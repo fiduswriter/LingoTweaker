@@ -4353,7 +4353,7 @@
     },
     {
       "path": "nrd/README.md",
-      "sha256": "f555addf2d48e2558b47a0f85777b82c119f268c41532367879e8636093928f0",
+      "sha256": "afa82a8caed201a70ab2c3fa845beb25e3aa888d36568db5ea05491e7808d3ea",
       "size": 7951,
       "source": {
         "kind": "hand-authored",
@@ -4510,8 +4510,8 @@
     },
     {
       "path": "nrd/rules/source_forms.txt",
-      "sha256": "328246a12d9ad97d7d9e73cac0268c0c8c7cc10ed2fdd56e53c4cf31bcb87ad1",
-      "size": 940,
+      "sha256": "9ec0e6f02fa9f191f77d1cea52b1a8b0d63e5805a571b3486306cb5c7cb84cdc",
+      "size": 955,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",

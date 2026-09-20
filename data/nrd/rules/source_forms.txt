@@ -43,6 +43,8 @@ pigerne=pijarna
 søke=søge
 # Pronoun forms from the source languages (§4.6)
 och=og
+jeg=jei
+eg=jei
 jag=jei
 mig=mei
 dig=dei
