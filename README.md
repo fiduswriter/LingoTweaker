@@ -1,7 +1,8 @@
 # LingoTweaker
 
-A JVM-free Rust port of the [LanguageTool](https://languagetool.org) proofreading engine
-and its rule data, targeting parity for all languages.
+LingoTweaker includes a JVM-free Rust port of the [LanguageTool](https://languagetool.org) 
+proofreading engine and its rule data. Additional languages and improvements to existing 
+languages will be added over time.
 
 *LingoTweaker* is an independent project, not affiliated with or endorsed by the
 LanguageTool project, whose name and trademark belong to their owners. Upstream
