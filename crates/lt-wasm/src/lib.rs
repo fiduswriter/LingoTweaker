@@ -8,7 +8,7 @@
 //! import init, { LtEngine } from "./pkg/lt_wasm.js";
 //! await init();
 //! const pack = new Uint8Array(await (await fetch("/lt-data-gn.pack")).arrayBuffer());
-//! const engine = new LtEngine("gn-ES", undefined, new Date().toISOString(), pack);
+//! const engine = new LtEngine("gn-ES", pack, JSON.stringify({ today: new Date().toISOString() }));
 //! const result = JSON.parse(engine.check_json("Mba'éichapa."));
 //! ```
 //!
@@ -19,7 +19,40 @@
 //! Build with `wasm-pack build crates/lt-wasm --target web` (or `--target
 //! nodejs` for the Node smoke test).
 
+use serde::Deserialize;
 use wasm_bindgen::prelude::*;
+
+/// Engine options accepted as JSON by [`LtEngine::new`].
+#[derive(Debug, Default, Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct WasmOptions {
+    /// language variant (e.g. `en-GB`); selects the spelling dictionary
+    variant: Option<String>,
+    /// ISO date (or timestamp) pinned for the date filters
+    today: Option<String>,
+    /// include `tags="picky"` rules
+    picky: bool,
+    /// default-off rule ids to compile and enable
+    enabled_rules: Vec<String>,
+    /// rule ids to disable
+    disabled_rules: Vec<String>,
+    enabled_categories: Vec<String>,
+    disabled_categories: Vec<String>,
+    enabled_only: bool,
+}
+
+impl WasmOptions {
+    fn into_engine(self) -> lt::EngineOptions {
+        lt::EngineOptions {
+            enabled_rules: self.enabled_rules,
+            disabled_rules: self.disabled_rules,
+            enabled_categories: self.enabled_categories,
+            disabled_categories: self.disabled_categories,
+            enabled_only: self.enabled_only,
+            picky: self.picky,
+        }
+    }
+}
 
 fn js_error(error: impl std::fmt::Display) -> JsError {
     JsError::new(&error.to_string())
@@ -53,19 +86,26 @@ pub struct LtEngine {
 impl LtEngine {
     /// Build an engine for `lang` (e.g. `en-US`, `gn-ES`) from `pack`.
     ///
-    /// `variant` selects e.g. `en-GB`; `today` is an ISO date (or timestamp)
-    /// used by the date filters.
+    /// `options` is a JSON object; all fields are optional:
+    /// `variant` (`en-GB`) selects variant resources, `today` (ISO date or
+    /// timestamp) pins the date filters, and `picky`, `enabledRules`,
+    /// `disabledRules`, `enabledCategories`, `disabledCategories`,
+    /// `enabledOnly` configure rule selection.
     #[wasm_bindgen(constructor)]
-    pub fn new(
-        lang: &str,
-        variant: Option<String>,
-        today: Option<String>,
-        pack: &[u8],
-    ) -> Result<LtEngine, JsError> {
+    pub fn new(lang: &str, pack: &[u8], options: Option<String>) -> Result<LtEngine, JsError> {
         let code = lt::Lang::from_long_code(lang)
             .ok_or_else(|| JsError::new(&format!("unknown language: {lang}")))?;
         let data = lt::DataDir::from_pack(pack).map_err(js_error)?;
-        let mut builder = lt::Engine::builder(code).map_err(js_error)?.data_dir(data);
+        let options = match &options {
+            Some(json) => serde_json::from_str::<WasmOptions>(json).map_err(js_error)?,
+            None => WasmOptions::default(),
+        };
+        let variant = options.variant.clone();
+        let today = options.today.clone();
+        let mut builder = lt::Engine::builder(code)
+            .map_err(js_error)?
+            .data_dir(data)
+            .options(options.into_engine());
         if let Some(variant) = &variant {
             builder = builder.variant(variant.clone());
         }

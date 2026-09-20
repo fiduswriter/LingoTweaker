@@ -103,6 +103,9 @@ enum Command {
         /// print every rule id (with sub id) instead of the summary
         #[arg(long)]
         rules: bool,
+        /// print the rule metadata as JSON (for the web UI)
+        #[arg(long)]
+        json: bool,
     },
     /// Dump per-token readings as TSV (Java-oracle diff helper).
     Analyze {
@@ -176,7 +179,7 @@ fn main() -> Result<()> {
             file,
         } => cmd_analyze(&cli, *lang, *raw, text.clone(), file.clone()),
         Command::Examples { lang, out } => cmd_examples(&cli, *lang, out.clone()),
-        Command::Inventory { lang, rules } => cmd_inventory(&cli, *lang, *rules),
+        Command::Inventory { lang, rules, json } => cmd_inventory(&cli, *lang, *rules, *json),
         Command::Serve { addr } => cmd_serve(addr.clone()),
         Command::Smoke {
             lang,
@@ -497,7 +500,7 @@ fn cmd_examples(cli: &Cli, lang: LangArg, out: Option<PathBuf>) -> Result<()> {
     Ok(())
 }
 
-fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool) -> Result<()> {
+fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool, as_json: bool) -> Result<()> {
     let lang: Lang = lang.into();
     let data = data_dir(cli)?;
     let mut total_rules = 0usize;
@@ -506,10 +509,29 @@ fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool) -> Result<()> {
     let mut regexp_rules = 0usize;
     let mut categories = std::collections::BTreeMap::new();
     let mut files = 0usize;
+    let mut json_rules: Vec<serde_json::Value> = Vec::new();
     for path in rule_files(&data, lang)? {
         files += 1;
         let grammar = lt_pattern::Grammar::load_file(&path)
             .with_context(|| format!("loading {}", path.display()))?;
+        if as_json {
+            for rule in &grammar.rules {
+                json_rules.push(json!({
+                    "id": rule.id,
+                    "subId": rule.sub_id,
+                    "name": rule.name,
+                    "categoryId": rule.category_id,
+                    "categoryName": rule.category_name,
+                    "issueType": rule.issue_type,
+                    "defaultOn": rule.default_on,
+                    "categoryDefaultOn": rule.category_default_on,
+                    "picky": rule.tags.iter().any(|t| t == "picky"),
+                    "tags": rule.tags,
+                    "priority": rule.prio,
+                    "complex": rule.complex_pattern,
+                }));
+            }
+        }
         total_rules += grammar.rules.len();
         total_examples += grammar.example_count();
         with_filter += grammar.rules.iter().filter(|r| r.has_filter).count();
@@ -531,6 +553,10 @@ fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool) -> Result<()> {
                 }
             }
         }
+    }
+    if as_json {
+        println!("{}", serde_json::to_string(&json_rules)?);
+        return Ok(());
     }
     if list_rules {
         return Ok(());

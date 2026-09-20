@@ -20,7 +20,11 @@ async function load({ lang, pack, variant }) {
     throw new Error(`cannot load ${url.pathname}: HTTP ${response.status}`);
   }
   const bytes = new Uint8Array(await response.arrayBuffer());
-  engine = new LtEngine(lang, variant, new Date().toISOString(), bytes);
+  engine = new LtEngine(
+    lang,
+    bytes,
+    JSON.stringify({ variant, today: new Date().toISOString() }),
+  );
   const failures = JSON.parse(engine.compile_failures_json());
   if (failures.length > 0) {
     throw new Error(`${failures.length} rules failed to compile (first: ${failures[0].rule})`);
