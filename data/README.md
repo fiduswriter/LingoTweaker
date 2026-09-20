@@ -92,6 +92,12 @@ The `sha256` values are the contract: `cargo test -p lt-data` fails if a vendore
 file no longer matches. Regenerating with the pinned checkout and artifacts must
 therefore not change any `sha256`, `size`, or source path.
 
+Morfologik `.dict` files can also be rebuilt without Java with the pure-Python
+port of the LanguageTool/Morfologik dictionary tools
+(`python3 tools/morfologik/lt_morfologik.py pos|spell|synth|dict_compile`,
+see `tools/morfologik/README.md`). Its output is byte-for-byte identical to the
+Java tooling, so a regenerated `.dict` keeps the manifest `sha256`.
+
 ## Licensing
 
 Vendored files keep their upstream licenses; the project's own code is

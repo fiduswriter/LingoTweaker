@@ -36,6 +36,13 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - run: cargo test --workspace
 
+  # Pure-Python dictionary tooling (tools/morfologik): self-contained, no JVM.
+  python-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s tools/morfologik/tests
+
   # P6.3: the parity matrix is computed from the changed paths (owner
   # gate-scope rule: a change gates only the languages it can influence;
   # shared paths -> all). `affected` runs

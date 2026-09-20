@@ -63,6 +63,19 @@ python3 tools/lt-sync/lt_sync.py report
 
 `lt-sync status` also writes `docs/parity/lt-sync-status.json` (gitignored artifact).
 
+Dictionary tooling (pure-Python port of `languagetool-tools` + Morfologik; no JVM):
+
+```sh
+python3 tools/morfologik/lt_morfologik.py pos   -i word-lemma-tag.txt --info xx.info -o xx.dict
+python3 tools/morfologik/lt_morfologik.py spell -i words.txt --info xx.info -o xx.dict
+python3 tools/morfologik/lt_morfologik.py synth -i word-lemma-tag.txt --info xx_synth.info -o xx_synth.dict
+python3 tools/morfologik/lt_morfologik.py dict_decompile -i xx.dict -o xx.txt
+python3 -m unittest discover -s tools/morfologik/tests
+```
+
+Output is byte-for-byte identical to the Java tooling (`tools/morfologik/README.md`,
+optional cross-check `tools/morfologik/tests/compare_with_java.py`).
+
 Corpus extraction (regenerates `docs/parity/corpora/*.jsonl`):
 
 ```sh

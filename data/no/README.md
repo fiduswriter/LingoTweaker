@@ -101,26 +101,20 @@ Give a new rule a non-zero priority there if it must beat the speller
 and, since the one-off Morfologik build, the vendored CFSA2 speller dictionary
 `dictionaries/no.dict` (~1 MB) for suggestions: the Hunspell dictionary is
 above the bounded edit-distance limit, so the error-tolerant FSA search is
-used instead. The artifact is built **once** with the pinned Java tooling; no
-Rust port of the converter is needed because it is only refreshed when
-`nb_NO.dic` changes. Exact build (reproducible):
+used instead. The artifact is built **once**; it is only refreshed when
+`nb_NO.dic` changes. Exact build (reproducible, no JVM needed):
 
 ```sh
-# pinned tooling (org.carrot2:morfologik 2.2.0; DictCompile also needs
-# com.carrotsearch:hppc at runtime, shipped as hppc.jar with LanguageTool):
-#   morfologik-tools-2.2.0.jar morfologik-stemming-2.2.0.jar
-#   morfologik-fsa-2.2.0.jar morfologik-fsa-builders-2.2.0.jar
-#   jcommander-1.78.jar hppc.jar
-CP="morfologik-tools-2.2.0.jar:morfologik-stemming-2.2.0.jar:morfologik-fsa-2.2.0.jar:morfologik-fsa-builders-2.2.0.jar:jcommander-1.78.jar:hppc.jar"
+# metadata (also the runtime metadata, see below)
+printf 'fsa.dict.separator=+\nfsa.dict.encoding=utf-8\nfsa.dict.encoder=SUFFIX\nfsa.dict.speller.runon-words=false\n' > /tmp/no.info
 
 # 1) input rows are `base+inflected` (DictCompile rejects single-column rows
 #    with "[base,inflected,tag?]"); for a speller dict base = inflected =
 #    word. Affix flags are stripped at `/`; affix fragments (`-abel`),
-#    separator-carrying and letterless entries are dropped; `LC_ALL=C` keeps
-#    the build deterministic (plain `sort` merges lines under the locale
-#    collation). 707391 rows, 18.7 MB.
-printf 'fsa.dict.separator=+\nfsa.dict.encoding=utf-8\nfsa.dict.encoder=SUFFIX\nfsa.dict.speller.runon-words=false\n' > /tmp/no.info
-python3 - <<'PY' | LC_ALL=C sort -u > /tmp/no.txt
+#    separator-carrying and letterless entries are dropped. 707391 rows,
+#    18.7 MB. The tool sorts the input itself (unsigned byte order), so no
+#    external `sort` is needed.
+python3 - > /tmp/no.txt <<'PY'
 for line in open('data/no/hunspell/nb_NO.dic', encoding='utf-8'):
     word = line.rstrip('\n').split('\t')[0].split('/')[0].strip()
     if not word or word.startswith('-') or '+' in word or not any(c.isalpha() for c in word):
@@ -128,11 +122,15 @@ for line in open('data/no/hunspell/nb_NO.dic', encoding='utf-8'):
     print(word + '+' + word)
 PY
 
-# 2) compile (3.5 s; CFSA2, 1051193 bytes) and vendor the outputs:
-java -cp "$CP" morfologik.tools.DictCompile --exit false -i /tmp/no.txt -f CFSA2 --overwrite
+# 2) compile (CFSA2, 1051193 bytes) and vendor the outputs:
+python3 tools/morfologik/lt_morfologik.py dict_compile -i /tmp/no.txt -o /tmp/no.dict --overwrite
 cp /tmp/no.dict data/no/dictionaries/no.dict
 cp /tmp/no.info data/no/dictionaries/no.info
 ```
+
+The same build with the pinned Java `morfologik.tools.DictCompile` (`-f CFSA2`,
+org.carrot2:morfologik 2.2.0 + hppc) produces identical bytes; the Python tool
+in `tools/morfologik/` is a byte-for-byte port and needs no JVM.
 
 The generated `dictionaries/no.dict`/`no.info` are derived data of
 `hunspell/nb_NO.dic` and keep its attribution obligations (CC BY 4.0 +
