@@ -1,6 +1,11 @@
 # LingoTweaker
 
-LingoTweaker includes a JVM-free Rust port of the [LanguageTool](https://languagetool.org) 
+LingoTweaker is a proofreader of numerous languages written in Rust, with bindings with 
+Python and Node and compilable to WebAssembly.
+
+**[Try it out here!](https://fiduswriter.github.io/fiduswriter/LingoTweaker/)**
+
+LingoTweaker includes a port of the [LanguageTool](https://languagetool.org) 
 proofreading engine and its rule data. Additional languages and improvements to existing 
 languages will be added over time.
 
