@@ -1,7 +1,7 @@
 //! `org.languagetool.chunking.GermanChunker` — the rule-based German noun
 //! phrase chunker used as `German`'s post-disambiguation chunker.
 //!
-//! The upstream class is 528 lines of OpenRegex expressions plus
+//! The legacy class is 528 lines of OpenRegex expressions plus
 //! `TokenExpressionFactory`/`TokenPredicate` (core chunking). Both are ported
 //! here on top of [`crate::openregex`]. Behavioural notes:
 //!
@@ -317,7 +317,7 @@ impl ValueParser {
                     return Err(TooComplex);
                 };
                 self.pos += offset + 2;
-                // upstream `unknown()` for `{n,m}` quantifiers
+                // legacy `unknown()` for `{n,m}` quantifiers
                 return Err(TooComplex);
             }
             if "*+?".contains(next) {

@@ -127,7 +127,7 @@ fn table_priority(id: &str) -> i32 {
         "SUGGERIMENTS_LE" => -97,        // less than CA_MULTITOKEN_SPELLING
         "MORFOLOGIK_RULE_CA_ES" => -100,
         "EXIGEIX_ACCENTUACIO_VALENCIANA" => -120,
-        // "APOSTROFACIO_MOT_DESCONEGUT" => -120, // commented out upstream
+        // "APOSTROFACIO_MOT_DESCONEGUT" => -120, // commented out in the legacy engine
         "PHRASE_REPETITION" => -150,
         "SUBSTANTIUS_JUNTS" => -150,
         "REPETITION_ADJ_N_ADJ" => -155,

@@ -4,7 +4,7 @@
 use crate::beam;
 use crate::model::{FeatureSink, GenericModel};
 
-/// `DefaultChunkerContextGenerator` — note the upstream quirk that `p_2`
+/// `DefaultChunkerContextGenerator` — note the legacy quirk that `p_2`
 /// has no `=` separator (`"p_2" + preds[i - 2]`); reproduced exactly since
 /// the predicates must match training.
 ///
@@ -103,7 +103,7 @@ pub(crate) fn chunk_dynamic(
     let p_2 = if i < 2 {
         "p_2=bos".to_string()
     } else {
-        format!("p_2{}", model.outcome(preds[i - 2])) // no '=' — upstream quirk
+        format!("p_2{}", model.outcome(preds[i - 2])) // no '=' — legacy quirk
     };
     let p_1 = if i < 1 {
         "p_1=bos".to_string()

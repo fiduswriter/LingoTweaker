@@ -15,8 +15,8 @@ references and licenses are kept.
   fetchable per-language data packs.
 - **Vendored data**: everything needed at runtime is copied into `data/` with per-file
   sha256 provenance, pinned to one upstream commit (`upstream.json`).
-- **Parity-driven**: the upstream `<example>` tests are the primary gate; a pinned
-  upstream Java build provides differential fixtures.
+- **Parity-driven**: the legacy `<example>` tests are the primary gate; a pinned
+  Java build of the legacy engine provides differential fixtures.
 
 ## Quick start
 

@@ -1,7 +1,7 @@
 //! Nordum (`nrd`) engine tests.
 //!
 //! Nordum is a constructed pan-Scandinavian written language
-//! (<https://www.nordum.org>); there is no upstream Java module, so the tests
+//! (<https://www.nordum.org>); there is no legacy Java module, so the tests
 //! pin the staged rule wiring and the owner-approved examples from
 //! `new-languages/nordum/proposed-rules.md`.
 

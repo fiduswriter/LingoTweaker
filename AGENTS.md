@@ -49,7 +49,7 @@ changed, no language job for docs-only changes). de/es/it/nl/ca must be 0
 only-Java / 0 only-Rust / 0 field diffs; en allows exactly the one documented
 `ADVERB_VERB_ADVERB_REPETITION` field diff, fr the documented divergences
 #3/#4/#5 and pt #6. `no`, `nrd` and `gn` are hand-authored languages with no
-upstream Java module, so they run the same matrix with a tests-only gate
+legacy Java module, so they run the same matrix with a tests-only gate
 (integration test + `lt-cli inventory`, no Java oracle).
 
 ## Data tooling
@@ -103,7 +103,7 @@ predicates, and gate `SystemTime`/`Instant` uses so wasm builds cannot trap.
 
 - UTF-8 is the default string/offset format internally and externally.
   Engine-internal offsets are UTF-8 bytes. The HTTP API exposes two versions:
-  `/v2/*` is the upstream v2 drop-in surface (UTF-16 code-unit offsets,
+  `/v2/*` is the legacy v2 drop-in surface (UTF-16 code-unit offsets,
   exactly like LT) and `/v3/*` is the native surface (UTF-8 byte offsets).
   The oracle `lt-cli check --lines` converts to UTF-16 only to compare with
   Java's `CheckDump`. Do not move UTF-16 into the engine or default outputs.

@@ -259,7 +259,7 @@ fn is_any_verb(tokens: &[&AnalyzedTokenReadings], n: usize) -> bool {
                     && tokens[n + 1].has_pos_tag_starting_with("VER:"))))
 }
 
-/// `isVerbBehind` (used by `MissingCommaRelativeClauseRuleTest` upstream;
+/// `isVerbBehind` (used by `MissingCommaRelativeClauseRuleTest` in the legacy engine;
 /// kept for API parity).
 #[allow(dead_code)]
 pub(crate) fn is_verb_behind(tokens: &[&AnalyzedTokenReadings], end: usize) -> bool {

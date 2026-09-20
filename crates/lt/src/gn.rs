@@ -1,6 +1,6 @@
 //! Paraguayan Guaraní (`gn`/`gug`) pipeline parts.
 //!
-//! Hand-authored language: upstream LanguageTool has no Guaraní module. The
+//! Hand-authored language: the legacy engine has no Guaraní module. The
 //! tokenizer keeps the puso (glottal stop, `'`/`’`/`ʼ`) inside the word; the
 //! speller is the LibreOffice `gug` Hunspell dictionary; the word-list rules
 //! live in [`crate::gn::rules`].

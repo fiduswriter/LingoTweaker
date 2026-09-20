@@ -4,7 +4,7 @@
 //! prepareLineForSpeller` line handling) and its filter
 //! `MultitokenSpellerFilter`.
 //!
-//! Deviations from upstream:
+//! Deviations from the legacy engine:
 //! - the Guava suggestions cache is replaced by the caller's usage pattern
 //!   (suggestions are only computed on filter invocation);
 //! - the per-first-character candidate map is stored pre-sorted in Java

@@ -6,7 +6,7 @@
 //! `core/spelling_global.txt` word lists, `gl/hunspell/prohibit*.txt`, the
 //! `_english_ignore_` tag and the `desc_spelling`/`spelling`/
 //! `desc_spelling_short` messages. Suggestions come from the shared bounded
-//! search over the dictionary words (`HunspellSpellingRule`); upstream's
+//! search over the dictionary words (`HunspellSpellingRule`); the legacy engine's
 //! native `hunspell.suggest` ranking is not reproduced (internal notes).
 
 use std::path::Path;

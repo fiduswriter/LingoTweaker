@@ -1,6 +1,6 @@
 //! Guaraní (`gn`/`gug`) engine tests.
 //!
-//! Hand-authored language: no upstream Java module. The tests pin the staged
+//! Hand-authored language: no legacy Java module. The tests pin the staged
 //! rules and the curated examples from
 //! `new-languages/guarani/proposed-rules.md` (constructed examples are marked
 //! there and still need owner confirmation).

@@ -1,6 +1,6 @@
 # data/no — Norwegian Bokmål
 
-Hand-authored language data (upstream LanguageTool has no Norwegian module; it
+Hand-authored language data (the legacy engine has no Norwegian module; it
 ships only a spell-check-only dynamic language). Module:
 `crates/lt/src/no.rs` + `crates/lt/src/no/`; tests:
 `crates/lt/tests/norwegian.rs`; the owner-approved rule list is the

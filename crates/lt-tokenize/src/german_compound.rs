@@ -711,7 +711,7 @@ mod tests {
     #[test]
     fn get_all_splits_matches_jwordsplitter() {
         // Expected values probed against jwordsplitter 4.7 (`AllSplits.java`
-        // with the upstream jar)
+        // with the legacy jar)
         let Some(t) = tokenizer(true) else {
             eprintln!("skipping: no vendored data");
             return;

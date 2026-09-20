@@ -209,7 +209,7 @@ impl PostponedAdjectiveConcordanceFilter {
         a.punctuation |= postag_matches(tr, &p.punctuacio) || tr.surface() == ",";
     }
 
-    /// `updateJValue` (the old coordination loop is commented out upstream;
+    /// `updateJValue` (the old coordination loop is commented out in the legacy engine;
     /// only the `dos o més` handling remains).
     fn update_j_value(
         p: &PaPatterns,

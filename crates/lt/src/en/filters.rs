@@ -1,4 +1,4 @@
-//! English `<filter>` implementations (P1.6), keyed by the upstream Java
+//! English `<filter>` implementations (P1.6), keyed by the legacy Java
 //! class name in `FilterRegistry`. Ports of:
 //!
 //! - `org.languagetool.rules.DateRangeChecker`
@@ -18,7 +18,7 @@
 //!   (AbstractFindSuggestionsFilter)
 //! - `org.languagetool.rules.spelling.multitoken.MultitokenSpellerFilter`
 //!
-//! Deviations from upstream (recorded in the internal development notes D-007):
+//! Deviations from the legacy engine (recorded in the internal development notes D-007):
 //! - the default spelling rule's ignore/prohibit word lists are not applied;
 //!   `SpellChecker::is_correct` over `en_US.dict` decides misspellings;
 //! - the English "speller" of `FindSuggestionsFilter` ranks by edit distance

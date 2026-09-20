@@ -195,7 +195,7 @@ pub fn catalan_tagger_ca_probe(data_dir: &DataDir) -> std::sync::Arc<lt_tagger::
 /// Convert a UTF-8 byte offset into a UTF-16 code-unit offset (LanguageTool
 /// HTTP API semantics). Offsets past the end or inside a multi-unit scalar
 /// are clamped to the nearest char boundary (engine offsets are always
-/// valid; this keeps the output surfaces robust against upstream bugs).
+/// valid; this keeps the output surfaces robust against legacy bugs).
 pub fn to_utf16_offset(text: &str, utf8_offset: usize) -> usize {
     let mut offset = utf8_offset.min(text.len());
     while !text.is_char_boundary(offset) {

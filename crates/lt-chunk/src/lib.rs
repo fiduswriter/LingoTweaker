@@ -1,10 +1,10 @@
 //! English chunking (P1.7/D-002 option (a)): a clean-room port of the
-//! OpenNLP 1.9.5 components the upstream engine uses — `TokenizerME`,
+//! OpenNLP 1.9.5 components the legacy engine uses — `TokenizerME`,
 //! `POSTaggerME` (1.5-era classic feature set) and `ChunkerME` — reading
 //! LT's vendored `.bin` models directly, plus the `EnglishChunker` /
 //! `EnglishChunkFilter` mapping into `AnalyzedTokenReadings.chunk_tags`.
 //!
-//! Deviations from upstream: beam-search heap tie-breaking differs from
+//! Deviations from the legacy engine: beam-search heap tie-breaking differs from
 //! Java's `PriorityQueue` for exactly-equal sequence scores; feature caches
 //! are not ported (results are identical, performance only).
 

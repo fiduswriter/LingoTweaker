@@ -1,6 +1,6 @@
 //! Norwegian Bokmål (`no`) engine tests.
 //!
-//! Hand-authored language: there is no upstream Java module to probe, so the
+//! Hand-authored language: there is no legacy Java module to probe, so the
 //! tests pin the staged rule wiring and the owner-approved examples from
 //! `new-languages/norwegian-bokmal/proposed-rules.md`. Offsets are UTF-8
 //! bytes (the engine format).

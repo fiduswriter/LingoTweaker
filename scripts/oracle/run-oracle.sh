@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build and run the pinned upstream Java oracle in Docker.
+# Build and run the pinned legacy Java oracle in Docker.
 set -euo pipefail
 
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"

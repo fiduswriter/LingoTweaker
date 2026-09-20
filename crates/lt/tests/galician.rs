@@ -112,7 +112,7 @@ fn galician_legacy_replace_rules() {
 
 /// `HunspellRule` (`HUNSPELL_RULE`) over the `FLAG num` `gl_ES` dictionary:
 /// a clear misspelling fires with the `MessagesBundle_gl` message. The
-/// suggestion list still comes from the shared bounded search, not upstream's
+/// suggestion list still comes from the shared bounded search, not the legacy engine's
 /// native `hunspell.suggest` ranking (internal notes/D-195).
 #[test]
 fn galician_speller() {

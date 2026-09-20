@@ -1,4 +1,4 @@
-//! Upstream v2-compatible HTTP API (`ApiV2.java` drop-in, P2.3).
+//! Legacy v2-compatible HTTP API (`ApiV2.java` drop-in, P2.3).
 //!
 //! The response schema mirrors `RuleMatchesAsJsonSerializer` (plan
 //! Appendix A): UTF-16 code-unit offsets, `ContextTools`-style context
@@ -87,7 +87,7 @@ impl AppState {
     }
 }
 
-/// `/v2/*` is the upstream v2 drop-in API (UTF-16 code-unit offsets,
+/// `/v2/*` is the legacy v2 drop-in API (UTF-16 code-unit offsets,
 /// exactly like LT). `/v3/*` is the native API: UTF-8 byte offsets and room
 /// for further changes without breaking drop-in clients.
 pub fn router(state: Arc<AppState>) -> Router {

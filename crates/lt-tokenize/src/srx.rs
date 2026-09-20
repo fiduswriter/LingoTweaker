@@ -1,6 +1,6 @@
 //! SRX (Segmentation Rules eXchange) sentence splitting, mirroring the
 //! algorithm of `net.loomchild.segment`'s `SrxTextIterator` as used by
-//! The upstream `SRXSentenceTokenizer`.
+//! The legacy `SRXSentenceTokenizer`.
 //!
 //! Break rules are found by searching `beforebreak`, then anchoring
 //! `afterbreak` at the match end. No-break (`break="no"`) rules act as
@@ -41,7 +41,7 @@ impl SrxDocument {
     /// Codes with no language-specific mapping — the hand-authored Guaraní,
     /// Norwegian and Nordum modules pass `gn_two`/`no_two`/`nrd_two` — only
     /// match the `.*` maps, whose `Default` group has no plain ". " break
-    /// rule (upstream maps such languages to `Generic`). Prepend the generic
+    /// rule (the legacy engine maps such languages to `Generic`). Prepend the generic
     /// break rules so sentences split like in the ported languages.
     pub fn rules_for(&self, language_code: &str) -> Vec<SrxRule> {
         // groups that every language gets from the `.*`/`_one`/`_two` maps

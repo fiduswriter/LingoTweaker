@@ -17,7 +17,7 @@ fn engine_with_today() -> Option<Arc<Engine>> {
                 return None;
             };
             // Pin "today" so FutureDateFilter/NewYearDateFilter examples
-            // behave as in the upstream XML examples (LT's test harness pins
+            // behave as in the legacy XML examples (the legacy test harness pins
             // 2014-01-01).
             match builder.today(2014, 1, 1).build() {
                 Ok(e) => Some(Arc::new(e)),

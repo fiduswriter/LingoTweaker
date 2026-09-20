@@ -94,7 +94,7 @@ pub(crate) enum GrammarCategory {
 }
 
 impl GrammarCategory {
-    /// The `displayName` used by `getCategoriesCausingError` (upstream only
+    /// The `displayName` used by `getCategoriesCausingError` (legacy engine only
     /// called from its test; kept for parity).
     #[allow(dead_code)]
     pub(crate) fn display_name(self) -> &'static str {
@@ -255,7 +255,7 @@ pub(crate) fn get_agreement_categories(
 }
 
 /// `AgreementTools.getAgreementSOLCategories` (only referenced from the
-/// commented-out branch of `AgreementRule2` upstream; kept for parity).
+/// commented-out branch of `AgreementRule2` in the legacy engine; kept for parity).
 #[allow(dead_code)]
 pub(crate) fn get_agreement_sol_categories(
     token: &AnalyzedTokenReadings,

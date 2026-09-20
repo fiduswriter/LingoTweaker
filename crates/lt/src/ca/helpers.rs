@@ -437,7 +437,7 @@ pub fn do_replace_em_en(pronouns_str: &str, verb_str: &str, _pronouns_after: boo
 }
 
 /// `PronomsFeblesHelper.doReplaceHiEn` (identical to `doReplaceEmEn`
-/// upstream).
+/// the legacy engine).
 pub fn do_replace_hi_en(pronouns_str: &str, verb_str: &str, _pronouns_after: bool) -> String {
     if pronouns_str.eq_ignore_ascii_case("hi") {
         return format!("en {verb_str}");

@@ -289,7 +289,7 @@ pub fn conjunction_at_begin_of_sentence(sentences: &[AnalyzedSentence]) -> Vec<M
                     }
                     return Some(num);
                 }
-                // the third disjunct is upstream's (odd) handling of
+                // the third disjunct is the legacy engine's (odd) handling of
                 // "Auch wenn": it still fires unless the sentence is a question
                 if !token.has_pos_tag_starting_with("KON:UNT")
                     || text == "Sondern"

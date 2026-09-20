@@ -1065,7 +1065,7 @@ fn compile_rules(
     (compiled_rules, skipped, compile_failures)
 }
 
-/// Foundations shared by the hand-authored languages (no upstream LT Java
+/// Foundations shared by the hand-authored languages (no legacy Java
 /// module): SRX, grammar.xml (+ optional style.xml), compiled rules and the
 /// XML disambiguator.
 struct HandAuthoredFoundations {
@@ -3011,7 +3011,7 @@ impl Pipeline {
     }
 
     /// Norwegian Bokmål (`no`) engine. Hand-authored language: XML rules,
-    /// Hunspell speller and word-list rules; no upstream LT Java module
+    /// Hunspell speller and word-list rules; no legacy Java module
     /// exists (LT ships only a spell-check-only dynamic language).
     pub fn new_norwegian(
         data_dir: &lt_data::DataDir,
@@ -3085,7 +3085,7 @@ impl Pipeline {
 
     /// Nordum (`nrd`) engine. Hand-authored constructed language
     /// (<https://www.nordum.org>): XML rules, a word-list Hunspell speller and
-    /// word-list rules; no upstream LT module exists.
+    /// word-list rules; no legacy Java module exists.
     pub fn new_nordum(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,
@@ -3156,7 +3156,7 @@ impl Pipeline {
 
     /// Paraguayan Guaraní (`gn`/`gug`) engine. Hand-authored language: XML
     /// rules, the LibreOffice `gug` Hunspell speller (data only) and word-list
-    /// rules; no upstream LT module exists.
+    /// rules; no legacy Java module exists.
     pub fn new_guarani(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,

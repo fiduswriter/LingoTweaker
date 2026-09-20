@@ -1165,7 +1165,7 @@ fn german_statistic_sentence_rules_match_java() {
         .collect();
     assert_eq!(m.len(), 2, "{m:?}");
     assert_eq!((m[0].range.start, m[0].range.end), (0, 4));
-    // the upstream "Auch wenn" quirk: it fires unless the sentence is a question
+    // the legacy "Auch wenn" quirk: it fires unless the sentence is a question
     let engine_q = de_engine(&["SENTENCE_BEGINNING_WITH_CONJUNCTION_DE"]).unwrap();
     let result = engine_q
         .check("Auch wenn das passiert? Es ist gut.")
@@ -4006,7 +4006,7 @@ fn german_multitoken_speller_matches_java() {
     assert_eq!((m[0].range.start, m[0].range.end), (0, 29));
     assert_eq!(m[0].suggestions[0].value, "Rocky Mountain National Park");
     // Java probe: "Rocky Mountains National Park." still matches (the
-    // commented-out upstream example is aspirational)
+    // commented-out legacy example is aspirational)
     let result = engine.check("Rocky Mountains National Park.").unwrap();
     let m: Vec<_> = result
         .matches

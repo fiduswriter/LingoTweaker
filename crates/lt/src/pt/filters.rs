@@ -797,7 +797,7 @@ impl RuleFilter for RegularIrregularParticipleFilter {
 
 /// `org.languagetool.rules.pt.PortugueseSuppressMisspelledSuggestionsFilter`
 /// (`AbstractSuppressMisspelledSuggestionsFilter`). Both XML references are
-/// commented out upstream, so no rule currently instantiates it.
+/// commented out in the legacy engine, so no rule currently instantiates it.
 struct PortugueseSuppressMisspelledSuggestionsFilter {
     env: Env,
 }

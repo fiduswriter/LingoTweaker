@@ -1,7 +1,7 @@
 //! Nordum (`nrd`) pipeline parts.
 //!
-//! Hand-authored constructed language (<https://www.nordum.org>): upstream
-//! LanguageTool has no Nordum module. The speller is a Hunspell dictionary
+//! Hand-authored constructed language (<https://www.nordum.org>): the legacy
+//! engine has no Nordum module. The speller is a Hunspell dictionary
 //! generated from the authoritative Nordum word list plus the Norwegian,
 //! Danish and Swedish dictionaries with the Nordum orthographic rules
 //! applied (see `tools/nordum-dict/`); the word-list rules live in

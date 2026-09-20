@@ -296,7 +296,7 @@ enum RExpr {
     EndAssertion,
 }
 
-/// `Expression.*.minMatchingLength()` — reproduces the upstream quirks
+/// `Expression.*.minMatchingLength()` — reproduces the legacy quirks
 /// (`Plus` is 1, `MinMax` is the minimum count, not scaled by the sub-expr).
 fn min_matching_length(expr: &RExpr) -> usize {
     match expr {
@@ -847,7 +847,7 @@ mod tests {
         assert_eq!(compile("<a>+").min_matching_length(), 1);
         assert_eq!(compile("<a>*").min_matching_length(), 0);
         assert_eq!(compile("<a>{2,3}").min_matching_length(), 2);
-        // upstream quirk: MinMax.minMatchingLength is the minimum count only
+        // legacy quirk: MinMax.minMatchingLength is the minimum count only
         assert_eq!(compile("(<a> <b>){2,4}").min_matching_length(), 2);
         // `<a>|<b> <c>` is `(a|b) c`: the top-level group sums 1+1
         assert_eq!(compile("<a>|<b> <c>").min_matching_length(), 2);

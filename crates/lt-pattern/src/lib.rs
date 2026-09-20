@@ -1,4 +1,4 @@
-//! Upstream XML pattern-rule engine.
+//! XML pattern-rule engine (legacy-compatible).
 //!
 //! v0 scope (P0.2): load `grammar.xml`/`style.xml` rule files into a typed
 //! model, extract per-rule metadata and `<example>` corpora. The full

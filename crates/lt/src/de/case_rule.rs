@@ -1388,7 +1388,7 @@ impl CaseRule {
     }
 }
 
-/// `CaseRule.compareLists` (`@VisibleForTesting` upstream).
+/// `CaseRule.compareLists` (`@VisibleForTesting` in the legacy engine).
 pub(crate) fn compare_lists(
     tokens: &[&AnalyzedTokenReadings],
     start_index: isize,
@@ -1413,7 +1413,7 @@ pub(crate) fn compare_lists(
     true
 }
 
-/// `CaseRule.isQuestionEquivalentAfterColon` (`@VisibleForTesting` upstream).
+/// `CaseRule.isQuestionEquivalentAfterColon` (`@VisibleForTesting` in the legacy engine).
 pub(crate) fn is_question_equivalent_after_colon(
     i: usize,
     tokens: &[&AnalyzedTokenReadings],

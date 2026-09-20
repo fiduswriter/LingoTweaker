@@ -1,5 +1,5 @@
 //! Faithful port of the hunspell 1.7.2 spelling checker (`spell()` +
-//! affix/compound/break logic) as used by the upstream German speller
+//! affix/compound/break logic) as used by the legacy German speller
 //! through the native libhunspell binding.
 //!
 //! Scope: everything `hunspell_spell()` needs for the German dictionaries

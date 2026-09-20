@@ -1,6 +1,6 @@
 //! Norwegian Bokmål (`no`) pipeline parts.
 //!
-//! Hand-authored language: upstream LanguageTool never had a Norwegian
+//! Hand-authored language: the legacy engine never had a Norwegian
 //! module (only a spell-check-only dynamic language). This module grows in
 //! the same stages as the ported languages: XML rules (`data/no/rules/`),
 //! the Hunspell speller (`nb_NO.dic`/`.aff`) and word-list rules; the

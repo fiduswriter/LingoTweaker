@@ -26,7 +26,7 @@ fn decimal_comma_pattern() -> &'static Regex {
 
 /// `DATE_PATTERN`: three alternatives. Java's `replaceAll` builds the
 /// replacement from groups 1–3 only, so the `yyyy.mm.dd` / `yyyy-mm-dd`
-/// alternatives lose their content (upstream bug reproduced faithfully).
+/// alternatives lose their content (legacy bug reproduced faithfully).
 fn date_pattern() -> &'static Regex {
     static RE: OnceLock<Regex> = OnceLock::new();
     RE.get_or_init(|| {
