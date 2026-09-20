@@ -197,3 +197,30 @@ renderer (`resolve_suggestions`), which would change every language.
 Reproduce:
 `scripts/oracle/pt/probe-rule.sh pt-PT "Vou estudar enquanto possa ser possível." PODER_SER_POSSIVEL`.
 This is the only remaining Portuguese corpus field diff.
+
+## 7. `HUNSPELL_RULE` (Galician) suggestion ranking not ported (83 corpus field diffs)
+
+Unlike the other entries this is a **known limitation, not a correctness
+judgement**: the Galician match set is identical to the legacy engine
+(0 only-Java / 0 only-Rust over the 717-example corpus), but the
+`HUNSPELL_RULE` suggestions differ because the in-tree checker produces them
+with a bounded edit-distance search over the `gl_ES.dic` words, while the
+legacy engine calls native `hunspell.suggest` (`suggestmgr.cxx` is not
+ported). The differences are candidate sets and ordering/casing, e.g.:
+
+- `data/parity/golden/gl-full.txt` line 7, token `Hal`:
+  legacy `Cal|Mal|Sal|Tal|Val|Ha|Hala|Hale|Halo|Chal|Haa|Hai|Hao|Han`,
+  Rust `Halo`.
+- line 7, token `Frank`: legacy `Franxa`, Rust `""` (no candidate within the
+  bounded distance).
+
+Reproduce (pinned Java build):
+
+```sh
+scripts/oracle/gl/probe-speller.sh Hal Frank VEDRAS
+```
+
+This is the only remaining Galician corpus difference and is pinned exactly
+as `--expect-field-diffs=HUNSPELL_RULE=83` in `scripts/ci/parity.sh`. Porting
+`suggestmgr` (or vendoring a compatible suggestion engine) would remove the
+allowance.

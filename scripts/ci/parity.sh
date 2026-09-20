@@ -7,12 +7,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -67,6 +67,9 @@ fi
 if [ "$LANG_ARG" = "ca" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-20"
 fi
+if [ "$LANG_ARG" = "gl" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-20"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -87,6 +90,11 @@ if [ "$LANG_ARG" = "en" ]; then
 elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)
+elif [ "$LANG_ARG" = "gl" ]; then
+  # documented speller divergence (docs/differences.md #7): the match set is
+  # identical, only HUNSPELL_RULE suggestions come from the bounded search
+  # instead of the unported native hunspell.suggest ranking
+  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=83)
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)

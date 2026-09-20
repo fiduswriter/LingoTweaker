@@ -1,0 +1,1272 @@
+L	1	A poboación no ano 2020 era de 1034 133 habitantes.
+M	1	GENERAL_NUMBER_FORMAT	1	31	35	Other	Se non é un ano, os algarismos deben ser escritos en grupos de 3.	1 034
+L	2	O ano ten exactamente 365,24219858156 días.
+M	2	GENERAL_NUMBER_FORMAT	2	22	37	Other	Os algarismos deben ser escritos en grupos de 3.	365,242 19858156
+L	3	É o ano de 1989.
+L	4	ISBN 0-522-85317-X.
+M	4	DASH_RULE	4	5	10	Other	Se pretende indicar un intervalo temporal ou numérico, debe utilizar o medio-trazo.	0 – 522|0–522
+L	5	A media exacta é de 17,10341 valores.
+M	5	GENERAL_NUMBER_FORMAT	2	20	28	Other	Os algarismos deben ser escritos en grupos de 3.	17,103 41
+L	6	O ano ten exactamente 365,24219858156 días.
+M	6	GENERAL_NUMBER_FORMAT	2	22	37	Other	Os algarismos deben ser escritos en grupos de 3.	365,242 19858156
+L	7	“Bo día, Frank,”dixo Hal.
+M	7	HUNSPELL_RULE		9	14	UnknownWord	Atopouse un posíbel erro ortográfico	Franxa
+M	7	NO_SPACE_CLOSING_QUOTE	1	15	20	Other	Debe haber un espazo despois das aspas de peche.	” dixo
+M	7	HUNSPELL_RULE		21	24	UnknownWord	Atopouse un posíbel erro ortográfico	Cal|Mal|Sal|Tal|Val|Ha|Hala|Hale|Halo|Chal|Haa|Hai|Hao|Han
+L	8	A temperatura é de 25°C.
+M	8	UNITS_OF_MEASURE_SPACING	1	19	23	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>25 °C</suggestion>	25 °C
+L	9	A temperatura é de -25°C.
+M	9	UNITS_OF_MEASURE_SPACING	1	19	24	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>-25 °C</suggestion>	-25 °C
+L	10	A temperatura é de 25,5°F.
+M	10	UNITS_OF_MEASURE_SPACING	1	19	25	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>25,5 °F</suggestion>	25,5 °F
+L	11	A temperatura é de 25,5 °C.
+L	12	A temperatura é de 25,5 °Ra.
+M	12	UNITS_OF_MEASURE_SPACING	2	19	26	Other	Entre o valor numérico e o símbolo de grao debe haber un espazo. Utilice <suggestion>25,5°</suggestion> ou engada a unidade de medida térmica (p.ex. <suggestion>25,5 °C</suggestion>).	25,5°|25,5 °C
+L	13	Son 5 km de distancia.
+L	14	Son 5km de distancia.
+M	14	UNITS_OF_MEASURE_SPACING	1	4	7	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>5 km</suggestion>	5 km
+L	15	Son 5 ZiB de datos.
+L	16	Son 5ZiB de datos.
+M	16	UNITS_OF_MEASURE_SPACING	1	4	8	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>5 ZiB</suggestion>	5 ZiB
+L	17	Son 5 kB de datos.
+L	18	Son 5kB de datos.
+M	18	UNITS_OF_MEASURE_SPACING	1	4	7	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>5 kB</suggestion>	5 kB
+L	19	Pesa 5kg.
+M	19	UNITS_OF_MEASURE_SPACING	1	5	8	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>5 kg</suggestion>	5 kg
+L	20	Pesa 5Mt.
+M	20	UNITS_OF_MEASURE_SPACING	1	5	8	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>5 Mt</suggestion>	5 Mt
+L	21	Pesa 5 µg.
+L	22	Isótopo 241Am
+L	23	(AsCH3)2n
+M	23	CHEMICAL_FORMULAS_TYPOGRAPHY	3	1	6	Other	Nas fórmulas químicas os números deben estar en subíndice.	AsCH₃
+L	24	Bd. 1b
+M	24	HUNSPELL_RULE		0	2	UnknownWord	Atopouse un posíbel erro ortográfico	Be|Br|B|D|Ba|Ad|Bi|Cd|Bk|Bq|rd|Gd|BI
+L	25	Primeiro lanzamento do Saturno 1B
+L	26	Consumíronse 2.000kWh
+M	26	UNITS_OF_MEASURE_SPACING	1	13	21	Other	Debe dar un espazo entre o valor e a unidade de medida: <suggestion>2.000 kWh</suggestion>	2.000 kWh
+L	27	Os xuros son de 5 %.
+M	27	PERCENT_WITHOUT_SPACE	1	16	19	Other	Escriba a porcentaxe sen espazos (estilo estándar).	5%
+L	28	jbo:1901moi
+M	28	UPPERCASE_SENTENCE_START		0	3	Other	Esta oración non comeza cunha letra maiúscula.	Jbo
+L	29	O ángulo é de 25 °
+L	30	Fan -25,5 ° de temperatura.
+M	30	UNITS_OF_MEASURE_SPACING	2	4	12	Other	Entre o valor numérico e o símbolo de grao debe haber un espazo. Utilice <suggestion>-25,5°</suggestion> ou engada a unidade de medida térmica (p.ex. <suggestion>-25,5 °C</suggestion>).	-25,5°|-25,5 °C
+L	31	Fan -25 ° de temperatura.
+M	31	UNITS_OF_MEASURE_SPACING	2	4	10	Other	Entre o valor numérico e o símbolo de grao debe haber un espazo. Utilice <suggestion>-25°</suggestion> ou engada a unidade de medida térmica (p.ex. <suggestion>-25 °C</suggestion>).	-25°|-25 °C
+L	32	O ángulo é de 25 ° de abertura.
+M	32	UNITS_OF_MEASURE_SPACING	2	14	19	Other	Entre o valor numérico e o símbolo de grao debe haber un espazo. Utilice <suggestion>25°</suggestion> ou engada a unidade de medida térmica (p.ex. <suggestion>25 °C</suggestion>).	25°|25 °C
+L	33	Fan -25 ° de temperatura.
+M	33	UNITS_OF_MEASURE_SPACING	2	4	10	Other	Entre o valor numérico e o símbolo de grao debe haber un espazo. Utilice <suggestion>-25°</suggestion> ou engada a unidade de medida térmica (p.ex. <suggestion>-25 °C</suggestion>).	-25°|-25 °C
+L	34	3°14′ 45,54″
+L	35	45 ″ E
+M	35	UNITS_OF_MEASURE_SPACING	3	0	4	Other	Debe haber un espazo antes do símbolo de segundos ().	45″
+L	36	45,54 ″ E
+M	36	UNITS_OF_MEASURE_SPACING	3	0	7	Other	Debe haber un espazo antes do símbolo de segundos ().	45,54″
+L	37	g = 9,8 m/s2
+M	37	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	G
+M	37	SI_UNITS_EXPONENT	1	10	12	Other	Os expoñentes deben estar en superíndice.	s²
+L	38	g = 9,8 m/s^2
+M	38	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	G
+M	38	SI_UNITS_EXPONENT	1	10	13	Other	Os expoñentes deben estar en superíndice.	s²
+L	39	ρ[H₂O]≈1,0 g/cm3.
+M	39	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	Ρ
+M	39	SI_UNITS_EXPONENT	2	13	16	Other	Os expoñentes deben estar en superíndice.	cm³
+L	40	ρ[H₂O]≈1,0 g/cm^3.
+M	40	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	Ρ
+M	40	SI_UNITS_EXPONENT	2	13	17	Other	Os expoñentes deben estar en superíndice.	cm³
+L	41	O aparello consume 5 kW/h.
+M	41	kWh	1	21	25	Other	Se se refire á unidade de consumo de enerxía, debe escribir <suggestion>kWh</suggestion>.	kWh
+L	42	O aparello consume 5 kW.h.
+L	43	O aparello consume 5 kWh.
+L	44	O aparello consume 5 KW.h.
+M	44	kWh	2	21	25	Other	O prefixo kilo debe ser escrito en minúsculas.	kWh|kW.h
+L	45	O aparello consume 5 kWh.
+L	46	O aparello consume 5 KWh.
+M	46	kWh	3	21	24	Other	O prefixo kilo debe ser escrito en minúsculas.	kWh
+L	47	O aparello consume 5 kW·h.
+L	48	O aparello consume 5 kWh.
+L	49	5*5.
+M	49	SPACES_BETWEEN_OPERATORS	1	0	3	Other	Separe as fórmulas con espazos (protexidos).	5 * 5
+L	50	3a=2.
+M	50	SPACES_BETWEEN_OPERATORS	1	0	4	Other	Separe as fórmulas con espazos (protexidos).	3a = 2
+L	51	a = 2 · x² + 5
+M	51	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	52	Un mapa na escala 1:80000.
+L	53	Teño unha reunión ás 7:00 h.
+L	54	Teño unha reunión ás 7:00h.
+L	55	Enviado a 2014-01-23 10:32 :
+M	55	SPACE_BEFORE_PUNCTUATION	2	24	28	Other	Retire o espazo antes deste sinal de puntuación.	32:
+L	56	4,5 × 2,5
+L	57	Entre as 9:00 e as 16:45.
+L	58	h = 6,626 x 10⁻³⁴ J.s
+M	58	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	H
+L	59	h = 6.626 x 10⁻³⁴ J.s
+M	59	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	H
+L	60	5 * 2 = 10
+L	61	a = 5 * x + 7
+M	61	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	62	a = 5x * 5 + 7
+M	62	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	63	a * b
+M	63	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	64	a = 2 · x² + 5
+M	64	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	65	4,5 × 2,5 = 11,25
+L	66	Consideremos que x é a coordenada horizontal, e y é a coordenada vertical.
+L	67	Regueira Fernández, X. L.
+L	68	c=2,998x10⁸ m/s
+M	68	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	C
+L	69	h = 6.626x10⁻³⁴ J.s
+M	69	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	H
+L	70	5*2 = 10
+M	70	SPACES_BETWEEN_OPERATORS	1	0	3	Other	Separe as fórmulas con espazos (protexidos).	5 * 2
+L	71	a=2·x²+5
+M	71	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	72	4,5×2,5=11,25
+L	73	Oxihalídeos do Americio en forma de AmVIO2X2, AmVO2X, AmIVOX2 e AmIIIOX...
+M	73	HUNSPELL_RULE		0	11	UnknownWord	Atopouse un posíbel erro ortográfico	Clitorídeos
+M	73	HUNSPELL_RULE		36	41	UnknownWord	Atopouse un posíbel erro ortográfico	Amaio|Amnio|Amomio
+M	73	HUNSPELL_RULE		46	50	UnknownWord	Atopouse un posíbel erro ortográfico	Amo|Ameo|Amúo
+M	73	HUNSPELL_RULE		54	60	UnknownWord	Atopouse un posíbel erro ortográfico	Arxivo
+M	73	HUNSPELL_RULE		64	71	UnknownWord	Atopouse un posíbel erro ortográfico	Aramio
+L	74	Número 1Z1141X30370035113
+L	75	a=5*x+7
+M	75	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	76	a=5x*5+7
+M	76	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+M	76	SPACES_BETWEEN_OPERATORS	1	2	6	Other	Separe as fórmulas con espazos (protexidos).	5x * 5
+L	77	a=7+5x*5
+M	77	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+M	77	SPACES_BETWEEN_OPERATORS	1	2	6	Other	Separe as fórmulas con espazos (protexidos).	7 + 5x
+L	78	a*b
+M	78	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	79	a=2·x²+5
+M	79	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	A
+L	80	4,5×2,5=11,25
+L	81	m = 75,5 +- 0,1 g
+M	81	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	M
+M	81	PLUS_MINUS	1	9	11	Other	O símbolo tipográfico é máis claro.	±
+L	82	m = 75,5 -+ 0,1 g
+M	82	UPPERCASE_SENTENCE_START		0	1	Other	Esta oración non comeza cunha letra maiúscula.	M
+M	82	PLUS_MINUS	2	9	11	Other	O símbolo tipográfico é máis claro.	±
+L	83	1 ≥ 1
+L	84	1 >= 0
+M	84	EQUAL_OR_X	1	2	4	Other	O símbolo tipográfico é máis claro.	≥|≧
+L	85	1 ≤ 3
+L	86	1 <= 3
+M	86	ARROWS	2	2	4	Other	As frechas tipográficas acrecentan a claridade dun texto	←|⇽|⇇|⇐|⇦|⇚|≤
+L	87	-> Punto 1
+M	87	DASH_ENUMERATION_SPACE_RULE	1	0	2	Other	En diálogos, debe dar espazo despois do trazo longo.	— >
+L	88	A <- B
+M	88	ARROWS	2	2	4	Other	As frechas tipográficas acrecentan a claridade dun texto	←|⇽|⇇|⇐|⇦|⇚|≤
+L	89	A ← B
+L	90	-128 < -127 < -126
+M	90	DASH_ENUMERATION_SPACE_RULE	1	0	4	Other	En diálogos, debe dar espazo despois do trazo longo.	— 128
+L	91	A <=> B
+M	91	ARROWS	3	2	5	Other	As frechas tipográficas acrecentan a claridade dun texto	↔|⇿|⇄|⇆|⇋|⇌|⇔
+L	92	A ⇔ B
+L	93	Naceu no ano 1.989.
+M	93	YEAR_NUMBER_FORMAT	1	13	18	Other	Nos anos os números non deben estar separados.	1989
+L	94	É decembro de 1.989.
+M	94	YEAR_NUMBER_FORMAT	2	14	19	Other	Nos anos os números non deben estar separados.	1989
+L	95	Estamos a 1.989 aC.
+M	95	YEAR_NUMBER_FORMAT	3	10	15	Other	Nos anos os números non deben estar separados.	1989
+L	96	9'5
+M	96	AVOID_DECIMAL_APOSTROPHE	1	0	3	Other	Utilice antes unha vírgula para separar os decimais.	9,5
+L	97	9'5%
+M	97	AVOID_DECIMAL_APOSTROPHE	1	0	4	Other	Utilice antes unha vírgula para separar os decimais.	9,5%
+L	98	9.349'5
+M	98	AVOID_DECIMAL_APOSTROPHE	1	0	7	Other	Utilice antes unha vírgula para separar os decimais.	9.349,5
+L	99	1.999.349'5
+M	99	AVOID_DECIMAL_APOSTROPHE	1	0	11	Other	Utilice antes unha vírgula para separar os decimais.	1.999.349,5
+L	100	1 999 349'5
+M	100	AVOID_DECIMAL_APOSTROPHE	1	6	11	Other	Utilice antes unha vírgula para separar os decimais.	349,5
+L	101	1,23'2
+L	102	41° 22'44.
+M	102	DEGREE_MINUTES_SECONDS	2	0	7	Other	Utilice os símbolos de graos e minutos.	41° 22′
+L	103	41° 12’12” N.
+M	103	DEGREE_MINUTES_SECONDS	1	0	10	Other	Utilice os símbolos de graos, minutos e segundos.	41° 12′ 12″
+L	104	A taxa é de 23,5 %.
+M	104	PERCENT_WITHOUT_SPACE	1	12	18	Other	Escriba a porcentaxe sen espazos (estilo estándar).	23,5%
+L	105	Paga 23,5 ‰.
+M	105	PERCENT_WITHOUT_SPACE	1	5	11	Other	Escriba a porcentaxe sen espazos (estilo estándar).	23,5‰
+L	106	Neste caso a % é de 1 a 2.
+L	107	Paga 25%.
+L	108	A taxa é do 23,5%.
+M	108	GENERAL_NUMBER_AGREEMENT_ERRORS	4	9	17	Other	Posíbel erro de concordancia de número.	do (23,5%)|dos 23,5%
+L	109	Paga 23,5‰.
+L	110	Paga 25 %.
+M	110	PERCENT_WITHOUT_SPACE	1	5	9	Other	Escriba a porcentaxe sen espazos (estilo estándar).	25%
+L	111	El saíu de casa.
+L	112	- Que é iso, mamá?
+M	112	DASH_RULE	1	0	1	Other	En diálogos e enumeracións debe utilizar trazo longo.	—
+L	113	« - Que é iso, mamá?
+M	113	PARENTESESE_AND_QUOTES_SPACING	1	0	3	Other	Espazamento incorrecto.	«-
+L	114	— É o teu presente de aniversario, miña filla.
+L	115	1466–1469 — Gran Guerra Irmandiña
+L	116	2560-657 TORRES VEDRAS
+M	116	HUNSPELL_RULE		16	22	UnknownWord	Atopouse un posíbel erro ortográfico	VEDAS|VERAS|EDRAS|VEDARAS|VEDRÉS|VEIRAS|VIDRAS|VEDROS|HEDRAS|MEDRAS|PEDRAS|REDRAS|VEDRA|VEDRAÑAS
+L	117	---------------------------------------
+L	118	como dixen -,…
+M	118	UPPERCASE_SENTENCE_START		0	4	Other	Esta oración non comeza cunha letra maiúscula.	Como
+M	118	DASH_RULE	2	11	12	Other	Termine a frase parentética cun trazo longo.	—
+M	118	COMMA_PARENTHESIS_WHITESPACE		12	14	Other	Poña un espazo detrás da coma.	, …
+L	119	Neses establecementos de ensino existían matrículas - a maioría de ensino fundamental — e un total de docentes.
+M	119	DASH_RULE	3	52	53	Other	Se non pretende unir dúas palabras, debe utilizar trazo longo.	—
+L	120	Instituto Ricci de Macau - Asociación de promoción cultural da Compañía de Xesús en Macau
+M	120	HUNSPELL_RULE		10	15	UnknownWord	Atopouse un posíbel erro ortográfico	Ricei|Fricción
+M	120	DASH_RULE	3	25	26	Other	Se non pretende unir dúas palabras, debe utilizar trazo longo.	—
+L	121	Na porción centro-oeste e noroeste presentan maiores elevacións, podendo atinxir 500 metros por enriba do nivel do mar, destacándose a Serra do Tumucumaque e a Serra Lombarda.
+M	121	HUNSPELL_RULE		144	155	UnknownWord	Atopouse un posíbel erro ortográfico	Lumaquela
+L	122	1466–1469 — Gran Guerra Irmandiña
+L	123	2560-657 TORRES VEDRAS
+M	123	HUNSPELL_RULE		16	22	UnknownWord	Atopouse un posíbel erro ortográfico	VEDAS|VERAS|EDRAS|VEDARAS|VEDRÉS|VEIRAS|VIDRAS|VEDROS|HEDRAS|MEDRAS|PEDRAS|REDRAS|VEDRA|VEDRAÑAS
+L	124	---------------------------------------
+L	125	Antonio Casares Rodríguez (1812 - 1888) — primeiro catedrático de Química da USC.
+M	125	DASH_RULE	4	27	38	Other	Se pretende indicar un intervalo temporal ou numérico, debe utilizar o medio-trazo.	1812 – 1888|1812–1888
+L	126	1466–1469 — Gran Guerra Irmandiña
+L	127	2560-657 TORRES VEDRAS
+M	127	HUNSPELL_RULE		16	22	UnknownWord	Atopouse un posíbel erro ortográfico	VEDAS|VERAS|EDRAS|VEDARAS|VEDRÉS|VEIRAS|VIDRAS|VEDROS|HEDRAS|MEDRAS|PEDRAS|REDRAS|VEDRA|VEDRAÑAS
+L	128	---------------------------------------
+L	129	10-10-10 — Data
+L	130	10-10-2010 — Data
+L	131	2010-10-10 — Data
+L	132	1—Influencia artística.
+L	133	— Corre! Vaia!
+L	134	1466–1469 — Gran Guerra Irmandiña
+L	135	—Saltar
+M	135	DASH_ENUMERATION_SPACE_RULE	1	0	7	Other	En diálogos, debe dar espazo despois do trazo longo.	— Saltar
+L	136	—Correr
+M	136	DASH_ENUMERATION_SPACE_RULE	1	0	7	Other	En diálogos, debe dar espazo despois do trazo longo.	— Correr
+L	137	—Rastrear
+M	137	DASH_ENUMERATION_SPACE_RULE	1	0	9	Other	En diálogos, debe dar espazo despois do trazo longo.	— Rastrear
+L	138	---------------------------------------
+L	139	—Corre! Vaia!
+M	139	DASH_ENUMERATION_SPACE_RULE	1	0	6	Other	En diálogos, debe dar espazo despois do trazo longo.	— Corre
+L	140	1466–1469 — Gran Guerra Irmandiña
+L	141	— Saltar
+L	142	— Correr
+L	143	— Rastrear
+L	144	---------------------------------------
+L	145	Alfándega da Fe fica en Tras -os-Montes.
+L	146	Ayer, A. J.— As Ideas de Bertrand Russel.
+M	146	HUNSPELL_RULE		0	4	UnknownWord	Atopouse un posíbel erro ortográfico	Ater
+M	146	HUNSPELL_RULE		25	33	UnknownWord	Atopouse un posíbel erro ortográfico	Bertrán
+M	146	HUNSPELL_RULE		34	40	UnknownWord	Atopouse un posíbel erro ortográfico	Carrusel
+L	147	Alfándega da Fe fica en Tras- os-Montes.
+L	148	1.- Introdución
+M	148	ENUMERATION_AND_DASHES	1	0	3	Other	Os trazos longos son innecesarios en enumeracións.	1.
+L	149	1.-- Introdución
+M	149	ENUMERATION_AND_DASHES	1	0	4	Other	Os trazos longos son innecesarios en enumeracións.	1.
+L	150	1.3.— Introdución
+M	150	ENUMERATION_AND_DASHES	1	0	5	Other	Os trazos longos son innecesarios en enumeracións.	1.3.
+L	151	1466–1469 — Gran Guerra Irmandiña
+L	152	50-30
+M	152	DASH_RULE	4	0	5	Other	Se pretende indicar un intervalo temporal ou numérico, debe utilizar o medio-trazo.	50 – 30|50–30
+L	153	…cunha pedra…—, penso que…
+M	153	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	154	H0: Non existen efectos significativos.
+M	154	CHEMICAL_FORMULAS_TYPOGRAPHY	15	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₀
+L	155	H1: Existen efectos significativos co composto A.
+M	155	HYPOTHESIS_TYPOGRAPHY	2	0	2	Other	O símbolo tipográfico é máis claro.	H₁
+L	156	H2: Existen efectos significativos co composto B.
+M	156	CHEMICAL_FORMULAS_TYPOGRAPHY	2	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₂
+L	157	H3: Existen efectos significativos cos compostos A e B combinados.
+M	157	CHEMICAL_FORMULAS_TYPOGRAPHY	3	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₃
+L	158	H4: Existen efectos significativos na ausencia do composto C.
+M	158	CHEMICAL_FORMULAS_TYPOGRAPHY	4	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₄
+L	159	H5: Existen efectos significativos do composto C.
+M	159	HYPOTHESIS_TYPOGRAPHY	6	0	2	Other	O símbolo tipográfico é máis claro.	H₅
+L	160	H6: Existen efectos significativos do composto D.
+M	160	HYPOTHESIS_TYPOGRAPHY	7	0	2	Other	O símbolo tipográfico é máis claro.	H₆
+L	161	H7: Existen efectos significativos do composto E.
+M	161	CHEMICAL_FORMULAS_TYPOGRAPHY	12	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₇
+L	162	H8: Existen efectos significativos do composto F.
+M	162	CHEMICAL_FORMULAS_TYPOGRAPHY	13	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₈
+L	163	H9: Existen efectos significativos do composto G.
+M	163	CHEMICAL_FORMULAS_TYPOGRAPHY	14	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₉
+L	164	4H₂O
+M	164	CHEMICAL_FORMULAS_TYPOGRAPHY	1	0	4	Other	Nas fórmulas químicas os multiplicadores deben ir separados.	4 H₂O
+L	165	O2
+M	165	CHEMICAL_FORMULAS_TYPOGRAPHY	2	0	2	Other	Nas fórmulas químicas os números deben estar en subíndice.	O₂
+L	166	4H2O
+M	166	CHEMICAL_FORMULAS_TYPOGRAPHY	2	0	4	Other	Nas fórmulas químicas os números deben estar en subíndice.	4H₂O
+L	167	2S3
+M	167	CHEMICAL_FORMULAS_TYPOGRAPHY	3	0	3	Other	Nas fórmulas químicas os números deben estar en subíndice.	2S₃
+L	168	CH4
+M	168	CHEMICAL_FORMULAS_TYPOGRAPHY	4	0	3	Other	Nas fórmulas químicas os números deben estar en subíndice.	CH₄
+L	169	H4Si
+M	169	CHEMICAL_FORMULAS_TYPOGRAPHY	4	0	4	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₄Si
+L	170	H2O2
+M	170	CHEMICAL_FORMULAS_TYPOGRAPHY	5	0	4	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₂O₂
+L	171	H2NO2Al
+M	171	CHEMICAL_FORMULAS_TYPOGRAPHY	5	0	7	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₂NO₂Al
+L	172	K2HPO3
+M	172	CHEMICAL_FORMULAS_TYPOGRAPHY	6	0	6	Other	Nas fórmulas químicas os números deben estar en subíndice.	K₂HPO₃
+L	173	CH3CH2OH
+M	173	CHEMICAL_FORMULAS_TYPOGRAPHY	7	0	8	Other	Nas fórmulas químicas os números deben estar en subíndice.	CH₃CH₂OH
+L	174	CH3CH3
+M	174	CHEMICAL_FORMULAS_TYPOGRAPHY	8	0	6	Other	Nas fórmulas químicas os números deben estar en subíndice.	CH₃CH₃
+L	175	H2SO4
+M	175	CHEMICAL_FORMULAS_TYPOGRAPHY	9	0	5	Other	Nas fórmulas químicas os números deben estar en subíndice.	H₂SO₄
+L	176	C2H5OH
+M	176	CHEMICAL_FORMULAS_TYPOGRAPHY	10	0	6	Other	Nas fórmulas químicas os números deben estar en subíndice.	C₂H₅OH
+L	177	C2H6
+M	177	CHEMICAL_FORMULAS_TYPOGRAPHY	11	0	4	Other	Nas fórmulas químicas os números deben estar en subíndice.	C₂H₆
+L	178	C7H₁₆
+M	178	CHEMICAL_FORMULAS_TYPOGRAPHY	12	0	5	Other	Nas fórmulas químicas os números deben estar en subíndice.	C₇H₁₆
+L	179	C8H₁₈
+M	179	CHEMICAL_FORMULAS_TYPOGRAPHY	13	0	5	Other	Nas fórmulas químicas os números deben estar en subíndice.	C₈H₁₈
+L	180	C9H₂₀
+M	180	CHEMICAL_FORMULAS_TYPOGRAPHY	14	0	5	Other	Nas fórmulas químicas os números deben estar en subíndice.	C₉H₂₀
+L	181	Lola T70 Chevy V8
+M	181	HUNSPELL_RULE		9	14	UnknownWord	Atopouse un posíbel erro ortográfico	Cheviot
+L	182	C₉H₂0
+M	182	CHEMICAL_FORMULAS_TYPOGRAPHY	15	0	5	Other	Nas fórmulas químicas os números deben estar en subíndice.	C₉H₂₀
+L	183	Fai 25º C á sombra.
+M	183	DEGREE_SYMBOL	1	6	9	Other	Se está a indicar graos, utilice o símbolo <suggestion> °C</suggestion>.	 °C
+L	184	Fai 25ºC á sombra.
+M	184	DEGREE_SYMBOL	1	6	8	Other	Se está a indicar graos, utilice o símbolo <suggestion> °C</suggestion>.	 °C
+L	185	Fai 25 º C á sombra.
+M	185	DEGREE_SYMBOL	1	6	10	Other	Se está a indicar graos, utilice o símbolo <suggestion> °C</suggestion>.	 °C
+L	186	Fai 25 ºC á sombra.
+M	186	DEGREE_SYMBOL	1	6	9	Other	Se está a indicar graos, utilice o símbolo <suggestion> °C</suggestion>.	 °C
+L	187	Fai 25°.
+L	188	…o da Unión, conforme estabelecido nos artigos 349.º e 355.º do Tratado sobre o Funcionamento da Unión E…
+M	188	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	189	…que puxo fin á República Vella, depondo seu 13º e último presidente Washington Luís e impedindo a…
+M	189	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	190	Son 2 kgs de mazás.
+M	190	PLURAL_IN_UNITS_OF_MEASURE	1	6	9	Other	As abreviaturas de unidades de medida estándar non teñen plural.	kg
+L	191	A 30 ºK.
+M	191	KELVIN	1	4	7	Other	Kelvin non utiliza o sinal de grao.	 K
+L	192	A 30ºK.
+M	192	KELVIN	1	4	6	Other	Kelvin non utiliza o sinal de grao.	 K
+L	193	A 30 º K.
+M	193	KELVIN	1	4	8	Other	Kelvin non utiliza o sinal de grao.	 K
+L	194	25º 29,1' 49".
+M	194	DEGREE_MINUTES_SECONDS	1	0	13	Other	Utilice os símbolos de graos, minutos e segundos.	25° 29,1′ 49″
+L	195	25º 29' 49'.
+M	195	DEGREE_MINUTES_SECONDS	1	0	11	Other	Utilice os símbolos de graos, minutos e segundos.	25° 29′ 49″
+L	196	25 º 29,1' 49".
+M	196	DEGREE_MINUTES_SECONDS	1	0	14	Other	Utilice os símbolos de graos, minutos e segundos.	25° 29,1′ 49″
+L	197	25 º 29' 49'.
+M	197	DEGREE_MINUTES_SECONDS	1	0	12	Other	Utilice os símbolos de graos, minutos e segundos.	25° 29′ 49″
+L	198	25º29’49” N.
+M	198	DEGREE_MINUTES_SECONDS	1	0	9	Other	Utilice os símbolos de graos, minutos e segundos.	25° 29′ 49″
+L	199	25° 29′ 34″
+L	200	25º 29,1'.
+M	200	DEGREE_MINUTES_SECONDS	2	0	9	Other	Utilice os símbolos de graos e minutos.	25° 29,1′
+L	201	25º 29 '.
+M	201	DEGREE_MINUTES_SECONDS	2	0	8	Other	Utilice os símbolos de graos e minutos.	25° 29′
+L	202	25 º 29,1'.
+M	202	DEGREE_MINUTES_SECONDS	2	0	10	Other	Utilice os símbolos de graos e minutos.	25° 29,1′
+L	203	25 º29'.
+M	203	DEGREE_MINUTES_SECONDS	2	0	7	Other	Utilice os símbolos de graos e minutos.	25° 29′
+L	204	25º29’ N.
+M	204	DEGREE_MINUTES_SECONDS	2	0	6	Other	Utilice os símbolos de graos e minutos.	25° 29′
+L	205	25° 29′
+L	206	29,1' 49".
+M	206	DEGREE_MINUTES_SECONDS	3	0	9	Other	Utilice os símbolos de minutos e segundos.	29,1′ 49″
+L	207	29' 49 '.
+M	207	DEGREE_MINUTES_SECONDS	3	0	8	Other	Utilice os símbolos de minutos e segundos.	29′ 49″
+L	208	29,1' 49 ".
+M	208	DEGREE_MINUTES_SECONDS	3	0	10	Other	Utilice os símbolos de minutos e segundos.	29,1′ 49″
+L	209	29 ' 49'.
+M	209	DEGREE_MINUTES_SECONDS	3	0	8	Other	Utilice os símbolos de minutos e segundos.	29′ 49″
+L	210	29’49” N.
+M	210	DEGREE_MINUTES_SECONDS	3	0	6	Other	Utilice os símbolos de minutos e segundos.	29′ 49″
+L	211	29′ 34″
+L	212	Non e´ común encontrar erros deste tipo.
+M	212	LOOSE_ACCENTS	1	5	6	Other	Carácter incorrecto. Utilice antes o apóstrofo ou revise a acentuación.	’|
+L	213	Unha nova n' A Nosa Terra.
+M	213	GENERAL_GENDER_AGREEMENT_ERRORS	5	5	11	Other	Posíbel erro de concordancia de xénero.	novo n|nova (n)
+M	213	UNPAIRED_BRACKETS		11	12	Other	Símbolo desemparellado: Parece que falta «'»	
+L	214	‘Dixen que “si”.
+M	214	UNPAIRED_BRACKETS		0	1	Other	Símbolo desemparellado: Parece que falta «’»	
+L	215	“Dixen que ‘si’”.
+L	216	«Dixen que “si”».
+L	217	Dixen que “si”.’
+M	217	UNPAIRED_BRACKETS		15	16	Other	Símbolo desemparellado: Parece que falta «‘»	
+L	218	“Dixen que ‘si’”.
+L	219	«Dixen que “si”».
+L	220	“Dixen que «si»”.
+L	221	“Dixen que ‘si’”.
+L	222	«Dixen que “si”».
+L	223	“Dixen que «si»”.
+L	224	“Dixen que ‘si’”.
+L	225	«Dixen que “si”».
+L	226	Dixen que ‘si‘.
+M	226	UNPAIRED_BRACKETS		10	11	Other	Símbolo desemparellado: Parece que falta «’»	
+M	226	UNPAIRED_BRACKET_SUGGESTIONS	1	13	14	Other	Utilice unha comiña de peche.	’
+L	227	Dixen que “si“.
+M	227	UNPAIRED_BRACKETS		10	11	Other	Símbolo desemparellado: Parece que falta «”»	
+M	227	UNPAIRED_BRACKET_SUGGESTIONS	2	13	14	Other	Utilice unha comiña de peche.	”
+L	228	O novo produto é de Escolla Executiva(TM) Plus.
+M	228	TRADEMARK	1	37	41	Other	Quería escribir <suggestion>™</suggestion>?	™
+M	228	HUNSPELL_RULE		42	46	UnknownWord	Atopouse un posíbel erro ortográfico	Pus|Paus|Plumas
+L	229	O novo produto é de Escolla Executiva(SM) Plus.
+M	229	SERVICEMARK	2	37	41	Other	Quería escribir <suggestion>℠</suggestion>?	℠
+M	229	HUNSPELL_RULE		42	46	UnknownWord	Atopouse un posíbel erro ortográfico	Pus|Paus|Plumas
+L	230	Windows (R)
+M	230	R_SYMBOL	1	8	11	Other	Quería escribir <suggestion>®</suggestion>?	®
+L	231	Copyright (C) Joanna Bator, 2012
+M	231	GL_BARBARISM_REPLACE		0	9	Other	'Copyright' é un xenismo. É preferíbel dicir <suggestion>dereito de autor</suggestion>	Dereito de autor
+M	231	COPYRIGHT	1	10	13	Other	Posibelmente sexa máis claro usar o símbolo: <suggestion>©</suggestion>	©
+M	231	HUNSPELL_RULE		14	20	UnknownWord	Atopouse un posíbel erro ortográfico	Hosanna
+M	231	HUNSPELL_RULE		21	26	UnknownWord	Atopouse un posíbel erro ortográfico	Botar|Bato|Bater|Babor|Balor|Barato|Borato|Torba
+L	232	Copyright (C) 2010 O Estado da Gramática
+M	232	GL_BARBARISM_REPLACE		0	9	Other	'Copyright' é un xenismo. É preferíbel dicir <suggestion>dereito de autor</suggestion>	Dereito de autor
+M	232	COPYRIGHT	1	10	13	Other	Posibelmente sexa máis claro usar o símbolo: <suggestion>©</suggestion>	©
+L	233	Isto é unha lista: (a) elemento, (b) 2 elementos, (c) 2014 elementos.
+L	234	Debe 100£.
+M	234	CURRENCY	1	5	9	Hint	O símbolo desta divisa colócase por norma antes do valor: <suggestion>£100</suggestion>.	£100
+L	235	Debe 100.00£.
+M	235	CURRENCY	1	5	12	Hint	O símbolo desta divisa colócase por norma antes do valor: <suggestion>£100.00</suggestion>.	£100.00
+L	236	Debe 100 £.
+M	236	CURRENCY	2	5	10	Hint	O símbolo desta divisa colócase por norma antes do valor: <suggestion>£100</suggestion>.	£100
+L	237	Debe 100.00 £.
+M	237	CURRENCY	2	5	13	Hint	O símbolo desta divisa colócase por norma antes do valor: <suggestion>£100.00</suggestion>.	£100.00
+L	238	Debe € 100.
+M	238	CURRENCY	3	5	10	Hint	O símbolos de euro colócase despois do valor: <suggestion>100 €</suggestion>.	100 €
+L	239	Debe € 100,00.
+M	239	CURRENCY	3	5	13	Hint	O símbolos de euro colócase despois do valor: <suggestion>100,00 €</suggestion>.	100,00 €
+L	240	Débese $ 100.
+M	240	CURRENCY_SPACE	1	7	12	Other	Os símbolos monetarios internacionais sepáranse cun espazo: <suggestion>$100</suggestion>.	$100
+L	241	Débese 100€.
+M	241	CURRENCY_SPACE_2	2	7	11	Other	Os símbolos monetarios do euro (€) sepáranse cun espazo<suggestion>100 €</suggestion>.	100 €
+L	242	Isto é unha ("proba").
+L	243	"Proba"!
+L	244	“Proba”!
+L	245	Isto é outra proba "proba".
+L	246	Isto é unha proba ("proba")
+L	247	Use as comiñas "aquí" para dicir algo.
+L	248	Isto é outra proba "proba".
+L	249	"O Aradiño" aparece no primeiro álbum de Fuxan os Ventos.
+M	249	HUNSPELL_RULE		3	10	UnknownWord	Atopouse un posíbel erro ortográfico	Aladino|Abadiño
+L	250	“Proba”!
+L	251	Os asentos da clase económica teñen unha profundidade de 31-33"
+M	251	DASH_RULE	4	57	62	Other	Se pretende indicar un intervalo temporal ou numérico, debe utilizar o medio-trazo.	31 – 33|31–33
+M	251	UNPAIRED_BRACKETS		62	63	Other	Símbolo desemparellado: Parece que falta «"»	
+L	252	O xogador de fútbol apelidado do "Animal"
+L	253	``Proba”.
+M	253	LOOSE_ACCENTS	1	0	1	Other	Carácter incorrecto. Utilice antes o apóstrofo ou revise a acentuación.	’|
+M	253	UNPAIRED_BRACKETS		7	8	Other	Símbolo desemparellado: Parece que falta «“»	
+L	254	„Proba”.
+M	254	UNPAIRED_BRACKETS		6	7	Other	Símbolo desemparellado: Parece que falta «“»	
+L	255	Ás 10.00.43.
+M	255	TIME_FORMAT	1	3	11	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	10:00:43|10 h 00 min 43 s
+L	256	Ás 10.00.43,5.
+M	256	TIME_FORMAT	1	3	13	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	10:00:43,5|10 h 00 min 43,5 s
+L	257	Ás 22.50 h.
+M	257	GENERAL_GENDER_AGREEMENT_ERRORS	7	0	10	Other	Posíbel erro de concordancia de xénero.	Ases 22.50 h|Ás 22.50 (h)
+L	258	Ás 6,05 h.
+M	258	GENERAL_GENDER_AGREEMENT_ERRORS	7	0	9	Other	Posíbel erro de concordancia de xénero.	Ases 6,05 h|Ás 6,05 (h)
+L	259	Ás 22:30 h.
+L	260	A subida demora 8, 10 horas.
+L	261	Ás 10.00.
+M	261	TIME_FORMAT	3	0	8	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	Ás 10:00
+L	262	Da 01.00 a as…
+M	262	TIME_FORMAT	3	0	8	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	Da 01:00
+L	263	Das 10:00 ás 10.50.
+M	263	TIME_FORMAT	3	10	18	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	ás 10:50
+L	264	Ás 5.00 da mañá.
+M	264	TIME_FORMAT	3	0	7	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	Ás 5:00
+L	265	Ás 6.05 da tarde.
+M	265	TIME_FORMAT	3	0	7	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	Ás 6:05
+L	266	Ás 6.05 da noite.
+M	266	TIME_FORMAT	3	0	7	Other	A norma ISO 8601 indica que as horas sepáranse dos minutos e dos segundos por dous puntos e que teñen sempre dúas cifras.	Ás 6:05
+L	267	Ás 22:30 h.
+L	268	O Diácono Remedios preguntou onde estabas nos 1970's.
+M	268	APOSTROPHE_IN_DATES	1	46	52	Other	Os apóstrofos non son necesarios en décadas: <suggestion>1970s</suggestion>.	1970s
+L	269	O Diácono Remedios preguntou onde estabas nos 70's.
+M	269	APOSTROPHE_IN_DATES	1	46	50	Other	Os apóstrofos non son necesarios en décadas: <suggestion>70s</suggestion>.	70s
+L	270	Onde estabas nos 1990’s?
+M	270	APOSTROPHE_IN_DATES	1	17	23	Other	Os apóstrofos non son necesarios en décadas: <suggestion>1990s</suggestion>.	1990s
+L	271	Discos de freo da Alvis 12/70 adaptados para rodas máis grandes.
+M	271	HUNSPELL_RULE		18	23	UnknownWord	Atopouse un posíbel erro ortográfico	Albis|Avis
+L	272	Pegue aquí o seu texto...ou comprobe este texto.
+M	272	SPACE_AFTER_PUNCTUATION	1	22	25	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	273	...e os votos de Bo Aninovo.
+M	273	SPACE_AFTER_PUNCTUATION	1	0	3	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	274	Peque aquí o seu texto...
+L	275	Cole aquí o seu texto…ou comprobe este texto.
+M	275	SPACE_AFTER_PUNCTUATION	2	21	22	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	276	…e os votos de Bo Aninovo.
+M	276	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	277	Pegue aquí o seu texto…
+L	278	Alén diso…
+L	279	Como escapou !
+M	279	SPACE_BEFORE_PUNCTUATION	1	5	14	Other	Retire o espazo antes deste sinal de puntuación.	escapou!
+L	280	Existen dúas estratexias posíbeis: aproveitar o que existe ou reinventar a roda .
+M	280	HUNSPELL_RULE		62	72	UnknownWord	Atopouse un posíbel erro ortográfico	inventariar|inventar|aviventar|intentar
+M	280	SPACE_BEFORE_PUNCTUATION	1	75	81	Other	Retire o espazo antes deste sinal de puntuación.	roda.
+L	281	Existen dúas estratexias posíbeis : aproveitar o que existe ou reinventar a roda.
+M	281	SPACE_BEFORE_PUNCTUATION	2	25	35	Other	Retire o espazo antes deste sinal de puntuación.	posíbeis:
+M	281	HUNSPELL_RULE		63	73	UnknownWord	Atopouse un posíbel erro ortográfico	inventariar|inventar|aviventar|intentar
+L	282	Un sorriso :-)
+L	283	Un sorriso :)
+L	284	Un sorriso :(
+L	285	Un sorriso :-/
+M	285	SEMICOLON_COLON_SPACING	1	11	13	Other	Debe colocar un espazo despois de «:».	: -
+L	286	Un sorriso :/
+L	287	Un sorriso :D
+L	288	«Non me incomode con súa leria infantil;» dixen Maria; «eu escribo versos inmortais.»
+M	288	SEMICOLON_AND_QUOTES	1	39	41	Other	Xeralmente, non se coloca punto e vírgula antes de comiñas.	
+M	288	HUNSPELL_RULE		48	53	UnknownWord	Atopouse un posíbel erro ortográfico	María|Mara|Maia|Aria|Mariña|Malia|Mafia|Marica|Marial|Maiar|Miara|Marea
+L	289	« O xardín é verdadeiramente bonito», dixo ela.
+M	289	PARENTESESE_AND_QUOTES_SPACING	1	0	3	Other	Espazamento incorrecto.	«O
+L	290	Ela dixo: « O xardín é verdadeiramente bonito.»
+M	290	PARENTESESE_AND_QUOTES_SPACING	5	8	13	Other	Un dos espazos é innecesario. Debe excluílo.	:« O|: «O
+L	291	«O xardín», dixo ela, « é verdadeiramente bonito.»
+M	291	PARENTESESE_AND_QUOTES_SPACING	5	20	25	Other	Un dos espazos é innecesario. Debe excluílo.	,« é|, «é
+L	292	A galiña di «Quiquiriquiqui» o porco di «Oinc, Oinc», o pato di «Cuá, Cuá» e o gato «Miau».
+M	292	HUNSPELL_RULE		13	27	UnknownWord	Atopouse un posíbel erro ortográfico	Quiquiriquí
+M	292	HUNSPELL_RULE		41	45	UnknownWord	Atopouse un posíbel erro ortográfico	Cinc|Zinc|Incio
+M	292	HUNSPELL_RULE		47	51	UnknownWord	Atopouse un posíbel erro ortográfico	Cinc|Zinc|Incio
+M	292	HUNSPELL_RULE		65	68	UnknownWord	Atopouse un posíbel erro ortográfico	Chá|Cu|Cúa|Cá|Cun|Cus
+M	292	HUNSPELL_RULE		70	73	UnknownWord	Atopouse un posíbel erro ortográfico	Chá|Cu|Cúa|Cá|Cun|Cus
+L	293	«O xardín é verdadeiramente bonito. »
+L	294	«O xardín», dixo el, «xardín é verdadeiramente bonito. »
+L	295	Algunhas palabras inglesas teñen dúas grafías, p.ex. "gray" e "grey".
+M	295	UPPERCASE_SENTENCE_START		54	58	Other	Esta oración non comeza cunha letra maiúscula.	Gray
+M	295	HUNSPELL_RULE		63	67	UnknownWord	Atopouse un posíbel erro ortográfico	grea|gres
+L	296	«O xardín é verdadeiramente bonito », dixo ela.
+M	296	PARENTESESE_AND_QUOTES_SPACING	3	28	36	Other	Espazamento incorrecto.	bonito»
+L	297	Ela dixo: “ O xardín é verdadeiramente bonito.”
+M	297	PARENTESESE_AND_QUOTES_SPACING	5	8	13	Other	Un dos espazos é innecesario. Debe excluílo.	:“ O|: “O
+L	298	O xardín é ' verdadeiramente' bonito.
+M	298	PARENTESESE_AND_QUOTES_SPACING	5	9	28	Other	Un dos espazos é innecesario. Debe excluílo.	é' verdadeiramente|é 'verdadeiramente
+L	299	El dixo:«O xardín é verdadeiramente bonito.»
+M	299	SENTENCE_WHITESPACE		8	9	Other	Engada un espazo entre oracións.	 «
+L	300	A cea estará lista ás 18:30.
+L	301	Un vaca está no prado.
+M	301	GENERAL_GENDER_AGREEMENT_ERRORS	1	0	7	Other	Posíbel erro de concordancia de xénero.	Unha vaca|Un (vaca)
+L	302	Queres que fagamos un tortilla para cearmos?
+M	302	GENERAL_GENDER_AGREEMENT_ERRORS	1	19	30	Other	Posíbel erro de concordancia de xénero.	unha tortilla|un (tortilla)
+L	303	O Un tórnase Dous, o Dous tórnase Tres.
+M	303	GENERAL_NUMBER_AGREEMENT_ERRORS	3	19	25	Other	Posíbel erro de concordancia de número.	o (Dous)|os Dous
+L	304	O monte Fariña é unha montaña do distrito de Vila Real.
+L	305	Foi resolto no hora correcta.
+M	305	GENERAL_GENDER_AGREEMENT_ERRORS	2	12	19	Other	Posíbel erro de concordancia de xénero.	no (hora)
+L	306	Foi resolto na hora correcta.
+L	307	Os invasoras holandeses decidiron ir en dirección ao Río Grande do Norte…
+M	307	GENERAL_GENDER_AGREEMENT_ERRORS	3	0	12	Other	Posíbel erro de concordancia de xénero.	As invasoras|Os invasores
+L	308	Os frases están erradas.
+M	308	GENERAL_GENDER_AGREEMENT_ERRORS	3	0	9	Other	Posíbel erro de concordancia de xénero.	As frases|Os (frases)
+L	309	Uns cadelas están na rúa.
+M	309	GENERAL_GENDER_AGREEMENT_ERRORS	3	0	11	Other	Posíbel erro de concordancia de xénero.	Unhas cadelas|Uns cans
+L	310	Os bois están no prado.
+L	311	Existe cada vez máis presión sobre os medios de comunicación para que presenten contidos de calidade.
+L	312	Os ríos Camba, Navea e Xares son afluentes do Bibei.
+M	312	HUNSPELL_RULE		15	20	UnknownWord	Atopouse un posíbel erro ortográfico	Nava|Avea|Navia|Naves|Nave|Navega|Naveta|Nívea
+M	312	HUNSPELL_RULE		23	28	UnknownWord	Atopouse un posíbel erro ortográfico	Ares|Bares|Dares|Lares|Mares|Pares|Vares|Xeras|Xades|Xabres|Arxes|Xaras|Xeres|Xires|Xures
+L	313	Os escolas de ferrado recibían o seu nome pola forma na que se pagaban.
+M	313	GENERAL_GENDER_AGREEMENT_ERRORS	3	0	10	Other	Posíbel erro de concordancia de xénero.	As escolas|Os (escolas)
+L	314	Algúns frases ten erros gramaticais.
+M	314	GENERAL_VERB_AGREEMENT_ERRORS	9	0	17	Other	Posíbel erro de concordancia verbal.	Algúns frases teñen
+L	315	Algunhas frases ten erros gramaticais.
+M	315	GENERAL_VERB_AGREEMENT_ERRORS	9	0	19	Other	Posíbel erro de concordancia verbal.	Algunhas frases teñen
+L	316	Nos mil e unha noites.
+M	316	GENERAL_GENDER_AGREEMENT_ERRORS	4	0	7	Other	Posíbel erro de concordancia de xénero.	Nos (mil)
+L	317	Unha boi está no prado.
+M	317	GENERAL_GENDER_AGREEMENT_ERRORS	5	0	8	Other	Posíbel erro de concordancia de xénero.	Un boi|Unha (boi)
+L	318	Á comunidade Mozilla (Firefox, Thunderbird e SeaMonkey).
+M	318	HUNSPELL_RULE		13	20	UnknownWord	Atopouse un posíbel erro ortográfico	Morcilla
+M	318	HUNSPELL_RULE		45	54	UnknownWord	Atopouse un posíbel erro ortográfico	Sermonar
+L	319	Unha vaca está no prado.
+L	320	Alemaña perdeu a Primeira Guerra Mundial debido á Revolución alemá.
+L	321	Unha rúa Roberto Duarte Silva, tantas memorias.
+L	322	Algunha boi está no prado.
+M	322	GENERAL_GENDER_AGREEMENT_ERRORS	5	0	11	Other	Posíbel erro de concordancia de xénero.	Algún boi|Algunha (boi)
+L	323	Unhas bois están no prado.
+M	323	GENERAL_GENDER_AGREEMENT_ERRORS	7	0	10	Other	Posíbel erro de concordancia de xénero.	Uns bois|Unhas (bois)
+L	324	Unhas vacas están no prado.
+L	325	Vexan as millóns de mulleres.
+M	325	GENERAL_GENDER_AGREEMENT_ERRORS	7	6	16	Other	Posíbel erro de concordancia de xénero.	os millóns|as (millóns)
+L	326	Isto é, as escolas Álvaro de Campos, José Rodrigues dos Santos e Fernando Persoa.
+M	326	HUNSPELL_RULE		19	25	UnknownWord	Atopouse un posíbel erro ortográfico	Álavaro|Bávaro
+L	327	As ríos Camba, Navea e Xares son afluentes do Bibei..
+M	327	GENERAL_GENDER_AGREEMENT_ERRORS	7	0	7	Other	Posíbel erro de concordancia de xénero.	Os ríos|As (ríos)
+M	327	HUNSPELL_RULE		15	20	UnknownWord	Atopouse un posíbel erro ortográfico	Nava|Avea|Navia|Naves|Nave|Navega|Naveta|Nívea
+M	327	HUNSPELL_RULE		23	28	UnknownWord	Atopouse un posíbel erro ortográfico	Ares|Bares|Dares|Lares|Mares|Pares|Vares|Xeras|Xades|Xabres|Arxes|Xaras|Xeres|Xires|Xures
+M	327	DOUBLE_PUNCTUATION		51	53	Other	Dous puntos consecutivos	.|…
+L	328	Mascotas réptiles.
+L	329	Algunhas bois están no prado.
+M	329	GENERAL_GENDER_AGREEMENT_ERRORS	7	0	13	Other	Posíbel erro de concordancia de xénero.	Algúns bois|Algunhas (bois)
+L	330	Das viaxantes do tempo
+L	331	A boi está no prado.
+L	332	A vaca está no prado.
+L	333	A dogma de quen sabe moito.
+L	334	É necesario unha festa.
+M	334	SER_ADJECTIVE_AGREEMENT	1	0	22	Other	Posíbel erro de concordancia de xénero.	É necesaria unha festa
+L	335	É necesario unha gran festa.
+M	335	SER_ADJECTIVE_AGREEMENT	1	0	27	Other	Posíbel erro de concordancia de xénero.	É necesaria unha gran festa
+L	336	É necesaria un acordo.
+M	336	SER_ADJECTIVE_AGREEMENT	2	0	21	Other	Posíbel erro de concordancia de xénero.	É necesario un acordo
+L	337	É necesaria un gran acordo.
+M	337	SER_ADJECTIVE_AGREEMENT	2	0	26	Other	Posíbel erro de concordancia de xénero.	É necesario un gran acordo
+L	338	Son necesarios unhas festas.
+M	338	SER_ADJECTIVE_AGREEMENT	3	0	27	Other	Posíbel erro de concordancia de xénero.	Son necesarias unhas festas
+L	339	Son necesarios unhas grandes festas.
+M	339	SER_ADJECTIVE_AGREEMENT	3	0	35	Other	Posíbel erro de concordancia de xénero.	Son necesarias unhas grandes festas
+L	340	Son necesarias uns acordos.
+M	340	SER_ADJECTIVE_AGREEMENT	4	0	26	Other	Posíbel erro de concordancia de xénero.	Son necesarios uns acordos
+L	341	Son necesarias uns grandes acordos.
+M	341	SER_ADJECTIVE_AGREEMENT	4	0	34	Other	Posíbel erro de concordancia de xénero.	Son necesarios uns grandes acordos
+L	342	O cadela está no prado.
+M	342	ERRO_DE_CONCORDNCIA_DO_GÉNERO_MASCULINO_O	1	0	8	Other	Posíbel erro de concordancia de xénero.	A cadela|O can
+L	343	A cadela está no prado.
+L	344	Os can está no prado.
+M	344	GENERAL_NUMBER_AGREEMENT_ERRORS	1	0	6	Other	Posíbel erro de concordancia de número.	O can|Os cans
+L	345	Había pais natal na festa.
+M	345	GENERAL_NUMBER_AGREEMENT_ERRORS	1	6	16	Other	Posíbel erro de concordancia de número.	pai natal|pais natais
+L	346	Posúe unha extensión aproximada de 378 km, o que representa 3,8% de todos litoral do México.
+M	346	GENERAL_NUMBER_AGREEMENT_ERRORS	1	68	81	Other	Posíbel erro de concordancia de número.	todo litoral|todos litorais
+L	347	Casos máis preocupante son estas.
+M	347	GENERAL_NUMBER_AGREEMENT_ERRORS	1	0	22	Other	Posíbel erro de concordancia de número.	Caso máis preocupante|Casos máis preocupantes
+L	348	Conforme máis datos van sendo acumulados de persoas de todas as idades.
+L	349	Os rinocerontes serán anestesiados, antes de se remover o chifre.
+L	350	Pantalóns, os máis estragados posíbel!
+L	351	Os montes Everest, K2 e Kanchenjunga son os máis altos do mundo.
+M	351	HUNSPELL_RULE		10	17	UnknownWord	Atopouse un posíbel erro ortográfico	Revestir|Reverter|Terrestre
+M	351	CHEMICAL_FORMULAS_TYPOGRAPHY	2	19	21	Other	Nas fórmulas químicas os números deben estar en subíndice.	K₂
+M	351	HUNSPELL_RULE		24	36	UnknownWord	Atopouse un posíbel erro ortográfico	Enganche
+L	352	As cores son: Ás de Copas vermello, Ás de Ouros vermello, Ás de Bastos negro e Ás de Espadas negro.
+L	353	Fixo nacer as criaturas forestais estándar: teixugo e oso.
+L	354	É o orgullo dos pai.
+M	354	GENERAL_NUMBER_AGREEMENT_ERRORS	2	12	19	Other	Posíbel erro de concordancia de número.	dos pais
+L	355	Este gatos están no prado.
+M	355	GENERAL_NUMBER_AGREEMENT_ERRORS	3	0	10	Other	Posíbel erro de concordancia de número.	Este gato|Estes gatos
+L	356	Son todo oídos
+L	357	Uso lentes desde os 6 anos,
+L	358	Pantalóns, o máis posíbel estragados.
+L	359	O Monte Camerún é o volcán máis activo do oeste africano, tendo numerosas erupcións rexistradas.
+L	360	O número nove.
+L	361	Alí fóra están a cero graos.
+L	362	É o orgullo do pais.
+M	362	GENERAL_NUMBER_AGREEMENT_ERRORS	4	12	19	Other	Posíbel erro de concordancia de número.	do pai|dos pais
+L	363	Conseguiron combater o lume polo medios de todos os reveses.
+M	363	GENERAL_NUMBER_AGREEMENT_ERRORS	3	28	39	Other	Posíbel erro de concordancia de número.	polo medio|polos medios
+L	364	Polo menos nós terminamos o traballo pesado.
+L	365	Unha vacas son cachenas, outras non.
+M	365	GENERAL_NUMBER_AGREEMENT_ERRORS	5	0	10	Other	Posíbel erro de concordancia de número.	Unha vaca|Unhas vacas
+L	366	O programa Lendas do Futuro é bo?
+L	367	Unha vez acordadas as novas condicións, será feito o abastecemento eléctrico.
+L	368	As rexións da unión empobrecidas acabaron por ser culpabilizados.
+M	368	HUNSPELL_RULE		50	64	UnknownWord	Atopouse un posíbel erro ortográfico	culpabilidades
+L	369	Merca máis xemas.
+L	370	palabras clave útiles na descrición
+M	370	UPPERCASE_SENTENCE_START		0	8	Other	Esta oración non comeza cunha letra maiúscula.	Palabras
+L	371	Valor contido nunha especies por descubrir.
+M	371	GENERAL_NUMBER_AGREEMENT_ERRORS	6	14	28	Other	Posíbel erro de concordancia de número.	nunha especie|nunhas especies
+L	372	As vaca son cachenas.
+M	372	GENERAL_NUMBER_AGREEMENT_ERRORS	7	0	7	Other	Posíbel erro de concordancia de número.	A vaca|As vacas
+L	373	Presentou os programas Xornal do Mundo, Internacional Patati e Plus Berlin.
+M	373	HUNSPELL_RULE		54	60	UnknownWord	Atopouse un posíbel erro ortográfico	Pata|Patio
+M	373	HUNSPELL_RULE		63	67	UnknownWord	Atopouse un posíbel erro ortográfico	Pus|Paus|Plumas
+M	373	HUNSPELL_RULE		68	74	UnknownWord	Atopouse un posíbel erro ortográfico	Berlín|Berlina|Berlinés
+L	374	Coloca esa chave nas fechaduras grande.
+M	374	GENERAL_NUMBER_AGREEMENT_ERRORS	7	21	38	Other	Posíbel erro de concordancia de número.	fechadura grande|fechaduras grandes
+L	375	A situacións máis preocupante é esta.
+M	375	GENERAL_NUMBER_AGREEMENT_ERRORS	7	2	29	Other	Posíbel erro de concordancia de número.	situación máis preocupante|situacións máis preocupantes
+L	376	Conforme máis datos van sendo acumulados de persoas de todas as idades.
+L	377	Colle a chave das fechaduras grande.
+L	378	Pezas estándar.
+L	379	Valor contido nunhas especie por descubrir.
+M	379	GENERAL_NUMBER_AGREEMENT_ERRORS	8	14	28	Other	Posíbel erro de concordancia de número.	nunhas especies
+L	380	Eu andan pola praia.
+M	380	GENERAL_VERB_AGREEMENT_ERRORS	1	0	8	Other	Posíbel erro de concordancia verbal.	Eu ando
+L	381	Ti andan pola praia.
+M	381	GENERAL_VERB_AGREEMENT_ERRORS	2	0	8	Other	Posíbel erro de concordancia verbal.	Ti andas
+L	382	El non andan pola praia.
+M	382	GENERAL_VERB_AGREEMENT_ERRORS	3	0	12	Other	Posíbel erro de concordancia verbal.	El non anda
+L	383	Nós non andan pola praia.
+M	383	GENERAL_VERB_AGREEMENT_ERRORS	4	0	13	Other	Posíbel erro de concordancia verbal.	Nós non andamos
+L	384	Eu e Rita andan pola praia.
+M	384	GENERAL_VERB_AGREEMENT_ERRORS	5	0	15	Other	Posíbel erro de concordancia verbal.	Eu e Rita andamos
+L	385	Ti e eu andan pola praia.
+M	385	GENERAL_VERB_AGREEMENT_ERRORS	6	0	13	Other	Posíbel erro de concordancia verbal.	Ti e eu andamos
+L	386	Vós andan pola praia.
+M	386	CLITICS_01	1	0	9	Other	Os pronomes clíticos non poden ir no inicio da oración. Por regra xeral, o pronome átono vai colocado detrás do verbo.	{Suggestion}
+L	387	Eles e elas andamos pola praia.
+M	387	GENERAL_VERB_AGREEMENT_ERRORS	8	7	19	Other	Posíbel erro de concordancia verbal.	elas andan|elas andaron
+L	388	Os médicos saíra sen saber como romper a noticia.
+M	388	GENERAL_VERB_AGREEMENT_ERRORS	9	0	16	Other	Posíbel erro de concordancia verbal.	Os médicos saíran
+L	389	O médico novo saíran sen saber como romper a noticia.
+M	389	GENERAL_VERB_AGREEMENT_ERRORS	10	0	20	Other	Posíbel erro de concordancia verbal.	O médico novo saíra
+L	390	Can e gato é animais.
+L	391	O can e o gato é animais.
+L	392	É unha cría dun ave rapaz.
+M	392	NO_CACOPHONY	1	12	19	Other	Posíbel erro: os substantivos femininos que comezan por «a-» inicial tónico non implican modificacións no determinante que os precede. Quería vostede dicir <suggestion>dunha ave</suggestion>?	dunha ave
+L	393	É unha cría dunha ave rapaz.
+L	394	Rozouna coa empuñadura do arma.
+M	394	NO_CACOPHONY	2	23	30	Other	Posíbel erro: os substantivos femininos que comezan por «a-» inicial tónico non implican modificacións no determinante que os precede. Quería vostede dicir <suggestion>da arma</suggestion>?	da arma
+L	395	Rozouna coa empuñadura da arma.
+L	396	A súa obra rompeu co arte anterior.
+M	396	NO_CACOPHONY	3	18	25	Other	Posíbel erro: os substantivos femininos que comezan por «a-» inicial tónico non implican modificacións no determinante que os precede. Quería vostede dicir <suggestion>coa arte</suggestion>?	coa arte
+L	397	A súa obra rompeu coa arte anterior.
+L	398	Vou a saltar con ela.
+M	398	IR_A_INF	1	0	12	Other	A perífrase formada polo verbo «ir» máis un infinitivo constrúese sempre sen preposición: <suggestion>Vou saltar</suggestion>	Vou saltar
+L	399	O neno ven saltando polo camiño.
+M	399	GENERAL_VERB_AGREEMENT_ERRORS	10	0	10	Other	Posíbel erro de concordancia verbal.	O neno ve|O neno vén
+L	400	A caixa ven de sanear a carteira de créditos.
+M	400	GENERAL_VERB_AGREEMENT_ERRORS	10	0	11	Other	Posíbel erro de concordancia verbal.	A caixa ve|A caixa vén
+L	401	Compre agora analizar o proceso de constitución das listas.
+M	401	COMPRE	1	0	6	Other	A forma «compre», cando é do verbo «cumprir» (ser necesario), leva acento para distinguila do verbo «comprar». Quería vostede dicir <suggestion>cómpre</suggestion>?	Cómpre
+L	402	Compre que a arquitectura das Nacións Unidas se axuste a ese concepto.
+M	402	COMPRE	2	0	6	Other	A forma «compre», cando é do verbo «cumprir» (ser necesario), leva acento para distinguila do verbo «comprar». Quería vostede dicir <suggestion>cómpre</suggestion>?	Cómpre
+L	403	Volo dixen
+M	403	CLITICS_01	1	0	10	Other	Os pronomes clíticos non poden ir no inicio da oración. Por regra xeral, o pronome átono vai colocado detrás do verbo.	Díxenvolo
+L	404	Díxenvolo
+L	405	Cando déchesllelo?
+M	405	CLITICS_02B	3	6	17	Other	Nas preguntas e exclamacións os pronomes átonos van antes do verbo.	o deches
+L	406	Quen ma soubera cantar!
+L	407	Onde llela amañaches?
+L	408	Canto custoulle?
+M	408	CLITICS_02B	3	6	15	Other	Nas preguntas e exclamacións os pronomes átonos van antes do verbo.	lle custou
+L	409	Como o fixeches?
+L	410	Quen mo dera!
+L	411	Finalmente marcheime con Alberte.
+M	411	REFLEXIVOS	1	11	20	Other	Algúns verbos non admiten nunca construcións reflexivas. Será mellor <suggestion>marchei</suggestion>?	marchei
+L	412	Finalmente márchaste con Alberte?
+M	412	REFLEXIVOS	2	11	20	Other	Algúns verbos non admiten nunca construcións reflexivas. Será mellor <suggestion>marchas</suggestion>?	marchas
+L	413	Finalmente marchouse con Alberte.
+M	413	REFLEXIVOS	3	11	20	Other	Algúns verbos non admiten nunca construcións reflexivas. Será mellor <suggestion>marchou</suggestion>?	marchou
+L	414	Finalmente marchámonos con Alberte.
+M	414	REFLEXIVOS	4	11	22	Other	Algúns verbos non admiten nunca construcións reflexivas. Será mellor <suggestion>marchamos</suggestion>?	marchamos
+L	415	Finalmente marchádesvos con Alberte.
+M	415	REFLEXIVOS	5	11	23	Other	Algúns verbos non admiten nunca construcións reflexivas. Será mellor <suggestion>marchades</suggestion>?	marchades
+L	416	Finalmente non me caso con Alberte.
+M	416	REFLEXIVOS	6	15	22	Other	Algúns verbos non admiten nunca construcións reflexivas. Será mellor <suggestion>caso</suggestion>?	caso
+L	417	Finalmente non caso con Alberte.
+L	418	Nos cremos que a lingua é un tesouro.
+M	418	CLITICS_01	1	0	10	Other	Os pronomes clíticos non poden ir no inicio da oración. Por regra xeral, o pronome átono vai colocado detrás do verbo.	Crémonos|Crémosnos
+L	419	Vos sabedes o que come?
+M	419	CLITICS_01	1	0	11	Other	Os pronomes clíticos non poden ir no inicio da oración. Por regra xeral, o pronome átono vai colocado detrás do verbo.	Sabédesvos
+L	420	Os servizos de emerxencia informaron que habería fortes ventos na costa.
+M	420	REXIME_VERBAL	1	26	40	Other	O verbo «informaron» constrúese normalmente coa preposición «de». Quería vostede dicir <suggestion>informaron de que</suggestion>?	informaron de que
+L	421	Os servizos de emerxencia insistiron que habería fortes ventos na costa.
+M	421	REXIME_VERBAL	2	26	40	Other	O verbo «insistiron» constrúese normalmente coa preposición «en». Quería vostede dicir <suggestion>insistiron en que</suggestion>?	insistiron en que
+L	422	Confío que actuarán de xeito consecuente.
+M	422	REXIME_VERBAL	2	0	10	Other	O verbo «Confío» constrúese normalmente coa preposición «en». Quería vostede dicir <suggestion>Confío en que</suggestion>?	Confío en que
+L	423	O novo profesor é de fora.
+M	423	FORA_FORA	1	21	25	Other	A palabra «fora» semella corresponderse neste contexto co adverbio «fóra», que leva acento para o diferenciar das formas dos verbos «ser» ou «ir». Quería vostede dicir <suggestion>fóra</suggestion>?	fóra
+L	424	Non saben quenes son os encargados.
+M	424	QUENES	1	10	16	Other	O pronome «quen» carece de plural. Empregue <suggestion>quen</suggestion> ou <suggestion>os que</suggestion> segundo o contexto.	quen|os que
+L	425	Non saben quen son os encargados.
+L	426	Seguramente quenes máis protestan serán os que máis se beneficien.
+M	426	QUENES	1	12	18	Other	O pronome «quen» carece de plural. Empregue <suggestion>quen</suggestion> ou <suggestion>os que</suggestion> segundo o contexto.	quen|os que
+L	427	Seguramente os que máis protestan serán os que máis se beneficien.
+L	428	Resultou ser un grande curso.
+L	429	Resultou ser un gran curso.
+L	430	Resultou ser un gran amigo.
+M	430	APOCOPES	2	16	20	Other	O adxectivo «grande» non vai nunca apocopado cando precede a un substantivo que comeza por vogal. Non haberá que empregar <suggestion>grande</suggestion>?	grande
+L	431	Resultou ser un grande amigo.
+L	432	Resultou ser un malo ano.
+M	432	APOCOPES	3	16	20	Other	O adxectivo «malo» vai apocopado cando precede a un substantivo masculino singular. Non haberá que empregar <suggestion>mal</suggestion>?	mal
+L	433	Resultou ser un mal ano.
+L	434	Foi á romaría de san André.
+M	434	APOCOPES	4	17	20	Other	O adxectivo «santo» non vai apocopado cando precede palabras que comezan por vogal. Non haberá que empregar <suggestion>santo</suggestion>?	santo
+L	435	Foi á romaría de santo André.
+L	436	Foi á romaría de santo Rosendo.
+M	436	APOCOPES	5	17	22	Other	O adxectivo «santo» vai apocopado cando precede palabras que comezan por consoante. Quería vostede dicir <suggestion>san</suggestion>?	san
+L	437	Foi á romaría de san Rosendo.
+L	438	A estrada cara Noia.
+M	438	CARA	1	10	14	Other	A preposición «cara» vai seguida de «a» diante dun nome propio. Quería vostede dicir <suggestion>cara a</suggestion>?	cara a
+L	439	Cara un novo modelo.
+M	439	CARA	2	0	4	Other	A preposición «cara» vai seguida de «a». Quería vostede dicir <suggestion>Cara a</suggestion>?	Cara a
+L	440	Cara novos retos.
+M	440	GENERAL_GENDER_AGREEMENT_ERRORS	5	0	10	Other	Posíbel erro de concordancia de xénero.	Caro novos|Cara nova
+L	441	Cara a nova fase.
+M	441	CARA	4	0	4	Other	A preposición «cara» vai seguida de «a». Quería vostede dicir <suggestion>Cara á</suggestion>?	Cara á
+L	442	Cara á nova fase.
+L	443	Os independentistas escoceses miran cara os liberais para formar goberno.
+M	443	CARA	5	36	40	Other	A preposición «cara» vai seguida de «a». Quería vostede dicir <suggestion>cara aos</suggestion>?	cara aos
+L	444	Os independentistas escoceses miran cara aos liberais para formar goberno.
+L	445	Xogaron tamén un papel importante até á conquista romana.
+M	445	ATA_ATE	1	34	39	Other	A preposición «até» non vai seguida da preposición «a». Quería vostede dicir <suggestion>até a</suggestion>?	até a
+L	446	Cándo chegan teus pais?
+M	446	INTERROGATIVE_PRONOUNS	1	0	5	Other	Non é preciso acentuar as interrogativas directas. Empregue <suggestion>Cando</suggestion>.	Cando
+L	447	¿Cándo chegan teus pais?
+M	447	INTERROGATIVE_PRONOUNS	2	1	6	Other	Non é preciso acentuar as interrogativas directas. Empregue <suggestion>Cando</suggestion>.	Cando
+L	448	Ónde está Bretoña?
+M	448	INTERROGATIVE_PRONOUNS	3	0	4	Other	Non é preciso acentuar as interrogativas directas. Empregue <suggestion>onde</suggestion>.	Onde
+L	449	¿Ónde está Bretoña?
+M	449	INTERROGATIVE_PRONOUNS	4	1	5	Other	Non é preciso acentuar as interrogativas directas. Empregue <suggestion>onde</suggestion>.	Onde
+L	450	Qué día chegan teus pais?
+M	450	INTERROGATIVE_PRONOUNS	5	0	3	Other	Non é preciso acentuar as interrogativas directas. Empregue <suggestion>Que</suggestion>.	Que
+L	451	¿Qué día chegan teus pais?
+M	451	INTERROGATIVE_PRONOUNS	6	1	4	Other	Non é preciso acentuar as interrogativas directas. Empregue <suggestion>Que</suggestion>.	Que
+L	452	Sempre fala demais.
+M	452	DEMAIS	1	12	18	Other	«demais» escríbese xunto só cando é pronome, e nese caso vai precedido por un artigo. Polo contexto semella ser o adverbio, que indica exceso dunha cantidade, e neste caso vai separado. Quería vostede dicir <suggestion>de máis</suggestion>?	de máis
+L	453	Xaquín e mailos demais rapaces.
+M	453	GENERAL_NUMBER_AGREEMENT_ERRORS	3	16	30	Other	Posíbel erro de concordancia de número.	demais rapaz|(demais) rapaces
+L	454	Foi xogar cos demais rapaces.
+M	454	GENERAL_NUMBER_AGREEMENT_ERRORS	3	14	28	Other	Posíbel erro de concordancia de número.	demais rapaz|(demais) rapaces
+L	455	Sempre fala de mais.
+M	455	DEMAIS	2	12	19	Other	A locución adverbial «de máis» leva til. Quería vostede dicir <suggestion>de máis</suggestion>?	de máis
+L	456	A economía da guerra non se baseaba na empresa libre, se non que era o resultado da sectorización do gasto do goberno
+M	456	SE_NON_QUE	1	54	64	Other	Despois dunha partícula negativa, a secuencia «se non que» é normalmente unha conxunción adversativa e escríbese «senón que». Quería vostede dicir <suggestion>senón que</suggestion>?	senón que
+M	456	HUNSPELL_RULE		84	97	UnknownWord	Atopouse un posíbel erro ortográfico	desautorización|secularización|electrización|autorización
+L	457	O osíxeno non é unha proba de vida, se non que é producido polo xeo de auga da superficie de Ganímedes.
+M	457	SENON_QUE	2	36	46	Other	Despois dunha partícula negativa, a secuencia «se non que» é normalmente unha conxunción adversativa e escríbese «senón que». Quería vostede dicir <suggestion>senón que</suggestion>?	senón que
+M	457	HUNSPELL_RULE		93	102	UnknownWord	Atopouse un posíbel erro ortográfico	Ganísedes|Desganedes|Desmangades
+L	458	Visitou ambas cidades este ano.
+M	458	AMBOS_TODOS	1	8	21	Other	A forma «ambas» require do artigo determinado cando vai diante dun substantivo. Quería vostede dicir <suggestion>ambas as cidades</suggestion> ou <suggestion>ámbalas cidades</suggestion>?	ambas as cidades|ámbalas cidades
+L	459	Visitou ámbalas cidades este ano.
+L	460	Visitou ambas as cidades este ano.
+L	461	De todos xeitos non importa moito.
+M	461	GENERAL_VERB_AGREEMENT_ERRORS	9	3	27	Other	Posíbel erro de concordancia verbal.	todos xeitos non importan
+L	462	De todos os xeitos non importa moito.
+M	462	GENERAL_VERB_AGREEMENT_ERRORS	9	9	30	Other	Posíbel erro de concordancia verbal.	os xeitos non importan
+L	463	De tódolos xeitos non importa moito.
+L	464	Por o mar abaixo vai unha troita de pé.
+M	464	POR_O	1	0	5	Other	A preposición «por» e o artigo «o» contraen. Quería vostede dicir <suggestion>Polo</suggestion>?	Polo
+L	465	Foron ao cine ela e mais a súa irmá.
+M	465	E_MAIS_O	2	18	26	Other	A conxunción «e mais» e o artigo «a» contraen. Quería vostede dicir <suggestion>e maila</suggestion>?	e maila
+L	466	Foron ao cine ela maila súa irmá.
+M	466	MAILO	3	18	23	Other	O uso correcto é «e mais». Quería vostede dicir <suggestion>e maila</suggestion>?	e maila
+L	467	Tódo-los días vou mercar á praza.
+M	467	AMBO_TRA_ENTRAMBO_PO_TODO_LOS	1	0	8	Other	As formas «e mais», «ambos», «entrambos», «por», «tras» e «todos» non marcan a segunda forma do artigo mediante un trazo. Quería vostede dicir <suggestion>Tódolos</suggestion>?	Tódolos
+L	468	Non se pode presentar máis dunha solicitude por persoa e grupo.
+L	469	Non se pode presentar máis dunha solicitude por persoa nin grupo.
+L	470	Se ben os resultados poden parecer similares, non teñen moito que ver os experimentos.
+M	470	SE_BEN	1	0	6	Other	A partícula «se ben» é un calco do castelán. Empregue mellor <suggestion>aínda que</suggestion>, <suggestion>a pesar de que</suggestion>, <suggestion>pese a que</suggestion> ou <suggestion>malia que</suggestion>.	Aínda que|A pesar de que|Pese a que|Malia que
+L	471	Aínda que os resultados poden parecer similares, non teñen moito que ver os experimentos.
+L	472	Con elo conseguimos mellorar o rendemento do proceso.
+M	472	ELO	1	4	7	Other	«Elo» é un substantivo masculino que significa «aro ou anel dunha cadea». Quería vostede dicir <suggestion>isto</suggestion> ou <suggestion>iso</suggestion>?	isto|iso
+L	473	Con iso conseguimos mellorar o rendemento do proceso.
+L	474	No centro de todo elo sitúase o escudo da vila.
+M	474	ELO	2	18	21	Other	«Elo» é un substantivo masculino que significa «aro ou anel dunha cadea». Quería vostede dicir <suggestion>isto</suggestion> ou <suggestion>iso</suggestion>?	isto|iso
+L	475	No centro de todo isto sitúase o escudo da vila.
+L	476	Vén xusto detrás miña.
+M	476	DETRAS_MINHA	1	10	21	Other	A expresión «detrás miña» é incorrecta. Empregue mellor <suggestion>detrás de min</suggestion> no seu lugar.	detrás de min
+L	477	Mira detrás túa, un mono con tres cabezas!
+M	477	DETRAS_TUA	2	5	15	Other	A expresión «detrás túa» é incorrecta. Empregue mellor <suggestion>detrás de ti</suggestion> no seu lugar.	detrás de ti
+L	478	Mirade detrás vosa, un mono con tres cabezas!
+M	478	DETRAS_NOSA_VOSA	3	7	18	Other	A expresión «detrás vosa» é incorrecta. Empregue mellor <suggestion>detrás de vós</suggestion> no seu lugar.	detrás de vós
+L	479	Ese Presidente da Xunta que leva detrás súa a todo o séquito de acólitos coma avésporas chuchonas.
+M	479	DETRAS_SUA	4	33	43	Other	A expresión «detrás súa» é incorrecta. Empregue mellor, dependendo do referente, <suggestion>detrás del</suggestion>, <suggestion>detrás dela</suggestion>, <suggestion>detrás deles</suggestion>, <suggestion>detrás delas</suggestion>, <suggestion>detrás de vostede</suggestion> ou <suggestion>detrás de vostedes</suggestion> no seu lugar.	detrás del|detrás dela|detrás deles|detrás delas|detrás de vostede|detrás de vostedes
+L	480	Ese Presidente da Xunta que leva detrás del a todo o séquito de acólitos coma avésporas chuchonas.
+L	481	O martín pescador non é un paxaro fácil de fotografar.
+M	481	MARTINPESCADOR	1	2	17	Other	Palabra incorrecta: a forma «martín pescador» non existe en galego. Quería vostede dicir <suggestion>picapeixe</suggestion>?	picapeixe
+L	482	Alomellor non é importante.
+M	482	ALOMELLOR	2	0	9	Other	Palabra incorrecta: a forma «Alomellor» non existe en galego. Quería vostede dicir <suggestion>se cadra</suggestion>?	Se cadra
+L	483	Mañá será oficial o seu cesamento no cargo de concellal.
+M	483	CONCELLAL	3	46	55	Other	Palabra incorrecta: a forma «concellal» non existe en galego. Quería vostede dicir <suggestion>concelleiro</suggestion>?	concelleiro
+L	484	Denunciamos o deterioro da diversificación na oferta educativa.
+M	484	DETERIORO	4	14	23	Other	Palabra incorrecta: a forma «deterioro» non existe en galego. Quería vostede dicir <suggestion>deterioración</suggestion> (feminino)?	deterioración
+L	485	Denunciamos a deterioración da diversificación na oferta educativa.
+L	486	Hoxe teño que sacar eu a basura.
+M	486	BASURA	5	25	31	Other	Palabra incorrecta: a forma «basura» non existe en galego. Quería vostede dicir <suggestion>lixo</suggestion> (masculino)?	lixo
+L	487	Hoxe teño que sacar eu o lixo.
+L	488	Este ano teño só tres asignaturas.
+M	488	GENERAL_VERB_AGREEMENT_ERRORS	10	0	13	Other	Posíbel erro de concordancia verbal.	Este ano tedes|Este ano temos|Este ano tendes|Este ano teredes|Este ano teremos|Este ano teriades|Este ano teriamos|Este ano terán|Este ano terían|Este ano teñades|Este ano teñamos|Este ano teñan|Este ano teñen|Este ano tivemos|Este ano tiverades|Este ano tiveramos|Este ano tiveran|Este ano tiverdes|Este ano tiveren|Este ano tivermos|Este ano tiveron|Este ano tivesen|Este ano tivestes|Este ano tivésedes|Este ano tivésemos|Este ano tiñades|Este ano tiñamos|Este ano tiñan
+M	488	ASIGNATURA	6	22	33	Other	Palabra incorrecta: a forma «asignaturas» non existe en galego. Quería vostede dicir <suggestion>materia</suggestion> ou <suggestion>disciplina</suggestion>?	materia|disciplina
+L	489	Este ano teño só tres materias.
+M	489	GENERAL_VERB_AGREEMENT_ERRORS	10	0	13	Other	Posíbel erro de concordancia verbal.	Este ano tedes|Este ano temos|Este ano tendes|Este ano teredes|Este ano teremos|Este ano teriades|Este ano teriamos|Este ano terán|Este ano terían|Este ano teñades|Este ano teñamos|Este ano teñan|Este ano teñen|Este ano tivemos|Este ano tiverades|Este ano tiveramos|Este ano tiveran|Este ano tiverdes|Este ano tiveren|Este ano tivermos|Este ano tiveron|Este ano tivesen|Este ano tivestes|Este ano tivésedes|Este ano tivésemos|Este ano tiñades|Este ano tiñamos|Este ano tiñan
+L	490	Ten unha veleta no pincho da casa.
+M	490	VELETA	7	9	15	Other	Palabra incorrecta: a forma «veleta» non existe en galego. Quería vostede dicir <suggestion>catavento</suggestion> (masculino)?	catavento
+L	491	Ten un catavento no pincho da casa.
+L	492	Abre a ventanilla do coche.
+M	492	VENTANILLA	8	7	17	Other	Palabra incorrecta: a forma «ventanilla» non existe en galego. Quería vostede dicir <suggestion>portelo</suggestion> (masculino)?	portelo
+L	493	Abre o portelo do coche.
+L	494	Hai pílulas para a dor de cabeza no botiquín?
+M	494	BOTIQUIN	9	36	44	Other	Palabra incorrecta: a forma «botiquín» non existe en galego. Quería vostede dicir <suggestion>caixa de urxencias</suggestion> (feminino)?	caixa de urxencias
+L	495	Hai pílulas para a dor de cabeza na caixa de urxencias?
+L	496	No concerto sobrepasouse o aforo do recinto.
+M	496	HUNSPELL_RULE		12	24	UnknownWord	Atopouse un posíbel erro ortográfico	sobredourase|sobrepuxese|sobreparto|sobrecease
+M	496	AFORO	10	27	32	Other	Palabra incorrecta: a forma «aforo» non existe en galego. Quería vostede dicir <suggestion>capacidade</suggestion> (feminino)?	capacidade
+L	497	No concerto sobrepasouse a capacidade do recinto.
+M	497	HUNSPELL_RULE		12	24	UnknownWord	Atopouse un posíbel erro ortográfico	sobredourase|sobrepuxese|sobreparto|sobrecease
+L	498	Precisa pescudar o promedio de litros caídos en Santiago durante o ano 2000.
+M	498	PROMEDIO	11	19	27	Other	Palabra incorrecta: a forma «promedio» non existe en galego. Quería vostede dicir <suggestion>media</suggestion> (feminino) ou <suggestion>termo medio</suggestion>?	media|termo medio
+L	499	Precisa pescudar a media de litros caídos en Santiago durante o ano 2000.
+L	500	Home prevenido vale por dous.
+M	500	PREVENIDO	12	5	14	Other	Palabra incorrecta: a forma «prevenido» non existe en galego. Quería vostede dicir <suggestion>prevido</suggestion>?	prevido
+L	501	Tes que mercar unhas servilletas novas.
+M	501	SERVILLETA	13	21	32	Other	Palabra incorrecta: a forma «servilletas» non existe en galego. Quería vostede dicir <suggestion>pano de mesa</suggestion> (masculino)?	pano de mesa
+L	502	Tes que mercar uns panos de mesa novos.
+L	503	Non chegaron ao cupo de matriculados.
+M	503	CUPO	14	16	20	Other	Palabra incorrecta: a forma «cupo» non existe en galego. Quería vostede dicir <suggestion>cota</suggestion> (feminino)?	cota
+L	504	Non chegaron á cota de matriculados.
+L	505	A discusión acabou nun calexón sen saída.
+M	505	CALLEXON	15	23	30	Other	Palabra incorrecta: a forma «calexón» non existe en galego. Quería vostede dicir <suggestion>canella</suggestion> (feminino)?	canella
+L	506	A discusión acabou nunha canella sen saída.
+L	507	Teño un sabañón nunha man.
+M	507	SABANHON	16	8	15	Other	Palabra incorrecta: a forma «sabañón» non existe en galego. Quería vostede dicir <suggestion>frieira</suggestion> (feminino)?	frieira
+L	508	Teño unha frieira nunha man.
+L	509	Puxo ao neno nun rincón.
+M	509	RINCON	17	17	23	Other	Palabra incorrecta: a forma «rincón» non existe en galego. Quería vostede dicir <suggestion>recuncho</suggestion> ou <suggestion>cornello</suggestion>?	recuncho|cornello
+L	510	Puxo ao neno nun recuncho.
+L	511	O mastro do barco ten carcoma.
+M	511	CARCOMA	18	22	29	Other	Palabra incorrecta: a forma «carcoma» non existe en galego. Quería vostede dicir <suggestion>caruncho</suggestion> (masculino) ou <suggestion>couza</suggestion>?	caruncho|couza
+L	512	O mastro do barco ten caruncho.
+L	513	A ausencia de melanina é un rasgo característico do albinismo.
+M	513	RASGO	19	28	33	Other	Palabra incorrecta: a forma «rasgo» non existe en galego. Quería vostede dicir <suggestion>trazo</suggestion> (liña trazada ou característica dunha persoa ou cousa) ou <suggestion>risco</suggestion> (liña longa)?	trazo|risco
+L	514	A ausencia de melanina é un trazo característico do albinismo.
+L	515	Tiña dúas cartas no buzón.
+M	515	BUZON	20	20	25	Other	Palabra incorrecta: a forma «buzón» non existe en galego. Quería vostede dicir <suggestion>caixa de correos</suggestion> (feminino)?	caixa de correos
+L	516	Tiña dúas cartas na caixa de correos.
+L	517	Traían uns calamares do mercado.
+M	517	CALAMAR	21	11	20	Other	Palabra incorrecta: a forma «calamares» non existe en galego. Quería vostede dicir <suggestion>luras</suggestion> (feminino)?	luras
+L	518	Traían unhas luras do mercado.
+L	519	Unha brúxula sinala sempre ao norte.
+M	519	BRUXULA	22	5	12	Other	Palabra incorrecta: a forma «brúxula» non existe en galego. Quería vostede dicir <suggestion>compás</suggestion> (masculino)?	compás
+L	520	Un compás sinala sempre ao norte.
+L	521	Vai traballar tódolos días vestido de corbata.
+M	521	GENERAL_NUMBER_AGREEMENT_ERRORS	1	22	34	Other	Posíbel erro de concordancia de número.	día vestido|días vestidos
+M	521	CORBATA	23	38	45	Other	Palabra incorrecta: a forma «corbata» non existe en galego. Quería vostede dicir <suggestion>garavata</suggestion> ou <suggestion>gravata</suggestion>?	garavata|gravata
+L	522	Vai traballar tódolos días vestido de gravata.
+M	522	GENERAL_NUMBER_AGREEMENT_ERRORS	1	22	34	Other	Posíbel erro de concordancia de número.	día vestido|días vestidos
+L	523	Tivo que cambiar a súa contraseña de entrada.
+M	523	CONTRASEÑA	24	23	33	Other	Palabra incorrecta: a forma «contraseña» non existe en galego. Quería vostede dicir <suggestion>contrasinal</suggestion> (masculino)?	contrasinal
+L	524	Tivo que cambiar o seu contrasinal de entrada.
+L	525	En novembro é cando as grullas inician a súa migración.
+M	525	GRULLA	25	23	30	Other	Palabra incorrecta: a forma «grullas» non existe en galego. Quería vostede dicir <suggestion>grou</suggestion> (masculino) ou <suggestion>grúa</suggestion>?	grou|grúa
+L	526	En novembro é cando as grúas inician a súa migración.
+M	526	GRUA	7	23	28	Other	Posíbel castelanismo: o substantivo «grúa» fai referencia a un paxaro. Para denominar ao aparato empregado para mover ou remolcar grandes pesos emprégase preferibelmente <suggestion>guindastre</suggestion> (masculino).	guindastre
+L	527	Andrés foi mercar unha libreta para a escola.
+M	527	LIBRETA	26	23	30	Other	Palabra incorrecta: a forma «libreta» non existe en galego. Quería vostede dicir <suggestion>caderno</suggestion> (masculino)?	caderno
+L	528	Andrés foi mercar un caderno para a escola.
+L	529	Na aula do segundo curso non hai tiza.
+M	529	TIZA	27	33	37	Other	Palabra incorrecta: a forma «tiza» non existe en galego. Quería vostede dicir <suggestion>xiz</suggestion> (masculino)?	xiz
+L	530	Puxo un tragaluz na casa.
+M	530	TRAGALUZ	28	8	16	Other	Palabra incorrecta: a forma «tragaluz» non existe en galego. Quería vostede dicir <suggestion>bufarda</suggestion> (feminino)?	bufarda
+L	531	Puxo unha bufarda na casa.
+L	532	O dromedario ten unha única xoroba.
+M	532	XOROBA	29	28	34	Other	Palabra incorrecta: a forma «xoroba» non existe en galego. Quería vostede dicir <suggestion>chepa</suggestion> ou <suggestion>carrumba</suggestion>?	chepa|carrumba
+L	533	O dromedario ten unha única chepa.
+L	534	Rompín o xarrón que lle mercara á túa nai.
+M	534	XARRON	30	9	15	Other	Palabra incorrecta: a forma «xarrón» non existe en galego. Quería vostede dicir <suggestion>floreiro</suggestion> ou <suggestion>vaso</suggestion>?	floreiro|vaso
+L	535	Rompín o floreiro que lle mercara á túa nai.
+L	536	Fixo importantes aportacións ao proxecto.
+M	536	GENERAL_NUMBER_AGREEMENT_ERRORS	3	0	16	Other	Posíbel erro de concordancia de número.	Fixo importante|Fixos importantes
+M	536	APORTACION	31	17	28	Other	Posíbel castelanismo: o substantivo «aportacións» non existe en galego. Quería vostede dicir <suggestion>achega</suggestion> ou <suggestion>contribución</suggestion>?	achega|contribución
+L	537	Fixo importantes achegas ao proxecto.
+M	537	GENERAL_NUMBER_AGREEMENT_ERRORS	3	0	16	Other	Posíbel erro de concordancia de número.	Fixo importante|Fixos importantes
+L	538	Miraron un tiburón dende o barco.
+M	538	TIBURON	32	11	18	Other	Posíbel castelanismo: o substantivo «tiburón» non existe en galego. Quería vostede dicir <suggestion>quenlla</suggestion> (feminino)?	quenlla
+L	539	Miraron unha quenlla dende o barco.
+L	540	Onte foi facer un chequeo médico.
+M	540	CHEQUEO	33	18	25	Other	Posíbel castelanismo: o substantivo «chequeo» non existe en galego. Quería vostede dicir <suggestion>revisión</suggestion> ou <suggestion>recoñecemento</suggestion>?	revisión|recoñecemento
+L	541	Onte foi facer un recoñecemento médico.
+L	542	Perdín o meu turno na lista de agarda.
+M	542	TURNO_TANDA	34	13	18	Other	A palabra «turno» é un castelanismo. Empregue no seu sitio <suggestion>quenda</suggestion> ou <suggestion>vez</suggestion> tendo en conta as diferenzas de xénero.	quenda|vez
+L	543	Perdín a miña vez na lista de agarda.
+L	544	No colexio non hai turno de tarde.
+M	544	TURNO_TANDA	34	19	24	Other	A palabra «turno» é un castelanismo. Empregue no seu sitio <suggestion>quenda</suggestion> ou <suggestion>vez</suggestion> tendo en conta as diferenzas de xénero.	quenda|vez
+L	545	No colexio non hai quenda de tarde..
+M	545	DOUBLE_PUNCTUATION		34	36	Other	Dous puntos consecutivos	.|…
+L	546	Rebentaban os renos e atuaban o trineo na nevada co peso dos seus bandullos.
+M	546	TRINEO	35	32	38	Other	A palabra «trineo» é un castelanismo. Empregue no seu sitio <suggestion>zorra</suggestion>.	zorra
+L	547	Rebentaban os renos e atuaban a zorra na nevada co peso dos seus bandullos.
+L	548	Non saía auga do grifo.
+M	548	GRIFO	36	17	22	Other	A palabra «grifo» é un castelanismo. Empregue no seu sitio <suggestion>billa</suggestion> (feminino).	billa
+L	549	Non saía auga da billa.
+L	550	Levoulle media orella dun mordisco.
+M	550	MORDISCO	37	26	34	Other	A palabra «mordisco» é un castelanismo. Empregue no seu sitio <suggestion>dentada</suggestion> (feminino).	dentada
+L	551	Levoulle media orella dunha dentada.
+L	552	Un albanel vai vir montar o andamio mañá.
+M	552	ANDAMIO	38	28	35	Other	A palabra «andamio» é un castelanismo. Empregue no seu sitio <suggestion>estada</suggestion> (feminino).	estada
+L	553	Un albanel vai vir montar a estada mañá.
+L	554	O tren chegará ao andén número tres.
+M	554	ANDEN	39	18	23	Other	A palabra «andén» é un castelanismo. Empregue no seu sitio <suggestion>plataforma</suggestion> (feminino).	plataforma
+L	555	O tren chegará á plataforma número tres.
+L	556	Na bicicleta procuro sempre circular polo arcén.
+M	556	ARCEN	40	42	47	Other	A palabra «arcén» é un castelanismo. Empregue no seu sitio <suggestion>beiravía</suggestion> (feminino).	beiravía
+L	557	Na bicicleta procuro sempre circular pola beiravía.
+L	558	Usaron adoquíns para pavimentar a rúa.
+M	558	ADOQUIN	41	7	15	Other	A palabra «adoquíns» é un castelanismo. Empregue no seu sitio <suggestion>lastra</suggestion> (feminino).	lastra
+L	559	Usaron lastras para pavimentar a rúa.
+L	560	Do pan prefiro comer a corteza.
+M	560	CORTEZA_NON_CEREBRAL	42	23	30	Other	A palabra «corteza» non existe en galego. Empregue no seu sitio <suggestion>codia</suggestion>.	codia
+L	561	O relator presentou un traballo sobre o comportamento da corteza cerebral.
+M	561	CORTEZA_CEREBRAL	43	57	73	Other	O termo «corteza cerebral» non é correcto en galego. Empregue no seu sitio <suggestion>córtex cerebral</suggestion>.	córtex cerebral
+L	562	O relator presentou un traballo sobre o comportamento do córtex cerebral.
+M	562	HUNSPELL_RULE		57	63	UnknownWord	Atopouse un posíbel erro ortográfico	córtea|córteo|cortexo
+L	563	O prezo actual da vivenda non é asequible para moita xente no pais.
+M	563	ASEQUIBEL	1	32	41	Other	A palabra «asequible» é un castelanismo. Empregue no seu sitio <suggestion>alcanzable</suggestion> ou <suggestion>accesible</suggestion>.	alcanzable|accesible
+M	563	GENERAL_NUMBER_AGREEMENT_ERRORS	4	59	66	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	564	O prezo actual da vivenda non é accesible para moita xente no pais.
+M	564	GENERAL_NUMBER_AGREEMENT_ERRORS	4	59	66	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	565	O prezo actual da vivenda é inasequible para moita xente no pais.
+M	565	ASEQUIBEL	2	28	39	Other	A palabra «inasequible» é un castelanismo. Empregue no seu sitio <suggestion>inalcanzable</suggestion> ou <suggestion>inaccesible</suggestion>.	inalcanzable|inaccesible
+M	565	GENERAL_NUMBER_AGREEMENT_ERRORS	4	57	64	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	566	O prezo actual da vivenda é inaccesible para moita xente no pais.
+M	566	GENERAL_NUMBER_AGREEMENT_ERRORS	4	57	64	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	567	O prezo actual da vivenda non é asequíbel para moita xente no pais.
+M	567	ASEQUIBEL	3	32	41	Other	A palabra «asequíbel» é un castelanismo. Empregue no seu sitio <suggestion>alcanzábel</suggestion> ou <suggestion>accesíbel</suggestion>.	alcanzábel|accesíbel
+M	567	GENERAL_NUMBER_AGREEMENT_ERRORS	4	59	66	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	568	O prezo actual da vivenda non é accesíbel para moita xente no pais.
+M	568	GENERAL_NUMBER_AGREEMENT_ERRORS	4	59	66	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	569	O prezo actual da vivenda é inasequíbel para moita xente no pais.
+M	569	ASEQUIBEL	4	28	39	Other	A palabra «inasequíbel» é un castelanismo. Empregue no seu sitio <suggestion>inalcanzábel</suggestion> ou <suggestion>inaccesíbel</suggestion>.	inalcanzábel|inaccesíbel
+M	569	GENERAL_NUMBER_AGREEMENT_ERRORS	4	57	64	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	570	O prezo actual da vivenda é inaccesíbel para moita xente no pais.
+M	570	GENERAL_NUMBER_AGREEMENT_ERRORS	4	57	64	Other	Posíbel erro de concordancia de número.	no pai|nos pais
+L	571	Moi bo traballo, noraboa!
+M	571	NORABOA	1	17	24	Other	A palabra «noraboa» é un castelanismo. Empregue no seu sitio <suggestion>parabén</suggestion> ou <suggestion>parabéns</suggestion>.	parabén|parabéns
+L	572	Moi bo traballo, parabéns!
+L	573	Quero dar a noraboa á miña sobriña Noelia.
+M	573	NORABOA	2	6	19	Other	A expresión «dar a noraboa» é un castelanismo. Empregue no seu sitio <suggestion>felicitar</suggestion> ou <suggestion>parabenizar</suggestion>.	felicitar|parabenizar
+L	574	Quero felicitar á miña sobriña Noelia.
+L	575	Quero dar a miña noraboa á miña sobriña Noelia.
+M	575	NORABOA	3	6	24	Other	A expresión «dar a miña noraboa» é un castelanismo. Empregue no seu sitio <suggestion>felicitar</suggestion> ou <suggestion>parabenizar</suggestion>.	felicitar|parabenizar
+L	576	Quero felicitar á miña sobriña Noelia.
+L	577	Sen embargo, a súa importancia débese a outros factores.
+M	577	SEN_EMBARGO	1	0	11	Other	A conxunción «sen embargo» é un castelanismo. Empregue no seu sitio <suggestion>porén</suggestion>, <suggestion>mais</suggestion> ou <suggestion>no entanto</suggestion>.	Porén|Mais|No entanto
+L	578	Porén, a súa importancia débese a outros factores.
+L	579	A súa importancia débese nembargantes a outros factores.
+M	579	SEN_EMBARGO	2	25	37	Other	A palabra «nembargantes» non existe en galego. Empregue no seu sitio <suggestion>porén</suggestion>, <suggestion>mais</suggestion> ou <suggestion>no entanto</suggestion>.	porén|mais|no entanto
+L	580	A súa importancia débese porén a outros factores.
+L	581	O aparato ten as pantallas acústicas avariadas.
+L	582	O aparato ten os baffles avariados.
+M	582	BAFFLE	1	17	24	Other	A palabra «baffles» é un anglicismo. Empregue mellor <suggestion>pantalla acústica</suggestion>.	pantalla acústica
+L	583	Un compact disk mercado fóra de España non leva canon da SGAE.
+M	583	COMPACTDISK	2	3	15	Other	A palabra «compact disk» é un anglicismo. Empregue mellor <suggestion>disco compacto</suggestion>.	disco compacto
+L	584	Van contratar un novo chef no restaurante.
+M	584	CHEF	3	22	26	Other	A palabra «chef» é un galicismo. Empregue mellor <suggestion>xefe de cociña</suggestion> ou <suggestion>xefa de cociña</suggestion>.	xefe de cociña|xefa de cociña
+L	585	Van contratar un novo xefe de cociña no restaurante.
+L	586	O container do lixo apareceu queimado.
+M	586	CONTAINER	4	2	11	Other	A palabra «container» é un anglicismo. Empregue mellor <suggestion>colector</suggestion>.	colector
+L	587	O wáter estaba limpo.
+M	587	WATER	5	2	7	Other	A palabra «wáter» é un anglicismo. Empregue mellor <suggestion>váter</suggestion>.	váter
+L	588	É un playback.
+M	588	PLAYBACK	6	5	13	Other	A palabra «playback» é un anglicismo. Empregue mellor <suggestion>son pregravado</suggestion> ou <suggestion>son de estudio</suggestion>.	son pregravado|son de estudio
+L	589	É un son pregravado.
+L	590	Comunicou a nova off the record aos xornalistas.
+M	590	OFFTHERECORD	7	17	31	Other	A expresión «off the record» é un anglicismo. Empregue mellor <suggestion>en privado</suggestion>.	en privado
+L	591	O dóping é un problema grave no deporte profesional.
+M	591	DOPING	8	2	8	Other	A palabra «dóping» é un anglicismo. Empregue mellor <suggestion>dopaxe</suggestion> (feminino).	dopaxe
+L	592	A dopaxe é un problema grave no deporte profesional.
+L	593	O seu é un traballo de moito stres.
+M	593	STRESS	9	29	34	Other	A palabra «stres» é un anglicismo. Empregue mellor <suggestion>tensión</suggestion>.	tensión
+L	594	O seu é un traballo de moita tensión.
+L	595	O atleta non conseguíu bater o record.
+M	595	HUNSPELL_RULE		13	22	UnknownWord	Atopouse un posíbel erro ortográfico	conseguía|conseguiu|conseguín|conseguíbel
+M	595	RECORD	10	31	37	Other	A palabra «record» é un anglicismo. Empregue mellor <suggestion>marca</suggestion> (feminino).	marca
+L	596	O atleta non conseguíu bater a marca.
+M	596	HUNSPELL_RULE		13	22	UnknownWord	Atopouse un posíbel erro ortográfico	conseguía|conseguiu|conseguín|conseguíbel
+L	597	Todos os traballadores dispoñen dunha equipa de protección individual.
+M	597	EQUIPA	1	38	44	Other	A palabra «equipa» é un lusismo. Empregue mellor <suggestion>equipo</suggestion> (masculino).	equipo
+L	598	Todos os traballadores dispoñen dun equipo de protección individual.
+L	599	Había rachas de vento na costa.
+M	599	RACHA	1	6	12	Other	Unha racha é unha fenda ou ben un anaco de pedra ou madeira. A forma correcta para facer referencia a un golpe forte de vento é <suggestion>refacho</suggestion> (masculino).	refacho
+L	600	Había refachos de vento na costa.
+L	601	Ten un loro na súa casa.
+M	601	LORO	2	7	11	Other	Un loro é unha peza do carro. A forma correcta para facer referencia ao paxaro é <suggestion>papagaio</suggestion>.	papagaio
+L	602	O médico recetoume unhas píldoras para a acidez estomacal.
+M	602	HUNSPELL_RULE		9	18	UnknownWord	Atopouse un posíbel erro ortográfico	receitoume|receoume|receptoume|recitoume|receboume
+M	602	PILDORA	3	25	33	Other	Unha píldora é unha ave tamén coñecida como «píllara».  A forma correcta para facer referencia ao medicamento é <suggestion>pílula</suggestion>.	pílula
+L	603	O médico recetoume unhas pílulas para a acidez estomacal.
+M	603	HUNSPELL_RULE		9	18	UnknownWord	Atopouse un posíbel erro ortográfico	receitoume|receoume|receptoume|recitoume|receboume
+L	604	Eu tamén quero aportar algo ao proxecto.
+M	604	APORTAR	4	15	22	Other	O verbo «aportar» significa «chegar a porto».  A forma correcta para o sentido de «proporcionar» ou «presentar» é <suggestion>achegar</suggestion> ou <suggestion>facer unha achega</suggestion>.	achegar|facer unha achega
+L	605	Eu tamén quero achegar algo ao proxecto.
+L	606	Obtivo unha beca para o Trinity College.
+M	606	BECA	5	12	16	Other	A palabra «beca» significa «vestidura talar de cor negra».  A forma correcta para o sentido de «axuda económica á formación» é <suggestion>bolsa</suggestion>.	bolsa
+L	607	O estudo analiza o papel dos abonos na contaminación das augas subterráneas.
+M	607	ABONO	6	29	35	Other	Posíbel castelanismo: «abono» significa «subscrición».  Se vostede alude ás substancias químicas ou orgánicas que aumentan a fertilidade do solo, debe empregar <suggestion>fertilizante</suggestion>; pola contra, se falaba da acción de pagar por un obxecto ou servizo, use <suggestion>pagamento</suggestion> ou <suggestion>pago</suggestion>.	fertilizante|pagamento|pago
+L	608	O estudo analiza o papel dos fertilizantes na contaminación das augas subterráneas.
+L	609	Xa fixo o abono das taxas de matrícula.
+M	609	ABONO	6	10	15	Other	Posíbel castelanismo: «abono» significa «subscrición».  Se vostede alude ás substancias químicas ou orgánicas que aumentan a fertilidade do solo, debe empregar <suggestion>fertilizante</suggestion>; pola contra, se falaba da acción de pagar por un obxecto ou servizo, use <suggestion>pagamento</suggestion> ou <suggestion>pago</suggestion>.	fertilizante|pagamento|pago
+L	610	Xa fixo o pagamento das taxas de matrícula.
+L	611	A grúa levoulle o automóbil.
+M	611	GRUA	7	2	6	Other	Posíbel castelanismo: o substantivo «grúa» fai referencia a un paxaro. Para denominar ao aparato empregado para mover ou remolcar grandes pesos emprégase preferibelmente <suggestion>guindastre</suggestion> (masculino).	guindastre
+L	612	O guindastre levoulle o automóbil.
+L	613	Xa publicaron a fecha do exame de Álxebra.
+M	613	FECHA	8	16	21	Other	Posíbel castelanismo: o substantivo «fecha» significa «grolo», «sorbo».  A forma correcta para a indicación de tempo é <suggestion>data</suggestion>.	data
+L	614	Esa actitude da xente dá asco.
+M	614	ASCO	9	25	29	Other	Posíbel castelanismo: «asco» é unha estrutura utricular propia dun tipo de fungo. A forma correcta para indicar repugnancia é <suggestion>noxo</suggestion>.	noxo
+L	615	Merquei un par de rapes na praza.
+M	615	RAPE	10	18	23	Other	Posíbel castelanismo: o substantivo «rapes» significa «acción ou efecto de rapar».  A forma correcta para o peixe é <suggestion>rabada</suggestion> (feminino) ou <suggestion>peixe sapo</suggestion>.	rabada|peixe sapo
+L	616	Merquei un par de rabadas na praza.
+L	617	Desque se acabou a guerra, guerra quere esta canalla?.
+M	617	DESQUE	1	0	6	Hint	A forma «desque» considérase arcaica. No seu lugar pódese empregar <suggestion>así que</suggestion>.	Así que
+L	618	Así que se acabou a guerra, guerra quere esta canalla?
+L	619	Acordaron adicar máis tempo ás tarefas pendentes.
+M	619	ADICAR	1	10	16	Other	A palabra «adicar» non é aconsellábel en galego. Empregue mellor <suggestion>dedicar</suggestion>.	dedicar
+L	620	Como narrador gaña dous accésits do Pedrón de Ouro.
+M	620	ACCESIT	1	24	32	Other	A palabra «accésit» non varía no plural. Empregue mellor <suggestion>accésit</suggestion>.	accésit
+M	620	HUNSPELL_RULE		36	42	UnknownWord	Atopouse un posíbel erro ortográfico	Padrón|Perdón
+L	621	Xoga tan ven coma o pai.
+M	621	VEN_BEN	1	5	17	Other	Aquí «ben» probabelmente sexa un adverbio e, por tanto, debe escribirse con «b». Quería vostede dicir <suggestion>tan ben ven</suggestion>?	tan ben ven
+L	622	Xoga tan ben coma o pai.
+L	623	Deuse conta en seguida.
+M	623	EN_DE_SEGUIDA	1	12	22	Other	As formas «en» e «seguida» forman en galego unha locución que se escribe unida. Quería vostede dicir <suggestion>enseguida</suggestion>?	enseguida
+L	624	De seguida nos percatamos das notas que a constitúen.
+M	624	EN_DE_SEGUIDA	1	0	10	Other	As formas «De» e «seguida» forman en galego unha locución que se escribe unida. Quería vostede dicir <suggestion>Deseguida</suggestion>?	Deseguida
+M	624	HUNSPELL_RULE		15	25	UnknownWord	Atopouse un posíbel erro ortográfico	percutamos|percutiramos|peraltamos|percorramos
+L	625	A masa mestúrase e de seguido envásase en recipientes.
+M	625	DE_SEGUIDO_CONTADO_CONTINO	2	19	29	Other	As formas «de» e «seguido» forman en galego unha locución que se escribe unida. Quería vostede dicir <suggestion>deseguido</suggestion>?	deseguido
+L	626	Recoñecera de contado os axentes da Stasi.
+M	626	GENERAL_NUMBER_AGREEMENT_ERRORS	3	14	24	Other	Posíbel erro de concordancia de número.	contado o|contados os
+M	626	HUNSPELL_RULE		36	41	UnknownWord	Atopouse un posíbel erro ortográfico	Sitas|Astasia
+L	627	Tal vez a maneira máis profusa de ser europeo.
+M	627	TAL_VEZ	1	0	7	Other	As formas «tal» e «vez» escrébense unidas cando forman unha locución. Quería vostede dicir <suggestion>Talvez</suggestion>?	Talvez
+L	628	Dacordo con iso, será preciso aumentar as inversións.
+M	628	DACORDO	1	0	7	Other	A locución «de acordo» escríbese en galego separada. Quería vostede dicir <suggestion>de acordo</suggestion>?	De acordo
+L	629	Traballaron a reo no proxecto.
+M	629	A_REO	1	12	17	Other	As formas «a» e «reo» normalmente forman en galego unha locución que se escribe preferibelmente unida. Quería vostede dicir <suggestion>arreo</suggestion>?	arreo
+L	630	Vai tódolos días de Vigo a A Ramallosa.
+M	630	A_DE_EN_CON_O	1	25	38	Other	Algunhas preposicións seguidas de topónimos con artigo determinado contraen con estes. Quería vostede dicir <suggestion>á Ramallosa</suggestion>?	á Ramallosa
+L	631	Foi mercalo a O Carballiño.
+M	631	A_DE_EN_CON_O	2	12	26	Other	Algunhas preposicións seguidas de topónimos con artigo determinado contraen con este. Quería vostede dicir <suggestion>ao Carballiño</suggestion>?	ao Carballiño
+L	632	As praias de O Morrazo.
+M	632	A_DE_EN_CON_O	3	10	22	Other	Algunhas preposicións seguidas de topónimos con artigo determinado contraen con este. Quería vostede dicir <suggestion>do Morrazo</suggestion>?	do Morrazo
+L	633	Casou en A Ramallosa.
+M	633	A_DE_EN_CON_O	3	6	20	Other	Algunhas preposicións seguidas de topónimos con artigo determinado contraen con este. Quería vostede dicir <suggestion>na Ramallosa</suggestion>?	na Ramallosa
+L	634	Viaxa a Alemaña a cotío por razóns de traballo.
+M	634	A_DE_COTIO	1	16	23	Other	Posíbel erro: a locución adverbial «a cotío» escrébese todo xunto. Quería vostede dicir <suggestion>acotío</suggestion>?	acotío
+L	635	Foi andando de vagar pola braña.
+M	635	DE_VAGAR_COTE	1	12	20	Other	Posíbel erro: a locución adverbial «de vagar» escrébese todo xunto. Quería vostede dicir <suggestion>devagar</suggestion>?	devagar
+L	636	Vai de cote ao parque.
+M	636	DE_VAGAR_COTE	1	4	11	Other	Posíbel erro: a locución adverbial «de cote» escrébese todo xunto. Quería vostede dicir <suggestion>decote</suggestion>?	decote
+L	637	Vai a modo para non caer.
+M	637	A_MODO_PENAS	1	4	10	Other	Posíbel erro: a locución adverbial «a modo» escrébese todo xunto. Quería vostede dicir <suggestion>amodo</suggestion>?	amodo
+L	638	Eles consideran que se lle das confianza á xente ésta responderá correctamente.
+M	638	GENERAL_NUMBER_AGREEMENT_ERRORS	8	27	40	Other	Posíbel erro de concordancia de número.	das confianzas
+M	638	ESTE_ESTA	1	49	53	Other	Posíbel erro: os pronomes demostrativos (este, ese, aquel) non levan til. Quería vostede dicir <suggestion>esta</suggestion>?	esta
+L	639	Temos os DNIs caducados.
+M	639	ACRONYMS_PLURAL	1	9	13	Other	O plural dunha sigla só se marca no artigo ou nalgunha das palabras que a acompañan. Empregue <suggestion>DNI</suggestion>.\n\t\t\t	DNI
+L	640	Observeina de reollo.
+M	640	DE_REOLLO	1	11	20	Other	A locución «de reollo» é un castelanismo. Empregue no seu sitio <suggestion>de esguello</suggestion>.	de esguello
+L	641	Patrimonio apraza o seu visto bo á recuperación das mámoas de Castiñeiras.
+M	641	VISTO_BO	2	24	32	Other	A locución «visto bo» non é propia do galego. Empregue mellor <suggestion>visto e prace</suggestion>.	visto e prace
+L	642	Tivo que pagarlle danos e perxuízos polo incidente.
+M	642	DANOS_E_PREXUIZOS	3	18	35	Other	A expresión «danos e perxuízos» non é correcta en galego. Empregue mellor <suggestion>danos e perdas</suggestion>.	danos e perdas
+L	643	O alumnado non pasou polo aro cando o responsable presentou as súas propostas.
+M	643	PASAR_POLO_ARO	4	15	29	Other	A expresión «pasou polo aro» non é correcta en galego. Empregue mellor <suggestion>veu ao rego</suggestion>.	veu ao rego
+L	644	Deberá presentar o acuse de recibo cuberto e selado.
+M	644	ACUSE_DE_RECIBO	5	19	34	Other	A expresión «acuse de recibo» non é correcta en galego. Empregue mellor <suggestion>xustificante de recepción</suggestion>.	xustificante de recepción
+L	645	O xuíz estimou a demanda das traballadoras.
+M	645	ESTIMAR_UNHA_DEMANDA	6	7	24	Other	A expresión «estimou a demanda» non é aconsellábel en galego. Empregue mellor <suggestion>admitir a demanda</suggestion>.	admitir a demanda
+L	646	O xuíz admitiu a demanda das traballadoras.
+L	647	A situación actual é de déficit na balanza de pagos.
+M	647	BALANZA_DE_PAGOS	7	35	51	Other	A expresión «balanza de pagos» non é aconsellábel en galego. Empregue mellor <suggestion>balanza de pagamentos</suggestion>.	balanza de pagamentos
+L	648	O cliente ten á súa disposición un buzón de suxerencias.
+M	648	BUZON_DE_SUXERENCIAS	8	35	55	Other	A expresión «buzón de suxerencias» non é correcta en galego. Empregue mellor <suggestion>caixa de suxestións</suggestion>.	caixa de suxestións
+L	649	O cliente ten á súa disposición unha caixa de suxestións.
+L	650	Nós somos homo Sapiens.
+M	650	BINOMIAL_GENRE_LOWER	1	10	22	Other	Na nomenclatura binomial, que se escribe en cursiva, o xénero vai en maiúscula e a especie e a subespecie en minúscula.	Homo sapiens
+L	651	O polgar do homo habilis xa era opoñíbel.
+M	651	BINOMIAL_GENRE_LOWER	1	12	24	Other	Na nomenclatura binomial, que se escribe en cursiva, o xénero vai en maiúscula e a especie e a subespecie en minúscula.	Homo habilis
+L	652	Nós somos Homo Sapiens.
+M	652	BINOMIAL_SPECIES_UPPER	2	10	22	Other	Na nomenclatura binomial, que se escribe en cursiva, o xénero vai en maiúscula e a especie e a subespecie en minúscula.	Homo sapiens
+L	653	O polgar do Homo Habilis xa era opoñíbel.
+M	653	BINOMIAL_SPECIES_UPPER	2	12	24	Other	Na nomenclatura binomial, que se escribe en cursiva, o xénero vai en maiúscula e a especie e a subespecie en minúscula.	Homo habilis
+L	654	Tamén escribiu tamén para un xornal nacional.
+M	654	CONJUNCTION_REPETITION	1	15	20	Other	Repetición estilisticamente incorrecta.	
+L	655	Aínda que non é aínda que definitivo.
+M	655	CONJUNCTION_REPETITION	1	16	21	Other	Repetición estilisticamente incorrecta.	
+L	656	Sexa por vergoña, sexa por timidez.
+L	657	Como acontece coa maior parte das linguas linguas romances.
+M	657	WORD_REPETITION	1	34	49	Other	Posíbel erro tipográfico: hai unha palabra repetida.	linguas
+L	658	Como acontece coa maior parte das linguas romances.
+L	659	A >> B
+L	660	Hepatoloxía do final de do final de século.
+M	660	PHRASE_REPETITION	1	12	35	Other	Este segmento está duplicado. Talvez queira, só, dicir <suggestion>do final de</suggestion>.	do final de
+L	661	Un amigo dun amigo de seu pai non é necesariamente un amigo.
+L	662	Hepatoloxía do final do final de século.
+M	662	PHRASE_REPETITION	2	12	29	Other	Este segmento está duplicado. Talvez queira, só, dicir <suggestion>do final</suggestion>.	do final
+L	663	El volveu novamente ao estudo e colocou o colocou o candeeiro em cima da mesa.
+M	663	PHRASE_REPETITION	2	32	51	Other	Este segmento está duplicado. Talvez queira, só, dicir <suggestion>colocou o</suggestion>.	colocou o
+M	663	HUNSPELL_RULE		62	64	UnknownWord	Atopouse un posíbel erro ortográfico	me|Em|dm|en|e|m|eme|rem|ea|am|ei|eu|cm|fm|eh
+L	664	O transporte adaptado vén da vén da Universidade do Porto.
+M	664	PHRASE_REPETITION	2	22	35	Other	Este segmento está duplicado. Talvez queira, só, dicir <suggestion>vén da</suggestion>.	vén da
+L	665	Todo o que eles querían era ficar tranquilos, e ollar e ollar e ollar.
+L	666	As instrucións son executadas paso a paso a partir do comezo da lista.
+L	667	…integrar o día a día a partir de o…
+M	667	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	668	Saíu de coche despois de coller as chaves do coche.
+L	669	As repeticións empobrecen o texto, porque as repeticións son aborrecidas de ler.
+L	670	Non virá máis.
+L	671	Descoñezo o significado da palabra «imposíbel».
+L	672	As proteínas son biopolímeros cuxas unidades monoméricas son os aminoácidos.
+M	672	HUNSPELL_RULE		17	29	UnknownWord	Atopouse un posíbel erro ortográfico	polímeros
+M	672	HUNSPELL_RULE		45	56	UnknownWord	Atopouse un posíbel erro ortográfico	monométricas
+L	673	…pola posesión do diploma fornecido polas autoridades educativas e…
+M	673	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+L	674	Clube Amigos da Chave de Ferrolterra
+M	674	HUNSPELL_RULE		0	5	UnknownWord	Atopouse un posíbel erro ortográfico	Clubs|Club
+M	674	HUNSPELL_RULE		25	36	UnknownWord	Atopouse un posíbel erro ortográfico	Aferrollara|Aferrollar|Aferrolla
+L	675	Isto son exemplos do día a día.
+L	676	É preciso dar tempo ao tempo.
+L	677	371 575 m³ para Gas Natural Comprimido, 243 024 m³ para usuarios comerciais, 120 119 m³ para
+L	678	99,6% con iluminación pública, 99,3% con recada de residuos e 89,7% dos lares ten
+L	679	Andou de estación en estación á procura dela.
+L	680	Andou de estación si en estación non á procura dela.
+L	681	Cerca de 42% de todos os xudeus residen en Israel e cerca de 42% nos Estados Unidos e Canadá, coa maioría restante na Europa.
+L	682	Non estou totalmente satisfeito coa situación, mais regras son regras", dixo Bolt.
+M	682	UNPAIRED_BRACKETS		69	70	Other	Símbolo desemparellado: Parece que falta «"»	
+M	682	HUNSPELL_RULE		77	81	UnknownWord	Atopouse un posíbel erro ortográfico	Bola|Bolo|Colt|Volt|Bole
+L	683	Hectáreas e hectáreas de terra ardida.
+L	684	Bateu a marca na proba dos cen metros, moi antes de considerar competir nos catrocentos metros barreiras.
+M	684	GENERAL_GENDER_AGREEMENT_ERRORS	3	88	104	Other	Posíbel erro de concordancia de xénero.	(metros) barreiras|metros (barreiras)
+L	685	Traballo é traballo, augardente é augardente.
+L	686	A astronomía profesional foi dividido en dous ramos: a astronomía «observacional» e a astronomía teórica.
+M	686	HUNSPELL_RULE		67	80	UnknownWord	Atopouse un posíbel erro ortográfico	observación|observancia
+L	687	Repeticións... as repeticións empobrecen o texto, porque as repeticións son aborrecidas de ler.
+L	688	Saíu do coche despois de coller as chaves do coche.
+L	689	Non virá máis.
+L	690	Descoñezo o significado da palabra «imposíbel».
+L	691	As proteínas son biopolímeros cuxas unidades 'monoméricas' son os aminoácidos.
+M	691	HUNSPELL_RULE		17	29	UnknownWord	Atopouse un posíbel erro ortográfico	polímeros
+M	691	HUNSPELL_RULE		45	58	UnknownWord	Atopouse un posíbel erro ortográfico	monométrico
+L	692	…pola posesión do diploma fornecido pola autoridade educacional e…
+M	692	SPACE_AFTER_PUNCTUATION	2	0	1	Other	Coloque un espazo despois dos puntos suspensivos	… 
+M	692	HUNSPELL_RULE		52	63	UnknownWord	Atopouse un posíbel erro ortográfico	nacionalidade
+L	693	Clube da Chave de Ferrolterrao
+M	693	HUNSPELL_RULE		0	5	UnknownWord	Atopouse un posíbel erro ortográfico	Clubs|Club
+M	693	HUNSPELL_RULE		18	30	UnknownWord	Atopouse un posíbel erro ortográfico	Aferrollamento
+L	694	371 575 m³ para Gas Natural Comprimido, 243 024 m³ para usuarios comerciais, 120 119 m³ para
+L	695	99,6% con iluminación pública, 99,3% con recada de residuos e 99,7% dos lares ten
+L	696	Principalmente migrantes teñen procurado residencia en Alagoas, estabelecéndose principalmente na costa.
+M	696	HUNSPELL_RULE		15	24	UnknownWord	Atopouse un posíbel erro ortográfico	emigrantes|migrastes|inmigrantes|emigrante|inmigrante|denigrantes
+L	697	Vou en dirección a casa
+L	698	Isto é errado…
+L	699	Isto non se xustifica co meu coñecemento actual…
+L	700	Os datos non confirman esa afirmación…
+L	701	De acordo co teorema central do límite, a distribución normal aborda o comportamento asentótico de varias distribucións de probabilidade.
+M	701	HUNSPELL_RULE		85	95	UnknownWord	Atopouse un posíbel erro ortográfico	asintótico|asemántico
+L	702	Xuros do 0,2% ao ano.
+M	702	GENERAL_NUMBER_AGREEMENT_ERRORS	4	6	13	Other	Posíbel erro de concordancia de número.	do (0,2%)|dos 0,2%
+L	703	Hai moito tempo que non vía publicacións da Ana.
+L	704	Examplo 'a'
+M	704	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+M	704	HUNSPELL_RULE		8	11	UnknownWord	Atopouse un posíbel erro ortográfico	
+L	705	Examplo "a
+M	705	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+L	706	"Um teste.
+M	706	UNPAIRED_BRACKETS		0	1	Other	Símbolo desemparellado: Parece que falta «"»	
+M	706	HUNSPELL_RULE		1	3	UnknownWord	Atopouse un posíbel erro ortográfico	U|m|Am|Cm|Dm|Fm|Hm|km|Lm|Mm|Nm|Pm|Ym|Zm
+L	707	Examplo 'a'
+M	707	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+M	707	HUNSPELL_RULE		8	11	UnknownWord	Atopouse un posíbel erro ortográfico	
+L	708	Examplo "a
+M	708	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+L	709	Examplo ("a
+M	709	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+L	710	Um "teste".
+M	710	HUNSPELL_RULE		0	2	UnknownWord	Atopouse un posíbel erro ortográfico	U|m|Am|Cm|Dm|Fm|Hm|km|Lm|Mm|Nm|Pm|Ym|Zm
+L	711	Examplo 'a'
+M	711	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+M	711	HUNSPELL_RULE		8	11	UnknownWord	Atopouse un posíbel erro ortográfico	
+L	712	Examplo a"
+M	712	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+M	712	UNPAIRED_BRACKETS		9	10	Other	Símbolo desemparellado: Parece que falta «"»	
+L	713	Um "teste".
+M	713	HUNSPELL_RULE		0	2	UnknownWord	Atopouse un posíbel erro ortográfico	U|m|Am|Cm|Dm|Fm|Hm|km|Lm|Mm|Nm|Pm|Ym|Zm
+L	714	Examplo 'a'
+M	714	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+M	714	HUNSPELL_RULE		8	11	UnknownWord	Atopouse un posíbel erro ortográfico	
+L	715	Examplo "a
+M	715	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+L	716	Examplo a"
+M	716	HUNSPELL_RULE		0	7	UnknownWord	Atopouse un posíbel erro ortográfico	Exemplo|Amplo
+M	716	UNPAIRED_BRACKETS		9	10	Other	Símbolo desemparellado: Parece que falta «"»	
+L	717	Um ("teste".
+M	717	HUNSPELL_RULE		0	2	UnknownWord	Atopouse un posíbel erro ortográfico	U|m|Am|Cm|Dm|Fm|Hm|km|Lm|Mm|Nm|Pm|Ym|Zm
+M	717	UNPAIRED_BRACKETS		3	4	Other	Símbolo desemparellado: Parece que falta «)»	

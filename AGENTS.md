@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn                 # tests-only gate
 ```
 
@@ -48,9 +48,11 @@ runs the affected languages per push/PR (all gated languages when shared code
 changed, no language job for docs-only changes). de/es/it/nl/ca must be 0
 only-Java / 0 only-Rust / 0 field diffs; en allows exactly the one documented
 `ADVERB_VERB_ADVERB_REPETITION` field diff, fr the documented divergences
-#3/#4/#5 and pt #6. `no`, `nrd` and `gn` are hand-authored languages with no
-legacy Java module, so they run the same matrix with a tests-only gate
-(integration test + `lt-cli inventory`, no Java oracle).
+#3/#4/#5, pt #6 and gl the documented `HUNSPELL_RULE` = 83 suggestion field
+diffs (#7: same match set, suggestions from the bounded search instead of the
+unported native `hunspell.suggest`). `no`, `nrd` and `gn` are hand-authored
+languages with no legacy Java module, so they run the same matrix with a
+tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
 
 ## Data tooling
 
