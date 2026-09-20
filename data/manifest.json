@@ -4503,8 +4503,8 @@
     },
     {
       "path": "no/README.md",
-      "sha256": "4889d8124ee870d81803608b2c0015622c198a68f9e6165b99217c0bac5e90c7",
-      "size": 10292,
+      "sha256": "95aaa061d07f86fda0bbda23bc3d99bfc2a727c688b04f73b4263301124d93fe",
+      "size": 10021,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
