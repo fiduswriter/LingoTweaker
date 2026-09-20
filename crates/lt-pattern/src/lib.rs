@@ -192,6 +192,11 @@ pub struct PatternToken {
     pub exceptions: Vec<ExceptionSpec>,
     /// true when inside `<marker>`
     pub in_marker: bool,
+    /// Java `PatternToken.setPhraseName`: tokens expanded from one
+    /// `<phraseref>` share a group id, so a `<match no>` naming the phrase
+    /// renders all of its tokens (`PatternRule.elementNo` grouping)
+    #[serde(skip)]
+    pub phrase_group: Option<u32>,
     /// LT `spacebefore` (test yes/no; `None` = ignore)
     #[serde(skip_serializing_if = "Option::is_none")]
     pub spacebefore: Option<bool>,
@@ -240,10 +245,15 @@ pub struct EquivalenceDef {
 }
 
 /// Configuration of one `<match/>` element (LT `rules.patterns.Match`).
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct MatchRefSpec {
     /// 1-based pattern token reference (`no` attribute)
     pub no: usize,
+    /// number of pattern tokens the referenced element spans (Java
+    /// `PatternRule.elementNo`): >1 for a `<phraseref>` element, so the
+    /// rendering concatenates the whole phrase
+    #[serde(skip_serializing_if = "is_one")]
+    pub phrase_len: usize,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub postag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -264,6 +274,29 @@ pub struct MatchRefSpec {
     pub include_skipped: String,
     /// suppress suggestions that are not tagged by the speller
     pub suppress_misspelled: bool,
+}
+
+fn is_one(n: &usize) -> bool {
+    *n == 1
+}
+
+impl Default for MatchRefSpec {
+    fn default() -> Self {
+        Self {
+            no: 0,
+            phrase_len: 1,
+            postag: None,
+            postag_replace: None,
+            postag_regexp: false,
+            regexp_match: None,
+            regexp_replace: None,
+            case_conversion: String::new(),
+            setpos: false,
+            static_lemma: None,
+            include_skipped: String::new(),
+            suppress_misspelled: false,
+        }
+    }
 }
 
 /// Part of a `<suggestion>`: literal text or a `<match no>` token reference.
@@ -997,6 +1030,38 @@ fn push_or_attach(list: &mut Vec<PatternToken>, token: PatternToken, groups: &mu
     list.push(token);
 }
 
+/// Java `PatternRule.elementNo`: the number of tokens each pattern element
+/// spans (a `<phraseref>` element spans all of its phrase tokens).
+fn element_lengths(tokens: &[PatternToken]) -> Vec<usize> {
+    let mut lengths = vec![1usize; tokens.len()];
+    let mut i = 0;
+    while i < tokens.len() {
+        if let Some(group) = tokens[i].phrase_group {
+            let mut j = i;
+            while j < tokens.len() && tokens[j].phrase_group == Some(group) {
+                j += 1;
+            }
+            for length in lengths.iter_mut().take(j).skip(i) {
+                *length = j - i;
+            }
+            i = j;
+        } else {
+            i += 1;
+        }
+    }
+    lengths
+}
+
+/// Set a `<match no>` spec's phrase span from `element_lengths`.
+fn set_ref_phrase_len(spec: &mut MatchRefSpec, lengths: &[usize]) {
+    spec.phrase_len = spec
+        .no
+        .checked_sub(1)
+        .and_then(|i| lengths.get(i))
+        .copied()
+        .unwrap_or(1);
+}
+
 struct Loader {
     grammar: Grammar,
     source: PathBuf,
@@ -1057,6 +1122,8 @@ struct Loader {
     phrase_id: Option<String>,
     /// Java `phraseMap`: phrase id -> alternative token lists
     phrase_map: std::collections::HashMap<String, Vec<Vec<PatternToken>>>,
+    /// next id for `PatternToken.phrase_group` (one per `<phraseref>` expansion)
+    phrase_group_counter: u32,
     /// tokens collected for the current phrase definition (Java's global
     /// `patternTokens` while `inPhrases`)
     phrase_tokens: Vec<PatternToken>,
@@ -1121,6 +1188,7 @@ impl Loader {
             in_phrases: false,
             phrase_id: None,
             phrase_map: std::collections::HashMap::new(),
+            phrase_group_counter: 1,
             phrase_tokens: Vec::new(),
             phrase_groups: Vec::new(),
             phrase_current_token: None,
@@ -2595,10 +2663,15 @@ impl Loader {
             .map(|p| p.marker_depth > 0 && (p.in_pattern || self.antipattern_depth > 0))
             .unwrap_or(false);
         let prefix = self.current_pattern_tokens();
+        let group = self.phrase_group_counter;
+        self.phrase_group_counter += 1;
         for alt in alts {
             let mut copy = alt;
             for token in copy.iter_mut() {
                 token.in_marker = in_marker;
+                // Java `preparePhrase` marks the phrase's own tokens with the
+                // idref (`setPhraseName`); the prefix tokens stay ungrouped.
+                token.phrase_group = Some(group);
             }
             if prefix.is_empty() {
                 self.phrase_pattern_tokens.push(copy);
@@ -2681,7 +2754,21 @@ impl Loader {
         }
     }
 
-    fn emit(&mut self, p: Pending) {
+    fn emit(&mut self, mut p: Pending) {
+        // Java `PatternRule.elementNo`: a `<match no>` naming a `<phraseref>`
+        // element renders every token of the phrase, so record the element's
+        // token span on each reference.
+        let element_lengths = element_lengths(&p.pattern.tokens);
+        for mref in &mut p.message_match_refs {
+            set_ref_phrase_len(&mut mref.spec, &element_lengths);
+        }
+        for suggestion in &mut p.suggestions {
+            for part in suggestion.iter_mut() {
+                if let SuggestionPart::MatchRef(spec) = part {
+                    set_ref_phrase_len(spec, &element_lengths);
+                }
+            }
+        }
         let pattern = p.pattern;
         let complex_pattern = pattern.complex;
         let rule = RuleDef {

@@ -1377,6 +1377,7 @@ fn resolve_references<T: Deref<Target = AnalyzedTokenReadings>>(
         let atr = tokens.get(first + mref.no)?;
         let spec = crate::MatchRefSpec {
             no: mref.no,
+            phrase_len: 1,
             postag: mref.postag.clone(),
             postag_replace: None,
             postag_regexp: false,
@@ -2494,6 +2495,18 @@ fn resolve_suggestions<T: Deref<Target = AnalyzedTokenReadings>>(
     out
 }
 
+/// `StringTools.addSpace(word, language)` for the non-French branch: a single
+/// punctuation character takes no preceding space, everything else takes one.
+fn add_space_for(word: &str) -> &'static str {
+    let mut chars = word.chars();
+    if let (Some(c), None) = (chars.next(), chars.next()) {
+        if matches!(c, '.' | ',' | ';' | ':' | '?' | '!') {
+            return "";
+        }
+    }
+    " "
+}
+
 /// `MatchState.toFinalString`: render one `<match/>` reference into its
 /// possible strings. `None` = Java's `{""}` case for an unmatched optional
 /// element (the caller collapses the surrounding space).
@@ -2509,6 +2522,31 @@ pub fn render_match_ref<T: Deref<Target = AnalyzedTokenReadings>>(
         None if no > positions.len() => positions.iter().flatten().next_back().copied()?,
         None => return None,
     };
+    // Java `PatternRuleMatcher.concatMatches` for a `<phraseref>` element
+    // (`phraseLen(index) > 1`): render each phrase token and join the
+    // alternatives with `StringTools.addSpace`.
+    if spec.phrase_len > 1 && (spec.include_skipped.is_empty() || spec.include_skipped == "none") {
+        let mut groups: Vec<Vec<String>> = Vec::new();
+        for k in 0..spec.phrase_len {
+            let t = tokens.get(tok_idx + k)?;
+            groups.push(render_match_ref_forms(spec, t, synth)?);
+        }
+        let mut combined = vec![String::new()];
+        for (index, forms) in groups.iter().enumerate() {
+            let mut next = Vec::new();
+            for prefix in &combined {
+                for form in forms {
+                    if index == 0 {
+                        next.push(form.clone());
+                    } else {
+                        next.push(format!("{prefix}{}{form}", add_space_for(form)));
+                    }
+                }
+            }
+            combined = next;
+        }
+        return Some(combined);
+    }
     let tr = tokens.get(tok_idx)?;
     // `MatchState.setToken(tokens, index, next)`: skipped tokens are the ones
     // consumed by the *following* pattern element when it spans >1 token.
@@ -2637,9 +2675,33 @@ fn render_match_ref_forms(
                 None => target,
             }
         };
-        for reading in &form_readings {
-            for f in synth.synthesize(reading, &target, true) {
-                forms.insert(f);
+        // Java `MatchState.toFinalString` (postagRegexp branch): readings
+        // without a lemma keep the surface form; a SENT_START/SENT_END/
+        // PARAGRAPH_END tag (e.g. a phrase's trailing `.`) sets `oneForm`,
+        // which skips synthesis entirely.
+        let mut one_form = false;
+        for reading in &tr.readings {
+            if reading.stem.is_none() {
+                match reading.pos_tag.as_deref() {
+                    None => {
+                        forms.insert(matched_surface.clone());
+                        one_form = true;
+                    }
+                    Some("SENT_START" | "SENT_END" | "PARAGRAPH_END") => {
+                        if !one_form {
+                            forms.insert(matched_surface.clone());
+                        }
+                        one_form = true;
+                    }
+                    Some(_) => one_form = false,
+                }
+            }
+        }
+        if !one_form {
+            for reading in &form_readings {
+                for f in synth.synthesize(reading, &target, true) {
+                    forms.insert(f);
+                }
             }
         }
         if forms.is_empty() {
@@ -2785,6 +2847,7 @@ mod tests {
         let positions = vec![Some(0usize)];
         let spec = MatchRefSpec {
             no: 1,
+            phrase_len: 1,
             postag: None,
             postag_replace: None,
             postag_regexp: false,

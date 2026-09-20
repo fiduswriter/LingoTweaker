@@ -263,3 +263,43 @@ fn polish_stage3_rules_match_java_probe() {
     assert_eq!(range16("To jest zdanie z „cudzysłowem.", &ms[0]), (17, 18));
     assert_eq!(ms[0].message, "Brak niesparowanego symbolu: „””");
 }
+
+/// `OPATRZYC_W`: a `<match no>` naming a `<phraseref>` renders the whole
+/// phrase (Java `PatternRule.elementNo` / `PatternRuleMatcher.concatMatches`),
+/// and a phrase token tagged SENT_END keeps its surface (the `postag_regexp`
+/// `oneForm` branch of `MatchState.toFinalString`). Java-probed with
+/// `scripts/oracle/pl/probe-rule.sh`.
+#[test]
+fn polish_phraseref_match_matches_java_probe() {
+    let _guard = engine_guard();
+    let Some(pl) = engine_with_rules(&["OPATRZYC_W"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let check = |text: &str| -> Vec<lt::Match> {
+        pl.check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == "OPATRZYC_W")
+            .collect()
+    };
+
+    let text = "Prace należy opatrzyć w osobiste godło.";
+    let ms = check(text);
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16(text, &ms[0]), (13, 38));
+    assert_eq!(
+        suggestions(&ms[0]),
+        vec!["zaopatrzyć w osobiste godło", "opatrzyć osobistym godłem"]
+    );
+
+    let text = "Pracę opatrzyłem w podpis.";
+    let ms = check(text);
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16(text, &ms[0]), (6, 26));
+    assert_eq!(
+        suggestions(&ms[0]),
+        vec!["zaopatrzyłem w podpis.", "opatrzyłem podpisem."]
+    );
+}
