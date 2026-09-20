@@ -30,12 +30,20 @@ curl -s -X POST localhost:8081/v2/check -d 'text=Hello+world.&language=en-US'
 
 The engine reads data from `LT_DATA_DIR`, or `./data` when run inside the repository.
 
-Build the browser demo (needs `rustup target add wasm32-unknown-unknown` and
-[wasm-pack](https://rustwasm.github.io/wasm-pack/)):
+Build the minimal browser demo (needs `rustup target add wasm32-unknown-unknown`
+and [wasm-pack](https://rustwasm.github.io/wasm-pack/)):
 
 ```sh
 tools/wasm/build-demo.sh
 python3 -m http.server -d crates/lt-wasm/www 8000
+```
+
+The full GitHub Pages demo (ProseMirror editor, all languages, rule settings)
+lives in `demo/`:
+
+```sh
+demo/scripts/build.sh                  # wasm + data + Vite bundle
+python3 -m http.server -d demo/dist 8000
 ```
 
 ## Workspace

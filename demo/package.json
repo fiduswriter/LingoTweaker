@@ -1,0 +1,24 @@
+{
+  "name": "lingotweaker-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "ProseMirror demo for the LingoTweaker wasm engine (GitHub Pages)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "prosemirror-commands": "^1.6.2",
+    "prosemirror-history": "^1.4.1",
+    "prosemirror-keymap": "^1.2.2",
+    "prosemirror-model": "^1.24.1",
+    "prosemirror-schema-basic": "^1.2.3",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.38.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

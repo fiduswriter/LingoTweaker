@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LingoTweaker demo — grammar checking in WebAssembly</title>
+    <meta
+      name="description"
+      content="A ProseMirror editor with the LingoTweaker engine running fully in the browser via WebAssembly."
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>LingoTweaker</h1>
+      <p class="tagline">
+        A language checker in WebAssembly. Everything runs in your browser; the
+        text never leaves the page.
+      </p>
+      <div class="toolbar">
+        <label class="control">
+          <span>Language</span>
+          <select id="language"></select>
+        </label>
+        <button id="check" type="button" disabled>Check now</button>
+        <button id="rules" type="button" disabled>Rules…</button>
+        <label class="control checkbox">
+          <input id="auto-check" type="checkbox" checked />
+          <span>Check as you type</span>
+        </label>
+        <span id="status" class="status">loading engine…</span>
+      </div>
+      <div id="progress" class="progress" hidden><div id="progress-bar"></div></div>
+    </header>
+
+    <main id="editor" class="editor" spellcheck="false" aria-label="Text to check"></main>
+
+    <footer class="footer">
+      <p>
+        Right-click an underlined word for suggestions. Underline colour by
+        issue type:
+        <span class="legend lt-kind-misspelling">misspelling</span>,
+        <span class="legend lt-kind-grammar">grammar</span>,
+        <span class="legend lt-kind-style">style</span>,
+        <span class="legend lt-kind-typographical">typographical</span>,
+        <span class="legend lt-kind-duplication">duplication</span>,
+        <span class="legend lt-kind-other">other</span>.
+      </p>
+      <p>
+        Engine:
+        <a href="https://github.com/johanneswilm/lingotweaker">LingoTweaker</a>
+        (Rust + WebAssembly), a JVM-free grammar and spelling checker.
+      </p>
+    </footer>
+
+    <dialog id="rules-dialog" class="rules-dialog">
+      <header class="rules-header">
+        <h2>Rules <span id="rules-lang" class="muted"></span></h2>
+        <button id="rules-close" class="rules-close" type="button" aria-label="Close">×</button>
+      </header>
+      <div class="rules-controls">
+        <label class="control checkbox">
+          <input id="picky" type="checkbox" />
+          <span>Include picky rules</span>
+        </label>
+        <input id="rules-search" type="search" placeholder="Filter by name, id or category…" />
+      </div>
+      <p class="rules-note">
+        Toggling rules recompiles the engine in the worker; the data pack is
+        reused, so nothing is downloaded again.
+      </p>
+      <div id="rules-list" class="rules-list"></div>
+      <footer class="rules-footer">
+        <span id="rules-summary" class="status"></span>
+        <button id="rules-reset" type="button">Reset</button>
+        <button id="rules-apply" type="button" disabled>Apply</button>
+      </footer>
+    </dialog>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

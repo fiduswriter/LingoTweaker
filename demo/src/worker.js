@@ -1,0 +1,164 @@
+// Owns the wasm engine: fetches and decompresses a data pack, builds the
+// engine (optionally with rule-selection settings), and checks paragraphs on
+// request. Everything stays in this worker so typing never blocks on engine
+// construction or checks.
+
+import init, { LtEngine } from "../pkg/lt_wasm.js";
+
+let initPromise = null;
+let engine = null;
+let packBytes = null;
+let current = null;
+let loadGeneration = 0;
+let phase = "idle";
+let activeUrl = null;
+let packManifestPromise = null;
+
+function post(message) {
+  self.postMessage(message);
+}
+
+function ensureInit() {
+  initPromise ??= init();
+  return initPromise;
+}
+
+/** `packs/manifest.json` (content hashes) for cache-busted pack URLs. */
+function ensurePackManifest() {
+  packManifestPromise ??= (async () => {
+    const url = new URL(
+      `${import.meta.env.BASE_URL}packs/manifest.json`,
+      self.location.origin,
+    );
+    try {
+      const response = await fetch(url, { cache: "no-store" });
+      return response.ok ? await response.json() : {};
+    } catch {
+      return {};
+    }
+  })();
+  return packManifestPromise;
+}
+
+/** Fetch `url`, reporting progress; gunzips only when the bytes are gzip. */
+async function fetchPack(url, onProgress) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`cannot load ${url}: HTTP ${response.status}`);
+  }
+  const total = Number(response.headers.get("content-length") ?? 0);
+  const reader = response.body.getReader();
+  const chunks = [];
+  let received = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) {
+      break;
+    }
+    chunks.push(value);
+    received += value.length;
+    onProgress?.(received, total);
+  }
+  const raw = new Uint8Array(await new Blob(chunks).arrayBuffer());
+  // Servers may serve `.gz` files with `Content-Encoding: gzip` (the browser
+  // then hands us the decoded pack) or as opaque gzip bytes; sniff the magic.
+  if (raw.length < 2 || raw[0] !== 0x1f || raw[1] !== 0x8b) {
+    return raw;
+  }
+  const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+/** Build (or rebuild) the engine from the cached pack bytes. */
+async function build(options) {
+  const generation = loadGeneration;
+  post({ type: "status", phase: "build", lang: current.lang });
+  await ensureInit();
+  const started = performance.now();
+  const engineOptions = JSON.stringify({
+    variant: current.variant,
+    today: new Date().toISOString(),
+    ...(options ?? {}),
+  });
+  const built = new LtEngine(current.lang, packBytes, engineOptions);
+  if (generation !== loadGeneration) {
+    return;
+  }
+  const failures = JSON.parse(built.compile_failures_json());
+  engine = built;
+  phase = "idle";
+  post({
+    type: "ready",
+    lang: current.lang,
+    rules: built.active_rule_count(),
+    compileFailures: failures.length,
+    packBytes: packBytes.length,
+    buildMs: performance.now() - started,
+  });
+}
+
+async function load({ lang, variant, pack, options }) {
+  const generation = ++loadGeneration;
+  engine = null;
+  if (!packBytes || !current || current.pack !== pack) {
+    const manifest = await ensurePackManifest();
+    const entry = manifest[pack];
+    const version = entry?.sha256 ? `?v=${entry.sha256.slice(0, 12)}` : "";
+    const file = entry?.file ?? `${pack}.pack.gz`;
+    const url = new URL(
+      `${import.meta.env.BASE_URL}packs/${file}${version}`,
+      self.location.origin,
+    ).href;
+    activeUrl = url;
+    phase = "download";
+    post({ type: "status", phase, lang, url });
+    packBytes = await fetchPack(url, (received, total) => {
+      post({ type: "progress", received, total });
+    });
+  }
+  if (generation !== loadGeneration) {
+    return;
+  }
+  current = { lang, variant, pack };
+  activeUrl = null;
+  await build(options);
+}
+
+function check({ id, paragraphs }) {
+  if (!engine) {
+    post({ type: "error", message: "engine is not loaded" });
+    return;
+  }
+  const started = performance.now();
+  const results = paragraphs.map((text, index) => {
+    if (!text || text.trim().length === 0) {
+      return { index, matches: [] };
+    }
+    const result = JSON.parse(engine.check_json(text));
+    return { index, matches: result.matches };
+  });
+  post({ type: "result", id, results, ms: performance.now() - started });
+}
+
+self.onmessage = async (event) => {
+  const message = event.data;
+  try {
+    if (message.type === "load") {
+      await load(message);
+    } else if (message.type === "rebuild") {
+      if (!packBytes || !current) {
+        throw new Error("no pack loaded yet");
+      }
+      loadGeneration += 1;
+      engine = null;
+      await build(message.options);
+    } else if (message.type === "check") {
+      check(message);
+    }
+  } catch (error) {
+    const failingPhase = phase;
+    phase = "error";
+    const detail = activeUrl ? ` [${failingPhase} · ${activeUrl}]` : ` [${failingPhase}]`;
+    post({ type: "error", message: `${String(error?.message ?? error)}${detail}` });
+  }
+};

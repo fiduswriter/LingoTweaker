@@ -12,3 +12,10 @@ crates/lt-wasm/pkg/
 crates/lt-wasm/pkg-node/
 crates/lt-wasm/www/pkg/
 crates/lt-wasm/www/packs/
+
+# GitHub Pages demo build artifacts
+demo/node_modules/
+demo/dist/
+demo/pkg/
+demo/public/packs/
+demo/public/rules/

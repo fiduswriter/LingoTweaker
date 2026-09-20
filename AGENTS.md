@@ -77,7 +77,9 @@ rustup target add wasm32-unknown-unknown      # once
 cargo run --release -p lt-data --bin pack_data -- data gn /tmp/lt-gn.pack
 wasm-pack build crates/lt-wasm --target nodejs --out-dir ../../target/wasm-pkg/node
 node tools/wasm/smoke.mjs /tmp/lt-gn.pack     # engine built from the pack
-tools/wasm/build-demo.sh                      # browser demo (www/pkg + packs)
+tools/wasm/build-demo.sh                      # minimal browser demo (www/pkg + packs)
+demo/scripts/build-packs.sh                   # full demo: packs + rule inventories
+demo/scripts/build.sh                         # full demo bundle into demo/dist
 ```
 
 Engine data reads go through `lt_data::fs` (mount-aware): use
