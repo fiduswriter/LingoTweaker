@@ -153,6 +153,9 @@ struct Aff {
     have_cont_class: bool,
     cont_classes: Box<[bool; CONTSIZE]>,
     break_patterns: Vec<Vec<u8>>,
+    /// `AffixMgr::parsedbreaktable`: a `BREAK` directive was present (even
+    /// `BREAK 0`), suppressing the default hyphen break table.
+    parsed_break: bool,
 }
 
 impl Default for Aff {
@@ -182,6 +185,7 @@ impl Default for Aff {
             have_cont_class: false,
             cont_classes: Box::new([false; CONTSIZE]),
             break_patterns: Vec::new(),
+            parsed_break: false,
         }
     }
 }
@@ -267,6 +271,11 @@ impl Aff {
             || aff.compound_middle.is_some()
             || aff.compound_end.is_some()
             || aff.compound_flag.is_some();
+        // `AffixMgr::parse_file`: without a BREAK directive hunspell installs
+        // the default hyphen break table.
+        if !aff.parsed_break {
+            aff.break_patterns = vec![b"-".to_vec(), b"^-".to_vec(), b"-$".to_vec()];
+        }
         Ok(aff)
     }
 }
@@ -531,6 +540,7 @@ fn parse_directive<'a>(
         "CIRCUMFIX" => aff.circumfix = Some(next_flag(it)?),
         "COMPOUNDMIN" => aff.compound_min = it.next().and_then(|v| v.parse().ok()).unwrap_or(1),
         "BREAK" => {
+            aff.parsed_break = true;
             let count: usize = it.next().and_then(|v| v.parse().ok()).unwrap_or(0);
             for _ in 0..count {
                 let Some(bline) = lines.next() else { break };

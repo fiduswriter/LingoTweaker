@@ -10,12 +10,19 @@
 //! native `hunspell.suggest` ranking is not reproduced (internal notes).
 
 use std::path::Path;
+use std::sync::LazyLock;
 
-use lt_core::{AnalyzedTokenReadings, Match, Result};
+use lt_core::{AnalyzedToken, AnalyzedTokenReadings, Match, Result};
+use regex::Regex;
 
 use crate::hunspell_spelling::{HunspellSpellingConfig, HunspellSpellingRule as InnerRule};
+use crate::wordutil::{is_email, is_url};
 
 pub const RULE_ID: &str = "HUNSPELL_RULE";
+
+/// `HunspellRule.tokenizeText` with the `gl_ES.aff` `WORDCHARS -'`: maximal
+/// runs of letters plus `-` and `'` (`nonWordPattern = (?![-'])[^\p{L}]`).
+static LETTER_RUN: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[\p{L}'-]+").unwrap());
 
 pub struct GalicianSpellingRule(InnerRule);
 
@@ -52,8 +59,38 @@ impl GalicianSpellingRule {
     pub fn check_sentence(
         &self,
         tokens: &[AnalyzedTokenReadings],
+        sentence_text: &str,
         sentence_offset: usize,
     ) -> Vec<Match> {
-        self.0.check_sentence(tokens, sentence_offset)
+        // `HunspellRule.match` spell-checks `tokenizeText(text)` over the
+        // sentence text (URLs/immunized tokens replaced by whitespace), not
+        // the engine token stream: alphanumeric and quoted tokens are split
+        // at non-letters (`241Am` -> `Am`, `'a'` stays one token).
+        let mut matches: Vec<Match> = Vec::new();
+        for m in LETTER_RUN.find_iter(sentence_text) {
+            let start = m.start();
+            // Skip runs inside URLs / e-mail / immunized / speller-ignored
+            // tokens (`getSentenceTextWithoutUrlsAndImmunizedTokens`).
+            let skipped = tokens.iter().any(|tr| {
+                if tr.is_whitespace || start < tr.start_pos {
+                    return false;
+                }
+                let end = tr.start_pos + tr.raw_byte_len.max(tr.surface().len());
+                start < end
+                    && (tr.is_immunized
+                        || tr.is_ignore_spelling
+                        || is_url(tr.surface())
+                        || is_email(tr.surface()))
+            });
+            if skipped {
+                continue;
+            }
+            let mut sub =
+                AnalyzedTokenReadings::new(vec![AnalyzedToken::new(m.as_str(), None, None)]);
+            sub.start_pos = start;
+            sub.raw_byte_len = m.end() - start;
+            matches.extend(self.0.check_sentence(&[sub], sentence_offset));
+        }
+        matches
     }
 }

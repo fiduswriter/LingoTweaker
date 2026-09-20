@@ -6644,7 +6644,7 @@ impl Pipeline {
                             disabled_categories,
                             enabled_categories,
                         ),
-                        spelling.check_sentence(&analyzed.tokens, start),
+                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
                         &mut seen,
                     );
                 }
