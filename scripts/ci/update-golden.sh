@@ -3,10 +3,10 @@
 # Only run after an intentional corpus/input change; then check whether
 # PARITY_TODAY in scripts/ci/parity.sh must be updated to the capture date.
 #
-# Usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl>
+# Usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl|ro>
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl>}"
+LANG_ARG="${1:?usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl|ro>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 GOLDEN="$RS_ROOT/docs/parity/golden"
 PREFIX="/tmp/lt-golden-$LANG_ARG"
@@ -21,6 +21,7 @@ case "$LANG_ARG" in
   nl) "$RS_ROOT/scripts/oracle/nl/check-diff-nl.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
   ca) "$RS_ROOT/scripts/oracle/ca/check-diff-ca.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
   gl) "$RS_ROOT/scripts/oracle/gl/check-diff-gl.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  ro) "$RS_ROOT/scripts/oracle/ro/check-diff-ro.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
   *) echo "unknown language: $LANG_ARG" >&2; exit 2 ;;
 esac
 

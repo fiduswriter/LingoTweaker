@@ -2213,6 +2213,23 @@ impl Loader {
                 self.captures.pop();
             }
             "pattern" => {
+                // Java `PatternRuleHandler.endElement` `case PATTERN`: a
+                // `<phraseref>` as the last pattern element has already been
+                // expanded into `phrasePatternTokens` (including the prefix
+                // tokens); clear the prefix so the rule-end handler does not
+                // append it again.
+                if self.last_phrase {
+                    self.last_phrase = false;
+                    if let Some(p) = self.pending.as_mut() {
+                        if self.antipattern_depth > 0 {
+                            if let Some(anti) = p.current_antipattern.as_mut() {
+                                anti.tokens.clear();
+                            }
+                        } else {
+                            p.pattern.tokens.clear();
+                        }
+                    }
+                }
                 if let Some(p) = self.pending.as_mut() {
                     p.in_pattern = false;
                 }

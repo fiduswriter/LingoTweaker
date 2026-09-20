@@ -1,0 +1,1996 @@
+L	1	La nu proiect.
+M	1	LITERE_INVERSATE_LA_UN	1	3	5	Other	Ați dorit să scrieți <suggestion>un</suggestion>?	un
+L	2	La nu băiat.
+M	2	LITERE_INVERSATE_LA_UN	1	3	5	Other	Ați dorit să scrieți <suggestion>un</suggestion>?	un
+L	3	La nu oarecare moment.
+M	3	LITERE_INVERSATE_LA_UN	1	3	5	Other	Ați dorit să scrieți <suggestion>un</suggestion>?	un
+L	4	La nu anumit moment.
+M	4	LITERE_INVERSATE_LA_UN	1	3	5	Other	Ați dorit să scrieți <suggestion>un</suggestion>?	un
+L	5	La nu oarecare moment.
+M	5	LITERE_INVERSATE_LA_UN	1	3	5	Other	Ați dorit să scrieți <suggestion>un</suggestion>?	un
+L	6	La nu mare moment.
+M	6	LITERE_INVERSATE_LA_UN	1	3	5	Other	Ați dorit să scrieți <suggestion>un</suggestion>?	un
+L	7	La nu mai puțin de un metru.
+L	8	Recensământ al populației.
+L	9	ceea ce a fost al populație dat.
+M	9	UPPERCASE_SENTENCE_START		0	4	Other	Propoziția nu începe cu literă mare	Ceea
+M	9	LITERE_INVERSATE_AL_LA	1	15	27	Other	Ați dorit să scrieți <suggestion>al populației</suggestion> sau <suggestion>la populație</suggestion>?	al populației|la populație
+L	10	Mergem la piață.
+L	11	Mergem al piață.
+M	11	LITERE_INVERSATE_AL_LA	1	7	15	Other	Ați dorit să scrieți <suggestion>al pieței</suggestion> sau <suggestion>la piață</suggestion>?	al pieței|la piață
+L	12	Mergem la film.
+L	13	Mergem al film.
+M	13	LITERE_INVERSATE_AL_LA	1	7	14	Other	Ați dorit să scrieți <suggestion>al filmului</suggestion> sau <suggestion>la film</suggestion>?	al filmului|la film
+L	14	Mergem la mai multe filme.
+L	15	Este al mai multor filme.
+L	16	Este al tău.
+L	17	Este al cui se cuvine.
+L	18	Situl oficial al Studio Pierrot.
+M	18	MORFOLOGIK_RULE_RO_RO		24	31	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Pierre|Pietro|Pierat|Pierdut|Pierit|Pierito|Pietroi|Pietros
+L	19	Situl oficial al studio Pierrot.
+M	19	LITERE_INVERSATE_AL_LA	1	14	23	Other	Ați dorit să scrieți <suggestion>al studioului</suggestion> sau <suggestion>la studio</suggestion>?	al studioului|la studio
+M	19	MORFOLOGIK_RULE_RO_RO		24	31	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Pierre|Pietro|Pierat|Pierdut|Pierit|Pierito|Pietroi|Pietros
+L	20	Situl oficial al Început Zilei.
+L	21	Director și editor al site-ului de stiri.
+M	21	MORFOLOGIK_RULE_RO_RO		35	40	UnknownWord	S-a găsit o posibilă greșeală de ortografie	știri|ițiri|oștiri|satiri|siri|soiri|steri|strii|stuiri|stări|suiri|șliri|știai|știi|știmi|știr|știrb|știrbi|știre|știrii|știru|știui|știți|șutiri|Siri
+L	22	Director și editor al sitului de stiri.
+M	22	MORFOLOGIK_RULE_RO_RO		33	38	UnknownWord	S-a găsit o posibilă greșeală de ortografie	știri|ițiri|oștiri|satiri|siri|soiri|steri|strii|stuiri|stări|suiri|șliri|știai|știi|știmi|știr|știrb|știrbi|știre|știrii|știru|știui|știți|șutiri|Siri
+L	23	Un nivel mai scăzut al TVA-ului.
+L	24	Cum și ce unde se vor obține datele.
+M	24	LITERE_INVERSATE_SI_CE_UNDE	1	4	14	Other	Ați dorit să scrieți <suggestion>și de unde</suggestion>?	și de unde
+L	25	La nivel ce nod.
+M	25	LITERE_INVERSATE_LA_NIVEL_CE	1	9	11	Other	Ați dorit să scrieți <suggestion>de</suggestion>?	de
+L	26	La nivel ce carte.
+M	26	LITERE_INVERSATE_LA_NIVEL_CE	1	9	11	Other	Ați dorit să scrieți <suggestion>de</suggestion>?	de
+L	27	La nivel ce cărți.
+M	27	LITERE_INVERSATE_LA_NIVEL_CE	1	9	11	Other	Ați dorit să scrieți <suggestion>de</suggestion>?	de
+L	28	A trecuse în neființă destul de devreme.
+M	28	TRECUT_IN_NEFIINTA	1	2	21	Other	Inadvertenţă gramaticală între verbul „a trece” şi substantivul „nefiinţă”. Puteți folosi <suggestion>trecuse la cele veșnice</suggestion>, <suggestion>trecuse la cele sfinte</suggestion>, <suggestion>plecase dintre noi</suggestion>, <suggestion>încetase din viață</suggestion> etc.	trecuse la cele veșnice|trecuse la cele sfinte|plecase dintre noi|încetase din viață
+L	29	Trece în neființă la vârsta de 39 de ani.
+M	29	TRECUT_IN_NEFIINTA	1	0	17	Other	Inadvertenţă gramaticală între verbul „a trece” şi substantivul „nefiinţă”. Puteți folosi <suggestion>Trece la cele veșnice</suggestion>, <suggestion>Trece la cele sfinte</suggestion>, <suggestion>Pleacă dintre noi</suggestion>, <suggestion>Încetează din viață</suggestion> etc.	Trece la cele veșnice|Trece la cele sfinte|Pleacă dintre noi|Încetează din viață
+L	30	A trecut la cele veșnice prea devreme.
+L	31	L-am întrebat de starea civila.
+M	31	STARE_CIVILA	1	17	30	Other	Ați dorit să scrieți <suggestion>starea civilă</suggestion>?	starea civilă
+L	32	L-am trimis la Starea Civila.
+M	32	STARE_CIVILA	1	15	28	Other	Ați dorit să scrieți <suggestion>Starea Civilă</suggestion>?	Starea Civilă
+L	33	L-am trimis la STAREA CIVILA.
+M	33	STARE_CIVILA	1	15	28	Other	Ați dorit să scrieți <suggestion>STAREA CIVILĂ</suggestion>?	STAREA CIVILĂ
+L	34	L-am întrebat de starea civilă.
+L	35	Au găsit un o om de încredere.
+M	35	UN_O	1	9	16	Other	Ați dorit să scrieți <suggestion>un om</suggestion>	un om
+L	36	Au găsit un om de încredere.
+L	37	Au găsit un o serie de coroane.
+M	37	UN_O	2	9	19	Other	Ați dorit să scrieți <suggestion>o serie</suggestion>	o serie
+L	38	Au găsit o serie de coroane.
+L	39	Au găsit un o altă ordine.
+M	39	UN_O	3	9	18	Other	Ați dorit să scrieți <suggestion>un altă</suggestion> sau <suggestion>o altă</suggestion>	un altă|o altă
+L	40	Au găsit o altă ordine.
+L	41	Se va folosi un O pentru om și un M pentru animal.
+L	42	El a spus ca să-l aștept.
+M	42	SPUS_CA_SA_L_ASTEPT	1	3	17	Other	Ați dorit să scrieți <suggestion>a spus să-l</suggestion>?	a spus să-l
+L	43	Ei au spus ca să-i aștept.
+M	43	SPUS_CA_SA_L_ASTEPT	1	3	18	Other	Ați dorit să scrieți <suggestion>au spus să-i</suggestion>?	au spus să-i
+L	44	El a spus ca să îl aștept.
+M	44	SPUS_CA_SA_L_ASTEPT	2	3	18	Other	Ați dorit să scrieți <suggestion>a spus să îl</suggestion>?	a spus să îl
+L	45	Ei au spus ca să îi aștept.
+M	45	SPUS_CA_SA_L_ASTEPT	2	3	19	Other	Ați dorit să scrieți <suggestion>au spus să îi</suggestion>?	au spus să îi
+L	46	Nu miau spus tot.
+M	46	MIAU	1	3	7	Other	Ați dorit să scrieți <suggestion>mi-au</suggestion>?	mi-au
+L	47	L-am invitat de Anul nou la noi.
+M	47	ANUL_NOU	1	16	24	Other	Ați dorit să scrieți <suggestion>Anul Nou</suggestion>?	Anul Nou
+L	48	L-am invitat de Buna vestire la noi.
+M	48	BUNA_VESTIRE	1	16	28	Other	Ați dorit să scrieți <suggestion>Buna Vestire</suggestion>?	Buna Vestire
+L	49	Eu creiam ceva.
+M	49	CREIAM	1	3	9	Other	Ați dorit să scrieți <suggestion>cream</suggestion>?	cream
+L	50	Tu creiai ceva.
+M	50	CREIAM	1	3	9	Other	Ați dorit să scrieți <suggestion>creai</suggestion>?	creai
+L	51	El/Ea creia ceva.
+M	51	CREIAM	1	6	11	Other	Ați dorit să scrieți <suggestion>crea</suggestion>?	crea
+L	52	Noi creiam ceva.
+M	52	CREIAM	1	4	10	Other	Ați dorit să scrieți <suggestion>cream</suggestion>?	cream
+L	53	Voi creiați ceva.
+M	53	CREIAM	1	4	11	Other	Ați dorit să scrieți <suggestion>creați</suggestion>?	creați
+L	54	Noi creiaserăm ceva.
+M	54	CREIAM	1	4	14	Other	Ați dorit să scrieți <suggestion>creaserăm</suggestion>?	creaserăm
+L	55	Voi creiau ceva.
+M	55	CREIAM	1	4	10	Other	Ați dorit să scrieți <suggestion>creau</suggestion>?	creau
+L	56	Acum noi creem prototipul mașinii.
+M	56	CREEM_CREAM	1	9	14	Other	Ați dorit să scrieți <suggestion>creăm</suggestion>?	creăm
+L	57	Acum el crează prototipul mașinii.
+M	57	CREAZA_CREEAZA	1	8	14	Other	Ați dorit să scrieți <suggestion>creează</suggestion>?	creează
+L	58	Opera a fost creeată cu mult timp în urmă.
+M	58	CREEATA_CREATA	1	13	20	Other	Ați dorit să scrieți <suggestion>creată</suggestion>?	creată
+L	59	Opera a fostcreată cu mult timp în urmă.
+M	59	MORFOLOGIK_RULE_RO_RO		8	18	UnknownWord	S-a găsit o posibilă greșeală de ortografie	fost creată
+L	60	Opusul a fost creeat cu mult timp în urmă.
+M	60	CREEAT_CREAT	1	14	20	Other	Ați dorit să scrieți <suggestion>creat</suggestion>?	creat
+L	61	Opusul a fostcreat cu mult timp în urmă.
+M	61	MORFOLOGIK_RULE_RO_RO		9	18	UnknownWord	S-a găsit o posibilă greșeală de ortografie	fost creat
+L	62	M-am referit despre cum au jucat ei.
+M	62	REFERIT_DESPRE	1	5	19	Other	Ați dorit să scrieți <suggestion>referit la</suggestion>, <suggestion>referit la modul cum</suggestion> sau <suggestion>referit la modul în care</suggestion>?	referit la|referit la modul cum|referit la modul în care
+L	63	M-am referit la cum au jucat ei.
+L	64	Nu as dori nimic altceva.
+M	64	AS_AVEA	1	3	10	Other	Ați dorit să scrieți <suggestion>aș dori</suggestion>?	aș dori
+L	65	Nu este asa cum spui.
+M	65	ASA	1	8	11	Other	Ați dorit să scrieți <suggestion>așa</suggestion>?	așa
+L	66	Cei mai multi cumpărători preferă aceste produse.
+M	66	MAI_MULTI	1	4	13	Other	Ați dorit să scrieți <suggestion>mai mulți</suggestion>?	mai mulți
+L	67	El are multe aptitudini și competente.
+M	67	COMPETENTE_COMPETENTE	1	13	37	Other	Ați dorit să scrieți <suggestion>aptitudini și competențe</suggestion>?	aptitudini și competențe
+L	68	Se pot oferi sa facă multe.
+M	68	SE_POT_OFERI_SA	1	13	15	Other	Ați dorit să scrieți <suggestion>să</suggestion>?	să
+L	69	Vrea sa facă multe.
+M	69	VREA_SA_FACA_MULTE	1	5	7	Other	Ați dorit să scrieți <suggestion>să</suggestion>?	să
+L	70	Vor sa facă multe.
+M	70	VOR_SA_FACA_MULTE	1	4	6	Other	Ați dorit să scrieți <suggestion>să</suggestion>?	să
+L	71	Mai le era cald?
+M	71	MAI_ITI_ESTE	1	0	10	Other	Ați vrut să scrieți <suggestion>le mai era</suggestion> cald?	Le mai era
+L	72	Îți mai este cald?
+L	73	Mai îți este foame?
+M	73	MAI_ITI_ESTE	1	0	12	Other	Ați vrut să scrieți <suggestion>îți mai este</suggestion> foame?	Îți mai este
+L	74	A scris câteva proceduri stocare.
+M	74	DIVERSE_GRESELI	1	15	32	Other	Ați dorit să scrieți <suggestion>proceduri stocate</suggestion> sau <suggestion>proceduri de stocare</suggestion>?	proceduri stocate|proceduri de stocare
+L	75	A scris câteva proceduri stocate.
+L	76	Acolo era un doar un copil.
+M	76	UN_DOAR_UN	2	6	20	Other	Ați dorit să scrieți <suggestion>era doar un</suggestion> sau <suggestion>era un</suggestion>?	era doar un|era un
+L	77	Acolo era doar un copil.
+L	78	Acolo era o doar o copilă.
+M	78	O_DOAR_O	3	6	18	Other	Ați dorit să scrieți <suggestion>era doar o</suggestion> sau <suggestion>era o</suggestion>?	era doar o|era o
+L	79	Acolo era doar o copilă.
+L	80	Mama s-a este aici.
+M	80	S_A_ARE	4	5	13	Other	Ați dorit să scrieți <suggestion>sa este</suggestion>?	sa este
+L	81	Mama sa are nevoie de liniste.
+M	81	MORFOLOGIK_RULE_RO_RO		22	29	UnknownWord	S-a găsit o posibilă greșeală de ortografie	liniște|iniște|liniate|liniuțe|liniștea|linișteo|liniști|linișți|oiniste
+L	82	Suprafața orașului s-a mărit în semnificativ.
+L	83	Spune-i și s-a îndrepta îndată.
+L	84	Bunicul sa dus la piata.
+M	84	SA_DUS	5	8	14	Other	Ați dorit să scrieți <suggestion>s-a dus</suggestion>?	s-a dus
+M	84	MORFOLOGIK_RULE_RO_RO		18	23	UnknownWord	S-a găsit o posibilă greșeală de ortografie	piața|piață|Piatra|Pița|Prața|biata|biată|diata|diată|iată|ipata|ipată|paiața|paiață|pata|pată|piară|piat|piatra|piatră|piază|piați|piațo|picata|picată|picta|pictă|pieta|pința|pință|piota|piotă|pipata|pipată|pirata|pirată|pisata|pisată|pista|pistă|pita|pită|piuata|piuată|pișata|pișată|plata|plată|pliata|pliată|poată|poiata|poiată|puiata|puiată|păta|pătă|viata|viată|viața|viață|pi ata|pia ta|piat a
+L	85	Mama sa dusă a fost.
+L	86	Experiența sa deosebit de variată l-a ajutat mult.
+L	87	Acolo sa găsit Tezaurul de Guarrazar.
+M	87	SA_DUS	5	6	14	Other	Ați dorit să scrieți <suggestion>s-a găsit</suggestion>?	s-a găsit
+M	87	MORFOLOGIK_RULE_RO_RO		27	36	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Ceaprazar|Garează|Guarana|Guardaman
+L	88	Acest conflict sa terminat cu războiul de la Arauco
+M	88	SA_DUS	5	15	26	Other	Ați dorit să scrieți <suggestion>s-a terminat</suggestion>?	s-a terminat
+M	88	MORFOLOGIK_RULE_RO_RO		45	51	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aranco|Arau co
+L	89	Acest lucru sa realizat prin întreruperea fasciculului de lumină.
+M	89	SA_DUS	5	12	23	Other	Ați dorit să scrieți <suggestion>s-a realizat</suggestion>?	s-a realizat
+L	90	El sa apucat de treabă
+M	90	SA_DUS	5	3	12	Other	Ați dorit să scrieți <suggestion>s-a apucat</suggestion>?	s-a apucat
+L	91	A plecat dintrodată.
+M	91	DINTRODATA	1	9	19	Other	Ați dorit să scrieți <suggestion>dintr-odată</suggestion> (loc. adv.) sau <suggestion>dintr-o dată</suggestion> (prop.)?	dintr-odată|dintr-o dată
+L	92	A plecat dintr-odată.
+L	93	Va să zică a plecat...
+M	93	VASAZICA	1	0	10	Other	Ați dorit să scrieți <suggestion>vasăzică</suggestion> (conj. adv.)?	Vasăzică
+L	94	A venit azinoapte, pe la trei.
+M	94	AZINOAPTE	1	8	17	Other	Ați dorit să scrieți <suggestion>azi-noapte</suggestion>?	azi-noapte
+L	95	Sunt sigur că a făcut dintradins.
+M	95	DINTRADINS	1	22	32	Other	Ați dorit să scrieți <suggestion>dintr-adins</suggestion>?	dintr-adins
+L	96	Nu sunt dubii asupra ce va face.
+M	96	ASUPRA_CE	1	14	23	Other	Ați dorit să scrieți <suggestion>asupra a ce</suggestion>?	asupra a ce
+L	97	Nu știu asupra ce elemente vrei să te oprești.
+M	97	ASUPRA_CE	1	8	17	Other	Ați dorit să scrieți <suggestion>asupra a ce</suggestion>?	asupra a ce
+L	98	A arătat bună-stare.
+M	98	BUNA_STARE	1	9	19	Other	Ați dorit să scrieți <suggestion>bunăstare</suggestion>?	bunăstare
+L	99	Aș dori să fac o introducere preliminară.
+M	99	INTRODUCERE_PRELIMINARA	1	17	40	Other	Ați dorit să scrieți <suggestion>introducere</suggestion>?	introducere
+L	100	În ceea ce privește introducerea preliminară făcută de el, nu sunt de acord.
+M	100	INTRODUCERE_PRELIMINARA	1	20	44	Other	Ați dorit să scrieți <suggestion>introducerea</suggestion>?	introducerea
+L	101	L-am văzut ieșind afară.
+M	101	A_IESI_AFARA	1	11	23	Other	Ați dorit să scrieți <suggestion>ieșind</suggestion>?	ieșind
+L	102	El a ieșit afară.
+M	102	A_IESI_AFARA	1	5	16	Other	Ați dorit să scrieți <suggestion>ieșit</suggestion>?	ieșit
+L	103	"Un test".
+M	103	GHILIMELE_DUBLE_INCEPUT	1	0	1	Other	Pentru limba română se folosește simbolul <suggestion>„</suggestion>.	„
+L	104	„Test”.
+L	105	"Un test"
+M	105	GHILIMELE_DUBLE_INCEPUT	1	0	1	Other	Pentru limba română se folosește simbolul <suggestion>„</suggestion>.	„
+M	105	GHILIMELE_DUBLE_SFARSIT	1	8	9	Other	Pentru limba română se folosește simbolul <suggestion>”</suggestion>.	”
+L	106	"Un test."
+M	106	GHILIMELE_DUBLE_INCEPUT	1	0	1	Other	Pentru limba română se folosește simbolul <suggestion>„</suggestion>.	„
+M	106	GHILIMELE_DUBLE_SFARSIT	1	9	10	Other	Pentru limba română se folosește simbolul <suggestion>”</suggestion>.	”
+L	107	„Test”
+L	108	Un <<prim test».
+M	108	GHILIMELE_DUBLE_INTERIOR_INCEPUT	1	3	5	Other	Pentru limba română se folosește simbolul <suggestion>«</suggestion>.	«
+M	108	UNPAIRED_BRACKETS		14	15	Other	Unpaired symbol: '«' seems to be missing	
+L	109	<<un alt test»
+M	109	GHILIMELE_DUBLE_INTERIOR_INCEPUT	1	0	2	Other	Pentru limba română se folosește simbolul <suggestion>«</suggestion>.	«
+M	109	UNPAIRED_BRACKETS		13	14	Other	Unpaired symbol: '«' seems to be missing	
+L	110	Un «test».
+L	111	Un «test>> oarecare.
+M	111	UNPAIRED_BRACKETS		3	4	Other	Unpaired symbol: '»' seems to be missing	
+M	111	GHILIMELE_DUBLE_INTERIOR_SFARSIT	1	8	10	Other	Pentru limba română se folosește simbolul <suggestion>»</suggestion>.	»
+L	112	„Un «test>> oarecare.”
+M	112	UNPAIRED_BRACKETS		4	5	Other	Unpaired symbol: '»' seems to be missing	
+M	112	GHILIMELE_DUBLE_INTERIOR_SFARSIT	1	9	11	Other	Pentru limba română se folosește simbolul <suggestion>»</suggestion>.	»
+L	113	Un «test» oarecare.
+L	114	A dat sfară în țară că va demisiona.
+L	115	A vrut să dea sfoară în țară că va nu este de aceeași părere.
+M	115	A_DA_SFARA_IN_TARA	1	10	28	Other	Pentru sensul „a da de știre” folosiți „sfară”, nu „sfoară”: <suggestion>dea sfară în țară</suggestion>.	dea sfară în țară
+L	116	A vrut să dea sfoară în târg că va nu este de aceeași părere.
+M	116	A_DA_SFARA_IN_TARA	1	10	28	Other	Pentru sensul „a da de știre” folosiți „sfară”, nu „sfoară”: <suggestion>dea sfară în târg</suggestion>.	dea sfară în târg
+L	117	Cartea care ți-am dat-o.
+M	117	CARE_PE_CARE__CARTEA_CARE_TI-AM	1	7	11	Other	În acest context formularea corectă este <suggestion>pe care</suggestion>.	pe care
+L	118	S-a ivit pe cer steaua care i-a călăuzit pe cei trei.
+L	119	Ea nu intră decât pe ușa care i-am deschis-o.
+M	119	CARE_PE_CARE__CARTEA_CARE_TI-AM	1	25	29	Other	În acest context formularea corectă este <suggestion>pe care</suggestion>.	pe care
+L	120	Cu puterea care mi s-a dat.
+L	121	Generația care i-a urmat lui Mozart.
+L	122	Votul care l-am dat ieri a fost anulat
+L	123	Votul pe care l-am dat ieri a fost anulat
+L	124	Caietul care îl citesc este al meu.
+L	125	Caietul pe care îl citesc este al meu.
+L	126	Vehiculele care îl pot transporta nu sunt disponibile.
+L	127	Teorema care îi poartă numele este cunosută.
+M	127	MORFOLOGIK_RULE_RO_RO		35	43	UnknownWord	S-a găsit o posibilă greșeală de ortografie	cunocuta|cunocută|cunoscuta|cunoscută
+L	128	Organizația care îl susține este foarte puternică.
+L	129	Este afacerea care îi aduce cel mai mare profit.
+L	130	Binele care mi l-ai făcut nu poate fi uitat.
+M	130	CARE_PE_CARE__BINELE_CARE_MI_L_AI	4	7	19	Other	În acest context formularea corectă este <suggestion>pe care mi l-ai</suggestion>.	pe care mi l-ai
+L	131	Să vorbește frumos.
+M	131	SA_VORBESTE	1	3	11	Other	Dezacord. Ați dorit să scrieți <suggestion>vorbească</suggestion>, <suggestion>vorbesc</suggestion>, <suggestion>vorbești</suggestion>, <suggestion>vorbim</suggestion>, <suggestion>vorbiți</suggestion>?	vorbească|vorbesc|vorbești|vorbim|vorbiți
+L	132	Să vorbesc frumos.
+L	133	Să vorbească frumos.
+L	134	Să vorbim frumos.
+L	135	El dorea să asmute câinii.
+M	135	SA_VORBESTE	1	12	18	Other	Dezacord. Ați dorit să scrieți <suggestion>asmut</suggestion>, <suggestion>asmută</suggestion>, <suggestion>asmuți</suggestion>, <suggestion>asmuțim</suggestion>, <suggestion>asmuțiți</suggestion>?	asmut|asmută|asmuți|asmuțim|asmuțiți
+L	136	E cu siguranță că va veni.
+M	136	ESTE_CU_SIGURANTA	1	0	17	Other	Ați dorit să scrieți <suggestion>E sigur că</suggestion> sau <suggestion>cu siguranță că</suggestion>?	E sigur că|Cu siguranță că
+L	137	Cu siguranță că va veni.
+L	138	Sigur că va veni.
+L	139	E bine ca să pleci mâine.
+M	139	ESTE_BINE_CA_SA_SIGURANTA	1	7	18	Other	Ați dorit să scrieți <suggestion>să pleci</suggestion>?	să pleci
+L	140	E bine ca să plecăm mâine.
+M	140	ESTE_BINE_CA_SA_SIGURANTA	1	7	19	Other	Ați dorit să scrieți <suggestion>să plecăm</suggestion>?	să plecăm
+L	141	E bine ca să plecați mâine.
+M	141	ESTE_BINE_CA_SA_SIGURANTA	1	7	20	Other	Ați dorit să scrieți <suggestion>să plecați</suggestion>?	să plecați
+L	142	E bine ca să plece mâine.
+M	142	ESTE_BINE_CA_SA_SIGURANTA	1	7	18	Other	Ați dorit să scrieți <suggestion>să plece</suggestion>?	să plece
+L	143	Este esențial ca să contribui.
+M	143	ESTE_BINE_CA_SA_SIGURANTA	1	14	29	Other	Ați dorit să scrieți <suggestion>să contribui</suggestion>?	să contribui
+L	144	Este suficient ca să poată fi categorisită.
+M	144	ESTE_BINE_CA_SA_SIGURANTA	1	15	26	Other	Ați dorit să scrieți <suggestion>să poată</suggestion>?	să poată
+L	145	Este necesar ca să existe un înalt nivel de dezvolare.
+M	145	ESTE_BINE_CA_SA_SIGURANTA	1	13	25	Other	Ați dorit să scrieți <suggestion>să existe</suggestion>?	să existe
+M	145	MORFOLOGIK_RULE_RO_RO		44	53	UnknownWord	S-a găsit o posibilă greșeală de ortografie	dezolare|dezvoltare
+L	146	Consecințele ale ceea ce a făcut.
+M	146	ALE_CEEA_CE	1	13	16	Other	Ați dorit să scrieți <suggestion>a</suggestion> ceea ce?	a
+L	147	Mi-ar place să vii.
+M	147	MI-AR_PLACEA	1	6	11	Other	Se folosește forma de infinitiv: mi-ar <suggestion>plăcea</suggestion>.	plăcea
+L	148	Cred că se merită să...
+M	148	SE_MERITA	1	8	17	Other	"Se merită" este greșit, formularea corectă este <suggestion>merită</suggestion>	merită
+L	149	Cred că se meritau făcuți...
+M	149	SE_MERITA	1	8	18	Other	"Se meritau" este greșit, formularea corectă este <suggestion>meritau</suggestion>	meritau
+L	150	Nu se riscă stând târziu.
+M	150	SE_MERITA	1	3	11	Other	"Se riscă" este greșit, formularea corectă este <suggestion>riscă</suggestion>	riscă
+L	151	Cred că merită să...
+L	152	Nu m-aș risca.
+M	152	SE_MERITA	2	3	13	Other	Ați vrut să scrieți <suggestion>aș risca</suggestion>	aș risca
+L	153	Zice că nu s-ar risca.
+M	153	SE_MERITA	3	11	21	Other	Ați vrut să scrieți <suggestion>ar risca</suggestion>	ar risca
+L	154	Zice că nu s-ar merita să mai stăm.
+M	154	SE_MERITA	3	11	22	Other	Ați vrut să scrieți <suggestion>ar merita</suggestion>	ar merita
+L	155	Nu mă risc.
+M	155	SE_MERITA	4	3	10	Other	Ați vrut să scrieți <suggestion>risc</suggestion>	risc
+L	156	Nu te riști.
+M	156	SE_MERITA	5	3	11	Other	Ați vrut să scrieți <suggestion>riști</suggestion>	riști
+L	157	Te riști?
+M	157	SE_MERITA	5	0	8	Other	Ați vrut să scrieți <suggestion>riști</suggestion>	Riști
+L	158	A făcut decât atât cât a putut.
+M	158	DECAT_ATAT	1	8	18	Other	"decât atât" este greșit, formularea corectă este <suggestion>atât</suggestion>	atât
+L	159	A făcut atât cât a putut.
+L	160	Nu a făcut decât atât cât a putut.
+L	161	N-a făcut decât atât cât a putut.
+L	162	Este preferabil să vii mai devreme.
+L	163	Este de preferabil să vii mai devreme.
+M	163	DE_PREFERABIL	1	5	18	Other	Ați vrut să scrieți <suggestion>preferabil</suggestion> sau <suggestion>de preferință</suggestion>.	preferabil|de preferință
+L	164	Un masă
+M	164	UN_SF_O_SF	1	0	2	Other	Pentru substantivele de gen feminin se folosește <suggestion>o</suggestion>.	O
+L	165	Această cartea este a mea.
+M	165	ACEASTA_SF_ACEASTA_SF	1	8	14	Other	Folosire incorectă a substantivului feminin articulat. "Această" cere substantiv nearticulat: <suggestion>carte</suggestion>	carte
+L	166	Cartea este a mea.
+L	167	Carte este a mea.
+M	167	SFN_ESTE_A	1	0	5	Other	Ați vrut să folosiți substantivul articulat <suggestion>carta</suggestion>, <suggestion>cartea</suggestion>	Carta|Cartea
+L	168	Această deltă este cea mai noua din lume.
+M	168	CEA_MAI_SUBST_ART	1	19	31	Other	Folosire incorectă a adjectivului articulat. "cea mai" cere adjectiv nearticulat: <suggestion>cea mai nouă</suggestion>.	cea mai nouă
+L	169	Aceasta este cea mai buna carte.
+M	169	CEA_MAI_SUBST_ART	1	13	25	Other	Folosire incorectă a adjectivului articulat. "cea mai" cere adjectiv nearticulat: <suggestion>cea mai bună</suggestion>.	cea mai bună
+L	170	Este cel mai buni dintre toți.
+M	170	CEL_MAI_SUBST_PLURAL	1	5	17	Other	Folosire incorectă a adjectivului. "cel mai" cere numărul singular: <suggestion>cel mai bun</suggestion>.	cel mai bun
+L	171	Această deltă este cea mai noi din lume.
+M	171	CEA_MAI_SUBST_PLURAL	1	19	30	Other	Folosire incorectă a adjectivului. "cea mai" cere numărul singular: <suggestion>cea mai nouă</suggestion>.	cea mai nouă
+L	172	Sunt cei mai bun dintre toți.
+M	172	CEI_MAI_SUBST_PLURAL	1	5	16	Other	Folosire incorectă a adjectivului. "cei mai" cere numărul plural: <suggestion>cei mai buni</suggestion>.	cei mai buni
+L	173	El este unul dintre cei mai remarcabil cățărători ai tuturor timpurilor.
+M	173	CEI_MAI_SUBST_PLURAL	1	20	38	Other	Folosire incorectă a adjectivului. "cei mai" cere numărul plural: <suggestion>cei mai remarcabili</suggestion>.	cei mai remarcabili
+L	174	Acești jucători sunt cei mai ușor de antrenat.
+L	175	Printre cronicarii din prima categorie, cei mai frecvent citați sînt aceștia.
+M	175	MORFOLOGIK_RULE_RO_RO		64	68	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Saint|mint|minț|saint|simt|simț|sin|sine|sinet|sini|sino|sinu|sit|sunt|vint|șanț|șiit|șina|șine|șino|șină|șist|șont|șunt
+L	176	Ochii albaști sunt cei mai des întâlniți.
+M	176	MORFOLOGIK_RULE_RO_RO		6	13	UnknownWord	S-a găsit o posibilă greșeală de ortografie	albaștri|albești|albăstri|alba ști
+L	177	Suedezii sunt printre cei mai puțin religioși oameni.
+L	178	Pentru cei mai puțin tehnici există TV tunerele plug and play.
+L	179	Aceste cărți sunt cele mai nouă.
+M	179	CELE_MAI_SUBST_PLURAL	1	18	31	Other	Folosire incorectă a adjectivului. "cele mai" cere numărul plural: <suggestion>cele mai noi</suggestion>.	cele mai noi
+L	180	Se alege o regula.
+M	180	VERB_O_SUBST_ART	1	11	17	Other	Folosire incorectă a substantivului feminin articulat . "o" cere substantiv nearticulat: <suggestion>regulă</suggestion>.	regulă
+L	181	Se alege un documentul nou.
+M	181	UN_ADJ_ART_UN_ADJ_NEART	1	12	22	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>(documentul)</suggestion>.	(documentul)
+L	182	Se alege un nr.
+L	183	Pentru un cazul ca acesta.
+M	183	UN_ADJ_ART_UN_ADJ_NEART	1	10	15	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>(cazul)</suggestion>.	(cazul)
+L	184	Acesta se trimite unui angajatului nou.
+M	184	UNUI_SAG_UN_SNEART	1	23	34	Other	Folosire incorectă a substantivului masculin articulat. "unui" cere substantiv nearticulat: <suggestion>angajat</suggestion>.	angajat
+L	185	Acesta se trimite unui omului potrivit.
+M	185	UNUI_SAG_UN_SNEART	1	23	29	Other	Folosire incorectă a substantivului masculin articulat. "unui" cere substantiv nearticulat: <suggestion>om</suggestion>.	om
+L	186	Acesta se trimite unor angajatelor noi.
+M	186	UNOR_AAG_UNOR_SN	1	23	34	Other	Folosire incorectă a substantivului masculin articulat. "unor" cere substantiv nearticulat: <suggestion>angajate</suggestion>.	angajate
+L	187	Acesta se trimite unor oamenilor potriviți.
+M	187	UNOR_AAG_UNOR_SN	1	23	32	Other	Folosire incorectă a substantivului masculin articulat. "unor" cere substantiv nearticulat: <suggestion>oameni</suggestion>.	oameni
+L	188	Acesta se datorează unor bețelor anume.
+M	188	UNOR_AAG_UNOR_SN	1	25	32	Other	Folosire incorectă a substantivului masculin articulat. "unor" cere substantiv nearticulat: <suggestion>bețe</suggestion>.	bețe
+L	189	Acesta se datorează unor bețe anume.
+L	190	Selectarea de resursei este ușoară.
+M	190	SELECTAREA_DE_RESURSEI	1	0	22	Other	Ați dorit să scrieți <suggestion>Selectarea resursei</suggestion>?	Selectarea resursei
+L	191	Fabricarea de baterii este dificilă.
+L	192	Creșterea de producției germane a fost rapidă.
+M	192	SELECTAREA_DE_RESURSEI	1	0	23	Other	Ați dorit să scrieți <suggestion>Creșterea producției</suggestion>?	Creșterea producției
+L	193	Aceasta a luat rareori forma de opoziției politice.
+M	193	SELECTAREA_DE_RESURSEI	1	23	41	Other	Ați dorit să scrieți <suggestion>forma opoziției</suggestion>?	forma opoziției
+L	194	Legată de distribuția de presiunii din fluid.
+M	194	SELECTAREA_DE_RESURSEI	1	10	34	Other	Ați dorit să scrieți <suggestion>distribuția presiunii</suggestion>?	distribuția presiunii
+L	195	Materia primă în industria de sticlăriei este aceasta.
+M	195	SELECTAREA_DE_RESURSEI	1	17	40	Other	Ați dorit să scrieți <suggestion>industria sticlăriei</suggestion>?	industria sticlăriei
+L	196	Dat fiind performanțele sale, a fost admis.
+M	196	DAT_FIIND__FEM_PLURAL	1	0	23	Other	Ați dorit să scrieți <suggestion>date fiind performanțele</suggestion>?	Date fiind performanțele
+L	197	Dat fiind aceste performanțe, a fost admis.
+M	197	DAT_FIIND__FEM_PLURAL	1	0	16	Other	Ați dorit să scrieți <suggestion>date fiind aceste</suggestion>?	Date fiind aceste
+L	198	Dat fiind performanța sale, a fost admis.
+L	199	Dat fiind curajul sale, a fost admis.
+L	200	Dat fiind anii săi, a fost admis.
+M	200	DAT_FIIND__MASC_PLURAL	1	0	14	Other	Ați dorit să scrieți <suggestion>dați fiind anii</suggestion>?	Dați fiind anii
+L	201	Dat fiind anul său fructuos, a fost admis.
+L	202	Dat fiind în judecată, a fost supărat.
+L	203	Dat fiind curajul sale, a fost admis.
+L	204	Au venit niște copiii.
+M	204	NISTE_COPIII	1	9	21	Other	Ați vrut să folosiți forma nearticulată<suggestion>niște copii</suggestion>, <suggestion>niște copili</suggestion>?	niște copii|niște copili
+L	205	Au venit niște geamgiii.
+M	205	NISTE_COPIII	1	9	23	Other	Ați vrut să folosiți forma nearticulată<suggestion>niște geamgii</suggestion>?	niște geamgii
+L	206	Au venit niște abagiii.
+M	206	NISTE_COPIII	1	9	22	Other	Ați vrut să folosiți forma nearticulată<suggestion>niște abagii</suggestion>?	niște abagii
+L	207	Au venit câțiva copiii.
+M	207	NISTE_COPIII	1	9	22	Other	Ați vrut să folosiți forma nearticulată<suggestion>câțiva copii</suggestion>, <suggestion>câțiva copili</suggestion>?	câțiva copii|câțiva copili
+L	208	Au venit niște copii.
+L	209	Au cumpărat niște copili.
+L	210	A primit moștenire niște moșii.
+L	211	Doctorul a făcut niște operații.
+L	212	Au văzut schimbările ca pe niște erezii.
+L	213	Are niște principii foarte solide.
+L	214	Au venit toți copii.
+M	214	TOTI_COPII	1	9	19	Other	Ați vrut să folosiți forma articulată<suggestion>toți copiii</suggestion>, <suggestion>toți copilii</suggestion>?	toți copiii|toți copilii
+L	215	Au venit toți abagii.
+M	215	TOTI_COPII	1	9	20	Other	Ați vrut să folosiți forma articulată<suggestion>toți abagiii</suggestion>?	toți abagiii
+L	216	Sunt toți frumoși.
+L	217	Sunt toți duși de acasă.
+L	218	Au venit toți copiii.
+L	219	Au cumpărat toți copilii.
+L	220	Au venit și harnicii membrii ai colectivului.
+M	220	HARNICII_MEMBRII	1	12	28	Other	Ați vrut să folosiți forma nearticulată<suggestion>harnicii membri</suggestion>?	harnicii membri
+L	221	Înființarea noii Episcopii a Giurgiului...
+M	221	MORFOLOGIK_RULE_RO_RO		29	39	UnknownWord	S-a găsit o posibilă greșeală de ortografie	GIurgiului|Giulgiului|Giurgiu lui|Ciuroiului|Giugiuli|Giugiulii|Gugiului|Gurguiului|Guriiului|Găuroiului|Iaurgiului
+L	222	Dețineau suveranitatea asupra întregii Germanii.
+L	223	În cuprinsul vechii Dacii.
+L	224	Își protejează propriile soții și copiii
+L	225	Părerea celor mai mulți colegi nu este favorabilă.
+L	226	Le-a spus celor mai mulți să nu vină.
+L	227	Părerea celor mai multor nu a contat.
+M	227	CELOR_MAI_MULTOR	1	8	24	Other	Cazul genitiv sau dativ trebuie să fie marcat o singură dată: <suggestion>celor mai multe</suggestion>, <suggestion>celor mai mulți</suggestion>.	celor mai multe|celor mai mulți
+L	228	El a captat atenția celor mai multor persoane cu studii superioare.
+M	228	CELOR_MAI_MULTOR	1	20	36	Other	Cazul genitiv sau dativ trebuie să fie marcat o singură dată: <suggestion>celor mai multe</suggestion>, <suggestion>celor mai mulți</suggestion>.	celor mai multe|celor mai mulți
+L	229	Evoluția pe care a avut-o frumoasa actriță este foarte interesantă.
+L	230	El a cunoscut o frumoasa actriță.
+M	230	O_ADJ_ART_TERMINAT_IN_A	1	16	24	Other	Folosire incorectă a adjectivului feminin articulat . "o" cere adjectiv nearticulat: <suggestion>frumoasă</suggestion>.	frumoasă
+L	231	Se alege un frumosul exemplar.
+M	231	UN_ADJ_ART_UN_ADJ_NEART	1	12	20	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>frumos</suggestion>.	frumos
+L	232	Este un cunoscutul actor.
+M	232	UN_ADJ_ART_UN_ADJ_NEART	1	8	18	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>cunoscut</suggestion>.	cunoscut
+L	233	Este un bravul soldat.
+M	233	UN_ADJ_ART_UN_ADJ_NEART	1	8	14	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>brav</suggestion>.	brav
+L	234	Este un soldatul curajos.
+M	234	UN_ADJ_ART_UN_ADJ_NEART	1	8	16	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>soldat</suggestion>.	soldat
+L	235	Este un bravul soldat.
+M	235	UN_ADJ_ART_UN_ADJ_NEART	1	8	14	Other	Folosire incorectă a adjectivului/substantivului masculin articulat. "un" cere forma nearticulată: <suggestion>brav</suggestion>.	brav
+L	236	Un video cu lungimea de 7 minute.
+L	237	Este alcătuit dintr-un calicul.
+L	238	Acești pepeni sunt excesivi de scumpi.
+M	238	EXCESIVI_DE_SCUMPI	1	19	37	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>excesiv de scumpi</suggestion>?	excesiv de scumpi
+L	239	Aceste cărți sunt excesive de scumpe.
+M	239	EXCESIVI_DE_SCUMPI	1	18	36	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>excesiv de scumpe</suggestion>?	excesiv de scumpe
+L	240	Aceste cărți sunt grozave de scumpe.
+M	240	EXCESIVI_DE_SCUMPI	1	18	35	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>grozav de scumpe</suggestion>?	grozav de scumpe
+L	241	Aceste cărți sunt grozave de frumoase.
+M	241	EXCESIVI_DE_SCUMPI	1	18	37	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>grozav de frumoase</suggestion>?	grozav de frumoase
+L	242	Se pot alegeți.
+M	242	SE_POT_VB	1	7	14	Other	Dezacord gramatical: se folosește forma de infinitiv <suggestion>alege</suggestion>.	alege
+L	243	Eu alergam mult.
+L	244	Ei alergau mult.
+L	245	Eu veneau adesea la el.
+M	245	EU_VENEAU	1	0	9	Other	Dezacord gramatical: forma de persoana I singular a indicativ imperfect de la verbul „a veni” este <suggestion>eu veneam</suggestion>; pentru persoana a treia plural folosiți „ei”: <suggestion>ei veneau</suggestion>.	Eu veneam|Ei veneau
+L	246	Și eu veneam adesea la el.
+L	247	Voi veneați repede.
+L	248	Eu veneam repede.
+L	249	Eu veneați adesea la el.
+M	249	EU_VENEATI	1	0	10	Other	Dezacord gramatical: forma de persoana I singular a indicativ imperfect de la verbul „a veni” este <suggestion>eu veneam</suggestion>; pentru persoana a doua plural folosiți „voi”: <suggestion>voi veneați</suggestion>.	Eu veneam|Voi veneați
+L	250	Și eu alergam adesea prin parc.
+L	251	Voi veniserăți repede.
+L	252	Eu venisem repede.
+L	253	Eu veniserăți adesea la el.
+M	253	EU_VENISERATI	1	0	13	Other	Dezacord gramatical: forma de persoana I singular a indicativ mai mult ca perfect de la verbul „a veni” este <suggestion>eu venisem</suggestion>; pentru persoana a doua plural folosiți „voi”: <suggestion>voi veniserăți</suggestion>.	Eu venisem|Voi veniserăți
+L	254	Și eu venisem adesea prin parc.
+L	255	Eu am încercat să îl împing mai departe.
+L	256	Nu a făcut decât să îl aducă aici.
+L	257	De cele mai multe ori refuză să îl ajută.
+M	257	SA_IL_AJUTA	1	35	40	Other	Dezacord gramatical: formele de conjunctiv ale verbului „a ajuta” sunt: <suggestion>ajut</suggestion>, <suggestion>ajutați</suggestion>, <suggestion>ajute</suggestion>, <suggestion>ajutăm</suggestion>, <suggestion>ajuți</suggestion>.	ajut|ajutați|ajute|ajutăm|ajuți
+L	258	Noi am încercat să îl configuram cât mai bine.
+M	258	SA_IL_AJUTA	1	22	32	Other	Dezacord gramatical: formele de conjunctiv ale verbului „a configura” sunt: <suggestion>configurați</suggestion>, <suggestion>configurez</suggestion>, <suggestion>configureze</suggestion>, <suggestion>configurezi</suggestion>, <suggestion>configurăm</suggestion>.	configurați|configurez|configureze|configurezi|configurăm
+L	259	Noi am încercat să îl configura cât mai bine.
+M	259	SA_IL_AJUTA	1	22	31	Other	Dezacord gramatical: formele de conjunctiv ale verbului „a configura” sunt: <suggestion>configurați</suggestion>, <suggestion>configurez</suggestion>, <suggestion>configureze</suggestion>, <suggestion>configurezi</suggestion>, <suggestion>configurăm</suggestion>.	configurați|configurez|configureze|configurezi|configurăm
+L	260	Eu am încercat să îl configurez cât mai bine.
+L	261	Tu ai încercat să îl configurezi cât mai bine.
+L	262	El a încercat să îl configureze cât mai bine.
+L	263	Noi am încercat să îl configurăm cât mai bine.
+L	264	Voi ați încercat să îl configurați cât mai bine.
+L	265	Ei au încercat să îl configureze cât mai bine.
+L	266	Eu am încercat să nu îl împing mai departe.
+L	267	A vrut să nu îl aducă aici.
+L	268	De cele mai multe ori refuză să nu îl ajută.
+M	268	SA_IL_AJUTA	2	38	43	Other	Dezacord gramatical: formele de conjunctiv ale verbului „a ajuta” sunt: <suggestion>ajut</suggestion>, <suggestion>ajutați</suggestion>, <suggestion>ajute</suggestion>, <suggestion>ajutăm</suggestion>, <suggestion>ajuți</suggestion>.	ajut|ajutați|ajute|ajutăm|ajuți
+L	269	Noi am încercat să nu îl configuram cât mai bine.
+M	269	SA_IL_AJUTA	2	25	35	Other	Dezacord gramatical: formele de conjunctiv ale verbului „a configura” sunt: <suggestion>configurați</suggestion>, <suggestion>configurez</suggestion>, <suggestion>configureze</suggestion>, <suggestion>configurezi</suggestion>, <suggestion>configurăm</suggestion>.	configurați|configurez|configureze|configurezi|configurăm
+L	270	Noi am încercat să nu îl configura cât mai bine.
+M	270	SA_IL_AJUTA	2	25	34	Other	Dezacord gramatical: formele de conjunctiv ale verbului „a configura” sunt: <suggestion>configurați</suggestion>, <suggestion>configurez</suggestion>, <suggestion>configureze</suggestion>, <suggestion>configurezi</suggestion>, <suggestion>configurăm</suggestion>.	configurați|configurez|configureze|configurezi|configurăm
+L	271	Eu am încercat să nu îl configurez rău.
+L	272	Tu ai încercat să nu îl configurezi rău.
+L	273	El a încercat să nu îl configureze rău.
+L	274	Noi am încercat să nu îl configurăm rău.
+L	275	Voi ați încercat să nu îl configurați rău.
+L	276	Ei au încercat să nu îl configureze rău.
+L	277	Eu știu multe povești.
+L	278	Eu voi fi acolo.
+L	279	Eu făcuși multe greșeli.
+M	279	EU_FACUSI	1	3	9	Other	Dezacord gramatical: forma de persoana I singular a perfectului simplu de la verbul "a face" este <suggestion>făcui</suggestion>.	făcui
+L	280	Tu făcui multe greșeli.
+M	280	TU_FACUI	1	3	8	Other	Dezacord gramatical: forma de persoana I singular a perfectului simplu de la verbul "a face" este <suggestion>făcuși</suggestion>.	făcuși
+L	281	Este frumos colorat.
+L	282	Sunt frumos colorat.
+L	283	Este frumoși colorați.
+M	283	ESTE_FRUMOSI	1	0	12	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>sunt frumoși</suggestion> sau <suggestion>este frumos</suggestion>.	Sunt frumoși|Este frumos
+L	284	Care este deștepți.
+M	284	ESTE_FRUMOSI	1	5	18	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>sunt deștepți</suggestion> sau <suggestion>este deștept</suggestion>.	sunt deștepți|este deștept
+L	285	Care sunt deștepți.
+L	286	Care este deștepte.
+M	286	ESTE_FRUMOSI	1	5	18	Other	Dezacord gramatical: ați vrut să scrieți <suggestion>sunt deștepte</suggestion> sau <suggestion>este deșteaptă</suggestion>.	sunt deștepte|este deșteaptă
+L	287	Care sunt deștepte.
+L	288	Care este folositoare.
+L	289	Singura care este muritoare.
+L	290	Singura care este aproape.
+L	291	Într-o țară care este anti-religioasă.
+L	292	Ce faci și ce vorbești se știu.
+M	292	CE_X_SI_CE_Y_SE_STIU	1	23	30	Other	Ați dorit să scrieți <suggestion>se știe</suggestion>.	se știe
+L	293	Ce faceți și ce vorbiți se știu.
+M	293	CE_X_SI_CE_Y_SE_STIU	1	24	31	Other	Ați dorit să scrieți <suggestion>se știe</suggestion>.	se știe
+L	294	Ce facem și ce vorbim se știu.
+M	294	CE_X_SI_CE_Y_SE_STIU	1	22	29	Other	Ați dorit să scrieți <suggestion>se știe</suggestion>.	se știe
+L	295	Este un reprezentant al hoților, al clasei hulită de oamenii cinstiți.
+M	295	AL_CLASEI_HULITA	1	33	49	Other	Ați dorit să scrieți <suggestion>al clasei hulite</suggestion>	al clasei hulite
+L	296	Codul ISO al limbii vorbită de rromi sau romany.
+M	296	AL_CLASEI_HULITA	1	10	27	Other	Ați dorit să scrieți <suggestion>al limbii vorbite</suggestion>	al limbii vorbite
+M	296	MORFOLOGIK_RULE_RO_RO		41	47	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Roman|Romano|roman|romana|romane|romani|romano|romanu|romană|român|româna|române|români|româno|românu|română
+L	297	A existat un permanent control al domniei reprezentată de orlicul de târg.
+M	297	AL_CLASEI_HULITA	1	31	54	Other	Ați dorit să scrieți <suggestion>al domniei reprezentate</suggestion>	al domniei reprezentate
+M	297	MORFOLOGIK_RULE_RO_RO		58	65	UnknownWord	S-a găsit o posibilă greșeală de ortografie	oblicul|orcicul|orficul|ornicul|orticul
+L	298	A fost membru al formației datorită intenției lui Vikernes.
+M	298	MORFOLOGIK_RULE_RO_RO		50	58	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Perneș|Verdeș|Vereș|Verne|Vienei|Hibernez|iSeries|Iernez|Kernel|Vernis|Vienez|Viere|Vierea|Viereo|Vierese|Vierme|Viermuș|Viers|Vinere|Vinerea|Vinereo|Vipere|Viperei|Viperine|Viperinei|Vitrene
+L	299	Acest copil este fructul unei iubiri formidabilă.
+M	299	UNEI_IUBIRI_FORMIDABILA	1	25	48	Other	Ați dorit să scrieți <suggestion>unei iubiri formidabile</suggestion>?	unei iubiri formidabile
+L	300	Este o prelucrare a unei povestiri scrisă cu câțiva ani mai înainte.
+M	300	UNEI_IUBIRI_FORMIDABILA	1	20	41	Other	Ați dorit să scrieți <suggestion>unei povestiri scrise</suggestion>?	unei povestiri scrise
+L	301	Are aspectul unei fortificații capabilă să reziste unui asediu.
+M	301	UNEI_IUBIRI_FORMIDABILA	1	13	39	Other	Ați dorit să scrieți <suggestion>unei fortificații capabile</suggestion>?	unei fortificații capabile
+L	302	Populatia localității se afla sub jurisdicția unei abații condusă de Andreas.
+M	302	MORFOLOGIK_RULE_RO_RO		0	9	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Populația|Copulația|Populata|Populată|Populați|Populație|Populații|Populațio|Populat ia
+M	302	UNEI_IUBIRI_FORMIDABILA	1	46	65	Other	Ați dorit să scrieți <suggestion>unei abații conduse</suggestion>?	unei abații conduse
+L	303	Are aspectul unei păduri populată de figuri alegorice.
+M	303	UNEI_IUBIRI_FORMIDABILA	1	13	33	Other	Ați dorit să scrieți <suggestion>unei păduri populate</suggestion>?	unei păduri populate
+L	304	Sunt aranjați în forma unei potcoave orientată cu deschiderea spre sud-est.
+M	304	UNEI_IUBIRI_FORMIDABILA	1	23	46	Other	Ați dorit să scrieți <suggestion>unei potcoave orientate</suggestion>?	unei potcoave orientate
+L	305	În 1883 a început construcția unei catedrale dedicată Sfintei Familii.
+M	305	UNEI_IUBIRI_FORMIDABILA	1	30	53	Other	Ați dorit să scrieți <suggestion>unei catedrale dedicate</suggestion>?	unei catedrale dedicate
+L	306	El intervine în procesul de luare a unei decizii dacă este necesar.
+L	307	Băiatului acesta i s-a dat un premiu nemeritat.
+M	307	BAIATULUI_ACESTA	1	0	16	Other	Ați dorit să scrieți <suggestion>Băiatului acestuia</suggestion>?	Băiatului acestuia
+L	308	Femeilor acestea le este rușine de ce au făcut.
+M	308	FEMEILOR_ACESTEA	1	0	16	Other	Ați dorit să scrieți <suggestion>Femeilor acestora</suggestion>?	Femeilor acestora
+L	309	Eu sunt un critic al ideii acestea.
+M	309	IDEILOR_ACESTEA	1	21	34	Other	Ați dorit să scrieți <suggestion>ideii acesteia</suggestion>?	ideii acesteia
+L	310	Eu sunt un critic al ideii acesteie.
+M	310	MORFOLOGIK_RULE_RO_RO		27	35	UnknownWord	S-a găsit o posibilă greșeală de ortografie	acestei|acesteia|acestele|ace steie|aceste ie|acestei e
+L	311	Este aceiași femeie ca și ieri.
+M	311	ACEIASI_FEMEIE	1	5	19	Other	Ați dorit să scrieți <suggestion>aceeași</suggestion>?	aceeași
+L	312	Este aceeași femeie ca și ieri.
+L	313	Sunt aceeași bărbați ca și ieri.
+M	313	ACEEASI_BARBATI	1	5	20	Other	Ați dorit să scrieți <suggestion>aceiași</suggestion>?	aceiași
+L	314	Sunt aceeași femeie ca și ieri.
+L	315	A plecat spre tine acum două zile în urmă dar nu a ajuns încă.
+M	315	ACUM_DOUA_ZILE_IN_URMA	1	19	41	Other	Ați dorit să scrieți <suggestion>acum două zile</suggestion> sau <suggestion>cu două zile în urmă</suggestion>?	acum două zile|cu două zile în urmă
+L	316	A plecat din oraș acum câțiva ani în urmă și nu s-a mai întors.
+M	316	ACUM_DOUA_ZILE_IN_URMA	1	18	41	Other	Ați dorit să scrieți <suggestion>acum câțiva ani</suggestion> sau <suggestion>cu câțiva ani în urmă</suggestion>?	acum câțiva ani|cu câțiva ani în urmă
+L	317	Și-a luat concediu acum două zile.
+L	318	Și-a luat concediu cu două zile în urmă.
+L	319	A trebuit să plec, drept care nu am mai discutat.
+L	320	Nu ne-am mai întâlnit cu el, drept pentru care nu i-am putut da cartean înapoi.
+M	320	DREPT_PENTRU_CARE	1	29	46	Other	Ați dorit să scrieți <suggestion>drept care</suggestion> sau <suggestion>pentru care</suggestion>?	drept care|pentru care
+M	320	MORFOLOGIK_RULE_RO_RO		64	71	UnknownWord	S-a găsit o posibilă greșeală de ortografie	cartea|curtean|cârtea|cârteai|cârteam|cârteau|carte an|cartea n
+L	321	Libertatea este un drept pentru care s-au purtat multe războaie.
+L	322	A trebuit să plec, drept care nu am mai discutat.
+L	323	Ne-am întâlnit cu un cuplu de doi italieni.
+M	323	UN_CUPLU_DE_DOI	1	21	33	Other	Ați dorit să scrieți <suggestion>cuplu de</suggestion>?	cuplu de
+L	324	Veriga este un cuplu de două utilaje între care se stabilește o relație...
+M	324	UN_CUPLU_DE_DOI	1	15	28	Other	Ați dorit să scrieți <suggestion>cuplu de</suggestion>?	cuplu de
+L	325	A venit și un cuplu de mexicani.
+L	326	L-am văzut coborând jos de pe munte.
+M	326	COBORI_JOS	1	11	23	Other	Ați dorit să scrieți <suggestion>coborând</suggestion>?	coborând
+L	327	S-a liniștit doar după ce a coborât de pe munte.
+L	328	S-a liniștit doar după ce a coborât foarte jos.
+L	329	L-am văzut coborând în jos de pe munte.
+M	329	COBORI_JOS	2	11	26	Other	Ați dorit să scrieți <suggestion>coborând</suggestion>?	coborând
+L	330	S-a liniștit doar după ce a coborât de pe munte.
+L	331	S-a liniștit doar după ce a coborât foarte jos.
+L	332	L-am văzut urcând sus pe munte.
+M	332	URCA_SUS	1	11	21	Other	Ați dorit să scrieți <suggestion>urcând</suggestion>?	urcând
+L	333	S-a liniștit doar după ce a urcat pe munte.
+L	334	S-a liniștit doar după ce a urcat sus de tot.
+L	335	L-am văzut urcând în sus pe munte.
+M	335	URCA_SUS	2	11	24	Other	Ați dorit să scrieți <suggestion>urcând</suggestion>?	urcând
+L	336	S-a liniștit doar după ce a urcat pe munte.
+L	337	S-a liniștit doar după ce a urcat sus de tot.
+L	338	A trimis scrisoarea către ambele două surori.
+M	338	AMBELE_DOUA	1	26	37	Other	Ați dorit să scrieți <suggestion>ambele</suggestion>?	ambele
+L	339	A trimis scrisoarea ambilor doi foști colegi.
+M	339	AMBELE_DOUA	1	20	31	Other	Ați dorit să scrieți <suggestion>ambilor</suggestion>?	ambilor
+L	340	A trimis scrisoarea ambilor amândoi foști colegi.
+M	340	AMBELE_DOUA	1	20	35	Other	Ați dorit să scrieți <suggestion>ambilor</suggestion>?	ambilor
+L	341	A trimis scrisoarea ambilor colegi
+L	342	El nu a vrut să folosescă o bicicletă cu două roți.
+M	342	MORFOLOGIK_RULE_RO_RO		16	25	UnknownWord	S-a găsit o posibilă greșeală de ortografie	folosească|folosesc|folosesc ă
+M	342	BICICLETA_CU_DOUA_ROTI	1	28	50	Other	Ați dorit să scrieți <suggestion>bicicletă</suggestion>?	bicicletă
+L	343	Nu a vrut să dea drumul bicicletei cu două roți.
+M	343	BICICLETA_CU_DOUA_ROTI	1	24	47	Other	Ați dorit să scrieți <suggestion>bicicletei</suggestion>?	bicicletei
+L	344	El nu a vrut să folosească o bicicletă.
+L	345	El nu a vrut să folosescă o tricicletă cu trei roți.
+M	345	MORFOLOGIK_RULE_RO_RO		16	25	UnknownWord	S-a găsit o posibilă greșeală de ortografie	folosească|folosesc|folosesc ă
+M	345	TRICICLETA_CU_TREI_ROTI	1	28	51	Other	Ați dorit să scrieți <suggestion>tricicletă</suggestion>?	tricicletă
+L	346	Nu a vrut să dea drumul tricicletei cu trei roți.
+M	346	TRICICLETA_CU_TREI_ROTI	1	24	48	Other	Ați dorit să scrieți <suggestion>tricicletei</suggestion>?	tricicletei
+L	347	El nu a vrut să folosească o tricicletă.
+L	348	El nu a vrut să ceară o solicitare scrisă.
+M	348	CERE_O_SOLICITARE	1	16	34	Other	Ați dorit să scrieți <suggestion>facă o solicitare</suggestion> sau <suggestion>solicite</suggestion>?	facă o solicitare|solicite
+L	349	El a cerut o solicitare.
+M	349	CERE_O_SOLICITARE	1	5	23	Other	Ați dorit să scrieți <suggestion>făcut o solicitare</suggestion> sau <suggestion>solicitat</suggestion>?	făcut o solicitare|solicitat
+L	350	El nu a vrut să facă o solicitare scrisă.
+L	351	Regiunea era sub influența unui triumvirat din trei persoane importante.
+M	351	TRIUMVIRAT_TREI	1	32	51	Other	"triumvivat" implică alianța a trei conducători	
+L	352	Regiunea era sub influența unui triumvirat foarte vechi.
+L	353	Dacă am putea întoarce timpul înapoi...
+M	353	INTOARCE_TIMPUL_INAPOI	1	14	36	Other	Ați vrut să scrieți <suggestion>întoarce timpul</suggestion> sau <suggestion>da timpul înapoi</suggestion>?	întoarce timpul|da timpul înapoi
+L	354	Dacă am putea să întoarcem timpul înapoi...
+M	354	INTOARCE_TIMPUL_INAPOI	1	17	40	Other	Ați vrut să scrieți <suggestion>întoarcem timpul</suggestion> sau <suggestion>dăm timpul înapoi</suggestion>?	întoarcem timpul|dăm timpul înapoi
+L	355	Dacă ai putea să întorci anii înapoi...
+M	355	INTOARCE_TIMPUL_INAPOI	1	17	36	Other	Ați vrut să scrieți <suggestion>întorci anii</suggestion> sau <suggestion>dai anii înapoi</suggestion>?	întorci anii|dai anii înapoi
+L	356	Dacă am putea întoarce timpul ar fi foarte bine
+M	356	CACOFONIE__PUL_A	1	23	32	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	357	A adăuga o completare.
+M	357	A_ADAUGA_O_COMPLETARE	1	2	21	Other	Ați vrut să scrieți <suggestion>completa</suggestion>?	completa
+L	358	Ei adăugaseră o completare.
+M	358	A_ADAUGA_O_COMPLETARE	1	3	26	Other	Ați vrut să scrieți <suggestion>completaseră</suggestion>?	completaseră
+L	359	Ei adăugaseră unele completări.
+M	359	A_ADAUGA_O_COMPLETARE	1	3	30	Other	Ați vrut să scrieți <suggestion>completaseră</suggestion>?	completaseră
+L	360	A avansa înainte.
+M	360	A_AVANSA_INAINTE	1	2	16	Other	"A avansa" implică noţiunea de înaintare. Ați vrut să scrieți <suggestion>avansa</suggestion> sau <suggestion>înainta</suggestion>?	avansa|înainta
+L	361	A avansa.
+L	362	A înainta.
+L	363	Să avansăm înainte repede.
+M	363	A_AVANSA_INAINTE	1	3	18	Other	"A avansa" implică noţiunea de înaintare. Ați vrut să scrieți <suggestion>avansăm</suggestion> sau <suggestion>înaintăm</suggestion>?	avansăm|înaintăm
+L	364	Să avansăm repede.
+L	365	Să înaintăm repede.
+L	366	Avansasem înainte repede.
+M	366	A_AVANSA_INAINTE	1	0	17	Other	"A avansa" implică noţiunea de înaintare. Ați vrut să scrieți <suggestion>Avansasem</suggestion> sau <suggestion>înaintasem</suggestion>?	Avansasem|Înaintasem
+L	367	Avansasem repede.
+L	368	Înaintând repede.
+L	369	A aduce aportul la ceva.
+M	369	A_ADUCE_APORTUL	1	2	15	Other	"„apporter” înseamnă „a aduce”. Ați vrut să scrieți <suggestion>aduce contribuția</suggestion>?	aduce contribuția
+L	370	A aduce contribuția.
+L	371	Și-a adus aportul la ceva.
+M	371	A_ADUCE_APORTUL	1	5	17	Other	"„apporter” înseamnă „a aduce”. Ați vrut să scrieți <suggestion>adus contribuția</suggestion>?	adus contribuția
+L	372	Își aduceau aportul la ceva.
+M	372	A_ADUCE_APORTUL	1	4	19	Other	"„apporter” înseamnă „a aduce”. Ați vrut să scrieți <suggestion>aduceau contribuția</suggestion>?	aduceau contribuția
+L	373	Și-a adus contribuția.
+L	374	A îndoi în două.
+M	374	A_INDOI_IN_DOUA	1	2	15	Other	Ați vrut să scrieți <suggestion>îndoi</suggestion>?	îndoi
+L	375	A îndoit în două.
+M	375	A_INDOI_IN_DOUA	1	2	16	Other	Ați vrut să scrieți <suggestion>îndoit</suggestion>?	îndoit
+L	376	A îndoi cartea în două.
+M	376	A_INDOI_CEVA_IN_DOUA	2	2	22	Other	Ați vrut să scrieți <suggestion>îndoi cartea</suggestion>?	îndoi cartea
+L	377	A îndoit cartea în două.
+M	377	A_INDOI_CEVA_IN_DOUA	2	2	23	Other	Ați vrut să scrieți <suggestion>îndoit cartea</suggestion>?	îndoit cartea
+L	378	A reveni din nou.
+M	378	A_REVENI_DIN_NOU	1	2	16	Other	Ați vrut să scrieți <suggestion>reveni</suggestion>?	reveni
+L	379	L-a văzut revenind din nou acolo.
+M	379	A_REVENI_DIN_NOU	1	10	26	Other	Ați vrut să scrieți <suggestion>revenind</suggestion>?	revenind
+L	380	Ei conviețuiau laolaltă acolo.
+M	380	A_CONVIETUI_LAOLALTA	1	3	23	Other	Ați vrut să scrieți <suggestion>conviețuiau</suggestion>?	conviețuiau
+L	381	Ei conviețuiesc laolaltă.
+M	381	A_CONVIETUI_LAOLALTA	1	3	24	Other	Ați vrut să scrieți <suggestion>conviețuiesc</suggestion>?	conviețuiesc
+L	382	A conviețui.
+L	383	A coexista împreună.
+M	383	A_COEXISTA_IMPREUNA	1	2	19	Other	Ați vrut să scrieți <suggestion>coexista</suggestion>?	coexista
+L	384	Acestea coexistau împreună.
+M	384	A_COEXISTA_IMPREUNA	1	8	26	Other	Ați vrut să scrieți <suggestion>coexistau</suggestion>?	coexistau
+L	385	Se povestește că s-a sinucis singur.
+M	385	SINUCIS_SINGUR	1	21	35	Other	Ați vrut să scrieți <suggestion>sinucis</suggestion>?	sinucis
+L	386	Se povestește că se sinucisese singur.
+M	386	SINUCIS_SINGUR	1	20	37	Other	Ați vrut să scrieți <suggestion>sinucisese</suggestion>?	sinucisese
+L	387	Se povestește că doreau să se sinucidă singure.
+M	387	SINUCIS_SINGUR	1	30	46	Other	Ați vrut să scrieți <suggestion>sinucidă</suggestion>?	sinucidă
+L	388	Se povestește că dorea să se sinucidă singur.
+M	388	SINUCIS_SINGUR	1	29	44	Other	Ați vrut să scrieți <suggestion>sinucidă</suggestion>?	sinucidă
+L	389	Este o muncă laborioasă.
+M	389	MUNCA_LABORIOASA	1	7	23	Other	Ați vrut să scrieți <suggestion>muncă grea</suggestion>?	muncă grea
+L	390	El ne respectă munca noastră.
+M	390	NE_RESPECTA_Sb_NOASTRA	1	3	28	Other	Pleonasm: ne ... noastră. Ați vrut să scrieți <suggestion>ne respectă munca</suggestion>?	ne respectă munca
+L	391	Ei ne respectau munca noastră.
+M	391	NE_RESPECTA_Sb_NOASTRA	1	3	29	Other	Pleonasm: ne ... noastră. Ați vrut să scrieți <suggestion>ne respectau munca</suggestion>?	ne respectau munca
+L	392	Contact direct nemijlocit.
+M	392	DIRECT_NEMIJLOCIT	1	8	25	Other	Ați vrut să scrieți <suggestion>direct</suggestion> sau <suggestion>nemijlocit</suggestion>?	direct|nemijlocit
+L	393	Contact direct.
+L	394	Contact nemijlocit.
+L	395	Știrea revine iar în actualitate.
+M	395	A_REVENI_IAR	1	7	17	Other	Ați vrut să scrieți <suggestion>revine</suggestion>?	revine
+L	396	Știrea revine înapoi în actualitate.
+M	396	A_REVENI_IAR	1	7	20	Other	Ați vrut să scrieți <suggestion>revine</suggestion>?	revine
+L	397	Știrea revenise iarăși în actualitate.
+M	397	A_REVENI_IAR	1	7	22	Other	Ați vrut să scrieți <suggestion>revenise</suggestion>?	revenise
+L	398	Stirea revine în actualitate.
+M	398	MORFOLOGIK_RULE_RO_RO		0	6	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Știrea|Spirea|Ițirea|Oștirea|Soirea|Starea|Stiren|Stuirea|Suirea|Șlirea|Știrba|Știrbea|Știrbă|Știre|Știreo|Șutirea
+L	399	Drumul a fost greu și dificil.
+M	399	GREU_SI_DIFICIL	1	14	29	Other	Ați vrut să scrieți <suggestion>greu</suggestion> sau <suggestion>dificil</suggestion>?	greu|dificil
+L	400	Calea a fost grea și dificilă.
+M	400	GREU_SI_DIFICIL	1	13	29	Other	Ați vrut să scrieți <suggestion>grea</suggestion> sau <suggestion>dificilă</suggestion>?	grea|dificilă
+L	401	Drumul a fostgreu.
+M	401	MORFOLOGIK_RULE_RO_RO		9	17	UnknownWord	S-a găsit o posibilă greșeală de ortografie	fost greu
+L	402	Drumul a fostdificil.
+M	402	MORFOLOGIK_RULE_RO_RO		9	20	UnknownWord	S-a găsit o posibilă greșeală de ortografie	fost dificil
+L	403	Soluția a venit firesc și natural.
+M	403	FIRESC_SI_NATURAL	1	16	33	Other	Ați vrut să scrieți <suggestion>firesc</suggestion> sau <suggestion>natural</suggestion>?	firesc|natural
+L	404	Soluția a fost firească și naturală.
+M	404	FIRESC_SI_NATURAL	1	15	35	Other	Ați vrut să scrieți <suggestion>firească</suggestion> sau <suggestion>naturală</suggestion>?	firească|naturală
+L	405	Soluția este firească.
+L	406	Acesta este algoritmul cel mai optim.
+M	406	CEL_MAI	1	23	36	Other	"optim" nu are grad de comparație. Ați vrut să scrieți <suggestion>optim</suggestion>?	optim
+L	407	El este cel mai celebru.
+M	407	CEL_MAI	1	8	23	Other	"celebru" nu are grad de comparație. Ați vrut să scrieți <suggestion>celebru</suggestion>?	celebru
+L	408	El este superior.
+L	409	Algoritmul acesta este deosebit de optim.
+M	409	DEOSEBIT_DE	1	23	40	Other	"optim" nu are grad de comparație. Ați vrut să scrieți <suggestion>optim</suggestion>?	optim
+L	410	El este deosebit de celebru.
+M	410	DEOSEBIT_DE	1	8	27	Other	"celebru" nu are grad de comparație. Ați vrut să scrieți <suggestion>celebru</suggestion>?	celebru
+L	411	El este superior.
+L	412	Acesta este algoritmul mai optim.
+M	412	PLEONASM__MAI	1	23	32	Other	"optim" nu are grad de comparație. Ați vrut să scrieți <suggestion>optim</suggestion>?	optim
+L	413	El este superior.
+L	414	El este foarte superior.
+M	414	FOARTE	1	8	23	Other	"superior" nu are grad de comparație. Ați vrut să scrieți <suggestion>superior</suggestion>?	superior
+L	415	El este destul de superior.
+M	415	DESTUL_DE	1	8	26	Other	"superior" nu are grad de comparație. Ați vrut să scrieți <suggestion>superior</suggestion>?	superior
+L	416	Meciul a fost super de milioane.
+M	416	DE_MILIOANE	1	14	31	Other	"de milioane" nu are grad de comparație. Ați vrut să scrieți <suggestion>de milioane</suggestion>?	de milioane
+L	417	Meciul a fost super din cale-afară de interesant.
+M	417	DIN_CALE_AFARA	1	14	34	Other	"din cale-afară" nu are grad de comparație. Ați vrut să scrieți <suggestion>din cale-afară</suggestion>?	din cale-afară
+L	418	A plecat pentru o perioadă de timp.
+M	418	O_PERIOADA_DE_TIMP	1	16	34	Other	Ați vrut să scrieți <suggestion>o perioadă</suggestion> sau <suggestion>un timp</suggestion>?	o perioadă|un timp
+L	419	A plecat pentru un timp.
+L	420	A plecat pentru o perioadă.
+L	421	El este plecat în această perioadă de timp.
+M	421	O_PERIOADA_DE_TIMP	2	26	42	Other	Ați vrut să scrieți <suggestion>perioadă</suggestion>?	perioadă
+L	422	El este protagonistul principal al piesei.
+M	422	PROTAGONIST_PRINCIPAL	1	8	34	Other	Ați vrut să scrieți <suggestion>protagonistul</suggestion>?	protagonistul
+L	423	Ei sunt protagoniștii principali ale piesei.
+M	423	PROTAGONIST_PRINCIPAL	1	8	36	Other	Ați vrut să scrieți <suggestion>protagoniștii</suggestion>?	protagoniștii
+L	424	Ea este protagonista principală a piesei.
+M	424	PROTAGONIST_PRINCIPAL	1	8	33	Other	Ați vrut să scrieți <suggestion>protagonista</suggestion>?	protagonista
+L	425	Ele sunt protagonistele principale ale piesei.
+M	425	PROTAGONIST_PRINCIPAL	1	9	38	Other	Ați vrut să scrieți <suggestion>protagonistele</suggestion>?	protagonistele
+L	426	Ele sunt protagonistele piesei.
+L	427	El este protagonistul principal din această piesă.
+M	427	PROTAGONIST_PRINCIPAL	2	8	31	Other	Ați vrut să scrieți <suggestion>protagonistul</suggestion>?	protagonistul
+L	428	Ele sunt protagonistele principale din această piesă.
+M	428	PROTAGONIST_PRINCIPAL	2	9	34	Other	Ați vrut să scrieți <suggestion>protagonistele</suggestion>?	protagonistele
+L	429	Ele sunt protagonistele din această piesă.
+L	430	El este principalul protagonist al piesei.
+M	430	PROTAGONIST_PRINCIPAL	3	8	34	Other	Ați vrut să scrieți <suggestion>protagonistul</suggestion>?	protagonistul
+L	431	Ei sunt principalii protagoniști ai piesei.
+M	431	PROTAGONIST_PRINCIPAL	3	8	35	Other	Ați vrut să scrieți <suggestion>protagoniștii</suggestion>?	protagoniștii
+L	432	Ele sunt protagonistele piesei.
+L	433	Ele sunt principalele protagoniste ale piesei.
+M	433	PROTAGONIST_PRINCIPAL	4	9	38	Other	Ați vrut să scrieți <suggestion>protagonistele</suggestion>?	protagonistele
+L	434	Sunt ale principalelor protagoniste ale piesei.
+M	434	PROTAGONIST_PRINCIPAL	4	9	39	Other	Ați vrut să scrieți <suggestion>protagonistelor</suggestion>?	protagonistelor
+L	435	Ele sunt protagonistele piesei.
+L	436	Meritul este al principalului protagonist din piesă.
+M	436	PROTAGONIST_PRINCIPAL	5	16	41	Other	Ați vrut să scrieți <suggestion>protagonistului</suggestion>?	protagonistului
+L	437	El este principalul protagonist din piesă.
+M	437	PROTAGONIST_PRINCIPAL	5	8	31	Other	Ați vrut să scrieți <suggestion>protagonistul</suggestion>?	protagonistul
+L	438	Sunt ai principalilor protagoniști din piesă.
+M	438	PROTAGONIST_PRINCIPAL	5	8	34	Other	Ați vrut să scrieți <suggestion>protagoniștilor</suggestion>?	protagoniștilor
+L	439	Ei sunt principalii protagoniști din piesă.
+M	439	PROTAGONIST_PRINCIPAL	5	8	32	Other	Ați vrut să scrieți <suggestion>protagoniștii</suggestion>?	protagoniștii
+L	440	Este al principalului protagonist din piesă.
+M	440	PROTAGONIST_PRINCIPAL	5	8	33	Other	Ați vrut să scrieți <suggestion>protagonistului</suggestion>?	protagonistului
+L	441	Ei sunt protagoniștii piesei.
+L	442	Ea este principala protagonistă din piesă.
+M	442	PROTAGONIST_PRINCIPAL	6	8	31	Other	Ați vrut să scrieți <suggestion>protagonista</suggestion>?	protagonista
+L	443	Sunt ale principalelor protagoniste din piesă.
+M	443	PROTAGONIST_PRINCIPAL	6	9	35	Other	Ați vrut să scrieți <suggestion>protagonistelor</suggestion>?	protagonistelor
+L	444	Ele sunt principalele protagoniste din piesă.
+M	444	PROTAGONIST_PRINCIPAL	6	9	34	Other	Ați vrut să scrieți <suggestion>protagonistele</suggestion>?	protagonistele
+L	445	Este al principalei protagoniste din piesă.
+M	445	PROTAGONIST_PRINCIPAL	6	8	32	Other	Ați vrut să scrieți <suggestion>protagonistei</suggestion>?	protagonistei
+L	446	Ei sunt protagoniștii piesei.
+L	447	Inaugurarea oficială a avut loc astăzi.
+M	447	INAUGURARE_OFICIALA	1	0	20	Other	Ați vrut să scrieți <suggestion>Inaugurarea</suggestion> sau <suggestion>deschiderea oficială</suggestion>?	Inaugurarea|Deschiderea oficială
+L	448	Inaugurările oficiale au avut loc astăzi.
+M	448	INAUGURARE_OFICIALA	1	0	21	Other	Ați vrut să scrieți <suggestion>Inaugurările</suggestion> sau <suggestion>deschiderile oficiale</suggestion>?	Inaugurările|Deschiderile oficiale
+L	449	Inaugurărea a avut loc astăzi.
+M	449	MORFOLOGIK_RULE_RO_RO		0	11	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Inaugurarea|Inaugurare|Inaugurareo|Inaugurară|Inaungurarea|Inaugură rea
+L	450	Astazi a avut loc inaugurarea oficială a școlii.
+M	450	MORFOLOGIK_RULE_RO_RO		0	8	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Astazia|Astăzi a|Astazia a|Astazie a|Astazii a|Astazio a|Ast azi a|Asta zi a
+M	450	INAUGURARE_OFICIALA	2	18	40	Other	Ați vrut să scrieți <suggestion>inaugurarea</suggestion> sau <suggestion>deschiderea oficială a</suggestion>?	inaugurarea|deschiderea oficială a
+L	451	Astazi au avut loc inaugurările oficiale ale școlilor.
+M	451	MORFOLOGIK_RULE_RO_RO		0	6	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Astăzi|Astazia|Astazie|Astazii|Astazio|Ast azi|Asta zi
+M	451	INAUGURARE_OFICIALA	2	19	44	Other	Ați vrut să scrieți <suggestion>inaugurările</suggestion> sau <suggestion>deschiderile oficiale ale</suggestion>?	inaugurările|deschiderile oficiale ale
+L	452	Inaugurarea oficială a acestor clădiri.
+M	452	INAUGURARE_OFICIALA	3	0	22	Other	Ați vrut să scrieți <suggestion>Inaugurarea</suggestion> sau <suggestion>deschiderea</suggestion>?	Inaugurarea|Deschiderea
+L	453	Inaugurarea oficială a câtorva clădiri.
+M	453	INAUGURARE_OFICIALA	3	0	22	Other	Ați vrut să scrieți <suggestion>Inaugurarea</suggestion> sau <suggestion>deschiderea</suggestion>?	Inaugurarea|Deschiderea
+L	454	Inaugurarea oficială a câtorva mici dar importante clădiri.
+M	454	INAUGURARE_OFICIALA	3	0	22	Other	Ați vrut să scrieți <suggestion>Inaugurarea</suggestion> sau <suggestion>deschiderea</suggestion>?	Inaugurarea|Deschiderea
+L	455	Inaugurarea acestor clădiri.
+L	456	A participat la inaugurarea oficială de astăzi.
+M	456	INAUGURARE_OFICIALA	4	16	36	Other	Ați vrut să scrieți <suggestion>inaugurarea</suggestion> sau <suggestion>deschiderea oficială</suggestion>?	inaugurarea|deschiderea oficială
+L	457	Cei care au participat la inaugurările oficiale de astăzi.
+M	457	INAUGURARE_OFICIALA	4	26	47	Other	Ați vrut să scrieți <suggestion>inaugurările</suggestion> sau <suggestion>deschiderile oficiale</suggestion>?	inaugurările|deschiderile oficiale
+L	458	Etica și morala crestină sunt considerate temelia societății.
+M	458	ETICA_SI_MORALA	1	0	15	Other	Ați vrut să scrieți <suggestion>Etica</suggestion> sau <suggestion>morala</suggestion>?	Etica|Morala
+M	458	MORFOLOGIK_RULE_RO_RO		16	24	UnknownWord	S-a găsit o posibilă greșeală de ortografie	creștina|creștină|Cristina|creatina|creatină|cretina|cretină|creștin|creștinai|creștinam|creștinat|creștinau|creștine|creștinea|creștini|creștino|creștinu|creștinăm
+L	459	A scris un tratat despre etică și morală.
+M	459	ETICA_SI_MORALA	1	25	40	Other	Ați vrut să scrieți <suggestion>etică</suggestion> sau <suggestion>morală</suggestion>?	etică|morală
+L	460	A scris un tratat asupra eticii și moralei.
+M	460	ETICA_SI_MORALA	1	25	42	Other	Ați vrut să scrieți <suggestion>eticii</suggestion> sau <suggestion>moralei</suggestion>?	eticii|moralei
+L	461	A menținut în continuare acea stare.
+M	461	MENTINE_IN_CONTINUARE	1	2	24	Other	Ați vrut să scrieți <suggestion>menținut</suggestion>?	menținut
+L	462	A dorit să mențină în continuare acea stare.
+M	462	MENTINE_IN_CONTINUARE	1	11	32	Other	Ați vrut să scrieți <suggestion>mențină</suggestion>?	mențină
+L	463	L-am surprins menținând în continuare acea stare.
+M	463	MENTINE_IN_CONTINUARE	1	14	37	Other	Ați vrut să scrieți <suggestion>menținând</suggestion>?	menținând
+L	464	Au fost influențați prin mijloace mass-media.
+M	464	MIJLOACE_MASS-MEDIA	1	25	44	Other	MASS-MÉDIA reprezintă totalitatea mijloacelor de informare a maselor. Ați vrut să scrieți <suggestion>mass-media</suggestion>?	mass-media
+L	465	S-a datorat mijloacelor mass-media de atunci.
+M	465	MIJLOACE_MASS-MEDIA	1	12	34	Other	MASS-MÉDIA reprezintă totalitatea mijloacelor de informare a maselor. Ați vrut să scrieți <suggestion>mass-media</suggestion>?	mass-media
+L	466	Pentru a-i modifica atributele se adaugă aditivi.
+M	466	ADAUGA_ADITIVI	1	34	40	Other	ADITIV: Substanță care se adaugă la (ceva). Ați vrut să scrieți <suggestion>folosesc</suggestion>?	folosesc
+L	467	Pentru a-i modifica atributele se adăugau aditivi.
+M	467	ADAUGA_ADITIVI	1	34	41	Other	ADITIV: Substanță care se adaugă la (ceva). Ați vrut să scrieți <suggestion>foloseau</suggestion>?	foloseau
+L	468	Pentru a-i modifica atributele adaug aditivi.
+M	468	ADAUGA_ADITIVI	2	31	36	Other	ADITIV: Substanță care se adaugă la (ceva). Ați vrut să scrieți <suggestion>folosesc</suggestion>?	folosesc
+L	469	Pentru a-i modifica atributele se folosesc aditivi.
+L	470	Pentru a-i modifica atributele se adaugă un aditiv.
+M	470	ADAUGA_ADITIVI	3	34	43	Other	ADITIV: Substanță care se adaugă la (ceva). Ați vrut să scrieți <suggestion>folosește un</suggestion>?	folosește un
+L	471	Și apropo de asta, ce părere ai?
+M	471	APROPO_DE_ASTA	1	3	17	Other	Ați vrut să scrieți <suggestion>apropo</suggestion>?	apropo
+L	472	A scăpat cu viață datorită salvamontiștilor montani.
+M	472	SALVAMONTISTI_MONTANI	1	27	51	Other	Ați vrut să scrieți <suggestion>salvamontiștilor</suggestion>?	salvamontiștilor
+L	473	În partea dreaptă se află un șantier în lucru.
+M	473	SANTIER_IN_LUCRU	1	29	45	Other	Ați vrut să scrieți <suggestion>șantier</suggestion>?	șantier
+L	474	În partea dreaptă se află șantierul în lucru.
+M	474	SANTIER_IN_LUCRU	1	26	44	Other	Ați vrut să scrieți <suggestion>șantierul</suggestion>?	șantierul
+L	475	Este un mecanism de întrajutorare reciprocă.
+M	475	INTRAJUTORARE_RECIPROCA	1	20	43	Other	Ați vrut să scrieți <suggestion>întrajutorare</suggestion>?	întrajutorare
+L	476	Este un mecanism de întrajutorare mutuală.
+M	476	INTRAJUTORARE_RECIPROCA	1	20	41	Other	Ați vrut să scrieți <suggestion>întrajutorare</suggestion>?	întrajutorare
+L	477	Acestea este una dintre condițiile întrajutorării reciproce.
+M	477	INTRAJUTORARE_RECIPROCA	1	35	59	Other	Ați vrut să scrieți <suggestion>întrajutorării</suggestion>?	întrajutorării
+L	478	Acestea este una dintre condițiile interasistenței reciproce.
+M	478	INTRAJUTORARE_RECIPROCA	1	35	60	Other	Ați vrut să scrieți <suggestion>interasistenței</suggestion>?	interasistenței
+L	479	Stă la baza interasistenței.
+L	480	L-am găsit înghețat de frig.
+M	480	A_INGHETA_DE_FRIG	1	11	27	Other	Ați vrut să scrieți <suggestion>înghețat</suggestion>?	înghețat
+L	481	Am găsit-o înghețată de frig.
+M	481	A_INGHETA_DE_FRIG	1	11	28	Other	Ați vrut să scrieți <suggestion>înghețată</suggestion>?	înghețată
+L	482	Se plângeau că îngheață de frig.
+M	482	A_INGHETA_DE_FRIG	1	15	31	Other	Ați vrut să scrieți <suggestion>îngheață</suggestion>?	îngheață
+L	483	Ne plângeam că înghețăm de frig.
+M	483	A_INGHETA_DE_FRIG	1	15	31	Other	Ați vrut să scrieți <suggestion>înghețăm</suggestion>?	înghețăm
+L	484	El se opune împotriva tuturor.
+M	484	A_SE_OPUNE_IMPOTRIVA	1	3	21	Other	Ați vrut să scrieți <suggestion>se opune</suggestion> sau <suggestion>se împotrivește</suggestion>?	se opune|se împotrivește
+L	485	El se opusese împotriva tuturor.
+M	485	A_SE_OPUNE_IMPOTRIVA	1	3	23	Other	Ați vrut să scrieți <suggestion>se opusese</suggestion> sau <suggestion>se împotrivise</suggestion>?	se opusese|se împotrivise
+L	486	El se opune tuturor.
+L	487	El s-a opus împotriva tuturor.
+M	487	A_SE_OPUNE_IMPOTRIVA	2	3	21	Other	Ați vrut să scrieți <suggestion>s-a opus</suggestion> sau <suggestion>s-a împotrivit</suggestion>?	s-a opus|s-a împotrivit
+L	488	Ei s-au opuns tuturor.
+M	488	MORFOLOGIK_RULE_RO_RO		8	13	UnknownWord	S-a găsit o posibilă greșeală de ortografie	opun|opune|opună|opus|op uns|opu ns|opun s
+L	489	Au făcut un schimb reciproc de idei.
+M	489	SCHIMB_RECIPROC	1	12	27	Other	Ați vrut să scrieți <suggestion>schimb</suggestion>?	schimb
+L	490	Acestea sunt notițele din timpul schimbului reciproc de idei.
+M	490	SCHIMB_RECIPROC	1	33	52	Other	Ați vrut să scrieți <suggestion>schimbului</suggestion>?	schimbului
+L	491	O analiză asupra perspectivelor de viitor oferite.
+M	491	PERSPECTIVE_DE_VIITOR	1	17	41	Other	Ați vrut să scrieți <suggestion>perspectivelor</suggestion>?	perspectivelor
+L	492	Serviciul îi oferă multe perspective de viitor.
+M	492	PERSPECTIVE_DE_VIITOR	1	25	46	Other	Ați vrut să scrieți <suggestion>perspective</suggestion>?	perspective
+L	493	Este îngrijorat în privința perspectivelor de viitor.
+M	493	PERSPECTIVE_DE_VIITOR	1	28	52	Other	Ați vrut să scrieți <suggestion>perspectivelor</suggestion>?	perspectivelor
+L	494	Nici medicina alopată nu este panaceu universal.
+M	494	PANACEU_UNIVERSAL	1	30	47	Other	Panaceu înseamnă remediu universal. Ați vrut să scrieți <suggestion>panaceu</suggestion> sau <suggestion>remediu universal</suggestion>?	panaceu|remediu universal
+L	495	S-au oprit asupra panaceului universal descoperit recent.
+M	495	PANACEU_UNIVERSAL	1	18	38	Other	Panaceu înseamnă remediu universal. Ați vrut să scrieți <suggestion>panaceului</suggestion> sau <suggestion>remediului universal</suggestion>?	panaceului|remediului universal
+L	496	Nici medicina alopată nu este panaceu.
+L	497	Femeilor românce le place să danseze.
+M	497	FEMEIE_XYZ	1	0	16	Other	Pleonasm. Ați vrut să scrieți <suggestion>româncelor</suggestion>?	Româncelor
+L	498	Femeilor le place să danseze.
+L	499	Romăncelor le place să danseze.
+M	499	MORFOLOGIK_RULE_RO_RO		0	10	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Româncelor|Aromâncelor|Romanelor|Romanicelor|Romanșelor|Romanțelor|Românelor
+L	500	Femeii românce îi place să danseze.
+M	500	FEMEIE_XYZ	2	0	14	Other	Pleonasm. Ați vrut să scrieți <suggestion>româncei</suggestion>?	Româncei
+L	501	Femeilor le place să danseze.
+L	502	Româncelor le place să danseze.
+L	503	Este nevoie de o femeie româncă.
+M	503	FEMEIE_XYZ	3	17	31	Other	Pleonasm. Ați vrut să scrieți <suggestion>româncă</suggestion>?	româncă
+L	504	A venit femeia româncă.
+M	504	FEMEIE_XYZ	4	8	22	Other	Pleonasm. Ați vrut să scrieți <suggestion>românca</suggestion>?	românca
+L	505	Este nevoie de o româncă.
+L	506	Fapta făcută este condamnabilă.
+M	506	FAPTA_FACUTA	1	0	12	Other	Ați vrut să scrieți <suggestion>Fapta</suggestion>?	Fapta
+L	507	Uneori este necesară epilarea părului.
+M	507	A_EPILA_PARUL	1	21	37	Other	Pleonasm. Ați vrut să scrieți <suggestion>epilarea</suggestion>?	epilarea
+L	508	A fost lansată chiar de ziua echidistant egală din punct de vedere temporal între cele momente.
+M	508	ECHIDISTANTA_EGALA	1	29	46	Other	Pleonasm sau exprimare greșită. Ați vrut să scrieți <suggestion>echidistant</suggestion>?	echidistant
+L	509	Aceste linii sunt echidistante.
+L	510	Acolo sunt dune de nisip.
+M	510	DUNE_DE_NISIP	1	11	24	Other	Ați vrut să scrieți <suggestion>dune</suggestion>?	dune
+L	511	În spatele dunelor de nisip este o oază.
+M	511	DUNE_DE_NISIP	1	11	27	Other	Ați vrut să scrieți <suggestion>dunelor</suggestion>?	dunelor
+L	512	Acolo sunt dune de nisip mișcătoare.
+M	512	DUNE_DE_NISIP	1	11	24	Other	Ați vrut să scrieți <suggestion>dune</suggestion>?	dune
+L	513	Acolo sunt dune de nisip mișcător.
+L	514	A trasat o dreaptă rectilinie.
+M	514	DREAPTA_RECTILINIE	1	11	29	Other	Ați vrut să scrieți <suggestion>dreaptă</suggestion>?	dreaptă
+L	515	Este vorba de o democrație populară străveche.
+M	515	DEMOCRATIE_POPULARA	1	16	35	Other	Ați vrut să scrieți <suggestion>democrație</suggestion>?	democrație
+L	516	Schimbarea s-a datorat democrației populare străvechi.
+M	516	DEMOCRATIE_POPULARA	1	23	43	Other	Ați vrut să scrieți <suggestion>democrației</suggestion>?	democrației
+L	517	Stă la baza democrație.
+L	518	Firma este sub conducerea managerială a unui mare om.
+M	518	CONDUCERE_MANAGERIALA	1	15	39	Other	Ați vrut să scrieți <suggestion>conducerea</suggestion>?	conducerea
+L	519	Firma este sub conducerea sa.
+L	520	Firma este sub o severă conducere managerială.
+M	520	CONDUCERE_MANAGERIALA	2	24	45	Other	Ați vrut să scrieți <suggestion>conducere</suggestion>?	conducere
+L	521	Firma este condusă managerial de mai multe persoane.
+M	521	CONDUCERE_MANAGERIALA	2	11	29	Other	Ați vrut să scrieți <suggestion>condusă</suggestion>?	condusă
+L	522	Ei prezintă informații despre alegerile electorale din acel oraș.
+M	522	ALEGERI_ELECTORALE	1	30	50	Other	Ați vrut să scrieți <suggestion>alegerile</suggestion>?	alegerile
+L	523	Ei prezintă informații despre desfășurarea alegerilor electorale.
+M	523	ALEGERI_ELECTORALE	1	43	64	Other	Ați vrut să scrieți <suggestion>alegerilor</suggestion>?	alegerilor
+L	524	A fost surprins cu o alcoolemie în sânge foarte mare.
+M	524	ALCOOLEMIE_IN_SANGE	1	21	40	Other	Pleonasm. Ați vrut să scrieți <suggestion>alcoolemie</suggestion>?	alcoolemie
+L	525	Pe baza alcoolemiei din sânge au stabilit multe.
+M	525	ALCOOLEMIE_IN_SANGE	1	8	29	Other	Pleonasm. Ați vrut să scrieți <suggestion>alcoolemiei</suggestion>?	alcoolemiei
+L	526	Pe baza alcoolemiei sângelui au stabilit multe.
+M	526	ALCOOLEMIE_IN_SANGE	2	8	28	Other	Pleonasm. Ați vrut să scrieți <suggestion>alcoolemiei</suggestion>?	alcoolemiei
+L	527	Care este autoritatea competentă în materie de drept civil?
+M	527	AUTORITATE_COMPETENTA	1	10	32	Other	Pleonasm. Ați vrut să scrieți <suggestion>autoritatea</suggestion>?	autoritatea
+L	528	A anunțat autoritățile competente.
+M	528	AUTORITATE_COMPETENTA	1	10	33	Other	Pleonasm. Ați vrut să scrieți <suggestion>autoritățile</suggestion>?	autoritățile
+L	529	A anunțat autoritățile oficiale.
+M	529	AUTORITATE_COMPETENTA	1	10	31	Other	Pleonasm. Ați vrut să scrieți <suggestion>autoritățile</suggestion>?	autoritățile
+L	530	A anunțat autoritățile
+L	531	Formația a susținut un spectacol artistic.
+M	531	SPECTACOL_ARTISTIC	1	23	41	Other	Pleonasm. Ați vrut să scrieți <suggestion>spectacol</suggestion>?	spectacol
+L	532	Formația a susținut o reprezentație artistică.
+M	532	SPECTACOL_ARTISTIC	1	22	45	Other	Pleonasm. Ați vrut să scrieți <suggestion>reprezentație</suggestion>?	reprezentație
+L	533	Formația a susținul un spectacol.
+M	533	MORFOLOGIK_RULE_RO_RO		11	19	UnknownWord	S-a găsit o posibilă greșeală de ortografie	suspinul|susținu|susținui|susținut|susțin ul|susținu l
+L	534	Formația a susținul o reprezentație.
+M	534	MORFOLOGIK_RULE_RO_RO		11	19	UnknownWord	S-a găsit o posibilă greșeală de ortografie	suspinul|susținu|susținui|susținut|susțin ul|susținu l
+L	535	Am văzut un moș bătrân.
+M	535	MOS_BATRAN	1	12	22	Other	Ați vrut să scrieți <suggestion>moș</suggestion>?	moș
+L	536	Am dat cartea moșului bătrân.
+M	536	MOS_BATRAN	1	14	28	Other	Ați vrut să scrieți <suggestion>moșului</suggestion>?	moșului
+L	537	Am dat cartea moșneagului bătrân.
+M	537	MOS_BATRAN	1	14	32	Other	Ați vrut să scrieți <suggestion>moșneagului</suggestion>?	moșneagului
+L	538	Am dat cărțile moșilor bătrâni.
+M	538	MOS_BATRAN	1	15	30	Other	Ați vrut să scrieți <suggestion>moșilor</suggestion>?	moșilor
+L	539	Am văzut o babă bătrână.
+M	539	CACOFONIE__BA	1	11	23	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	540	Am văzut câteva babe bătrâne.
+M	540	BABA_BATRANA	2	16	28	Other	Ați vrut să scrieți <suggestion>babe</suggestion>?	babe
+L	541	Am dat câteva ceva babelor bătrâne.
+M	541	BABA_BATRANA	2	19	34	Other	Ați vrut să scrieți <suggestion>babelor</suggestion>?	babelor
+L	542	Formația noastră s-a impus forțat în fața formației gazdă.
+M	542	IMPUS_OBLIGATORIU	1	21	33	Other	Pleonasm. Ați vrut să scrieți <suggestion>impus</suggestion>?	impus
+L	543	Formația noastră s-a impus cu forța în fața formației gazdă.
+M	543	IMPUS_OBLIGATORIU	2	21	35	Other	Pleonasm. Ați vrut să scrieți <suggestion>impus</suggestion>?	impus
+L	544	El a cerut icre de pește.
+M	544	ICRE_DE_PESTE	1	11	24	Other	Pleonasm. Ați vrut să scrieți <suggestion>icre</suggestion>?	icre
+L	545	El are hipertensiune mare.
+M	545	HIPERTENSIUNE_MARE_FOARTE_MARE	1	7	25	Other	Pleonasm. Ați vrut să scrieți <suggestion>hipertensiune</suggestion>?	hipertensiune
+L	546	El are hipertensiunea foarte mare.
+M	546	HIPERTENSIUNE_MARE_FOARTE_MARE	2	7	33	Other	Pleonasm. Ați vrut să scrieți <suggestion>hipertensiune</suggestion>?	hipertensiune
+L	547	El are hipertensiunea destul de mare.
+M	547	HIPERTENSIUNE_MARE_FOARTE_MARE	3	7	36	Other	Pleonasm. Ați vrut să scrieți <suggestion>hipertensiune</suggestion>?	hipertensiune
+L	548	El are hipertensiunea exagerat de mare.
+M	548	HIPERTENSIUNE_MARE_FOARTE_MARE	3	7	38	Other	Pleonasm. Ați vrut să scrieți <suggestion>hipertensiune</suggestion>?	hipertensiune
+L	549	Această hemoragie de sânge trebuie oprită.
+M	549	HEMORAGIE_DE_SANGE	1	8	26	Other	Pleonasm. Ați vrut să scrieți <suggestion>hemoragie</suggestion>?	hemoragie
+L	550	A murit din cauza hemoragiei sângelui.
+M	550	HEMORAGIE_DE_SANGE	2	18	37	Other	Pleonasm. Ați vrut să scrieți <suggestion>hemoragiei</suggestion>?	hemoragiei
+L	551	Această hemogramă a sângelui este foarte veche.
+M	551	HEMOGRAMA_A_SANGELUI	1	8	28	Other	Pleonasm. Ați vrut să scrieți <suggestion>hemogramă</suggestion>?	hemogramă
+L	552	Pe baza hemogramei sângelui au stabilit multe.
+M	552	HEMOGRAMA_A_SANGELUI	2	8	27	Other	Pleonasm. Ați vrut să scrieți <suggestion>hemogramei</suggestion>?	hemogramei
+L	553	Blocarea totală a hemoglobinei din sânge este periculoasă.
+M	553	HEMOGLOBINA_DIN_SANGE	1	18	40	Other	Pleonasm. Ați vrut să scrieți <suggestion>hemoglobinei</suggestion>?	hemoglobinei
+L	554	Să vorbești decât numai cu persoanele cunoscute.
+M	554	DECAT_NUMAI	1	12	23	Other	Pleonasm. Ați vrut să scrieți <suggestion>decât</suggestion> sau <suggestion>numai</suggestion>?	decât|numai
+L	555	Să vorbești decât cu persoanele cunoscute.
+L	556	L-am auzit, dar însă nu l-am înțeles.
+M	556	DAR_INSA	1	12	20	Other	Pleonasm. Ați vrut să scrieți <suggestion>dar</suggestion> sau <suggestion>însă</suggestion>?	dar|însă
+L	557	L-am auzit, dar nu l-am înțeles.
+L	558	Aceasta este harta mapamondului.
+M	558	HARTA_MAPAMONDULUI	1	13	31	Other	Pleonasm. Ați vrut să scrieți <suggestion>harta lumii</suggestion>?	harta lumii
+L	559	Aceasta este harta planiglobului.
+M	559	HARTA_MAPAMONDULUI	1	13	32	Other	Pleonasm. Ați vrut să scrieți <suggestion>harta lumii</suggestion>?	harta lumii
+L	560	Aceasta este harta planisferei.
+M	560	HARTA_MAPAMONDULUI	1	13	30	Other	Pleonasm. Ați vrut să scrieți <suggestion>harta lumii</suggestion>?	harta lumii
+L	561	Acearta este harta lumii.
+M	561	MORFOLOGIK_RULE_RO_RO		0	7	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aceasta|Această|Cearta|Ceartă|A cearta|Ace arta
+L	562	Aceasta este o hartă a mapamondului.
+M	562	HARTA_MAPAMONDULUI	2	15	35	Other	Pleonasm. Ați vrut să scrieți <suggestion>hartă a lumii</suggestion>?	hartă a lumii
+L	563	Aceasta este o hartă a planiglobului.
+M	563	HARTA_MAPAMONDULUI	2	15	36	Other	Pleonasm. Ați vrut să scrieți <suggestion>hartă a lumii</suggestion>?	hartă a lumii
+L	564	Aceasta este o hartă a planisferei.
+M	564	HARTA_MAPAMONDULUI	2	15	34	Other	Pleonasm. Ați vrut să scrieți <suggestion>hartă a lumii</suggestion>?	hartă a lumii
+L	565	A venit un june tânăr.
+M	565	JUNE_TANAR	1	11	21	Other	Pleonasm. Ați vrut să scrieți <suggestion>june</suggestion>?	june
+L	566	Este meritul tânărului june.
+M	566	JUNE_TANAR	2	13	27	Other	Pleonasm. Ați vrut să scrieți <suggestion>tânărului</suggestion>?	tânărului
+L	567	În cele ce urmează vă voi prezenta autobiografia proprie.
+M	567	AUTOBIOGRAFIA_MEA	1	35	56	Other	Pleonasm. Ați vrut să scrieți <suggestion>autobiografia</suggestion> sau <suggestion>biografia proprie</suggestion>?	autobiografia|biografia proprie
+L	568	În cele ce urmează vă voi prezenta autobiografia.
+L	569	În cele ce urmează vă voi prezenta propria autobiografie.
+M	569	AUTOBIOGRAFIA_MEA	2	35	56	Other	Pleonasm. Ați vrut să scrieți <suggestion>autobiografia</suggestion>?	autobiografia
+L	570	Cu timpul, el a devenit un alcoolic cronic.
+M	570	ALCOOLIC_CRONIC	1	27	42	Other	Pleonasm. Ați vrut să scrieți <suggestion>alcoolic</suggestion>?	alcoolic
+L	571	Ea a devenit cu timpul o alcoolică cronică.
+M	571	ALCOOLIC_CRONIC	1	25	42	Other	Pleonasm. Ați vrut să scrieți <suggestion>alcoolică</suggestion>?	alcoolică
+L	572	Cu timpul, ea a devenit o alcoolică.
+L	573	Această piesă poate fi utilizabilă.
+M	573	POATE_FI_UTILIZABIL	1	14	34	Other	Ați dorit să scrieți <suggestion>poate fi utilizată</suggestion> sau <suggestion>este utilizabilă</suggestion>?	poate fi utilizată|este utilizabilă
+L	574	Aceaste piese pot fi utilizabile.
+M	574	MORFOLOGIK_RULE_RO_RO		0	7	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aceasta|Această|Aceste|Ace aste
+M	574	POATE_FI_UTILIZABIL	1	14	32	Other	Ați dorit să scrieți <suggestion>pot fi utilizate</suggestion> sau <suggestion>sunt utilizabile</suggestion>?	pot fi utilizate|sunt utilizabile
+L	575	Aceast obiect poate fi utilizabil.
+M	575	MORFOLOGIK_RULE_RO_RO		0	6	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aceasta|Această|Acest|Ace ast|Acea st
+M	575	POATE_FI_UTILIZABIL	1	14	33	Other	Ați dorit să scrieți <suggestion>poate fi utilizat</suggestion> sau <suggestion>este utilizabil</suggestion>?	poate fi utilizat|este utilizabil
+L	576	Această piesă poate fi utilizată.
+L	577	Aceast obiect poate fi utilizat.
+M	577	MORFOLOGIK_RULE_RO_RO		0	6	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aceasta|Această|Acest|Ace ast|Acea st
+L	578	Aceaste piese pot fi utilizate.
+M	578	MORFOLOGIK_RULE_RO_RO		0	7	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aceasta|Această|Aceste|Ace aste
+L	579	El a continuat menținerea supravegherii.
+M	579	CONTINUA_MENTINEREA	1	5	39	Other	Pleonasm. Ați vrut să scrieți <suggestion>continuat supravegherea</suggestion> or <suggestion>menținut supravegherea</suggestion>?	continuat supravegherea|menținut supravegherea
+L	580	El a continuat menținerea acesteia.
+M	580	CONTINUA_MENTINEREA	1	5	34	Other	Pleonasm. Ați vrut să scrieți <suggestion>continuat aceasta</suggestion> or <suggestion>menținut aceasta</suggestion>?	continuat aceasta|menținut aceasta
+L	581	El a continuat supravegherea.
+L	582	El a menținut supravegherea.
+L	583	El a dorit continuarea menținerii supravegherii.
+M	583	CONTINUA_MENTINEREA	2	11	47	Other	Pleonasm. Ați vrut să scrieți <suggestion>continuarea supravegherii</suggestion> or <suggestion>menținerea supravegherii</suggestion>?	continuarea supravegherii|menținerea supravegherii
+L	584	El a dorit continuarea supravegherii.
+L	585	El a dorit menținerea supravegherii.
+L	586	El continua să mențină supravegherea.
+M	586	CONTINUA_MENTINEREA	3	3	22	Other	Pleonasm. Ați vrut să scrieți <suggestion>continua</suggestion> or <suggestion>menținea</suggestion>?	continua|menținea
+L	587	El continuă să mențină supravegherea.
+M	587	CONTINUA_MENTINEREA	3	3	22	Other	Pleonasm. Ați vrut să scrieți <suggestion>continuă</suggestion> or <suggestion>menține</suggestion>?	continuă|menține
+L	588	Ei continuau să mențină supravegherea.
+M	588	CONTINUA_MENTINEREA	3	3	23	Other	Pleonasm. Ați vrut să scrieți <suggestion>continuau</suggestion> or <suggestion>mențineau</suggestion>?	continuau|mențineau
+L	589	Ei continuau supravegherea.
+L	590	Ei mențineau supravegherea.
+L	591	Au ajuns la un consens de opinii.
+M	591	CONSENS_DE_OPINII	1	15	32	Other	Pleonasm. Ați vrut să scrieți <suggestion>consens</suggestion>?	consens
+L	592	Au ajuns la un consens de păreri.
+M	592	CONSENS_DE_OPINII	1	15	32	Other	Pleonasm. Ați vrut să scrieți <suggestion>consens</suggestion>?	consens
+L	593	Drumul se bifurcă în două.
+M	593	BIFURCA_IN_DOUA	1	10	25	Other	Pleonasm. Ați vrut să scrieți <suggestion>bifurcă</suggestion>?	bifurcă
+L	594	Acestea au fost prevăzute în vederea extinderii funcționalități.
+M	594	PREVAZUT_IN_VEDEREA	1	16	36	Other	Ați vrut să scrieți <suggestion>prevăzute în scopul</suggestion>?	prevăzute în scopul
+L	595	Aceasta a fost prevăzută în vederea extinderii funcționalități.
+M	595	PREVAZUT_IN_VEDEREA	1	15	35	Other	Ați vrut să scrieți <suggestion>prevăzută în scopul</suggestion>?	prevăzută în scopul
+L	596	A fost fundamentat pe baze greșite.
+M	596	FUNDAMENTAT_PE_BAZE	1	7	26	Other	Pleonasm. Ați vrut să scrieți <suggestion>fundamentat</suggestion>?	fundamentat
+L	597	A fost fundamentat greșit.
+L	598	A fost fundamentat pe o bază greșită.
+M	598	FUNDAMENTAT_PE_BAZE	2	7	28	Other	Ați vrut să scrieți <suggestion>fundamentat</suggestion>?	fundamentat
+L	599	A fost fundamentat greșit.
+L	600	Aceasta a prilejuit ocazia afirmării.
+M	600	A_PRILEJUIT_OCAZIA	1	10	26	Other	Ați vrut să scrieți <suggestion>oferit ocazia</suggestion>?	oferit ocazia
+L	601	El a discutat direct și nemijlocit cu oficialitățile.
+M	601	DIRECT_SI_NEMIJLOCIT	1	14	34	Other	Ați vrut să scrieți <suggestion>direct</suggestion> sau <suggestion>nemijlocit</suggestion>?	direct|nemijlocit
+L	602	El a ales o cale directă și nemijlocită de a pătrunde în instituție.
+M	602	DIRECT_SI_NEMIJLOCIT	1	17	39	Other	Ați vrut să scrieți <suggestion>directă</suggestion> sau <suggestion>nemijlocită</suggestion>?	directă|nemijlocită
+L	603	Operațiunea s-a desfășurat sub directa și nemijlocita supraveghere a directorului.
+M	603	DIRECT_SI_NEMIJLOCIT	1	31	53	Other	Ați vrut să scrieți <suggestion>directa</suggestion> sau <suggestion>nemijlocita</suggestion>?	directa|nemijlocita
+L	604	El a discutat direct cu oficialitățile.
+L	605	El a discutat nemijlocit cu oficialitățile.
+L	606	El are un stil simplu și nesofisticat.
+M	606	SIMPLA_SI_NESOFISTICATA	1	15	37	Other	Ați vrut să scrieți <suggestion>simplu</suggestion> sau <suggestion>nesofisticat</suggestion>?	simplu|nesofisticat
+L	607	El a folosit o abordare simplă și nesofisticată.
+M	607	SIMPLA_SI_NESOFISTICATA	1	24	47	Other	Ați vrut să scrieți <suggestion>simplă</suggestion> sau <suggestion>nesofisticată</suggestion>?	simplă|nesofisticată
+L	608	El are un stil simplu.
+L	609	El are un stil nesofisticat.
+L	610	Actul este considerat nul și neavenit.
+M	610	NUL_SI_NEAVENIT	1	22	37	Other	Ați vrut să scrieți <suggestion>nul</suggestion> sau <suggestion>neavenit</suggestion>?	nul|neavenit
+L	611	Dovada este considerată nulă și neavenită.
+M	611	NUL_SI_NEAVENIT	1	24	41	Other	Ați vrut să scrieți <suggestion>nulă</suggestion> sau <suggestion>neavenită</suggestion>?	nulă|neavenită
+L	612	Dovada este considerată neavenită.
+L	613	Dovada este considerată nulă.
+L	614	A dat dovadă de cinste și onoare.
+M	614	CINSTE_SI_ONOARE	1	16	32	Other	Ați vrut să scrieți <suggestion>cinste</suggestion> sau <suggestion>onoare</suggestion>?	cinste|onoare
+L	615	A dat dovadă de cinste.
+L	616	A dat dovadă de onoare.
+L	617	Ține foarte mult la cinstea și onoarea sa.
+M	617	CINSTE_SI_ONOARE	1	20	38	Other	Ați vrut să scrieți <suggestion>cinstea</suggestion> sau <suggestion>onoarea</suggestion>?	cinstea|onoarea
+L	618	S-a bazat pe un ajutor mutual și reciproc.
+M	618	MUTUAL_SI_RECIPROC	1	23	41	Other	Ați vrut să scrieți <suggestion>mutual</suggestion> sau <suggestion>reciproc</suggestion>?	mutual|reciproc
+L	619	S-a bazat pe un ajutor mutual.
+L	620	S-a bazat pe un ajutor reciproc.
+L	621	Relația s-a bazat pe colaborare și cooperare.
+M	621	COLABORARE_SI_COOPERARE	1	21	44	Other	Ați vrut să scrieți <suggestion>colaborare</suggestion> sau <suggestion>cooperare</suggestion>?	colaborare|cooperare
+L	622	Aceasta a fost în scopul colaborării și cooperării.
+M	622	COLABORARE_SI_COOPERARE	1	25	50	Other	Ați vrut să scrieți <suggestion>colaborării</suggestion> sau <suggestion>cooperării</suggestion>?	colaborării|cooperării
+L	623	Relația s-a bazat pe colaborare.
+L	624	E a ținut o scurtă alocuțiune.
+M	624	SCURTA_ALOCUTIUNE	1	12	29	Other	Ați vrut să scrieți <suggestion>alocuțiune</suggestion>?	alocuțiune
+L	625	Gestul lui a urmat unei scurte alocuțiuni a colegului.
+M	625	SCURTA_ALOCUTIUNE	1	24	41	Other	Ați vrut să scrieți <suggestion>alocuțiuni</suggestion>?	alocuțiuni
+L	626	E a spart geamul de sticlă.
+M	626	GEAM_DE_STICLA	1	10	26	Other	Ați vrut să scrieți <suggestion>geamul</suggestion>?	geamul
+L	627	Mâine vor cădea averse de ploaie și va fi ceață.
+M	627	AVERSE_DE_PLOAIE	1	16	32	Other	Ați vrut să scrieți <suggestion>averse</suggestion>?	averse
+L	628	Ei vor colabora împreună la acest proiect.
+M	628	A_COLABORA_IMPREUNA	1	7	24	Other	Ați vrut să scrieți <suggestion>colabora</suggestion>?	colabora
+L	629	Ei au colaborat împreună la acest proiect.
+M	629	A_COLABORA_IMPREUNA	1	6	24	Other	Ați vrut să scrieți <suggestion>colaborat</suggestion>?	colaborat
+L	630	Ei urmează să colaboreze împreună la acest proiect.
+M	630	A_COLABORA_IMPREUNA	1	14	33	Other	Ați vrut să scrieți <suggestion>colaboreze</suggestion>?	colaboreze
+L	631	Au reușit doar colaborând împreună la acel proiect.
+M	631	A_COLABORA_IMPREUNA	1	15	34	Other	Ați vrut să scrieți <suggestion>colaborând</suggestion>?	colaborând
+L	632	Reușita se datorează colaborării împreună la acel proiect.
+M	632	A_COLABORA_IMPREUNA	1	21	41	Other	Ați vrut să scrieți <suggestion>colaborării</suggestion>?	colaborării
+L	633	Acesta este primul pas spre o caligrafie frumoasă.
+M	633	CALIGRAFIE_FRUMOASA	1	30	49	Other	Ați vrut să scrieți <suggestion>caligrafie</suggestion>?	caligrafie
+L	634	Acesta este primul pas spre o frumoasă caligrafie.
+M	634	CALIGRAFIE_FRUMOASA	2	30	49	Other	Ați vrut să scrieți <suggestion>caligrafie</suggestion>?	caligrafie
+L	635	El se mândrește cu frumoasa sa caligrafie.
+M	635	CALIGRAFIE_FRUMOASA	3	19	41	Other	Ați vrut să scrieți <suggestion>a sa caligrafie</suggestion>?	a sa caligrafie
+L	636	Ei se mândrește cu frumoasa lor caligrafie.
+M	636	CALIGRAFIE_FRUMOASA	3	19	42	Other	Ați vrut să scrieți <suggestion>a lor caligrafie</suggestion>?	a lor caligrafie
+L	637	El se mândrește cu caligrafia sa frumoasă.
+M	637	CALIGRAFIE_FRUMOASA	4	19	41	Other	Ați vrut să scrieți <suggestion>caligrafia sa</suggestion>?	caligrafia sa
+L	638	Domnica se mândrește cu caligrafia ei frumoasă.
+M	638	MORFOLOGIK_RULE_RO_RO		0	7	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Dominica|Domnia|Domniră|Domnita|Domnită|Domnița|Domniță|Dornica|Dornică|Dosnica|Dosnică|Domni ca
+M	638	CALIGRAFIE_FRUMOASA	4	24	46	Other	Ați vrut să scrieți <suggestion>caligrafia ei</suggestion>?	caligrafia ei
+L	639	Elevii s-au adunat pentru a comemora memoria înaintașilor.
+M	639	A_COMEMORA_MEMORIA	1	28	57	Other	Ați vrut să scrieți <suggestion>comemora înaintașii</suggestion>?	comemora înaintașii
+L	640	Elevii s-au adunat pentru a comemora memoria eroilor.
+M	640	A_COMEMORA_MEMORIA	1	28	52	Other	Ați vrut să scrieți <suggestion>comemora eroii</suggestion>?	comemora eroii
+L	641	Elevii s-au adunat pentru a comemora memoria primului conducător.
+M	641	A_COMEMORA_MEMORIA	1	28	53	Other	Ați vrut să scrieți <suggestion>comemora primul</suggestion>?	comemora primul
+L	642	Elevii s-au adunat pentru a comemora amintirea înaintașilor.
+M	642	A_COMEMORA_MEMORIA	1	28	59	Other	Ați vrut să scrieți <suggestion>comemora înaintașii</suggestion>?	comemora înaintașii
+L	643	Elevii s-au adunat pentru a comemora amintirea eroilor.
+M	643	A_COMEMORA_MEMORIA	1	28	54	Other	Ați vrut să scrieți <suggestion>comemora eroii</suggestion>?	comemora eroii
+L	644	Elevii s-au adunat pentru a comemora amintirea primului conducător.
+M	644	A_COMEMORA_MEMORIA	1	28	55	Other	Ați vrut să scrieți <suggestion>comemora primul</suggestion>?	comemora primul
+L	645	Elevii s-au adunat pentru a comemora amintirea sa.
+M	645	A_COMEMORA_MEMORIA	1	28	49	Other	Ați vrut să scrieți <suggestion>comemora sa</suggestion>?	comemora sa
+L	646	Elevii s-au adunat pentru a comemora amintirea iubitului coleg.
+M	646	A_COMEMORA_MEMORIA	1	28	56	Other	Ați vrut să scrieți <suggestion>comemora iubitul</suggestion>?	comemora iubitul
+L	647	În clasă sunt aproximativ cam zece elevi.
+M	647	APROXIMATIV_CAM	1	14	29	Other	Ați vrut să scrieți <suggestion>aproximativ</suggestion> sau <suggestion>cam</suggestion>?	aproximativ|cam
+L	648	În clasă sunt cam zece elevi.
+L	649	În clasă sunt aproximativ zece elevi.
+L	650	În clasă sunt cam aproximativ zece elevi.
+M	650	APROXIMATIV_CAM	1	14	29	Other	Ați vrut să scrieți <suggestion>cam</suggestion> sau <suggestion>aproximativ</suggestion>?	cam|aproximativ
+L	651	În clasă sunt cam zece elevi.
+L	652	În clasă sunt aproximativ zece elevi.
+L	653	În clasă sunt cam aproximativ zece elevi.
+M	653	APROXIMATIV_CAM	1	14	29	Other	Ați vrut să scrieți <suggestion>cam</suggestion> sau <suggestion>aproximativ</suggestion>?	cam|aproximativ
+L	654	În clasă sunt cam zece elevi.
+L	655	În clasă sunt aproximativ zece elevi.
+L	656	În clasă sunt vreo circa zece elevi.
+M	656	APROXIMATIV_CAM	1	14	24	Other	Ați vrut să scrieți <suggestion>vreo</suggestion> sau <suggestion>circa</suggestion>?	vreo|circa
+L	657	În clasă sunt vreo zece elevi.
+L	658	În clasă sunt circa zece elevi.
+L	659	În cele din urmă s-a ajuns la partaj între părți.
+M	659	PARTAJ_INTRE_PARTI	1	30	48	Other	Ați vrut să scrieți <suggestion>partaj</suggestion>?	partaj
+L	660	În cele din urmă s-a ajuns la partaj între cele două părți.
+M	660	PARTAJ_INTRE_PARTI	2	30	58	Other	Ați vrut să scrieți <suggestion>partaj</suggestion>?	partaj
+L	661	El s-a întors după doi ani de zile.
+M	661	ANI_DE_ZILE	1	23	34	Other	Ați vrut să scrieți <suggestion>ani</suggestion>?	ani
+L	662	El are un număr de cinci mere.
+M	662	UN_NUMAR_DE_X	1	7	24	Other	Ați vrut să scrieți <suggestion>cinci</suggestion>?	cinci
+L	663	Un număr de cinci persoane au lipsit.
+M	663	UN_NUMAR_DE_X	1	0	17	Other	Ați vrut să scrieți <suggestion>cinci</suggestion>?	Cinci
+L	664	El are un număr de 20 de mere.
+M	664	UN_NUMAR_DE_X	1	7	21	Other	Ați vrut să scrieți <suggestion>20</suggestion>?	20
+L	665	El mi-a dat un număr de telefon.
+L	666	El mi-a dat un număr de contact.
+L	667	Acolo se aflau un număr de douăzeci și trei de persoane.
+M	667	UN_NUMAR_DE_X	1	15	35	Other	Ați vrut să scrieți <suggestion>douăzeci</suggestion>?	douăzeci
+L	668	Jucătorii s-au întreptat către mijlocul centrului.
+M	668	MORFOLOGIK_RULE_RO_RO		15	24	UnknownWord	S-a găsit o posibilă greșeală de ortografie	îndreptat|în treptat
+M	668	MIJLOCUL_CENTRULUI	1	31	49	Other	Ați vrut să scrieți <suggestion>mijloc</suggestion> sau <suggestion>centru</suggestion>?	mijloc|centru
+L	669	Jucătorii s-au întreptat către mijloc.
+M	669	MORFOLOGIK_RULE_RO_RO		15	24	UnknownWord	S-a găsit o posibilă greșeală de ortografie	îndreptat|în treptat
+L	670	Ostașii au luptat pentru independență și neatârnare.
+M	670	INDEPENDENTA_SI_NEATARNARE	1	25	51	Other	Ați vrut să scrieți <suggestion>independență</suggestion> sau <suggestion>neatârnare</suggestion>?	independență|neatârnare
+L	671	Ostașii au luptat pentru independența și neatârnarea țării.
+M	671	INDEPENDENTA_SI_NEATARNARE	1	25	52	Other	Ați vrut să scrieți <suggestion>independența</suggestion> sau <suggestion>neatârnarea</suggestion>?	independența|neatârnarea
+L	672	Ostașii au luptat pentru independență.
+L	673	Ostașii au luptat pentru neatârnare și independență.
+M	673	INDEPENDENTA_SI_NEATARNARE	2	25	51	Other	Ați vrut să scrieți <suggestion>neatârnare</suggestion> sau <suggestion>independență</suggestion>?	neatârnare|independență
+L	674	Ostașii au luptat pentru neatârnarea și independența țării.
+M	674	INDEPENDENTA_SI_NEATARNARE	2	25	52	Other	Ați vrut să scrieți <suggestion>neatârnarea</suggestion> sau <suggestion>independența</suggestion>?	neatârnarea|independența
+L	675	Ostașii au luptat pentru independența țării.
+L	676	Abia atunci și-a dat seama că fusese sedus și păcălit.
+M	676	SEDUS_SI_PACALIT	1	37	53	Other	Ați vrut să scrieți <suggestion>sedus</suggestion> sau <suggestion>păcălit</suggestion>?	sedus|păcălit
+L	677	Abia atunci și-a dat seama că fusese sedusă și păcălită.
+M	677	SEDUS_SI_PACALIT	1	37	55	Other	Ați vrut să scrieți <suggestion>sedusă</suggestion> sau <suggestion>păcălită</suggestion>?	sedusă|păcălită
+L	678	Abia atunci și-a dat seama că fusese sedusă.
+L	679	A avut o tentativă de încercare în acest sens dar a renunțat.
+M	679	TENTATIVA_DE_INCERCARE	1	9	31	Other	Ați vrut să scrieți <suggestion>tentativă</suggestion> sau <suggestion>încercare</suggestion>?	tentativă|încercare
+L	680	A avut mai multe tentative de încercări în acest sens dar a renunțat.
+M	680	TENTATIVA_DE_INCERCARE	1	17	39	Other	Ați vrut să scrieți <suggestion>tentative</suggestion> sau <suggestion>încercări</suggestion>?	tentative|încercări
+L	681	A avut mai multe tentative în acest sens dar a renunțat.
+L	682	Pentru astăzi se anunță rafale puternice de vânt.
+M	682	RAFALE_PUTERNICE	1	24	40	Other	Ați vrut să scrieți <suggestion>rafale</suggestion>?	rafale
+L	683	Pentru astăzi se anunță rafale violente de vânt.
+M	683	RAFALE_PUTERNICE	1	24	39	Other	Ați vrut să scrieți <suggestion>rafale</suggestion>?	rafale
+L	684	El a fost surpsins de o rafală puternică de vânt.
+M	684	MORFOLOGIK_RULE_RO_RO		10	18	UnknownWord	S-a găsit o posibilă greșeală de ortografie	surprins
+M	684	RAFALE_PUTERNICE	1	24	40	Other	Ați vrut să scrieți <suggestion>rafală</suggestion>?	rafală
+L	685	Pentru astăzi se anunță puternice rafale de vânt.
+M	685	RAFALE_PUTERNICE	2	24	40	Other	Ați vrut să scrieți <suggestion>rafale</suggestion>?	rafale
+L	686	Pentru astăzi se anunță violente rafale de vânt.
+M	686	RAFALE_PUTERNICE	2	24	39	Other	Ați vrut să scrieți <suggestion>rafale</suggestion>?	rafale
+L	687	El a fost surpsins de o puternică rafală de vânt.
+M	687	MORFOLOGIK_RULE_RO_RO		10	18	UnknownWord	S-a găsit o posibilă greșeală de ortografie	surprins
+M	687	RAFALE_PUTERNICE	2	24	40	Other	Ați vrut să scrieți <suggestion>rafală</suggestion>?	rafală
+L	688	I-a fost coasociat.
+M	688	COASOCIAT	1	9	18	Other	Ați vrut să scrieți <suggestion>asociat</suggestion>?	asociat
+L	689	A trimis vorbă coasociatului.
+M	689	COASOCIAT	1	15	28	Other	Ați vrut să scrieți <suggestion>asociatului</suggestion>?	asociatului
+L	690	I-a fost copărtaș.
+M	690	COPARTAS	1	9	17	Other	Ați vrut să scrieți <suggestion>părtaș</suggestion>?	părtaș
+L	691	A trimis vorbă copărtașului.
+M	691	COPARTAS	1	15	27	Other	Ați vrut să scrieți <suggestion>părtașului</suggestion>?	părtașului
+L	692	I-a fost copartener.
+M	692	COPARTENER	1	9	19	Other	Ați vrut să scrieți <suggestion>partener</suggestion>?	partener
+L	693	A trimis vorbă copartenerului.
+M	693	COPARTENER	1	15	29	Other	Ați vrut să scrieți <suggestion>partenerului</suggestion>?	partenerului
+L	694	Se uita cu melancolie la vestigiile trecute.
+M	694	VESTIGII_TRECUTE	1	25	43	Other	Ați vrut să scrieți <suggestion>vestigii</suggestion>?	vestigii
+L	695	Lucrarea a fost rescrisă iar.
+M	695	RESCRIE_IAR	1	16	28	Other	Ați vrut să scrieți <suggestion>rescrisă</suggestion>?	rescrisă
+L	696	Lucrarea a fost rescrisă din nou.
+M	696	RESCRIE_IAR	2	16	32	Other	Ați vrut să scrieți <suggestion>rescrisă</suggestion>?	rescrisă
+L	697	Are și el un procent la sută din acțiuni.
+M	697	PROCENT_LA_SUTA	1	13	28	Other	Ați dorit să scrieți <suggestion>procent</suggestion>?	procent
+L	698	Are un procent de 12 la sută zahăr.
+M	698	PROCENT_LA_SUTA	2	4	28	Other	Ați vrut să scrieți <suggestion>12 la sută</suggestion>?	12 la sută
+L	699	Este în procent de 12 la sută zahăr.
+M	699	PROCENT_LA_SUTA	2	5	29	Other	Ați vrut să scrieți <suggestion>12 la sută</suggestion>?	12 la sută
+L	700	12 la sută zahăr.
+L	701	Are un procent de zece la sută zahăr.
+M	701	PROCENT_LA_SUTA	3	4	30	Other	Ați vrut să scrieți <suggestion>zece la sută</suggestion>?	zece la sută
+L	702	Zece la sută zahăr.
+L	703	Concentrația este într-un procent de 12 la sută.
+M	703	PROCENT_LA_SUTA	4	18	47	Other	Ați vrut să scrieți <suggestion>de 12 la sută</suggestion>?	de 12 la sută
+L	704	Concentrația este de 12 la sută zahăr.
+L	705	Concentrația este într-un procent de zece la sută.
+M	705	PROCENT_LA_SUTA	5	18	49	Other	Ați vrut să scrieți <suggestion>de zece la sută</suggestion>?	de zece la sută
+L	706	Concentrația este de zece la sută zahăr.
+L	707	Are un procent de 12% zahăr.
+M	707	PROCENT_LA_SUTA	6	4	21	Other	Ați vrut să scrieți <suggestion>12%</suggestion>?	12%
+L	708	Are un procent de 12 % zahăr.
+M	708	PROCENT_LA_SUTA	6	4	22	Other	Ați vrut să scrieți <suggestion>12%</suggestion>?	12%
+L	709	Are 12 % zahăr.
+L	710	Are un procent de zece % zahăr.
+M	710	PROCENT_LA_SUTA	7	4	24	Other	Ați vrut să scrieți <suggestion>zece la sută</suggestion>?	zece la sută
+L	711	Are un procent de zece% zahăr.
+M	711	PROCENT_LA_SUTA	7	4	23	Other	Ați vrut să scrieți <suggestion>zece la sută</suggestion>?	zece la sută
+L	712	Are zece % zahăr.
+L	713	Concentrația de zahăr este într-un procent de 12 %.
+M	713	PROCENT_LA_SUTA	8	27	50	Other	Ați vrut să scrieți <suggestion>de 12%</suggestion>?	de 12%
+L	714	Concentrația de zahăr este de 12 %.
+L	715	Concentrația de zahăr este într-un procent de 12%.
+M	715	PROCENT_LA_SUTA	8	27	49	Other	Ați vrut să scrieți <suggestion>de 12%</suggestion>?	de 12%
+L	716	Concentrația de zahăr este într-un procent de 12,2 %.
+M	716	PROCENT_LA_SUTA	9	27	52	Other	Ați vrut să scrieți <suggestion>de 12,2 %</suggestion>?	de 12,2 %
+L	717	Are un procent de 12,3% zahăr.
+M	717	PROCENT_LA_SUTA	10	4	23	Other	Ați vrut să scrieți <suggestion>12,3%</suggestion>?	12,3%
+L	718	Are un procent de 12,3 % zahăr.
+M	718	PROCENT_LA_SUTA	10	4	24	Other	Ați vrut să scrieți <suggestion>12,3%</suggestion>?	12,3%
+L	719	Concentrația de zahăr este într-un procent de zece %.
+M	719	PROCENT_LA_SUTA	11	27	52	Other	Ați vrut să scrieți <suggestion>de zece la sută</suggestion>?	de zece la sută
+L	720	Concentrația de zahăr este de zece %.
+L	721	Procent de zece %.
+M	721	PROCENT_LA_SUTA	12	0	17	Other	Ați vrut să scrieți <suggestion>zece la sută</suggestion>?	Zece la sută
+L	722	Acel procent de zece % nu este semnificativ.
+M	722	PROCENT_LA_SUTA	12	5	22	Other	Ați vrut să scrieți <suggestion>zece la sută</suggestion>?	zece la sută
+L	723	Zece %.
+L	724	Concentrația de zahăr este procent de 12,2%.
+M	724	PROCENT_LA_SUTA	13	27	43	Other	Ați vrut să scrieți <suggestion>12,2%</suggestion>?	12,2%
+L	725	Concentrația de zahăr este procent de 12,2 %.
+M	725	PROCENT_LA_SUTA	13	27	44	Other	Ați vrut să scrieți <suggestion>12,2%</suggestion>?	12,2%
+L	726	Concentrația de zahăr este de 12,2%.
+L	727	S-a lovit la genunchiul piciorului.
+M	727	GENUNCHIUL_PICIORULUI	1	13	34	Other	Ați vrut să scrieți <suggestion>genunchi</suggestion>?	genunchi
+L	728	S-a lovit la genunchiul piciorului dar nu l-a durut.
+M	728	GENUNCHIUL_PICIORULUI	1	13	34	Other	Ați vrut să scrieți <suggestion>genunchi</suggestion>?	genunchi
+L	729	S-a lovit la genunchiul piciorului drept.
+L	730	S-a lovit la genunchi
+L	731	Blocați genunchiul piciorului care lucrează.
+L	732	Genunchiul piciorului din față trebuie să cadă în dreptul degetelor de la picior.
+L	733	A plecat, deci în concluzie nu mai poate fi găsit.
+M	733	DECI__IN_CONCLUZIE	1	10	27	Other	Ați vrut să scrieți <suggestion>deci</suggestion> sau <suggestion>în concluzie</suggestion>?	deci|în concluzie
+L	734	A plecat, în concluzie nu mai poate fi găsit.
+L	735	A plecat, deci nu mai poate fi găsit.
+L	736	A plecat, deci, în concluzie nu mai poate fi găsit.
+M	736	DECI__IN_CONCLUZIE	2	10	28	Other	Ați vrut să scrieți <suggestion>deci</suggestion> sau <suggestion>în concluzie</suggestion>?	deci|în concluzie
+L	737	A plecat, în concluzie nu mai poate fi găsit.
+L	738	A plecat, deci nu mai poate fi găsit.
+L	739	A plecat, în concluzie deci nu mai poate fi găsit.
+M	739	IN_CONCLUZIE__DECI	1	10	27	Other	Ați vrut să scrieți <suggestion>în concluzie</suggestion> sau <suggestion>deci</suggestion>?	în concluzie|deci
+L	740	A plecat, în concluzie nu mai poate fi găsit.
+L	741	A plecat, deci nu mai poate fi găsit.
+L	742	A plecat, în concluzie, deci nu mai poate fi găsit.
+M	742	IN_CONCLUZIE__DECI	2	10	28	Other	Ați vrut să scrieți <suggestion>în concluzie</suggestion> sau <suggestion>deci</suggestion>?	în concluzie|deci
+L	743	A plecat, în concluzie nu mai poate fi găsit.
+L	744	A plecat, deci nu mai poate fi găsit.
+L	745	A plecat, așadar deci nu mai poate fi găsit.
+M	745	ASADAR__DECI	1	10	21	Other	Ați vrut să scrieți <suggestion>așadar</suggestion> sau <suggestion>deci</suggestion>?	așadar|deci
+L	746	A plecat, așadar nu mai poate fi găsit.
+L	747	A plecat, deci nu mai poate fi găsit.
+L	748	A plecat, așadar, deci nu mai poate fi găsit.
+M	748	ASADAR__DECI	2	10	22	Other	Ați vrut să scrieți <suggestion>așadar</suggestion> sau <suggestion>deci</suggestion>?	așadar|deci
+L	749	A plecat, în concluzie nu mai poate fi găsit.
+L	750	A plecat, deci nu mai poate fi găsit.
+L	751	A plecat, deci așadar nu mai poate fi găsit.
+M	751	DECI__ASADAR	1	10	21	Other	Ați vrut să scrieți <suggestion>deci</suggestion> sau <suggestion>așadar</suggestion>?	deci|așadar
+L	752	A plecat, așadar nu mai poate fi găsit.
+L	753	A plecat, deci nu mai poate fi găsit.
+L	754	A plecat, deci, așadar nu mai poate fi găsit.
+M	754	DECI__ASADAR	2	10	22	Other	Ați vrut să scrieți <suggestion>deci</suggestion> sau <suggestion>așadar</suggestion>?	deci|așadar
+L	755	A plecat, în concluzie nu mai poate fi găsit.
+L	756	A plecat, deci nu mai poate fi găsit.
+L	757	Ideea sa a venit ca o concluzie finală.
+M	757	CONCLUZIE_FINALA	1	22	38	Other	Ați vrut să scrieți <suggestion>concluzie</suggestion>?	concluzie
+L	758	El a fost acuzat de contrabandă ilegală.
+M	758	CONTRABANDA_ILEGALA	1	20	39	Other	Ați vrut să scrieți <suggestion>contrabandă</suggestion>?	contrabandă
+L	759	Partenerul său a fost ucis definitiv.
+M	759	OMORAT_DEFINITIV	1	22	36	Other	Ați vrut să scrieți <suggestion>ucis</suggestion>?	ucis
+L	760	Partenerul său a fost omorât definitiv.
+M	760	OMORAT_DEFINITIV	1	22	38	Other	Ați vrut să scrieți <suggestion>omorât</suggestion>?	omorât
+L	761	Aici este necesară o copie xerox.
+M	761	COPIE_XEXOX	1	21	32	Other	Ați vrut să scrieți <suggestion>copie</suggestion> sau <suggestion>fotocopie</suggestion>?	copie|fotocopie
+L	762	Aici este necesară o copie.
+L	763	Aici este necesară o fotocopie.
+L	764	Nu a plecat ci dimpotrivă a rămas.
+M	764	CI_DIMPOTRIVA	1	12	25	Other	Ați vrut să scrieți <suggestion>ci</suggestion> sau <suggestion>dimpotrivă</suggestion>?	ci|dimpotrivă
+L	765	Nu a plecatci a rămas.
+M	765	MORFOLOGIK_RULE_RO_RO		5	13	UnknownWord	S-a găsit o posibilă greșeală de ortografie	plecatei|plecați|plecații|plecat ci
+L	766	Nu a plecatdimpotrivă a rămas.
+M	766	MORFOLOGIK_RULE_RO_RO		5	21	UnknownWord	S-a găsit o posibilă greșeală de ortografie	plecat dimpotrivă
+L	767	Multe persoane au fost infectate cu virusul HIV.
+M	767	VIRUSUL_HIV	1	36	47	Other	Ați vrut să scrieți <suggestion>HIV</suggestion> (Human Immunodeficiency Virus)?	HIV
+L	768	El a ținut un speech scurt.
+M	768	SPEECH_SCURT	1	14	26	Other	Ați vrut să scrieți <suggestion>speech</suggestion> sau <suggestion>scurt discurs</suggestion>?	speech|scurt discurs
+L	769	El a ținut un speech.
+L	770	El a ținut un scurt speech.
+M	770	SPEECH_SCURT	2	14	26	Other	Ați vrut să scrieți <suggestion>speech</suggestion> sau <suggestion>scurt discurs</suggestion>?	speech|scurt discurs
+L	771	El a ținut un speech.
+L	772	El a ținut un scurt discurs.
+L	773	El a ținut cont de ortografia corectă.
+M	773	ORTOGRAFIE_CORECTA	1	19	37	Other	Pleonasm. Ar fi bine să reformulați, ortografia se referă la scrierea corectă a unui limbi.	
+L	774	El a ținut cont de ortografie.
+L	775	El a folosit tot, inclusiv și vechile materiale.
+M	775	INCLUSIV_SI	1	18	29	Other	Ați dorit să scrieți <suggestion>inclusiv</suggestion> sau <suggestion>și</suggestion>?	inclusiv|și
+L	776	El a folosit tot, inclusiv vechile materiale.
+L	777	El nu a arătat respectul cuvenit blazonului de noblețe vechile materiale.
+M	777	BLAZON_DE_NOBLETE	1	33	54	Other	Ați dorit să scrieți <suggestion>blazonului</suggestion>?	blazonului
+L	778	El a reluat din nou aceeași temă.
+M	778	A_RELUA_DIN_NOU	1	5	19	Other	Ați dorit să scrieți <suggestion>reluat</suggestion>?	reluat
+L	779	A plictisit auditoriul reluând din nou aceeași temă.
+M	779	A_RELUA_DIN_NOU	1	23	38	Other	Ați dorit să scrieți <suggestion>reluând</suggestion>?	reluând
+L	780	Până să-l opresc, reluase din nou aceeași idee.
+M	780	A_RELUA_DIN_NOU	1	18	33	Other	Ați dorit să scrieți <suggestion>reluase</suggestion>?	reluase
+L	781	El m-a învățat cum să încep un atac agresiv.
+M	781	ATAC_AGRESIV	1	31	43	Other	Ați dorit să scrieți <suggestion>atac</suggestion>?	atac
+L	782	El m-a învățat cum să încep un agresiv atac.
+M	782	ATAC_AGRESIV	2	31	43	Other	Ați dorit să scrieți <suggestion>atac</suggestion>?	atac
+L	783	El preciza cu exactitate problemele apărute.
+M	783	A_PRECIZA_CU_EXACTITATE	1	3	24	Other	Ați dorit să scrieți <suggestion>preciza</suggestion>?	preciza
+L	784	El precizase cu exactitate problemele apărute.
+M	784	A_PRECIZA_CU_EXACTITATE	1	3	26	Other	Ați dorit să scrieți <suggestion>precizase</suggestion>?	precizase
+L	785	El m-a impresionat plăcut precizând cu exactitate problemele apărute.
+M	785	A_PRECIZA_CU_EXACTITATE	1	26	49	Other	Ați dorit să scrieți <suggestion>precizând</suggestion>?	precizând
+L	786	Se vor preciza cu exactitate intervalele orare.
+M	786	A_PRECIZA_CU_EXACTITATE	1	7	28	Other	Ați dorit să scrieți <suggestion>preciza</suggestion>?	preciza
+L	787	Cinci răniţi sunt internaţi cu numeroase politraumatisme.
+M	787	MORFOLOGIK_RULE_RO_RO		6	12	UnknownWord	S-a găsit o posibilă greșeală de ortografie	râniți|răniți|băniți|căniți|drăniți|hrăniți|ranița|ranițe|raniței|ranițo|raniță|râmniți|rânii|râniri|rânit|rânita|rânite|rânitei|rânito|rânitu|rânită|râniși|râniții|rânjiți|râvniți|râșniți|răciți|răcniți|răgiți|rănii|răniri|rănit|rănita|rănite|rănitei|rănito|rănitu|rănită|răniși|răniții|răpiți|răriți|răzniți
+M	787	MORFOLOGIK_RULE_RO_RO		18	27	UnknownWord	S-a găsit o posibilă greșeală de ortografie	internați|internai|internat|internata|internate|internatei|internato|internatu|internată|internași|internații|internări|înturnați
+M	787	NUMEROASE_POLITRAUMATISME	1	31	56	Other	Ați dorit să scrieți <suggestion>politraumatism</suggestion>?	politraumatism
+L	788	A repetat încă o dată poezia.
+M	788	A_REPETA_INCA_O_DATA	1	2	21	Other	Ați dorit să scrieți <suggestion>repetat</suggestion>?	repetat
+L	789	A repetat încă odată poezia.
+M	789	A_REPETA_INCA_O_DATA	2	2	20	Other	Ați dorit să scrieți <suggestion>repetat</suggestion>?	repetat
+L	790	A rămas în continuare acolo.
+M	790	A_RAMANE_IN_CONTINUARE	1	2	21	Other	Ați dorit să scrieți <suggestion>rămas</suggestion>?	rămas
+L	791	A urmat în continuare o prezentare a produsului.
+M	791	A_URMA_IN_CONTINUARE	1	2	21	Other	Ați dorit să scrieți <suggestion>urmat</suggestion>?	urmat
+L	792	Apoi el poposi pentru odihnă la han.
+M	792	A_POPOSI_PENTRU_ODIHNA	1	8	28	Other	Ați dorit să scrieți <suggestion>poposi</suggestion>?	poposi
+L	793	S-a exprimat cu persuasiune convingătoare.
+M	793	PERSUASIUNE_CONVINGATOARE	1	16	41	Other	Ați dorit să scrieți <suggestion>persuasiune</suggestion>?	persuasiune
+L	794	S-a exprimat cu persuasiunea convingătoare care îl caracterizează.
+M	794	PERSUASIUNE_CONVINGATOARE	1	16	42	Other	Ați dorit să scrieți <suggestion>persuasiunea</suggestion>?	persuasiunea
+L	795	S-a exprimat cu o persuasiune convingătoare.
+M	795	PERSUASIUNE_CONVINGATOARE	2	16	43	Other	Ați dorit să scrieți <suggestion>persuasiune</suggestion>?	persuasiune
+L	796	Amintirea sa va dăinui permanent.
+M	796	DAINUI_PERMANENT	1	16	32	Other	Ați dorit să scrieți <suggestion>dăinui</suggestion>?	dăinui
+L	797	Cartea conținea în cuprins multe capitole.
+M	797	A_CONTINE_IN_CUPRINS	1	7	26	Other	Ați dorit să scrieți <suggestion>conținea</suggestion> sau <suggestion>cuprindea</suggestion>?	conținea|cuprindea
+L	798	Cartea va conține în cuprins multe capitole.
+M	798	A_CONTINE_IN_CUPRINS	1	10	28	Other	Ați dorit să scrieți <suggestion>conține</suggestion> sau <suggestion>cuprinde</suggestion>?	conține|cuprinde
+L	799	Cartea conținea multe capitole.
+L	800	Cartea cuprindea multe capitole.
+L	801	Ei au conlucrat împreună la acel proiect.
+M	801	A_CONLUCRA_IMPREUNA	1	6	24	Other	Ați dorit să scrieți <suggestion>conlucrat</suggestion> sau <suggestion>lucrat împreună</suggestion>?	conlucrat|lucrat împreună
+L	802	Ei au conlucrat la acel proiect.
+L	803	Ei au lucrat împreună la acel proiect.
+L	804	El a exterminat toți paraziții.
+M	804	A_EXTERMINA_PE_TOTI	1	5	20	Other	Ați dorit să scrieți <suggestion>exterminat</suggestion>?	exterminat
+L	805	El a exterminat pe toți paraziții.
+M	805	A_EXTERMINA_PE_TOTI	2	5	23	Other	Ați dorit să scrieți <suggestion>exterminat</suggestion>?	exterminat
+L	806	El a fost exmatriculat din școală.
+M	806	A_EXMATRICULA_DIN_SCOALA	1	10	33	Other	Ați dorit să scrieți <suggestion>exmatriculat</suggestion>?	exmatriculat
+L	807	El a eradicat din rădăcină toate problemele.
+M	807	A_ERADICA_DIN_RADACINA	1	5	26	Other	Ați dorit să scrieți <suggestion>eradicat</suggestion>?	eradicat
+L	808	El a eradicat de la rădăcină toate problemele.
+M	808	A_ERADICA_DIN_RADACINA	2	5	28	Other	Ați dorit să scrieți <suggestion>eradicat</suggestion>?	eradicat
+L	809	El i-a decimat pe toți șoarecii.
+M	809	A_DECIMA_PE_TOTI	1	7	22	Other	Ați dorit să scrieți <suggestion>decimat</suggestion>?	decimat
+L	810	El i-a decimat toți șoarecii.
+M	810	A_DECIMA_PE_TOTI	2	7	19	Other	Ați dorit să scrieți <suggestion>decimat</suggestion>?	decimat
+L	811	El dat dovadă de dârzenie aprigă.
+M	811	DARZENIE_APRIGA	1	17	32	Other	Ați dorit să scrieți <suggestion>dârzenie</suggestion>?	dârzenie
+L	812	El dat dovadă de aprigă dârzenie.
+M	812	DARZENIE_APRIGA	2	17	32	Other	Ați dorit să scrieți <suggestion>dârzenie</suggestion>?	dârzenie
+L	813	El dat dovadă de o dârzenie aprigă.
+M	813	DARZENIE_APRIGA	3	17	34	Other	Ați dorit să scrieți <suggestion>dârzenie</suggestion>?	dârzenie
+L	814	El dat dovadă de o aprigă dârzenie.
+M	814	DARZENIE_APRIGA	4	17	34	Other	Ați dorit să scrieți <suggestion>dârzenie</suggestion>?	dârzenie
+L	815	Ea are o migrenă de cap.
+M	815	MIGRENA_DE_CAP	1	9	23	Other	Ați dorit să scrieți <suggestion>migrenă</suggestion> sau <suggestion>durere de cap</suggestion>?	migrenă|durere de cap
+L	816	Nu a putut veni din cauza migrenei de cap.
+M	816	MIGRENA_DE_CAP	1	26	41	Other	Ați dorit să scrieți <suggestion>migrenei</suggestion> sau <suggestion>durerii de cap</suggestion>?	migrenei|durerii de cap
+L	817	Ea are o migrenă.
+L	818	Ea are o durere de cap.
+L	819	Aceste documente atestă o continuitate neîntreruptă în acest areal.
+M	819	CONTINUITATE_NEINTRERUPTA	1	26	51	Other	Ați dorit să scrieți <suggestion>continuitate</suggestion>?	continuitate
+L	820	S-a bazat pe continuitatea neîntreruptă în acest areal.
+M	820	CONTINUITATE_NEINTRERUPTA	1	13	39	Other	Ați dorit să scrieți <suggestion>continuitatea</suggestion>?	continuitatea
+L	821	Au lucrat amândoi împreună.
+M	821	AMANDOI_IMPREUNA	1	10	26	Other	Ați dorit să scrieți <suggestion>amândoi</suggestion> sau <suggestion>împreună</suggestion>?	amândoi|împreună
+L	822	Au lucrat amândoi.
+L	823	Au lucrat împreună.
+L	824	Acest artist este aproape cvasicunoscut.
+M	824	APROPE_CVASI___	1	18	39	Other	Ați dorit să scrieți <suggestion>cvasicunoscut</suggestion>?	cvasicunoscut
+L	825	Acest artist este cam cvasicunoscut.
+M	825	APROPE_CVASI___	1	18	35	Other	Ați dorit să scrieți <suggestion>cvasicunoscut</suggestion>?	cvasicunoscut
+L	826	Acest artist este aproape cvasinecunoscut.
+M	826	APROPE_CVASI___	1	18	41	Other	Ați dorit să scrieți <suggestion>cvasinecunoscut</suggestion>?	cvasinecunoscut
+L	827	Acest artist este cam cvasinecunoscut.
+M	827	APROPE_CVASI___	1	18	37	Other	Ați dorit să scrieți <suggestion>cvasinecunoscut</suggestion>?	cvasinecunoscut
+L	828	A fost bine dar în schimb nu am putut rămâne mult.
+M	828	DAR_IN_SCHIMB	1	12	25	Other	Ați dorit să scrieți <suggestion>dar</suggestion> sau <suggestion>în schimb</suggestion>?	dar|în schimb
+L	829	A fost bine dar nu am putut rămâne mult.
+L	830	A fost bine în schimb nu am putut rămâne mult.
+L	831	El a anexat alături o copie după buletin.
+M	831	A_ANEXA_ALATURI	1	5	19	Other	Ați dorit să scrieți <suggestion>anexat</suggestion> sau <suggestion>alăturat</suggestion>?	anexat|alăturat
+L	832	El a găsit anexate alături o copie după buletin.
+M	832	A_ANEXA_ALATURI	1	11	26	Other	Ați dorit să scrieți <suggestion>anexate</suggestion> sau <suggestion>alăturate</suggestion>?	anexate|alăturate
+L	833	El rezolvat problema anexând alături o carte de vizită.
+M	833	A_ANEXA_ALATURI	1	21	36	Other	Ați dorit să scrieți <suggestion>anexând</suggestion> sau <suggestion>alăturând</suggestion>, <suggestion>alăturându</suggestion>?	anexând|alăturând|alăturându
+L	834	El a alăturat o copie după buletin.
+L	835	El a anexat o copie după buletin.
+L	836	Este în firea lui să fie altruist cu alții.
+M	836	ALTRUIST_CU_ALTUL	1	25	42	Other	Ați dorit să scrieți <suggestion>altruist</suggestion>?	altruist
+L	837	Este în firea ei să fie altruistă cu ceilalți.
+M	837	ALTRUIST_CU_ALTUL	1	24	45	Other	Ați dorit să scrieți <suggestion>altruistă</suggestion>?	altruistă
+L	838	Este în firea noastră să fim altruiști cu ceilalți.
+M	838	ALTRUIST_CU_ALTUL	1	29	50	Other	Ați dorit să scrieți <suggestion>altruiști</suggestion>?	altruiști
+L	839	Acest lucru poate fi rezolvabil.
+M	839	POATE_FI_REZOLVABIL	1	12	31	Other	Ați dorit să scrieți <suggestion>este rezolvabil</suggestion>?	este rezolvabil
+L	840	Acest lucru este fi rezolvabil.
+L	841	Este un lucru care poate fi rezolvabil.
+M	841	POATE_FI_REZOLVABIL	2	14	38	Other	Ați dorit să scrieți <suggestion>este rezolvabil</suggestion>?	este rezolvabil
+L	842	Este un lucru rezolvabil.
+L	843	În cazul în care coroborăm comparativ aceste informații aflăm soluția.
+M	843	COROBORA_COMPARATIV	1	17	37	Other	Ați dorit să scrieți <suggestion>coroborăm</suggestion>?	coroborăm
+L	844	Aceste date coroborate comparativ vor oferi soluția.
+M	844	COROBORA_COMPARATIV	1	12	33	Other	Ați dorit să scrieți <suggestion>coroborate</suggestion>?	coroborate
+L	845	După aluziile și insinuările mele nu a mai îndrăznit să obiecteze.
+M	845	ALUZII_SI_INSINUARI	1	5	28	Other	Ați dorit să scrieți <suggestion>aluziile</suggestion> sau <suggestion>insinuările</suggestion>?	aluziile|insinuările
+L	846	După aceste aluzii și insinuări nu a mai îndrăznit să obiecteze.
+M	846	ALUZII_SI_INSINUARI	1	12	31	Other	Ați dorit să scrieți <suggestion>aluzii</suggestion> sau <suggestion>insinuări</suggestion>?	aluzii|insinuări
+L	847	După aluziile mele nu a mai îndrăznit să obiecteze.
+L	848	După insinuările mele nu a mai îndrăznit să obiecteze.
+L	849	După insinuările și aluziile mele nu a mai îndrăznit să obiecteze.
+M	849	ALUZII_SI_INSINUARI	2	5	28	Other	Ați dorit să scrieți <suggestion>insinuările</suggestion> sau <suggestion>aluziile</suggestion>?	insinuările|aluziile
+L	850	După aceste insinuări și aluzii nu a mai îndrăznit să obiecteze.
+M	850	ALUZII_SI_INSINUARI	2	12	31	Other	Ați dorit să scrieți <suggestion>insinuări</suggestion> sau <suggestion>aluzii</suggestion>?	insinuări|aluzii
+L	851	După aluziile mele nu a mai îndrăznit să obiecteze.
+L	852	După insinuările mele nu a mai îndrăznit să obiecteze.
+L	853	Atunci el șopti încet temerile sale.
+M	853	A_SOPTI_INCET	1	10	21	Other	Ați dorit să scrieți <suggestion>șopti</suggestion>?	șopti
+L	854	Atunci el, șoptind încet, expuse temerile sale.
+M	854	A_SOPTI_INCET	1	11	24	Other	Ați dorit să scrieți <suggestion>șoptind</suggestion>?	șoptind
+L	855	A păstrat totul în sine însuși.
+M	855	SINE_INSUSI	1	19	30	Other	Ați dorit să scrieți <suggestion>sine</suggestion>?	sine
+L	856	Au păstrat totul în sine însele.
+M	856	SINE_INSUSI	1	20	31	Other	Ați dorit să scrieți <suggestion>sine</suggestion>?	sine
+L	857	A intervenit chiar el însuși.
+M	857	CHIAR_EL_INSUSI	1	13	28	Other	Ați dorit să scrieți <suggestion>chiar el</suggestion> sau <suggestion>el însuși</suggestion>?	chiar el|el însuși
+L	858	Au intervenit chiar ele însele.
+M	858	CHIAR_EL_INSUSI	1	14	30	Other	Ați dorit să scrieți <suggestion>chiar ele</suggestion> sau <suggestion>ele însele</suggestion>?	chiar ele|ele însele
+L	859	A intervenit chiar el.
+L	860	A intervenit el însuși în persoană.
+M	860	EL_INSUSI_IN_PERSOANA	1	13	34	Other	Ați dorit să scrieți <suggestion>el însuși</suggestion> sau <suggestion>el în persoană</suggestion>?	el însuși|el în persoană
+L	861	Au intervenit ele însele în persoană.
+M	861	EL_INSUSI_IN_PERSOANA	1	14	36	Other	Ați dorit să scrieți <suggestion>ele însele</suggestion> sau <suggestion>ele în persoană</suggestion>?	ele însele|ele în persoană
+L	862	A intervenit chiar el.
+L	863	A returnat înapoi cartea.
+M	863	A_RETURNA_INAPOI	1	2	17	Other	Ați dorit să scrieți <suggestion>returnat</suggestion>?	returnat
+L	864	Returnând înapoi cartea, nu a mai rămas nimic de spus.
+M	864	A_RETURNA_INAPOI	1	0	16	Other	Ați dorit să scrieți <suggestion>Returnând</suggestion>?	Returnând
+L	865	A împărțit mărul în două jumătăți egale.
+M	865	JUMATATI_EGALE	1	25	39	Other	Ați dorit să scrieți <suggestion>jumătăți</suggestion>?	jumătăți
+L	866	A intrat înăuntru fără să spună un cuvânt.
+M	866	A_INTRA_INAUNTRU	1	2	17	Other	Ați dorit să scrieți <suggestion>intrat</suggestion>?	intrat
+L	867	A introdus înăuntru o monedă.
+M	867	A_INTRA_INAUNTRU	1	2	19	Other	Ați dorit să scrieți <suggestion>introdus</suggestion>?	introdus
+L	868	A descoperit un om umanoid.
+M	868	OM_UMANOID	1	16	26	Other	Ați dorit să scrieți <suggestion>om</suggestion> sau <suggestion>umanoid</suggestion>?	om|umanoid
+L	869	A descoperit un umanoid.
+L	870	A descoperit un om.
+L	871	Așadar și prin urmare a plecat.
+M	871	ASADAR_SI_PRIN_URMARE	1	0	21	Other	Ați dorit să scrieți <suggestion>Așadar</suggestion> sau <suggestion>prin urmare</suggestion>?	Așadar|Prin urmare
+L	872	Așadar a plecat.
+L	873	Prin urmare a plecat.
+L	874	Și-a cumpărat o pereche de pijamale.
+M	874	O_PERECHE_DE___	1	14	35	Other	Ați dorit să scrieți <suggestion>pijamale</suggestion>?	pijamale
+L	875	Și-a cumpărat o pereche de doi porumbei.
+M	875	O_PERECHE_DE___	1	14	30	Other	Ați dorit să scrieți <suggestion>doi</suggestion>?	doi
+L	876	A venit din nou iarăși la noi.
+M	876	DIN_NOU_IARASI	1	8	22	Other	Ați dorit să scrieți <suggestion>din nou</suggestion> sau <suggestion>iarăși</suggestion>?	din nou|iarăși
+L	877	A venit iarăși la noi.
+L	878	Avionul survolează peste munți.
+M	878	SERVOLEAZA_PESTE	1	8	30	Other	Ați dorit să scrieți <suggestion>survolează munții</suggestion>?	survolează munții
+L	879	Avionul survolează peste munții patriei.
+M	879	SERVOLEAZA_PESTE	1	8	31	Other	Ați dorit să scrieți <suggestion>survolează munții</suggestion>?	survolează munții
+L	880	Avionul survolează peste orașe.
+M	880	SERVOLEAZA_PESTE	1	8	30	Other	Ați dorit să scrieți <suggestion>survolează orașele</suggestion>?	survolează orașele
+L	881	Avionul survolează peste orașele patriei.
+M	881	SERVOLEAZA_PESTE	1	8	32	Other	Ați dorit să scrieți <suggestion>survolează orașele</suggestion>?	survolează orașele
+L	882	Avionul survolează peste case.
+M	882	SERVOLEAZA_PESTE	1	8	29	Other	Ați dorit să scrieți <suggestion>survolează casele</suggestion>?	survolează casele
+L	883	Avionul survolează peste casele orașului.
+M	883	SERVOLEAZA_PESTE	1	8	31	Other	Ați dorit să scrieți <suggestion>survolează casele</suggestion>?	survolează casele
+L	884	Avionul survolează prin aer.
+M	884	SERVOLEAZA_PRIN_AER	1	8	27	Other	Ați dorit să scrieți <suggestion>survolează</suggestion>?	survolează
+L	885	Avionul survola prin aer.
+M	885	SERVOLEAZA_PRIN_AER	1	8	24	Other	Ați dorit să scrieți <suggestion>survola</suggestion>?	survola
+L	886	Apoi a urmat o mică petrecere.
+M	886	APOI_A_URMAT	1	0	12	Other	Pleonasm. Ați dorit să scrieți <suggestion>a urmat</suggestion>?	A urmat
+L	887	Se simte rău din cauza încorsetării rigide.
+M	887	INCORSETARE_RIGIDA	1	23	42	Other	Ați dorit să scrieți <suggestion>încorsetării</suggestion>?	încorsetării
+L	888	Se simte rău deoarece a fost încorsetată rigid.
+M	888	INCORSETARE_RIGIDA	1	29	46	Other	Ați dorit să scrieți <suggestion>încorsetată</suggestion>?	încorsetată
+L	889	A participat la deschiderea vernisajului de la sala Dales.
+M	889	DESCHIDEREA_VERNISAJULUI	1	16	40	Other	vernisaj = este ceremonia de deschiderea a unei expoziţii. Ați dorit să scrieți <suggestion>vernisajul</suggestion>?	vernisajul
+M	889	MORFOLOGIK_RULE_RO_RO		52	57	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Daneș|Maleș|Tales|Ales|Dale|Dalei|Dalez|Galeș|Jaleș|D ales|Dale s
+L	890	S-au întâlnit cu ocazia deschiderii vernisajului de la sala Dales.
+M	890	DESCHIDEREA_VERNISAJULUI	1	24	48	Other	vernisaj = este ceremonia de deschiderea a unei expoziţii. Ați dorit să scrieți <suggestion>vernisajului</suggestion>?	vernisajului
+M	890	MORFOLOGIK_RULE_RO_RO		60	65	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Daneș|Maleș|Tales|Ales|Dale|Dalei|Dalez|Galeș|Jaleș|D ales|Dale s
+L	891	Este pregătit, adică, cu alte cuvinte te poate ajuta
+M	891	ADICA_CU_ALTE___	1	15	37	Other	Ați dorit să scrieți <suggestion>adică</suggestion> sau <suggestion>cu alte cuvinte</suggestion>?	adică|cu alte cuvinte
+L	892	Este pregătit, adică te poate ajuta
+L	893	Este pregătit, adică cu alte cuvinte te poate ajuta.
+M	893	ADICA_CU_ALTE___	2	15	36	Other	Ați dorit să scrieți <suggestion>adică</suggestion> sau <suggestion>cu alte cuvinte</suggestion>?	adică|cu alte cuvinte
+L	894	Este pregătit, adică te poate ajuta.
+L	895	Eu prefer mai bine să rămân.
+M	895	PREFERA_MAI_BINE	1	3	18	Other	Ați dorit să scrieți <suggestion>prefer</suggestion>?	prefer
+L	896	Au plecat, preferând mai bine să nu vadă ce se întâmplă.
+M	896	PREFERA_MAI_BINE	1	11	29	Other	Ați dorit să scrieți <suggestion>preferând</suggestion>?	preferând
+L	897	Le-a spus direct pe șleau tot ce avea de spus.
+M	897	DIRECT_PE_SLEAU	1	10	25	Other	Ați dorit să scrieți <suggestion>direct</suggestion> sau <suggestion>pe șleau</suggestion>?	direct|pe șleau
+L	898	Le-a spus pe șleau tot ce avea de spus.
+L	899	Așa ceva nu poate fi posibil.
+M	899	POATE_FI_POSIBIL	1	12	28	Other	Ați dorit să scrieți <suggestion>este posibil</suggestion> sau <suggestion>poate fi realizat</suggestion>?	este posibil|poate fi realizat
+L	900	Aceasta nu poate fi posibilă.
+M	900	POATE_FI_POSIBIL	1	11	28	Other	Ați dorit să scrieți <suggestion>este posibilă</suggestion> sau <suggestion>poate fi realizată</suggestion>?	este posibilă|poate fi realizată
+L	901	Așa ceva nu este posibil.
+L	902	Așa ceva nu poate fi admisibil.
+M	902	POATE_FI_ADMISIBIL	1	12	30	Other	Ați dorit să scrieți <suggestion>este admisibil</suggestion> sau <suggestion>poate fi admis</suggestion>?	este admisibil|poate fi admis
+L	903	Aceasta nu poate fi admisibilă.
+M	903	POATE_FI_ADMISIBIL	1	11	30	Other	Ați dorit să scrieți <suggestion>este admisibilă</suggestion> sau <suggestion>poate fi admisă</suggestion>?	este admisibilă|poate fi admisă
+L	904	Așa ceva nu este admisibil.
+L	905	Am prezentat lucrurile prin prisma punctului meu de vedere.
+M	905	PRIN_PRISMA_PUNCTULUI___	1	23	58	Other	Ați dorit să scrieți <suggestion>din punctul meu de vedere</suggestion>?	din punctul meu de vedere
+L	906	Am primit exclusiv numai rebuturi.
+M	906	EXCLUSIV_NUMAI	1	10	24	Other	Ați dorit să scrieți <suggestion>exclusiv</suggestion> sau <suggestion>numai</suggestion>?	exclusiv|numai
+L	907	Am primit numai rebuturi.
+L	908	X poate fi substituit în locul lui Y.
+M	908	SUBSTITUIT_IN_LOCUL	1	11	30	Other	Ați dorit să scrieți <suggestion>substituit</suggestion>?	substituit
+L	909	X nu se poate substitui în locul lui Y.
+M	909	SUBSTITUIT_IN_LOCUL	1	14	32	Other	Ați dorit să scrieți <suggestion>substitui</suggestion>?	substitui
+L	910	Activitatea cotidiană de zi cu zi este plictisitoare.
+M	910	COTIDIANA_DE_ZI_CU_ZI	1	12	33	Other	Ați dorit să scrieți <suggestion>cotidiană</suggestion> sau <suggestion>de zi cu zi</suggestion>?	cotidiană|de zi cu zi
+L	911	Activitatea de zi cu zi este plictisitoare.
+L	912	Activitatea cotidiană este plictisitoare.
+L	913	Activitatea cotidiană zilnică este plictisitoare.
+M	913	COTIDIAN_ZILNIC	1	12	29	Other	Ați dorit să scrieți <suggestion>cotidiană</suggestion> sau <suggestion>zilnică</suggestion>?	cotidiană|zilnică
+L	914	Activitatea cotidiană este plictisitoare.
+L	915	Avea o înfățișare cu aspect neîngrijit.
+M	915	INFATISARE_CU_ASPECT	1	7	27	Other	Cuvintele «înfățișare» și «aspect» sunt sinonime.	
+L	916	Avea o aspect neîngrijit.
+L	917	Avea o căciulă la fel ca a mea.
+M	917	LA_FEL_CA	1	15	24	Other	Ați dorit să scrieți <suggestion>ca</suggestion> sau <suggestion>la fel cu</suggestion>?	ca|la fel cu
+L	918	Avea o căciulă ca a mea.
+L	919	Avea o căciulă la fel cu a mea.
+L	920	Este la fel ca în Marea Britanie
+L	921	Este la fel ca-n Marea Britanie
+L	922	Marte, la fel ca și Venus, este format din...
+M	922	MORFOLOGIK_RULE_RO_RO		0	5	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Marce|Mare|Marge|Marie|Marta|Martei|Marto|Marty|Arte|Carte|Harțe|Hârțe|Mante|Maree|Marje|Marne|Maroe|Marote|Mart|Martie|Martu|Marșe|Marț|Marțea|Marți|Marțu|Maste|Mate|Mațe|Miarțe|Moarte|Morte|Mâțe|Mărețe|Mărie|Mărite|Măruțe|Parte|Tarte|M arte|Mar te|Mart e
+M	922	LA_FEL_CA_SI	1	7	19	Other	Ați dorit să scrieți <suggestion>ca și</suggestion> sau <suggestion>la fel cu</suggestion>?	ca și|la fel cu
+L	923	Marte, ca și Venus, este format din...
+M	923	MORFOLOGIK_RULE_RO_RO		0	5	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Marce|Mare|Marge|Marie|Marta|Martei|Marto|Marty|Arte|Carte|Harțe|Hârțe|Mante|Maree|Marje|Marne|Maroe|Marote|Mart|Martie|Martu|Marșe|Marț|Marțea|Marți|Marțu|Maste|Mate|Mațe|Miarțe|Moarte|Morte|Mâțe|Mărețe|Mărie|Mărite|Măruțe|Parte|Tarte|M arte|Mar te|Mart e
+L	924	Avea o căciulă identic la fel cu a mea.
+M	924	IDENTIC_LA_FEL	1	15	29	Other	Ați dorit să scrieți <suggestion>la fel</suggestion>?	la fel
+L	925	A plecat pentru ca să îl anunțe.
+M	925	PENTRU_CA_SA	1	9	21	Other	Ați dorit să scrieți <suggestion>ca să</suggestion>?	ca să
+L	926	Acestea sunt doar câteva exemple ilustrative.
+M	926	EXEMPLE_ILUSTRATIVE	1	25	44	Other	Ați dorit să scrieți <suggestion>exemple</suggestion>?	exemple
+L	927	Acesta este doar un exemplu ilustrativ.
+M	927	EXEMPLE_ILUSTRATIVE	1	20	38	Other	Ați dorit să scrieți <suggestion>exemplu</suggestion>?	exemplu
+L	928	A ilustrat prin exemple ceea ce avea de spus.
+M	928	ILUSTRAT_CU_EXEMPLE	1	2	23	Other	Ați dorit să scrieți <suggestion>exemplificat</suggestion>?	exemplificat
+L	929	Doresc să ilustrez cu exemple ceea ce am de spus.
+M	929	ILUSTRAT_CU_EXEMPLE	1	10	29	Other	Ați dorit să scrieți <suggestion>exemplific</suggestion>?	exemplific
+L	930	Au ajuns la un acord comun.
+M	930	ACORD_COMUN	1	15	26	Other	Ați dorit să scrieți <suggestion>acord</suggestion>?	acord
+L	931	Pe baza acordului comun...
+M	931	ACORD_COMUN	1	8	23	Other	Ați dorit să scrieți <suggestion>acordului</suggestion>?	acordului
+L	932	Au adus alte pubele de gunoi.
+M	932	PUBELE_DE_GUNOI	1	13	28	Other	Ați dorit să scrieți <suggestion>pubele</suggestion>?	pubele
+L	933	Au adus altă pubelă de gunoi.
+M	933	PUBELE_DE_GUNOI	1	13	28	Other	Ați dorit să scrieți <suggestion>pubelă</suggestion>?	pubelă
+L	934	A mers pe uma pubelelor de gunoi.
+M	934	MORFOLOGIK_RULE_RO_RO		10	13	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Ama|DMA|Ema|Oma|UML|USA|Ula|Ume|Uță|cuma|cumă|duma|dumă|fuma|fumă|guma|gumă|huma|humă|juma|ma|muma|mumă|mă|numa|puma|pumă|suma|sumă|uda|udma|udmă|udă|uia|uima|uimă|uman|umăr|una|ura|urma|urmă|ură|uza|uză|ușa|ușă|Puma
+M	934	PUBELE_DE_GUNOI	1	14	32	Other	Ați dorit să scrieți <suggestion>pubelelor</suggestion>?	pubelelor
+L	935	Au făcut o pauză temporară.
+M	935	PAUZA_TEMPORARA	1	11	26	Other	Ați dorit să scrieți <suggestion>pauză</suggestion>?	pauză
+L	936	Au făcut multe pauze temporară.
+M	936	PAUZA_TEMPORARA	1	15	30	Other	Ați dorit să scrieți <suggestion>pauze</suggestion>?	pauze
+L	937	Anul școlar a fost împărțit în trei trimestre.
+M	937	IMPARTIT_IN_TREI_TRIMESTERE	1	19	45	Other	Ați dorit să scrieți <suggestion>împărțit în trimestre</suggestion>?	împărțit în trimestre
+L	938	Perioadele a fost împărțite în trei trimestre.
+M	938	IMPARTIT_IN_TREI_TRIMESTERE	1	18	45	Other	Ați dorit să scrieți <suggestion>împărțite în trimestre</suggestion>?	împărțite în trimestre
+L	939	Anul școlar a fost împărțit în două semestre.
+M	939	IMPARTIT_IN_DOUA_SEMESTRE	1	19	44	Other	Ați dorit să scrieți <suggestion>împărțit în semestre</suggestion>?	împărțit în semestre
+L	940	Perioadele a fost împărțite în două semestre.
+M	940	IMPARTIT_IN_DOUA_SEMESTRE	1	18	44	Other	Ați dorit să scrieți <suggestion>împărțite în semestre</suggestion>?	împărțite în semestre
+L	941	Anul școlar a fost împărțit două semestre.
+L	942	El a crezut în sinea lui că este bine.
+M	942	CREDE_IN_SINEA_LUI	1	5	24	Other	Ați dorit să scrieți <suggestion>crezut</suggestion>?	crezut
+L	943	Eu credeam în sinea mea că este bine.
+M	943	CREDE_IN_SINEA_LUI	1	3	23	Other	Ați dorit să scrieți <suggestion>credeam</suggestion>?	credeam
+L	944	Voi credeați în sinea voastră că este bine.
+M	944	CREDE_IN_SINEA_LUI	1	4	29	Other	Ați dorit să scrieți <suggestion>credeați</suggestion>?	credeați
+L	945	Acest hamster este doar un cobai de experiență.
+M	945	COBAI_DE_EXPERIENTA	1	27	46	Other	Ați dorit să scrieți <suggestion>cobai</suggestion>?	cobai
+L	946	A folosit cobaii de experiență.
+M	946	COBAI_DE_EXPERIENTA	1	10	30	Other	Ați dorit să scrieți <suggestion>cobaii</suggestion>?	cobaii
+L	947	Știu toate acestea din experiențele trecute.
+M	947	EXPERIENTA_TRECUTA	1	23	43	Other	Ați dorit să scrieți <suggestion>experință</suggestion>?	experință
+L	948	Experința trecută pe cartea de muncă.
+M	948	MORFOLOGIK_RULE_RO_RO		0	9	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Experienta|Experientă|Experiența|Experiență
+L	949	I-a oferit ca drept răsplată o carte.
+M	949	CA_DREPT_RASPLATA	1	11	28	Other	Ați dorit să scrieți <suggestion>ca răsplată</suggestion> sau <suggestion>drept răsplată</suggestion>?	ca răsplată|drept răsplată
+L	950	I-a oferit drept răsplată o carte.
+L	951	Hei, întoarce-te înapoi!
+M	951	INTOARCE_TE_INAPOI	1	5	23	Other	Ați dorit să scrieți <suggestion>întoarce-te</suggestion>?	întoarce-te
+L	952	Hei, întoarceți-vă înapoi!
+M	952	INTOARCE_TE_INAPOI	1	5	25	Other	Ați dorit să scrieți <suggestion>întoarceți-vă</suggestion>?	întoarceți-vă
+L	953	El a adăugat un spor.
+M	953	ADAUGA_UN_SPOR	1	5	20	Other	Ați dorit să scrieți <suggestion>sporit</suggestion>?	sporit
+L	954	El a sporit valoarea cărții.
+L	955	Rămâi și nu pleca!
+M	955	RAMAI_SI_NU_PLECA	1	0	17	Other	Ați dorit să scrieți <suggestion>Rămâi</suggestion> sau <suggestion>nu pleca</suggestion>?	Rămâi|Nu pleca
+L	956	Rămâi!
+L	957	Ei conlocuiesc laolaltă cu multe alte persoane.
+M	957	A_CONLOCUI_LAOLALTA	1	3	23	Other	Ați dorit să scrieți <suggestion>conlocuiesc</suggestion> sau <suggestion>locuiesc laolaltă</suggestion>?	conlocuiesc|locuiesc laolaltă
+L	958	Ei locuiesc laolaltă cu multe alte persoane.
+L	959	La limitează numai la câteva noțiuni.
+M	959	LIMITA_NUMAI_LA	1	3	21	Other	Ați dorit să scrieți <suggestion>limitează la</suggestion>?	limitează la
+L	960	A ecranizat un film nou.
+M	960	ECRANIZA_UN_FILM	1	2	19	Other	Pleonasm. ECRANIZA = A turna un film...	
+L	961	A turnat un film nou.
+L	962	A inșirat fraze goale și fără sens.
+M	962	MORFOLOGIK_RULE_RO_RO		2	9	UnknownWord	S-a găsit o posibilă greșeală de ortografie	înșirat|inserat|inspirat|înserat|însurat|înșira|înșirai|înșiram|înșirata|înșirate|înșirato|înșiratu|înșirată|înșirau|înșirați|înșiră|înșirăm
+M	962	GOALE_SI_FARA_SENS	1	16	34	Other	Ați dorit să scrieți <suggestion>goale</suggestion> sau <suggestion>fără sens</suggestion>?	goale|fără sens
+L	963	Fraza părea goală și fără sens.
+M	963	GOALE_SI_FARA_SENS	1	12	30	Other	Ați dorit să scrieți <suggestion>goală</suggestion> sau <suggestion>fără sens</suggestion>?	goală|fără sens
+L	964	A inșirat fraze fără sens.
+M	964	MORFOLOGIK_RULE_RO_RO		2	9	UnknownWord	S-a găsit o posibilă greșeală de ortografie	înșirat|inserat|inspirat|înserat|însurat|înșira|înșirai|înșiram|înșirata|înșirate|înșirato|înșiratu|înșirată|înșirau|înșirați|înșiră|înșirăm
+L	965	Examenul necesită multă atenție și concentrare.
+M	965	ATENTIE_SI_CONCENTRARE	1	24	46	Other	Ați dorit să scrieți <suggestion>atenție</suggestion> sau <suggestion>concentrare</suggestion>?	atenție|concentrare
+L	966	Examenul necesită multă concentrare.
+L	967	Acolo era un loc de meditație și reculegere.
+M	967	RECULEGERE_SI_MEDITATIE	1	20	43	Other	Ați dorit să scrieți <suggestion>meditație</suggestion> sau <suggestion>reculegere</suggestion>?	meditație|reculegere
+L	968	Acolo era un loc de reculegere.
+L	969	Acolo era un loc de reculegere și meditație.
+M	969	RECULEGERE_SI_MEDITATIE	2	20	43	Other	Ați dorit să scrieți <suggestion>reculegere</suggestion> sau <suggestion>meditație</suggestion>?	reculegere|meditație
+L	970	Acolo era un loc de reculegere.
+L	971	Acolo era un loc de reculegere și de meditație.
+M	971	RECULEGERE_SI_MEDITATIE	3	17	46	Other	Ați dorit să scrieți <suggestion>de reculegere</suggestion> sau <suggestion>de meditație</suggestion>?	de reculegere|de meditație
+L	972	Acolo era un loc de reculegere.
+L	973	Acolo era un loc de meditație și de reculegere.
+M	973	RECULEGERE_SI_MEDITATIE	4	17	46	Other	Ați dorit să scrieți <suggestion>de meditație</suggestion> sau <suggestion>de reculegere</suggestion>?	de meditație|de reculegere
+L	974	Acolo era un loc de reculegere.
+L	975	Astăzi ne-a prezentat în primă audiție o compoziție a sa.
+L	976	Astăzi am ascultat în primă audiție o compoziție a sa.
+M	976	IN_PRIMA_AUDITIE	1	10	35	Other	Ați dorit să scrieți 	
+L	977	Mica cetate este foarte frumoasă.
+L	978	Biserica catolică este foarte răspândită.
+L	979	Mica carte este foarte frumoasă.
+M	979	CACOFONIE__CA	1	0	10	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	980	Mica cămilă este foarte frumoasă.
+M	980	CACOFONIE__CA	1	0	11	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	981	Această mică camilă este foarte frumoasă.
+M	981	CACOFONIE__CA	1	8	19	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	982	Aceasta este o politică care enervează electoratul.
+M	982	CACOFONIE__CA	1	15	28	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	983	Regret că nu sunt de acord colegii mei.
+L	984	De data asta pleca către exterior.
+M	984	CACOFONIE__CA	1	13	24	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	985	A studiat opera lui Ion Luca Caragiale
+L	986	Nico colaborase cu toți
+M	986	CACOFONIE__CO_CO	1	0	15	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	987	Nico a colaborat cu toți
+M	987	MORFOLOGIK_RULE_RO_RO		0	4	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Anico|Gico|NIC|Nic|Nicu|Nino|Rico|Tico|Inico|Mico|Naico|Neco|Nici|Nicio|Nilo|Nișo|Nuco|Pico|Sico|Unico|Ni co|Nic o
+L	988	Bunica cunoscuse multă lume
+M	988	CACOFONIE__CO_CO	1	0	16	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	989	Bunica a cunoscut multă lume
+L	990	Regret că colegii mei nu sunt de acord.
+M	990	CACOFONIE__CO_CO	1	7	17	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	991	Ca consilier are noi responsabilități.
+M	991	CACOFONIE__CO_CO	1	0	12	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	992	Am venit cu rugămintea de a-mi motiva absențele.
+M	992	CACOFONIE__CU_RU	1	9	22	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	993	Am venit cu o rugăminte de a-mi motiva absențele.
+L	994	Mă privește cu curiozitate.
+M	994	CACOFONIE__CU_CU	1	12	26	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	995	Mă privește cu vădită curiozitate.
+L	996	Nu a fost el ci cineva din afară.
+M	996	CACOFONIE__CI_CI	1	13	22	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	997	Nu a fost el ci o persoană din afară.
+L	998	Trebuie ca cineva să răspundă.
+M	998	CACOFONIE__CI_CI	1	8	17	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	999	Astăzi facem ora de chimie la laborator.
+M	999	CACOFONIE__LA	1	27	39	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1000	Astăzi facem ora de chimie în laborator.
+L	1001	Undeva valea se îngusta.
+M	1001	CACOFONIE__VA	1	0	12	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1002	Undeva se îngusta valea.
+L	1003	Cu timpul a înțeles toate problemele.
+M	1003	CACOFONIE__PUL_A	1	3	11	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1004	In timp, a înțeles toate problemele.
+L	1005	În timpul acesta vorbea profesorul.
+M	1005	CACOFONIE__PUL_A	1	3	16	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1006	În acest timp, vorbea profesorul.
+L	1007	Tipul acela nu-mi place.
+M	1007	CACOFONIE__PUL_A	1	0	11	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1008	Acel tip nu-mi place.
+L	1009	Fata ta nu este aici.
+M	1009	CACOFONIE__TA_TA	1	0	7	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1010	A ta fată nu este aici.
+L	1011	A plecat și ultima mașină.
+M	1011	CACOFONIE__MA_MA	1	12	25	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1012	A plecat și ultima dintre mașini.
+L	1013	A luat o ultimă măsură.
+M	1013	CACOFONIE__MA_MA	2	9	22	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1014	A luat încă o măsură, ultima.
+L	1015	Știu unde depune Maria cererea.
+L	1016	Știu unde Maria depune cererea.
+L	1017	O babă bătea cânepa.
+M	1017	CACOFONIE__BA	1	2	12	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1018	O babă cânepa bătea.
+L	1019	Roaba bate pisica.
+M	1019	CACOFONIE__BA	2	0	10	Other	Cacofonie: încercați să evitați astfel de formulări.	
+L	1020	Roaba aceea bate pisica.
+L	1021	Prietenul a cărui câine nu mușcă e aici.
+M	1021	AL_CARUI_PRIETENUL__CAINE	1	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărui</suggestion>?	al cărui
+L	1022	Prietenul a cărui băț este nou e aici.
+M	1022	AL_CARUI_PRIETENUL__CAINE	1	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărui</suggestion>?	al cărui
+L	1023	Prietenul al cărei câine nu mușcă e aici.
+M	1023	AL_CARUI_PRIETENUL__CAINE	2	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărui</suggestion>?	al cărui
+L	1024	Prietenul al cărei băț e roșu e aici.
+M	1024	AL_CARUI_PRIETENUL__CAINE	2	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărui</suggestion>?	al cărui
+L	1025	Prietenul ai cărei câine nu mușcă e aici.
+M	1025	AL_CARUI_PRIETENUL__CAINE	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărui</suggestion>?	al cărui
+L	1026	Prietenul ai cărei băț e roșu e aici.
+M	1026	AL_CARUI_PRIETENUL__CAINE	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărui</suggestion>?	al cărui
+L	1027	Prietenul al cărui pisică nu mușcă e aici.
+M	1027	AL_CARUI_PRIETENUL__PISICA	1	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>a cărui</suggestion>?	a cărui
+L	1028	Prietenul a cărei pisică nu mușcă e aici.
+M	1028	AL_CARUI_PRIETENUL__PISICA	2	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>a cărui</suggestion>?	a cărui
+L	1029	Prietenul al cărei pisică nu mușcă e aici.
+M	1029	AL_CARUI_PRIETENUL__PISICA	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>a cărui</suggestion>?	a cărui
+L	1030	Prietenul al cărui câini nu mușcă e aici.
+M	1030	AL_CARUI_PRIETENUL__CAINI	1	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărui</suggestion>?	ai cărui
+L	1031	Prietenul ai cărei câini nu mușcă e aici.
+M	1031	AL_CARUI_PRIETENUL__CAINI	2	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărui</suggestion>?	ai cărui
+L	1032	Prietenul al cărei câini nu mușcă e aici.
+M	1032	AL_CARUI_PRIETENUL__CAINI	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărui</suggestion>?	ai cărui
+L	1033	Prietenul a cărei câini nu mușcă e aici.
+M	1033	AL_CARUI_PRIETENUL__CAINI	3	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărui</suggestion>?	ai cărui
+L	1034	Prietenul al cărui cărți îmi plac e aici.
+M	1034	AL_CARUI_PRIETENUL__PISICI	1	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ale cărui</suggestion>?	ale cărui
+L	1035	Prietenul ale cărei cărți îmi plac e aici.
+M	1035	AL_CARUI_PRIETENUL__PISICI	2	10	19	Other	Dezacord. Ați vrut să scrieți <suggestion>ale cărui</suggestion>?	ale cărui
+L	1036	Prietenul al cărei cărți îmi plac e aici.
+M	1036	AL_CARUI_PRIETENUL__PISICI	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ale cărui</suggestion>?	ale cărui
+L	1037	Prietena a cărei câine nu mușcă e aici.
+M	1037	AL_CARUI_PRIETENA__CAINE	1	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+L	1038	Prietena a cărei popor...
+M	1038	AL_CARUI_PRIETENA__CAINE	1	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+L	1039	Prietena al cărui câine nu mușcă e aici.
+M	1039	AL_CARUI_PRIETENA__CAINE	2	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+L	1040	Prietena al cărui popor...
+M	1040	AL_CARUI_PRIETENA__CAINE	2	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+L	1041	Prietena a cărui câine nu mușcă e aici.
+M	1041	AL_CARUI_PRIETENA__CAINE	3	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+L	1042	Prietena a cărui popor...
+M	1042	AL_CARUI_PRIETENA__CAINE	3	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+L	1043	Țara a cărui popor..
+M	1043	AL_CARUI_PRIETENA__CAINE	3	5	12	Other	Dezacord. Ați vrut să scrieți <suggestion>al cărei</suggestion>?	al cărei
+M	1043	DOUBLE_PUNCTUATION		18	20	Other	Două puncte consecutive	.|…
+L	1044	Prietena al cărei pisică nu mușcă e aici.
+M	1044	AL_CARUI_PRIETENA__PISICA	1	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>a cărei</suggestion>?	a cărei
+L	1045	Prietena a cărui pisică nu mușcă e aici.
+M	1045	AL_CARUI_PRIETENA__PISICA	2	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>a cărei</suggestion>?	a cărei
+L	1046	Prietena al cărui pisică nu mușcă e aici.
+M	1046	AL_CARUI_PRIETENA__PISICA	3	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>a cărei</suggestion>?	a cărei
+L	1047	Prietena a cărei câini nu mușcă e aici.
+M	1047	AL_CARUI_PRIETENA__CAINI	1	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărei</suggestion>?	ai cărei
+L	1048	Prietena ai cărui câini nu mușcă e aici.
+M	1048	AL_CARUI_PRIETENA__CAINI	2	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărei</suggestion>?	ai cărei
+L	1049	Prietena a cărui câini nu mușcă e aici.
+M	1049	AL_CARUI_PRIETENA__CAINI	3	9	16	Other	Dezacord. Ați vrut să scrieți <suggestion>ai cărei</suggestion>?	ai cărei
+L	1050	Prietena al cărei cărți îmi plac e aici.
+M	1050	AL_CARUI_PRIETENA__PISICI	1	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>ale cărei</suggestion>?	ale cărei
+L	1051	Prietena ale cărui cărți îmi plac e aici.
+M	1051	AL_CARUI_PRIETENA__PISICI	2	9	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ale cărei</suggestion>?	ale cărei
+L	1052	Prietena al cărui cărți îmi plac e aici.
+M	1052	AL_CARUI_PRIETENA__PISICI	3	9	17	Other	Dezacord. Ați vrut să scrieți <suggestion>ale cărei</suggestion>?	ale cărei
+L	1053	Prietenii a căror câine nu mușcă e aici.
+M	1053	AL_CARUI_PRIETENII__CAINE	1	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1054	Prietenii a căror popor...
+M	1054	AL_CARUI_PRIETENII__CAINE	1	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1055	Prietenii al cărei câine nu mușcă e aici.
+M	1055	AL_CARUI_PRIETENII__CAINE	2	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1056	Prietenii al cărei popor...
+M	1056	AL_CARUI_PRIETENII__CAINE	2	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1057	Prietenii ai cărei câine nu mușcă e aici.
+M	1057	AL_CARUI_PRIETENII__CAINE	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1058	Prietenii ai cărei popor...
+M	1058	AL_CARUI_PRIETENII__CAINE	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1059	Prietenii al căror pisică nu mușcă e aici.
+M	1059	AL_CARUI_PRIETENII__PISICA	1	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>a căror</suggestion>?	a căror
+L	1060	Prietenii a cărui pisică nu mușcă e aici.
+M	1060	AL_CARUI_PRIETENII__PISICA	2	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>a căror</suggestion>?	a căror
+L	1061	Prietenii al cărui pisică nu mușcă e aici.
+M	1061	AL_CARUI_PRIETENII__PISICA	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>a căror</suggestion>?	a căror
+L	1062	Prietenii al căror câini nu mușcă e aici.
+M	1062	AL_CARUI_PRIETENII__CAINI	1	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1063	Prietenii ai cărei câini nu mușcă e aici.
+M	1063	AL_CARUI_PRIETENII__CAINI	2	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1064	Prietenii al cărei câini nu mușcă e aici.
+M	1064	AL_CARUI_PRIETENII__CAINI	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1065	Prietenii a cărei câini nu mușcă e aici.
+M	1065	AL_CARUI_PRIETENII__CAINI	3	10	17	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1066	Prietenii al căror cărți îmi plac e aici.
+M	1066	AL_CARUI_PRIETENII__PISICI	1	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ale căror</suggestion>?	ale căror
+L	1067	Prietenii ale cărei cărți îmi plac e aici.
+M	1067	AL_CARUI_PRIETENII__PISICI	2	10	19	Other	Dezacord. Ați vrut să scrieți <suggestion>ale căror</suggestion>?	ale căror
+L	1068	Prietenii al cărei cărți îmi plac e aici.
+M	1068	AL_CARUI_PRIETENII__PISICI	3	10	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ale căror</suggestion>?	ale căror
+L	1069	Prietenele a căror câini nu mușcă e aici.
+M	1069	AL_CARUI_PRIETENELE__CAINI	1	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1070	Prietenele ai cărui câini nu mușcă e aici.
+M	1070	AL_CARUI_PRIETENELE__CAINI	2	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1071	Prietenele a cărui câini nu mușcă e aici.
+M	1071	AL_CARUI_PRIETENELE__CAINI	3	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>ai căror</suggestion>?	ai căror
+L	1072	Prietenele a căror câine nu mușcă e aici.
+M	1072	AL_CARUI_PRIETENELE__CAINE	1	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1073	Prietenele a căror popor...
+M	1073	AL_CARUI_PRIETENELE__CAINE	1	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1074	Prietenele al cărui câine nu mușcă e aici.
+M	1074	AL_CARUI_PRIETENELE__CAINE	2	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1075	Prietenele al cărui popor...
+M	1075	AL_CARUI_PRIETENELE__CAINE	2	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1076	Prietenele a cărui câine nu mușcă e aici.
+M	1076	AL_CARUI_PRIETENELE__CAINE	3	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1077	Prietenele a cărui popor...
+M	1077	AL_CARUI_PRIETENELE__CAINE	3	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>al căror</suggestion>?	al căror
+L	1078	Prietenele al căror pisică nu mușcă e aici.
+M	1078	AL_CARUI_PRIETENELE__PISICA	1	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>a căror</suggestion>?	a căror
+L	1079	Prietenele a cărui pisică nu mușcă e aici.
+M	1079	AL_CARUI_PRIETENELE__PISICA	2	11	18	Other	Dezacord. Ați vrut să scrieți <suggestion>a căror</suggestion>?	a căror
+L	1080	Prietenele al cărui pisică nu mușcă e aici.
+M	1080	AL_CARUI_PRIETENELE__PISICA	3	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>a căror</suggestion>?	a căror
+L	1081	Prietenele al căror cărți îmi plac e aici.
+M	1081	AL_CARUI_PRIETENELE__PISICI	1	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>ale căror</suggestion>?	ale căror
+L	1082	Prietenele ale cărui cărți îmi plac e aici.
+M	1082	AL_CARUI_PRIETENELE__PISICI	2	11	20	Other	Dezacord. Ați vrut să scrieți <suggestion>ale căror</suggestion>?	ale căror
+L	1083	Prietenele al cărui cărți îmi plac e aici.
+M	1083	AL_CARUI_PRIETENELE__PISICI	3	11	19	Other	Dezacord. Ați vrut să scrieți <suggestion>ale căror</suggestion>?	ale căror
+L	1084	A adus mere, pere, prune , etc.
+M	1084	VIRGULA_ETC	1	25	30	Other	Nu se pune virgulă înainte de „etc”. Ați dorit să scrieți <suggestion>etc</suggestion>?	etc
+L	1085	A adus mere, pere, prune etc.
+L	1086	A spus , – printre altele – că nu mai vine.
+M	1086	VIRGULA_CRATIMA	1	7	10	Other	Nu se pune virgulă înainte de „–”. Ați dorit să scrieți <suggestion>–</suggestion>?	–
+L	1087	A spus - printre altele - că nu mai vine.
+L	1088	A pus -1, -2, -3.
+L	1089	A spus etc. etc.
+M	1089	ETC_ETC	1	7	16	Other	Ați dorit să scrieți <suggestion>etc.</suggestion> sau <suggestion>etc., etc.</suggestion>?	etc.|etc., etc.
+L	1090	A spus etc.
+L	1091	A spus șamd. șamd.
+M	1091	SAMD_SAMD	1	7	18	Other	Ați dorit să scrieți <suggestion>șamd.</suggestion>?	șamd.
+L	1092	Doar 20 pagini din lucrare erau ale lui.
+M	1092	_20_DE_PAGINI	1	5	14	Other	Ați dorit să scrieți <suggestion>20 de pagini</suggestion>?	20 de pagini
+L	1093	Tonul se schimbă la fiecare 22 minute.
+M	1093	_20_DE_PAGINI	1	28	37	Other	Ați dorit să scrieți <suggestion>22 de minute</suggestion>?	22 de minute
+L	1094	Tonul se schimbă la fiecare 200 minute.
+M	1094	_20_DE_PAGINI	1	28	38	Other	Ați dorit să scrieți <suggestion>200 de minute</suggestion>?	200 de minute
+L	1095	Războiul a durat 2000 ani.
+M	1095	_20_DE_PAGINI	1	17	25	Other	Ați dorit să scrieți <suggestion>2000 de ani</suggestion>?	2000 de ani
+L	1096	Războiul a durat 2001 ani.
+L	1097	Războiul a durat 201 ani.
+L	1098	Războiul a durat 102 ani.
+L	1099	Războiul a durat 107 ani.
+L	1100	Din cele 407 biblioteci existente pe cuprinsul județului 87 sunt biblioteci sunt noi.
+L	1101	Tricoul are numărul 20.
+L	1102	Lucrarea avea peste 200 de pagini.
+L	1103	Cetatea datează din anul 200 î.H..
+M	1103	MORFOLOGIK_RULE_RO_RO		29	30	UnknownWord	S-a găsit o posibilă greșeală de ortografie	I|i
+M	1103	DOUBLE_PUNCTUATION		32	34	Other	Două puncte consecutive	.|…
+L	1104	Lucrarea este din 20 martie.
+L	1105	El a organizat aproximativ în anul 1200 primul cor pe mai multe voci
+L	1106	Este s-a lansat pe 13 decembrie 1996 la Sala Polivalentă
+L	1107	Tonul se schimbă la fiecare 10 secunde.
+L	1108	Tonul se schimbă la fiecare 202 secunde.
+L	1109	A cincia lucrare era a lui.
+M	1109	A_CINCIA	1	0	8	Other	Ați dorit să scrieți <suggestion>A cincea</suggestion>?	A cincea
+L	1110	A doisprezecea lucrare era a lui.
+M	1110	A_DOISPREZECEA	1	0	14	Other	Ați dorit să scrieți <suggestion>A douăsprezecea</suggestion>?	A douăsprezecea
+L	1111	S-au întâlnit la ora una.
+M	1111	ORA_UNA	1	17	24	Other	Ați dorit să scrieți <suggestion>ora unu</suggestion>?	ora unu
+L	1112	I-a trimis doar un pachet jumătate.
+M	1112	UN_PACHET_JUMATATE	1	16	34	Other	Ați dorit să scrieți <suggestion>un pachet și jumătate</suggestion>?	un pachet și jumătate
+L	1113	A primit doar un pachet și jumătate.
+L	1114	Era îmbrăcat într-un costum jumătate alb, jumătate negru.
+L	1115	Din apă a apărut un monstru jumătate pește, jumătate șarpe.
+L	1116	A tăit cu un cuțit jumătate din pâine.
+M	1116	MORFOLOGIK_RULE_RO_RO		2	6	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Taița|baiț|băit|căit|hait|hâit|hăit|mâit|sait|tacit|tact|taft|taht|tai|taie|taim|tain|trăit|tuit|tânt|tăi|tăia|tăiat|tăie|tăiș|tăuit
+L	1117	A optelea caiet era a lui.
+M	1117	AL_OPTELEA	1	0	9	Other	Ați dorit să scrieți <suggestion>al optulea</suggestion>?	Al optulea
+L	1118	El era al o sutelea pe listă.
+M	1118	O_SUTELEA	1	10	19	Other	Ați dorit să scrieți <suggestion>o sutălea</suggestion>?	o sutălea
+L	1119	El era alo sutălea pe listă.
+L	1120	El era al două sutălea pe listă.
+M	1120	DOUA_SUTALEA	1	10	22	Other	Ați dorit să scrieți <suggestion>două sutelea</suggestion>?	două sutelea
+L	1121	El era aldouă sutelea pe listă.
+M	1121	MORFOLOGIK_RULE_RO_RO		7	13	UnknownWord	S-a găsit o posibilă greșeală de ortografie	Aldous|aldoza|aldoză|al două
+L	1122	Mâine este unu aprilie.
+M	1122	UNU_APRILIE	1	11	22	Other	Ați dorit să scrieți <suggestion>întâi aprilie</suggestion>?	întâi aprilie
+L	1123	Mâine este întâi aprilie.
+L	1124	Mâine este unu mai.
+M	1124	UNU_APRILIE	1	11	18	Other	Ați dorit să scrieți <suggestion>întâi mai</suggestion>?	întâi mai
+L	1125	Am primit cu unu mai mult decât mă așteptam.
+L	1126	Și-a luat nevastă de-a doua.
+M	1126	NEVASTA_DE_AL_DOILEA	1	10	27	Other	Ați dorit să scrieți <suggestion>nevastă de-al doilea</suggestion>?	nevastă de-al doilea
+L	1127	Și-a luat nevastă de-al doilea.
+L	1128	Și-a luat soție de-a doua.
+M	1128	NEVASTA_DE_AL_DOILEA	1	10	25	Other	Ați dorit să scrieți <suggestion>soție de-al doilea</suggestion>?	soție de-al doilea
+L	1129	Casa este a nevestei de-a doua.
+M	1129	NEVASTA_DE_AL_DOILEA	1	12	30	Other	Ați dorit să scrieți <suggestion>nevestei de-al doilea</suggestion>?	nevestei de-al doilea
+L	1130	Casa este a nevestei de-aal doilea.
+M	1130	MORFOLOGIK_RULE_RO_RO		24	27	UnknownWord	S-a găsit o posibilă greșeală de ortografie	AOL|Aral|Mal|PAL|Wal|al|ala|anal|aul|aval|bal|băl|cal|gal|hal|mal|mâl|pal|ral|sal|tal|val|văl|ăl|ăla|șal|țal|a al
+L	1131	Mai are încă două zeci și doi de lei.
+M	1131	X_ZECI_SI_Y	1	13	29	Other	Ați dorit să scrieți <suggestion>douăzeci și doi</suggestion>?	douăzeci și doi
+L	1132	Mai are încă douăzeci și doi de lei.
+L	1133	Au mai rămas cinci zeci și șase de zile.
+M	1133	X_ZECI_SI_Y	1	13	31	Other	Ați dorit să scrieți <suggestion>cincizeci și șase</suggestion>?	cincizeci și șase
+L	1134	Mai sunt încă douăzeci elevi.
+M	1134	DOUAZECI_ELEVI	1	14	28	Other	Ați dorit să scrieți <suggestion>douăzeci de elevi</suggestion>?	douăzeci de elevi
+L	1135	Au mai rămas cincizeci cărți pe raft.
+M	1135	DOUAZECI_ELEVI	1	13	28	Other	Ați dorit să scrieți <suggestion>cincizeci de cărți</suggestion>?	cincizeci de cărți
+L	1136	Mai are încă douăzeci de elevi.
+L	1137	Aici au venit în anii șaizeci formații celebre.
+L	1138	Irinel a ieșit al douăzeci și unu.
+M	1138	AL_DOUAZECI_SI_UNU	1	15	33	Other	Ați dorit să scrieți <suggestion>al douăzeci și unulea</suggestion>?	al douăzeci și unulea
+L	1139	Era al cincizeci și unu pe listă.
+M	1139	AL_DOUAZECI_SI_UNU	1	4	23	Other	Ați dorit să scrieți <suggestion>al cincizeci și unulea</suggestion>?	al cincizeci și unulea
+L	1140	A ajuns al optzeci și unulea.
+M	1140	MORFOLOGIK_RULE_RO_RO		22	28	UnknownWord	S-a găsit o posibilă greșeală de ortografie	unule|unu lea|unul ea|unule a
+L	1141	Irinel a ieșit al douăsprezecelea.
+M	1141	AL_DOUASPREZECELEA	1	15	33	Other	Ați dorit să scrieți <suggestion>al doisprezecelea</suggestion>?	al doisprezecelea
+L	1142	Irinel a ajuns al doisprezecelea.
+L	1143	Irina a venit abia la începutul celei de-a treia zi.
+M	1143	CELEI_DE_A_TREIA_ZI	1	32	51	Other	Ați dorit să scrieți <suggestion>celei de-a treia zile</suggestion>?	celei de-a treia zile
+L	1144	Era la stârșitul celei de-a treia zi de vacanță.
+M	1144	MORFOLOGIK_RULE_RO_RO		7	16	UnknownWord	S-a găsit o posibilă greșeală de ortografie	sfârșitul|stârcitul|stârnitul|stârpitul|stăruitul|târșitul|s târșitul
+M	1144	CELEI_DE_A_TREIA_ZI	1	17	36	Other	Ați dorit să scrieți <suggestion>celei de-a treia zile</suggestion>?	celei de-a treia zile
+L	1145	A ajuns abia în zori celei de-a treia zile.
+L	1146	Irina a venit abia la începutul celei de a treia zi.
+M	1146	CELEI_DE_A_TREIA_ZI	2	32	51	Other	Ați dorit să scrieți <suggestion>celei de a treia zile</suggestion>?	celei de a treia zile
+L	1147	Era la stârșitul celei de a treia zi de vacanță.
+M	1147	MORFOLOGIK_RULE_RO_RO		7	16	UnknownWord	S-a găsit o posibilă greșeală de ortografie	sfârșitul|stârcitul|stârnitul|stârpitul|stăruitul|târșitul|s târșitul
+M	1147	CELEI_DE_A_TREIA_ZI	2	17	36	Other	Ați dorit să scrieți <suggestion>celei de a treia zile</suggestion>?	celei de a treia zile
+L	1148	A ajuns abia în zori celei de a treia zile.
+L	1149	Irina a venit abia la începutul celei de a treia zile toridă.
+M	1149	CELEI_DE_A_TREIA_ZILE_TORIDA	1	32	60	Other	Ați dorit să scrieți <suggestion>celei de a treia zile toride</suggestion>?	celei de a treia zile toride
+L	1150	Era la stârșitul celei de a treia zile toridă de vacanță.
+M	1150	MORFOLOGIK_RULE_RO_RO		7	16	UnknownWord	S-a găsit o posibilă greșeală de ortografie	sfârșitul|stârcitul|stârnitul|stârpitul|stăruitul|târșitul|s târșitul
+M	1150	CELEI_DE_A_TREIA_ZILE_TORIDA	1	17	45	Other	Ați dorit să scrieți <suggestion>celei de a treia zile toride</suggestion>?	celei de a treia zile toride
+L	1151	A ajuns abia în zori celei de a treia zile toride.
+L	1152	Irina a venit abia la începutul celei de-a treia zile toridă.
+M	1152	CELEI_DE_A_TREIA_ZILE_TORIDA	2	32	60	Other	Ați dorit să scrieți <suggestion>celei de-a treia zile toride</suggestion>?	celei de-a treia zile toride
+L	1153	Era la stârșitul celei de-a treia zile toridă de vacanță.
+M	1153	MORFOLOGIK_RULE_RO_RO		7	16	UnknownWord	S-a găsit o posibilă greșeală de ortografie	sfârșitul|stârcitul|stârnitul|stârpitul|stăruitul|târșitul|s târșitul
+M	1153	CELEI_DE_A_TREIA_ZILE_TORIDA	2	17	45	Other	Ați dorit să scrieți <suggestion>celei de-a treia zile toride</suggestion>?	celei de-a treia zile toride
+L	1154	A ajuns abia în zori celei de-a treia zile toride.

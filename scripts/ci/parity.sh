@@ -7,12 +7,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -68,6 +68,9 @@ if [ "$LANG_ARG" = "ca" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-20"
 fi
 if [ "$LANG_ARG" = "gl" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-20"
+fi
+if [ "$LANG_ARG" = "ro" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-20"
 fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
