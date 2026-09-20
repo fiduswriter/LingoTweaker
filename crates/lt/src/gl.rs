@@ -27,10 +27,9 @@ pub struct GalicianPipeline {
     /// `MultiWordChunker.getInstance("/gl/multiwords.txt")`
     pub multiwords_chunker: lt_disambig::MultiWordChunker,
     pub disambiguator: lt_disambig::XmlDisambiguator,
-    /// `HunspellRule` (`HUNSPELL_RULE`, rule 4). `None` when the vendored
-    /// `gl_ES` dictionary cannot be parsed by the in-tree checker (it uses
-    /// `FLAG num`, which `lt-spell` does not support yet) — the rest of the
-    /// Galician engine still loads.
+    /// `HunspellRule` (`HUNSPELL_RULE`, rule 4). `None` only when the vendored
+    /// `gl_ES` dictionary cannot be read (it uses the `FLAG num` mode, supported
+    /// by the in-tree checker).
     pub spelling: Option<Arc<crate::gl::spelling::GalicianSpellingRule>>,
     /// Legacy `AbstractSimpleReplaceRule` instances (15–16).
     pub legacy_replace: Vec<crate::gl::rules::LegacyReplaceRule>,

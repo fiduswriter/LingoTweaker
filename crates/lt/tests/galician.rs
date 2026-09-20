@@ -62,9 +62,8 @@ fn one(text: &str, rule: &str) -> Vec<lt::Match> {
 
 /// Stage-3 state: 295 active XML rules (the Java-only replace family is not
 /// part of the XML rule count), 285 disambiguation rules and
-/// `compile_failures()` = 0. The `HunspellRule` speller is disabled because
-/// the vendored `gl_ES` dictionary uses `FLAG num`, unsupported by the
-/// in-tree checker (internal notes).
+/// `compile_failures()` = 0. The `HunspellRule` speller loads the `FLAG num`
+/// `gl_ES` dictionary.
 #[test]
 fn galician_engine_state() {
     let _guard = engine_guard();

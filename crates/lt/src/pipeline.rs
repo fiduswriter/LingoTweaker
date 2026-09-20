@@ -2891,9 +2891,8 @@ impl Pipeline {
         mark("chunker");
 
         // `HunspellRule` (4), default on. The vendored `gl_ES` dictionary uses
-        // `FLAG num`, which the in-tree `lt-spell` checker does not support
-        // yet, so the speller is disabled (not a hard error) until that
-        // lands; see the Galician rule-port checklist.
+        // the `FLAG num` flag mode (now supported by `lt-spell`); a load
+        // failure would only disable the speller, not the engine.
         let spelling = match crate::gl::spelling::GalicianSpellingRule::load(data_dir.path()) {
             Ok(rule) => Some(Arc::new(rule)),
             Err(err) => {

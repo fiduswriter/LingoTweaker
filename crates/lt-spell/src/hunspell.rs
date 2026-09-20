@@ -17,10 +17,11 @@
 //!
 //! Unsupported (erroring at load, so a dictionary that needs them is never
 //! silently mis-checked): `COMPLEXPREFIXES`, `AF`/`AM` flag aliases,
-//! non-default `FLAG` modes, `ICONV`/`OCONV`, `IGNORE`, `COMPOUNDRULE`,
+//! `ICONV`/`OCONV`, `IGNORE`, `COMPOUNDRULE`,
 //! `CHECKCOMPOUNDPATTERN`/`CHECKCOMPOUNDREP`/`CHECKCOMPOUNDTRIPLE`/
 //! `CHECKCOMPOUNDCASE`/`CHECKCOMPOUNDDUP`/`COMPOUNDWORDMAX`. None of them
-//! occur (uncommented) in the German `.aff` files.
+//! occur (uncommented) in the German `.aff` files. The `FLAG` modes `char`
+//! (default), `long`, `num` and `UTF-8` are supported (`Flag = u16`).
 
 use std::path::Path;
 
@@ -30,11 +31,31 @@ const MAXWORDLEN: usize = 100;
 const MAXWORDUTF8LEN: usize = MAXWORDLEN * 3;
 const MAXSHARPS: usize = 5;
 
+/// One affix/dictionary flag (`unsigned short` in hunspell).
+type Flag = u16;
+/// Hunspell's `DEFAULTFLAGS` (flag ids at or above this are dropped).
+const DEFAULTFLAGS: u32 = 65510;
+/// `AffixMgr::contclasses[CONTSIZE]` (`atypes.hxx`).
+const CONTSIZE: usize = 65536;
+
+/// `enum flag { FLAG_CHAR, FLAG_LONG, FLAG_NUM, FLAG_UNI }` (`hashmgr.hxx`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum FlagMode {
+    /// Ispell's one-character flags (`erfg -> e r f g`).
+    Char,
+    /// Two-character flags (`1x2yZz -> 1x 2y Zz`).
+    Long,
+    /// Decimal numbers separated by commas (`4521,23,233`).
+    Num,
+    /// UTF-8 characters (stored as UTF-16 code units, like `w_char`).
+    Uni,
+}
+
 /// One dictionary entry, decoded on demand from the raw `.dic` bytes
 /// (`hentry` view: flags, ONLYUPCASE marker, byte length).
 #[derive(Clone, Copy)]
 struct DicEntry<'a> {
-    flags: &'a [u8],
+    flags: &'a [Flag],
     only_upcase: bool,
     /// byte length of the dictionary word (`hentry::blen`)
     word_len: usize,
@@ -57,7 +78,7 @@ struct PackedEntry {
 /// D-033).
 struct WordIndex {
     dic: Vec<u8>,
-    flags: Vec<u8>,
+    flags: Vec<Flag>,
     /// sorted by word bytes (stable: insertion order per word)
     entries: Vec<PackedEntry>,
 }
@@ -91,11 +112,11 @@ impl WordIndex {
 
 #[derive(Debug, Clone)]
 struct AffixEntry {
-    flag: u8,
+    flag: Flag,
     cross: bool,
     strip: Vec<u8>,
     appnd: Vec<u8>,
-    cont: Vec<u8>,
+    cont: Vec<Flag>,
     /// Condition exactly as hunspell stores it (suffixes: byte-reversed with
     /// '['/']' swapped; see `parse_affix`).
     cond: Vec<u8>,
@@ -113,23 +134,24 @@ struct Aff {
     suffixes: Vec<AffixEntry>,
     empty_suffixes: Vec<AffixEntry>,
     compound: bool,
-    compound_flag: Option<u8>,
-    compound_begin: Option<u8>,
-    compound_middle: Option<u8>,
-    compound_end: Option<u8>,
-    compound_permit: Option<u8>,
-    compound_forbid: Option<u8>,
-    compound_root: Option<u8>,
+    flag_mode: FlagMode,
+    compound_flag: Option<Flag>,
+    compound_begin: Option<Flag>,
+    compound_middle: Option<Flag>,
+    compound_end: Option<Flag>,
+    compound_permit: Option<Flag>,
+    compound_forbid: Option<Flag>,
+    compound_root: Option<Flag>,
     compound_min: usize,
-    forbidden_word: Option<u8>,
-    keep_case: Option<u8>,
-    need_affix: Option<u8>,
-    only_in_compound: Option<u8>,
-    circumfix: Option<u8>,
+    forbidden_word: Option<Flag>,
+    keep_case: Option<Flag>,
+    need_affix: Option<Flag>,
+    only_in_compound: Option<Flag>,
+    circumfix: Option<Flag>,
     checksharps: bool,
     fullstrip: bool,
     have_cont_class: bool,
-    cont_classes: Box<[bool; 256]>,
+    cont_classes: Box<[bool; CONTSIZE]>,
     break_patterns: Vec<Vec<u8>>,
 }
 
@@ -141,6 +163,7 @@ impl Default for Aff {
             suffixes: Vec::new(),
             empty_suffixes: Vec::new(),
             compound: false,
+            flag_mode: FlagMode::Char,
             compound_flag: None,
             compound_begin: None,
             compound_middle: None,
@@ -157,7 +180,7 @@ impl Default for Aff {
             checksharps: false,
             fullstrip: false,
             have_cont_class: false,
-            cont_classes: Box::new([false; 256]),
+            cont_classes: Box::new([false; CONTSIZE]),
             break_patterns: Vec::new(),
         }
     }
@@ -166,7 +189,7 @@ impl Default for Aff {
 impl Aff {
     fn parse(text: &str) -> Result<Aff> {
         let mut aff = Aff::default();
-        let mut pending: Vec<(bool, u8, bool, AffixEntry)> = Vec::new();
+        let mut pending: Vec<(bool, Flag, bool, AffixEntry)> = Vec::new();
         let mut lines = text.lines().peekable();
         while let Some(raw) = lines.next() {
             let line = raw.trim_end_matches('\r');
@@ -178,7 +201,8 @@ impl Aff {
             match kind {
                 "PFX" | "SFX" => {
                     let is_prefix = kind == "PFX";
-                    let flag = single_flag(&mut it, line)?;
+                    let mode = aff.flag_mode;
+                    let flag = decode_flag(mode, it.next().ok_or_else(|| parse_err(line))?);
                     let cross = it.next().map(|f| f == "Y").unwrap_or(false);
                     let count: usize = it
                         .next()
@@ -187,7 +211,7 @@ impl Aff {
                     for _ in 0..count {
                         let eline = lines.next().ok_or_else(|| parse_err(line))?;
                         let eline = eline.trim_end_matches('\r');
-                        let entry = parse_affix_entry(eline, is_prefix, flag, cross)?;
+                        let entry = parse_affix_entry(eline, is_prefix, flag, cross, mode)?;
                         for &c in &entry.cont {
                             aff.have_cont_class = true;
                             aff.cont_classes[c as usize] = true;
@@ -251,21 +275,86 @@ fn parse_err(line: &str) -> CoreError {
     CoreError::Data(format!("hunspell affix parse error: {line:?}"))
 }
 
-fn single_flag(it: &mut std::str::SplitWhitespace<'_>, line: &str) -> Result<u8> {
-    let token = it.next().ok_or_else(|| parse_err(line))?;
-    let bytes = token.as_bytes();
-    if bytes.len() != 1 {
-        return Err(CoreError::Data(format!(
-            "hunspell flag {token:?} is not a single byte in {line:?} (FLAG modes are unsupported)"
-        )));
+/// `atoi` (skips leading whitespace, optional sign, stops at the first
+/// non-digit; empty/no-digits -> 0).
+fn parse_atoi(s: &str) -> u32 {
+    let b = s.as_bytes();
+    let mut i = 0;
+    while i < b.len() && (b[i] == b' ' || b[i] == b'\t') {
+        i += 1;
     }
-    Ok(bytes[0])
+    let mut sign = 1i64;
+    if i < b.len() && (b[i] == b'+' || b[i] == b'-') {
+        if b[i] == b'-' {
+            sign = -1;
+        }
+        i += 1;
+    }
+    let mut value: i64 = 0;
+    while i < b.len() && b[i].is_ascii_digit() {
+        value = value
+            .saturating_mul(10)
+            .saturating_add((b[i] - b'0') as i64);
+        i += 1;
+    }
+    (value * sign).clamp(0, u32::MAX as i64) as u32
 }
 
-fn parse_affix_entry(line: &str, is_prefix: bool, flag: u8, cross: bool) -> Result<AffixEntry> {
+/// `HashMgr::decode_flag` for one flag token.
+fn decode_flag(mode: FlagMode, token: &str) -> Flag {
+    let value = match mode {
+        FlagMode::Long => {
+            let b = token.as_bytes();
+            let hi = b.first().copied().unwrap_or(0) as u32;
+            let lo = b.get(1).copied().unwrap_or(0) as u32;
+            (hi << 8) | lo
+        }
+        FlagMode::Num => parse_atoi(token),
+        FlagMode::Uni => token.encode_utf16().next().map(|u| u as u32).unwrap_or(0),
+        FlagMode::Char => token.as_bytes().first().copied().unwrap_or(0) as u32,
+    };
+    if value >= DEFAULTFLAGS {
+        0
+    } else {
+        value as Flag
+    }
+}
+
+/// `HashMgr::decode_flags` (`ap` is the text after the `/`).
+fn decode_flags(mode: FlagMode, flags: &str) -> Vec<Flag> {
+    if flags.is_empty() {
+        return Vec::new();
+    }
+    match mode {
+        FlagMode::Long => flags
+            .as_bytes()
+            .chunks(2)
+            .filter(|c| c.len() == 2)
+            .map(|c| (((c[0] as u32) << 8) | c[1] as u32) as u16)
+            .collect(),
+        FlagMode::Num => flags
+            .split(',')
+            .map(parse_atoi)
+            .map(|v| v as Flag)
+            .collect(),
+        FlagMode::Uni => flags.encode_utf16().collect(),
+        FlagMode::Char => flags.as_bytes().iter().map(|&b| b as Flag).collect(),
+    }
+}
+
+fn parse_affix_entry(
+    line: &str,
+    is_prefix: bool,
+    flag: Flag,
+    cross: bool,
+    mode: FlagMode,
+) -> Result<AffixEntry> {
     let mut it = line.split_whitespace();
     let _type = it.next().ok_or_else(|| parse_err(line))?;
-    let f = single_flag(&mut it, line)?;
+    let f = it
+        .next()
+        .map(|token| decode_flag(mode, token))
+        .ok_or_else(|| parse_err(line))?;
     if f != flag {
         return Err(parse_err(line));
     }
@@ -278,10 +367,12 @@ fn parse_affix_entry(line: &str, is_prefix: bool, flag: u8, cross: bool) -> Resu
         strip.as_bytes().to_vec()
     };
     let add_str = add_field.split('/').next().unwrap_or("");
-    let cont = match add_field.split_once('/') {
-        Some((_, c)) => c.as_bytes().to_vec(),
+    let mut cont = match add_field.split_once('/') {
+        Some((_, c)) => decode_flags(mode, c),
         None => Vec::new(),
     };
+    // `AffixMgr::parse_affix` sorts the continuation classes.
+    cont.sort_unstable();
     let appnd = if add_str == "0" {
         Vec::new()
     } else {
@@ -382,13 +473,32 @@ fn parse_directive<'a>(
     line: &str,
     lines: &mut std::iter::Peekable<std::str::Lines<'_>>,
 ) -> Result<()> {
+    let mode = aff.flag_mode;
+    let next_flag = |it: &mut std::str::SplitWhitespace<'a>| -> Result<Flag> {
+        let token = it.next().ok_or_else(|| parse_err(line))?;
+        Ok(decode_flag(mode, token))
+    };
     match kind {
         "SET" | "LANG" | "TRY" | "REP" | "KEY" | "MAP" | "PHONE" | "NOSUGGEST" | "WARN"
         | "SUBSTANDARD" | "FORCEUCASE" | "SYLLABLENUM" | "WORDCHARS" | "MAXNGRAMSUGS"
         | "MAXDIFF" | "ONLYMAXDIFF" | "MAXCPDSUGS" | "MAXSUGS" | "NOSPLITSUGS" | "SUGSWITHDOTS"
         | "LEMMA_PRESENT" | "OCONV" | "ICONV" => {}
-        "FLAG"
-        | "AF"
+        "FLAG" => {
+            let value = it.next().ok_or_else(|| parse_err(line))?;
+            aff.flag_mode = match value {
+                "long" => FlagMode::Long,
+                "num" => FlagMode::Num,
+                v if v.eq_ignore_ascii_case("utf-8") || v.eq_ignore_ascii_case("utf8") => {
+                    FlagMode::Uni
+                }
+                other => {
+                    return Err(CoreError::Data(format!(
+                        "hunspell FLAG mode {other:?} is not supported ({line:?})"
+                    )))
+                }
+            };
+        }
+        "AF"
         | "AM"
         | "COMPLEXPREFIXES"
         | "IGNORE"
@@ -407,18 +517,18 @@ fn parse_directive<'a>(
         }
         "FULLSTRIP" => aff.fullstrip = true,
         "CHECKSHARPS" => aff.checksharps = true,
-        "COMPOUNDFLAG" => aff.compound_flag = Some(single_flag(it, line)?),
-        "COMPOUNDBEGIN" => aff.compound_begin = Some(single_flag(it, line)?),
-        "COMPOUNDMIDDLE" => aff.compound_middle = Some(single_flag(it, line)?),
-        "COMPOUNDEND" => aff.compound_end = Some(single_flag(it, line)?),
-        "COMPOUNDPERMITFLAG" => aff.compound_permit = Some(single_flag(it, line)?),
-        "COMPOUNDFORBIDFLAG" => aff.compound_forbid = Some(single_flag(it, line)?),
-        "COMPOUNDROOT" => aff.compound_root = Some(single_flag(it, line)?),
-        "FORBIDDENWORD" => aff.forbidden_word = Some(single_flag(it, line)?),
-        "KEEPCASE" => aff.keep_case = Some(single_flag(it, line)?),
-        "NEEDAFFIX" | "PSEUDOROOT" => aff.need_affix = Some(single_flag(it, line)?),
-        "ONLYINCOMPOUND" => aff.only_in_compound = Some(single_flag(it, line)?),
-        "CIRCUMFIX" => aff.circumfix = Some(single_flag(it, line)?),
+        "COMPOUNDFLAG" => aff.compound_flag = Some(next_flag(it)?),
+        "COMPOUNDBEGIN" => aff.compound_begin = Some(next_flag(it)?),
+        "COMPOUNDMIDDLE" => aff.compound_middle = Some(next_flag(it)?),
+        "COMPOUNDEND" => aff.compound_end = Some(next_flag(it)?),
+        "COMPOUNDPERMITFLAG" => aff.compound_permit = Some(next_flag(it)?),
+        "COMPOUNDFORBIDFLAG" => aff.compound_forbid = Some(next_flag(it)?),
+        "COMPOUNDROOT" => aff.compound_root = Some(next_flag(it)?),
+        "FORBIDDENWORD" => aff.forbidden_word = Some(next_flag(it)?),
+        "KEEPCASE" => aff.keep_case = Some(next_flag(it)?),
+        "NEEDAFFIX" | "PSEUDOROOT" => aff.need_affix = Some(next_flag(it)?),
+        "ONLYINCOMPOUND" => aff.only_in_compound = Some(next_flag(it)?),
+        "CIRCUMFIX" => aff.circumfix = Some(next_flag(it)?),
         "COMPOUNDMIN" => aff.compound_min = it.next().and_then(|v| v.parse().ok()).unwrap_or(1),
         "BREAK" => {
             let count: usize = it.next().and_then(|v| v.parse().ok()).unwrap_or(0);
@@ -435,6 +545,39 @@ fn parse_directive<'a>(
         _ => {}
     }
     Ok(())
+}
+
+/// `HashMgr::load_tables`: split off the morphological description. Hunspell
+/// looks for a `:` whose two-character type prefix is preceded by whitespace
+/// (e.g. `word/flags po:noun`), backing up over the spaces; a tab always acts
+/// as the old morphological separator.
+fn strip_morphology(ts: &str) -> &str {
+    let bytes = ts.as_bytes();
+    let mut dp: Option<usize> = None;
+    let mut search = 0usize;
+    while let Some(rel) = ts[search..].find(':') {
+        let pos = search + rel;
+        if pos > 3 && (bytes[pos - 3] == b' ' || bytes[pos - 3] == b'\t') {
+            let mut p = pos - 3;
+            while p > 0 && (bytes[p - 1] == b' ' || bytes[p - 1] == b'\t') {
+                p -= 1;
+            }
+            if p > 0 {
+                dp = Some(p + 1);
+            }
+            break;
+        }
+        search = pos + 1;
+    }
+    if let Some(tab) = ts.find('\t') {
+        if dp.is_none() || tab < dp.unwrap() {
+            dp = Some(tab + 1);
+        }
+    }
+    match dp {
+        Some(p) => &ts[..p - 1],
+        None => ts,
+    }
 }
 
 /// The in-tree hunspell checker for one `.aff`/`.dic` pair.
@@ -455,7 +598,7 @@ impl HunspellChecker {
     pub fn from_strs(aff_text: &str, dic_text: &str) -> Result<Self> {
         let aff = Aff::parse(aff_text)?;
         let mut dic: Vec<u8> = Vec::with_capacity(dic_text.len());
-        let mut flag_arena: Vec<u8> = Vec::new();
+        let mut flag_arena: Vec<Flag> = Vec::new();
         let mut raw: Vec<PackedEntry> = Vec::new();
         let mut lines = dic_text.lines();
         lines.next(); // entry count
@@ -464,10 +607,9 @@ impl HunspellChecker {
             if line.starts_with('#') {
                 continue;
             }
-            let mut word_part = line;
-            if let Some(tab) = line.find('\t') {
-                word_part = &line[..tab];
-            }
+            // `HashMgr::load_tables`: split off the morphological description
+            // (the `:`-with-two-char-prefix heuristic, else a tab).
+            let word_part = strip_morphology(line);
             if word_part.is_empty() {
                 continue;
             }
@@ -486,7 +628,7 @@ impl HunspellChecker {
                 i += 1;
             }
             let (word_raw, flags_raw) = match slash {
-                Some(pos) if pos > 0 => (&bytes[..pos], Some(&bytes[pos + 1..])),
+                Some(pos) if pos > 0 => (&bytes[..pos], Some(&word_part[pos + 1..])),
                 _ => (bytes, None),
             };
             let mut word: Vec<u8> = Vec::with_capacity(word_raw.len());
@@ -503,7 +645,9 @@ impl HunspellChecker {
             if word.is_empty() {
                 continue;
             }
-            let mut flags: Vec<u8> = flags_raw.map(|f| f.to_vec()).unwrap_or_default();
+            let mut flags: Vec<Flag> = flags_raw
+                .map(|f| decode_flags(aff.flag_mode, f))
+                .unwrap_or_default();
             flags.sort_unstable();
             let flags_off = flag_arena.len() as u32;
             flag_arena.extend_from_slice(&flags);
@@ -879,7 +1023,7 @@ impl HunspellChecker {
         None
     }
 
-    fn has_flag(&self, entry: DicEntry<'_>, flag: Option<u8>) -> bool {
+    fn has_flag(&self, entry: DicEntry<'_>, flag: Option<Flag>) -> bool {
         flag.is_some_and(|f| entry.flags.contains(&f))
     }
 
@@ -900,7 +1044,7 @@ impl HunspellChecker {
         word: &[u8],
         start: usize,
         len: usize,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         in_compound: InCompound,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
@@ -943,7 +1087,7 @@ impl HunspellChecker {
         start: usize,
         len: usize,
         in_compound: InCompound,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         state.pfx = None;
@@ -1029,7 +1173,7 @@ impl HunspellChecker {
         start: usize,
         len: usize,
         in_compound: InCompound,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         if len < e.appnd.len() {
@@ -1089,7 +1233,7 @@ impl HunspellChecker {
         start: usize,
         len: usize,
         in_compound: InCompound,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         state.pfx = None;
@@ -1145,7 +1289,7 @@ impl HunspellChecker {
         start: usize,
         len: usize,
         in_compound: InCompound,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         if len < e.appnd.len() {
@@ -1190,8 +1334,8 @@ impl HunspellChecker {
         len: usize,
         sfxopts: u32,
         ppfx: Option<PfxId>,
-        cclass: Option<u8>,
-        needflag: Option<u8>,
+        cclass: Option<Flag>,
+        needflag: Option<Flag>,
         in_compound: InCompound,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
@@ -1260,7 +1404,7 @@ impl HunspellChecker {
         &self,
         e: &AffixEntry,
         ppfx: Option<PfxId>,
-        cclass: Option<u8>,
+        cclass: Option<Flag>,
         in_compound: InCompound,
     ) -> bool {
         let permit = self
@@ -1330,9 +1474,9 @@ impl HunspellChecker {
         len: usize,
         optflags: u32,
         ppfx: Option<PfxId>,
-        cclass: Option<u8>,
-        needflag: Option<u8>,
-        badflag: Option<u8>,
+        cclass: Option<Flag>,
+        needflag: Option<Flag>,
+        badflag: Option<Flag>,
         _state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         if optflags & AFFIX_XPRODUCT != 0 && !e.cross {
@@ -1399,7 +1543,7 @@ impl HunspellChecker {
         len: usize,
         sfxopts: u32,
         ppfx: Option<PfxId>,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         for (idx, e) in self.aff.empty_suffixes.iter().enumerate() {
@@ -1464,7 +1608,7 @@ impl HunspellChecker {
         len: usize,
         optflags: u32,
         ppfx: Option<PfxId>,
-        needflag: Option<u8>,
+        needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
         if optflags & AFFIX_XPRODUCT != 0 && !e.cross {
@@ -2000,7 +2144,7 @@ struct AffixState {
     pfx: Option<PfxId>,
     sfx: Option<SfxId>,
     sfxappnd: Option<Vec<u8>>,
-    sfxflag: Option<u8>,
+    sfxflag: Option<Flag>,
 }
 
 fn find_sub(haystack: &[u8], needle: &[u8], from: usize) -> Option<usize> {
