@@ -110,6 +110,19 @@ fn galician_legacy_replace_rules() {
     assert_eq!(matches[0].suggestions[0].value, "beirarrúa");
 }
 
+/// `HunspellRule` (`HUNSPELL_RULE`) over the `FLAG num` `gl_ES` dictionary:
+/// a clear misspelling fires with the `MessagesBundle_gl` message. The
+/// suggestion list still comes from the shared bounded search, not upstream's
+/// native `hunspell.suggest` ranking (internal notes/D-195).
+#[test]
+fn galician_speller() {
+    let matches = one("O mundo zzz.", "HUNSPELL_RULE");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].message, "Atopouse un posíbel erro ortográfico");
+    let clean = one("O mundo.", "HUNSPELL_RULE");
+    assert!(clean.is_empty(), "{clean:?}");
+}
+
 /// `AbstractSimpleReplaceRule2` family (17–20), one match each with the
 /// rule's first suggestion.
 #[test]

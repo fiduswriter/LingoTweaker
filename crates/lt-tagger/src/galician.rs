@@ -131,9 +131,14 @@ impl GalicianTagger {
     /// `GalicianTagger.tag()` for one word.
     pub fn tag_word(&self, word: &str) -> (Vec<AnalyzedToken>, bool) {
         // "This hack allows all rules and dictionary entries to work with
-        // typewriter apostrophe".
+        // typewriter apostrophe". Java only rewrites when the token has more
+        // than one character (a lone `’` stays a typographic apostrophe).
         let contains_typewriter_apostrophe = word.chars().count() > 1 && word.contains('\'');
-        let word = word.replace('\u{2019}', "'");
+        let word = if word.chars().count() > 1 {
+            word.replace('\u{2019}', "'")
+        } else {
+            word.to_string()
+        };
         let mut l: Vec<AnalyzedToken> = Vec::new();
         let lower_word = word.to_lowercase();
         let is_lowercase = word == lower_word;

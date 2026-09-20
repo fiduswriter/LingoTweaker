@@ -725,6 +725,12 @@ impl SynthDictionary {
                 // byte concatenation first (`TrimSuffixEncoder.decode`), decode after
                 let mut stem_bytes = key_bytes[..key_bytes.len() - trim].to_vec();
                 stem_bytes.extend_from_slice(&seq[2..]);
+                // The old morfologik `tab2morph` build (Galician) appends the
+                // field separator as an entry terminator; morfologik's
+                // `DictionaryLookup` never exposes it.
+                if stem_bytes.last() == Some(&separator) {
+                    stem_bytes.pop();
+                }
                 out.push(charset.decode(&stem_bytes).into_owned());
             });
         out

@@ -621,6 +621,12 @@ fn rule_files(data: &lt_data::DataDir, lang: Lang) -> Result<Vec<PathBuf>> {
         .filter_map(|e| e.ok())
         .map(|e| e.path())
         .filter(|p| {
+            // `bitext.xml` (Galician) is a parallel-corpus file, not a rule
+            // file loaded by the engine (`Language.getRuleFileNames` returns
+            // grammar.xml/style.xml); its examples must not enter the corpus.
+            if p.file_name().is_some_and(|n| n == "bitext.xml") {
+                return false;
+            }
             if p.is_file() {
                 return p.extension().is_some_and(|e| e == "xml");
             }
