@@ -9,10 +9,19 @@
       content="A ProseMirror editor with the LingoTweaker engine running fully in the browser via WebAssembly."
     />
     <link rel="stylesheet" href="./src/styles.css" />
+    <link rel="icon" href="./logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="./favicon.ico" sizes="any" />
+    <link rel="icon" href="./favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="./favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta name="theme-color" content="#2f6f4f" />
   </head>
   <body>
     <header class="header">
-      <h1>LingoTweaker</h1>
+      <h1 class="brand">
+        <img class="brand-mark" src="./logo.svg" alt="" width="40" height="40" />
+        <span>LingoTweaker</span>
+      </h1>
       <p class="tagline">
         A language checker in WebAssembly. Everything runs in your browser; the
         text never leaves the page.
@@ -37,8 +46,8 @@
 
     <footer class="footer">
       <p>
-        Right-click an underlined word for suggestions. Underline colour by
-        issue type:
+        Right-click an underlined word for suggestions (or tap it on a touch
+        screen). Underline colour by issue type:
         <span class="legend lt-kind-misspelling">misspelling</span>,
         <span class="legend lt-kind-grammar">grammar</span>,
         <span class="legend lt-kind-style">style</span>,

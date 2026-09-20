@@ -254,9 +254,19 @@ function showPopup(match, x, y) {
   const margin = 8;
   const width = popup.offsetWidth;
   const height = popup.offsetHeight;
-  popup.style.left = `${Math.min(x, window.innerWidth - width - margin)}px`;
-  popup.style.top = `${Math.min(y, window.innerHeight - height - margin)}px`;
-  ok.focus();
+  // Use the visual viewport when available so the popup stays on screen above
+  // a mobile keyboard (which shrinks the visual viewport without resizing the
+  // layout viewport).
+  const visual = window.visualViewport;
+  const viewLeft = visual?.offsetLeft ?? 0;
+  const viewTop = visual?.offsetTop ?? 0;
+  const viewWidth = visual?.width ?? window.innerWidth;
+  const viewHeight = visual?.height ?? window.innerHeight;
+  const maxLeft = viewLeft + viewWidth - width - margin;
+  const maxTop = viewTop + viewHeight - height - margin;
+  popup.style.left = `${Math.max(viewLeft + margin, Math.min(x, maxLeft))}px`;
+  popup.style.top = `${Math.max(viewTop + margin, Math.min(y, maxTop))}px`;
+  ok.focus({ preventScroll: true });
 }
 
 function applySuggestion(match, suggestion) {
@@ -273,6 +283,31 @@ view.dom.addEventListener("contextmenu", (event) => {
   }
   event.preventDefault();
   showPopup(match, event.clientX, event.clientY);
+});
+
+// Touch devices have no right-click, so a tap on an underlined word opens the
+// same popup. Scrolling and long presses (the latter handled by the
+// contextmenu listener above) are ignored.
+let touchStart = null;
+view.dom.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "touch") {
+    touchStart = { x: event.clientX, y: event.clientY, time: Date.now() };
+  }
+});
+view.dom.addEventListener("pointerup", (event) => {
+  if (event.pointerType !== "touch" || !touchStart) {
+    return;
+  }
+  const { x, y, time } = touchStart;
+  touchStart = null;
+  if (Math.hypot(event.clientX - x, event.clientY - y) > 10 || Date.now() - time > 700) {
+    return;
+  }
+  const position = view.posAtCoords({ left: event.clientX, top: event.clientY });
+  const match = position && matchAt(view.state, position.pos);
+  if (match) {
+    showPopup(match, event.clientX, event.clientY);
+  }
 });
 
 document.addEventListener("pointerdown", (event) => {

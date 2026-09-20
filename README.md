@@ -1,5 +1,7 @@
 # LingoTweaker
 
+![LingoTweaker](https://fiduswriter.github.io/LingoTweaker/logo-wordmark.png)
+
 LingoTweaker is a proofreader of numerous languages written in Rust, with bindings with 
 Python and Node and compilable to WebAssembly.
 

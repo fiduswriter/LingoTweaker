@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 306 64" width="306" height="64" role="img" aria-label="LingoTweaker">
+  <!-- Editable wordmark source: the text is live so it can be re-typed or
+       restyled. `demo/brand/build-assets.sh` outlines it into
+       `demo/public/logo-wordmark.svg` so the shipped asset has no font
+       dependency. -->
+  <style>
+    .lt-wordmark { fill: #1f2328; }
+    @media (prefers-color-scheme: dark) { .lt-wordmark { fill: #e8e6e3; } }
+  </style>
+  <defs>
+    <linearGradient id="lt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3f8f68"/>
+      <stop offset="1" stop-color="#1f5238"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#lt-bg)"/>
+  <path d="M23 14 L23 37 L46 37" fill="none" stroke="#f7f3ea" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 49.5 q 4.25 -4.5 8.5 0 t 8.5 0 t 8.5 0 t 8.5 0" fill="none" stroke="#f0a92b" stroke-width="3.4" stroke-linecap="round"/>
+  <text class="lt-wordmark" x="79" y="43" font-family="'DejaVu Sans','Verdana',sans-serif" font-weight="700" font-size="30" letter-spacing="-0.4">LingoTweaker</text>
+  <path d="M81 55 q 10.95 -4.6 21.9 0 t 21.9 0 t 21.9 0 t 21.9 0 t 21.9 0 t 21.9 0 t 21.9 0 t 21.9 0 t 21.9 0" fill="none" stroke="#f0a92b" stroke-width="3" stroke-linecap="round"/>
+</svg>
