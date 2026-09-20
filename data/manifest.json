@@ -1,7 +1,6 @@
 {
   "upstream_commit": "01d07e1f61651d5ad7ea015cce36573314754ad8",
-  "generated_by": "tools/lt-sync/lt_sync.py add-local",
-  "file_count": 515,
+  "file_count": 544,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -3227,6 +3226,322 @@
       }
     },
     {
+      "path": "gl/dictionaries/galician.dict",
+      "sha256": "0dc6d9346b28ace10e3d5bdf4c706e6b907c835be501e842368f58c72ad0f43c",
+      "size": 3291586,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician.dict",
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/README.txt"
+      }
+    },
+    {
+      "path": "gl/dictionaries/galician.info",
+      "sha256": "000391816ca437c7f3bd5e1005f9b8e49a847c7bb390061a5758cf9fccded5ea",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician.info",
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/README.txt"
+      }
+    },
+    {
+      "path": "gl/dictionaries/galician_synth.dict",
+      "sha256": "e2571a59b4d4be2037d8a97d108cca1ee284917eecb2959c11eea6201511f894",
+      "size": 3376957,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician_synth.dict",
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/README.txt"
+      }
+    },
+    {
+      "path": "gl/dictionaries/galician_synth.info",
+      "sha256": "000391816ca437c7f3bd5e1005f9b8e49a847c7bb390061a5758cf9fccded5ea",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician_synth.info",
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/README.txt"
+      }
+    },
+    {
+      "path": "gl/dictionaries/galician_tags.txt",
+      "sha256": "92fbdf24dfd0d772cbedb077f89915a5e17ec2cc900bd002c1857f6f2189362f",
+      "size": 217478,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician_tags.txt",
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/README.txt"
+      }
+    },
+    {
+      "path": "gl/disambiguation.xml",
+      "sha256": "650f00f95ab4928bda27fd1d58a84e2648340c6de6f141d1bbed8ed95220cfaa",
+      "size": 91864,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/hunspell/LICENCES-en.txt",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "size": 35147,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/LICENCES-en.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/hunspell/README-gl-ES.txt",
+      "sha256": "5ca2996cd654f22fec322b90c252729c0e0f45a0684f3646521eee03afe524d4",
+      "size": 1072,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/README-gl-ES.txt",
+        "license": "GPL (hunspell-gl_ES / VOLGa dictionary documentation; README states GPL, LICENCES-en.txt is GPL-3.0) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/hunspell/README-gl-ES.txt"
+      }
+    },
+    {
+      "path": "gl/hunspell/gl_ES.aff",
+      "sha256": "51c3d51b19ad47f1870acef059013b00b3aaf4efb2d4fa03ce6a94746f01d020",
+      "size": 853785,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/gl_ES.aff",
+        "license": "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/hunspell/README-gl-ES.txt"
+      }
+    },
+    {
+      "path": "gl/hunspell/gl_ES.dic",
+      "sha256": "6d5fcc271881e31d523ffb4b7354cae10de70f92803f3f148adf9b90000f48e9",
+      "size": 2444812,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/gl_ES.dic",
+        "license": "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream gl/hunspell/README-gl-ES.txt"
+      }
+    },
+    {
+      "path": "gl/hunspell/ignore.txt",
+      "sha256": "759a847d70217f2221885a29752d8116e05bcd0977b2abcda675552ca2f9ac25",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/hunspell/spelling.txt",
+      "sha256": "70a20decc665755bbd20771b456230fe71b01c7e616af12b702a92358e27bb3a",
+      "size": 7415,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/barbarisms.txt",
+      "sha256": "f6475d0f528eb74f5a25fca118d0a627606d818d0afb56d0bba00c7a24e92ddb",
+      "size": 34665,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/barbarisms.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/bitext.xml",
+      "sha256": "64485ad74c1383e678ae90f20565c66cab7e200293a064ac095a0a3afe571390",
+      "size": 2617,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/bitext.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/grammar.xml",
+      "sha256": "2d169feca480373bb5970f6a351c8a8e9940704c8be60a44378f1754b333e2fa",
+      "size": 282985,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/redundancies.txt",
+      "sha256": "dbd3056bbc9e20bed5e4b147cec3dcc34ee5a5341c42f2ffe03ffbf5c7fc91ad",
+      "size": 11952,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/redundancies.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/spanish.txt",
+      "sha256": "759f2504bbd8dd7b61ccd412deda0989073171f9394d1ec444c2753f57672a0f",
+      "size": 3875,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/spanish.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/wikipedia.txt",
+      "sha256": "c9ada8f89b97a617e4db367130238f2f96322f2ae92fddbb5ecd1d8bc1d46e84",
+      "size": 45605,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/wikipedia.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/wordiness.txt",
+      "sha256": "5e6dd84afccb7853ac906f4adc3b3ee9f933fb29281da49cc6251688125c31c8",
+      "size": 5131,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/wordiness.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/rules/words.txt",
+      "sha256": "0dcf9086823e721ea5e4fbe6446f5aa46cf65682f78a90d9f0a029c3a3ca5c8b",
+      "size": 1210,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/rules/gl/words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/README.txt",
+      "sha256": "06ee0fabb31aa399fcd906ad413dd8aa236c5aa6c18026f4d7e5225684bfbabd",
+      "size": 156,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/added.txt",
+      "sha256": "46d9f3ad4132647ff2947a36c9b6a3bff499a69fc3f12872c8ac0b1f0623f19b",
+      "size": 483,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/common_words.txt",
+      "sha256": "30e088d8e25ffd8d9f4bc28b9e5ee6174d38731822bf347368b88fa0cec33077",
+      "size": 50212,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/multiwords.txt",
+      "sha256": "3f988e3ad06f7c1a83be253cbbec6be1a8149baed0bf60343d1c9f7f2b3d0baa",
+      "size": 268844,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/multiwords.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/removed.txt",
+      "sha256": "2a3ec57d2f24db7b50a9c2b01baf0aa1fb3a55813ce12ff6b1c9f8ffd2bef683",
+      "size": 328,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "gl/words/tagset.txt",
+      "sha256": "ef535ff78f5109f0cba1b85a41a3d91964d576c7f252b151a3b01e635f1d3f63",
+      "size": 2392,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "gn/README.md",
       "sha256": "433dbf02888a9d3096d3aaba608ac2def398204495ec4abe25901370bc29aced",
       "size": 7219,
@@ -3627,6 +3942,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/fr/src/main/resources/org/languagetool/MessagesBundle_fr.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_gl.properties",
+      "sha256": "0f766c6c1d47daf7148281d7125684db0f2ed9422cf5e2bf14a03eb4abb06f2e",
+      "size": 16833,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/MessagesBundle_gl.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
@@ -5894,5 +6220,6 @@
         "license_verified": false
       }
     }
-  ]
+  ],
+  "generated_by": "tools/lt-sync/lt_sync.py import"
 }

@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -256,6 +256,15 @@ IN_TREE_ARTIFACTS = {
         "resource/it/italian_synth.info": "it/dictionaries/italian_synth.info",
         "resource/it/italian_tags.txt": "it/dictionaries/italian_tags.txt",
     },
+    # Galician ships its Freeling/Apertium-derived POS/synthesis dictionaries
+    # in-tree (`GalicianTagger` / `GalicianSynthesizer`).
+    "gl": {
+        "resource/gl/galician.dict": "gl/dictionaries/galician.dict",
+        "resource/gl/galician.info": "gl/dictionaries/galician.info",
+        "resource/gl/galician_synth.dict": "gl/dictionaries/galician_synth.dict",
+        "resource/gl/galician_synth.info": "gl/dictionaries/galician_synth.info",
+        "resource/gl/galician_tags.txt": "gl/dictionaries/galician_tags.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -320,6 +329,12 @@ IN_TREE_LICENSES = {
         "upstream it/README.txt (Morph-it! statement), it/tagset.txt "
         "(LICENSING INFORMATION)",
     ),
+    "gl": (
+        "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt "
+        "states both source dictionaries are GPL) - to be confirmed",
+        False,
+        "upstream gl/README.txt",
+    ),
 }
 
 # Per-language hunspell dictionaries with documented third-party licenses.
@@ -353,6 +368,22 @@ def hunspell_license(lang: str, name: str):
                 "dictionary; README_it_IT.txt)",
                 False,
                 "upstream it/hunspell/README_it_IT.txt",
+            )
+    if lang == "gl":
+        if name == "README-gl-ES.txt":
+            return (
+                "GPL (hunspell-gl_ES / VOLGa dictionary documentation; "
+                "README states GPL, LICENCES-en.txt is GPL-3.0) - to be confirmed",
+                False,
+                "upstream gl/hunspell/README-gl-ES.txt",
+            )
+        if name.startswith("gl_ES."):
+            # Raw .aff/.dic of the VOLGa-based hunspell dictionary.
+            return (
+                "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - "
+                "to be confirmed",
+                False,
+                "upstream gl/hunspell/README-gl-ES.txt",
             )
     return None
 
@@ -718,7 +749,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL
