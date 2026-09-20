@@ -1,6 +1,6 @@
 //! SRX (Segmentation Rules eXchange) sentence splitting, mirroring the
 //! algorithm of `net.loomchild.segment`'s `SrxTextIterator` as used by
-//! LanguageTool's `SRXSentenceTokenizer`.
+//! The upstream `SRXSentenceTokenizer`.
 //!
 //! Break rules are found by searching `beforebreak`, then anchoring
 //! `afterbreak` at the match end. No-break (`break="no"`) rules act as

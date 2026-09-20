@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""lt-sync — upstream LanguageTool sync and vendored-data management.
+"""lt-sync — upstream sync and vendored-data management.
 
 Subcommands:
   baseline  Pin the upstream baseline commit into upstream.json.
@@ -831,7 +831,7 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("baseline", help="pin upstream baseline commit")
-    p.add_argument("--upstream", required=True, help="path to LanguageTool git checkout")
+    p.add_argument("--upstream", required=True, help="path to the upstream git checkout")
     p.set_defaults(fn=cmd_baseline)
 
     p = sub.add_parser("import", help="vendor data from upstream checkout + maven artifacts")

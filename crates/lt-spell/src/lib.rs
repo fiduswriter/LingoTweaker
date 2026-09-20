@@ -27,7 +27,7 @@ pub struct ConfusionSet {
     pub line: usize,
 }
 
-/// Parse a LanguageTool `confusion_sets.txt` file (one `a; b; c` group per
+/// Parse an upstream `confusion_sets.txt` file (one `a; b; c` group per
 /// line; `#` comments and blank lines ignored).
 pub fn parse_confusion_sets(text: &str) -> Vec<ConfusionSet> {
     let mut sets = Vec::new();

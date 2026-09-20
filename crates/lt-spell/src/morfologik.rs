@@ -1,5 +1,5 @@
 //! Port of morfologik-speller 2.2.0 (`Speller`, `HMatrix`,
-//! `DictionaryMetadata`) plus LanguageTool's `MorfologikSpeller` /
+//! `DictionaryMetadata`) plus the upstream `MorfologikSpeller` /
 //! `MorfologikMultiSpeller` suggestion pipeline.
 //!
 //! The error-tolerant FSA walk follows Oflazer's algorithm exactly as

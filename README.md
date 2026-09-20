@@ -3,19 +3,19 @@
 A JVM-free Rust port of the [LanguageTool](https://languagetool.org) proofreading engine
 and its rule data, targeting parity for all languages.
 
-*LingoTweaker* is an independent project: it is not affiliated with or endorsed by the
-LanguageTool project, whose name and trademark belong to their owners. LanguageTool references and
-licenses are kept.
+*LingoTweaker* is an independent project, not affiliated with or endorsed by the
+LanguageTool project, whose name and trademark belong to their owners. Upstream
+references and licenses are kept.
 
 - **Rust-first**: `cargo add lt` and embed the engine directly (`Engine::check`).
-- **LT v2 HTTP drop-in**: same `/v2/*` paths, parameters, and JSON schema, so existing
-  LT clients switch without changes.
+- **v2 HTTP drop-in**: same `/v2/*` paths, parameters, and JSON schema, so existing
+  clients switch without changes.
 - **WebAssembly**: `lt-wasm` (wasm-bindgen) runs the engine in the browser from
   fetchable per-language data packs.
 - **Vendored data**: everything needed at runtime is copied into `data/` with per-file
   sha256 provenance, pinned to one upstream commit (`upstream.json`).
-- **Parity-driven**: LT's own `<example>` tests are the primary gate; a pinned Java LT
-  oracle provides differential fixtures.
+- **Parity-driven**: the upstream `<example>` tests are the primary gate; a pinned
+  upstream Java build provides differential fixtures.
 
 ## Quick start
 
@@ -66,7 +66,7 @@ PyO3 (`lt-py`) and napi-rs (`lt-node`) wrappers arrive in Phase 2.
 
 ## Data and upstream sync
 
-`upstream.json` pins the LanguageTool baseline commit. `data/manifest.json` records
+`upstream.json` pins the upstream baseline commit. `data/manifest.json` records
 every vendored file's upstream path, sha256, size, and license. External artifacts
 (tagger/speller dictionaries, OpenNLP chunker models) are pinned Maven artifacts
 recorded in `tools/lt-sync/lt_sync.py`. The data layout, generation workflow and

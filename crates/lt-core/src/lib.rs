@@ -2,7 +2,7 @@
 //!
 //! Offsets: all ranges produced by the engine use UTF-8 byte offsets into the
 //! original text. The HTTP layer converts these to UTF-16 code units to stay
-//! LanguageTool-compatible (locked decision 11).
+//! Upstream-compatible (locked decision 11).
 
 use serde::{Deserialize, Serialize};
 
@@ -44,7 +44,7 @@ pub enum Lang {
     Pt,
     Nl,
     Ca,
-    /// Norwegian Bokmål (LanguageTool dynamic language code `no`; `nb`
+    /// Norwegian Bokmål (upstream dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
     /// Nordum, the constructed pan-Scandinavian written language
@@ -69,7 +69,7 @@ impl Lang {
         Lang::Gn,
     ];
 
-    /// Parse a LanguageTool long code such as `en-US`, `de-DE`, `es`, `fr`.
+    /// Parse an upstream long code such as `en-US`, `de-DE`, `es`, `fr`.
     pub fn from_long_code(code: &str) -> Option<Lang> {
         let lower = code.to_ascii_lowercase();
         let base = lower.split(['-', '_']).next().unwrap_or(&lower);
@@ -105,7 +105,7 @@ impl Lang {
         }
     }
 
-    /// LanguageTool-style display name and long code.
+    /// Upstream-style display name and long code.
     pub fn info(self) -> Language {
         match self {
             Lang::En => Language {
@@ -167,7 +167,7 @@ impl Lang {
     }
 }
 
-/// Static language metadata (LanguageTool-compatible fields).
+/// Static language metadata (upstream-compatible fields).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Language {
     pub code: &'static str,
@@ -357,7 +357,7 @@ pub fn is_whitespace(s: &str) -> bool {
 }
 
 /// A single reading of a token: surface form, stem, and POS tag
-/// (LanguageTool `AnalyzedToken` equivalent).
+/// (upstream `AnalyzedToken` equivalent).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct AnalyzedToken {
     /// The token's surface form.
@@ -377,13 +377,13 @@ impl AnalyzedToken {
         }
     }
 
-    /// LanguageTool semantics: lemma falls back to the token itself.
+    /// Upstream semantics: lemma falls back to the token itself.
     pub fn lemma(&self) -> &str {
         self.stem.as_deref().unwrap_or(&self.token)
     }
 }
 
-/// All readings of one token, plus stream annotations (LanguageTool
+/// All readings of one token, plus stream annotations (upstream
 /// `AnalyzedTokenReadings` equivalent). Whitespace tokens are part of the
 /// stream, mirroring LT's token arrays.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

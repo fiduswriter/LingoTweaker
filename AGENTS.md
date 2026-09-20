@@ -90,7 +90,7 @@ predicates, and gate `SystemTime`/`Instant` uses so wasm builds cannot trap.
 
 - UTF-8 is the default string/offset format internally and externally.
   Engine-internal offsets are UTF-8 bytes. The HTTP API exposes two versions:
-  `/v2/*` is the Java-LanguageTool drop-in surface (UTF-16 code-unit offsets,
+  `/v2/*` is the upstream v2 drop-in surface (UTF-16 code-unit offsets,
   exactly like LT) and `/v3/*` is the native surface (UTF-8 byte offsets).
   The oracle `lt-cli check --lines` converts to UTF-16 only to compare with
   Java's `CheckDump`. Do not move UTF-16 into the engine or default outputs.

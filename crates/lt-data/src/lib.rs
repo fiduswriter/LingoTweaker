@@ -1,4 +1,4 @@
-//! Discovery and verification of vendored LanguageTool data.
+//! Discovery and verification of vendored upstream data.
 //!
 //! Resolution order for the data directory:
 //! 1. explicit builder override (`lt::EngineBuilder::data_dir`)
