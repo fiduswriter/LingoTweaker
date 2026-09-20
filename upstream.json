@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/languagetool-org/languagetool.git",
-  "baseline_commit": "01d07e1f61651d5ad7ea015cce36573314754ad8",
-  "baseline_date": "2026-09-15T05:43:40+01:00",
+  "baseline_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
+  "baseline_date": "2026-09-20T15:51:54+02:00",
   "lt_version": "6.9-SNAPSHOT",
   "note": "Pinned baseline for all vendored data; rule/category/message ids must never be renumbered."
 }

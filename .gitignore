@@ -1,5 +1,6 @@
 /target
 /docs/parity/lt-sync-status.json
+/docs/parity/porting-checklist.md
 *.swp
 
 # Python bytecode from the binding tests

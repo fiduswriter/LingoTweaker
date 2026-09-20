@@ -52,6 +52,9 @@ GOLDEN="$RS_ROOT/docs/parity/golden"
 # date filters are pinned to the (per-language) golden capture date
 # (golden/README.md)
 TODAY="${PARITY_TODAY:-2026-09-18}"
+if [ "$LANG_ARG" = "es" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-20"
+fi
 if [ "$LANG_ARG" = "fr" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-19"
 fi
@@ -59,7 +62,7 @@ if [ "$LANG_ARG" = "it" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-19"
 fi
 if [ "$LANG_ARG" = "pt" ] && [ -z "${PARITY_TODAY:-}" ]; then
-  TODAY="2026-09-19"
+  TODAY="2026-09-20"
 fi
 if [ "$LANG_ARG" = "nl" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-19"
@@ -90,6 +93,11 @@ EXTRA=()
 if [ "$LANG_ARG" = "en" ]; then
   # the one documented deliberate divergence (docs/differences.md #1)
   EXTRA+=(--expect-field-diffs=ADVERB_VERB_ADVERB_REPETITION=1)
+elif [ "$LANG_ARG" = "es" ]; then
+  # documented deliberate divergence (docs/differences.md #8): the
+  # hand-authored demonstrative-verb rules in es/rules/local.xml. The corpus
+  # contains their 11 incorrect examples, which Java does not report.
+  EXTRA+=(--expect-only-rust=AGREEMENT_DEMONSTRATIVE_VERB=11)
 elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)

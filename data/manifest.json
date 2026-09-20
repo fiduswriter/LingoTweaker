@@ -1,6 +1,6 @@
 {
-  "upstream_commit": "01d07e1f61651d5ad7ea015cce36573314754ad8",
-  "file_count": 593,
+  "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
+  "file_count": 594,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -173,8 +173,8 @@
     },
     {
       "path": "ca/rules/grammar.xml",
-      "sha256": "b8e91aaad8a459f20c9b0cb0e2e2639536111bb3b27ef4914857e16e9e4b8ae5",
-      "size": 9508532,
+      "sha256": "0836de199fb8598567cc3841d243ce447f4c7e66a459e0da024d62b80ba9d048",
+      "size": 9520569,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/rules/ca/grammar.xml",
@@ -184,8 +184,8 @@
     },
     {
       "path": "ca/rules/replace.txt",
-      "sha256": "388c308948cf909d602be41778914e85ae78cbafb257137c1907653afc8b3f59",
-      "size": 118062,
+      "sha256": "3f521cc43b7ff79e6d7a210d2c0ade0284e5e1f5773cfb63f08c9ac730229b6e",
+      "size": 118179,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/rules/ca/replace.txt",
@@ -206,8 +206,8 @@
     },
     {
       "path": "ca/rules/replace_anglicism.txt",
-      "sha256": "9aa024fa490b25ab3e9698667f393bbdd108a73730b23d49ebb5f73d68994419",
-      "size": 25305,
+      "sha256": "83b3465a56844c9d609e0409bdce2daa2be88513e6abd195049a29b7c3e399a7",
+      "size": 25403,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/rules/ca/replace_anglicism.txt",
@@ -283,8 +283,8 @@
     },
     {
       "path": "ca/rules/replace_multiwords.txt",
-      "sha256": "b8d18a3c5a91193b812bf89e7e116fe277766e56b19a0de8cd80319ab5071d8e",
-      "size": 53415,
+      "sha256": "dde059603feb9e17ff55d8d894bdc9a7eb9e3549c7cf8b862ce11826e1690d17",
+      "size": 53453,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/rules/ca/replace_multiwords.txt",
@@ -427,8 +427,8 @@
     },
     {
       "path": "ca/words/added.txt",
-      "sha256": "fd3af6c2153558f2e173ee0728c3706e0c8858c1be47c5150746d9653b770757",
-      "size": 177190,
+      "sha256": "c00e13cc24f9d54023ec5423826162b5e67ae9036fad6b763ff7488b20ebfc7a",
+      "size": 178048,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/resource/ca/added.txt",
@@ -504,8 +504,8 @@
     },
     {
       "path": "ca/words/multiwords.txt",
-      "sha256": "36357c895e153304d1f8140745a3c246fa0312eaf44bed3f92e46c1e1c3c9a12",
-      "size": 470728,
+      "sha256": "0109bdaf207125c203a9d4d77663e3c6ff5ac60dac7537a4dbfd1467acd0dcbe",
+      "size": 470934,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/resource/ca/multiwords.txt",
@@ -515,8 +515,8 @@
     },
     {
       "path": "ca/words/removed.txt",
-      "sha256": "9ddf542a16c806f965fccbeca63992931e169dab5fe6b3bf75ba3c9a8f617403",
-      "size": 22109,
+      "sha256": "02c80eac365dabbe05c60c3f0a844f966d92d5fb8457addd8dddae2885801ff1",
+      "size": 22261,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/resource/ca/removed.txt",
@@ -548,8 +548,8 @@
     },
     {
       "path": "ca/words/spelling.txt",
-      "sha256": "4dc14c2ff590e04c3a612b08de57a24729bb8fb65eda9c6a861d7592017bbdc3",
-      "size": 55390,
+      "sha256": "9973624806cba7a714e5dc63b2eb519ce91030117dc1a115a514c4b5079d1d7a",
+      "size": 55738,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ca/src/main/resources/org/languagetool/resource/ca/spelling.txt",
@@ -2627,13 +2627,24 @@
     },
     {
       "path": "es/rules/grammar.xml",
-      "sha256": "b3264e1274779d855bd05f993fc4d8e57bf8089e436732594fe5525d656ac117",
-      "size": 2135723,
+      "sha256": "75c4100470a0d0543af9723b112f8f9b0821dd0df578804dad58f29c70759d91",
+      "size": 2137501,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/es/src/main/resources/org/languagetool/rules/es/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "es/rules/local.xml",
+      "sha256": "bc7b259df77867c61a06f507cdccb7ed2126b5e1803d0c07593c2f2f4081f6ea",
+      "size": 5304,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LingoTweaker project LICENSE",
+        "note": "Hand-authored Spanish demonstrative-verb agreement rules (not upstream); see docs/differences.md #8"
       }
     },
     {
@@ -5541,8 +5552,8 @@
     },
     {
       "path": "pt/disambiguation.xml",
-      "sha256": "4743b48e3fe0ccebdc13112107628ca6bf8783596dfc4c37ff5847228c483776",
-      "size": 293249,
+      "sha256": "6e5abcc62814350494bfbc07ff2779e225eabc79271f9b3844163e3d63363ba5",
+      "size": 293145,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/resource/pt/disambiguation.xml",
@@ -5783,8 +5794,8 @@
     },
     {
       "path": "pt/rules/grammar.xml",
-      "sha256": "c2c094a7e34a4e26e4306744d6f7fc61ab6196adc5806130de33e2dc994e11e7",
-      "size": 2835209,
+      "sha256": "f0c202f3ce2cedb14cfa9861c63f52bd6bb8517780d4a2832c927615144b6ec0",
+      "size": 2838009,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/grammar.xml",
@@ -6003,8 +6014,8 @@
     },
     {
       "path": "pt/rules/pt-PT/style.xml",
-      "sha256": "f9af607e3890eb5e85bb996edbd5d5b739c36ede16d12ea9872e2a4aaa59b4ff",
-      "size": 325620,
+      "sha256": "a0f173e3d313aad4ed3520db7b47fea84e39d3026bcbc5da8174ec676293bc6a",
+      "size": 325672,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/pt-PT/style.xml",
@@ -6263,8 +6274,8 @@
     },
     {
       "path": "pt/words/added.txt",
-      "sha256": "2ffa09cfaefff303f3bceebbfe4f86c69f81fee8fd068f09f9596e064e2b542c",
-      "size": 10644,
+      "sha256": "9ad41c3e94550fa0ad7b42cba810cccfdc417e2063277b592ce326c27812900c",
+      "size": 11398,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/resource/pt/added.txt",
@@ -6384,8 +6395,8 @@
     },
     {
       "path": "pt/words/multiwords.txt",
-      "sha256": "50399b5425c53901484b0acf2640edffee536af3f267ccbeb5056e63450f14b0",
-      "size": 314033,
+      "sha256": "e56b10ad8d7efeb599cc36b85c35f088029c50f05da7b2d4eafe6b4ce5727e15",
+      "size": 314117,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/resource/pt/multiwords.txt",
@@ -6461,8 +6472,8 @@
     },
     {
       "path": "pt/words/spelling.txt",
-      "sha256": "702284e8aa0386a0a573861a1a3f18eff7fa4faaa9e53f35d09b1070d075b2c3",
-      "size": 7517,
+      "sha256": "dd61fbab944d67a1b9818e545ba35385f298a3360b3c54709c691d991010f7b8",
+      "size": 7761,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/resource/pt/spelling.txt",

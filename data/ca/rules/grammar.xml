@@ -34682,6 +34682,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         </rule>
     </category>
     <category id="CONFUSIONS" name="Confusions" type="grammar">
+        <rule id="ENTRA_ENTRE" name="entra -> entre" default="temp_off">
+            <pattern>
+                <marker>
+                    <token>entra</token>
+                </marker>
+                <token regexp="yes">ambdós|ambdues|tots|totes|ells|elles|nosaltres|vosaltres</token>
+            </pattern>
+            <message>¿Volíeu dir <suggestion>entre</suggestion> (preposició)? "Entra" és una forma del verb 'entrar'.</message>
+            <example correction="entre">La guerra retòrica <marker>entra</marker> ambdós països</example>
+        </rule>
         <rule id="SEN_SHAN" name="se'n cregut -> s'han cregut">
             <pattern>
                 <marker>
@@ -70891,7 +70901,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <example>Que té un moment, si us plau?</example>
                 <example>Que em podria asseure un moment amb vostès?</example>
             </rule>
-            <rule default="temp_off">
+            <rule>
                 <pattern>
                     <token postag="SENT_START"/>
                     <token min="0" max="3" regexp="yes">\p{P}</token>
@@ -139475,7 +139485,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token><exception postag="&pronom_feble;|RN" postag_regexp="yes"/></token>
                     <marker>
                         <token postag="V.*" postag_regexp="yes" inflected="yes" regexp="yes">portar|dur<exception inflected="yes">durar</exception><exception postag="V.IS.*" postag_regexp="yes"/></token>
-                        <token chunk="PTime" min="1" max="5"/>
+                        <token chunk="PTime" min="1" max="6"/>
                         <or>
                             <token postag="V.G.*|AQ.*|VMP.*" postag_regexp="yes"><exception postag="_GN_.*" postag_regexp="yes"/><exception regexp="yes">cabals?</exception></token>
                             <token regexp="yes">que|sense|així|a|en|ací|aquí|ahí|allí|allà</token>
@@ -139507,6 +139517,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <example correction="fa dues hores que està">Potser <marker>porta dues hores</marker> camuflada.</example>
                 <example correction="fa ja molts anys que escriu">La novel·lista <marker>porta ja molts anys escrivint</marker>.</example>
                 <example correction="Feia mitja hora que estava"><marker>Portava mitja hora</marker> aquí.</example>
+                <example correction="Fa més de dos anys i mig que faig"><marker>Porto més de dos anys i mig fent</marker> lactància materna.</example>
                 <example>Allò li va portar més de tres anys de feina.</example>
                 <example>ha de portar algun dia la humanitat sencera</example>
                 <example>Això ens portarà molts anys.</example>
@@ -161063,6 +161074,209 @@ No t'ho explicaré, no cal que em burxis més-->
                 <message>Adaptació al valencià.</message>
                 <suggestion>per favor</suggestion>
                 <example correction="Per favor"><marker>Si us plau</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>aquí</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>ací</suggestion>
+                <example correction="ací">Feu clic <marker>aquí</marker>.</example>
+                <example correction="Ací"><marker>Aquí</marker> teniu l'ajuda.</example>
+                <example correction="ací">Des d'<marker>aquí</marker> es pot configurar.</example>
+            </rule>
+            <!-- aturar -> parar: la forma adaptada comença en consonant i cal desfer l'elisió -->
+            <rule>
+                <pattern>
+                    <token>s'</token>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>es <match no="2" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="es pararà">La gravació <marker>s'aturarà</marker>.</example>
+                <example correction="Es para"><marker>S'atura</marker> el servei.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>m'</token>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>em <match no="2" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="em pare">No vol que <marker>m'ature</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>t'</token>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>et <match no="2" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="et pares">Si <marker>t'atures</marker> ara.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>n'</token>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>en <match no="2" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="en paren">Si <marker>n'aturen</marker> dos.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>d'</token>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>de <match no="2" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="de parar">Abans <marker>d'aturar</marker> el servei.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>d'</token>
+                    <token postag="N.*" postag_regexp="yes" regexp="yes">atura(t|da|ts|des)</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>de <match no="2" regexp_match="(?iu)^atur" regexp_replace="par"/></suggestion>
+                <example correction="de parada">El senyal <marker>d'aturada</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token postag="N.*" postag_regexp="yes" regexp="yes">atura(t|da|ts|des)<exception scope="previous" regexp="yes">[ld]'</exception></token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion><match no="1" regexp_match="(?iu)^atur" regexp_replace="par"/></suggestion>
+                <example correction="parades">Les <marker>aturades</marker> del servei.</example>
+                <example correction="Parada"><marker>Aturada</marker> d'emergència</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>l'</token>
+                    <token>aturada</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>la parada</suggestion>
+                <example correction="la parada">Força <marker>l'aturada</marker> del sistema.</example>
+                <example correction="La parada"><marker>L'aturada</marker> del sistema.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>l'</token>
+                    <token>aturat</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>el parat</suggestion>
+                <example correction="el parat">Cal reprendre <marker>l'aturat</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>l'</token>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>el <match no="2" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="el para">Si el procés no respon, <marker>l'atura</marker>.</example>
+                <example correction="El pararà"><marker>L'aturarà</marker> el sistema.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">aturar<exception scope="previous" regexp="yes">[ldmtsn]'</exception></token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion><match no="1" postag="(V.*)" postag_regexp="yes" postag_replace="$1">parar</match></suggestion>
+                <example correction="Para"><marker>Atura</marker> la reproducció.</example>
+                <example correction="parar">No s'ha pogut <marker>aturar</marker> el servei.</example>
+                <example correction="parat">El servei està <marker>aturat</marker>.</example>
+                <example correction="Pareu"><marker>Atureu</marker>-lo.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token postag="V.*" postag_regexp="yes" inflected="yes">mancar</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion><match no="1" postag="(V.*)" postag_regexp="yes" postag_replace="$1">faltar</match></suggestion>
+                <example correction="Falta"><marker>Manca</marker> el fitxer de configuració.</example>
+                <example correction="falten">Hi <marker>manquen</marker> dos paràmetres.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token postag="N.*" postag_regexp="yes" regexp="yes">manca|manques</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion><match no="1" regexp_match="(?iu)man(?:c|qu)(a|es)" regexp_replace="falt$1"/></suggestion>
+                <example correction="falta">Per la <marker>manca</marker> d'espai.</example>
+                <example correction="faltes">Les <marker>manques</marker> del sistema.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>a</token>
+                    <token>sobre</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>damunt</suggestion>
+                <example correction="damunt">Feu clic <marker>a sobre</marker> de la icona.</example>
+                <example correction="Damunt"><marker>A sobre</marker> de la finestra.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token postag="A.*|NC.*" postag_regexp="yes" inflected="yes">vermell</token>
+                </pattern>
+                <filter class="org.languagetool.rules.ca.RemoveSuggestionsFilter" args="removeSuggestionsRegexp:roigs"/>
+                <message>Adaptació al valencià.</message>
+                <suggestion><match no="1" postag="(A.*|NC.*)" postag_regexp="yes" postag_replace="$1">roig</match></suggestion>
+                <example correction="roig">El canal <marker>vermell</marker>.</example>
+                <example correction="Roig"><marker>Vermell</marker></example>
+                <example correction="rojos">Ulls <marker>vermells</marker>.</example>
+                <example correction="roja">La línia <marker>vermella</marker>.</example>
+                <example correction="roges">Les línies <marker>vermelles</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>aviat</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>prompte</suggestion>
+                <example correction="prompte">Tan <marker>aviat</marker> com siga possible.</example>
+                <example correction="Prompte"><marker>Aviat</marker> estarà disponible.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>de</token>
+                    <token>quelcom</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>d'alguna cosa</suggestion>
+                <example correction="d'alguna cosa">Depén <marker>de quelcom</marker> més.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>quelcom<exception scope="previous">de</exception></token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>alguna cosa</suggestion>
+                <example correction="alguna cosa">Si <marker>quelcom</marker> falla.</example>
+                <example correction="Alguna cosa"><marker>Quelcom</marker> ha fallat.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <marker>
+                        <token>un</token>
+                        <token regexp="yes">col?p</token>
+                    </marker>
+                    <token postag="V.P.*" postag_regexp="yes"/>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>una vegada</suggestion>
+                <example correction="Una vegada"><marker>Un cop</marker> baixat el programa, el descomprimim.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>cop</token>
+                </pattern>
+                <message>Adaptació al valencià.</message>
+                <suggestion>colp</suggestion>
+                <example correction="colp">Es tanca de <marker>cop</marker>.</example>
             </rule>
         </rulegroup>
     </category>

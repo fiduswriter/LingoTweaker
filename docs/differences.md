@@ -224,3 +224,64 @@ This is the only remaining Galician corpus difference and is pinned exactly
 as `--expect-field-diffs=HUNSPELL_RULE=83` in `scripts/ci/parity.sh`. Porting
 `suggestmgr` (or vendoring a compatible suggestion engine) would remove the
 allowance.
+
+## 8. `AGREEMENT_DEMONSTRATIVE_VERB` (Spanish, hand-authored rule)
+
+This is the first entry that is an **added rule**, not a different rendering
+of an upstream one. `data/es/rules/local.xml` (manifest kind
+`hand-authored`, so `lt-sync import` never overwrites it) adds
+`AGREEMENT_DEMONSTRATIVE_VERB`, which reports a sentence-initial demonstrative
+pronoun whose verb disagrees in number:
+
+```
+Estos es un problema.   -> "es" -> "son"
+Esta son muy buena.     -> "son" -> "es"
+Ese son un problema.    -> "son" -> "es"
+Este están muy bueno.   -> "están" -> "está"
+Este son un problema.   -> "son" -> "es"
+```
+
+Pinned Java (`scripts/oracle/es/probe-rule.sh`, Docker, commit `01d07e1f6165`)
+reports **none** of these. The upstream agreement rule
+`AGREEMENT_SUBJECT_VERB_SG_PL` (`data/es/rules/grammar.xml:25242`) requires a
+full singular noun phrase (`<phraseref idref="_GN_SINGULAR"/>`) before the
+verb, so a bare demonstrative subject never qualifies; the broader
+`AGREEMENT_SUBJECT_VERB` / `AGRREMENT_SUBJECT_PREDICATE` rules are
+`default="off"` and do not match this shape even when enabled. Personal
+pronouns (`Ella son profesora.`) are already handled by the upstream
+`AGREEMENT_PRONOUNSUBJECT_VERB` in both engines.
+
+**Rust is more correct**: each sentence above is a real agreement error.
+Details and limits of the rule:
+
+- Neuter `esto/eso/aquello` are excluded on purpose: `Esto son los motivos`
+  is accepted by RAE, so flagging it would be a false positive.
+- `Este son` is special: `son` is also a masculine noun, so the Spanish
+  disambiguator reads `Este son` as the valid noun phrase "this tune" and
+  drops the verb reading. The rule matches that noun reading but only when a
+  further noun phrase follows (`Este son un problema.`); a verb directly after
+  `son` is the valid `Este son es bonito.` and is left untouched.
+- Only the sentence-initial position is covered.
+
+Parity: the Spanish corpus (`docs/parity/golden/es-full.txt`, 7,056 lines)
+was regenerated from the current rules and includes the rule's examples, so
+the gate reports 0 only-Java / 11 only-Rust / 0 field diffs. The 11 are exactly
+the rule's incorrect examples; `scripts/ci/parity.sh` pins them with
+`--expect-only-rust=AGREEMENT_DEMONSTRATIVE_VERB=11` (exact-count validated)
+and runs es with `PARITY_TODAY=2026-09-20` (the golden capture date). The
+behavior is also covered by
+`crates/lt/tests/spanish.rs::spanish_demonstrative_verb_agreement`.
+
+Reproduce the Java side:
+
+```sh
+scripts/oracle/es/probe-rule.sh "Estos es un problema." AGREEMENT_SUBJECT_VERB_SG_PL
+scripts/oracle/es/probe-rule.sh "Este son un problema." AGREEMENT_SUBJECT_VERB_SG_PL
+```
+
+Reproduce the Rust side:
+
+```sh
+cargo run -p lt-cli -- check -l es --json "Estos es un problema."
+cargo run -p lt-cli -- check -l es --json "Este son un problema."
+```

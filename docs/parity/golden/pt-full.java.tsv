@@ -3985,7 +3985,7 @@ M	2381	MORFOLOGIK_RULE_PT_PT		20	24	UnknownWord	Possível erro ortográfico	saiu
 L	2382	O quê?!
 L	2383	…incluindo .wmv, .avi, .mov, .mpeg, .mp4
 M	2383	RETICENCIAS_ESPACO	2	0	10	Other	As reticências devem ser seguidas de espaço.	… incluindo
-M	2383	MORFOLOGIK_RULE_PT_PT		30	34	UnknownWord	Possível erro ortográfico	MPEG|JPEG|MPG|mãe|mês|me|per|pé|pés|meu|mel|pega|mega|mães|open|pego|pág|MP|MPLA|apego|EEG|OPEP|Opel|PEC|PNG|PSG|moer|pen|MPT|IPE|ISEG|KPMG|MNE|PEV|apega|MTE|mie|pez|SPEA|miei|muge|pejo|pê|mies|moem|moeu|APEL|DGEG|FFmpeg|MEI|MEO|Mem|Met|Mew|Ming|Oleg|Peng|Pug|TAEG|miem|moei|oper|peja|peje|pet|pug|APNG|GPG|JPG|MP3|MP4|Moët|P&G|mg
+M	2383	MORFOLOGIK_RULE_PT_PT		30	34	UnknownWord	Possível erro ortográfico	MPEG|JPEG|MPG|mãe|mês|me|per|pé|pés|meu|mel|pega|mega|mães|open|pego|pág|MP|MPLA|apego|EEG|OPEP|Opel|PEC|PNG|PSG|moer|pen|MPT|IPE|ISEG|KPMG|MNE|PEV|apega|MTE|mie|pez|SPEA|miei|muge|pejo|pê|mies|moem|moeu|APEL|DGEG|FFmpeg|MEI|MEO|Mem|Met|Mew|Ming|Oleg|Peng|Pug|TAEG|miem|moei|oper|peja|peje|pet|pug|APNG|GPG|JPG|MP3|MP4|Moët|P&G|QPE|mg
 L	2384	.16, .20 e .24%
 M	2384	SPACE_BEFORE_PUNCTUATION2	1	9	12	Other	Remova o espaço antes deste sinal de pontuação.	e.
 L	2385	A situação financeira era estável--e a fazenda garantia um bom rendimento.
@@ -9485,7 +9485,7 @@ L	5194	Cidade Alerta GO.
 L	5195	Adaptador 135W AC com cabo de 3 pinos.
 L	5196	Secretaria Estadual da Cultura de SP.
 L	5197	Moro em SP capital.
-M	5197	MORFOLOGIK_RULE_PT_PT		8	10	UnknownWord	Possível erro ortográfico	SE|SÓ|SI|EP|LP|USP|GP|IP|SÁ|XP|CP|HP|PS|PSP|SR|SÉ|MP|SAP|BP|ESP|ISP|SPC|SPA|SÃ|SÊ|SCP|PP|ST|SU|SY|UP|S|S&P
+M	5197	MORFOLOGIK_RULE_PT_PT		8	10	UnknownWord	Possível erro ortográfico	SE|SÓ|SI|EP|LP|USP|GP|IP|SÁ|XP|CP|HP|PS|PSP|SR|SÉ|MP|SAP|BP|ESP|ISP|SPC|SPA|SÃ|SÊ|SCP|PP|ST|SU|SY|UP|S|QSP|S&P
 L	5198	Pode ser diferente Especificação: CE ISO9001.
 L	5199	Resolução da Presidência do IBGE de n° 5 (R.PR-5/02).
 M	5199	MORFOLOGIK_RULE_PT_PT		28	32	UnknownWord	Possível erro ortográfico	IBM|ABRE|AUGE|AGE|FOGE|IEEE|LIÈGE|FINGE|IATE|IOGA|OBOÉ|REGE|INE|INPE|TIBRE|BEGE|IGC|ÍBIS|BSE|BIÉ|IPE|ISEG|UÍGE|ICE|IENE|TINGE|URGE|BCE|ISG|BÊ|CINGE|RUGE|SAGE|BFE|IADE|BUÉ|MUGE|OBRE|UNGE|VIBRE|BIBE|IODE|BE|EDGE|IBAN|PGE|IDE|ILHE|INGRE|IRE|VIBE|DOGE|IG
@@ -15830,7 +15830,6 @@ L	8968	Eu vou à cidade passear.
 L	8969	Eu vou ao Rio aproveitar a praia.
 L	8970	Eu gosto de ir ao cinema ver filmes estrangeiros.
 L	8971	Temos o caso de servidores de páginas web irem abaixo e demorar até se conseguir que funcionem novamente.
-M	8971	GENERAL_NUMBER_AGREEMENT_ERRORS	7	30	41	Other	Possível erro de concordância de número.	páginas webs|páginas, web|páginas de web
 L	8972	O Rui não sabia nada do assunto.
 L	8973	Tu não sabias nada do assunto.
 L	8974	Os amigos não sabiam nada do assunto.

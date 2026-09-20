@@ -878,6 +878,38 @@ Total envío:
 Silencio mientras termino.
 Justo acabo de ver que en el otro equipo tiene el mismo problema.
 La consulta objeto de análisis por la DGT analiza lo que ocurre cuando se adquieren a título lucrativo una serie de inmuebles.
+La policía colaboro con el juez
+Juan hablo con ella.
+Mary tomo la píldora.
+Jesús nunca enseño esto.
+El niño canto hoy.
+La misma revista también catalogo la campaña como loca.
+Time Magazine llamo a su campaña "una comedia".
+Ernesto acepto la invitación.
+Deja más espacio entre caracteres.
+El estudio más profundo y la práctica más intensa.
+Teorema segundo de Tales.
+Un hombre tan honesto como John.
+Siempre colaboro con la policía.
+El jueves hablo con él.
+Mañana hablo con ella.
+El objetivo creo que ha quedado claro.
+Un grande gozo siento en mí.
+Su finado marido era violinista.
+La enfermera promedio duerme menos de 5 horas por día.
+El alfabeto paleo-hebraico proviene del fenicio.
+El objeto modelo es cualquier representación esquemática de un objeto.
+Su falda estilo cola.
+Un gran gusto encontrarte aquí.
+Adjunto facilito factura.
+Adjunta facilito factura.
+Cada mañana cruzo las vías férreas.
+Un examen más profundo y detallado-
+Total envío:
+Silencio mientras termino.
+Justo acabo de ver que en el otro equipo tiene el mismo problema.
+La consulta objeto de análisis por la DGT analiza lo que ocurre cuando se adquieren a título lucrativo una serie de inmuebles.
+"Time Magazine" llamo a su campaña "una comedia".
 "Time Magazine" llamo a su campaña "una comedia".
 Uber pago a reputados economistas.
 Acabo de encontrar por casualidad el anuncio.
@@ -896,6 +928,7 @@ Metió de promedio 10 triples por partido.
 No hay nadie que se fie de él
 Necesitamos que él guie.
 Necesitamos que él nos guie.
+Necesitamos que el taxi guie.
 Necesitamos que el taxi guie.
 No se a quién pertenece.
 Se té han caído las llaves.
@@ -1809,6 +1842,8 @@ Me alegra tu vuelta al trabajo.
 Es tu hermosa gente trabajadora.
 ¿Cómo vas a explicar la razón de tu no asistencia?
 ¡Espero que hayas practicado tu solo de flauta!
+Me ha sorprendido tu… conjuro.
+Vi tu... casa.
 Tu mejor que nadie lo sabes.
 Y tu más.
 Tu mejor amigo es él.
@@ -4225,6 +4260,9 @@ Con rigor y honor mezcladas.
 El domingo pasada hubo corrida de toros de lujo.
 De todas las maneras posible.
 Construyeron una torre bien alto.
+La serie más seguido.
+Dice que la película más seguido de la tele fue esa.
+El jurado nominó la serie más seguido por el público.
 Uno de los aspectos migratorios más criticado
 con la bobina y la placa electrónica montadas en una caja única
 El contacto con la cultura y la historia japonesas.
@@ -4738,6 +4776,31 @@ Media docena son seis.
 Un ejemplo son los que existen en el Panteón.
 Esta obra son estampas del Antiguo Testamento.
 Esta franja solo la tienen para la publicidad.
+Esta sopa son muy buena.
+Mención especial merecen su trabajo.
+La cosa parecen que es así.
+Este helado están muy bueno.
+Dos son sacerdotes.
+Su pasión son las fresas.
+Su pasión eran las fresas.
+Aquel par eran buenos.
+Mención especial merecen sus trabajos.
+El resto son explicativos.
+El infierno son los demás.
+Derecha e izquierda son opuestos.
+Media docena son seis.
+Un ejemplo son los que existen en el Panteón.
+Esta obra son estampas del Antiguo Testamento.
+Esta franja solo la tienen para la publicidad.
+Esta sopa han sido muy buena.
+Mención especial han merecido su trabajo.
+La cosa habían parecido que era así.
+Dos han sido sacerdotes.
+Su pasión han sido las fresas.
+Su pasión hubieran sido las fresas.
+Aquel par habían sido buenos.
+Mención especial han merecido sus trabajos.
+El resto habían sido explicativos.
 Esta sopa han sido muy buena.
 Mención especial han merecido su trabajo.
 La cosa habían parecido que era así.
@@ -4865,6 +4928,36 @@ Se lo dedico a todas las madres, a sus cajas de botones que tanto tienen que ens
 Como dice Panchosilio, que poco se valoran estos militantes.
 Muy frecuentemente se pierde la voz de las personas que mucho hablan.
 Muy frecuentemente se pierde la voz de las personas que poco hablan.
+El niño se van a casa.
+El niño no se toman la sopa.
+Dijo que el niño no se tomaban la sopa.
+No confíes en que otro te ayuden.
+La próxima semana abren la nueva tienda
+La filosofía de Hegel es tan extraña que nadie habría esperado que él pudiera hacer que personas cuerdas la aceptaran.
+Sé que este curso se agotaron y bastante rápido.
+Son procesos industriales que cada vez se alejan más de la alimentación saludable y tradicional.
+Ese producto lo anunciaban en televisión.
+Esos productos los anunciaban en televisión.
+Estas revistas las anunciaban en televisión.
+Esta revista la anunciaban en televisión.
+Una vez citaron a Cristóbal Colón al decir que los piratas eran demasiado "ingenuos".
+Dos combaten, un tercero lucra.
+Mi hobby son las lenguas.
+Se lo dedico a todas las madres, a sus cajas de botones que tanto tienen que enseñarnos.
+Como dice Panchosilio, que poco se valoran estos militantes.
+Muy frecuentemente se pierde la voz de las personas que mucho hablan.
+Muy frecuentemente se pierde la voz de las personas que poco hablan.
+Los niños se va a casa.
+Los niños no se toma la sopa.
+Dijo que las niñas no se tomaba la sopa.
+No confíes en que otros te ayude.
+Las próximas semanas abre la nueva tienda
+Ese producto lo anunciaba en televisión.
+Esos productos los anunciaba en televisión.
+Estas revistas las anunciaba en televisión.
+Esta revista la anunciaba en televisión.
+Algunos libros hay que degustarlos.
+Familias disfuncionales hay a montones.
 Los niños se va a casa.
 Los niños no se toma la sopa.
 Dijo que las niñas no se tomaba la sopa.
@@ -6032,6 +6125,8 @@ Al-‘Arabiyyah.
 Los historiales clínicos (‘medical records’)
 Ha ilustrado ‘El Hobbit’, ‘El Señor de los Anillos‘ y ‘Los hijos de Húrin’.
 Los historiales clínicos (‘medical records’)
+Esto es una frase con dos espacios.
+Esto es una frase, que tiene dos espacios.
 Diario de la República n.° 18
 Diario de la República n° 18
 Diario de la República nº 18
@@ -6642,6 +6737,23 @@ Sant-Exupery.
 Toulose-Lautrec
 Saint-Exupery.
 Rimsky-Kórsakov.
+Estos es un problema.
+Estas es muy buenas.
+Esos está muy buenos.
+Aquellos tiene sed.
+Estos son un problema.
+Estas son muy buenas.
+Esta son muy buena.
+Ese son un problema.
+Esa son las razones.
+Este están muy bueno.
+Esta tienen sed.
+Esta es muy buena.
+Ese es un problema.
+Este son un problema.
+Este son los motivos.
+Este son es bonito.
+Este son, un clásico, es bonito.
 El dalái lama.
 Es una resultado del 50%.
 Es una resultado del 50,3%.

@@ -7,15 +7,18 @@ field-level diffs (rule/sub/from/to/message/suggestions) for shared matches.
 Usage: compare-checks.py <java.tsv> <rust.tsv> [show]
        [--fail-on-diff]
        [--expect-field-diffs=RULE=N] [--expect-only-java=RULE=N]
+       [--expect-only-rust=RULE=N]
 
 `show` limits the printed example diffs (default 60). By default the exit
 status is always 0 (triage usage); with `--fail-on-diff` the script exits 1
 on any only-Java / only-Rust / missing-line / unexpected field diff. Rules in
-`--expect-field-diffs=RULE=N` and `--expect-only-java=RULE=N` (both
-repeatable) must have exactly N matching diffs; those are excluded from the
-reported `field diffs` / `only Java` counts (documented divergences, e.g. the
-English ADVERB_VERB_ADVERB_REPETITION case and the French
-FRENCH_WORD_REPEAT_RULE/SUJET_AUXILIAIRE false positives). Both counts are
+`--expect-field-diffs=RULE=N`, `--expect-only-java=RULE=N` and
+`--expect-only-rust=RULE=N` (all repeatable) must have exactly N matching
+diffs; those are excluded from the reported `field diffs` / `only Java` /
+`only Rust` counts (documented divergences, e.g. the English
+ADVERB_VERB_ADVERB_REPETITION case, the French
+FRENCH_WORD_REPEAT_RULE/SUJET_AUXILIAIRE false positives, or the Spanish
+hand-authored AGREEMENT_DEMONSTRATIVE_VERB rules). Both counts are
 validated exactly: a rule with fewer or more diffs than expected fails the
 gate.
 """
@@ -52,15 +55,17 @@ def key(rec):
 
 
 def main(java_path, rust_path, show=60, fail_on_diff=False, expect=None,
-         expect_only_java=None):
+         expect_only_java=None, expect_only_rust=None):
     expect = expect or {}
     expect_only_java = expect_only_java or {}
+    expect_only_rust = expect_only_rust or {}
     jlines, jm = load(java_path)
     rlines, rm = load(rust_path)
     only_java = 0
     only_rust = 0
     field_diffs = 0
     only_java_by_rule = defaultdict(int)
+    only_rust_by_rule = defaultdict(int)
     field_diffs_by_rule = defaultdict(int)
     missing_lines = 0
     examples = []
@@ -81,6 +86,7 @@ def main(java_path, rust_path, show=60, fail_on_diff=False, expect=None,
         for k in rset:
             if k not in jset:
                 only_rust += 1
+                only_rust_by_rule[rset[k]['rule']] += 1
                 if len(examples) < show:
                     m = rset[k]
                     examples.append((lineno, 'ONLY-RUST', m['rule'], m['from'], m['to'],
@@ -118,21 +124,31 @@ def main(java_path, rust_path, show=60, fail_on_diff=False, expect=None,
         if got != want:
             expect_oj_failures.append(('only-Java', rule, got, want))
     unexpected_oj = only_java - allowed_oj
+    expect_or_failures = []
+    allowed_or = 0
+    for rule, want in expect_only_rust.items():
+        got = only_rust_by_rule.get(rule, 0)
+        allowed_or += min(got, want)
+        if got != want:
+            expect_or_failures.append(('only-Rust', rule, got, want))
+    unexpected_or = only_rust - allowed_or
     total_j = sum(len(v) for v in jm.values())
     total_r = sum(len(v) for v in rm.values())
     print(f"lines: {len(jlines)}; matches Java: {total_j}, Rust: {total_r}")
-    print(f"only Java: {unexpected_oj}; only Rust: {only_rust}; field diffs: {unexpected}; missing lines: {missing_lines}")
+    print(f"only Java: {unexpected_oj}; only Rust: {unexpected_or}; field diffs: {unexpected}; missing lines: {missing_lines}")
     for rule, want in expect.items():
         print(f"allowed field diffs: {field_diffs_by_rule.get(rule, 0)}/{want} {rule}")
     for rule, want in expect_only_java.items():
         print(f"allowed only-Java: {only_java_by_rule.get(rule, 0)}/{want} {rule}")
-    for kind, rule, got, want in expect_failures + expect_oj_failures:
+    for rule, want in expect_only_rust.items():
+        print(f"allowed only-Rust: {only_rust_by_rule.get(rule, 0)}/{want} {rule}")
+    for kind, rule, got, want in expect_failures + expect_oj_failures + expect_or_failures:
         print(f"EXPECTATION FAILED: {kind} for {rule}: got {got}, want {want}")
     for e in examples:
         lineno, kind, rule, frm, to, msg, text = e
         print(f"[line {lineno}] {kind} {rule} {frm}-{to} {msg} :: {text}")
-    failed = bool(unexpected_oj or only_rust or unexpected or missing_lines
-                  or expect_failures or expect_oj_failures)
+    failed = bool(unexpected_oj or unexpected_or or unexpected or missing_lines
+                  or expect_failures or expect_oj_failures or expect_or_failures)
     return 1 if (fail_on_diff and failed) else 0
 
 
@@ -141,6 +157,7 @@ if __name__ == '__main__':
     fail_on_diff = False
     expect = {}
     expect_only_java = {}
+    expect_only_rust = {}
     rest = []
     for arg in args:
         if arg == '--fail-on-diff':
@@ -151,7 +168,11 @@ if __name__ == '__main__':
         elif arg.startswith('--expect-only-java='):
             rule, _, count = arg.split('=', 1)[1].rpartition('=')
             expect_only_java[rule] = int(count)
+        elif arg.startswith('--expect-only-rust='):
+            rule, _, count = arg.split('=', 1)[1].rpartition('=')
+            expect_only_rust[rule] = int(count)
         else:
             rest.append(arg)
     show = int(rest[2]) if len(rest) > 2 else 60
-    sys.exit(main(rest[0], rest[1], show, fail_on_diff, expect, expect_only_java))
+    sys.exit(main(rest[0], rest[1], show, fail_on_diff, expect, expect_only_java,
+                  expect_only_rust))

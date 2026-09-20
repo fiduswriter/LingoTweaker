@@ -903,3 +903,127 @@ fn suppress_misspelled_r_rr_yields_to_speller() {
         .expect("speller match");
     assert_eq!((m.range.start, m.range.end), (0, 11));
 }
+
+/// LingoTweaker hand-authored rule (`es/rules/local.xml`, not upstream):
+/// sentence-initial demonstrative pronoun subjects whose verb disagrees in
+/// number. The pinned Java engine reports none of these
+/// (`docs/differences.md` #8); personal pronouns keep using the upstream
+/// `AGREEMENT_PRONOUNSUBJECT_VERB`.
+#[test]
+fn spanish_demonstrative_verb_agreement() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+
+    // (text, rule id, sub id, from, to, expected suggestion)
+    for (text, rule, sub, from, to, suggestion) in [
+        (
+            "Estos es un problema.",
+            "AGREEMENT_DEMONSTRATIVE_VERB",
+            "1",
+            6,
+            8,
+            "son",
+        ),
+        (
+            "Esta son muy buena.",
+            "AGREEMENT_DEMONSTRATIVE_VERB",
+            "2",
+            5,
+            8,
+            "es",
+        ),
+        (
+            "Ese son un problema.",
+            "AGREEMENT_DEMONSTRATIVE_VERB",
+            "2",
+            4,
+            7,
+            "es",
+        ),
+        (
+            "Este están muy bueno.",
+            "AGREEMENT_DEMONSTRATIVE_VERB",
+            "2",
+            5,
+            11,
+            "está",
+        ),
+        (
+            "Este son un problema.",
+            "AGREEMENT_DEMONSTRATIVE_VERB",
+            "3",
+            5,
+            8,
+            "es",
+        ),
+        (
+            "Ella son profesora.",
+            "AGREEMENT_PRONOUNSUBJECT_VERB",
+            "5",
+            5,
+            8,
+            "es",
+        ),
+    ] {
+        let result = engine.check(text).unwrap();
+        let m = result
+            .matches
+            .iter()
+            .find(|m| m.rule_id == rule && m.sub_id.as_deref() == Some(sub))
+            .unwrap_or_else(|| panic!("{rule}[{sub}] missing for {text:?}: {:?}", result.matches));
+        assert_eq!((m.range.start, m.range.end), (from, to), "{text:?}");
+        let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
+        assert!(values.contains(&suggestion), "{text:?}: {values:?}");
+    }
+
+    // Valid sentences (including the RAE-accepted neuter `Esto son`, and the
+    // noun-phrase reading of `Este son`) must stay untouched.
+    for text in [
+        "Estos son un problema.",
+        "Esta es muy buena.",
+        "Este son es bonito.",
+        "Esto son los motivos.",
+        "Este son, un clásico, es bonito.",
+    ] {
+        let result = engine.check(text).unwrap();
+        assert!(
+            !result
+                .matches
+                .iter()
+                .any(|m| m.rule_id == "AGREEMENT_DEMONSTRATIVE_VERB"),
+            "{text:?} must not trigger the local rule: {:?}",
+            result.matches
+        );
+    }
+}
+
+/// `enabledOnly` with both `enabledRules` and `enabledCategories` keeps the
+/// union (Java `Tools.selectRules`, #12194/#aece4da): the explicitly enabled
+/// rule and the rules of the enabled category both run, and nothing else.
+#[test]
+fn spanish_enabled_only_union_of_rules_and_categories() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let options = EngineOptions {
+        enabled_rules: vec!["ID_HUBO_HUBIERON".to_string()],
+        enabled_categories: vec!["AGREEMENT_DEMONSTRATIVE".to_string()],
+        enabled_only: true,
+        ..Default::default()
+    };
+    let result = engine
+        .check_with_options(
+            "Este son un prueba. Habían muchas personas en la calle.",
+            &options,
+        )
+        .unwrap();
+    let ids: Vec<&str> = result.matches.iter().map(|m| m.rule_id.as_str()).collect();
+    assert!(ids.contains(&"AGREEMENT_DEMONSTRATIVE_VERB"), "{ids:?}");
+    assert!(ids.contains(&"ID_HUBO_HUBIERON"), "{ids:?}");
+    assert!(!ids.contains(&"AGREEMENT_DET_NOUN"), "{ids:?}");
+}

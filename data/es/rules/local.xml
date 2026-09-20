@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hand-authored Spanish rules added by LingoTweaker.
+
+  This file is NOT part of the upstream LanguageTool rule set. It lives in a
+  separate file so `tools/lt-sync/lt_sync.py import` never overwrites local
+  improvements (the manifest records it as `hand-authored`). The engine loads
+  it in addition to `grammar.xml`/`style.xml`; see `new_spanish` in
+  `crates/lt/src/pipeline.rs` and `docs/differences.md` #8 for the resulting
+  divergence from the Java engine.
+
+  Coverage: demonstrative pronoun subjects whose verb disagrees in number.
+  Java only catches this when a full noun phrase follows the demonstrative
+  (`AGREEMENT_SUBJECT_VERB_SG_PL`), so `Estos es ...` and `Este son ...` go
+  unreported there. Personal pronouns (`Ella son ...`) are already handled by
+  the upstream `AGREEMENT_PRONOUNSUBJECT_VERB`.
+
+  `esto/eso/aquello` (neuter) are deliberately excluded: `Esto son los
+  motivos` is accepted by RAE, so flagging it would create false positives.
+-->
+<rules lang="es">
+    <category id="AGREEMENT_DEMONSTRATIVE" name="Concordancia demostrativo-verbo" type="inconsistency">
+        <rulegroup id="AGREEMENT_DEMONSTRATIVE_VERB" name="concordancia demostrativo-verbo">
+            <!-- plural demonstrative + singular verb: `Estos es ...` -->
+            <rule>
+                <pattern>
+                    <token postag="SENT_START"/>
+                    <token regexp="yes">estos|estas|esos|esas|aquellos|aquellas</token>
+                    <marker>
+                        <token postag="V.[IS].3S." postag_regexp="yes" inflected="yes" regexp="yes">estar|ser|seguir|continuar|tener|parecer|mostrar|ofrecer|merecer<exception postag="V.[ISM]..P..|_possible_NP|.*LOC_ADV.*" postag_regexp="yes"/></token>
+                    </marker>
+                </pattern>
+                <message>Posible error de concordancia: el sujeto es plural, pero el verbo está en singular.</message>
+                <suggestion><match no="3" postag="(V.[IS].3)S." postag_regexp="yes" postag_replace="$1P."/></suggestion>
+                <example correction="son">Estos <marker>es</marker> un problema.</example>
+                <example correction="son">Estas <marker>es</marker> muy buenas.</example>
+                <example correction="están">Esos <marker>está</marker> muy buenos.</example>
+                <example correction="tienen">Aquellos <marker>tiene</marker> sed.</example>
+                <example>Estos son un problema.</example>
+                <example>Estas son muy buenas.</example>
+            </rule>
+            <!-- singular demonstrative + plural verb (verb reading survives):
+                 `Esta son ...`, `Ese son ...`, `Este están ...` -->
+            <rule>
+                <pattern>
+                    <token postag="SENT_START"/>
+                    <token regexp="yes">este|esta|ese|esa|aquel|aquella</token>
+                    <marker>
+                        <token postag="V.[IS].3P." postag_regexp="yes" regexp="yes" inflected="yes">estar|ser|seguir|continuar|tener|parecer|mostrar|ofrecer|merecer<exception postag="V.[ISM]..S..|_possible_NP|.*LOC_ADV.*" postag_regexp="yes"/></token>
+                    </marker>
+                </pattern>
+                <message>Posible error de concordancia: el sujeto es singular, pero el verbo está en plural.</message>
+                <suggestion><match no="3" postag="(V.[IS].3)P." postag_regexp="yes" postag_replace="$1S."/></suggestion>
+                <example correction="es">Esta <marker>son</marker> muy buena.</example>
+                <example correction="es">Ese <marker>son</marker> un problema.</example>
+                <example correction="es">Esa <marker>son</marker> las razones.</example>
+                <example correction="está">Este <marker>están</marker> muy bueno.</example>
+                <example correction="tiene">Esta <marker>tienen</marker> sed.</example>
+                <example>Esta es muy buena.</example>
+                <example>Ese es un problema.</example>
+            </rule>
+            <!-- `Este son`: `son` is also a masculine noun, so the
+                 disambiguator reads `Este son` as the valid noun phrase
+                 "this tune" and drops the verb reading. Match it on the noun
+                 reading, but only when another noun phrase follows: a verb
+                 right after `son` is the valid `Este son es ...`. -->
+            <rule>
+                <pattern>
+                    <token postag="SENT_START"/>
+                    <token postag="DD0MS0">este</token>
+                    <marker>
+                        <token postag="NCMS000">son</token>
+                    </marker>
+                    <token postag="D.*|N.*|P.*" postag_regexp="yes"/>
+                </pattern>
+                <message>Posible error de concordancia: «Este» es singular, pero «son» es plural.</message>
+                <suggestion>es</suggestion>
+                <example correction="es">Este <marker>son</marker> un problema.</example>
+                <example correction="es">Este <marker>son</marker> los motivos.</example>
+                <example>Este son es bonito.</example>
+                <example>Este son, un clásico, es bonito.</example>
+            </rule>
+        </rulegroup>
+    </category>
+</rules>

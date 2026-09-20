@@ -1,3 +1,4 @@
+acuagym|aiguagym|aquagim=aiguagim
 desenteniment|desentendiment=desavinença|desacord|falta d'entesa|inhibició|passivitat
 desenteniments|desentendiments=desavinences|desacords|inhibició|passivitat
 Butan=Bhutan
@@ -2028,6 +2029,8 @@ calendarització=calendari
 calentador=escalfador|calefactor
 calentadors=escalfadors|calefactors
 calentaments=escalfaments
+recalentaments=reescalfaments|recalfaments
+recalentament=reescalfament|recalfament
 calibració=calibratge
 calibracions=calibratges
 calissa=calcària

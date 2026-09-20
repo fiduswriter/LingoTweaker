@@ -1622,6 +1622,16 @@ impl Pipeline {
             grammar.categories.extend(style.categories);
             grammar.equivalence_defs.extend(style.equivalence_defs);
         }
+        // LingoTweaker hand-authored rules (not upstream). Kept in a separate
+        // file so `lt-sync import` never overwrites them; see
+        // docs/differences.md #8.
+        let local_path = data_dir.path().join("es/rules/local.xml");
+        if local_path.lt_exists() {
+            let local = Grammar::load_file(&local_path)?;
+            grammar.rules.extend(local.rules);
+            grammar.categories.extend(local.categories);
+            grammar.equivalence_defs.extend(local.equivalence_defs);
+        }
         let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
             .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
 

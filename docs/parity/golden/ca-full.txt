@@ -6495,6 +6495,7 @@ La Comédie Française.
 Mostra els establiment s de la compra.
 Es tracte d'un cas diferente.
 Es tracte o no del mateixa cas, ho farem d'una altra manera.
+La guerra retòrica entra ambdós països
 Però què se'n cregut.
 Les enquestes poden estan esbiaixades.
 Ara no pic entrar.
@@ -21801,6 +21802,7 @@ Duien molts anys a la capital del Túria.
 Potser porta dues hores camuflada.
 La novel·lista porta ja molts anys escrivint.
 Portava mitja hora aquí.
+Porto més de dos anys i mig fent lactància materna.
 Allò li va portar més de tres anys de feina.
 ha de portar algun dia la humanitat sencera
 Això ens portarà molts anys.
@@ -25553,6 +25555,45 @@ Que llegesca.
 Que llegeixin.
 Que afegeixi.
 Si us plau.
+Feu clic aquí.
+Aquí teniu l'ajuda.
+Des d'aquí es pot configurar.
+La gravació s'aturarà.
+S'atura el servei.
+No vol que m'ature.
+Si t'atures ara.
+Si n'aturen dos.
+Abans d'aturar el servei.
+El senyal d'aturada.
+Les aturades del servei.
+Aturada d'emergència
+Força l'aturada del sistema.
+L'aturada del sistema.
+Cal reprendre l'aturat.
+Si el procés no respon, l'atura.
+L'aturarà el sistema.
+Atura la reproducció.
+No s'ha pogut aturar el servei.
+El servei està aturat.
+Atureu-lo.
+Manca el fitxer de configuració.
+Hi manquen dos paràmetres.
+Per la manca d'espai.
+Les manques del sistema.
+Feu clic a sobre de la icona.
+A sobre de la finestra.
+El canal vermell.
+Vermell
+Ulls vermells.
+La línia vermella.
+Les línies vermelles.
+Tan aviat com siga possible.
+Aviat estarà disponible.
+Depén de quelcom més.
+Si quelcom falla.
+Quelcom ha fallat.
+Un cop baixat el programa, el descomprimim.
+Es tanca de cop.
 Està-te quiet.
 Per fi, ens l'hem llevat de damunt.
 Per fi, ens l'hem llevat de damunt.
