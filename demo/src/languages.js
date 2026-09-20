@@ -34,7 +34,7 @@ const NORWEGIAN = {
 };
 const NORDUM = {
   sample:
-    "Det er en bra dag. Eg backa bilen. Eg har en datamaskin. " +
+    "Det er ein bra dag. Eg backa bilen. Eg har en datamaskin. " +
     "Mellom huset og skogen arbetar halvtreds personer. Norsk og Dansk er bra språk.",
 };
 const GUARANI = {
