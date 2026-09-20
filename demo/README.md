@@ -35,7 +35,7 @@ npm install
 npm run dev
 ```
 
-The default Vite base is `/lingotweaker/` (the GitHub Pages project path).
+The default Vite base is `/LingoTweaker/` (the GitHub Pages project path).
 For a different root, set `BASE_URL`:
 
 ```sh
