@@ -1,6 +1,6 @@
 {
   "upstream_commit": "01d07e1f61651d5ad7ea015cce36573314754ad8",
-  "file_count": 544,
+  "file_count": 566,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -4002,6 +4002,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_ro.properties",
+      "sha256": "d7d4fd567f93e8a01610b62fd59356ceb8158d5a998b6b2523b13e57f9f36029",
+      "size": 15417,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/MessagesBundle_ro.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "nl/compound_acceptor/acronym_exceptions.txt",
       "sha256": "d38a5f1beafb93cf8e7382c05e0e5705c4ea56692c495aab3c80a7c04fd7230c",
       "size": 271,
@@ -6172,6 +6183,246 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/resource/pt/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/dictionaries/romanian.dict",
+      "sha256": "eaccf5c9d68e8d40f8e794bc9a0d70cbde781b5622627ff47d7089d3091caa87",
+      "size": 703152,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/romanian.dict",
+        "license": "LGPL (Romanian POS/synthesis dictionaries; upstream ro/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream ro/README.txt"
+      }
+    },
+    {
+      "path": "ro/dictionaries/romanian.info",
+      "sha256": "e0bb94a1c6bd402c775b3e32f2295fa59a695a60a847a4e894e024cd04990488",
+      "size": 101,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/romanian.info",
+        "license": "LGPL (Romanian POS/synthesis dictionaries; upstream ro/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream ro/README.txt"
+      }
+    },
+    {
+      "path": "ro/dictionaries/romanian_synth.dict",
+      "sha256": "8dfd3544cc98750971ffb68475326b1720d080a3f345eb7f4528d0d4f2c7fb56",
+      "size": 552686,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/romanian_synth.dict",
+        "license": "LGPL (Romanian POS/synthesis dictionaries; upstream ro/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream ro/README.txt"
+      }
+    },
+    {
+      "path": "ro/dictionaries/romanian_synth.info",
+      "sha256": "e0bb94a1c6bd402c775b3e32f2295fa59a695a60a847a4e894e024cd04990488",
+      "size": 101,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/romanian_synth.info",
+        "license": "LGPL (Romanian POS/synthesis dictionaries; upstream ro/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream ro/README.txt"
+      }
+    },
+    {
+      "path": "ro/dictionaries/romanian_tags.txt",
+      "sha256": "1f3acd8941eb8e63edb4f0a2ad9e1e6bbfcac1f47fece4ca3078c03df2c79a65",
+      "size": 4444,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/romanian_tags.txt",
+        "license": "LGPL (Romanian POS/synthesis dictionaries; upstream ro/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream ro/README.txt"
+      }
+    },
+    {
+      "path": "ro/disambiguation.xml",
+      "sha256": "8b4cbb27cbce75752e824c33324c626129f0fe1be15c49517a84f5c0dd22e8f3",
+      "size": 2062,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/hunspell/README_EN.txt",
+      "sha256": "4388a539465b5105a7b075d789f87524297e8073ec215cf10344ee28bcc42840",
+      "size": 845,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/hunspell/README_EN.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Romanian spelling dictionary; ro/hunspell/README_EN.txt + COPYING.*)",
+        "license_verified": true,
+        "license_source": "upstream ro/hunspell/README_EN.txt"
+      }
+    },
+    {
+      "path": "ro/hunspell/README_RO.txt",
+      "sha256": "fae94c075ff8a3b05b5f6d02608a06d18256f7beaf3912f482216c73e70e0f5c",
+      "size": 828,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/hunspell/README_RO.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Romanian spelling dictionary; ro/hunspell/README_EN.txt + COPYING.*)",
+        "license_verified": true,
+        "license_source": "upstream ro/hunspell/README_EN.txt"
+      }
+    },
+    {
+      "path": "ro/hunspell/ignore.txt",
+      "sha256": "6d6558d582ce6b72036dca38edea86d7dbaa644d908b1032ad6526d2592df7f5",
+      "size": 71,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/hunspell/ro_RO.dict",
+      "sha256": "fec646ff15495239563bdf5298556431966affb2e5d90e1b73911d6966e1dcfe",
+      "size": 613960,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/hunspell/ro_RO.dict",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the ro_RO spelling dictionary; ro/hunspell/README_EN.txt)",
+        "license_verified": false,
+        "license_source": "upstream ro/hunspell/README_EN.txt"
+      }
+    },
+    {
+      "path": "ro/hunspell/ro_RO.info",
+      "sha256": "41cbd7b6d67d7b4af8240d560974f992a58da7a9e3f31d1e1f7521cea6cc1589",
+      "size": 99,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/hunspell/ro_RO.info",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the ro_RO spelling dictionary; ro/hunspell/README_EN.txt)",
+        "license_verified": false,
+        "license_source": "upstream ro/hunspell/README_EN.txt"
+      }
+    },
+    {
+      "path": "ro/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/rules/grammar.xml",
+      "sha256": "924650ae0517eb008bb25d8692afff355d9f5f374a0e77a323716ae6813cf145",
+      "size": 360937,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/rules/ro/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/rules/replace.txt",
+      "sha256": "3a5bc5ee06ad9b47b3aed470b4621d1fdb6aa4c370f594b6e30a99c7dc5dbcb6",
+      "size": 14967,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/rules/ro/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/README.txt",
+      "sha256": "e2492aa797e860be7bb5be751626920f7721017b3328f2bb68fc530cfc9694f0",
+      "size": 145,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/added.txt",
+      "sha256": "37fc4aa6c6d15f969e7c340f641e6298c2451e574a3bac3cc6ba761edd6a8ebe",
+      "size": 1100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/common_words.txt",
+      "sha256": "daaaee242c88655f9cd5680ca31547d10372f1e13cd7ac5a532abaa8fb9cfef2",
+      "size": 86534,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/compounds.txt",
+      "sha256": "32822c827f0b15aa0425f1cc4b3048c08c4f9cf7d785d0344e68e4aad58583d5",
+      "size": 1784,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/compounds.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ro/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/removed_custom.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

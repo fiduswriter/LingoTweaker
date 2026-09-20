@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -265,6 +265,15 @@ IN_TREE_ARTIFACTS = {
         "resource/gl/galician_synth.info": "gl/dictionaries/galician_synth.info",
         "resource/gl/galician_tags.txt": "gl/dictionaries/galician_tags.txt",
     },
+    # Romanian ships its POS/synthesis dictionaries in-tree
+    # (`RomanianTagger` / `RomanianSynthesizer`).
+    "ro": {
+        "resource/ro/romanian.dict": "ro/dictionaries/romanian.dict",
+        "resource/ro/romanian.info": "ro/dictionaries/romanian.info",
+        "resource/ro/romanian_synth.dict": "ro/dictionaries/romanian_synth.dict",
+        "resource/ro/romanian_synth.info": "ro/dictionaries/romanian_synth.info",
+        "resource/ro/romanian_tags.txt": "ro/dictionaries/romanian_tags.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -335,6 +344,12 @@ IN_TREE_LICENSES = {
         False,
         "upstream gl/README.txt",
     ),
+    "ro": (
+        "LGPL (Romanian POS/synthesis dictionaries; upstream ro/README.txt "
+        'states "released here on LGPL license")',
+        True,
+        "upstream ro/README.txt",
+    ),
 }
 
 # Per-language hunspell dictionaries with documented third-party licenses.
@@ -384,6 +399,23 @@ def hunspell_license(lang: str, name: str):
                 "to be confirmed",
                 False,
                 "upstream gl/hunspell/README-gl-ES.txt",
+            )
+    if lang == "ro":
+        if name.startswith("README") or name.startswith("COPYING"):
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Romanian spelling "
+                "dictionary; ro/hunspell/README_EN.txt + COPYING.*)",
+                True,
+                "upstream ro/hunspell/README_EN.txt",
+            )
+        if name.startswith("ro_RO."):
+            # Morfologik conversion of the tri-licensed ro_RO hunspell
+            # dictionary; the conversion is a derived build.
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the "
+                "ro_RO spelling dictionary; ro/hunspell/README_EN.txt)",
+                False,
+                "upstream ro/hunspell/README_EN.txt",
             )
     return None
 
@@ -749,7 +781,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL
