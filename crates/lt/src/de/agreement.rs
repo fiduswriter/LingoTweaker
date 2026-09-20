@@ -1259,6 +1259,7 @@ fn analyze_plain_sentence(tagger: &lt_tagger::GermanTagger, text: &str) -> Analy
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }
 

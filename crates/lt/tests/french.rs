@@ -181,6 +181,17 @@ fn french_raw_pos_matches_java() {
         "La préposition <suggestion>à</suggestion> est attendue après \"soumis\"."
     );
     assert_eq!(m.suggestions[0].value, "à");
+    // The raw_pos view keeps `soumis`'s tagger readings: the earlier
+    // `NE_V` `<match>` action is a wrapper-replacing `REPLACE` in Java, so it
+    // does not propagate to `getPreDisambigTokens()`. The later `PRONOM_VERB`
+    // `remove` must therefore not be mirrored onto the pre view (D-191);
+    // otherwise the `J.*`+`V ppa.*` `<and>` fails and `A_A_ACCENT` survives
+    // the overlap filter instead.
+    assert!(
+        result.matches.iter().all(|m| m.rule_id != "A_A_ACCENT"),
+        "A_A_ACCENT must not survive once the raw_pos A_ACCENT matches: {:#?}",
+        result.matches
+    );
 
     let result = engine
         .check("C'est trop, tu n'aurais pas du savoir !")

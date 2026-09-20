@@ -165,5 +165,6 @@ pub fn analyze_italian_sentence(italian: &ItalianPipeline, text: &str) -> Analyz
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }

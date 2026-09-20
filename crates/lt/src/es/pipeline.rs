@@ -137,5 +137,6 @@ pub fn analyze_spanish_sentence(spanish: &SpanishPipeline, text: &str) -> Analyz
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }

@@ -586,6 +586,7 @@ mod tests {
             offset: 0,
             tokens,
             pre_disambig_tokens: Vec::new(),
+            pre_disambig_detached: Vec::new(),
         };
         let matches = rule.check_sentence(&sentence, 0);
         assert_eq!(matches.len(), 1, "{matches:?}");

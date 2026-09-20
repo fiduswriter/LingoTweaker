@@ -871,6 +871,7 @@ mod tests {
                 },
             ],
             pre_disambig_tokens: Vec::new(),
+            pre_disambig_detached: Vec::new(),
         }
     }
 

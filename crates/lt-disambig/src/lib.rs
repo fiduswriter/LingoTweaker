@@ -623,10 +623,15 @@ pub fn marker_targets(
 /// `JLanguageTool.getAnalyzedSentence` stores the *same* token objects as
 /// the pre-disambiguation view, `raw_pos="yes"` rules observe those
 /// changes. Rust clones the pre view, so the in-place mutations are
-/// replayed onto it (wrapper-replacing actions — `REPLACE`, `UNIFY`,
-/// `FILTER`, `FILTERALL` — are not mirrored, like Java).
+/// replayed onto it. Wrapper-replacing actions — `REPLACE`, `UNIFY`,
+/// `FILTER`, `FILTERALL` — are not mirrored; they call
+/// `AnalyzedSentence::detach_pre_disambig`, which freezes the pre view for
+/// that slot so later in-place mutations stop propagating (Java assigns a
+/// new `AnalyzedTokenReadings` to the live slot, breaking the alias).
 fn mirror_pre(sentence: &mut AnalyzedSentence, idx: usize, f: impl Fn(&mut AnalyzedTokenReadings)) {
-    if sentence.pre_disambig_tokens.len() == sentence.tokens.len() {
+    if sentence.pre_disambig_tokens.len() == sentence.tokens.len()
+        && sentence.pre_disambig_is_aliased(idx)
+    {
         f(&mut sentence.pre_disambig_tokens[idx]);
     }
 }
@@ -658,6 +663,7 @@ fn apply_action(
                     let tr = &mut sentence.tokens[idx];
                     tr.readings = readings.clone();
                     restore_sent_end(tr);
+                    sentence.detach_pre_disambig(idx);
                 }
             }
         }
@@ -674,6 +680,7 @@ fn apply_action(
                 // RP-ETRE_ADJ_AMBIG drops the `N`/SENT_END readings of the
                 // final `grands` but Java restores SENT_END)
                 restore_sent_end(&mut sentence.tokens[idx]);
+                sentence.detach_pre_disambig(idx);
             }
             return;
         }
@@ -847,6 +854,7 @@ fn apply_action(
                                     .unwrap_or(true)
                             });
                             restore_sent_end(first);
+                            sentence.detach_pre_disambig(idx);
                         }
                     }
                 }
@@ -911,6 +919,7 @@ fn apply_action(
                 tr.readings = kept;
                 tr.refresh_is_tagged();
                 restore_sent_end(tr);
+                sentence.detach_pre_disambig(idx);
             }
         }
         "replace" if !readings.is_empty() && readings.len() == t.count => {
@@ -930,6 +939,7 @@ fn apply_action(
                 tr.readings = vec![new_tok];
                 tr.is_tagged = wd.postag.is_some();
                 restore_sent_end(tr);
+                sentence.detach_pre_disambig(idx);
             }
         }
         "replace" if readings.is_empty() => {
@@ -950,6 +960,7 @@ fn apply_action(
                 tr.readings = vec![AnalyzedToken::new(surface, lemma, Some(pos.clone()))];
                 tr.is_tagged = true;
                 restore_sent_end(tr);
+                sentence.detach_pre_disambig(idx);
             }
         }
         "immunize" => {
@@ -1113,6 +1124,7 @@ mod tests_helpers {
             offset: 0,
             tokens,
             pre_disambig_tokens: Vec::new(),
+            pre_disambig_detached: Vec::new(),
         }
     }
 

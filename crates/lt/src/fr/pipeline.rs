@@ -62,6 +62,7 @@ pub fn suggestion_has_no_errors(
     // `raw_pos="yes"` rules (Java `PatternRule.isInterpretPosTagsPreDisambiguation`)
     // need the view captured before the disambiguation steps.
     analyzed.pre_disambig_tokens = analyzed.tokens.clone();
+    analyzed.pre_disambig_detached = Vec::new();
     french.disambiguate(&mut analyzed);
     // Same token view as the engine's rule loop: whitespace tokens are
     // dropped (Java's `PatternRule` matches on
@@ -313,5 +314,6 @@ pub fn analyze_french_sentence(french: &FrenchPipeline, text: &str) -> AnalyzedS
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }

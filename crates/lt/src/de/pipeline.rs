@@ -198,6 +198,7 @@ pub fn analyze_german_sentence(german: &GermanPipeline, text: &str) -> AnalyzedS
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }
 

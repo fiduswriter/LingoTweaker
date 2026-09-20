@@ -559,6 +559,19 @@ pub struct AnalyzedSentence {
     /// pipeline has no `raw_pos` rule (the snapshot is then skipped).
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub pre_disambig_tokens: Vec<AnalyzedTokenReadings>,
+    /// Per-token detachment flags for `pre_disambig_tokens`. Java's
+    /// `getPreDisambigTokens()` holds *references* to the same
+    /// `AnalyzedTokenReadings` objects as `getTokens()`; an in-place
+    /// disambiguation action (`REMOVE`/`ADD`/`ADDCHUNK`/`IMMUNIZE`/
+    /// `IGNORE_SPELLING`) is therefore visible in the pre-disambiguation view,
+    /// while a wrapper-replacing action (`REPLACE`/`UNIFY`/`FILTER`/
+    /// `FILTERALL`, incl. the `<match>` filter) assigns a *new* object to the
+    /// live slot and permanently detaches it: later in-place mutations are no
+    /// longer seen by `raw_pos="yes"` rules. `true` marks a detached index.
+    /// Empty means "nothing detached yet" (and is kept in sync with
+    /// `pre_disambig_tokens` by the disambiguator).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub pre_disambig_detached: Vec<bool>,
 }
 
 impl AnalyzedSentence {
@@ -571,6 +584,26 @@ impl AnalyzedSentence {
                 !t.is_whitespace || t.is_sentence_start || t.is_sentence_end || t.is_paragraph_end
             })
             .collect()
+    }
+
+    /// Whether the pre-disambiguation reference at `idx` still aliases the
+    /// live token (Java: no wrapper-replacing action has hit that slot yet).
+    pub fn pre_disambig_is_aliased(&self, idx: usize) -> bool {
+        self.pre_disambig_detached.get(idx).is_none_or(|d| !*d)
+    }
+
+    /// Java's wrapper-replacing actions detach the pre-disambiguation
+    /// reference for `idx` (the frozen value stays what the live token held
+    /// just before the replacement).
+    pub fn detach_pre_disambig(&mut self, idx: usize) {
+        if idx >= self.pre_disambig_tokens.len() {
+            return;
+        }
+        if self.pre_disambig_detached.len() < self.pre_disambig_tokens.len() {
+            self.pre_disambig_detached
+                .resize(self.pre_disambig_tokens.len(), false);
+        }
+        self.pre_disambig_detached[idx] = true;
     }
 }
 

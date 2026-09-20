@@ -105,6 +105,7 @@ impl CatalanPipeline {
         self.multiwords_chunker.apply(sentence);
         if snapshot_after_chunkers {
             sentence.pre_disambig_tokens = sentence.tokens.clone();
+            sentence.pre_disambig_detached = Vec::new();
         }
         self.disambiguator.apply(sentence);
         if let Some(speller) = &self.multitoken_dict_speller {
@@ -281,5 +282,6 @@ pub fn analyze_catalan_sentence(catalan: &CatalanPipeline, text: &str) -> Analyz
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }

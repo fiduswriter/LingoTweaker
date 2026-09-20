@@ -277,6 +277,7 @@ pub fn surface_sentence_from_tokens(text: &str, raw_tokens: Vec<String>) -> Anal
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }
 
@@ -397,6 +398,7 @@ pub fn analyze_sentence(tagger: &lt_tagger::EnglishTagger, text: &str) -> Analyz
         offset: 0,
         tokens,
         pre_disambig_tokens: Vec::new(),
+        pre_disambig_detached: Vec::new(),
     }
 }
 
@@ -4844,6 +4846,7 @@ impl Pipeline {
         let needs_pre_disambig = self.compiled_rules.iter().any(|r| r.raw_pos);
         if self.french.is_some() && needs_pre_disambig {
             analyzed.pre_disambig_tokens = analyzed.tokens.clone();
+            analyzed.pre_disambig_detached = Vec::new();
         }
         self.apply_disambiguation(&mut analyzed, needs_pre_disambig);
         // German's post-disambiguation chunker (`German.createDefaultPost

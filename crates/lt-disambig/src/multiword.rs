@@ -564,6 +564,7 @@ mod tests {
                 token("quoi", false, "quoi", "R"),
             ],
             pre_disambig_tokens: Vec::new(),
+            pre_disambig_detached: Vec::new(),
         };
         chunker.apply(&mut sentence);
         for token in &sentence.tokens {
