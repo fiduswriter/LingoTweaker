@@ -2283,3 +2283,30 @@ fn catalan_empty_exception_does_not_block() {
     let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
     assert_eq!(values, vec!["girar"]);
 }
+
+/// Java `StringTools.isCamelCase` is the ASCII-anchored
+/// `[a-z]+[A-Z][A-Za-z]+`, so `al-Àndalus` (hyphen + `À`) is not camel case
+/// and the `MultiWordChunker` adds its all-uppercase variant. Golden:
+/// `AL-ÀNDALUS` gets the `NPCSG00` chunk reading on `al`, which satisfies the
+/// rule's `<exception postag="NPCSG00"/>`, while lowercase `al-Andalus`
+/// still matches.
+#[test]
+fn catalan_al_andalus_all_uppercase_chunk() {
+    let _guard = engine_guard();
+    let Some(engine) = engine_with_rules("ca-ES", &["AL_ANDALUS"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let result = engine.check("AL-ÀNDALUS").unwrap();
+    assert!(
+        result.matches.iter().all(|m| m.rule_id != "AL_ANDALUS"),
+        "AL_ANDALUS should be blocked by the chunk reading: {:?}",
+        result.matches
+    );
+    let result = engine.check("Un estudi sobre al-Andalus.").unwrap();
+    assert!(
+        result.matches.iter().any(|m| m.rule_id == "AL_ANDALUS"),
+        "AL_ANDALUS should match: {:?}",
+        result.matches
+    );
+}

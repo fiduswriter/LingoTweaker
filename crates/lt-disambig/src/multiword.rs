@@ -354,8 +354,26 @@ impl MultiWordChunker {
 }
 
 fn is_camel_case(s: &str) -> bool {
-    let chars: Vec<char> = s.chars().collect();
-    chars.len() > 1 && chars[0].is_lowercase() && chars.iter().any(|c| c.is_uppercase())
+    // Java `StringTools.isCamelCase`: `token.matches("[a-z]+[A-Z][A-Za-z]+")`
+    // — ASCII-only and anchored, so e.g. `al-Àndalus` and `n'importe` are not
+    // camel case (a non-ASCII or punctuation char breaks the match) and do
+    // get their all-uppercase variants.
+    let bytes = s.as_bytes();
+    let mut i = 0;
+    while i < bytes.len() && bytes[i].is_ascii_lowercase() {
+        i += 1;
+    }
+    if i == 0 || i >= bytes.len() || !bytes[i].is_ascii_uppercase() {
+        return false;
+    }
+    i += 1;
+    if i >= bytes.len() {
+        return false;
+    }
+    while i < bytes.len() && bytes[i].is_ascii_alphabetic() {
+        i += 1;
+    }
+    i == bytes.len()
 }
 
 fn uppercase_first_char(s: &str) -> String {
@@ -488,6 +506,19 @@ mod tests {
         }
         let chunker = MultiWordChunker::load(&path, true, true, false, None, true).unwrap();
         assert!(!chunker.space_full.is_empty(), "multiwords should load");
+    }
+
+    /// Java `StringTools.isCamelCase` is `token.matches("[a-z]+[A-Z][A-Za-z]+")`
+    /// (ASCII, anchored): `iPhone`/`iPad` are camel case, but a hyphen or a
+    /// non-ASCII letter breaks the match, so `al-Àndalus` is not.
+    #[test]
+    fn is_camel_case_matches_java_semantics() {
+        assert!(is_camel_case("iPhone"));
+        assert!(is_camel_case("iPad"));
+        assert!(!is_camel_case("al-Àndalus"));
+        assert!(!is_camel_case("Àndalus"));
+        assert!(!is_camel_case("al"));
+        assert!(!is_camel_case("AL-ÀNDALUS"));
     }
 
     fn token(surface: &str, is_ws: bool, lemma: &str, tag: &str) -> AnalyzedTokenReadings {
