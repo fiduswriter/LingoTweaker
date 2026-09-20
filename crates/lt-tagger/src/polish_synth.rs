@@ -124,11 +124,10 @@ impl PolishSynthesizer {
                 results.extend(self.get_word_forms(token, tag, is_negated));
             }
         }
-        // Java's `new HashSet<>(results)` dedupe is order-insensitive; keep
-        // first occurrence so the output is deterministic.
-        let mut seen = HashSet::new();
-        results.retain(|form| seen.insert(form.clone()));
-        results
+        // Java's `new HashSet<>(results)` dedupe is order-insensitive and the
+        // returned order is the HashSet's bucket order; reproduce it so
+        // suggestions match Java byte-for-byte.
+        java_hash_set_order(results)
     }
 
     /// `PolishSynthesizer.synthesize(AnalyzedToken, String, boolean)`.
@@ -200,4 +199,114 @@ fn matches_letter_dot_letter(s: &str) -> bool {
     bytes
         .windows(3)
         .any(|w| w[0].is_ascii_lowercase() && w[1] == b'.' && w[2].is_ascii_lowercase())
+}
+
+/// Emulate `new HashSet<String>(results)` iteration order: dedupe by first
+/// occurrence, then lay the strings out in a `java.util.HashMap` table
+/// (capacity `tableSizeFor(max(n/0.75+1, 16))`, bucket `(h ^ h>>>16) & cap-1`,
+/// insertion order within a bucket). Java's `String.hashCode` is over UTF-16
+/// code units.
+fn java_hash_set_order(forms: Vec<String>) -> Vec<String> {
+    let n = forms.len();
+    let initial = ((n as f64 / 0.75) as usize + 1).max(16);
+    let capacity = initial.next_power_of_two();
+    let mut seen = HashSet::new();
+    let mut buckets: Vec<Vec<String>> = vec![Vec::new(); capacity];
+    for form in forms {
+        if !seen.insert(form.clone()) {
+            continue;
+        }
+        let h = java_string_hash(&form);
+        let spread = (h ^ ((h as u32 >> 16) as i32)) as u32 as usize;
+        buckets[spread & (capacity - 1)].push(form);
+    }
+    buckets.into_iter().flatten().collect()
+}
+
+/// Java `String.hashCode()` (31-based over UTF-16 code units, wrapping i32).
+fn java_string_hash(s: &str) -> i32 {
+    let mut h: i32 = 0;
+    for unit in s.encode_utf16() {
+        h = h.wrapping_mul(31).wrapping_add(unit as i32);
+    }
+    h
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use lt_core::AnalyzedToken;
+
+    fn data_dir() -> Option<std::path::PathBuf> {
+        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data");
+        path.is_dir().then_some(path)
+    }
+
+    fn synth(data_dir: &std::path::Path) -> PolishSynthesizer {
+        PolishSynthesizer::from_data(data_dir).expect("load Polish synthesizer")
+    }
+
+    /// Java probe (`PlSynthProbe`, pinned checkout):
+    /// `dobrze [adv:pos] -> adv:com => [lepiej]`,
+    /// `niemiecki [adj:sg:nom.voc:m1.m2.m3:pos] -> adj:pl:.* (re)
+    ///  => [niemieckim, niemieccy, niemieckich, niemieckie, niemieckimi]`.
+    #[test]
+    fn synthesizer_matches_java_probe() {
+        let Some(data_dir) = data_dir() else {
+            eprintln!("skipping: no vendored data");
+            return;
+        };
+        let synth = synth(&data_dir);
+        let tok = |lemma: &str, tag: &str| {
+            AnalyzedToken::new(lemma, Some(lemma.to_string()), Some(tag.to_string()))
+        };
+        assert_eq!(
+            synth.synthesize(&tok("dobrze", "adv:pos"), "adv:com", false),
+            vec!["lepiej".to_string()]
+        );
+        assert!(synth
+            .synthesize(&tok("kot", "subst:sg:nom:m1"), "subst:pl:gen:f", false)
+            .is_empty());
+        assert_eq!(
+            synth.synthesize(
+                &tok("niemiecki", "adj:sg:nom.voc:m1.m2.m3:pos"),
+                "adj:pl:.*",
+                true
+            ),
+            vec![
+                "niemieckim".to_string(),
+                "niemieccy".to_string(),
+                "niemieckich".to_string(),
+                "niemieckie".to_string(),
+                "niemieckimi".to_string(),
+            ]
+        );
+        // `+` in the tag selects the regexp path.
+        assert_eq!(
+            synth.synthesize(
+                &tok("kot", "subst:sg:nom:m1"),
+                "subst:sg:nom:m1+subst:pl:gen:f",
+                false
+            ),
+            vec!["kot".to_string()]
+        );
+    }
+
+    /// `PolishSynthesizer.getPosTagCorrection`.
+    #[test]
+    fn pos_tag_correction_expands_dots() {
+        let Some(data_dir) = data_dir() else {
+            eprintln!("skipping: no vendored data");
+            return;
+        };
+        let synth = synth(&data_dir);
+        assert_eq!(
+            synth.pos_tag_correction("adj:sg:nom.voc:m1.m2.m3:pos"),
+            "adj:sg:(.*nom.*|.*voc.*):m1.m2.m3:pos"
+        );
+        assert_eq!(
+            synth.pos_tag_correction("subst:sg:nom:m1"),
+            "subst:sg:nom:m1"
+        );
+    }
 }

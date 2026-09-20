@@ -196,3 +196,75 @@ fn load_negation_exceptions(path: &Path) -> Result<HashSet<String>> {
     }
     Ok(out)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn data_dir() -> Option<std::path::PathBuf> {
+        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data");
+        path.is_dir().then_some(path)
+    }
+
+    fn readings(tagger: &PolishTagger, word: &str) -> Vec<String> {
+        tagger
+            .tag_word(word)
+            .iter()
+            .map(|t| {
+                format!(
+                    "{}:{}",
+                    t.stem.clone().unwrap_or_default(),
+                    t.pos_tag.clone().unwrap_or_default()
+                )
+            })
+            .collect()
+    }
+
+    /// Java probe (`PlTaggerProbe`, pinned checkout): the PoliMorf readings
+    /// (`+`-tags split) and the 2026 joined-`nie` `additionalTags` fallback.
+    #[test]
+    fn tagger_matches_java_probe() {
+        let Some(data_dir) = data_dir() else {
+            eprintln!("skipping: no vendored data");
+            return;
+        };
+        let tagger = PolishTagger::load(&data_dir).expect("load Polish tagger");
+        assert_eq!(
+            readings(&tagger, "Kot"),
+            vec![
+                "Kot:subst:sg:nom:m1",
+                "kot:subst:sg:nom:m1",
+                "kot:subst:sg:nom:m2",
+                "kota:subst:pl:gen:f",
+            ]
+        );
+        assert_eq!(
+            readings(&tagger, "kota"),
+            vec![
+                "kota:subst:sg:nom:f",
+                "kot:subst:sg:acc:m1",
+                "kot:subst:sg:acc:m2",
+                "kot:subst:sg:gen:m1",
+                "kot:subst:sg:gen:m2",
+            ]
+        );
+        assert_eq!(readings(&tagger, "nielepiej"), vec!["niedobrze:adv:com"]);
+        assert_eq!(
+            readings(&tagger, "nienajlepszy"),
+            vec![
+                "niedobry:adj:sg:acc:m3:sup",
+                "niedobry:adj:sg:nom.voc:m1.m2.m3:sup",
+            ]
+        );
+        assert_eq!(
+            readings(&tagger, "niemiecki"),
+            vec![
+                "niemiecki:adj:sg:acc:m3:pos",
+                "niemiecki:adj:sg:nom.voc:m1.m2.m3:pos",
+                "niemiecki:subst:sg:acc:m3",
+                "niemiecki:subst:sg:nom:m3",
+                "niemiecki:subst:sg:voc:m3",
+            ]
+        );
+    }
+}
