@@ -5,6 +5,9 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
+# Not published yet: wasm packages are built per-release from the workspace
+# (see attic release notes / owner question on lt-wasm publishing).
+publish = false
 
 [lib]
 crate-type = ["cdylib", "rlib"]

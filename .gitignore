@@ -20,3 +20,7 @@ demo/dist/
 demo/pkg/
 demo/public/packs/
 demo/public/rules/
+
+# Publish-only facade crate (own workspace): local build artifacts and lockfile
+crates/lingotweaker/target/
+crates/lingotweaker/Cargo.lock

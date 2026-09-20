@@ -799,7 +799,7 @@ checksum = "f9f8bd3e56ce4dfc153cf470fffbfa98c7620958b312ca5c3a4b8d5181fd13c6"
 
 [[package]]
 name = "lt"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "lt-chunk",
@@ -817,7 +817,7 @@ dependencies = [
 
 [[package]]
 name = "lt-chunk"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "lt-core",
@@ -829,7 +829,7 @@ dependencies = [
 
 [[package]]
 name = "lt-cli"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "anyhow",
  "clap",
@@ -847,7 +847,7 @@ dependencies = [
 
 [[package]]
 name = "lt-core"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "regex",
@@ -857,7 +857,7 @@ dependencies = [
 
 [[package]]
 name = "lt-data"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "lt-core",
  "serde",
@@ -867,7 +867,7 @@ dependencies = [
 
 [[package]]
 name = "lt-disambig"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "lt-core",
@@ -880,7 +880,7 @@ dependencies = [
 
 [[package]]
 name = "lt-http"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "axum",
  "axum-test",
@@ -895,7 +895,7 @@ dependencies = [
 
 [[package]]
 name = "lt-node"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "lt",
  "napi",
@@ -906,7 +906,7 @@ dependencies = [
 
 [[package]]
 name = "lt-pattern"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "lt-core",
@@ -918,7 +918,7 @@ dependencies = [
 
 [[package]]
 name = "lt-py"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "lt",
  "pyo3",
@@ -927,7 +927,7 @@ dependencies = [
 
 [[package]]
 name = "lt-spell"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "lt-core",
  "lt-data",
@@ -937,7 +937,7 @@ dependencies = [
 
 [[package]]
 name = "lt-tagger"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "lt-core",
@@ -950,7 +950,7 @@ dependencies = [
 
 [[package]]
 name = "lt-tokenize"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fancy-regex",
  "lt-core",
@@ -962,7 +962,7 @@ dependencies = [
 
 [[package]]
 name = "lt-wasm"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "console_error_panic_hook",
  "lt",

@@ -5,6 +5,9 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
+# Not publishable to crates.io: distributed through PyPI (maturin). Depends on
+# the internal `lt` facade crate.
+publish = false
 
 [lib]
 name = "lt_py"

@@ -1,27 +1,38 @@
 [workspace]
 resolver = "2"
 members = ["crates/*"]
+# `crates/lingotweaker` is the publish-only facade crate. It shares the
+# engine source with `crates/lt` through a symlink and is its own workspace,
+# so workspace/CI builds do not compile the engine a second time.
+exclude = ["crates/lingotweaker"]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 edition = "2021"
 license = "LGPL-2.1-or-later"
-repository = "https://github.com/languagetool-rs/languagetool-rs"
+repository = "https://github.com/fiduswriter/LingoTweaker"
+homepage = "https://fiduswriter.github.io/LingoTweaker/"
+readme = "README.md"
 rust-version = "1.85"
 
 [workspace.dependencies]
-lt = { path = "crates/lt" }
-lt-core = { path = "crates/lt-core" }
-lt-tokenize = { path = "crates/lt-tokenize" }
-lt-tagger = { path = "crates/lt-tagger" }
-lt-disambig = { path = "crates/lt-disambig" }
-lt-pattern = { path = "crates/lt-pattern" }
-lt-spell = { path = "crates/lt-spell" }
-lt-chunk = { path = "crates/lt-chunk" }
-lt-data = { path = "crates/lt-data" }
-lt-http = { path = "crates/lt-http" }
-lt-py = { path = "crates/lt-py" }
-lt-node = { path = "crates/lt-node" }
+# Path dependencies carry a version so the publishable crates can be pushed to
+# crates.io (`cargo publish` strips the path and keeps the version). The
+# non-publishable crates (`lt`, `lt-cli`, `lt-http`, `lt-py`, `lt-node`,
+# `lt-wasm`) set `publish = false` in their own manifests; `lt` cannot be
+# published because the crates.io name `lt` belongs to a third party.
+lt = { path = "crates/lt", version = "0.1.0-alpha.1" }
+lt-core = { path = "crates/lt-core", version = "0.1.0-alpha.1" }
+lt-tokenize = { path = "crates/lt-tokenize", version = "0.1.0-alpha.1" }
+lt-tagger = { path = "crates/lt-tagger", version = "0.1.0-alpha.1" }
+lt-disambig = { path = "crates/lt-disambig", version = "0.1.0-alpha.1" }
+lt-pattern = { path = "crates/lt-pattern", version = "0.1.0-alpha.1" }
+lt-spell = { path = "crates/lt-spell", version = "0.1.0-alpha.1" }
+lt-chunk = { path = "crates/lt-chunk", version = "0.1.0-alpha.1" }
+lt-data = { path = "crates/lt-data", version = "0.1.0-alpha.1" }
+lt-http = { path = "crates/lt-http", version = "0.1.0-alpha.1" }
+lt-py = { path = "crates/lt-py", version = "0.1.0-alpha.1" }
+lt-node = { path = "crates/lt-node", version = "0.1.0-alpha.1" }
 serde = { version = "1", features = ["derive"] }
 serde_urlencoded = "0.7"
 sha2 = "0.10"
