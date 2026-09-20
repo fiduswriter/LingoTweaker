@@ -12,6 +12,7 @@ use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
 pub mod filters;
+pub mod priorities;
 pub mod rules;
 pub mod spelling;
 

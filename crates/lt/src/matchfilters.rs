@@ -230,6 +230,9 @@ fn priority(m: &Match, lang: Lang, variant: Option<&str>) -> i32 {
         Lang::Gl => {
             crate::gl::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0)
         }
+        Lang::Pl => {
+            crate::pl::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0)
+        }
         Lang::No => {
             crate::no::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0)
         }
