@@ -51,6 +51,7 @@ mod pipeline;
 mod pt;
 mod readability;
 mod repeated_words;
+mod ro;
 mod sentence_whitespace;
 mod simple_replace;
 mod style_too_often;
@@ -330,6 +331,12 @@ impl EngineBuilder {
                 &self.options.enabled_rules,
                 self.variant.as_deref(),
             )?,
+            Lang::Ro => Pipeline::new_romanian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
             Lang::No => Pipeline::new_norwegian(
                 &data_dir,
                 self.today,
@@ -423,6 +430,9 @@ impl Engine {
         }
         if let Some(galician) = &self.pipeline.galician {
             return galician.disambiguator.rules_len();
+        }
+        if let Some(romanian) = &self.pipeline.romanian {
+            return romanian.disambiguator.rules_len();
         }
         if let Some(norwegian) = &self.pipeline.norwegian {
             return norwegian.disambiguator.rules_len();

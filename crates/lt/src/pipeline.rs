@@ -149,6 +149,8 @@ pub struct Pipeline {
     pub catalan: Option<Arc<crate::ca::CatalanPipeline>>,
     /// Galician pipeline parts (`None` for the other languages)
     pub galician: Option<Arc<crate::gl::GalicianPipeline>>,
+    /// Romanian pipeline parts (`None` for the other languages)
+    pub romanian: Option<Arc<crate::ro::RomanianPipeline>>,
     /// Norwegian Bokmål pipeline parts (`None` for the other languages)
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
@@ -1329,6 +1331,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1561,6 +1564,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1742,6 +1746,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1941,6 +1946,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2060,6 +2066,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2298,6 +2305,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2496,6 +2504,7 @@ impl Pipeline {
             dutch: Some(dutch),
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2811,6 +2820,7 @@ impl Pipeline {
             dutch: None,
             catalan: Some(catalan),
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2950,6 +2960,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: Some(galician),
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2957,6 +2968,131 @@ impl Pipeline {
         })
     }
 
+    /// Romanian (`ro`) engine. Stage 1 wires the XML rules with the plain
+    /// `RomanianTagger`/`RomanianSynthesizer` and the `XmlRuleDisambiguator`
+    /// order; the Morfologik speller and the Java rule classes follow in
+    /// stages 2/3.
+    pub fn new_romanian(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        variant: Option<&str>,
+    ) -> Result<Self> {
+        let _ = today;
+        let _ = variant;
+        let timing = std::env::var("LT_TIMING").is_ok();
+        let mut last = timing.then(std::time::Instant::now);
+        let mut mark = |name: &str| {
+            if let Some(previous) = last {
+                let now = std::time::Instant::now();
+                eprintln!("[timing] ro {name}: {:?}", now - previous);
+                last = Some(now);
+            }
+        };
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "ro_two")?;
+        mark("srx");
+
+        let tagger = Arc::new(lt_tagger::RomanianTagger::load(data_dir.path())?);
+        mark("tagger");
+        let synth = Arc::new(lt_tagger::RomanianSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::ro::RomanianSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        mark("synth");
+
+        let grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ro))?;
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        mark("grammar");
+
+        // Romanian references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        mark("rules");
+
+        // `Romanian.createDefaultDisambiguator` = plain `XmlRuleDisambiguator`
+        // (+ global rules).
+        let global_disambig = data_dir.path().join("core/disambiguation-global.xml");
+        let mut disambiguator = lt_disambig::XmlDisambiguator::load_with_extra(
+            &data_dir.disambiguation_path(Lang::Ro),
+            Some(&global_disambig),
+        )?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+        mark("disambiguator");
+
+        // `MorfologikRomanianSpellerRule` (7), default on.
+        let spelling = match crate::ro::spelling::RomanianSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ro] spelling rule disabled: {err}");
+                None
+            }
+        };
+        mark("speller");
+
+        let word_repeat = crate::ro::rules::WordRepeatSentenceRule::new();
+        let simple_replace = crate::ro::rules::simple_replace_instance(data_dir.path())?;
+        let compound = crate::compound::CompoundRule::romanian(data_dir.path())?;
+        mark("rules-java");
+
+        let romanian = Arc::new(crate::ro::RomanianPipeline {
+            tagger,
+            synthesizer: synth,
+            synth_adapter,
+            disambiguator,
+            spelling,
+            word_repeat,
+            simple_replace,
+            compound,
+        });
+        Ok(Self {
+            lang: Lang::Ro,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: Some(romanian),
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
     /// Shared loading for the hand-authored languages (Norwegian Bokmål,
     /// Nordum, Guaraní): SRX, grammar.xml (+ optional style.xml), compiled
     /// rules and the XML disambiguator (+ global rules when the language
@@ -3076,6 +3212,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
@@ -3147,6 +3284,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
@@ -3222,6 +3360,7 @@ impl Pipeline {
             dutch: None,
             catalan: None,
             galician: None,
+            romanian: None,
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
@@ -3272,17 +3411,27 @@ impl Pipeline {
                                                 catalan,
                                                 sentence_text,
                                             ),
-                                            None => match &self.galician {
-                                                Some(galician) => {
-                                                    crate::gl::analyze_galician_sentence(
-                                                        galician,
+                                            None => match &self.romanian {
+                                                Some(romanian) => {
+                                                    crate::ro::analyze_romanian_sentence(
+                                                        romanian,
                                                         sentence_text,
                                                     )
                                                 }
-                                                None => analyze_sentence(
-                                                    self.tagger.as_deref().expect("english tagger"),
-                                                    sentence_text,
-                                                ),
+                                                None => match &self.galician {
+                                                    Some(galician) => {
+                                                        crate::gl::analyze_galician_sentence(
+                                                            galician,
+                                                            sentence_text,
+                                                        )
+                                                    }
+                                                    None => analyze_sentence(
+                                                        self.tagger
+                                                            .as_deref()
+                                                            .expect("english tagger"),
+                                                        sentence_text,
+                                                    ),
+                                                },
                                             },
                                         },
                                     },
@@ -5020,6 +5169,64 @@ impl Pipeline {
                 ));
             }
         }
+        // Romanian text-level rules (`Romanian.getRelevantRules`):
+        // UppercaseSentenceStart (3), GenericUnpairedBrackets (5) and
+        // RomanianWordRepeatBeginning (8).
+        if self.lang == crate::Lang::Ro {
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_ro(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_ro(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_ro(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::ro::rules::WORD_REPEAT_BEGINNING_ID,
+                "REPETITIONS_STYLE",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::ro::rules::word_repeat_beginning(&analyzed_sentences));
+            }
+        }
         text_level_matches.append(&mut matches);
         matches = text_level_matches;
         // Text-level repetition rules (`RepeatedPatternRuleTransformer`):
@@ -5159,15 +5366,23 @@ impl Pipeline {
                                             catalan,
                                             &text[start..end],
                                         ),
-                                        None => match &self.galician {
-                                            Some(galician) => crate::gl::analyze_galician_sentence(
-                                                galician,
+                                        None => match &self.romanian {
+                                            Some(romanian) => crate::ro::analyze_romanian_sentence(
+                                                romanian,
                                                 &text[start..end],
                                             ),
-                                            None => analyze_sentence(
-                                                self.tagger.as_deref().expect("english tagger"),
-                                                &text[start..end],
-                                            ),
+                                            None => match &self.galician {
+                                                Some(galician) => {
+                                                    crate::gl::analyze_galician_sentence(
+                                                        galician,
+                                                        &text[start..end],
+                                                    )
+                                                }
+                                                None => analyze_sentence(
+                                                    self.tagger.as_deref().expect("english tagger"),
+                                                    &text[start..end],
+                                                ),
+                                            },
                                         },
                                     },
                                 },
@@ -6689,6 +6904,122 @@ impl Pipeline {
                 }
             }
         }
+        // Romanian sentence-level Java rules in `Romanian.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2), WordRepeatRule
+        // (6), MorfologikRomanianSpellerRule (7), SimpleReplaceRule (9),
+        // CompoundRule (10). UppercaseSentenceStart (3),
+        // GenericUnpairedBrackets (5) and RomanianWordRepeatBeginning (8) are
+        // text-level and run above.
+        if self.lang == crate::Lang::Ro {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_ro(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_ro(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(romanian) = &self.romanian {
+                // `WordRepeatRule` (6), default on
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::ro::rules::WORD_REPEAT_RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    romanian.word_repeat.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `MorfologikRomanianSpellerRule` (7), default on
+                if let Some(spelling) = &romanian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::ro::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                // `SimpleReplaceRule` (9), default on
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        romanian.simple_replace.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    romanian
+                        .simple_replace
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `CompoundRule` (10), default on
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        romanian.compound.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    romanian
+                        .compound
+                        .check_sentence(&analyzed.tokens, sentence_text, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -7878,6 +8209,9 @@ impl Pipeline {
         if let Some(galician) = &self.galician {
             return Some(galician.synth_adapter.as_ref());
         }
+        if let Some(romanian) = &self.romanian {
+            return Some(romanian.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)
@@ -7932,6 +8266,12 @@ impl Pipeline {
             // GalicianHybridDisambiguator order: gl/multiwords → XML rules
             // (+ global rules).
             galician.disambiguate(sentence);
+            return;
+        }
+        if let Some(romanian) = &self.romanian {
+            // `Romanian.createDefaultDisambiguator` is a plain
+            // `XmlRuleDisambiguator`: XML rules (+ global rules).
+            romanian.disambiguate(sentence);
             return;
         }
         if let Some(norwegian) = &self.norwegian {

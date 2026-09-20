@@ -158,6 +158,19 @@ pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Romanian `MessagesBundle_ro`
+/// strings.
+pub fn check_ro(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Propoziția nu începe cu literă mare",
+        "Capitalizare",
+        "Verifică dacă propoziția începe cu literă mare",
+        "Capitalizare",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

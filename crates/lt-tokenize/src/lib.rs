@@ -12,6 +12,7 @@ pub mod galician;
 pub mod german;
 pub mod german_compound;
 pub mod portuguese;
+pub mod romanian;
 pub mod spanish;
 pub mod srx;
 pub mod wordtokenizer;
@@ -24,6 +25,7 @@ pub use galician::GalicianWordTokenizer;
 pub use german::GermanWordTokenizer;
 pub use german_compound::GermanCompoundTokenizer;
 pub use portuguese::PortugueseWordTokenizer;
+pub use romanian::RomanianWordTokenizer;
 pub use spanish::SpanishWordTokenizer;
 pub use srx::{SrxDocument, SrxTokenizer};
 

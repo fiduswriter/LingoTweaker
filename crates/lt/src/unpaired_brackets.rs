@@ -549,6 +549,26 @@ pub fn check_pt(sentences: &[AnalyzedSentence], variant: &str) -> Vec<Match> {
     check_with(sentences, &symbols_pt(variant))
 }
 
+/// `Romanian.getRelevantRules`: the generic rule with
+/// `[ ( { „ « »` / `] ) } ” » «` and the `MessagesBundle_ro` strings.
+pub fn symbols_ro() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Acolade, paranteze, ghilimele sau alte simboluri similare desperecheate",
+        category_id: "PUNCTUATION",
+        category_name: "Punctuation",
+        start: &["[", "(", "{", "\u{201E}", "\u{00AB}", "\u{00BB}"],
+        end: &["]", ")", "}", "\u{201D}", "\u{00BB}", "\u{00AB}"],
+        spanish: false,
+        message_template: "Unpaired symbol: '{other}' seems to be missing",
+    }
+}
+
+/// Romanian `UNPAIRED_BRACKETS` (generic rule, Romanian strings).
+pub fn check_ro(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_ro())
+}
+
 /// `Galician.getRelevantRules`: the generic rule with
 /// `[ ( { “ « » ‘ " '` / `] ) } ” » « ’ " '` and the `MessagesBundle_gl`
 /// strings.

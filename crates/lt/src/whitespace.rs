@@ -113,6 +113,16 @@ pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Romanian `MessagesBundle_ro` strings.
+pub fn check_ro(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Spațiu repetat (formatare greșită)",
+        "Posibilă greșeală: ați repetat un spațiu",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

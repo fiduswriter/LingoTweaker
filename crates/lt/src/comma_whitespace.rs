@@ -469,6 +469,44 @@ pub fn check_sentence_nl(
     matches
 }
 
+/// Java `messages.getString` with the `MessagesBundle_ro` bundle.
+fn translate_comma_message_ro(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Nu puneți spațiu după deschiderea parantezei".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Nu puneți spațiu după închiderea parantezei".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Puneți un spațiu după virgulă".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Pune un spațiu după virgulă, dar nu înainte de virgulă".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Nu puneți spațiu înainte de punct".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
+/// `CommaWhitespaceRule` with the Romanian `MessagesBundle_ro` strings.
+pub fn check_sentence_ro(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Typography".to_string();
+        m.description = "Spații puse înainte de virgulă sau înainte/după paranteze".to_string();
+        m.message = translate_comma_message_ro(&m.message);
+    }
+    matches
+}
+
 /// `CommaWhitespaceRule` with the Catalan `MessagesBundle_ca` strings.
 pub fn check_sentence_ca(
     tokens: &[AnalyzedTokenReadings],

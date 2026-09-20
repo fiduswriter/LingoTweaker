@@ -32,6 +32,23 @@ pub fn check_sentence_de(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Romanian `MessagesBundle_ro` strings.
+pub fn check_sentence_ro(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Punctuation".to_string();
+        m.description = "S-au folosit două puncte sau virgule consecutive".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Două puncte consecutive".to_string();
+            m.short_message = Some("Două puncte consecutive".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Două virgule consecutive".to_string();
+            m.short_message = Some("Două virgule consecutive".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Spanish `MessagesBundle_es` strings.
 pub fn check_sentence_es(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

@@ -102,6 +102,7 @@ impl DataDir {
             Lang::Nl => "dutch.dict",
             Lang::Ca => "ca-ES.dict",
             Lang::Gl => "galician.dict",
+            Lang::Ro => "romanian.dict",
             _ => "",
         };
         self.0

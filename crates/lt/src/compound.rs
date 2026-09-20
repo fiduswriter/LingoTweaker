@@ -533,6 +533,33 @@ impl CompoundRule {
         })
     }
 
+    /// `ro.CompoundRule` (`RO_COMPOUND`): `ro/words/compounds.txt`. The
+    /// Romanian class does not override `isMisspelled`, so every candidate
+    /// replacement passes `filterReplacements` (base `isMisspelled` = false).
+    pub fn romanian(data_dir: &Path) -> Result<Self> {
+        let data = CompoundData::from_path(&data_dir.join("ro/words/compounds.txt"))?;
+        Ok(Self {
+            data,
+            is_misspelled: Arc::new(|_| false),
+            config: CompoundConfig {
+                rule_id: "RO_COMPOUND",
+                description: "Greșeală de scriere (cuvinte scrise legat sau cu cratimă)"
+                    .to_string(),
+                with_hyphen_message: "Cuvântul se scrie cu cratimă.",
+                without_hyphen_message: "Cuvântul se scrie legat.",
+                with_or_without_hyphen_message: "Cuvântul se scrie legat sau cu cratimă.",
+                short_message: Some("Problemă de scriere (cratimă, spațiu, etc.)"),
+                category_id: "MISC",
+                category_name: "Diverse",
+                sub_rule_specific_ids: false,
+                to_id_german: false,
+                merge: merge_compound,
+                issue_type: "misspelling",
+            },
+            anti_patterns: Vec::new(),
+        })
+    }
+
     pub fn rule_id(&self) -> &str {
         self.config.rule_id
     }
