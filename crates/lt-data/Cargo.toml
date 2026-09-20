@@ -1,0 +1,13 @@
+[package]
+name = "lt-data"
+description = "Vendored data discovery, manifests, and provenance for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = "0.10"

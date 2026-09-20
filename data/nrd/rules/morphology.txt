@@ -1,0 +1,33 @@
+# Nordum — word formation (NDM_MORPHOLOGY; spec §4.2, §4.3).
+# Source-language endings are normalized to the Nordum paradigm; accepted
+# multiple words follow §5.5.
+arbeta=arbeide|arbete
+arbetar=arbeider
+arbetade=arbeidede|arbeida
+arbetat=arbeidet
+talar=taler|snakker
+talade=talede|talte
+tänker=tenker
+läser=læser|læs
+köper=køper|købe
+arbeidar=arbeider
+snakkar=snakker
+lesar=leser
+skrivar=skriver
+jenter=jentar
+biler=bilar
+hunder=hundar
+katter=kattar
+dager=dagar
+epler=eplar
+# Definite singular follows the general -en ending (spec §4.3.2)
+flikkan=flikken
+jentene=jentarna
+flickor=flikkar
+flickorna=flikkarna
+husene=husar|husarna
+har arbeid=har arbeidet
+har arbeida=har arbeidet
+gåer=går
+værer=er
+haer=har

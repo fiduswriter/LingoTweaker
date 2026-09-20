@@ -1,0 +1,450 @@
+S	L'home menja pa.
+T	L'	el:DA0CS0|ell:PP3CSA00
+T	home	home:I|home:NCMS000
+T	 	null:null
+T	menja	menja:NCFS000|menjar:VMIP3S00|menjar:VMM02S00
+T	 	null:null
+T	pa	pa:NCMS000
+T	.	null:null
+S	Anem a l'escola.
+T	Anem	anar:VMIP1P00|anar:VMM01P00|anar:VMSP1P00
+T	 	null:null
+T	a	a:NCFS000|a:SPS00
+T	 	null:null
+T	l'	el:DA0CS0|ell:PP3CSA00
+T	escola	escola:NCFS000|escolar:VMIP3S00|escolar:VMM02S00
+T	.	null:null
+S	Dóna'm el llibre.
+T	Dóna	donar:VMIP3S00|donar:VMM02S00
+T	'm	jo:P010S000|jo:PP1CS000
+T	 	null:null
+T	el	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	llibre	llibre:NCMS000
+T	.	null:null
+S	Vés-hi demà.
+T	Vés	anar:VMM02S00
+T	-hi	hi:PP3CN000
+T	 	null:null
+T	demà	demà:NCMS000|demà:RG
+T	.	null:null
+S	Porta-li el diari.
+T	Porta	Porta:NPCNSP0|porta:NCFS000|portar:VMIP3S00|portar:VMM02S00
+T	-li	ell:PP3CSD00
+T	 	null:null
+T	el	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	diari	diari:AQ0MS0|diari:NCMS000
+T	.	null:null
+S	Anar-se'n és difícil.
+T	Anar	anar:VMN00000
+T	-se	es:P0300000
+T	'n	en:PP3CN000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	difícil	difícil:AQ0CS0
+T	.	null:null
+S	El col·legi és nou.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	col·legi	col·legi:NCMS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	nou	nou_1:NCFS000|nou_2:NCMS000|nou:AQ0MS0|nou:DN0CP0|nou:NCCN000|noure:VMIP3S00|noure:VMM02S00
+T	.	null:null
+S	El paral·lel fa goig.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	paral·lel	paral·lel:AQ0MS0|paral·lel:NCMS000
+T	 	null:null
+T	fa	fa:NCMS000|fer:VMIP3S00
+T	 	null:null
+T	goig	goig:NCMS000|gojar:VMIP1S0B
+T	.	null:null
+S	És un mers-cov estrany.
+T	És	ser:VSIP3S00
+T	 	null:null
+T	un	un:DI0MS0|un:PI0MS000
+T	 	null:null
+T	mers-cov	null:null
+T	 	null:null
+T	estrany	estrany:AQ0MS0|estrany:NCMS000|estranyar:VMIP1S0B
+T	.	null:null
+S	El pitjor és el sars-cov-2.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	pitjor	pitjor:AQ0CS0|pitjor:RG|pitjorar:VMIP1S0B
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	el	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	sars-cov-2	null:null
+T	.	null:null
+S	Això és un ph-metre.
+T	Això	això:PD0NS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	un	un:DI0MS0|un:PI0MS000
+T	 	null:null
+T	ph-metre	null:null
+T	.	null:null
+S	Ha costat 1.000 euros.
+T	Ha	ha:I|ha:NCFN000|haver:VAIP3S00
+T	 	null:null
+T	costat	costat:NCMS000|costar:VMP00SM0
+T	 	null:null
+T	1.000	null:null
+T	 	null:null
+T	euros	euro:NCMP000
+T	.	null:null
+S	La temperatura és de 12,5 graus.
+T	La	la:NCMS000|el:DA0FS0|ell:PP3FSA00
+T	 	null:null
+T	temperatura	temperatura:NCFS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	de	de:NCFS000|de:SPS00
+T	 	null:null
+T	12,5	null:null
+T	 	null:null
+T	graus	grau:NCMP000
+T	.	null:null
+S	Hi havia 2 000 000 de persones.
+T	Hi	hi:PP3CN000
+T	 	null:null
+T	havia	haver:VAII1S00|haver:VAII3S00|heure:VMII1S00|heure:VMII3S00
+T	 	null:null
+T	2 000 000	null:null
+T	 	null:null
+T	de	de:NCFS000|de:SPS00
+T	 	null:null
+T	persones	persona:NCFP000|personar:VMIP2S00|personar:VMSP2S0V
+T	.	null:null
+S	Al carrer hi ha els veïns.
+T	A	a:NCFS000|a:SPS00
+T	l	l:NCMN000|el:DA0MS0
+T	 	null:null
+T	carrer	carrer:NCMS000
+T	 	null:null
+T	hi	hi:PP3CN000
+T	 	null:null
+T	ha	ha:I|ha:NCFN000|haver:VAIP3S00
+T	 	null:null
+T	els	el:DA0MP0|ell:PP3CP000
+T	 	null:null
+T	veïns	veí:AQ0MP0|veí:NCMP000
+T	.	null:null
+S	Ho va dir als seus amics.
+T	Ho	ho:PP3NN000
+T	 	null:null
+T	va	va:AQ0MS0|anar:VAIP3S00|anar:VMIP3S00
+T	 	null:null
+T	dir	dir:NCMS000|dir:VMN00000
+T	 	null:null
+T	a	a:NCFS000|a:SPS00
+T	ls	el:DA0MP0
+T	 	null:null
+T	seus	seu:NCFP000|seu:PX3MP0C0|seure:VMIP2S00
+T	 	null:null
+T	amics	amic:AQ0MP0|amic:NCMP000
+T	.	null:null
+S	Viuen can Joan i cal Pere.
+T	Viuen	viure:VMIP3P00
+T	 	null:null
+T	ca	ca_1:NCMS000|ca_2:NCFS000|ca_3:NCFS000|ca_4:I|circa:Y
+T	n	null:null
+T	 	null:null
+T	Joan	Joan:NPCNSP0|Joan:NPMSSP0
+T	 	null:null
+T	i	i:CC|i:NCFS000
+T	 	null:null
+T	cal	calar:VMIP1S0B|caldre:VMIP3S00
+T	 	null:null
+T	Pere	Pere:NPCNSP0|Pere:NPMSSP0
+T	.	null:null
+S	Ràpidament va marxar.
+T	Ràpidament	ràpidament:RG
+T	 	null:null
+T	va	va:AQ0MS0|anar:VAIP3S00|anar:VMIP3S00
+T	 	null:null
+T	marxar	marxar:VMN00000
+T	.	null:null
+S	FRANÇA és gran.
+T	FRANÇA	França:NPFSG00
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	gran	gran:AQ0CS0|gran:NCCS000|granar:VMIP1S0B
+T	.	null:null
+S	L'ARNAU canta.
+T	L'	el:DA0CS0|ell:PP3CSA00
+T	ARNAU	arnar:VMIP2P0B|arnar:VMM02P0B|Arnau:NPMSSP0
+T	 	null:null
+T	canta	cantar:VMIP3S00|cantar:VMM02S00
+T	.	null:null
+S	Aquest home és un franc-americano-alemany.
+T	Aquest	aquest:DD0MS0|aquest:PD0MS000
+T	 	null:null
+T	home	home:I|home:NCMS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	un	un:DI0MS0|un:PI0MS000
+T	 	null:null
+T	franc	franc:AQ0MS0|franc:NCMS000|franc:RG
+T	-	null:null
+T	americano	null:null
+T	-	null:null
+T	alemany	alemany:AQ0MS0|alemany:NCMS000
+T	.	null:null
+S	És una forma folklòrico-popular.
+T	És	ser:VSIP3S00
+T	 	null:null
+T	una	un:DI0FS0|un:PI0FS000
+T	 	null:null
+T	forma	forma:NCFS000|formar:VMIP3S00|formar:VMM02S00
+T	 	null:null
+T	folklòrico-popular	folklòrico-popular:AQ0CS0
+T	.	null:null
+S	L'home és a la ciutat.
+T	L'	el:DA0CS0|ell:PP3CSA00
+T	home	home:I|home:NCMS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	a	a:NCFS000|a:SPS00
+T	 	null:null
+T	la	la:NCMS000|el:DA0FS0|ell:PP3FSA00
+T	 	null:null
+T	ciutat	ciutat:NCFS000
+T	.	null:null
+S	Els nens juguen al parc.
+T	Els	el:DA0MP0|ell:PP3CP000
+T	 	null:null
+T	nens	nen:NCMP000
+T	 	null:null
+T	juguen	jugar:VMIP3P00|jugar:VMM03P0V|jugar:VMSP3P0V
+T	 	null:null
+T	a	a:NCFS000|a:SPS00
+T	l	l:NCMN000|el:DA0MS0
+T	 	null:null
+T	parc	parc:AQ0MS0|parc:NCMS000
+T	.	null:null
+S	Ahir vam anar al cinema.
+T	Ahir	ahir:NCMS000|ahir:RG
+T	 	null:null
+T	vam	anar:VAIP1P00
+T	 	null:null
+T	anar	anar:VMN00000
+T	 	null:null
+T	a	a:NCFS000|a:SPS00
+T	l	l:NCMN000|el:DA0MS0
+T	 	null:null
+T	cinema	cinema:NCMS000
+T	.	null:null
+S	La dona llegeix un llibre.
+T	La	la:NCMS000|el:DA0FS0|ell:PP3FSA00
+T	 	null:null
+T	dona	dona:NCFS000|donar:VMIP3S00|donar:VMM02S00
+T	 	null:null
+T	llegeix	llegir:VMIP3S00|llegir:VMM02S00
+T	 	null:null
+T	un	un:DI0MS0|un:PI0MS000
+T	 	null:null
+T	llibre	llibre:NCMS000
+T	.	null:null
+S	El cotxe és vermell.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	cotxe	cotxe:NCMS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	vermell	vermell:AQ0MS0|vermell:NCMS000
+T	.	null:null
+S	Aquesta casa és gran.
+T	Aquesta	aquest:DD0FS0|aquest:PD0FS000
+T	 	null:null
+T	casa	casa:NCFS000|casar:VMIP3S00|casar:VMM02S00
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	gran	gran:AQ0CS0|gran:NCCS000|granar:VMIP1S0B
+T	.	null:null
+S	Enraonem una mica.
+T	Enraonem	enraonar:VMIP1P00|enraonar:VMM01P00|enraonar:VMSP1P00
+T	 	null:null
+T	una	un:DI0FS0|un:PI0FS000
+T	 	null:null
+T	mica	mica:NCFS000|mica:RG
+T	.	null:null
+S	S'enriuen de tot.
+T	S'	es:DA0CS0|es:P0300000
+T	enriuen	enriuar:VMIP3P00|enriuar:VMM03P0V|enriuar:VMSP3P0V
+T	 	null:null
+T	de	de:NCFS000|de:SPS00
+T	 	null:null
+T	tot	tot:DI0MS0|tot:NCMS000|tot:PI0MS000|tot:RG
+T	.	null:null
+S	Aquests són els meus amics.
+T	Aquests	aquest:DD0MP0|aquest:PD0MP000
+T	 	null:null
+T	són	ser:VSIP3P00
+T	 	null:null
+T	els	el:DA0MP0|ell:PP3CP000
+T	 	null:null
+T	meus	meu:NCMP000|meu:PX1MP0S0
+T	 	null:null
+T	amics	amic:AQ0MP0|amic:NCMP000
+T	.	null:null
+S	Els nostres veïns són simpàtics.
+T	Els	el:DA0MP0|ell:PP3CP000
+T	 	null:null
+T	nostres	nostre:DP1CPP|nostre:PX1CP0P0
+T	 	null:null
+T	veïns	veí:AQ0MP0|veí:NCMP000
+T	 	null:null
+T	són	ser:VSIP3P00
+T	 	null:null
+T	simpàtics	simpàtic:AQ0MP0|simpàtic:NCMP000
+T	.	null:null
+S	Jo tinc gana.
+T	Jo	jo:NCMS000|jo:PP1CSN00
+T	 	null:null
+T	tinc	tenir:VMIP1S00
+T	 	null:null
+T	gana	gana:NCFS000
+T	.	null:null
+S	Tu menges massa.
+T	Tu	tu:PP2CSN00
+T	 	null:null
+T	menges	menja:NCFP000|menjar:VMIP2S00|menjar:VMSP2S0V
+T	 	null:null
+T	massa	massa:DI0CN0|massa:NCFS000|massa:RG
+T	.	null:null
+S	Ell dorm profundament.
+T	Ell	ell:PP3MSN00
+T	 	null:null
+T	dorm	dormir:VMIP1S0Z|dormir:VMIP3S00|dormir:VMM02S00
+T	 	null:null
+T	profundament	profundament:RG
+T	.	null:null
+S	Nosaltres cantem junts.
+T	Nosaltres	jo:PP1CPN00
+T	 	null:null
+T	cantem	cantar:VMIP1P00|cantar:VMM01P00|cantar:VMSP1P00
+T	 	null:null
+T	junts	junt:AQ0MP0|junt:NCMP000
+T	.	null:null
+S	Vosaltres rieu molt.
+T	Vosaltres	tu:PP2CPN00
+T	 	null:null
+T	rieu	riure:VMIP2P00|riure:VMM02P00
+T	 	null:null
+T	molt	molt:DI0MS0|molt:PI0MS000|molt:RG|moldre:VMP00SM0
+T	.	null:null
+S	Ells escriuen cartes.
+T	Ells	ell:PP3MPN00
+T	 	null:null
+T	escriuen	escriure:VMIP3P00
+T	 	null:null
+T	cartes	carta:NCFP000
+T	.	null:null
+S	He vist una pel·lícula.
+T	He	he:NCFS000|haver:VAIP1S00
+T	 	null:null
+T	vist	vestir:VMIP1S0V|vestir:VMIP3S0V|vestir:VMM02S0V|veure:VMP00SM0
+T	 	null:null
+T	una	un:DI0FS0|un:PI0FS000
+T	 	null:null
+T	pel·lícula	pel·lícula:NCFS000
+T	.	null:null
+S	Vols venir amb mi?
+T	Vols	vol:NCMP000|voler:VMIP2S00
+T	 	null:null
+T	venir	venir:VMN00000
+T	 	null:null
+T	amb	amb:SPS00
+T	 	null:null
+T	mi	mi_1:NCMS000|mi_2:NCFS000|jo:PP1CS000
+T	?	null:null
+S	Demà plourà.
+T	Demà	demà:NCMS000|demà:RG
+T	 	null:null
+T	plourà	ploure:VMIF3S00
+T	.	null:null
+S	Avui fa sol.
+T	Avui	avui:RG
+T	 	null:null
+T	fa	fa:NCMS000|fer:VMIP3S00
+T	 	null:null
+T	sol	sol:AQ0MS0|sol:NCMS000|solar:VMIP1S0B|soler:VMIP3S00|soler:VMM02S00
+T	.	null:null
+S	La lluna és plena.
+T	La	la:NCMS000|el:DA0FS0|ell:PP3FSA00
+T	 	null:null
+T	lluna	lluna:NCFS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	plena	plena:NCFS000|ple:AQ0FS0
+T	.	null:null
+S	El mar és blau.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	mar	mar:NCCS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	blau	blau:AQ0MS0|blau:NCMS000
+T	.	null:null
+S	La muntanya és alta.
+T	La	la:NCMS000|el:DA0FS0|ell:PP3FSA00
+T	 	null:null
+T	muntanya	muntanya:NCFS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	alta	alt:AQ0FS0|alt:NCFS000
+T	.	null:null
+S	El riu és llarg.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	riu	riu:NCMS000|riure:VMIP3S00|riure:VMM02S00
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	llarg	llarg:AQ0MS0|llarg:NCMS000|llarg:RG
+T	.	null:null
+S	El bosc és fosc.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	bosc	bosc:NCMS000|boscar:VMIP1S0B
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	fosc	fosc:AQ0MS0|fosc:RG
+T	.	null:null
+S	La ciutat és gran.
+T	La	la:NCMS000|el:DA0FS0|ell:PP3FSA00
+T	 	null:null
+T	ciutat	ciutat:NCFS000
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	gran	gran:AQ0CS0|gran:NCCS000|granar:VMIP1S0B
+T	.	null:null
+S	El poble és petit.
+T	El	el:DA0MS0|ell:PP3MSA00
+T	 	null:null
+T	poble	poble:NCMS000|poblar:VMIP1S0V|poblar:VMM03S0V|poblar:VMSP1S0V|poblar:VMSP3S0V
+T	 	null:null
+T	és	ser:VSIP3S00
+T	 	null:null
+T	petit	petit:AQ0MS0|petit:NCMS000
+T	.	null:null

@@ -1,0 +1,13 @@
+[package]
+name = "lt-spell"
+description = "Speller and confusion sets for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+lt-data = { workspace = true }
+lt-tagger = { workspace = true }
+unicode-normalization = { workspace = true }

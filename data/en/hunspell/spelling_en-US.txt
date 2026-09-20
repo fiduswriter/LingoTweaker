@@ -1,0 +1,41 @@
+# Words that extend the en-US spell checker.
+# To add a word to all variants (en-US, en-GB,...) use spelling.txt
+# For multi-word terms, refer to https://github.com/languagetool-org/languagetool/issues/700
+disulfide
+disulfides
+hypoglycemics
+lockup
+lockups
+micrometer
+micrometers
+non-fulfillment
+non-fulfillments
+noncapitalizable
+pentasulfide
+pentasulfides
+polysulfide
+polysulfides
+grayout
+gray-out
+grayouts
+gray-outs
+preorder
+preordered
+preordering
+reprioritize
+reprioritized
+reprioritizes
+reprioritizing
+deprioritize
+deprioritized
+deprioritizes
+deprioritizing
+preorders
+sulfide
+sulfides
+tetrasulfide
+tetrasulfides
+uncapitalizable
+practicum
+practicums
+practica

@@ -1,0 +1,4 @@
+# Guaraní — postpositions are written attached (GN_POSTPOSITIONS; ALG rule 4).
+óga pe=ógape
+óga gui=ógagui
+óga rehe=ógarehe

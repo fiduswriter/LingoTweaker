@@ -1,0 +1,14 @@
+# Norwegian Bokmål — common misspellings and fixed expressions (NB_TYPOS).
+# Format: wrong=right (tab + message optional). `|` separates alternatives.
+# Hand-picked entries. The Wikipedia import lives in typos_wikipedia.txt
+# (CC BY-SA 4.0, see that file and THIRD_PARTY_NOTICES.md).
+desverre=dessverre
+ihvertfall=i hvert fall
+orginal=original
+sansynligvis=sannsynligvis
+sansynlig=sannsynlig
+sammtidig=samtidig
+værre=verre
+har vær=har vært
+så og si=så å si
+til å med=til og med

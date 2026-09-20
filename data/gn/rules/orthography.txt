@@ -1,0 +1,20 @@
+# Guaraní (Paraguayan, gug) — curated orthography corrections (GN_ORTHOGRAPHY).
+# Wrong=right pairs from the ALG orthography rules and Wikipedia vocabulary;
+# examples marked [constructed] in new-languages/guarani/proposed-rules.md
+# still need owner confirmation before public release.
+ñee=ñe'ẽ
+kaa=ka'a
+mokói=mokõi
+ko'ẽró=ko'ẽrõ
+akáme=akãme
+aga=ag̃a
+guahẽ=g̃uahẽ
+ñúpe=ñúme
+nde tĩ=ne tĩ
+jamba'apo=ñamba'apo
+ndojapoi=ndojapói
+noñaníi=noñaníri
+mitãkuéra=mitãnguéra
+avanguéra=avakuéra
+cabra=kavara
+farmacia=farmasia

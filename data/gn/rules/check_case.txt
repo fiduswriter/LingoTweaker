@@ -1,0 +1,3 @@
+# Guaraní — correct lowercase forms (GN_CAPITALIZATION, AbstractCheckCaseRule).
+# The language name is written lowercase in running text (owner decision).
+guarani

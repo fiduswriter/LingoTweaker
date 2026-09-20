@@ -1,0 +1,15 @@
+[package]
+name = "lt-pattern"
+description = "LanguageTool XML pattern-rule engine for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+lt-data = { workspace = true }
+quick-xml = { workspace = true }
+serde = { workspace = true }
+regex = { workspace = true }
+fancy-regex = { workspace = true }

@@ -1,0 +1,804 @@
+//! Italian spelling rule (`MorfologikItalianSpellerRule`): port of the
+//! morfologik speller path of `MorfologikSpellerRule` and
+//! `SpellingCheckRule` with the Italian override (`orderSuggestions`).
+//!
+//! Differences from Spanish: `MorfologikItalianSpellerRule` does **not**
+//! call `setIgnoreTaggedWords()`, has no additional top suggestions and no
+//! `prepareLineForSpeller` override; the binary dictionary is
+//! `it/hunspell/it_IT.dict` (CFSA2, ISO-8859-15).
+use lt_data::PathExt as _;
+
+use std::collections::HashSet;
+use std::path::{Path, PathBuf};
+use std::sync::{Arc, LazyLock};
+
+use lt_core::{AnalyzedTokenReadings, Match, Result, Suggestion, TextRange};
+
+use crate::wordutil::{is_email, is_punctuation_mark, is_url};
+use lt_spell::morfologik::{
+    self, DictSource, MorfologikSpeller, MultiSpeller, SpellerMetadata, WeightedSuggestion,
+};
+use lt_tagger::DictionaryInfo;
+use regex::Regex;
+
+pub const RULE_ID: &str = "MORFOLOGIK_RULE_IT_IT";
+const DESCRIPTION: &str = "Probabile errore di battitura";
+const MESSAGE: &str = "Trovato un probabile errore di battitura.";
+const SHORT_MESSAGE: &str = "Errore di battitura";
+const CATEGORY_ID: &str = "TYPOS";
+const CATEGORY_NAME: &str = "Possibile errore di battitura";
+/// `MorfologikSpellerRule.MAX_FREQUENCY_FOR_SPLITTING`
+const MAX_FREQUENCY_FOR_SPLITTING: i32 = 21;
+/// `SpellingCheckRule.MAX_TOKEN_LENGTH`
+const MAX_TOKEN_LENGTH: usize = 200;
+
+static HAS_NO_LETTER: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[^\p{Latin}]+$").unwrap());
+static STARTS_WITH_NUMBERS_BULLETS: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^(\d[.,\d]*|\P{L}+)(.*)$").unwrap());
+static STARTS_WITH_NUMBERS_BULLETS_EXCEPTIONS: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^([\p{C}\-\$%&]+)(.*)$").unwrap());
+
+pub struct ItalianSpellingRule {
+    /// the binary `it_IT.dict` alone (`MorfologikSpeller` for
+    /// `FindSuggestionsFilter`'s `findSimilarWords`)
+    binary_speller: MorfologikSpeller,
+    speller1: MultiSpeller,
+    speller2: MultiSpeller,
+    speller3: MultiSpeller,
+    /// `SpellingCheckRule.wordsToBeIgnored` (case-sensitive, like Java)
+    ignore: HashSet<String>,
+    /// `SpellingCheckRule.wordsToBeProhibited`
+    prohibit: HashSet<String>,
+    /// `MorfologikItalianSpellerRule` does not call `setIgnoreTaggedWords()`
+    ignore_tagged_words: bool,
+    suggestion_cache:
+        std::sync::Mutex<std::collections::HashMap<String, std::sync::Arc<Vec<Suggestion>>>>,
+}
+
+impl ItalianSpellingRule {
+    pub fn load(data_dir: &Path) -> Result<Self> {
+        let hunspell = data_dir.join("it/hunspell");
+        let info = DictionaryInfo::load(&hunspell.join("it_IT.info"))?;
+        let meta = SpellerMetadata::from_info(&info)?;
+        let binary_source = Arc::new(DictSource::from_dict_file(
+            &hunspell.join("it_IT.dict"),
+            &hunspell.join("it_IT.info"),
+        )?);
+        let binary = |distance: i32| -> MorfologikSpeller {
+            MorfologikSpeller::from_source(Arc::clone(&binary_source), meta.clone(), distance)
+        };
+        let lines = load_plain_text_dict_lines(data_dir);
+        let plain_source = Arc::new(DictSource::from_lines(&lines));
+        let plain = |distance: i32| -> MorfologikSpeller {
+            MorfologikSpeller::from_source(Arc::clone(&plain_source), meta.clone(), distance)
+        };
+        let binary_speller = binary(1);
+        let speller1 = MultiSpeller::new(vec![binary(1), plain(1)], vec![0, 1]);
+        let speller2 = MultiSpeller::new(vec![binary(2), plain(2)], vec![0, 1]);
+        let speller3 = MultiSpeller::new(vec![binary(3), plain(3)], vec![0, 1]);
+
+        let mut rule = Self {
+            binary_speller,
+            speller1,
+            speller2,
+            speller3,
+            ignore: HashSet::new(),
+            prohibit: HashSet::new(),
+            ignore_tagged_words: false,
+            suggestion_cache: std::sync::Mutex::new(std::collections::HashMap::new()),
+        };
+        // `SpellingCheckRule.init`: ignore file, spelling file, additional
+        // spelling files (the global list), then the prohibit files.
+        for path in [
+            hunspell.join("ignore.txt"),
+            hunspell.join("spelling.txt"),
+            hunspell.join("spelling_custom.txt"),
+            data_dir.join("core/spelling_global.txt"),
+        ] {
+            rule.load_ignore(&path);
+        }
+        for path in [
+            hunspell.join("prohibit.txt"),
+            hunspell.join("prohibit_custom.txt"),
+        ] {
+            rule.load_prohibit(&path);
+        }
+        Ok(rule)
+    }
+
+    pub fn rule_id(&self) -> &str {
+        RULE_ID
+    }
+
+    /// The binary-dictionary speller (`FindSuggestionsFilter`).
+    pub fn dict_speller(&self) -> &MorfologikSpeller {
+        &self.binary_speller
+    }
+
+    /// `MorfologikSpellerRule.getSpellingSuggestions` (one synthetic token).
+    pub fn suggestions(&self, word: &str) -> Vec<String> {
+        let token = lt_core::AnalyzedTokenReadings::new(vec![lt_core::AnalyzedToken::new(
+            word, None, None,
+        )]);
+        self.check_sentence(&[token], 0)
+            .into_iter()
+            .next()
+            .map(|m| m.suggestions.into_iter().map(|s| s.value).collect())
+            .unwrap_or_default()
+    }
+
+    fn load_ignore(&mut self, path: &Path) {
+        for word in cache_word_list(path) {
+            self.ignore.insert(word);
+        }
+    }
+
+    fn load_prohibit(&mut self, path: &Path) {
+        for word in cache_word_list(path) {
+            self.prohibit.insert(word);
+        }
+    }
+
+    /// `MorfologikSpellerRule.isMisspelled(speller1, word)` (`checkCompound`
+    /// is false for Italian).
+    pub(crate) fn is_misspelled(&self, word: &str) -> bool {
+        self.speller1.is_misspelled(word)
+    }
+
+    fn is_prohibited(&self, word: &str) -> bool {
+        self.prohibit.contains(word)
+    }
+
+    fn is_ignored_no_case(&self, word: &str) -> bool {
+        let converts_case = true;
+        self.ignore.contains(word)
+            || (!morfologik::is_mixed_case(word)
+                && converts_case
+                && self.ignore.contains(&word.to_lowercase()))
+    }
+
+    /// `SpellingCheckRule.ignoreWord(String)`.
+    fn ignore_word(&self, word: &str) -> bool {
+        if word.chars().count() > MAX_TOKEN_LENGTH {
+            return true;
+        }
+        if HAS_NO_LETTER.is_match(word) {
+            return true;
+        }
+        if let Some(stripped) = word.strip_suffix('.') {
+            if !self.ignore.contains(word) {
+                return self.is_ignored_no_case(stripped);
+            }
+        }
+        self.is_ignored_no_case(word)
+    }
+
+    /// `SpellingCheckRule.ignoreWord(String)` + `StringTools.isEmoji`.
+    fn ignore_word_with_emoji(&self, word: &str) -> bool {
+        self.ignore_word(word) || lt_tagger::is_emoji(word)
+    }
+
+    /// `MorfologikSpellerRule.canBeIgnored`.
+    fn can_be_ignored(
+        &self,
+        tokens: &[&AnalyzedTokenReadings],
+        idx: usize,
+        token: &AnalyzedTokenReadings,
+    ) -> bool {
+        token.is_sentence_start
+            || token.is_immunized
+            || token.is_ignore_spelling
+            || is_url(token.surface())
+            || is_email(token.surface())
+            || (self.ignore_tagged_words && token.is_tagged && !self.is_prohibited(token.surface()))
+            || self.ignore_word_with_emoji(tokens[idx].surface())
+    }
+
+    /// `MorfologikSpellerRule.match` over one sentence's token stream
+    /// (absolute byte offsets already applied by the caller).
+    pub fn check_sentence(
+        &self,
+        tokens: &[AnalyzedTokenReadings],
+        sentence_offset: usize,
+    ) -> Vec<Match> {
+        let non_blank: Vec<&AnalyzedTokenReadings> = tokens
+            .iter()
+            .filter(|t| !t.is_whitespace || t.is_sentence_start || t.is_sentence_end)
+            .collect();
+        let mut matches: Vec<Match> = Vec::new();
+        let mut is_first_word = true;
+        for (idx, token) in non_blank.iter().enumerate() {
+            if self.can_be_ignored(&non_blank, idx, token) {
+                if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
+                    is_first_word = false;
+                }
+                continue;
+            }
+            let start_pos = token.start_pos;
+            let word = token
+                .readings
+                .first()
+                .map(|r| r.token.clone())
+                .unwrap_or_else(|| token.surface().to_string());
+            let new_matches =
+                self.get_rule_matches(&word, start_pos, &mut matches, idx, &non_blank);
+            matches.extend(new_matches);
+
+            // Capitalize the (first) match's suggestions when the word is the
+            // sentence's first word and not its last token.
+            if is_first_word && !matches.is_empty() && idx < non_blank.len() - 1 {
+                let values: Vec<String> = matches[0]
+                    .suggestions
+                    .iter()
+                    .map(|s| s.value.clone())
+                    .collect();
+                let mut new_values: Vec<String> = Vec::new();
+                for replacement in values {
+                    if replacement == replacement.to_lowercase() {
+                        let capitalized = morfologik::uppercase_first_char(&replacement);
+                        if !new_values.contains(&capitalized) {
+                            new_values.push(capitalized);
+                        }
+                    } else if !new_values.contains(&replacement) {
+                        new_values.push(replacement);
+                    }
+                }
+                matches[0].suggestions = new_values
+                    .into_iter()
+                    .map(|value| Suggestion {
+                        value,
+                        short_description: None,
+                    })
+                    .collect();
+            }
+            if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
+                is_first_word = false;
+            }
+        }
+        let mut out = Vec::with_capacity(matches.len());
+        for mut m in matches {
+            m.range = TextRange::new(
+                sentence_offset + m.range.start,
+                sentence_offset + m.range.end,
+            );
+            out.push(m);
+        }
+        out
+    }
+
+    /// `MorfologikSpellerRule.getRuleMatches` (no Italian override).
+    fn get_rule_matches(
+        &self,
+        word: &str,
+        start_pos: usize,
+        rule_matches_so_far: &mut Vec<Match>,
+        idx: usize,
+        tokens: &[&AnalyzedTokenReadings],
+    ) -> Vec<Match> {
+        let mut rule_matches: Vec<Match> = Vec::new();
+        let mut rule_match: Option<Match> = None;
+
+        if !self.is_misspelled(word) && !self.is_prohibited(word) {
+            return rule_matches;
+        }
+        if rule_matches_so_far
+            .last()
+            .is_some_and(|m| m.range.end > start_pos)
+        {
+            return rule_matches;
+        }
+
+        let mut before_suggestion_str = String::new();
+        let mut after_suggestion_str = String::new();
+
+        // Check for split word with previous word
+        if idx > 0 && tokens[idx].whitespace_before {
+            let prev_word = tokens[idx - 1].surface().to_string();
+            if !prev_word.is_empty()
+                && !prev_word.chars().any(|c| c.is_ascii_digit())
+                && self.speller1.get_frequency(&prev_word) < MAX_FREQUENCY_FOR_SPLITTING
+            {
+                let prev_start_pos = tokens[idx - 1].start_pos;
+                // "thanky ou" -> "thank you"
+                if let Some((prev_head, prev_tail)) = split_last_char(&prev_word) {
+                    let sugg1a = prev_head.to_string();
+                    let sugg1b = format!("{prev_tail}{word}");
+                    if sugg1a.chars().count() > 1
+                        && sugg1b.chars().count() > 2
+                        && !self.is_misspelled(&sugg1a)
+                        && !self.is_misspelled(&sugg1b)
+                        && self.speller1.get_frequency(&sugg1a)
+                            + self.speller1.get_frequency(&sugg1b)
+                            > self.speller1.get_frequency(&prev_word)
+                    {
+                        rule_match = Some(self.create_wrong_split_match(
+                            rule_matches_so_far,
+                            tokens[idx].end_pos(),
+                            &sugg1a,
+                            &sugg1b,
+                            prev_start_pos,
+                        ));
+                        before_suggestion_str = format!("{prev_word} ");
+                    }
+                }
+                // "than kyou" -> "thank you"
+                {
+                    let first_char: String = word.chars().take(1).collect();
+                    let sugg2a = format!("{prev_word}{first_char}");
+                    let sugg2b: String = word.chars().skip(1).collect();
+                    if sugg2b.chars().count() > 2
+                        && !self.is_misspelled(&sugg2a)
+                        && !self.is_misspelled(&sugg2b)
+                    {
+                        if rule_match.is_none() {
+                            if self.speller1.get_frequency(&sugg2a)
+                                + self.speller1.get_frequency(&sugg2b)
+                                > self.speller1.get_frequency(&prev_word)
+                            {
+                                rule_match = Some(self.create_wrong_split_match(
+                                    rule_matches_so_far,
+                                    tokens[idx].end_pos(),
+                                    &sugg2a,
+                                    &sugg2b,
+                                    prev_start_pos,
+                                ));
+                                before_suggestion_str = format!("{prev_word} ");
+                            }
+                        } else if let Some(rm) = &mut rule_match {
+                            rm.suggestions.push(Suggestion {
+                                value: format!("{sugg2a} {sugg2b}").trim().to_string(),
+                                short_description: None,
+                            });
+                        }
+                    }
+                }
+                // "g oing" -> "going"
+                let sugg = format!("{prev_word}{word}");
+                if word == word.to_lowercase() && !self.is_misspelled(&sugg) {
+                    if rule_match.is_none() {
+                        if self.speller1.get_frequency(&sugg)
+                            >= self.speller1.get_frequency(&prev_word)
+                        {
+                            let mut m = self.new_rule_match(
+                                prev_start_pos,
+                                tokens[idx].end_pos(),
+                                MESSAGE,
+                                SHORT_MESSAGE,
+                            );
+                            before_suggestion_str = format!("{prev_word} ");
+                            m.suggestions.push(Suggestion {
+                                value: sugg.clone(),
+                                short_description: None,
+                            });
+                            rule_match = Some(m);
+                        }
+                    } else if let Some(rm) = &mut rule_match {
+                        rm.suggestions.push(Suggestion {
+                            value: sugg.clone(),
+                            short_description: None,
+                        });
+                    }
+                }
+                if rule_match.is_some() && self.is_misspelled(&prev_word) {
+                    rule_matches.push(rule_match.take().unwrap());
+                    return rule_matches;
+                }
+            }
+        }
+
+        // Check for split word with next word
+        if rule_match.is_none() && idx < tokens.len() - 1 && tokens[idx + 1].whitespace_before {
+            let next_word = tokens[idx + 1].surface().to_string();
+            if !next_word.is_empty()
+                && !next_word.chars().any(|c| c.is_ascii_digit())
+                && self.speller1.get_frequency(&next_word) < MAX_FREQUENCY_FOR_SPLITTING
+            {
+                if let Some((word_head, word_tail)) = split_last_char(word) {
+                    let sugg1a = word_head.to_string();
+                    let sugg1b = format!("{word_tail}{next_word}");
+                    if sugg1a.chars().count() > 1
+                        && sugg1b.chars().count() > 2
+                        && !self.is_misspelled(&sugg1a)
+                        && !self.is_misspelled(&sugg1b)
+                        && self.speller1.get_frequency(&sugg1a)
+                            + self.speller1.get_frequency(&sugg1b)
+                            > self.speller1.get_frequency(&next_word)
+                    {
+                        rule_match = Some(self.create_wrong_split_match(
+                            rule_matches_so_far,
+                            tokens[idx + 1].end_pos(),
+                            &sugg1a,
+                            &sugg1b,
+                            start_pos,
+                        ));
+                        after_suggestion_str = format!(" {next_word}");
+                    }
+                }
+                {
+                    let first_char: String = next_word.chars().take(1).collect();
+                    let sugg2a = format!("{word}{first_char}");
+                    let sugg2b: String = next_word.chars().skip(1).collect();
+                    if sugg2b.chars().count() > 2
+                        && !self.is_misspelled(&sugg2a)
+                        && !self.is_misspelled(&sugg2b)
+                    {
+                        if rule_match.is_none() {
+                            if self.speller1.get_frequency(&sugg2a)
+                                + self.speller1.get_frequency(&sugg2b)
+                                > self.speller1.get_frequency(&next_word)
+                            {
+                                rule_match = Some(self.create_wrong_split_match(
+                                    rule_matches_so_far,
+                                    tokens[idx + 1].end_pos(),
+                                    &sugg2a,
+                                    &sugg2b,
+                                    start_pos,
+                                ));
+                                after_suggestion_str = format!(" {next_word}");
+                            }
+                        } else if let Some(rm) = &mut rule_match {
+                            rm.suggestions.push(Suggestion {
+                                value: format!("{sugg2a} {sugg2b}").trim().to_string(),
+                                short_description: None,
+                            });
+                        }
+                    }
+                }
+                let sugg = format!("{word}{next_word}");
+                if next_word == next_word.to_lowercase() && !self.is_misspelled(&sugg) {
+                    if rule_match.is_none() {
+                        if self.speller1.get_frequency(&sugg)
+                            >= self.speller1.get_frequency(&next_word)
+                        {
+                            let mut m = self.new_rule_match(
+                                start_pos,
+                                tokens[idx + 1].end_pos(),
+                                MESSAGE,
+                                SHORT_MESSAGE,
+                            );
+                            after_suggestion_str = format!(" {next_word}");
+                            m.suggestions.push(Suggestion {
+                                value: sugg.clone(),
+                                short_description: None,
+                            });
+                            rule_match = Some(m);
+                        }
+                    } else if let Some(rm) = &mut rule_match {
+                        rm.suggestions.push(Suggestion {
+                            value: sugg.clone(),
+                            short_description: None,
+                        });
+                    }
+                }
+                if rule_match.is_some() && self.is_misspelled(&next_word) {
+                    rule_matches.push(rule_match.take().unwrap());
+                    return rule_matches;
+                }
+            }
+        }
+
+        let mut prevent_further_suggestions = false;
+        let mut clean_word = word.to_string();
+
+        if rule_match.is_none() {
+            rule_match =
+                Some(self.new_rule_match(start_pos, tokens[idx].end_pos(), MESSAGE, SHORT_MESSAGE));
+        }
+
+        // word starting with numbers or bullets
+        if let Some(caps) = STARTS_WITH_NUMBERS_BULLETS.captures(word) {
+            if !STARTS_WITH_NUMBERS_BULLETS_EXCEPTIONS.is_match(word) {
+                let first_part = caps.get(1).map(|m| m.as_str()).unwrap_or("");
+                let second_part = caps.get(2).map(|m| m.as_str()).unwrap_or("");
+                let second_part_tokens = lt_tokenize::wordtokenizer::join_emails_and_urls(
+                    lt_tokenize::wordtokenizer::string_tokenize(
+                        second_part,
+                        &lt_tokenize::wordtokenizer::base_tokenizing_characters(),
+                    ),
+                );
+                let multitoken_is_misspelled =
+                    second_part_tokens.iter().any(|s| self.is_misspelled(s));
+                if (!multitoken_is_misspelled || self.is_ignored_no_case(second_part))
+                    && !self.is_prohibited(second_part)
+                {
+                    if let Some(rm) = &mut rule_match {
+                        rm.suggestions.push(Suggestion {
+                            value: format!("{first_part} {second_part}"),
+                            short_description: None,
+                        });
+                    }
+                    prevent_further_suggestions = true;
+                } else {
+                    before_suggestion_str = format!("{first_part} ");
+                    clean_word = second_part.to_string();
+                }
+            }
+        }
+
+        let prev_suggestions = rule_match
+            .as_ref()
+            .map(|m| m.suggestions.clone())
+            .unwrap_or_default();
+        if !prevent_further_suggestions {
+            let mut joined = Vec::new();
+            let cached = self.calc_speller_suggestions_cached(&clean_word);
+            for suggestion in cached.iter() {
+                joined.push(Suggestion {
+                    value: format!(
+                        "{before_suggestion_str}{}{after_suggestion_str}",
+                        suggestion.value
+                    ),
+                    short_description: suggestion.short_description.clone(),
+                });
+            }
+            let mut all = prev_suggestions;
+            all.extend(joined);
+            if let Some(rm) = &mut rule_match {
+                rm.suggestions = all;
+            }
+        }
+
+        if let Some(rm) = rule_match {
+            let mut rule_match = rm;
+            rule_match.suggestions = dedupe(rule_match.suggestions);
+            rule_matches.push(rule_match);
+        }
+        rule_matches
+    }
+
+    /// `SpellingCheckRule.createWrongSplitMatch`.
+    fn create_wrong_split_match(
+        &self,
+        rule_matches_so_far: &mut Vec<Match>,
+        end_pos: usize,
+        suggestion1: &str,
+        suggestion2: &str,
+        prev_pos: usize,
+    ) -> Match {
+        if let Some(prev) = rule_matches_so_far.last() {
+            if prev.range.start == prev_pos {
+                rule_matches_so_far.pop();
+            }
+        }
+        let mut m = self.new_rule_match(prev_pos, end_pos, MESSAGE, SHORT_MESSAGE);
+        m.suggestions.push(Suggestion {
+            value: format!("{suggestion1} {suggestion2}").trim().to_string(),
+            short_description: None,
+        });
+        m
+    }
+
+    fn new_rule_match(&self, from: usize, to: usize, message: &str, short_message: &str) -> Match {
+        Match::new(
+            RULE_ID,
+            Option::<String>::None,
+            message,
+            Some(short_message.to_string()),
+            TextRange::new(from, to),
+            Vec::new(),
+            CATEGORY_ID,
+            CATEGORY_NAME,
+        )
+        .with_metadata(DESCRIPTION, "misspelling", 0)
+        .with_match_type("UnknownWord")
+    }
+
+    fn calc_speller_suggestions_cached(&self, word: &str) -> std::sync::Arc<Vec<Suggestion>> {
+        if let Ok(cache) = self.suggestion_cache.lock() {
+            if let Some(hit) = cache.get(word) {
+                return std::sync::Arc::clone(hit);
+            }
+        }
+        let computed = std::sync::Arc::new(self.calc_speller_suggestions(word));
+        if let Ok(mut cache) = self.suggestion_cache.lock() {
+            if cache.len() >= 50_000 {
+                cache.clear();
+            }
+            cache.insert(word.to_string(), std::sync::Arc::clone(&computed));
+        }
+        computed
+    }
+
+    /// `MorfologikSpellerRule.calcSpellerSuggestions` (no Italian top or
+    /// additional suggestions).
+    fn calc_speller_suggestions(&self, word: &str) -> Vec<Suggestion> {
+        let mut default_suggestions: Vec<Suggestion> = self
+            .speller1
+            .get_weighted_suggestions_from_default_dicts(word)
+            .into_iter()
+            .map(weighted_to_suggestion)
+            .collect();
+        let user_suggestions: Vec<Suggestion> = Vec::new();
+        let only_case_differs = default_suggestions
+            .first()
+            .is_some_and(|s| s.value.eq_ignore_ascii_case(word));
+        let full_results = false;
+        if word.chars().count() >= 3
+            && (only_case_differs || full_results || default_suggestions.is_empty())
+        {
+            default_suggestions.extend(
+                self.speller2
+                    .get_weighted_suggestions_from_default_dicts(word)
+                    .into_iter()
+                    .map(weighted_to_suggestion),
+            );
+            if word.chars().count() >= 5 && (full_results || default_suggestions.is_empty()) {
+                default_suggestions.extend(
+                    self.speller3
+                        .get_weighted_suggestions_from_default_dicts(word)
+                        .into_iter()
+                        .map(weighted_to_suggestion),
+                );
+            }
+        }
+        // `SpellingCheckRule.getAdditionalTopSuggestions`: the LanguageTool
+        // sentinel suggestions (Italian does not override this).
+        let mut top_suggestions = self.additional_top_suggestions(&default_suggestions, word);
+        default_suggestions.splice(0..0, top_suggestions.drain(..));
+
+        if default_suggestions.is_empty() && user_suggestions.is_empty() {
+            return Vec::new();
+        }
+        let default_suggestions = self.filter_suggestions(default_suggestions);
+        let user_suggestions = dedupe(user_suggestions);
+        let default_suggestions = self.order_suggestions(default_suggestions, word);
+        if word.chars().count() > 4 {
+            user_suggestions
+                .into_iter()
+                .chain(default_suggestions)
+                .collect()
+        } else {
+            default_suggestions
+                .into_iter()
+                .chain(user_suggestions)
+                .collect()
+        }
+    }
+
+    /// `SpellingCheckRule.getAdditionalTopSuggestions` (base: the
+    /// LanguageTool/LanguageTooler sentinels).
+    fn additional_top_suggestions(
+        &self,
+        suggestions: &[Suggestion],
+        word: &str,
+    ) -> Vec<Suggestion> {
+        let mut more: Vec<&str> = Vec::new();
+        if (word == "Languagetool" || word == "languagetool")
+            && !suggestions
+                .iter()
+                .any(|s| s.value == morfologik::LANGUAGETOOL)
+        {
+            more.push(morfologik::LANGUAGETOOL);
+        }
+        if (word == "Languagetooler" || word == "languagetooler")
+            && !suggestions
+                .iter()
+                .any(|s| s.value == morfologik::LANGUAGETOOLER)
+        {
+            more.push(morfologik::LANGUAGETOOLER);
+        }
+        more.into_iter()
+            .map(|value| Suggestion {
+                value: value.to_string(),
+                short_description: None,
+            })
+            .collect()
+    }
+
+    /// `SpellingCheckRule.filterSuggestions`.
+    fn filter_suggestions(&self, suggestions: Vec<Suggestion>) -> Vec<Suggestion> {
+        dedupe(
+            suggestions
+                .into_iter()
+                .filter(|s| !self.is_prohibited(&s.value))
+                .collect(),
+        )
+    }
+
+    /// `MorfologikItalianSpellerRule.orderSuggestions`: drop a capitalized
+    /// suggestion when the original word is not capitalized and the lowercase
+    /// variant is also suggested.
+    fn order_suggestions(&self, suggestions: Vec<Suggestion>, word: &str) -> Vec<Suggestion> {
+        let originals: Vec<String> = suggestions.iter().map(|s| s.value.clone()).collect();
+        let mut new_suggestions: Vec<Suggestion> = Vec::new();
+        for suggestion in suggestions {
+            let suggestion_str = suggestion.value.clone();
+            if !lt_tagger::is_capitalized_word(word)
+                && lt_tagger::is_capitalized_word(&suggestion_str)
+                && originals.contains(&suggestion_str.to_lowercase())
+            {
+                continue;
+            }
+            new_suggestions.push(suggestion);
+        }
+        new_suggestions
+    }
+}
+
+fn weighted_to_suggestion(s: WeightedSuggestion) -> Suggestion {
+    Suggestion {
+        value: s.word,
+        short_description: None,
+    }
+}
+
+/// `List.distinct()` over suggestions (`equals` = value + short description).
+fn dedupe(suggestions: Vec<Suggestion>) -> Vec<Suggestion> {
+    let mut seen = Vec::new();
+    let mut out = Vec::with_capacity(suggestions.len());
+    for s in suggestions {
+        if !seen.contains(&s) {
+            seen.push(s.clone());
+            out.push(s);
+        }
+    }
+    out
+}
+
+fn split_last_char(word: &str) -> Option<(&str, &str)> {
+    let mut chars = word.char_indices();
+    chars
+        .next_back()
+        .map(|(split, _)| (&word[..split], &word[split..]))
+}
+
+/// CachingWordListLoader: skip empty/`#` lines, cut at `#`, trim.
+fn cache_word_list(path: &Path) -> Vec<String> {
+    let Ok(text) = lt_data::fs::read_to_string(path) else {
+        return Vec::new();
+    };
+    let mut result = Vec::new();
+    for line in text.lines() {
+        if line.is_empty() || line.starts_with('#') {
+            continue;
+        }
+        let trimmed = line.trim();
+        let cut = trimmed.split('#').next().unwrap_or("").trim();
+        if !cut.is_empty() {
+            result.push(cut.to_string());
+        }
+    }
+    result
+}
+
+/// Plain-text speller dictionary lines: `spelling.txt`,
+/// `spelling_custom.txt`, `spelling_global.txt`. The base
+/// `Language.prepareLineForSpeller` is the identity for Italian. Java adds
+/// the `LanguageTool` sentinel line only for languages with a variant
+/// spelling file (`getLanguageVariantSpellingFileName` is null here).
+fn load_plain_text_dict_lines(data_dir: &Path) -> Vec<Vec<u8>> {
+    let hunspell = data_dir.join("it/hunspell");
+    let mut paths: Vec<PathBuf> = Vec::new();
+    for path in [
+        hunspell.join("spelling.txt"),
+        hunspell.join("spelling_custom.txt"),
+        data_dir.join("core/spelling_global.txt"),
+    ] {
+        if path.lt_exists() {
+            paths.push(path);
+        }
+    }
+    let mut lines: Vec<Vec<u8>> = Vec::new();
+    for path in &paths {
+        lines.extend(read_speller_lines(path));
+    }
+    lines
+}
+
+/// LT `MorfologikMultiSpeller.getLines` (identity `prepareLineForSpeller`).
+fn read_speller_lines(path: &Path) -> Vec<Vec<u8>> {
+    let Ok(text) = lt_data::fs::read_to_string(path) else {
+        return Vec::new();
+    };
+    let mut out = Vec::new();
+    for original_line in text.lines() {
+        if original_line.starts_with('#') || original_line.is_empty() {
+            continue;
+        }
+        let line = original_line.split('#').next().unwrap_or("").trim();
+        if !line.is_empty() {
+            out.push(line.as_bytes().to_vec());
+        }
+    }
+    out
+}

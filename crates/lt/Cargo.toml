@@ -1,0 +1,23 @@
+[package]
+name = "lt"
+description = "Public facade crate for LingoTweaker: Engine, EngineBuilder, re-exports"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+lt-tokenize = { workspace = true }
+lt-tagger = { workspace = true }
+lt-spell = { workspace = true }
+lt-chunk = { workspace = true }
+lt-disambig = { workspace = true }
+lt-data = { workspace = true }
+lt-pattern = { workspace = true }
+regex = { workspace = true }
+fancy-regex = { workspace = true }
+unicode-normalization = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Nordum (nrd) — hand-authored rules for LingoTweaker.
+
+  Nordum is a constructed pan-Scandinavian written language
+  (<https://www.nordum.org>); there is no upstream LanguageTool module.
+  Sources: NORDUM_LANGUAGE_SPECIFICATION.md (v0.9.1) and the owner-approved
+  rule list in new-languages/nordum/proposed-rules.md.
+
+  No tagger is available: rules must not use postag/inflected matching.
+  Rule ids are stable and must never be renumbered.
+-->
+<rules lang="nrd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <category id="GRAMMAR" name="Grammar">
+        <rule id="NDM_ATT_AA" name="att before an infinitive → å">
+            <pattern>
+                <marker>
+                    <token>att</token>
+                </marker>
+                <token regexp="yes">\p{L}+(?:e|es)$</token>
+            </pattern>
+            <antipattern>
+                <token>att</token>
+                <token regexp="yes">\p{L}+(?:e|es)$</token>
+                <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg|við</token>
+            </antipattern>
+            <message>«å» is the infinitive marker; «att» is the conjunction «that».</message>
+            <suggestion>å</suggestion>
+            <short>å/att</short>
+            <example correction="å">Det er viktig <marker>att</marker> lære språket.</example>
+            <example>Det er viktig å lære språket.</example>
+            <example>Jei vet att hun arbeider.</example>
+        </rule>
+
+        <rule id="NDM_AA_ATT" name="å before a clause → att">
+            <pattern>
+                <token regexp="yes">vet|vite|sier|sa|tror|trodde|synes|mener|hører|ser|serr</token>
+                <marker>
+                    <token>å</token>
+                </marker>
+                <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg</token>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <message>«att» is the conjunction «that»; «å» only marks an infinitive.</message>
+            <suggestion>att</suggestion>
+            <short>å/att</short>
+            <example correction="att">Jei vet <marker>å</marker> hun arbeider.</example>
+            <example>Jei vet att hun arbeider.</example>
+        </rule>
+
+        <rule id="NDM_NEG_SUB" name="ikke placement in subordinate clauses">
+            <pattern>
+                <token regexp="yes">att|fordi|hvis|om|når|da|mens|siden|dersom|ettersom</token>
+                <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg</token>
+                <marker>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                    <token>ikke</token>
+                </marker>
+            </pattern>
+            <message>In subordinate clauses «ikke» comes before the main verb: «att hun ikke arbeider».</message>
+            <suggestion>ikke <match no="3"/></suggestion>
+            <short>Negation</short>
+            <example correction="ikke arbeider">Jei vet att hun <marker>arbeider ikke</marker>.</example>
+            <example>Jei vet att hun ikke arbeider.</example>
+        </rule>
+
+        <rule id="NDM_NEG_MAIN" name="ikke placement in main clauses">
+            <pattern>
+                <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg</token>
+                <marker>
+                    <token>ikke</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får</token>
+                </marker>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">att|fordi|hvis|om|når|da|mens|siden|dersom|ettersom</token>
+                <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg</token>
+                <token>ikke</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får</token>
+            </antipattern>
+            <message>In main clauses «ikke» comes after the finite verb: «Jei arbeider ikke».</message>
+            <suggestion><match no="3"/> ikke</suggestion>
+            <short>Negation</short>
+            <example correction="arbeider ikke">Jei <marker>ikke arbeider</marker>.</example>
+            <example>Jei arbeider ikke.</example>
+        </rule>
+
+        <rule id="NDM_V2" name="V2 inversion after a fronted adverbial">
+            <pattern>
+                <token regexp="yes">Nå|Snart|Ofte|Alltid|Aldri|Kanskje|Heldigvis|Dessverre|Likevel|Derfor|Sjelden|Egentlig</token>
+                <marker>
+                    <token regexp="yes">jei|du|han|hun|vi|ni|de|jeg|jag|eg</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|gør</token>
+                </marker>
+            </pattern>
+            <message>After a fronted adverbial the finite verb comes before the subject (V2).</message>
+            <suggestion><match no="3"/> <match no="2"/></suggestion>
+            <short>Word order</short>
+            <example correction="arbeider jei">I dag <marker>jei arbeider</marker> jemme.</example>
+            <example>I dag arbeider jei jemme.</example>
+            <example>Nå må du gå.</example>
+        </rule>
+
+        <rule id="NDM_ADJ_NEUTER" name="neuter adjective -t">
+            <pattern>
+                <token regexp="yes">ett|et</token>
+                <marker>
+                    <token regexp="yes">[a-zæøåäö]{2,}(?&lt;!e)(?&lt;!t)</token>
+                </marker>
+                <token regexp="yes">hus|barn|bord|brev|språk|år|ord|land|vand|vann|øl|brød|kjøkken|bad|rom|vindu|eple|tre|dyr|fjell|hav|hjerte|hode|bilde|spørsmål|svar|problem|system|program|punkt|kapittel|dokument|prosjekt|møte|arbeid|forhold|eksempel|nummer|minutt|sekund|døgn|menneske|øye|øre|ben|hår|stykke|par|glas|glass|fat|kort|spil|spill|lag|tog|fly|skip</token>
+            </pattern>
+            <message>The neuter singular adjective takes «-t»: «ett stort hus».</message>
+            <suggestion><match no="2" regexp_match="^(.+)$" regexp_replace="$1t"/></suggestion>
+            <short>Agreement</short>
+            <example correction="stort">Vi har ett <marker>stor</marker> hus.</example>
+            <example correction="praktiskt">ett <marker>praktisk</marker> språk</example>
+            <example>Vi har ett stort hus.</example>
+        </rule>
+
+        <rule id="NDM_ADJ_PLURAL" name="plural adjective -e">
+            <pattern>
+                <marker>
+                    <token regexp="yes">[a-zæøåäö]{2,}(?&lt;!e)<exception>flere</exception><exception>få</exception><exception>små</exception></token>
+                </marker>
+                <token regexp="yes">jentar|pijar|flikkar|husar|barnar|bilar|hundar|kattar|dagar|eplar|gutar|jentarna|pijarna|flikkarna|husarna|barnarna</token>
+            </pattern>
+            <message>The plural adjective takes «-e»: «store bilar».</message>
+            <suggestion><match no="1" regexp_match="^(.+)$" regexp_replace="$1e"/></suggestion>
+            <short>Agreement</short>
+            <example correction="store">Vi har <marker>stor</marker> bilar.</example>
+            <example>Vi har store bilar.</example>
+        </rule>
+
+        <rule id="NDM_PRON_SUBJ_HAM" name="ham as subject → han">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>ham</token>
+                </marker>
+                <token regexp="yes">\p{L}{2,}r|er|har|går|kan|vil|skal|må|bør|kom|gikk|var|hadde|ble|fikk|tok|ga|sa|gør</token>
+            </pattern>
+            <message>As the subject the pronoun is «han», not «ham».</message>
+            <suggestion>han</suggestion>
+            <short>Pronoun</short>
+            <example correction="han">Ham arbeider i dag.</example>
+            <example>Han arbeider i dag.</example>
+        </rule>
+
+        <rule id="NDM_PRON_SUBJ_HENNE" name="henne as subject → hun">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>henne</token>
+                </marker>
+                <token regexp="yes">\p{L}{2,}r|er|har|går|kan|vil|skal|må|bør|kom|gikk|var|hadde|ble|fikk|tok|ga|sa|gør</token>
+            </pattern>
+            <message>As the subject the pronoun is «hun», not «henne».</message>
+            <suggestion>hun</suggestion>
+            <short>Pronoun</short>
+            <example correction="hun">Henne arbeider i dag.</example>
+            <example>Hun arbeider i dag.</example>
+        </rule>
+
+        <rule id="NDM_PRON_SUBJ_DEM" name="dem as subject → de">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>dem</token>
+                </marker>
+                <token regexp="yes">\p{L}{2,}r|er|har|går|kan|vil|skal|må|bør|kom|gikk|var|hadde|ble|fikk|tok|ga|sa|gør</token>
+            </pattern>
+            <message>As the subject the pronoun is «de», not «dem».</message>
+            <suggestion>de</suggestion>
+            <short>Pronoun</short>
+            <example correction="de">Dem arbeider i dag.</example>
+            <example>De arbeider i dag.</example>
+        </rule>
+
+        <rule id="NDM_PRON_SUBJ_MEI" name="mei as subject → jei">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>mei</token>
+                </marker>
+                <token regexp="yes">\p{L}{2,}r|er|har|går|kan|vil|skal|må|bør|kom|gikk|var|hadde|ble|fikk|tok|ga|sa|gør</token>
+            </pattern>
+            <message>As the subject the pronoun is «jei», not «mei».</message>
+            <suggestion>jei</suggestion>
+            <short>Pronoun</short>
+            <example correction="jei">Mei arbeider i dag.</example>
+            <example>Jei arbeider i dag.</example>
+        </rule>
+
+        <rule id="NDM_PRON_OBJ_HENNE" name="hun after a preposition → henne">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellem|ved|av|fra|gennem|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>hun</token>
+                </marker>
+            </pattern>
+            <message>After a preposition the object pronoun «henne» is used.</message>
+            <suggestion>henne</suggestion>
+            <short>Pronoun</short>
+            <example correction="henne">Jei snakker med <marker>hun</marker>.</example>
+            <example>Jei snakker med henne.</example>
+        </rule>
+
+        <rule id="NDM_PRON_OBJ_MEI" name="jei after a preposition → mei">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellem|ved|av|fra|gennem|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>jei</token>
+                </marker>
+            </pattern>
+            <message>After a preposition the object pronoun «mei» is used.</message>
+            <suggestion>mei</suggestion>
+            <short>Pronoun</short>
+            <example correction="mei">Jei snakker med <marker>jei</marker>.</example>
+            <example>Jei snakker med mei.</example>
+        </rule>
+
+        <rule id="NDM_PRON_OBJ_DEI" name="du after a preposition → dei">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellem|ved|av|fra|gennem|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>du</token>
+                </marker>
+            </pattern>
+            <message>After a preposition the object pronoun «dei» is used.</message>
+            <suggestion>dei</suggestion>
+            <short>Pronoun</short>
+            <example correction="dei">Jei snakker med <marker>du</marker>.</example>
+            <example>Jei snakker med dei.</example>
+        </rule>
+
+        <rule id="NDM_PRON_OBJ_OSS" name="vi after a preposition → oss">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellem|ved|av|fra|gennem|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>vi</token>
+                </marker>
+            </pattern>
+            <message>After a preposition the object pronoun «oss» is used.</message>
+            <suggestion>oss</suggestion>
+            <short>Pronoun</short>
+            <example correction="oss">Jei snakker med <marker>vi</marker>.</example>
+            <example>Jei snakker med oss.</example>
+        </rule>
+
+        <rule id="NDM_PRON_OBJ_DEM" name="de after a preposition → dem">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellem|ved|av|fra|gennem|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>de</token>
+                </marker>
+            </pattern>
+            <message>After a preposition the object pronoun «dem» is used.</message>
+            <suggestion>dem</suggestion>
+            <short>Pronoun</short>
+            <example correction="dem">Jei snakker med <marker>de</marker>.</example>
+            <example>Jei snakker med dem.</example>
+        </rule>
+
+        <rule id="NDM_PRON_OBJ_HAM" name="han after a preposition → ham">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellem|ved|av|fra|gennem|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>han</token>
+                </marker>
+            </pattern>
+            <message>After a preposition the object pronoun «ham» is used.</message>
+            <suggestion>ham</suggestion>
+            <short>Pronoun</short>
+            <example correction="ham">Jei snakker med <marker>han</marker>.</example>
+            <example>Jei snakker med ham.</example>
+        </rule>
+
+        <rule id="NDM_OG_AA" name="og after a modal verb → å">
+            <pattern>
+                <token regexp="yes">vil|ville|skal|skulle|kan|kunne|må|måtte|bør|burde</token>
+                <marker>
+                    <token>og</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <message>After a modal verb the infinitive marker «å» is used, not the conjunction «og».</message>
+            <suggestion>å</suggestion>
+            <short>og/å</short>
+            <example correction="å">Jei vil <marker>og</marker> lære nordum.</example>
+            <example>Jei vil å lære nordum.</example>
+        </rule>
+
+        <rule id="NDM_YN_QUESTION" name="yes/no question inversion">
+            <regexp>^(Jei|jei|Du|du|Han|han|Hun|hun|Vi|vi|Ni|ni|De|de) ([a-zæøåäö]+) (.*)\?$</regexp>
+            <message>A yes/no question starts with the finite verb: «Arbeider du i dag?».</message>
+            <suggestion><match no="2" case_conversion="startupper"/> <match no="1" case_conversion="alllower"/> <match no="3"/>?</suggestion>
+            <short>Word order</short>
+            <example correction="Arbeider du i dag?">Du arbeider i dag?</example>
+            <example>Arbeider du i dag?</example>
+        </rule>
+
+        <rule id="NDM_YN_QUESTION_SHORT" name="short yes/no question inversion">
+            <regexp>^(Jei|jei|Du|du|Han|han|Hun|hun|Vi|vi|Ni|ni|De|de) ([a-zæøåäö]+)\?$</regexp>
+            <message>A yes/no question starts with the finite verb: «Arbeider du?».</message>
+            <suggestion><match no="2" case_conversion="startupper"/> <match no="1" case_conversion="alllower"/>?</suggestion>
+            <short>Word order</short>
+            <example correction="Arbeider du?">Du arbeider?</example>
+            <example>Arbeider du?</example>
+        </rule>
+
+        <rule id="NDM_WH_QUESTION_SHORT" name="short wh-question inversion">
+            <regexp>^(Vad|vad|Var|var|Vem|vem|Vordan|vordan|Ven|ven|Vilken|vilken) (Jei|jei|Du|du|Han|han|Hun|hun|Vi|vi|Ni|ni|De|de) ([a-zæøåäö]+)\?$</regexp>
+            <message>In a wh-question the finite verb comes before the subject: «Vad gør du?».</message>
+            <suggestion><match no="1" case_conversion="startupper"/> <match no="3"/> <match no="2" case_conversion="alllower"/>?</suggestion>
+            <short>Word order</short>
+            <example correction="Vad gør du?">Vad du gør?</example>
+            <example>Vad gør du?</example>
+        </rule>
+
+        <rule id="NDM_WH_QUESTION" name="wh-question inversion">
+            <regexp>^(Vad|vad|Var|var|Vem|vem|Vordan|vordan|Ven|ven|Vilken|vilken) (Jei|jei|Du|du|Han|han|Hun|hun|Vi|vi|Ni|ni|De|de) ([a-zæøåäö]+) (.*)\?$</regexp>
+            <message>In a wh-question the finite verb comes before the subject: «Vad gør du?».</message>
+            <suggestion><match no="1" case_conversion="startupper"/> <match no="3"/> <match no="2" case_conversion="alllower"/> <match no="4"/>?</suggestion>
+            <short>Word order</short>
+            <example correction="Vad gør du?">Vad du gør?</example>
+            <example>Vad gør du?</example>
+        </rule>
+    </category>
+
+    <category id="TYPOS" name="Possible Typo"/>
+    <category id="STYLE" name="Style"/>
+    <category id="CASING" name="Capitalization"/>
+
+</rules>

@@ -1,0 +1,9 @@
+# Nordum — compound hot list (NDM_COMPOUND).
+# Nordum compounds are simple concatenation and keep doubled consonants
+# (owner decision D9); linking vowels are never inserted. The
+# dictionary-driven split check is still deferred.
+barnehage=barnhage
+arbeidsdag=arbeiddag
+barn hage=barnhage
+arbeid dag=arbeiddag
+tunn skiva=tunnskiva

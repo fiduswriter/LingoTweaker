@@ -1,0 +1,55 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "LGPL-2.1-or-later"
+repository = "https://github.com/languagetool-rs/languagetool-rs"
+rust-version = "1.85"
+
+[workspace.dependencies]
+lt = { path = "crates/lt" }
+lt-core = { path = "crates/lt-core" }
+lt-tokenize = { path = "crates/lt-tokenize" }
+lt-tagger = { path = "crates/lt-tagger" }
+lt-disambig = { path = "crates/lt-disambig" }
+lt-pattern = { path = "crates/lt-pattern" }
+lt-spell = { path = "crates/lt-spell" }
+lt-chunk = { path = "crates/lt-chunk" }
+lt-data = { path = "crates/lt-data" }
+lt-http = { path = "crates/lt-http" }
+lt-py = { path = "crates/lt-py" }
+lt-node = { path = "crates/lt-node" }
+serde = { version = "1", features = ["derive"] }
+serde_urlencoded = "0.7"
+sha2 = "0.10"
+serde_json = "1"
+thiserror = "2"
+quick-xml = "0.37"
+zip = { version = "2.4", default-features = false, features = ["deflate"] }
+regex = "1"
+fancy-regex = "0.14"
+unicode-normalization = "0.1"
+axum = "0.8"
+pyo3 = { version = "0.29", features = ["extension-module", "abi3-py39"] }
+napi = { version = "3", default-features = false, features = ["napi8", "serde-json"] }
+napi-derive = "3"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+clap = { version = "4", features = ["derive", "env"] }
+wasm-bindgen = "0.2"
+console_error_panic_hook = "0.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+# Engine construction compiles thousands of rule regexes and the test suite
+# builds an engine per test; optimized test binaries are several times faster
+# at that than unoptimized ones (one-time compile cost, then fast iterations).
+[profile.dev]
+opt-level = 1
+
+[profile.test]
+opt-level = 2

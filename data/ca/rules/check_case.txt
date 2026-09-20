@@ -1,0 +1,2640 @@
+# Phrases to check case. Capitalization at the sentence start is allowed.
+# Optionally, add a specific message after '='
+Joan Pau
+Josep Maria
+Joan Maria
+Josep Lluís
+Joan Lluís
+Lluís Maria
+Leonardo da Vinci
+da Vinci
+El codi Da Vinci
+van Beethoven
+Carl von Clausewitz
+C. von Clausewitz
+el Prat de Llobregat
+#l'Alacantí
+l'Alcalatén
+#l'Alcoià
+l'Alt Maestrat
+l'Alt Millars
+l'Alt Palància
+l'Alt Vinalopó
+el Baix Maestrat
+el Baix Segura
+el Baix Vinalopó
+el Camp de Morvedre
+el Camp de Túria
+Camp de Túria
+la Canal de Navarrés
+#el Comtat
+#la Costera
+la Foia de Bunyol
+#l'Horta
+la Marina Alta
+la Marina Baixa
+la Plana Alta
+la Plana Baixa
+la Plana d'Utiel
+#els Ports
+#el Racó
+la Ribera Alta
+la Ribera Baixa
+la Safor
+els Serrans
+la Vall d'Albaida
+la Vall de Cofrents
+la Vall de Laguar
+Vall d'Albaida
+Vall de Cofrents
+Vall de Laguar
+el Vinalopó Mitjà
+l'Alt Camp
+Alt Camp
+l'Alt Empordà
+Alt Empordà
+l'Alt Penedès
+Alt Penedès
+l'Alt Urgell
+Alt Urgell
+l'Alta Ribagorça
+Alta Ribagorça
+l'Anoia
+el Bages
+el Baix Camp
+Baix Camp
+el Baix Ebre
+Baix Ebre
+el Baix Empordà
+Baix Empordà
+el Baix Llobregat
+Baix Llobregat
+el Baix Penedès
+Baix Penedès
+el Barcelonès
+el Berguedà
+la Cerdanya
+la Conca de Barberà
+Conca de Barberà
+el Garraf
+#les Garrigues
+la Garrotxa
+#el Gironès
+#el Maresme
+el Moianès
+el Montsià
+#la Noguera
+el Pallars Jussà
+el Pallars Sobirà
+el Pla de l'Estany
+el Pla d'Urgell
+#el Priorat
+la Ribera d'Ebre
+el Ripollès
+la Segarra
+el Segrià
+#la Selva
+#el Solsonès
+#el Tarragonès
+la Terra Alta
+l'Urgell
+la Vall d'Aran
+Vall d'Aran
+el Vallès Occidental
+el Vallès Oriental
+l'Alta Cerdanya
+el Capcir
+el Conflent
+la Fenolleda
+el Rosselló
+el Vallespir
+Marina Alta
+Marina Baixa
+estat d'alarma
+expedients de regulació temporal d'ocupació
+expedient de regulació temporal d'ocupació
+R+D+I
+R+D
+Regió de Múrcia
+producte interior brut
+Tractat de Maastricht
+Tractat de Niça
+Tractat de No-proliferació Nuclear
+Tractat de Forces Nuclears d'Abast Intermedi
+Tractat de Roma
+Tractat de Schengen
+Tractat de Versalles
+Compromís de Casp
+Pacte de Varsòvia
+Pacte de Lizarra
+Pacte de Toledo
+Pacte de Bogotà
+Pacte d'Estabilitat i Creixement
+Pacte Nacional pel Referèndum
+Declaració de Barcelona
+Declaració de Pedralbes
+Declaració Valencianista
+Declaració Balfour
+Declaració d'Arnaga
+Convenció de Dublín
+Convencions de Ginebra
+Acord de París
+Acord de Belfast
+Acords d'Abraham
+Acord de Divendres Sant
+Acords de Minsk
+Acords d'Oslo
+Manifest de Cervera
+Protocol de Kyoto
+Carta Europea de les Llengües Regionals o Minoritàries|Carta europea de les llengües regionals o minoritàries
+baixa edat mitjana
+alta edat mitjana
+edat mitjana
+edat antiga
+edat contemporània
+edat moderna
+Parc Juràssic
+#potser cal una regla per a les paraules soltes?
+juràssic
+mesolític
+mesozoic
+neolític
+paleocè
+paleolític
+prehistòria
+Departament de Prehistòria
+quaternari
+terciari
+Fons Monetari Internacional
+Congrés dels EUA
+Congrés dels Estats Units
+Congrés dels Estats Units d'Amèrica
+Cambra de Representants
+educació secundària
+graduat en educació secundària
+graduat en educació secundària obligatòria
+graduat en educació secundària per a adults
+Institut d'Educació Secundària
+Col·legi d'Educació Infantil i Primària
+Educació Secundària Obligatòria|educació secundària obligatòria
+Pròxim Orient
+Orient Pròxim
+Orient Mitjà
+Extrem Orient
+Orient Llunyà
+valor afegit brut
+Comissió Europea
+Consell Europeu
+Consell d'Europa
+Parlament Europeu
+cap parlament europeu
+algun parlament europeu
+Direcció General d'Administracions Públiques
+administracions públiques
+#administració pública
+ensenyament superior
+ensenyament mitjà
+doble grau
+programa de doctorat
+corredor mediterrani
+tecnologies de la informació i la comunicació
+Àrea de Tecnologies de la Informació i la Comunicació
+raigs X
+Cap d'Any
+Església catòlica
+Església catòlica romana
+Església anglicana
+Església evangèlica
+Església grega
+Església d'orient
+Església llatina
+Església d'occident
+Església ortodoxa
+una petita església ortodoxa
+Església Cristiana Adventista del Setè Dia
+Església Adventista del Setè Dia
+Conferència Episcopal Espanyola
+Consell Pastoral de Barcelona
+Setmana Tràgica
+Gran Depressió
+gran depressió agrària
+gran depressió econòmica
+Transició espanyola
+Primavera de Praga
+Primavera Àrab
+Revolució Francesa
+Revolució Russa
+Revolució de Vellut
+Revolució de Vellut de l'antiga Txecoslovàquia
+Revolució de les Tulipes
+Revolució de les Tulipes del Kirguizstan
+Revolució Taronja
+Revolució Taronja d'Ucraïna
+Revolució del Gessamí
+Revolució del Gessamí de Tunísia
+Revolució dels Paraigües
+Revolució dels Paraigües de Hong Kong
+revolució industrial
+guerra de Successió
+guerra dels Quatre Dies
+guerra dels Sis Dies
+guerra dels Set Anys
+guerra de Bòsnia
+guerra del Golf
+guerra del golf Pèrsic
+guerra civil de Somàlia
+#guerra freda
+postguerra freda
+guerra del cava
+guerra de l'aigua
+guerra de preus
+guerra bruta
+Primera Guerra Mundial
+I Guerra Mundial
+Segona Guerra Mundial
+II Guerra Mundial
+Guerra Civil Espanyola|Guerra Civil espanyola
+#Guerra Civil catalana
+batalla de Waterloo
+batalla de l'Ebre
+espai Schengen
+espai de Schengen
+Dia Internacional de les Dones
+Dia Internacional de la Dona
+Dia Mundial de l'Alzheimer
+Dia Internacional de l'Alfabetització
+Dia de les Forces Armades
+canal de Suez
+canal de la Mànega
+platja d'Omaha
+Països Baixos
+Principat d'Andorra
+#denominació d'origen protegida
+#denominació d'origen
+Divendres de Dolors
+Divendres de Passió
+Dissabte de Passió
+Diumenge de Rams
+Dilluns Sant
+Dimarts Sant
+Dimecres Sant
+Dimecres de Cendra
+Dijous Sant
+Divendres Sant
+Dissabte Sant
+Dissabte de Glòria
+Diumenge de Pasqua
+Diumenge de Glòria
+Diumenge de Resurrecció
+Pasqua de Resurrecció
+Pasqua Florida
+Pasqua Granada
+primera Pasqua
+segona Pasqua
+Pasqua abans de Rams
+Dilluns de Pasqua
+política agrària comuna
+zona euro
+eurozona
+La Rioja
+Franc Comtat
+el Franc Comtat
+Declaració Universal dels Drets Humans
+Conveni Europeu de Drets Humans
+Dia dels Drets Humans
+Tribunal Europeu de Drets Humans
+#drets humans
+Save the Children
+pressupostos de la Generalitat
+pressupostos generals de l'Estat
+pressuposts de la Generalitat
+pressuposts generals de l'Estat
+sistema solar
+síndrome de savant
+síndrome del savant
+Aràbia Saudita
+Aràbia Saudí
+patrimoni de la humanitat
+patrimoni cultural immaterial de la humanitat
+bé cultural d'interès nacional
+bé cultural d'interés nacional
+bé cultural d'interès local
+bé cultural d'interés local
+bé d'interés cultural
+bé d'interès cultural
+béns culturals d'interès nacional
+béns culturals d'interés nacional
+béns culturals d'interès local
+béns culturals d'interés local
+béns d'interés cultural
+béns d'interès cultural
+reserva nacional
+reserva de la biosfera
+reserva biològica
+#parc nacional
+paratge natural
+#parc natural
+#parc nacional d'Aigüestortes i Estany de Sant Maurici
+#parc nacional d'Ordesa i Mont Perdut
+#parc natural dels Aiguamolls de l'Empordà
+#parc natural dels Ports
+#parc natural del Delta de l'Ebre
+#parc natural del Delta del Llobregat
+#parc natural de les Capçaleres del Ter i del Freser
+Alt Pirineu
+impost sobre actes jurídics documentats
+impost d'actes jurídics documentats
+impost sobre el valor afegit
+impost sobre la renda
+impost sobre la renda de les persones físiques
+impost sobre l'increment de valor dels terrenys de naturalesa urbana
+impost de plusvàlua municipal
+impost de plusvàlua
+actes jurídics documentats
+Comunitat de Madrid
+Comunitat Valenciana
+País Valencià
+els Pirineus
+el Pirineu
+als Pirineus
+al Pirineu
+dels Pirineus
+del Pirineu
+comunitat autònoma
+comunitats autònomes
+Tots Sants
+variant delta
+variant delta plus
+talibà
+talibans
+megawatt
+megawatts
+megabyte
+megabytes
+gigabyte
+gigabytes
+òmicron
+intel·ligència artificial
+intel·ligència artificial generativa
+Observatori d'Ètica en Intel·ligència Artificial
+banc dolent
+honoris causa
+palau de Buckingham
+llei marcial
+Rada Suprema
+països bàltics
+repúbliques bàltiques
+estats bàltics
+estat membre
+estats membres
+cop d'estat
+colp d'estat
+cops d'estat
+colps d'estat
+estat del benestar
+qüestió d'estat
+qüestions d'estat
+estat nació
+estats nació
+estat de dret
+pacte d'estat
+raó d'estat
+raons d'estat
+Jocs Olímpics d'hivern
+els Emirats Àrabs
+els Emirats Àrabs Units
+diada de Sant Jordi
+dia de Sant Jordi
+Premi Nobel de la Pau
+Premi Nobel de Literatura
+#Premis Nobel
+Premi Nobel d'Economia
+Premi Nobel de Física
+Premi Nobel de Química
+Premi Nobel de Medicina
+Festival de la Cançó d'Eurovisió
+Unió Europea de Radiodifusió
+la Moncloa
+la Zarzuela
+Prime Video
+Amazon Prime Video
+Prime Music
+Amazon Prime Music
+Amazon Prime
+Vell Continent
+el Vell Continent
+debat sobre l'estat de la Unió
+debat sobre l'estat de la Unió Europea
+debat sobre l'estat de la nació
+debat de política general
+debat de política general sobre l'estat de la nació
+Unió Europea
+síndic de greuges
+síndica de greuges
+IVA suportat
+IVA repercutit
+IVA meritat
+Google Calendar
+Universitat Occitana d'Estiu
+Universitat Catalana d'Estiu
+Universitat Abat Oliba CEU
+Universitat d'Alacant
+Universitat d'Andorra
+Universitat Autònoma de Barcelona
+Universitat de Barcelona
+Universitat CEU Cardenal Herrera
+Universitat de Girona
+Universitat de les Illes Balears
+Universitat Internacional de Catalunya
+Universitat Jaume I
+Universitat de Lleida
+Universitat Miguel Hernández
+Universitat Miguel Hernández d'Elx
+Universitat Oberta de Catalunya
+Universitat de Perpinyà
+Universitat de Perpinyà Via Domícia
+Universitat de Perpinyà Via Domitia
+Universitat Politècnica de Catalunya
+Universitat Politècnica de València
+Universitat Pompeu Fabra
+Universitat Ramon Llull
+Universitat Rovira i Virgili
+Universitat de Sàsser
+Universitat de València
+Universitat de Vic
+Universitat Central de Catalunya
+Orquestra Simfònica de Barcelona i Nacional de Catalunya
+Mare de Déu d'Agost
+Assumpció de la Mare de Déu
+Falles de València
+Falles de Sant Josep
+Premier League
+The Premiership
+postguerra
+Big Ben
+Regne Unit
+Regne de Dinamarca
+Regne d'Espanya
+regne danès
+Gran Bretanya
+País de Gal·les
+Irlanda del Nord
+La Fúmiga
+Google Maps
+Google Earth
+Unió Esportiva d'Horta
+Israel-Palestina
+X-Men
+Google Street View
+Street View
+corredor del Mediterrani
+mar Mediterrani
+mar Mediterrània
+deute públic
+mercat de deute públic anotat
+mercat primari de deute públic
+taxa de natalitat
+taxa de mortalitat
+taxa de fecunditat
+índex de fecunditat
+entitat local
+entitats locals
+Amèrica Llatina
+Codi civil
+Codi militar
+Codi penal
+Codi Internacional de Nomenclatura Zoològica
+nit de Cap d'Any
+nit de Nadal
+#Carta Magna
+llei del divorci
+llei de l'avortament
+llei de partits
+llei d'enjudiciament civil
+llei d'estrangeria
+llei de qualitat de l'ensenyament
+llei de limitació de mandats
+llei de costes
+llei de seguretat nacional
+llei del referèndum
+llei de transitorietat jurídica
+llei del clima
+llei de memòria democràtica
+llei de memòria històrica
+llei trans
+llei d'amnistia
+Estatut d'autonomia
+Estatut dels treballadors
+pla Marshall
+pla Ibarretxe
+pla Tenet
+pla Juncker
+pla de Chequers
+Pla d'Actuació Municipal
+Pla Hidrològic Nacional
+Pla Especial de Reforma Interior
+Pla General de Normalització Lingüística
+Pla Especial d'Emergències per Inundacions a Catalunya
+Pla Especial d'Emergències per Nevades a Catalunya
+Pla Especial d'Emergències per Allaus a Catalunya
+Pla Especial d'Emergències per Incendis Forestals a Catalunya
+Pla Especial d'Emergències per Risc de Vent a Catalunya
+Pla d'Emergència Exterior del Sector Químic de Catalunya
+Pla d'Emergència Exterior del Sector Químic de Tarragona
+Pla d'Emergència Exterior del Sector Químic de les Terres de l'Ebre
+Pla d'Emergència Exterior del Sector Químic de la Tordera
+Sant Pere de Ribes
+Llei orgànica d'harmonització del procés autonòmic
+avinguda Diagonal
+avinguda Meridiana
+baixada de la Glòria
+carrer Major
+carretera de Sants
+districte de Gràcia
+jardins de la Vil·la Amèlia
+passatge del Sol
+passeig de Gràcia
+parada Passeig de Gràcia
+Jardinets de Gràcia
+Jardins de Salvador Espriu
+passeig de Sant Joan
+#passeig Marítim
+parc de la Ciutadella
+parc de la Mitjana
+pla de l'Ós
+pla de Palau
+plaça de les Mèlies
+plaça de Sant Jaume
+plaça Universitat
+ronda Universitat
+plaça del Blat
+plaça del Vi
+plaça Reial
+rambla Nova
+rambla de la Llibertat
+ronda de Dalt
+ronda del Mig
+ronda del Litoral
+ronda de Mataró
+ronda de Sant Pere
+nus de la Trinitat
+pota nord de Barcelona
+Rambla de Barcelona
+barri San Bernardo
+districte Meatpacking
+carrer Virgen de la Esperanza
+carrer Génova
+font de Neptuno
+font de Cibeles
+passeig de la Castellana
+passeig del Prado
+plaça Castilla
+plaça de la Puerta del Sol
+Moll de la Fusta
+Portal de l'Àngel
+Sot del Migdia
+Via Augusta
+Via Favència
+Via Júlia
+Via Laietana
+Zona Franca
+Travessera de Dalt
+Eix del Llobregat
+Eix Pirinenc
+Cinquena Avinguda
+Carrera de San Jerónimo
+Trafalgar Square
+Downing Street
+Piccadilly Circus
+Camps Elisis
+Central Park
+Place de l'Étoile
+Grand-Place
+atlantisme
+bon Nadal
+feliç any nou
+pròsper any nou
+bon any nou
+bon any
+feliç any
+À Punt Mèdia
+À Punt
+de Nadal a Sant Esteve
+Creu de Sant Jordi
+Creus de Sant Jordi
+Terra Santa
+lloc sant
+llocs sants
+euroordre
+euroordres
+Cisma d'Occident
+Los Angeles
+El Pardo
+Las Vegas
+Le Mans
+Mar Menor
+Consell de Ministres
+Editorial Afers
+arròs Parellada
+Prat de Llobregat
+Prat de Cadí
+Prat de la Riba
+Prat de Comte
+Tirant lo Blanc
+Tirant lo Blanch
+Lo Cristià
+Lo Crestià
+Lo somni
+Primo de Rivera
+ovni
+ovnis
+#baix imperi
+#imperi asteca
+#imperi britànic
+#imperi carolingi
+#imperi de Napoleó
+#imperi del Sol Naixent
+#imperi d'Orient
+#imperi egipci
+#imperi inca
+#imperi otomà
+#imperi romà
+#imperi rus
+Platja d'Aro
+Castell d'Aro
+Castell-Platja d'Aro
+Castell i Platja d'Aro
+Le Havre
+le Carré
+Sacre Imperi Romanogermànic
+Sacre Imperi Romà
+Sacre Imperi Romànic
+Sacre Imperi
+Sant Imperi
+imperi de la llei
+mer imperi
+mixt imperi
+Le Figaro
+Institut Valencià d'Administració Pública
+Escola d'Administració Pública de Catalunya
+Capital Europea de la Cultura
+Capital de la Cultura Catalana
+Catalunya Ràdio
+nombre pi
+Dia Internacional del Nombre Pi
+Jocs d'hivern
+Silicon Valley
+Alemanya nazi
+TED Talk
+TED Talks
+Setmana Santa
+revetlla de Sant Joan
+revetla de Sant Joan
+Estats Units d'Amèrica
+Estats Units
+Lady Di
+urbi et orbi
+Mies van der Rohe
+van der Rohe
+M. van der Rohe
+guerres mundials
+Red Bull
+Brigades Al-Quds
+Jocs Europeus
+Tomatina
+Al·lots de Llevant
+Arreplegats de la Zona Universitària
+Bergants del Campus de Terrassa
+Bordegassos de Vilanova
+Brivalls de Cornudella
+Capgrossos de Mataró
+Castellers d'Altafulla
+Castellers d'Andorra
+Castellers d'Esparreguera
+Castellers d'Esplugues
+Castellers de Badalona
+Castellers de Barcelona
+Castellers de Berga
+Castellers de Caldes de Montbui
+Castellers de Castellar del Vallès
+Castellers de Castelldefels
+Castellers de Cerdanyola
+Castellers de Cornellà
+Castellers de Gavà
+Castellers de l'Adroc
+Castellers de la Sagrada Família
+Castellers de la Selva
+Castellers de la Vila de Gràcia
+Castellers de les Roquetes
+Castellers de Lleida
+Castellers de Mallorca
+Castellers de Mediona
+Castellers de Mollet
+Castellers de Montcada i Reixac
+Castellers de Rubí
+Castellers de Sabadell
+Castellers de Sant Adrià
+Castellers de Sant Cugat
+Castellers de Sant Feliu
+Castellers de Sant Pere i Sant Pau
+Castellers de Sant Vicenç dels Horts
+Castellers de Santa Coloma
+Castellers de Santpedor
+Castellers de Sants
+Castellers de Sarrià
+Castellers de Terrassa
+Castellers de Tortosa
+Castellers de Viladecans
+Castellers de Vilafranca
+Castellers del Baix Montseny
+Castellers del Foix de Cubelles
+Castellers del Pallars
+Castellers del Poble Sec
+Castellers del Prat de Llobregat
+Castellers del Riberal
+Colla Castellera de Cerdanya
+Colla Castellera de Figueres
+Colla Castellera de l'Alt Maresme i la Selva Marítima
+Colla Castellera de l'Esquerra de l'Eixample
+Colla Castellera de la Gavarresa
+Colla Castellera de Vacarisses
+Colla Castellera Els Encantats de Begues
+Colla Castellera Jove de Barcelona
+Colla Castellera La Bisbal del Penedès
+Colla Jove de Castellers de Sitges
+Colla Jove de l'Hospitalet
+Colla Jove Xiquets de Tarragona
+Colla Jove Xiquets de Vilafranca
+Colla Joves Xiquets de Valls
+Colla Vella dels Xiquets de Valls
+Emboirats de la Universitat de Vic
+Engrescats de la URL
+Esperxats de l'Estany
+Ganàpies de la UAB
+Grillats del Campus del Baix Llobregat
+Laietans de Gramenet
+Llunàtics UPC Vilanova
+Manyacs de Parets
+Margeners de Guissona
+Marrecs de Salt
+Matossers de Molins de Rei
+Minyons de l'Arboç
+Minyons de Santa Cristina d'Aro
+Minyons de Terrassa
+Moixiganguers d'Igualada
+Nens del Vendrell
+Nois de la Torre
+Pallagos del Conflent
+Passerells del TCM
+Pataquers de la URV
+Penjats del Campus de Manresa
+Sagals d'Osona
+Salats de Súria
+Tirallongues de Manresa
+Torraires de Montblanc
+Trempats de la UPF
+Vailets de Gelida
+Xerrics d'Olot
+Xicots de Vilafranca
+Xics de Granollers
+Xiquets de Cambrils
+Xiquets de Reus
+Xiquets de Tarragona
+Xiquets de Torredembarra
+Xiquets de Vila-seca
+Xiquets del Serrallo
+Xiqüelos i Xiqüeles del Delta
+Xoriguers de la UdG
+Vila-seca
+fossar de les Moreres
+Diada de Catalunya
+Diada nacional de Catalunya
+Diada nacional
+festa nacional de Catalunya
+bitcoins
+dòlars
+euros
+País Basc
+Google Play Store
+Play Store
+la Play Store
+la Play
+una Play
+App Store
+Parlament de les Illes Balears
+presidenta de les Illes Balears
+president de les Illes Balears
+Govern de les Illes Balears
+Govern Balear
+WiZink Center
+enquesta de població activa
+Bartolomé de las Casas
+de las Casas
+la Diada del País Valencià
+Diada del País Valencià
+la Diada nacional del País Valencià
+Diada nacional del País Valencià
+la festa nacional del País Valencià
+festa nacional del País Valencià
+Sant Pere de Rodes
+Sant Miquel dels Reis
+Corea del Nord
+Corea del Sud
+La Bohème
+El Celler de Can Roca
+Concili Vaticà
+Jocs Panamericans
+Copa Davis
+El Bulli
+Escola Parc de la Ciutadella
+Buenos Aires
+virus FIFA
+Llei d'ús i ensenyament del valencià
+impost de successions
+impost sobre activitats econòmiques
+taxa Google
+taxa Netflix
+taxa Tobin
+impost sobre successions i donacions
+República Txeca
+República de Sud-àfrica
+sistema mètric decimal
+sistema internacional d'unitats
+Ho Chi Minh
+Carmina Burana
+intel·ligència artificial general
+T. rex
+zona de baixes emissions
+zones de baixes emissions
+decrets llei
+#llei orgànica
+lleis orgàniques
+Brian De Palma
+programa PISA
+informe PISA
+operació Barrufet
+operació Bomsai
+operació Caront
+operació Catalunya
+operació Cautxú
+operació Còndor
+operació Enfiladissa
+operació Espases de Ferro
+operació Galàxia
+operació Judes
+operació Justícia Infinita
+operació Kitchen
+operació Llebrer
+operació Llibertat Duradora
+operació Mare Nostrum
+operació Marge Protector
+operació Mercuri
+operació Més Fusta
+operació Més Torró
+operació Nècora
+operació Nova Albada
+operació Odissea de l'Alba
+operació Pas de l'Estret
+operació Pika
+operació Port
+operació Pretòria
+operació Rentacotxes
+operació Sudoku
+operació Tempesta Al-Aqsa
+operació Tempesta del Desert
+operació Tritó
+operació Tro
+operació Troca
+operació Vespa
+operació Volhov
+operació Titella
+cas Barrufet
+cas Bomsai
+cas Caront
+cas Catalunya
+cas Cautxú
+cas Còndor
+cas Enfiladissa
+cas Espases de Ferro
+cas Galàxia
+cas Judes
+cas Kitchen
+cas Llebrer
+cas Mare Nostrum
+cas Marge Protector
+cas Mercuri
+cas Més Fusta
+cas Més Torró
+cas Nècora
+cas Pika
+cas Pretòria
+cas Rentacotxes
+cas Sudoku
+cas Tritó
+cas Tro
+cas Troca
+cas Vespa
+cas Volhov
+cas Koldo
+cas Erial
+cas Cerdán
+cas Andic
+afer Galinsoga
+cas Galinsoga
+cas Watergate
+afer Dreyfus
+art déco
+art nouveau
+la transició democràtica espanyola
+Guerra del Francès
+guerra napoleònica
+guerres napoleòniques
+Guerra dels Dos Peres
+Antic Règim
+reconquesta d'Espanya
+Primera Guerra Púnica
+Primera Guerra Carlista
+dictadura de Primo de Rivera
+dictadura franquista
+batalla de Lepant
+capitulació de Vilafranca
+transició nacional catalana
+sant sopar
+#davallament de la Creu
+focs de Sant Joan
+Dia d'Acció de Gràcies
+Maig del 68
+Bíblia Catalana Interconfessional
+Evangeli segons Joan
+Evangeli segons Mateu
+Evangeli segons Lluc
+Evangeli segons Marc
+Evangeli segons sant Joan
+Evangeli segons sant Mateu
+Evangeli segons sant Lluc
+Evangeli segons sant Marc
+llibre de les Lamentacions
+les Sagrades Escriptures
+Sant Joan Despí
+Museu Picasso
+Fundació Joan Miró
+formació bruta de capital fix
+formació bruta de capital
+estat de la qüestió
+estat d'emergència
+estat de setge
+estat de guerra
+Nord-Westfàlia
+Sant Cugat del Vallès
+franquisme
+Taco Bell
+Sant Just Desvern
+Lliga de Campions
+Lliga de Campiones
+hepatits B
+clorofil·la b
+Far West
+Old West
+Wild West
+estadi Rei Fahd
+estany d'Ivars i Vila-sana
+Burger King
+Emirates Stadium
+Arsenal Stadium
+World Wide Web
+Open Arms
+The Rolling Stones
+format Word
+document Word
+fitxer Word
+formats Word
+documents Word
+fitxers Word
+Rage Against the Machine
+Mare de Déu
+Mare de Déu dels Desemparats
+Centre de Cultura Contemporània de Barcelona
+Ursula von der Leyen
+Von der Leyen
+U. von der Leyen
+Rogier van der Weyden
+R. van der Weyden
+Van der Weyden
+Vicente del Bosque
+Frenkie de Jong
+Paulo da Silva
+Jonathan dos Santos
+Louis van Gaal
+Ossama bin Laden
+Charles de Gaulle
+3Cat
+iOS
+iMac
+Partit de les Estrelles
+Ray-Ban
+Star Wars
+Agència Tributària de Catalunya
+Neus Català
+Autoritat Independent de Responsabilitat Fiscal
+Georges de La Tour
+Vincent van Gogh
+Marco van Basten
+V. van Gogh
+Theo van Gogh
+Vincent Willem van Gogh
+Museu Van Gogh
+La Oreja de Van Gogh
+Herbert von Karajan
+H. von Karajan
+Kees van Dongen
+Ludwig von Mises
+coeficient intel·lectual
+Ofensiva del Tet
+Àsia central
+Àfrica central
+Comunitat Econòmica dels Estats de l'Àfrica Central
+la Via Làctia
+l'Ossa Major
+l'Óssa Major
+#estrella Polar
+constel·lació d'Orió
+cometa Halley
+planeta Terra
+posta de sol
+eclipsi de sol
+eclipsi de lluna
+eclipsi solar
+eclipsi lunar
+eclipsi total
+eclipsi parcial
+eclipsi solars
+eclipsis lunars
+eclipsis totals
+eclipsis parcials
+lluna plena
+lluna de sang
+superlluna
+superterra
+a la lluna de València
+Cambra dels Comuns
+Cambra dels Lords
+cambra alta
+cambra baixa
+Societat Coral El Micalet
+Octubre Centre de Cultura Contemporània
+Teatre Apolo
+basílica de la Sagrada Família
+basílica del Pilar
+basílica del Sant Sepulcre
+basílica de la Macarena
+catedral de Barcelona
+catedral de València
+catedral de Girona
+catedral de Tarragona
+catedral de Notre-Dame de París
+catedral de l'Almudena
+colònia Güell
+edifici Fòrum
+ermita de la Salut
+església de la Santa Creu
+església de Sant Miquel
+estació de França
+estació de Sants
+estació del Nord
+monestir de Pedralbes
+palau de l'Elisi
+sala de la Mare de Déu de Montserrat del Palau de la Generalitat
+sala de plens
+Capella Sixtina
+Llotja de Mar de Barcelona
+Palau de Congressos de Catalunya
+Palau de Gel d'Andorra
+Palau de Justícia
+Palau de la Generalitat
+Palau de la Música Catalana
+Palau de la Música
+Palau de la Virreina
+Palau Güell
+Palau Macaya
+Palau Moja
+Palau Robert
+Palauet Albéniz
+Pati dels Tarongers
+Sala Apolo
+Saló de Cent
+Saló Sant Jordi
+Teatre de La Zarzuela
+Teatre de l'Òpera de París
+Teatre Principal de Lleida
+Teatre Principal de València
+la Font d'en Carròs
+Font d'en Carròs
+Coll d'en Rabassa
+Tribunal de Justícia de les Comunitats Europees
+Tribunal de Justícia de la UE
+Tribunal de Justícia de la Unió Europea
+Tribunal de Comptes de la UE
+Tribunal de Comptes de la Unió Europea
+Europa continental
+Europa central
+Europa occidental
+Europa oriental
+Consell General del Poder Judicial
+Fundació puntCAT
+Fundació .cat
+pels Armilles Grogues
+els Armilles Grogues
+dels Armilles Grogues
+als Armilles Grogues
+Teatre Goya
+Opus Dei
+finestra d'Overton
+IEA Oriol Martorell
+Oriol Martorell
+Tomàs Molina
+Patum de Berga
+Misteri d'Elx
+la Patum de Berga
+el Misteri d'Elx
+Najat El Hachmi
+Nova Caledònia
+Àsia Menor
+Atlàntic Nord
+Atlàntic Sud
+Camp de Tarragona
+Catalunya Nord
+Catalunya del Nord
+diferències Nord-Sud
+diferències entre Orient i Occident
+Franja de Gaza
+Ciutat de Gaza
+la ciutat de Gaza
+Mars del Sud
+Principat de Catalunya
+Primer Món
+Tercer Món
+Terres de l'Ebre
+Terres de Ponent
+Catalunya oriental
+Catalunya interior
+Romanyà de la Selva
+Josep Miquel
+Joan Miquel
+Tribunal Internacional de Justícia
+Cort Internacional de Justícia
+Tribunal Penal Internacional
+la Selva de Mar
+Premià de Mar
+Tossa de Mar
+l'Ametlla de Mar
+Cabrera de Mar
+Lloret de Mar
+Malgrat de Mar
+Arenys de Mar
+Canet de Mar
+Pineda de Mar
+Sant Pol de Mar
+Vilassar de Mar
+Fundació CatDem
+La Habana Vieja
+l'Havana
+Eth Pònt d'Arròs
+Lo Puèi de Velai
+M. Àngels
+Maria Àngels
+institucions europees
+Consell de la Unió Europea
+Museu Nacional d'Art de Catalunya
+Antoni Abat
+Antoni del porquet
+Antoni el Gran
+Santíssima Trinitat
+Santíssim Crist
+Patum de lluïment
+Patum infantil
+Bisbal de Falset
+doctor il·luminat
+doctor seràfic
+Cassà de la Selva
+Riudellots de la Selva
+les Masies de Roda
+Copa Amèrica
+Copa Amèrica de vela
+Pallars Sobirà
+Pallars Jussà
+Circuit de Barcelona-Catalunya
+Circuit de Catalunya
+Gran Teatre del Liceu
+Sant Joan d'Alacant
+Sant Joan de Vilatorrada
+Hospital Trueta
+Hospital Vall d'Hebron
+Hospital Universitari Vall d'Hebron
+tiktoks
+un tiktok
+Al Jazeera
+Al-Jazeera
+Al-Arabiya
+Al Arabiya
+American Dream|American dream
+sant Mateu|Sant Mateu
+Lo Rat Penat
+s'Agaró
+Castellar de n'Hug
+la Bisbal d'Empordà
+O Grove
+La Línea de la Concepción
+a Ciutat Vella
+de Ciutat Vella
+Horta-Guinardó
+Sants-Montjuïc
+Sarrià-Sant Gervasi
+Consolat de Mar
+l'Europa de l'Est
+Europa de l'Est
+l'est d'Europa
+est d'Europa
+l'Oest americà
+Oest americà
+Berlín Est
+Berlín Oest
+Con Sud
+hemisferi nord
+hemisferi sud
+Premi Ondas
+Premis Ondas
+canal Esport3
+Lliçà de Vall
+Lliçà d'Amunt
+Vall d'Hebron
+diagrama de Venn
+diagrames de Venn
+Così fan futte
+zona zero
+edat de pedra
+edat del ferro
+edat del bronze
+edat del coure
+edat dels metalls
+Ciutat de Quebec
+papa Francesc
+papa de Roma
+bisbe de Roma
+papa Luna
+papa Lluna
+Ciutat de Mèxic
+la ciutat de Mèxic
+Bashar al-Assad
+Baixar al-Assad
+Hafiz al-Assad
+Al-Assad
+Abdel Fattah al-Sisi
+Al-Sisi
+Hayat Tahrir al-Sham
+Tahrir al-Sham
+Pare Noel
+Pare Nadal
+Pares Noel
+Pares Nadal
+Mohammed al-Bashir
+Omar al-Bashir
+Al-Bashir
+Abu Mohammad al-Julani
+Al-Julani
+efecte Dunning-Kruger
+cap d'estudis
+caps d'estudis
+península Ibèrica
+península Itàlica
+#península Apenina
+Costa d'Ivori
+Costa Brava
+Costa Blanca
+Castelló de la Plana
+Monna Lisa
+La Gioconda
+Nova Escòcia
+República Democràtica del Congo
+La Vanguardia
+República Federal d'Alemanya
+República Democràtica Alemanya
+Pau Casals
+oceà Atlàntic
+oceà Pacífic
+oceà Índic
+oceà Àrtic
+oceà Antàrtic
+oceà Glacial Àrtic
+oceà Glacial Antàrtic
+pol nord
+pol sud
+península Antàrtica
+Mont-roig del Camp
+Mont-roig
+Al-Qaeda
+Al-Qaida
+Les Troyens
+Il trovatore
+Un ballo in maschera
+La forza del destino
+I puritani
+La sonnambula
+I Capuleti e i Montecchi
+Il barbiere di Siviglia
+Santa Maria Major
+Direcció General d'Atenció a la Infància i l'Adolescència
+Conselleria de Presidència i Administracions Públiques
+Conselleria d'Agricultura, Ramaderia, Pesca i Alimentació
+Conselleria d'Empresa i Treball
+Conselleria d'Esports
+Conselleria d'Unió Europea i Acció Exterior
+Conselleria de Justícia i Qualitat Democràtica
+Conselleria de la Presidència
+Conselleria de Política Lingüística
+Conselleria d'Economia i Finances
+Conselleria d'Educació i Formació Professional
+Conselleria d'Igualtat i Feminisme
+Conselleria d'Interior i Seguretat Pública
+Conselleria de Cultura
+Conselleria de Cultura, Educació i Ciència
+Conselleria de Drets Socials i Inclusió
+Conselleria de Recerca i Universitats
+Conselleria de Salut
+Conselleria de Territori, Habitatge i Transició Ecològica
+Conselleria d'Agricultura
+Conselleria de Justícia
+Conselleria de Justícia i Dret
+Conselleria d'Economia
+Conselleria d'Educació
+Conselleria d'Ensenyament
+Conselleria d'Interior
+Conselleria d'Universitats
+Conselleria de Servicis Socials, Igualtat i Vivenda
+Conselleria de Serveis Socials, Igualtat i Vivenda
+Conselleria de Servicis Socials
+Conselleria de Serveis Socials
+Conselleria d'Hisenda i Model Econòmic
+Conselleria d'Hisenda
+Conselleria de Justícia, Interior i Administració Pública
+Conselleria d'Educació, Cultura i Esport
+Conselleria d'Educació i Cultura
+Conselleria de Sanitat Universal i Salut Pública
+Conselleria de Sanitat
+Conselleria de Sanitat i Assistència Social
+Conselleria de Medi Ambient, Infraestructures i Territori
+Conselleria de Medi Ambient
+Conselleria d'Agricultura, Aigua, Ramaderia i Pesca
+Conselleria d'Innovació, Universitats, Ciència i Societat Digital
+Candidatura d'Unitat Popular
+conseller primer
+consellers primers
+consellera primera
+conselleres primeres
+conseller en cap
+consellera en cap
+consellers en cap
+conselleres en cap
+papat
+summe pontífex
+summes pontífexs
+pontífex màxim
+pontífexs màxims
+Ahmed al-Sharaa
+Al-Sharaa
+Reis Catòlics
+Reis Mags
+vehicle utilitari esportiu
+Isabel Coixet
+La Villarroel
+tinció de Gram
+tincions de Gram
+nouvelle cuisine
+Museu Nacional de Praga
+Museu Nacional del Bardo
+#Museu Britànic
+Museu del Louvre
+Museu del Prado
+Museu d'Història Natural de Londres
+Museu Nacional Centre d'Art Reina Sofia
+Centre d'Art Reina Sofia
+Galeria dels Uffizi
+Metropolitan Museum
+Tate Modern
+Royal Academy of Arts
+King's Theatre
+Teatro Real
+Teatro Español
+guerra de les Germanies
+revolta de les Germanies
+guerra dels Segadors
+decrets de Nova Planta
+Universitat Harvard
+Universitat Yale
+Universitat Stanford
+Universitat Duke
+Universitat de Colúmbia
+Colúmbia Britànica
+riu Colúmbia
+altiplà Colúmbia
+pic Colúmbia
+ciutat de Colúmbia
+Districte de Colúmbia
+Ryder Cup
+Hyde Park
+Caldes de Malavella
+Caldes de Montbui
+Santa Cristina d'Aro
+Sant Feliu de Llobregat
+Sant Feliu|sant Feliu
+Santa Cristina|santa Cristina
+Dama d'Elx
+Ter Stegen
+Marc-André ter Stegen
+Le Pen
+el Figueró i Montmany
+conseller primer del Govern
+consellera primera del Govern
+canal de Panamà
+canal d'Urgell
+canal de Sant Jordi
+canal Segarra-Garrigues
+Comunitat General de Regants del Canal Segarra-Garrigues
+canal de Sicília
+generació Z
+generació X
+generació Y
+generació del 98
+generació del 27
+generació alfa
+generació beta
+generació del baby-boom
+#noms UB
+CRAI Biblioteca
+Campus Bellvitge
+Campus Clínic
+Campus Diagonal
+Campus Mundet
+Campus Plaça Universitat
+Campus Raval
+Campus Sants
+Campus Torribera
+Facultat d'Economia i Empresa
+Facultat d'Economia
+Facultat d'Educació
+Facultat d'Infermeria
+Facultat d'Informació i Mitjans Audiovisuals
+Facultat de Belles Arts
+Facultat de Biblioteconomia i Documentació
+Facultat de Biologia
+Facultat de Ciències de la Terra
+Facultat de Dret
+Facultat de Farmàcia i Ciències de l'Alimentació
+Facultat de Filologia
+Facultat de Filologia i Comunicació
+Facultat de Filosofia
+Facultat de Filosofia i Lletres
+Facultat de Física
+Facultat de Geografia i Història
+Facultat de Geologia
+Facultat de Matemàtiques
+Facultat de Matemàtiques i Informàtica
+Facultat de Medicina i Ciències de la Salut
+Facultat de Psicologia
+Facultat de Química
+adjunt a la direcció de la Unitat de Formació i Recerca d'Infermeria
+adjunt al Deganat de la Facultat d'Infermeria
+adjunt al síndic de greuges
+adjunt per a l'anàlisi de la plantilla de personal docent i investigador
+adjunt per a la coordinació amb els instituts de recerca
+adjunt per a la coordinació amb la xarxa d'institucions sanitàries
+adjunt per a la innovació i transferència
+adjunt per a la internacionalització en l'àmbit acadèmic
+adjunt per a la política acadèmica
+adjunt per a la política docent
+adjunt per a la promoció interna de la recerca
+adjunt per a la promoció internacional d'estudis de postgrau
+adjunt per a la qualitat normativa
+adjunt per a la sostenibilitat
+adjunt per a les relacions amb el Mediterrani, l'Àfrica subsahariana i els països veïns
+adjunt per a les relacions amb l'Amèrica Llatina i el Carib
+adjunt per a les relacions amb l'Àsia i el Pacífic
+adjunt per a xarxes i mobilitat internacional
+adjunta a la direcció de la Unitat de Formació i Recerca d'Infermeria
+adjunta al Deganat de la Facultat d'Infermeria
+adjunta al síndic de greuges
+adjunta per a l'anàlisi de la plantilla de personal docent i investigador
+adjunta per a la coordinació amb els instituts de recerca
+adjunta per a la coordinació amb la xarxa d'institucions sanitàries
+adjunta per a la innovació i transferència
+adjunta per a la internacionalització en l'àmbit acadèmic
+adjunta per a la política acadèmica
+adjunta per a la política docent
+adjunta per a la promoció interna de la recerca
+adjunta per a la promoció internacional d'estudis de postgrau
+adjunta per a la qualitat normativa
+adjunta per a la sostenibilitat
+adjunta per a les relacions amb el Mediterrani, l'Àfrica subsahariana i els països veïns
+adjunta per a les relacions amb l'Amèrica Llatina i el Carib
+adjunta per a les relacions amb l'Àsia i el Pacífic
+adjunta per a xarxes i mobilitat internacional
+assessor en relació amb el marc jurídic i la transparència
+assessor per a la gestió documental i informació corporativa
+assessora en relació amb el marc jurídic i la transparència
+assessora per a la gestió documental i informació corporativa
+cap d'estudis del grau
+cap d'estudis del grau en Administració i Direcció d'Empreses
+cap d'estudis del grau en Antropologia Social i Cultural
+cap d'estudis del grau en Arqueologia
+cap d'estudis del grau en Belles Arts
+cap d'estudis del grau en Biologia
+cap d'estudis del grau en Bioquímica
+cap d'estudis del grau en Biotecnologia
+cap d'estudis del grau en Ciència i Tecnologia dels Aliments
+cap d'estudis del grau en Ciències Ambientals
+cap d'estudis del grau en Ciències Biomèdiques
+cap d'estudis del grau en Ciències del Mar
+cap d'estudis del grau en Ciències Polítiques i de l'Administració
+cap d'estudis del grau en Comunicació Audiovisual
+cap d'estudis del grau en Comunicació i Indústries Culturals
+cap d'estudis del grau en Conservació-Restauració de Béns Culturals
+cap d'estudis del grau en Criminologia
+cap d'estudis del grau en Disseny
+cap d'estudis del grau en Dret
+cap d'estudis del grau en Economia
+cap d'estudis del grau en Educació Social
+cap d'estudis del grau en Empresa Internacional
+cap d'estudis del grau en Enginyeria Biomèdica
+cap d'estudis del grau en Enginyeria de Materials
+cap d'estudis del grau en Enginyeria Electrònica de Telecomunicació
+cap d'estudis del grau en Enginyeria Geològica
+cap d'estudis del grau en Enginyeria Informàtica
+cap d'estudis del grau en Enginyeria Química
+cap d'estudis del grau en Estadística
+cap d'estudis del grau en Farmàcia
+cap d'estudis del grau en Filosofia
+cap d'estudis del grau en Física
+cap d'estudis del grau en Geografia
+cap d'estudis del grau en Geologia
+cap d'estudis del grau en Gestió d'Informació i Documentació Digital
+cap d'estudis del grau en Gestió i Administració Pública
+cap d'estudis del grau en Història
+cap d'estudis del grau en Història de l'Art
+cap d'estudis del grau en Infermeria
+cap d'estudis del grau en Informació i Documentació
+cap d'estudis del grau en Investigació Privada
+cap d'estudis del grau en Matemàtiques
+cap d'estudis del grau en Medicina
+cap d'estudis del grau en Mestre d'Educació Infantil
+cap d'estudis del grau en Mestre d'Educació Primària
+cap d'estudis del grau en Nutrició Humana i Dietètica
+cap d'estudis del grau en Odontologia
+cap d'estudis del grau en Pedagogia
+cap d'estudis del grau en Podologia
+cap d'estudis del grau en Psicologia
+cap d'estudis del grau en Química
+cap d'estudis del grau en Relacions Laborals
+cap d'estudis del grau en Sociologia
+cap d'estudis del grau en Treball Social
+cap d'estudis dels ensenyaments de filologia
+cap de la Secció d'Educació i Comunitat de l'Institut de Desenvolupament Professional
+cap de la Secció d'Educació Infantil, Primària, Secundària i Formació Professional de l'Institut de Desenvolupament Professional
+cap de la Secció d'Universitat de l'Institut de Ciències de l'Educació
+cap de la Secció d'Universitat de l'Institut de Desenvolupament Professional
+cap de la Secció de Comunitat i Sostenibilitat de l'Institut de Desenvolupament Professional
+cap de la Secció de Publicacions de l'Institut de Ciències de l'Educació
+cap de la Secció de Publicacions de l'Institut de Desenvolupament Professional
+cap de la Secció de Recerca de l'Institut de Ciències de l'Educació
+cap de la Secció de Recerca de l'Institut de Desenvolupament Professional
+comissionada per a la CHARM-EU
+comissionat per a la CHARM-EU
+coordinador d'estudiants, innovació i qualitat de l'Agència de Postgrau
+coordinador d'estudis del grau
+coordinador d'estudis del grau en Estudis Anglesos
+coordinador d'estudis del grau en Estudis Literaris
+coordinador d'estudis del grau en Estudis Àrabs i Hebreus
+coordinador d'estudis del grau en Filologia Catalana
+coordinador d'estudis del grau en Filologia Clàssica
+coordinador d'estudis del grau en Filologia Hispànica
+coordinador d'estudis del grau en Lingüística
+coordinador d'estudis del grau en Llengües i Literatures Modernes
+coordinador d'estudis del grau en Llengües Romàniques i les seves Literatures
+coordinador d'estudis i anàlisi de l'Agència de Postgrau
+coordinador d'estudis i anàlisis de l'Agència de Postgrau
+coordinador d'estudis i prospectiva de l'Agència de Postgrau en funcions
+coordinador d'innovació i qualitat de l'Agència de Postgrau
+coordinador de l'àmbit acadèmic del Campus de les Arts
+coordinador de la Unitat Docent d'Infermeria
+coordinador de programes de l'Agència de Postgrau
+coordinador de projectes d'innovació
+coordinador del grau en Ciències Culinàries i Gastronòmiques
+coordinador del II Pla de dinamització lingüística
+coordinador del màster en Advocacia
+coordinador del màster en Advocacia i Procura
+coordinador del màster en Formació del Professorat de Secundària Obligatòria i Batxillerat, Formació Professional i Ensenyament d'Idiomes
+coordinador per a les relacions amb l'Àsia Oriental
+coordinador per a universitats xineses
+coordinador per als instituts de recerca propis
+coordinadora d'estudiants, innovació i qualitat de l'Agència de Postgrau
+coordinadora d'estudis del grau
+coordinadora d'estudis
+coordinador d'estudis
+coordinadora d'estudis del grau en Estudis Anglesos
+coordinadora d'estudis del grau en Estudis Literaris
+coordinadora d'estudis del grau en Estudis Àrabs i Hebreus
+coordinadora d'estudis del grau en Filologia Catalana
+coordinadora d'estudis del grau en Filologia Clàssica
+coordinadora d'estudis del grau en Filologia Hispànica
+coordinadora d'estudis del grau en Lingüística
+coordinadora d'estudis del grau en Llengües i Literatures Modernes
+coordinadora d'estudis del grau en Llengües Romàniques i les seves Literatures
+coordinadora d'estudis i anàlisis de l'Agència de Postgrau
+coordinadora d'innovació i qualitat de l'Agència de Postgrau
+coordinadora de l'àmbit acadèmic del Campus de les Arts
+coordinadora de la Unitat Docent d'Infermeria
+coordinadora del II Pla de dinamització lingüística
+coordinadora del màster en Advocacia
+coordinadora per a les relacions amb l'Àsia Oriental
+delegada de la UB a l'Escola de Noves Tecnologies Interactives
+delegada de la UB a l'Escola Superior de Cinema i Audiovisual de Catalunya
+delegada de la UB a l'Escola Superior de Relacions Públiques
+delegada de la UB a l'Escola Universitària d'Hoteleria i Turisme CETT
+delegada de la UB a l'Institut de Seguretat Pública de Catalunya
+delegada de la UB al Barcelona Culinary Hub
+delegada de la UB al Centre d'Estudis Internacionals
+delegada de la UB al Centre Universitari Internacional de Barcelona
+delegada de la UB als centres adscrits
+delegada del rector
+delegada del rector adjunta a la direcció de la Unitat d'Igualtat
+delegada del rector adjunta al Vicerectorat de Transformació Digital
+delegada del rector com a comissionada per a la CHARM-EU
+delegada del rector com a comissionada per a la innovació
+delegada del rector per a accions estratègiques de recerca i la representació de la UB a la Lliga d'Universitats Europees de Recerca
+delegada del rector per a afers acadèmics
+delegada del rector per a afers de comunicació i interacció social
+delegada del rector per a afers de personal docent
+delegada del rector per a ensenyaments de grau i màster
+delegada del rector per a estudiants i relacions internacionals a la Facultat de Matemàtiques i Informàtica
+delegada del rector per a estudis de personal docent i investigador
+delegada del rector per a estudis i anàlisis
+delegada del rector per a graus i màsters
+delegada del rector per a instituts de recerca
+delegada del rector per a l'acció social
+delegada del rector per a l'administració electrònica i la transparència
+delegada del rector per a l'anàlisi econòmica
+delegada del rector per a l'assessorament normatiu
+delegada del rector per a l'Observatori de l'Estudiant
+delegada del rector per a la CHARM-EU
+delegada del rector per a la ciència oberta
+delegada del rector per a la comunicació digital
+delegada del rector per a la coordinació amb hospitals i institucions sanitàries
+delegada del rector per a la coordinació i innovació docent a la Facultat d'Economia i Empresa
+delegada del rector per a la direcció de l'Agència de Polítiques i de Qualitat
+delegada del rector per a la direcció de l'Agència de Postgrau
+delegada del rector per a la direcció de la Unitat d'Igualtat
+delegada del rector per a la direcció de la Universitat de l'Experiència
+delegada del rector per a la direcció de totes les unitats vinculades al Rectorat
+delegada del rector per a la divulgació científica
+delegada del rector per a la formació contínua i professional
+delegada del rector per a la innovació i transferència
+delegada del rector per a la internacionalització
+delegada del rector per a la LERU
+delegada del rector per a la mobilitat i programes internacionals
+delegada del rector per a la mobilitat internacional i el compromís global
+delegada del rector per a la planificació i projectes de PDI
+delegada del rector per a la política lingüística i publicacions
+delegada del rector per a la projecció del postgrau i la formació permanent
+delegada del rector per a la promoció de la recerca
+delegada del rector per a la recerca biosanitària
+delegada del rector per a la recerca i contractes programa a la Facultat de Ciències de la Terra
+delegada del rector per a la recerca, innovació i millora de la docència i l'aprenentatge
+delegada del rector per a la recerca, ocupabilitat i relacions amb les empreses a la Facultat de Matemàtiques i Informàtica
+delegada del rector per a la sostenibilitat
+delegada del rector per a la transferència de coneixement
+delegada del rector per a la transparència i l'administració electrònica
+delegada del rector per a màsters i postgraus a la Facultat d'Economia i Empresa
+delegada del rector per a polítiques de personal investigador
+delegada del rector per a polítiques de professorat i organització
+delegada del rector per a relacions externes i estudiants a la Facultat d'Economia i Empresa
+delegada del rector per a relacions externes i la supervisió de l'edifici a la Facultat de Ciències de la Terra
+delegada del rector per a relacions internacionals i qualitat a la Facultat d'Economia i Empresa
+delegada del rector per a xarxes i mobilitat internacional
+delegada del rector per al desenvolupament de tecnologies digitals per a l'alumnat
+delegada del rector per al multilingüisme
+delegada del rector per al professorat i seguretat a la Facultat de Química
+delegada del rector per al programa RIMDA
+delegat de la UB a l'Escola de Noves Tecnologies Interactives
+delegat de la UB a l'Escola Superior de Cinema i Audiovisual de Catalunya
+delegat de la UB a l'Escola Superior de Relacions Públiques
+delegat de la UB a l'Escola Universitària d'Hoteleria i Turisme CETT
+delegat de la UB a l'Escola Universitària d'Infermeria Sant Joan de Déu
+delegat de la UB a l'Institut de Seguretat Pública de Catalunya
+delegat de la UB al Barcelona Culinary Hub
+delegat de la UB al Centre d'Estudis Internacionals
+delegat de la UB al Centre Universitari Internacional de Barcelona
+delegat de la UB als centres adscrits
+delegat del rector
+delegat del rector adjunt a la direcció de la Unitat d'Igualtat
+delegat del rector adjunt al Vicerectorat de Transformació Digital
+delegat del rector com a comissionat per a la CHARM-EU
+delegat del rector com a comissionat per a la innovació
+delegat del rector per a accions estratègiques de recerca i la representació de la UB a la Lliga d'Universitats Europees de Recerca
+delegat del rector per a afers acadèmics
+delegat del rector per a afers de comunicació i interacció social
+delegat del rector per a afers de personal docent
+delegat del rector per a ensenyaments de grau i màster
+delegat del rector per a estudiants i relacions internacionals a la Facultat de Matemàtiques i Informàtica
+delegat del rector per a estudis de personal docent i investigador
+delegat del rector per a estudis i anàlisis
+delegat del rector per a graus i màsters
+delegat del rector per a instituts de recerca
+delegat del rector per a l'acció social
+delegat del rector per a l'administració electrònica i la transparència
+delegat del rector per a l'anàlisi econòmica
+delegat del rector per a l'assessorament normatiu
+delegat del rector per a l'Observatori de l'Estudiant
+delegat del rector per a la CHARM-EU
+delegat del rector per a la ciència oberta
+delegat del rector per a la comunicació digital
+delegat del rector per a la coordinació amb hospitals i institucions sanitàries
+delegat del rector per a la coordinació i innovació docent a la Facultat d'Economia i Empresa
+delegat del rector per a la direcció de l'Agència de Polítiques i de Qualitat
+delegat del rector per a la direcció de l'Agència de Postgrau
+delegat del rector per a la direcció de la Unitat d'Igualtat
+delegat del rector per a la direcció de la Universitat de l'Experiència
+delegat del rector per a la direcció de totes les unitats vinculades al Rectorat
+delegat del rector per a la divulgació científica
+delegat del rector per a la formació contínua i professional
+delegat del rector per a la innovació i transferència
+delegat del rector per a la internacionalització
+delegat del rector per a la LERU
+delegat del rector per a la mobilitat i programes internacionals
+delegat del rector per a la mobilitat internacional i el compromís global
+delegat del rector per a la planificació i projectes de PDI
+delegat del rector per a la política lingüística i publicacions
+delegat del rector per a la projecció del postgrau i la formació permanent
+delegat del rector per a la promoció de la recerca
+delegat del rector per a la recerca biosanitària
+delegat del rector per a la recerca i contractes programa a la Facultat de Ciències de la Terra
+delegat del rector per a la recerca, innovació i millora de la docència i l'aprenentatge
+delegat del rector per a la recerca, ocupabilitat i relacions amb les empreses a la Facultat de Matemàtiques i Informàtica
+delegat del rector per a la sostenibilitat
+delegat del rector per a la transferència de coneixement
+delegat del rector per a la transparència i l'administració electrònica
+delegat del rector per a màsters i postgraus a la Facultat d'Economia i Empresa
+delegat del rector per a polítiques de personal investigador
+delegat del rector per a polítiques de professorat i organització
+delegat del rector per a relacions externes i estudiants a la Facultat d'Economia i Empresa
+delegat del rector per a relacions externes i la supervisió de l'edifici a la Facultat de Ciències de la Terra
+delegat del rector per a relacions internacionals i qualitat a la Facultat d'Economia i Empresa
+delegat del rector per a xarxes i mobilitat internacional
+delegat del rector per al desenvolupament de tecnologies digitals per a l'alumnat
+delegat del rector per al multilingüisme
+delegat del rector per al professorat i seguretat a la Facultat de Química
+delegat del rector per al programa RIMDA
+director acadèmic
+directora acadèmica
+director adjunt
+directora adjunta
+director acadèmic d'Estudis Hispànics
+director acadèmic i adjunt a direcció de l'Agència de Postgrau
+director adjunt de l'Agència de Postgrau
+director adjunt de l'Institut de Ciències de l'Educació
+director adjunt de l'Institut de Desenvolupament Professional
+director d'Estudis Hispànics
+director d'Estudis Hispànics en funcions
+director de l'Agència de Polítiques i de Qualitat
+director de l'Agència de Postgrau
+director de l'Escola de Doctorat
+director de l'Institut d'Innovació i Emprenedoria
+director de l'Institut de Biomedicina
+director de l'Institut de Ciències de l'Educació
+director de l'Institut de Ciències del Cosmos
+director de l'Institut de Desenvolupament Professional
+director de l'Institut de Matemàtica
+director de l'Institut de Nanociència i Nanotecnologia
+director de l'Institut de Neurociències
+director de l'Institut de Química Teòrica i Computacional
+director de l'Institut de Recerca de l'Aigua
+director de l'Institut de Recerca de la Biodiversitat
+director de l'Institut de Recerca en Cervell, Cognició i Conducta
+director de l'Institut de Recerca en Cultures Medievals
+director de l'Institut de Recerca en Economia
+director de l'Institut de Recerca en Economia Aplicada Regional i Pública
+director de l'Institut de Recerca en Educació
+director de l'Institut de Recerca en Nutrició i Seguretat Alimentària
+director de l'Institut de Recerca en Sistemes Complexos
+director de l'Institut de Recerca Geomodels
+director de l'Institut de Recerca Jurídica TransJus
+director de l'Institut del Pròxim Orient Antic
+director de l'Àrea de Formació Complementària
+director de la Unitat de Formació i Recerca de Podologia
+director de la Unitat de Formació i Recerca de Treball Social
+director de la Universitat de l'Experiència
+director del Campus Torribera
+director del Centre d'Estudis de Documentació i de Patents
+director del Departament d'Antropologia Social
+director del Departament d'Arts i Conservació-Restauració
+director del Departament d'Arts Visuals i Disseny
+director del Departament d'Econometria, Estadística i Economia Aplicada
+director del Departament d'Economia
+director del Departament d'Educació Lingüística i Literària, i Didàctica de les Ciències Experimentals i de la Matemàtica
+director del Departament d'Educació Lingüística, Científica i Matemàtica
+director del Departament d'Empresa
+director del Departament d'Enginyeria Electrònica i Biomèdica
+director del Departament d'Enginyeria Química i Química Analítica
+director del Departament d'Escultura
+director del Departament d'Història Contemporània
+director del Departament d'Història de l'Art
+director del Departament d'Història del Dret, Dret Romà i Dret Eclesiàstic de l'Estat
+director del Departament d'Història Econòmica, Institucions, Política i Economia Mundial
+director del Departament d'Història i Arqueologia
+director del Departament d'Infermeria de Salut Pública, Salut Mental i Maternoinfantil
+director del Departament d'Infermeria Fonamental i Clínica
+director del Departament d'Infermeria Fonamental i Medicoquirúrgica
+director del Departament d'Odontoestomatologia
+director del Departament de Biblioteconomia, Documentació i Comunicació Audiovisual
+director del Departament de Biologia Cel·lular, Fisiologia i Immunologia
+director del Departament de Biologia Evolutiva, Ecologia i Ciències Ambientals
+director del Departament de Biologia, Sanitat i Medi Ambient
+director del Departament de Biomedicina
+director del Departament de Bioquímica i Biomedicina Molecular
+director del Departament de Bioquímica i Fisiologia
+director del Departament de Cirurgia i Especialitats Medicoquirúrgiques
+director del Departament de Ciència de Materials i Química Física
+director del Departament de Ciència Política, Dret Constitucional i Filosofia del Dret
+director del Departament de Ciències Clíniques
+director del Departament de Ciències Fisiològiques
+director del Departament de Cognició, Desenvolupament i Psicologia de l'Educació
+director del Departament de Dibuix
+director del Departament de Didàctica i Organització Educativa
+director del Departament de Didàctiques Aplicades
+director del Departament de Dinàmica de la Terra i de l'Oceà
+director del Departament de Dret Administratiu, Dret Processal i Dret Financer i Tributari
+director del Departament de Dret Penal i Criminologia, i Dret Internacional Públic i Relacions Internacionals
+director del Departament de Dret Privat
+director del Departament de Farmacologia, Toxicologia i Química Terapèutica
+director del Departament de Farmàcia i Tecnologia Farmacèutica, i Fisicoquímica
+director del Departament de Filologia Catalana i Lingüística General
+director del Departament de Filologia Clàssica, Romànica i Semítica
+director del Departament de Filologia Hispànica, Teoria de la Literatura i Comunicació
+director del Departament de Filosofia
+director del Departament de Fonaments Clínics
+director del Departament de Física Aplicada
+director del Departament de Física de la Matèria Condensada
+director del Departament de Física Quàntica i Astrofísica
+director del Departament de Genètica, Microbiologia i Estadística
+director del Departament de Geografia
+director del Departament de Llengües i Literatures Modernes i d'Estudis Anglesos
+director del Departament de Matemàtica Econòmica, Financera i Actuarial
+director del Departament de Matemàtiques i Informàtica
+director del Departament de Medicina
+director del Departament de Mineralogia, Petrologia i Geologia Aplicada
+director del Departament de Mètodes d'Investigació i Diagnòstic en Educació
+director del Departament de Nutrició, Ciències de l'Alimentació i Gastronomia
+director del Departament de Patologia i Terapèutica Experimental
+director del Departament de Psicologia Clínica i Psicobiologia
+director del Departament de Psicologia Social i Psicologia Quantitativa
+director del Departament de Química Inorgànica i Orgànica
+director del Departament de Sociologia
+director del Departament de Teoria i Història de l'Educació
+director dels departaments d'enginyeria
+directora acadèmica d'Estudis Hispànics
+directora acadèmica i adjunta a direcció de l'Agència de Postgrau
+directora adjunta de l'Agència de Postgrau
+directora adjunta de l'Institut de Ciències de l'Educació
+directora adjunta de l'Institut de Desenvolupament Professional
+directora d'Estudis Hispànics
+directora d'Estudis Hispànics en funcions
+directora de l'Agència de Polítiques i de Qualitat
+directora de l'Agència de Postgrau
+directora de l'Escola de Doctorat
+directora de l'Institut d'Innovació i Emprenedoria
+directora de l'Institut de Biomedicina
+directora de l'Institut de Ciències de l'Educació
+directora de l'Institut de Ciències del Cosmos
+directora de l'Institut de Desenvolupament Professional
+directora de l'Institut de Matemàtica
+directora de l'Institut de Nanociència i Nanotecnologia
+directora de l'Institut de Neurociències
+directora de l'Institut de Química Teòrica i Computacional
+directora de l'Institut de Recerca de l'Aigua
+directora de l'Institut de Recerca de la Biodiversitat
+directora de l'Institut de Recerca en Cervell, Cognició i Conducta
+directora de l'Institut de Recerca en Cultures Medievals
+directora de l'Institut de Recerca en Economia
+directora de l'Institut de Recerca en Economia Aplicada Regional i Pública
+directora de l'Institut de Recerca en Educació
+directora de l'Institut de Recerca en Nutrició i Seguretat Alimentària
+directora de l'Institut de Recerca en Sistemes Complexos
+directora de l'Institut de Recerca Geomodels
+directora de l'Institut de Recerca Jurídica TransJus
+directora de l'Institut del Pròxim Orient Antic
+directora de l'Àrea de Formació Complementària
+directora de la Unitat de Formació i Recerca de Podologia
+directora de la Unitat de Formació i Recerca de Treball Social
+directora de la Universitat de l'Experiència
+directora del Campus Torribera
+directora del Centre d'Estudis de Documentació i de Patents
+directora del Departament d'Antropologia Social
+directora del Departament d'Arts i Conservació-Restauració
+directora del Departament d'Arts Visuals i Disseny
+directora del Departament d'Econometria, Estadística i Economia Aplicada
+directora del Departament d'Economia
+directora del Departament d'Educació Lingüística i Literària, i Didàctica de les Ciències Experimentals i de la Matemàtica
+directora del Departament d'Educació Lingüística, Científica i Matemàtica
+directora del Departament d'Empresa
+directora del Departament d'Enginyeria Electrònica i Biomèdica
+directora del Departament d'Enginyeria Química i Química Analítica
+directora del Departament d'Escultura
+directora del Departament d'Història Contemporània
+directora del Departament d'Història de l'Art
+directora del Departament d'Història del Dret, Dret Romà i Dret Eclesiàstic de l'Estat
+directora del Departament d'Història Econòmica, Institucions, Política i Economia Mundial
+directora del Departament d'Història i Arqueologia
+directora del Departament d'Infermeria de Salut Pública, Salut Mental i Maternoinfantil
+directora del Departament d'Infermeria Fonamental i Clínica
+directora del Departament d'Infermeria Fonamental i Medicoquirúrgica
+directora del Departament d'Odontoestomatologia
+directora del Departament de Biblioteconomia, Documentació i Comunicació Audiovisual
+directora del Departament de Biologia Cel·lular, Fisiologia i Immunologia
+directora del Departament de Biologia Evolutiva, Ecologia i Ciències Ambientals
+directora del Departament de Biologia, Sanitat i Medi Ambient
+directora del Departament de Biomedicina
+directora del Departament de Bioquímica i Biomedicina Molecular
+directora del Departament de Bioquímica i Fisiologia
+directora del Departament de Cirurgia i Especialitats Medicoquirúrgiques
+directora del Departament de Ciència de Materials i Química Física
+directora del Departament de Ciència Política, Dret Constitucional i Filosofia del Dret
+directora del Departament de Ciències Clíniques
+directora del Departament de Ciències Fisiològiques
+directora del Departament de Cognició, Desenvolupament i Psicologia de l'Educació
+directora del Departament de Dibuix
+directora del Departament de Didàctica i Organització Educativa
+directora del Departament de Didàctiques Aplicades
+directora del Departament de Dinàmica de la Terra i de l'Oceà
+directora del Departament de Dret Administratiu, Dret Processal i Dret Financer i Tributari
+directora del Departament de Dret Penal i Criminologia, i Dret Internacional Públic i Relacions Internacionals
+directora del Departament de Dret Privat
+directora del Departament de Farmacologia, Toxicologia i Química Terapèutica
+directora del Departament de Farmàcia i Tecnologia Farmacèutica, i Fisicoquímica
+directora del Departament de Filologia Catalana i Lingüística General
+directora del Departament de Filologia Clàssica, Romànica i Semítica
+directora del Departament de Filologia Hispànica, Teoria de la Literatura i Comunicació
+directora del Departament de Filosofia
+directora del Departament de Fonaments Clínics
+directora del Departament de Física Aplicada
+directora del Departament de Física de la Matèria Condensada
+directora del Departament de Física Quàntica i Astrofísica
+directora del Departament de Genètica, Microbiologia i Estadística
+directora del Departament de Geografia
+directora del Departament de Llengües i Literatures Modernes i d'Estudis Anglesos
+directora del Departament de Matemàtica Econòmica, Financera i Actuarial
+directora del Departament de Matemàtiques i Informàtica
+directora del Departament de Medicina
+directora del Departament de Mineralogia, Petrologia i Geologia Aplicada
+directora del Departament de Mètodes d'Investigació i Diagnòstic en Educació
+directora del Departament de Nutrició, Ciències de l'Alimentació i Gastronomia
+directora del Departament de Patologia i Terapèutica Experimental
+directora del Departament de Psicologia Clínica i Psicobiologia
+directora del Departament de Psicologia Social i Psicologia Quantitativa
+directora del Departament de Química Inorgànica i Orgànica
+directora del Departament de Sociologia
+directora del Departament de Teoria i Història de l'Educació
+directora dels departaments d'enginyeria
+encàrrec de funcions per a la relació amb estudiants a la Facultat de Física
+encàrrec de funcions per al suport de la transició de Treball Social en la gestió de l'estructura acadèmica
+encàrrec de funcions relacionades amb els estudiants i la qualitat a la Facultat de Física
+encàrrec de funcions relacionades amb internacional i web a la Facultat de Matemàtiques i Informàtica
+encàrrec de funcions relacionades amb ocupabilitat i relacions amb empreses a la Facultat de Matemàtiques i Informàtica
+encàrrec de funcions relacionades amb postgraus, equipaments i espais del Campus Sants
+encàrrec de funcions relacionades amb professorat i seguretat a la Facultat de Química
+encàrrec de funcions relacionades amb recerca i contractes programa de la Facultat de Ciències de la Terra
+encàrrec de funcions sobre relacions externes i supervisió de l'edifici a la Facultat de Ciències de la Terra
+gestor de la Bústia ètica i d'integritat institucional
+gestora de la Bústia ètica i d'integritat institucional
+president del Comitè d'Ètica
+presidenta del Comitè d'Ètica
+representant de la UB a les xarxes internacionals en matèria de doctorat
+secretari de l'Institut de Ciències de l'Educació
+secretari de l'Institut de Desenvolupament Professional
+secretari de l'Institut de Recerca en Economia Aplicada Regional i Pública
+secretari de l'Institut de Recerca en Nutrició i Seguretat Alimentària
+secretari de l'Institut del Pròxim Orient Antic
+secretari de la Unitat de Formació i Recerca de Treball Social
+secretari del Centre de Recerca d'Alta Muntanya
+secretari del Departament d'Antropologia Social
+secretari del Departament d'Arts i Conservació-Restauració
+secretari del Departament d'Arts Visuals i Disseny
+secretari del Departament d'Econometria, Estadística i Economia Aplicada
+secretari del Departament d'Economia
+secretari del Departament d'Educació Lingüística i Literària, i Didàctica de les Ciències Experimentals i de la Matemàtica
+secretari del Departament d'Educació Lingüística, Científica i Matemàtica
+secretari del Departament d'Empresa
+secretari del Departament d'Enginyeria Electrònica i Biomèdica
+secretari del Departament d'Enginyeria Química i Química Analítica
+secretari del Departament d'Estructura i Constituents de la Matèria
+secretari del Departament d'Història de l'Art
+secretari del Departament d'Història del Dret, Dret Romà i Dret Eclesiàstic de l'Estat
+secretari del Departament d'Història Econòmica, Institucions, Política i Economia Mundial
+secretari del Departament d'Història i Arqueologia
+secretari del Departament d'Història Moderna
+secretari del Departament d'Infermeria de Salut Pública, Salut Mental i Maternoinfantil
+secretari del Departament d'Infermeria Fonamental i Clínica
+secretari del Departament d'Infermeria Fonamental i Medicoquirúrgica
+secretari del Departament d'Odontoestomatologia
+secretari del Departament de Biblioteconomia, Documentació i Comunicació Audiovisual
+secretari del Departament de Biologia Cel·lular, Fisiologia i Immunologia
+secretari del Departament de Biologia Evolutiva, Ecologia i Ciències Ambientals
+secretari del Departament de Biologia, Sanitat i Medi Ambient
+secretari del Departament de Biomedicina
+secretari del Departament de Bioquímica i Biomedicina Molecular
+secretari del Departament de Bioquímica i Fisiologia
+secretari del Departament de Cirurgia i Especialitats Medicoquirúrgiques
+secretari del Departament de Ciència de Materials i Química Física
+secretari del Departament de Ciència Política, Dret Constitucional i Filosofia del Dret
+secretari del Departament de Ciències Clíniques
+secretari del Departament de Ciències Fisiològiques
+secretari del Departament de Cognició, Desenvolupament i Psicologia de l'Educació
+secretari del Departament de Didàctica i Organització Educativa
+secretari del Departament de Didàctiques Aplicades
+secretari del Departament de Dinàmica de la Terra i de l'Oceà
+secretari del Departament de Dret Administratiu, Dret Processal i Dret Financer i Tributari
+secretari del Departament de Dret Penal i Criminologia, i Dret Internacional Públic i Relacions Internacionals
+secretari del Departament de Dret Privat
+secretari del Departament de Farmacologia, Toxicologia i Química Terapèutica
+secretari del Departament de Farmàcia i Tecnologia Farmacèutica, i Fisicoquímica
+secretari del Departament de Filologia Catalana i Lingüística General
+secretari del Departament de Filologia Clàssica, Romànica i Semítica
+secretari del Departament de Filologia Hispànica, Teoria de la Literatura i Comunicació
+secretari del Departament de Filosofia
+secretari del Departament de Fonaments Clínics
+secretari del Departament de Física Aplicada
+secretari del Departament de Física de la Matèria Condensada
+secretari del Departament de Física Quàntica i Astrofísica
+secretari del Departament de Genètica, Microbiologia i Estadística
+secretari del Departament de Geografia
+secretari del Departament de Llengües i Literatures Modernes i d'Estudis Anglesos
+secretari del Departament de Matemàtica Econòmica, Financera i Actuarial
+secretari del Departament de Matemàtiques i Informàtica
+secretari del Departament de Medicina
+secretari del Departament de Mineralogia, Petrologia i Geologia Aplicada
+secretari del Departament de Mètodes d'Investigació i Diagnòstic en Educació
+secretari del Departament de Nutrició, Ciències de l'Alimentació i Gastronomia
+secretari del Departament de Patologia i Terapèutica Experimental
+secretari del Departament de Psicologia Clínica i Psicobiologia
+secretari del Departament de Psicologia Social i Psicologia Quantitativa
+secretari del Departament de Química Inorgànica i Orgànica
+secretari del Departament de Sociologia
+secretari del Departament de Teoria i Història de l'Educació
+secretari dels departaments d'enginyeria
+secretari general
+secretari general adjunt
+secretari i responsable de doctorat i igualtat de la Facultat de Biologia
+secretari i responsable de la política lingüística i activitats culturals de la Facultat d'Educació
+secretària de l'Institut de Ciències de l'Educació
+secretària de l'Institut de Desenvolupament Professional
+secretària de l'Institut de Recerca en Economia Aplicada Regional i Pública
+secretària de l'Institut de Recerca en Nutrició i Seguretat Alimentària
+secretària de l'Institut del Pròxim Orient Antic
+secretària de la Unitat de Formació i Recerca de Treball Social
+secretària del Centre de Recerca d'Alta Muntanya
+secretària del Departament d'Antropologia Social
+secretària del Departament d'Arts i Conservació-Restauració
+secretària del Departament d'Arts Visuals i Disseny
+secretària del Departament d'Econometria, Estadística i Economia Aplicada
+secretària del Departament d'Economia
+secretària del Departament d'Educació Lingüística i Literària, i Didàctica de les Ciències Experimentals i de la Matemàtica
+secretària del Departament d'Educació Lingüística, Científica i Matemàtica
+secretària del Departament d'Empresa
+secretària del Departament d'Enginyeria Electrònica i Biomèdica
+secretària del Departament d'Enginyeria Química i Química Analítica
+secretària del Departament d'Estructura i Constituents de la Matèria
+secretària del Departament d'Història de l'Art
+secretària del Departament d'Història del Dret, Dret Romà i Dret Eclesiàstic de l'Estat
+secretària del Departament d'Història Econòmica, Institucions, Política i Economia Mundial
+secretària del Departament d'Història i Arqueologia
+secretària del Departament d'Història Moderna
+secretària del Departament d'Infermeria de Salut Pública, Salut Mental i Maternoinfantil
+secretària del Departament d'Infermeria Fonamental i Clínica
+secretària del Departament d'Infermeria Fonamental i Medicoquirúrgica
+secretària del Departament d'Odontoestomatologia
+secretària del Departament de Biblioteconomia, Documentació i Comunicació Audiovisual
+secretària del Departament de Biologia Cel·lular, Fisiologia i Immunologia
+secretària del Departament de Biologia Evolutiva, Ecologia i Ciències Ambientals
+secretària del Departament de Biologia, Sanitat i Medi Ambient
+secretària del Departament de Biomedicina
+secretària del Departament de Bioquímica i Biomedicina Molecular
+secretària del Departament de Bioquímica i Fisiologia
+secretària del Departament de Cirurgia i Especialitats Medicoquirúrgiques
+secretària del Departament de Ciència de Materials i Química Física
+secretària del Departament de Ciència Política, Dret Constitucional i Filosofia del Dret
+secretària del Departament de Ciències Clíniques
+secretària del Departament de Ciències Fisiològiques
+secretària del Departament de Cognició, Desenvolupament i Psicologia de l'Educació
+secretària del Departament de Didàctica i Organització Educativa
+secretària del Departament de Didàctiques Aplicades
+secretària del Departament de Dinàmica de la Terra i de l'Oceà
+secretària del Departament de Dret Administratiu, Dret Processal i Dret Financer i Tributari
+secretària del Departament de Dret Penal i Criminologia, i Dret Internacional Públic i Relacions Internacionals
+secretària del Departament de Dret Privat
+secretària del Departament de Farmacologia, Toxicologia i Química Terapèutica
+secretària del Departament de Farmàcia i Tecnologia Farmacèutica, i Fisicoquímica
+secretària del Departament de Filologia Catalana i Lingüística General
+secretària del Departament de Filologia Clàssica, Romànica i Semítica
+secretària del Departament de Filologia Hispànica, Teoria de la Literatura i Comunicació
+secretària del Departament de Filosofia
+secretària del Departament de Fonaments Clínics
+secretària del Departament de Física Aplicada
+secretària del Departament de Física de la Matèria Condensada
+secretària del Departament de Física Quàntica i Astrofísica
+secretària del Departament de Genètica, Microbiologia i Estadística
+secretària del Departament de Geografia
+secretària del Departament de Llengües i Literatures Modernes i d'Estudis Anglesos
+secretària del Departament de Matemàtica Econòmica, Financera i Actuarial
+secretària del Departament de Matemàtiques i Informàtica
+secretària del Departament de Medicina
+secretària del Departament de Mineralogia, Petrologia i Geologia Aplicada
+secretària del Departament de Mètodes d'Investigació i Diagnòstic en Educació
+secretària del Departament de Nutrició, Ciències de l'Alimentació i Gastronomia
+secretària del Departament de Patologia i Terapèutica Experimental
+secretària del Departament de Psicologia Clínica i Psicobiologia
+secretària del Departament de Psicologia Social i Psicologia Quantitativa
+secretària del Departament de Química Inorgànica i Orgànica
+secretària del Departament de Sociologia
+secretària del Departament de Teoria i Història de l'Educació
+secretària dels departaments d'enginyeria
+secretària general
+secretària general adjunta
+secretària i responsable de doctorat i igualtat de la Facultat de Biologia
+secretària i responsable de la política lingüística i activitats culturals de la Facultat d'Educació
+sotscoordinador de les PAU
+sotscoordinadora de les PAU
+sotsdirector de la Unitat de Formació i Recerca d'Infermeria
+sotsdirectora de la Unitat de Formació i Recerca d'Infermeria
+vicedegana acadèmica
+vicedegà acadèmic
+vicedegana acadèmica de graus i relacions internacionals de la Facultat de Medicina i Ciències de la Salut
+vicedegana acadèmica de postgraus i màsters de la Facultat de Medicina i Ciències de la Salut
+vicedegana acadèmica i d'estudiants de la Facultat de Ciències de la Terra
+vicedegana acadèmica i de qualitat de la Facultat d'Infermeria
+vicedegana acadèmica i de qualitat de la Facultat de Belles Arts
+vicedegana d'afers acadèmics de la Facultat d'Educació
+vicedegana d'afers acadèmics de la Facultat d'Informació i Mitjans Audiovisuals
+vicedegana d'afers acadèmics de la Facultat de Física
+vicedegana d'afers acadèmics i estudiants de la Facultat de Psicologia
+vicedegana d'estudiants i qualitat de la Facultat de Física
+vicedegana d'estudiants i relacions institucionals de la Facultat de Matemàtiques i Informàtica
+vicedegana d'estudiants, participació i comunicació de la Facultat d'Educació
+vicedegana d'Infermeria de la Facultat de Medicina i Ciències de la Salut
+vicedegana d'innovació, equitat i relació amb la societat de la Facultat d'Educació
+vicedegana d'Odontologia de la Facultat de Medicina i Ciències de la Salut
+vicedegana d'ordenació acadèmica de la Facultat de Filologia i Comunicació
+vicedegana d'ordenació acadèmica i docència de la Facultat de Dret
+vicedegana d'organització i relacions externes de la Facultat de Psicologia
+vicedegana de compromís social, igualtat i comunicació de la Facultat de Dret
+vicedegana de coordinació i innovació docent de la Facultat d'Economia i Empresa
+vicedegana de cultura i estudiants de la Facultat de Belles Arts
+vicedegana de doctorat i qualitat de la Facultat de Geografia i Història
+vicedegana de docència, estudiants i compromís social de la Facultat d'Infermeria
+vicedegana de gestió i qualitat de la Facultat de Ciències de la Terra
+vicedegana de mobilitat i relacions externes de la Facultat de Química
+vicedegana de mobilitat i relacions internacionals de la Facultat de Biologia
+vicedegana de mobilitat, recerca i doctorat de la Facultat de Belles Arts
+vicedegana de màrqueting i equipament de la Facultat de Biblioteconomia i Documentació
+vicedegana de professorat i comunicació de la Facultat de Filologia i Comunicació
+vicedegana de qualitat de la Facultat d'Informació i Mitjans Audiovisuals
+vicedegana de qualitat de la Facultat de Filosofia
+vicedegana de qualitat de la Facultat de Geografia i Història
+vicedegana de qualitat i innovació de la Facultat de Farmàcia i Ciències de l'Alimentació
+vicedegana de qualitat, innovació i professionalització de la Facultat de Biologia
+vicedegana de recerca de la Facultat de Biologia
+vicedegana de recerca de la Facultat de Geografia i Història
+vicedegana de recerca de la Facultat de Matemàtiques i Informàtica
+vicedegana de recerca de la Facultat de Medicina i Ciències de la Salut
+vicedegana de recerca i d'afers generals de la Facultat d'Informació i Mitjans Audiovisuals
+vicedegana de recerca i doctorat de la Facultat d'Economia i Empresa
+vicedegana de recerca i doctorat de la Facultat de Filosofia
+vicedegana de recerca i doctorat de la Facultat de Física
+vicedegana de recerca i economia de la Facultat de Ciències de la Terra
+vicedegana de recerca i innovació de la Facultat de Psicologia
+vicedegana de recerca i relacions internacionals de la Facultat d'Infermeria
+vicedegana de recerca i relacions internacionals de la Facultat de Filologia i Comunicació
+vicedegana de recerca i transferència de la Facultat de Química
+vicedegana de recerca, doctorat i qualitat de la Facultat d'Educació
+vicedegana de recerca, política científica i transferència de la Facultat de Farmàcia i Ciències de l'Alimentació
+vicedegana de relacions externes, compromís social i estudiants de la Facultat d'Economia i Empresa
+vicedegana de relacions institucionals i transferència de la Facultat de Dret
+vicedegana de relacions internacionals de la Facultat d'Economia i Empresa
+vicedegana de relacions internacionals i recerca de la Facultat de Dret
+vicedegana de seguretat, salut i sostenibilitat de la Facultat de Química
+vicedegana directora del Consell Acadèmic de Ciències de l'Alimentació
+vicedegà acadèmic de graus i relacions internacionals de la Facultat de Medicina i Ciències de la Salut
+vicedegà acadèmic de postgraus i màsters de la Facultat de Medicina i Ciències de la Salut
+vicedegà acadèmic i d'estudiants de la Facultat de Ciències de la Terra
+vicedegà acadèmic i de qualitat de la Facultat d'Infermeria
+vicedegà acadèmic i de qualitat de la Facultat de Belles Arts
+vicedegà d'afers acadèmics de la Facultat d'Educació
+vicedegà d'afers acadèmics de la Facultat d'Informació i Mitjans Audiovisuals
+vicedegà d'afers acadèmics de la Facultat de Física
+vicedegà d'afers acadèmics i estudiants de la Facultat de Psicologia
+vicedegà d'estudiants i qualitat de la Facultat de Física
+vicedegà d'estudiants i relacions institucionals de la Facultat de Matemàtiques i Informàtica
+vicedegà d'estudiants, participació i comunicació de la Facultat d'Educació
+vicedegà d'Infermeria de la Facultat de Medicina i Ciències de la Salut
+vicedegà d'innovació, equitat i relació amb la societat de la Facultat d'Educació
+vicedegà d'Odontologia de la Facultat de Medicina i Ciències de la Salut
+vicedegà d'ordenació acadèmica de la Facultat de Filologia i Comunicació
+vicedegà d'ordenació acadèmica i docència de la Facultat de Dret
+vicedegà d'ordenació acadèmica i qualitat de la Facultat de Química
+vicedegà d'organització i relacions externes de la Facultat de Psicologia
+vicedegà de compromís social, igualtat i comunicació de la Facultat de Dret
+vicedegà de coordinació i innovació docent de la Facultat d'Economia i Empresa
+vicedegà de cultura i estudiants de la Facultat de Belles Arts
+vicedegà de doctorat i qualitat de la Facultat de Geografia i Història
+vicedegà de docència, estudiants i compromís social de la Facultat d'Infermeria
+vicedegà de gestió i qualitat de la Facultat de Ciències de la Terra
+vicedegà de la Facultat de Biblioteconomia i Documentació
+vicedegà de la Facultat de Ciències de la Terra
+vicedegà de la Facultat de Filologia i Comunicació
+vicedegà de la Facultat de Filosofia
+vicedegà de la Facultat de Física
+vicedegà de la Facultat de Matemàtiques
+vicedegà de la Facultat de Química
+vicedegà de mobilitat i relacions externes de la Facultat de Química
+vicedegà de mobilitat i relacions internacionals de la Facultat de Biologia
+vicedegà de mobilitat, recerca i doctorat de la Facultat de Belles Arts
+vicedegà de màrqueting i equipament de la Facultat de Biblioteconomia i Documentació
+vicedegà de professorat i comunicació de la Facultat de Filologia i Comunicació
+vicedegà de qualitat de la Facultat d'Informació i Mitjans Audiovisuals
+vicedegà de qualitat de la Facultat de Filosofia
+vicedegà de qualitat de la Facultat de Geografia i Història
+vicedegà de qualitat i innovació de la Facultat de Farmàcia i Ciències de l'Alimentació
+vicedegà de qualitat, innovació i professionalització de la Facultat de Biologia
+vicedegà de recerca de la Facultat de Biologia
+vicedegà de recerca de la Facultat de Geografia i Història
+vicedegà de recerca de la Facultat de Matemàtiques i Informàtica
+vicedegà de recerca de la Facultat de Medicina i Ciències de la Salut
+vicedegà de recerca i d'afers generals de la Facultat d'Informació i Mitjans Audiovisuals
+vicedegà de recerca i doctorat de la Facultat d'Economia i Empresa
+vicedegà de recerca i doctorat de la Facultat de Filosofia
+vicedegà de recerca i doctorat de la Facultat de Física
+vicedegà de recerca i economia de la Facultat de Ciències de la Terra
+vicedegà de recerca i innovació de la Facultat de Psicologia
+vicedegà de recerca i relacions internacionals de la Facultat d'Infermeria
+vicedegà de recerca i relacions internacionals de la Facultat de Filologia i Comunicació
+vicedegà de recerca i transferència de la Facultat de Química
+vicedegà de recerca, doctorat i qualitat de la Facultat d'Educació
+vicedegà de recerca, política científica i transferència de la Facultat de Farmàcia i Ciències de l'Alimentació
+vicedegà de relacions externes, compromís social i estudiants de la Facultat d'Economia i Empresa
+vicedegà de relacions institucionals i transferència de la Facultat de Dret
+vicedegà de relacions internacionals de la Facultat d'Economia i Empresa
+vicedegà de relacions internacionals i recerca de la Facultat de Dret
+vicedegà de seguretat, salut i sostenibilitat de la Facultat de Química
+vicedegà director del Consell Acadèmic de Ciències de l'Alimentació
+vicedirector de l'Escola de Doctorat
+vicedirectora de l'Escola de Doctorat
+vicerector d'Arts, Cultura i Patrimoni
+vicerector d'Economia
+vicerector d'Emprenedoria, Innovació i Transferència
+vicerector d'Emprenedoria, Transferència i Innovació
+vicerector d'Estudiants i Participació
+vicerector d'Estudiants i Política Lingüística
+vicerector d'Estudiants i Vida Universitària
+vicerector d'Igualtat i Acció Social
+vicerector d'Igualtat i Gènere
+vicerector d'Igualtat, Inclusió i Gènere
+vicerector d'Internacionalització
+vicerector d'Ordenació Acadèmica
+vicerector d'Ordenació Acadèmica i Qualitat
+vicerector d'Organització i Governança
+vicerector d'Organització i Personal d'Administració i Serveis
+vicerector de Comunicació
+vicerector de Comunicació i Coordinació
+vicerector de Cultura, Memòria i Patrimoni
+vicerector de Doctorat i Personal Investigador en Formació
+vicerector de Doctorat i Promoció de la Recerca
+vicerector de Doctorat, Personal Investigador en Formació, Atracció de Talent i Divulgació
+vicerector de Docència
+vicerector de Docència i Ordenació Acadèmica
+vicerector de Formació Permanent i Professional
+vicerector de Patrimoni i Activitats Culturals
+vicerector de Personal Docent i Investigador
+vicerector de Política Acadèmica
+vicerector de Política Acadèmica i Qualitat
+vicerector de Política d'Internacionalització
+vicerector de Política de Digitalització
+vicerector de Política de Qualitat
+vicerector de Política Docent
+vicerector de Política Lingüística
+vicerector de Projecció i Internacionalització
+vicerector de Recerca
+vicerector de Relacions Institucionals, Comunicació i Política Lingüística
+vicerector de Relacions Laborals
+vicerector de Sostenibilitat i Acció Climàtica
+vicerector de Transformació Digital
+vicerectora d'Arts, Cultura i Patrimoni
+vicerectora d'Economia
+vicerectora d'Emprenedoria, Innovació i Transferència
+vicerectora d'Emprenedoria, Transferència i Innovació
+vicerectora d'Estudiants i Participació
+vicerectora d'Estudiants i Política Lingüística
+vicerectora d'Estudiants i Vida Universitària
+vicerectora d'Igualtat i Acció Social
+vicerectora d'Igualtat i Gènere
+vicerectora d'Igualtat, Inclusió i Gènere
+vicerectora d'Internacionalització
+vicerectora d'Ordenació Acadèmica
+vicerectora d'Ordenació Acadèmica i Qualitat
+vicerectora d'Organització i Governança
+vicerectora d'Organització i Personal d'Administració i Serveis
+vicerectora de Comunicació
+vicerectora de Comunicació i Coordinació
+vicerectora de Cultura, Memòria i Patrimoni
+vicerectora de Doctorat i Personal Investigador en Formació
+vicerectora de Doctorat i Promoció de la Recerca
+vicerectora de Doctorat, Personal Investigador en Formació, Atracció de Talent i Divulgació
+vicerectora de Docència
+vicerectora de Docència i Ordenació Acadèmica
+vicerectora de Formació Permanent i Professional
+vicerectora de Patrimoni i Activitats Culturals
+vicerectora de Personal Docent i Investigador
+vicerectora de Política Acadèmica
+vicerectora de Política Acadèmica i Qualitat
+vicerectora de Política d'Internacionalització
+vicerectora de Política de Digitalització
+vicerectora de Política de Qualitat
+vicerectora de Política Docent
+vicerectora de Política Lingüística
+vicerectora de Projecció i Internacionalització
+vicerectora de Recerca
+vicerectora de Relacions Institucionals, Comunicació i Política Lingüística
+vicerectora de Relacions Laborals
+vicerectora de Sostenibilitat i Acció Climàtica
+vicerectora de Transformació Digital
+Centre d'Investigació en Gestió i Enginyeria de Producció
+màster en Formació del Professorat de Secundària Obligatòria i Batxillerat
+màster en Formació del Professorat de Secundària Obligatòria
+màster en Formació del Professorat de Secundària
+màster universitari
+set meravelles del món
+set meravelles del món antic
+noves set meravelles del món modern
+set noves meravelles del món modern
+set meravelles del món modern
+Euro 7
+habitatge amb protecció oficial
+habitatges amb protecció oficial
+habitatge de protecció oficial
+habitatges de protecció oficial
+salari mínim interprofessional
+sistema monetari internacional
+esplanada de les Mesquites
+mont del Temple
+mur de les Lamentacions
+mesquita d'Al-Aqsa
+cúpula de la Roca
+porta de la Misericòrdia
+Eumo Editorial
+El Corte Inglés
+Bora Bora
+fallera major
+fallera major infantil
+falleres majors
+falleres majors infantils
+home de Neandertal
+homes de Neandertal
+Le Mont-Saint-Michel
+mont Saint-Michel
+déu-vos-guard
+déu-vos-guards
+Premi Sàkharov
+illa de Man
+De la Rúa
+Fernando de la Rúa
+Teatre Borràs
+Ciutat de les Arts i de les Ciències
+Burj Khalifa
+Burj Dubai
+Monarquia de Juliol
+ingrés mínim vital
+renda garantida de ciutadania
+renda garantida ciutadana
+Bòsnia i Hercegovina
+Front Polisario
+Gabinet del President
+Gabinet de la President
+Gabinet de Presidència
+Gabinet de la Presidència
+Sàhara Occidental
+Premis Oscar
+Cien años de soledad
+Oques Grasses
+Fiscalia General de l'Estat
+Fiscalia de l'Estat
+fiscal general de l'Estat
+fiscal de l'Estat
+alts del Golan
+Alt Comissionat de les Nacions Unides
+Alt Comissionat de les Nacions Unides per als Refugiats
+Col·legi Electoral dels Estats Units
+Mundial de bàsquet
+Mundial de futbol
+Mundial d'handbol
+Mundial de clubs d'handbol
+Mundial de natació
+Mundial d'atletisme
+Mundials de natació
+Mundials d'atletisme
+Campionat del Món de natació
+Campionat del Món d'atletisme
+Campionats del Món de natació
+Campionats del Món d'atletisme
+poble palestí
+Organització dels Estats Americans
+Comunitat d'Estats Llatinoamericans i Caribenys
+política agrícola comuna
+Abraham de Moivre
+De Moivre
+costa est
+costa oest
+Federació Russa
+premi Médicis
+premi Médicis Estranger
+Assemblea Nacional francesa
+la Santa Seu
+església militant
+església primitiva
+església dels apòstols
+església purgant
+església triomfant
+església matriu
+església sucursal
+#església universal
+Església Evangèlica Espanyola
+Reforma protestant
+D'Annunzio
+Gabriele D'Annunzio
+Super Bowl
+Fòrum Econòmic Mundial
+Autoritat Nacional Palestina
+Ministeri d'Afers Estrangers
+Ministeri d'Economia
+Ministeri d'Hisenda
+Ministeri d'Economia i Hisenda
+Ministeri de Defensa
+Ministeri d'Educació
+Ministeri d'Educació i Formació Professional i Esport
+Ministeri d'Educació i Ciència
+Ministeri d'Educació i Cultura
+cap d'Hornos
+Sant Pau Extramurs
+Sant Pere del Vaticà
+Sindicat de Llogateres
+Cadena SER
+Camí de Sant Jaume
+estret d'Ormuz
+Mar-a-Lago
+Das Lied von der Erde
+John von Neumann
+Von Neumann
+pla Inuncat
+pla Infocat
+pla Allaucat
+pla PIVE
+pla Moves
+pla Ventcat
+pla Neucat
+pla Kanpai
+Lana Del Rey
+Thomas De Quincey
+Lorenzo Da Ponte
+República Islàmica de l'Iran
+Agència Internacional de l'Energia Atòmica
+Palau-sator
+Palau-sacosta
+Palau-saverdera
+Palau-solità
+Palau-surroca
+ministre d'Afers Estrangers
+ministra d'Afers Estrangers
+ministres d'Afers Estrangers
+Guàrdia Revolucionària Islàmica
+Guàrdia de la Revolució Islàmica
+Guardians de la Revolució Islàmica
+La Tour d'Argent
+Front d'Alliberament Nacional
+Feria de Abril
+declaració de la renda
+declaracions de la renda
+despotisme il·lustrat
+Willard Van Orman Quine
+Corriere della Sera
+salari brut
+salari brut anual
+director de programa
+directora de programa
+mosso d'esquadra
+mossa d'esquadra
+mosses d'esquadra
+Moammar al-Gaddafi
+Consorci Administració Oberta de Catalunya
+Administració Oberta de Catalunya
+Abdelbaki es-Satty
+Escolania de Montserrat
+monestir de Montserrat
+#abadia de Montserrat
+Publicacions de l’Abadia de Montserrat
+Discos Abadia de Montserrat
+núvol d'Oort
+cinturó de Kuiper
+galàxia d'Andròmeda
+galàxia del Triangle
+nebulosa d'Orió
+nebulosa del Cranc
+púlsar del Cranc
+planeta Mercuri
+planeta Venus
+planeta Mart
+planeta Júpiter
+planeta Saturn
+planeta Urà
+planeta Neptú
+Petit Núvol de Magalhães
+Gran Núvol de Magalhães
+lluna dicòtoma
+lluna minvant
+lluna en quart minvant
+lluna creixent
+lluna en quart creixent
+lluna nova
+lluna vella
+lluna gelada
+lluna de mel
+bona lluna
+mala lluna
+mitja lluna
+Mitja Lluna Roja
+una mitja lluna roja
+Mitja Lluna Fèrtil
+Mitja Lluna Daurada
+Mitja Lluna de Ferro
+Mitja Lluna de les Terres Fèrtils
+Mitja Lluna Roja Catalana
+eclipsi total de sol
+sol ixent
+ulleres de sol
+ullera de sol
+#terres
+llunes
+#sols
+cinturó d'asteroides
+estrella polar
+univers
+Miss Univers
+Institut de Ciències del Cosmos
+cosmos
+cada terra fa sa guerra
+lluna de València
+UCC+I
+Unitat de Cultura Científica i Innovació
+coca-coles
+selectivitat
+selectivitats
+Oficina Antifrau de Catalunya
+Oficina Antifrau|oficina antifrau
+Abelardo de la Espriella
+de la Espriella
+Sagrada Família
+vudú
+Pau de Westfàlia
+Acta Única Europea
+diputacions provincials
+Georges de Rham
+De Rham
+serra d'Espadà
+Parc Natural Serra d'Espadà
+Parc Natural de la Serra d'Espadà
+IES Serra d'Espadà
+3CatInfo
+Fundació Enciclopèdia Catalana
+Advocacia General de l'Estat
+Audiència Nacional
+Audiència Provincial de Barcelona
+Tribunal Constitucional
+Tribunal d'Apel·lació de Brussel·les
+Tribunal de Comptes
+Tribunal Superior de Justícia de Catalunya
+Tribunal Suprem
+jutjat de primera instància
+jutjat d'instrucció número
+jutjat d'instrucció
+jutjat social
+sala penal
+sala civil
+sala contenciosa administrativa
+sala social
+sala militar
+sala d'apel·lacions
+alt tribunal
+ministeri fiscal
+administració de justícia

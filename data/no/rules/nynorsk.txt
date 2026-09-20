@@ -1,0 +1,25 @@
+# Norwegian Bokmål — Nynorsk forms in Bokmål text (NB_NYNORSK_FORMS).
+# Only unambiguous forms; words valid in both standards must not be listed.
+ikkje=ikke
+eg=jeg
+kva=hva
+korleis=hvordan
+kvifor=hvorfor
+kven=hvem
+kor=hvor
+mykje=mye
+noko=noe
+nokon=noen
+dykk=dere
+hjå=hos
+vere=være
+gjere=gjøre
+seie=si
+saman=sammen
+eit=et
+ein=en
+ho=hun
+me=vi
+vart=ble
+fyrst=først
+dei=de|dem

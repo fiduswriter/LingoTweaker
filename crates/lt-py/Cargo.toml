@@ -1,0 +1,20 @@
+[package]
+name = "lt-py"
+description = "Python bindings (PyO3) for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "lt_py"
+crate-type = ["cdylib"]
+# extension modules leave the Python symbols undefined at link time; cargo
+# test/clippy compile the crate, the Python-side tests import the built .so
+test = false
+doctest = false
+
+[dependencies]
+lt = { workspace = true }
+pyo3 = { workspace = true }
+serde_json = { workspace = true }

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Regenerate one language's pinned Java golden (Docker + pinned checkout).
+# Only run after an intentional corpus/input change; then check whether
+# PARITY_TODAY in scripts/ci/parity.sh must be updated to the capture date.
+#
+# Usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt>
+set -euo pipefail
+
+LANG_ARG="${1:?usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl>}"
+RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+GOLDEN="$RS_ROOT/docs/parity/golden"
+PREFIX="/tmp/lt-golden-$LANG_ARG"
+
+case "$LANG_ARG" in
+  en) "$RS_ROOT/scripts/oracle/check-diff.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  de) "$RS_ROOT/scripts/oracle/de/check-diff-de.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  es) "$RS_ROOT/scripts/oracle/es/check-diff-es.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  fr) "$RS_ROOT/scripts/oracle/fr/check-diff-fr.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  it) "$RS_ROOT/scripts/oracle/it/check-diff-it.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  pt) "$RS_ROOT/scripts/oracle/pt/check-diff-pt.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  nl) "$RS_ROOT/scripts/oracle/nl/check-diff-nl.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  *) echo "unknown language: $LANG_ARG" >&2; exit 2 ;;
+esac
+
+cp "$PREFIX.java.tsv" "$GOLDEN/$LANG_ARG-full.java.tsv"
+echo "updated $GOLDEN/$LANG_ARG-full.java.tsv (captured $(date +%F))"
+echo "if that differs from PARITY_TODAY in scripts/ci/parity.sh, update it too"

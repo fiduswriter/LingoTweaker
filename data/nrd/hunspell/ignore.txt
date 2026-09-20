@@ -1,0 +1,9 @@
+# Words the Nordum speller must accept although they are not in the generated
+# dictionary (proper nouns, abbreviations, technical terms).
+nordum
+TikTok
+Twitch
+España
+barnhage
+arbeiddag
+tunnskiva

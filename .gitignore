@@ -1,0 +1,14 @@
+/target
+/docs/parity/lt-sync-status.json
+*.swp
+
+# Python bytecode from the binding tests
+__pycache__/
+*.pyc
+attic/
+
+# wasm-pack output and generated demo data packs
+crates/lt-wasm/pkg/
+crates/lt-wasm/pkg-node/
+crates/lt-wasm/www/pkg/
+crates/lt-wasm/www/packs/

@@ -1,0 +1,16 @@
+# Norwegian Bokmål — one word vs two words (NB_WORD_DIVISION).
+forøvrig=for øvrig
+endel=en del
+idag=i dag
+igår=i går
+imorgen=i morgen
+istedet=i stedet
+tilslutt=til slutt
+etterhvert=etter hvert
+værsågod=vær så god
+ombord=om bord
+tilstede=til stede
+ihenhold til=i henhold til
+iforhold til=i forhold til
+pågrunn av=på grunn av
+tiltross for=til tross for

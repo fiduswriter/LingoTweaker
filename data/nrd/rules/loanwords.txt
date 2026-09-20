@@ -1,0 +1,8 @@
+# Nordum — loanword preference (NDM_LOANWORDS; spec §2.2, §9.1).
+datamaskin=computer
+internett=internet
+nettside=website
+e-post=email
+programvare=software
+nettleser=browser
+passord=password

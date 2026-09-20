@@ -1,0 +1,33 @@
+# Nordum — correct lowercase forms (NDM_CAPITALIZATION,
+# AbstractCheckCaseRule; spec §3.3.4: sentence case plus proper nouns only).
+norsk
+dansk
+svensk
+engelsk
+tysk
+fransk
+spansk
+italiensk
+portugisisk
+nederlandsk
+mandag
+tirsdag
+onsdag
+torsdag
+fredag
+lørdag
+søndag
+januar
+februar
+mars
+april
+mai
+juni
+juli
+august
+september
+oktober
+november
+desember
+doctor
+nordum

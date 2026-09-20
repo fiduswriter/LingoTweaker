@@ -1,0 +1,13 @@
+# Norwegian Bokmål — særskriving hot list (NB_SPLIT_COMPOUND).
+# The lexicon-driven split-compound check is still deferred; this curated list
+# covers frequent mistakes until then.
+sommer ferie=sommerferie
+skole gård=skolegård
+tegne konkurranse=tegnekonkurranse
+barne hage=barnehage
+bil motor=bilmotor
+syke pleier=sykepleier
+fotball kamp=fotballkamp
+arbeids plass=arbeidsplass
+jule gave=julegave
+bursdags fest=bursdagsfest

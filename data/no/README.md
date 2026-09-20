@@ -1,0 +1,180 @@
+# data/no — Norwegian Bokmål
+
+Hand-authored language data (upstream LanguageTool has no Norwegian module; it
+ships only a spell-check-only dynamic language). Module:
+`crates/lt/src/no.rs` + `crates/lt/src/no/`; tests:
+`crates/lt/tests/norwegian.rs`; the owner-approved rule list is the
+`new-languages/norwegian-bokmal/proposed-rules.md` sign-off package (outside
+this repo until the staging folder is retired).
+
+## Contents
+
+| Path | Source | License |
+|---|---|---|
+| `hunspell/nb_NO.dic` | LibreOffice dictionaries `no/` (dis.v3.0, data from NB/Språkrådet) | CC BY 4.0 + CLARIN PUB+BY |
+| `hunspell/nb_NO.aff` | LibreOffice dictionaries `no/` | GPL-2.0; the `CHECKCOMPOUNDTRIPLE` and `SIMPLIFIEDTRIPLE` directives are stripped because `lt-spell` rejects them at load time; the file carries a GPL-2.0 modification notice in its header |
+| `hunspell/ignore.txt`, `hunspell/prohibit.txt`, `hunspell/repetition_exceptions.txt` | hand-authored | LGPL-2.1-or-later |
+| `rules/grammar.xml` | hand-authored XML rules (Språkrådet-guided) | LGPL-2.1-or-later |
+| `rules/typos.txt`, `nynorsk.txt`, `word_division.txt`, `split_compounds.txt`, `check_case.txt` | hand-authored list rules | LGPL-2.1-or-later |
+| `rules/typos_wikipedia.txt` | [Wikipedia:Liste over alminnelige stavefeil](https://no.wikipedia.org/wiki/Wikipedia:Liste_over_alminnelige_stavefeil) (no.wikipedia; wiki markup stripped, whitespace normalized, entries filtered against `hunspell/nb_NO.dic` and the hand-picked list in `rules/typos.txt`) | CC BY-SA 4.0 |
+| `words/gender_overrides.txt` | curated gender overrides for the definite-form heuristic (`noun c`/`noun n`) | LGPL-2.1-or-later |
+
+## Modifying this language
+
+There is **no tagger and no POS dictionary** for Norwegian: everything works on
+the surface token stream. Keep that in mind for every new rule.
+
+### Rule kinds
+
+1. **XML pattern rules** — `rules/grammar.xml`, LanguageTool format. Supported
+   and used here: `<pattern>` with literal tokens, `regexp="yes"` tokens
+   (fancy-regex fallback supports lookbehind, e.g. `(?<!e)`), `<marker>` for the
+   error range, `<antipattern>` for false-positive guards, `<exception>` inside
+   a token, `postag="SENT_START"` for sentence-initial rules, `<suggestion>`
+   with `<match no="N" regexp_match="…" regexp_replace="…"/>` (including
+   reordering matches and deleting trailing characters), `<example
+   correction="…">` for incorrect and plain `<example>` for correct sentences.
+   `default="off"` keeps a rule out of `active_rule_count` until enabled (see
+   `NB_OG_A_VERB`, `NB_DA_NAR`, `NB_QUESTION_INVERSION`).
+2. **List rules** — `rules/*.txt`, one `wrong=right` per line (`#` comments;
+   `|` separates multiple wrong forms or multiple suggestions; multi-word keys
+   are supported). Each file needs a `SimpleReplaceRule` entry in
+   `crates/lt/src/no/rules.rs` with the rule id and message. A
+   `checking_case: true` rule (see `check_case.txt`) lists the *correct* forms
+   and flags any other casing except at sentence start.
+3. **Speller word lists** — `hunspell/ignore.txt` (accepted words missing from
+   `nb_NO.dic`), `prohibit.txt` (rejected words),
+   `repetition_exceptions.txt` (legitimate repetitions such as `ja ja`).
+4. **Rust built-ins** — `crates/lt/src/no/context.rs`:
+   `NB_EN_ET_GENDER` (article gender), `NB_COMMA_PP_VERB` (spurious comma),
+   `NB_SIN_HANS` and `NB_SEG_REFLEX` (reflexives; suggestions) and
+   `NB_SPLIT_COMPOUND_LEX` (dictionary-driven særskriving, **default-off**:
+   guards and a phrase whitelist reduce but cannot remove false positives
+   without POS). They are
+   called from the `if let Some(norwegian) = &self.norwegian` block in
+   `crates/lt/src/pipeline.rs` via `append_active` + `builtin_active`. The
+   shared `crate::word_repetition::WordRepetitionRule` (`NB_WORD_REPETITION`)
+   is wired the same way. `HunspellSpellingRule::is_known()` is exposed through
+   `NorwegianSpellingRule::is_known()` for rules that need dictionary lookups,
+   and `infer_singular_gender()` (definite-form heuristic, no POS dictionary)
+   is shared by the gender-article rule and `NB_SIN_HANS`.
+
+### Overlap priorities
+
+`crates/lt/src/no/priorities.rs` implements `getPriorityForId`: the speller is
+`-1000`, style rules `-50`, everything else `0`. When two matches overlap, the
+higher priority wins; on a tie the longer match wins and then the later one.
+Give a new rule a non-zero priority there if it must beat the speller
+(e.g. a suggestion-carrying rule) or yield to another rule.
+
+### Adding a rule: checklist
+
+1. Add the XML rule or list file; keep rule ids stable (never renumber).
+2. Add `/ update examples` (`<example>`) and the tests in
+   `crates/lt/tests/norwegian.rs`: `norwegian_rules_fire` for hits,
+   `norwegian_correct_sentences` for false-positive guards.
+3. Update `active_rule_count()` in `norwegian_engine_state` when adding
+   default-on XML rules (currently 24; default-off rules are not counted).
+4. Register changed data files in the manifest (see below).
+5. `cargo test -p lt --test norwegian` and `cargo clippy -p lt --all-targets --
+   -D warnings`.
+
+### Notes / gotchas
+
+- Offsets are UTF-8 bytes everywhere; never return UTF-16 ranges.
+- The speller accepts productive hyphen compounds (`50-årsdag`,
+  `NRK-medarbeider`) when every part is a number, an abbreviation or a known
+  word — see `crates/lt/src/hunspell_spelling.rs`.
+- `NB_EN_ET_GENDER` / `NB_SIN_HANS` infer the gender from the *speller's*
+  definite forms (`jenten` vs `jentet`); the curated
+  `words/gender_overrides.txt` (`noun c`/`noun n`) resolves ambiguous nouns
+  (e.g. `bil`, because `bilet` is an unrelated word). Add overrides there
+  instead of new heuristics; add a word to `ignore.txt` when the dictionary
+  lacks a valid form.
+- Compound splitting is a curated hot list (`split_compounds.txt`); the
+  lexicon-driven check is a documented follow-up (false positives on phrases
+  like `god morgen`, `til stede`).
+
+## Spelling suggestions (Morfologik, one-off)
+
+`NB_SPELLER` uses the 708k-word Hunspell dictionary as the spelling authority
+and, since the one-off Morfologik build, the vendored CFSA2 speller dictionary
+`dictionaries/no.dict` (~1 MB) for suggestions: the Hunspell dictionary is
+above the bounded edit-distance limit, so the error-tolerant FSA search is
+used instead. The artifact is built **once** with the pinned Java tooling; no
+Rust port of the converter is needed because it is only refreshed when
+`nb_NO.dic` changes. Exact build (reproducible):
+
+```sh
+# pinned tooling (org.carrot2:morfologik 2.2.0; DictCompile also needs
+# com.carrotsearch:hppc at runtime, shipped as hppc.jar with LanguageTool):
+#   morfologik-tools-2.2.0.jar morfologik-stemming-2.2.0.jar
+#   morfologik-fsa-2.2.0.jar morfologik-fsa-builders-2.2.0.jar
+#   jcommander-1.78.jar hppc.jar
+CP="morfologik-tools-2.2.0.jar:morfologik-stemming-2.2.0.jar:morfologik-fsa-2.2.0.jar:morfologik-fsa-builders-2.2.0.jar:jcommander-1.78.jar:hppc.jar"
+
+# 1) input rows are `base+inflected` (DictCompile rejects single-column rows
+#    with "[base,inflected,tag?]"); for a speller dict base = inflected =
+#    word. Affix flags are stripped at `/`; affix fragments (`-abel`),
+#    separator-carrying and letterless entries are dropped; `LC_ALL=C` keeps
+#    the build deterministic (plain `sort` merges lines under the locale
+#    collation). 707391 rows, 18.7 MB.
+printf 'fsa.dict.separator=+\nfsa.dict.encoding=utf-8\nfsa.dict.encoder=SUFFIX\nfsa.dict.speller.runon-words=false\n' > /tmp/no.info
+python3 - <<'PY' | LC_ALL=C sort -u > /tmp/no.txt
+for line in open('data/no/hunspell/nb_NO.dic', encoding='utf-8'):
+    word = line.rstrip('\n').split('\t')[0].split('/')[0].strip()
+    if not word or word.startswith('-') or '+' in word or not any(c.isalpha() for c in word):
+        continue
+    print(word + '+' + word)
+PY
+
+# 2) compile (3.5 s; CFSA2, 1051193 bytes) and vendor the outputs:
+java -cp "$CP" morfologik.tools.DictCompile --exit false -i /tmp/no.txt -f CFSA2 --overwrite
+cp /tmp/no.dict data/no/dictionaries/no.dict
+cp /tmp/no.info data/no/dictionaries/no.info
+```
+
+The generated `dictionaries/no.dict`/`no.info` are derived data of
+`hunspell/nb_NO.dic` and keep its attribution obligations (CC BY 4.0 +
+CLARIN PUB+BY); `data/manifest.json` records this (`source.license`).
+
+The same `no.info` is the runtime metadata (`fsa.dict.separator=+`,
+`utf-8`, `SUFFIX`, plus `runon-words=false`: splitting a misspelling into two
+dictionary words mostly yielded single-letter noise like `datamaskin e`, and
+Norwegian compounds are normally written as one word). The Rust side loads it
+in `crates/lt/src/hunspell_spelling.rs` via
+`lt_spell::morfologik::MorfologikSpeller::from_dict_file(dict, info, 2)`;
+Hunspell remains the spelling authority (`is_known`), and the Morfologik
+speller only feeds `suggestions()` when no plain `suggestion_file` is
+configured.
+
+## Regenerating the dictionary
+
+```sh
+curl -sL -o nb_NO.aff https://raw.githubusercontent.com/LibreOffice/dictionaries/master/no/nb_NO.aff
+curl -sL -o nb_NO.dic https://raw.githubusercontent.com/LibreOffice/dictionaries/master/no/nb_NO.dic
+grep -vE '^(CHECKCOMPOUNDTRIPLE|SIMPLIFIEDTRIPLE)' nb_NO.aff > data/no/hunspell/nb_NO.aff
+cp nb_NO.dic data/no/hunspell/nb_NO.dic
+python3 tools/lt-sync/lt_sync.py add-local vendor data/no/hunspell/nb_NO.dic \
+    --license "CC BY 4.0" --url https://github.com/LibreOffice/dictionaries/tree/master/no
+python3 tools/lt-sync/lt_sync.py add-local vendor data/no/hunspell/nb_NO.aff \
+    --license "GPL-2.0" --url https://github.com/LibreOffice/dictionaries/tree/master/no \
+    --note "CHECKCOMPOUNDTRIPLE and SIMPLIFIEDTRIPLE stripped"
+```
+
+The vendored `.aff` also carries a GPL-2.0 modification-notice header (upstream,
+copyright holder and the removed directives, dated). Keep that header when
+regenerating; GPL-2.0 requires modified files to state the change and its date.
+
+## Registering data changes
+
+```sh
+python3 tools/lt-sync/lt_sync.py add-local hand-authored <changed files> \
+    --license "LGPL-2.1-or-later" --license-source "LICENSE"
+cargo test -p lt-data     # sha256/size verification must pass
+```
+
+`lt-sync import` preserves `hand-authored`/`vendor`/`generated` entries
+(D-154), so re-imports do not drop this data.
+
+Tests: `cargo test -p lt --test norwegian`.

@@ -1,0 +1,153 @@
+S	Muitos tinham-o como um bom amigo.
+T	Muitos	muito:DI0MP0|muito:NCMP000|muito:PI0MP000
+T	 	null:null
+T	tinham	ter:VMII3P0
+T	-	null:null
+T	o	o:DA0MS0|o:PD0MS000|ele:PP3MSA00
+T	 	null:null
+T	como	como:CS|como:I|como:NCMS000|como:PT0CN000|como:RG|comer:VMIP1S0
+T	 	null:null
+T	um	um:DI0MS0|um:NCMS000|um:PI0MS000|um:Z0MS0
+T	 	null:null
+T	bom	bom:AQ0MS0|bom:NCMS000
+T	 	null:null
+T	amigo	amigo:AQ0MS0|amigo:NCMS000|amigar:VMIP1S0
+T	.	null:null
+S	Assim poderia-se escrever à Ana.
+T	Assim	assim:AQ0CN0|assim:CC|assim:RG
+T	 	null:null
+T	poderia	poder:VMIC1S0|poder:VMIC3S0
+T	-	null:null
+T	se	se:CS|se:PP3CNO00
+T	 	null:null
+T	escrever	escrever:VMN0000|escrever:VMN01S0|escrever:VMN03S0|escrever:VMSF1S0|escrever:VMSF3S0
+T	 	null:null
+T	à	a:o:SPS00:DA0FS0
+T	 	null:null
+T	Ana	Ana:NPFS000|Ana:NPFSS00
+T	.	null:null
+S	Isso aconteceu no dia 1º de maio.
+T	Isso	Isso:I|isso:PD0NN000
+T	 	null:null
+T	aconteceu	acontecer:VMIS3S0
+T	 	null:null
+T	no	ele:PP3MSA00|em:o:SPS00:DA0MS0
+T	 	null:null
+T	dia	dia:NCMS000
+T	 	null:null
+T	1º	1º:NCMS000|1º:AO0MS0
+T	 	null:null
+T	de	de:SPS00
+T	 	null:null
+T	maio	maio:AQ0MS0|maio:NCMS000
+T	.	null:null
+S	O 2.º lugar e a 3.ª posição.
+T	O	o:DA0MS0|o:PD0MS000|ele:PP3MSA00
+T	 	null:null
+T	2.º	2.º:NCMS000|2.º:AO0MS0
+T	 	null:null
+T	lugar	lugar:NCMS000
+T	 	null:null
+T	e	e:CC
+T	 	null:null
+T	a	a:SPS00|ele:PP3FSA00|o:DA0FS0|o:PD0FS000
+T	 	null:null
+T	3.ª	3.º:NCFS000|3.º:AO0FS0
+T	 	null:null
+T	posição	posição:NCFS000
+T	.	null:null
+S	A taxa é 50% e a temperatura 30°C.
+T	A	a:SPS00|ele:PP3FSA00|o:DA0FS0|o:PD0FS000
+T	 	null:null
+T	taxa	taxa:NCFS000|taxar:VMIP3S0|taxar:VMM02S0
+T	 	null:null
+T	é	ser:VMIP3S0
+T	 	null:null
+T	50%	50%:NCMP000
+T	 	null:null
+T	e	e:CC
+T	 	null:null
+T	a	a:SPS00|ele:PP3FSA00|o:DA0FS0|o:PD0FS000
+T	 	null:null
+T	temperatura	temperatura:NCFS000
+T	 	null:null
+T	30°C	null:null
+T	.	null:null
+S	Ele fala rapidamente e calmamente.
+T	Ele	ele:NCMS000|ele:PP3MSN00|elar:VMM03S0|elar:VMSP1S0|elar:VMSP3S0
+T	 	null:null
+T	fala	fala:NCFS000|falar:VMIP3S0|falar:VMM02S0
+T	 	null:null
+T	rapidamente	rapidamente:RG
+T	 	null:null
+T	e	e:CC
+T	 	null:null
+T	calmamente	calmamente:RG
+T	.	null:null
+S	O soto-pôs algo estranho.
+T	O	o:DA0MS0|o:PD0MS000|ele:PP3MSA00
+T	 	null:null
+T	soto-pôs	soto-pôr:VMIS3S0
+T	 	null:null
+T	algo	algo:NCMS000|algo:PI0CN000|algo:RG
+T	 	null:null
+T	estranho	estranho:AQ0MS0|estranho:NCMS000|estranhar:VMIP1S0
+T	.	null:null
+S	Ele d'água falou.
+T	Ele	ele:NCMS000|ele:PP3MSN00|elar:VMM03S0|elar:VMSP1S0|elar:VMSP3S0
+T	 	null:null
+T	d	null:null
+T	'	null:null
+T	água	água:NCFS000
+T	 	null:null
+T	falou	falar:VMIS3S0
+T	.	null:null
+S	Ele reúne-se com ela.
+T	Ele	ele:NCMS000|ele:PP3MSN00|elar:VMM03S0|elar:VMSP1S0|elar:VMSP3S0
+T	 	null:null
+T	reúne-se	reunir:VMIP3S0:PP3CNO00|reunir:VMM02S0:PP3CNO00
+T	 	null:null
+T	com	com:SPS00
+T	 	null:null
+T	ela	elar:VMIP3S0|elar:VMM02S0|ele:PP3FSN00
+T	.	null:null
+S	Havia 2 000 000 de habitantes.
+T	Havia	haver:VMII1S0|haver:VMII3S0
+T	 	null:null
+T	2 000 000	null:null
+T	 	null:null
+T	de	de:SPS00
+T	 	null:null
+T	habitantes	habitante:AQ0CP0|habitante:NCCP000
+T	.	null:null
+S	Nasceu em 2020-03-12.
+T	Nasceu	nascer:VMIS3S0
+T	 	null:null
+T	em	em:SPS00
+T	 	null:null
+T	2020	null:null
+T	-	null:null
+T	03	null:null
+T	-	null:null
+T	12	null:null
+T	.	null:null
+S	O valor é R$ 10,50.
+T	O	o:DA0MS0|o:PD0MS000|ele:PP3MSA00
+T	 	null:null
+T	valor	valor:NCMS000
+T	 	null:null
+T	é	ser:VMIP3S0
+T	 	null:null
+T	R$	R$:NCCP000|R$:NCCS000|R$:NCMP000|R$:NCMS000
+T	 	null:null
+T	10,50	null:null
+T	.	null:null
+S	A temperatura é 30°.
+T	A	a:SPS00|ele:PP3FSA00|o:DA0FS0|o:PD0FS000
+T	 	null:null
+T	temperatura	temperatura:NCFS000
+T	 	null:null
+T	é	ser:VMIP3S0
+T	 	null:null
+T	30°	30°:NCMP000
+T	.	null:null

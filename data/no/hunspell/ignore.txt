@@ -1,0 +1,3 @@
+# Norwegian Bokmål — words the speller must accept although they are not in
+# nb_NO.dic (proper nouns, abbreviations, domain terms).
+årsgrense

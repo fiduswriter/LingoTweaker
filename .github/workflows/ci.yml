@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup component add rustfmt
+      - run: cargo fmt --all --check
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup component add clippy
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+
+  test:
+    runs-on: ubuntu-latest
+    env:
+      # the German tests build ~1 GB engines serially; without a single
+      # malloc arena glibc keeps ~700 MB per thread arena alive, pushing the
+      # peak to >20 GB (D-033)
+      MALLOC_ARENA_MAX: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --workspace
+
+  # P6.3: the parity matrix is computed from the changed paths (owner
+  # gate-scope rule: a change gates only the languages it can influence;
+  # shared paths -> all). `affected` runs
+  # scripts/ci/affected-languages.sh and exports the JSON list. GitHub
+  # rejects an empty matrix, so an empty list (docs-only changes) becomes the
+  # sentinel ["none"] and every parity step below is guarded by
+  # `matrix.lang != 'none'`; the job-level `if` additionally skips the job.
+  affected:
+    runs-on: ubuntu-latest
+    outputs:
+      langs: ${{ steps.compute.outputs.langs }}
+      matrix: ${{ steps.compute.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: compute
+        env:
+          # push: the previous head (all-zero on branch creation);
+          # pull_request: the PR base commit
+          AFFECTED_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          AFFECTED_HEAD: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          langs="$(scripts/ci/affected-languages.sh)"
+          if [ "$langs" = "[]" ]; then
+            matrix='["none"]'
+          else
+            matrix="$langs"
+          fi
+          echo "langs=$langs" >> "$GITHUB_OUTPUT"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          echo "parity matrix: $matrix"
+
+  # Per-language corpus parity vs the pinned Java CheckDump goldens
+  # (docs/parity/golden, no Docker needed; scripts/ci/parity.sh). de/es/it/nl
+  # must be 0 only-Java / 0 only-Rust / 0 field diffs; en carries exactly the
+  # one documented deliberate field diff; fr carries the documented
+  # divergences #3/#4/#5 and pt #6 (validated exactly by
+  # --expect-only-java/--expect-field-diffs). no/nrd/gn have no Java oracle
+  # and run the parity.sh tests-only gate (integration test + inventory).
+  # The matrix is the affected language set (P6.3/D-134), not a static list.
+  parity:
+    needs: affected
+    if: needs.affected.result == 'success' && needs.affected.outputs.langs != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: ${{ fromJSON(needs.affected.outputs.matrix) }}
+    steps:
+      - if: matrix.lang != 'none'
+        uses: actions/checkout@v4
+      - if: matrix.lang != 'none'
+        uses: Swatinem/rust-cache@v2
+      - if: matrix.lang != 'none'
+        run: cargo build --release -p lt-cli
+      - if: matrix.lang != 'none'
+        run: scripts/ci/parity.sh ${{ matrix.lang }}
+
+  # P2.4: PyO3/napi-rs bindings — build the extension modules and run the
+  # Python/Node smoke, thread-safety and (when granian is available) ASGI
+  # integration tests.
+  bindings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install granian
+      - run: scripts/bindings/smoke.sh
+
+  # wasm: build the browser bindings, package one small language and exercise
+  # the actual wasm module from Node (engine built from an in-memory data
+  # pack; no file system in the module).
+  wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup target add wasm32-unknown-unknown
+      - uses: jetli/wasm-pack-action@v0.4.0
+        with:
+          version: "latest"
+      - run: cargo run --release -p lt-data --bin pack_data -- data gn /tmp/lt-gn.pack
+      - run: wasm-pack build crates/lt-wasm --target nodejs --out-dir ../../target/wasm-pkg/node
+      - run: node tools/wasm/smoke.mjs /tmp/lt-gn.pack
+
+  # P0.4 drift job: scheduled upstream delta report (advisory until P5.4).
+  upstream-drift:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Classify upstream changes
+        run: |
+          git clone --depth 1 https://github.com/languagetool-org/languagetool /tmp/lt-upstream
+          python3 tools/lt-sync/lt_sync.py status --upstream /tmp/lt-upstream
+      - name: Upload delta report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lt-sync-status
+          path: docs/parity/lt-sync-status.json

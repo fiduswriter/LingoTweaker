@@ -1,0 +1,17 @@
+[package]
+name = "lt-chunk"
+description = "OpenNLP maxent chunker pipeline for LingoTweaker (D-002)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+lt-data = { workspace = true }
+fancy-regex = { workspace = true }
+quick-xml = { workspace = true }
+zip = { workspace = true }
+
+[dev-dependencies]
+lt-pattern = { workspace = true }

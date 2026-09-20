@@ -1,0 +1,16 @@
+[package]
+name = "lt-disambig"
+description = "Disambiguation XML interpreter for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+lt-data = { workspace = true }
+lt-pattern = { workspace = true }
+quick-xml = { workspace = true }
+serde = { workspace = true }
+regex = { workspace = true }
+fancy-regex = { workspace = true }

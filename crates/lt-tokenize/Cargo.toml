@@ -1,0 +1,17 @@
+[package]
+name = "lt-tokenize"
+description = "Sentence splitting and word tokenization with UTF-8 byte offsets"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt-core = { workspace = true }
+lt-data = { workspace = true }
+regex = { workspace = true }
+fancy-regex = "0.14"
+quick-xml = { workspace = true }
+
+[dev-dependencies]
+lt-tagger = { workspace = true }

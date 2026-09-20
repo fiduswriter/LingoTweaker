@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Norwegian Bokmål (no) — hand-authored rules for LingoTweaker.
+
+  There is no upstream LanguageTool Norwegian module to port (LT ships only a
+  spell-check-only dynamic language), so these rules are written from the
+  Språkrådet guidance (https://sprakradet.no) and the owner-approved rule list
+  in new-languages/norwegian-bokmal/proposed-rules.md.
+
+  No tagger is available: rules must not use postag/inflected matching.
+  Rule ids are stable and must never be renumbered.
+-->
+<rules lang="no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <category id="GRAMMAR" name="Grammatikk">
+        <rule id="NB_TIL_OG_A" name="til og + verb → til å">
+            <pattern>
+                <token>til</token>
+                <marker>
+                    <token>og</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <antipattern>
+                <token>til</token>
+                <token>og</token>
+                <token regexp="yes">med|fra|begynne|byrje</token>
+            </antipattern>
+            <message>Etter «til» skal infinitivsmerket skrives «å», ikke «og».</message>
+            <suggestion>å</suggestion>
+            <short>og/å</short>
+            <example correction="å">Pakka er klar til <marker>og</marker> hentes.</example>
+            <example correction="å">Jeg har lyst til <marker>og</marker> reise.</example>
+            <example>Det er en god ting til og med for barna.</example>
+            <example>Både til og fra jobb.</example>
+        </rule>
+
+        <rule id="NB_UT_OG_A" name="ut/inn å + verb → og">
+            <pattern>
+                <token regexp="yes">ut|inn</token>
+                <marker>
+                    <token>å</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <message>Her er «og» bindeordet mellom to verb, ikke infinitivsmerket «å».</message>
+            <suggestion>og</suggestion>
+            <short>og/å</short>
+            <example correction="og">Vi skal ut <marker>å</marker> spise.</example>
+            <example correction="og">Han gikk inn <marker>å</marker> la seg.</example>
+            <example>Vi skal ut og spise.</example>
+        </rule>
+
+        <rule id="NB_SITTE_OG_A" name="sitte/stå/ligge/gå å + verb → og">
+            <pattern>
+                <token regexp="yes">sitter|står|ligger|går|satt|sto|lå|gikk</token>
+                <marker>
+                    <token>å</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <message>Etter sitte-, stå-, ligge- og gå-verb er «og» bindeordet, ikke «å».</message>
+            <suggestion>og</suggestion>
+            <short>og/å</short>
+            <example correction="og">Han sitter <marker>å</marker> leser.</example>
+            <example correction="og">Hun står <marker>å</marker> venter.</example>
+            <example>Han sitter og leser.</example>
+        </rule>
+
+        <rule id="NB_OG_A_VERB" name="kontrollverb og + infinitiv" default="off">
+            <pattern>
+                <token regexp="yes">lære|lærte|begynne|begynte|prøve|prøvde|pleie|pleide|bruke|brukte|slutte|sluttet|fortsette|fortsatte|rekke|rakk|orke|orket|glemme|glemte|huske|husket|ønske|ønsket|planlegge|planla|håpe|håpet|love|lovet|velge|valgte|trenge|trengte</token>
+                <marker>
+                    <token>og</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <message>Sannsynligvis skal infinitivsmerket «å» brukes her (fortidsprøven: «lærte å lese», ikke «lærte og leste»).</message>
+            <suggestion>å</suggestion>
+            <short>og/å</short>
+            <example correction="å">Hun må lære <marker>og</marker> lese.</example>
+            <example>Hun må lære å lese.</example>
+            <example>Han liker å lære og lese.</example>
+        </rule>
+
+        <rule id="NB_LA_LOT" name="la + objekt + infinitiv → lot">
+            <pattern>
+                <marker>
+                    <token>la</token>
+                </marker>
+                <token regexp="yes">meg|deg|seg|ham|henne|oss|dere|dem|den|det</token>
+                <token regexp="yes">gå|se|vite|komme|ta|få|være|ha|gjøre|si|spørre|prøve|arbeide|sove|vente|begynne|slutte|leve|bli|dra|reise|snakke|fortelle|bruke|hente|kjøpe|ligge|sitte|stå|bestemme</token>
+            </pattern>
+            <message>«lot» er preteritum av «å la» (tillate); «la» er preteritum av «å legge».</message>
+            <suggestion>lot</suggestion>
+            <short>la/lot</short>
+            <example correction="lot">Han <marker>la</marker> meg gå.</example>
+            <example correction="lot">De <marker>la</marker> oss vite det.</example>
+            <example>Han lot meg gå.</example>
+            <example>Han la boka på bordet.</example>
+        </rule>
+
+        <rule id="NB_HAN_HAM" name="han som objekt → ham">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellom|ved|av|fra|gjennom|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>han</token>
+                </marker>
+            </pattern>
+            <message>Som objekt eller etter preposisjon anbefales «ham» på bokmål.</message>
+            <suggestion>ham</suggestion>
+            <short>han/ham</short>
+            <example correction="ham">Jeg gikk til <marker>han</marker>.</example>
+            <example>Jeg gikk til ham.</example>
+        </rule>
+
+        <rule id="NB_HUN_HENNE" name="hun som objekt → henne">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellom|ved|av|fra|gjennom|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>hun</token>
+                </marker>
+            </pattern>
+            <message>Som objekt eller etter preposisjon heter det «henne», ikke «hun».</message>
+            <suggestion>henne</suggestion>
+            <short>hun/henne</short>
+            <example correction="henne">Jeg så <marker>hun</marker>.</example>
+            <example correction="henne">Han snakket med <marker>hun</marker>.</example>
+            <example>Jeg så henne.</example>
+        </rule>
+
+        <rule id="NB_NEG_SUB" name="ikke-plassering i leddsetning">
+            <pattern>
+                <token regexp="yes">at|fordi|hvis|om|når|da|mens|siden|dersom|ettersom</token>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <marker>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                    <token>ikke</token>
+                </marker>
+            </pattern>
+            <message>I leddsetninger står «ikke» før det finitte verbet: «at han ikke kommer».</message>
+            <suggestion>ikke <match no="3"/></suggestion>
+            <short>ikke-plassering</short>
+            <example correction="ikke kommer">Jeg vet at han <marker>kommer ikke</marker>.</example>
+            <example>Jeg vet at han ikke kommer.</example>
+        </rule>
+
+        <rule id="NB_NEG_MAIN" name="ikke-plassering i helsetning">
+            <pattern>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <marker>
+                    <token>ikke</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får</token>
+                </marker>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">at|fordi|hvis|om|når|da|mens|siden|dersom|ettersom</token>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <token>ikke</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får</token>
+            </antipattern>
+            <message>I helsetninger står «ikke» etter det finitte verbet: «jeg vet det ikke».</message>
+            <suggestion><match no="3"/> ikke</suggestion>
+            <short>ikke-plassering</short>
+            <example correction="kan ikke">Hun <marker>ikke kan</marker> komme.</example>
+            <example>Hun kan ikke komme.</example>
+        </rule>
+
+        <rule id="NB_V2" name="V2-inversjon etter foranstilt adverbial">
+            <pattern>
+                <token regexp="yes">Nå|Snart|Ofte|Alltid|Aldri|Kanskje|Heldigvis|Dessverre|Likevel|Derfor|Sjelden|Egentlig</token>
+                <marker>
+                    <token regexp="yes">jeg|du|han|hun|vi|dere|de</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                </marker>
+            </pattern>
+            <message>Når et adverbial står først, må det finitte verbet komme foran subjektet (V2-regelen).</message>
+            <suggestion><match no="3"/> <match no="2"/></suggestion>
+            <short>V2</short>
+            <example correction="reiser jeg">Nå <marker>jeg reiser</marker> til Bergen.</example>
+            <example>Nå reiser jeg til Bergen.</example>
+            <example>Nå må du gå.</example>
+        </rule>
+
+        <rule id="NB_V2_DATE" name="V2-inversjon etter tidsuttrykk med «i»">
+            <pattern>
+                <token>i</token>
+                <token regexp="yes">dag|går|morgen|fjor|år|kveld|natt|helgen|helga|sommer|vinter|høst|vår</token>
+                <marker>
+                    <token regexp="yes">jeg|du|han|hun|vi|dere|de</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                </marker>
+            </pattern>
+            <message>Etter et foranstilt tidsuttrykk kommer det finitte verbet foran subjektet.</message>
+            <suggestion><match no="4"/> <match no="3"/></suggestion>
+            <short>V2</short>
+            <example correction="arbeider jeg">I dag <marker>jeg arbeider</marker> hjemme.</example>
+            <example>I dag arbeider jeg hjemme.</example>
+            <example>I går kom han sent.</example>
+        </rule>
+
+        <rule id="NB_POSS_DEF" name="possessiv + bestemt form">
+            <pattern>
+                <marker>
+                    <token regexp="yes">min|mitt|mine|din|ditt|dine|sin|sitt|sine|hans|hennes|dens|dets|vår|vårt|våre|deres</token>
+                    <token regexp="yes">\p{L}+(?:en|et|ene)<exception>verden</exception><exception>morgen</exception><exception>aften</exception></token>
+                </marker>
+            </pattern>
+            <message>Possessivet kommer etter den bestemte formen: «bilen min», ikke «min bilen».</message>
+            <suggestion><match no="2"/> <match no="1"/></suggestion>
+            <short>eiendomsord</short>
+            <example correction="bilen min">Dette er <marker>min bilen</marker>.</example>
+            <example correction="huset mitt">Dette er <marker>mitt huset</marker>.</example>
+            <example>Dette er bilen min.</example>
+            <example>Dette er min bil.</example>
+        </rule>
+
+        <rule id="NB_DEF_ADJ" name="adjektivets bestemte form">
+            <pattern>
+                <token regexp="yes">den|det|de</token>
+                <marker>
+                    <token regexp="yes">[a-zæøå]{2,}(?&lt;!e)</token>
+                </marker>
+                <token regexp="yes">\p{L}+(?:en|et|ene)</token>
+            </pattern>
+            <message>Etter «den/det/de» står adjektivet i bestemt form på «-e»: «den store bilen».</message>
+            <suggestion><match no="2" regexp_match="^(.+)$" regexp_replace="$1e"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="store">Dette er den <marker>stor</marker> bilen.</example>
+            <example correction="store">Vi så det <marker>ny</marker> huset.</example>
+            <example>Dette er den store bilen.</example>
+            <example>den lille bilen</example>
+        </rule>
+
+        <rule id="NB_NEUTER_T" name="intetkjønn: adjektiv på -t">
+            <pattern>
+                <token regexp="yes">et|ett</token>
+                <marker>
+                    <token regexp="yes">[a-zæøå]{2,}(?&lt;!e)(?&lt;!t)<exception>liten</exception></token>
+                </marker>
+                <token regexp="yes">hus|barn|bord|brev|språk|år|ord|land|vann|øl|brød|kjøkken|bad|rom|vindu|eple|tre|dyr|fjell|hav|hjerte|hode|bilde|spørsmål|svar|problem|system|program|punkt|kapittel|dokument|prosjekt|møte|arbeid|forhold|eksempel|nummer|minutt|sekund|døgn|menneske|øye|øre|bein|hår|stykke|par|glass|fat|kort|spill|lag|tog|fly|skip|mot|kort|brett</token>
+            </pattern>
+            <message>Intetkjønnsadjektivet får «-t» i entall: «et stort hus».</message>
+            <suggestion><match no="2" regexp_match="^(.+)$" regexp_replace="$1t"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="stort">Vi bor i et <marker>stor</marker> hus.</example>
+            <example correction="praktiskt">et <marker>praktisk</marker> språk</example>
+            <example>Vi bor i et stort hus.</example>
+            <example>et lite hus</example>
+        </rule>
+
+        <rule id="NB_PLURAL_ADJ" name="adjektiv i flertall">
+            <pattern>
+                <marker>
+                    <token regexp="yes">[a-zæøå]{2,}(?&lt;!e)<exception>få</exception><exception>små</exception><exception>grå</exception><exception>blå</exception><exception>rå</exception></token>
+                </marker>
+                <token regexp="yes">biler|jenter|gutter|bøker|bilder|problemer|dager|byer|veier|epler|hunder|katter|skoler|jobber|steder|møter|eksempler|muligheter|utfordringer|resultater|prosjekter|systemer|programmer|dokumenter|kapitler|punkter|planter|blomster|trær|innsjøer|elver|strender|husene|barna|bilene|jentene|guttene|ordene|bildene|problemene|dagene|møtene|mulighetene|utfordringene|resultatene</token>
+            </pattern>
+            <message>Adjektivet får «-e» i flertall: «store biler».</message>
+            <suggestion><match no="1" regexp_match="^(.+)$" regexp_replace="$1e"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="store">Vi har <marker>stor</marker> biler.</example>
+            <example>Vi har store biler.</example>
+        </rule>
+
+        <rule id="NB_VIRKE_SOM" name="virke/høres/late + som at">
+            <pattern>
+                <token regexp="yes">virker|virket|høres|hørtes|later|lot</token>
+                <token>som</token>
+                <marker>
+                    <token>at</token>
+                </marker>
+            </pattern>
+            <message>Etter «som» brukes «om» eller ingen konjunksjon: «virker som om».</message>
+            <suggestion>om</suggestion>
+            <short>som om</short>
+            <example correction="om">Det virker som <marker>at</marker> han mener det.</example>
+            <example>Det virker som om han mener det.</example>
+        </rule>
+
+        <rule id="NB_QUESTION_INVERSION" name="spørsmål med påstandsrekkefølge" default="off">
+            <regexp>^(Du|du|Jeg|jeg|Han|han|Hun|hun|Vi|vi|De|de|Dere|dere) ([a-zæøå]+) (.*)\?$</regexp>
+            <message>I spørsmål kommer det finitte verbet før subjektet: «Har du sett den?».</message>
+            <suggestion><match no="2" case_conversion="startupper"/> <match no="1" case_conversion="alllower"/> <match no="3"/>?</suggestion>
+            <short>Spørsmål</short>
+            <example correction="Har du sett den?">Du har sett den?</example>
+            <example>Har du sett den?</example>
+        </rule>
+
+        <rule id="NB_DA_NAR" name="da/når i fortid" default="off">
+            <pattern>
+                <marker>
+                    <token>når</token>
+                </marker>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <token regexp="yes">var|hadde|kom|gikk|ble|fikk|tok|så|sa|begynte|sluttet</token>
+            </pattern>
+            <message>Om en enkeltstående hendelse i fortiden brukes «da», ikke «når»: «Da jeg var liten …».</message>
+            <suggestion>da</suggestion>
+            <short>da/når</short>
+            <example correction="Da">Når jeg var liten, bodde vi i Oslo.</example>
+            <example>Da jeg var liten, bodde vi i Oslo.</example>
+        </rule>
+
+        <rule id="NB_HYPHEN_NUMBERS_JOINED" name="tall + sammensatt ord uten bindestrek">
+            <pattern>
+                <marker>
+                    <token regexp="yes">\d+(?:års|dags|timers|minutters|meters|kilos|kroners|prosent|graders|siders|ukers|måneders|årig)\p{L}*</token>
+                </marker>
+            </pattern>
+            <message>Tall og etterfølgende sammensetning skilles med bindestrek: «50-årsdag».</message>
+            <suggestion><match no="1" regexp_match="^(\d+)(.+)$" regexp_replace="$1-$2"/></suggestion>
+            <short>bindestrek</short>
+            <example correction="50-årsdag">Vi feirer <marker>50årsdag</marker>.</example>
+            <example>Vi feirer 50-årsdag.</example>
+        </rule>
+
+        <rule id="NB_HYPHEN_NUMBERS_SPACED" name="tall + sammensetning med mellomrom">
+            <pattern>
+                <token regexp="yes">\d+</token>
+                <marker>
+                    <token regexp="yes">årsdag|årsjubileum|årsjubileet|årsgrense|årsalder|årsmøte|årsrapport|årslønn|årskurs|årskrig|årskrigen|årig|årige|dagers|timers|minutters|meters|kilos|kroners|siders|ukers|måneders</token>
+                </marker>
+            </pattern>
+            <message>Tall og etterfølgende sammensetning skilles med bindestrek, ikke mellomrom: «18-årsgrense».</message>
+            <suggestion>-<match no="2"/></suggestion>
+            <short>bindestrek</short>
+            <example correction="18-årsgrense">Det er en <marker>årsgrense</marker> på 18 for dette.</example>
+            <example>Det er en 18-årsgrense for dette.</example>
+        </rule>
+
+        <rule id="NB_ABBREV_HYPHEN" name="forkortelse + ord med bindestrek">
+            <pattern>
+                <marker>
+                    <token regexp="yes">NRK|TV|PC|IT|DVD|CD|USB|HTML|PDF|EU|USA|FN|SSB|NTNU|UiO|SMS|BMI|ADHD|GPS|ISO|NRK2|TV2</token>
+                    <token regexp="yes">\p{L}{3,}</token>
+                </marker>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">NRK|TV|PC|IT|DVD|CD|USB|HTML|PDF|EU|USA|FN|SSB|NTNU|UiO|SMS|BMI|ADHD|GPS|ISO|NRK2|TV2</token>
+                <token regexp="yes">er|har|var|kan|skal|vil|må|bør|ikke|og|eller|som|at|på|i|med|for|til|av|fra|ved|over|under|mot|uten|bare|også|her|der|nå</token>
+            </antipattern>
+            <message>Forkortelser og påfølgende ord skilles med bindestrek: «NRK-medarbeider».</message>
+            <suggestion><match no="1"/>-<match no="2"/></suggestion>
+            <short>bindestrek</short>
+            <example correction="NRK-medarbeider">Han er <marker>NRK medarbeider</marker>.</example>
+            <example>Han er NRK-medarbeider.</example>
+            <example>TV er gøy.</example>
+        </rule>
+
+        <rule id="NB_DE_DEM_SUBJ" name="dem som subjekt">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>dem</token>
+                </marker>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+            </pattern>
+            <message>Som subjekt skrives «de», ikke «dem».</message>
+            <suggestion>de</suggestion>
+            <short>de/dem</short>
+            <example correction="de">Dem kommer i morgen.</example>
+            <example>De kommer i morgen.</example>
+        </rule>
+
+        <rule id="NB_DE_DEM_OBJ" name="de som objekt (anbefalt dem)">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellom|ved|av|fra|gjennom|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>de</token>
+                </marker>
+                <token regexp="yes">som|der|her</token>
+            </pattern>
+            <message>Som objekt anbefales «dem» på bokmål.</message>
+            <suggestion>dem</suggestion>
+            <short>de/dem</short>
+            <example correction="dem">Gi klærne til de som trenger dem.</example>
+            <example>Gi klærne til dem som trenger dem.</example>
+        </rule>
+
+        <rule id="NB_MYE_MANGE" name="mye + flertall">
+            <pattern>
+                <marker>
+                    <token>mye</token>
+                </marker>
+                <token regexp="yes">biler|jenter|gutter|bøker|bilder|problemer|dager|byer|veier|epler|hunder|katter|skoler|jobber|steder|møter|eksempler|muligheter|utfordringer|resultater|prosjekter|systemer|programmer|dokumenter|kapitler|punkter|planter|blomster|trær|innsjøer|elver|strender</token>
+            </pattern>
+            <message>Tellelige substantiv i flertall tar «mange», ikke «mye».</message>
+            <suggestion>mange</suggestion>
+            <short>mye/mange</short>
+            <example correction="mange">Vi har <marker>mye</marker> biler.</example>
+            <example>Vi har mange biler.</example>
+        </rule>
+
+        <rule id="NB_LITE_FA" name="lite + flertall">
+            <pattern>
+                <marker>
+                    <token>lite</token>
+                </marker>
+                <token regexp="yes">biler|jenter|gutter|bøker|bilder|problemer|dager|byer|veier|epler|hunder|katter|skoler|jobber|steder|møter|eksempler|muligheter|utfordringer|resultater|prosjekter|systemer|programmer|dokumenter|kapitler|punkter|planter|blomster|trær|innsjøer|elver|strender</token>
+            </pattern>
+            <message>Tellelige substantiv i flertall tar «få», ikke «lite».</message>
+            <suggestion>få</suggestion>
+            <short>lite/få</short>
+            <example correction="få">Det er <marker>lite</marker> biler i byen.</example>
+            <example>Det er få biler i byen.</example>
+        </rule>
+
+        <rule id="NB_HVEM_HVILKEN" name="hvem + substantiv">
+            <pattern>
+                <marker>
+                    <token>hvem</token>
+                </marker>
+                <token regexp="yes">bok|bøker|bil|biler|hus|jobb|skole|film|dag|uke|måned|time|ting|person|mann|kvinne|gutt|jente|by|gate|vei|katt|hund|stol|bord|seng|dør|vindu|klokke|telefon</token>
+            </pattern>
+            <message>Foran et substantiv brukes «hvilken/hvilket/hvilke», ikke «hvem».</message>
+            <suggestion>hvilken</suggestion>
+            <short>hvem/hvilken</short>
+            <example correction="Hvilken">Hvem bok leser du?</example>
+            <example>Hvilken bok leser du?</example>
+        </rule>
+
+        <rule id="NB_COMMA_FRONTED_SUB" name="komma etter foranstilt leddsetning">
+            <pattern>
+                <marker>
+                    <token regexp="yes">hvis|da|når|fordi|siden|mens|dersom|ettersom|selv om</token>
+                    <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                    <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                </marker>
+            </pattern>
+            <message>Når en leddsetning står først, settes det komma etter den: «Hvis du kommer, blir jeg glad».</message>
+            <suggestion><match no="1"/> <match no="2"/> <match no="3"/>, <match no="4"/> <match no="5"/></suggestion>
+            <short>komma</short>
+            <example correction="Hvis du kommer, blir jeg glad">Hvis du kommer blir jeg glad.</example>
+            <example>Hvis du kommer, blir jeg glad.</example>
+        </rule>
+    </category>
+
+    <category id="TYPOS" name="Mulig skrivefeil"/>
+    <category id="STYLE" name="Stil"/>
+    <category id="PUNCTUATION" name="Tegnsetting"/>
+    <category id="CASING" name="Stor og liten bokstav"/>
+
+</rules>

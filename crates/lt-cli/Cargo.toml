@@ -1,0 +1,25 @@
+[package]
+name = "lt-cli"
+description = "Batch/JSON CLI and parity-harness workhorse for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "lt-cli"
+path = "src/main.rs"
+
+[dependencies]
+lt = { workspace = true }
+lt-core = { workspace = true }
+lt-data = { workspace = true }
+lt-pattern = { workspace = true }
+lt-disambig = { workspace = true }
+lt-http = { workspace = true }
+lt-tokenize = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { workspace = true }
+anyhow = "1"

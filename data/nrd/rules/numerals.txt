@@ -1,0 +1,11 @@
+# Nordum — numerals (NDM_NUMERALS; spec §2.4): decimal system.
+halvtreds=femti
+tres=sexti
+halvfjerds=sytti
+firs=åtti
+halvfems=nitti
+femtio=femti
+sextio=sexti
+sjuttio=sytti
+åttio=åtti
+nittio=nitti

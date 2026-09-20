@@ -1,0 +1,24 @@
+[package]
+name = "lt-node"
+description = "Node.js bindings (napi-rs) for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "lt_node"
+crate-type = ["cdylib"]
+# the N-API symbols come from the Node runtime at load time; the Node-side
+# tests load the built .node module
+test = false
+doctest = false
+
+[dependencies]
+lt = { workspace = true }
+napi = { workspace = true }
+napi-derive = { workspace = true }
+serde_json = { workspace = true }
+
+[build-dependencies]
+napi-build = "2"

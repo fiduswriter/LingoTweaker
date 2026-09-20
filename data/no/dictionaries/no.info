@@ -1,0 +1,4 @@
+fsa.dict.separator=+
+fsa.dict.encoding=utf-8
+fsa.dict.encoder=SUFFIX
+fsa.dict.speller.runon-words=false

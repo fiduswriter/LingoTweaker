@@ -1,0 +1,185 @@
+S	oma's fiets staat buiten.
+T	oma's	oma:ZNW:BEZ|oma:ZNW:MRV:DE_
+T	 	null:null
+T	fiets	fietsen:WKW:TGW:1EP|fiets:ZNW:EKV:DE_
+T	 	null:null
+T	staat	staat:ZNW:EKV:DE_|staan:WKW:TGW:3EP
+T	 	null:null
+T	buiten	buiten:BYW|buiten:VRZ|buiten:ZNW:EKV|uitbuiten:WKW:TGW:INF:LOS
+T	.	.:ITP:PNT
+S	Het is 's ochtends vroeg.
+T	Het	het:VNW:OND:MRV:HET|het:VNW:AWZ:EKV:HET|het:VNW:OND:EKV:HET
+T	 	null:null
+T	is	is:ZNW:EKV:DE_|zijn:WKW:TGW:3EP
+T	 	null:null
+T	'	null:null
+T	s	s:ZNW:EKV:DE_
+T	 	null:null
+T	ochtends	ochtends:DVW
+T	 	null:null
+T	vroeg	vroeg:BNW:STL:ONV|vragen:WKW:VLT:1EP
+T	.	.:ITP:PNT
+S	's-Gravenhage is een stad.
+T	'	null:null
+T	s-Gravenhage	null:null
+T	 	null:null
+T	is	is:ZNW:EKV:DE_|zijn:WKW:TGW:3EP
+T	 	null:null
+T	een	een:GET:TXT:EKV|een:ZNW:EKV:DE_
+T	 	null:null
+T	stad	stad:ZNW:EKV:DE_
+T	.	.:ITP:PNT
+S	café, resumé en één.
+T	café	café:ZNW:EKV:HET
+T	,	,:ITP:KMA
+T	 	null:null
+T	resumé	resumé:ZNW:EKV:HET
+T	 	null:null
+T	en	en:VGW
+T	 	null:null
+T	één	een:GET:TXT:EKV|een:ZNW:EKV:DE_
+T	.	.:ITP:PNT
+S	De regenboog is mooi.
+T	De	de:VNW:AWZ:EKV:DE_|de:VNW:AWZ:MRV:DE_
+T	 	null:null
+T	regenboog	regenboog:ZNW:EKV:DE_
+T	 	null:null
+T	is	is:ZNW:EKV:DE_|zijn:WKW:TGW:3EP
+T	 	null:null
+T	mooi	mooi:BNW:STL:ONV
+T	.	.:ITP:PNT
+S	De politieeenheid werkt hard.
+T	De	de:VNW:AWZ:EKV:DE_|de:VNW:AWZ:MRV:DE_
+T	 	null:null
+T	politieeenheid	null:null
+T	 	null:null
+T	werkt	werken:WKW:TGW:3EP
+T	 	null:null
+T	hard	harden:WKW:TGW:1EP|hard:BNW:STL:ONV
+T	.	.:ITP:PNT
+S	Hij ziet een zee-egel.
+T	Hij	hij:VNW:PER:3EP:EKV:ACT
+T	 	null:null
+T	ziet	zien:WKW:TGW:3EP
+T	 	null:null
+T	een	een:GET:TXT:EKV|een:ZNW:EKV:DE_
+T	 	null:null
+T	zee-egel	zee-egel:ZNW:EKV:DE_
+T	.	.:ITP:PNT
+S	Het IRA-akkoord is getekend.
+T	Het	het:VNW:OND:MRV:HET|het:VNW:AWZ:EKV:HET|het:VNW:OND:EKV:HET
+T	 	null:null
+T	IRA-akkoord	ira-akkoord:ZNW:EKV:HET
+T	 	null:null
+T	is	is:ZNW:EKV:DE_|zijn:WKW:TGW:3EP
+T	 	null:null
+T	getekend	getekend:BNW:STL:ONV|tekenen:WKW:VTD:ONV
+T	.	.:ITP:PNT
+S	De MIDI-bestanden staan klaar.
+T	De	de:VNW:AWZ:EKV:DE_|de:VNW:AWZ:MRV:DE_
+T	 	null:null
+T	MIDI-bestanden	midi-bestand:ZNW:MRV:DE_
+T	 	null:null
+T	staan	staan:WKW:TGW:INF
+T	 	null:null
+T	klaar	klaar:BNW:STL:ONV|klaren:WKW:TGW:1EP
+T	.	.:ITP:PNT
+S	WK-finalisten zijn bekend.
+T	WK-finalisten	wk-finalist:ZNW:MRV:DE_
+T	 	null:null
+T	zijn	zijn:WKW:TGW:INF|hij:VNW:PER:3EP:EKV:BEZ
+T	 	null:null
+T	bekend	bekend:BNW:STL:ONV|bekennen:WKW:VTD:ONV
+T	.	.:ITP:PNT
+S	Zij kocht een iPhone.
+T	Zij	zij:VNW:PER:3EP:EKV:ACT|zij:VNW:PER:3EP:MRV:ACT|zij:ZNW:EKV:DE_
+T	 	null:null
+T	kocht	kopen:WKW:VLT:1EP|kopen:WKW:VLT:GIJ
+T	 	null:null
+T	een	een:GET:TXT:EKV|een:ZNW:EKV:DE_
+T	 	null:null
+T	iPhone	iPhone:ENM:PRD|iPhone:ZNW:EKV:DE_
+T	.	.:ITP:PNT
+S	De NS rijdt vandaag.
+T	De	de:VNW:AWZ:EKV:DE_|de:VNW:AWZ:MRV:DE_
+T	 	null:null
+T	NS	NS:ZNW:EKV:DE_
+T	 	null:null
+T	rijdt	rijden:WKW:TGW:3EP
+T	 	null:null
+T	vandaag	vandaag:BYW
+T	.	.:ITP:PNT
+S	AOW en AKW zijn wetten.
+T	AOW	AOW:ZNW:EKV:DE_
+T	 	null:null
+T	en	en:VGW
+T	 	null:null
+T	AKW	null:null
+T	 	null:null
+T	zijn	zijn:WKW:TGW:INF|hij:VNW:PER:3EP:EKV:BEZ
+T	 	null:null
+T	wetten	wetten:WKW:TGW:INF|wetten:WKW:VLT:INF|wet:ZNW:MRV:DE_
+T	.	.:ITP:PNT
+S	Hij rijdt in een 2cv.
+T	Hij	hij:VNW:PER:3EP:EKV:ACT
+T	 	null:null
+T	rijdt	rijden:WKW:TGW:3EP
+T	 	null:null
+T	in	innen:WKW:TGW:1EP|in:VRZ
+T	 	null:null
+T	een	een:GET:TXT:EKV|een:ZNW:EKV:DE_
+T	 	null:null
+T	2cv	null:null
+T	.	.:ITP:PNT
+S	"Hallo", zei hij.
+T	"	null:null
+T	Hallo	hallo:TSW
+T	"	null:null
+T	,	,:ITP:KMA
+T	 	null:null
+T	zei	zeggen:WKW:VLT:1EP
+T	 	null:null
+T	hij	hij:VNW:PER:3EP:EKV:ACT
+T	.	.:ITP:PNT
+S	Zij zei ''quotes'' tegen mij.
+T	Zij	zij:VNW:PER:3EP:EKV:ACT|zij:VNW:PER:3EP:MRV:ACT|zij:ZNW:EKV:DE_
+T	 	null:null
+T	zei	zeggen:WKW:VLT:1EP
+T	 	null:null
+T	'	null:null
+T	'quotes'	null:null
+T	'	null:null
+T	 	null:null
+T	tegen	tegen:VRZ|tegen:ZNW:EKV:HET
+T	 	null:null
+T	mij	ik:VNW:PER:1EP:EKV:PSF
+T	.	.:ITP:PNT
+S	Het Nederlands-Engels woordenboek.
+T	Het	het:VNW:OND:MRV:HET|het:VNW:AWZ:EKV:HET|het:VNW:OND:EKV:HET
+T	 	null:null
+T	Nederlands-Engels	Nederlands-Engels:BNW:STL:VRB
+T	 	null:null
+T	woordenboek	woordenboek:ZNW:EKV:HET
+T	.	.:ITP:PNT
+S	arbeidsongeschiktheidsverzekering
+T	arbeidsongeschiktheidsverzekering	arbeidsongeschiktheidsverzekering:ZNW:EKV:DE_
+S	De hondenbelasting is afgeschaft.
+T	De	de:VNW:AWZ:EKV:DE_|de:VNW:AWZ:MRV:DE_
+T	 	null:null
+T	hondenbelasting	hondenbelasting:ZNW:EKV:DE_
+T	 	null:null
+T	is	is:ZNW:EKV:DE_|zijn:WKW:TGW:3EP
+T	 	null:null
+T	afgeschaft	afschaffen:WKW:VTD:ONV
+T	.	.:ITP:PNT
+S	quasi nauwkeurig en quasi irritant.
+T	quasi	quasi:BYW
+T	 	null:null
+T	nauwkeurig	nauwkeurig:BNW:STL:ONV
+T	 	null:null
+T	en	en:VGW
+T	 	null:null
+T	quasi	quasi:BYW
+T	 	null:null
+T	irritant	irritant:BNW:STL:ONV
+T	.	.:ITP:PNT

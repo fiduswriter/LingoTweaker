@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LingoTweaker wasm demo</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, sans-serif;
+      }
+      body {
+        margin: 2rem auto;
+        max-width: 46rem;
+        padding: 0 1rem;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      .controls {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        margin: 1rem 0;
+      }
+      textarea {
+        width: 100%;
+        min-height: 8rem;
+        font: inherit;
+        padding: 0.5rem;
+      }
+      button {
+        font: inherit;
+        padding: 0.4rem 1rem;
+      }
+      #status {
+        margin-left: auto;
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+      #matches {
+        margin-top: 1rem;
+      }
+      .match {
+        border-left: 3px solid #c62828;
+        padding: 0.4rem 0.75rem;
+        margin: 0.5rem 0;
+        background: rgba(198, 40, 40, 0.06);
+      }
+      .match .rule {
+        font-size: 0.75rem;
+        opacity: 0.7;
+      }
+      .match .suggestions {
+        font-size: 0.85rem;
+      }
+      .match em {
+        font-style: normal;
+        text-decoration: underline wavy #c62828;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LingoTweaker &mdash; LanguageTool engine in WebAssembly</h1>
+    <p>
+      The engine and its data run entirely in your browser; the text never
+      leaves the page. Data packs are fetched per language and cached.
+    </p>
+    <div class="controls">
+      <label>Language <select id="language"></select></label>
+      <button id="check" disabled>Check</button>
+      <span id="status">loading&hellip;</span>
+    </div>
+    <textarea id="text">This are a test.</textarea>
+    <div id="matches"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

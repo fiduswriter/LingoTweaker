@@ -1,0 +1,69 @@
+# Nordum authoritative core additions.
+# Words required by NORDUM_LANGUAGE_SPECIFICATION.md that are missing from the
+# generated build/assets/data/wordlist.txt (spec examples, irregular verbs,
+# numerals, pronouns, accepted multiple-word forms, loanwords).
+# One word per line; the dictionary builder adds both vowel systems.
+
+# Spec examples / paradigms
+jei mei dei sei
+meg deg seg
+er har går
+arbeide arbeider arbeidede arbeida arbeidet arbeidende
+snakke snakker snakkede snakka snakket snakkende
+tale taler talede tala talet talende
+køpe køper køpede køpa køpet køpende
+købe køber købede køba købet købende
+lære lærer lærte lært lærende
+læse læser læste læst læsende
+skrive skriver skreiv skrevet skrivende
+jente jenten jentar jentarna
+pije pijen pijar pijarna
+flikka flikken flikkar flikkarna
+huset husar husarna
+barnar barnarna
+stor stort store større størst
+liten lite litt mindre mindst
+god godt gode bedre bedst
+praktisk praktiskt praktiske
+ny nytt nye
+rød rødt røde
+gammel gammelt gamle
+kall full
+bakka takk fix max box
+sentrum sirkel sykkel sykel
+filosofi telefon
+forskell skære skorte
+mat ved
+mellem gennem efter till
+att å
+
+# Question words and accepted variants (§3.5, §7.2)
+vad va var vem vilken vilket vilke vordan varfør vorfor ven vornår når när
+vort vore
+
+# Numerals (§2.4) — decimal system
+# The `ks` → `x` rule applies to numerals too (owner decision 2026-09-20):
+# seks → sex, seksten → sexten, seksti → sexti.
+null en ett to tre fire fem sex sju åtte ni ti
+elleve tolv tretten fjorten femten sexten sytten atten nitten
+tjue tjueen tretti førti femti sexti sytti åtti nitti
+hundre tusen million milliard
+første andre tredje fjerde femte sjette sjuende åttende niende tiende
+
+# Pronouns / determiners (§4.6)
+jeg du han ham hun henne den det vi oss ni er de dem
+min mitt mina din ditt dina hans hennas dens dets vår vårt våra deras
+hver hin ingen noen noe alle hverandre
+
+# Function words
+og eller men fordi at om hvis når da mens siden dersom
+ikke ja nei kanskje ganske mye veldig
+her der jemme hemma hjemme ute inne oppe nede
+i på fra med om av for ved over under mot før siden uten innen
+en ett den det de
+
+# English/international loanwords (§2.2)
+computer internet email software website app smartphone browser password
+check chocolate social media basketball cool game gamer streamer stream
+chat chatten memes e-sport turnering weekenden
+schokolade doppelgänger zeitgeist mosquito patio baguette sjokolade

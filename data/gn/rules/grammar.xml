@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Guaraní (gn) — hand-authored rules for LingoTweaker.
+
+  There is no upstream LanguageTool Guaraní module. Sources: ALG
+  «Guaraní Ñe'ẽtekuaa» (2020, official orthography rules) and the
+  owner-approved rule list in new-languages/guarani/proposed-rules.md.
+  The morphology-aware rules (accent placement, full nasal harmony) need an
+  analyzer and are documented as stage 3.
+
+  No tagger is available: rules must not use postag/inflected matching.
+  Rule ids are stable and must never be renumbered.
+-->
+<rules lang="gn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <category id="GRAMMAR" name="Grammar">
+        <rule id="GN_PE_ME" name="-pe → -me after nasal stems">
+            <pattern>
+                <marker>
+                    <token regexp="yes">\p{L}*[ãẽĩõũỹ]pe$</token>
+                </marker>
+            </pattern>
+            <message>After a nasal stem the postposition is written «-me», not «-pe»: «ñúme».</message>
+            <suggestion><match no="1" regexp_match="^(.*)pe$" regexp_replace="$1me"/></suggestion>
+            <short>Nasal harmony</short>
+            <example correction="ñúme">ñú<marker>pe</marker></example>
+            <example>ñúme</example>
+            <example>ka'aguýpe</example>
+        </rule>
+
+        <rule id="GN_NDE_NE" name="nde → ne before nasal stems">
+            <pattern>
+                <marker>
+                    <token>nde</token>
+                </marker>
+                <token regexp="yes">tĩ|ñe'ẽ|mitã|ñakã|ñarõ|ñandu|ñana|ñembo'e|ñepyrũ|ñe'ã|ñati'ũ|ñembyahýi|ñorãirõ|ñeñandu|ñeha'ã</token>
+            </pattern>
+            <message>Before a nasal stem the 2nd person possessive is «ne», not «nde»: «ne tĩ».</message>
+            <suggestion>ne</suggestion>
+            <short>Nasal harmony</short>
+            <example correction="ne tĩ"><marker>nde</marker> tĩ</example>
+            <example>ne tĩ</example>
+            <example>nde juru</example>
+        </rule>
+
+        <rule id="GN_FOREIGN_QU" name="Spanish qu → k" default="off">
+            <pattern>
+                <marker>
+                    <token regexp="yes">^\p{Ll}*qu\p{Ll}*$</token>
+                </marker>
+            </pattern>
+            <message>Guaraní adapts the Spanish «qu» to «k»: «keso», not «queso».</message>
+            <suggestion><match no="1" regexp_match="^(.*)qu(.*)$" regexp_replace="$1k$2"/></suggestion>
+            <short>Adapted loan</short>
+            <example correction="keso">queso</example>
+            <example>keso</example>
+        </rule>
+
+        <rule id="GN_FOREIGN_Z" name="Spanish z → s" default="off">
+            <pattern>
+                <marker>
+                    <token regexp="yes">^\p{Ll}*z\p{Ll}*$</token>
+                </marker>
+            </pattern>
+            <message>Guaraní adapts the Spanish «z» to «s».</message>
+            <suggestion><match no="1" regexp_match="^(.*)z(.*)$" regexp_replace="$1s$2"/></suggestion>
+            <short>Adapted loan</short>
+            <example correction="sapato">zapato</example>
+            <example>sapato</example>
+        </rule>
+
+        <rule id="GN_FOREIGN_C" name="Spanish c before e/i → s" default="off">
+            <pattern>
+                <marker>
+                    <token regexp="yes">^\p{Ll}*c[eiy]\p{Ll}*$</token>
+                </marker>
+            </pattern>
+            <message>Guaraní adapts the Spanish «c» before e/i/y to «s» or «k».</message>
+            <suggestion><match no="1" regexp_match="^(.*)c([eiy].*)$" regexp_replace="$1s$2"/></suggestion>
+            <short>Adapted loan</short>
+            <example correction="sentro">centro</example>
+            <example>sentro</example>
+        </rule>
+
+        <rule id="GN_PARTICLES" name="particles are written attached">
+            <pattern>
+                <token regexp="yes">aha|aho|aju|aiko|japo|karu|guata|ñe'ẽ|juhu|hecha|ho|ou|iko</token>
+                <marker>
+                    <token regexp="yes">ta|ne|kuri|niko|mi|ete|vo|ma</token>
+                </marker>
+            </pattern>
+            <message>The modal/aspect particle is written attached to the verb: «aháta», «oikomo'ákuri».</message>
+            <short>Particles</short>
+            <example correction="aháta">aha ta</example>
+            <example>aháta</example>
+        </rule>
+    </category>
+
+    <category id="TYPOS" name="Possible Typo"/>
+
+</rules>

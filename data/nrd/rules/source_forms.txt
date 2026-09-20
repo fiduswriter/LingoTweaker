@@ -1,0 +1,52 @@
+# Nordum — source-language spellings normalized to the Nordum standard
+# (NDM_SOURCE_FORMS; NORDUM_LANGUAGE_SPECIFICATION.md §3.3.2, §3.6, §7).
+# Accepted alternatives are listed as extra suggestions.
+backa=bakka
+tack=takk
+fiks=fix
+maks=max
+boks=box
+# Numerals: the `ks` → `x` rule applies to number words too (owner decision).
+seks=sex
+seksten=sexten
+sekstende=sextende
+centrum=sentrum
+cirkel=sirkel
+cykel=sykkel|sykel
+philosophi=filosofi
+forskjell=forskell
+skjære=skære
+skjorte=skorte
+kald=kall
+kold=kall
+fuld=full
+hvad=vad
+hva=va|vad
+hvor=var
+hvem=vem
+hvilken=vilken
+hvilket=vilket
+hvordan=vordan
+hvorfor=varfør|vorfor
+hvornår=ven|vornår|når|när
+vejr=veir
+nej=nei
+maj=mei
+høj=høi
+høy=høi
+mad=mat
+et=ett
+# Lexical selection (spec §5.2, §5.5)
+pige=pije
+piger=pijar
+pigerne=pijarna
+søke=søge
+# Pronoun forms from the source languages (§4.6)
+och=og
+jag=jei
+mig=mei
+dig=dei
+sig=sei
+dere=ni|er
+hennes=hennas
+deres=deras

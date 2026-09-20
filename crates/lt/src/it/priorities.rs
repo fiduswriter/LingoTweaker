@@ -1,0 +1,38 @@
+//! `Italian` does not override `getPriorityForId`, so `CleanOverlappingFilter`
+//! uses the base `Language.getPriorityForId` defaults (-101/-55/-50) and
+//! `getDefaultRulePriorityForStyle() == 0`.
+
+/// Base `Language.getPriorityForId` (no Italian override).
+pub fn priority_for_id(id: &str) -> i32 {
+    if id.eq_ignore_ascii_case("TOO_LONG_SENTENCE") {
+        return -101;
+    }
+    if id == "REPETITIONS_STYLE" {
+        return -55;
+    }
+    if id.contains("STYLE") {
+        return -50;
+    }
+    0
+}
+
+/// `Language.getRulePriority` for Italian (base style default 0).
+pub fn rule_priority(
+    rule_id: &str,
+    category_id: &str,
+    _issue_type: &str,
+    rule_priority: i32,
+) -> i32 {
+    let rule_specific = priority_for_id(rule_id);
+    if rule_specific != 0 {
+        return rule_specific;
+    }
+    if rule_priority != 0 {
+        return rule_priority;
+    }
+    let category = priority_for_id(category_id);
+    if category != 0 {
+        return category;
+    }
+    0
+}

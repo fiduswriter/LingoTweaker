@@ -1,0 +1,8 @@
+# Guaraní — Spanish function words in Guaraní text (GN_JOPARA).
+# Default-off style rule; the suggestions are placeholders pending owner
+# review (see new-languages/guarani/proposed-rules.md, GN_JOPARA).
+porque=ha
+pero=ha katu
+también=avei
+entonces=upéi
+después=upéi

@@ -1,0 +1,2 @@
+# Norwegian Bokmål — words that should not be used (NB_SPELLER prohibit list).
+# Empty for now; the Nynorsk list rule covers standard norm violations.

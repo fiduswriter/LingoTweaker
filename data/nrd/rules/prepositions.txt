@@ -1,0 +1,6 @@
+# Nordum — prepositions (NDM_PREPOSITIONS; spec §3.3.4): Bokmål pattern with
+# the exceptions mellem, gennem, efter, till.
+mellom=mellem
+gjennom=gennem
+etter=efter
+til=till

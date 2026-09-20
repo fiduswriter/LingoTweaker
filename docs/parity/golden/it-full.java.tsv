@@ -1,0 +1,399 @@
+L	1	Bisogna cogliere la meglio occasione.
+L	2	Bisogna cogliere l'occasione migliore.
+L	3	Bisogna cogliere le meglio occasioni.
+L	4	Evitiamo di fare una peggio figura.
+L	5	Evitiamo di fare delle peggio figure.
+L	6	Vidi il mucca pascolare nel campo.
+L	7	Vidi il mucche pascolare nel campo.
+L	8	il male è la specializzazione
+M	8	UPPERCASE_SENTENCE_START		0	2	Other	Questa frase non inizia con una maiuscola	Il
+L	9	il pioniere dei videogiochi
+M	9	UPPERCASE_SENTENCE_START		0	2	Other	Questa frase non inizia con una maiuscola	Il
+L	10	Vidi un mucca pascolare nel campo.
+L	11	Vidi una mucche pascolare nel campo.
+L	12	Quanto costa lo vino?
+L	13	Io le ritrovo quando osservo
+L	14	Hai fatto le compiti?
+L	15	Mi insegni uno trucco?
+L	16	Ho forato il pneumatico.
+L	17	Hai forato lo pneumatico.
+L	18	Come raccontano i storici...
+L	19	Devi andare da un psicologo.
+L	20	Adoravano i dei del suono.
+L	21	Per dimostrare ch'è impossibile.
+M	21	GR_04_001	1	15	19	Other	Nell'italiano standard, la frase <suggestion>che è</suggestion> non è normalmente contratta.	che è
+L	22	Da professionista qual'è.
+M	22	GR_04_001	2	18	24	Other	L'apostrofo non è richiesto in quanto non si tratta di elisione: <suggestion>qual è</suggestion>.	qual è
+L	23	Solo noi possiamo farlo, e nessun'altro, e dobbiamo agire in modo molto rapido.
+M	23	GR_04_001	3	27	39	Other	Non si usa l'apostrofo se la parola che segue è maschile.	nessun altro
+L	24	Tuttavia, a mio avviso, l'unica soluzione è lasciar decidere al popolo e a nessun altro!
+L	25	Un’isola, alcun’amica, buon’anima.
+L	26	Un'interprete.
+L	27	un'«unghia»
+M	27	UPPERCASE_SENTENCE_START		0	2	Other	Questa frase non inizia con una maiuscola	Un
+L	28	Ho bisogno di informazioni.
+L	29	L'uva e' sul tavolo.
+M	29	GR_04_002	2	6	8	Other	Si suggerisce di non usare l'apostrofo per scrivere il verbo essere.	è
+L	30	Ve lo dico solo perché' mi siete simpatici.
+M	30	GR_04_002	3	16	23	Other	Togliere l'apostrofo in quanto la parola è già accentata.	perché
+L	31	E' un peccato!
+M	31	GR_04_002	4	0	2	Other	Si suggerisce di non usare l'apostrofo per il verbo essere.	È
+L	32	Mi da' una mano per favore?
+M	32	GR_04_002	5	3	6	Other	Non utilizzare l'apostrofo per accentare.	dà
+L	33	E non si capisce il perché di tanta paura.
+L	34	Non si capisce il perché di tanta paura.
+L	35	Il libro degli amici.
+L	36	Il libro degli amico
+M	36	ARTICOLATA_SOSTANTIVO	1	9	20	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	37	Il libro dell'amico amici.
+L	38	Il libro dello amici
+M	38	ARTICOLATA_SOSTANTIVO	2	9	20	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	39	sul prodotti
+M	39	ARTICOLATA_SOSTANTIVO	2	0	12	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	40	nel terra
+M	40	ARTICOLATA_SOSTANTIVO	2	0	9	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	41	nel amica
+M	41	ARTICOLATA_SOSTANTIVO	2	0	9	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	42	nel amiche
+M	42	ARTICOLATA_SOSTANTIVO	2	0	10	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	43	dal problema
+M	43	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Dal
+L	44	nel panorama
+M	44	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Nel
+L	45	sul pianeta
+M	45	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Sul
+L	46	sul tema
+M	46	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Sul
+L	47	del programma
+M	47	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Del
+L	48	dal verde
+M	48	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Dal
+L	49	dal sistema
+M	49	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Dal
+L	50	al cinema
+M	50	UPPERCASE_SENTENCE_START		0	2	Other	Questa frase non inizia con una maiuscola	Al
+L	51	Il libro dell'amica.
+L	52	Il libro delle amica
+M	52	ARTICOLATA_SOSTANTIVO	3	9	20	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	53	Il libro dell'amica.
+L	54	Il libro della amiche
+M	54	ARTICOLATA_SOSTANTIVO	4	9	21	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	55	Vengo dà Roma.
+M	55	GR_07_001	1	6	8	Other	Probabilmente si scrive senza accento: <suggestion>da</suggestion>.	da
+L	56	È dà due ore che ti aspetto.
+M	56	GR_07_001	1	2	4	Other	Probabilmente si scrive senza accento: <suggestion>da</suggestion>.	da
+L	57	L'opposizione russa dà voce alle sue inquietudini.
+L	58	Sentirsi giudicati da chi non ti conosce dà un pochino fastidio.
+L	59	Chi vuole dà l'elemosina.
+L	60	Assolvere a un compito.
+M	60	GR_07_001	2	10	11	Other	Non si assolve a qualcosa, si assolve qualcosa. Rimuovere a <suggestion></suggestion>	
+L	61	Assolvere un compito.
+L	62	Mi interesso al calcio.
+M	62	GR_07_001	3	13	15	Other	Non ci si interessa a ma ci si interessa <suggestion>di</suggestion>...	di
+L	63	Interessarsi al calcio.
+M	63	GR_07_001	4	13	15	Other	Non ci si interessa a ma ci si interessa <suggestion>di</suggestion>...	di
+L	64	Fui promosso a direttore.
+M	64	GR_07_001	5	13	14	Other	Non si promuove a qualcosa, si promuove qualcosa. Rimuovere a <suggestion></suggestion>	
+L	65	Fui promosso direttore.
+L	66	Insisto a dire che è così.
+M	66	GR_07_001	6	8	9	Other	Non si insiste a, si insiste <suggestion>nel</suggestion>	nel
+L	67	Ovviamente... è tutto a gratis!
+M	67	UPPERCASE_SENTENCE_START		14	15	Other	Questa frase non inizia con una maiuscola	È
+M	67	GR_07_001	7	22	30	Other	Si scrive <suggestion>gratis</suggestion> (senza la preposizione).	gratis
+L	68	Una ragazza a nome Francesca.
+M	68	GR_07_001	8	12	18	Other	La forma corretta è <suggestion>di nome</suggestion> e non a nome.	di nome
+L	69	Ecco il mio biglietto di visita.
+M	69	GR_07_001	9	22	24	Other	Biglietto <suggestion>da</suggestion> visita	da
+L	70	Preferisco non pensare a quel **.
+M	70	GR_09_001	1	30	32	Other	L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.	***
+L	71	Preferisco non pensare a quel **
+M	71	GR_09_001	2	30	32	Other	L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.	***
+L	72	Preferisco non pensare a quel ****.
+M	72	GR_09_001	3	30	34	Other	L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.	***
+L	73	Preferisco non pensare a quel ****
+M	73	GR_09_001	4	30	34	Other	L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.	***
+L	74	Preferisco non pensare a quel *****
+M	74	GR_09_001	5	30	35	Other	L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.	***
+L	75	Lasciami pensare....
+M	75	GR_09_002	1	16	20	Other	I puntini di sospensione si usano sempre nel numero di tre, per indicare la sospensione del discorso: <suggestion>...</suggestion>.	...
+L	76	Fammi parlare!!
+M	76	GR_09_003	1	13	15	Other	Se ne mette uno solo: <suggestion>!</suggestion>.	!
+L	77	Quando vieni??
+M	77	GR_09_003	2	12	14	Other	Se ne mette uno solo: <suggestion>?</suggestion>.	?
+L	78	La Nomedifantasia spa offre nuovi servizi.
+M	78	MORFOLOGIK_RULE_IT_IT		3	17	UnknownWord	Trovato un probabile errore di battitura.	
+M	78	GR_09_004	1	18	21	Other	Utilizzare la sigla corretta: <suggestion>S.p.A.</suggestion>.	S.p.A.
+L	79	La Nomedifantasia S.p.a. offre nuovi servizi.
+M	79	MORFOLOGIK_RULE_IT_IT		3	17	UnknownWord	Trovato un probabile errore di battitura.	
+M	79	GR_09_004	2	18	24	Other	Utilizzare la sigla corretta: <suggestion>S.p.A.</suggestion>.	S.p.A.
+M	79	UPPERCASE_SENTENCE_START		25	30	Other	Questa frase non inizia con una maiuscola	Offre
+L	80	La Nomedifantasia srl offre nuovi servizi.
+M	80	MORFOLOGIK_RULE_IT_IT		3	17	UnknownWord	Trovato un probabile errore di battitura.	
+M	80	GR_09_004	3	18	21	Other	Utilizzare la sigla corretta: <suggestion>S.R.L.</suggestion>.	S.R.L.
+L	81	La Nomedifantasia S.r.l. offre nuovi servizi.
+M	81	MORFOLOGIK_RULE_IT_IT		3	17	UnknownWord	Trovato un probabile errore di battitura.	
+M	81	GR_09_004	4	18	24	Other	Utilizzare la sigla corretta: <suggestion>S.R.L.</suggestion>.	S.R.L.
+L	82	La Nomedifantasia sas offre nuovi servizi.
+M	82	MORFOLOGIK_RULE_IT_IT		3	17	UnknownWord	Trovato un probabile errore di battitura.	
+M	82	GR_09_004	5	18	21	Other	Utilizzare la sigla corretta: <suggestion>S.A.S.</suggestion>.	S.A.S.
+L	83	non sono vengono preparate con le tecnologie e le infrastrutture adatte
+M	83	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Non
+M	83	DOPPIO_VERBO_AUSILIARE_TERZA_PERSONA	1	4	16	Other	La frase contiene un verbo ausiliare ripetuto	
+L	84	Io navigo ma mi dirigevo nella direzione sbagliata.
+L	85	Io navigo ma mi dirigo nella direzione sbagliata.
+L	86	Tu navighi ma ti dirigevi nella direzione sbagliata.
+L	87	Tu navighi ma ti dirigi nella direzione sbagliata.
+L	88	La barca naviga ma si dirigeva nella direzione sbagliata.
+L	89	La barca naviga ma si dirige nella direzione sbagliata.
+L	90	Questa notte camminerò nel buio e rischio di andare a sbattere contro una porta.
+L	91	Questa notte camminerò nel buio e rischierò di andare a sbattere contro una porta.
+L	92	Questa notte camminerai nel buio e rischi di andare a sbattere contro una porta.
+L	93	Questa notte camminerai nel buio e rischierai di andare a sbattere contro una porta.
+L	94	Questa notte camminerà nel buio e rischia di andare a sbattere contro una porta.
+L	95	Questa notte camminerà nel buio e rischierà di andare a sbattere contro una porta.
+L	96	Io aspettavo il tram e decido di telefonare.
+L	97	Io aspettavo il tram e decidevo di telefonare.
+L	98	Tu aspettavi il tram e decidi di telefonare.
+L	99	Tu aspettavi il tram e decidevi di telefonare.
+L	100	Clara aspettava il tram e decide di telefonare.
+L	101	Clara aspettava il tram e decideva di telefonare.
+L	102	Io aspettai il tram e decido di telefonare.
+L	103	Io aspettai il tram e decisi di telefonare.
+L	104	Tu aspettasti il tram e decidi di telefonare.
+L	105	Tu aspettasti il tram e decisi di telefonare.
+L	106	Clara aspettò il tram e decide di telefonare.
+L	107	Clara aspettò il tram e decise di telefonare.
+L	108	Ti avviso affinché tu puoi rimediare.
+M	108	GR_10_003	1	22	26	Other	La congiunzione 'affinché' richiede il congiuntivo.	
+L	109	Ti avviso affinché tu possa rimediare.
+L	110	Non possiamo vederci a meno che tu non puoi venire.
+M	110	GR_10_003	2	39	43	Other	La congiunzione 'a meno che' richiede il congiuntivo.	
+L	111	Non possiamo vederci a meno che tu non possa venire.
+L	112	Ci incontreremo nel caso che tu puoi venire.
+M	112	GR_10_003	3	32	36	Other	La congiunzione 'nel caso che' richiede il congiuntivo.	
+L	113	Ci incontreremo nel caso che tu possa venire.
+L	114	Ti avviso prima che tu fai qualcosa di sbagliato.
+M	114	GR_10_003	4	23	26	Other	La congiunzione 'prima che' richiede il congiuntivo.	
+L	115	Ti avviso prima che tu faccia qualcosa di sbagliato.
+L	116	Ti troverò ovunque tu sei.
+M	116	GR_10_003	5	22	25	Other	L'aggettivo 'ovunque' richiede il congiuntivo.	
+L	117	Ti troverò ovunque tu sia.
+L	118	Chiunque può apprezzare i risultati ottenuti.
+L	119	Qualunque cosa dirai, non ti crederò.
+L	120	Qualsiasi modo mi va bene.
+L	121	Credimi, è meglio che tu sei vicino.
+M	121	GR_10_003	6	25	28	Other	L'espressione impersonale 'è meglio che' richiede il congiuntivo.	
+L	122	Credimi, è meglio che tu sia vicino.
+L	123	È così che funziona.
+L	124	Giorgio fu costretto a adire per le vie legali per far valere i propri diritti.
+M	124	ST_03_001	4	21	28	Other	In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>ad adire</suggestion>.	ad adire
+M	124	GR_10_004	1	29	46	Other	Adire è un verbo transitivo per cui si adisce <suggestion>le vie legali</suggestion>	le vie legali
+L	125	Giorgio fu costretto a aderire alle vie legali per far valere i propri diritti.
+M	125	GR_10_004	2	23	35	Other	Non si aderisce alle vie legali ma si adisce le vie legali.	
+L	126	Giorgio fu costretto a adire le vie legali per far valere i propri diritti.
+M	126	ST_03_001	4	21	28	Other	In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>ad adire</suggestion>.	ad adire
+L	127	Mi aspetti un attimo?
+L	128	Mi aspetti un attimino?
+M	128	ST_01_002	1	14	22	Other	Si consiglia di utilizzare <suggestion>attimo</suggestion>.	attimo
+L	129	Mi aspetti un momentino?
+M	129	ST_01_002	2	14	23	Other	Si consiglia di utilizzare <suggestion>momento</suggestion>.	momento
+L	130	Sono arrivato ma però me ne vado subito.
+M	130	ST_01_003	1	14	21	Other	Ma e però non possono essere usati insieme.	
+L	131	Sono arrivato però me ne vado subito.
+L	132	A me mi piace il gelato.
+M	132	ST_01_003	2	0	7	Other	Si tratta di una ripetizione. Meglio scegliere una delle due forme: <suggestion>A me</suggestion> oppure <suggestion>mi</suggestion>.	A me|Mi
+L	133	Mi piace il gelato.
+L	134	A te ti pare strano.
+M	134	ST_01_003	3	0	7	Other	Si tratta di una ripetizione. Meglio scegliere una delle due forme: <suggestion>A te</suggestion> oppure <suggestion>ti</suggestion>.	A te|Ti
+L	135	Ti pare strano.
+L	136	A lui gli faceva comodo.
+M	136	ST_01_003	4	0	9	Other	Si tratta di una ripetizione. Meglio scegliere una delle due forme: <suggestion>A lui</suggestion> oppure <suggestion>gli</suggestion>.	A lui|Gli
+L	137	Gli faceva comodo.
+L	138	A loro gli era utile.
+M	138	ST_01_003	5	0	10	Other	Si tratta di una ripetizione. Meglio scegliere una delle due forme: <suggestion>A loro</suggestion> oppure <suggestion>gli</suggestion>.	A loro|Gli
+L	139	Gli era utile.
+L	140	La commissione ha abolito interamente il provvedimento.
+M	140	ST_01_003	6	18	37	Other	Si tratta di una ripetizione, meglio usare <suggestion>abolito</suggestion>.	abolito
+L	141	Verrò io personalmente a trovarla.
+M	141	ST_01_003	7	6	22	Other	Si consiglia di evitare questa ridondanza a meno che non si intenda, ad esempio, tenere distinte le proprie opinioni personali da quelle che competono alla propria funzione, al proprio "ruolo istituzionale".	
+L	142	Verrò personalmente a trovarla.
+L	143	Usa questo prodotto che è più migliore del tuo.
+M	143	ST_01_003	8	26	38	Other	Il più è ridondante in quanto la gradazione di comparazione è già contemplata nell'aggettivo. Sostituire con: <suggestion>migliore</suggestion>.	migliore
+L	144	Il calcio mi piace, ma il motociclismo mi piace più molto.
+M	144	ST_01_003	9	48	57	Other	E' un errore creare il comparativo di maggioranza degli avverbi molto e poco. Si scrive <suggestion>di più</suggestion>.	di più
+L	145	Il calcio mi piace, ma il motociclismo mi piace di più.
+L	146	Stasera abbiamo ballato più poco del solito.
+M	146	ST_01_003	10	24	32	Other	E' un errore creare il comparativo di maggioranza degli avverbi molto e poco. Si scrive <suggestion>meno</suggestion>.	meno
+L	147	Stasera abbiamo ballato meno del solito.
+L	148	Abbiamo mangiato un'anguria.
+M	148	ST_01_004	1	20	27	Other	Sostituire forme dialettali con l'equivalente Italiano per migliorare la leggibilità: <suggestion>cocomero</suggestion>.	cocomero
+L	149	Abbiamo mangiato un cocomero.
+L	150	Ho colto un asparagio.
+M	150	ST_01_004	2	12	21	Other	Sostituire forme dialettali con l'equivalente Italiano per migliorare la leggibilità: <suggestion>asparago</suggestion>.	asparago
+L	151	Mauro portava un paio di pedalini bianchi.
+M	151	ST_01_004	3	25	33	Other	Sostituire forme dialettali con l'equivalente Italiano per migliorare la leggibilità: <suggestion>calza</suggestion>.	calza
+L	152	Mauro portava un paio di calze bianche.
+L	153	Il pomidoro era maturo.
+M	153	ST_01_004	4	3	11	Other	Sostituire forme dialettali con l'equivalente Italiano per migliorare la leggibilità: <suggestion>pomodoro</suggestion>.	pomodoro
+L	154	budget
+M	154	ST_01_005	1	0	6	Other	<suggestion>bilancio</suggestion> <suggestion>bilancio di previsione</suggestion> <suggestion>stanziamento</suggestion>	bilancio|bilancio di previsione|stanziamento
+L	155	bilancio
+L	156	input
+M	156	ST_01_005	2	0	5	Other	<suggestion>ingresso</suggestion> <suggestion>entrata</suggestion> <suggestion>immissione</suggestion>	ingresso|entrata|immissione
+L	157	ingresso
+L	158	output
+M	158	ST_01_005	3	0	6	Other	<suggestion>uscita</suggestion> <suggestion>prodotto</suggestion> <suggestion>produzione</suggestion>	uscita|prodotto|produzione
+L	159	uscita
+L	160	penalty
+M	160	ST_01_005	4	0	7	Other	<suggestion>rigore</suggestion> <suggestion>calcio di rigore</suggestion> <suggestion>punizione</suggestion>	rigore|calcio di rigore|punizione
+L	161	rigore
+L	162	show
+M	162	ST_01_005	5	0	4	Other	<suggestion>spettacolo</suggestion>	spettacolo
+L	163	trend
+M	163	ST_01_005	6	0	5	Other	<suggestion>tendenza</suggestion> <suggestion>orientamento</suggestion> <suggestion>corso</suggestion> <suggestion>evoluzione</suggestion>	tendenza|orientamento|corso|evoluzione
+L	164	tendenza
+L	165	La casa aveva tante cose da vedere e da toccare con mano attenta a non romperle e occhio pronto ad ammirarle in tutto lo splendore infuso loro dalla cura maniacale per la perfezione che la padrona esibiva in qualunque sua attività ogni giorno che passava.
+L	166	La casa era piena di cose.
+L	167	Provo ad interpretare il tuo pensiero.
+M	167	ST_03_001	1	6	21	Other	L'uso della d eufonica dovrebbe essere limitato ai casi d'incontro della stessa vocale: <suggestion>a interpretare</suggestion>.	a interpretare
+L	168	Io, ad esempio, non ci sono cascato.
+L	169	Ti dico ed insisto che è vero.
+M	169	ST_03_001	2	8	18	Other	L'uso della 'd' eufonica dovrebbe essere limitato ai casi d'incontro della stessa vocale: <suggestion>e insisto</suggestion>.	e insisto
+L	170	Si consiglia un farmaco blando od un omeopatico.
+M	170	ST_03_001	3	31	36	Other	L'uso della 'd' eufonica dovrebbe essere limitato ai casi d'incontro della stessa vocale: <suggestion>o un</suggestion>.	o un
+L	171	Provo a arrivare prima di te.
+M	171	ST_03_001	4	6	16	Other	In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>ad arrivare</suggestion>.	ad arrivare
+L	172	Io, ad esempio, non ci sono cascato.
+L	173	Si concentra e effettua una bella manovra.
+M	173	ST_03_001	5	13	23	Other	In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>ed effettua</suggestion>.	ed effettua
+L	174	Puoi vederlo ogni mattina o ogni sera.
+M	174	ST_03_001	6	26	32	Other	In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>od ogni</suggestion>.	od ogni
+L	175	Puoi vederlo ogni mattina od ogni sera.
+L	176	Il bambino aveva capito bene l'altro bambino di fronte a se.
+L	177	Il bambino aveva capito bene l'altro fanciullo di fronte a se.
+L	178	Ma non è questo che contesto, il male è la specializzazione.
+L	179	0 volte
+L	180	1 volte
+L	181	2 volte
+L	182	3 volte
+L	183	tre volte
+M	183	UPPERCASE_SENTENCE_START		0	3	Other	Questa frase non inizia con una maiuscola	Tre
+L	184	4 volte
+L	185	5 volte
+L	186	6 volte
+L	187	7 volte
+L	188	7:30
+L	189	8 volte
+L	190	9 volte
+L	191	99 volte
+L	192	novantanove volte
+M	192	UPPERCASE_SENTENCE_START		0	11	Other	Questa frase non inizia con una maiuscola	Novantanove
+L	193	7:30
+L	194	La mamma a fatto la spesa.
+M	194	ER_01_001	1	9	16	Other	Forse volevi dire <suggestion>ha fatto</suggestion>?	ha fatto
+L	195	Tutte le informazioni del mondo a portata di mano
+L	196	Dovrebbe andare a messa più spesso.
+L	197	Esperienze diverse portano a scelte diverse.
+L	198	Piero a soldi con sé?.
+L	199	Piero ha soldi con se?.
+L	200	Di esempi ce ne sono a volontà.
+L	201	Preferirei andare a piedi che stare qua ad aspettare il bus.
+L	202	Piero a un cane.
+L	203	Piero ha un cane.
+L	204	Ai fatto i compiti?
+M	204	ER_01_002	1	0	8	Other	Forse volevi dire <suggestion>hai fatto</suggestion>?	Hai fatto
+L	205	Ai fame?
+M	205	ER_01_002	2	0	7	Other	Forse volevi dire <suggestion>hai fame</suggestion>?	Hai fame
+L	206	Tu ai un bel cane.
+M	206	ER_01_002	3	3	8	Other	Forse volevi dire <suggestion>ha un</suggestion>?	ha un
+L	207	Tu hai un bel cane.
+L	208	Piero, tu ai un cane?
+M	208	ER_01_002	3	10	15	Other	Forse volevi dire <suggestion>ha un</suggestion>?	ha un
+L	209	Piero, tu hai un cane?
+L	210	Anno fatto i compiti?
+M	210	ER_01_003	1	0	10	Other	Forse volevi dire <suggestion>hanno fatto</suggestion>?	Hanno fatto
+L	211	Non conoscevo Tom l' anno scorso.
+L	212	Piero e Cinzia anno un bel cane.
+L	213	Piero e Cinzia hanno un bel cane.
+L	214	Non o fatto i compiti.
+L	215	7 gironi dopo.
+M	215	GIRONI_GIORNI	1	2	8	Other	Forse volevi dire <suggestion>giorni</suggestion>?	giorni
+L	216	Ho dato un bacio ala mamma.
+M	216	ER_02_001	1	17	26	Other	Forse volevi dire <suggestion>alla mamma</suggestion>?	alla mamma
+L	217	Ho dato un bacio ala mia mamma.
+M	217	ER_02_001	2	17	30	Other	Forse volevi dire <suggestion>alla mia mamma</suggestion>?	alla mia mamma
+L	218	Sono andato la circo.
+L	219	Ho portato un regalo la mio papà.
+L	220	La tesi dell'autore.
+L	221	Ho mangiato al mela.
+M	221	ARTICOLATA_SOSTANTIVO	2	12	19	Other	La preposizione articolata non concorda con il sostantivo che la segue	
+L	222	Ho mangiato al tua merenda.
+L	223	Li gatto dormiva tranquillo.
+L	224	Li mio gatto dormiva tranquillo.
+L	225	Li bel gatto dormiva tranquillo.
+L	226	Là gatta dormiva tranquilla.
+M	226	ER_02_004	1	0	8	Other	Forse volevi dire <suggestion>la gatta</suggestion>?	La gatta
+L	227	Là mia gatta dormiva tranquilla.
+M	227	ER_02_004	2	0	6	Other	Forse volevi dire <suggestion>la mia</suggestion>?	La mia
+L	228	Mettilo la.
+M	228	ER_02_004	3	8	11	Other	Forse volevi dire <suggestion>là.</suggestion>?	là.
+L	229	Mettilo la.
+M	229	ER_02_004	3	8	11	Other	Forse volevi dire <suggestion>là.</suggestion>?	là.
+L	230	Luigi mi da la mano.
+M	230	ER_02_005	1	9	11	Other	Probabilmente si scrive con accento: <suggestion>dà</suggestion>.	dà
+L	231	Luigi mi dà la mano.
+L	232	È dal 20014.
+M	232	ANNO20011_2011	1	6	11	Other	Forse volevi dire <suggestion>2014</suggestion>?	2014
+L	233	Del corso 20014.
+M	233	ANNO20011_2011	1	10	15	Other	Forse volevi dire <suggestion>2014</suggestion>?	2014
+L	234	Es del 2015.
+L	235	Lunedì 7 ottobre 2014
+M	235	DATE_WEEKDAY	1	0	21	Other	Questa data non è un lunedì ma un martedì.	
+L	236	Martedì, 7 ottobre 2014
+L	237	Lunedì, 7.ott.2014
+M	237	DATE_WEEKDAY	1	0	18	Other	Questa data non è un lunedì ma un martedì.	
+L	238	Lunedì 7/ottobre/2014
+M	238	DATE_WEEKDAY	1	0	21	Other	Questa data non è un lunedì ma un martedì.	
+L	239	Martedì, 7 ottobre 2014
+L	240	Lunedì 7 ottobre
+M	240	DATE_WEEKDAY	2	0	16	Other	Se si riferisce all'anno in corso (2026), questa data non è un lunedì ma un mercoledì.	
+L	241	Lunedì, 7 ottobre
+M	241	DATE_WEEKDAY	2	0	17	Other	Se si riferisce all'anno in corso (2026), questa data non è un lunedì ma un mercoledì.	
+L	242	Martedì, 7 ottobre
+M	242	DATE_WEEKDAY	2	0	18	Other	Se si riferisce all'anno in corso (2026), questa data non è un martedì ma un mercoledì.	
+L	243	Martedì 27 novembre 1922
+M	243	DATE_WEEKDAY	1	0	24	Other	Questa data non è un martedì ma un lunedì.	
+L	244	Martedì 27 novembre del 1922
+M	244	DATE_WEEKDAY	1	0	28	Other	Questa data non è un martedì ma un lunedì.	
+L	245	Martedì 27 novembre 1922
+M	245	DATE_WEEKDAY	1	0	24	Other	Questa data non è un martedì ma un lunedì.	
+L	246	È nato il 31 settembre.
+L	247	È nato il 31/11/1988.
+L	248	È nato il 31 febbraio.
+L	249	È nato il 30/2/1988.
+L	250	El 29 febbraio de 1900.
+L	251	El 29/febbraio/1900.
+L	252	El 29/02/1900.
+L	253	El 29/2/1900.
+L	254	El 29 febbraio 2000.
+L	255	El 29/febbraio/2000.
+L	256	El 29/02/2000.
+L	257	El 29/2/2000.
+L	258	El 29 febbraio 2001.
+L	259	El 29 febbraio 2002.
+L	260	El 29 febbraio 2003.
+L	261	El 29 febbraio 2004.
+L	262	El 29 febbraio 2005.
+L	263	El 29 febbraio del 2006.
+L	264	El 29 febbraio 2007.
+L	265	El 29 febbraio 2008.
+L	266	El 29 febbraio del 2009.
+L	267	El 29 febbraio de 2010.
+L	268	El 29 febbraio 2011.
+L	269	El 29 febbraio 2012.
+L	270	El 29 febbraio del 2014.
+L	271	El 29 febbraio 2016.
+L	272	El 29 febbraio 2018.
+L	273	El 29 febbraio 2020.
+L	274	El 29 febbraio del 2100.
+L	275	El 29-feb-2004

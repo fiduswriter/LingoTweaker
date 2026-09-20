@@ -1,0 +1,20 @@
+[package]
+name = "lt-http"
+description = "LanguageTool v2-compatible HTTP API for LingoTweaker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+lt = { workspace = true }
+lt-core = { workspace = true }
+axum = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_urlencoded = { workspace = true }
+
+[dev-dependencies]
+axum-test = "17"
+tower = { version = "0.5", features = ["util"] }
