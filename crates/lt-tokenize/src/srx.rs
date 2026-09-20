@@ -37,20 +37,44 @@ impl SrxDocument {
 
     /// Rule groups selected for `language_code` (cascade semantics: every
     /// matching languagemap contributes its rules, in document order).
+    ///
+    /// Codes with no language-specific mapping — the hand-authored Guaraní,
+    /// Norwegian and Nordum modules pass `gn_two`/`no_two`/`nrd_two` — only
+    /// match the `.*` maps, whose `Default` group has no plain ". " break
+    /// rule (upstream maps such languages to `Generic`). Prepend the generic
+    /// break rules so sentences split like in the ported languages.
     pub fn rules_for(&self, language_code: &str) -> Vec<SrxRule> {
+        // groups that every language gets from the `.*`/`_one`/`_two` maps
+        const GENERIC_GROUPS: [&str; 4] = [
+            "Default",
+            "GeneralImportant",
+            "ByLineBreak",
+            "ByTwoLineBreaks",
+        ];
         let mut rules = Vec::new();
+        let mut specific_match = false;
         for (pattern, name) in &self.language_map {
             let matches = FancyRegex::new(pattern)
                 .ok()
                 .and_then(|r| r.is_match(language_code).ok())
                 .unwrap_or(false);
             if matches {
+                if !GENERIC_GROUPS.contains(&name.as_str()) {
+                    specific_match = true;
+                }
                 if let Some(group) = self.language_rules.get(name) {
                     rules.extend(group.iter().cloned());
                 }
                 if !self.cascade {
                     break;
                 }
+            }
+        }
+        if !specific_match {
+            if let Some(generic) = self.language_rules.get("Generic") {
+                let mut with_generic = generic.clone();
+                with_generic.extend(rules);
+                return with_generic;
             }
         }
         rules
@@ -459,6 +483,20 @@ mod tests {
         let segs: Vec<&str> = tok.split(text).iter().map(|(s, e)| &text[*s..*e]).collect();
         assert_eq!(segs, vec!["One.\n\n  \n\n", "Two.\n"]);
         let _ = tok;
+    }
+
+    #[test]
+    fn unmapped_language_gets_generic_sentence_break() {
+        let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/core/segment.srx");
+        if !path.lt_exists() {
+            eprintln!("skipping: no vendored segment.srx");
+            return;
+        }
+        let doc = SrxDocument::load_file(&path).unwrap();
+        // `nrd_two` has no language-specific languagemap (only line breaks)
+        let tok = SrxTokenizer::new(&doc, "nrd_two").unwrap();
+        let text = "Det er bra. Norsk og Spania er bra.";
+        assert_eq!(tok.split(text).len(), 2, "{:?}", tok.split(text));
     }
 
     #[test]
