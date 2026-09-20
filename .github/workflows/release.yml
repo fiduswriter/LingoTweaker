@@ -1,0 +1,103 @@
+name: Release
+
+# Tag-driven prerelease publishing to crates.io, PyPI and npm.
+#
+# Pushing a tag like `v0.1.0-alpha.1` (which must match the workspace version)
+# publishes the prerelease. This workflow is intentionally separate from
+# ci.yml and does not touch the `parity` or `test` jobs.
+#
+# Secrets: CARGO_REGISTRY_TOKEN (crates.io), NPM_TOKEN (+ optional NPM_OTP).
+# PyPI uses trusted publishing (`id-token: write`), no secret required.
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  contents: read
+
+jobs:
+  # Validate the tag against the workspace version and derive the PEP 440
+  # version so every registry gets the same release.
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      cargo: ${{ steps.v.outputs.cargo }}
+      python: ${{ steps.v.outputs.python }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME#v}"
+          manifest="$(sed -nE 's/^version = "(.*)"/\1/p' Cargo.toml | head -1)"
+          if [ "$tag" != "$manifest" ]; then
+            echo "tag ${GITHUB_REF_NAME} does not match workspace version ${manifest}" >&2
+            exit 1
+          fi
+          py="$(python3 -c "import sys; v='${tag}'; core,_,pre=v.partition('-'); print(core+'a'+pre.split('.')[1] if pre.startswith('alpha.') else v)")"
+          echo "cargo=${tag}" >> "$GITHUB_OUTPUT"
+          echo "python=${py}" >> "$GITHUB_OUTPUT"
+
+  crates:
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup toolchain install 1.98.1 --profile minimal
+      - name: Publish lt-* crates and the lingotweaker facade
+        run: scripts/release/publish-crates.sh
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: Verify from crates.io
+        run: scripts/release/verify-crates.sh "${{ needs.version.outputs.cargo }}"
+
+  pypi:
+    needs: version
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # trusted publishing to PyPI
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: PyO3/maturin-action@v1
+        with:
+          command: build
+          args: --release --manifest-path crates/lt-py/Cargo.toml --out dist
+          manylinux: auto
+      - uses: PyO3/maturin-action@v1
+        with:
+          command: sdist
+          args: --manifest-path crates/lt-py/Cargo.toml --out dist
+      - name: Smoke-test the wheel
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/smoke
+          /tmp/smoke/bin/pip install dist/lingotweaker-*.whl
+          LT_DATA_DIR="$PWD/data" /tmp/smoke/bin/python crates/lt-py/tests/python/test_smoke.py
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+
+  npm:
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup toolchain install 1.98.1 --profile minimal
+      - name: Build, smoke-test and publish the addon
+        run: scripts/release/publish-npm.sh
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ secrets.NPM_OTP }}
