@@ -1866,8 +1866,16 @@ fn try_from<T: Deref<Target = AnalyzedTokenReadings>>(
             // LT min="0": prefer skipping the element when the following
             // element matches the same token; otherwise consume it (and
             // commit like Java's `break`).
-            let next_ok =
-                next_element_matches_at(pattern, i, tokens, cand, prev_skip, first_matched, synth);
+            let next_ok = next_element_matches_at(
+                pattern,
+                i,
+                tokens,
+                cand,
+                prev_skip,
+                first_matched,
+                synth,
+                &mut prev_matched,
+            );
             if self_ok && next_ok {
                 let mut positions = positions;
                 positions.push(None);
@@ -1918,7 +1926,9 @@ fn try_from<T: Deref<Target = AnalyzedTokenReadings>>(
         }
         let mut idx = cand;
         // LT `skipMaxTokens`: an element with `maxOccurrence > 1` matches a
-        // consecutive run of matching tokens (greedy, longest run wins)
+        // consecutive run of matching tokens (greedy, longest run wins).
+        // Java routes each extension through `testAllReadings`, so a
+        // `prevMatched` flag set by a `scope="next"` exception stops the run.
         if token.max_occurrence != 1 {
             let limit = if token.max_occurrence == -1 {
                 usize::MAX
@@ -1927,7 +1937,7 @@ fn try_from<T: Deref<Target = AnalyzedTokenReadings>>(
             };
             let remaining = pattern.tokens.len() - i - 1;
             let mut consumed = 1usize;
-            while consumed < limit {
+            while consumed < limit && !prev_matched {
                 let next = idx + 1;
                 if next >= tokens.len().saturating_sub(remaining) {
                     break;
@@ -1974,6 +1984,7 @@ fn try_from<T: Deref<Target = AnalyzedTokenReadings>>(
 
 /// LT `matchFrom` min="0" lookahead: does the following element (or a
 /// consecutive chain of optional elements) match at the same token?
+#[allow(clippy::too_many_arguments)]
 fn next_element_matches_at<T: Deref<Target = AnalyzedTokenReadings>>(
     pattern: &CompiledPattern,
     i: usize,
@@ -1982,6 +1993,7 @@ fn next_element_matches_at<T: Deref<Target = AnalyzedTokenReadings>>(
     _prev_skip: i32,
     first_matched: Option<usize>,
     synth: Option<&dyn Synthesizer>,
+    prev_matched: &mut bool,
 ) -> bool {
     let Some(tr) = tokens.get(cand) else {
         return false;
@@ -2006,6 +2018,16 @@ fn next_element_matches_at<T: Deref<Target = AnalyzedTokenReadings>>(
         } else {
             0
         };
+        // Java `testAllReadings` runs for each looked-ahead element and its
+        // `prevMatched` flag is a performer field: when the element has a
+        // `scope="next"` exception matching the token after `cand`, the flag
+        // stays set for the rest of the attempt and blocks the
+        // `skipMaxTokens` extension of the *current* element (this is what
+        // keeps HO_FA_TOT matching `Deixa sempre tot …` in Java).
+        if *prev_matched || next_scope_next_exception_hits(next_token, tokens, cand) {
+            *prev_matched = true;
+            return false;
+        }
         if token_matches(next_token, tr) && !element_blocked(pattern, k2, tokens, cand, skip) {
             return true;
         }
@@ -2014,6 +2036,25 @@ fn next_element_matches_at<T: Deref<Target = AnalyzedTokenReadings>>(
         }
     }
     false
+}
+
+/// Java `testAllReadings`'s `scope="next"` workaround: does `token` have a
+/// next-scoped exception matching the first reading of `tokens[cand + 1]`?
+fn next_scope_next_exception_hits<T: Deref<Target = AnalyzedTokenReadings>>(
+    token: &CompiledToken,
+    tokens: &[T],
+    cand: usize,
+) -> bool {
+    let Some(next_tr) = tokens.get(cand + 1) else {
+        return false;
+    };
+    let untagged = next_tr
+        .readings
+        .iter()
+        .all(|r| has_no_pos_tag(r.pos_tag.as_deref()));
+    next_tr.readings.first().is_some_and(|first| {
+        reading_scope_exception_matches(token, "next", first, next_tr.whitespace_before, untagged)
+    })
 }
 /// Collect the unification payload of one matched element (LT `toUnify` /
 /// `neutralReadings` population in `testAllReadings`).

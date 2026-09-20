@@ -2310,3 +2310,29 @@ fn catalan_al_andalus_all_uppercase_chunk() {
         result.matches
     );
 }
+
+/// Java's `AbstractPatternRulePerformer.prevMatched` is a performer field:
+/// the `min="0"` lookahead calls `testAllReadings` for the following element,
+/// and a `scope="next"` exception matching the token after the candidate sets
+/// the flag, which then blocks the current element's `skipMaxTokens`
+/// extension. Golden: `Deixa sempre tot en mans dels altres.` matches (the
+/// `RG|LOC_ADV` element must not greedily consume `tot`).
+#[test]
+fn catalan_ho_fa_tot_optional_chunk_gv() {
+    let _guard = engine_guard();
+    let Some(engine) = engine_with_rules("ca-ES", &["HO_FA_TOT"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let result = engine
+        .check("Deixa sempre tot en mans dels altres.")
+        .unwrap();
+    let m = result
+        .matches
+        .iter()
+        .find(|m| m.rule_id == "HO_FA_TOT")
+        .expect("no HO_FA_TOT match");
+    assert_eq!((m.range.start, m.range.end), (0, 5));
+    let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
+    assert_eq!(values, vec!["Ho deixa"]);
+}
