@@ -2336,3 +2336,29 @@ fn catalan_ho_fa_tot_optional_chunk_gv() {
     let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
     assert_eq!(values, vec!["Ho deixa"]);
 }
+
+/// Java's disambiguator applies each `add` match as `doMatch` scans forward
+/// and mutates the shared token readings in place, so
+/// `propaga_marca_reflexiu` chains `han`→`pogut`→`tornar`. Golden:
+/// `S'han pogut tornar contra nosaltres.` reports `TORNAR_GIRAR` sub-rule 2
+/// (the reflexive `tornar` rule) rather than sub-rule 3.
+#[test]
+fn catalan_tornar_girar_reflexiu_propagation() {
+    let _guard = engine_guard();
+    let Some(engine) = engine_with_rules("ca-ES", &["TORNAR_GIRAR"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let result = engine
+        .check("S'han pogut tornar contra nosaltres.")
+        .unwrap();
+    let m = result
+        .matches
+        .iter()
+        .find(|m| m.rule_id == "TORNAR_GIRAR")
+        .expect("no TORNAR_GIRAR match");
+    assert_eq!(m.sub_id.as_deref(), Some("2"));
+    assert_eq!((m.range.start, m.range.end), (12, 18));
+    let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
+    assert_eq!(values, vec!["girar"]);
+}

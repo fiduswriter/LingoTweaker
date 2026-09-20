@@ -287,6 +287,78 @@ impl XmlDisambiguator {
                     continue;
                 }
             }
+            // Java `DisambiguationPatternRuleReplacer.replace`: `doMatch`
+            // scans start positions in order and applies each match's action
+            // immediately; `add` mutates the shared token readings in place,
+            // so a later start sees readings added by an earlier match
+            // (`propaga_marca_reflexiu` chains han→pogut→tornar). For a single
+            // standalone `add` rule, re-scan after each application, only for
+            // starts after the applied one, mirroring Java's forward scan.
+            if rule.compiled.len() == 1 && rule.disambig.action == "add" {
+                let compiled = &rule.compiled[0];
+                let starts = compiled
+                    .anchor
+                    .as_ref()
+                    .map(|a| pm::anchor_starts(a, &token_lower, &lemma_lower));
+                if starts.as_ref().is_some_and(|s| s.is_empty()) {
+                    continue;
+                }
+                let mut min_start = 0usize;
+                let mut applied: Vec<(usize, usize)> = Vec::new();
+                loop {
+                    let view_refs: Vec<&lt_core::AnalyzedTokenReadings> =
+                        view.iter().map(|&i| &sentence.tokens[i]).collect();
+                    let mut best: Option<Application> = None;
+                    let mut best_start = usize::MAX;
+                    let mut best_end = 0usize;
+                    let matches = pm::find_matches_with_unify(
+                        compiled,
+                        &[],
+                        &view_refs,
+                        starts.as_deref(),
+                        Some(&self.unify_config),
+                    );
+                    for m in matches {
+                        let s = m.start_tok();
+                        let e = m.end_tok();
+                        if s < min_start || applied.contains(&(s, e)) {
+                            continue;
+                        }
+                        if rule.antipatterns.iter().any(|ap| {
+                            antipattern_overlaps(ap, &view_refs, s, e, self.synth.as_deref())
+                        }) {
+                            continue;
+                        }
+                        if !filter_accepts(rule, self.filters.as_ref(), &view_refs, &m, sentence) {
+                            continue;
+                        }
+                        if s < best_start {
+                            best_start = s;
+                            best_end = e;
+                            best = Some((Arc::clone(compiled), m.positions, m.unified));
+                        }
+                    }
+                    drop(view_refs);
+                    let Some((compiled, positions, unified)) = best else {
+                        break;
+                    };
+                    apply_action(
+                        &rule.disambig,
+                        &compiled,
+                        sentence,
+                        &view,
+                        &positions,
+                        unified.as_deref(),
+                    );
+                    applied.push((best_start, best_end));
+                    min_start = best_start + 1;
+                    maps_dirty = true;
+                    if applied.len() > view.len() + 8 {
+                        break;
+                    }
+                }
+                continue;
+            }
             // phase 1 (immutable): find matches and map to real token indices
             let applications: Vec<Application> = {
                 let view_refs: Vec<&lt_core::AnalyzedTokenReadings> =
