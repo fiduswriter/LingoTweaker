@@ -28,6 +28,9 @@ const CA_VALENCIA_RULE_ID: &str = "CA_WORD_COHERENCY_VALENCIA";
 const CA_DESCRIPTION: &str = "Detecta l'ús incoherent de diferents formes dins d'un text.";
 const CA_SHORT: &str = "Coherència";
 const CA_CATEGORY_NAME: &str = "Estil";
+const PL_RULE_ID: &str = "PL_WORD_COHERENCY";
+const PL_DESCRIPTION: &str = "Jednolita pisownia wyrazów o obocznej dopuszczalnej pisowni";
+const PL_CATEGORY_NAME: &str = "Błędy różne";
 
 /// Which subclass's message/category/issue-type the loader applies.
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -38,6 +41,7 @@ enum CoherencyLang {
     Dutch,
     Catalan,
     Valencian,
+    Polish,
 }
 
 pub struct WordCoherencyRule {
@@ -82,6 +86,12 @@ impl WordCoherencyRule {
     /// category MISC (Diversen), issue type misspelling.
     pub fn dutch(data_dir: &Path) -> Self {
         Self::load(data_dir, "nl/rules/coherency.txt", CoherencyLang::Dutch)
+    }
+
+    /// `pl.WordCoherencyRule`: `pl/rules/coherency.txt`, Polish message,
+    /// category MISC (Błędy różne), issue type misspelling.
+    pub fn polish(data_dir: &Path) -> Self {
+        Self::load(data_dir, "pl/rules/coherency.txt", CoherencyLang::Polish)
     }
 
     /// `ca.WordCoherencyRule`: `ca/rules/coherency.txt`, Catalan message,
@@ -148,6 +158,7 @@ impl WordCoherencyRule {
             CoherencyLang::Catalan | CoherencyLang::Valencian => {
                 (CA_RULE_ID, CA_DESCRIPTION, Some(CA_SHORT), CA_CATEGORY_NAME)
             }
+            CoherencyLang::Polish => (PL_RULE_ID, PL_DESCRIPTION, None, PL_CATEGORY_NAME),
         };
         let rule_id = if lang == CoherencyLang::Valencian {
             CA_VALENCIA_RULE_ID
@@ -230,6 +241,9 @@ impl WordCoherencyRule {
                             ),
                             CoherencyLang::Catalan | CoherencyLang::Valencian => format!(
                                 "No és coherent usar '{token}' i '{other_spelling}' dins d'un mateix text."
+                            ),
+                            CoherencyLang::Polish => format!(
+                                "Formy „{token}” i „{other_spelling}” zwykle nie powinny być używane jednocześnie."
                             ),
                         };
                         let marked = sentence

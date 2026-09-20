@@ -594,6 +594,26 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_gl())
 }
 
+/// Polish `PL_UNPAIRED_BRACKETS`: `[ ( { „ » "` / `] ) } ” « "` with the
+/// `MessagesBundle_pl` strings.
+pub fn symbols_pl() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "PL_UNPAIRED_BRACKETS",
+        description: "Niesparowane nawiasy i cudzysłowy",
+        category_id: "PUNCTUATION",
+        category_name: "Błędy interpunkcyjne",
+        start: &["[", "(", "{", "\u{201E}", "\u{00BB}", "\""],
+        end: &["]", ")", "}", "\u{201D}", "\u{00AB}", "\""],
+        spanish: false,
+        message_template: "Brak niesparowanego symbolu: „{other}”",
+    }
+}
+
+/// Polish `PL_UNPAIRED_BRACKETS`.
+pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_pl())
+}
+
 pub fn check_with(sentences: &[AnalyzedSentence], sym: &UnpairedSymbols) -> Vec<Match> {
     let mut symbol_stack: Vec<SymbolLocator> = Vec::new();
     let mut rule_match_stack: Vec<SymbolLocator> = Vec::new();

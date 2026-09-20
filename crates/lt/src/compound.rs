@@ -533,6 +533,33 @@ impl CompoundRule {
         })
     }
 
+    /// `pl.CompoundRule` (`PL_COMPOUNDS`): `pl/words/compounds.txt`. The
+    /// Polish class does not override `isMisspelled`, so every candidate
+    /// replacement passes `filterReplacements` (base `isMisspelled` = false).
+    pub fn polish(data_dir: &Path) -> Result<Self> {
+        let data = CompoundData::from_path(&data_dir.join("pl/words/compounds.txt"))?;
+        Ok(Self {
+            data,
+            is_misspelled: Arc::new(|_| false),
+            config: CompoundConfig {
+                rule_id: "PL_COMPOUNDS",
+                description: "Sprawdza wyrazy z łącznikiem, np. „łapu capu” zamiast „łapu-capu”"
+                    .to_string(),
+                with_hyphen_message: "Ten wyraz pisze się z łącznikiem.",
+                without_hyphen_message: "Ten wyraz pisze się razem (bez spacji ani łącznika).",
+                with_or_without_hyphen_message: "Ten wyraz pisze się z łącznikiem lub bez niego.",
+                short_message: Some("Brak łącznika lub zbędny łącznik"),
+                category_id: "MISC",
+                category_name: "Błędy różne",
+                sub_rule_specific_ids: false,
+                to_id_german: false,
+                merge: merge_compound,
+                issue_type: "misspelling",
+            },
+            anti_patterns: Vec::new(),
+        })
+    }
+
     /// `ro.CompoundRule` (`RO_COMPOUND`): `ro/words/compounds.txt`. The
     /// Romanian class does not override `isMisspelled`, so every candidate
     /// replacement passes `filterReplacements` (base `isMisspelled` = false).

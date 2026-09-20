@@ -242,7 +242,11 @@ impl PolishSpellingRule {
             .map(|(i, _)| i)
             .chain(std::iter::once(word.len()))
             .collect();
-        for &split in boundaries.iter().skip(2).take(word.chars().count().saturating_sub(2)) {
+        for &split in boundaries
+            .iter()
+            .skip(2)
+            .take(word.chars().count().saturating_sub(2))
+        {
             let first = &word[..split];
             let second = &word[split..];
             if PREFIXES.contains(&first.to_lowercase().as_str())

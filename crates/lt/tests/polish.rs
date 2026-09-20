@@ -52,6 +52,17 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
     m.suggestions.iter().map(|s| s.value.clone()).collect()
 }
 
+/// Convert an engine byte offset to the UTF-16 code-unit offset the Java
+/// probes print.
+fn utf16(text: &str, byte: usize) -> usize {
+    text[..byte].encode_utf16().count()
+}
+
+/// `(from, to)` in UTF-16 code units, for comparison with the Java probes.
+fn range16(text: &str, m: &lt::Match) -> (usize, usize) {
+    (utf16(text, m.range.start), utf16(text, m.range.end))
+}
+
 /// Stage state: active XML rule count, disambiguation rules and
 /// `compile_failures()` = 0. Updated by each stage.
 #[test]
@@ -172,4 +183,83 @@ fn polish_speller_matches_java_probe() {
     // The sentence-start capitalization of suggestions.
     let ms = matches("Zrobilem to wczoraj.");
     assert_eq!(suggestions(&ms[0])[0], "Zrobiłem");
+}
+
+/// The stage-3 Java rule classes, Java-probed with
+/// `scripts/oracle/pl/probe-rule.sh` (UTF-16 offsets; ASCII prefixes).
+#[test]
+fn polish_stage3_rules_match_java_probe() {
+    let _guard = engine_guard();
+    let check = |text: &str, rule: &str| -> Vec<lt::Match> {
+        let Some(pl) = engine_with_rules(&[rule]) else {
+            eprintln!("skipping: no vendored data");
+            return Vec::new();
+        };
+        pl.check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == rule)
+            .collect()
+    };
+
+    // `PL_SIMPLE_REPLACE` (`AbstractSimpleReplaceRule` v1).
+    let ms = check("Uspokój sei.", "PL_SIMPLE_REPLACE");
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16("Uspokój sei.", &ms[0]), (8, 11));
+    assert_eq!(
+        ms[0].message,
+        "Wyraz „sei” to najczęściej literówka; poprawnie pisze się: się."
+    );
+    assert_eq!(suggestions(&ms[0]), vec!["się"]);
+
+    // `PL_COMPOUNDS`.
+    let ms = check("Witamy w Rabce Zdroju.", "PL_COMPOUNDS");
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16("Witamy w Rabce Zdroju.", &ms[0]), (9, 21));
+    assert_eq!(ms[0].message, "Ten wyraz pisze się z łącznikiem.");
+    assert_eq!(suggestions(&ms[0]), vec!["Rabce-Zdroju"]);
+
+    // `DASH_RULE` (picky).
+    let ms = check("Busko — Zdrój to miasto.", "DASH_RULE");
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16("Busko — Zdrój to miasto.", &ms[0]), (0, 13));
+    assert_eq!(suggestions(&ms[0]), vec!["Busko-Zdrój"]);
+
+    // `PL_WORD_REPEAT` (default off).
+    let ms = check(
+        "Mówiła długo, bo lubiła robić wszystko długo.",
+        "PL_WORD_REPEAT",
+    );
+    assert_eq!(ms.len(), 1);
+    assert_eq!(
+        range16("Mówiła długo, bo lubiła robić wszystko długo.", &ms[0]),
+        (39, 44)
+    );
+    assert_eq!(ms[0].message, "Powtórzony wyraz w zdaniu");
+
+    // `PL_WORD_COHERENCY` (text level).
+    let ms = check(
+        "Grapefruity są zdrowe. Grejpfrut smakuje najlepiej.",
+        "PL_WORD_COHERENCY",
+    );
+    assert_eq!(ms.len(), 1);
+    assert_eq!(
+        range16(
+            "Grapefruity są zdrowe. Grejpfrut smakuje najlepiej.",
+            &ms[0]
+        ),
+        (23, 32)
+    );
+    assert_eq!(
+        ms[0].message,
+        "Formy „grejpfrut” i „grapefruit” zwykle nie powinny być używane jednocześnie."
+    );
+    assert_eq!(suggestions(&ms[0]), vec!["Grapefruit"]);
+
+    // `PL_UNPAIRED_BRACKETS`.
+    let ms = check("To jest zdanie z „cudzysłowem.", "PL_UNPAIRED_BRACKETS");
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16("To jest zdanie z „cudzysłowem.", &ms[0]), (17, 18));
+    assert_eq!(ms[0].message, "Brak niesparowanego symbolu: „””");
 }

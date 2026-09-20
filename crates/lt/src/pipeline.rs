@@ -3193,6 +3193,14 @@ impl Pipeline {
         };
         mark("speller");
 
+        // Stage-3 Java rule classes (`Polish.getRelevantRules` 8–12).
+        let polish_word_repeat = crate::pl::rules::PolishWordRepeatRule::new();
+        let simple_replace = crate::pl::rules::PolishSimpleReplaceRule::load(data_dir.path())?;
+        let compound = crate::compound::CompoundRule::polish(data_dir.path())?;
+        let word_coherency = crate::word_coherency::WordCoherencyRule::polish(data_dir.path());
+        let dash = crate::dash::polish(data_dir.path())?;
+        mark("rules-java");
+
         let polish = Arc::new(crate::pl::PolishPipeline {
             tagger,
             synthesizer: synth,
@@ -3201,6 +3209,11 @@ impl Pipeline {
             disambiguator,
             word_repeat: crate::pl::rules::WordRepeatSentenceRule::new(),
             spelling,
+            polish_word_repeat,
+            simple_replace,
+            compound,
+            word_coherency,
+            dash,
         });
         Ok(Self {
             lang: Lang::Pl,
@@ -3654,7 +3667,16 @@ impl Pipeline {
                 continue;
             }
             if !enabled_rules.is_empty() && options.enabled_only {
-                if !explicitly_enabled {
+                if !enabled_categories.is_empty() {
+                    // With both an explicit rule list and a category list,
+                    // `enabledOnly` keeps the union (Java `Tools.selectRules`,
+                    // #12194/#aece4da), not the intersection.
+                    let enabled_by_category =
+                        enabled_categories.contains(rule.category_id.as_str());
+                    if !explicitly_enabled && !enabled_by_category {
+                        continue;
+                    }
+                } else if !explicitly_enabled {
                     continue;
                 }
             } else {
@@ -5390,8 +5412,8 @@ impl Pipeline {
         }
         // Polish text-level rules (`Polish.getRelevantRules`):
         // UppercaseSentenceStart (2), MultipleWhitespace (4),
-        // SentenceWhitespace (5). PolishUnpairedBrackets (6) and
-        // PolishWordRepeat (8) are stage 3.
+        // SentenceWhitespace (5), PolishUnpairedBrackets (6) and
+        // WordCoherencyRule (11).
         if self.lang == crate::Lang::Pl {
             if builtin_active(
                 "UPPERCASE_SENTENCE_START",
@@ -5432,6 +5454,34 @@ impl Pipeline {
             ) {
                 text_level_matches
                     .extend(crate::sentence_whitespace::check_pl(&analyzed_sentences));
+            }
+            if builtin_active(
+                "PL_UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_pl(&analyzed_sentences));
+            }
+            if let Some(polish) = &self.polish {
+                if builtin_active(
+                    polish.word_coherency.rule_id(),
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    &enabled_rules,
+                    &disabled_rules,
+                    &disabled_categories,
+                    &enabled_categories,
+                ) {
+                    text_level_matches.extend(polish.word_coherency.check(&analyzed_sentences));
+                }
             }
         }
         text_level_matches.append(&mut matches);
@@ -6035,7 +6085,13 @@ impl Pipeline {
                 continue;
             }
             if !enabled_rules.is_empty() && options.enabled_only {
-                if !enabled_rules.contains(builtin.rule_id()) {
+                if !enabled_categories.is_empty() {
+                    // Union of rule ids and categories (Java #12194/#aece4da).
+                    let enabled_by_category = enabled_categories.contains(builtin.category_id());
+                    if !enabled_rules.contains(builtin.rule_id()) && !enabled_by_category {
+                        continue;
+                    }
+                } else if !enabled_rules.contains(builtin.rule_id()) {
                     continue;
                 }
             } else {
@@ -6078,7 +6134,17 @@ impl Pipeline {
                             continue;
                         }
                         if !enabled_rules.is_empty() && options.enabled_only {
-                            if !enabled_rules.contains(builtin.rule_id()) {
+                            if !enabled_categories.is_empty() {
+                                // Union of rule ids and categories
+                                // (Java #12194/#aece4da).
+                                let enabled_by_category =
+                                    enabled_categories.contains(builtin.category_id());
+                                if !enabled_rules.contains(builtin.rule_id())
+                                    && !enabled_by_category
+                                {
+                                    continue;
+                                }
+                            } else if !enabled_rules.contains(builtin.rule_id()) {
                                 continue;
                             }
                         } else if disabled_rules.contains(builtin.rule_id())
@@ -7294,6 +7360,80 @@ impl Pipeline {
                         &mut seen,
                     );
                 }
+                // `PolishWordRepeatRule` (8), default off
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::pl::rules::POLISH_WORD_REPEAT_ID,
+                        "MISC",
+                        false,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    polish
+                        .polish_word_repeat
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `CompoundRule` (9), default on
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        polish.compound.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    polish
+                        .compound
+                        .check_sentence(&analyzed.tokens, sentence_text, start),
+                    &mut seen,
+                );
+                // `SimpleReplaceRule` (10), default on
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        polish.simple_replace.rule_id(),
+                        "PRAWDOPODOBNE_LITEROWKI",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    polish
+                        .simple_replace
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `DashRule` (12), default on and picky
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        polish.dash.rule_id(),
+                        "TYPOGRAPHY",
+                        true,
+                        true,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    polish.dash.check_sentence(analyzed),
+                    &mut seen,
+                );
             }
         }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
@@ -7920,7 +8060,16 @@ impl Pipeline {
                 continue;
             }
             if !enabled_rules.is_empty() && options.enabled_only {
-                if !enabled_rules.contains(rule.rule_id.as_str()) {
+                if !enabled_categories.is_empty() {
+                    // With both an explicit rule list and a category list,
+                    // `enabledOnly` keeps the union (Java `Tools.selectRules`,
+                    // #12194/#aece4da), not the intersection.
+                    let enabled_by_category =
+                        enabled_categories.contains(rule.category_id.as_str());
+                    if !enabled_rules.contains(rule.rule_id.as_str()) && !enabled_by_category {
+                        continue;
+                    }
+                } else if !enabled_rules.contains(rule.rule_id.as_str()) {
                     continue;
                 }
             } else {
@@ -8673,7 +8822,10 @@ fn builtin_active(
         return false;
     }
     if !enabled_rules.is_empty() && options.enabled_only {
-        return enabled_rules.contains(rule_id);
+        // With both an explicit rule list and a category list, `enabledOnly`
+        // keeps the union (Java `Tools.selectRules`, #12194/#aece4da).
+        return enabled_rules.contains(rule_id)
+            || (!enabled_categories.is_empty() && enabled_categories.contains(category_id));
     }
     if disabled_rules.contains(rule_id) {
         return false;

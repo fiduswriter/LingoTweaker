@@ -146,6 +146,24 @@ pub fn english(data_dir: &Path) -> Result<DashRule> {
     )
 }
 
+/// `pl.DashRule`: `pl/words/compounds.txt`, base `DASH_RULE` id, Polish
+/// messages, TYPOGRAPHY, picky, ASCII-letter boundaries.
+pub fn polish(data_dir: &Path) -> Result<DashRule> {
+    DashRule::from_data(
+        data_dir,
+        "pl/words/compounds.txt",
+        DashConfig {
+            rule_id: "DASH_RULE",
+            description: "Sprawdza, czy wyrazy pisane z łącznikiem zapisano z myślnikami (np. „Lądek — Zdrój” zamiast „Lądek-Zdrój”).",
+            message: "Błędne użycie myślnika zamiast łącznika.",
+            category_id: "TYPOGRAPHY",
+            category_name: "Błędy typograficzne",
+            picky: true,
+            boundary: |c| !c.is_ascii_alphabetic(),
+        },
+    )
+}
+
 /// `PostReformPortugueseDashRule` / `PreReformPortugueseDashRule`.
 pub fn portuguese(data_dir: &Path, pre_reform: bool) -> Result<DashRule> {
     // chars from http://unicode.e-workers.de/portugiesisch.php

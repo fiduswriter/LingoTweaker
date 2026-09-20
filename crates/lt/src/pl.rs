@@ -30,6 +30,16 @@ pub struct PolishPipeline {
     pub word_repeat: crate::pl::rules::WordRepeatSentenceRule,
     /// `MorfologikPolishSpellerRule` (`MORFOLOGIK_RULE_PL_PL`, rule 7).
     pub spelling: Option<Arc<crate::pl::spelling::PolishSpellingRule>>,
+    /// `PolishWordRepeatRule` (`PL_WORD_REPEAT`, rule 8, default off).
+    pub polish_word_repeat: crate::pl::rules::PolishWordRepeatRule,
+    /// `SimpleReplaceRule` (`PL_SIMPLE_REPLACE`, rule 10).
+    pub simple_replace: crate::pl::rules::PolishSimpleReplaceRule,
+    /// `CompoundRule` (`PL_COMPOUNDS`, rule 9).
+    pub compound: crate::compound::CompoundRule,
+    /// `WordCoherencyRule` (`PL_WORD_COHERENCY`, rule 11, text level).
+    pub word_coherency: crate::word_coherency::WordCoherencyRule,
+    /// `DashRule` (`DASH_RULE`, rule 12).
+    pub dash: crate::dash::DashRule,
 }
 
 impl PolishPipeline {
