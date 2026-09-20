@@ -6,6 +6,7 @@
 
 use std::sync::Arc;
 
+use lt_core::Suggestion;
 use lt_pattern::{FilterContext, FilterOutcome, FilterRegistry, RuleFilter};
 
 use crate::dates::{self, trim_special_characters, Ymd};
@@ -185,12 +186,53 @@ impl RuleFilter for DecadeSpellingFilter {
             .message
             .replace("{dekada}", decade)
             .replace("{wiek}", &roman_number(cent + 1));
+        // `DecadeSpellingFilter.acceptRuleMatch` builds a new `RuleMatch` whose
+        // constructor re-extracts the `<suggestion>` tags from the replaced
+        // message (`startWithUppercase = match.getFromPos() == 0`).
+        let suggestions = extract_message_suggestions(&message, ctx.match_range.start == 0);
         FilterOutcome {
             accepted: true,
             range: None,
             message: Some(message),
-            suggestions: None,
+            suggestions: Some(suggestions),
         }
+    }
+}
+
+/// `RuleMatch`'s `<suggestion>…</suggestion>` extraction from a message:
+/// skip `<mistake/>` placeholders and apply `uppercaseFirstChar` when the
+/// match starts the sentence.
+fn extract_message_suggestions(message: &str, start_with_uppercase: bool) -> Vec<Suggestion> {
+    let mut out = Vec::new();
+    let mut rest = message;
+    while let Some(start) = rest.find("<suggestion>") {
+        let after = &rest[start + "<suggestion>".len()..];
+        let Some(end) = after.find("</suggestion>") else {
+            break;
+        };
+        let replacement = &after[..end];
+        rest = &after[end + "</suggestion>".len()..];
+        if replacement.contains("<mistake/>") {
+            continue;
+        }
+        let value = if start_with_uppercase {
+            uppercase_first_char(replacement)
+        } else {
+            replacement.to_string()
+        };
+        out.push(Suggestion {
+            value,
+            short_description: None,
+        });
+    }
+    out
+}
+
+fn uppercase_first_char(s: &str) -> String {
+    let mut chars = s.chars();
+    match chars.next() {
+        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+        None => String::new(),
     }
 }
 

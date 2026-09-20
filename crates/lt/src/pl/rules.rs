@@ -334,15 +334,17 @@ impl PolishSimpleReplaceRule {
             if replacements.is_empty() {
                 continue;
             }
+            // Java `createRuleMatch` builds the message with the *original*
+            // replacement case and only then capitalizes the suggestion list.
+            let message = format!(
+                "Wyraz „{original}” to najczęściej literówka; poprawnie pisze się: {}.",
+                replacements.join(", ")
+            );
             if original.chars().next().is_some_and(char::is_uppercase) {
                 for replacement in &mut replacements {
                     *replacement = lt_tagger::uppercase_first_char(replacement);
                 }
             }
-            let message = format!(
-                "Wyraz „{original}” to najczęściej literówka; poprawnie pisze się: {}.",
-                replacements.join(", ")
-            );
             rule_matches.push(
                 Match::new(
                     SIMPLE_REPLACE_ID,

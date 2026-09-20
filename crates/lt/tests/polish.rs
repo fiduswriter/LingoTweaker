@@ -81,7 +81,7 @@ fn polish_engine_state() {
         pl.compile_failures()
     );
     assert_eq!(pl.active_rule_count(), 1773);
-    assert_eq!(pl.disambig_rule_count(), 1346);
+    assert_eq!(pl.disambig_rule_count(), 1347);
     assert_eq!(pl.skipped_counts().filters, 0);
     assert_eq!(pl.skipped_counts().off_by_default, 13);
     assert!(

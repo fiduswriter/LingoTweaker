@@ -8647,6 +8647,9 @@ impl Pipeline {
         if let Some(romanian) = &self.romanian {
             return Some(romanian.synth_adapter.as_ref());
         }
+        if let Some(polish) = &self.polish {
+            return Some(polish.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)

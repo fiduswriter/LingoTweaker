@@ -197,6 +197,10 @@ fn compile_regex_uncached(
 ) -> Result<TextRegex, String> {
     let pattern = normalize_java_surrogate_escapes(&drop_quantified_anchors(pattern));
     let pattern = normalize_java_octal_escapes(&pattern);
+    // Java allows a literal `-` right after a class escape or nested class
+    // inside `[...]` (`[\p{Punct}-…&&[^!\.]]`, Polish `interp`); the Rust
+    // regex crate reads it as an invalid range start.
+    let pattern = escape_class_hyphens(&pattern);
     // Java inline flag groups such as `(?-iu)` cannot be left as-is: the Rust
     // regex crate cannot disable Unicode mode (Polish `DNI_TYGODNIA`).
     let pattern = strip_java_unicode_flags(&pattern);
@@ -274,6 +278,56 @@ fn normalize_java_surrogate_escapes(pattern: &str) -> String {
         let ch = pattern[i..].chars().next().unwrap();
         out.push(ch);
         i += ch.len_utf8();
+    }
+    out
+}
+
+/// Java allows a literal `-` right after a character-class escape or a nested
+/// class inside a character class (`[\d-–]`, `[\p{Lu}-–]`); the Rust regex
+/// crate reads it as an invalid range start. Escape such hyphens.
+fn escape_class_hyphens(pattern: &str) -> String {
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len());
+    let mut in_class = 0usize;
+    let mut i = 0usize;
+    while i < chars.len() {
+        let c = chars[i];
+        if c == '\\' {
+            out.push(c);
+            if i + 1 < chars.len() {
+                out.push(chars[i + 1]);
+                i += 2;
+            } else {
+                i += 1;
+            }
+            continue;
+        }
+        if c == '[' {
+            in_class += 1;
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        if c == ']' {
+            in_class = in_class.saturating_sub(1);
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        if c == '-' && in_class > 0 {
+            let prev_is_class_end = matches!(out.chars().last(), Some('}') | Some(']'));
+            let prev_is_class_escape = i >= 2
+                && chars[i - 2] == '\\'
+                && matches!(chars[i - 1], 'd' | 'D' | 'w' | 'W' | 's' | 'S' | 'p' | 'P');
+            if prev_is_class_end || prev_is_class_escape {
+                out.push('\\');
+            }
+            out.push('-');
+            i += 1;
+            continue;
+        }
+        out.push(c);
+        i += 1;
     }
     out
 }
@@ -1159,6 +1213,7 @@ pub fn normalize_java_quantifiers(pattern: &str) -> String {
 fn java_regex(pattern: &str) -> Option<FancyRegex> {
     let pattern = normalize_java_quantifiers(pattern);
     let pattern = normalize_java_octal_escapes(&pattern);
+    let pattern = escape_class_hyphens(&pattern);
     let pattern = strip_java_unicode_flags(&pattern);
     if let Ok(re) = FancyRegex::new(&pattern) {
         return Some(re);
