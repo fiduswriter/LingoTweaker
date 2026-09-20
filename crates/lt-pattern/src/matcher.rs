@@ -1990,7 +1990,7 @@ fn next_element_matches_at<T: Deref<Target = AnalyzedTokenReadings>>(
     i: usize,
     tokens: &[T],
     cand: usize,
-    _prev_skip: i32,
+    prev_skip: i32,
     first_matched: Option<usize>,
     synth: Option<&dyn Synthesizer>,
     prev_matched: &mut bool,
@@ -2023,8 +2023,13 @@ fn next_element_matches_at<T: Deref<Target = AnalyzedTokenReadings>>(
         // `scope="next"` exception matching the token after `cand`, the flag
         // stays set for the rest of the attempt and blocks the
         // `skipMaxTokens` extension of the *current* element (this is what
-        // keeps HO_FA_TOT matching `Deixa sempre tot …` in Java).
-        if *prev_matched || next_scope_next_exception_hits(next_token, tokens, cand) {
+        // keeps HO_FA_TOT matching `Deixa sempre tot …` in Java). Java's
+        // workaround only applies when `prevSkipNext == 0`; with a pending
+        // `skip` it is condition 1 (the previous element's next-scoped
+        // exception) that can set the flag.
+        if *prev_matched
+            || (prev_skip == 0 && next_scope_next_exception_hits(next_token, tokens, cand))
+        {
             *prev_matched = true;
             return false;
         }
