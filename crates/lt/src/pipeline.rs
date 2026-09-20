@@ -2861,10 +2861,8 @@ impl Pipeline {
             .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
         mark("grammar");
 
-        // Stage 1 has no Java-coded filter classes wired yet (the single
-        // XML-referenced filter, `AdvancedSynthesizerFilter`, is stage 3), so
-        // its rules land in `compile_failures` until then.
-        let filters = lt_pattern::FilterRegistry::builder().build();
+        // XML-referenced filter classes (`AdvancedSynthesizerFilter`).
+        let filters = crate::gl::filters::galician_filter_registry(Arc::clone(&synth_adapter));
         let (compiled_rules, skipped, compile_failures) =
             compile_rules(&grammar, &filters, enabled_rules);
         mark("rules");
@@ -2892,12 +2890,33 @@ impl Pipeline {
         .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
         mark("chunker");
 
+        // `HunspellRule` (4), default on. The vendored `gl_ES` dictionary uses
+        // `FLAG num`, which the in-tree `lt-spell` checker does not support
+        // yet, so the speller is disabled (not a hard error) until that
+        // lands; see the Galician rule-port checklist.
+        let spelling = match crate::gl::spelling::GalicianSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[gl] spelling rule disabled: {err}");
+                None
+            }
+        };
+        mark("speller");
+
+        // Stage-3 built-in replace family (15–20).
+        let legacy_replace =
+            crate::gl::rules::legacy_replace_instances(data_dir.path(), Arc::clone(&synth));
+        let rule2 = crate::gl::rules::rule2_instances(data_dir.path())?;
+
         let galician = Arc::new(crate::gl::GalicianPipeline {
             tagger,
             synthesizer: synth,
             synth_adapter,
             multiwords_chunker,
             disambiguator,
+            spelling,
+            legacy_replace,
+            rule2,
         });
         Ok(Self {
             lang: Lang::Gl,
@@ -6610,6 +6629,66 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence_gl(&analyzed.tokens, start),
                 &mut seen,
             );
+            // `HunspellRule` (4), default on
+            if let Some(galician) = &self.galician {
+                if let Some(spelling) = &galician.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::gl::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                // `SimpleReplaceRule` (15), `CastWordsRule` (16)
+                for rule in &galician.legacy_replace {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            rule.rule_id(),
+                            "MISC",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        rule.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                // `AbstractSimpleReplaceRule2` family (17–20)
+                let rule2_categories = ["REDUNDANCY", "REDUNDANCY", "STYLE", "WIKIPEDIA"];
+                for (rule, category) in galician.rule2.iter().zip(rule2_categories) {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            rule.rule_id(),
+                            category,
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        rule.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
         }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only

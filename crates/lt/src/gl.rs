@@ -12,7 +12,10 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod filters;
 pub mod priorities;
+pub mod rules;
+pub mod spelling;
 
 /// `GalicianHybridDisambiguator`: `gl/multiwords.txt` chunker → XML rules
 /// (+ global rules).
@@ -24,6 +27,15 @@ pub struct GalicianPipeline {
     /// `MultiWordChunker.getInstance("/gl/multiwords.txt")`
     pub multiwords_chunker: lt_disambig::MultiWordChunker,
     pub disambiguator: lt_disambig::XmlDisambiguator,
+    /// `HunspellRule` (`HUNSPELL_RULE`, rule 4). `None` when the vendored
+    /// `gl_ES` dictionary cannot be parsed by the in-tree checker (it uses
+    /// `FLAG num`, which `lt-spell` does not support yet) — the rest of the
+    /// Galician engine still loads.
+    pub spelling: Option<Arc<crate::gl::spelling::GalicianSpellingRule>>,
+    /// Legacy `AbstractSimpleReplaceRule` instances (15–16).
+    pub legacy_replace: Vec<crate::gl::rules::LegacyReplaceRule>,
+    /// `AbstractSimpleReplaceRule2` instances (17–20).
+    pub rule2: Vec<crate::simple_replace::SimpleReplaceRule>,
 }
 
 impl GalicianPipeline {
