@@ -147,6 +147,8 @@ pub struct Pipeline {
     pub dutch: Option<Arc<crate::nl::DutchPipeline>>,
     /// Catalan pipeline parts (`None` for the other languages)
     pub catalan: Option<Arc<crate::ca::CatalanPipeline>>,
+    /// Galician pipeline parts (`None` for the other languages)
+    pub galician: Option<Arc<crate::gl::GalicianPipeline>>,
     /// Norwegian Bokmål pipeline parts (`None` for the other languages)
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
@@ -1326,6 +1328,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1557,6 +1560,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1737,6 +1741,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1935,6 +1940,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2053,6 +2059,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2290,6 +2297,7 @@ impl Pipeline {
             portuguese: Some(portuguese),
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2487,6 +2495,7 @@ impl Pipeline {
             portuguese: None,
             dutch: Some(dutch),
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2801,6 +2810,128 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: Some(catalan),
+            galician: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Galician engine (`Galician.getRelevantRules`, stage 1: XML rules, the
+    /// `GalicianTagger`/`GalicianSynthesizer` and the
+    /// `GalicianHybridDisambiguator`; the hunspell speller and the Java rule
+    /// classes follow in stages 2/3).
+    pub fn new_galician(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        variant: Option<&str>,
+    ) -> Result<Self> {
+        let _ = today;
+        let _ = variant;
+        let timing = std::env::var("LT_TIMING").is_ok();
+        let mut last = timing.then(std::time::Instant::now);
+        let mut mark = |name: &str| {
+            if let Some(previous) = last {
+                let now = std::time::Instant::now();
+                eprintln!("[timing] gl {name}: {:?}", now - previous);
+                last = Some(now);
+            }
+        };
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "gl_two")?;
+        mark("srx");
+
+        let tagger = Arc::new(lt_tagger::GalicianTagger::load(data_dir.path())?);
+        mark("tagger");
+        let synth = Arc::new(lt_tagger::GalicianSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::gl::GalicianSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        mark("synth");
+
+        let grammar = Grammar::load_file(data_dir.grammar_path(Lang::Gl))?;
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        mark("grammar");
+
+        // Stage 1 has no Java-coded filter classes wired yet (the single
+        // XML-referenced filter, `AdvancedSynthesizerFilter`, is stage 3), so
+        // its rules land in `compile_failures` until then.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        mark("rules");
+
+        // `GalicianHybridDisambiguator`: `gl/multiwords.txt` chunker → XML
+        // rules (+ global rules).
+        let global_disambig = data_dir.path().join("core/disambiguation-global.xml");
+        let mut disambiguator = lt_disambig::XmlDisambiguator::load_with_extra(
+            &data_dir.disambiguation_path(Lang::Gl),
+            Some(&global_disambig),
+        )?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+        mark("disambiguator");
+
+        let multiwords_chunker = lt_disambig::MultiWordChunker::load(
+            &data_dir.path().join("gl/words/multiwords.txt"),
+            // Java: MultiWordChunker.getInstance("/gl/multiwords.txt")
+            false,
+            false,
+            false,
+            None,
+            false,
+        )
+        .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
+        mark("chunker");
+
+        let galician = Arc::new(crate::gl::GalicianPipeline {
+            tagger,
+            synthesizer: synth,
+            synth_adapter,
+            multiwords_chunker,
+            disambiguator,
+        });
+        Ok(Self {
+            lang: Lang::Gl,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: Some(galician),
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2926,6 +3057,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
@@ -2996,6 +3128,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
@@ -3070,6 +3203,7 @@ impl Pipeline {
             portuguese: None,
             dutch: None,
             catalan: None,
+            galician: None,
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
@@ -3120,10 +3254,18 @@ impl Pipeline {
                                                 catalan,
                                                 sentence_text,
                                             ),
-                                            None => analyze_sentence(
-                                                self.tagger.as_deref().expect("english tagger"),
-                                                sentence_text,
-                                            ),
+                                            None => match &self.galician {
+                                                Some(galician) => {
+                                                    crate::gl::analyze_galician_sentence(
+                                                        galician,
+                                                        sentence_text,
+                                                    )
+                                                }
+                                                None => analyze_sentence(
+                                                    self.tagger.as_deref().expect("english tagger"),
+                                                    sentence_text,
+                                                ),
+                                            },
                                         },
                                     },
                                 },
@@ -4679,6 +4821,187 @@ impl Pipeline {
                 ));
             }
         }
+        // Galician text-level rules (`Galician.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5),
+        // MultipleWhitespace (6), SentenceWhitespace (9), LongSentence (7)
+        // and the paragraph rules (8, 10–14).
+        if self.lang == crate::Lang::Gl {
+            // `GenericUnpairedBracketsRule` (3), default on
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_gl(&analyzed_sentences));
+            }
+            // `UppercaseSentenceStartRule` (5), default on
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_gl(&analyzed_sentences));
+            }
+            // `MultipleWhitespaceRule` (6), default on
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_gl(&analyzed_sentences));
+            }
+            // `SentenceWhitespaceRule` (9), default on
+            if builtin_active(
+                "SENTENCE_WHITESPACE",
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_gl(&analyzed_sentences));
+            }
+            // `LongSentenceRule` (7), `tags="picky"`, 50 words
+            if builtin_active(
+                "TOO_LONG_SENTENCE",
+                "STYLE",
+                true,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::long_sentence::check_gl(&analyzed_sentences));
+            }
+            let gl_para = crate::paragraph::strings_gl();
+            // `LongParagraphRule` (8), default off and picky
+            if builtin_active(
+                crate::paragraph::LONG_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::long_paragraph_with(
+                    &analyzed_sentences,
+                    &gl_para,
+                ));
+            }
+            // `WhiteSpaceBeforeParagraphEnd` (10), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::whitespace_before_paragraph_end_with(
+                    &analyzed_sentences,
+                    &gl_para,
+                ));
+            }
+            // `WhiteSpaceAtBeginOfParagraph` (11), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_BEGIN_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                for sentence in &analyzed_sentences {
+                    text_level_matches.extend(
+                        crate::paragraph::whitespace_at_begin_of_paragraph_with(sentence, &gl_para),
+                    );
+                }
+            }
+            // `EmptyLineRule` (12), default off
+            if builtin_active(
+                crate::paragraph::EMPTY_LINE_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::empty_line_with(
+                    &analyzed_sentences,
+                    &gl_para,
+                ));
+            }
+            // `ParagraphRepeatBeginningRule` (13), default off
+            if builtin_active(
+                crate::paragraph::PARAGRAPH_REPEAT_BEGINNING_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::paragraph_repeat_beginning_with(
+                    &analyzed_sentences,
+                    &gl_para,
+                ));
+            }
+            // `PunctuationMarkAtParagraphEnd` (14), default on and picky
+            if builtin_active(
+                crate::paragraph::PUNCTUATION_PARAGRAPH_END_ID,
+                "PUNCTUATION",
+                true,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::punctuation_at_paragraph_end_with(
+                    &analyzed_sentences,
+                    &gl_para,
+                ));
+            }
+        }
         text_level_matches.append(&mut matches);
         matches = text_level_matches;
         // Text-level repetition rules (`RepeatedPatternRuleTransformer`):
@@ -4818,10 +5141,16 @@ impl Pipeline {
                                             catalan,
                                             &text[start..end],
                                         ),
-                                        None => analyze_sentence(
-                                            self.tagger.as_deref().expect("english tagger"),
-                                            &text[start..end],
-                                        ),
+                                        None => match &self.galician {
+                                            Some(galician) => crate::gl::analyze_galician_sentence(
+                                                galician,
+                                                &text[start..end],
+                                            ),
+                                            None => analyze_sentence(
+                                                self.tagger.as_deref().expect("english tagger"),
+                                                &text[start..end],
+                                            ),
+                                        },
                                     },
                                 },
                             },
@@ -6244,6 +6573,44 @@ impl Pipeline {
                 );
             }
         }
+        // Galician sentence-level Java rules in `Galician.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2), Hunspell (4) and
+        // the replace family (15–20). The speller is stage 2 and the replace
+        // family stage 3.
+        if self.lang == crate::Lang::Gl {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_gl(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_gl(&analyzed.tokens, start),
+                &mut seen,
+            );
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -7478,6 +7845,12 @@ impl Pipeline {
             // → ca/multiwords (removePreviousTags) → XML rules (+ global);
             // the `raw_pos` snapshot is taken after the chunkers (D-185).
             catalan.disambiguate_with_snapshot(sentence, snapshot_catalan_pre);
+            return;
+        }
+        if let Some(galician) = &self.galician {
+            // GalicianHybridDisambiguator order: gl/multiwords → XML rules
+            // (+ global rules).
+            galician.disambiguate(sentence);
             return;
         }
         if let Some(norwegian) = &self.norwegian {

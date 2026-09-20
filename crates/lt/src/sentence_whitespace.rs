@@ -206,6 +206,21 @@ pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &STRINGS_CA)
 }
 
+/// `SentenceWhitespaceRule` with the Galician `MessagesBundle_gl` strings
+/// (Java constructor default `maxSpacesBetweenSentences` = 1).
+const STRINGS_GL: Strings = Strings {
+    description: "Falta un espazo entre oracións",
+    repeated_message: "Posíbel erro tipográfico: repetiu un espazo en branco",
+    add_space_message: "Engada un espazo entre oracións.",
+    category_name: "Tipografía",
+    max_spaces_between_sentences: 1,
+};
+
+/// `SentenceWhitespaceRule` with the Galician `MessagesBundle_gl` strings.
+pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &STRINGS_GL)
+}
+
 fn strings_pt(variant: &str) -> &'static Strings {
     const PT_PT_STRINGS: Strings = Strings {
         description: "Falta um espaço entre as frases",

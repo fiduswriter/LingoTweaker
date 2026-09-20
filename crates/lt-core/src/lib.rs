@@ -44,6 +44,7 @@ pub enum Lang {
     Pt,
     Nl,
     Ca,
+    Gl,
     /// Norwegian Bokmål (upstream dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -55,7 +56,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 11] = [
+    pub const ALL: [Lang; 12] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -64,6 +65,7 @@ impl Lang {
         Lang::Pt,
         Lang::Nl,
         Lang::Ca,
+        Lang::Gl,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -82,6 +84,7 @@ impl Lang {
             "pt" => Some(Lang::Pt),
             "nl" => Some(Lang::Nl),
             "ca" => Some(Lang::Ca),
+            "gl" => Some(Lang::Gl),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -99,6 +102,7 @@ impl Lang {
             Lang::Pt => "pt",
             Lang::Nl => "nl",
             Lang::Ca => "ca",
+            Lang::Gl => "gl",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -147,6 +151,11 @@ impl Lang {
                 code: "ca",
                 long_code: "ca",
                 name: "Catalan",
+            },
+            Lang::Gl => Language {
+                code: "gl",
+                long_code: "gl",
+                name: "Galician",
             },
             Lang::No => Language {
                 code: "no",

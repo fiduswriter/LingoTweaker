@@ -146,6 +146,23 @@ pub fn check_sentence_ca(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Galician `MessagesBundle_gl` strings.
+pub fn check_sentence_gl(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Puntuación".to_string();
+        m.description = "Uso de dous puntos ou comas consecutivos".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Dous puntos consecutivos".to_string();
+            m.short_message = Some("Dous puntos consecutivos".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Dúas comas consecutivas".to_string();
+            m.short_message = Some("Dúas comas consecutivas".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule.match` over one sentence.
 pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut rule_matches: Vec<Match> = Vec::new();

@@ -113,6 +113,16 @@ pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Galician `MessagesBundle_gl` strings.
+pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Repetición de espazos en branco (erro de formato)",
+        "Posíbel erro tipográfico: repetiu un espazo en branco",
+        ("TYPOGRAPHY", "Tipografía"),
+    )
+}
+
 /// `MultipleWhitespaceRule.match` over all sentences.
 pub fn check(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

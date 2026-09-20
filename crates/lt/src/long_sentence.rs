@@ -63,6 +63,20 @@ pub fn check(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `Galician.getRelevantRules`: `new LongSentenceRule(messages, userConfig,
+/// 50)` (`MessagesBundle_gl` `long_sentence_rule_desc`/`_msg2`).
+pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const GL_MAX_WORDS: usize = 50;
+    check_impl(
+        sentences,
+        RULE_ID,
+        "Lexibilidade: oración de máis de 50 palabras",
+        "Esta oración ten máis de 50 palabras. Considere a posibilidade de partila, xa que as oracións máis curtas facilitan a lectura.",
+        ("STYLE", "Estilo"),
+        GL_MAX_WORDS,
+    )
+}
+
 /// `de.LongSentenceRule` (`TOO_LONG_SENTENCE_DE`, 40 words, German messages).
 pub fn check_de(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_impl(

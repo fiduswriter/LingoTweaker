@@ -17,6 +17,8 @@ pub mod english;
 pub mod french;
 pub mod french_synth;
 pub mod fsa5;
+pub mod galician;
+pub mod galician_synth;
 pub mod german;
 pub mod german_synth;
 pub mod italian;
@@ -40,6 +42,8 @@ pub use english::{
 pub use french::FrenchTagger;
 pub use french_synth::FrenchSynthesizer;
 pub use fsa5::Fsa5;
+pub use galician::GalicianTagger;
+pub use galician_synth::GalicianSynthesizer;
 pub use german::{GermanTagger, SwissGermanTagger};
 pub use german_synth::GermanSynthesizer;
 pub use italian::ItalianTagger;

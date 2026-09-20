@@ -549,6 +549,31 @@ pub fn check_pt(sentences: &[AnalyzedSentence], variant: &str) -> Vec<Match> {
     check_with(sentences, &symbols_pt(variant))
 }
 
+/// `Galician.getRelevantRules`: the generic rule with
+/// `[ ( { “ « » ‘ " '` / `] ) } ” » « ’ " '` and the `MessagesBundle_gl`
+/// strings.
+pub fn symbols_gl() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Parénteses, comiñas e símbolos similares desemparellados",
+        category_id: "PUNCTUATION",
+        category_name: "Puntuación",
+        start: &[
+            "[", "(", "{", "\u{201C}", "\u{00AB}", "\u{00BB}", "\u{2018}", "\"", "'",
+        ],
+        end: &[
+            "]", ")", "}", "\u{201D}", "\u{00BB}", "\u{00AB}", "\u{2019}", "\"", "'",
+        ],
+        spanish: false,
+        message_template: "Símbolo desemparellado: Parece que falta «{other}»",
+    }
+}
+
+/// Galician `UNPAIRED_BRACKETS` (generic rule, Galician strings).
+pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_gl())
+}
+
 pub fn check_with(sentences: &[AnalyzedSentence], sym: &UnpairedSymbols) -> Vec<Match> {
     let mut symbol_stack: Vec<SymbolLocator> = Vec::new();
     let mut rule_match_stack: Vec<SymbolLocator> = Vec::new();

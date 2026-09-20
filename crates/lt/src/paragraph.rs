@@ -221,6 +221,31 @@ pub fn strings_ca() -> ParagraphStrings {
     }
 }
 
+/// Galician `MessagesBundle_gl` paragraph-rule strings (`Galician.java`
+/// wires the base `LongParagraphRule`, `EmptyLineRule`,
+/// `WhiteSpaceBeforeParagraphEnd`, `WhiteSpaceAtBeginOfParagraph`,
+/// `ParagraphRepeatBeginningRule` and `PunctuationMarkAtParagraphEnd`).
+pub fn strings_gl() -> ParagraphStrings {
+    ParagraphStrings {
+        style_category: ("STYLE", "Estilo"),
+        punctuation_category: ("PUNCTUATION", "Puntuación"),
+        long_desc: |max| format!("Lexibilidade: parágrafo de máis de {max} palabras"),
+        long_msg: |max| {
+            format!("O parágrafo sobrepasa as {max} palabras de longo. Considere unha revisión.")
+        },
+        empty_line_msg: "Elimine a liña baleira seguinte e utilice formatado no seu lugar",
+        empty_line_desc: "Liña baleira",
+        ws_begin_msg: "Elimine o carácter de espazo ao comezo do parágrafo.",
+        ws_begin_desc: "Carácter de espazo ao comezo do parágrafo",
+        ws_end_msg: "Elimine o carácter de espazo ao final do parágrafo.",
+        ws_end_desc: "Carácter de espazo ao final do parágrafo",
+        punct_msg: "Engada un signo de puntuación ao final do parágrafo.",
+        punct_desc: "Sen signo de puntuación ao final do parágrafo",
+        repetition_last_msg: "O mesmo comezo como derradeiro parágrafo",
+        repetition_desc: "O mesmo comezo do parágrafo",
+    }
+}
+
 pub fn strings_pt(variant: &str) -> ParagraphStrings {
     if variant == "pt-BR" {
         return ParagraphStrings {

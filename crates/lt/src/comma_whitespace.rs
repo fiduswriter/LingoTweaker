@@ -485,6 +485,45 @@ pub fn check_sentence_ca(
     matches
 }
 
+/// `CommaWhitespaceRule` with the Galician `MessagesBundle_gl` strings.
+pub fn check_sentence_gl(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Tipografía".to_string();
+        m.description =
+            "Uso de espazos en branco diante dunha coma ou antes/despois de paréntese".to_string();
+        m.message = translate_comma_message_gl(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_gl` bundle.
+fn translate_comma_message_gl(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Non deixe espazos detrás da paréntese de apertura.".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Non deixe espazos antes da paréntese de peche.".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Non poña un espazo a ambos os lados dunhas aspas.".to_string()
+        }
+        "Put a space after the comma." => "Poña un espazo detrás da coma.".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Poña un espazo en branco despois da coma, pero nunca antes.".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Non poña espazos antes dun punto.".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_ca` bundle.
 fn translate_comma_message_ca(msg: &str) -> String {
     match msg {
@@ -507,8 +546,6 @@ fn translate_comma_message_ca(msg: &str) -> String {
         _ => msg.to_string(),
     }
 }
-
-/// Java `messages.getString` with the `MessagesBundle_nl` bundle.
 fn translate_comma_message_nl(msg: &str) -> String {
     match msg {
         "Don't put a space after the opening parenthesis." => {

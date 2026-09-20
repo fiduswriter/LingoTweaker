@@ -19,6 +19,7 @@ enum LangArg {
     Pt,
     Nl,
     Ca,
+    Gl,
     No,
     Nrd,
     Gn,
@@ -35,6 +36,7 @@ impl From<LangArg> for Lang {
             LangArg::Pt => Lang::Pt,
             LangArg::Nl => Lang::Nl,
             LangArg::Ca => Lang::Ca,
+            LangArg::Gl => Lang::Gl,
             LangArg::No => Lang::No,
             LangArg::Nrd => Lang::Nrd,
             LangArg::Gn => Lang::Gn,
@@ -356,9 +358,9 @@ fn cmd_analyze(
     let lang: Lang = lang.into();
     if !matches!(
         lang,
-        Lang::En | Lang::De | Lang::Es | Lang::It | Lang::Pt | Lang::Nl | Lang::Ca
+        Lang::En | Lang::De | Lang::Es | Lang::It | Lang::Pt | Lang::Nl | Lang::Ca | Lang::Gl
     ) {
-        bail!("analyze currently supports en/de/es/it/pt/nl/ca only");
+        bail!("analyze currently supports en/de/es/it/pt/nl/ca/gl only");
     }
     let data = data_dir(cli)?;
     let engine = lt::Engine::builder(lang)?.data_dir(data).build()?;

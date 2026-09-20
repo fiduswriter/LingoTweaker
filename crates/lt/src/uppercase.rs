@@ -158,6 +158,18 @@ pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
+pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Esta oración non comeza cunha letra maiúscula.",
+        "Maiúsculas e minúsculas",
+        "Comproba que unha oración comece con maiúscula",
+        "Maiúsculas e minúsculas",
+        false,
+    )
+}
+
 fn check_with(
     sentences: &[AnalyzedSentence],
     message: &str,

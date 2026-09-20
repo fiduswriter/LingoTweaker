@@ -36,6 +36,7 @@ mod double_punctuation;
 mod en;
 mod es;
 mod fr;
+mod gl;
 mod gn;
 mod hunspell_spelling;
 mod it;
@@ -323,6 +324,12 @@ impl EngineBuilder {
                 &self.options.enabled_rules,
                 self.variant.as_deref(),
             )?,
+            Lang::Gl => Pipeline::new_galician(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
             Lang::No => Pipeline::new_norwegian(
                 &data_dir,
                 self.today,
@@ -413,6 +420,9 @@ impl Engine {
         }
         if let Some(catalan) = &self.pipeline.catalan {
             return catalan.disambiguator.rules_len();
+        }
+        if let Some(galician) = &self.pipeline.galician {
+            return galician.disambiguator.rules_len();
         }
         if let Some(norwegian) = &self.pipeline.norwegian {
             return norwegian.disambiguator.rules_len();
