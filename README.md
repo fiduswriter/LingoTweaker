@@ -15,7 +15,7 @@ languages will be added over time.
 LanguageTool project, whose name and trademark belong to their owners. Upstream
 references and licenses are kept.
 
-- **Rust-first**: `cargo add lt` and embed the engine directly (`Engine::check`).
+- **Rust-first**: `cargo add lingotweaker` and embed the engine directly (`lt::Engine::check`).
 - **v2 HTTP drop-in**: same `/v2/*` paths, parameters, and JSON schema, so existing
   clients switch without changes.
 - **WebAssembly**: `lt-wasm` (wasm-bindgen) runs the engine in the browser from
@@ -58,7 +58,8 @@ python3 -m http.server -d demo/dist 8000
 
 | crate | purpose |
 |-------|---------|
-| `lt` | public facade: `Engine`, `EngineBuilder`, re-exports |
+| `lt` | internal engine facade (not publishable: crates.io `lt` name is taken) |
+| `lingotweaker` | publishable crates.io facade, `[lib] name = "lt"` |
 | `lt-core` | core types: languages, matches, check results, offsets |
 | `lt-tokenize` | sentence splitter + tokenizer (UTF-8 byte offsets) |
 | `lt-tagger` | Morfologik FSA tagger (spike in progress) |
@@ -88,6 +89,26 @@ python3 tools/lt-sync/lt_sync.py report
 ```
 
 Rule, category, and message ids are never renumbered.
+
+## Installing releases
+
+Prereleases are published from one version to crates.io, PyPI and npm:
+
+```sh
+cargo add lingotweaker@0.1.0-alpha.1   # Rust (library name stays `lt`)
+pip install lingotweaker==0.1.0a1      # Python (module name `lt_py`)
+npm install lingotweaker@next          # Node.js
+```
+
+`lt` on crates.io is an unrelated third-party crate; the engine is published as
+`lingotweaker` with `[lib] name = "lt"`, so `use lt::...` still works.
+Prereleases use the npm `next` dist-tag and a PEP 440 prerelease version on
+PyPI, so `latest` stays on the last stable release.
+
+The engine packages ship **code only**: no language data is bundled. Set
+`LT_DATA_DIR` to a data tree (see `data/README.md`) before building an engine.
+
+Release tooling lives in `scripts/release/`; see `scripts/release/README.md`.
 
 ## License
 

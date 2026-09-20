@@ -101,6 +101,25 @@ Engine data reads go through `lt_data::fs` (mount-aware): use
 `lt_data::PathExt::lt_exists`/`lt_is_dir`/`lt_is_file` instead of the `Path`
 predicates, and gate `SystemTime`/`Instant` uses so wasm builds cannot trap.
 
+## Releasing
+
+One prerelease version is shared by crates.io, PyPI and npm:
+
+```sh
+scripts/release/set-version.sh 0.1.0-alpha.2
+git commit -am "release: 0.1.0-alpha.2"
+git tag v0.1.0-alpha.2 && git push origin main v0.1.0-alpha.2
+```
+
+`.github/workflows/release.yml` runs on `v*` tags and calls
+`scripts/release/*.sh` (kept separate from `ci.yml`; it does not touch the
+`parity` or `test` jobs). The publishable crates.io set is the `lt-*` libraries
+plus the `lingotweaker` facade (`crates/lingotweaker`, its own workspace, shares
+the engine source through a symlink and keeps `[lib] name = "lt"`). `lt` cannot
+be published (the crates.io name is taken); `lt-cli`/`lt-http`/`lt-py`/`lt-node`/
+`lt-wasm` set `publish = false`. Package readmes must keep stating that engine
+packages ship without data and read `LT_DATA_DIR` at runtime.
+
 ## Conventions
 
 - UTF-8 is the default string/offset format internally and externally.
