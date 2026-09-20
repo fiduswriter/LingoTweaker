@@ -262,50 +262,82 @@ fn normalize_srx_pattern(pattern: &str) -> String {
 
 /// Java allows a literal `-` right after a character-class escape or a nested
 /// class inside a character class (`[\d-–]`, `[\p{Lu}-–]`); the Rust regex
-/// crate reads it as an invalid range start. Escape such hyphens.
+/// crate reads it as an invalid range start. Escape such hyphens. A `}` that
+/// closes a `\u{…}`/`\x{…}` code point is *not* a class end.
 fn escape_class_hyphens(pattern: &str) -> String {
     let chars: Vec<char> = pattern.chars().collect();
     let mut out = String::with_capacity(pattern.len());
     let mut in_class = 0usize;
     let mut i = 0usize;
+    let mut last_is_class_end = false;
     while i < chars.len() {
         let c = chars[i];
         if c == '\\' {
-            out.push(c);
-            if i + 1 < chars.len() {
-                out.push(chars[i + 1]);
-                i += 2;
-            } else {
-                i += 1;
+            match chars.get(i + 1).copied() {
+                Some(kind @ ('p' | 'P')) => {
+                    out.push('\\');
+                    out.push(kind);
+                    i += 2;
+                    if i < chars.len() && chars[i] == '{' {
+                        while i < chars.len() {
+                            out.push(chars[i]);
+                            if chars[i] == '}' {
+                                i += 1;
+                                break;
+                            }
+                            i += 1;
+                        }
+                    }
+                    last_is_class_end = true;
+                    continue;
+                }
+                Some(kind @ ('d' | 'D' | 'w' | 'W' | 's' | 'S')) => {
+                    out.push('\\');
+                    out.push(kind);
+                    i += 2;
+                    last_is_class_end = true;
+                    continue;
+                }
+                Some(next) => {
+                    out.push('\\');
+                    out.push(next);
+                    i += 2;
+                    last_is_class_end = false;
+                    continue;
+                }
+                None => {
+                    out.push('\\');
+                    i += 1;
+                    continue;
+                }
             }
-            continue;
         }
         if c == '[' {
             in_class += 1;
             out.push(c);
             i += 1;
+            last_is_class_end = false;
             continue;
         }
         if c == ']' {
             in_class = in_class.saturating_sub(1);
             out.push(c);
             i += 1;
+            last_is_class_end = in_class > 0;
             continue;
         }
         if c == '-' && in_class > 0 {
-            let prev_is_class_end = matches!(out.chars().last(), Some('}') | Some(']'));
-            let prev_is_class_escape = i >= 2
-                && chars[i - 2] == '\\'
-                && matches!(chars[i - 1], 'd' | 'D' | 'w' | 'W' | 's' | 'S' | 'p' | 'P');
-            if prev_is_class_end || prev_is_class_escape {
+            if last_is_class_end {
                 out.push('\\');
             }
             out.push('-');
             i += 1;
+            last_is_class_end = false;
             continue;
         }
         out.push(c);
         i += 1;
+        last_is_class_end = false;
     }
     out
 }
