@@ -539,6 +539,44 @@ pub fn check_sentence_gl(
     matches
 }
 
+/// `CommaWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
+pub fn check_sentence_pl(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Błędy typograficzne".to_string();
+        m.description = "Odstępy przed przecinkami oraz przed nawiasami i po nawiasach".to_string();
+        m.message = translate_comma_message_pl(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_pl` bundle.
+fn translate_comma_message_pl(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Nie wstawiamy spacji po nawiasie otwierającym".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Nie wstawiamy spacji przed nawiasem zamykającym".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Nie wstawiaj spacji po obu stronach cudzysłowu.".to_string()
+        }
+        "Put a space after the comma." => "Po przecinku wstawiamy spację".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Spację wstawiamy po przecinku, nie przed przecinkiem".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Nie wstawiamy spacji przed kropką".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_gl` bundle.
 fn translate_comma_message_gl(msg: &str) -> String {
     match msg {

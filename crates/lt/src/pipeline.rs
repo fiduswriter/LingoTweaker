@@ -151,6 +151,8 @@ pub struct Pipeline {
     pub galician: Option<Arc<crate::gl::GalicianPipeline>>,
     /// Romanian pipeline parts (`None` for the other languages)
     pub romanian: Option<Arc<crate::ro::RomanianPipeline>>,
+    /// Polish pipeline parts (`None` for the other languages)
+    pub polish: Option<Arc<crate::pl::PolishPipeline>>,
     /// Norwegian Bokmål pipeline parts (`None` for the other languages)
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
@@ -1332,6 +1334,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1565,6 +1568,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1747,6 +1751,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1947,6 +1952,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2067,6 +2073,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2306,6 +2313,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2505,6 +2513,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2821,6 +2830,7 @@ impl Pipeline {
             catalan: Some(catalan),
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2961,6 +2971,7 @@ impl Pipeline {
             catalan: None,
             galician: Some(galician),
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3087,6 +3098,130 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: Some(romanian),
+            polish: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+    /// Polish (`pl`): the PoliMorf `PolishTagger`/`PolishSynthesizer`, the
+    /// `pl_two` SRX, the `PolishHybridDisambiguator` order (XML rules →
+    /// `pl/multiwords.txt` chunker) and the four XML-referenced filters.
+    /// Stage 1 wires the XML rules and the generic core built-ins; the
+    /// morfologik speller and the Java rule classes follow in stages 2/3.
+    pub fn new_polish(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        variant: Option<&str>,
+    ) -> Result<Self> {
+        let _ = variant;
+        let timing = std::env::var("LT_TIMING").is_ok();
+        let mut last = timing.then(std::time::Instant::now);
+        let mut mark = |name: &str| {
+            if let Some(previous) = last {
+                let now = std::time::Instant::now();
+                eprintln!("[timing] pl {name}: {:?}", now - previous);
+                last = Some(now);
+            }
+        };
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "pl_two")?;
+        mark("srx");
+
+        let tagger = Arc::new(lt_tagger::PolishTagger::load(data_dir.path())?);
+        mark("tagger");
+        let synth = Arc::new(lt_tagger::PolishSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::pl::PolishSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        mark("synth");
+
+        let grammar = Grammar::load_file(data_dir.grammar_path(Lang::Pl))?;
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        mark("grammar");
+
+        // XML-referenced filter classes: `DateCheckFilter`,
+        // `DecadeSpellingFilter`, `DateRangeChecker`,
+        // `ShortenedYearRangeChecker`.
+        let filters = crate::pl::filters::polish_filter_registry(today.unwrap_or_else(Ymd::today));
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        mark("rules");
+
+        // `PolishHybridDisambiguator`: XML rules (+ global rules), then the
+        // `pl/multiwords.txt` chunker.
+        let global_disambig = data_dir.path().join("core/disambiguation-global.xml");
+        let mut disambiguator = lt_disambig::XmlDisambiguator::load_with_extra(
+            &data_dir.disambiguation_path(Lang::Pl),
+            Some(&global_disambig),
+        )?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+        mark("disambiguator");
+
+        let multiwords_chunker = lt_disambig::MultiWordChunker::load(
+            &data_dir.path().join("pl/words/multiwords.txt"),
+            // Java: MultiWordChunker.getInstance("/pl/multiwords.txt")
+            false,
+            false,
+            false,
+            None,
+            false,
+        )
+        .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
+        mark("chunker");
+
+        let polish = Arc::new(crate::pl::PolishPipeline {
+            tagger,
+            synthesizer: synth,
+            synth_adapter,
+            multiwords_chunker,
+            disambiguator,
+            word_repeat: crate::pl::rules::WordRepeatSentenceRule::new(),
+        });
+        Ok(Self {
+            lang: Lang::Pl,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: Some(polish),
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3213,6 +3348,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
@@ -3285,6 +3421,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
@@ -3361,6 +3498,7 @@ impl Pipeline {
             catalan: None,
             galician: None,
             romanian: None,
+            polish: None,
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
@@ -3418,19 +3556,27 @@ impl Pipeline {
                                                         sentence_text,
                                                     )
                                                 }
-                                                None => match &self.galician {
-                                                    Some(galician) => {
-                                                        crate::gl::analyze_galician_sentence(
-                                                            galician,
+                                                None => match &self.polish {
+                                                    Some(polish) => {
+                                                        crate::pl::analyze_polish_sentence(
+                                                            polish,
                                                             sentence_text,
                                                         )
                                                     }
-                                                    None => analyze_sentence(
-                                                        self.tagger
-                                                            .as_deref()
-                                                            .expect("english tagger"),
-                                                        sentence_text,
-                                                    ),
+                                                    None => match &self.galician {
+                                                        Some(galician) => {
+                                                            crate::gl::analyze_galician_sentence(
+                                                                galician,
+                                                                sentence_text,
+                                                            )
+                                                        }
+                                                        None => analyze_sentence(
+                                                            self.tagger
+                                                                .as_deref()
+                                                                .expect("english tagger"),
+                                                            sentence_text,
+                                                        ),
+                                                    },
                                                 },
                                             },
                                         },
@@ -5227,6 +5373,52 @@ impl Pipeline {
                     .extend(crate::ro::rules::word_repeat_beginning(&analyzed_sentences));
             }
         }
+        // Polish text-level rules (`Polish.getRelevantRules`):
+        // UppercaseSentenceStart (2), MultipleWhitespace (4),
+        // SentenceWhitespace (5). PolishUnpairedBrackets (6) and
+        // PolishWordRepeat (8) are stage 3.
+        if self.lang == crate::Lang::Pl {
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_pl(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_pl(&analyzed_sentences));
+            }
+            if builtin_active(
+                "SENTENCE_WHITESPACE",
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_pl(&analyzed_sentences));
+            }
+        }
         text_level_matches.append(&mut matches);
         matches = text_level_matches;
         // Text-level repetition rules (`RepeatedPatternRuleTransformer`):
@@ -5371,17 +5563,25 @@ impl Pipeline {
                                                 romanian,
                                                 &text[start..end],
                                             ),
-                                            None => match &self.galician {
-                                                Some(galician) => {
-                                                    crate::gl::analyze_galician_sentence(
-                                                        galician,
-                                                        &text[start..end],
-                                                    )
-                                                }
-                                                None => analyze_sentence(
-                                                    self.tagger.as_deref().expect("english tagger"),
+                                            None => match &self.polish {
+                                                Some(polish) => crate::pl::analyze_polish_sentence(
+                                                    polish,
                                                     &text[start..end],
                                                 ),
+                                                None => match &self.galician {
+                                                    Some(galician) => {
+                                                        crate::gl::analyze_galician_sentence(
+                                                            galician,
+                                                            &text[start..end],
+                                                        )
+                                                    }
+                                                    None => analyze_sentence(
+                                                        self.tagger
+                                                            .as_deref()
+                                                            .expect("english tagger"),
+                                                        &text[start..end],
+                                                    ),
+                                                },
                                             },
                                         },
                                     },
@@ -7020,6 +7220,48 @@ impl Pipeline {
                 );
             }
         }
+        // Polish sentence-level Java rules in `Polish.getRelevantRules`
+        // order: CommaWhitespace (1), WordRepeatRule (3). UppercaseSentenceStart
+        // (2), MultipleWhitespace (4), SentenceWhitespace (5),
+        // PolishUnpairedBrackets (6) and PolishWordRepeat (8) are text-level
+        // and run above; the speller and the Polish replace/compound family
+        // are stage 2/3.
+        if self.lang == crate::Lang::Pl {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_pl(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            if let Some(polish) = &self.polish {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::pl::rules::WORD_REPEAT_RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    polish.word_repeat.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -8272,6 +8514,12 @@ impl Pipeline {
             // `Romanian.createDefaultDisambiguator` is a plain
             // `XmlRuleDisambiguator`: XML rules (+ global rules).
             romanian.disambiguate(sentence);
+            return;
+        }
+        if let Some(polish) = &self.polish {
+            // PolishHybridDisambiguator order: XML rules (+ global rules) →
+            // pl/multiwords chunker.
+            polish.disambiguate(sentence);
             return;
         }
         if let Some(norwegian) = &self.norwegian {

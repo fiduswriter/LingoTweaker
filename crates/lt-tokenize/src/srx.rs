@@ -246,6 +246,120 @@ struct Cursor {
     break_pos: Option<usize>,
 }
 
+/// Normalize Java-style constructs that `fancy-regex` cannot compile. The
+/// pinned `segment.srx` has exactly one variable-length lookbehind: the Polish
+/// Roman-numeral no-break rule's trailing `(?<=[XVI]+)`, which asserts that
+/// the matched Roman numeral ends with one of `X`/`V`/`I`; since a trailing
+/// positive lookbehind `(?<=C+)` only requires the character immediately
+/// before the current position to be in `C`, it is equivalent to the
+/// constant-size `(?<=[XVI])`. Java's `(?iu)` inline flags are also
+/// normalized (mirrors `lt-pattern`'s `strip_java_unicode_flags`).
+fn normalize_srx_pattern(pattern: &str) -> String {
+    let pattern = pattern.replace("(?<=[XVI]+)", "(?<=[XVI])");
+    let pattern = escape_class_hyphens(&pattern);
+    strip_java_unicode_flags(&pattern)
+}
+
+/// Java allows a literal `-` right after a character-class escape or a nested
+/// class inside a character class (`[\d-–]`, `[\p{Lu}-–]`); the Rust regex
+/// crate reads it as an invalid range start. Escape such hyphens.
+fn escape_class_hyphens(pattern: &str) -> String {
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len());
+    let mut in_class = 0usize;
+    let mut i = 0usize;
+    while i < chars.len() {
+        let c = chars[i];
+        if c == '\\' {
+            out.push(c);
+            if i + 1 < chars.len() {
+                out.push(chars[i + 1]);
+                i += 2;
+            } else {
+                i += 1;
+            }
+            continue;
+        }
+        if c == '[' {
+            in_class += 1;
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        if c == ']' {
+            in_class = in_class.saturating_sub(1);
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        if c == '-' && in_class > 0 {
+            let prev_is_class_end = matches!(out.chars().last(), Some('}') | Some(']'));
+            let prev_is_class_escape = i >= 2
+                && chars[i - 2] == '\\'
+                && matches!(chars[i - 1], 'd' | 'D' | 'w' | 'W' | 's' | 'S' | 'p' | 'P');
+            if prev_is_class_end || prev_is_class_escape {
+                out.push('\\');
+            }
+            out.push('-');
+            i += 1;
+            continue;
+        }
+        out.push(c);
+        i += 1;
+    }
+    out
+}
+
+/// Drop `u`/`U` from Java inline flag groups (the Rust regex crate cannot
+/// leave Unicode mode); a group left empty becomes the no-op `(?:)`.
+fn strip_java_unicode_flags(pattern: &str) -> String {
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len());
+    let mut i = 0usize;
+    while i < chars.len() {
+        if chars[i] == '\\' {
+            out.push(chars[i]);
+            if i + 1 < chars.len() {
+                out.push(chars[i + 1]);
+                i += 2;
+            } else {
+                i += 1;
+            }
+            continue;
+        }
+        if chars[i] == '(' && i + 1 < chars.len() && chars[i + 1] == '?' {
+            let mut j = i + 2;
+            let mut flags = String::new();
+            let mut is_flag_group = true;
+            while j < chars.len() && chars[j] != ')' {
+                if matches!(chars[j], 'i' | 'm' | 's' | 'x' | 'u' | 'U' | 'd' | '-') {
+                    flags.push(chars[j]);
+                    j += 1;
+                } else {
+                    is_flag_group = false;
+                    break;
+                }
+            }
+            if is_flag_group && !flags.is_empty() && j < chars.len() && chars[j] == ')' {
+                let cleaned: String = flags.chars().filter(|c| !matches!(c, 'u' | 'U')).collect();
+                let cleaned = cleaned.trim_end_matches('-');
+                if cleaned.is_empty() {
+                    out.push_str("(?:)");
+                } else {
+                    out.push_str("(?");
+                    out.push_str(cleaned);
+                    out.push(')');
+                }
+                i = j + 1;
+                continue;
+            }
+        }
+        out.push(chars[i]);
+        i += 1;
+    }
+    out
+}
+
 /// Compiled, cascaded rule set for one language.
 #[derive(Debug)]
 pub struct SrxTokenizer {
@@ -269,12 +383,14 @@ impl SrxTokenizer {
         for rule in doc.rules_for(language_code) {
             if rule.is_break {
                 let exceptions: Vec<usize> = (0..pending_no_break.len()).collect();
+                let before = normalize_srx_pattern(&rule.before);
+                let after = normalize_srx_pattern(&rule.after);
                 break_rules.push(CompiledBreakRule {
-                    before: FancyRegex::new(&rule.before).map_err(|e| {
-                        lt_core::CoreError::Parse("srx-before".into(), e.to_string())
+                    before: FancyRegex::new(&before).map_err(|e| {
+                        lt_core::CoreError::Parse("srx-before".into(), format!("{before}: {e}"))
                     })?,
-                    after: FancyRegex::new(&rule.after).map_err(|e| {
-                        lt_core::CoreError::Parse("srx-after".into(), e.to_string())
+                    after: FancyRegex::new(&after).map_err(|e| {
+                        lt_core::CoreError::Parse("srx-after".into(), format!("{after}: {e}"))
                     })?,
                     exceptions,
                 });
@@ -284,10 +400,14 @@ impl SrxTokenizer {
         }
         let mut no_break_compiled = Vec::new();
         for (before, after) in pending_no_break {
-            let re_before = FancyRegex::new(&before)
-                .map_err(|e| lt_core::CoreError::Parse("srx-before".into(), e.to_string()))?;
-            let re_after = FancyRegex::new(&after)
-                .map_err(|e| lt_core::CoreError::Parse("srx-after".into(), e.to_string()))?;
+            let before = normalize_srx_pattern(&before);
+            let after = normalize_srx_pattern(&after);
+            let re_before = FancyRegex::new(&before).map_err(|e| {
+                lt_core::CoreError::Parse("srx-before".into(), format!("{before}: {e}"))
+            })?;
+            let re_after = FancyRegex::new(&after).map_err(|e| {
+                lt_core::CoreError::Parse("srx-after".into(), format!("{after}: {e}"))
+            })?;
             no_break_compiled.push((re_before, re_after));
         }
         // the segment library applies `break="no"` rules as global exceptions

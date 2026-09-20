@@ -133,6 +133,16 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
+pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Powtórzenie spacji (błędne formatowanie)",
+        "Prawdopodobna literówka: wiele spacji z rzędu",
+        ("TYPOGRAPHY", "Błędy typograficzne"),
+    )
+}
+
 /// `MultipleWhitespaceRule.match` over all sentences.
 pub fn check(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

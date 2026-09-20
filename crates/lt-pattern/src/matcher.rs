@@ -196,6 +196,10 @@ fn compile_regex_uncached(
     anchored: bool,
 ) -> Result<TextRegex, String> {
     let pattern = normalize_java_surrogate_escapes(&drop_quantified_anchors(pattern));
+    let pattern = normalize_java_octal_escapes(&pattern);
+    // Java inline flag groups such as `(?-iu)` cannot be left as-is: the Rust
+    // regex crate cannot disable Unicode mode (Polish `DNI_TYGODNIA`).
+    let pattern = strip_java_unicode_flags(&pattern);
     // Java accepts `(?-)` as a flag reset with no flags (used by the French
     // rules as `(?-)[A-Z]`); the Rust engines reject the empty flag list.
     let pattern = pattern.replace("(?-)", "");
@@ -270,6 +274,42 @@ fn normalize_java_surrogate_escapes(pattern: &str) -> String {
         let ch = pattern[i..].chars().next().unwrap();
         out.push(ch);
         i += ch.len_utf8();
+    }
+    out
+}
+
+/// Java octal escapes (`\02`, `\012`, `\0mnn`) have no Rust regex
+/// equivalent; convert them to `\x{...}` (Polish `BRAK_KROPKI` uses `[\02]`).
+fn normalize_java_octal_escapes(pattern: &str) -> String {
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len());
+    let mut i = 0usize;
+    while i < chars.len() {
+        if chars[i] == '\\' {
+            if i + 2 < chars.len() && chars[i + 1] == '0' && chars[i + 2].is_digit(8) {
+                let mut digits = String::new();
+                let mut k = i + 2;
+                while k < chars.len() && digits.len() < 3 && chars[k].is_digit(8) {
+                    digits.push(chars[k]);
+                    k += 1;
+                }
+                if let Ok(value) = u32::from_str_radix(&digits, 8) {
+                    out.push_str(&format!("\\x{{{value:X}}}"));
+                    i = k;
+                    continue;
+                }
+            }
+            out.push(chars[i]);
+            if i + 1 < chars.len() {
+                out.push(chars[i + 1]);
+                i += 2;
+            } else {
+                i += 1;
+            }
+            continue;
+        }
+        out.push(chars[i]);
+        i += 1;
     }
     out
 }
@@ -1118,6 +1158,7 @@ pub fn normalize_java_quantifiers(pattern: &str) -> String {
 /// `fancy-regex` rejects it, so normalize that one case.
 fn java_regex(pattern: &str) -> Option<FancyRegex> {
     let pattern = normalize_java_quantifiers(pattern);
+    let pattern = normalize_java_octal_escapes(&pattern);
     let pattern = strip_java_unicode_flags(&pattern);
     if let Ok(re) = FancyRegex::new(&pattern) {
         return Some(re);

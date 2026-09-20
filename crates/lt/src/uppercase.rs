@@ -183,6 +183,18 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Polish `MessagesBundle_pl` strings.
+pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "To zdanie nie zaczyna się wielką literą",
+        "Pisownia małą i wielką literą",
+        "Test, czy zdanie zaczyna się wielką literą",
+        "Pisownia małą i wielką literą",
+        false,
+    )
+}
+
 fn check_with(
     sentences: &[AnalyzedSentence],
     message: &str,

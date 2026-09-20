@@ -221,6 +221,21 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &STRINGS_GL)
 }
 
+/// `SentenceWhitespaceRule` with the Polish `MessagesBundle_pl` strings
+/// (Java constructor default `maxSpacesBetweenSentences` = 1).
+const STRINGS_PL: Strings = Strings {
+    description: "Brak spacji między zdaniami",
+    repeated_message: "Prawdopodobna literówka: wiele spacji z rzędu",
+    add_space_message: "Dodaj spację między zdaniami",
+    category_name: "Błędy typograficzne",
+    max_spaces_between_sentences: 1,
+};
+
+/// `SentenceWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
+pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &STRINGS_PL)
+}
+
 fn strings_pt(variant: &str) -> &'static Strings {
     const PT_PT_STRINGS: Strings = Strings {
         description: "Falta um espaço entre as frases",

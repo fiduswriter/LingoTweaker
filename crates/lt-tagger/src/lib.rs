@@ -24,6 +24,8 @@ pub mod german_synth;
 pub mod italian;
 pub mod italian_synth;
 pub mod manual_synth;
+pub mod polish;
+pub mod polish_synth;
 pub mod portuguese;
 pub mod portuguese_synth;
 pub mod romanian;
@@ -51,6 +53,8 @@ pub use german_synth::GermanSynthesizer;
 pub use italian::ItalianTagger;
 pub use italian_synth::ItalianSynthesizer;
 pub use manual_synth::ManualSynthesizer;
+pub use polish::PolishTagger;
+pub use polish_synth::PolishSynthesizer;
 pub use portuguese::PortugueseTagger;
 pub use portuguese_synth::PortugueseSynthesizer;
 pub use romanian::RomanianTagger;
@@ -533,10 +537,78 @@ impl ManualTagger {
     }
 }
 
+/// The `.info` `fsa.dict.encoder` sequence encoder (morfologik
+/// `EncoderType`): how a stored annotation is reconstructed relative to the
+/// FSA path. LT dictionaries are mostly `SUFFIX`; Polish's PoliMorf
+/// dictionaries use `PREFIX` (`TrimPrefixAndSuffixEncoder`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum DictEncoder {
+    /// `TrimSuffixEncoder`: `{trim}{suffix}` — trim `trim` bytes off the end
+    /// of the path and append the suffix.
+    Suffix,
+    /// `TrimPrefixAndSuffixEncoder`: `{P}{K}{suffix}` — trim `P` bytes off
+    /// the start and `K` bytes off the end of the path, then append.
+    Prefix,
+    /// `NoEncoder`: the annotation is the complete value.
+    None,
+}
+
+impl DictEncoder {
+    fn from_info(info: &DictionaryInfo) -> Self {
+        match info.fields.get("fsa.dict.encoder").map(|s| s.as_str()) {
+            Some(v) if v.eq_ignore_ascii_case("PREFIX") => DictEncoder::Prefix,
+            Some(v) if v.eq_ignore_ascii_case("NONE") => DictEncoder::None,
+            _ => DictEncoder::Suffix,
+        }
+    }
+
+    /// Bytes of trim header before the literal suffix in the annotation.
+    fn header_bytes(self) -> usize {
+        match self {
+            DictEncoder::Suffix => 1,
+            DictEncoder::Prefix => 2,
+            DictEncoder::None => 0,
+        }
+    }
+
+    /// Decode `(trim_prefix, trim_suffix)` from the header of `ann` for a
+    /// `path_len`-byte FSA path; `REMOVE_EVERYTHING` (255) means the whole
+    /// path is dropped.
+    fn trim(self, ann: &[u8], path_len: usize) -> Option<(usize, usize)> {
+        let code = |b: u8| ((b as i32) - (b'A' as i32)) & 0xFF;
+        match self {
+            DictEncoder::None => Some((0, 0)),
+            DictEncoder::Suffix => {
+                if ann.is_empty() {
+                    return None;
+                }
+                let t = code(ann[0]);
+                if t == 255 {
+                    Some((0, path_len))
+                } else {
+                    Some((0, t as usize))
+                }
+            }
+            DictEncoder::Prefix => {
+                if ann.len() < 2 {
+                    return None;
+                }
+                let p = code(ann[0]);
+                let k = code(ann[1]);
+                if p == 255 || k == 255 {
+                    Some((0, path_len))
+                } else {
+                    Some((p as usize, k as usize))
+                }
+            }
+        }
+    }
+}
+
 /// A Morfologik dictionary: surface form → decoded readings (stem, tag),
 /// decoded on demand from the automaton. The stored annotation is
-/// suffix-encoded per the `.info` encoder (LT dictionaries use `SUFFIX`):
-/// first byte is a trim code, then the stem remainder, separator, and tag.
+/// trim-encoded per the `.info` encoder (mostly `SUFFIX`, Polish `PREFIX`):
+/// the trim header, then the stem remainder, separator, and tag.
 ///
 /// The automaton is walked per lookup instead of being expanded into a
 /// `HashMap` up front: the German `german.dict` expansion alone used ~745 MB
@@ -545,14 +617,13 @@ impl ManualTagger {
 pub struct Dictionary {
     automaton: Automaton,
     separator: u8,
+    encoder: DictEncoder,
     /// `.info` `fsa.dict.encoding` (ISO-8859-15 for Italian).
     charset: Charset,
     /// `.info` `fsa.dict.frequency-included`: the tag's last byte is a
     /// frequency marker (Java `MorfologikTagger` strips it).
     frequency_included: bool,
 }
-
-const REMOVE_EVERYTHING: i32 = 255;
 
 impl Dictionary {
     /// Load `.dict` + `.info` pair.
@@ -583,6 +654,7 @@ impl Dictionary {
         Ok(Self {
             automaton,
             separator,
+            encoder: DictEncoder::from_info(info),
             charset,
             frequency_included,
         })
@@ -604,6 +676,7 @@ impl Dictionary {
         };
         let separator = self.separator;
         let charset = self.charset;
+        let encoder = self.encoder;
         let mut out = Vec::new();
         // Only the separator-labeled arcs at the word node carry this word's
         // annotations; descending into letter arcs would walk the subtree of
@@ -611,7 +684,14 @@ impl Dictionary {
         // dominated the German tagger).
         self.automaton
             .visit_sequences_with_first(node, separator, &mut |seq: &[u8]| {
-                decode_annotation(&word_bytes, &seq[1..], separator, charset, &mut out);
+                decode_annotation(
+                    &word_bytes,
+                    &seq[1..],
+                    separator,
+                    charset,
+                    encoder,
+                    &mut out,
+                );
             });
         if self.frequency_included {
             for (_, tag) in &mut out {
@@ -624,35 +704,41 @@ impl Dictionary {
     }
 }
 
-/// Decode one `[trimCode][stem remainder][sep][tag]` annotation: the trim
-/// counts *bytes* and the stem is the byte concatenation of the trimmed
-/// surface and the encoded suffix (`TrimSuffixEncoder.decode`), so the
-/// concatenation must happen before UTF-8 decoding (German umlauts split
-/// across the boundary).
+/// Decode one `[trim header][stem remainder][sep][tag]` annotation. The trim
+/// counts *bytes* of the surface path and the stem is the byte concatenation
+/// of the trimmed surface and the encoded suffix (`TrimSuffixEncoder.decode` /
+/// `TrimPrefixAndSuffixEncoder.decode`), so the concatenation must happen
+/// before UTF-8 decoding (German umlauts split across the boundary).
 fn decode_annotation(
     surface_bytes: &[u8],
     ann: &[u8],
     separator: u8,
     charset: Charset,
+    encoder: DictEncoder,
     out: &mut Vec<(String, String)>,
 ) {
     if ann.is_empty() {
         return;
     }
-    let Some(tag_sep) = ann[1..].iter().position(|&b| b == separator).map(|p| p + 1) else {
-        return;
-    };
-    let trim_raw = ((ann[0] as i32) - (b'A' as i32)) & 0xFF;
-    let trim = if trim_raw == REMOVE_EVERYTHING {
-        surface_bytes.len()
-    } else {
-        trim_raw as usize
-    };
-    if trim > surface_bytes.len() {
+    let header = encoder.header_bytes();
+    if ann.len() < header {
         return;
     }
-    let mut stem_bytes = surface_bytes[..surface_bytes.len() - trim].to_vec();
-    stem_bytes.extend_from_slice(&ann[1..tag_sep]);
+    let Some(tag_sep) = ann[header..]
+        .iter()
+        .position(|&b| b == separator)
+        .map(|p| p + header)
+    else {
+        return;
+    };
+    let Some((trim_prefix, trim_suffix)) = encoder.trim(ann, surface_bytes.len()) else {
+        return;
+    };
+    if trim_prefix + trim_suffix > surface_bytes.len() {
+        return;
+    }
+    let mut stem_bytes = surface_bytes[trim_prefix..surface_bytes.len() - trim_suffix].to_vec();
+    stem_bytes.extend_from_slice(&ann[header..tag_sep]);
     out.push((
         charset.decode(&stem_bytes).into_owned(),
         charset.decode(&ann[tag_sep + 1..]).into_owned(),
@@ -660,16 +746,16 @@ fn decode_annotation(
 }
 
 /// Morfologik synthesizer dictionary (`BaseSynthesizer`/`DictionaryLookup`):
-/// the automaton spells `<lemma>|<tag>+<trimCode><suffix>` (SUFFIX encoder).
+/// the automaton spells `<lemma>|<tag>` followed by the trim-encoded inflected
+/// form (`SUFFIX` for most languages, `PREFIX` for Polish).
 /// `lookup("lemma|tag")` decodes the inflected forms.
 #[derive(Debug, Clone)]
 pub struct SynthDictionary {
     automaton: Automaton,
     separator: u8,
+    encoder: DictEncoder,
     charset: Charset,
 }
-
-const REMOVE_EVERYTHING_CODE: i32 = 255;
 
 impl SynthDictionary {
     pub fn load(dict_path: &Path, info: &DictionaryInfo) -> Result<Self> {
@@ -691,6 +777,7 @@ impl SynthDictionary {
         Ok(Self {
             automaton,
             separator,
+            encoder: DictEncoder::from_info(info),
             charset,
         })
     }
@@ -709,26 +796,28 @@ impl SynthDictionary {
         };
         let separator = self.separator;
         let charset = self.charset;
+        let encoder = self.encoder;
         let mut out = Vec::new();
         self.automaton
             .visit_sequences_with_first(node, separator, &mut |seq: &[u8]| {
-                if seq.len() < 2 {
+                if seq.is_empty() {
                     return;
                 }
-                let trim_raw = (seq[1] as i32) - (b'A' as i32);
-                let trim = if trim_raw == REMOVE_EVERYTHING_CODE {
-                    key_bytes.len()
-                } else if trim_raw < 0 {
+                let ann = &seq[1..];
+                let header = encoder.header_bytes();
+                if ann.len() < header {
                     return;
-                } else {
-                    trim_raw as usize
+                }
+                let Some((trim_prefix, trim_suffix)) = encoder.trim(ann, key_bytes.len()) else {
+                    return;
                 };
-                if trim > key_bytes.len() {
+                if trim_prefix + trim_suffix > key_bytes.len() {
                     return;
                 }
-                // byte concatenation first (`TrimSuffixEncoder.decode`), decode after
-                let mut stem_bytes = key_bytes[..key_bytes.len() - trim].to_vec();
-                stem_bytes.extend_from_slice(&seq[2..]);
+                // byte concatenation first (`TrimSuffixEncoder.decode` /
+                // `TrimPrefixAndSuffixEncoder.decode`), decode after
+                let mut stem_bytes = key_bytes[trim_prefix..key_bytes.len() - trim_suffix].to_vec();
+                stem_bytes.extend_from_slice(&ann[header..]);
                 // The old morfologik `tab2morph` build (Galician) appends the
                 // field separator as an entry terminator; morfologik's
                 // `DictionaryLookup` never exposes it.

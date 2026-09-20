@@ -47,6 +47,8 @@ pub enum Lang {
     Gl,
     /// Romanian (`ro`).
     Ro,
+    /// Polish (`pl`).
+    Pl,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -58,7 +60,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 13] = [
+    pub const ALL: [Lang; 14] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -69,6 +71,7 @@ impl Lang {
         Lang::Ca,
         Lang::Gl,
         Lang::Ro,
+        Lang::Pl,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -89,6 +92,7 @@ impl Lang {
             "ca" => Some(Lang::Ca),
             "gl" => Some(Lang::Gl),
             "ro" => Some(Lang::Ro),
+            "pl" => Some(Lang::Pl),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -108,6 +112,7 @@ impl Lang {
             Lang::Ca => "ca",
             Lang::Gl => "gl",
             Lang::Ro => "ro",
+            Lang::Pl => "pl",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -166,6 +171,11 @@ impl Lang {
                 code: "ro",
                 long_code: "ro",
                 name: "Romanian",
+            },
+            Lang::Pl => Language {
+                code: "pl",
+                long_code: "pl",
+                name: "Polish",
             },
             Lang::No => Language {
                 code: "no",

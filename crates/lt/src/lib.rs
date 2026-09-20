@@ -48,6 +48,7 @@ mod no;
 mod nrd;
 mod paragraph;
 mod pipeline;
+mod pl;
 mod pt;
 mod readability;
 mod repeated_words;
@@ -337,6 +338,12 @@ impl EngineBuilder {
                 &self.options.enabled_rules,
                 self.variant.as_deref(),
             )?,
+            Lang::Pl => Pipeline::new_polish(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
             Lang::No => Pipeline::new_norwegian(
                 &data_dir,
                 self.today,
@@ -433,6 +440,9 @@ impl Engine {
         }
         if let Some(romanian) = &self.pipeline.romanian {
             return romanian.disambiguator.rules_len();
+        }
+        if let Some(polish) = &self.pipeline.polish {
+            return polish.disambiguator.rules_len();
         }
         if let Some(norwegian) = &self.pipeline.norwegian {
             return norwegian.disambiguator.rules_len();
