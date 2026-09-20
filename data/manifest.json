@@ -4444,8 +4444,8 @@
     },
     {
       "path": "nrd/rules/endonyms.txt",
-      "sha256": "a5ea53984aa6429b447f7b8b1e07ae0cb0d363000d5b023e7c7037194aa81194",
-      "size": 230,
+      "sha256": "07127cc29a97a0ac538bf4cc2a57ea453d0681f903c5e999a712a26e991b1aad",
+      "size": 245,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",

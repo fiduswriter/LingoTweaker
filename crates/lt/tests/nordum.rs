@@ -106,6 +106,8 @@ fn nordum_rules_fire() {
         ("Vad du gør i dag?", "NDM_WH_QUESTION"),
         ("Du arbeider?", "NDM_YN_QUESTION_SHORT"),
         ("Spanien", "NDM_ENDONYMS"),
+        ("Spania", "NDM_ENDONYMS"),
+        ("eg", "NDM_SOURCE_FORMS"),
         ("Jei jei arbeider.", "NDM_WORD_REPETITION"),
         ("barn hage", "NDM_COMPOUND"),
         ("barnehage", "NDM_COMPOUND"),
@@ -148,6 +150,8 @@ fn nordum_correct_sentences() {
         "Vad gør du i dag?",
         "Arbeider du?",
         "España",
+        "Det er en bra dag. Jei bakka bilen. Jei har en computer. \
+         Mellem huset og skogen arbeider femti personer. Norsk og dansk er bra språk.",
         "nordum",
         "Ja ja, jei kommer.",
         "barnhage",

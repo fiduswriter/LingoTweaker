@@ -1,6 +1,7 @@
 # Nordum — geographic endonyms (NDM_ENDONYMS; spec §5.6).
 # Tyskland/Østerrike remain permitted alternatives and are not listed.
 Spanien=España
+Spania=España
 Holland=Nederland
 Grækenland=Hellas
 Italien=Italia
