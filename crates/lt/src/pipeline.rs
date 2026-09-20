@@ -3179,6 +3179,20 @@ impl Pipeline {
         .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
         mark("chunker");
 
+        // `MorfologikPolishSpellerRule` (7), default on. A load failure would
+        // only disable the speller, not the engine.
+        let spelling = match crate::pl::spelling::PolishSpellingRule::load(
+            data_dir.path(),
+            Arc::clone(&tagger),
+        ) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[pl] spelling rule disabled: {err}");
+                None
+            }
+        };
+        mark("speller");
+
         let polish = Arc::new(crate::pl::PolishPipeline {
             tagger,
             synthesizer: synth,
@@ -3186,6 +3200,7 @@ impl Pipeline {
             multiwords_chunker,
             disambiguator,
             word_repeat: crate::pl::rules::WordRepeatSentenceRule::new(),
+            spelling,
         });
         Ok(Self {
             lang: Lang::Pl,
@@ -7260,6 +7275,25 @@ impl Pipeline {
                     polish.word_repeat.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
+                // `MorfologikPolishSpellerRule` (7), default on
+                if let Some(spelling) = &polish.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::pl::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
             }
         }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`

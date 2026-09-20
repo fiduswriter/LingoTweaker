@@ -13,6 +13,7 @@ use lt_pattern::Synthesizer;
 
 pub mod filters;
 pub mod rules;
+pub mod spelling;
 
 /// `PolishHybridDisambiguator` calls
 /// `chunker.disambiguate(disambiguator.disambiguate(input))`: the XML rule
@@ -27,6 +28,8 @@ pub struct PolishPipeline {
     pub disambiguator: lt_disambig::XmlDisambiguator,
     /// `WordRepeatRule` (3), the generic built-in over the Polish tokens.
     pub word_repeat: crate::pl::rules::WordRepeatSentenceRule,
+    /// `MorfologikPolishSpellerRule` (`MORFOLOGIK_RULE_PL_PL`, rule 7).
+    pub spelling: Option<Arc<crate::pl::spelling::PolishSpellingRule>>,
 }
 
 impl PolishPipeline {
