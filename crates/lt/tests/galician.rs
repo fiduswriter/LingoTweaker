@@ -112,7 +112,7 @@ fn galician_legacy_replace_rules() {
 
 /// `HunspellRule` (`HUNSPELL_RULE`) over the `FLAG num` `gl_ES` dictionary:
 /// a clear misspelling fires with the `MessagesBundle_gl` message. The
-/// suggestion list still comes from the shared bounded search, not the legacy engine's
+/// suggestion list still comes from the shared bounded search, not upstream's
 /// native `hunspell.suggest` ranking (internal notes/D-195).
 #[test]
 fn galician_speller() {
@@ -121,6 +121,16 @@ fn galician_speller() {
     assert_eq!(matches[0].message, "Atopouse un posíbel erro ortográfico");
     let clean = one("O mundo.", "HUNSPELL_RULE");
     assert!(clean.is_empty(), "{clean:?}");
+}
+
+/// Standalone `é` is accepted: it is derived from the allomorph entry
+/// `érer` via the empty-append suffix `SFX 322 rer 0/… érer`, whose condition
+/// is byte-reversed UTF-8 (`test_condition_suffix` must advance past the
+/// reversed lead byte).
+#[test]
+fn galician_speller_accepts_affix_derived_e_acute() {
+    let matches = one("O ano é bo.", "HUNSPELL_RULE");
+    assert!(matches.is_empty(), "{matches:?}");
 }
 
 /// `AbstractSimpleReplaceRule2` family (17–20), one match each with the

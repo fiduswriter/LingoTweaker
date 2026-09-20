@@ -2375,12 +2375,18 @@ fn test_condition_suffix(cond: &[u8], numconds: usize, word: &[u8]) -> bool {
                     p += 1;
                     if word[st as usize] & 0x80 != 0 {
                         st -= 1;
-                        while p < cond.len() && cond[p] & 0xC0 == 0x80 && st >= beg {
+                        while p < cond.len() && st >= beg {
                             if cond[p] != word[st as usize] {
                                 if pos.is_none() {
                                     return false;
                                 }
                                 st = pos.unwrap();
+                                break;
+                            }
+                            // First byte of the UTF-8 multibyte character:
+                            // stop here (the byte-reversed condition holds the
+                            // lead byte last), the advance below moves past it.
+                            if cond[p] & 0xC0 != 0x80 {
                                 break;
                             }
                             p += 1;
@@ -2397,6 +2403,9 @@ fn test_condition_suffix(cond: &[u8], numconds: usize, word: &[u8]) -> bool {
                                 p += 1;
                             }
                             st -= 1;
+                        }
+                        if p < cond.len() && cond[p] != b']' {
+                            p += 1;
                         }
                     } else if pos.is_some() {
                         if neg {
