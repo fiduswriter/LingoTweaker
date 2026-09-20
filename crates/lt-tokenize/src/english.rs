@@ -371,28 +371,9 @@ impl<'a> EnglishWordTokenizer<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use lt_data::PathExt as _;
 
     fn tagged_all_true() -> impl Fn(&str) -> bool {
         |_| false
-    }
-
-    #[test]
-    fn splits_contractions_like_lt() {
-        // with the real tagger, "n't" is a dictionary word and stays intact
-        let dir =
-            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/en/dictionaries");
-        if !dir.lt_exists() {
-            eprintln!("skipping: no vendored data");
-            return;
-        }
-        let info = lt_tagger::DictionaryInfo::load(&dir.join("english.info")).unwrap();
-        let dict = lt_tagger::Dictionary::load(&dir.join("english.dict"), &info).unwrap();
-        let tagger = lt_tagger::EnglishTagger::new(dict);
-        let callback = |w: &str| tagger.is_tagged(w);
-        let tok = EnglishWordTokenizer::new(&callback);
-        assert_eq!(tok.tokenize("don't"), vec!["do", "n't"]);
-        assert_eq!(tok.tokenize("it's fine"), vec!["it", "'s", " ", "fine"]);
     }
 
     #[test]

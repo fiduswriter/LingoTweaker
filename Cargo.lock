@@ -955,7 +955,6 @@ dependencies = [
  "fancy-regex",
  "lt-core",
  "lt-data",
- "lt-tagger",
  "quick-xml",
  "regex",
 ]

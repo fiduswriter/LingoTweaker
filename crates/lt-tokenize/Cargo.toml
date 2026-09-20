@@ -13,6 +13,8 @@ lt-data = { workspace = true }
 regex = { workspace = true }
 fancy-regex = "0.14"
 quick-xml = { workspace = true }
-
-[dev-dependencies]
-lt-tagger = { workspace = true }
+# NOTE: no dev-dependency on `lt-tagger` here. `lt-tagger` depends on
+# `lt-tokenize`, so a dev-dependency back-edge makes both crates
+# unpublishable to crates.io (dev-dependencies take part in publish
+# resolution). The contraction test that needs the real tagger lives in
+# `crates/lt-tagger/tests/english_tokenizer.rs` instead.
