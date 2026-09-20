@@ -45,7 +45,7 @@ scripts/ci/parity.sh no|nrd|gn                 # tests-only gate
 Diffs the full per-language corpus against the pinned Java `CheckDump` goldens
 in `docs/parity/golden/` (captured once with Docker); the CI `parity` matrix
 runs the affected languages per push/PR (all gated languages when shared code
-changed, no language job for docs-only changes). de/es/it/nl must be 0
+changed, no language job for docs-only changes). de/es/it/nl/ca must be 0
 only-Java / 0 only-Rust / 0 field diffs; en allows exactly the one documented
 `ADVERB_VERB_ADVERB_REPETITION` field diff, fr the documented divergences
 #3/#4/#5 and pt #6. `no`, `nrd` and `gn` are hand-authored languages with no

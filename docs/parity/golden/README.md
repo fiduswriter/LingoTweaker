@@ -15,7 +15,7 @@ re-runs the Rust side and diffs against the golden.
 | it | `it-full.txt` (275) | `it-full.java.tsv` |
 | pt | `pt-full.txt` (9,151) | `pt-full.java.tsv` |
 | nl | `nl-full.txt` (7,264) | `nl-full.java.tsv` |
-| ca | `ca-full.txt` (25,626) | `ca-full.java.tsv` (not yet in the gate, D-158) |
+| ca | `ca-full.txt` (25,626) | `ca-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt = all example texts (embedded
@@ -27,8 +27,8 @@ re-runs the Rust side and diffs against the golden.
 - The date filters are pinned in `scripts/ci/parity.sh`: en/de/es use
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
-  their capture date `2026-09-19`.
-- Expected state: de/es/it/nl exactly 0 only-Java / 0 only-Rust / 0 field
+  their capture date `2026-09-19`, and ca uses its capture date `2026-09-20`.
+- Expected state: de/es/it/nl/ca exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
   (`ADVERB_VERB_ADVERB_REPETITION`, `docs/differences.md` #1); fr has exactly
@@ -38,19 +38,16 @@ re-runs the Rust side and diffs against the golden.
   `PODER_SER_POSSIVEL` = 1 field diff (#6). All allowances are encoded with
   `--expect-field-diffs`/`--expect-only-java` in the gate and validated
   exactly (fewer *or* more diffs than expected fail). The CI `parity` matrix
-  runs the affected languages, not a static list (all seven on shared
+  runs the affected languages, not a static list (all eight on shared
   changes, one language on language-local changes, none for docs-only
-  changes; P6.3/D-134). nl is exactly 0/0/0 (D-133).
+  changes; P6.3/D-134). nl is exactly 0/0/0 (D-133); ca is exactly 0/0/0
+  (D-188…D-190).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca   # rewrites <lang>-full.java.tsv
 ```
-
-`ca` has a captured golden (2026-09-20, D-158) and
-`scripts/oracle/ca/check-diff-ca.sh`, but the CI gate entry lands only after
-the corpus is at 0/0/0 or the divergences are documented as allowances.
 
 If the capture date differs from `PARITY_TODAY`, update the pin in
 `scripts/ci/parity.sh` (and this README) in the same commit.
