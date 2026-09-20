@@ -24,3 +24,14 @@ demo/public/rules/
 # Publish-only facade crate (own workspace): local build artifacts and lockfile
 crates/lingotweaker/target/
 crates/lingotweaker/Cargo.lock
+
+# napi-rs build output (generated at release time by `napi build`)
+crates/lt-node/node_modules/
+crates/lt-node/index.js
+crates/lt-node/index.d.ts
+crates/lt-node/*.node
+crates/lt-node/*.tgz
+
+# maturin / Python build output
+crates/lt-py/target/
+/target/wheels/

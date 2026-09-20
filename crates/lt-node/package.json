@@ -1,0 +1,42 @@
+{
+  "name": "lingotweaker",
+  "version": "0.1.0-alpha.1",
+  "description": "Proofreading engine for many languages: Rust core with Node.js bindings",
+  "license": "LGPL-2.1-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiduswriter/LingoTweaker.git"
+  },
+  "homepage": "https://fiduswriter.github.io/LingoTweaker/",
+  "keywords": [
+    "proofreading",
+    "grammar",
+    "spellcheck",
+    "nlp",
+    "language"
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "*.node",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">= 18"
+  },
+  "napi": {
+    "binaryName": "lt-node",
+    "targets": [
+      "x86_64-unknown-linux-gnu"
+    ]
+  },
+  "scripts": {
+    "build": "napi build --platform --release",
+    "artifacts": "napi artifacts"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "3.10.4"
+  }
+}

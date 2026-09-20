@@ -1,0 +1,31 @@
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "lingotweaker"
+description = "Proofreading engine for many languages: Rust core with Python bindings"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "LGPL-2.1-or-later" }
+keywords = ["proofreading", "grammar", "spellcheck", "nlp", "language"]
+dynamic = ["version"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Rust",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Text Processing :: Linguistic",
+]
+
+[project.urls]
+Homepage = "https://fiduswriter.github.io/LingoTweaker/"
+Repository = "https://github.com/fiduswriter/LingoTweaker"
+Changelog = "https://github.com/fiduswriter/LingoTweaker/releases"
+
+[tool.maturin]
+# PyO3 module defined by `#[pymodule] fn lt_py` in src/lib.rs.
+module-name = "lt_py"
+# The Rust crate is a workspace member; keep the sdist reproducible by
+# including the sibling crates the engine path-depends on.
+sdist-include = ["src/**", "Cargo.toml", "README.md", "pyproject.toml", "../../README.md", "../../LICENSE", "../../THIRD_PARTY_NOTICES.md", "../../crates/**"]
