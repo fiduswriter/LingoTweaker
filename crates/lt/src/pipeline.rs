@@ -7875,6 +7875,9 @@ impl Pipeline {
         if let Some(catalan) = &self.catalan {
             return Some(catalan.synth_adapter.as_ref());
         }
+        if let Some(galician) = &self.galician {
+            return Some(galician.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)

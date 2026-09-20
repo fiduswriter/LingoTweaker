@@ -133,6 +133,23 @@ fn galician_speller_accepts_affix_derived_e_acute() {
     assert!(matches.is_empty(), "{matches:?}");
 }
 
+/// `GENERAL_GENDER_AGREEMENT_ERRORS` (sub-rule 1) `<match postag_replace>`
+/// suggestions: the shared pattern engine must render both the inflected form
+/// (`Unha vaca`) and the parenthesized failed match (`Un (vaca)`) exactly like
+/// the legacy engine, which needs the Galician synthesizer wired into
+/// `Pipeline::synthesizer()`.
+#[test]
+fn galician_gender_agreement_suggestions() {
+    let matches = one("Un vaca está no prado.", "GENERAL_GENDER_AGREEMENT_ERRORS");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    let values: Vec<&str> = matches[0]
+        .suggestions
+        .iter()
+        .map(|s| s.value.as_str())
+        .collect();
+    assert_eq!(values, ["Unha vaca", "Un (vaca)"]);
+}
+
 /// `AbstractSimpleReplaceRule2` family (17–20), one match each with the
 /// rule's first suggestion.
 #[test]
