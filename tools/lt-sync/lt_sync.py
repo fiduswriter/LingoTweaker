@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -274,6 +274,15 @@ IN_TREE_ARTIFACTS = {
         "resource/ro/romanian_synth.info": "ro/dictionaries/romanian_synth.info",
         "resource/ro/romanian_tags.txt": "ro/dictionaries/romanian_tags.txt",
     },
+    # Polish ships the PoliMorf 2.0 POS/synthesis dictionaries in-tree
+    # (`PolishTagger` / `PolishSynthesizer`).
+    "pl": {
+        "resource/pl/polish.dict": "pl/dictionaries/polish.dict",
+        "resource/pl/polish.info": "pl/dictionaries/polish.info",
+        "resource/pl/polish_synth.dict": "pl/dictionaries/polish_synth.dict",
+        "resource/pl/polish_synth.info": "pl/dictionaries/polish_synth.info",
+        "resource/pl/polish_tags.txt": "pl/dictionaries/polish_tags.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -350,6 +359,13 @@ IN_TREE_LICENSES = {
         True,
         "upstream ro/README.txt",
     ),
+    "pl": (
+        "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; "
+        "upstream pl/README.txt copyright Marcin Miłkowski, redistribution "
+        "permitted with the notice)",
+        True,
+        "upstream pl/README.txt (LICENCE section)",
+    ),
 }
 
 # Per-language hunspell dictionaries with documented third-party licenses.
@@ -416,6 +432,23 @@ def hunspell_license(lang: str, name: str):
                 "ro_RO spelling dictionary; ro/hunspell/README_EN.txt)",
                 False,
                 "upstream ro/hunspell/README_EN.txt",
+            )
+    if lang == "pl":
+        if name.startswith("README"):
+            return (
+                "GPL / LGPL / MPL / CC-BY-SA (sjp.pl-derived Polish spelling "
+                "dictionary; pl/hunspell/README_en.txt)",
+                True,
+                "upstream pl/hunspell/README_en.txt",
+            )
+        if name.startswith("pl_PL."):
+            # Morfologik conversion of the multi-licensed pl_PL hunspell
+            # dictionary; the conversion is a derived build.
+            return (
+                "GPL / LGPL / MPL / CC-BY-SA (converted from the pl_PL "
+                "spelling dictionary; pl/hunspell/README_en.txt)",
+                False,
+                "upstream pl/hunspell/README_en.txt",
             )
     return None
 
@@ -781,7 +814,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

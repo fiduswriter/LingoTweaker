@@ -1,0 +1,14 @@
+# words to be removed from the dictionary (LT-side restrictions, 2026-08)
+# the polak- family: lowercase is the FSO car brand "Polak"; the common-name
+# usage is spelled "Polak" (capitalized) after the 2026 name-capitalization rule.
+polakach
+polakami
+polakom
+polaka
+polakiem
+polakowi
+polaku
+polaków
+polaki
+polak
+fer

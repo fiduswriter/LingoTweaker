@@ -1,6 +1,6 @@
 {
   "upstream_commit": "01d07e1f61651d5ad7ea015cce36573314754ad8",
-  "file_count": 566,
+  "file_count": 593,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -3980,6 +3980,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_pl.properties",
+      "sha256": "0dbd4311308917286fe88a6890fdfc1b9a43f7183d8677dd18eb0038c8854f13",
+      "size": 16800,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/MessagesBundle_pl.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle_pt_BR.properties",
       "sha256": "60fb483a48d4abf0f1ced3a0f4f2f91cbf2ae7d30fe22121f9ee34d5c32f58ce",
       "size": 16512,
@@ -4865,6 +4876,300 @@
         "license": "LGPL-2.1-or-later",
         "license_source": "LICENSE",
         "note": "Hand-authored language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "pl/dictionaries/polish.dict",
+      "sha256": "47b5ba7e807d11112ba00f8cf615712b8615f92fcdf5e5e40463542733a1ebcb",
+      "size": 2797415,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish.dict",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license_verified": true,
+        "license_source": "upstream pl/README.txt (LICENCE section)"
+      }
+    },
+    {
+      "path": "pl/dictionaries/polish.info",
+      "sha256": "de7d35bb7a5be6c04a6691d5e847b47eaa0730f1e9817d3dbebb45bd72e2e5e3",
+      "size": 1676,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish.info",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license_verified": true,
+        "license_source": "upstream pl/README.txt (LICENCE section)"
+      }
+    },
+    {
+      "path": "pl/dictionaries/polish_synth.dict",
+      "sha256": "b94f9c0378a05fb519cdd631510ed600baa7b9c73b446f7b078ab34d65c68066",
+      "size": 2872448,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_synth.dict",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license_verified": true,
+        "license_source": "upstream pl/README.txt (LICENCE section)"
+      }
+    },
+    {
+      "path": "pl/dictionaries/polish_synth.info",
+      "sha256": "95c419c1944a8705d0e96f7af5ca32c629db2bedf0eac5dc555aaf4e3c93ff49",
+      "size": 1678,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_synth.info",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license_verified": true,
+        "license_source": "upstream pl/README.txt (LICENCE section)"
+      }
+    },
+    {
+      "path": "pl/dictionaries/polish_tags.txt",
+      "sha256": "56fc10f3c08ef4a6c0560cfb2ef5863a68e8666c425e5a5eeba8604f5e576615",
+      "size": 38226,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_tags.txt",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license_verified": true,
+        "license_source": "upstream pl/README.txt (LICENCE section)"
+      }
+    },
+    {
+      "path": "pl/disambiguation.xml",
+      "sha256": "61bb481d6fbe7706402eed81d2037f42a5e8357fbd026b72b981473009bbe83c",
+      "size": 840351,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/hunspell/README_en.txt",
+      "sha256": "d2f1ff785e52ba4e7b563602d3d4ce9b7cb8d790320a0e739b36ea58480ffc5c",
+      "size": 1883,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/hunspell/README_en.txt",
+        "license": "GPL / LGPL / MPL / CC-BY-SA (sjp.pl-derived Polish spelling dictionary; pl/hunspell/README_en.txt)",
+        "license_verified": true,
+        "license_source": "upstream pl/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "pl/hunspell/ignore.txt",
+      "sha256": "54685c66e5464b9577d2181de3273d162b5caf47f8280290fabef3aa04d6ccce",
+      "size": 1488,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/hunspell/pl_PL.dict",
+      "sha256": "bad0100ecb95ced5caa3faad3409e4993e14dc1c5362e74115650b90486fd1bc",
+      "size": 3717599,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/hunspell/pl_PL.dict",
+        "license": "GPL / LGPL / MPL / CC-BY-SA (converted from the pl_PL spelling dictionary; pl/hunspell/README_en.txt)",
+        "license_verified": false,
+        "license_source": "upstream pl/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "pl/hunspell/pl_PL.info",
+      "sha256": "fecd77c71d8c04ce6ef918ef694fbb030198c5a879b70597effe41f83802a706",
+      "size": 750,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/hunspell/pl_PL.info",
+        "license": "GPL / LGPL / MPL / CC-BY-SA (converted from the pl_PL spelling dictionary; pl/hunspell/README_en.txt)",
+        "license_verified": false,
+        "license_source": "upstream pl/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "pl/hunspell/prohibit.txt",
+      "sha256": "ac80e62b8534530113f5f10af4648b83f10233ebac48827ab0f481943eb93411",
+      "size": 316,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/hunspell/prohibit.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/hunspell/spelling.txt",
+      "sha256": "f181a69d6f291de1cd79ae4e4a5a230efd160381109d915f60a570870155a2da",
+      "size": 1020,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/rules/bitext.xml",
+      "sha256": "4114c85fff32dc81b36d735d71ef9645c90854c5ad9bf60c5fcb92921c697740",
+      "size": 1412,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/rules/pl/bitext.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/rules/coherency.txt",
+      "sha256": "5e248675b0d66c4dff783494619e03e1e1ed8dabf8942db238581073a10831ed",
+      "size": 6178,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/rules/pl/coherency.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/rules/grammar.xml",
+      "sha256": "34b90a5ad5ba34fc909ce88952f02b1a734a18730d4f844fc0a268990b63084e",
+      "size": 1882819,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/rules/pl/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/rules/replace.txt",
+      "sha256": "93c21c6f5ccfc310a6d6fc691cba37abd8360e023071489f2ea3828200581cb0",
+      "size": 4004,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/rules/pl/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/README.txt",
+      "sha256": "ec6adb7c95eb59239989a838e486ae8b29e72d3c5b5ab9cb1eaa6218789fad19",
+      "size": 2469,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/added.txt",
+      "sha256": "df0b7772d29ea97e95b83a08e7492d5dfa15f4de707ef17e79336f327aa3f821",
+      "size": 295,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/common_words.txt",
+      "sha256": "43df8ad1c4a00000680688c511fdf35bd8f0beddde33fceecfcfca46f83c2727",
+      "size": 88342,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/compounds.txt",
+      "sha256": "895172ff7e6fd562630b0e4b83e42816d5aa976709e22d4c18cb9dc62bcdf252",
+      "size": 27675,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/compounds.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/multiwords.txt",
+      "sha256": "c3d5ae7fe45f920a27e0c7d0087fd015ce61be183cd919ca578c0ab7b537f976",
+      "size": 4593,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/multiwords.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/nie_compar_exceptions.txt",
+      "sha256": "44c30480bab8b68ce1ab91390a1741d921dc02f836027c362a457b717380efc4",
+      "size": 1883,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/nie_compar_exceptions.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "pl/words/tagset.txt",
+      "sha256": "6bd3cc775f3e2458e422dba7978fb44cca4f1015fb205a33be9809957e7ca214",
+      "size": 6326,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
       }
     },
     {
