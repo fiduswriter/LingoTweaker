@@ -73,8 +73,8 @@ fn engine_with_rules_today(
         .ok()
 }
 
-/// Stage-3h state: all Catalan stages are wired — 9,325 active XML rules
-/// for ca-ES / ca-ES-balear and 9,329 for ca-ES-valencia, 1,996
+/// Stage-3h state: all Catalan stages are wired — 9,347 active XML rules
+/// for ca-ES, 9,379 for ca-ES-valencia and 9,359 for ca-ES-balear, 1,996
 /// disambiguation rules, and `compile_failures()` = 0 / 0 / 0. The
 /// stage-3 XML-referenced filter classes are all mapped (see
 /// `ca-rule-port.md` for the documented triage stubs).
@@ -85,7 +85,7 @@ fn catalan_engine_state_stage3h() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    assert_eq!(ca.active_rule_count(), 9325);
+    assert_eq!(ca.active_rule_count(), 9347);
     assert_eq!(ca.disambig_rule_count(), 1996);
     assert_eq!(ca.skipped_counts().filters, 0);
     assert!(
@@ -100,7 +100,7 @@ fn catalan_engine_state_stage3h() {
     };
     // the valencia variant additionally compiles the 8
     // `getDefaultEnabledRulesForVariant` rulegroups (D-154)
-    assert_eq!(valencia.active_rule_count(), 9357);
+    assert_eq!(valencia.active_rule_count(), 9379);
     assert_eq!(valencia.disambig_rule_count(), 1996);
     assert!(valencia.compile_failures().is_empty());
 
@@ -109,7 +109,7 @@ fn catalan_engine_state_stage3h() {
         return;
     };
     // + `EXIGEIX_VERBS_BALEARS` (D-154)
-    assert_eq!(balear.active_rule_count(), 9337);
+    assert_eq!(balear.active_rule_count(), 9359);
     assert!(balear.compile_failures().is_empty());
 }
 
