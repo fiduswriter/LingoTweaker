@@ -4565,11 +4565,12 @@ impl Pipeline {
 
     /// Lithuanian (`lt`) engine: the `DemoTagger` (every token untagged, i.e.
     /// `surface_sentence`), the base no-op disambiguator and the
-    /// `MorfologikLithuanianSpellerRule` (`MORFOLOGIK_RULE_LT_LT`).
-    /// `Lithuanian.getRelevantRules` adds the speller plus the generic
-    /// built-ins (including `GenericUnpairedBracketsRule`). The upstream
-    /// speller dictionary is not shipped, so the speller is disabled and the
-    /// language runs the tests-only gate (see `crate::lt`).
+    /// `MorfologikLithuanianSpellerRule` (`MORFOLOGIK_RULE_LT_LT`) over the
+    /// vendored third-party ispell-lt dictionary. `Lithuanian.getRelevantRules`
+    /// adds the speller plus the generic built-ins (including
+    /// `GenericUnpairedBracketsRule`). Upstream ships no `lt_LT` dictionary, so
+    /// the owner asked us to vendor one ourselves; `lt` therefore stays on the
+    /// tests-only gate (see `crate::lt`, `docs/differences.md` #12).
     pub fn new_lithuanian(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,
@@ -4601,8 +4602,8 @@ impl Pipeline {
         let spelling = match crate::lt::spelling::load(data_dir.path()) {
             Ok(rule) => Some(Arc::new(rule)),
             Err(err) => {
-                // The upstream `/lt/hunspell/lt_LT.dict` is not shipped; the
-                // legacy engine throws on every check. Disable the rule.
+                // The vendored `lt/hunspell/lt_LT` dictionary could not be
+                // read; the legacy engine has no dictionary at all.
                 eprintln!("[lt] spelling rule disabled: {err}");
                 None
             }
@@ -10603,8 +10604,8 @@ impl Pipeline {
         // order: CommaWhitespace (1), DoublePunctuation (2) and
         // MorfologikLithuanianSpellerRule (4). GenericUnpairedBrackets (3),
         // UppercaseSentenceStart (5) and MultipleWhitespace (6) are
-        // text-level and run above. The speller is disabled (the upstream
-        // `lt_LT.dict` is not shipped).
+        // text-level and run above. The speller runs over the vendored
+        // third-party `lt_LT` dictionary.
         if self.lang == crate::Lang::Lt {
             append_active(
                 &mut matches,

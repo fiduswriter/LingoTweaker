@@ -32,8 +32,10 @@ re-runs the Rust side and diffs against the golden.
 | crh | `crh-full.txt` (98) | `crh-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
-shipped, so the legacy engine throws on every check; `lt` runs the
-tests-only gate (`docs/differences.md` #12).
+shipped, so the legacy engine throws on every check. The Rust engine vendors a
+third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
+id; there is no Java baseline, so `lt` runs the tests-only gate
+(`docs/differences.md` #12).
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts

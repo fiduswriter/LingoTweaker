@@ -396,7 +396,7 @@ Reproduce (pinned Java build):
 scripts/oracle/tl/probe-rule.sh "Sa DLSU rin ako nag-aral." MORFOLOGIK_RULE_TL
 ```
 
-## 12. Lithuanian (`lt`) legacy module is unusable (missing `lt_LT.dict`)
+## 12. Lithuanian (`lt`): vendored third-party dictionary, no Java baseline
 
 The pinned upstream Lithuanian module (`Lithuanian.getRelevantRules`)
 includes `MorfologikLithuanianSpellerRule` over `/lt/hunspell/lt_LT.dict`,
@@ -409,14 +409,21 @@ not exist). Consequently the legacy engine throws on **every** check:
 java.lang.RuntimeException: Could not check sentence (language: Lithuanian)
 ```
 
-The Rust engine disables the missing speller (`spelling = None`, a logged
-warning) and runs the XML rules and generic built-ins; the per-rule Java
-probes still work because `ProbeRule` enables a single rule and never
-initializes the speller. `lt` is therefore gated **tests-only** in
+The Rust engine does **not** replicate the broken legacy module. By owner
+request it vendors a third-party dictionary instead: the ispell-lt 1.3.2
+Hunspell dictionary (`data/lt/hunspell/lt_LT.aff`/`lt_LT.dic`, BSD-3-Clause,
+from [LibreOffice/dictionaries `lt_LT`](https://github.com/LibreOffice/dictionaries/tree/master/lt_LT)),
+runs the speller under the unchanged legacy id `MORFOLOGIK_RULE_LT_LT`
+(`native_suggestions`, five-suggestion cap) and keeps the 4 XML rules plus the
+generic built-ins. There is **no Java baseline for the speller** — the legacy
+engine cannot check Lithuanian at all — so the speller's behaviour is pinned
+by our own tests (`crates/lt/tests/lithuanian.rs`). The per-rule Java probes
+still work because `ProbeRule` enables a single rule and never initializes the
+speller. `lt` therefore stays on the **tests-only** gate in
 `scripts/ci/parity.sh` (like `no`/`nrd`/`gn`): `cargo test -p lt --test
 lithuanian` plus an `lt-cli inventory` sanity check, no corpus golden.
 
-Reproduce (pinned Java build):
+Reproduce (pinned Java build, per-rule probe):
 
 ```sh
 scripts/oracle/lt/probe-rule.sh "Jaroslavas pajuto kad jo draugas yra Mantas." BRAK_PRZECINKA_ZE

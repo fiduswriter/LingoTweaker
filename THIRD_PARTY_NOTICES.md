@@ -73,6 +73,8 @@ must decide. Data paths are relative to `data/`.
 | OpenNLP model containers (`edu.washington.cs.knowitall:opennlp-{tokenize,postag,chunk}-models:1.5`) | `en/models/en-token.bin`, `en-pos-maxent.bin`, `en-chunker.bin` | Apache-2.0 | POMs: [tokenize](https://repo1.maven.org/maven2/edu/washington/cs/knowitall/opennlp-tokenize-models/1.5/opennlp-tokenize-models-1.5.pom), [postag](https://repo1.maven.org/maven2/edu/washington/cs/knowitall/opennlp-postag-models/1.5/opennlp-postag-models-1.5.pom), [chunk](https://repo1.maven.org/maven2/edu/washington/cs/knowitall/opennlp-chunk-models/1.5/opennlp-chunk-models-1.5.pom) | Confirmed (model training-data provenance not further documented upstream) |
 | OpenRegex (Java library ported to Rust; not vendored data) | `crates/lt-chunk/src/openregex.rs` | LGPL-2.1-or-later | `edu.washington.cs.knowitall:openregex:1.1.1` Maven POM `<license>`; sources jar sha256 pinned in `licenses/README.md` | Confirmed (D-027) |
 | Morfologik + LanguageTool dictionary tools (Java, ported to Python; not vendored data) | `tools/morfologik/**` | Morfologik: BSD-3-Clause; LanguageTool `languagetool-tools`: LGPL-2.1-or-later | [morfologik-stemming](https://github.com/morfologik/morfologik-stemming) `LICENSE.txt` (BSD-3-Clause); upstream `COPYING.txt` / `pom.xml` | Confirmed |
+| Lithuanian hunspell dictionary (ispell-lt, vendored because upstream ships none) | `lt/hunspell/lt_LT.aff`, `lt_LT.dic`, `README_lt_LT.txt`, `COPYING_lt_LT.txt`, `AUTHORS_lt_LT.txt` | BSD-3-Clause (© 2000–2020 Albertas Agejevas and contributors) | [LibreOffice/dictionaries `lt_LT`](https://github.com/LibreOffice/dictionaries/tree/master/lt_LT) at `8c45ec68d6b0346467c7ee23a6901139d129e468` (ispell-lt 1.3.2); bundled `COPYING_lt_LT.txt` | Confirmed |
+| Belarusian POS/spelling dictionaries (`io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2`) | `be/hunspell/be_BY.dict`, `be_BY.info` | CC-BY-SA-4.0 (artifact POM, Grammardb) | [artifact POM](https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom) | **License to be confirmed** (CC-BY-SA-4.0 share-alike data in an LGPL distribution) |
 
 Notices for the German/Italian/French/Dutch dictionaries in the table come from
 files that are themselves vendored, so the notice texts travel with the data
@@ -120,6 +122,13 @@ files that are themselves vendored, so the notice texts travel with the data
    requires attribution/share-alike for the dictionary data; whether to keep
    shipping it in an LGPL distribution needs the owner's sign-off, like the
    German POS dictionary above.
+10. **Belarusian dictionaries
+    (`io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2`)** are
+    CC-BY-SA-4.0 per the artifact POM. As with the German POS and Greek
+    analyzer data, CC-BY-SA requires attribution/share-alike for the
+    dictionary data; whether to keep shipping it in an LGPL distribution needs
+    the owner's sign-off. (The Lithuanian ispell-lt dictionary, by contrast, is
+    BSD-3-Clause and needs no such review.)
 
 ## Why this file exists
 

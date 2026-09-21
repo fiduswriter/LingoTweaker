@@ -61,7 +61,9 @@ resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
 runs the same tests-only gate because its legacy module references an
-unshipped `lt_LT.dict` and throws on every check (docs/differences.md #12).
+unshipped `lt_LT.dict` and throws on every check, so the Rust engine vendors a
+third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
+id (docs/differences.md #12).
 
 ## Data tooling
 

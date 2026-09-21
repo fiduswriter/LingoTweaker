@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 779,
+  "file_count": 784,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -5107,6 +5107,81 @@
       }
     },
     {
+      "path": "lt/hunspell/AUTHORS_lt_LT.txt",
+      "sha256": "bf195fd983d656de3f1d7972d659b6b1cc0cc3730fb9e38ce31541a25ca168f6",
+      "size": 691,
+      "source": {
+        "kind": "vendor",
+        "project": "ispell-lt (LibreOffice/dictionaries lt_LT)",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/lt_LT",
+        "commit": "8c45ec68d6b0346467c7ee23a6901139d129e468",
+        "upstream_path": "AUTHORS",
+        "license": "BSD-3-Clause (ispell-lt, Albertas Agejevas and contributors)",
+        "license_verified": true,
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/lt_LT/COPYING"
+      }
+    },
+    {
+      "path": "lt/hunspell/COPYING_lt_LT.txt",
+      "sha256": "c5c73b4e3743ed2b959c70e886c4acee20d8654002ccdabac0a51af977ee2a17",
+      "size": 1520,
+      "source": {
+        "kind": "vendor",
+        "project": "ispell-lt (LibreOffice/dictionaries lt_LT)",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/lt_LT",
+        "commit": "8c45ec68d6b0346467c7ee23a6901139d129e468",
+        "upstream_path": "COPYING",
+        "license": "BSD-3-Clause (ispell-lt, Albertas Agejevas and contributors)",
+        "license_verified": true,
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/lt_LT/COPYING"
+      }
+    },
+    {
+      "path": "lt/hunspell/README_lt_LT.txt",
+      "sha256": "80b2b37785bab50153753eac04bf2ee368a7baa25bf2bfee6bbd5b556f72e78f",
+      "size": 619,
+      "source": {
+        "kind": "vendor",
+        "project": "ispell-lt (LibreOffice/dictionaries lt_LT)",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/lt_LT",
+        "commit": "8c45ec68d6b0346467c7ee23a6901139d129e468",
+        "upstream_path": "README",
+        "license": "BSD-3-Clause (ispell-lt, Albertas Agejevas and contributors)",
+        "license_verified": true,
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/lt_LT/COPYING"
+      }
+    },
+    {
+      "path": "lt/hunspell/lt_LT.aff",
+      "sha256": "79c6f8304490d1c8b27ec93e509b2f635d9bb21d45a2d41c15162b18c8ff897c",
+      "size": 99714,
+      "source": {
+        "kind": "vendor",
+        "project": "ispell-lt (LibreOffice/dictionaries lt_LT)",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/lt_LT",
+        "commit": "8c45ec68d6b0346467c7ee23a6901139d129e468",
+        "upstream_path": "lt.aff",
+        "license": "BSD-3-Clause (ispell-lt, Albertas Agejevas and contributors)",
+        "license_verified": true,
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/lt_LT/COPYING"
+      }
+    },
+    {
+      "path": "lt/hunspell/lt_LT.dic",
+      "sha256": "a751750b040623cf408cf1a3b6f6336141b55ac9519e54068dbeaa52eb395ccd",
+      "size": 1181184,
+      "source": {
+        "kind": "vendor",
+        "project": "ispell-lt (LibreOffice/dictionaries lt_LT)",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/lt_LT",
+        "commit": "8c45ec68d6b0346467c7ee23a6901139d129e468",
+        "upstream_path": "lt.dic",
+        "license": "BSD-3-Clause (ispell-lt, Albertas Agejevas and contributors)",
+        "license_verified": true,
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/lt_LT/COPYING"
+      }
+    },
+    {
       "path": "lt/rules/grammar.xml",
       "sha256": "ea342566f164a16e4448bf237bb1f08e5327b121d54fd3ecca4436f447a41858",
       "size": 7195,
@@ -8923,5 +8998,5 @@
       }
     }
   ],
-  "generated_by": "tools/lt-sync/lt_sync.py import"
+  "generated_by": "tools/lt-sync/lt_sync.py vendor-external"
 }

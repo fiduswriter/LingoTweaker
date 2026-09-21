@@ -27,9 +27,9 @@ no | nrd | gn | lt)
   gn) TEST_SUITE=guarani ;;
   # `lt` has a legacy module but it is unusable: the referenced
   # `lt/hunspell/lt_LT.dict` is not shipped upstream, so the legacy engine
-  # throws on every check (docs/differences.md #12). The Rust engine disables
-  # the missing speller and runs the XML + generic rules; the gate is
-  # tests-only.
+  # throws on every check (docs/differences.md #12). The Rust engine vendors a
+  # third-party ispell-lt dictionary under the unchanged rule id and runs the
+  # XML + generic rules; there is no Java baseline, so the gate is tests-only.
   lt) TEST_SUITE=lithuanian ;;
   esac
   LT_CLI=""

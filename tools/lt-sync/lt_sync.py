@@ -301,6 +301,33 @@ JAR_EXTRACTIONS = {
     "opennlp-chunk-models-1.5.jar": {"en-chunker.bin": "en/models/en-chunker.bin"},
 }
 
+# Third-party dictionaries vendored because the upstream module ships none.
+# `lt` is the first such language (owner decision, see docs/differences.md
+# #12): upstream `MorfologikLithuanianSpellerRule` references an unshipped
+# `/lt/hunspell/lt_LT.dict`, so the owner asked us to source one ourselves.
+# The files are fetched from the project repository at the pinned `commit`
+# into a local directory (`vendor-external --dir`, or `import --vendor-dir`)
+# and copied from there; the source-relative path is recorded per file.
+EXTERNAL_DICTIONARIES = {
+    "lt": {
+        "project": "ispell-lt (LibreOffice/dictionaries lt_LT)",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/lt_LT",
+        "commit": "8c45ec68d6b0346467c7ee23a6901139d129e468",
+        "version": "1.3.2",
+        # BSD-3-Clause-style (the ispell-lt COPYING is a 3-clause BSD text).
+        "license": "BSD-3-Clause (ispell-lt, Albertas Agejevas and contributors)",
+        "license_verified": True,
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/lt_LT/COPYING",
+        "files": {
+            "lt.aff": "lt/hunspell/lt_LT.aff",
+            "lt.dic": "lt/hunspell/lt_LT.dic",
+            "README": "lt/hunspell/README_lt_LT.txt",
+            "COPYING": "lt/hunspell/COPYING_lt_LT.txt",
+            "AUTHORS": "lt/hunspell/AUTHORS_lt_LT.txt",
+        },
+    },
+}
+
 # Language modules that ship their POS/synthesis dictionaries in-tree instead
 # of a Maven artifact: module-inner path -> destination relative to data/.
 # Italian is the first such language (its morph-it! derived dictionaries live
@@ -948,6 +975,60 @@ def extract_jar_entries(artifacts_dir: Path, entries: list) -> None:
                 entries.append(manifest_entry(rel_dest, dest, entry_source))
 
 
+def vendor_external_entries(vendor_dir: Path, entries: list, langs: list | None = None) -> None:
+    """Copy third-party dictionary sources from `vendor_dir` into `data/`.
+
+    `vendor_dir` holds one subdirectory per language (`<lang>/<source name>`),
+    e.g. `lt_LT/lt.aff`. Missing languages are skipped with a warning, like a
+    missing Maven artifact.
+    """
+    for lang, spec in EXTERNAL_DICTIONARIES.items():
+        if langs is not None and lang not in langs:
+            continue
+        src_dir = vendor_dir / lang
+        if not src_dir.is_dir():
+            print(f"WARNING: external dictionary source not found: {src_dir}", file=sys.stderr)
+            continue
+        for src_name, rel_dest in spec["files"].items():
+            src = src_dir / src_name
+            if not src.is_file():
+                print(f"WARNING: external dictionary file not found: {src}", file=sys.stderr)
+                continue
+            dest = DATA_DIR / rel_dest
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(src.read_bytes())
+            source = {
+                "kind": "vendor",
+                "project": spec["project"],
+                "url": spec["url"],
+                "commit": spec["commit"],
+                "upstream_path": src_name,
+                "license": spec["license"],
+                "license_verified": spec["license_verified"],
+            }
+            if spec.get("license_source"):
+                source["license_source"] = spec["license_source"]
+            entries.append(manifest_entry(rel_dest, dest, source))
+
+
+def cmd_vendor_external(args: argparse.Namespace) -> None:
+    """Vendor the third-party dictionaries recorded in `EXTERNAL_DICTIONARIES`.
+
+    Merges only those entries into the existing manifest, leaving every other
+    entry untouched (safe alongside a full `import`).
+    """
+    vendor_dir = Path(args.dir).resolve()
+    entries: list = []
+    vendor_external_entries(vendor_dir, entries, args.langs)
+    manifest = load_manifest()
+    files = {e["path"]: e for e in manifest.get("files", [])}
+    for entry in entries:
+        files[entry["path"]] = entry
+    manifest["files"] = list(files.values())
+    write_manifest(manifest, "tools/lt-sync/lt_sync.py vendor-external")
+    print(f"vendored {len(entries)} external files -> {MANIFEST_JSON}")
+
+
 def cmd_import(args: argparse.Namespace) -> None:
     upstream = Path(args.upstream).resolve()
     artifacts_dir = Path(args.artifacts).resolve() if args.artifacts else None
@@ -1093,6 +1174,10 @@ def cmd_import(args: argparse.Namespace) -> None:
     # Dictionaries / models from Maven artifacts
     if artifacts_dir:
         extract_jar_entries(artifacts_dir, entries)
+
+    # Third-party dictionaries vendored because upstream ships none.
+    if args.vendor_dir:
+        vendor_external_entries(Path(args.vendor_dir).resolve(), entries, args.langs)
 
     # Keep data that is not imported from upstream (hand-authored, vendor,
     # generated) across imports.
@@ -1249,8 +1334,21 @@ def main() -> None:
     p = sub.add_parser("import", help="vendor data from upstream checkout + maven artifacts")
     p.add_argument("--upstream", required=True)
     p.add_argument("--artifacts", help="directory with pre-downloaded Maven artifact jars")
+    p.add_argument(
+        "--vendor-dir",
+        help="directory with pre-downloaded third-party dictionary sources "
+        "(EXTERNAL_DICTIONARIES; one subdirectory per language)",
+    )
     p.add_argument("--langs", nargs="+", default=LANGS, choices=LANGS)
     p.set_defaults(fn=cmd_import, langs=LANGS)
+
+    p = sub.add_parser(
+        "vendor-external",
+        help="vendor third-party dictionaries (EXTERNAL_DICTIONARIES) into data/",
+    )
+    p.add_argument("--dir", required=True, help="pre-downloaded source directory")
+    p.add_argument("--langs", nargs="+", choices=list(EXTERNAL_DICTIONARIES))
+    p.set_defaults(fn=cmd_vendor_external)
 
     p = sub.add_parser("status", help="classify upstream delta vs pinned manifest")
     p.add_argument("--upstream", required=True)

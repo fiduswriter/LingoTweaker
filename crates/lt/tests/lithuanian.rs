@@ -3,11 +3,14 @@
 //! The upstream Lithuanian module is unusable: `getRelevantRules` includes
 //! `MorfologikLithuanianSpellerRule` over `/lt/hunspell/lt_LT.dict`, but that
 //! dictionary is not shipped in the pinned checkout or any pinned Maven
-//! artifact, so the legacy engine throws on every check. The Rust engine
-//! disables the missing speller and runs the XML + generic rules; the values
-//! below are Java-probed per rule (`scripts/oracle/lt/probe-rule.sh`, which
-//! enables one rule and therefore never initializes the speller) and asserted
-//! in Java UTF-16 code units via `common::assert_utf16`.
+//! artifact, so the legacy engine throws on every check. By owner request the
+//! Rust engine vendors a third-party ispell-lt dictionary (BSD-3-Clause) and
+//! runs the speller under the legacy id `MORFOLOGIK_RULE_LT_LT`; there is no
+//! Java baseline for the speller, so its behaviour is pinned by these tests.
+//! The XML and generic-rule values below are Java-probed per rule
+//! (`scripts/oracle/lt/probe-rule.sh`, which enables one rule and therefore
+//! never initializes the speller) and asserted in Java UTF-16 code units via
+//! `common::assert_utf16`.
 //! `Lithuanian` uses the `DemoTagger` (all tokens untagged), has no
 //! disambiguator/synthesizer, and the language is gated tests-only.
 
@@ -72,7 +75,8 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
 }
 
 /// Stage state: 4 active XML rules, no XML-referenced filters and
-/// `compile_failures()` = 0. The speller is disabled (dictionary not shipped).
+/// `compile_failures()` = 0. The speller runs over the vendored `lt_LT`
+/// dictionary (it is not part of `active_rule_count`).
 #[test]
 fn lithuanian_engine_state() {
     let _guard = engine_guard();
@@ -195,7 +199,59 @@ fn lithuanian_unpaired_brackets() {
     );
 }
 
-/// Correct Lithuanian text is clean (the missing speller stays disabled).
+/// `MORFOLOGIK_RULE_LT_LT` over the vendored ispell-lt dictionary:
+/// `ačiu` -> `ačiū` (the native hunspell suggestions, capped at five).
+#[test]
+fn lithuanian_speller_misspelling_suggestions() {
+    let _guard = engine_guard();
+    let text = "Labai ačiu už pagalba.";
+    let matches = one(text, "MORFOLOGIK_RULE_LT_LT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (6, 10));
+    assert_eq!(matches[0].message, "Rasta galima rašybos klaida.");
+    assert_eq!(matches[0].short_message.as_deref(), Some("Rašybos klaida"));
+    assert_eq!(matches[0].category_id, "TYPOS");
+    assert_eq!(matches[0].category_name, "Galima rinkimo klaida");
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["ačiū", "ančiu", "arčiu", "mačiu", "pačiu"]
+    );
+}
+
+/// The native suggestions keep the Lithuanian diacritics and the five-slot
+/// cap: `Žmoniu` -> `Žmonių` first, with a second candidate.
+#[test]
+fn lithuanian_speller_suggestions_keep_diacritics() {
+    let _guard = engine_guard();
+    let text = "Žmoniu daug.";
+    let matches = one(text, "MORFOLOGIK_RULE_LT_LT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 6));
+    assert_eq!(suggestions(&matches[0]), vec!["Žmonių", "Žmoninu"]);
+}
+
+/// Real Lithuanian orthography (`š`, `ą`, `ž`, `ė`, `ų`, `į`) is accepted by
+/// the vendored dictionary.
+#[test]
+fn lithuanian_speller_accepts_correct_orthography() {
+    let _guard = engine_guard();
+    let Some(lt) = engine_with_rules(&["MORFOLOGIK_RULE_LT_LT"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    for text in [
+        "Šią žiemą žmonės mokosi.",
+        "Aš mokausi lietuvių kalbos.",
+        "Įdomus šuo bėga.",
+        "Ąžuolai auga prie upės.",
+    ] {
+        let result = lt.check(text).expect("check");
+        assert!(result.matches.is_empty(), "{text}: {:?}", result.matches);
+    }
+}
+
+/// Correct Lithuanian text is clean (the speller is enabled but finds
+/// nothing).
 #[test]
 fn lithuanian_correct_text_is_clean() {
     let _guard = engine_guard();
@@ -204,7 +260,7 @@ fn lithuanian_correct_text_is_clean() {
         return;
     };
     let result = lt
-        .check("Jaroslavas pajuto, kad jo draugas yra Mantas.")
+        .check("Šią žiemą žmonės mokosi lietuvių kalbos.")
         .expect("check");
     assert!(result.matches.is_empty(), "{:?}", result.matches);
 }
