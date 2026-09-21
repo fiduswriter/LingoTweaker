@@ -47,6 +47,7 @@ mod hunspell_spelling;
 mod is;
 mod it;
 mod long_sentence;
+mod lt;
 mod matchfilters;
 mod morfologik_spelling;
 mod multitoken;
@@ -412,6 +413,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Tl => Pipeline::new_tagalog(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Lt => Pipeline::new_lithuanian(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

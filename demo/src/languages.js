@@ -83,6 +83,9 @@ const BRETON = {
 const TAGALOG = {
   sample: "Kumain ako ng kanin . Pinalakad ng ng abogado si Maria.",
 };
+const LITHUANIAN = {
+  sample: "Jaroslavas pajuto kad jo draugas yra Mantas. Jaroslavas pajuto kad .",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -110,6 +113,7 @@ export const LANGUAGES = [
   { code: "ast-ES", pack: "ast", label: "Asturianu", size: "1.1 MB", ...ASTURIAN },
   { code: "br-FR", pack: "br", label: "Brezhoneg", size: "2.1 MB", ...BRETON },
   { code: "tl-PH", pack: "tl", label: "Tagalog", size: "0.53 MB", ...TAGALOG },
+  { code: "lt-LT", pack: "lt", label: "Lietuvių", size: "0.41 MB", ...LITHUANIAN },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.1 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.7 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.35 MB", ...GUARANI },

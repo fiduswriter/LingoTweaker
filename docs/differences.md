@@ -395,3 +395,29 @@ Reproduce (pinned Java build):
 ```sh
 scripts/oracle/tl/probe-rule.sh "Sa DLSU rin ako nag-aral." MORFOLOGIK_RULE_TL
 ```
+
+## 12. Lithuanian (`lt`) legacy module is unusable (missing `lt_LT.dict`)
+
+The pinned upstream Lithuanian module (`Lithuanian.getRelevantRules`)
+includes `MorfologikLithuanianSpellerRule` over `/lt/hunspell/lt_LT.dict`,
+but that dictionary is **not shipped** in the LanguageTool checkout or in any
+pinned Maven artifact (Lithuanian is deprecated upstream since 3.6; the
+module's `src/main/resources/org/languagetool/resource/lt/` directory does
+not exist). Consequently the legacy engine throws on **every** check:
+
+```
+java.lang.RuntimeException: Could not check sentence (language: Lithuanian)
+```
+
+The Rust engine disables the missing speller (`spelling = None`, a logged
+warning) and runs the XML rules and generic built-ins; the per-rule Java
+probes still work because `ProbeRule` enables a single rule and never
+initializes the speller. `lt` is therefore gated **tests-only** in
+`scripts/ci/parity.sh` (like `no`/`nrd`/`gn`): `cargo test -p lt --test
+lithuanian` plus an `lt-cli inventory` sanity check, no corpus golden.
+
+Reproduce (pinned Java build):
+
+```sh
+scripts/oracle/lt/probe-rule.sh "Jaroslavas pajuto kad jo draugas yra Mantas." BRAK_PRZECINKA_ZE
+```

@@ -63,6 +63,7 @@ eo esperanto
 ast asturian
 br breton
 tl tagalog
+lt lithuanian
 no norwegian crates/lt/src/no*.rs
 nrd nordum crates/lt/src/nrd*.rs tools/nordum-dict/*
 gn guarani crates/lt/src/gn*.rs

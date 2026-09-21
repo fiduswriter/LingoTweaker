@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 764,
+  "file_count": 766,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -4943,6 +4943,17 @@
       }
     },
     {
+      "path": "lt/rules/grammar.xml",
+      "sha256": "ea342566f164a16e4448bf237bb1f08e5327b121d54fd3ecca4436f447a41858",
+      "size": 7195,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/lt/src/main/resources/org/languagetool/rules/lt/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle.properties",
       "sha256": "ae2951dc5a2c13819f3761133df2072095fa64b0be2f3eed88e4a12943128414",
       "size": 14268,
@@ -5092,6 +5103,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/MessagesBundle_it.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_lt.properties",
+      "sha256": "87ee3aaa727f0fbf9d249aa18a348b9bf171f1cc860345d61dc078c0a9cd692d",
+      "size": 16302,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/lt/src/main/resources/org/languagetool/MessagesBundle_lt.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

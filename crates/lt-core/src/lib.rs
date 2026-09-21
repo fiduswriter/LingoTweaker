@@ -69,6 +69,8 @@ pub enum Lang {
     Br,
     /// Tagalog (`tl`).
     Tl,
+    /// Lithuanian (`lt`).
+    Lt,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -80,7 +82,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 24] = [
+    pub const ALL: [Lang; 25] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -102,6 +104,7 @@ impl Lang {
         Lang::Ast,
         Lang::Br,
         Lang::Tl,
+        Lang::Lt,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -133,6 +136,7 @@ impl Lang {
             "ast" => Some(Lang::Ast),
             "br" => Some(Lang::Br),
             "tl" => Some(Lang::Tl),
+            "lt" => Some(Lang::Lt),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -163,6 +167,7 @@ impl Lang {
             Lang::Ast => "ast",
             Lang::Br => "br",
             Lang::Tl => "tl",
+            Lang::Lt => "lt",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -276,6 +281,11 @@ impl Lang {
                 code: "tl",
                 long_code: "tl-PH",
                 name: "Tagalog",
+            },
+            Lang::Lt => Language {
+                code: "lt",
+                long_code: "lt-LT",
+                name: "Lithuanian",
             },
             Lang::No => Language {
                 code: "no",

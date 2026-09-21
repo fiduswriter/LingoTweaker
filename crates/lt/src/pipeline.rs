@@ -167,6 +167,8 @@ pub struct Pipeline {
     pub breton: Option<Arc<crate::br::BretonPipeline>>,
     /// Tagalog pipeline parts (`None` for the other languages)
     pub tagalog: Option<Arc<crate::tl::TagalogPipeline>>,
+    /// Lithuanian pipeline parts (`None` for the other languages)
+    pub lithuanian: Option<Arc<crate::lt::LithuanianPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Danish pipeline parts (`None` for the other languages)
@@ -1362,6 +1364,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1606,6 +1609,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1809,6 +1813,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2020,6 +2025,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2151,6 +2157,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2401,6 +2408,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2611,6 +2619,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2938,6 +2947,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3089,6 +3099,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3226,6 +3237,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3387,6 +3399,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3526,6 +3539,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3637,6 +3651,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3783,6 +3798,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: Some(greek),
             norwegian: None,
             nordum: None,
@@ -3859,6 +3875,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             da: Some(danish),
             sv: None,
@@ -4020,6 +4037,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             da: None,
             sv: Some(swedish),
@@ -4093,6 +4111,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             da: None,
             sv: None,
@@ -4203,6 +4222,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             da: None,
             sv: None,
@@ -4299,6 +4319,7 @@ impl Pipeline {
             asturian: Some(asturian),
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             da: None,
             sv: None,
@@ -4409,6 +4430,7 @@ impl Pipeline {
             asturian: None,
             breton: Some(breton),
             tagalog: None,
+            lithuanian: None,
             greek: None,
             da: None,
             sv: None,
@@ -4507,6 +4529,106 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: Some(tagalog),
+            lithuanian: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Lithuanian (`lt`) engine: the `DemoTagger` (every token untagged, i.e.
+    /// `surface_sentence`), the base no-op disambiguator and the
+    /// `MorfologikLithuanianSpellerRule` (`MORFOLOGIK_RULE_LT_LT`).
+    /// `Lithuanian.getRelevantRules` adds the speller plus the generic
+    /// built-ins (including `GenericUnpairedBracketsRule`). The upstream
+    /// speller dictionary is not shipped, so the speller is disabled and the
+    /// language runs the tests-only gate (see `crate::lt`).
+    pub fn new_lithuanian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "lt_two")?;
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Lt))?;
+        if data_dir.style_path(Lang::Lt).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Lt))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Lithuanian references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        let spelling = match crate::lt::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                // The upstream `/lt/hunspell/lt_LT.dict` is not shipped; the
+                // legacy engine throws on every check. Disable the rule.
+                eprintln!("[lt] spelling rule disabled: {err}");
+                None
+            }
+        };
+
+        let lithuanian = Arc::new(crate::lt::LithuanianPipeline { spelling });
+        Ok(Self {
+            lang: Lang::Lt,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: Some(lithuanian),
             greek: None,
             da: None,
             sv: None,
@@ -4645,6 +4767,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
@@ -4728,6 +4851,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
@@ -4815,6 +4939,7 @@ impl Pipeline {
             asturian: None,
             breton: None,
             tagalog: None,
+            lithuanian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -4910,6 +5035,9 @@ impl Pipeline {
                                                                         }
                                                                         None => match &self.slovenian {
                                                                             Some(_) => {
+                                                                                surface_sentence(sentence_text)
+                                                                            }
+                                                                            None if self.lithuanian.is_some() => {
                                                                                 surface_sentence(sentence_text)
                                                                             }
                                                                             None => match &self.icelandic {
@@ -7303,6 +7431,50 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_tl(&analyzed_sentences));
             }
         }
+        // Lithuanian text-level rules (`Lithuanian.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (6).
+        if self.lang == crate::Lang::Lt {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_lt(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_lt(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_lt(&analyzed_sentences));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -7561,6 +7733,9 @@ impl Pipeline {
                                                                     }
                                                                     None => match &self.slovenian {
                                                                         Some(_) => surface_sentence(
+                                                                            &text[start..end],
+                                                                        ),
+                                                                        None if self.lithuanian.is_some() => surface_sentence(
                                                                             &text[start..end],
                                                                         ),
                                                                         None => match &self.icelandic {
@@ -10199,6 +10374,66 @@ impl Pipeline {
                 }
             }
         }
+        // Lithuanian sentence-level Java rules in `Lithuanian.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2) and
+        // MorfologikLithuanianSpellerRule (4). GenericUnpairedBrackets (3),
+        // UppercaseSentenceStart (5) and MultipleWhitespace (6) are
+        // text-level and run above. The speller is disabled (the upstream
+        // `lt_LT.dict` is not shipped).
+        if self.lang == crate::Lang::Lt {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_lt(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_lt(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(lithuanian) = &self.lithuanian {
+                if let Some(spelling) = &lithuanian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::lt::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -11520,6 +11755,12 @@ impl Pipeline {
             // `Tagalog` does not override `createDefaultDisambiguator`: the
             // base no-op `DemoDisambiguator` applies.
             tagalog.disambiguate(sentence);
+            return;
+        }
+        if let Some(lithuanian) = &self.lithuanian {
+            // `Lithuanian` does not override `createDefaultDisambiguator`: the
+            // base no-op `DemoDisambiguator` applies.
+            lithuanian.disambiguate(sentence);
             return;
         }
         if let Some(greek) = &self.greek {

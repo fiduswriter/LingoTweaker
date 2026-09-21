@@ -268,6 +268,19 @@ pub fn check_tl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Lithuanian `MessagesBundle_lt`
+/// strings.
+pub fn check_lt(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Sakinys turi prasidėti iš didžiosios raidės",
+        "Didžiosios/mažosios raidės",
+        "Tikrinti, ar sakinys prasideda iš didžiosios raidės",
+        "Didžiosios/mažosios raidės",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Esperanto `MessagesBundle_eo`
 /// strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {

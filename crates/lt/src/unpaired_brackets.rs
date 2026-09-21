@@ -592,6 +592,26 @@ pub fn check_tl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_tl())
 }
 
+/// Lithuanian `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_lt`
+/// strings): the default symbol lists `[ ( { " '` / `] ) } " '`.
+pub fn symbols_lt() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Skliausteliai, kabutės ar kiti panašūs simboliai, neturintys poros",
+        category_id: "PUNCTUATION",
+        category_name: "Skyryba",
+        start: &["[", "(", "{", "\"", "'"],
+        end: &["]", ")", "}", "\"", "'"],
+        spanish: false,
+        message_template: "Unpaired symbol: '{other}' seems to be missing",
+    }
+}
+
+/// Lithuanian `UNPAIRED_BRACKETS` (generic rule, Lithuanian strings).
+pub fn check_lt(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_lt())
+}
+
 /// Esperanto `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_eo` strings):
 /// the default symbol lists `[ ( { " '` / `] ) } " '`.
 pub fn symbols_eo() -> UnpairedSymbols {

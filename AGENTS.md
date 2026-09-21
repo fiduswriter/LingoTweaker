@@ -39,7 +39,7 @@ Offline corpus gate (CI, no Docker):
 ```sh
 cargo build --release -p lt-cli
 scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl   # Java-golden languages
-scripts/ci/parity.sh no|nrd|gn                 # tests-only gate
+scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
 Diffs the full per-language corpus against the pinned Java `CheckDump` goldens
@@ -59,7 +59,9 @@ suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
 (#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/5 (#15, docs/differences.md #11 suggestion ordering). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
-tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
+tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
+runs the same tests-only gate because its legacy module references an
+unshipped `lt_LT.dict` and throws on every check (docs/differences.md #12).
 
 ## Data tooling
 

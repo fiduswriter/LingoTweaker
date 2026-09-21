@@ -30,6 +30,10 @@ re-runs the Rust side and diffs against the golden.
 | br | `br-full.txt` (1,835) | `br-full.java.tsv` |
 | tl | `tl-full.txt` (99) | `tl-full.java.tsv` |
 
+`lt` has no golden: the legacy module references a `lt_LT.dict` that is not
+shipped, so the legacy engine throws on every check; `lt` runs the
+tests-only gate (`docs/differences.md` #12).
+
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
   (embedded newlines replaced by spaces; gl excludes the parallel-corpus

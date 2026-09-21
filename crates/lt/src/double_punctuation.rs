@@ -185,6 +185,23 @@ pub fn check_sentence_tl(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Lithuanian `MessagesBundle_lt` strings.
+pub fn check_sentence_lt(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Skyryba".to_string();
+        m.description = "Ar nėra dviejų pasikartojančių taškų ar kablelių".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Du iš eilės einantys taškai".to_string();
+            m.short_message = Some("Du iš eilės einantys taškai".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Du iš eilės einantys kableliai".to_string();
+            m.short_message = Some("Du iš eilės einantys kableliai".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

@@ -213,6 +213,16 @@ pub fn check_tl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Lithuanian `MessagesBundle_lt` strings.
+pub fn check_lt(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Tarpų pasikartojimas (blogas formatavimas)",
+        "Galima rinkimo klaida: pakartojote tarpą",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

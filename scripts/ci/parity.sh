@@ -3,11 +3,12 @@
 # against the pinned Java CheckDump golden in docs/parity/golden (captured
 # once with Docker; CI needs none). See docs/parity/golden/README.md.
 #
-# Languages without a Java oracle (no, nrd, gn) get a tests-only gate: the
+# Languages without a usable Java oracle (no, nrd, gn; lt has a broken
+# upstream module) get a tests-only gate: the
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
@@ -19,11 +20,17 @@ RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 # no pinned golden to diff, so assert the integration test passes and that
 # `lt-cli inventory` loads the language rules (> 0 rules).
 case "$LANG_ARG" in
-no | nrd | gn)
+no | nrd | gn | lt)
   case "$LANG_ARG" in
   no) TEST_SUITE=norwegian ;;
   nrd) TEST_SUITE=nordum ;;
   gn) TEST_SUITE=guarani ;;
+  # `lt` has a legacy module but it is unusable: the referenced
+  # `lt/hunspell/lt_LT.dict` is not shipped upstream, so the legacy engine
+  # throws on every check (docs/differences.md #12). The Rust engine disables
+  # the missing speller and runs the XML + generic rules; the gate is
+  # tests-only.
+  lt) TEST_SUITE=lithuanian ;;
   esac
   LT_CLI=""
   for candidate in "$RS_ROOT/target/release/lt-cli" "$RS_ROOT/target/debug/lt-cli"; do

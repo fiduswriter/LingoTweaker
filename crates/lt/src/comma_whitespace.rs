@@ -815,6 +815,42 @@ fn translate_comma_message_tl(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Lithuanian `MessagesBundle_lt` strings.
+pub fn check_sentence_lt(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Typography".to_string();
+        m.description = "Tarpų naudojimas prieš/po kablelį bei skliaustelius".to_string();
+        m.message = translate_comma_message_lt(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_lt` bundle.
+fn translate_comma_message_lt(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Nereikia dėti tarpo po atidarančio skliaustelio".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Nereikia dėti tarpo prieš uždarantį skliaustelį".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Po kablelio reikia padėti tarpą".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Tarpą reikia dėti po kablelio, o ne prieš jį".to_string()
+        }
+        "Don't put a space before the full stop." => "Nereikia dėti tarpo prieš tašką".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],
