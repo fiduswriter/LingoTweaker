@@ -28,6 +28,8 @@ pub fn load(data_dir: &Path) -> Result<CrimeanTatarSpellingRule> {
             is_latin_script: false,
             ignore_tagged_words: false,
             split_on_hyphen: false,
+            no_suggest_words: &[],
+            ignore_token_pattern: None,
         },
     )
 }

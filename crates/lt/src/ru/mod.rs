@@ -10,6 +10,7 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 
 pub mod priorities;
+pub mod spelling;
 
 /// Russian pipeline parts.
 pub struct RussianPipeline {
@@ -21,6 +22,12 @@ pub struct RussianPipeline {
     pub disambiguator: lt_disambig::XmlDisambiguator,
     /// `Russian.createDefaultPostDisambiguationChunker`.
     pub post_chunker: lt_chunk::RussianChunker,
+    /// `MorfologikRussianSpellerRule` (`MORFOLOGIK_RULE_RU_RU`); `None` only
+    /// when the vendored `ru_RU` dictionary cannot be read.
+    pub spelling: Option<Arc<crate::ru::spelling::RussianSpellingRule>>,
+    /// `MorfologikRussianYOSpellerRule` (`MORFOLOGIK_RULE_RU_RU_YO`, default
+    /// off).
+    pub spelling_yo: Option<Arc<crate::ru::spelling::RussianYOSpellingRule>>,
 }
 
 impl RussianPipeline {

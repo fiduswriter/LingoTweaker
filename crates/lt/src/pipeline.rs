@@ -4985,11 +4985,28 @@ impl Pipeline {
 
         let post_chunker = lt_chunk::RussianChunker::new()?;
 
+        let spelling = match crate::ru::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ru] spelling rule disabled: {err}");
+                None
+            }
+        };
+        let spelling_yo = match crate::ru::spelling::load_yo(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ru] yo spelling rule disabled: {err}");
+                None
+            }
+        };
+
         let russian = Arc::new(crate::ru::RussianPipeline {
             tagger,
             multiwords_chunker,
             disambiguator,
             post_chunker,
+            spelling,
+            spelling_yo,
         });
         Ok(Self {
             lang: Lang::Ru,
@@ -11303,6 +11320,44 @@ impl Pipeline {
                 crate::comma_whitespace::check_sentence_ru(&analyzed.tokens, sentence_text, start),
                 &mut seen,
             );
+            if let Some(russian) = &self.russian {
+                if let Some(spelling) = &russian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::ru::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                if let Some(spelling_yo) = &russian.spelling_yo {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::ru::spelling::YO_RULE_ID,
+                            "TYPOS",
+                            false,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling_yo.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
         }
         // Crimean Tatar sentence-level Java rules in
         // `CrimeanTatar.getRelevantRules` order: CommaWhitespace (0),

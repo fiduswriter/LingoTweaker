@@ -57,6 +57,12 @@ pub struct MorfologikSpellerConfig {
     /// `MorfologikSpellerRule.tokenizingPattern()` == `-`: the token is split
     /// at hyphens and every segment is checked separately (Breton).
     pub split_on_hyphen: bool,
+    /// `SpellingCheckRule.filterSuggestions`' `filterNoSuggestWords`
+    /// (lowercased exact matches are removed from the suggestion list).
+    pub no_suggest_words: &'static [&'static str],
+    /// `MorfologikSpellerRule.ignoreToken` override: a word that does not
+    /// fully match this pattern is ignored (Russian `RUSSIAN_LETTERS`).
+    pub ignore_token_pattern: Option<&'static str>,
 }
 
 pub struct MorfologikSpellingRule {
@@ -76,6 +82,9 @@ pub struct MorfologikSpellingRule {
     prohibit: HashSet<String>,
     /// the base class does not call `setIgnoreTaggedWords()`
     ignore_tagged_words: bool,
+    /// compiled `ignore_token_pattern` (`^(?:…)$` full match, like Java
+    /// `Matcher.matches()`)
+    ignore_token_re: Option<Regex>,
     suggestion_cache:
         std::sync::Mutex<std::collections::HashMap<String, std::sync::Arc<Vec<Suggestion>>>>,
 }
@@ -102,6 +111,12 @@ impl MorfologikSpellingRule {
         let speller3 = MultiSpeller::new(vec![binary(3), plain(3)], vec![0, 1]);
 
         let ignore_tagged_words = config.ignore_tagged_words;
+        let ignore_token_re = match config.ignore_token_pattern {
+            Some(pattern) => Some(Regex::new(&format!("^(?:{pattern})$")).map_err(|e| {
+                lt_core::CoreError::Parse("speller ignore pattern".into(), e.to_string())
+            })?),
+            None => None,
+        };
         let mut rule = Self {
             config,
             binary_speller,
@@ -112,6 +127,7 @@ impl MorfologikSpellingRule {
             ignore_phrases: std::collections::HashMap::new(),
             prohibit: HashSet::new(),
             ignore_tagged_words,
+            ignore_token_re,
             suggestion_cache: std::sync::Mutex::new(std::collections::HashMap::new()),
         };
         // `SpellingCheckRule.init`: ignore file, spelling file, additional
@@ -240,7 +256,18 @@ impl MorfologikSpellingRule {
             || is_url(token.surface())
             || is_email(token.surface())
             || (self.ignore_tagged_words && token.is_tagged && !self.is_prohibited(token.surface()))
+            || self.ignore_token_override(tokens[idx].surface())
             || self.ignore_word_with_emoji(tokens[idx].surface())
+    }
+
+    /// `MorfologikSpellerRule.ignoreToken` override: when a language sets an
+    /// `ignore_token_pattern`, a word that does not fully match it is ignored
+    /// (the base `ignoreWord` still applies to the matching words).
+    fn ignore_token_override(&self, word: &str) -> bool {
+        match &self.ignore_token_re {
+            Some(re) => !re.is_match(word),
+            None => false,
+        }
     }
 
     /// `SpellingCheckRule.getAntiPatterns()`: every multi-word word-list
@@ -782,14 +809,26 @@ impl MorfologikSpellingRule {
             .collect()
     }
 
-    /// `SpellingCheckRule.filterSuggestions`.
+    /// `SpellingCheckRule.filterSuggestions` (+ `filterNoSuggestWords`).
     fn filter_suggestions(&self, suggestions: Vec<Suggestion>) -> Vec<Suggestion> {
-        dedupe(
-            suggestions
-                .into_iter()
-                .filter(|s| !self.is_prohibited(&s.value))
-                .collect(),
-        )
+        let filtered: Vec<Suggestion> = suggestions
+            .into_iter()
+            .filter(|s| !self.is_prohibited(&s.value))
+            .collect();
+        dedupe(filtered)
+            .into_iter()
+            .filter(|s| !self.is_no_suggest_word(&s.value))
+            .collect()
+    }
+
+    /// `filterNoSuggestWords`: the language list holds lowercase words and
+    /// Java compares `replacement.toLowerCase()`.
+    fn is_no_suggest_word(&self, word: &str) -> bool {
+        if self.config.no_suggest_words.is_empty() {
+            return false;
+        }
+        let lower = word.to_lowercase();
+        self.config.no_suggest_words.iter().any(|w| *w == lower)
     }
 }
 

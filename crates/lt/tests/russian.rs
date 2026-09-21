@@ -147,3 +147,141 @@ fn uppercase_sentence_start_uses_russian_message() {
         (18, 22),
     );
 }
+
+/// `scripts/oracle/ru/probe-speller.sh каждя` — Java probe
+/// `M каждя 0-5:Возможно найдена орфографическая ошибка.:дождя|кадя|каждая|вождя|ка ждя`.
+#[test]
+fn speller_matches_java_for_kazhdya() {
+    let _guard = engine_guard();
+    let matches = one("каждя", "MORFOLOGIK_RULE_RU_RU");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_eq!(matches.len(), 1);
+    assert_utf16("каждя", &matches[0], (0, 5));
+    assert_eq!(
+        matches[0].message,
+        "Возможно найдена орфографическая ошибка."
+    );
+    let suggestions: Vec<&str> = matches[0]
+        .suggestions
+        .iter()
+        .map(|s| s.value.as_str())
+        .collect();
+    assert_eq!(suggestions, ["дождя", "кадя", "каждая", "вождя", "ка ждя"]);
+}
+
+/// `RUSSIAN_LETTERS.ignoreToken`: a token with anything but Russian
+/// letters/hyphen/stress marks is not spell-checked (`abc`, `тест123`), while
+/// `по-русски` is.
+#[test]
+fn speller_ignores_non_russian_letters() {
+    let _guard = engine_guard();
+    for word in ["abc", "тест123", "по-русски", "каждая"] {
+        let matches = one(word, "MORFOLOGIK_RULE_RU_RU");
+        assert!(
+            matches.is_empty(),
+            "unexpected speller match for {word}: {matches:?}"
+        );
+    }
+}
+
+/// `scripts/oracle/ru/probe-speller.sh --rule MORFOLOGIK_RULE_RU_RU_YO елка`
+/// — Java probe `ёлка|ёлку|ялта|…|шелка`; the rule is default off.
+#[test]
+fn yo_speller_flags_elka_when_enabled() {
+    let _guard = engine_guard();
+    let matches = one("елка", "MORFOLOGIK_RULE_RU_RU_YO");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_eq!(matches.len(), 1);
+    assert_utf16("елка", &matches[0], (0, 4));
+    let suggestions: Vec<&str> = matches[0]
+        .suggestions
+        .iter()
+        .map(|s| s.value.as_str())
+        .collect();
+    assert_eq!(suggestions[0], "ёлка");
+    assert_eq!(
+        suggestions,
+        [
+            "ёлка",
+            "ёлку",
+            "ялта",
+            "ярко",
+            "ямка",
+            "явка",
+            "ятка",
+            "едко",
+            "белка",
+            "янка",
+            "телка",
+            "ёлках",
+            "ёлкам",
+            "ёлке",
+            "ёлки",
+            "ёлкою",
+            "ёлкой",
+            "ёмка",
+            "ёмко",
+            "юлка",
+            "юлку",
+            "едка",
+            "ейка",
+            "ейку",
+            "ела",
+            "елла",
+            "еллу",
+            "елва",
+            "елву",
+            "елза",
+            "елзу",
+            "емко",
+            "ила",
+            "илека",
+            "илга",
+            "илгу",
+            "илька",
+            "илза",
+            "илзу",
+            "инка",
+            "инку",
+            "иска",
+            "иску",
+            "лека",
+            "леку",
+            "мелка",
+            "яка",
+            "яла",
+            "ялика",
+            "ялту",
+            "ямку",
+            "янку",
+            "ярка",
+            "ярку",
+            "ятку",
+            "явку",
+            "шелка"
+        ]
+    );
+}
+
+/// The YO rule is default off, so a plain check does not report it.
+#[test]
+fn yo_speller_is_default_off() {
+    let _guard = engine_guard();
+    let Some(ru) = engine() else {
+        return;
+    };
+    let matches: Vec<lt::Match> = ru
+        .check("елка")
+        .map(|r| r.matches)
+        .unwrap_or_default()
+        .into_iter()
+        .filter(|m| m.rule_id == "MORFOLOGIK_RULE_RU_RU_YO")
+        .collect();
+    assert!(matches.is_empty(), "YO rule must be default off");
+}

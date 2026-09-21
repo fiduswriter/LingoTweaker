@@ -28,6 +28,8 @@ pub fn load(data_dir: &Path) -> Result<BretonSpellingRule> {
             is_latin_script: true,
             ignore_tagged_words: true,
             split_on_hyphen: true,
+            no_suggest_words: &[],
+            ignore_token_pattern: None,
         },
     )
 }
