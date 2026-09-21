@@ -3536,16 +3536,16 @@ fn initcap_bytes(word: &mut [u8]) {
 //
 // Scope: the UTF-8 candidate generators and their iteration order, the
 // compound-aware suggestion `checkword`, the per-capitalization driver, the
-// wrapper post-processing (case restoration, `SUGSWITHDOTS`, keepcase
+// `SuggestMgr::ngsuggest` n-gram fallback (dictionary-walking, with the
+// n-gram/LCS scoring and `MAXNGRAMSUGS`/`ONLYMAXDIFF`/`MAXDIFF` handling),
+// the wrapper post-processing (case restoration, `SUGSWITHDOTS`, keepcase
 // filtering, dedup) and the dash suggestion.
 //
 // Deliberately not ported:
-// - `SuggestMgr::ngsuggest` (the n-gram fallback). It does not use an
-//   `.ngram` file (it walks the whole dictionary), but the mission scope
-//   gates it on the languages shipping n-gram data; the vendored gl/da/sv
-//   dictionaries ship none. When the generators find nothing the n-gram
-//   list therefore stays empty (see the parity allowances in
-//   `docs/differences.md`).
+// - The `.ngram`-file path (`ngram.cxx`/`NGramSuggest`, whose table is built
+//   by the hunspell `ngram` tool): no vendored dictionary ships an `.ngram`
+//   file, and the owner decided the dictionary-walking n-gram fallback is
+//   sufficient.
 // - `suggest_ph`/`PHONE`: no target dictionary ships a `PHONE` table.
 // - `suggest_gen`/`morphgen`: morphological generation, unused by `suggest`.
 // - `COMPLEXPREFIXES`, `ICONV`/`OCONV`, `IGNORE`: never occur in the target
