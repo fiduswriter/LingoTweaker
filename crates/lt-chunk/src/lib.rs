@@ -14,10 +14,13 @@ pub mod german;
 pub mod model;
 pub mod openregex;
 mod pos;
+pub mod russian;
 
 use std::path::Path;
 
 use lt_core::{AnalyzedTokenReadings, CoreError, Result};
+
+pub use russian::RussianChunker;
 
 use chunk::{tokenize_pos, TokenTag};
 use model::{GenericModel, ModelFile};

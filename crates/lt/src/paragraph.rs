@@ -907,6 +907,26 @@ pub fn strings_be() -> ParagraphStrings {
     }
 }
 
+/// `Russian.getRelevantRules`: the `MessagesBundle_ru` paragraph strings.
+pub fn strings_ru() -> ParagraphStrings {
+    ParagraphStrings {
+        style_category: ("STYLE", "Стиль"),
+        punctuation_category: ("PUNCTUATION", "Пунктуация"),
+        long_desc: |max| format!("Удобочитаемость: абзац длиной {max} слов"),
+        long_msg: |max| format!("Абзац длиной {max} слов, разбейте его на части."),
+        empty_line_msg: "Please delete empty line below and use formatting instead",
+        empty_line_desc: "Empty Line",
+        ws_begin_msg: "Удалите пробел в начале абзаца",
+        ws_begin_desc: "Пробел в начале абзаца",
+        ws_end_msg: "Удалите пробел в конце абзаца",
+        ws_end_desc: "Пробел в конце абзаца",
+        punct_msg: "Добавьте знак пунктуации в конце абзаца.",
+        punct_desc: "В конце абзаца отсутствует знак пунктуации",
+        repetition_last_msg: "Повтор начала последнего абзаца",
+        repetition_desc: "Повтор начала абзаца",
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

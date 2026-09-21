@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 797,
+  "file_count": 829,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -5562,6 +5562,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_ru.properties",
+      "sha256": "5d3f2e2ce573e56d45766faee6a06b1bd396f58cccda97b1964fd3c34a5f2b5f",
+      "size": 46877,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/MessagesBundle_ru.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle_sk.properties",
       "sha256": "9d56dde349a02f8d31ae65d4050cf0d99ad7d4bc8b499832d266cd8c2a9665ee",
       "size": 16388,
@@ -8310,6 +8321,355 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ro/src/main/resources/org/languagetool/resource/ro/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/dictionaries/russian.dict",
+      "sha256": "387f9fcf652a574c9d361397c30aa87ef6f7397a76d3d51cd04c94e8dcbc4015",
+      "size": 2322253,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/russian.dict",
+        "license": "LGPL (Russian POS/synthesis dictionaries; upstream ru/README.txt states the aot.ru dictionary is \"licensed under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream ru/README.txt"
+      }
+    },
+    {
+      "path": "ru/dictionaries/russian.info",
+      "sha256": "e9768f4a50285756cb3505f6ce1e8ed4eaae4defc822ab76f22d7e06ada07c6f",
+      "size": 410,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/russian.info",
+        "license": "LGPL (Russian POS/synthesis dictionaries; upstream ru/README.txt states the aot.ru dictionary is \"licensed under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream ru/README.txt"
+      }
+    },
+    {
+      "path": "ru/dictionaries/russian_synth.dict",
+      "sha256": "299addaa9d5ccf7e95b84e48eeef5ccbd1a2137112204f56e4d5234fc6c86311",
+      "size": 1481255,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/russian_synth.dict",
+        "license": "LGPL (Russian POS/synthesis dictionaries; upstream ru/README.txt states the aot.ru dictionary is \"licensed under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream ru/README.txt"
+      }
+    },
+    {
+      "path": "ru/dictionaries/russian_synth.info",
+      "sha256": "916c0ff9a6101c5f36e33c109b15e9cd37da0e75b772f97bca1df8f5fcdcca3b",
+      "size": 431,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/russian_synth.info",
+        "license": "LGPL (Russian POS/synthesis dictionaries; upstream ru/README.txt states the aot.ru dictionary is \"licensed under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream ru/README.txt"
+      }
+    },
+    {
+      "path": "ru/dictionaries/tags_russian.txt",
+      "sha256": "1efed64cfc852bb4619da092034dcb208acde303baeb55109718afe9cf56729a",
+      "size": 27195,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/tags_russian.txt",
+        "license": "LGPL (Russian POS/synthesis dictionaries; upstream ru/README.txt states the aot.ru dictionary is \"licensed under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream ru/README.txt"
+      }
+    },
+    {
+      "path": "ru/disambiguation.xml",
+      "sha256": "088da5e49938e7f4b1251e4de29de059822ab7e9fc299b07fbeca970b73d0f18",
+      "size": 47039,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/hunspell/README.txt",
+      "sha256": "ee6d4c22cbd2c4f27e987cacfbe41f245cf451a2371d11aad052c2096d88fc94",
+      "size": 699,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/README.txt",
+        "license": "LGPL (morfologik conversion of the aot.ru Russian dictionary; ru/hunspell/README.txt)",
+        "license_verified": true,
+        "license_source": "upstream ru/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "ru/hunspell/ignore.txt",
+      "sha256": "0561df4242ce2d6c6768cb57a0be7822ffda7c3e5991c8664aef7da05351f616",
+      "size": 72,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/hunspell/prohibit.txt",
+      "sha256": "fb56a59b07d43fc0543e6e39d845cfc0d2674438bde628efca7fba93b4f1bcae",
+      "size": 868,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/prohibit.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/hunspell/ru_RU.dict",
+      "sha256": "10c3acd195935a589d3baebe8de4a829def7d19ee4d0613664196795fe91403f",
+      "size": 1889147,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/ru_RU.dict",
+        "license": "LGPL (morfologik conversion of the aot.ru Russian dictionary; ru/hunspell/README.txt)",
+        "license_verified": false,
+        "license_source": "upstream ru/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "ru/hunspell/ru_RU.info",
+      "sha256": "1d6a66af2b3c1812c44d03d2b8d27e6f407e8c99b071956a82296c600679f6a4",
+      "size": 1078,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/ru_RU.info",
+        "license": "LGPL (morfologik conversion of the aot.ru Russian dictionary; ru/hunspell/README.txt)",
+        "license_verified": true,
+        "license_source": "upstream ru/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "ru/hunspell/ru_RU_yo.dict",
+      "sha256": "215cc717920e814a40702f65c2aa3c8e4598fd8f41004140aa00cf1a4893434b",
+      "size": 1783672,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/ru_RU_yo.dict",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/hunspell/ru_RU_yo.info",
+      "sha256": "956e5db4022ffe4b989ac841ab30b33781867b6a1f20905e40bca83c81650573",
+      "size": 1086,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/ru_RU_yo.info",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/hunspell/spelling.txt",
+      "sha256": "964c4bb256ebe8170c4df7e91cea6c66a5717a3ad984debe321f4d65f6a268d7",
+      "size": 39687,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/rules/bitext.xml",
+      "sha256": "68dfe8efc1a56ac793a0d8ef7918a94c3049c2d4441501b61e4c2821d24c46db",
+      "size": 1375,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/rules/ru/bitext.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/rules/coherency.txt",
+      "sha256": "f6b282c5da932fc5025ce068ba96261c24255d7b1cc8c95dd56d6dd400167bd2",
+      "size": 987,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/rules/ru/coherency.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/rules/grammar.xml",
+      "sha256": "f430aaa69e8e0a371cf2680890475b2e9800505e663921101137c18af8b4227e",
+      "size": 1195052,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/rules/ru/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/rules/replace.txt",
+      "sha256": "38bfd8fc096dd0581d4213847c39ee51bc9b5ef3f63b9663900de8da2b091829",
+      "size": 13485,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/rules/ru/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/rules/wordrootrep.txt",
+      "sha256": "a6c59703ddf81ae0bb8b1525455e48b055ca4865b351f279a7bb324499a239d5",
+      "size": 565589,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/rules/ru/wordrootrep.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/README.txt",
+      "sha256": "ff130639a81e6843c6a5662499510e75dc0c26d6cb1cfb19844f8c8dbbe4383d",
+      "size": 711,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/added.txt",
+      "sha256": "4748f15da5cf97095e4d96dda3a3431028c660ff2456c30f143162616d0d8b40",
+      "size": 92745,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/common_words.txt",
+      "sha256": "f49b0f61b641f437df1bf4a58b86a57d7a4d72fdd9473ca0e6397871f4dd9a9e",
+      "size": 145914,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/compounds.txt",
+      "sha256": "71b4217689cf83c07eb88b4f4b5c9c5e482171a053b48fa93e1cd1c14e8e720a",
+      "size": 899551,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/compounds.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/confusion_sets.txt",
+      "sha256": "f2a165a02c7b8d382f0a0ca0041e36376175193854c88991970e59dc323408de",
+      "size": 308,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/confusion_sets.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/multiwords.txt",
+      "sha256": "b802c6c9cb5a251348f0b392e4167c5e12543a44b04f3ce616e4253bc8af4e06",
+      "size": 5289,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/multiwords.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/removed.txt",
+      "sha256": "193c3174a137a5343b1dd7ad5a0314716c3e4023f75f57e161d6f99e2c7baff5",
+      "size": 3205,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/russian_manual_add.txt",
+      "sha256": "489475f53caec2b9e9b3ea65bfee161b333ff35b30d3e6c2dfaf8d0786ed428e",
+      "size": 803316,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/russian_manual_add.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/specific_case.txt",
+      "sha256": "c35d08b0909b45acf242621961e2dbf0148792b70e4696be40248ad952c50966",
+      "size": 915,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/specific_case.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ru/words/tagset.txt",
+      "sha256": "06ff17a8640596e710b8147564490d649ed05489e656021a5a7262098e6b2b5c",
+      "size": 23447,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ru/src/main/resources/org/languagetool/resource/ru/tagset.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

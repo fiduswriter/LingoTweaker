@@ -473,3 +473,15 @@ pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         false,
     )
 }
+
+/// `UppercaseSentenceStartRule` with the Russian `MessagesBundle_ru` strings.
+pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Это предложение не начинается с заглавной буквы.",
+        "Заглавные буквы",
+        "Предложение должно начинаться с заглавной буквы",
+        "Заглавные буквы",
+        false,
+    )
+}

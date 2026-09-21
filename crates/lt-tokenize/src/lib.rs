@@ -19,6 +19,7 @@ pub mod greek;
 pub mod polish;
 pub mod portuguese;
 pub mod romanian;
+pub mod russian;
 pub mod spanish;
 pub mod srx;
 pub mod tagalog;

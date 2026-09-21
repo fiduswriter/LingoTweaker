@@ -323,3 +323,13 @@ pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         ("TYPOGRAPHY", "Тыпаграфіка"),
     )
 }
+
+/// `MultipleWhitespaceRule` with the Russian `MessagesBundle_ru` strings.
+pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Повтор пробела",
+        "Повтор пробела",
+        ("TYPOGRAPHY", "Типографика"),
+    )
+}

@@ -296,3 +296,17 @@ pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         BE_MAX_WORDS,
     )
 }
+
+/// `Russian.getRelevantRules`: `new LongSentenceRule(messages, userConfig,
+/// 50)` (`MessagesBundle_ru` `long_sentence_rule_desc`/`_msg2`).
+pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const RU_MAX_WORDS: usize = 50;
+    check_impl(
+        sentences,
+        RULE_ID,
+        "Удобочитаемость: предложение длиной 50 слов",
+        "Предложение длиной 50 слов от позиции маркера необходимо проверить. Более короткие предложения лучше воспринимаются читателями.",
+        ("STYLE", "Стиль"),
+        RU_MAX_WORDS,
+    )
+}

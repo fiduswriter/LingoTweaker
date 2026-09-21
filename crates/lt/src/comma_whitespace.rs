@@ -889,6 +889,44 @@ fn translate_comma_message_be(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Russian `MessagesBundle_ru` strings.
+pub fn check_sentence_ru(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Типографика".to_string();
+        m.description = "Пробелы перед запятой или до и после скобок".to_string();
+        m.message = translate_comma_message_ru(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_ru` bundle.
+fn translate_comma_message_ru(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Не ставьте пробел после открывающейся скобки.".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Не ставьте пробел до закрывающейся скобки.".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Не ставьте пробел у символа кавычек.".to_string()
+        }
+        "Put a space after the comma." => "Поставьте пробел после запятой.".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Поставьте пробел после запятой, а не перед ней.".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Не ставьте пробел перед точкой в конце предложения.".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],

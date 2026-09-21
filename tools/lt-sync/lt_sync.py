@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -431,6 +431,16 @@ IN_TREE_ARTIFACTS = {
         "resource/tl/tagalog.dict": "tl/dictionaries/tagalog.dict",
         "resource/tl/tagalog.info": "tl/dictionaries/tagalog.info",
     },
+    # Russian ships its aot.ru-derived POS/synthesis dictionaries in-tree
+    # (`RussianTagger` / `RussianSynthesizer`); the tags file is named
+    # `tags_russian.txt` (not `russian_tags.txt`).
+    "ru": {
+        "resource/ru/russian.dict": "ru/dictionaries/russian.dict",
+        "resource/ru/russian.info": "ru/dictionaries/russian.info",
+        "resource/ru/russian_synth.dict": "ru/dictionaries/russian_synth.dict",
+        "resource/ru/russian_synth.info": "ru/dictionaries/russian_synth.info",
+        "resource/ru/tags_russian.txt": "ru/dictionaries/tags_russian.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -575,6 +585,12 @@ IN_TREE_LICENSES = {
         'states "made available under LGPL")',
         True,
         "upstream tl/README.txt",
+    ),
+    "ru": (
+        "LGPL (Russian POS/synthesis dictionaries; upstream ru/README.txt "
+        'states the aot.ru dictionary is "licensed under LGPL")',
+        True,
+        "upstream ru/README.txt",
     ),
 }
 
@@ -799,6 +815,17 @@ def hunspell_license(lang: str, name: str):
                 verified,
                 "upstream tl/hunspell/README_tl_PH.txt; "
                 "tl/hunspell/README_frequencies.txt",
+            )
+    if lang == "ru":
+        # The Russian morfologik spelling dictionaries are converted from the
+        # LGPL aot.ru dictionary; ru/hunspell/README.txt states LGPL.
+        if name.startswith(("README", "ru_RU.")):
+            verified = name == "README.txt" or name.endswith(".info")
+            return (
+                "LGPL (morfologik conversion of the aot.ru Russian dictionary; "
+                "ru/hunspell/README.txt)",
+                verified,
+                "upstream ru/hunspell/README.txt",
             )
     return None
 
@@ -1229,7 +1256,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

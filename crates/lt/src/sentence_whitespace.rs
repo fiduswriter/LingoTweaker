@@ -386,3 +386,15 @@ pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     };
     check_with(sentences, &BE_STRINGS)
 }
+
+/// `SentenceWhitespaceRule` with the Russian `MessagesBundle_ru` strings.
+pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const RU_STRINGS: Strings = Strings {
+        description: "Отсутствуют пробелы между предложениями",
+        repeated_message: "Повтор пробела",
+        add_space_message: "Добавьте пробел между предложениями.",
+        category_name: "Типографика",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &RU_STRINGS)
+}

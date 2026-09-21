@@ -63,6 +63,7 @@ mod pt;
 mod readability;
 mod repeated_words;
 mod ro;
+mod ru;
 mod sentence_whitespace;
 mod simple_replace;
 mod sk;
@@ -433,6 +434,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Be => Pipeline::new_belarusian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Ru => Pipeline::new_russian(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

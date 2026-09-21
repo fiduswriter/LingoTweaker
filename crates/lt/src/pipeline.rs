@@ -185,6 +185,8 @@ pub struct Pipeline {
     pub guarani: Option<Arc<crate::gn::GuaraniPipeline>>,
     /// Belarusian pipeline parts (`None` for the other languages)
     pub belarusian: Option<Arc<crate::be::BelarusianPipeline>>,
+    /// Russian pipeline parts (`None` for the other languages)
+    pub russian: Option<Arc<crate::ru::RussianPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1375,6 +1377,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1622,6 +1625,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1828,6 +1832,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2042,6 +2047,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2176,6 +2182,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2429,6 +2436,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2642,6 +2650,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2972,6 +2981,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3126,6 +3136,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3266,6 +3277,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3430,6 +3442,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3572,6 +3585,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3686,6 +3700,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3835,6 +3850,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3916,6 +3932,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4080,6 +4097,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4156,6 +4174,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4269,6 +4288,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4368,6 +4388,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4481,6 +4502,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4582,6 +4604,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4684,6 +4707,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4796,6 +4820,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4897,6 +4922,127 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: Some(belarusian),
+            russian: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Russian (`ru`) engine. Stage 1 wires the XML rules with the
+    /// `RussianTagger` + `RussianWordTokenizer`, the
+    /// `RussianHybridDisambiguator` order (`ru/multiwords.txt` chunker → XML
+    /// disambiguation) and the post-disambiguation `RussianChunker`; the
+    /// speller and the language's Java rule classes follow in stages 2/3.
+    pub fn new_russian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "ru_two")?;
+
+        let tagger = Arc::new(lt_tagger::RussianTagger::load(data_dir.path())?);
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ru))?;
+        if data_dir.style_path(Lang::Ru).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Ru))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Russian references `<filter>` classes (DateCheckFilter,
+        // FutureDateFilter, INNNumberFilter, AdvancedSynthesizerFilter,
+        // RussianPartialPosTagFilter,
+        // RussianSuppressMisspelledSuggestionsFilter) that are wired in
+        // stage 3.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        let multiwords_chunker = lt_disambig::MultiWordChunker::load(
+            &data_dir.path().join("ru/words/multiwords.txt"),
+            // Java: MultiWordChunker.getInstance("/ru/multiwords.txt")
+            false,
+            false,
+            false,
+            None,
+            false,
+        )
+        .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
+
+        // `new XmlRuleDisambiguator(Russian.getInstance())` uses the default
+        // `useGlobalDisambiguation = false`.
+        let mut disambiguator =
+            lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Ru))?;
+        disambiguator.set_filter_registry(filters);
+
+        let post_chunker = lt_chunk::RussianChunker::new()?;
+
+        let russian = Arc::new(crate::ru::RussianPipeline {
+            tagger,
+            multiwords_chunker,
+            disambiguator,
+            post_chunker,
+        });
+        Ok(Self {
+            lang: Lang::Ru,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: Some(russian),
             clean_overlapping_matches: true,
         })
     }
@@ -5036,6 +5182,7 @@ impl Pipeline {
             nordum: None,
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5122,6 +5269,7 @@ impl Pipeline {
             nordum: Some(nordum),
             guarani: None,
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5212,6 +5360,7 @@ impl Pipeline {
             nordum: None,
             guarani: Some(guarani),
             belarusian: None,
+            russian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5232,6 +5381,8 @@ impl Pipeline {
                 crate::gn::analyze_guarani_sentence(sentence_text)
             } else if self.belarusian.is_some() {
                 crate::be::analyze_belarusian_sentence(sentence_text)
+            } else if let Some(russian) = &self.russian {
+                crate::ru::analyze_russian_sentence(russian, sentence_text)
             } else {
                 match &self.german {
                     Some(german) => {
@@ -7889,6 +8040,144 @@ impl Pipeline {
                 ));
             }
         }
+        // Russian text-level rules (`Russian.getRelevantRules`):
+        // UppercaseSentenceStart (1), MultipleWhitespace (3),
+        // SentenceWhitespace (4) and the default-off/picky paragraph rules
+        // (5, 6, 8, 9, 11) plus LongSentence (7, 50 words). Russian has no
+        // `GenericUnpairedBracketsRule`.
+        if self.lang == crate::Lang::Ru {
+            let para = crate::paragraph::strings_ru();
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_ru(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_ru(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_ru(&analyzed_sentences));
+            }
+            // `WHITESPACE_PARAGRAPH` (5), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::whitespace_before_paragraph_end_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+            // `WHITESPACE_PARAGRAPH_BEGIN` (6), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_BEGIN_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                for sentence in &analyzed_sentences {
+                    text_level_matches.extend(
+                        crate::paragraph::whitespace_at_begin_of_paragraph_with(sentence, &para),
+                    );
+                }
+            }
+            // `TOO_LONG_SENTENCE` (7), `tags="picky"` (50 words)
+            if options.picky && !disabled_rules.contains("TOO_LONG_SENTENCE") {
+                text_level_matches.extend(crate::long_sentence::check_ru(&analyzed_sentences));
+            }
+            // `TOO_LONG_PARAGRAPH` (8), default off and picky
+            if builtin_active(
+                crate::paragraph::LONG_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::long_paragraph_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+            // `PARAGRAPH_REPEAT_BEGINNING_RULE` (9), default off
+            if builtin_active(
+                crate::paragraph::PARAGRAPH_REPEAT_BEGINNING_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::paragraph_repeat_beginning_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+            // `PUNCTUATION_PARAGRAPH_END2` (11), default off
+            if builtin_active(
+                crate::paragraph::PUNCTUATION_PARAGRAPH_END2_ID,
+                "PUNCTUATION",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::punctuation_at_paragraph_end2_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+        }
         // Crimean Tatar text-level rules (`CrimeanTatar.getRelevantRules`):
         // GenericUnpairedBrackets (2), UppercaseSentenceStart (3),
         // MultipleWhitespace (4), SentenceWhitespace (5) and the two
@@ -8146,6 +8435,8 @@ impl Pipeline {
             crate::gn::analyze_guarani_sentence(&text[start..end])
         } else if self.belarusian.is_some() {
             crate::be::analyze_belarusian_sentence(&text[start..end])
+        } else if let Some(russian) = &self.russian {
+            crate::ru::analyze_russian_sentence(russian, &text[start..end])
         } else {
             match &self.german {
                 Some(german) => {
@@ -10992,6 +11283,27 @@ impl Pipeline {
                 }
             }
         }
+        // Russian sentence-level Java rules in `Russian.getRelevantRules`
+        // order: CommaWhitespace (0), then the speller (2) and the
+        // Russian-specific rules (stage 2/3).
+        if self.lang == crate::Lang::Ru {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "TYPOGRAPHY",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_ru(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+        }
         // Crimean Tatar sentence-level Java rules in
         // `CrimeanTatar.getRelevantRules` order: CommaWhitespace (0),
         // DoublePunctuation (1) and MorfologikCrimeanTatarSpellerRule (8).
@@ -12448,6 +12760,12 @@ impl Pipeline {
         }
         if let Some(guarani) = &self.guarani {
             guarani.disambiguate(sentence);
+            return;
+        }
+        if let Some(russian) = &self.russian {
+            // `RussianHybridDisambiguator`: `ru/multiwords.txt` chunker →
+            // XML rules; the post-disambiguation `RussianChunker` runs after.
+            russian.disambiguate(sentence);
             return;
         }
         self.global_chunker.apply(sentence);
