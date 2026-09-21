@@ -168,6 +168,23 @@ pub fn check_sentence_br(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Tagalog `MessagesBundle_tl` strings.
+pub fn check_sentence_tl(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Punctuation".to_string();
+        m.description = "Paggamit ng dalawang magkasunod na tuldok o kuwit".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Dalawang magkasunod na tuldok".to_string();
+            m.short_message = Some("Dalawang magkasunod na tuldok".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Dalawang magkasunod na kuwit".to_string();
+            m.short_message = Some("Dalawang magkasunod na kuwit".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

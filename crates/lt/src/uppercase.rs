@@ -256,6 +256,18 @@ pub fn check_br(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Tagalog `MessagesBundle_tl` strings.
+pub fn check_tl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Hindi nagsisimula ang pangungusap na ito sa malaking letra",
+        "Kapitalisasiyon",
+        "Sinusuri na nagsisimula ang pangungusap sa malaking letra",
+        "Kapitalisasiyon",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Esperanto `MessagesBundle_eo`
 /// strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {

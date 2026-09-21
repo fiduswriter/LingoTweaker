@@ -44,6 +44,7 @@ pub mod spanish;
 pub mod spanish_synth;
 pub mod swedish;
 pub mod swedish_synth;
+pub mod tagalog;
 
 pub use asturian::AsturianTagger;
 pub use breton::BretonTagger;
@@ -83,6 +84,7 @@ pub use spanish::{is_emoji, SpanishTagger};
 pub use spanish_synth::SpanishSynthesizer;
 pub use swedish::SwedishTagger;
 pub use swedish_synth::SwedishSynthesizer;
+pub use tagalog::TagalogTagger;
 
 use std::collections::HashMap;
 use std::path::Path;

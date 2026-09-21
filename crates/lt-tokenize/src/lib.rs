@@ -19,6 +19,7 @@ pub mod portuguese;
 pub mod romanian;
 pub mod spanish;
 pub mod srx;
+pub mod tagalog;
 pub mod wordtokenizer;
 
 pub use breton::BretonWordTokenizer;
@@ -36,6 +37,7 @@ pub use portuguese::PortugueseWordTokenizer;
 pub use romanian::RomanianWordTokenizer;
 pub use spanish::SpanishWordTokenizer;
 pub use srx::{SrxDocument, SrxTokenizer};
+pub use tagalog::TagalogWordTokenizer;
 
 use lt_core::{Sentence, TextRange};
 

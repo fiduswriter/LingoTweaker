@@ -368,3 +368,30 @@ scripts/oracle/eo/probe-rule.sh "La ŭesta parto de la urbo." HUNSPELL_RULE
 scripts/oracle/eo/probe-rule.sh "La digesta aparato inflamiĝis." HUNSPELL_RULE
 ```
 
+
+## 11. Tagalog (`tl`) `MORFOLOGIK_RULE_TL` suggestion ordering (5 corpus field diffs)
+
+The Tagalog speller dictionary (`tl/hunspell/tl_PH.dict`) is the only vendored
+Morfologik dictionary with `fsa.dict.frequency-included=true`, so its
+suggestion weights use the morfologik
+`distance * FREQ_RANGES + FREQ_RANGES - frequency - 1` composite. The Rust
+speller returns the **same suggestion set and the same match set** as the
+legacy engine, but orders the frequency-weighted candidates differently for
+the misspelling `nag` (5 corpus lines):
+
+```
+Java: nang|nga|pag|mag|wag|bag|Naga|Pag|nagi|ang|ng|na
+Rust: ang|ng|na|nang|nga|pag|mag|wag|bag|Naga|Pag|nagi
+```
+
+The difference is the frequency code read for the high-frequency function
+words `ang`/`ng`/`na` (the Rust `Speller::get_frequency` picks the first
+stored annotation's last byte; the legacy engine's frequency lookup orders
+them differently). The corpus gate pins this exactly with
+`--expect-field-diffs=MORFOLOGIK_RULE_TL=5`; no only-Java/only-Rust matches.
+
+Reproduce (pinned Java build):
+
+```sh
+scripts/oracle/tl/probe-rule.sh "Sa DLSU rin ako nag-aral." MORFOLOGIK_RULE_TL
+```

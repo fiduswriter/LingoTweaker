@@ -203,6 +203,16 @@ pub fn check_br(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Tagalog `MessagesBundle_tl` strings.
+pub fn check_tl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Pag-uulit ng Whitespace (pangit na pag-format)",
+        "Posibleng typo: naulit mo ang whitespace",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

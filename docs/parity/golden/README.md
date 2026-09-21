@@ -28,6 +28,7 @@ re-runs the Rust side and diffs against the golden.
 | eo | `eo-full.txt` (876) | `eo-full.java.tsv` |
 | ast | `ast-full.txt` (125) | `ast-full.java.tsv` |
 | br | `br-full.txt` (1,835) | `br-full.java.tsv` |
+| tl | `tl-full.txt` (99) | `tl-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -41,7 +42,7 @@ re-runs the Rust side and diffs against the golden.
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk/sl/el/da/sv/is/eo/ast `2026-09-21`.
+  sk/sl/el/da/sv/is/eo/ast/br/tl `2026-09-21`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -100,11 +101,15 @@ re-runs the Rust side and diffs against the golden.
   two shared gaps the corpus surfaced are fixed: `<match no="0"
   regexp_match=... regexp_replace=...>` token references in patterns and the
   multi-word `IGNORE_SPELLING` anti-patterns from the spelling word lists).
+  tl is 0 only-Java / 0 only-Rust / exactly the documented
+  `MORFOLOGIK_RULE_TL` = 5 suggestion-order field diffs (docs/differences.md
+  #11; the frequency-included `tl_PH` dictionary orders the weighted
+  candidates differently, the match and suggestion sets are identical).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

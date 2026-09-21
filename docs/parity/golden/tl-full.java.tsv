@@ -1,0 +1,182 @@
+L	1	Baka ang tingin mo ay talo ka din.
+M	1	D_WORDS	1	30	33	Other	 Do you mean <suggestion>rin</suggestion>? If the preceding word ends with a vowel, din should start with the letter R.	rin
+L	2	Kinuha ko ito dito.
+M	2	D_WORDS	1	14	18	Other	 Do you mean <suggestion>rito</suggestion>? If the preceding word ends with a vowel, dito should start with the letter R.	rito
+L	3	Natalo ka daw sa pustahan.
+M	3	D_WORDS	1	10	13	Other	 Do you mean <suggestion>raw</suggestion>? If the preceding word ends with a vowel, daw should start with the letter R.	raw
+M	3	MORFOLOGIK_RULE_TL		17	25	UnknownWord	Posibleng may nahanap na mali sa ispeling	puntahan
+L	4	Iniwan ko diyan ang pantasa.
+M	4	D_WORDS	1	10	15	Other	 Do you mean <suggestion>riyan</suggestion>? If the preceding word ends with a vowel, diyan should start with the letter R.	riyan
+M	4	MORFOLOGIK_RULE_TL		20	27	UnknownWord	Posibleng may nahanap na mali sa ispeling	pagtasa|panlasa|pantas
+L	5	Baka ang tingin mo doon ay bahay ko.
+M	5	D_WORDS	1	19	23	Other	 Do you mean <suggestion>roon</suggestion>? If the preceding word ends with a vowel, doon should start with the letter R.	roon
+L	6	Sa DLSU rin ako nag-aral.
+M	6	MORFOLOGIK_RULE_TL		3	7	UnknownWord	Posibleng may nahanap na mali sa ispeling	DATU|DOS|DUSA|DNS|GLS|TLS|XLS|XLSX
+M	6	MORFOLOGIK_RULE_TL		16	19	UnknownWord	Posibleng may nahanap na mali sa ispeling	nang|nga|pag|mag|wag|bag|Naga|Pag|nagi|ang|ng|na
+L	7	Sa UP din ako nag-aral.
+M	7	MORFOLOGIK_RULE_TL		3	5	UnknownWord	Posibleng may nahanap na mali sa ispeling	UPA|UPO|UY|BP|HP|UDP|UPS
+M	7	MORFOLOGIK_RULE_TL		14	17	UnknownWord	Posibleng may nahanap na mali sa ispeling	nang|nga|pag|mag|wag|bag|Naga|Pag|nagi|ang|ng|na
+L	8	Sinaksak niya ang biktima rito, sa puso.
+M	8	MORFOLOGIK_RULE_TL		0	8	UnknownWord	Posibleng may nahanap na mali sa ispeling	Sinaktan|Sinasaka|Winasak
+L	9	Ibalik mo iyan dito mamaya.
+L	10	Tinalo ka raw ng kaklase mo.
+L	11	Ikaw daw ang panalo
+L	12	Bakit mo riyan linagay ang lapis?
+M	12	MORFOLOGIK_RULE_TL		15	22	UnknownWord	Posibleng may nahanap na mali sa ispeling	ilagay|lagay|pinatay|binigay|hinagap|ibinagay|inagaw|inakay|ingay|kinamay|kinatay|lalagay|sinanay|sinaway|tinangay|tinapay
+L	13	Bakit diyan walang mansanas?
+L	14	Kumakain ka ba roon?
+L	15	Baka ang tingin mo ay doon ako nakatira.
+L	16	Nasa apat na daan ang dumating.
+M	16	DAAN	1	13	17	Other	 Do you mean <suggestion>raan</suggestion>? If the preceding word ends with a vowel, daan should start with the letter R.	raan
+L	17	Nasa apat na daang tao ang dumating.
+M	17	DAAN	1	13	18	Other	 Do you mean <suggestion>raang</suggestion>? If the preceding word ends with a vowel, daang should start with the letter R.	raang
+L	18	Nagbayad sila ng anim na raan sa tindera.
+M	18	MORFOLOGIK_RULE_TL		33	40	UnknownWord	Posibleng may nahanap na mali sa ispeling	Tinder
+L	19	May limang daan ka ba?
+L	20	Nagbayad sila ng anim na raang piso sa tindera.
+M	20	MORFOLOGIK_RULE_TL		39	46	UnknownWord	Posibleng may nahanap na mali sa ispeling	Tinder
+L	21	May limang daang piso ka ba?
+L	22	Baka ang tingin mo ay pangit rin ikaw.
+M	22	R_WORDS	1	29	32	Other	 Do you mean <suggestion>din</suggestion>? If the preceding word ends with a vowel, rin should start with the letter D.	din
+L	23	Kinuha ko itong lapis rito.
+M	23	R_WORDS	1	22	26	Other	 Do you mean <suggestion>dito</suggestion>? If the preceding word ends with a vowel, rito should start with the letter D.	dito
+L	24	Matapang raw ikaw.
+M	24	R_WORDS	1	9	12	Other	 Do you mean <suggestion>daw</suggestion>? If the preceding word ends with a vowel, raw should start with the letter D.	daw
+L	25	Iniwan ko ang lapis riyan.
+M	25	R_WORDS	1	20	25	Other	 Do you mean <suggestion>diyan</suggestion>? If the preceding word ends with a vowel, riyan should start with the letter D.	diyan
+L	26	Baka ang tingin mo ay roon ang papunta sa bahay nila.
+M	26	R_WORDS	1	22	26	Other	 Do you mean <suggestion>doon</suggestion>? If the preceding word ends with a vowel, roon should start with the letter D.	doon
+L	27	Sa UP din ako nag-aral.
+M	27	MORFOLOGIK_RULE_TL		3	5	UnknownWord	Posibleng may nahanap na mali sa ispeling	UPA|UPO|UY|BP|HP|UDP|UPS
+M	27	MORFOLOGIK_RULE_TL		14	17	UnknownWord	Posibleng may nahanap na mali sa ispeling	nang|nga|pag|mag|wag|bag|Naga|Pag|nagi|ang|ng|na
+L	28	Sa DLSU rin ako nag-aral.
+M	28	MORFOLOGIK_RULE_TL		3	7	UnknownWord	Posibleng may nahanap na mali sa ispeling	DATU|DOS|DUSA|DNS|GLS|TLS|XLS|XLSX
+M	28	MORFOLOGIK_RULE_TL		16	19	UnknownWord	Posibleng may nahanap na mali sa ispeling	nang|nga|pag|mag|wag|bag|Naga|Pag|nagi|ang|ng|na
+L	29	Ibalik mo iyan dito mamaya.
+L	30	Sinaksak niya ang biktima rito, sa puso.
+M	30	MORFOLOGIK_RULE_TL		0	8	UnknownWord	Posibleng may nahanap na mali sa ispeling	Sinaktan|Sinasaka|Winasak
+L	31	Ikaw daw ang panalo.
+L	32	Tinalo ka raw ng kaklase mo.
+L	33	Bakit diyan walang mansanas?
+L	34	Bakit mo riyan linagay ang lapis?
+M	34	MORFOLOGIK_RULE_TL		15	22	UnknownWord	Posibleng may nahanap na mali sa ispeling	ilagay|lagay|pinatay|binigay|hinagap|ibinagay|inagaw|inakay|ingay|kinamay|kinatay|lalagay|sinanay|sinaway|tinangay|tinapay
+L	35	Baka roon ang papunta sa bahay nila.
+L	36	Baka ang tingin mo ay doon ako nakatira.
+L	37	Kumakain ka ba roon?
+L	38	Nasa tatlong raan ang dumating.
+M	38	RAAN	1	13	17	Other	 Do you mean <suggestion>daan</suggestion>? If the preceding word ends with a vowel, raan should start with the letter D.	daan
+L	39	Nasa tatlong raang tao ang dumating.
+M	39	RAAN	1	13	18	Other	 Do you mean <suggestion>daang</suggestion>? If the preceding word ends with a vowel, raang should start with the letter D.	daang
+L	40	Nagbayad sila ng pitong daan sa tindera.
+M	40	MORFOLOGIK_RULE_TL		32	39	UnknownWord	Posibleng may nahanap na mali sa ispeling	Tinder
+L	41	May apat na raan ka ba?
+L	42	Nagbayad sila ng pitong daang piso sa tindera.
+M	42	MORFOLOGIK_RULE_TL		38	45	UnknownWord	Posibleng may nahanap na mali sa ispeling	Tinder
+L	43	May apat na raang piso ka ba?
+L	44	Ang dentista ay nagbunot ng ngipin.
+M	44	NAG-	1	16	24	Other	Do you mean <suggestion>bumunot</suggestion>?	bumunot
+L	45	Ang dentista aybumunot ng ngipin
+M	45	MORFOLOGIK_RULE_TL		13	22	UnknownWord	Posibleng may nahanap na mali sa ispeling	bumuntot
+L	46	Nagbunot ng ngipin ang dentista.
+M	46	NAG-_SS	1	0	8	Other	Do you mean <suggestion>Bumunot</suggestion>?	Bumunot
+L	47	Baka ang tingin mo ay asul mata ang meron siya.
+M	47	ADJECTIVE-C_COMMON_NOUN	1	22	31	Other	Do you mean <suggestion>asul na mata</suggestion>? If the adjective ends with a consonant, except the letter N, the ligature "na" should be added.	asul na mata
+L	48	Baka ang tingin mo ay asul na mata and meron siya.
+M	48	MORFOLOGIK_RULE_TL		35	38	UnknownWord	Posibleng may nahanap na mali sa ispeling	ano|Ano|ani|AMD|ang
+L	49	Siya ay isang madasalin bata.
+M	49	ADJECTIVE-N_COMMON_NOUN	1	14	28	Other	Do you mean <suggestion>madasaling bata</suggestion>? If the adjective ends with the letter N, the ligature "-g" should be added.	madasaling bata
+L	50	Siya ay isang madalasing bata.
+M	50	MORFOLOGIK_RULE_TL		14	24	UnknownWord	Posibleng may nahanap na mali sa ispeling	madalas ing
+L	51	Siya ay isang mababa bata.
+M	51	ADJECTIVE-V_COMMON_NOUN	1	14	25	Other	Do you mean <suggestion>mababang bata</suggestion>? If the adjective ends with a vowel, the ligature "-ng" should be added.	mababang bata
+L	52	Kumain ng maayos.
+M	52	VERB_NG_ADVERB	1	7	16	Other	Do you mean <suggestion>nang maayos</suggestion>? The adjective marker should be the conjunction "nang".	nang maayos
+L	53	Kumain ng di gaanong maayos.
+M	53	VERB_NG_DI_ADVERB	1	7	20	Other	Do you mean <suggestion>nang di gaanong</suggestion>? The adjective marker should be the conjunction "nang".	nang di gaanong
+L	54	Kumain ng 'di gaanong maayos.
+M	54	VERB_NG_DI_ADVERB2	1	7	21	Other	Do you mean <suggestion>nang 'di gaanong</suggestion>? The adjective marker should be the conjunction "nang".	nang 'di gaanong
+L	55	Magaganda ako.
+M	55	ADJECTIVE-PL_AKO	1	10	13	Other	Do you mean <suggestion>kami</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	kami
+L	56	Magaganda tayo.
+L	57	Maganda ako.
+L	58	Magaganda akong bata.
+M	58	ADJECTIVE-PL_AKONG	1	10	15	Other	Do you mean <suggestion>kaming</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	kaming
+L	59	Magaganda tayong bata.
+L	60	Maganda akong bata.
+L	61	Magaganda ka.
+M	61	ADJECTIVE-PL_KA	1	10	12	Other	Do you mean <suggestion>kayo</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	kayo
+L	62	Maganda ka.
+L	63	Magaganda kang bata.
+M	63	ADJECTIVE-PL_KANG	1	10	14	Other	Do you mean <suggestion>kayong</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	kayong
+L	64	Maganda kang bata.
+L	65	Magaganda siya.
+M	65	ADJECTIVE-PL_SIYA	1	10	14	Other	Do you mean <suggestion>sila</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	sila
+L	66	Maganda siya.
+L	67	Magaganda siyang bata.
+M	67	ADJECTIVE-PL_SIYANG	1	10	16	Other	Do you mean <suggestion>silang</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	silang
+L	68	Maganda siyang bata.
+L	69	Magaganda si Maria.
+M	69	ADJECTIVE-PL_SI	1	10	12	Other	Do you mean <suggestion>sina</suggestion>? If the adjective is plural, the nominal phrase should also be plural.	sina
+L	70	Maganda si Maria.
+L	71	Pinalakad ni Maria si abogado.
+M	71	MORFOLOGIK_RULE_TL		0	9	UnknownWord	Posibleng may nahanap na mali sa ispeling	Pinalakas
+M	71	SI_COMMON_NOUN	1	19	29	Other	Do you mean <suggestion>ang abogado</suggestion>? "si" is a personal name marker.	ang abogado
+L	72	Pinalakad ni abogado si Maria.
+M	72	MORFOLOGIK_RULE_TL		0	9	UnknownWord	Posibleng may nahanap na mali sa ispeling	Pinalakas
+M	72	NI_COMMON_NOUN	1	10	20	Other	Do you mean <suggestion>ng abogado</suggestion>? "ni" is a personal name marker.	ng abogado
+L	73	Pinalakad ng abogadosi Maria.
+M	73	MORFOLOGIK_RULE_TL		0	9	UnknownWord	Posibleng may nahanap na mali sa ispeling	Pinalakas
+M	73	MORFOLOGIK_RULE_TL		13	22	UnknownWord	Posibleng may nahanap na mali sa ispeling	abogado si
+L	74	Pinalakad kay abogado ang lupa.
+M	74	MORFOLOGIK_RULE_TL		0	9	UnknownWord	Posibleng may nahanap na mali sa ispeling	Pinalakas
+M	74	KAY_COMMON_NOUN	1	10	21	Other	Do you mean <suggestion>sa abogado</suggestion>? "kay" is a personal name marker.	sa abogado
+L	75	Maganda ang ang tanawin.
+M	75	ANG_ANG	1	8	15	Other	Do you mean <suggestion>ang mga</suggestion>? "ang" can not be followed by another "ang".	ang mga
+L	76	Maganda mga mga tanawin.
+M	76	MGA_MGA	1	8	15	Other	Do you mean <suggestion>ang mga</suggestion>? "mga" can not be followed by another "mga".	ang mga
+L	77	Pinalakad ng ng abogado si Maria.
+M	77	MORFOLOGIK_RULE_TL		0	9	UnknownWord	Posibleng may nahanap na mali sa ispeling	Pinalakas
+M	77	NG_NG	1	10	15	Other	Do you mean <suggestion>ng mga</suggestion>? "ng" can not be followed by another "ng".	ng mga
+L	78	Kapag lagging kapiling kita, sumasaya ako.
+M	78	LAGGING	1	6	13	Other	Do you mean <suggestion>laging</suggestion>?	laging
+M	78	MORFOLOGIK_RULE_TL		29	37	UnknownWord	Posibleng may nahanap na mali sa ispeling	sumasama|sumasayaw|suma saya
+L	79	Siya ay nagging aso.
+M	79	NAGGING	1	8	15	Other	Do you mean <suggestion>naging</suggestion>?	naging
+L	80	Kumain kami ng cake kagabi.
+M	80	CAKE	1	15	19	Other	Do you mean <suggestion>keyk</suggestion>?	keyk
+L	81	Ano na ang score?
+M	81	SCORE	1	11	16	Other	Do you mean <suggestion>iskor</suggestion>?	iskor
+L	82	Bakit may liquid?
+M	82	LIQUID	1	10	16	Other	Do you mean <suggestion>likido</suggestion>?	likido
+L	83	Pumara ka ng jeep.
+M	83	MORFOLOGIK_RULE_TL		0	6	UnknownWord	Posibleng may nahanap na mali sa ispeling	Pumasa
+M	83	JEEP	1	13	17	Other	Do you mean <suggestion>dyip</suggestion>?	dyip
+L	84	Gumawa tayo ng research.
+M	84	RESEARCH	1	15	23	Other	Do you mean <suggestion>riserts</suggestion>?	riserts
+L	85	May nagraid daw dito kagabi?
+M	85	RAID	1	4	11	Other	Do you mean <suggestion>nagreyd</suggestion>?	nagreyd
+L	86	Ano ba, where na kayo?
+M	86	WHERE	1	8	13	Other	Do you mean <suggestion>nasaan</suggestion>?	nasaan
+L	87	Ano ba, nasaan na you?
+M	87	YOU	1	18	21	Other	Do you mean <suggestion>ikaw</suggestion>?	ikaw
+L	88	Matalino Maria.
+M	88	ADJECTIVE_PROPER_NOUN	1	0	14	Other	Do you mean <suggestion>Matalino si Maria</suggestion>? A proper noun should be preceded by a determiner.	Matalino si Maria
+L	89	Si Maria maganda.
+M	89	SI_PROPER_NOUN_ADJECTIVE	1	3	16	Other	Do you mean <suggestion>Maria ay maganda</suggestion>? Missing lexical marker "ay".	Maria ay maganda
+L	90	Ang ibon maganda.
+M	90	ANG_COMMON_NOUN_ADJECTIVE	1	4	16	Other	Do you mean <suggestion>ibon ay maganda</suggestion>? Missing lexical marker "ay".	ibon ay maganda
+L	91	Ang mga ibon maganda.
+M	91	MGA_COMMON_NOUN_ADJECTIVE	1	8	20	Other	Do you mean <suggestion>ibon ay maganda</suggestion>? Missing lexical marker "ay".	ibon ay maganda
+L	92	Si Maria kumakain.
+M	92	SI_PROPER_NOUN_VERB	1	3	17	Other	Do you mean <suggestion>Maria ay kumakain</suggestion>? Missing lexical marker "ay".	Maria ay kumakain
+L	93	Maganda si.
+M	93	SI_LAST_WORD_MISSING	1	8	11	Other	Probably a proper noun is missing. A determiner can not be the last word of a sentence or of a phrase.	
+L	94	Maganda si Maria.
+L	95	Maganda ang.
+M	95	ANG_LAST_WORD_MISSING	1	8	12	Other	Probably a noun is missing. A determiner can not be the last word of a sentence or of a phrase.	
+L	96	Maganda ang tanawin.
+L	97	Maganda ang mga.
+M	97	MGA_LAST_WORD_MISSING	1	12	16	Other	Probably a noun is missing. A determiner can not be the last word of a sentence or of a phrase.	
+L	98	Maganda ang mga halaman.
+L	99	Maganda Maria si.
+M	99	PROPER_NOUN_SI_PUNCT	1	8	16	Other	Do you mean <suggestion>si Maria</suggestion>? Irregular POS sequence due to transposition of words.	si Maria

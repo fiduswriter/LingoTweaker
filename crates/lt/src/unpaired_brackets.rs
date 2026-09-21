@@ -572,6 +572,26 @@ pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_ast())
 }
 
+/// Tagalog `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_tl` strings):
+/// the default symbol lists `[ ( { " '` / `] ) } " '`.
+pub fn symbols_tl() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Walang kapares na mga panaklong, braket, panipi, at kaparehong simbolo",
+        category_id: "PUNCTUATION",
+        category_name: "Punctuation",
+        start: &["[", "(", "{", "\"", "'"],
+        end: &["]", ")", "}", "\"", "'"],
+        spanish: false,
+        message_template: "Unpaired symbol: '{other}' seems to be missing",
+    }
+}
+
+/// Tagalog `UNPAIRED_BRACKETS` (generic rule, Tagalog strings).
+pub fn check_tl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_tl())
+}
+
 /// Esperanto `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_eo` strings):
 /// the default symbol lists `[ ( { " '` / `] ) } " '`.
 pub fn symbols_eo() -> UnpairedSymbols {

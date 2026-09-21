@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","no","nrd","gn"]'
+ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","no","nrd","gn"]'
 fails=0
 
 check() {
@@ -77,6 +77,9 @@ check "ast golden" '["ast"]' docs/parity/golden/ast-full.java.tsv
 check "br integration test" '["br"]' crates/lt/tests/breton.rs
 check "br module" '["br"]' crates/lt/src/br/spelling.rs
 check "br golden" '["br"]' docs/parity/golden/br-full.java.tsv
+check "tl integration test" '["tl"]' crates/lt/tests/tagalog.rs
+check "tl module" '["tl"]' crates/lt/src/tl/spelling.rs
+check "tl golden" '["tl"]' docs/parity/golden/tl-full.java.tsv
 
 # hand-authored languages (tests-only parity gate): local layout plus the
 # no/nrd/gn module entry files and the Nordum dictionary generator

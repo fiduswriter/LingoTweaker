@@ -67,6 +67,7 @@ mod sl;
 mod specific_case;
 mod style_too_often;
 mod sv;
+mod tl;
 mod unit_conversion;
 mod unpaired_brackets;
 mod unpaired_quotes;
@@ -405,6 +406,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Br => Pipeline::new_breton(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Tl => Pipeline::new_tagalog(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

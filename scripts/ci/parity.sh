@@ -7,7 +7,7 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
@@ -106,6 +106,9 @@ fi
 if [ "$LANG_ARG" = "br" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-21"
 fi
+if [ "$LANG_ARG" = "tl" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-21"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -141,6 +144,12 @@ elif [ "$LANG_ARG" = "fr" ]; then
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
+elif [ "$LANG_ARG" = "tl" ]; then
+  # documented suggestion-order divergence (docs/differences.md #11): the
+  # match and suggestion *sets* are identical; the frequency-included
+  # tl_PH Morfologik dictionary orders the frequency-weighted candidates
+  # differently for `nag`.
+  EXTRA+=(--expect-field-diffs=MORFOLOGIK_RULE_TL=5)
 elif [ "$LANG_ARG" = "pl" ]; then
   # documented known fidelity gaps (docs/differences.md #9): the
   # <unify negate="yes"> agreement rules, the ZDANIA_ZLOZONE comp:comma

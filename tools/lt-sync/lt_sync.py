@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -359,6 +359,13 @@ IN_TREE_ARTIFACTS = {
         "resource/br/breton.dict": "br/dictionaries/breton.dict",
         "resource/br/breton.info": "br/dictionaries/breton.info",
     },
+    # Tagalog ships its `BaseTagger` Morfologik dictionary (CFSA2,
+    # ISO-8859-1) in-tree (`TagalogTagger`); the FSA spelling dictionary
+    # (`hunspell/tl_PH.dict`) is imported with the `hunspell/` directory.
+    "tl": {
+        "resource/tl/tagalog.dict": "tl/dictionaries/tagalog.dict",
+        "resource/tl/tagalog.info": "tl/dictionaries/tagalog.info",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -430,6 +437,11 @@ UPSTREAM_FILE_LICENSES = {
         True,
         "upstream br/README.txt",
     ),
+    "tl/words/README.txt": (
+        "LGPL (Tagalog tagger dictionary and tagset; upstream tl/README.txt)",
+        True,
+        "upstream tl/README.txt",
+    ),
 }
 
 # In-tree (module resource) dictionaries that are not Maven artifacts.
@@ -492,6 +504,12 @@ IN_TREE_LICENSES = {
         "to be confirmed",
         False,
         "upstream br/README.txt",
+    ),
+    "tl": (
+        "LGPL (Tagalog POS dictionary and tagset; upstream tl/README.txt "
+        'states "made available under LGPL")',
+        True,
+        "upstream tl/README.txt",
     ),
 }
 
@@ -695,6 +713,27 @@ def hunspell_license(lang: str, name: str):
                 "br/README.txt)",
                 verified,
                 "upstream br/hunspell/README.txt; br/README.txt",
+            )
+    if lang == "tl":
+        # The Tagalog FSA spelling dictionary is the GPL-2.0-or-later
+        # myspell-tl word list (Sagum/Scannell) with CC-BY-4.0 SpellOnIt
+        # frequency data (README_frequencies.txt).
+        if name == "README_frequencies.txt":
+            return (
+                "CC-BY-4.0 (SpellOnIt word frequency lists; "
+                "tl/hunspell/README_frequencies.txt)",
+                True,
+                "upstream tl/hunspell/README_frequencies.txt",
+            )
+        if name.startswith(("README", "tl_PH.")):
+            verified = name == "README_tl_PH.txt" or name.endswith(".info")
+            return (
+                "GPL-2.0-or-later (myspell-tl Tagalog dictionary, "
+                "Sagum/Scannell; tl/hunspell/README_tl_PH.txt) with "
+                "CC-BY-4.0 SpellOnIt frequency data",
+                verified,
+                "upstream tl/hunspell/README_tl_PH.txt; "
+                "tl/hunspell/README_frequencies.txt",
             )
     return None
 
@@ -1067,7 +1106,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

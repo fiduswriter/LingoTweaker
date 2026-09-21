@@ -776,6 +776,45 @@ fn translate_comma_message_br(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Tagalog `MessagesBundle_tl` strings.
+pub fn check_sentence_tl(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Typography".to_string();
+        m.description =
+            "Paggamit ng blangko bago ang kuwit at bago/pagkatapos ng panaklong".to_string();
+        m.message = translate_comma_message_tl(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_tl` bundle.
+fn translate_comma_message_tl(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Huwag lagyan ng espasyo pagkatapos ng pagbubukas ng panaklong".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Huwag lagyan ng espasyo bago ang pagsasara ng panaklong".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Lagyan ng espasiyo pagkatapos ng kuwit".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Maglagay ng espasyo pagkatapos ng kuwit, pero hindi bago ang kuwit".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Huwag lagyan ng espasyo bago ang tuldok".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],

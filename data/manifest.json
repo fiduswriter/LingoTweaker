@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 747,
+  "file_count": 764,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -5185,6 +5185,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_tl.properties",
+      "sha256": "03fbb2563732aa16b8ee647604a5d18c203f421cb2260e15815d98559ac06ca4",
+      "size": 14762,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/MessagesBundle_tl.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "nl/compound_acceptor/acronym_exceptions.txt",
       "sha256": "d38a5f1beafb93cf8e7382c05e0e5705c4ea56692c495aab3c80a7c04fd7230c",
       "size": 271,
@@ -8538,6 +8549,189 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/dictionaries/tagalog.dict",
+      "sha256": "d200c9441bcd114358b7a44ebfcdd00a6d80e54c0036dce1171b21350a8a5f60",
+      "size": 43690,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/tagalog.dict",
+        "license": "LGPL (Tagalog POS dictionary and tagset; upstream tl/README.txt states \"made available under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream tl/README.txt"
+      }
+    },
+    {
+      "path": "tl/dictionaries/tagalog.info",
+      "sha256": "f31656d6db7f5701c23547d33f95fdf6e83e4e886c90f92f49890ac7f5950f33",
+      "size": 105,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/tagalog.info",
+        "license": "LGPL (Tagalog POS dictionary and tagset; upstream tl/README.txt states \"made available under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream tl/README.txt"
+      }
+    },
+    {
+      "path": "tl/hunspell/README_frequencies.txt",
+      "sha256": "9ea8c704baac181f1c49e8f85c92f0af20df56a277fbf0669711f72e0ffaf264",
+      "size": 253,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/hunspell/README_frequencies.txt",
+        "license": "CC-BY-4.0 (SpellOnIt word frequency lists; tl/hunspell/README_frequencies.txt)",
+        "license_verified": true,
+        "license_source": "upstream tl/hunspell/README_frequencies.txt"
+      }
+    },
+    {
+      "path": "tl/hunspell/README_tl_PH.txt",
+      "sha256": "3c2b5dbd4590331710d89c20728e27aa4a2ed183f5fbd763d45451b06d22caca",
+      "size": 19135,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/hunspell/README_tl_PH.txt",
+        "license": "GPL-2.0-or-later (myspell-tl Tagalog dictionary, Sagum/Scannell; tl/hunspell/README_tl_PH.txt) with CC-BY-4.0 SpellOnIt frequency data",
+        "license_verified": true,
+        "license_source": "upstream tl/hunspell/README_tl_PH.txt; tl/hunspell/README_frequencies.txt"
+      }
+    },
+    {
+      "path": "tl/hunspell/ignore.txt",
+      "sha256": "0fe96cb015d929ecd0a238cb3406d847807c22d945f1af13079ae4b612248ae7",
+      "size": 78,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/hunspell/tl_PH.dict",
+      "sha256": "209f819adf1e1d5605108197310aadd4bdde08c156c2b820d14debd4ae38ce4e",
+      "size": 51457,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/hunspell/tl_PH.dict",
+        "license": "GPL-2.0-or-later (myspell-tl Tagalog dictionary, Sagum/Scannell; tl/hunspell/README_tl_PH.txt) with CC-BY-4.0 SpellOnIt frequency data",
+        "license_verified": false,
+        "license_source": "upstream tl/hunspell/README_tl_PH.txt; tl/hunspell/README_frequencies.txt"
+      }
+    },
+    {
+      "path": "tl/hunspell/tl_PH.info",
+      "sha256": "3b005fa3712490aa404dd103d9a3a94a1ceadf7330d7a12c60ef6fd51f0203cb",
+      "size": 246,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/hunspell/tl_PH.info",
+        "license": "GPL-2.0-or-later (myspell-tl Tagalog dictionary, Sagum/Scannell; tl/hunspell/README_tl_PH.txt) with CC-BY-4.0 SpellOnIt frequency data",
+        "license_verified": true,
+        "license_source": "upstream tl/hunspell/README_tl_PH.txt; tl/hunspell/README_frequencies.txt"
+      }
+    },
+    {
+      "path": "tl/rules/grammar.xml",
+      "sha256": "145fcde10855867503605ec58a6be355da174c789e88a56c0b02a16d685e955e",
+      "size": 33183,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/rules/tl/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/words/README.txt",
+      "sha256": "c696bedcce8c06eaa99aa8d16769553b822827919ecc3a8f30b527703099d251",
+      "size": 425,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/README.txt",
+        "license": "LGPL (Tagalog tagger dictionary and tagset; upstream tl/README.txt)",
+        "license_verified": true,
+        "license_source": "upstream tl/README.txt"
+      }
+    },
+    {
+      "path": "tl/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/words/common_words.txt",
+      "sha256": "2c7f70ec20b84d779c36b0ba7004967eb93ffe01fc572578fa4085d24a3c3c5e",
+      "size": 73988,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "tl/words/tagset.txt",
+      "sha256": "2373c0039ae3398daf561a48254ccac79dc38dfd97da73f7f856406cb3fc95ea",
+      "size": 3139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/tagset.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
