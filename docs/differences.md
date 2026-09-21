@@ -421,3 +421,30 @@ Reproduce (pinned Java build):
 ```sh
 scripts/oracle/lt/probe-rule.sh "Jaroslavas pajuto kad jo draugas yra Mantas." BRAK_PRZECINKA_ZE
 ```
+
+## 13. Crimean Tatar (`crh`) Java `UNICODE_CASE` folding of `ı` (1 corpus match)
+
+Java compiles pattern-token regexps with
+`Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE` (unless `case_sensitive`
+is set). Under that flag `Character.toUpperCase('ı')` (U+0131, dotless i)
+is `I`, so `[A-Za-z…]` matches `ı`:
+
+```java
+Pattern.compile("[A-Za-zñğüşöçâ][A-Za-zñğüşöçâ-]*",
+    Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)
+  .matcher("21fayız").matches()   // true
+```
+
+The Rust `regex` crate uses Unicode *simple* case folding, where U+0131
+folds to itself, so `(?i)[A-Za-z…]` does **not** match `ı`. The corpus line
+`21fayız.` therefore matches `COMPLEX_NUMBER_DEFIS_MISSING` in the legacy
+engine but not in the Rust engine (1 only-Java match; no only-Rust matches,
+0 field diffs). Pinned exactly with
+`--expect-only-java=COMPLEX_NUMBER_DEFIS_MISSING=1` in
+`scripts/ci/parity.sh`.
+
+Reproduce (pinned Java build):
+
+```sh
+scripts/oracle/crh/probe-rule.sh "21fayız." COMPLEX_NUMBER_DEFIS_MISSING
+```

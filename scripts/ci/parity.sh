@@ -8,7 +8,7 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
@@ -116,6 +116,9 @@ fi
 if [ "$LANG_ARG" = "tl" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-21"
 fi
+if [ "$LANG_ARG" = "crh" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-21"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -151,6 +154,12 @@ elif [ "$LANG_ARG" = "fr" ]; then
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
+elif [ "$LANG_ARG" = "crh" ]; then
+  # documented divergence (docs/differences.md #13): Java's
+  # CASE_INSENSITIVE|UNICODE_CASE folds U+0131 (dotless i) into [A-Za-z],
+  # so `21fayız` matches COMPLEX_NUMBER_DEFIS_MISSING; the Rust regex crate's
+  # simple case folding does not.
+  EXTRA+=(--expect-only-java=COMPLEX_NUMBER_DEFIS_MISSING=1)
 elif [ "$LANG_ARG" = "tl" ]; then
   # documented suggestion-order divergence (docs/differences.md #11): the
   # match and suggestion *sets* are identical; the frequency-included

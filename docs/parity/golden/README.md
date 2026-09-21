@@ -29,6 +29,7 @@ re-runs the Rust side and diffs against the golden.
 | ast | `ast-full.txt` (125) | `ast-full.java.tsv` |
 | br | `br-full.txt` (1,835) | `br-full.java.tsv` |
 | tl | `tl-full.txt` (99) | `tl-full.java.tsv` |
+| crh | `crh-full.txt` (98) | `crh-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check; `lt` runs the
@@ -46,7 +47,7 @@ tests-only gate (`docs/differences.md` #12).
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk/sl/el/da/sv/is/eo/ast/br/tl `2026-09-21`.
+  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -109,11 +110,15 @@ tests-only gate (`docs/differences.md` #12).
   `MORFOLOGIK_RULE_TL` = 5 suggestion-order field diffs (docs/differences.md
   #11; the frequency-included `tl_PH` dictionary orders the weighted
   candidates differently, the match and suggestion sets are identical).
+  crh is 0 only-Rust / 0 field diffs and exactly the documented
+  `COMPLEX_NUMBER_DEFIS_MISSING` = 1 only-Java match (docs/differences.md
+  #13; Java's `UNICODE_CASE` folds `ı` into `[A-Za-z]`, Rust's simple case
+  folding does not).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

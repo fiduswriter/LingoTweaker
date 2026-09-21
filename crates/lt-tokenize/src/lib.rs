@@ -6,6 +6,7 @@
 
 pub mod breton;
 pub mod catalan;
+pub mod crimean_tatar;
 pub mod dutch;
 pub mod english;
 pub mod esperanto;
@@ -24,6 +25,7 @@ pub mod wordtokenizer;
 
 pub use breton::BretonWordTokenizer;
 pub use catalan::CatalanWordTokenizer;
+pub use crimean_tatar::CrimeanTatarWordTokenizer;
 pub use dutch::DutchWordTokenizer;
 pub use english::{EnglishWordTokenizer, IsTagged};
 pub use esperanto::EsperantoWordTokenizer;

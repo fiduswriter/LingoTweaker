@@ -169,6 +169,8 @@ pub struct Pipeline {
     pub tagalog: Option<Arc<crate::tl::TagalogPipeline>>,
     /// Lithuanian pipeline parts (`None` for the other languages)
     pub lithuanian: Option<Arc<crate::lt::LithuanianPipeline>>,
+    /// Crimean Tatar pipeline parts (`None` for the other languages)
+    pub crimean_tatar: Option<Arc<crate::crh::CrimeanTatarPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Danish pipeline parts (`None` for the other languages)
@@ -1365,6 +1367,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1610,6 +1613,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1814,6 +1818,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2026,6 +2031,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2158,6 +2164,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2409,6 +2416,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2620,6 +2628,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2948,6 +2957,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3100,6 +3110,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3238,6 +3249,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3400,6 +3412,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3540,6 +3553,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3652,6 +3666,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3799,6 +3814,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: Some(greek),
             norwegian: None,
             nordum: None,
@@ -3876,6 +3892,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: Some(danish),
             sv: None,
@@ -4038,6 +4055,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: None,
             sv: Some(swedish),
@@ -4112,6 +4130,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: None,
             sv: None,
@@ -4223,6 +4242,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: None,
             sv: None,
@@ -4320,6 +4340,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: None,
             sv: None,
@@ -4431,6 +4452,7 @@ impl Pipeline {
             breton: Some(breton),
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: None,
             sv: None,
@@ -4530,6 +4552,7 @@ impl Pipeline {
             breton: None,
             tagalog: Some(tagalog),
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             da: None,
             sv: None,
@@ -4629,6 +4652,118 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: Some(lithuanian),
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Crimean Tatar (`crh`) engine: the `CrimeanTatarTagger` +
+    /// `CrimeanTatarWordTokenizer`, the `CrimeanTatarSynthesizer`, the base
+    /// no-op disambiguator and the `MorfologikCrimeanTatarSpellerRule`.
+    /// `CrimeanTatar.getRelevantRules` adds the speller plus the generic
+    /// built-ins (incl. the two paragraph-whitespace rules); the module has no
+    /// `MessagesBundle_crh`, so the core English strings apply. The rule XML
+    /// references no `<filter>` class.
+    pub fn new_crimean_tatar(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "crh_two")?;
+
+        let tagger = Arc::new(lt_tagger::CrimeanTatarTagger::load(data_dir.path())?);
+        let synthesizer = Arc::new(lt_tagger::CrimeanTatarSynthesizer::from_data(
+            data_dir.path(),
+        )?);
+        let synth_adapter = Arc::new(crate::crh::CrimeanTatarSynthesizerAdapter {
+            synth: Arc::clone(&synthesizer),
+            tagger: Arc::clone(&tagger),
+        });
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Crh))?;
+        if data_dir.style_path(Lang::Crh).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Crh))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        let spelling = match crate::crh::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[crh] spelling rule disabled: {err}");
+                None
+            }
+        };
+
+        let crimean_tatar = Arc::new(crate::crh::CrimeanTatarPipeline {
+            tagger,
+            synthesizer,
+            synth_adapter,
+            spelling,
+        });
+        Ok(Self {
+            lang: Lang::Crh,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: Some(crimean_tatar),
             greek: None,
             da: None,
             sv: None,
@@ -4768,6 +4903,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
@@ -4852,6 +4988,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
@@ -4940,6 +5077,7 @@ impl Pipeline {
             breton: None,
             tagalog: None,
             lithuanian: None,
+            crimean_tatar: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -5064,12 +5202,18 @@ impl Pipeline {
                                                                                                     tagalog,
                                                                                                     sentence_text,
                                                                                                 ),
-                                                                                                None => analyze_sentence(
-                                                                                                    self.tagger
-                                                                                                        .as_deref()
-                                                                                                        .expect("english tagger"),
-                                                                                                    sentence_text,
-                                                                                                ),
+                                                                                                None => match &self.crimean_tatar {
+                                                                                                    Some(crh) => crate::crh::analyze_crimean_tatar_sentence(
+                                                                                                        crh,
+                                                                                                        sentence_text,
+                                                                                                    ),
+                                                                                                    None => analyze_sentence(
+                                                                                                        self.tagger
+                                                                                                            .as_deref()
+                                                                                                            .expect("english tagger"),
+                                                                                                        sentence_text,
+                                                                                                    ),
+                                                                                                },
                                                                                             },
                                                                                         },
                                                                                     },
@@ -7475,6 +7619,81 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_lt(&analyzed_sentences));
             }
         }
+        // Crimean Tatar text-level rules (`CrimeanTatar.getRelevantRules`):
+        // GenericUnpairedBrackets (2), UppercaseSentenceStart (3),
+        // MultipleWhitespace (4), SentenceWhitespace (5) and the two
+        // default-off paragraph rules (6, 7). The module has no
+        // `MessagesBundle_crh`, so the core English strings apply.
+        if self.lang == crate::Lang::Crh {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_crh(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::sentence_whitespace::check(&analyzed_sentences));
+            }
+            // `WhiteSpaceBeforeParagraphEnd` (6), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::whitespace_before_paragraph_end(
+                    &analyzed_sentences,
+                ));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -7762,12 +7981,18 @@ impl Pipeline {
                                                                                                 tagalog,
                                                                                                 &text[start..end],
                                                                                             ),
-                                                                                            None => analyze_sentence(
-                                                                                                self.tagger
-                                                                                                    .as_deref()
-                                                                                                    .expect("english tagger"),
-                                                                                                &text[start..end],
-                                                                                            ),
+                                                                                            None => match &self.crimean_tatar {
+                                                                                                Some(crh) => crate::crh::analyze_crimean_tatar_sentence(
+                                                                                                    crh,
+                                                                                                    &text[start..end],
+                                                                                                ),
+                                                                                                None => analyze_sentence(
+                                                                                                    self.tagger
+                                                                                                        .as_deref()
+                                                                                                        .expect("english tagger"),
+                                                                                                    &text[start..end],
+                                                                                                ),
+                                                                                            },
                                                                                         },
                                                                                     },
                                                                                 },
@@ -10434,6 +10659,82 @@ impl Pipeline {
                 }
             }
         }
+        // Crimean Tatar sentence-level Java rules in
+        // `CrimeanTatar.getRelevantRules` order: CommaWhitespace (0),
+        // DoublePunctuation (1) and MorfologikCrimeanTatarSpellerRule (8).
+        // The generic text-level rules run above. The module has no
+        // `MessagesBundle_crh`, so the core English strings apply.
+        if self.lang == crate::Lang::Crh {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "TYPOGRAPHY",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(crh) = &self.crimean_tatar {
+                if let Some(spelling) = &crh.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::crh::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
+            // `WhiteSpaceAtBeginOfParagraph` (7), default off
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::paragraph::WHITESPACE_PARAGRAPH_BEGIN_ID,
+                    "STYLE",
+                    false,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::paragraph::whitespace_at_begin_of_paragraph(analyzed),
+                &mut seen,
+            );
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -11395,6 +11696,20 @@ impl Pipeline {
                                 original,
                             );
                         }
+                        // Java `RuleMatch` collects the `<suggestion>` values in
+                        // a `LinkedHashSet<SuggestedReplacement>` *after* the
+                        // case conversion, so two forms that differ only in case
+                        // collapse to one (Crimean Tatar `Terekke`/`terekke`).
+                        let mut seen: Vec<(String, Option<String>)> = Vec::new();
+                        suggestions.retain(|s| {
+                            let key = (s.value.clone(), s.short_description.clone());
+                            if seen.contains(&key) {
+                                false
+                            } else {
+                                seen.push(key);
+                                true
+                            }
+                        });
                     }
                     // `PatternRuleMatcher.createRuleMatch` FIXME quirk:
                     // when the formatted message or suggestion list
@@ -11647,6 +11962,9 @@ impl Pipeline {
         if let Some(swedish) = &self.sv {
             return Some(swedish.synth_adapter.as_ref());
         }
+        if let Some(crh) = &self.crimean_tatar {
+            return Some(crh.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)
@@ -11761,6 +12079,12 @@ impl Pipeline {
             // `Lithuanian` does not override `createDefaultDisambiguator`: the
             // base no-op `DemoDisambiguator` applies.
             lithuanian.disambiguate(sentence);
+            return;
+        }
+        if let Some(crh) = &self.crimean_tatar {
+            // `CrimeanTatar` does not override `createDefaultDisambiguator`:
+            // the base no-op `DemoDisambiguator` applies.
+            crh.disambiguate(sentence);
             return;
         }
         if let Some(greek) = &self.greek {

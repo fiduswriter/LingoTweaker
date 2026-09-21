@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 766,
+  "file_count": 779,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -995,6 +995,170 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/resource/spelling_global.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar.dict",
+      "sha256": "60b6da80e1356bf9106a2ad1d2d8f0f8539ff7e5a0bf035c5ff5707b50eb04ba",
+      "size": 1935268,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar.dict",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar.info",
+      "sha256": "000391816ca437c7f3bd5e1005f9b8e49a847c7bb390061a5758cf9fccded5ea",
+      "size": 100,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar.info",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar_synth.dict",
+      "sha256": "ef194964f241f19028f4d2067d747925fde45a18f0cacef1d7c43e66710aad19",
+      "size": 2023563,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar_synth.dict",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar_synth.info",
+      "sha256": "7e0192504ace105bbb26165f77671249c1a63823aa4bc09c57ae391ea8c25315",
+      "size": 142,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar_synth.info",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar_synth_tags.txt",
+      "sha256": "e85539164d7bbbd4478f768543f3f026e904a9976f696fcd4b6c9bfd2ffe9ffb",
+      "size": 77164,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar_synth.dict_tags.txt",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/hunspell/crh_UA.dict",
+      "sha256": "060212e75a3a9a36ebb4153c40845bb9cd86ac08de79b6d0e29d87fd11828197",
+      "size": 348088,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/hunspell/crh_UA.dict",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/hunspell/crh_UA.info",
+      "sha256": "91eebca5f3881495b74a2d7bf79408692458e9856e78d666b0df219dd7aebc8a",
+      "size": 223,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/hunspell/crh_UA.info",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/hunspell/ignore.txt",
+      "sha256": "4c516887963c6df0ecfc7ce6641614043bd73362e0c9e8c6e5597d511cb3154f",
+      "size": 42,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/crh/src/main/resources/org/languagetool/resource/crh/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "crh/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/crh/src/main/resources/org/languagetool/resource/crh/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "crh/rules/grammar.xml",
+      "sha256": "8957d9c5baa8a3e278d4b21ca8db6bede9730e325513958ec0177ad85f423cee",
+      "size": 48984,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/crh/src/main/resources/org/languagetool/rules/crh/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "crh/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/crh/src/main/resources/org/languagetool/resource/crh/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "crh/words/common_words.txt",
+      "sha256": "7789f3c9e09bef33311f67d71274c28313803e2ad244b7a6c474151e5903908f",
+      "size": 243382,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/crh/src/main/resources/org/languagetool/resource/crh/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "crh/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/crh/src/main/resources/org/languagetool/resource/crh/removed.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

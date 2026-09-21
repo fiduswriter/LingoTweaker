@@ -1,0 +1,214 @@
+L	1	Defterimde hataler yaptım.
+M	1	PLURAL_AFFIX_CONFUSION	1	11	18	Other	Cemi afiksi hatası: <suggestion>hatalar</suggestion>	hatalar
+L	2	Tereklar kördim.
+M	2	PLURAL_AFFIX_CONFUSION	2	0	8	Other	Cemi afiksi hatası: <suggestion>Terekler</suggestion>	Terekler
+L	3	Дефтеримде хаталер яптым.
+M	3	PLURAL_AFFIX_CONFUSION_CYR	1	11	18	Other	Джеми афикси хатасы: <suggestion>хаталар</suggestion>	хаталар
+L	4	Тереклар корьдим.
+M	4	PLURAL_AFFIX_CONFUSION_CYR	2	0	8	Other	Джеми афикси хатасы: <suggestion>Тереклер</suggestion>	Тереклер
+L	5	Yeter, ağızıñnı qapat!
+M	5	MIDDLE_VOWEL_EXCLUSION	1	7	15	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>ağzıñnı</suggestion>	ağzıñnı
+L	6	Asan vaqıtında yetişmedi.
+M	6	MIDDLE_VOWEL_EXCLUSION	2	5	14	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>vaqtında</suggestion>	vaqtında
+L	7	Menim oğulum mektepte oquy.
+M	7	MIDDLE_VOWEL_EXCLUSION	3	6	12	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>oğlum</suggestion>	oğlum
+L	8	Bitamnıñ ömürü uzun ve bahtlı.
+M	8	MIDDLE_VOWEL_EXCLUSION	4	9	14	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>ömrü</suggestion>	ömrü
+L	9	Universitetimizde fizika ilimini ögrenemiz.
+M	9	MIDDLE_VOWEL_EXCLUSION	5	25	32	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>ilmini</suggestion>	ilmini
+L	10	Temel şekili yañlış körüne.
+M	10	MIDDLE_VOWEL_EXCLUSION	6	6	12	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>şekli</suggestion>	şekli
+L	11	Fikirim uzaqlarda.
+M	11	MIDDLE_VOWEL_EXCLUSION	7	0	7	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>Fikrim</suggestion>	Fikrim
+L	12	Bu mevzuda iç fikirimiz yoqtur.
+M	12	MIDDLE_VOWEL_EXCLUSION	7	14	23	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>fikrimiz</suggestion>	fikrimiz
+M	12	MORFOLOGIK_RULE_CRH_UA		24	30	UnknownWord	Possible spelling mistake found.	doqtur|yoq tur
+L	13	Onıñ burunı uzundır.
+M	13	MIDDLE_VOWEL_EXCLUSION	8	5	11	Other	Bu söz içinde orta sozuq sesi tüşmeli: <suggestion>burnu</suggestion>	burnu
+M	13	MORFOLOGIK_RULE_CRH_UA		12	19	UnknownWord	Possible spelling mistake found.	urundı|urundım|urundıq|urundıñ|urunır|usandır|utandır|uyandır|uyundı|uyundım|uyundıq|uyundıñ|uyunır|uzandı|uzandım|uzandıq|uzandıñ|uzanır|uzunda|uzundam|uzundan|uzunlar|uzunlıq|uzunnı|uzunnıñ|uzunsıñ|uzunı|uzunım|uzunıñ|uzuñda|uzuñdam|uzuñdan|uzuñnı|uzuñnıñ|uzuñsıñ|uzuñım|uzuñız|yuvundır
+L	14	Memetniñ oğlusı mektepte oquy!
+M	14	MORFOLOGIK_RULE_CRH_UA		0	8	UnknownWord	Possible spelling mistake found.	Mametniñ|Medetniñ|Mehmetniñ|Demetniñ|Mememniñ|Memeniñ|Memeñniñ|Semetniñ
+M	14	SON_WORD_MISSSPELL	1	9	15	Other	Oğul sözüni şöyle yazmamalı: <suggestion>oğlu</suggestion>	oğlu
+L	15	Eleki bozulğan edi.
+M	15	MISSVOCALIZATION	1	0	5	Other	Yañğıravuqlıq yapılmalı: <suggestion>Elegi</suggestion>	Elegi
+L	16	Talepimiz acele oldı.
+M	16	MISSVOCALIZATION	2	0	9	Other	Yañğıravuqlıq yapılmalı: <suggestion>Talebimiz</suggestion>	Talebimiz
+L	17	Cepinde aqça çoq.
+M	17	MISSVOCALIZATION	2	0	7	Other	Yañğıravuqlıq yapılmalı: <suggestion>Cebinde</suggestion>	Cebinde
+L	18	Terek tüpünde mışıçıq yattı.
+M	18	MISSVOCALIZATION	2	6	13	Other	Yañğıravuqlıq yapılmalı: <suggestion>tübünde</suggestion>	tübünde
+L	19	Menim ağa qardaşlarım Aqmescitte yaşaylar.
+M	19	NOUN_DOUBLING	1	6	21	Other	İsimler sızıq ile yazılmalı: <suggestion>ağa-qardaşlarım</suggestion>	ağa-qardaşlarım
+L	20	Bala bağçasına çoq bala çağalar keldiler.
+M	20	NOUN_DOUBLING	2	19	31	Other	İsimler sızıq ile yazılmalı: <suggestion>bala-çağalar</suggestion>	bala-çağalar
+L	21	Toyumızğa çoq soy soplarımıznı çağırdıq.
+M	21	NOUN_DOUBLING	3	14	30	Other	İsimler sızıq ile yazılmalı: <suggestion>soy-soplarımıznı</suggestion>	soy-soplarımıznı
+L	22	Endi ana babalarımnen yaşayım.
+M	22	NOUN_DOUBLING	4	5	21	Other	İsimler sızıq ile yazılmalı: <suggestion>ana-babalarımnen</suggestion>	ana-babalarımnen
+L	23	Toyumızda çalğı çağana çoq çaldı.
+M	23	NOUN_DOUBLING	5	10	22	Other	İsimler sızıq ile yazılmalı: <suggestion>çalğı-çağana</suggestion>	çalğı-çağana
+L	24	Qardaşım alış verişni yapa.
+M	24	NOUN_DOUBLING	6	9	21	Other	İsimler sızıq ile yazılmalı: <suggestion>alış-verişni</suggestion>	alış-verişni
+L	25	Memetnen ara sıra körüşemiz.
+M	25	MORFOLOGIK_RULE_CRH_UA		0	8	UnknownWord	Possible spelling mistake found.	Mametnen|Medetnen|Mehmetnen|Demetnen|Mememnen|Memenen|Memeñnen|Semetnen
+M	25	NOUN_DOUBLING	7	9	17	Other	İsimler sızıq ile yazılmalı: <suggestion>ara-sıra</suggestion>	ara-sıra
+L	26	Ahtem uçurımdan özenge aman aman tüşti.
+M	26	MORFOLOGIK_RULE_CRH_UA		0	5	UnknownWord	Possible spelling mistake found.	Artem|Ahtım|Aptem|Sahtem|Ah tem|Aht em
+M	26	NOUN_DOUBLING	8	23	32	Other	İsimler sızıq ile yazılmalı: <suggestion>aman-aman</suggestion>	aman-aman
+L	27	Evde bir eki adam bar.
+M	27	NUMBER_DOUBLING	1	5	12	Other	Ekileşmeli sayılar sızıq ile yazılmalı: <suggestion>bir-eki</suggestion>	bir-eki
+L	28	Evde eki üç adam bar.
+M	28	NUMBER_DOUBLING	2	5	11	Other	Ekileşmeli sayılar sızıq ile yazılmalı: <suggestion>eki-üç</suggestion>	eki-üç
+L	29	Evde üç dört adam bar.
+M	29	NUMBER_DOUBLING	3	5	12	Other	Ekileşmeli sayılar sızıq ile yazılmalı: <suggestion>üç-dört</suggestion>	üç-dört
+L	30	Evde dört beş adam bar.
+M	30	NUMBER_DOUBLING	4	5	13	Other	Ekileşmeli sayılar sızıq ile yazılmalı: <suggestion>dört-beş</suggestion>	dört-beş
+L	31	qışkence
+M	31	LASTING_ADVERB_AFFIX	1	0	8	Other	Soñki zarf afiksi hatası: <suggestion>qışqanca</suggestion>	qışqanca
+L	32	olgence
+M	32	LASTING_ADVERB_AFFIX	2	0	7	Other	Soñki zarf afiksi hatası: <suggestion>olğanca</suggestion>	olğanca
+L	33	pişqanca
+M	33	LASTING_ADVERB_AFFIX	3	0	8	Other	Soñki zarf afiksi hatası: <suggestion>pişkence</suggestion>	pişkence
+L	34	ölğanca
+M	34	LASTING_ADVERB_AFFIX	4	0	7	Other	Soñki zarf afiksi hatası: <suggestion>ölgence</suggestion>	ölgence
+L	35	O elbetteki evdedir.
+M	35	COLLOQUIAL_TYPOS	1	2	11	Other	Minnetdarliilq formas: <suggestion>elbette ki</suggestion>	elbette ki
+M	35	MORFOLOGIK_RULE_CRH_UA		12	19	UnknownWord	Possible spelling mistake found.	evdeki|evdekim|evdekiñ|evdemiz|evdenim|evdesiñ|evlendir|evlenir
+L	36	Salam aleykum dostum.
+M	36	COLLOQUIAL_TYPOS	2	0	13	Other	Toponimika hataları: <suggestion>Selâm aleykum</suggestion>	Selâm aleykum
+L	37	Qrımda yaşamız.
+M	37	TOPONOMY_TYPOS	1	0	6	Other	Toponimika hataları: <suggestion>Qırımda</suggestion>	Qırımda
+M	37	MORFOLOGIK_RULE_CRH_UA		7	14	UnknownWord	Possible spelling mistake found.	Yaşamız|Aşamız|Masamız|Maşamız|Paşamız|Yaramız|Yasarmız|Yaşanmız|Yaşarmız|Yaşañız|Yaşkamız|Yaşmız|Yaştamız|Yaşımız|asamız|basamız|kasamız|masamız|râsamız|tasamız|taşamız|yanamız|yapamız|yaqamız|yaramız|yasamaz|yasarmız|yasaymız|yasañız|yatamız|yayamız|yazamız|yağamız|yaşamaz|yaşarmız|yaşaymız|yaşañız|yaşmamız|yaşımız|Şaşamız|şaşamız|ya şamız|Adamız|Akamız|Alamız|Amamız|Anamız|Apamız|Aramız|Asanmız|Aslmız|Atamız|Ayadamız|Ayamız|Ayasımız|Aşarmız|Aşañız|Aşmız|Aştamız|Aşımız|Babamız|Balamız|Baramız|Basramız|Başmız|Baştamız|Başımız|Dadamız|Davamız|Esamız|Gagamız|Hasmız|Hastamız|Hasımız|Hayamız|Kalamız|Kamamız|Kasmız|Kastamız|Kasımız|Löşamız|Malamız|Manamız|Masaimız|Masanmız|Masañız|Maşañız|Mişamız|Nadamız|Nasımız|Paramız|Pashamız|Paşañız|Radamız|Sabamız|Salamız|Sanamız|Tamamız|Tatamız|Taşmız|Taştamız|Taşımız|Vaskamız|Vasâmiz|Yagmamız|Yagomız|Yalanmız|Yaltamız|Yanarmız|Yandamız|Yanmız|Yanımız|Yarasmız|Yarañız|Yardamız|Yarmız|Yarımız|Yasarı|Yasarım|Yasarımız|Yasarıñ|Yaylamız|Yaşadamız|Yaşam|Yaşama|Yaşamda|Yaşamnı|Yaşamnıñ|Yaşamızda|Yaşamıznı|Yaşamızğa|Yaşanı|Yaşanım|Yaşanımız|Yaşanıñ|Yaşarı|Yaşarım|Yaşarımız|Yaşarıñ|Yaşası|Yaşasım|Yaşasımız|Yaşasıñ|Yaşañım|Yaşkañız|Yaştanmız|Yaşımım|Yaşıñız|Yuramız|abamız|adamız|adaşamız|akamız|alamız|alaşamız|anamız|aqamız|aramız|arsamız|asamaz|asarmız|asañız|asmamız|atamız|avamız|ayadamız|ayamamız|ayamız|ayaramız|ayasañız|aydamız|aynamız|aytamız|ayvamız|ayyamız|azamız|açamız|añamız|ağamız|aşaamız|aşamaz|aşarmız|aşaymız|aşañız|aşnamız|aştamız|aşımız|baamız|babamız|bacamız|balamız|baqamız|baramız|basamaz|basarmız|basañız|basmamız|bastamız|basımız|batamız|bazamız|baştamız|başımız|caramız|cayamız|coşamız|dalamız|damamız|davamız|dayamız|daçamız|faramız|fatamız|fazamız|faştamız|faşımız|hassamız|hastamız|hasımız|hatamız|inşamız|kakamız|kapamız|kasañız|kassamız|kâyamız|lamamız|laqşamız|lavamız|malamız|manamız|masañız|maskamız|mastamız|masımız|matamız|mayamız|maşnamız|naramız|oyadamız|oyamamız|oynaşamız|paramız|pastamız|pasımız|paçamız|pyansamız|pyesamız|pısamız|qabamız|qafamız|qalamız|qamamız|qanamız|qapamız|qaqamız|qaramız|qasımız|qatamız|qayamız|qazamız|qaçamız|qaşqamız|qaştamız|qaşımız|qoşamız|qusamız|qısamız|râsañız|saamız|sabamız|sadamız|sahamız|salamız|samsamız|sanamız|sapamız|saqamız|saramız|sarsamız|satamız|savamız|sayamız|saçamız|sağamız|susamız|tabamız|taksamız|talamız|tamamız|tanamız|tapamız|taqamız|taramız|tasañız|tastamız|tasımız|tatamız|tavamız|tayamız|taşamaz|taşarmız|taşmamız|tosamız|ulaşamız|uyalamız|uyamamız|uyanamız|uyatamız|uyuşamız|vahamız|vastamız|vazamız|yaddamız|yadımız|yahtamız|yahşımız|yaktamız|yakımız|yalamaz|yalarmız|yalaymız|yalañız|yaldamız|yalımız|yamamaz|yamarmız|yamaymız|yamañız|yanamaz|yanarmız|yanaşamız|yandamız|yanmamız|yansañız|yanımız|yapamaz|yaparmız|yapmamız|yapsañız|yapımız|yapışamız|yaqañız|yaqmamız|yaqsañız|yaqtamız|yaqımız|yaramaz|yararmız|yaraymız|yarañız|yaraşamız|yardamız|yarmamız|yarsañız|yarımız|yarışamız|yasadı|yasadım|yasadıq|yasadıñ|yasalmaz|yasama|yasamam|yasamamız|yasamaq|yasamay|yasamañ|yasamañız|yasarım|yasasın|yasavı|yasavım|yasavımız|yasavıñ|yasayım|yasayıq|yasağı|yasağım|yasağımız|yasağıñ|yatamaz|yatarmız|yatmamız|yatsañız|yatsımız|yattamız|yatımız|yatışamız|yavdamız|yavımız|yayamaz|yayarmız|yaydamız|yaylamız|yaymamız|yaysañız|yayımız|yazamaz|yazarmız|yazdamız|yazmamız|yazsañız|yazımız|yazışamız|yañımız|yağamaz|yağarmız|yağañız|yağdamız|yağmamız|yağsañız|yağımız|yaşadı|yaşadım|yaşadıq|yaşadıñ|yaşalmaz|yaşama|yaşamam|yaşamamız|yaşamaq|yaşamay|yaşamañız|yaşaramız|yaşarmaz|yaşarım|yaşarıp|yaşarır|yaşasın|yaşatamız|yaşatmaz|yaşatıp|yaşatır|yaşayım|yaşayıq|yaşayış|yaşlarmız|yaşlımız|yaşmañız|yaşnamaz|yaşnarmız|yaşnaymız|yaşnañız|yaştanmız|yaşımım|yaşınamız|yaşıramız|yaşıñız|yonamız|yoramız|yosmamız|yumamız|yuqamız|yutamız|yuvamız|yıqamız|yığamız|zayamız|Çanamız|Çapamız|çalamız|çanamız|çapamız|çaqamız|çatamız|çayamız|ğazamız|ğağamız|Şaşañız|şadamız|şamamız|şamız|şaşamaz|şaşarmız|şaşlamız|şaşmamız
+L	38	1981s.
+M	38	COMPLEX_NUMBER_DEFIS_MISSING	1	0	5	Other	Söz ve sayı arasında defis yoqtur: 	1981 s
+L	39	1981s.
+M	39	COMPLEX_NUMBER_DEFIS_MISSING	1	0	5	Other	Söz ve sayı arasında defis yoqtur: 	1981 s
+L	40	1981с.
+M	40	NUMBER_AFTER_DEFIS_MISSING	3	0	5	Other	Сёз ве сайы арасында дефис ёкътур: <suggestion>1981-с</suggestion>	1981-с
+L	41	1981с.
+M	41	NUMBER_AFTER_DEFIS_MISSING	3	0	5	Other	Сёз ве сайы арасында дефис ёкътур: <suggestion>1981-с</suggestion>	1981-с
+L	42	F32 savaş uçağı.
+M	42	NUMBER_BEFORE_DEFIS_MISSING	1	0	3	Other	Söz ve sayı arasında defis yoqtur: <suggestion>F-32</suggestion>	F-32
+M	42	MORFOLOGIK_RULE_CRH_UA		4	9	UnknownWord	Possible spelling mistake found.	Sabas|sadaş|sataş|sava|savam|savap|savar|savat|savuş|yavaş|şabaş|sav aş|SaaS
+L	43	Ve menim1 kitabım.
+M	43	NUMBER_BEFORE_DEFIS_MISSING	1	3	9	Other	Söz ve sayı arasında defis yoqtur: <suggestion>menim-1</suggestion>	menim-1
+L	44	Ф32 саваш учагъы.
+M	44	NUMBER_BEFORE_DEFIS_MISSING	3	0	3	Other	Сёз ве сайы арасында дефис ёкътур: <suggestion>Ф-32</suggestion>	Ф-32
+M	44	MORFOLOGIK_RULE_CRH_UA		4	9	UnknownWord	Possible spelling mistake found.	сава|савам|савап|савар|сават|савуш|садаш|саташ|сав аш
+L	45	Ве меним1 китабым.
+M	45	NUMBER_BEFORE_DEFIS_MISSING	3	3	9	Other	Сёз ве сайы арасында дефис ёкътур: <suggestion>меним-1</suggestion>	меним-1
+L	46	21fayız.
+M	46	COMPLEX_NUMBER_DEFIS_MISSING	1	0	7	Other	Söz ve sayı arasında defis yoqtur: 	21 fayız
+L	47	5nci.
+M	47	COMPLEX_NUMBER_DEFIS_MISSING	1	0	4	Other	Söz ve sayı arasında defis yoqtur: 	5 nci
+L	48	İşiñni yaptıñ mı?
+M	48	QUESTION_PARTICLE_SEPARATION	1	7	16	Other	Sual edatları ögdeki söznen beraber yazılmalı: <suggestion>yaptıñmı</suggestion>	yaptıñmı
+L	49	Alma rengi qırmızı mı?
+M	49	MORFOLOGIK_RULE_CRH_UA		5	10	UnknownWord	Possible spelling mistake found.	aengi|renki|ringi|zengi
+M	49	QUESTION_PARTICLE_SEPARATION	1	11	21	Other	Sual edatları ögdeki söznen beraber yazılmalı: <suggestion>qırmızımı</suggestion>	qırmızımı
+L	50	Tünevin mi keldik?
+M	50	QUESTION_PARTICLE_SEPARATION	2	0	10	Other	Sual edatları ögdeki söznen beraber yazılmalı: <suggestion>Tünevinmi</suggestion>	Tünevinmi
+L	51	Alma güzel mi?
+M	51	QUESTION_PARTICLE_SEPARATION	2	5	13	Other	Sual edatları ögdeki söznen beraber yazılmalı: <suggestion>güzelmi</suggestion>	güzelmi
+L	52	Bu yapar mısıñ?
+M	52	QUESTION_PARTICLE_PERSONALIZED_MISSPOS	1	3	14	Other	Sual edadı türk şeklinde yazılmamalı: <suggestion>yaparsıñmı</suggestion>	yaparsıñmı
+L	53	Bizge keler misiñ?
+M	53	QUESTION_PARTICLE_PERSONALIZED_MISSPOS	2	6	17	Other	Sual edadı türk şeklinde yazılmamalı: <suggestion>kelersiñmi</suggestion>	kelersiñmi
+L	54	Saña sağ ol.
+M	54	THANKFULLNESS_COLLOQUIAL	1	0	4	Other	Minnetdarliilq formas soyle: <suggestion>sen</suggestion>	Sen
+L	55	Menim dostu.
+M	55	PERSON_COORDINATION	1	6	11	Other	Şahisler uyğulaşmalılar: \n            <suggestion>dostum</suggestion>\n          	dostum
+L	56	Bizim dostları.
+M	56	PERSON_COORDINATION	2	6	14	Other	Şahisler uyğulaşmalılar: \n            <suggestion>dostlarımız</suggestion>\n          	dostlarımız
+L	57	Seniñ dostu.
+M	57	PERSON_COORDINATION	3	6	11	Other	Şahisler uyğulaşmalılar: \n            <suggestion>dostuñ</suggestion>\n          	dostuñ
+L	58	Siziñ dostları.
+M	58	PERSON_COORDINATION	4	6	14	Other	Şahisler uyğulaşmalılar: \n            <suggestion>dostlarıñız</suggestion>\n          	dostlarıñız
+L	59	Endi yapmağa kerek.
+M	59	SIMPLE_INFINITIVE	1	5	12	Other	Sade infinitiv qullanılmalı: \n            <suggestion>yapmaq</suggestion>\n          	yapmaq
+L	60	Endi ketmege kerek.
+M	60	SIMPLE_INFINITIVE	2	5	12	Other	Sade infinitiv qullanılmalı: \n            <suggestion>ketmek</suggestion>\n          	ketmek
+L	61	Şu sebepten içün.
+M	61	POSTPOSITION_CASE_COLLOCATION	3	3	11	Other	Munasebetçi kelişi şöyle uyğulaşmalı: \n            <suggestion>sebep</suggestion>\n          	sebep
+L	62	O yılnıñ evel.
+M	62	POSTPOSITION_CASE_COLLOCATION	2	2	8	Other	Munasebetçi kelişi şöyle uyğulaşmalı: \n            <suggestion>yıldan</suggestion>\n          	yıldan
+L	63	Terekniñ qarşı oturdı.
+M	63	POSTPOSITION_CASE_COLLOCATION	1	0	8	Other	Munasebetçi kelişi şöyle uyğulaşmalı: \n            <suggestion>Terekke</suggestion>, <suggestion>terekke</suggestion>\n          	Terekke
+L	64	Çoq zaman berli.
+M	64	POSTPOSITION_CASE_COLLOCATION	2	4	9	Other	Munasebetçi kelişi şöyle uyğulaşmalı: \n            <suggestion>zamandan</suggestion>\n          	zamandan
+L	65	Dostqa dayın.
+M	65	POSTPOSITION_CASE_COLLOCATION	3	0	6	Other	Munasebetçi kelişi şöyle uyğulaşmalı: \n            <suggestion>Dost</suggestion>, <suggestion>dost</suggestion>\n          	Dost
+L	66	Kelgen soñ.
+M	66	EXODIVE_VERB_ADVB_COLLOCATION	1	0	6	Other	Fiildeki çıqış kelişi şöyle uyğulaşmalı: \n          <suggestion>Kelgenden</suggestion>, <suggestion>kelgenden</suggestion>\n        	Kelgenden
+L	67	Beş aylar.
+M	67	NUMERAL_PLURAL_COLLOCATION	1	4	9	Other	Sayı cemisi şöyle yazılmalı: \n          <suggestion>ay</suggestion>\n        	ay
+L	68	Biz yaptılar.
+M	68	VERB_PERSON_COORDINATION	1	4	12	Other	Fiil şahisleri uyğulaşmalılar: \n            <suggestion>yaptıq</suggestion>\n          	yaptıq
+L	69	Sen yaptı.
+M	69	VERB_PERSON_COORDINATION	2	4	9	Other	Fiil şahisleri uyğulaşmalılar: \n            <suggestion>yaptıñ</suggestion>\n          	yaptıñ
+L	70	Siz yaptılar.
+M	70	VERB_PERSON_COORDINATION	3	4	12	Other	Fiil şahisleri uyğulaşmalılar: \n            <suggestion>yaptıñız</suggestion>\n          	yaptıñız
+L	71	elli faiz.
+M	71	PERCENTAGE_COORDINATION	1	0	9	Other	Faiz uyğulaşması: \n            <suggestion>yüzde elli</suggestion>\n          	yüzde elli
+L	72	elli fayız.
+M	72	PERCENTAGE_COORDINATION	2	0	10	Other	Faiz uyğulaşması: \n            <suggestion>yüzde elli</suggestion>\n          	yüzde elli
+L	73	элли фаиз.
+M	73	PERCENTAGE_COORDINATION_CYR	1	0	9	Other	Фаиз уйгъуламасы: \n            <suggestion>юзьде элли</suggestion>\n          	юзьде элли
+L	74	элли файыз.
+M	74	PERCENTAGE_COORDINATION_CYR	2	0	10	Other	Фаиз уйгъуламасы: \n            <suggestion>юзьде элли</suggestion>\n          	юзьде элли
+L	75	Asan sözni aldı.
+M	75	PHRASEOLOGY	1	5	15	Other	Halq ibarelerini qullanuv hatası: <suggestion>söz aldı</suggestion>	söz aldı
+L	76	Asan Memetten daima örnekni ala.
+M	76	MORFOLOGIK_RULE_CRH_UA		5	13	UnknownWord	Possible spelling mistake found.	Mametten|Medetten|Mehmetten|Demetten|Semetten
+M	76	PHRASEOLOGY	2	20	31	Other	Halq ibarelerini qullanuv hatası: <suggestion>örnek ala</suggestion>	örnek ala
+L	77	İçinde apansızdan ateşni tüşti.
+M	77	PHRASEOLOGY	3	18	30	Other	Halq ibarelerini qullanuv hatası: <suggestion>ateş tüşti</suggestion>	ateş tüşti
+L	78	Kezlevge yolnı almadıq.
+M	78	PHRASEOLOGY	4	9	22	Other	Halq ibarelerini qullanuv hatası: <suggestion>yol almadıq</suggestion>	yol almadıq
+L	79	Asan yeniden aqılnı ögretmek başladı.
+M	79	MORFOLOGIK_RULE_CRH_UA		5	12	UnknownWord	Possible spelling mistake found.	yeñiden|Teniden|Yeriden|yediden|yeñden|yeñide|yeñidem|yeñimden|yeñinden|yeñinen|yeñizden|yeñiñden
+M	79	PHRASEOLOGY	5	13	28	Other	Halq ibarelerini qullanuv hatası: <suggestion>aqıl ögretmek</suggestion>	aqıl ögretmek
+L	80	Asan bu işnen başnı etmek başladı.
+M	80	MORFOLOGIK_RULE_CRH_UA		8	13	UnknownWord	Possible spelling mistake found.	Aşnen|Esnen|Eşnen|Pisnen|Tişnen|Usnen|aşnen|eşnen|hisnen|ianeñ|ilnen|ineñ|innen|irnen|isseñ|itnen|iznen|içnen|işçen|misnen|oşnen|pisnen|tişnen|usnen|vişneñ|İşinen|ısnen|Şişnen|şişnen
+M	80	PHRASEOLOGY	6	14	25	Other	Halq ibarelerini qullanuv hatası: <suggestion>baş etmek</suggestion>	baş etmek
+L	81	Asan iç bir vaqıt başnı egmey.
+M	81	PHRASEOLOGY	7	18	29	Other	Halq ibarelerini qullanuv hatası: <suggestion>baş egmey</suggestion>	baş egmey
+L	82	Asan çoq diqqat ile babalıqnı ete.
+M	82	PHRASEOLOGY	8	20	33	Other	Halq ibarelerini qullanuv hatası: <suggestion>babalıq ete</suggestion>	babalıq ete
+L	83	Asan kün künden işinden başnı kötermey.
+M	83	MORFOLOGIK_RULE_CRH_UA		16	23	UnknownWord	Possible spelling mistake found.	İşiñden|Esinden|Esiñden|Eşinden|Eşiñden|Kisinden|Pisinden|Pisiñden|Risinden|Sinden|Tişinden|Tişiñden|dişiñden|eşinden|eşiñden|hisinden|hisiñden|ilinden|iliñden|ininden|iniñden|irinden|iriñden|isimden|isindiñ|isingen|isinmeñ|isinseñ|issinden|issiñden|itinden|itiñden|iyiñden|izinden|iziñden|içinden|içiñden|işliñden|işçiñden|kişiñden|misinden|misiñden|pisinden|pisiñden|tişinden|tişiñden|İliñden|İçinden|İşiden|İşimden|İşinen|İşiñde|İşiñdem|İşiñnen|Şişinden|Şişiñden|şişinden|şişiñden
+M	83	PHRASEOLOGY	9	24	38	Other	Halq ibarelerini qullanuv hatası: <suggestion>baş kötermey</suggestion>	baş kötermey
+L	84	Asan kene de başnı qoşa.
+M	84	PHRASEOLOGY	10	13	23	Other	Halq ibarelerini qullanuv hatası: <suggestion>baş qoşa</suggestion>	baş qoşa
+L	85	Asan сёзни алды.
+M	85	PHRASEOLOGY_CYR	1	5	15	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>сёз алды</suggestion>	сёз алды
+L	86	Асан Меметтен даима орьнекни ала.
+M	86	MORFOLOGIK_RULE_CRH_UA		5	13	UnknownWord	Possible spelling mistake found.	Маметтен|Медеттен|Мехметтен|Деметтен|Семеттен|Тёметтен
+M	86	PHRASEOLOGY_CYR	2	20	32	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>орьнек ала</suggestion>	орьнек ала
+L	87	Ичинде апансыздан атешни тюшти.
+M	87	PHRASEOLOGY_CYR	3	18	30	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>атеш тюшти</suggestion>	атеш тюшти
+L	88	Кезлевге ёлны алмадыкъ.
+M	88	PHRASEOLOGY_CYR	4	9	22	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>ёл алмадыкъ</suggestion>	ёл алмадыкъ
+L	89	Асан ениден акъылны огретмек башлады.
+M	89	MORFOLOGIK_RULE_CRH_UA		5	11	UnknownWord	Possible spelling mistake found.	Ериден|Тениден|едиден|енъден|енъиден
+M	89	PHRASEOLOGY_CYR	5	12	28	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>акъыл огретмек</suggestion>	акъыл огретмек
+L	90	Асан бу ишнен башны этмек башлады.
+M	90	MORFOLOGIK_RULE_CRH_UA		8	13	UnknownWord	Possible spelling mistake found.	Ашнен|Ишинен|Тишнен|Шишнен|Эшнен|Яшнен|ашнен|иенен|изнен|иннен|ирнен|итнен|ичнен|ишчен|ошнен|тишнен|шишнен|эшнен|яшнен
+M	90	PHRASEOLOGY_CYR	6	14	25	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>баш этмек</suggestion>	баш этмек
+L	91	Асан ич бир вакъыт башны эгмей.
+M	91	PHRASEOLOGY_CYR	7	19	30	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>баш эгмей</suggestion>	баш эгмей
+L	92	Асан чокъ дикъкъат иле бабалыкъны эте.
+M	92	PHRASEOLOGY_CYR	8	23	37	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>бабалыкъ эте</suggestion>	бабалыкъ эте
+L	93	Асан кунь куньден ишинден башны котермей.
+M	93	MORFOLOGIK_RULE_CRH_UA		18	25	UnknownWord	Possible spelling mistake found.	Ичинден|Ишиден|Ишимден|Ишинен|Ишинъден|Тишинден|Шишинден|Эшинден|изинден|илинден|ининден|иринден|итинден|ичинден|тишинден|шишинден|эшинден
+M	93	PHRASEOLOGY_CYR	9	26	40	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>баш котермей</suggestion>	баш котермей
+L	94	Асан кене де башны къоша.
+M	94	PHRASEOLOGY_CYR	10	13	24	Other	Халкъ ибарелерини къулланув хатасы: <suggestion>баш къоша</suggestion>	баш къоша
+L	95	Dostumnı soradım.
+M	95	VERB_CASE_COLLOCATION	1	0	8	Other	Fiildeki çıqış kelişi şöyle uyğulaşmalı: \n            <suggestion>Dostumdan</suggestion>, <suggestion>dostumdan</suggestion>\n          	Dostumdan
+L	96	Dostum qomşunı evlendi.
+M	96	VERB_CASE_COLLOCATION	2	7	14	Other	Fiildeki keliş şöyle uyğulaşmalı: \n            <suggestion>qomşuğa</suggestion>\n          	qomşuğa
+L	97	Достумны сорадым.
+M	97	VERB_CASE_COLLOCATION_CYR	1	0	8	Other	Фиильдеки келиш шойле уйгъулашмалы: \n            <suggestion>Достумдан</suggestion>, <suggestion>достумдан</suggestion>\n          	Достумдан
+L	98	Достум къомшуны эвленди.
+M	98	VERB_CASE_COLLOCATION_CYR	2	7	15	Other	Фиильдеки келиш шойле уйгъулашмалы: \n            <suggestion>къомшугъа</suggestion>\n          	къомшугъа

@@ -31,6 +31,7 @@ mod br;
 mod ca;
 mod comma_whitespace;
 mod compound;
+mod crh;
 mod da;
 mod dash;
 mod dates;
@@ -419,6 +420,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Lt => Pipeline::new_lithuanian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Crh => Pipeline::new_crimean_tatar(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -137,6 +137,18 @@ MAVEN_ARTIFACTS = {
         "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/de/danielnaber/jwordsplitter/4.7/jwordsplitter-4.7.pom",
     },
+    # `CrimeanTatarTagger`/`CrimeanTatarSynthesizer`/`MorfologikCrimeanTatar
+    # SpellerRule`: the dictionaries are not in the checkout, only in this
+    # artifact (the checkout's `crh/dev/` holds build tooling only).
+    "morfologik-crh-lt-1.0.1.jar": {
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        # POM: "GNU Lesser General Public License" (lgpl.txt); the artifact is
+        # the Crimean Tatar maintainer's (Andriy Rysin) Morfologik build of the
+        # tagger/synthesizer/spelling dictionaries.
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": True,
+        "license_source": f"{MAVEN_CENTRAL}/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom",
+    },
     "asturian-pos-dict-0.1.jar": {
         "coords": "org.languagetool:asturian-pos-dict:0.1",
         # POM: "GNU GENERAL PUBLIC LICENSE Version 3", data based on Morphy;
@@ -175,6 +187,18 @@ JAR_EXTRACTIONS = {
     # `AsturianTagger` (`asturian.dict`) and `MorfologikAsturianSpellerRule`
     # (`ast/hunspell/ast_ES.dict`); the LICENCES files document the GPL-3.0
     # Softastur dictionary.
+    # `CrimeanTatarTagger`/`CrimeanTatarSynthesizer`/`MorfologikCrimeanTatar
+    # SpellerRule`: the dictionaries are not in the checkout, only in this
+    # artifact (the checkout's `crh/dev/` holds build tooling only).
+    "morfologik-crh-lt-1.0.1.jar": {
+        "org/languagetool/resource/crh/crimean_tatar.dict": "crh/dictionaries/crimean_tatar.dict",
+        "org/languagetool/resource/crh/crimean_tatar.info": "crh/dictionaries/crimean_tatar.info",
+        "org/languagetool/resource/crh/crimean_tatar_synth.dict": "crh/dictionaries/crimean_tatar_synth.dict",
+        "org/languagetool/resource/crh/crimean_tatar_synth.info": "crh/dictionaries/crimean_tatar_synth.info",
+        "org/languagetool/resource/crh/crimean_tatar_synth.dict_tags.txt": "crh/dictionaries/crimean_tatar_synth_tags.txt",
+        "org/languagetool/resource/crh/hunspell/crh_UA.dict": "crh/hunspell/crh_UA.dict",
+        "org/languagetool/resource/crh/hunspell/crh_UA.info": "crh/hunspell/crh_UA.info",
+    },
     "asturian-pos-dict-0.1.jar": {
         "org/languagetool/resource/ast/asturian.dict": "ast/dictionaries/asturian.dict",
         "org/languagetool/resource/ast/asturian.info": "ast/dictionaries/asturian.info",
@@ -1106,7 +1130,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

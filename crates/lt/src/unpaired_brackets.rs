@@ -612,6 +612,27 @@ pub fn check_lt(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_lt())
 }
 
+/// Crimean Tatar `UNPAIRED_BRACKETS` (generic rule; the module has no
+/// `MessagesBundle_crh`, so the core English bundle applies): the default
+/// symbol lists `[ ( { " '` / `] ) } " '`.
+pub fn symbols_crh() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Unpaired braces, brackets, quotation marks and similar symbols",
+        category_id: "PUNCTUATION",
+        category_name: "Punctuation",
+        start: &["[", "(", "{", "\"", "'"],
+        end: &["]", ")", "}", "\"", "'"],
+        spanish: false,
+        message_template: "Unpaired symbol: '{other}' seems to be missing",
+    }
+}
+
+/// Crimean Tatar `UNPAIRED_BRACKETS` (generic rule, core English strings).
+pub fn check_crh(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_crh())
+}
+
 /// Esperanto `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_eo` strings):
 /// the default symbol lists `[ ( { " '` / `] ) } " '`.
 pub fn symbols_eo() -> UnpairedSymbols {
