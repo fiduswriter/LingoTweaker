@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -283,6 +283,15 @@ IN_TREE_ARTIFACTS = {
         "resource/pl/polish_synth.info": "pl/dictionaries/polish_synth.info",
         "resource/pl/polish_tags.txt": "pl/dictionaries/polish_tags.txt",
     },
+    # Slovak ships the Slovak National Corpus POS/synthesis dictionaries
+    # in-tree (`SlovakTagger` / `SlovakSynthesizer`).
+    "sk": {
+        "resource/sk/slovak.dict": "sk/dictionaries/slovak.dict",
+        "resource/sk/slovak.info": "sk/dictionaries/slovak.info",
+        "resource/sk/slovak_synth.dict": "sk/dictionaries/slovak_synth.dict",
+        "resource/sk/slovak_synth.info": "sk/dictionaries/slovak_synth.info",
+        "resource/sk/slovak_tags.txt": "sk/dictionaries/slovak_tags.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -365,6 +374,13 @@ IN_TREE_LICENSES = {
         "permitted with the notice)",
         True,
         "upstream pl/README.txt (LICENCE section)",
+    ),
+    "sk": (
+        "LGPL (Slovak POS/synthesis dictionaries built from Slovak National "
+        'Corpus data; upstream sk/README.txt states "released here on LGPL '
+        'license")',
+        True,
+        "upstream sk/README.txt",
     ),
 }
 
@@ -449,6 +465,23 @@ def hunspell_license(lang: str, name: str):
                 "spelling dictionary; pl/hunspell/README_en.txt)",
                 False,
                 "upstream pl/hunspell/README_en.txt",
+            )
+    if lang == "sk":
+        if name.startswith("README"):
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (sk-spell Slovak "
+                "spelling dictionary; sk/hunspell/README_en.txt)",
+                True,
+                "upstream sk/hunspell/README_en.txt",
+            )
+        if name.startswith("sk_SK."):
+            # Morfologik conversion of the tri-licensed sk_SK hunspell
+            # dictionary; the conversion is a derived build.
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the "
+                "sk_SK spelling dictionary; sk/hunspell/README_en.txt)",
+                False,
+                "upstream sk/hunspell/README_en.txt",
             )
     return None
 

@@ -123,6 +123,26 @@ pub fn check_ro(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Slovak `MessagesBundle_sk` strings.
+pub fn check_sk(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Opakovanie \"bielych znakov\" napr. medzier (zlé formátovanie)",
+        "Možný preklep: zopakovali ste \"biely znak\" (whitespace)",
+        ("TYPOGRAPHY", "Typografia"),
+    )
+}
+
+/// `MultipleWhitespaceRule` with the Slovenian `MessagesBundle_sl` strings.
+pub fn check_sl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Ponovljen presledek (nepravilno oblikovanje)",
+        "Možna tipkarska napaka: ponovili ste presledek",
+        ("TYPOGRAPHY", "Tipografija"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

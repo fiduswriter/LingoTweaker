@@ -153,6 +153,10 @@ pub struct Pipeline {
     pub romanian: Option<Arc<crate::ro::RomanianPipeline>>,
     /// Polish pipeline parts (`None` for the other languages)
     pub polish: Option<Arc<crate::pl::PolishPipeline>>,
+    /// Slovak pipeline parts (`None` for the other languages)
+    pub slovak: Option<Arc<crate::sk::SlovakPipeline>>,
+    /// Slovenian pipeline parts (`None` for the other languages)
+    pub slovenian: Option<Arc<crate::sl::SlovenianPipeline>>,
     /// Norwegian Bokmål pipeline parts (`None` for the other languages)
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
@@ -1335,6 +1339,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1569,6 +1575,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1762,6 +1770,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1963,6 +1973,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2084,6 +2096,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2324,6 +2338,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2524,6 +2540,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2841,6 +2859,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2982,6 +3002,8 @@ impl Pipeline {
             galician: Some(galician),
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3109,6 +3131,8 @@ impl Pipeline {
             galician: None,
             romanian: Some(romanian),
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3260,6 +3284,242 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: Some(polish),
+            slovak: None,
+            slovenian: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+    /// Slovak (`sk`) engine: the XML rules with the
+    /// `SlovakTagger`/`SlovakSynthesizer` and the `grammar-typography.xml`
+    /// extra rule file, plus the `MorfologikSlovakSpellerRule` and
+    /// `CompoundRule`.
+    pub fn new_slovak(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        variant: Option<&str>,
+    ) -> Result<Self> {
+        let _ = today;
+        let _ = variant;
+        let timing = std::env::var("LT_TIMING").is_ok();
+        let mut last = timing.then(std::time::Instant::now);
+        let mut mark = |name: &str| {
+            if let Some(previous) = last {
+                let now = std::time::Instant::now();
+                eprintln!("[timing] sk {name}: {:?}", now - previous);
+                last = Some(now);
+            }
+        };
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "sk_two")?;
+        mark("srx");
+
+        let tagger = Arc::new(lt_tagger::SlovakTagger::load(data_dir.path())?);
+        mark("tagger");
+        let synth = Arc::new(lt_tagger::SlovakSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::sk::SlovakSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        mark("synth");
+
+        // `Language.getRuleFileNames`: grammar.xml (+ style.xml) then the
+        // `Slovak.RULE_FILES` extra file `grammar-typography.xml`.
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Sk))?;
+        if data_dir.style_path(Lang::Sk).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Sk))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let typography = data_dir.path().join("sk/rules/grammar-typography.xml");
+        if typography.lt_exists() {
+            let extra = Grammar::load_file(&typography)?;
+            grammar.rules.extend(extra.rules);
+            grammar.categories.extend(extra.categories);
+            grammar.equivalence_defs.extend(extra.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        mark("grammar");
+
+        // Slovak references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        mark("rules");
+
+        // `MorfologikSlovakSpellerRule` (8), default on. A load failure would
+        // only disable the speller, not the engine.
+        let spelling = match crate::sk::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[sk] spelling rule disabled: {err}");
+                None
+            }
+        };
+        mark("speller");
+
+        let compound = crate::compound::CompoundRule::slovak(data_dir.path())?;
+        let word_repeat = crate::sk::rules::word_repeat_rule();
+        mark("rules-java");
+
+        let slovak = Arc::new(crate::sk::SlovakPipeline {
+            tagger,
+            synthesizer: synth,
+            synth_adapter,
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            spelling,
+            word_repeat,
+            compound,
+        });
+        Ok(Self {
+            lang: Lang::Sk,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: Some(slovak),
+            slovenian: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Slovenian (`sl`) engine: the XML rules over the surface tokenization
+    /// (`Slovenian` has no tagger/synthesizer/disambiguator) plus the
+    /// `MorfologikSlovenianSpellerRule` and the generic `WordRepeatRule`.
+    pub fn new_slovenian(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        variant: Option<&str>,
+    ) -> Result<Self> {
+        let _ = today;
+        let _ = variant;
+        let timing = std::env::var("LT_TIMING").is_ok();
+        let mut last = timing.then(std::time::Instant::now);
+        let mut mark = |name: &str| {
+            if let Some(previous) = last {
+                let now = std::time::Instant::now();
+                eprintln!("[timing] sl {name}: {:?}", now - previous);
+                last = Some(now);
+            }
+        };
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "sl_two")?;
+        mark("srx");
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Sl))?;
+        if data_dir.style_path(Lang::Sl).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Sl))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        mark("grammar");
+
+        // Slovenian references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        mark("rules");
+
+        // `MorfologikSlovenianSpellerRule` (4), default on.
+        let spelling = match crate::sl::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[sl] spelling rule disabled: {err}");
+                None
+            }
+        };
+        mark("speller");
+
+        let slovenian = Arc::new(crate::sl::SlovenianPipeline {
+            spelling,
+            word_repeat: crate::sl::rules::word_repeat_rule(),
+        });
+        Ok(Self {
+            lang: Lang::Sl,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: Some(slovenian),
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3387,6 +3647,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
@@ -3460,6 +3722,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
@@ -3537,6 +3801,8 @@ impl Pipeline {
             galician: None,
             romanian: None,
             polish: None,
+            slovak: None,
+            slovenian: None,
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
@@ -3608,12 +3874,25 @@ impl Pipeline {
                                                                 sentence_text,
                                                             )
                                                         }
-                                                        None => analyze_sentence(
-                                                            self.tagger
-                                                                .as_deref()
-                                                                .expect("english tagger"),
-                                                            sentence_text,
-                                                        ),
+                                                        None => match &self.slovak {
+                                                            Some(slovak) => {
+                                                                crate::sk::analyze_slovak_sentence(
+                                                                    slovak,
+                                                                    sentence_text,
+                                                                )
+                                                            }
+                                                            None => match &self.slovenian {
+                                                                Some(_) => {
+                                                                    surface_sentence(sentence_text)
+                                                                }
+                                                                None => analyze_sentence(
+                                                                    self.tagger
+                                                                        .as_deref()
+                                                                        .expect("english tagger"),
+                                                                    sentence_text,
+                                                                ),
+                                                            },
+                                                        },
                                                     },
                                                 },
                                             },
@@ -5494,6 +5773,94 @@ impl Pipeline {
                 }
             }
         }
+        // Slovak text-level rules (`Slovak.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (4) and
+        // MultipleWhitespace (6).
+        if self.lang == crate::Lang::Sk {
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_sk(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_sk(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_sk(&analyzed_sentences));
+            }
+        }
+        // Slovenian text-level rules (`Slovenian.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (7).
+        if self.lang == crate::Lang::Sl {
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_sl(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_sl(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_sl(&analyzed_sentences));
+            }
+        }
         text_level_matches.append(&mut matches);
         matches = text_level_matches;
         // Text-level repetition rules (`RepeatedPatternRuleTransformer`):
@@ -5650,12 +6017,25 @@ impl Pipeline {
                                                             &text[start..end],
                                                         )
                                                     }
-                                                    None => analyze_sentence(
-                                                        self.tagger
-                                                            .as_deref()
-                                                            .expect("english tagger"),
-                                                        &text[start..end],
-                                                    ),
+                                                    None => match &self.slovak {
+                                                        Some(slovak) => {
+                                                            crate::sk::analyze_slovak_sentence(
+                                                                slovak,
+                                                                &text[start..end],
+                                                            )
+                                                        }
+                                                        None => match &self.slovenian {
+                                                            Some(_) => {
+                                                                surface_sentence(&text[start..end])
+                                                            }
+                                                            None => analyze_sentence(
+                                                                self.tagger
+                                                                    .as_deref()
+                                                                    .expect("english tagger"),
+                                                                &text[start..end],
+                                                            ),
+                                                        },
+                                                    },
                                                 },
                                             },
                                         },
@@ -7446,6 +7826,175 @@ impl Pipeline {
                 );
             }
         }
+        // Slovak sentence-level Java rules in `Slovak.getRelevantRules` order:
+        // CommaWhitespace (1), DoublePunctuation (2), WordRepeatRule (5),
+        // MorphologikSpeller (8) and CompoundRule (7). UnpairedBrackets (3),
+        // UppercaseSentenceStart (4) and MultipleWhitespace (6) are
+        // text-level and run above.
+        if self.lang == crate::Lang::Sk {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_sk(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_sk(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(slovak) = &self.slovak {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    slovak.word_repeat.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                if let Some(spelling) = &slovak.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::sk::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        slovak.compound.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    slovak
+                        .compound
+                        .check_sentence(&analyzed.tokens, sentence_text, start),
+                    &mut seen,
+                );
+            }
+        }
+        // Slovenian sentence-level Java rules in `Slovenian.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2), Speller (4),
+        // WordRepeatRule (6). UnpairedBrackets (3), UppercaseSentenceStart (5)
+        // and MultipleWhitespace (7) are text-level and run above.
+        if self.lang == crate::Lang::Sl {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_sl(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_sl(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(slovenian) = &self.slovenian {
+                if let Some(spelling) = &slovenian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::sl::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    slovenian
+                        .word_repeat
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -8650,6 +9199,9 @@ impl Pipeline {
         if let Some(polish) = &self.polish {
             return Some(polish.synth_adapter.as_ref());
         }
+        if let Some(slovak) = &self.slovak {
+            return Some(slovak.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)
@@ -8716,6 +9268,18 @@ impl Pipeline {
             // PolishHybridDisambiguator order: XML rules (+ global rules) →
             // pl/multiwords chunker.
             polish.disambiguate(sentence);
+            return;
+        }
+        if let Some(slovak) = &self.slovak {
+            // `Slovak` does not override `createDefaultDisambiguator`, so the
+            // base no-op `DemoDisambiguator` applies (no XML disambiguation).
+            slovak.disambiguate(sentence);
+            return;
+        }
+        if let Some(slovenian) = &self.slovenian {
+            // `Slovenian` does not override `createDefaultDisambiguator`
+            // either: the base no-op `DemoDisambiguator` applies.
+            slovenian.disambiguate(sentence);
             return;
         }
         if let Some(norwegian) = &self.norwegian {

@@ -587,6 +587,35 @@ impl CompoundRule {
         })
     }
 
+    /// `sk.CompoundRule` (`SK_COMPOUNDS`): `sk/words/compounds.txt`. The
+    /// Slovak class does not override `isMisspelled`, so every candidate
+    /// replacement passes `filterReplacements` (base `isMisspelled` = false).
+    pub fn slovak(data_dir: &Path) -> Result<Self> {
+        let data = CompoundData::from_path(&data_dir.join("sk/words/compounds.txt"))?;
+        Ok(Self {
+            data,
+            is_misspelled: Arc::new(|_| false),
+            config: CompoundConfig {
+                rule_id: "SK_COMPOUNDS",
+                description:
+                    "Slová so spojovníkom napr. použite „česko-slovenský” namiesto „česko slovenský”"
+                        .to_string(),
+                with_hyphen_message: "Toto slovo sa zvyčajne píše so spojovníkom.",
+                without_hyphen_message: "Toto slovo sa obvykle píše bez spojovníka.",
+                with_or_without_hyphen_message:
+                    "Tento výraz sa bežne píše s alebo bez spojovníka.",
+                short_message: Some("Problém spájania slov"),
+                category_id: "MISC",
+                category_name: "Rôzne",
+                sub_rule_specific_ids: false,
+                to_id_german: false,
+                merge: merge_compound,
+                issue_type: "misspelling",
+            },
+            anti_patterns: Vec::new(),
+        })
+    }
+
     pub fn rule_id(&self) -> &str {
         self.config.rule_id
     }

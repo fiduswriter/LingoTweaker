@@ -49,6 +49,40 @@ pub fn check_sentence_ro(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Slovak `MessagesBundle_sk` strings.
+pub fn check_sentence_sk(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Interpunkcia".to_string();
+        m.description = "Použitie dvoch za sebou idúcich bodiek alebo čiarok".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Dve po sebe idúce bodky".to_string();
+            m.short_message = Some("Dve za sebou idúce bodky".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Dve po sebe idúce čiarky".to_string();
+            m.short_message = Some("Dve za sebou idúce čiarky".to_string());
+        }
+    }
+    matches
+}
+
+/// `DoublePunctuationRule` with the Slovenian `MessagesBundle_sl` strings.
+pub fn check_sentence_sl(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Postavitev ločil".to_string();
+        m.description = "Uporaba dveh zaporednih pik ali vejic".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Dve zaporedni piki".to_string();
+            m.short_message = Some("Zaporedni piki".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Dve zaporedni vejici".to_string();
+            m.short_message = Some("Zaporedni vejici".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Spanish `MessagesBundle_es` strings.
 pub fn check_sentence_es(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

@@ -42,6 +42,7 @@ mod hunspell_spelling;
 mod it;
 mod long_sentence;
 mod matchfilters;
+mod morfologik_spelling;
 mod multitoken;
 mod nl;
 mod no;
@@ -55,6 +56,8 @@ mod repeated_words;
 mod ro;
 mod sentence_whitespace;
 mod simple_replace;
+mod sk;
+mod sl;
 mod style_too_often;
 mod unit_conversion;
 mod unpaired_brackets;
@@ -63,6 +66,7 @@ mod uppercase;
 mod whitespace;
 mod whitespace_before_punctuation;
 mod word_coherency;
+mod word_repeat;
 mod word_repetition;
 mod wordutil;
 mod wrong_word_in_context;
@@ -339,6 +343,18 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Pl => Pipeline::new_polish(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Sk => Pipeline::new_slovak(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Sl => Pipeline::new_slovenian(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

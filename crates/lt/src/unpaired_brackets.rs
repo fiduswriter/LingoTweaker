@@ -569,6 +569,46 @@ pub fn check_ro(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_ro())
 }
 
+/// Slovak `UNPAIRED_BRACKETS`: `[ ( { „ » « "` / `] ) } “ « » "` with the
+/// `MessagesBundle_sk` strings.
+pub fn symbols_sk() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Nespárované zátvorky, úvodzovky alebo podobné symboly",
+        category_id: "PUNCTUATION",
+        category_name: "Interpunkcia",
+        start: &["[", "(", "{", "\u{201E}", "\u{00BB}", "\u{00AB}", "\""],
+        end: &["]", ")", "}", "\u{201C}", "\u{00AB}", "\u{00BB}", "\""],
+        spanish: false,
+        message_template: "Nepárový symbol: zdá sa, že chýba '{other}'",
+    }
+}
+
+/// Slovak `UNPAIRED_BRACKETS` (generic rule, Slovak strings).
+pub fn check_sk(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_sk())
+}
+
+/// Slovenian `UNPAIRED_BRACKETS`: `[ ( { „ » « "` / `] ) } ” « » "` with the
+/// `MessagesBundle_sl` strings.
+pub fn symbols_sl() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Neparni oklepaji, zaviti oklepaji, narekovaji in podobni znaki",
+        category_id: "PUNCTUATION",
+        category_name: "Postavitev ločil",
+        start: &["[", "(", "{", "\u{201E}", "\u{00BB}", "\u{00AB}", "\""],
+        end: &["]", ")", "}", "\u{201D}", "\u{00AB}", "\u{00BB}", "\""],
+        spanish: false,
+        message_template: "Neparni simbol: zdi se, da \u{00BB}{other}\u{00AB} manjka",
+    }
+}
+
+/// Slovenian `UNPAIRED_BRACKETS` (generic rule, Slovenian strings).
+pub fn check_sl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_sl())
+}
+
 /// `Galician.getRelevantRules`: the generic rule with
 /// `[ ( { “ « » ‘ " '` / `] ) } ” » « ’ " '` and the `MessagesBundle_gl`
 /// strings.

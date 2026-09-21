@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 594,
+  "file_count": 617,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -4035,6 +4035,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_sk.properties",
+      "sha256": "9d56dde349a02f8d31ae65d4050cf0d99ad7d4bc8b499832d266cd8c2a9665ee",
+      "size": 16388,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/MessagesBundle_sk.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "nl/compound_acceptor/acronym_exceptions.txt",
       "sha256": "d38a5f1beafb93cf8e7382c05e0e5705c4ea56692c495aab3c80a7c04fd7230c",
       "size": 271,
@@ -6783,6 +6794,257 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/dictionaries/slovak.dict",
+      "sha256": "2ff95707dc062285cdbdcfa972a2e4aca32672282596fcc634e7e22a5eaf9826",
+      "size": 760313,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/slovak.dict",
+        "license": "LGPL (Slovak POS/synthesis dictionaries built from Slovak National Corpus data; upstream sk/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream sk/README.txt"
+      }
+    },
+    {
+      "path": "sk/dictionaries/slovak.info",
+      "sha256": "a133ce35d17b8b8d6d2bdb8e1c9106d96d5d904ba6b5bf43a498c9aaaf8b0d79",
+      "size": 99,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/slovak.info",
+        "license": "LGPL (Slovak POS/synthesis dictionaries built from Slovak National Corpus data; upstream sk/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream sk/README.txt"
+      }
+    },
+    {
+      "path": "sk/dictionaries/slovak_synth.dict",
+      "sha256": "dfaf010e1d7180c6f06fbeb036f12f93d5d4d3d97c35f95ffbe800496bc778ff",
+      "size": 2590243,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/slovak_synth.dict",
+        "license": "LGPL (Slovak POS/synthesis dictionaries built from Slovak National Corpus data; upstream sk/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream sk/README.txt"
+      }
+    },
+    {
+      "path": "sk/dictionaries/slovak_synth.info",
+      "sha256": "79ff8798315c78fb1e91301296d2cac8e5514413b866d5eb7c057415fca6dcec",
+      "size": 99,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/slovak_synth.info",
+        "license": "LGPL (Slovak POS/synthesis dictionaries built from Slovak National Corpus data; upstream sk/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream sk/README.txt"
+      }
+    },
+    {
+      "path": "sk/dictionaries/slovak_tags.txt",
+      "sha256": "a9ea88680782fcf23d9883d86464b4174940c1c85a2cb23bdd717d137d2eb92f",
+      "size": 9493,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/slovak_tags.txt",
+        "license": "LGPL (Slovak POS/synthesis dictionaries built from Slovak National Corpus data; upstream sk/README.txt states \"released here on LGPL license\")",
+        "license_verified": true,
+        "license_source": "upstream sk/README.txt"
+      }
+    },
+    {
+      "path": "sk/hunspell/README_en.txt",
+      "sha256": "a19f196bebd49a9c377a95d514b06172c1cb398e9e12dd419744d285b5c9aa4a",
+      "size": 532,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/hunspell/README_en.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (sk-spell Slovak spelling dictionary; sk/hunspell/README_en.txt)",
+        "license_verified": true,
+        "license_source": "upstream sk/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "sk/hunspell/README_sk.txt",
+      "sha256": "9a127dce6ecf8e4c07e9eeb22314960c9700cab66e66778b784e0bca266670d4",
+      "size": 566,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/hunspell/README_sk.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (sk-spell Slovak spelling dictionary; sk/hunspell/README_en.txt)",
+        "license_verified": true,
+        "license_source": "upstream sk/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "sk/hunspell/ignore.txt",
+      "sha256": "d4fe7524d95fbd54bc91078648d465967a1e83e2813cd73d291ecae4332a19ce",
+      "size": 59,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/hunspell/sk_SK.dict",
+      "sha256": "560f69a11793de43ab06f87f3e76dfc2626ffba52113386d9bfc1a15e084882b",
+      "size": 855216,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/hunspell/sk_SK.dict",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the sk_SK spelling dictionary; sk/hunspell/README_en.txt)",
+        "license_verified": false,
+        "license_source": "upstream sk/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "sk/hunspell/sk_SK.info",
+      "sha256": "d83cdc75c03c050416b7760d90ee377970a0ebd11c6fbea51791511b731bb061",
+      "size": 149,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/hunspell/sk_SK.info",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the sk_SK spelling dictionary; sk/hunspell/README_en.txt)",
+        "license_verified": false,
+        "license_source": "upstream sk/hunspell/README_en.txt"
+      }
+    },
+    {
+      "path": "sk/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/rules/grammar-nezaradene.xml",
+      "sha256": "810becb2c82666de755cf0e789ba2e65dd0ee4b906c38b7d93e182db9303bbbf",
+      "size": 35551,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/rules/sk/grammar-nezaradene.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/rules/grammar-typography.xml",
+      "sha256": "f5e1ce9bbf64c61367bccd249b455e30e971d7f3b8ee4a3ebb1e7038a118355b",
+      "size": 16246,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/rules/sk/grammar-typography.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/rules/grammar.xml",
+      "sha256": "9548d11b98a6dcd3de0ab234f181027a11a21500eacc4f05d751bb8810f30bbf",
+      "size": 133154,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/rules/sk/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/README.txt",
+      "sha256": "48f4c29047a9657f6f27637570b98d763f30def87b8c82cc5453153858624090",
+      "size": 156,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/common_words.txt",
+      "sha256": "3e2b294dcdd48227048a9a81ccf2cc10175577cff0fd6e03682b0b3c6cccad9a",
+      "size": 40971,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/compounds.txt",
+      "sha256": "723fb5fb6f46d04f34b7a24cdd8aef41bbe4e56c16741dce282cb36dd0c15693",
+      "size": 41983,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/compounds.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sk/words/tagset.txt",
+      "sha256": "90c18d471fa84476480de755e9d97a4e055bbd87e4391b8b45001081d6c9dc78",
+      "size": 15922,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/tagset.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

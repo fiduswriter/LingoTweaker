@@ -577,6 +577,80 @@ fn translate_comma_message_pl(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Slovak `MessagesBundle_sk` strings.
+pub fn check_sentence_sk(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Interpunkcia".to_string();
+        m.description = "Použitie medzery pred čiarkou a pred/za zátvorkami".to_string();
+        m.message = translate_comma_message_sk(&m.message);
+    }
+    matches
+}
+
+/// `CommaWhitespaceRule` with the Slovenian `MessagesBundle_sl` strings.
+pub fn check_sentence_sl(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Postavitev ločil".to_string();
+        m.description =
+            "Uporaba presledka, tabulatorja ali preloma vrstice pred vejico in pred/po oklepaju"
+                .to_string();
+        m.message = translate_comma_message_sl(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_sk` bundle.
+fn translate_comma_message_sk(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Nevložiť medzeru za otváraciu zátvorku".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Nedávajte medzeru pred ukončovaciu zátvorku".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Vložte medzeru za čiarku".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Vložte medzeru za čiarku, ale nie pred čiarku".to_string()
+        }
+        "Don't put a space before the full stop." => "Nedávajte medzeru pred bodku".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
+/// Java `messages.getString` with the `MessagesBundle_sl` bundle.
+fn translate_comma_message_sl(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Ne postavljaj presledka za oklepaj".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Ne postavljaj presledka pred zaklepaj".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Ne postavljaj presledka na obe strani narekovaja".to_string()
+        }
+        "Put a space after the comma." => "Po vejici vstavi presledek".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Presledek vstavi po vejici, ne pa pred vejico".to_string()
+        }
+        "Don't put a space before the full stop." => "Ne postavljaj presledka po piki".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_gl` bundle.
 fn translate_comma_message_gl(msg: &str) -> String {
     match msg {

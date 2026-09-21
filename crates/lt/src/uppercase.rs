@@ -171,6 +171,30 @@ pub fn check_ro(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Slovak `MessagesBundle_sk` strings.
+pub fn check_sk(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Táto veta nezačína s veľkým písmenom",
+        "Veľké a malé písmená",
+        "Skontrolujte, či veta začína veľkými počiatočnými písmenami",
+        "Veľké a malé písmená",
+        false,
+    )
+}
+
+/// `UppercaseSentenceStartRule` with the Slovenian `MessagesBundle_sl` strings.
+pub fn check_sl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Ta poved se ne začenja z veliko začetnico",
+        "Velike začetnice",
+        "Preveri, da se poved začne z veliko začetnico",
+        "Velike začetnice",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(
