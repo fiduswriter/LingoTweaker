@@ -513,7 +513,7 @@ L	286	Un sorriso :/
 L	287	Un sorriso :D
 L	288	«Non me incomode con súa leria infantil;» dixen Maria; «eu escribo versos inmortais.»
 M	288	SEMICOLON_AND_QUOTES	1	39	41	Other	Xeralmente, non se coloca punto e vírgula antes de comiñas.	
-M	288	HUNSPELL_RULE		48	53	UnknownWord	Atopouse un posíbel erro ortográfico	María|Mara|Maia|Aria|Mariña|Malia|Mafia|Marica|Marial|Maiar|Miara|Marea
+M	288	HUNSPELL_RULE		48	53	UnknownWord	Atopouse un posíbel erro ortográfico	María|Mara|Maia|Aria|Mariña|Mario|Caria|Paria|Varia|Malia|Mafia|Marica|Marial
 L	289	« O xardín é verdadeiramente bonito», dixo ela.
 M	289	PARENTESESE_AND_QUOTES_SPACING	1	0	3	Other	Espazamento incorrecto.	«O
 L	290	Ela dixo: « O xardín é verdadeiramente bonito.»

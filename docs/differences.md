@@ -198,7 +198,7 @@ Reproduce:
 `scripts/oracle/pt/probe-rule.sh pt-PT "Vou estudar enquanto possa ser possível." PODER_SER_POSSIVEL`.
 This is the only remaining Portuguese corpus field diff.
 
-## 7. `HUNSPELL_RULE` (Galician) suggestion timer boundary (3 corpus field diffs)
+## 7. `HUNSPELL_RULE` (Galician) suggestion timer boundary (2 corpus field diffs)
 
 Unlike the other entries this is a **known limitation, not a correctness
 judgement**: the Galician match set is identical to the legacy engine
@@ -214,28 +214,34 @@ filtering, dedup, dash suggestions) **and the n-gram fallback
 scoring, `MAXNGRAMSUGS`/`ONLYMAXDIFF`/`MAXDIFF`)** all reproduce the legacy
 engine.
 
-Three field diffs remain, all at upstream's wall-clock
+Two field diffs remain, both at upstream's wall-clock
 `TIMELIMIT_SUGGESTION`/`TIMELIMIT_GLOBAL` boundary: the legacy engine bails
 out of the generator loop (and therefore skips the n-gram stage) when a
 generator exceeds 100 ms / the whole suggestion exceeds 250 ms. That cutoff
 is machine-timing-dependent upstream, so it cannot be reproduced
 byte-for-byte; the in-tree port bounds the only exponentially branching
-generator (`MAP`) with a deterministic node budget instead (D-224). The
+generator (`MAP`) with a deterministic node budget instead (D-224). A
+deterministic stand-in (bail out whenever the `MAP` budget is exhausted) was
+tried and made the corpus worse (6 vs 2 diffs), so it was reverted. The
 residue:
 
-- line 288, `Maria`: generator-list ordering/casing near the boundary.
-- line 624, `percatamos`: the n-gram list adds `permutamos` and keeps
-  `percútamos` where the legacy run stopped earlier.
+- line 624, `percatamos`: the legacy run hit the generator limit and stopped
+  at `percutamos|percutiramos|peraltamos|percorramos`; the port keeps
+  `percútamos` and appends the n-gram `permutamos`.
 - line 672, `monoméricas`: the legacy run hit the 100 ms generator limit and
-  skipped n-gram, the port appends n-gram candidates.
+  skipped n-gram; the port appends `cronométricas|monométricos|…`.
+
+The former third diff (`Maria`, line 288) was a stale golden entry: the
+pinned Java build now returns the same list as hunspell 1.7.2, and the
+golden was regenerated with `scripts/ci/update-golden.sh gl` (one line).
 
 Reproduce (pinned Java build):
 
 ```sh
-scripts/oracle/gl/probe-speller.sh Maria percatamos monoméricas
+scripts/oracle/gl/probe-speller.sh percatamos monoméricas
 ```
 
-Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=3` in
+Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=2` in
 `scripts/ci/parity.sh`. A deterministic emulation of the upstream wall-clock
 cutoff would remove the allowance.
 

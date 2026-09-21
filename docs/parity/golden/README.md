@@ -49,7 +49,7 @@ re-runs the Rust side and diffs against the golden.
   only-Java (#3), `SUJET_AUXILIAIRE` = 1 only-Java (#4) and
   `AGREEMENT_PARTICULAR` = 1 field diff (#5); pt has exactly the documented
   `PODER_SER_POSSIVEL` = 1 field diff (#6). gl has 0 only-Java / 0 only-Rust
-  and exactly the documented `HUNSPELL_RULE` = 3 field diffs (#7: the match
+  and exactly the documented `HUNSPELL_RULE` = 2 field diffs (#7: the match
   set is identical; the native hunspell suggestion engine including the
   n-gram fallback is ported, the residue is the upstream wall-clock timer
   boundary). es has 0
@@ -64,7 +64,7 @@ re-runs the Rust side and diffs against the golden.
   runs the affected languages, not a static list (all ten on shared
   changes, one language on language-local changes, none for docs-only
   changes; P6.3/D-134). nl is exactly 0/0/0 (D-133); ca is exactly 0/0/0
-  (D-188…D-190); gl is 0/0/3 (D-192…D-198 + D-224, reduced by the suggestion port); ro is exactly 0/0/0 (D-199);
+  (D-188…D-190); gl is 0/0/2 (D-192…D-198 + D-224, reduced by the suggestion port); ro is exactly 0/0/0 (D-199);
   pl is 4 only-Java / 5 only-Rust / 0 field diffs,   the documented known
   fidelity gaps of `docs/differences.md` #9 (the `<unify negate="yes">`
   agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and

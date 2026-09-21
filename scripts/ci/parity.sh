@@ -132,7 +132,7 @@ elif [ "$LANG_ARG" = "gl" ]; then
   # documented speller divergence (docs/differences.md #7): the match set is
   # identical; the native hunspell suggestion engine (generators + n-gram
   # fallback) is ported, leaving a small wall-clock-boundary residue
-  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=3)
+  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=2)
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)

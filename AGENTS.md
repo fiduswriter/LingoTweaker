@@ -48,7 +48,7 @@ runs the affected languages per push/PR (all gated languages when shared code
 changed, no language job for docs-only changes). de/es/it/nl/ca/ro/sk/sl/el must
 be 0 only-Java / 0 only-Rust / 0 field diffs; en allows exactly the one documented
 `ADVERB_VERB_ADVERB_REPETITION` field diff, fr the documented divergences
-#3/#4/#5, pt #6 and gl the documented `HUNSPELL_RULE` = 3 suggestion field
+#3/#4/#5, pt #6 and gl the documented `HUNSPELL_RULE` = 2 suggestion field
 diffs (#7: same match set; the native hunspell suggestion engine including
 the n-gram fallback is ported, the residue is the upstream wall-clock timer
 boundary); pl the documented known fidelity gaps
