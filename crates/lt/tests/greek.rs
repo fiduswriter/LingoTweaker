@@ -370,3 +370,20 @@ fn greek_disambiguation_have_inf() {
         .collect();
     assert_eq!(paei, vec!["πάω:INF", "πάω:SENT_END"], "{paei:?}");
 }
+
+/// XML rule `HAVE_INF` (`grammar.xml`), Java probe: `Είχα πάω.` Java 5..8 ->
+/// the `<match no="2" postag="INF"/>` synthesis `πάει` (the Greek synthesizer
+/// must be wired for `<match postag>` rendering).
+#[test]
+fn greek_xml_have_inf_synthesis() {
+    let _guard = engine_guard();
+    let matches = one("Είχα πάω.", "HAVE_INF");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 9);
+    assert_eq!(matches[0].range.end, 15);
+    assert_eq!(
+        matches[0].message,
+        "Πιθανόν να χρειάζεται να χρησιμοποιήσετε τον απαρεμφατικό τύπο <suggestion>πάει</suggestion>"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["πάει"]);
+}
