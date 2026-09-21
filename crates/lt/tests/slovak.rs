@@ -1,14 +1,17 @@
 //! Slovak engine tests: stage-1 XML wiring state plus Java-probed
 //! built-in-rule values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/sk/probe-rule.sh`, `check-diff-sk.sh`) print UTF-16 code
-//! units, so both are stated per case (the probes use real Slovak
-//! orthography: á/ä/č/š/ž/ý/…).
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/sk/probe-rule.sh`,
+//! `check-diff-sk.sh`); the probes use real Slovak orthography
+//! (á/ä/č/š/ž/ý/…).
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 /// One engine at a time: the Slovak engines hold the tagger dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -84,18 +87,14 @@ fn slovak_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Mám rád čaj , kávu a mlieko.`
-/// UTF-16 11..13, UTF-8 14..16 (`č` adds one byte).
+/// `CommaWhitespaceRule` (1), Java probe.
 #[test]
 fn slovak_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one(
-        "Mám rád čaj , kávu a mlieko.",
-        "COMMA_PARENTHESIS_WHITESPACE",
-    );
+    let text = "Mám rád čaj , kávu a mlieko.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 14);
-    assert_eq!(matches[0].range.end, 16);
+    assert_utf16(text, &matches[0], (11, 13));
     assert_eq!(
         matches[0].message,
         "Vložte medzeru za čiarku, ale nie pred čiarku"
@@ -103,59 +102,53 @@ fn slovak_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `To je pekný deň..`
-/// UTF-16 15..17, UTF-8 17..19 (`ý` adds one byte).
+/// `DoublePunctuationRule` (2), Java probe.
 #[test]
 fn slovak_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("To je pekný deň..", "DOUBLE_PUNCTUATION");
+    let text = "To je pekný deň..";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 17);
-    assert_eq!(matches[0].range.end, 19);
+    assert_utf16(text, &matches[0], (15, 17));
     assert_eq!(matches[0].message, "Dve po sebe idúce bodky");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
 /// `UppercaseSentenceStartRule` (4), Java probe: the second sentence starts
-/// lowercase, UTF-16 18..22, UTF-8 20..24 (`ž` adds one byte).
+/// lowercase.
 #[test]
 fn slovak_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one(
-        "Toto je žltý dom. toto je zelený dom.",
-        "UPPERCASE_SENTENCE_START",
-    );
+    let text = "Toto je žltý dom. toto je zelený dom.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 20);
-    assert_eq!(matches[0].range.end, 24);
+    assert_utf16(text, &matches[0], (18, 22));
     assert_eq!(matches[0].message, "Táto veta nezačína s veľkým písmenom");
     assert_eq!(suggestions(&matches[0]), vec!["Toto"]);
 }
 
-/// `MultipleWhitespaceRule` (6), Java probe: `Žltý  dom je tu.`
-/// UTF-16 4..6, UTF-8 6..8 (`Ž` adds one byte).
+/// `MultipleWhitespaceRule` (6), Java probe.
 #[test]
 fn slovak_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Žltý  dom je tu.", "WHITESPACE_RULE");
+    let text = "Žltý  dom je tu.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 6);
-    assert_eq!(matches[0].range.end, 8);
+    assert_utf16(text, &matches[0], (4, 6));
     assert_eq!(
         matches[0].message,
         "Možný preklep: zopakovali ste \"biely znak\" (whitespace)"
     );
 }
 
-/// `WordRepeatRule` (5), Java probe: `Žltý žltý dom.`
-/// UTF-16 0..9, UTF-8 0..13.
+/// `WordRepeatRule` (5), Java probe.
 #[test]
 fn slovak_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Žltý žltý dom.", "WORD_REPEAT_RULE");
+    let text = "Žltý žltý dom.";
+    let matches = one(text, "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 13);
+    assert_utf16(text, &matches[0], (0, 9));
     assert_eq!(matches[0].message, "Možný preklep: zopakovali ste slovo");
     assert_eq!(suggestions(&matches[0]), vec!["Žltý"]);
 }
@@ -167,11 +160,10 @@ fn slovak_word_repeat() {
 fn slovak_speller() {
     let _guard = engine_guard();
 
-    // `žlty`: Java UTF-16 8..12, UTF-8 8..13 (`ž` adds one byte)
-    let matches = one("Toto je žlty dom.", "MORFOLOGIK_RULE_SK_SK");
+    let text = "Toto je žlty dom.";
+    let matches = one(text, "MORFOLOGIK_RULE_SK_SK");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 13);
+    assert_utf16(text, &matches[0], (8, 12));
     assert_eq!(matches[0].message, "Nájdený pravdepodobný preklep");
     assert_eq!(matches[0].match_type, "UnknownWord");
     assert_eq!(
@@ -183,11 +175,10 @@ fn slovak_speller() {
         ]
     );
 
-    // `mäkky`: Java UTF-16 8..13, UTF-8 8..14
-    let matches = one("Toto je mäkky chlieb.", "MORFOLOGIK_RULE_SK_SK");
+    let text = "Toto je mäkky chlieb.";
+    let matches = one(text, "MORFOLOGIK_RULE_SK_SK");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 14);
+    assert_utf16(text, &matches[0], (8, 13));
     assert_eq!(
         suggestions(&matches[0]),
         vec![
@@ -216,15 +207,14 @@ fn slovak_speller() {
     );
 }
 
-/// `CompoundRule` (7, `SK_COMPOUNDS`), Java probe: `Toto je bielo červená.`
-/// (Java 8..21 UTF-16 = 8..23 UTF-8).
+/// `CompoundRule` (7, `SK_COMPOUNDS`), Java probe.
 #[test]
 fn slovak_compound() {
     let _guard = engine_guard();
-    let matches = one("Toto je bielo červená.", "SK_COMPOUNDS");
+    let text = "Toto je bielo červená.";
+    let matches = one(text, "SK_COMPOUNDS");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 23);
+    assert_utf16(text, &matches[0], (8, 21));
     assert_eq!(
         matches[0].message,
         "Toto slovo sa zvyčajne píše so spojovníkom."
@@ -237,30 +227,25 @@ fn slovak_compound() {
 #[test]
 fn slovak_typography_quotes() {
     let _guard = engine_guard();
-    let matches = one("Toto je (\"test\").", "POCITACOVE_UVODZOVKY");
+    let text = "Toto je (\"test\").";
+    let matches = one(text, "POCITACOVE_UVODZOVKY");
     assert_eq!(matches.len(), 2, "{matches:?}");
-    assert_eq!(matches[0].range.start, 9);
-    assert_eq!(matches[0].range.end, 10);
+    assert_utf16(text, &matches[0], (9, 10));
     assert_eq!(suggestions(&matches[0]), vec!["„"]);
-    assert_eq!(matches[1].range.start, 14);
-    assert_eq!(matches[1].range.end, 15);
+    assert_utf16(text, &matches[1], (14, 15));
     assert_eq!(suggestions(&matches[1]), vec!["“"]);
 }
 
 /// XML agreement rule `STREDNY_ROD_A` over the Slovak tagger (Java-probed
-/// via the corpus golden): `pekné` should be `pekného` (Java 17..22 UTF-16 =
-/// 17..23 UTF-8).
+/// via the corpus golden): `pekné` should be `pekného`.
 #[test]
 fn slovak_agreement_rule() {
     let _guard = engine_guard();
-    let matches = one(
-        "Zamilovala sa do pekné inteligentného chlapa.",
-        "STREDNY_ROD_A",
-    );
+    let text = "Zamilovala sa do pekné inteligentného chlapa.";
+    let matches = one(text, "STREDNY_ROD_A");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("2"));
-    assert_eq!(matches[0].range.start, 17);
-    assert_eq!(matches[0].range.end, 23);
+    assert_utf16(text, &matches[0], (17, 22));
     assert!(matches[0]
         .message
         .contains("Nespravny tvar prídavného mena"));
