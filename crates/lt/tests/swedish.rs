@@ -208,7 +208,7 @@ fn swedish_sentence_whitespace() {
 
 /// `HunspellRule` (4) with real Swedish misspellings. Java probe
 /// (`check-diff-sv.sh`): full `getSuggestedReplacements` lists, including
-/// diacritic-preserving candidates. Offsets are ASCII, so UTF-16 == UTF-8.
+/// diacritic-preserving candidates; UTF-16/UTF-8 offsets are stated per case.
 #[test]
 fn swedish_speller() {
     let _guard = engine_guard();
