@@ -3,11 +3,16 @@
 //! Nordum is a constructed pan-Scandinavian written language
 //! (<https://www.nordum.org>); there is no legacy Java module, so the tests
 //! pin the staged rule wiring and the owner-approved examples from
-//! `new-languages/nordum/proposed-rules.md`.
+//! `new-languages/nordum/proposed-rules.md`. Offset probes assert the
+//! Java/HTTP-compatible UTF-16 code units with `common::assert_utf16`,
+//! pinned from the engine's own output (no Java oracle exists).
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, Lang};
+
+mod common;
+use common::assert_utf16;
 
 fn engine_guard() -> MutexGuard<'static, ()> {
     static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
@@ -121,6 +126,32 @@ fn nordum_rules_fire() {
             "expected {rule_id} for {text:?}, got {:?}",
             match_ids(&engine, text)
         );
+    }
+}
+
+/// UTF-16 offset probes for owner-approved examples. No Java oracle exists,
+/// so the expectations pin the engine's own output in the Java/HTTP-compatible
+/// UTF-16 format (`common::assert_utf16`).
+#[test]
+fn nordum_utf16_offsets() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        return;
+    };
+    let cases: &[(&str, &str, (usize, usize))] = &[
+        ("på Mandag", "NDM_CAPITALIZATION", (3, 9)),
+        ("Jei vet å hun arbeider.", "NDM_AA_ATT", (8, 9)),
+        ("Vi har ett stor hus.", "NDM_ADJ_NEUTER", (11, 15)),
+    ];
+    for (text, rule, expected) in cases {
+        let m = engine
+            .check(text)
+            .unwrap()
+            .matches
+            .into_iter()
+            .find(|m| m.rule_id == *rule)
+            .unwrap_or_else(|| panic!("{rule} did not match {text:?}"));
+        assert_utf16(text, &m, *expected);
     }
 }
 

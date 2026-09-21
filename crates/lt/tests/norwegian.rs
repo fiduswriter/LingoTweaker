@@ -2,12 +2,16 @@
 //!
 //! Hand-authored language: there is no legacy Java module to probe, so the
 //! tests pin the staged rule wiring and the owner-approved examples from
-//! `new-languages/norwegian-bokmal/proposed-rules.md`. Offsets are UTF-8
-//! bytes (the engine format).
+//! `new-languages/norwegian-bokmal/proposed-rules.md`. Offset probes assert
+//! the Java/HTTP-compatible UTF-16 code units with `common::assert_utf16`,
+//! pinned from the engine's own hunspell-reference output.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 fn engine_guard() -> MutexGuard<'static, ()> {
     static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
@@ -127,6 +131,34 @@ fn norwegian_rules_fire() {
             "expected {rule_id} for {text:?}, got {:?}",
             match_ids(&engine, text)
         );
+    }
+}
+
+/// UTF-16 offset probes for owner-approved examples. No Java oracle exists,
+/// so the expectations pin the engine's own hunspell-reference output in the
+/// Java/HTTP-compatible UTF-16 format (`common::assert_utf16`).
+#[test]
+fn norwegian_utf16_offsets() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        return;
+    };
+    let cases: &[(&str, &str, (usize, usize))] = &[
+        ("Hun lånte hennes sykkel.", "NB_SIN_HANS", (10, 16)),
+        ("Han så ham selv.", "NB_SEG_REFLEX", (7, 10)),
+        ("Nå jeg reiser til Bergen.", "NB_V2", (3, 13)),
+        ("Jeg har gådd hjem.", "NB_SPELLER", (8, 12)),
+        ("Vi har mye biler.", "NB_MYE_MANGE", (7, 10)),
+    ];
+    for (text, rule, expected) in cases {
+        let m = engine
+            .check(text)
+            .unwrap()
+            .matches
+            .into_iter()
+            .find(|m| m.rule_id == *rule)
+            .unwrap_or_else(|| panic!("{rule} did not match {text:?}"));
+        assert_utf16(text, &m, *expected);
     }
 }
 
