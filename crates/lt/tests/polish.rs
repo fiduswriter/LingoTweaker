@@ -270,6 +270,33 @@ fn polish_ascii_punct_class_matches_java_probe() {
     assert_eq!(suggestions(&ms[0]), vec!["znajdujemy, gdy"]);
 }
 
+/// `JLanguageTool.replaceSoftHyphens`: soft hyphens (U+00AD) are removed
+/// before spell checking and the match end covers the hidden characters.
+/// Java-probed with `scripts/oracle/pl/probe-speller.sh`.
+#[test]
+fn polish_speller_strips_soft_hyphens() {
+    let _guard = engine_guard();
+    let Some(pl) = engine_with_rules(&["MORFOLOGIK_RULE_PL_PL"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let check = |text: &str| -> Vec<lt::Match> {
+        pl.check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == "MORFOLOGIK_RULE_PL_PL")
+            .collect()
+    };
+    // correct word with soft hyphens -> no match
+    assert!(check("Mam dostęp do wody bardzo dobrej pod względem mikro\u{00AD}bio\u{00AD}lo\u{00AD}gicz\u{00AD}nym.").is_empty());
+    // misspelled word with a soft hyphen -> the range covers the original token
+    let text = "To jest b\u{00AD}ledem.";
+    let ms = check(text);
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16(text, &ms[0]), (8, 15));
+}
+
 /// The stage-3 Java rule classes, Java-probed with
 /// `scripts/oracle/pl/probe-rule.sh` (UTF-16 offsets; ASCII prefixes).
 #[test]

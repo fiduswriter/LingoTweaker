@@ -416,20 +416,32 @@ impl PolishSpellingRule {
                 .first()
                 .map(|r| r.token.clone())
                 .unwrap_or_else(|| token.surface().to_string());
+            // `JLanguageTool.replaceSoftHyphens`: soft hyphens are removed
+            // before checking; Java extends the match end by the hidden chars.
+            let clean_word = word.replace('\u{00AD}', "");
+            let hidden = word.len() - clean_word.len();
+            let word = if hidden > 0 { clean_word } else { word };
 
             // `tokenizingPattern()`: split at `Quasi-`/`Niby-`, dropping the
             // matched prefix.
             let mut index = 0usize;
+            let mut new_matches: Vec<Match> = Vec::new();
             for m in POLISH_TOKENIZING_CHARS.find_iter(&word) {
                 let segment = &word[index..m.start()];
-                matches.extend(self.get_rule_matches(segment, start_pos + index));
+                new_matches.extend(self.get_rule_matches(segment, start_pos + index));
                 index = m.end();
             }
             if index == 0 {
-                matches.extend(self.get_rule_matches(&word, start_pos));
+                new_matches.extend(self.get_rule_matches(&word, start_pos));
             } else {
-                matches.extend(self.get_rule_matches(&word[index..], start_pos + index));
+                new_matches.extend(self.get_rule_matches(&word[index..], start_pos + index));
             }
+            if hidden > 0 {
+                for m in &mut new_matches {
+                    m.range.end += hidden;
+                }
+            }
+            matches.extend(new_matches);
 
             // Capitalize the (first) match's suggestions when the word is the
             // sentence's first word and not its last token.
