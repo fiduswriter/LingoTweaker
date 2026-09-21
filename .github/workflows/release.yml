@@ -6,8 +6,11 @@ name: Release
 # publishes the prerelease. This workflow is intentionally separate from
 # ci.yml and does not touch the `parity` or `test` jobs.
 #
-# Secrets: CARGO_REGISTRY_TOKEN (crates.io), NPM_TOKEN (+ optional NPM_OTP).
-# PyPI uses trusted publishing (`id-token: write`), no secret required.
+# Secrets: CARGO_REGISTRY_TOKEN (crates.io), NPM_TOKEN (+ optional NPM_OTP) for
+# the npm engine and data packages, PYPI_API_TOKEN for the per-language data
+# distributions. The `lingotweaker` wheel uses PyPI trusted publishing
+# (`id-token: write`), so it needs no secret. The `data` job uses the workflow
+# token with `contents: write` to attach assets to the GitHub Release.
 on:
   push:
     tags:
@@ -41,6 +44,54 @@ jobs:
           py="$(python3 -c "import sys; v='${tag}'; core,_,pre=v.partition('-'); print(core+'a'+pre.split('.')[1] if pre.startswith('alpha.') else v)")"
           echo "cargo=${tag}" >> "$GITHUB_OUTPUT"
           echo "python=${py}" >> "$GITHUB_OUTPUT"
+
+  # Per-language runtime data attached to the GitHub Release: gzipped packs,
+  # extractable native archives and a sha256 manifest.
+  data:
+    needs: version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup toolchain install 1.98.1 --profile minimal
+      - name: Build and attach release data assets
+        run: scripts/release/publish-data.sh "v${{ needs.version.outputs.cargo }}"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  # One npm data package (all language packs) shared by both engine packages.
+  npm-data:
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup toolchain install 1.98.1 --profile minimal
+      - name: Build and publish lingotweaker-data
+        run: scripts/release/publish-npm-data.sh
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ secrets.NPM_OTP }}
+
+  # One PyPI data distribution per language (each well under the 100 MB limit).
+  pypi-data:
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build (and upload when PYPI_API_TOKEN is set) data packages
+        run: scripts/release/publish-pypi-data.sh
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
 
   crates:
     needs: version
@@ -86,7 +137,7 @@ jobs:
           packages-dir: dist
 
   npm:
-    needs: version
+    needs: [version, npm-data]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -98,6 +149,26 @@ jobs:
       - run: rustup toolchain install 1.98.1 --profile minimal
       - name: Build, smoke-test and publish the addon
         run: scripts/release/publish-npm.sh
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ secrets.NPM_OTP }}
+
+  wasm:
+    needs: [version, npm-data]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - uses: jetli/wasm-pack-action@v0.4.0
+        with:
+          version: "latest"
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup toolchain install 1.98.1 --profile minimal
+      - name: Build, smoke-test and publish lingotweaker-wasm
+        run: scripts/release/publish-wasm.sh
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_OTP: ${{ secrets.NPM_OTP }}

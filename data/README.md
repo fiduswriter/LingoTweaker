@@ -24,8 +24,25 @@ listed file against `manifest.json` in its test suite.
 | `<lang>/*.sor` | serialized text resources (e.g. German special-case table) |
 | `en/models/` | OpenNLP model containers (token/pos/chunk) |
 
-Languages currently vendored: `en`, `de`, `es`, `fr`, `it`, `pt`, `nl`, `ca`,
-`gl`, `ro`, `pl`, `sk`, `sl`, `el`, `no`, `nrd`, `gn`.
+Languages currently vendored: `ca`, `de`, `el`, `en`, `es`, `fr`, `gl`, `gn`,
+`it`, `nl`, `no`, `nrd`, `pl`, `pt`, `ro`, `sk`, `sl`.
+
+## Released data artifacts
+
+Every release publishes the runtime data from this directory, built by
+`scripts/release/build-data.sh` (`scripts/data/build-packs.sh` + `pack_data`):
+
+| Artifact | Consumer |
+|----------|----------|
+| `packs/<lang>.pack.gz` (GitHub Release asset, npm `lingotweaker-data`) | wasm (`LtEngine`) and native Node (`dataDir`) |
+| `data/<lang>.tar.gz` (GitHub Release asset) | native `LT_DATA_DIR` (extract into a directory) |
+| `lingotweaker-data-<lang>` (PyPI) | `lt_py` (auto-discovered) |
+| `manifest.json` (release asset) | versions, sizes and sha256 per artifact |
+
+`LT_DATA_DIR` accepts either an extracted directory or a single
+`.pack`/`.pack.gz` file. The packs contain `manifest.json`, `core/**`,
+`messages/**` and `<lang>/**` — the same set as an extracted archive — and are
+the same bytes the GitHub Pages demo serves.
 
 ## How it is generated
 

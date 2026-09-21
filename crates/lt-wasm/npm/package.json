@@ -1,0 +1,57 @@
+{
+  "name": "lingotweaker-wasm",
+  "version": "0.1.0-alpha.1",
+  "description": "LingoTweaker proofreading engine compiled to WebAssembly (browser and Node)",
+  "license": "LGPL-2.1-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiduswriter/LingoTweaker.git"
+  },
+  "homepage": "https://fiduswriter.github.io/LingoTweaker/",
+  "keywords": [
+    "proofreading",
+    "grammar",
+    "spellcheck",
+    "nlp",
+    "language",
+    "wasm",
+    "webassembly"
+  ],
+  "type": "module",
+  "main": "./node/lt_wasm.js",
+  "module": "./web/lt_wasm.js",
+  "types": "./web/lt_wasm.d.ts",
+  "dependencies": {
+    "lingotweaker-data": "0.1.0-alpha.1"
+  },
+  "exports": {
+    ".": {
+      "types": "./web/lt_wasm.d.ts",
+      "browser": "./web/lt_wasm.js",
+      "import": "./web/lt_wasm.js",
+      "require": "./node/lt_wasm.js",
+      "default": "./web/lt_wasm.js"
+    },
+    "./web": {
+      "types": "./web/lt_wasm.d.ts",
+      "default": "./web/lt_wasm.js"
+    },
+    "./node": {
+      "types": "./node/lt_wasm.d.ts",
+      "default": "./node/lt_wasm.js"
+    },
+    "./pack": {
+      "default": "./pack.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "web",
+    "node",
+    "pack.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">= 18"
+  }
+}

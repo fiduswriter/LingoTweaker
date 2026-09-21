@@ -859,6 +859,7 @@ dependencies = [
 name = "lt-data"
 version = "0.1.0-alpha.1"
 dependencies = [
+ "flate2",
  "lt-core",
  "serde",
  "serde_json",

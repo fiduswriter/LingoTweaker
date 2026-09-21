@@ -1,0 +1,42 @@
+{
+  "name": "lingotweaker-data",
+  "version": "0.1.0-alpha.1",
+  "description": "Runtime language data packs for the LingoTweaker proofreading engine",
+  "license": "LGPL-2.1-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiduswriter/LingoTweaker.git"
+  },
+  "homepage": "https://fiduswriter.github.io/LingoTweaker/",
+  "keywords": [
+    "proofreading",
+    "grammar",
+    "spellcheck",
+    "nlp",
+    "language",
+    "data"
+  ],
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./packs/*": "./packs/*",
+    "./manifest.json": "./manifest.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "packs",
+    "manifest.json",
+    "index.js",
+    "index.mjs",
+    "index.d.ts",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">= 18"
+  }
+}

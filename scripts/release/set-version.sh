@@ -2,7 +2,10 @@
 # Set the LingoTweaker prerelease version everywhere it is hardcoded:
 #   - Cargo.toml            [workspace.package].version + lt-* path-dep versions
 #   - crates/lingotweaker/Cargo.toml   (own workspace: version + dep versions)
-#   - crates/lt-node/package.json      (npm)
+#   - crates/lt-node/package.json        (npm, lingotweaker)
+#   - crates/lt-wasm/npm/package.json    (npm, lingotweaker-wasm)
+#   - crates/lt-data/npm/package.json    (npm, lingotweaker-data)
+#   - crates/lt-wasm/npm/pack.js         (default data base URL / release tag)
 #
 # The Python version is derived from the Cargo version by maturin
 # (0.1.0-alpha.1 -> 0.1.0a1), so pyproject.toml stays `dynamic`.
@@ -27,13 +30,22 @@ fi
 old_re="${OLD//./\\.}"
 sed -i "s/${old_re}/${NEW}/g" "$ROOT/Cargo.toml"
 sed -i "s/${old_re}/${NEW}/g" "$ROOT/crates/lingotweaker/Cargo.toml"
+sed -i "s/${old_re}/${NEW}/g" "$ROOT/crates/lt-wasm/npm/pack.js"
 
-node - "$ROOT/crates/lt-node/package.json" "$NEW" <<'NODE'
+node - "$NEW" \
+  "$ROOT/crates/lt-node/package.json" \
+  "$ROOT/crates/lt-wasm/npm/package.json" \
+  "$ROOT/crates/lt-data/npm/package.json" <<'NODE'
 const fs = require("fs");
-const [path, version] = process.argv.slice(2);
-const pkg = JSON.parse(fs.readFileSync(path, "utf8"));
-pkg.version = version;
-fs.writeFileSync(path, JSON.stringify(pkg, null, 2) + "\n");
+const [version, ...paths] = process.argv.slice(2);
+for (const path of paths) {
+  const pkg = JSON.parse(fs.readFileSync(path, "utf8"));
+  pkg.version = version;
+  if (pkg.dependencies && pkg.dependencies["lingotweaker-data"]) {
+    pkg.dependencies["lingotweaker-data"] = version;
+  }
+  fs.writeFileSync(path, JSON.stringify(pkg, null, 2) + "\n");
+}
 NODE
 
 python_version="$(python3 - "$NEW" <<'PY'

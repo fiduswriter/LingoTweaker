@@ -96,6 +96,9 @@ cargo run --release -p lt-data --bin pack_data -- data gn /tmp/lt-gn.pack
 wasm-pack build crates/lt-wasm --target nodejs --out-dir ../../target/wasm-pkg/node
 node tools/wasm/smoke.mjs /tmp/lt-gn.pack     # engine built from the pack
 tools/wasm/build-demo.sh                      # minimal browser demo (www/pkg + packs)
+scripts/data/build-packs.sh data /tmp/packs   # gzipped packs + sha256 manifest
+scripts/release/publish-wasm.sh --build-only  # lingotweaker-wasm npm package (web+nodejs)
+scripts/release/publish-npm-data.sh --build-only  # lingotweaker-data npm package
 demo/scripts/build-packs.sh                   # full demo: packs + rule inventories
 demo/scripts/build.sh                         # full demo bundle into demo/dist
 ```
@@ -103,6 +106,9 @@ demo/scripts/build.sh                         # full demo bundle into demo/dist
 Engine data reads go through `lt_data::fs` (mount-aware): use
 `lt_data::PathExt::lt_exists`/`lt_is_dir`/`lt_is_file` instead of the `Path`
 predicates, and gate `SystemTime`/`Instant` uses so wasm builds cannot trap.
+`DataDir::new`/`discover` also accept a `.pack`/`.pack.gz` file (mounted in
+memory via `DataDir::from_pack_path`), so the npm data packs work for the
+native engine too.
 
 ## Releasing
 
@@ -120,8 +126,15 @@ git tag v0.1.0-alpha.2 && git push origin main v0.1.0-alpha.2
 plus the `lingotweaker` facade (`crates/lingotweaker`, its own workspace, shares
 the engine source through a symlink and keeps `[lib] name = "lt"`). `lt` cannot
 be published (the crates.io name is taken); `lt-cli`/`lt-http`/`lt-py`/`lt-node`/
-`lt-wasm` set `publish = false`. Package readmes must keep stating that engine
-packages ship without data and read `LT_DATA_DIR` at runtime.
+`lt-wasm` set `publish = false`.
+
+Runtime data ships separately from the engine packages (they stay code-only):
+one npm package `lingotweaker-data` (all language packs; a dependency of both
+`lingotweaker` and `lingotweaker-wasm`), one PyPI distribution
+`lingotweaker-data-<lang>` per language (auto-discovered by `lt_py`), and
+per-language `packs/*.pack.gz` + `data/*.tar.gz` + `manifest.json` assets on
+each GitHub Release. Package readmes must say that engine packages ship code
+only and how to get the data (`LT_DATA_DIR` accepts a directory or a pack file).
 
 ## Conventions
 

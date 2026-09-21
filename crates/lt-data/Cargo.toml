@@ -12,3 +12,6 @@ lt-core = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 sha2 = "0.10"
+# Gzip support for pack files (`.pack.gz`); the pure-Rust backend keeps the
+# crate buildable for wasm targets without a C toolchain.
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }

@@ -6,12 +6,20 @@
 //! 3. `./data` relative to the current directory
 //! 4. `../data` (running from a crate inside the workspace)
 //!
+//! Both a directory tree and a single pack file are accepted: if the override
+//! or `LT_DATA_DIR` names a `.pack`/`.pack.gz` file, it is registered as an
+//! in-memory pack (see [`DataDir::from_pack_path`]) and every loader reads
+//! through [`fs`] exactly as for a directory.
+//!
 //! Data may also come from an in-memory pack (`DataDir::from_pack`), which is
 //! how wasm builds without a file system are served (see [`pack`]); engine
 //! loaders read through [`fs`] so both sources behave identically. Manifest
 //! verification (`Manifest::verify`) still needs the real files on disk.
 
+use std::collections::HashMap;
+use std::io::Read;
 use std::path::{Path, PathBuf};
+use std::sync::{Mutex, OnceLock};
 
 use lt_core::{CoreError, Lang, Result};
 use serde::Deserialize;
@@ -24,9 +32,63 @@ pub use fs::PathExt;
 #[derive(Debug, Clone)]
 pub struct DataDir(PathBuf);
 
+/// Mounts are immutable and content-addressed by their path, so a pack file is
+/// parsed once even when several engines are built from it.
+static PACK_CACHE: OnceLock<Mutex<HashMap<PathBuf, DataDir>>> = OnceLock::new();
+
+fn pack_cache() -> &'static Mutex<HashMap<PathBuf, DataDir>> {
+    PACK_CACHE.get_or_init(|| Mutex::new(HashMap::new()))
+}
+
 impl DataDir {
     pub fn new(path: impl AsRef<Path>) -> Self {
-        Self(path.as_ref().to_path_buf())
+        let path = path.as_ref();
+        // A pack file path is mounted in memory; a directory (or any error,
+        // which surfaces on the first read) is used as-is.
+        if Self::is_pack_path(path) && path.is_file() {
+            if let Ok(dir) = Self::from_pack_path(path) {
+                return dir;
+            }
+        }
+        Self(path.to_path_buf())
+    }
+
+    /// Whether `path` names a data pack (`.pack`, optionally `.pack.gz`).
+    pub fn is_pack_path(path: &Path) -> bool {
+        path.to_str()
+            .is_some_and(|s| s.ends_with(".pack") || s.ends_with(".pack.gz"))
+    }
+
+    /// Load a pack file and register it as an in-memory mount.
+    ///
+    /// Gzip is detected from the `.gz` suffix. Repeated calls for the same
+    /// path reuse the existing mount.
+    pub fn from_pack_path(path: impl AsRef<Path>) -> Result<Self> {
+        let path = path.as_ref();
+        let key = path.canonicalize().unwrap_or_else(|_| path.to_path_buf());
+        if let Some(dir) = pack_cache().lock().expect("pack cache poisoned").get(&key) {
+            return Ok(dir.clone());
+        }
+        let raw = std::fs::read(path).map_err(|e| {
+            CoreError::Data(format!("cannot read data pack {}: {e}", path.display()))
+        })?;
+        let bytes = if path.extension().and_then(|e| e.to_str()) == Some("gz") {
+            let mut out = Vec::new();
+            flate2::read::GzDecoder::new(raw.as_slice())
+                .read_to_end(&mut out)
+                .map_err(|e| {
+                    CoreError::Data(format!("cannot gunzip data pack {}: {e}", path.display()))
+                })?;
+            out
+        } else {
+            raw
+        };
+        let dir = Self::from_pack(&bytes)?;
+        pack_cache()
+            .lock()
+            .expect("pack cache poisoned")
+            .insert(key, dir.clone());
+        Ok(dir)
     }
 
     /// A data directory backed by an in-memory pack (see [`pack`]).
@@ -45,6 +107,9 @@ impl DataDir {
             let p = PathBuf::from(p);
             if p.is_dir() {
                 return Ok(Self(p));
+            }
+            if Self::is_pack_path(&p) && p.is_file() {
+                return Self::from_pack_path(&p);
             }
         }
         for candidate in [
@@ -228,5 +293,38 @@ mod tests {
         assert!(data.pos_dict_path(Lang::En).exists());
         assert!(data.disambiguation_path(Lang::En).exists());
         assert!(data.grammar_path(Lang::Fr).exists());
+    }
+
+    #[test]
+    fn pack_file_loads_from_disk() {
+        use std::io::Write as _;
+
+        let pack = pack::write(&[
+            (PathBuf::from("en/rules/grammar.xml"), b"<rules/>".to_vec()),
+            (PathBuf::from("core/segment.srx"), b"<srx/>".to_vec()),
+        ]);
+        let dir = std::env::temp_dir().join(format!("lt-pack-test-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+
+        // Plain `.pack`.
+        let plain = dir.join("data.pack");
+        std::fs::write(&plain, &pack).unwrap();
+        let data = DataDir::new(&plain);
+        assert!(fs::is_file(data.grammar_path(Lang::En)));
+        assert_eq!(fs::read(data.grammar_path(Lang::En)).unwrap(), b"<rules/>");
+
+        // Gzipped `.pack.gz`.
+        let gz = dir.join("data.pack.gz");
+        let mut enc = flate2::write::GzEncoder::new(
+            std::fs::File::create(&gz).unwrap(),
+            flate2::Compression::default(),
+        );
+        enc.write_all(&pack).unwrap();
+        enc.finish().unwrap();
+        let data = DataDir::new(&gz);
+        assert!(fs::is_file(data.grammar_path(Lang::En)));
+        assert_eq!(fs::read(data.grammar_path(Lang::En)).unwrap(), b"<rules/>");
+
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 }

@@ -18,8 +18,8 @@ references and licenses are kept.
 - **Rust-first**: `cargo add lingotweaker` and embed the engine directly (`lt::Engine::check`).
 - **v2 HTTP drop-in**: same `/v2/*` paths, parameters, and JSON schema, so existing
   clients switch without changes.
-- **WebAssembly**: `lt-wasm` (wasm-bindgen) runs the engine in the browser from
-  fetchable per-language data packs.
+- **WebAssembly**: `lt-wasm` / the `lingotweaker-wasm` npm package runs the engine
+  in the browser and Node from fetchable per-language data packs.
 - **Vendored data**: everything needed at runtime is copied into `data/` with per-file
   sha256 provenance, pinned to one upstream commit (`upstream.json`).
 - **Parity-driven**: the legacy `<example>` tests are the primary gate; a pinned
@@ -36,7 +36,8 @@ curl -s localhost:8081/v2/languages
 curl -s -X POST localhost:8081/v2/check -d 'text=Hello+world.&language=en-US'
 ```
 
-The engine reads data from `LT_DATA_DIR`, or `./data` when run inside the repository.
+The engine reads data from `LT_DATA_DIR` (a data directory or a `.pack`/
+`.pack.gz` file), or `./data` when run inside the repository.
 
 Build the minimal browser demo (needs `rustup target add wasm32-unknown-unknown`
 and [wasm-pack](https://rustwasm.github.io/wasm-pack/)):
@@ -95,9 +96,13 @@ Rule, category, and message ids are never renumbered.
 Prereleases are published from one version to crates.io, PyPI and npm:
 
 ```sh
-cargo add lingotweaker@0.1.0-alpha.1   # Rust (library name stays `lt`)
-pip install lingotweaker==0.1.0a1      # Python (module name `lt_py`)
-npm install lingotweaker@next          # Node.js
+cargo add lingotweaker@0.1.0-alpha.1          # Rust (library name stays `lt`)
+pip install lingotweaker==0.1.0a1             # Python (module name `lt_py`)
+pip install lingotweaker-data-en              # Python runtime data (per language)
+npm install lingotweaker@next                 # Node.js
+npm install lingotweaker-wasm@next            # Browser/Node WebAssembly
+# `lingotweaker` and `lingotweaker-wasm` depend on `lingotweaker-data`, which
+# ships every language pack.
 ```
 
 `lt` on crates.io is an unrelated third-party crate; the engine is published as
@@ -105,8 +110,17 @@ npm install lingotweaker@next          # Node.js
 Prereleases use the npm `next` dist-tag and a PEP 440 prerelease version on
 PyPI, so `latest` stays on the last stable release.
 
-The engine packages ship **code only**: no language data is bundled. Set
-`LT_DATA_DIR` to a data tree (see `data/README.md`) before building an engine.
+The engine packages ship **code only**. Runtime data is published separately
+for every release:
+
+- Python: `pip install lingotweaker-data-<lang>`; `lt_py` finds it
+  automatically for a matching language.
+- Node.js: the `lingotweaker-data` dependency exposes `packPath("<lang>")`,
+  which the native and wasm engines both read (a `.pack.gz` file).
+- Rust/other: `LT_DATA_DIR` accepts either a data directory or a single
+  `.pack`/`.pack.gz` file. Per-language packs and extractable native archives
+  are attached to each [GitHub Release](https://github.com/fiduswriter/LingoTweaker/releases);
+  `manifest.json` lists sizes and sha256 hashes.
 
 Release tooling lives in `scripts/release/`; see `scripts/release/README.md`.
 

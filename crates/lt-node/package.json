@@ -17,6 +17,9 @@
   ],
   "main": "index.js",
   "types": "index.d.ts",
+  "dependencies": {
+    "lingotweaker-data": "0.1.0-alpha.1"
+  },
   "files": [
     "index.js",
     "index.d.ts",

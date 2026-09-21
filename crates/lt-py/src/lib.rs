@@ -10,7 +10,9 @@
 //!
 //! Data discovery: the engine reads the vendored `data/` directory; set
 //! `LT_DATA_DIR` (or pass `data_dir=`) when the process is not started from
-//! the repository root.
+//! the repository root. Without either, an installed per-language data
+//! distribution (`pip install lingotweaker-data-en`, exposing
+//! `lingotweaker_data_en.data_dir()`) is used automatically.
 
 use pyo3::exceptions::{PyRuntimeError, PyValueError};
 use pyo3::prelude::*;
@@ -23,6 +25,13 @@ fn to_py_err(e: lt::CoreError) -> PyErr {
 fn parse_lang(lang: &str) -> PyResult<lt::Lang> {
     lt::Lang::from_long_code(lang)
         .ok_or_else(|| PyValueError::new_err(format!("unsupported language: {lang}")))
+}
+
+/// The data directory of an installed `lingotweaker-data-<base>` package.
+fn installed_data_dir(py: Python<'_>, base: &str) -> Option<String> {
+    let module = format!("lingotweaker_data_{base}");
+    let module = py.import(&module).ok()?;
+    module.call_method0("data_dir").ok()?.extract().ok()
 }
 
 /// An immutable, thread-safe checking engine.
@@ -55,6 +64,7 @@ impl Engine {
     ))]
     #[allow(clippy::too_many_arguments)]
     fn new(
+        py: Python<'_>,
         lang: String,
         variant: Option<String>,
         data_dir: Option<String>,
@@ -67,6 +77,13 @@ impl Engine {
     ) -> PyResult<Self> {
         let lang_enum = parse_lang(&lang)?;
         let mut builder = lt::Engine::builder(lang_enum).map_err(to_py_err)?;
+        let data_dir = data_dir.or_else(|| {
+            if std::env::var_os("LT_DATA_DIR").is_none() && !std::path::Path::new("data").is_dir() {
+                installed_data_dir(py, lang_enum.base_code())
+            } else {
+                None
+            }
+        });
         if let Some(dir) = data_dir {
             builder = builder.data_dir(lt::DataDir::new(dir));
         }

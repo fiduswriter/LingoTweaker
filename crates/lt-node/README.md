@@ -2,24 +2,24 @@
 
 Node.js bindings for the LingoTweaker proofreading engine (Rust core, napi-rs).
 
+This package ships a native addon (code only) and depends on `lingotweaker-data`,
+which carries one gzipped pack per language. Point the engine at a pack:
+
 ```js
 const { Engine } = require("lingotweaker");
+const { packPath } = require("lingotweaker-data");
 
-const engine = new Engine("en-US");
+const engine = new Engine("en-US", { dataDir: packPath("en") });
 for (const match of engine.check("I can heard you.").matches) {
   console.log(match.rule_id, match.suggestions);
 }
 ```
 
-This package ships a native addon (code only). The engine loads its language
-data from a data directory at runtime:
-
-- set the `LT_DATA_DIR` environment variable to the directory that holds the
-  vendored `data/` tree, or
-- point the engine at it explicitly if the binding exposes a data-dir option.
-
-Without data the engine cannot build a pipeline; see the repository README for
-how the data tree is produced.
+`LT_DATA_DIR` accepts a data directory or a single `.pack`/`.pack.gz` file, so
+`packPath("en")` can also be exported before constructing the engine.
+Per-language packs and extractable native archives are attached to each
+[GitHub Release](https://github.com/fiduswriter/LingoTweaker/releases) too. See
+the repository README for how the data tree is produced.
 
 LingoTweaker is an independent project and includes a port of the legacy
 LanguageTool proofreading engine and its rule data. Upstream references and

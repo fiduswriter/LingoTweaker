@@ -5,8 +5,8 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
-# Not published yet: wasm packages are built per-release from the workspace
-# (see attic release notes / owner question on lt-wasm publishing).
+# Not published on crates.io: the wasm bindings ship through npm as
+# `lingotweaker-wasm` (see scripts/release/publish-wasm.sh).
 publish = false
 
 [lib]
