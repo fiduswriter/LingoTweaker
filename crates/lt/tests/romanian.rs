@@ -2,13 +2,15 @@
 //! built-in-rule values.
 //!
 //! Stage gates follow internal development notes: this file pins the progress
-//! metric and gets updated by each stage. Offsets are UTF-8 bytes (the engine
-//! format); the Java probes print UTF-16 code units, converted in the comments
-//! where a test exercises diacritics.
+//! metric and gets updated by each stage. Probe offsets are the Java UTF-16
+//! code units and are asserted with the `common::assert_utf16` helper.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 /// One engine at a time: the Romanian engines hold the tagger dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -81,14 +83,14 @@ fn romanian_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Bună , lume!` 4..6 message.
+/// `CommaWhitespaceRule` (1), Java probe.
 #[test]
 fn romanian_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Bună , lume!", "COMMA_PARENTHESIS_WHITESPACE");
+    let text = "Bună , lume!";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 5);
-    assert_eq!(matches[0].range.end, 7);
+    assert_utf16(text, &matches[0], (4, 6));
     assert_eq!(
         matches[0].message,
         "Pune un spațiu după virgulă, dar nu înainte de virgulă"
@@ -96,71 +98,64 @@ fn romanian_comma_whitespace() {
     assert_eq!(matches[0].suggestions[0].value, ",");
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `propozitie..` 25..27.
+/// `DoublePunctuationRule` (2), Java probe.
 #[test]
 fn romanian_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Aceasta este o propozitie..", "DOUBLE_PUNCTUATION");
+    let text = "Aceasta este o propozitie..";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 25);
-    assert_eq!(matches[0].range.end, 27);
+    assert_utf16(text, &matches[0], (25, 27));
     assert_eq!(matches[0].message, "Două puncte consecutive");
 }
 
 /// `UppercaseSentenceStartRule` (3), Java probe: the second sentence starts
-/// lowercase, 27..34.
+/// lowercase.
 #[test]
 fn romanian_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one(
-        "Aceasta este o propozitie. aceasta continua.",
-        "UPPERCASE_SENTENCE_START",
-    );
+    let text = "Aceasta este o propozitie. aceasta continua.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 27);
-    assert_eq!(matches[0].range.end, 34);
+    assert_utf16(text, &matches[0], (27, 34));
     assert_eq!(matches[0].message, "Propoziția nu începe cu literă mare");
     assert_eq!(matches[0].suggestions[0].value, "Aceasta");
 }
 
-/// `GenericUnpairedBracketsRule` (5) with the Romanian symbol lists,
-/// `(un exemplu.` 12..13.
+/// `GenericUnpairedBracketsRule` (5) with the Romanian symbol lists.
 #[test]
 fn romanian_unpaired_brackets() {
     let _guard = engine_guard();
-    let matches = one("Acesta este (un exemplu.", "UNPAIRED_BRACKETS");
+    let text = "Acesta este (un exemplu.";
+    let matches = one(text, "UNPAIRED_BRACKETS");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 12);
-    assert_eq!(matches[0].range.end, 13);
+    assert_utf16(text, &matches[0], (12, 13));
     assert_eq!(
         matches[0].message,
         "Unpaired symbol: ')' seems to be missing"
     );
 }
 
-/// `WordRepeatRule` (6), the generic base class: `este este` 8..17.
+/// `WordRepeatRule` (6), the generic base class.
 #[test]
 fn romanian_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Aceasta este este o propozitie.", "WORD_REPEAT_RULE");
+    let text = "Aceasta este este o propozitie.";
+    let matches = one(text, "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 17);
+    assert_utf16(text, &matches[0], (8, 17));
     assert_eq!(matches[0].suggestions[0].value, "este");
 }
 
-/// `MorfologikRomanianSpellerRule` (7), Java probe: `propozitie` 15..25 with
-/// the Morfologik ranking.
+/// `MorfologikRomanianSpellerRule` (7), Java probe: `propozitie` with the
+/// Morfologik ranking.
 #[test]
 fn romanian_spelling_suggestions() {
     let _guard = engine_guard();
-    let matches = one(
-        "Aceasta este o propozitie fara diacritice.",
-        "MORFOLOGIK_RULE_RO_RO",
-    );
+    let text = "Aceasta este o propozitie fara diacritice.";
+    let matches = one(text, "MORFOLOGIK_RULE_RO_RO");
     assert_eq!(matches.len(), 2, "{matches:?}");
-    assert_eq!(matches[0].range.start, 15);
-    assert_eq!(matches[0].range.end, 25);
+    assert_utf16(text, &matches[0], (15, 25));
     assert_eq!(
         matches[0].message,
         "S-a găsit o posibilă greșeală de ortografie"
@@ -181,8 +176,7 @@ fn romanian_spelling_suggestions() {
             "propozițio",
         ]
     );
-    assert_eq!(matches[1].range.start, 26);
-    assert_eq!(matches[1].range.end, 30);
+    assert_utf16(text, &matches[1], (26, 30));
 }
 
 /// `SimpleReplaceRule` (9) over `/ro/replace.txt`, Java-probed offsets and
@@ -191,22 +185,25 @@ fn romanian_spelling_suggestions() {
 fn romanian_simple_replace() {
     let _guard = engine_guard();
 
-    let matches = one("Patrusprezece case.", "RO_SIMPLE_REPLACE");
+    let text = "Patrusprezece case.";
+    let matches = one(text, "RO_SIMPLE_REPLACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 13));
+    assert_utf16(text, &matches[0], (0, 13));
     assert_eq!(matches[0].suggestions[0].value, "Paisprezece");
     assert_eq!(
         matches[0].message,
         "'Patrusprezece' este incorect sau ieșit din uz, folosiți <suggestion>paisprezece</suggestion>"
     );
 
-    let matches = one("Satul are patrusprezece case.", "RO_SIMPLE_REPLACE");
-    assert_eq!((matches[0].range.start, matches[0].range.end), (10, 23));
+    let text = "Satul are patrusprezece case.";
+    let matches = one(text, "RO_SIMPLE_REPLACE");
+    assert_utf16(text, &matches[0], (10, 23));
     assert_eq!(matches[0].suggestions[0].value, "paisprezece");
 
     // multi-word
-    let matches = one("aqua forte", "RO_SIMPLE_REPLACE");
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 10));
+    let text = "aqua forte";
+    let matches = one(text, "RO_SIMPLE_REPLACE");
+    assert_utf16(text, &matches[0], (0, 10));
     assert_eq!(matches[0].suggestions[0].value, "Acvaforte");
 
     // dash-delimited + two suggestions
@@ -225,10 +222,10 @@ fn romanian_simple_replace() {
 #[test]
 fn romanian_compound() {
     let _guard = engine_guard();
-    let matches = one("câte și trei", "RO_COMPOUND");
+    let text = "câte și trei";
+    let matches = one(text, "RO_COMPOUND");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    // Java UTF-16 0..12; `â`/`ș` are one char but two UTF-8 bytes.
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 14));
+    assert_utf16(text, &matches[0], (0, 12));
     assert_eq!(matches[0].message, "Cuvântul se scrie legat.");
     assert_eq!(matches[0].suggestions[0].value, "câteșitrei");
 
@@ -245,13 +242,10 @@ fn romanian_compound() {
 #[test]
 fn romanian_word_repeat_beginning() {
     let _guard = engine_guard();
-    let matches = one(
-        "Ion are mere. Ion are pere. Ion are prune.",
-        "ROMANIAN_WORD_REPEAT_BEGINNING_RULE",
-    );
+    let text = "Ion are mere. Ion are pere. Ion are prune.";
+    let matches = one(text, "ROMANIAN_WORD_REPEAT_BEGINNING_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 28);
-    assert_eq!(matches[0].range.end, 31);
+    assert_utf16(text, &matches[0], (28, 31));
     assert_eq!(
         matches[0].message,
         "Trei propoziții succesive încep cu același cuvânt. Consider rewording the sentence or use a thesaurus to find a synonym."
