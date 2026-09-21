@@ -303,3 +303,39 @@ fn polish_phraseref_match_matches_java_probe() {
         vec!["zaopatrzyłem w podpis.", "opatrzyłem podpisem."]
     );
 }
+
+/// `DWA_LUB_WIECEJ`: a message `<match no>` that yields several synthesized
+/// forms (and is followed by another `<match no>`) expands every form and
+/// reuses the recorded match spec for the repeated reference (Java
+/// `formatMatches` `numbersToMatches`). Java-probed with
+/// `scripts/oracle/pl/probe-rule.sh`.
+#[test]
+fn polish_multi_form_message_matches_java_probe() {
+    let _guard = engine_guard();
+    let Some(pl) = engine_with_rules(&["DWA_LUB_WIECEJ"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let text = "Nudził mnie przez dwie lub więcej wieczornych godzin.";
+    let ms: Vec<lt::Match> = pl
+        .check(text)
+        .expect("check")
+        .matches
+        .into_iter()
+        .filter(|m| m.rule_id == "DWA_LUB_WIECEJ")
+        .collect();
+    assert_eq!(ms.len(), 1);
+    assert_eq!(
+        suggestions(&ms[0]),
+        vec![
+            "co najmniej dwie wieczorne godziny",
+            "co najmniej dwie wieczornych godziny",
+        ]
+    );
+    assert_eq!(
+        ms[0].message,
+        "Konstrukcji tego typu nie da się użyć tak, aby nie budziła zastrzeżeń. Lepiej: \
+         <suggestion>co najmniej dwie wieczorne godziny</suggestion>, \
+         <suggestion>co najmniej dwie wieczornych godziny</suggestion>."
+    );
+}

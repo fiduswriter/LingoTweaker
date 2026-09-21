@@ -967,7 +967,18 @@ pub fn expand_message_matches<T: Deref<Target = AnalyzedTokenReadings>>(
         return s.to_string();
     }
     let mut out = String::with_capacity(s.len());
-    let _ = expand_message_matches_into(s, refs, tokens, positions, synth, 0, &mut out);
+    let mut spec_by_no: std::collections::HashMap<usize, MatchRefSpec> =
+        std::collections::HashMap::new();
+    let _ = expand_message_matches_into(
+        s,
+        refs,
+        tokens,
+        positions,
+        synth,
+        0,
+        &mut out,
+        &mut spec_by_no,
+    );
     out
 }
 
@@ -980,6 +991,7 @@ fn expand_message_matches_into<T: Deref<Target = AnalyzedTokenReadings>>(
     synth: Option<&dyn Synthesizer>,
     mut match_counter: usize,
     out: &mut String,
+    spec_by_no: &mut std::collections::HashMap<usize, MatchRefSpec>,
 ) -> usize {
     let bytes = s.as_bytes();
     let mut i = 0usize;
@@ -990,11 +1002,18 @@ fn expand_message_matches_into<T: Deref<Target = AnalyzedTokenReadings>>(
                 j += 1;
             }
             let n: usize = s[i + 1..j].parse().unwrap_or(0);
-            let spec = refs.get(match_counter).map(|r| r.spec.clone());
+            // Java `formatMatches`: the first occurrence of `\N` records its
+            // `Match` in `numbersToMatches`; a repeated `\N` (e.g. duplicated
+            // inside a multi-form suggestion) reuses the same match spec.
+            let from_refs = refs.get(match_counter).map(|r| r.spec.clone());
+            let spec = from_refs.clone().or_else(|| spec_by_no.get(&n).cloned());
             match spec {
                 Some(spec) => {
                     let mut spec = spec;
                     spec.no = n;
+                    if from_refs.is_some() {
+                        spec_by_no.entry(n).or_insert_with(|| spec.clone());
+                    }
                     match render_match_ref(&spec, tokens, positions, synth) {
                         // Java `formatMatches`: a single *empty* match (e.g.
                         // `\1` on the empty SENT_START token) goes through
@@ -1028,6 +1047,7 @@ fn expand_message_matches_into<T: Deref<Target = AnalyzedTokenReadings>>(
                                 synth,
                                 match_counter + 1,
                                 out,
+                                spec_by_no,
                             );
                             expand_message_matches_into(
                                 &s[j + right.len() - right_new.len()..],
@@ -1037,6 +1057,7 @@ fn expand_message_matches_into<T: Deref<Target = AnalyzedTokenReadings>>(
                                 synth,
                                 next_counter,
                                 out,
+                                spec_by_no,
                             );
                             return next_counter;
                         }
