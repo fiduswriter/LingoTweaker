@@ -590,7 +590,7 @@ mod tests {
         let (status, value) = send(router, "GET", "/v2/languages", "").await;
         assert_eq!(status, StatusCode::OK);
         let arr = value.as_array().unwrap();
-        assert_eq!(arr.len(), 14);
+        assert_eq!(arr.len(), 16);
         assert_eq!(arr[0]["longCode"], "en-US");
         assert!(arr.iter().any(|l| l["longCode"] == "it"));
         assert!(arr.iter().any(|l| l["longCode"] == "pt"));
@@ -599,6 +599,8 @@ mod tests {
         assert!(arr.iter().any(|l| l["longCode"] == "gl"));
         assert!(arr.iter().any(|l| l["longCode"] == "ro"));
         assert!(arr.iter().any(|l| l["longCode"] == "pl"));
+        assert!(arr.iter().any(|l| l["longCode"] == "sk"));
+        assert!(arr.iter().any(|l| l["longCode"] == "sl"));
         assert!(arr.iter().any(|l| l["longCode"] == "no"));
         assert!(arr.iter().any(|l| l["longCode"] == "nrd"));
         assert!(arr.iter().any(|l| l["longCode"] == "gn"));
