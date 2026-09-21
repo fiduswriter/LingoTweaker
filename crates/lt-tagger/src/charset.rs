@@ -1,11 +1,11 @@
 //! Dictionary charset support for the Morfologik `.info`
 //! `fsa.dict.encoding` property.
 //!
-//! All current LT dictionaries are UTF-8 except the Italian tagger and
-//! speller dictionaries, which are ISO-8859-15 (Latin-9). Morfologik's
-//! `DictionaryLookup` encodes the query word with the metadata charset and
-//! decodes hits the same way, so the tagger/speller must not assume UTF-8
-//! bytes (D-100).
+//! Most LT dictionaries are UTF-8; the Italian tagger/speller dictionaries
+//! are ISO-8859-15 (Latin-9, D-100) and the Slovenian speller dictionary is
+//! ISO-8859-2 (Latin-2). Morfologik's `DictionaryLookup` encodes the query
+//! word with the metadata charset and decodes hits the same way, so the
+//! tagger/speller must not assume UTF-8 bytes.
 
 use std::borrow::Cow;
 
@@ -17,6 +17,8 @@ pub enum Charset {
     Iso885915,
     /// ISO-8859-1 (Latin-1).
     Iso88591,
+    /// ISO-8859-2 (Latin-2, Central European).
+    Iso88592,
 }
 
 /// The 8 code points where ISO-8859-15 differs from ISO-8859-1.
@@ -31,6 +33,107 @@ const LATIN9_OVERRIDES: [(u8, char); 8] = [
     (0xBE, '\u{0178}'), // Ÿ
 ];
 
+/// The high half (0xA0–0xFF) of ISO-8859-2 (Latin-2). Bytes below 0xA0 are
+/// the identity mapping, like Latin-1.
+const LATIN2_HIGH: [(u8, char); 96] = [
+    (0xA0, '\u{00A0}'),
+    (0xA1, '\u{0104}'),
+    (0xA2, '\u{02D8}'),
+    (0xA3, '\u{0141}'),
+    (0xA4, '\u{00A4}'),
+    (0xA5, '\u{013D}'),
+    (0xA6, '\u{015A}'),
+    (0xA7, '\u{00A7}'),
+    (0xA8, '\u{00A8}'),
+    (0xA9, '\u{0160}'),
+    (0xAA, '\u{015E}'),
+    (0xAB, '\u{0164}'),
+    (0xAC, '\u{0179}'),
+    (0xAD, '\u{00AD}'),
+    (0xAE, '\u{017D}'),
+    (0xAF, '\u{017B}'),
+    (0xB0, '\u{00B0}'),
+    (0xB1, '\u{0105}'),
+    (0xB2, '\u{02DB}'),
+    (0xB3, '\u{0142}'),
+    (0xB4, '\u{00B4}'),
+    (0xB5, '\u{013E}'),
+    (0xB6, '\u{015B}'),
+    (0xB7, '\u{02C7}'),
+    (0xB8, '\u{00B8}'),
+    (0xB9, '\u{0161}'),
+    (0xBA, '\u{015F}'),
+    (0xBB, '\u{0165}'),
+    (0xBC, '\u{017A}'),
+    (0xBD, '\u{02DD}'),
+    (0xBE, '\u{017E}'),
+    (0xBF, '\u{017C}'),
+    (0xC0, '\u{0154}'),
+    (0xC1, '\u{00C1}'),
+    (0xC2, '\u{00C2}'),
+    (0xC3, '\u{0102}'),
+    (0xC4, '\u{00C4}'),
+    (0xC5, '\u{0139}'),
+    (0xC6, '\u{0106}'),
+    (0xC7, '\u{00C7}'),
+    (0xC8, '\u{010C}'),
+    (0xC9, '\u{00C9}'),
+    (0xCA, '\u{0118}'),
+    (0xCB, '\u{00CB}'),
+    (0xCC, '\u{011A}'),
+    (0xCD, '\u{00CD}'),
+    (0xCE, '\u{00CE}'),
+    (0xCF, '\u{010E}'),
+    (0xD0, '\u{0110}'),
+    (0xD1, '\u{0143}'),
+    (0xD2, '\u{0147}'),
+    (0xD3, '\u{00D3}'),
+    (0xD4, '\u{00D4}'),
+    (0xD5, '\u{0150}'),
+    (0xD6, '\u{00D6}'),
+    (0xD7, '\u{00D7}'),
+    (0xD8, '\u{0158}'),
+    (0xD9, '\u{016E}'),
+    (0xDA, '\u{00DA}'),
+    (0xDB, '\u{0170}'),
+    (0xDC, '\u{00DC}'),
+    (0xDD, '\u{00DD}'),
+    (0xDE, '\u{0162}'),
+    (0xDF, '\u{00DF}'),
+    (0xE0, '\u{0155}'),
+    (0xE1, '\u{00E1}'),
+    (0xE2, '\u{00E2}'),
+    (0xE3, '\u{0103}'),
+    (0xE4, '\u{00E4}'),
+    (0xE5, '\u{013A}'),
+    (0xE6, '\u{0107}'),
+    (0xE7, '\u{00E7}'),
+    (0xE8, '\u{010D}'),
+    (0xE9, '\u{00E9}'),
+    (0xEA, '\u{0119}'),
+    (0xEB, '\u{00EB}'),
+    (0xEC, '\u{011B}'),
+    (0xED, '\u{00ED}'),
+    (0xEE, '\u{00EE}'),
+    (0xEF, '\u{010F}'),
+    (0xF0, '\u{0111}'),
+    (0xF1, '\u{0144}'),
+    (0xF2, '\u{0148}'),
+    (0xF3, '\u{00F3}'),
+    (0xF4, '\u{00F4}'),
+    (0xF5, '\u{0151}'),
+    (0xF6, '\u{00F6}'),
+    (0xF7, '\u{00F7}'),
+    (0xF8, '\u{0159}'),
+    (0xF9, '\u{016F}'),
+    (0xFA, '\u{00FA}'),
+    (0xFB, '\u{0171}'),
+    (0xFC, '\u{00FC}'),
+    (0xFD, '\u{00FD}'),
+    (0xFE, '\u{0163}'),
+    (0xFF, '\u{02D9}'),
+];
+
 impl Charset {
     pub fn from_info_name(name: &str) -> Option<Self> {
         let normalized = name.trim().to_ascii_lowercase().replace('_', "-");
@@ -38,7 +141,18 @@ impl Charset {
             "utf-8" | "utf8" => Some(Charset::Utf8),
             "iso-8859-15" | "iso8859-15" | "latin9" | "l9" => Some(Charset::Iso885915),
             "iso-8859-1" | "iso8859-1" | "latin1" | "l1" => Some(Charset::Iso88591),
+            "iso-8859-2" | "iso8859-2" | "latin2" | "l2" => Some(Charset::Iso88592),
             _ => None,
+        }
+    }
+
+    /// The high-range override table of a single-byte charset (`0x00–0x9F`
+    /// are the Latin-1 identity mapping).
+    fn overrides(self) -> &'static [(u8, char)] {
+        match self {
+            Charset::Iso885915 => &LATIN9_OVERRIDES[..],
+            Charset::Iso88592 => &LATIN2_HIGH[..],
+            Charset::Utf8 | Charset::Iso88591 => &[][..],
         }
     }
 
@@ -47,12 +161,8 @@ impl Charset {
     pub fn decode(self, bytes: &[u8]) -> Cow<'_, str> {
         match self {
             Charset::Utf8 => String::from_utf8_lossy(bytes),
-            Charset::Iso885915 | Charset::Iso88591 => {
-                let overrides = if self == Charset::Iso885915 {
-                    &LATIN9_OVERRIDES[..]
-                } else {
-                    &[][..]
-                };
+            Charset::Iso885915 | Charset::Iso88591 | Charset::Iso88592 => {
+                let overrides = self.overrides();
                 Cow::Owned(
                     bytes
                         .iter()
@@ -65,6 +175,7 @@ impl Charset {
             }
         }
     }
+
     /// Decode the first character of a (possibly partial) byte sequence.
     /// UTF-8 returns `None` for an incomplete sequence so the caller can keep
     /// accumulating continuation bytes; single-byte charsets always decode the
@@ -74,7 +185,7 @@ impl Charset {
             Charset::Utf8 => std::str::from_utf8(bytes)
                 .ok()
                 .and_then(|s| s.chars().next()),
-            Charset::Iso885915 | Charset::Iso88591 => bytes
+            _ => bytes
                 .last()
                 .map(|&b| self.decode(&[b]).chars().next().unwrap_or('?')),
         }
@@ -87,16 +198,20 @@ impl Charset {
     pub fn encode(self, text: &str) -> Option<Vec<u8>> {
         match self {
             Charset::Utf8 => Some(text.as_bytes().to_vec()),
-            Charset::Iso885915 | Charset::Iso88591 => {
-                let overrides = if self == Charset::Iso885915 {
-                    &LATIN9_OVERRIDES[..]
-                } else {
-                    &[][..]
-                };
+            Charset::Iso885915 | Charset::Iso88591 | Charset::Iso88592 => {
+                let overrides = self.overrides();
                 let mut out = Vec::with_capacity(text.len());
                 for c in text.chars() {
                     if (c as u32) < 0x80 || (0xA0..=0xFF).contains(&(c as u32)) {
-                        out.push(c as u8);
+                        // In the high range the identity mapping only holds
+                        // for the bytes not in the override table; for
+                        // ISO-8859-2 every high byte is overridden, so check
+                        // the reverse table first.
+                        if let Some((byte, _)) = overrides.iter().find(|(_, ch)| *ch == c) {
+                            out.push(*byte);
+                        } else {
+                            out.push(c as u8);
+                        }
                     } else if let Some((byte, _)) = overrides.iter().find(|(_, ch)| *ch == c) {
                         out.push(*byte);
                     } else {
@@ -106,5 +221,24 @@ impl Charset {
                 Some(out)
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn latin2_round_trips_slovenian() {
+        let cs = Charset::Iso88592;
+        let text = "čšžČŠŽ";
+        let bytes = cs.encode(text).unwrap();
+        assert_eq!(bytes, vec![0xE8, 0xB9, 0xBE, 0xC8, 0xA9, 0xAE]);
+        assert_eq!(cs.decode(&bytes), text);
+    }
+
+    #[test]
+    fn latin2_rejects_unmappable() {
+        assert!(Charset::Iso88592.encode("€").is_none());
     }
 }

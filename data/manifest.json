@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 617,
+  "file_count": 625,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -4046,6 +4046,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_sl.properties",
+      "sha256": "2242b2c1d32263f964c197c9c2da7fdf89028c8bc937e940722ab44e09e366b2",
+      "size": 15661,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/MessagesBundle_sl.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "nl/compound_acceptor/acronym_exceptions.txt",
       "sha256": "d38a5f1beafb93cf8e7382c05e0e5705c4ea56692c495aab3c80a7c04fd7230c",
       "size": 271,
@@ -7045,6 +7056,86 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sk/src/main/resources/org/languagetool/resource/sk/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sl/hunspell/README_sl_SI.txt",
+      "sha256": "06ca32a935a36fcede286799d18b017b4a8cba8eb9c4dd4aaf6d4b9d5cdf286d",
+      "size": 2079,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/README_sl_SI.txt",
+        "license": "LGPL / GPL dual license (Amebis/Erjavec/Ko\u0161ir/Peterlin Slovenian spelling dictionary; sl/hunspell/README_sl_SI.txt)",
+        "license_verified": true,
+        "license_source": "upstream sl/hunspell/README_sl_SI.txt"
+      }
+    },
+    {
+      "path": "sl/hunspell/ignore.txt",
+      "sha256": "2e2a7982c9d9f0a8539ff3b119e50f2575bbf6b96b8034c6a32c1c488a7b9922",
+      "size": 73,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sl/hunspell/sl_SI.dict",
+      "sha256": "ef3fbd2c039033be14d1397452f7d0e9d53a1828828d428f5e28e2ad99911569",
+      "size": 316633,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/sl_SI.dict",
+        "license": "LGPL / GPL dual license (converted from the sl_SI spelling dictionary; sl/hunspell/README_sl_SI.txt)",
+        "license_verified": false,
+        "license_source": "upstream sl/hunspell/README_sl_SI.txt"
+      }
+    },
+    {
+      "path": "sl/hunspell/sl_SI.info",
+      "sha256": "cf814a47b95e19163e7184ecc13d278b9a11d36cdb53a8f0defaeb936d58479f",
+      "size": 189,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/sl_SI.info",
+        "license": "LGPL / GPL dual license (converted from the sl_SI spelling dictionary; sl/hunspell/README_sl_SI.txt)",
+        "license_verified": false,
+        "license_source": "upstream sl/hunspell/README_sl_SI.txt"
+      }
+    },
+    {
+      "path": "sl/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sl/rules/grammar.xml",
+      "sha256": "ef8c2fd8417e4acad77b19d39a358ba437e526489d40a654298e10da7da12d80",
+      "size": 63667,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/rules/sl/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sl/words/common_words.txt",
+      "sha256": "c92134a1beb568c18a5f3b7316f77bd2b2e8765f345aedff02484d84129a400e",
+      "size": 15746,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/common_words.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

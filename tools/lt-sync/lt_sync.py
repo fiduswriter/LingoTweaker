@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -482,6 +482,23 @@ def hunspell_license(lang: str, name: str):
                 "sk_SK spelling dictionary; sk/hunspell/README_en.txt)",
                 False,
                 "upstream sk/hunspell/README_en.txt",
+            )
+    if lang == "sl":
+        if name.startswith("README"):
+            return (
+                "LGPL / GPL dual license (Amebis/Erjavec/Košir/Peterlin "
+                "Slovenian spelling dictionary; sl/hunspell/README_sl_SI.txt)",
+                True,
+                "upstream sl/hunspell/README_sl_SI.txt",
+            )
+        if name.startswith("sl_SI."):
+            # Morfologik conversion of the dual-licensed sl_SI hunspell
+            # dictionary; the conversion is a derived build.
+            return (
+                "LGPL / GPL dual license (converted from the sl_SI spelling "
+                "dictionary; sl/hunspell/README_sl_SI.txt)",
+                False,
+                "upstream sl/hunspell/README_sl_SI.txt",
             )
     return None
 
