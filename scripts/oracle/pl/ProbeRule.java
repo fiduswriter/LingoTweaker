@@ -15,6 +15,20 @@ public class ProbeRule {
   public static void main(String[] args) throws Exception {
     String text = args[0];
     JLanguageTool lt = new JLanguageTool(Languages.getLanguageForShortCode("pl"));
+    if (args.length > 1 && args[1].equals("--readings")) {
+      org.languagetool.AnalyzedSentence as = lt.getAnalyzedSentence(text);
+      for (org.languagetool.AnalyzedTokenReadings tr : as.getTokens()) {
+        StringBuilder sb = new StringBuilder();
+        for (org.languagetool.AnalyzedToken at : tr.getReadings()) {
+          if (sb.length() > 0) {
+            sb.append('|');
+          }
+          sb.append(at.getLemma()).append(':').append(at.getPOSTag());
+        }
+        System.out.println(tr.getToken() + "\t" + tr.isIgnoredBySpeller() + "\t" + sb);
+      }
+      return;
+    }
     if (args.length > 1) {
       for (org.languagetool.rules.Rule rule : lt.getAllRules()) {
         if (java.util.Arrays.asList(args).subList(1, args.length).contains(rule.getId())) {
