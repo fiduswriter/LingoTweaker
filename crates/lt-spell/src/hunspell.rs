@@ -2350,6 +2350,11 @@ impl HunspellChecker {
     /// German dictionaries (no COMPOUNDRULE, no CHECKCOMPOUNDPATTERN, no
     /// SIMPLIFIEDTRIPLE/CHECKCOMPOUNDTRIPLE, no COMPOUNDWORDMAX).
     #[allow(clippy::only_used_in_recursion)]
+    /// `(cpdwordmax == -1) || (wordnum + 1 < cpdwordmax)`.
+    fn cpdword_max_ok(&self, wordnum: usize) -> bool {
+        self.aff.compound_word_max <= 0 || (wordnum + 1) < self.aff.compound_word_max as usize
+    }
+
     fn compound_check(
         &self,
         word: &[u8],
@@ -2584,11 +2589,7 @@ impl HunspellChecker {
                             .aff
                             .compound_end
                             .is_some_and(|f| entry2.flags.contains(&f)))
-                        && if self.aff.compound_word_max > 0 {
-                            (wordnum + 1) < self.aff.compound_word_max as usize
-                        } else {
-                            wordnum + 1 < 100
-                        }
+                        && self.cpdword_max_ok(wordnum)
                     {
                         if self.cpdwordpair_check(word) {
                             return None;
@@ -2623,7 +2624,7 @@ impl HunspellChecker {
                                         .is_some_and(|f| self.pfx_entry(p).cont.contains(&f))
                                 })
                                 .unwrap_or(false);
-                        if !forbid {
+                        if !forbid && self.cpdword_max_ok(wordnum) {
                             if self.has_flag(entry2, self.aff.forbidden_word) || entry2.only_upcase
                             {
                                 return None;
