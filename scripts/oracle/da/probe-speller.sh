@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Java probe for the Galician HunspellRule (`isMisspelled`, `getSuggestions`
+# Java probe for the Danish HunspellRule (`isMisspelled`, `getSuggestions`
 # and `match()` per word), for diffing against the Rust speller.
 #
-# Usage: scripts/oracle/gl/probe-speller.sh word1 word2 ...
+# Usage: scripts/oracle/da/probe-speller.sh word1 word2 ...
 set -euo pipefail
 
 RS_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"

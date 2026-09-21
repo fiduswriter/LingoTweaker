@@ -2,12 +2,11 @@
 //! built-in-rule values.
 //!
 //! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/da/check-diff-da.sh`, `docs/parity/golden/da-full.txt`)
-//! print UTF-16 code units. The probe sentences here are ASCII, so both agree.
-//! `Danish.getRelevantRules` has no Java rule classes beyond the generic
-//! built-ins; `MorfologikSpellerRule`/`HunspellRule` suggestions come from the
-//! bounded dictionary search instead of the unported native `hunspell.suggest`
-//! (documented divergence), so the speller test pins the match, not the list.
+//! (`scripts/oracle/da/check-diff-da.sh`, `docs/parity/golden/da-full.java.tsv`)
+//! print UTF-16 code units. Every probe sentence below uses real Danish
+//! orthography (æ/ø/å), so the two formats differ and both are stated per
+//! case. The speller suggestions are the full Java `HunspellRule` list; they
+//! preserve diacritics.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
@@ -86,14 +85,18 @@ fn danish_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Det er en fejl , her.` 14..16.
+/// `CommaWhitespaceRule` (1), Java probe: `Han spiste et æble , og gik.`
+/// UTF-16 18..20, UTF-8 19..21 (`æ` adds one byte).
 #[test]
 fn danish_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Det er en fejl , her.", "COMMA_PARENTHESIS_WHITESPACE");
+    let matches = one(
+        "Han spiste et æble , og gik.",
+        "COMMA_PARENTHESIS_WHITESPACE",
+    );
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 14);
-    assert_eq!(matches[0].range.end, 16);
+    assert_eq!(matches[0].range.start, 19);
+    assert_eq!(matches[0].range.end, 21);
     assert_eq!(
         matches[0].message,
         "Indsæt ikke et mellemrum før komma, men efter det."
@@ -101,24 +104,26 @@ fn danish_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `Det er en fejl..` 14..16.
+/// `DoublePunctuationRule` (2), Java probe: `Han spiste æbler..`
+/// UTF-16 16..18, UTF-8 17..19.
 #[test]
 fn danish_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Det er en fejl..", "DOUBLE_PUNCTUATION");
+    let matches = one("Han spiste æbler..", "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 14);
-    assert_eq!(matches[0].range.end, 16);
+    assert_eq!(matches[0].range.start, 17);
+    assert_eq!(matches[0].range.end, 19);
     assert_eq!(matches[0].message, "To på hinanden følgende punktummer");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
 /// `GenericUnpairedBracketsRule` (3) with the explicit Danish bracket lists,
-/// Java probe: `(Det er en fejl.` 0..1.
+/// Java probe: `(Han spiste et æble.` 0..1 (the opening bracket, before any
+/// non-ASCII byte).
 #[test]
 fn danish_unpaired_brackets() {
     let _guard = engine_guard();
-    let matches = one("(Det er en fejl.", "UNPAIRED_BRACKETS");
+    let matches = one("(Han spiste et æble.", "UNPAIRED_BRACKETS");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 0);
     assert_eq!(matches[0].range.end, 1);
@@ -128,11 +133,11 @@ fn danish_unpaired_brackets() {
     );
 }
 
-/// `UppercaseSentenceStartRule` (5), Java probe: `det er en fejl.` 0..3.
+/// `UppercaseSentenceStartRule` (5), Java probe: `det er en øl.` 0..3.
 #[test]
 fn danish_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("det er en fejl.", "UPPERCASE_SENTENCE_START");
+    let matches = one("det er en øl.", "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 0);
     assert_eq!(matches[0].range.end, 3);
@@ -143,11 +148,11 @@ fn danish_uppercase_sentence_start() {
     assert_eq!(suggestions(&matches[0]), vec!["Det"]);
 }
 
-/// `MultipleWhitespaceRule` (6), Java probe: `Det  er en fejl.` 3..5.
+/// `MultipleWhitespaceRule` (6), Java probe: `Det  er en øl.` 3..5.
 #[test]
 fn danish_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Det  er en fejl.", "WHITESPACE_RULE");
+    let matches = one("Det  er en øl.", "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 3);
     assert_eq!(matches[0].range.end, 5);
@@ -157,44 +162,137 @@ fn danish_multiple_whitespace() {
     );
 }
 
-/// `HunspellRule` (4), Java probe: `Dette er en tset.` 12..16 (the suggestion
-/// list is the documented bounded-search divergence).
+/// `HunspellRule` (4) with real Danish misspellings. Java probe
+/// (`check-diff-da.sh`): full `getSuggestedReplacements` lists, which
+/// preserve æ/ø/å.
 #[test]
 fn danish_speller() {
     let _guard = engine_guard();
-    let matches = one("Dette er en tset.", "HUNSPELL_RULE");
+
+    // `øll`: Java UTF-16 12..15, UTF-8 12..16 (`ø` adds one byte)
+    let matches = one("Dette er en øll.", "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 12);
     assert_eq!(matches[0].range.end, 16);
     assert_eq!(matches[0].message, "Mulig stavefejl fundet");
     assert_eq!(matches[0].match_type, "UnknownWord");
-    assert!(!suggestions(&matches[0]).is_empty());
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["øl", "øls", "ørl", "All", "Oll"]
+    );
+
+    let matches = one("Jeg har lavet en fejll.", "HUNSPELL_RULE");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 17);
+    assert_eq!(matches[0].range.end, 22);
+    assert_eq!(suggestions(&matches[0]), vec!["fejl", "fejle", "fejls"]);
+
+    // `æple`: Java UTF-16 16..20, UTF-8 16..21 (`æ` adds one byte)
+    let matches = one("Det er et stort æple.", "HUNSPELL_RULE");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 16);
+    assert_eq!(matches[0].range.end, 21);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["æble", "pæle", "ædle", "ækle", "ævle"]
+    );
 }
 
-/// XML rule `grube` (`grammar.xml`), Java-probed via the corpus golden
-/// (`da-full.java.tsv`): `faldgruper` 13..23 -> `faldgruber`.
+/// XML rule `grube` (`grammar.xml`), Java probe: `Der er mange faldgruper i
+/// skoven.` 13..23 (all-ASCII span) -> `faldgruber`.
 #[test]
 fn danish_xml_grube() {
     let _guard = engine_guard();
-    let matches = one("Der er mange faldgruper.", "grube");
+    let matches = one("Der er mange faldgruper i skoven.", "grube");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
     assert_eq!(matches[0].range.start, 13);
     assert_eq!(matches[0].range.end, 23);
+    assert_eq!(
+        matches[0].message,
+        "Mente du <suggestion>faldgruber</suggestion>, altså en mine eller et hul i jorden?"
+    );
     assert_eq!(suggestions(&matches[0]), vec!["faldgruber"]);
 }
 
-/// XML rule `yndlings` (`grammar.xml`), Java-probed via the corpus golden:
-/// `ynglingshold` 12..24 -> `yndlingshold`.
+/// XML rule `yndlings` (`grammar.xml`), Java probe: `Det var mit
+/// ynglingshold fra Århus.` 12..24 (all-ASCII span) -> `yndlingshold`.
 #[test]
 fn danish_xml_yndlings() {
     let _guard = engine_guard();
-    let matches = one("Det var mit ynglingshold.", "yndlings");
+    let matches = one("Det var mit ynglingshold fra Århus.", "yndlings");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
     assert_eq!(matches[0].range.start, 12);
     assert_eq!(matches[0].range.end, 24);
+    assert_eq!(
+        matches[0].message,
+        "Udtrykket staves <suggestion>yndlingshold</suggestion> ."
+    );
     assert_eq!(suggestions(&matches[0]), vec!["yndlingshold"]);
+}
+
+/// Dotted abbreviations (the recent legacy-token suppression fix): a known
+/// abbreviation (`ca.`) is not spell-checked, while the unknown `f.kr` inside
+/// `753f.kr.` is flagged as one run (not hidden by the ignored `f` token).
+/// Java probe `check-diff-da.sh`; also matches `da-full.java.tsv` lines
+/// 174-179.
+#[test]
+fn danish_dotted_abbreviations() {
+    let _guard = engine_guard();
+
+    // known abbreviation: no speller match
+    assert!(
+        one("Der er ca. en liter mælk.", "HUNSPELL_RULE").is_empty(),
+        "ca. must not be flagged"
+    );
+
+    // `753f.kr.`: HUNSPELL_RULE on `f.kr`, Java UTF-16 8..12 / UTF-8 9..13
+    let matches = one("I år 753f.kr. blev Rom grundlagt.", "HUNSPELL_RULE");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 9);
+    assert_eq!(matches[0].range.end, 13);
+    assert_eq!(suggestions(&matches[0]), vec!["frk.", "f.Kr."]);
+
+    // the XML rule `fkr.` flags the spaced form, Java UTF-16 9..13 / UTF-8 10..14
+    let matches = one("I år 200 fkr. Kristendommen fandtes ikke.", "fkr.");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
+    assert_eq!(matches[0].range.start, 10);
+    assert_eq!(matches[0].range.end, 14);
+    assert_eq!(
+        matches[0].message,
+        "Før Kristus forkortes <suggestion>f.kr.</suggestion>"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["f.kr."]);
+}
+
+/// Long paragraph with real Danish orthography. Java probe
+/// (`check-diff-da.sh`) yields exactly two matches (UTF-8 offsets; UTF-16 in
+/// parentheses).
+#[test]
+fn danish_long_paragraph() {
+    let _guard = engine_guard();
+    let Some(da) = engine() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let text = "Det var en kold vintermorgen, hvor sneen lå tungt over de gamle huse i landsbyen . En lille dreng ved navn Søren løb ud i haven for at lege med sin hund.. Han havde fået en ny slæde i julegave, og den ville han prøve straks. Moren råbte, at han skulle tage en varm trøje på, men han hørte hende ikke. Pludselig faldt han og slog sit knæ, og så måtte han alligevel ind i varmen igen.";
+    let matches: Vec<(String, usize, usize)> = da
+        .check(text)
+        .expect("check")
+        .matches
+        .into_iter()
+        .map(|m| (m.rule_id, m.range.start, m.range.end))
+        .collect();
+    assert_eq!(
+        matches,
+        vec![
+            ("COMMA_PARENTHESIS_WHITESPACE".into(), 81, 83),
+            ("DOUBLE_PUNCTUATION".into(), 155, 157),
+        ],
+        "{matches:?}"
+    );
 }
 
 /// The `BaseTagger`-derived `DanishTagger` tags known words and leaves

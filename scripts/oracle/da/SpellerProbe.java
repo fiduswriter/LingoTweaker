@@ -8,7 +8,7 @@ import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.spelling.hunspell.HunspellRule;
 
 /**
- * Prints the Galician HunspellRule's acceptance and match() output per
+ * Prints the Danish HunspellRule's acceptance and match() output per
  * argument, so it can be diffed against the Rust rule.
  *
  * Usage: java SpellerProbe <word1> <word2> ...
