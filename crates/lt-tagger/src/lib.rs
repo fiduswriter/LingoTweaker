@@ -11,6 +11,7 @@
 pub mod catalan;
 pub mod catalan_synth;
 pub mod charset;
+pub mod danish;
 pub mod dutch;
 pub mod dutch_synth;
 pub mod english;
@@ -41,6 +42,7 @@ pub mod spanish_synth;
 pub use catalan::CatalanTagger;
 pub use catalan_synth::CatalanSynthesizer;
 pub use charset::Charset;
+pub use danish::DanishTagger;
 pub use dutch::{CompoundPartsProvider, DutchTagger};
 pub use dutch_synth::DutchSynthesizer;
 pub use english::{

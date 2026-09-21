@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 650,
+  "file_count": 692,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -619,6 +619,188 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/resource/spelling_global.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/dictionaries/danish.dict",
+      "sha256": "91da2e7b2d83f6f2647e374a16fb6b39864c88a07cce9add21bbe58a23853079",
+      "size": 597834,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/danish.dict",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
+        "license_verified": true,
+        "license_source": "upstream da/README.txt"
+      }
+    },
+    {
+      "path": "da/dictionaries/danish.info",
+      "sha256": "247cde681035c92c1f9b650835e457264364ec8447183edd335d9d5f5c0965bd",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/danish.info",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
+        "license_verified": true,
+        "license_source": "upstream da/README.txt"
+      }
+    },
+    {
+      "path": "da/disambiguation.xml",
+      "sha256": "494c536270a6b3d584e436a4fca9631d8d24315b112b80fb80b8142f4159c919",
+      "size": 15290,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/hunspell/README_da_DK.txt",
+      "sha256": "752f65f041edf573e8293603c713a811f074e69503a831725d356094d2272c53",
+      "size": 783,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/hunspell/README_da_DK.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Stavekontrolden da_DK dictionary; da/hunspell/README_da_DK.txt)",
+        "license_verified": true,
+        "license_source": "upstream da/hunspell/README_da_DK.txt"
+      }
+    },
+    {
+      "path": "da/hunspell/da_DK.aff",
+      "sha256": "66616a6d9cdf4e9e9b6deaffdcabf4cbedd3beb8e101fed01749a1704921c331",
+      "size": 55779,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/hunspell/da_DK.aff",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Stavekontrolden da_DK dictionary; da/hunspell/README_da_DK.txt)",
+        "license_verified": true,
+        "license_source": "upstream da/hunspell/README_da_DK.txt"
+      }
+    },
+    {
+      "path": "da/hunspell/da_DK.dic",
+      "sha256": "3d3c9a0371e83133b6d455453c0c9b37c1c2cdd03c6000c8be08a39eb9ee78b2",
+      "size": 2915525,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/hunspell/da_DK.dic",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Stavekontrolden da_DK dictionary; da/hunspell/README_da_DK.txt)",
+        "license_verified": false,
+        "license_source": "upstream da/hunspell/README_da_DK.txt"
+      }
+    },
+    {
+      "path": "da/hunspell/ignore.txt",
+      "sha256": "aae92f6d6418b94f15d77dbb155dd3eb9f4930f93b6f8b15e75009c2439a030d",
+      "size": 73,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/rules/grammar.xml",
+      "sha256": "68486ea98f079653f2b7f5d5fc721b4cb62330e987c1bef0e48cec47cafeec87",
+      "size": 65888,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/rules/da/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/words/README.txt",
+      "sha256": "449f67daa1f91287d26ca1a313b70560169b7ff1cd7ee2ea5b1214b2c4f58baf",
+      "size": 463,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/README.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; da/README.txt states the tri-license)",
+        "license_verified": true,
+        "license_source": "upstream da/README.txt"
+      }
+    },
+    {
+      "path": "da/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/words/common_words.txt",
+      "sha256": "cf68f34eafb0498d7dc2050584e6fe3a1327ad13aa7303d84e356366bb27efea",
+      "size": 84956,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "da/words/tagset.txt",
+      "sha256": "274a78195adafcb0e46d5042764a61e5cb6e55cc1fd7be56eed291e19ccbd931",
+      "size": 3172,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/tagset.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
@@ -4192,6 +4374,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_da.properties",
+      "sha256": "a6a0ef7efa0ebfb5dd2d98f965832dd5905ee58856f95c2fed2d6f6e2fff13d9",
+      "size": 15043,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/MessagesBundle_da.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle_de.properties",
       "sha256": "ade1be0b2454f540ed43d5b526adce940a7d9c9cdfa9f36abdf068dea902d51b",
       "size": 16446,
@@ -4341,6 +4534,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/MessagesBundle_sl.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_sv.properties",
+      "sha256": "231f943022ca09466d5ff784a736d4d9023039752ccd2b0e335d74de918c4e31",
+      "size": 15999,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/MessagesBundle_sv.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
@@ -7425,6 +7629,280 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/dictionaries/swedish.dict",
+      "sha256": "7a26484d623531fd74c7de6e1b3a0bf53636f496f15514ac60638db70c24f973",
+      "size": 304053,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish.dict",
+        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
+        "license_verified": true,
+        "license_source": "upstream sv/README.txt"
+      }
+    },
+    {
+      "path": "sv/dictionaries/swedish.info",
+      "sha256": "61d64f64f651b403e37e78a2fe8dfc22d64392ddd041f3456286830b96312604",
+      "size": 1017,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish.info",
+        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
+        "license_verified": true,
+        "license_source": "upstream sv/README.txt"
+      }
+    },
+    {
+      "path": "sv/dictionaries/swedish_synth.dict",
+      "sha256": "e99f3a00bf770073667373ef1ff5b8988bf891b96d1dfaa77de78a0476022a63",
+      "size": 270499,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish_synth.dict",
+        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
+        "license_verified": true,
+        "license_source": "upstream sv/README.txt"
+      }
+    },
+    {
+      "path": "sv/dictionaries/swedish_synth.info",
+      "sha256": "247cde681035c92c1f9b650835e457264364ec8447183edd335d9d5f5c0965bd",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish_synth.info",
+        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
+        "license_verified": true,
+        "license_source": "upstream sv/README.txt"
+      }
+    },
+    {
+      "path": "sv/dictionaries/swedish_synth_tags.txt",
+      "sha256": "9a5ff8604475f61fe2ccace3d994ef634ac02c36cbbd2cab3b2d49e39fce8471",
+      "size": 859,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish_synth.dict_tags.txt",
+        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
+        "license_verified": true,
+        "license_source": "upstream sv/README.txt"
+      }
+    },
+    {
+      "path": "sv/disambiguation.xml",
+      "sha256": "a84171a91285e921c7afbd1c1de1f80c52556411fb26275449aa4358fe1b5525",
+      "size": 9788,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/hunspell/LICENSE_en_US.txt",
+      "sha256": "8d3afde8029eb345e241966f604b14ddf93c970f9873a1c8291ab33311391277",
+      "size": 494,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/hunspell/LICENSE_en_US.txt",
+        "license": "LGPL-3.0-only (Swedish sv_SE spelling dictionary; sv/hunspell/LICENSE_sv_SE.txt)",
+        "license_verified": true,
+        "license_source": "upstream sv/hunspell/LICENSE_sv_SE.txt"
+      }
+    },
+    {
+      "path": "sv/hunspell/LICENSE_sv_SE.txt",
+      "sha256": "644988bfc5894d0fbc246ed1395df6540fa121f9e6467f7d04f0a725ff696d96",
+      "size": 469,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/hunspell/LICENSE_sv_SE.txt",
+        "license": "LGPL-3.0-only (Swedish sv_SE spelling dictionary; sv/hunspell/LICENSE_sv_SE.txt)",
+        "license_verified": true,
+        "license_source": "upstream sv/hunspell/LICENSE_sv_SE.txt"
+      }
+    },
+    {
+      "path": "sv/hunspell/ignore.txt",
+      "sha256": "6330d9c2fbf30a9db3ba4fd89573bd3b38972c11591da67d6fee8428455bda9f",
+      "size": 77,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/hunspell/sv_SE.aff",
+      "sha256": "0db8700f1308e9e6ed6fce2c051e74d37b65e484e33a53c384ee21999bcb67a0",
+      "size": 18662,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/hunspell/sv_SE.aff",
+        "license": "LGPL-3.0-only (Swedish sv_SE spelling dictionary; sv/hunspell/LICENSE_sv_SE.txt)",
+        "license_verified": true,
+        "license_source": "upstream sv/hunspell/LICENSE_sv_SE.txt"
+      }
+    },
+    {
+      "path": "sv/hunspell/sv_SE.dic",
+      "sha256": "384a2126eff333f5f6f9790ae892554546f53948d2988c600397cb5ad6ce66e8",
+      "size": 2344202,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/hunspell/sv_SE.dic",
+        "license": "LGPL-3.0-only (Swedish sv_SE spelling dictionary; sv/hunspell/LICENSE_sv_SE.txt)",
+        "license_verified": false,
+        "license_source": "upstream sv/hunspell/LICENSE_sv_SE.txt"
+      }
+    },
+    {
+      "path": "sv/rules/coherency.txt",
+      "sha256": "353fc956707900d098fa54bc01ea7a4c01226e777c3d7a926779d7d285200813",
+      "size": 333,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/coherency.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/rules/grammar.xml",
+      "sha256": "04fa77b1a166a5536c5ac1bad5762a15ce4a456597214aa2232156f6a7cc3f8f",
+      "size": 21012,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/sv.sor",
+      "sha256": "cc0fbd05315f9a6cf025df9ccf86d00a2b893d1631eccf7a3792f2920562ce90",
+      "size": 2440,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/sv.sor",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/README.txt",
+      "sha256": "141d814b31cbbd1f7999c24949f32a9ff0d3ab108162e4d080cd96ad349d811f",
+      "size": 345,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/README.txt",
+        "license": "LGPL-2.1-or-later (Swedish POS data based on DSSO; sv/README.txt states LGPL-2.1-or-later)",
+        "license_verified": true,
+        "license_source": "upstream sv/README.txt"
+      }
+    },
+    {
+      "path": "sv/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/common_words.txt",
+      "sha256": "53a06fa960e4e304fdf79d90214bc7ffbd8855aaefc1f9c77fc00f79f8450b31",
+      "size": 85546,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/compounds.txt",
+      "sha256": "9915cb50c6af5949f9ccbe843847b3eee53ab2a4b7cc5c6861a770a4a077e3db",
+      "size": 1358,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/compounds.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/multiwords.txt",
+      "sha256": "2afaccb95b076329f80738994a1984643809a9f4b505dda2603e9a146babd608",
+      "size": 1317,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/multiwords.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sv/words/tagset.txt",
+      "sha256": "7f4b666d0c5fb5e739ebdac55a49aa0ff5120304089bbe886848da7ecaca134d",
+      "size": 1086,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/tagset.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

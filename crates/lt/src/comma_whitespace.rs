@@ -624,6 +624,33 @@ pub fn check_sentence_el(
     matches
 }
 
+/// `CommaWhitespaceRule` with the Danish `MessagesBundle_da` strings.
+pub fn check_sentence_da(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Typografi".to_string();
+        m.description = "Mellemrum før komma og før/efter parenteser".to_string();
+        m.message = translate_comma_message_da(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_da` bundle (the Danish
+/// bundle only overrides `no_space_around_quotes`; the rest fall back to the
+/// core English strings).
+fn translate_comma_message_da(msg: &str) -> String {
+    match msg {
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_sk` bundle.
 fn translate_comma_message_sk(msg: &str) -> String {
     match msg {

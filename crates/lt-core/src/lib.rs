@@ -55,6 +55,8 @@ pub enum Lang {
     Sl,
     /// Greek (`el`).
     El,
+    /// Danish (`da`).
+    Da,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -66,7 +68,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 17] = [
+    pub const ALL: [Lang; 18] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -81,6 +83,7 @@ impl Lang {
         Lang::Sk,
         Lang::Sl,
         Lang::El,
+        Lang::Da,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -105,6 +108,7 @@ impl Lang {
             "sk" => Some(Lang::Sk),
             "sl" => Some(Lang::Sl),
             "el" => Some(Lang::El),
+            "da" => Some(Lang::Da),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -128,6 +132,7 @@ impl Lang {
             Lang::Sk => "sk",
             Lang::Sl => "sl",
             Lang::El => "el",
+            Lang::Da => "da",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -206,6 +211,11 @@ impl Lang {
                 code: "el",
                 long_code: "el",
                 name: "Greek",
+            },
+            Lang::Da => Language {
+                code: "da",
+                long_code: "da-DK",
+                name: "Danish",
             },
             Lang::No => Language {
                 code: "no",

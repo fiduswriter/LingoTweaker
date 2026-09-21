@@ -163,6 +163,16 @@ pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Danish `MessagesBundle_da` strings.
+pub fn check_da(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Gentagende mellemrum (dårlig formatering)",
+        "Mulig slåfejl: du har gentaget et mellemrum",
+        ("TYPOGRAPHY", "Typografi"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
 pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

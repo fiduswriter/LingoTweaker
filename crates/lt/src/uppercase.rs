@@ -207,6 +207,18 @@ pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Danish `MessagesBundle_da` strings.
+pub fn check_da(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Denne sætning starter ikke med et stort begyndelsesbogstav",
+        "STORE/små bogstaver",
+        "Kontroller at sætningen starter med et stort begyndelsesbogstav",
+        "STORE/små bogstaver",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

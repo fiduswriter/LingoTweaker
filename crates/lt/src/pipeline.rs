@@ -159,6 +159,8 @@ pub struct Pipeline {
     pub slovenian: Option<Arc<crate::sl::SlovenianPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
+    /// Danish pipeline parts (`None` for the other languages)
+    pub da: Option<Arc<crate::da::DanishPipeline>>,
     /// Norwegian Bokmål pipeline parts (`None` for the other languages)
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
@@ -1347,6 +1349,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -1584,6 +1587,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -1780,6 +1784,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -1984,6 +1989,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2108,6 +2114,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2351,6 +2358,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2554,6 +2562,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2874,6 +2883,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3018,6 +3028,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3148,6 +3159,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3302,6 +3314,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3434,6 +3447,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3538,6 +3552,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3677,9 +3692,81 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
+    /// Danish (`da`) engine: the `DanishTagger` (`BaseTagger` over
+    /// `danish.dict` + the manual word lists), the `da_two` SRX, the plain
+    /// `XmlRuleDisambiguator` (`da/disambiguation.xml` + global rules) and the
+    /// hunspell `HunspellRule` speller. `Danish.getRelevantRules` adds no Java
+    /// rule classes beyond the generic core built-ins.
+    pub fn new_danish(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Da, "da_two", enabled_rules)?;
+        let tagger = Arc::new(lt_tagger::DanishTagger::load(data_dir.path())?);
+        let spelling = match crate::da::spelling::DanishSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[da] spelling rule disabled: {err}");
+                None
+            }
+        };
+        let danish = Arc::new(crate::da::DanishPipeline {
+            tagger,
+            disambiguator: f.disambiguator,
+            spelling,
+        });
+        Ok(Self {
+            lang: Lang::Da,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            greek: None,
+            da: Some(danish),
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
     /// Shared loading for the hand-authored languages (Norwegian Bokmål,
     /// Nordum, Guaraní): SRX, grammar.xml (+ optional style.xml), compiled
     /// rules and the XML disambiguator (+ global rules when the language
@@ -3807,6 +3894,7 @@ impl Pipeline {
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3883,6 +3971,7 @@ impl Pipeline {
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3963,6 +4052,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
+            da: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4042,16 +4132,21 @@ impl Pipeline {
                                                                 Some(greek) => {
                                                                     crate::el::analyze_greek_sentence(greek, sentence_text)
                                                                 }
-                                                                None => match &self.slovenian {
-                                                                    Some(_) => {
-                                                                        surface_sentence(sentence_text)
+                                                                None => match &self.da {
+                                                                    Some(danish) => {
+                                                                        crate::da::analyze_danish_sentence(danish, sentence_text)
                                                                     }
-                                                                    None => analyze_sentence(
-                                                                        self.tagger
-                                                                            .as_deref()
-                                                                            .expect("english tagger"),
-                                                                        sentence_text,
-                                                                    ),
+                                                                    None => match &self.slovenian {
+                                                                        Some(_) => {
+                                                                            surface_sentence(sentence_text)
+                                                                        }
+                                                                        None => analyze_sentence(
+                                                                            self.tagger
+                                                                                .as_deref()
+                                                                                .expect("english tagger"),
+                                                                            sentence_text,
+                                                                        ),
+                                                                    },
                                                                 },
                                                             },
                                                         },
@@ -6023,6 +6118,50 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_sl(&analyzed_sentences));
             }
         }
+        // Danish text-level rules (`Danish.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (6).
+        if self.lang == crate::Lang::Da {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_da(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_da(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_da(&analyzed_sentences));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -6265,16 +6404,24 @@ impl Pipeline {
                                                                     &text[start..end],
                                                                 )
                                                             }
-                                                            None => match &self.slovenian {
-                                                                Some(_) => surface_sentence(
-                                                                    &text[start..end],
-                                                                ),
-                                                                None => analyze_sentence(
-                                                                    self.tagger
-                                                                        .as_deref()
-                                                                        .expect("english tagger"),
-                                                                    &text[start..end],
-                                                                ),
+                                                            None => match &self.da {
+                                                                Some(danish) => {
+                                                                    crate::da::analyze_danish_sentence(
+                                                                        danish,
+                                                                        &text[start..end],
+                                                                    )
+                                                                }
+                                                                None => match &self.slovenian {
+                                                                    Some(_) => surface_sentence(
+                                                                        &text[start..end],
+                                                                    ),
+                                                                    None => analyze_sentence(
+                                                                        self.tagger
+                                                                            .as_deref()
+                                                                            .expect("english tagger"),
+                                                                        &text[start..end],
+                                                                    ),
+                                                                },
                                                             },
                                                         },
                                                     },
@@ -8380,6 +8527,64 @@ impl Pipeline {
                 );
             }
         }
+        // Danish sentence-level Java rules in `Danish.getRelevantRules` order:
+        // CommaWhitespace (1), DoublePunctuation (2), HunspellRule (4).
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (6) are text-level and run above.
+        if self.lang == crate::Lang::Da {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_da(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_da(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(danish) = &self.da {
+                if let Some(spelling) = &danish.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::da::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
+                        &mut seen,
+                    );
+                }
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -9674,6 +9879,12 @@ impl Pipeline {
             // `Greek.createDefaultDisambiguator` is a plain
             // `XmlRuleDisambiguator`: XML rules (+ global rules).
             greek.disambiguate(sentence);
+            return;
+        }
+        if let Some(danish) = &self.da {
+            // `Danish.createDefaultDisambiguator` is a plain
+            // `XmlRuleDisambiguator`: XML rules (+ global rules).
+            danish.disambiguate(sentence);
             return;
         }
         if let Some(norwegian) = &self.norwegian {

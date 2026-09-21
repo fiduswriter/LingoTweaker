@@ -512,6 +512,26 @@ pub fn symbols_ca() -> UnpairedSymbols {
     }
 }
 
+/// `Danish.getRelevantRules`: the generic rule with the explicit Danish
+/// bracket lists `[ ( { " ”` / `] ) } " ”` and the Danish strings.
+pub fn symbols_da() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Ikke parret parenteser, tuborgklammer, citationstegn og lignende symboler",
+        category_id: "PUNCTUATION",
+        category_name: "Tegnsætning",
+        start: &["[", "(", "{", "\"", "\u{201D}"],
+        end: &["]", ")", "}", "\"", "\u{201D}"],
+        spanish: false,
+        message_template: "Ikke parret symbol: \"{other}\" ser ud til at mangle",
+    }
+}
+
+/// Danish `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_da` strings).
+pub fn check_da(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_da())
+}
+
 /// Catalan `UNPAIRED_BRACKETS` (`CatalanUnpairedBracketsRule`, the generic
 /// algorithm with the Catalan symbol lists and strings).
 pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {

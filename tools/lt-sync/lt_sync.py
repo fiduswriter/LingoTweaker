@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -317,6 +317,21 @@ IN_TREE_ARTIFACTS = {
         "resource/el/greek_synth.info": "el/dictionaries/greek_synth.info",
         "resource/el/greek_tags.txt": "el/dictionaries/greek_tags.txt",
     },
+    # Danish ships its `BaseTagger` Morfologik dictionary in-tree
+    # (`DanishTagger`); the speller is hunspell (`da_DK`).
+    "da": {
+        "resource/da/danish.dict": "da/dictionaries/danish.dict",
+        "resource/da/danish.info": "da/dictionaries/danish.info",
+    },
+    # Swedish ships its `BaseTagger` and `BaseSynthesizer` Morfologik
+    # dictionaries in-tree (`SwedishTagger`/`SwedishSynthesizer`).
+    "sv": {
+        "resource/sv/swedish.dict": "sv/dictionaries/swedish.dict",
+        "resource/sv/swedish.info": "sv/dictionaries/swedish.info",
+        "resource/sv/swedish_synth.dict": "sv/dictionaries/swedish_synth.dict",
+        "resource/sv/swedish_synth.info": "sv/dictionaries/swedish_synth.info",
+        "resource/sv/swedish_synth.dict_tags.txt": "sv/dictionaries/swedish_synth_tags.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -369,6 +384,18 @@ UPSTREAM_FILE_LICENSES = {
         True,
         "upstream it/tagset.txt",
     ),
+    "da/words/README.txt": (
+        "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based "
+        "on Stavekontrolden; da/README.txt states the tri-license)",
+        True,
+        "upstream da/README.txt",
+    ),
+    "sv/words/README.txt": (
+        "LGPL-2.1-or-later (Swedish POS data based on DSSO; sv/README.txt "
+        "states LGPL-2.1-or-later)",
+        True,
+        "upstream sv/README.txt",
+    ),
 }
 
 # In-tree (module resource) dictionaries that are not Maven artifacts.
@@ -412,6 +439,18 @@ IN_TREE_LICENSES = {
         'states the few test entries are "made available here under LGPL")',
         True,
         "upstream el/README.txt",
+    ),
+    "da": (
+        "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on "
+        "Stavekontrolden; upstream da/README.txt states the tri-license)",
+        True,
+        "upstream da/README.txt",
+    ),
+    "sv": (
+        "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; "
+        "upstream sv/README.txt states LGPL-2.1-or-later)",
+        True,
+        "upstream sv/README.txt",
     ),
 }
 
@@ -547,6 +586,28 @@ def hunspell_license(lang: str, name: str):
                 "el_GR spelling dictionary; el/hunspell/README_el_GR.txt)",
                 False,
                 "upstream el/hunspell/README_el_GR.txt",
+            )
+    if lang == "da":
+        # Stavekontrolden `da_DK` hunspell dictionary; the README and the
+        # `.aff` header both state the GPL-2.0/LGPL-2.1/MPL-1.1 tri-license.
+        if name.startswith(("README", "da_DK.")):
+            verified = name == "README_da_DK.txt" or name.endswith(".aff")
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Stavekontrolden "
+                "da_DK dictionary; da/hunspell/README_da_DK.txt)",
+                verified,
+                "upstream da/hunspell/README_da_DK.txt",
+            )
+    if lang == "sv":
+        # Swedish `sv_SE` hunspell dictionary (den stora svenska ordlistan);
+        # the bundled LICENSE files state LGPL-3.0.
+        if name.startswith("sv_SE.") or name.startswith("LICENSE_"):
+            verified = name.startswith("LICENSE_") or name.endswith(".aff")
+            return (
+                "LGPL-3.0-only (Swedish sv_SE spelling dictionary; "
+                "sv/hunspell/LICENSE_sv_SE.txt)",
+                verified,
+                "upstream sv/hunspell/LICENSE_sv_SE.txt",
             )
     return None
 
@@ -912,7 +973,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

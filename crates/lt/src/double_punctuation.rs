@@ -100,6 +100,23 @@ pub fn check_sentence_el(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Danish `MessagesBundle_da` strings.
+pub fn check_sentence_da(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Tegnsætning".to_string();
+        m.description = "To på hinanden følgende punktummer eller kommaer".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "To på hinanden følgende punktummer".to_string();
+            m.short_message = Some("To på hinanden følgende punktummer".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "To på hinanden følgende kommaer".to_string();
+            m.short_message = Some("To på hinanden følgende kommaer".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Spanish `MessagesBundle_es` strings.
 pub fn check_sentence_es(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

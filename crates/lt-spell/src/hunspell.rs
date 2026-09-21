@@ -513,7 +513,6 @@ fn parse_directive<'a>(
         | "IGNORE"
         | "COMPOUNDRULE"
         | "CHECKCOMPOUNDPATTERN"
-        | "COMPOUNDWORDMAX"
         | "CHECKCOMPOUNDCASE"
         | "CHECKCOMPOUNDREP"
         | "CHECKCOMPOUNDTRIPLE"
@@ -524,6 +523,13 @@ fn parse_directive<'a>(
                 "hunspell directive {kind:?} is not supported by the in-tree checker ({line:?})"
             )));
         }
+        // `COMPOUNDWORDMAX`: the in-tree `compound_check` does not implement
+        // it (same as the other compound rules above), but the directive only
+        // lowers the accepted compound length, so ignoring it cannot cause
+        // false positives; the Danish `da_DK` dictionary declares
+        // `COMPOUNDWORDMAX 2`. Tracked as a known fidelity gap in the
+        // internal notes.
+        "COMPOUNDWORDMAX" => {}
         "FULLSTRIP" => aff.fullstrip = true,
         "CHECKSHARPS" => aff.checksharps = true,
         "COMPOUNDFLAG" => aff.compound_flag = Some(next_flag(it)?),

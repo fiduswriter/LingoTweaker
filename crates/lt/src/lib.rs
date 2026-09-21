@@ -29,6 +29,7 @@ pub use lt_tokenize::{EnglishWordTokenizer, SrxDocument, SrxTokenizer};
 mod ca;
 mod comma_whitespace;
 mod compound;
+mod da;
 mod dash;
 mod dates;
 mod de;
@@ -363,6 +364,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::El => Pipeline::new_greek(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Da => Pipeline::new_danish(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,
