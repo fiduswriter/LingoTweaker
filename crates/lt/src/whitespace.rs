@@ -153,6 +153,16 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Greek `MessagesBundle_el` strings.
+pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Επανάληψη κενού",
+        "Πιθανό λάθος: επανάληψη κενού",
+        ("TYPOGRAPHY", "Τυπογραφικά"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
 pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

@@ -157,6 +157,8 @@ pub struct Pipeline {
     pub slovak: Option<Arc<crate::sk::SlovakPipeline>>,
     /// Slovenian pipeline parts (`None` for the other languages)
     pub slovenian: Option<Arc<crate::sl::SlovenianPipeline>>,
+    /// Greek pipeline parts (`None` for the other languages)
+    pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Norwegian Bokmål pipeline parts (`None` for the other languages)
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
@@ -1341,6 +1343,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1577,6 +1580,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1772,6 +1776,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -1975,6 +1980,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2098,6 +2104,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2340,6 +2347,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2542,6 +2550,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -2861,6 +2870,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3004,6 +3014,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3133,6 +3144,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3286,6 +3298,7 @@ impl Pipeline {
             polish: Some(polish),
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3417,6 +3430,7 @@ impl Pipeline {
             polish: None,
             slovak: Some(slovak),
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3520,6 +3534,125 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: Some(slovenian),
+            greek: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+    /// Greek (`el`) engine: the `GreekWordTokenizer`/`GreekTagger` (with the
+    /// `morphology-el` analyzer), the `GreekSynthesizer`, the
+    /// `el/disambiguation.xml` XML disambiguator and the generic core rules.
+    /// The Morfologik speller and the Greek-only rule classes follow in
+    /// stages 2/3.
+    pub fn new_greek(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        variant: Option<&str>,
+    ) -> Result<Self> {
+        let _ = today;
+        let _ = variant;
+        let timing = std::env::var("LT_TIMING").is_ok();
+        let mut last = timing.then(std::time::Instant::now);
+        let mut mark = |name: &str| {
+            if let Some(previous) = last {
+                let now = std::time::Instant::now();
+                eprintln!("[timing] el {name}: {:?}", now - previous);
+                last = Some(now);
+            }
+        };
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "el_two")?;
+        mark("srx");
+
+        let tagger = Arc::new(lt_tagger::GreekTagger::load(data_dir.path())?);
+        mark("tagger");
+        let synth = Arc::new(lt_tagger::GreekSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::el::GreekSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        mark("synth");
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::El))?;
+        if data_dir.style_path(Lang::El).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::El))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        mark("grammar");
+
+        // Greek references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        mark("rules");
+
+        // `Greek.createDefaultDisambiguator` = plain `XmlRuleDisambiguator`
+        // (XML rules + `core/disambiguation-global.xml`).
+        let global_disambig = data_dir.path().join("core/disambiguation-global.xml");
+        let mut disambiguator = lt_disambig::XmlDisambiguator::load_with_extra(
+            &data_dir.disambiguation_path(Lang::El),
+            Some(&global_disambig),
+        )?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+        mark("disambiguator");
+
+        let greek = Arc::new(crate::el::GreekPipeline {
+            tagger,
+            synthesizer: synth,
+            synth_adapter,
+            disambiguator,
+            word_repeat: crate::el::rules::word_repeat_rule(),
+        });
+        Ok(Self {
+            lang: Lang::El,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            greek: Some(greek),
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -3649,6 +3782,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
@@ -3724,6 +3858,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
@@ -3803,6 +3938,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            greek: None,
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
@@ -3881,16 +4017,21 @@ impl Pipeline {
                                                                     sentence_text,
                                                                 )
                                                             }
-                                                            None => match &self.slovenian {
-                                                                Some(_) => {
-                                                                    surface_sentence(sentence_text)
+                                                            None => match &self.greek {
+                                                                Some(greek) => {
+                                                                    crate::el::analyze_greek_sentence(greek, sentence_text)
                                                                 }
-                                                                None => analyze_sentence(
-                                                                    self.tagger
-                                                                        .as_deref()
-                                                                        .expect("english tagger"),
-                                                                    sentence_text,
-                                                                ),
+                                                                None => match &self.slovenian {
+                                                                    Some(_) => {
+                                                                        surface_sentence(sentence_text)
+                                                                    }
+                                                                    None => analyze_sentence(
+                                                                        self.tagger
+                                                                            .as_deref()
+                                                                            .expect("english tagger"),
+                                                                        sentence_text,
+                                                                    ),
+                                                                },
                                                             },
                                                         },
                                                     },
@@ -5861,6 +6002,63 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_sl(&analyzed_sentences));
             }
         }
+        // Greek text-level rules (`Greek.getRelevantRules`):
+        // GenericUnpairedBrackets (3), LongSentence (4, picky),
+        // UppercaseSentenceStart (6) and MultipleWhitespace (7).
+        if self.lang == crate::Lang::El {
+            if builtin_active(
+                "EL_UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_el(&analyzed_sentences));
+            }
+            if builtin_active(
+                "TOO_LONG_SENTENCE",
+                "STYLE",
+                true,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::long_sentence::check_el(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_el(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_el(&analyzed_sentences));
+            }
+        }
         text_level_matches.append(&mut matches);
         matches = text_level_matches;
         // Text-level repetition rules (`RepeatedPatternRuleTransformer`):
@@ -6024,16 +6222,24 @@ impl Pipeline {
                                                                 &text[start..end],
                                                             )
                                                         }
-                                                        None => match &self.slovenian {
-                                                            Some(_) => {
-                                                                surface_sentence(&text[start..end])
+                                                        None => match &self.greek {
+                                                            Some(greek) => {
+                                                                crate::el::analyze_greek_sentence(
+                                                                    greek,
+                                                                    &text[start..end],
+                                                                )
                                                             }
-                                                            None => analyze_sentence(
-                                                                self.tagger
-                                                                    .as_deref()
-                                                                    .expect("english tagger"),
-                                                                &text[start..end],
-                                                            ),
+                                                            None => match &self.slovenian {
+                                                                Some(_) => surface_sentence(
+                                                                    &text[start..end],
+                                                                ),
+                                                                None => analyze_sentence(
+                                                                    self.tagger
+                                                                        .as_deref()
+                                                                        .expect("english tagger"),
+                                                                    &text[start..end],
+                                                                ),
+                                                            },
                                                         },
                                                     },
                                                 },
@@ -7995,6 +8201,63 @@ impl Pipeline {
                 );
             }
         }
+        // Greek sentence-level Java rules in `Greek.getRelevantRules` order:
+        // CommaWhitespace (1), DoublePunctuation (2), Speller (5, stage 2),
+        // WordRepeatRule (9). UnpairedBrackets (3), LongSentence (4),
+        // UppercaseSentenceStart (6) and MultipleWhitespace (7) are text-level
+        // and run above.
+        if self.lang == crate::Lang::El {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_el(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_el(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(greek) = &self.greek {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    greek.word_repeat.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -9280,6 +9543,12 @@ impl Pipeline {
             // `Slovenian` does not override `createDefaultDisambiguator`
             // either: the base no-op `DemoDisambiguator` applies.
             slovenian.disambiguate(sentence);
+            return;
+        }
+        if let Some(greek) = &self.greek {
+            // `Greek.createDefaultDisambiguator` is a plain
+            // `XmlRuleDisambiguator`: XML rules (+ global rules).
+            greek.disambiguate(sentence);
             return;
         }
         if let Some(norwegian) = &self.norwegian {

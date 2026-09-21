@@ -77,6 +77,20 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `Greek.getRelevantRules`: `new LongSentenceRule(messages, userConfig, 50)`
+/// (`MessagesBundle_el` `long_sentence_rule_desc`/`_msg2`).
+pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const EL_MAX_WORDS: usize = 50;
+    check_impl(
+        sentences,
+        RULE_ID,
+        "Η πρόταση έχει περισσότερες από 50 λέξεις",
+        "This sentence is over 50 words long at the marked position, consider revising",
+        ("STYLE", "Υφολογικά λάθη"),
+        EL_MAX_WORDS,
+    )
+}
+
 /// `de.LongSentenceRule` (`TOO_LONG_SENTENCE_DE`, 40 words, German messages).
 pub fn check_de(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_impl(

@@ -56,6 +56,9 @@ must decide. Data paths are relative to `data/`.
 | Portuguese POS dictionary + speller dictionaries (`org.languagetool:portuguese-pos-dict:1.2.0`) | `pt/dictionaries/*`, `pt/spelling/*` | LGPL-2.1-only | [artifact POM](https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom) | Confirmed |
 | Dutch POS dictionary (`org.languagetool:dutch-pos-dict:0.1`) | `nl/dictionaries/*` | README: CC-BY-3.0-or-later OR BSD (TaalTik); artifact POM: LGPL-2.1 | bundled `nl/dictionaries/README.txt`; [artifact POM](https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom) | **License to be confirmed** (conflicting statements) |
 | Dutch speller dictionary (TaalTik) | `nl/spelling/nl_NL.dict`, `nl_NL.info`, `README.txt` | LGPL-2.1-or-later | bundled `nl/spelling/README.txt` (Ruud Baars / TaalTik) | Confirmed |
+| Greek POS/synthesis dictionaries (`GreekTagger`/`GreekSynthesizer`) | `el/dictionaries/*` | LGPL (upstream `el/README.txt`: the few test entries are "made available here under LGPL") | upstream `resource/el/README.txt` | Confirmed |
+| Greek analyzer data (`org.ioperm:morphology-el:1.0.0`, `GreekAnalyzer`) | `el/morphology/analysis.dict`, `analysis.info` | POM: Apache-2.0 (source code) + CC-BY-SA-4.0 (linguistic data) | [artifact POM](https://repo1.maven.org/maven2/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom) | **License to be confirmed** (CC-BY-SA-4.0 share-alike data in an LGPL distribution, like the German POS dictionary) |
+| Greek hunspell dictionary (el_GR) | `el/hunspell/el_GR.dict`, `el_GR.info`, `README_el_GR.txt` | GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license | `el/hunspell/README_el_GR.txt` (© Steve Stavropoulos et al.) | Confirmed for the README; converted `.dict`/`.info` tracked as unverified |
 | Norwegian Bokmål Hunspell dictionary | `no/hunspell/nb_NO.dic` | CC BY 4.0 (Nasjonalbiblioteket/Ordbanken) + CLARIN PUB+BY (nyordslister 2018–2024, CLARINO Bergen) | [LibreOffice dictionaries `no/README_NO.txt`](https://github.com/LibreOffice/dictionaries/blob/master/no/README_NO.txt) (v3.0) | Confirmed |
 | Norwegian Bokmål affix rules | `no/hunspell/nb_NO.aff` | GPL-2.0 (spell-norwegian project) | same README and `no/COPYING`; `CHECKCOMPOUNDTRIPLE`/`SIMPLIFIEDTRIPLE` stripped because `lt-spell` rejects them | Confirmed; modification notice now in the file header (upstream, copyright, removed directives, date) |
 | Guaraní Hunspell dictionary (huracán) | `gn/hunspell/gug.dic`, `gn/hunspell/gug.aff` | GFDL-1.2-or-later | [LibreOffice dictionaries `gug/`](https://github.com/LibreOffice/dictionaries/tree/master/gug) (2016, unmaintained); the statement is in the package's thesaurus README, the `.dic`/`.aff` carry no license header | **Probable; evidence gap** (the license statement is only in the package's thesaurus README) |
@@ -105,9 +108,14 @@ files that are themselves vendored, so the notice texts travel with the data
    LGPL-2.1/MPL-1.1 and LGPL-3.0); the owner approved continuing with notices
    (D14) but a legal review of the derived-data distribution — including which
    license the derived `nrd.dic` itself can be distributed under — is still
-   advisable. The Nordum word list is now dual-licensed (CC BY 4.0 **or**
+   advisable. The Nordum word list is now    dual-licensed (CC BY 4.0 **or**
    LGPL-2.1-or-later, author decision), which removes the Nordum side of the
    mixing question.
+9. **Greek analyzer data (`org.ioperm:morphology-el`)** is CC-BY-SA-4.0
+   (linguistic data; the source code is Apache-2.0) per its POM. CC-BY-SA
+   requires attribution/share-alike for the dictionary data; whether to keep
+   shipping it in an LGPL distribution needs the owner's sign-off, like the
+   German POS dictionary above.
 
 ## Why this file exists
 

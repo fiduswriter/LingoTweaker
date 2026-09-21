@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 625,
+  "file_count": 650,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -1461,6 +1461,284 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/de/src/main/resources/org/languagetool/resource/de/words_infix_s.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/dictionaries/greek.dict",
+      "sha256": "09fac984008db630169eb37cca71c99d085857e722e209cf4b91cf94a9476ce0",
+      "size": 239,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/greek.dict",
+        "license": "LGPL (Greek POS/synthesis dictionaries; upstream el/README.txt states the few test entries are \"made available here under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream el/README.txt"
+      }
+    },
+    {
+      "path": "el/dictionaries/greek.info",
+      "sha256": "247cde681035c92c1f9b650835e457264364ec8447183edd335d9d5f5c0965bd",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/greek.info",
+        "license": "LGPL (Greek POS/synthesis dictionaries; upstream el/README.txt states the few test entries are \"made available here under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream el/README.txt"
+      }
+    },
+    {
+      "path": "el/dictionaries/greek_synth.dict",
+      "sha256": "ff921d23342815a164a5a694e7aa840c7b351b21dcc1da30c76d4473c72349f0",
+      "size": 198,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/greek_synth.dict",
+        "license": "LGPL (Greek POS/synthesis dictionaries; upstream el/README.txt states the few test entries are \"made available here under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream el/README.txt"
+      }
+    },
+    {
+      "path": "el/dictionaries/greek_synth.info",
+      "sha256": "247cde681035c92c1f9b650835e457264364ec8447183edd335d9d5f5c0965bd",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/greek_synth.info",
+        "license": "LGPL (Greek POS/synthesis dictionaries; upstream el/README.txt states the few test entries are \"made available here under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream el/README.txt"
+      }
+    },
+    {
+      "path": "el/dictionaries/greek_tags.txt",
+      "sha256": "f38e98b3b50280ee41c29f95f787c807150041cdb1fecf19cef62d74c0da796c",
+      "size": 15,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/greek_tags.txt",
+        "license": "LGPL (Greek POS/synthesis dictionaries; upstream el/README.txt states the few test entries are \"made available here under LGPL\")",
+        "license_verified": true,
+        "license_source": "upstream el/README.txt"
+      }
+    },
+    {
+      "path": "el/disambiguation.xml",
+      "sha256": "66cb066781ce9895753d984dde7851a67f93a2bfb528c77afb63c99e370ae35c",
+      "size": 641,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/hunspell/README_el_GR.txt",
+      "sha256": "ac8fc00b1162abdfa5660360d59eba0511aacee325a6348935e818d7f095d87a",
+      "size": 3025,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/hunspell/README_el_GR.txt",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (el_GR Greek spelling dictionary; el/hunspell/README_el_GR.txt)",
+        "license_verified": true,
+        "license_source": "upstream el/hunspell/README_el_GR.txt"
+      }
+    },
+    {
+      "path": "el/hunspell/el_GR.dict",
+      "sha256": "36986cc488c644d84ccb8e415dc641ea38008a4279dee41d4abd498272770893",
+      "size": 610982,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/hunspell/el_GR.dict",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the el_GR spelling dictionary; el/hunspell/README_el_GR.txt)",
+        "license_verified": false,
+        "license_source": "upstream el/hunspell/README_el_GR.txt"
+      }
+    },
+    {
+      "path": "el/hunspell/el_GR.info",
+      "sha256": "d40cfe7c0628f256cdba0674848eec99ca6328f800806fdd07f9c5fb9069980b",
+      "size": 192,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/hunspell/el_GR.info",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the el_GR spelling dictionary; el/hunspell/README_el_GR.txt)",
+        "license_verified": false,
+        "license_source": "upstream el/hunspell/README_el_GR.txt"
+      }
+    },
+    {
+      "path": "el/hunspell/ignore.txt",
+      "sha256": "d4fe7524d95fbd54bc91078648d465967a1e83e2813cd73d291ecae4332a19ce",
+      "size": 59,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/hunspell/spelling.txt",
+      "sha256": "2d3601eb0f77220fe856f78c76495a2ca104359916d7bab93517693f58c5b518",
+      "size": 484,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/morphology/analysis.dict",
+      "sha256": "9e6bbc3b47cdf90b02c7a81f3a443a3306f61db8b82dbf80b5d21b8f5223ecc9",
+      "size": 2929,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.ioperm:morphology-el:1.0.0",
+        "artifact_sha256": "caa36b7e96fd4c1804b3f4763de803ce87468d86908087087814f7d47caee668",
+        "artifact_inner_path": "org/ioperm/morphology/el/analysis.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM, linguistic data; source code Apache-2.0)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom"
+      }
+    },
+    {
+      "path": "el/morphology/analysis.info",
+      "sha256": "afda62092d85a58c853da6b1859bd387051c06e6d32daada86354a2846ec1f96",
+      "size": 114,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.ioperm:morphology-el:1.0.0",
+        "artifact_sha256": "caa36b7e96fd4c1804b3f4763de803ce87468d86908087087814f7d47caee668",
+        "artifact_inner_path": "org/ioperm/morphology/el/analysis.info",
+        "license": "CC-BY-SA-4.0 (artifact POM, linguistic data; source code Apache-2.0)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom"
+      }
+    },
+    {
+      "path": "el/rules/grammar.xml",
+      "sha256": "4b74b9e37c8a9f23266ad9547641781732dcc7bf4e60b94622c322dd45bfe249",
+      "size": 53984,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/rules/el/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/rules/redundancies.txt",
+      "sha256": "f336de3d94f4a38a83caa313d0b1334065a08fc2227ede619ff654588e95cb3e",
+      "size": 5581,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/rules/el/redundancies.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/rules/replace.txt",
+      "sha256": "e595d5613220617c8becf3713d309dd4be6b6d7d8b90d032a5850cf8ec02bc74",
+      "size": 3402,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/rules/el/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/README.txt",
+      "sha256": "f680fd91679df18d547542653c0d3e135ac951caea3f7b4d84a5ebe2f45533da",
+      "size": 134,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/common_words.txt",
+      "sha256": "5d399fbc34e0eb488e074e4a88d8dd8bc7c37806ea91a714fe185b430d444e2b",
+      "size": 157273,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/greek.txt",
+      "sha256": "ec7ce4ebd2c30e44de87a6058b48059e1f1ed43a7ad50d99f449864f35f452e3",
+      "size": 374,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/greek.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "el/words/specific_case.txt",
+      "sha256": "e2d7c3d945faef88cc2bc6874f6ad3f036bf718caf98c1bb277acdbe78f9734e",
+      "size": 2691,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/resource/el/specific_case.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
@@ -3920,6 +4198,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/de/src/main/resources/org/languagetool/MessagesBundle_de.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_el.properties",
+      "sha256": "a61bfff73fc698449ad010b356038ee7d878d461cf0575583e6c05574d645a53",
+      "size": 36784,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/el/src/main/resources/org/languagetool/MessagesBundle_el.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

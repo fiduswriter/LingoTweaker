@@ -609,6 +609,21 @@ pub fn check_sentence_sl(
     matches
 }
 
+/// `CommaWhitespaceRule` with the Greek `MessagesBundle_el` strings.
+pub fn check_sentence_el(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Στίξη".to_string();
+        m.description = "Χρήση κενού πριν από κόμμα και πρίν/μετά από παρένθεση".to_string();
+        m.message = translate_comma_message_el(&m.message);
+    }
+    matches
+}
+
 /// Java `messages.getString` with the `MessagesBundle_sk` bundle.
 fn translate_comma_message_sk(msg: &str) -> String {
     match msg {
@@ -647,6 +662,27 @@ fn translate_comma_message_sl(msg: &str) -> String {
             "Presledek vstavi po vejici, ne pa pred vejico".to_string()
         }
         "Don't put a space before the full stop." => "Ne postavljaj presledka po piki".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
+/// Java `messages.getString` with the `MessagesBundle_el` bundle.
+fn translate_comma_message_el(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Μην βάλετε κενό μετά το άνοιγμα παρένθεσης".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Μην βάλετε κενό πριν το κλείσιμο παρένθεσης".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Προσθέστε ένα κενό μετά το κόμμα".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Προσθέστε ένα κενό μετά το κόμμα αλλά όχι πριν το κόμμα.".to_string()
+        }
+        "Don't put a space before the full stop." => "Μην βάλετε κενό πριν από τελεία".to_string(),
         _ => msg.to_string(),
     }
 }

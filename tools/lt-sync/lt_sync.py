@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -119,6 +119,15 @@ MAVEN_ARTIFACTS = {
         "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
         "license_verified": False,
         "license_source": f"{MAVEN_CENTRAL}/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt",
+    },
+    "morphology-el-1.0.0.jar": {
+        "coords": "org.ioperm:morphology-el:1.0.0",
+        # POM: "Apache License, Version 2.0" for the source code and
+        # CC-BY-SA-4.0 for the linguistic data (analysis.dict); only the data
+        # dictionary is vendored (GreekTagger's analyzer).
+        "license": "CC-BY-SA-4.0 (artifact POM, linguistic data; source code Apache-2.0)",
+        "license_verified": True,
+        "license_source": f"{MAVEN_CENTRAL}/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom",
     },
     "jwordsplitter-4.7.jar": {
         "coords": "de.danielnaber:jwordsplitter:4.7",
@@ -234,6 +243,11 @@ JAR_EXTRACTIONS = {
         "org/languagetool/resource/ca/ca-ES_spelling_multitoken.dict": "ca/spelling/ca-ES_spelling_multitoken.dict",
         "org/languagetool/resource/ca/ca-ES_spelling_multitoken.info": "ca/spelling/ca-ES_spelling_multitoken.info",
     },
+    # `GreekTagger`'s `GreekAnalyzer` (org.ioperm:morphology-el) POS data.
+    "morphology-el-1.0.0.jar": {
+        "org/ioperm/morphology/el/analysis.dict": "el/morphology/analysis.dict",
+        "org/ioperm/morphology/el/analysis.info": "el/morphology/analysis.info",
+    },
     "jwordsplitter-4.7.jar": {
         "de/danielnaber/jwordsplitter/wordsGerman.txt": "de/compound/wordsGerman.txt",
         "de/danielnaber/jwordsplitter/exceptionsGerman.txt": "de/compound/exceptionsGerman.txt",
@@ -291,6 +305,17 @@ IN_TREE_ARTIFACTS = {
         "resource/sk/slovak_synth.dict": "sk/dictionaries/slovak_synth.dict",
         "resource/sk/slovak_synth.info": "sk/dictionaries/slovak_synth.info",
         "resource/sk/slovak_tags.txt": "sk/dictionaries/slovak_tags.txt",
+    },
+    # Greek ships its `BaseTagger` POS dictionary (`GreekTagger`, a small
+    # LGPL test lexicon) and the `GreekSynthesizer` data in-tree; the larger
+    # `org.ioperm:morphology-el` analyzer dictionaries come from a Maven
+    # artifact (see `MAVEN_ARTIFACTS`/`JAR_EXTRACTIONS`).
+    "el": {
+        "resource/el/greek.dict": "el/dictionaries/greek.dict",
+        "resource/el/greek.info": "el/dictionaries/greek.info",
+        "resource/el/greek_synth.dict": "el/dictionaries/greek_synth.dict",
+        "resource/el/greek_synth.info": "el/dictionaries/greek_synth.info",
+        "resource/el/greek_tags.txt": "el/dictionaries/greek_tags.txt",
     },
 }
 
@@ -381,6 +406,12 @@ IN_TREE_LICENSES = {
         'license")',
         True,
         "upstream sk/README.txt",
+    ),
+    "el": (
+        "LGPL (Greek POS/synthesis dictionaries; upstream el/README.txt "
+        'states the few test entries are "made available here under LGPL")',
+        True,
+        "upstream el/README.txt",
     ),
 }
 
@@ -499,6 +530,23 @@ def hunspell_license(lang: str, name: str):
                 "dictionary; sl/hunspell/README_sl_SI.txt)",
                 False,
                 "upstream sl/hunspell/README_sl_SI.txt",
+            )
+    if lang == "el":
+        if name.startswith("README"):
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (el_GR Greek "
+                "spelling dictionary; el/hunspell/README_el_GR.txt)",
+                True,
+                "upstream el/hunspell/README_el_GR.txt",
+            )
+        if name.startswith("el_GR."):
+            # Morfologik conversion of the tri-licensed el_GR hunspell
+            # dictionary; the conversion is a derived build.
+            return (
+                "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (converted from the "
+                "el_GR spelling dictionary; el/hunspell/README_el_GR.txt)",
+                False,
+                "upstream el/hunspell/README_el_GR.txt",
             )
     return None
 

@@ -33,6 +33,7 @@ mod dash;
 mod dates;
 mod de;
 mod double_punctuation;
+mod el;
 mod en;
 mod es;
 mod fr;
@@ -355,6 +356,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Sl => Pipeline::new_slovenian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::El => Pipeline::new_greek(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

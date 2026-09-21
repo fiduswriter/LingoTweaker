@@ -195,6 +195,18 @@ pub fn check_sl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Greek `MessagesBundle_el` strings.
+pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Η πρόταση δεν ξεκινάει με κεφαλαίο γράμμα",
+        "Χρήση κεφαλαίων",
+        "Έλεγχος πρότασης αν ξεκινά με κεφαλαίο γράμμα",
+        "Χρήση κεφαλαίων",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

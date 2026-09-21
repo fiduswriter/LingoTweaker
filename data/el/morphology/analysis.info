@@ -1,0 +1,5 @@
+#Timestamp 1464195164968
+#FSA format <cfsa2>
+fsa.dict.encoding=UTF-8
+fsa.dict.encoder=suffix
+fsa.dict.separator=+

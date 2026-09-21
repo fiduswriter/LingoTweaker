@@ -609,6 +609,26 @@ pub fn check_sl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_sl())
 }
 
+/// Greek `EL_UNPAIRED_BRACKETS`: `[ ( { “ « "` / `] ) } ” » "` with the
+/// `MessagesBundle_el` strings.
+pub fn symbols_el() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "EL_UNPAIRED_BRACKETS",
+        description: "Αταίριαστες αγκύλες, παρενθέσεις, εισαγωγικά ή παρόμοια σύμβολα",
+        category_id: "PUNCTUATION",
+        category_name: "Στίξη",
+        start: &["[", "(", "{", "\u{201C}", "\"", "\u{00AB}"],
+        end: &["]", ")", "}", "\u{201D}", "\"", "\u{00BB}"],
+        spanish: false,
+        message_template: "Αταίριαστο σύμβολο: το '{other}' φαίνεται πως λείπει",
+    }
+}
+
+/// Greek `EL_UNPAIRED_BRACKETS` (generic rule, Greek strings).
+pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_el())
+}
+
 /// `Galician.getRelevantRules`: the generic rule with
 /// `[ ( { “ « » ‘ " '` / `] ) } ” » « ’ " '` and the `MessagesBundle_gl`
 /// strings.
