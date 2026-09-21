@@ -183,6 +183,8 @@ pub struct Pipeline {
     pub nordum: Option<Arc<crate::nrd::NordumPipeline>>,
     /// Guaraní pipeline parts (`None` for the other languages)
     pub guarani: Option<Arc<crate::gn::GuaraniPipeline>>,
+    /// Belarusian pipeline parts (`None` for the other languages)
+    pub belarusian: Option<Arc<crate::be::BelarusianPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1372,6 +1374,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1618,6 +1621,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1823,6 +1827,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2036,6 +2041,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2169,6 +2175,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2421,6 +2428,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2633,6 +2641,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2962,6 +2971,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3115,6 +3125,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3254,6 +3265,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3417,6 +3429,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3558,6 +3571,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3671,6 +3685,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3819,6 +3834,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3899,6 +3915,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4062,6 +4079,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4137,6 +4155,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4249,6 +4268,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4347,6 +4367,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4459,6 +4480,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4559,6 +4581,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4660,6 +4683,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4771,6 +4795,108 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: None,
+            belarusian: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Belarusian (`be`) engine: the `DemoTagger` (every token untagged, i.e.
+    /// `surface_sentence`), the `BelarusianWordTokenizer` (apostrophes stay
+    /// inside the word), the base no-op disambiguator, the
+    /// `MorfologikBelarusianSpellerRule` (`MORFOLOGIK_RULE_BE_BY`) and the two
+    /// language rule classes `BE_SIMPLE_REPLACE` and `BE_SPECIFIC_CASE`.
+    /// `Belarusian.getRelevantRules` adds the generic built-ins (with the
+    /// `MessagesBundle_be` strings) and the paragraph/long-sentence text-level
+    /// rules; the module has **no** `GenericUnpairedBracketsRule`, and the rule
+    /// XML references no `<filter>` class.
+    pub fn new_belarusian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "be_two")?;
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Be))?;
+        if data_dir.style_path(Lang::Be).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Be))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Belarusian references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        let spelling = match crate::be::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[be] spelling rule disabled: {err}");
+                None
+            }
+        };
+
+        let belarusian = Arc::new(crate::be::BelarusianPipeline { spelling });
+        Ok(Self {
+            lang: Lang::Be,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: vec![crate::be::rules::simple_replace_instance(data_dir.path())?],
+            word_coherency: None,
+            specific_case: Some(crate::be::rules::specific_case_instance(data_dir.path())),
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: Some(belarusian),
             clean_overlapping_matches: true,
         })
     }
@@ -4909,6 +5035,7 @@ impl Pipeline {
             norwegian: Some(norwegian),
             nordum: None,
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -4994,6 +5121,7 @@ impl Pipeline {
             norwegian: None,
             nordum: Some(nordum),
             guarani: None,
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5083,6 +5211,7 @@ impl Pipeline {
             norwegian: None,
             nordum: None,
             guarani: Some(guarani),
+            belarusian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5101,6 +5230,8 @@ impl Pipeline {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
                 crate::gn::analyze_guarani_sentence(sentence_text)
+            } else if self.belarusian.is_some() {
+                crate::be::analyze_belarusian_sentence(sentence_text)
             } else {
                 match &self.german {
                     Some(german) => {
@@ -7620,6 +7751,144 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_lt(&analyzed_sentences));
             }
         }
+        // Belarusian text-level rules (`Belarusian.getRelevantRules`):
+        // UppercaseSentenceStart (4), MultipleWhitespace (5),
+        // SentenceWhitespace (6) and the default-off/picky paragraph rules
+        // (7, 8, 10, 11, 12) plus LongSentence (9). The module has no
+        // `GenericUnpairedBracketsRule`.
+        if self.lang == crate::Lang::Be {
+            let para = crate::paragraph::strings_be();
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_be(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_be(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_be(&analyzed_sentences));
+            }
+            // `WHITESPACE_PARAGRAPH` (7), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::whitespace_before_paragraph_end_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+            // `WHITESPACE_PARAGRAPH_BEGIN` (8), default off
+            if builtin_active(
+                crate::paragraph::WHITESPACE_PARAGRAPH_BEGIN_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                for sentence in &analyzed_sentences {
+                    text_level_matches.extend(
+                        crate::paragraph::whitespace_at_begin_of_paragraph_with(sentence, &para),
+                    );
+                }
+            }
+            // `TOO_LONG_SENTENCE` (9), `tags="picky"` (50 words)
+            if options.picky && !disabled_rules.contains("TOO_LONG_SENTENCE") {
+                text_level_matches.extend(crate::long_sentence::check_be(&analyzed_sentences));
+            }
+            // `TOO_LONG_PARAGRAPH` (10), default off and picky
+            if builtin_active(
+                crate::paragraph::LONG_PARAGRAPH_ID,
+                "STYLE",
+                false,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::long_paragraph_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+            // `PARAGRAPH_REPEAT_BEGINNING_RULE` (11), default off
+            if builtin_active(
+                crate::paragraph::PARAGRAPH_REPEAT_BEGINNING_ID,
+                "STYLE",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::paragraph_repeat_beginning_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+            // `PUNCTUATION_PARAGRAPH_END2` (12), default off
+            if builtin_active(
+                crate::paragraph::PUNCTUATION_PARAGRAPH_END2_ID,
+                "PUNCTUATION",
+                false,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::paragraph::punctuation_at_paragraph_end2_with(
+                    &analyzed_sentences,
+                    &para,
+                ));
+            }
+        }
         // Crimean Tatar text-level rules (`CrimeanTatar.getRelevantRules`):
         // GenericUnpairedBrackets (2), UppercaseSentenceStart (3),
         // MultipleWhitespace (4), SentenceWhitespace (5) and the two
@@ -7875,6 +8144,8 @@ impl Pipeline {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
             crate::gn::analyze_guarani_sentence(&text[start..end])
+        } else if self.belarusian.is_some() {
+            crate::be::analyze_belarusian_sentence(&text[start..end])
         } else {
             match &self.german {
                 Some(german) => {
@@ -10645,6 +10916,67 @@ impl Pipeline {
                         &mut matches,
                         builtin_active(
                             crate::lt::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
+        }
+        // Belarusian sentence-level Java rules in `Belarusian.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2) and
+        // MorfologikBelarusianSpellerRule (3). UppercaseSentenceStart (4),
+        // MultipleWhitespace (5), SentenceWhitespace (6) and the paragraph /
+        // long-sentence rules run above as text-level rules;
+        // `BE_SIMPLE_REPLACE` (13) and `BE_SPECIFIC_CASE` (14) run through the
+        // generic `simple_replace`/`specific_case` slots.
+        if self.lang == crate::Lang::Be {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_be(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_be(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(belarusian) = &self.belarusian {
+                if let Some(spelling) = &belarusian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::be::spelling::RULE_ID,
                             "TYPOS",
                             true,
                             false,

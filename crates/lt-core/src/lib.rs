@@ -73,6 +73,8 @@ pub enum Lang {
     Lt,
     /// Crimean Tatar (`crh`).
     Crh,
+    /// Belarusian (`be`).
+    Be,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -84,7 +86,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 26] = [
+    pub const ALL: [Lang; 27] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -108,6 +110,7 @@ impl Lang {
         Lang::Tl,
         Lang::Lt,
         Lang::Crh,
+        Lang::Be,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -141,6 +144,7 @@ impl Lang {
             "tl" => Some(Lang::Tl),
             "lt" => Some(Lang::Lt),
             "crh" => Some(Lang::Crh),
+            "be" => Some(Lang::Be),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -173,6 +177,7 @@ impl Lang {
             Lang::Tl => "tl",
             Lang::Lt => "lt",
             Lang::Crh => "crh",
+            Lang::Be => "be",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -296,6 +301,11 @@ impl Lang {
                 code: "crh",
                 long_code: "crh-UA",
                 name: "Crimean Tatar",
+            },
+            Lang::Be => Language {
+                code: "be",
+                long_code: "be-BY",
+                name: "Belarusian",
             },
             Lang::No => Language {
                 code: "no",

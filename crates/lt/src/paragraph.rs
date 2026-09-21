@@ -665,6 +665,15 @@ const TOKEN_THRESHOLD: usize = 10;
 
 /// `PunctuationMarkAtParagraphEnd2.match(List<AnalyzedSentence>)`.
 pub fn punctuation_at_paragraph_end2(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    punctuation_at_paragraph_end2_with(sentences, &strings_en())
+}
+
+/// `PunctuationMarkAtParagraphEnd2.match(List<AnalyzedSentence>)` with
+/// per-language strings.
+pub fn punctuation_at_paragraph_end2_with(
+    sentences: &[AnalyzedSentence],
+    strings: &ParagraphStrings,
+) -> Vec<Match> {
     let mut rule_matches = Vec::new();
     let mut pos = 0usize;
     let mut token_count = 0usize;
@@ -689,21 +698,17 @@ pub fn punctuation_at_paragraph_end2(sentences: &[AnalyzedSentence]) -> Vec<Matc
                     Match::new(
                         PUNCTUATION_PARAGRAPH_END2_ID,
                         Option::<String>::None,
-                        "Please add a punctuation mark at the end of paragraph.",
+                        strings.punct_msg,
                         Option::<String>::None,
                         TextRange::new(pos + last.start_pos, pos + last.end_pos()),
                         vec![Suggestion {
                             value: format!("{}.", last.surface()),
                             short_description: None,
                         }],
-                        PUNCTUATION_CATEGORY.0,
-                        PUNCTUATION_CATEGORY.1,
+                        strings.punctuation_category.0,
+                        strings.punctuation_category.1,
                     )
-                    .with_metadata(
-                        "No punctuation mark at the end of paragraph",
-                        "grammar",
-                        -1,
-                    ),
+                    .with_metadata(strings.punct_desc, "grammar", -1),
                 );
             }
         }
@@ -880,6 +885,26 @@ pub fn paragraph_repeat_beginning_de(sentences: &[AnalyzedSentence]) -> Vec<Matc
         ("STYLE", "Stil"),
         &is_article_de,
     )
+}
+
+/// `MessagesBundle_be` strings for the paragraph rules.
+pub fn strings_be() -> ParagraphStrings {
+    ParagraphStrings {
+        style_category: ("STYLE", "Стыль"),
+        punctuation_category: ("PUNCTUATION", "Пунктуацыя"),
+        long_desc: |max| format!("Чытэльнасць: абзац даўжынёй больш за {max} слоў"),
+        long_msg: |max| format!("У абзацы больш {max} слоў, неабходна перабудаваць"),
+        empty_line_msg: "Выдаліце пусты радок ніжэй і скарыстайцеся фарматаваннем",
+        empty_line_desc: "Пусты радок",
+        ws_begin_msg: "Выдаліце прабел у пачатку абзаца",
+        ws_begin_desc: "Прабел у пачатку абзаца",
+        ws_end_msg: "Выдаліце прабел у канцы абзаца",
+        ws_end_desc: "Прабел у канцы абзаца",
+        punct_msg: "Дадайце знак прыпынку ў канцы абзаца",
+        punct_desc: "Прапушчаны знак прыпынку ў канцы абзаца",
+        repetition_last_msg: "Супадае з апошнім абзацам",
+        repetition_desc: "Супадае з пачаткам абзаца",
+    }
 }
 
 #[cfg(test)]

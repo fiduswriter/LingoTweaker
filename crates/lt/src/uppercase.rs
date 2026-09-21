@@ -460,3 +460,16 @@ fn check_with(
     }
     rule_matches
 }
+
+/// `UppercaseSentenceStartRule` with the Belarusian `MessagesBundle_be`
+/// strings.
+pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Гэты сказ не пачынаецца з вялікай літары",
+        "Вялікія літары",
+        "Першая літара ў сказе павінна быць вялікай",
+        "Вялікія літары",
+        false,
+    )
+}

@@ -470,3 +470,20 @@ pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) 
     }
     rule_matches
 }
+
+/// `DoublePunctuationRule` with the Belarusian `MessagesBundle_be` strings.
+pub fn check_sentence_be(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Пунктуацыя".to_string();
+        m.description = "Дзве коскі або кропкі запар".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Дзве крокі запар".to_string();
+            m.short_message = Some("Дзве кропкі запар".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Дзве коскі запар".to_string();
+            m.short_message = Some("Дзве коскі запар".to_string());
+        }
+    }
+    matches
+}

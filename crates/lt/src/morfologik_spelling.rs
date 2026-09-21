@@ -709,7 +709,7 @@ impl MorfologikSpellingRule {
         let user_suggestions: Vec<Suggestion> = Vec::new();
         let only_case_differs = default_suggestions
             .first()
-            .is_some_and(|s| s.value.eq_ignore_ascii_case(word));
+            .is_some_and(|s| java_equals_ignore_case(&s.value, word));
         let full_results = false;
         if word.chars().count() >= 3
             && (only_case_differs || full_results || default_suggestions.is_empty())
@@ -797,6 +797,51 @@ fn weighted_to_suggestion(s: WeightedSuggestion) -> Suggestion {
     Suggestion {
         value: s.word,
         short_description: None,
+    }
+}
+
+/// Java `String.equalsIgnoreCase`: per-character full-Unicode case folding
+/// (ASCII `eq_ignore_ascii_case` misses Cyrillic/Greek case pairs, which
+/// changes `MorfologikSpellerRule.calcSpellerSuggestions`' `onlyCaseDiffers`
+/// and therefore the suggestion tiers).
+fn java_equals_ignore_case(a: &str, b: &str) -> bool {
+    let mut a_chars = a.chars();
+    let mut b_chars = b.chars();
+    loop {
+        match (a_chars.next(), b_chars.next()) {
+            (None, None) => return true,
+            (Some(c1), Some(c2)) => {
+                if c1 != c2 && java_upper(c1) != java_upper(c2) && java_lower(c1) != java_lower(c2)
+                {
+                    return false;
+                }
+            }
+            _ => return false,
+        }
+    }
+}
+
+/// `Character.toUpperCase(char)`: the char itself when the mapping is not
+/// one-to-one (e.g. `ß`).
+fn java_upper(c: char) -> char {
+    let mut it = c.to_uppercase();
+    let first = it.next().unwrap_or(c);
+    if it.next().is_none() {
+        first
+    } else {
+        c
+    }
+}
+
+/// `Character.toLowerCase(char)`: the char itself when the mapping is not
+/// one-to-one.
+fn java_lower(c: char) -> char {
+    let mut it = c.to_lowercase();
+    let first = it.next().unwrap_or(c);
+    if it.next().is_none() {
+        first
+    } else {
+        c
     }
 }
 

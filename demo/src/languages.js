@@ -89,6 +89,10 @@ const LITHUANIAN = {
 const CRIMEAN_TATAR = {
   sample: "Terekniñ qarşı oturdı. Meclis toplaşuvı olıp keçti.",
 };
+const BELARUSIAN = {
+  sample:
+    "З большага, гэта быў добры дзень. Вялікая айчынная Вайна — гэта тэрмін. кампутар",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -118,6 +122,7 @@ export const LANGUAGES = [
   { code: "tl-PH", pack: "tl", label: "Tagalog", size: "0.53 MB", ...TAGALOG },
   { code: "lt-LT", pack: "lt", label: "Lietuvių", size: "0.41 MB", ...LITHUANIAN },
   { code: "crh-UA", pack: "crh", label: "Qırımtatar tili", size: "2.7 MB", ...CRIMEAN_TATAR },
+  { code: "be-BY", pack: "be", label: "Беларуская", size: "1.1 MB", ...BELARUSIAN },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.1 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.7 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.35 MB", ...GUARANI },

@@ -30,6 +30,7 @@ re-runs the Rust side and diffs against the golden.
 | br | `br-full.txt` (1,835) | `br-full.java.tsv` |
 | tl | `tl-full.txt` (99) | `tl-full.java.tsv` |
 | crh | `crh-full.txt` (98) | `crh-full.java.tsv` |
+| be | `be-full.txt` (161) | `be-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a

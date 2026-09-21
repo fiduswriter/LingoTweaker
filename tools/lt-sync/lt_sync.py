@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -149,6 +149,15 @@ MAVEN_ARTIFACTS = {
         "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom",
     },
+    # `MorfologikBelarusianSpellerRule`: the `be_BY` dictionary is not in the
+    # checkout, only in this artifact (CC-BY-SA-4.0 per the POM -> owner/legal
+    # review, see THIRD_PARTY_NOTICES.md).
+    "linguistics.grammardb.spell.languagetool-1.0.2.jar": {
+        "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
+        "license_verified": False,
+        "license_source": f"{MAVEN_CENTRAL}/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom",
+    },
     "asturian-pos-dict-0.1.jar": {
         "coords": "org.languagetool:asturian-pos-dict:0.1",
         # POM: "GNU GENERAL PUBLIC LICENSE Version 3", data based on Morphy;
@@ -198,6 +207,11 @@ JAR_EXTRACTIONS = {
         "org/languagetool/resource/crh/crimean_tatar_synth.dict_tags.txt": "crh/dictionaries/crimean_tatar_synth_tags.txt",
         "org/languagetool/resource/crh/hunspell/crh_UA.dict": "crh/hunspell/crh_UA.dict",
         "org/languagetool/resource/crh/hunspell/crh_UA.info": "crh/hunspell/crh_UA.info",
+    },
+    # `MorfologikBelarusianSpellerRule` dictionary (`/be/hunspell/be_BY.dict`).
+    "linguistics.grammardb.spell.languagetool-1.0.2.jar": {
+        "org/languagetool/resource/be/hunspell/be_BY.dict": "be/hunspell/be_BY.dict",
+        "org/languagetool/resource/be/hunspell/be_BY.info": "be/hunspell/be_BY.info",
     },
     "asturian-pos-dict-0.1.jar": {
         "org/languagetool/resource/ast/asturian.dict": "ast/dictionaries/asturian.dict",
@@ -1215,7 +1229,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

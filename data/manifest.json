@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 784,
+  "file_count": 797,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -181,6 +181,144 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/hunspell/be_BY.dict",
+      "sha256": "67dbaae9f09c2352ad645462407b5becf47466225608b4cd9bbc28daad4444c6",
+      "size": 781594,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
+        "artifact_sha256": "1d1a55e905faa9740d648144cf05c4a460f0f26416d2ee01157bad0877be31c2",
+        "artifact_inner_path": "org/languagetool/resource/be/hunspell/be_BY.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom"
+      }
+    },
+    {
+      "path": "be/hunspell/be_BY.info",
+      "sha256": "68497eca22b2f8679e6f43cafbef8013e21a3dd017da607a9a4b2cab34571d6a",
+      "size": 568,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
+        "artifact_sha256": "1d1a55e905faa9740d648144cf05c4a460f0f26416d2ee01157bad0877be31c2",
+        "artifact_inner_path": "org/languagetool/resource/be/hunspell/be_BY.info",
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom"
+      }
+    },
+    {
+      "path": "be/hunspell/ignore.txt",
+      "sha256": "295f528b0c046be215ff549c71ef9f00fccafcce63f21f60005f8dd3b24c3805",
+      "size": 2125,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/rules/grammar.xml",
+      "sha256": "4a3bb503bd4738e149385be73891c10a68dc748afc881bb6543bdf2b9e83b52c",
+      "size": 66925,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/rules/be/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/rules/replace.txt",
+      "sha256": "12d793be4f43e8b302bec3681bea1cf1283ebed6c7091bfd94fef6e3f5e144ff",
+      "size": 25127,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/rules/be/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/words/added.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/words/common_words.txt",
+      "sha256": "dd02259da2a71768c78209c071779317a8c83f0ff9fd80bc56bd1c75e1c0c60e",
+      "size": 153242,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "be/words/specific_case.txt",
+      "sha256": "86420bf487ddba60016d4abc824744f60d1c1d81ce448c5e55a6a69c6c665bbc",
+      "size": 3571,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/resource/be/specific_case.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
@@ -5215,6 +5353,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_be.properties",
+      "sha256": "402d2b93e870909b2db98afba2d5f4e06a0987d76e5f15099898568d6b7e666d",
+      "size": 43949,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/be/src/main/resources/org/languagetool/MessagesBundle_be.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle_br.properties",
       "sha256": "1eece19a9d166ba71d04302e41f53bb769411ce000d2172c3b2e7ed7bffb0668",
       "size": 16367,
@@ -8998,5 +9147,5 @@
       }
     }
   ],
-  "generated_by": "tools/lt-sync/lt_sync.py vendor-external"
+  "generated_by": "tools/lt-sync/lt_sync.py import"
 }

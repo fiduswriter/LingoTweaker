@@ -851,6 +851,44 @@ fn translate_comma_message_lt(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Belarusian `MessagesBundle_be` strings.
+pub fn check_sentence_be(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Тыпаграфіка".to_string();
+        m.description = "Прабелы перад коскай або перад/пасля дужак".to_string();
+        m.message = translate_comma_message_be(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_be` bundle.
+fn translate_comma_message_be(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Не стаўце прабел пасля левай дужкі".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Не стаўце прабел перад правай дужкай".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Не стаўце прабел з абодвух бакоў сімвала двукосся".to_string()
+        }
+        "Put a space after the comma." => "Пастаўце прабел пасля коскі".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Пастаўце прабел пасля коскі, але не перад ёй".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Не стаўце прабел пасля заканчэння сказа".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],

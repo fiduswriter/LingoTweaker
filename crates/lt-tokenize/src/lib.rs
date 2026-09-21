@@ -4,6 +4,7 @@
 //! Parity with LT's `SRXSentenceTokenizer`/English word tokenizer is the P1.1
 //! deliverable; this module defines the offset contract everything else uses.
 
+pub mod belarusian;
 pub mod breton;
 pub mod catalan;
 pub mod crimean_tatar;
@@ -23,6 +24,7 @@ pub mod srx;
 pub mod tagalog;
 pub mod wordtokenizer;
 
+pub use belarusian::BelarusianWordTokenizer;
 pub use breton::BretonWordTokenizer;
 pub use catalan::CatalanWordTokenizer;
 pub use crimean_tatar::CrimeanTatarWordTokenizer;

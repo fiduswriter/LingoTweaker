@@ -374,3 +374,15 @@ pub(crate) fn check_with(sentences: &[AnalyzedSentence], strings: &Strings) -> V
     }
     rule_matches
 }
+
+/// `SentenceWhitespaceRule` with the Belarusian `MessagesBundle_be` strings.
+pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const BE_STRINGS: Strings = Strings {
+        description: "Адсутнічае прабел паміж сказамі",
+        repeated_message: "Магчымая памылка друку: вы паўтарылі прабел",
+        add_space_message: "Дадайце прабел паміж сказамі",
+        category_name: "Тыпаграфіка",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &BE_STRINGS)
+}

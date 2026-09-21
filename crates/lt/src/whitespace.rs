@@ -313,3 +313,13 @@ fn check_with(
     }
     rule_matches
 }
+
+/// `MultipleWhitespaceRule` with the Belarusian `MessagesBundle_be` strings.
+pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Паўтарэнне прабелаў (дрэннае фарматаванне)",
+        "Магчымая памылка друку: вы паўтарылі прабел",
+        ("TYPOGRAPHY", "Тыпаграфіка"),
+    )
+}

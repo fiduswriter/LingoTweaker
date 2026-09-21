@@ -278,3 +278,21 @@ fn check_impl(
     }
     rule_matches
 }
+
+/// `Belarusian.getRelevantRules`: `new LongSentenceRule(messages, userConfig,
+/// 50)` (`MessagesBundle_be` `long_sentence_rule_desc`/`_msg2`).
+pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const BE_MAX_WORDS: usize = 50;
+    let desc = format!("Чытэльнасць: сказ даўжынёй больш за {BE_MAX_WORDS} слоў");
+    let msg = format!(
+        "Гэты сказ даўжынёй больш за {BE_MAX_WORDS} слоў за пазначаную пазіцыю, паспрабуйце разбіць яго на часткі"
+    );
+    check_impl(
+        sentences,
+        RULE_ID,
+        &desc,
+        &msg,
+        ("STYLE", "Стыль"),
+        BE_MAX_WORDS,
+    )
+}
