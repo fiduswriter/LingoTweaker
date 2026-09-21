@@ -1,17 +1,18 @@
 //! Swedish engine tests: stage-1 XML wiring state plus Java-probed
 //! built-in-rule and rule-class values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/sv/probe-rule.sh`, `scripts/oracle/sv/check-diff-sv.sh`)
-//! print UTF-16 code units. Every probe sentence below uses real Swedish
-//! orthography (ä/ö/å), so the two formats differ and both are stated per
-//! case. The speller suggestions are the full Java `HunspellRule`
-//! suggestion list (the native suggestion engine is ported, D-…); they must
-//! preserve diacritics.
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/sv/probe-rule.sh`,
+//! `scripts/oracle/sv/check-diff-sv.sh`). The speller suggestions are the
+//! full Java `HunspellRule` suggestion list (the native suggestion engine is
+//! ported, D-…); they must preserve diacritics.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::{assert_utf16, assert_utf16_range};
 
 fn engine_guard() -> MutexGuard<'static, ()> {
     static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
@@ -84,15 +85,14 @@ fn swedish_engine_state() {
     );
 }
 
-/// `sv.CompoundRule` (`SV_COMPOUNDS`), Java probe: `Detta är ett e mail.`
-/// UTF-16 13..19, UTF-8 14..20 (`ä` is one extra byte) -> `e-mail`.
+/// `sv.CompoundRule` (`SV_COMPOUNDS`), Java probe -> `e-mail`.
 #[test]
 fn swedish_compound_rule() {
     let _guard = engine_guard();
-    let matches = one("Detta är ett e mail.", "SV_COMPOUNDS");
+    let text = "Detta är ett e mail.";
+    let matches = one(text, "SV_COMPOUNDS");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 14);
-    assert_eq!(matches[0].range.end, 20);
+    assert_utf16(text, &matches[0], (13, 19));
     assert_eq!(
         matches[0].message,
         "Dessa ord skrivs samman med bindestreck."
@@ -100,19 +100,14 @@ fn swedish_compound_rule() {
     assert_eq!(suggestions(&matches[0]), vec!["e-mail"]);
 }
 
-/// `sv.WordCoherencyRule` (`SV_WORD_COHERENCY`), Java probe:
-/// `Vi använder facett och fasett om varandra.` UTF-16 23..29, UTF-8 24..30
-/// (`ä` shifts the byte offset) -> `facett`.
+/// `sv.WordCoherencyRule` (`SV_WORD_COHERENCY`), Java probe -> `facett`.
 #[test]
 fn swedish_word_coherency() {
     let _guard = engine_guard();
-    let matches = one(
-        "Vi använder facett och fasett om varandra.",
-        "SV_WORD_COHERENCY",
-    );
+    let text = "Vi använder facett och fasett om varandra.";
+    let matches = one(text, "SV_WORD_COHERENCY");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 24);
-    assert_eq!(matches[0].range.end, 30);
+    assert_utf16(text, &matches[0], (23, 29));
     assert_eq!(
         matches[0].message,
         "Använd endast en av stavningsvarianterna 'fasett' och 'facett' i en och samma text."
@@ -120,15 +115,14 @@ fn swedish_word_coherency() {
     assert_eq!(suggestions(&matches[0]), vec!["facett"]);
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Det är en mening , här.`
-/// UTF-16 16..18, UTF-8 17..19 (`ä` adds one byte).
+/// `CommaWhitespaceRule` (1), Java probe.
 #[test]
 fn swedish_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Det är en mening , här.", "COMMA_PARENTHESIS_WHITESPACE");
+    let text = "Det är en mening , här.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 17);
-    assert_eq!(matches[0].range.end, 19);
+    assert_utf16(text, &matches[0], (16, 18));
     assert_eq!(
         matches[0].message,
         "Lägg till ett blanksteg efter kommatecknet, men inte före."
@@ -136,69 +130,67 @@ fn swedish_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `Det är en mening..`
-/// UTF-16 16..18, UTF-8 17..19.
+/// `DoublePunctuationRule` (2), Java probe.
 #[test]
 fn swedish_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Det är en mening..", "DOUBLE_PUNCTUATION");
+    let text = "Det är en mening..";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 17);
-    assert_eq!(matches[0].range.end, 19);
+    assert_utf16(text, &matches[0], (16, 18));
     assert_eq!(matches[0].message, "Dubbla punkter");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
-/// `GenericUnpairedBracketsRule` (3), Java probe: `(Det är en mening.` 0..1
-/// (the match is on the opening bracket, before any non-ASCII byte).
+/// `GenericUnpairedBracketsRule` (3), Java probe (the match is on the opening
+/// bracket, before any non-ASCII byte).
 #[test]
 fn swedish_unpaired_brackets() {
     let _guard = engine_guard();
-    let matches = one("(Det är en mening.", "UNPAIRED_BRACKETS");
+    let text = "(Det är en mening.";
+    let matches = one(text, "UNPAIRED_BRACKETS");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 1);
+    assert_utf16(text, &matches[0], (0, 1));
     assert_eq!(
         matches[0].message,
         "Grupperingssymboler: ')' ser ut att saknas"
     );
 }
 
-/// `UppercaseSentenceStartRule` (6), Java probe: `det är en mening.` 0..3.
+/// `UppercaseSentenceStartRule` (6), Java probe.
 #[test]
 fn swedish_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("det är en mening.", "UPPERCASE_SENTENCE_START");
+    let text = "det är en mening.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 3);
+    assert_utf16(text, &matches[0], (0, 3));
     assert_eq!(matches[0].message, "Meningen börjar inte med stor bokstav");
     assert_eq!(suggestions(&matches[0]), vec!["Det"]);
 }
 
-/// `MultipleWhitespaceRule` (10), Java probe: `Det  är en mening.` 3..5.
+/// `MultipleWhitespaceRule` (10), Java probe.
 #[test]
 fn swedish_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Det  är en mening.", "WHITESPACE_RULE");
+    let text = "Det  är en mening.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 3);
-    assert_eq!(matches[0].range.end, 5);
+    assert_utf16(text, &matches[0], (3, 5));
     assert_eq!(
         matches[0].message,
         "Möjligt korrekturfel: du upprepade ett blanktecken"
     );
 }
 
-/// `SentenceWhitespaceRule` (11), Java probe:
-/// `Det är en mening.Det är en till.` UTF-16 17..20, UTF-8 18..21 -> ` Det`.
+/// `SentenceWhitespaceRule` (11), Java probe -> ` Det`.
 #[test]
 fn swedish_sentence_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Det är en mening.Det är en till.", "SENTENCE_WHITESPACE");
+    let text = "Det är en mening.Det är en till.";
+    let matches = one(text, "SENTENCE_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 18);
-    assert_eq!(matches[0].range.end, 21);
+    assert_utf16(text, &matches[0], (17, 20));
     assert_eq!(
         matches[0].message,
         "Lägg till ett blanksteg mellan meningarna."
@@ -208,15 +200,15 @@ fn swedish_sentence_whitespace() {
 
 /// `HunspellRule` (4) with real Swedish misspellings. Java probe
 /// (`check-diff-sv.sh`): full `getSuggestedReplacements` lists, including
-/// diacritic-preserving candidates; UTF-16/UTF-8 offsets are stated per case.
+/// diacritic-preserving candidates.
 #[test]
 fn swedish_speller() {
     let _guard = engine_guard();
 
-    let matches = one("Vi tar tesst fem myror.", "HUNSPELL_RULE");
+    let text = "Vi tar tesst fem myror.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 7);
-    assert_eq!(matches[0].range.end, 12);
+    assert_utf16(text, &matches[0], (7, 12));
     assert_eq!(matches[0].message, "Hittat ett möjligt stavfel.");
     assert_eq!(matches[0].match_type, "UnknownWord");
     assert_eq!(
@@ -224,21 +216,20 @@ fn swedish_speller() {
         vec!["tests", "test", "estet", "restes", "stress", "tes"]
     );
 
-    let matches = one("Det var myket bra.", "HUNSPELL_RULE");
+    let text = "Det var myket bra.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 13);
+    assert_utf16(text, &matches[0], (8, 13));
     assert_eq!(
         suggestions(&matches[0]),
         vec!["mycket", "dyket", "tyket", "myset", "byket"]
     );
 
-    // `härr`: Java UTF-16 7..11, UTF-8 8..13 (`ä` adds one byte); the
-    // suggestions preserve `ä`/`ö` (`här`, `härar`, `märr`, `kärr`, ...).
-    let matches = one("Han är härr i staden.", "HUNSPELL_RULE");
+    // The suggestions preserve `ä`/`ö` (`här`, `härar`, `märr`, `kärr`, ...).
+    let text = "Han är härr i staden.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 13);
+    assert_utf16(text, &matches[0], (7, 11));
     assert_eq!(
         suggestions(&matches[0]),
         vec![
@@ -248,26 +239,20 @@ fn swedish_speller() {
     );
 }
 
-/// XML rule `efter-hand` (`grammar.xml`), Java probe: with real orthography
-/// `Det visade sig efterhand att orden borde särskrivas.` the match is
-/// UTF-16 15..24 == UTF-8 15..24 (all-ASCII span) -> `efter hand`.
+/// XML rule `efter-hand` (`grammar.xml`), Java probe -> `efter hand`.
 #[test]
 fn swedish_xml_efter_hand() {
     let _guard = engine_guard();
-    let matches = one(
-        "Det visade sig efterhand att orden borde särskrivas.",
-        "efter-hand",
-    );
+    let text = "Det visade sig efterhand att orden borde särskrivas.";
+    let matches = one(text, "efter-hand");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 15);
-    assert_eq!(matches[0].range.end, 24);
+    assert_utf16(text, &matches[0], (15, 24));
     assert_eq!(suggestions(&matches[0]), vec!["efter hand"]);
 }
 
 /// Long paragraph with real Swedish orthography. Java probe
-/// (`check-diff-sv.sh`) yields exactly five matches, with the UTF-8 byte
-/// offsets below (UTF-16 in parentheses where they differ).
+/// (`check-diff-sv.sh`) yields exactly five matches.
 #[test]
 fn swedish_long_paragraph() {
     let _guard = engine_guard();
@@ -280,24 +265,25 @@ fn swedish_long_paragraph() {
         plocka bär. En dag såg de en älg som stod alldeles stilla.. Flickan blev \
         myket rädd, men katten tesst fram och nosade på djuret. Efterhand vande \
         sig alla vid varandra och de levde lyckliga i många år.";
-    let matches: Vec<(String, usize, usize)> = sv
+    let matches: Vec<(String, lt::TextRange)> = sv
         .check(text)
         .expect("check")
         .matches
         .into_iter()
-        .map(|m| (m.rule_id, m.range.start, m.range.end))
+        .map(|m| (m.rule_id, m.range))
         .collect();
-    assert_eq!(
-        matches,
-        vec![
-            ("COMMA_PARENTHESIS_WHITESPACE".into(), 64, 66),
-            ("DOUBLE_PUNCTUATION".into(), 201, 203),
-            ("HUNSPELL_RULE".into(), 217, 222),
-            ("HUNSPELL_RULE".into(), 241, 246),
-            ("efter-hand".into(), 275, 284),
-        ],
-        "{matches:?}"
-    );
+    let expected = [
+        ("COMMA_PARENTHESIS_WHITESPACE", (63, 65)),
+        ("DOUBLE_PUNCTUATION", (196, 198)),
+        ("HUNSPELL_RULE", (212, 217)),
+        ("HUNSPELL_RULE", (235, 240)),
+        ("efter-hand", (268, 277)),
+    ];
+    assert_eq!(matches.len(), expected.len(), "{matches:?}");
+    for ((rule, range), (want_rule, want_range)) in matches.iter().zip(expected) {
+        assert_eq!(rule, want_rule, "{matches:?}");
+        assert_utf16_range(text, *range, want_range);
+    }
 }
 
 /// The `BaseTagger`-derived `SwedishTagger` tags known words.
