@@ -2,13 +2,16 @@
 //! values.
 //!
 //! Stage gates follow internal development notes: this file pins the
-//! progress metric and gets updated by each stage. Offsets are UTF-8 bytes
-//! (the engine format); the Java probes (`scripts/oracle/nl/probe-rule.sh`,
-//! pinned LT build) print UTF-16 code units, converted in the comments.
+//! progress metric and gets updated by each stage. Probe offsets are the
+//! Java UTF-16 code units and are asserted with the `common::assert_utf16`
+//! helper (`scripts/oracle/nl/probe-rule.sh`, pinned LT build).
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::{assert_utf16, assert_utf16_range};
 
 /// One engine at a time: the Dutch engines hold the tagger dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -96,9 +99,10 @@ fn dutch_stage3b_filters_match_java() {
             .unwrap_or_else(|| panic!("{rule} did not match {text:?}"))
     };
 
-    // DateCheckFilter: Java 0..9, "Dinsdag 7|Maandag 6"
-    let m = check("Maandag 7 oktober 2014.", "NL_DATE_WEEKDAY");
-    assert_eq!((m.range.start, m.range.end), (0, 9));
+    // DateCheckFilter: "Dinsdag 7|Maandag 6"
+    let text = "Maandag 7 oktober 2014.";
+    let m = check(text, "NL_DATE_WEEKDAY");
+    assert_utf16(text, &m, (0, 9));
     assert_eq!(
         m.message,
         "7 oktober 2014 is geen maandag, maar een dinsdag."
@@ -106,29 +110,31 @@ fn dutch_stage3b_filters_match_java() {
     let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
     assert_eq!(values, vec!["Dinsdag 7", "Maandag 6"]);
 
-    // CompoundFilter: Java 14..30 "quasinauwkeurig" / 14..28 "quasi-irritant"
-    let m = check("Deze regel is quasi nauwkeurig.", "QUASI_LOS");
-    assert_eq!((m.range.start, m.range.end), (14, 30));
+    // CompoundFilter: "quasinauwkeurig" / "quasi-irritant"
+    let text = "Deze regel is quasi nauwkeurig.";
+    let m = check(text, "QUASI_LOS");
+    assert_utf16(text, &m, (14, 30));
     assert_eq!(m.suggestions[0].value, "quasinauwkeurig");
-    let m = check("Deze regel is quasi irritant.", "QUASI_LOS");
-    assert_eq!((m.range.start, m.range.end), (14, 28));
+    let text = "Deze regel is quasi irritant.";
+    let m = check(text, "QUASI_LOS");
+    assert_utf16(text, &m, (14, 28));
     assert_eq!(m.suggestions[0].value, "quasi-irritant");
 
-    // DutchNumberInWordFilter: Java 4..9 "goede"
-    let m = check("Een g0ede morgen!", "CIJFERS_IN_WOORD");
-    assert_eq!((m.range.start, m.range.end), (4, 9));
+    // DutchNumberInWordFilter: "goede"
+    let text = "Een g0ede morgen!";
+    let m = check(text, "CIJFERS_IN_WOORD");
+    assert_utf16(text, &m, (4, 9));
     assert_eq!(m.message, "Mogelijke tikfout.");
     assert_eq!(m.suggestions[0].value, "goede");
 
-    // DutchSuppressMisspelledSuggestionsFilter: Java 3..12 / 10..27
-    let m = check("De pia- nist speelt door.", "NL_AFGEBROKEN_WOORD");
-    assert_eq!((m.range.start, m.range.end), (3, 12));
+    // DutchSuppressMisspelledSuggestionsFilter
+    let text = "De pia- nist speelt door.";
+    let m = check(text, "NL_AFGEBROKEN_WOORD");
+    assert_utf16(text, &m, (3, 12));
     assert_eq!(m.suggestions[0].value, "pianist");
-    let m = check(
-        "Het is de garan- tieperiode die niet klopt.",
-        "NL_AFGEBROKEN_WOORD",
-    );
-    assert_eq!((m.range.start, m.range.end), (10, 27));
+    let text = "Het is de garan- tieperiode die niet klopt.";
+    let m = check(text, "NL_AFGEBROKEN_WOORD");
+    assert_utf16(text, &m, (10, 27));
     assert_eq!(m.suggestions[0].value, "garantieperiode");
 }
 
@@ -155,13 +161,14 @@ fn dutch_speller_matches_java() {
     };
 
     // ttets: the full Java suggestion list (case variants included)
-    let result = engine.check("Dit is een ttets.").unwrap();
+    let text = "Dit is een ttets.";
+    let result = engine.check(text).unwrap();
     let m = result
         .matches
         .iter()
         .find(|m| m.rule_id == "MORFOLOGIK_RULE_NL_NL")
         .unwrap();
-    assert_eq!((m.range.start, m.range.end), (11, 16));
+    assert_utf16(text, m, (11, 16));
     assert_eq!(m.message, "Er is een mogelijke spelfout gevonden.");
     let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
     assert_eq!(
@@ -190,19 +197,21 @@ fn dutch_speller_matches_java() {
     assert!(speller("De regenboog is mooi.").is_empty());
     assert!(speller("Een fietsenmaker repareert fietsen.").is_empty());
     assert!(speller("De hondenbelasting is afgeschaft.").is_empty());
-    let matches = speller("De politieeenheid werkt hard.");
+    let text = "De politieeenheid werkt hard.";
+    let matches = speller(text);
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (3, 17));
+    assert_utf16(text, &matches[0], (3, 17));
     assert_eq!(matches[0].suggestions[0].value, "politie-eenheid");
 
     // English words keep the Java behavior (the `_english_ignore_` tag only
     // suppresses them where the disambiguation sets it)
-    let matches = speller("Dit is a example of the government.");
-    let ids: Vec<(usize, usize)> = matches
-        .iter()
-        .map(|m| (m.range.start, m.range.end))
-        .collect();
-    assert_eq!(ids, vec![(9, 16), (20, 23), (24, 34)]);
+    let text = "Dit is a example of the government.";
+    let matches = speller(text);
+    let ranges: Vec<lt::TextRange> = matches.iter().map(|m| m.range).collect();
+    assert_eq!(ranges.len(), 3, "{matches:?}");
+    for (range, want) in ranges.iter().zip([(9, 16), (20, 23), (24, 34)]) {
+        assert_utf16_range(text, *range, want);
+    }
 }
 
 /// Stage-2 `CompoundAcceptor`, pinned from
@@ -305,33 +314,32 @@ fn dutch_tagger_heuristics_match_java() {
 /// Stage-1 core built-ins with the Dutch `MessagesBundle_nl` strings, probed
 /// against the pinned Java build (`scripts/oracle/nl/probe-rule.sh nl-NL`,
 /// one rule enabled at a time, 2026-09-21). The probes use real Dutch
-/// orthography (é/ü/ï, `IJ`), so the Java UTF-16 offsets and the UTF-8 engine
-/// offsets differ; both are stated per case.
+/// orthography (é/ü/ï, `IJ`); offsets are asserted in Java UTF-16 units.
 #[test]
 fn dutch_core_rules_match_java() {
     let _guard = engine_guard();
 
-    // UPPERCASE_SENTENCE_START (4): `één appel is lekker.`
-    // Java UTF-16 0..3, UTF-8 0..5 (`é` is two bytes); suggestion "Één"
+    // UPPERCASE_SENTENCE_START (4): suggestion "Één"
     let Some(engine) = engine_with_rules("nl-NL", &["UPPERCASE_SENTENCE_START"]) else {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("één appel is lekker.").unwrap();
+    let text = "één appel is lekker.";
+    let result = engine.check(text).unwrap();
     let m = &result.matches[0];
     assert_eq!(m.rule_id, "UPPERCASE_SENTENCE_START");
-    assert_eq!((m.range.start, m.range.end), (0, 5));
+    assert_utf16(text, m, (0, 3));
     assert_eq!(m.message, "Deze zin begint niet met een hoofdletter");
     assert_eq!(m.suggestions[0].value, "Één");
 
-    // the `IJ` digraph: `ijs is lekker.` Java 0..3, suggestion "Ijs"
-    let result = engine.check("ijs is lekker.").unwrap();
+    // the `IJ` digraph: suggestion "Ijs"
+    let text = "ijs is lekker.";
+    let result = engine.check(text).unwrap();
     let m = &result.matches[0];
-    assert_eq!((m.range.start, m.range.end), (0, 3));
+    assert_utf16(text, m, (0, 3));
     assert_eq!(m.suggestions[0].value, "Ijs");
 
-    // COMMA_PARENTHESIS_WHITESPACE (1): `Het is een reünie , vandaag.`
-    // Java UTF-16 17..19, UTF-8 18..20 (`ü` shifts the byte offset)
+    // COMMA_PARENTHESIS_WHITESPACE (1)
     let Some(engine) = engine_with_rules(
         "nl-NL",
         &["COMMA_PARENTHESIS_WHITESPACE", "DOUBLE_PUNCTUATION"],
@@ -339,51 +347,55 @@ fn dutch_core_rules_match_java() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("Het is een reünie , vandaag.").unwrap();
+    let text = "Het is een reünie , vandaag.";
+    let result = engine.check(text).unwrap();
     let m = result
         .matches
         .iter()
         .find(|m| m.rule_id == "COMMA_PARENTHESIS_WHITESPACE")
         .unwrap();
-    assert_eq!((m.range.start, m.range.end), (18, 20));
+    assert_utf16(text, m, (17, 19));
     assert_eq!(m.message, "Zet een spatie na een komma, maar niet ervoor");
     assert_eq!(m.suggestions[0].value, ",");
 
-    // DOUBLE_PUNCTUATION (2): `Het is mooi,, maar duur.` 11..13
-    let result = engine.check("Het is mooi,, maar duur.").unwrap();
+    // DOUBLE_PUNCTUATION (2)
+    let text = "Het is mooi,, maar duur.";
+    let result = engine.check(text).unwrap();
     let m = result
         .matches
         .iter()
         .find(|m| m.rule_id == "DOUBLE_PUNCTUATION")
         .unwrap();
-    assert_eq!((m.range.start, m.range.end), (11, 13));
+    assert_utf16(text, m, (11, 13));
     assert_eq!(m.message, "Twee opeenvolgende komma's");
     assert_eq!(m.suggestions[0].value, ",");
 
-    // UNPAIRED_BRACKETS (3): `(Het is een reünie.` 0..1, no suggestions
+    // UNPAIRED_BRACKETS (3), no suggestions
     let Some(engine) = engine_with_rules("nl-NL", &["UNPAIRED_BRACKETS"]) else {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("(Het is een reünie.").unwrap();
+    let text = "(Het is een reünie.";
+    let result = engine.check(text).unwrap();
     let m = &result.matches[0];
     assert_eq!(m.rule_id, "UNPAIRED_BRACKETS");
-    assert_eq!((m.range.start, m.range.end), (0, 1));
+    assert_utf16(text, m, (0, 1));
     assert_eq!(
         m.message,
         "Niet-gecombineerd symbool: \")\" lijkt te ontbreken"
     );
     assert!(m.suggestions.is_empty());
 
-    // WHITESPACE_RULE (6, MultipleWhitespaceRule): `Het  is een reünie.` 3..5
+    // WHITESPACE_RULE (6, MultipleWhitespaceRule)
     let Some(engine) = engine_with_rules("nl-NL", &["WHITESPACE_RULE"]) else {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("Het  is een reünie.").unwrap();
+    let text = "Het  is een reünie.";
+    let result = engine.check(text).unwrap();
     let m = &result.matches[0];
     assert_eq!(m.rule_id, "WHITESPACE_RULE");
-    assert_eq!((m.range.start, m.range.end), (3, 5));
+    assert_utf16(text, m, (3, 5));
     assert_eq!(m.message, "Te veel witruimte");
     assert_eq!(m.suggestions[0].value, " ");
 }
@@ -391,8 +403,7 @@ fn dutch_core_rules_match_java() {
 /// `MorfologikDutchSpellerRule` on real Dutch orthography: the diaeresis
 /// misspellings (`reunie`, `beinvloeden`, `financieen`, `ideen`) and the full
 /// Java suggestion lists, which restore ë/ï. Java probe
-/// (`scripts/oracle/nl/check-diff-nl.sh`, 2026-09-21); the word spans are
-/// all-ASCII so UTF-16 == UTF-8.
+/// (`scripts/oracle/nl/check-diff-nl.sh`, 2026-09-21).
 #[test]
 fn dutch_speller_diacritics_match_java() {
     let _guard = engine_guard();
@@ -440,7 +451,7 @@ fn dutch_speller_diacritics_match_java() {
             .iter()
             .find(|m| m.rule_id == "MORFOLOGIK_RULE_NL_NL")
             .unwrap_or_else(|| panic!("no speller match for {text:?}"));
-        assert_eq!((m.range.start, m.range.end), *range, "{text:?}");
+        assert_utf16(text, m, *range);
         assert_eq!(m.message, "Er is een mogelijke spelfout gevonden.");
         let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
         assert_eq!(values, *expected, "{text:?}");
