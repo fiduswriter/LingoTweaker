@@ -197,6 +197,9 @@ fn compile_regex_uncached(
 ) -> Result<TextRegex, String> {
     let pattern = normalize_java_surrogate_escapes(&drop_quantified_anchors(pattern));
     let pattern = normalize_java_octal_escapes(&pattern);
+    // Java `\p{Punct}` is the POSIX (ASCII) punctuation class; the Rust regex
+    // crate maps it to the Unicode `P` category (which includes `„`, `–`, …).
+    let pattern = normalize_java_punct(&pattern);
     // Java allows a literal `-` right after a class escape or nested class
     // inside `[...]` (`[\p{Punct}-…&&[^!\.]]`, Polish `interp`); the Rust
     // regex crate reads it as an invalid range start.
@@ -280,6 +283,17 @@ fn normalize_java_surrogate_escapes(pattern: &str) -> String {
         i += ch.len_utf8();
     }
     out
+}
+
+/// Java's `\p{Punct}`/`\P{Punct}` are the POSIX ASCII punctuation class
+/// `[!-/:-@\[-`{-~]`, not the Unicode `P` category.
+fn normalize_java_punct(pattern: &str) -> String {
+    if !pattern.contains("\\p{Punct}") && !pattern.contains("\\P{Punct}") {
+        return pattern.to_string();
+    }
+    pattern
+        .replace("\\p{Punct}", "[!-/:-@\\[-`{-~]")
+        .replace("\\P{Punct}", "[^!-/:-@\\[-`{-~]")
 }
 
 /// Java allows a literal `-` right after a character-class escape or a nested
@@ -1269,6 +1283,7 @@ pub fn normalize_java_quantifiers(pattern: &str) -> String {
 fn java_regex(pattern: &str) -> Option<FancyRegex> {
     let pattern = normalize_java_quantifiers(pattern);
     let pattern = normalize_java_octal_escapes(&pattern);
+    let pattern = normalize_java_punct(&pattern);
     let pattern = escape_class_hyphens(&pattern);
     let pattern = strip_java_unicode_flags(&pattern);
     if let Ok(re) = FancyRegex::new(&pattern) {

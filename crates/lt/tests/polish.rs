@@ -246,6 +246,30 @@ fn polish_suppress_misspelled_matches_java_probe() {
     assert_eq!(suggestions(&ms[0]), vec!["twórcę"]);
 }
 
+/// Java `\p{Punct}` is the POSIX (ASCII) punctuation class: `BRAK_PRZECINKA_GDY`
+/// must still match when the next token is a typographic quote (`„`), which
+/// the Unicode `P` category would wrongly exclude via `&interp_no_quote;`.
+/// Java-probed with `scripts/oracle/pl/probe-rule.sh`.
+#[test]
+fn polish_ascii_punct_class_matches_java_probe() {
+    let _guard = engine_guard();
+    let Some(pl) = engine_with_rules(&["BRAK_PRZECINKA_GDY"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let text = "Co znajdujemy gdy „spoglądamy” wewnątrz?";
+    let ms: Vec<lt::Match> = pl
+        .check(text)
+        .expect("check")
+        .matches
+        .into_iter()
+        .filter(|m| m.rule_id == "BRAK_PRZECINKA_GDY")
+        .collect();
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16(text, &ms[0]), (3, 17));
+    assert_eq!(suggestions(&ms[0]), vec!["znajdujemy, gdy"]);
+}
+
 /// The stage-3 Java rule classes, Java-probed with
 /// `scripts/oracle/pl/probe-rule.sh` (UTF-16 offsets; ASCII prefixes).
 #[test]
