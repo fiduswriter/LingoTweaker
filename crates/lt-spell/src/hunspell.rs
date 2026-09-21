@@ -1,27 +1,45 @@
 //! Faithful port of the hunspell 1.7.2 spelling checker (`spell()` +
-//! affix/compound/break logic) as used by the legacy German speller
-//! through the native libhunspell binding.
+//! affix/compound/break logic) and suggestion engine (`suggestmgr.cxx`) as
+//! used by the legacy spellers through the native libhunspell binding.
 //!
-//! Scope: everything `hunspell_spell()` needs for the German dictionaries
-//! (`de_DE`/`de_AT`/`de_CH`). Suggestion generation (`suggestmgr`) is not
-//! ported; the German rule takes its suggestions from the morfologik
-//! spellers, like Java does.
+//! Scope: everything `hunspell_spell()`/`hunspell_suggest()` need for the
+//! vendored dictionaries (`de_DE`/`de_AT`/`de_CH`, `gl_ES`, `da_DK`,
+//! `sv_SE`, `nb_NO`, `nrd`, `gug`). Suggestion generation is ported in full
+//! (generators, ranking/order and the n-gram fallback); see the
+//! `SuggestMgr` section below.
 //!
 //! Ported from the upstream hunspell v1.7.2 sources: `hunspell.cxx`
-//! (`spell`, `spell_internal`, `cleanword2`, `checkword`, `spellsharps`),
-//! `affixmgr.cxx` (`prefix_check`, `suffix_check`, `*_twosfx`,
-//! `compound_check`, `parse_affix`, `encodeit`, `condlen`, `isSubset`,
-//! `isRevSubset`, `setcminmax`), `affentry.cxx` (`PfxEntry`/`SfxEntry`
-//! `checkword`/`check_twosfx`, `test_condition`) and `hashmgr.cxx`
-//! (dictionary load incl. `add_hidden_capitalized_word`).
+//! (`spell`, `spell_internal`, `cleanword2`, `checkword`, `spellsharps`,
+//! `suggest`/`suggest_internal`), `affixmgr.cxx` (`prefix_check`,
+//! `suffix_check`, `*_twosfx`, `compound_check`, `expand_rootword`,
+//! `parse_affix`, `encodeit`, `condlen`, `isSubset`, `isRevSubset`,
+//! `setcminmax`), `affentry.cxx` (`PfxEntry`/`SfxEntry`
+//! `checkword`/`check_twosfx`/`add`, `test_condition`), `suggestmgr.cxx`
+//! (`SuggestMgr`, `ngsuggest`, `ngram`/`lcs`) and `hashmgr.cxx`
+//! (dictionary load incl. `add_hidden_capitalized_word`, `hash`).
 //!
-//! Unsupported (erroring at load, so a dictionary that needs them is never
-//! silently mis-checked): `COMPLEXPREFIXES`, `AF`/`AM` flag aliases,
-//! `ICONV`/`OCONV`, `IGNORE`, `COMPOUNDRULE`,
-//! `CHECKCOMPOUNDPATTERN`/`CHECKCOMPOUNDREP`/`CHECKCOMPOUNDTRIPLE`/
-//! `CHECKCOMPOUNDCASE`/`CHECKCOMPOUNDDUP`/`COMPOUNDWORDMAX`. None of them
-//! occur (uncommented) in the German `.aff` files. The `FLAG` modes `char`
-//! (default), `long`, `num` and `UTF-8` are supported (`Flag = u16`).
+//! Affix-directive audit (all vendored `data/*/hunspell/*.aff`):
+//! - implemented: `SET`, `FLAG`, `LANG`, `TRY`, `KEY` (with the QWERTY
+//!   default), `REP`, `MAP`, `BREAK`, `WORDCHARS`, `NOSPLITSUGS`,
+//!   `SUGSWITHDOTS`, `ONLYMAXDIFF`, `MAXDIFF`, `MAXNGRAMSUGS`, `MAXCPDSUGS`,
+//!   `NOSUGGEST`, `NONGRAMSUGGEST`, `SUBSTANDARD`, `FORCEUCASE`, `KEEPCASE`,
+//!   `FORBIDDENWORD`, `NEEDAFFIX`/`PSEUDOROOT`, `ONLYINCOMPOUND`,
+//!   `CIRCUMFIX`, `FULLSTRIP`, `CHECKSHARPS`, `COMPOUNDFLAG`,
+//!   `COMPOUNDBEGIN`/`MIDDLE`/`END`, `COMPOUNDPERMITFLAG`,
+//!   `COMPOUNDFORBIDFLAG`, `COMPOUNDROOT`, `COMPOUNDMIN`, `COMPOUNDWORDMAX`;
+//! - parsed and ignored because no vendored dictionary uses them: `PHONE`,
+//!   `WARN`, `SYLLABLENUM`, `MAXSUGS`, `LEMMA_PRESENT`, `OCONV`, `ICONV`;
+//! - still unsupported (error at load): `COMPLEXPREFIXES`, `AF`/`AM` flag
+//!   aliases, `IGNORE`, `CHECKCOMPOUNDPATTERN`, `CHECKCOMPOUNDCASE`,
+//!   `COMPOUNDMORESUFFIXES` (none occur in the vendored files);
+//! - audited gaps (used by `sv_SE`/`da_DK`, not enforced): `COMPOUNDRULE`
+//!   (13 rules), `CHECKCOMPOUNDTRIPLE`, `SIMPLIFIEDTRIPLE`,
+//!   `CHECKCOMPOUNDDUP`, `CHECKCOMPOUNDREP`. They only ever *reject*
+//!   compounds, so ignoring them can only miss accepted compounds (spelling
+//!   false positives); the vendored corpora show none (D-225).
+//!
+//! The `FLAG` modes `char` (default), `long`, `num` and `UTF-8` are supported
+//! (`Flag = u16`).
 
 use std::path::Path;
 
@@ -484,6 +502,8 @@ struct Aff {
     sugswithdots: bool,
     /// `AffixMgr::langnum` (`LANG`); `0` when unset/unknown.
     langnum: u16,
+    /// `AffixMgr::cpdwordmax` (`COMPOUNDWORDMAX`); `-1` = unlimited.
+    compound_word_max: i32,
 }
 
 /// One `REP` entry (`replentry`): `pattern` with `^`/`$` anchoring stripped,
@@ -543,6 +563,7 @@ impl Default for Aff {
             maxdiff: -1,
             sugswithdots: false,
             langnum: 0,
+            compound_word_max: -1,
         }
     }
 }
@@ -977,13 +998,10 @@ fn parse_directive<'a>(
                 "hunspell directive {kind:?} is not supported by the in-tree checker ({line:?})"
             )));
         }
-        // `COMPOUNDWORDMAX`: the in-tree `compound_check` does not implement
-        // it (same as the other compound rules below), but the directive only
-        // lowers the accepted compound length, so ignoring it cannot cause
-        // false positives; the Danish `da_DK` dictionary declares
-        // `COMPOUNDWORDMAX 2`. Tracked as a known fidelity gap in the
-        // internal notes.
-        "COMPOUNDWORDMAX" => {}
+        // `AffixMgr::cpdwordmax`: lowers the accepted compound word count.
+        "COMPOUNDWORDMAX" => {
+            aff.compound_word_max = it.next().and_then(|v| v.parse().ok()).unwrap_or(-1)
+        }
         // The remaining compound directives are parsed and ignored: the
         // in-tree `compound_check` implements only the German flag-based
         // subset, and the Swedish `sv_SE` dictionary relies on
@@ -2566,7 +2584,11 @@ impl HunspellChecker {
                             .aff
                             .compound_end
                             .is_some_and(|f| entry2.flags.contains(&f)))
-                        && wordnum + 1 < 100
+                        && if self.aff.compound_word_max > 0 {
+                            (wordnum + 1) < self.aff.compound_word_max as usize
+                        } else {
+                            wordnum + 1 < 100
+                        }
                     {
                         if self.cpdwordpair_check(word) {
                             return None;
@@ -4573,6 +4595,18 @@ mod tests {
         assert_eq!(c.suggest("plnt"), vec!["planet"]);
         assert_eq!(c.suggest("ctt"), vec!["cat", "cut"]);
         assert_eq!(c.suggest("fsh"), vec!["fish"]);
+    }
+
+    #[test]
+    fn compound_word_max() {
+        let dic = "3\nfoo/A\nbar/M\nbaz/B\n";
+        let unlimited =
+            "SET UTF-8\nCOMPOUNDBEGIN A\nCOMPOUNDMIDDLE M\nCOMPOUNDEND B\nCOMPOUNDMIN 1\n";
+        let max2 = "SET UTF-8\nCOMPOUNDBEGIN A\nCOMPOUNDMIDDLE M\nCOMPOUNDEND B\nCOMPOUNDMIN 1\nCOMPOUNDWORDMAX 2\n";
+        let c = HunspellChecker::from_strs(unlimited, dic).unwrap();
+        assert!(c.spell("foobarbaz"));
+        let c = HunspellChecker::from_strs(max2, dic).unwrap();
+        assert!(!c.spell("foobarbaz"));
     }
 
     #[test]
