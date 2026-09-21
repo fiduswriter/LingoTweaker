@@ -63,6 +63,9 @@ pub struct HunspellSpellingConfig {
     pub morfologik_dict: Option<(&'static str, &'static str)>,
     /// `0` disables suggestions.
     pub max_suggestions: usize,
+    /// Use the ported native hunspell `suggest()` (affix/compound/REP/MAP
+    /// generators) instead of the bounded edit-distance search.
+    pub native_suggestions: bool,
 }
 
 /// A Hunspell speller wired as an LT spelling rule.
@@ -293,6 +296,9 @@ impl HunspellSpellingRule {
     /// `.dict` is configured, otherwise the bounded edit-distance search over
     /// the candidate word list.
     fn suggestions(&self, word: &str) -> Vec<Suggestion> {
+        if self.config.native_suggestions {
+            return self.native_suggestions(word);
+        }
         if word.chars().count() > MAX_SUGGESTION_WORD_LENGTH {
             return Vec::new();
         }
@@ -300,6 +306,27 @@ impl HunspellSpellingRule {
             return self.morfologik_suggestions(speller, word);
         }
         self.edit_distance_suggestions(word)
+    }
+
+    /// Native hunspell `suggest()`, plus `HunspellRule`'s post-processing
+    /// (`filterSuggestions`: drop prohibited replacements, dedup). The list is
+    /// not capped here: hunspell itself caps at `MAXSUGGESTION` (15), matching
+    /// the legacy engine.
+    fn native_suggestions(&self, word: &str) -> Vec<Suggestion> {
+        let mut out: Vec<Suggestion> = Vec::new();
+        for value in self.checker.suggest(word) {
+            if self.is_prohibited(&value) {
+                continue;
+            }
+            if out.iter().any(|s| s.value == value) {
+                continue;
+            }
+            out.push(Suggestion {
+                value,
+                short_description: None,
+            });
+        }
+        out
     }
 
     /// Morfologik suggestions (`MorfologikSpeller.getSuggestions`, which

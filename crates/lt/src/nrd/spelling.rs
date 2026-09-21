@@ -29,6 +29,7 @@ impl NordumSpellingRule {
                 suggestion_file: Some("nrd_core.dic"),
                 morfologik_dict: None,
                 max_suggestions: 5,
+                native_suggestions: false,
             },
         )?))
     }

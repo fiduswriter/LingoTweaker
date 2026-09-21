@@ -32,6 +32,7 @@ impl NorwegianSpellingRule {
                 suggestion_file: None,
                 morfologik_dict: Some(("no/dictionaries/no.dict", "no/dictionaries/no.info")),
                 max_suggestions: 5,
+                native_suggestions: false,
             },
         )?))
     }

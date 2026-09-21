@@ -42,6 +42,7 @@ impl SwedishSpellingRule {
                 suggestion_file: None,
                 morfologik_dict: None,
                 max_suggestions: 5,
+                native_suggestions: true,
             },
         )?))
     }

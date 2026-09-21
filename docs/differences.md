@@ -198,21 +198,31 @@ Reproduce:
 `scripts/oracle/pt/probe-rule.sh pt-PT "Vou estudar enquanto possa ser possível." PODER_SER_POSSIVEL`.
 This is the only remaining Portuguese corpus field diff.
 
-## 7. `HUNSPELL_RULE` (Galician) suggestion ranking not ported (83 corpus field diffs)
+## 7. `HUNSPELL_RULE` (Galician) n-gram fallback not ported (60 corpus field diffs)
 
 Unlike the other entries this is a **known limitation, not a correctness
 judgement**: the Galician match set is identical to the legacy engine
-(0 only-Java / 0 only-Rust over the 717-example corpus), but the
-`HUNSPELL_RULE` suggestions differ because the in-tree checker produces them
-with a bounded edit-distance search over the `gl_ES.dic` words, while the
-legacy engine calls native `hunspell.suggest` (`suggestmgr.cxx` is not
-ported). The differences are candidate sets and ordering/casing, e.g.:
+(0 only-Java / 0 only-Rust over the 717-example corpus). The native hunspell
+suggestion engine (`suggestmgr.cxx`, hunspell 1.7.2) is now ported into
+`crates/lt-spell` (`HunspellChecker::suggest`): the capitalization, `REP`,
+`MAP`, adjacent/long swap, add/remove/move char, double-two-chars and
+two-word generators, their iteration order, the compound-aware candidate
+`checkword`, the `TRY`/`KEY` tables (with hunspell's QWERTY `KEY` default)
+and the `Hunspell::suggest` wrapper (case restoration, `SUGSWITHDOTS`,
+keepcase filtering, dedup, dash suggestions) all reproduce the legacy
+engine.
 
-- `data/parity/golden/gl-full.txt` line 7, token `Hal`:
-  legacy `Cal|Mal|Sal|Tal|Val|Ha|Hala|Hale|Halo|Chal|Haa|Hai|Hao|Han`,
-  Rust `Halo`.
-- line 7, token `Frank`: legacy `Franxa`, Rust `""` (no candidate within the
-  bounded distance).
+The remaining 60 field diffs are the n-gram fallback
+(`SuggestMgr::ngsuggest`), which is deliberately not ported; it walks the
+whole dictionary, expands affixes and scores candidates with n-gram/LCS
+similarity. Where the generator stage finds nothing or fewer candidates, the
+legacy engine appends n-gram suggestions, e.g.:
+
+- line 7, `Hal`: the ported generators give the legacy list
+  `Cal|Mal|Sal|Tal|Val|Ha|Hala|Hale|Halo|Chal|Haa|Hai|Hao|Han` exactly.
+- line 7, `Frank`: legacy `Franxa` (n-gram only); the generators find
+  nothing.
+- `VEDRAS`: ported `…|REDRAS|VEDRA`; legacy appends `VEDRAÑAS` (n-gram).
 
 Reproduce (pinned Java build):
 
@@ -220,10 +230,8 @@ Reproduce (pinned Java build):
 scripts/oracle/gl/probe-speller.sh Hal Frank VEDRAS
 ```
 
-This is the only remaining Galician corpus difference and is pinned exactly
-as `--expect-field-diffs=HUNSPELL_RULE=83` in `scripts/ci/parity.sh`. Porting
-`suggestmgr` (or vendoring a compatible suggestion engine) would remove the
-allowance.
+Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=60` in
+`scripts/ci/parity.sh`. Porting `ngsuggest` would remove the allowance.
 
 ## 8. `AGREEMENT_DEMONSTRATIVE_VERB` (Spanish, hand-authored rule)
 
@@ -325,18 +333,17 @@ engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
   scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
   ```
 
-## 10. `HUNSPELL_RULE` (Danish) suggestion ranking and dotted abbreviations
+## 10. `HUNSPELL_RULE` (Danish) n-gram fallback and dotted abbreviations
 
 Like #7 this is a **known limitation, not a correctness judgement**. The
 Danish corpus (`docs/parity/golden/da-full.txt`, 284 examples) is at
-**2 only-Java / 0 only-Rust / 12 field diffs**, all on `HUNSPELL_RULE`:
+**2 only-Java / 0 only-Rust / 8 field diffs**, all on `HUNSPELL_RULE`:
 
-- 12 field diffs: the suggestions come from the bounded edit-distance search
-  over `da_DK.dic` instead of the legacy native `hunspell.suggest` ranking
-  (`suggestmgr.cxx` is not ported), so both candidate sets and ordering/casing
-  differ, e.g. `tset` (legacy `test|set|ætset|…`, Rust `teet|tiet|tuet`),
-  `1920'erne` (legacy `arne|rene|ene|…`, Rust `Eane|Ene|Erene|Erna|Erni`) and
-  `Treoghalvtreds` (legacy compound suggestions, Rust none).
+- 8 field diffs: the native hunspell suggestion generators are ported (see
+  #7) and match the legacy engine; the remaining diffs are the unported
+  n-gram fallback, e.g. `Treoghalvtreds` (legacy `Halvtredsårsdag|…`, port
+  none) and `Sørnsen` (legacy `Sørensen|Sørenses|Sørejsen|Sørens|Sørenn`,
+  port only `Sørensen`).
 - 2 only-Java: the in-tree `lt-spell` checker accepts a small set of dotted
   abbreviations that native hunspell rejects, e.g. the token `f.kr` in
   `I år 753f.kr. blev Rom grundlagt.` (lines 177/179). The legacy engine flags
@@ -355,39 +362,17 @@ scripts/oracle/da/check-diff-da.sh docs/parity/golden/da-full.txt
 ```
 
 Pinned exactly as `--expect-only-java=HUNSPELL_RULE=2` and
-`--expect-field-diffs=HUNSPELL_RULE=12` in `scripts/ci/parity.sh`. Porting
-`suggestmgr` (or vendoring a compatible suggestion engine) and fixing the
-`lt-spell` dotted-word acceptance would remove the allowance.
+`--expect-field-diffs=HUNSPELL_RULE=8` in `scripts/ci/parity.sh`. Porting
+`ngsuggest` and fixing the `lt-spell` dotted-word acceptance would remove the
+allowance.
 
-## 11. `HUNSPELL_RULE` (Swedish) suggestion ranking not ported (2 corpus field diffs)
+## 11. `HUNSPELL_RULE` (Swedish) suggestion ranking (resolved)
 
-Like #7/#10 this is a **known limitation, not a correctness judgement**. The
-Swedish corpus (`docs/parity/golden/sv-full.txt`, 45 examples) is at
-**0 only-Java / 0 only-Rust / 2 field diffs**, both `HUNSPELL_RULE`
-suggestion lists produced by the bounded edit-distance search over
-`sv_SE.dic` instead of the legacy native `hunspell.suggest` ranking
-(`suggestmgr.cxx` is not ported):
+The native hunspell suggestion engine is ported (see #7), so the Swedish
+corpus (`docs/parity/golden/sv-full.txt`, 45 examples) is now at
+**0 only-Java / 0 only-Rust / 0 field diffs**; the former two
+`HUNSPELL_RULE` suggestion field diffs (`tex`, `API`) match the legacy
+engine byte-for-byte, including the `REP`/`KEY`/`MAP` candidate order, the
+`FORCEUCASE` handling and the `suggestmgr` timer cut. No allowance remains in
+`scripts/ci/parity.sh`.
 
-- `Vi tar tex fem myror.`, token `tex` (7..10): legacy
-  `t.ex.|te|ex|text|tax|tee|ter|tes|sex|lex|teg|kex|te-`, Rust
-  `TEI|Tea|Ted|Tel|Teo`.
-- `Med det nya API:s fördelar, kan du hitta nya lösningar.`, token `API`
-  (12..15): legacy `PI|API:|APA|APP|AVI|AP-|ALI`, Rust `AI|AMI|AP-|API:|APU`.
-
-The match set is identical; the XML rules (32 compiled), the
-`SwedishTagger`/`SwedishSynthesizer`, the `SwedishHybridDisambiguator` order
-(XML rules → `sv/multiwords.txt` chunker), `SV_COMPOUNDS`,
-`SV_WORD_COHERENCY` and the other generic built-ins (CommaWhitespace,
-DoublePunctuation, GenericUnpairedBrackets, UppercaseSentenceStart,
-LongSentence, LongParagraph, MultipleWhitespace, SentenceWhitespace,
-WordRepeatRule) are at parity.
-
-Reproduce (pinned Java build):
-
-```sh
-scripts/oracle/sv/check-diff-sv.sh docs/parity/golden/sv-full.txt
-```
-
-Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=2` in
-`scripts/ci/parity.sh`. Porting `suggestmgr` (or vendoring a compatible
-suggestion engine) would remove the allowance.

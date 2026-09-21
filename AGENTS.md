@@ -48,14 +48,14 @@ runs the affected languages per push/PR (all gated languages when shared code
 changed, no language job for docs-only changes). de/es/it/nl/ca/ro/sk/sl/el must
 be 0 only-Java / 0 only-Rust / 0 field diffs; en allows exactly the one documented
 `ADVERB_VERB_ADVERB_REPETITION` field diff, fr the documented divergences
-#3/#4/#5, pt #6 and gl the documented `HUNSPELL_RULE` = 83 suggestion field
-diffs (#7: same match set, suggestions from the bounded search instead of the
-unported native `hunspell.suggest`); pl the documented known fidelity gaps
+#3/#4/#5, pt #6 and gl the documented `HUNSPELL_RULE` = 60 suggestion field
+diffs (#7: same match set; the native hunspell generators are ported, the
+remaining diffs are the unported n-gram fallback); pl the documented known fidelity gaps
 #9 (4 only-Java / 5 only-Rust / 0 field diffs, the `<unify negate="yes">`
 agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
 the PCON_VERB participle rule); da allows the documented `HUNSPELL_RULE`
-divergences #10 (2 only-Java + 12 suggestion field diffs) and sv the
-documented `HUNSPELL_RULE` = 2 suggestion field diffs (#11). `no`, `nrd` and `gn` are hand-authored
+divergences #10 (2 only-Java + 8 suggestion field diffs); sv is at
+0/0/0 (#11, resolved by the suggestion-engine port). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
 
