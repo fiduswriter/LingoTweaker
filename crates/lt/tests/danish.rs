@@ -1,16 +1,17 @@
 //! Danish engine tests: stage-1 XML wiring state plus Java-probed
 //! built-in-rule values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/da/check-diff-da.sh`, `docs/parity/golden/da-full.java.tsv`)
-//! print UTF-16 code units. Every probe sentence below uses real Danish
-//! orthography (æ/ø/å), so the two formats differ and both are stated per
-//! case. The speller suggestions are the full Java `HunspellRule` list; they
-//! preserve diacritics.
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/da/check-diff-da.sh`,
+//! `docs/parity/golden/da-full.java.tsv`). The speller suggestions are the
+//! full Java `HunspellRule` list; they preserve diacritics.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::{assert_utf16, assert_utf16_range};
 
 /// One engine at a time: the Danish engines hold the speller dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -85,18 +86,14 @@ fn danish_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Han spiste et æble , og gik.`
-/// UTF-16 18..20, UTF-8 19..21 (`æ` adds one byte).
+/// `CommaWhitespaceRule` (1), Java probe.
 #[test]
 fn danish_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one(
-        "Han spiste et æble , og gik.",
-        "COMMA_PARENTHESIS_WHITESPACE",
-    );
+    let text = "Han spiste et æble , og gik.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 19);
-    assert_eq!(matches[0].range.end, 21);
+    assert_utf16(text, &matches[0], (18, 20));
     assert_eq!(
         matches[0].message,
         "Indsæt ikke et mellemrum før komma, men efter det."
@@ -104,43 +101,41 @@ fn danish_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `Han spiste æbler..`
-/// UTF-16 16..18, UTF-8 17..19.
+/// `DoublePunctuationRule` (2), Java probe.
 #[test]
 fn danish_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Han spiste æbler..", "DOUBLE_PUNCTUATION");
+    let text = "Han spiste æbler..";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 17);
-    assert_eq!(matches[0].range.end, 19);
+    assert_utf16(text, &matches[0], (16, 18));
     assert_eq!(matches[0].message, "To på hinanden følgende punktummer");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
 /// `GenericUnpairedBracketsRule` (3) with the explicit Danish bracket lists,
-/// Java probe: `(Han spiste et æble.` 0..1 (the opening bracket, before any
-/// non-ASCII byte).
+/// Java probe (the opening bracket, before any non-ASCII byte).
 #[test]
 fn danish_unpaired_brackets() {
     let _guard = engine_guard();
-    let matches = one("(Han spiste et æble.", "UNPAIRED_BRACKETS");
+    let text = "(Han spiste et æble.";
+    let matches = one(text, "UNPAIRED_BRACKETS");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 1);
+    assert_utf16(text, &matches[0], (0, 1));
     assert_eq!(
         matches[0].message,
         "Ikke parret symbol: \")\" ser ud til at mangle"
     );
 }
 
-/// `UppercaseSentenceStartRule` (5), Java probe: `det er en øl.` 0..3.
+/// `UppercaseSentenceStartRule` (5), Java probe.
 #[test]
 fn danish_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("det er en øl.", "UPPERCASE_SENTENCE_START");
+    let text = "det er en øl.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 3);
+    assert_utf16(text, &matches[0], (0, 3));
     assert_eq!(
         matches[0].message,
         "Denne sætning starter ikke med et stort begyndelsesbogstav"
@@ -148,14 +143,14 @@ fn danish_uppercase_sentence_start() {
     assert_eq!(suggestions(&matches[0]), vec!["Det"]);
 }
 
-/// `MultipleWhitespaceRule` (6), Java probe: `Det  er en øl.` 3..5.
+/// `MultipleWhitespaceRule` (6), Java probe.
 #[test]
 fn danish_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Det  er en øl.", "WHITESPACE_RULE");
+    let text = "Det  er en øl.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 3);
-    assert_eq!(matches[0].range.end, 5);
+    assert_utf16(text, &matches[0], (3, 5));
     assert_eq!(
         matches[0].message,
         "Mulig slåfejl: du har gentaget et mellemrum"
@@ -169,11 +164,10 @@ fn danish_multiple_whitespace() {
 fn danish_speller() {
     let _guard = engine_guard();
 
-    // `øll`: Java UTF-16 12..15, UTF-8 12..16 (`ø` adds one byte)
-    let matches = one("Dette er en øll.", "HUNSPELL_RULE");
+    let text = "Dette er en øll.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 12);
-    assert_eq!(matches[0].range.end, 16);
+    assert_utf16(text, &matches[0], (12, 15));
     assert_eq!(matches[0].message, "Mulig stavefejl fundet");
     assert_eq!(matches[0].match_type, "UnknownWord");
     assert_eq!(
@@ -181,33 +175,31 @@ fn danish_speller() {
         vec!["øl", "øls", "ørl", "All", "Oll"]
     );
 
-    let matches = one("Jeg har lavet en fejll.", "HUNSPELL_RULE");
+    let text = "Jeg har lavet en fejll.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 17);
-    assert_eq!(matches[0].range.end, 22);
+    assert_utf16(text, &matches[0], (17, 22));
     assert_eq!(suggestions(&matches[0]), vec!["fejl", "fejle", "fejls"]);
 
-    // `æple`: Java UTF-16 16..20, UTF-8 16..21 (`æ` adds one byte)
-    let matches = one("Det er et stort æple.", "HUNSPELL_RULE");
+    let text = "Det er et stort æple.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 16);
-    assert_eq!(matches[0].range.end, 21);
+    assert_utf16(text, &matches[0], (16, 20));
     assert_eq!(
         suggestions(&matches[0]),
         vec!["æble", "pæle", "ædle", "ækle", "ævle"]
     );
 }
 
-/// XML rule `grube` (`grammar.xml`), Java probe: `Der er mange faldgruper i
-/// skoven.` 13..23 (all-ASCII span) -> `faldgruber`.
+/// XML rule `grube` (`grammar.xml`), Java probe -> `faldgruber`.
 #[test]
 fn danish_xml_grube() {
     let _guard = engine_guard();
-    let matches = one("Der er mange faldgruper i skoven.", "grube");
+    let text = "Der er mange faldgruper i skoven.";
+    let matches = one(text, "grube");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 13);
-    assert_eq!(matches[0].range.end, 23);
+    assert_utf16(text, &matches[0], (13, 23));
     assert_eq!(
         matches[0].message,
         "Mente du <suggestion>faldgruber</suggestion>, altså en mine eller et hul i jorden?"
@@ -215,16 +207,15 @@ fn danish_xml_grube() {
     assert_eq!(suggestions(&matches[0]), vec!["faldgruber"]);
 }
 
-/// XML rule `yndlings` (`grammar.xml`), Java probe: `Det var mit
-/// ynglingshold fra Århus.` 12..24 (all-ASCII span) -> `yndlingshold`.
+/// XML rule `yndlings` (`grammar.xml`), Java probe -> `yndlingshold`.
 #[test]
 fn danish_xml_yndlings() {
     let _guard = engine_guard();
-    let matches = one("Det var mit ynglingshold fra Århus.", "yndlings");
+    let text = "Det var mit ynglingshold fra Århus.";
+    let matches = one(text, "yndlings");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 12);
-    assert_eq!(matches[0].range.end, 24);
+    assert_utf16(text, &matches[0], (12, 24));
     assert_eq!(
         matches[0].message,
         "Udtrykket staves <suggestion>yndlingshold</suggestion> ."
@@ -247,19 +238,19 @@ fn danish_dotted_abbreviations() {
         "ca. must not be flagged"
     );
 
-    // `753f.kr.`: HUNSPELL_RULE on `f.kr`, Java UTF-16 8..12 / UTF-8 9..13
-    let matches = one("I år 753f.kr. blev Rom grundlagt.", "HUNSPELL_RULE");
+    // `753f.kr.`: HUNSPELL_RULE on `f.kr`
+    let text = "I år 753f.kr. blev Rom grundlagt.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 9);
-    assert_eq!(matches[0].range.end, 13);
+    assert_utf16(text, &matches[0], (8, 12));
     assert_eq!(suggestions(&matches[0]), vec!["frk.", "f.Kr."]);
 
-    // the XML rule `fkr.` flags the spaced form, Java UTF-16 9..13 / UTF-8 10..14
-    let matches = one("I år 200 fkr. Kristendommen fandtes ikke.", "fkr.");
+    // the XML rule `fkr.` flags the spaced form
+    let text = "I år 200 fkr. Kristendommen fandtes ikke.";
+    let matches = one(text, "fkr.");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 10);
-    assert_eq!(matches[0].range.end, 14);
+    assert_utf16(text, &matches[0], (9, 13));
     assert_eq!(
         matches[0].message,
         "Før Kristus forkortes <suggestion>f.kr.</suggestion>"
@@ -268,8 +259,7 @@ fn danish_dotted_abbreviations() {
 }
 
 /// Long paragraph with real Danish orthography. Java probe
-/// (`check-diff-da.sh`) yields exactly two matches (UTF-8 offsets; UTF-16 in
-/// parentheses).
+/// (`check-diff-da.sh`) yields exactly two matches.
 #[test]
 fn danish_long_paragraph() {
     let _guard = engine_guard();
@@ -278,21 +268,22 @@ fn danish_long_paragraph() {
         return;
     };
     let text = "Det var en kold vintermorgen, hvor sneen lå tungt over de gamle huse i landsbyen . En lille dreng ved navn Søren løb ud i haven for at lege med sin hund.. Han havde fået en ny slæde i julegave, og den ville han prøve straks. Moren råbte, at han skulle tage en varm trøje på, men han hørte hende ikke. Pludselig faldt han og slog sit knæ, og så måtte han alligevel ind i varmen igen.";
-    let matches: Vec<(String, usize, usize)> = da
+    let matches: Vec<(String, lt::TextRange)> = da
         .check(text)
         .expect("check")
         .matches
         .into_iter()
-        .map(|m| (m.rule_id, m.range.start, m.range.end))
+        .map(|m| (m.rule_id, m.range))
         .collect();
-    assert_eq!(
-        matches,
-        vec![
-            ("COMMA_PARENTHESIS_WHITESPACE".into(), 81, 83),
-            ("DOUBLE_PUNCTUATION".into(), 155, 157),
-        ],
-        "{matches:?}"
-    );
+    let expected = [
+        ("COMMA_PARENTHESIS_WHITESPACE", (80, 82)),
+        ("DOUBLE_PUNCTUATION", (152, 154)),
+    ];
+    assert_eq!(matches.len(), expected.len(), "{matches:?}");
+    for ((rule, range), (want_rule, want_range)) in matches.iter().zip(expected) {
+        assert_eq!(rule, want_rule, "{matches:?}");
+        assert_utf16_range(text, *range, want_range);
+    }
 }
 
 /// The `BaseTagger`-derived `DanishTagger` tags known words and leaves
