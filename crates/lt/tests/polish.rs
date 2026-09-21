@@ -185,6 +185,37 @@ fn polish_speller_matches_java_probe() {
     assert_eq!(suggestions(&ms[0])[0], "Zrobiłem");
 }
 
+/// `SpellingCheckRule.addIgnoreWords`: multi-word entries in
+/// `core/spelling_global.txt` (`Google Maps`, `Gro Harlem Brundtland`)
+/// immunize their tokens, while the last word alone is still checked.
+/// Java-probed with `scripts/oracle/pl/probe-speller.sh`.
+#[test]
+fn polish_speller_multiword_ignore_matches_java_probe() {
+    let _guard = engine_guard();
+    let Some(pl) = engine_with_rules(&["MORFOLOGIK_RULE_PL_PL"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let matches = |text: &str| -> Vec<lt::Match> {
+        pl.check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == "MORFOLOGIK_RULE_PL_PL")
+            .collect()
+    };
+    for text in [
+        "Google Maps.",
+        "z Google Maps.",
+        "Gro Harlem Brundtland zjadł kanapkę.",
+        "New York Islanders.",
+    ] {
+        assert!(matches(text).is_empty(), "phrase should be ignored: {text}");
+    }
+    // the word alone is still reported
+    assert!(!matches("Maps.").is_empty());
+}
+
 /// The stage-3 Java rule classes, Java-probed with
 /// `scripts/oracle/pl/probe-rule.sh` (UTF-16 offsets; ASCII prefixes).
 #[test]

@@ -65,6 +65,10 @@ pub struct PolishSpellingRule {
     ignore: Mutex<HashSet<String>>,
     /// `SpellingCheckRule.wordsToBeProhibited`
     prohibit: HashSet<String>,
+    /// multi-word ignore entries, indexed by their first token
+    /// (`SpellingCheckRule.addIgnoreWords` internal `IGNORE_SPELLING`
+    /// disambiguation patterns)
+    phrases: HashMap<String, Vec<Vec<String>>>,
     /// `language.getTagger()` for `isNotCompound`'s compound-adjective check
     tagger: Arc<lt_tagger::PolishTagger>,
     suggestion_cache: Mutex<HashMap<String, Arc<Vec<Suggestion>>>>,
@@ -91,16 +95,30 @@ impl PolishSpellingRule {
         let speller1 = MultiSpeller::new(vec![binary(1), plain(1)], vec![0, 1]);
 
         let mut ignore = HashSet::new();
-        // `SpellingCheckRule.init`: ignore file, spelling file, additional
-        // spelling files (the global list).
+        let mut phrases: HashMap<String, Vec<Vec<String>>> = HashMap::new();
+        // `SpellingCheckRule.init` + `addIgnoreWords`: a single-token line goes
+        // to the ignore set; a multi-word line becomes an internal
+        // `IGNORE_SPELLING` disambiguation pattern matching the phrase
+        // case-sensitively (`acceptPhrases`-style).
         for path in [
             hunspell.join("ignore.txt"),
             hunspell.join("spelling.txt"),
             hunspell.join("spelling_custom.txt"),
             data_dir.join("core/spelling_global.txt"),
         ] {
-            for word in cache_word_list(&path) {
-                ignore.insert(word);
+            for line in cache_word_list(&path) {
+                let tokens: Vec<String> = lt_tokenize::PolishWordTokenizer::new()
+                    .tokenize(&line)
+                    .into_iter()
+                    .filter(|t| !t.trim().is_empty())
+                    .collect();
+                match tokens.len() {
+                    0 => {}
+                    1 => {
+                        ignore.insert(tokens[0].clone());
+                    }
+                    _ => phrases.entry(tokens[0].clone()).or_default().push(tokens),
+                }
             }
         }
         let mut prohibit = HashSet::new();
@@ -117,6 +135,7 @@ impl PolishSpellingRule {
             speller1,
             ignore: Mutex::new(ignore),
             prohibit,
+            phrases,
             tagger,
             suggestion_cache: Mutex::new(HashMap::new()),
         })
@@ -186,6 +205,30 @@ impl PolishSpellingRule {
             || is_url(token.surface())
             || is_email(token.surface())
             || self.ignore_word_with_emoji(tokens[idx].surface())
+    }
+
+    /// `SpellingCheckRule.addIgnoreWords` internal `IGNORE_SPELLING`
+    /// disambiguation patterns: tokens covered by a multi-word ignore entry
+    /// are treated as `isIgnoredBySpeller`.
+    fn phrase_ignored_flags(&self, tokens: &[&AnalyzedTokenReadings]) -> Vec<bool> {
+        let mut flags = vec![false; tokens.len()];
+        for (start, token) in tokens.iter().enumerate() {
+            let Some(candidates) = self.phrases.get(token.surface()) else {
+                continue;
+            };
+            for phrase in candidates {
+                let len = phrase.len();
+                if start + len > tokens.len() {
+                    continue;
+                }
+                if (0..len).all(|k| tokens[start + k].surface() == phrase[k]) {
+                    for flag in flags.iter_mut().take(start + len).skip(start) {
+                        *flag = true;
+                    }
+                }
+            }
+        }
+        flags
     }
 
     /// `MorfologikPolishSpellerRule.getRuleMatches`: the Polish override
@@ -357,10 +400,11 @@ impl PolishSpellingRule {
             .iter()
             .filter(|t| !t.is_whitespace || t.is_sentence_start || t.is_sentence_end)
             .collect();
+        let phrase_ignored = self.phrase_ignored_flags(&non_blank);
         let mut matches: Vec<Match> = Vec::new();
         let mut is_first_word = true;
         for (idx, token) in non_blank.iter().enumerate() {
-            if self.can_be_ignored(&non_blank, idx, token) {
+            if phrase_ignored[idx] || self.can_be_ignored(&non_blank, idx, token) {
                 if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
                     is_first_word = false;
                 }

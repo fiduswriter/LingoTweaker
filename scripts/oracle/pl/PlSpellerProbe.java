@@ -16,12 +16,19 @@ import java.util.List;
  * `pruneSuggestions`) against the legacy engine.
  *
  * Usage: java PlSpellerProbe <sentences.txt>
+ *        java PlSpellerProbe --misspelled word1 word2 ...
  */
 public class PlSpellerProbe {
   public static void main(String[] args) throws Exception {
     Polish pl = new Polish();
     JLanguageTool lt = new JLanguageTool(pl);
     SpellingCheckRule rule = pl.getDefaultSpellingRule();
+    if (args.length > 0 && args[0].equals("--misspelled")) {
+      for (int i = 1; i < args.length; i++) {
+        System.out.println(args[i] + "\t" + rule.isMisspelled(args[i]));
+      }
+      return;
+    }
     List<String> lines = Files.readAllLines(Paths.get(args[0]));
     for (String line : lines) {
       if (line.trim().isEmpty()) {
