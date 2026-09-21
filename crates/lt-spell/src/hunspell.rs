@@ -2359,7 +2359,7 @@ impl HunspellChecker {
         &self,
         word: &[u8],
         wordnum_in: usize,
-        numsyllable: usize,
+        _numsyllable: usize,
         maxwordnum: usize,
         _wnum: usize,
         info: &mut Info,
@@ -2642,7 +2642,7 @@ impl HunspellChecker {
                     if let Some(rec) = self.compound_check(
                         second,
                         wordnum + 1,
-                        numsyllable,
+                        _numsyllable,
                         maxwordnum,
                         0,
                         &mut rec_info,
