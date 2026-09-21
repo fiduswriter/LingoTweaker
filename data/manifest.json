@@ -1,7 +1,190 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 713,
+  "file_count": 729,
   "files": [
+    {
+      "path": "ast/dictionaries/asturian.dict",
+      "sha256": "943c672b9cbcb444354004ba981c2ea3fed20445dd1fe87c1266a4dcb107bb92",
+      "size": 269710,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/asturian.dict",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/dictionaries/asturian.info",
+      "sha256": "ba17868a63587eddca7d76bab724f9f88c3f3753985e22a033cc1dfd9dc52f6f",
+      "size": 101,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/asturian.info",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/LICENCES-ast.txt",
+      "sha256": "7bc2de0902fbfd3965b3c26c5154ffdc80f733c20e8290988b176f3f7e2b299b",
+      "size": 264,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/LICENCES-ast.txt",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/LICENSES-en.txt",
+      "sha256": "b4bb22d3cb3ed83e2f3f635c2ba7237b03f21bb7bd150f98b09a78f0404071d6",
+      "size": 235,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/LICENSES-en.txt",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/ast_ES.dict",
+      "sha256": "6753c049b8202078125b13bef7d25b3063243c520130b7e2e1294a451593a65b",
+      "size": 746168,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/ast_ES.dict",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/ast_ES.info",
+      "sha256": "edc79d361bd65b553a0f250e98250063363f7b235c1a59d42bab64b0ffde8240",
+      "size": 652,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/ast_ES.info",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/ignore.txt",
+      "sha256": "d4fe7524d95fbd54bc91078648d465967a1e83e2813cd73d291ecae4332a19ce",
+      "size": 59,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/rules/grammar.xml",
+      "sha256": "46bc419cd79ba90f6e5a18324eed4185d69040d8fae2931c20a1a438741e0512",
+      "size": 49582,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/rules/ast/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/words/README.txt",
+      "sha256": "94008f3b0cef09fbde32925017b52d67958d53a6b03d5871c1df3e333277e8d7",
+      "size": 184,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/words/common_words.txt",
+      "sha256": "1339dc8b52463d754a5ec7dbbb2d07eca1052196a04b3a9fffbd4715f10d52bc",
+      "size": 3866,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ast/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
     {
       "path": "ca/ca.sor",
       "sha256": "e3383aa8a08ba949850cb6bef6e03a299c94bb6bbea3799c50a06979f820ae2e",
@@ -4573,6 +4756,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/MessagesBundle.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_ast.properties",
+      "sha256": "e970c077ca9c9d2d6ede2ba181f5ca93f6e25f0825eb035967af1e7474f2f4ab",
+      "size": 15694,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/MessagesBundle_ast.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

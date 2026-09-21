@@ -161,6 +161,8 @@ pub struct Pipeline {
     pub icelandic: Option<Arc<crate::is::IcelandicPipeline>>,
     /// Esperanto pipeline parts (`None` for the other languages)
     pub esperanto: Option<Arc<crate::eo::EsperantoPipeline>>,
+    /// Asturian pipeline parts (`None` for the other languages)
+    pub asturian: Option<Arc<crate::ast::AsturianPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Danish pipeline parts (`None` for the other languages)
@@ -1353,6 +1355,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1594,6 +1597,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1794,6 +1798,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2002,6 +2007,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2130,6 +2136,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2377,6 +2384,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2584,6 +2592,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2908,6 +2917,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3056,6 +3066,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3190,6 +3201,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3348,6 +3360,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3484,6 +3497,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3592,6 +3606,7 @@ impl Pipeline {
             slovenian: Some(slovenian),
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3735,6 +3750,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: Some(greek),
             norwegian: None,
             nordum: None,
@@ -3808,6 +3824,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             da: Some(danish),
             sv: None,
@@ -3966,6 +3983,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             da: None,
             sv: Some(swedish),
@@ -4036,6 +4054,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: Some(icelandic),
             esperanto: None,
+            asturian: None,
             greek: None,
             da: None,
             sv: None,
@@ -4143,6 +4162,101 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: Some(esperanto),
+            asturian: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Asturian (`ast`) engine: the `AsturianTagger` (`BaseTagger` over
+    /// `ast/dictionaries/asturian.dict` + the manual word lists), the
+    /// `ast_two` SRX, the base no-op disambiguator and the
+    /// `MorfologikAsturianSpellerRule`. `Asturian.getRelevantRules` adds no
+    /// Java rule classes beyond the generic built-ins.
+    pub fn new_asturian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "ast_two")?;
+
+        let tagger = Arc::new(lt_tagger::AsturianTagger::load(data_dir.path())?);
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ast))?;
+        if data_dir.style_path(Lang::Ast).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Ast))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Asturian references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        let spelling = match crate::ast::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ast] spelling rule disabled: {err}");
+                None
+            }
+        };
+
+        let asturian = Arc::new(crate::ast::AsturianPipeline { tagger, spelling });
+        Ok(Self {
+            lang: Lang::Ast,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: Some(asturian),
             greek: None,
             da: None,
             sv: None,
@@ -4278,6 +4392,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
@@ -4358,6 +4473,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
@@ -4442,6 +4558,7 @@ impl Pipeline {
             slovenian: None,
             icelandic: None,
             esperanto: None,
+            asturian: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -4548,12 +4665,18 @@ impl Pipeline {
                                                                                         esperanto,
                                                                                         sentence_text,
                                                                                     ),
-                                                                                    None => analyze_sentence(
-                                                                                        self.tagger
-                                                                                            .as_deref()
-                                                                                            .expect("english tagger"),
-                                                                                        sentence_text,
-                                                                                    ),
+                                                                                    None => match &self.asturian {
+                                                                                        Some(asturian) => crate::ast::analyze_asturian_sentence(
+                                                                                            asturian,
+                                                                                            sentence_text,
+                                                                                        ),
+                                                                                        None => analyze_sentence(
+                                                                                            self.tagger
+                                                                                                .as_deref()
+                                                                                                .expect("english tagger"),
+                                                                                            sentence_text,
+                                                                                        ),
+                                                                                    },
                                                                                 },
                                                                             },
                                                                         },
@@ -6779,6 +6902,50 @@ impl Pipeline {
                     .extend(crate::sentence_whitespace::check_eo(&analyzed_sentences));
             }
         }
+        // Asturian text-level rules (`Asturian.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (6).
+        if self.lang == crate::Lang::Ast {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_ast(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_ast(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_ast(&analyzed_sentences));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -7048,12 +7215,18 @@ impl Pipeline {
                                                                                     esperanto,
                                                                                     &text[start..end],
                                                                                 ),
-                                                                                None => analyze_sentence(
-                                                                                    self.tagger
-                                                                                        .as_deref()
-                                                                                        .expect("english tagger"),
-                                                                                    &text[start..end],
-                                                                                ),
+                                                                                None => match &self.asturian {
+                                                                                    Some(asturian) => crate::ast::analyze_asturian_sentence(
+                                                                                        asturian,
+                                                                                        &text[start..end],
+                                                                                    ),
+                                                                                    None => analyze_sentence(
+                                                                                        self.tagger
+                                                                                            .as_deref()
+                                                                                            .expect("english tagger"),
+                                                                                        &text[start..end],
+                                                                                    ),
+                                                                                },
                                                                             },
                                                                         },
                                                                     },
@@ -9464,6 +9637,65 @@ impl Pipeline {
                 );
             }
         }
+        // Asturian sentence-level Java rules in `Asturian.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2) and
+        // MorfologikAsturianSpellerRule (4). GenericUnpairedBrackets (3),
+        // UppercaseSentenceStart (5) and MultipleWhitespace (6) are
+        // text-level and run above.
+        if self.lang == crate::Lang::Ast {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_ast(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_ast(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(asturian) = &self.asturian {
+                if let Some(spelling) = &asturian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::ast::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -10767,6 +10999,12 @@ impl Pipeline {
             // `Esperanto.createDefaultDisambiguator` is a plain
             // `XmlRuleDisambiguator`: XML rules (+ global rules).
             esperanto.disambiguate(sentence);
+            return;
+        }
+        if let Some(asturian) = &self.asturian {
+            // `Asturian` does not override `createDefaultDisambiguator`: the
+            // base no-op `DemoDisambiguator` applies.
+            asturian.disambiguate(sentence);
             return;
         }
         if let Some(greek) = &self.greek {

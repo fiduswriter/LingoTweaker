@@ -18,7 +18,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 root="$(cd "$script_dir/../.." && pwd)"
 cd "$root"
 
-langs="${LT_DEMO_LANGS:-en de es fr it pt nl ca gl ro pl sk sl el da sv is eo no nrd gn}"
+langs="${LT_DEMO_LANGS:-en de es fr it pt nl ca gl ro pl sk sl el da sv is eo ast no nrd gn}"
 out="demo/public/packs"
 rules_out="demo/public/rules"
 

@@ -26,6 +26,7 @@ re-runs the Rust side and diffs against the golden.
 | sv | `sv-full.txt` (45) | `sv-full.java.tsv` |
 | is | `is-full.txt` (45) | `is-full.java.tsv` |
 | eo | `eo-full.txt` (876) | `eo-full.java.tsv` |
+| ast | `ast-full.txt` (125) | `ast-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -39,7 +40,7 @@ re-runs the Rust side and diffs against the golden.
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk/sl/el/da/sv/is/eo `2026-09-21`.
+  sk/sl/el/da/sv/is/eo/ast `2026-09-21`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -91,11 +92,14 @@ re-runs the Rust side and diffs against the golden.
   fidelity gaps of `docs/differences.md` #10 (the unported hunspell
   wrong-split logic and the BREAK-based suggestion variants), pinned exactly
   with `--expect-only-java`/`--expect-only-rust`/`--expect-field-diffs`.
+  ast is exactly 0/0/0 (D-230; Asturian has no disambiguator/synthesizer, the
+  `AsturianTagger` reads the old CFSA (`0xc5`) Morfologik dictionary — the
+  `lt-tagger` CFSA reader is new — and `compile_failures()` is empty).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

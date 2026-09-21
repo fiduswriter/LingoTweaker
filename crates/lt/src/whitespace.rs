@@ -183,6 +183,16 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Asturian `MessagesBundle_ast` strings.
+pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Repetición d'espacios",
+        "Posible error: repitisti un espaciu",
+        ("TYPOGRAPHY", "Tipografía"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

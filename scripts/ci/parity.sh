@@ -7,12 +7,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -98,6 +98,9 @@ if [ "$LANG_ARG" = "is" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-21"
 fi
 if [ "$LANG_ARG" = "eo" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-21"
+fi
+if [ "$LANG_ARG" = "ast" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-21"
 fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"

@@ -137,6 +137,15 @@ MAVEN_ARTIFACTS = {
         "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/de/danielnaber/jwordsplitter/4.7/jwordsplitter-4.7.pom",
     },
+    "asturian-pos-dict-0.1.jar": {
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        # POM: "GNU GENERAL PUBLIC LICENSE Version 3", data based on Morphy;
+        # the bundled ast/hunspell/LICENCES-ast.txt confirms GPL v3 for the
+        # Softastur dictionary.
+        "license": "GPL-3.0-only (artifact POM; data originally based on Morphy; ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": True,
+        "license_source": f"{MAVEN_CENTRAL}/org/languagetool/asturian-pos-dict/0.1/asturian-pos-dict-0.1.pom",
+    },
     "opennlp-chunk-models-1.5.jar": {
         "coords": "edu.washington.cs.knowitall:opennlp-chunk-models:1.5",
         # POM: "The Apache Software License, Version 2.0" (stock OpenNLP
@@ -163,6 +172,17 @@ MAVEN_ARTIFACTS = {
 
 # inner-path-in-jar -> destination relative to data/
 JAR_EXTRACTIONS = {
+    # `AsturianTagger` (`asturian.dict`) and `MorfologikAsturianSpellerRule`
+    # (`ast/hunspell/ast_ES.dict`); the LICENCES files document the GPL-3.0
+    # Softastur dictionary.
+    "asturian-pos-dict-0.1.jar": {
+        "org/languagetool/resource/ast/asturian.dict": "ast/dictionaries/asturian.dict",
+        "org/languagetool/resource/ast/asturian.info": "ast/dictionaries/asturian.info",
+        "org/languagetool/resource/ast/hunspell/ast_ES.dict": "ast/hunspell/ast_ES.dict",
+        "org/languagetool/resource/ast/hunspell/ast_ES.info": "ast/hunspell/ast_ES.info",
+        "org/languagetool/resource/ast/hunspell/LICENCES-ast.txt": "ast/hunspell/LICENCES-ast.txt",
+        "org/languagetool/resource/ast/hunspell/LICENSES-en.txt": "ast/hunspell/LICENSES-en.txt",
+    },
     "english-pos-dict-0.6.jar": {
         "org/languagetool/resource/en/english.dict": "en/dictionaries/english.dict",
         "org/languagetool/resource/en/english.info": "en/dictionaries/english.info",
@@ -656,6 +676,13 @@ def jar_inner_license(inner: str):
             "provenance not documented upstream - to be confirmed",
             False,
             "upstream english-pos-dict POM; no hunspell license note in the LT checkout",
+        )
+    if inner.startswith("org/languagetool/resource/ast/"):
+        return (
+            "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, "
+            "ast/hunspell/LICENCES-ast.txt)",
+            True,
+            "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt",
         )
     if inner.startswith("org/languagetool/resource/nl/spelling/"):
         return (

@@ -700,6 +700,44 @@ fn translate_comma_message_sv(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Asturian `MessagesBundle_ast` strings.
+pub fn check_sentence_ast(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Puntuación".to_string();
+        m.description = "Espaciu enantes de coma y enantes/depués de paréntesis".to_string();
+        m.message = translate_comma_message_ast(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_ast` bundle.
+fn translate_comma_message_ast(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Nun pongas un espaciu depués d'abrir paréntesis".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Nun pongas un espaciu enantes de zarrar paréntesis".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Pon un espaciu depués d'una coma".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Pon un espaciu depués de la coma, pero non enantes".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Nun pongas un espaciu enantes del puntu".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],

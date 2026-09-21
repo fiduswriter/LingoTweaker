@@ -552,6 +552,26 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_sv())
 }
 
+/// Asturian `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_ast` strings):
+/// the default symbol lists `[ ( { " '` / `] ) } " '`.
+pub fn symbols_ast() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Paréntesis, comines, esclamaciones, interrogaciones y asemeyaos despareyaos",
+        category_id: "PUNCTUATION",
+        category_name: "Puntuación",
+        start: &["[", "(", "{", "\"", "'"],
+        end: &["]", ")", "}", "\"", "'"],
+        spanish: false,
+        message_template: "Símbolu despareyáu: paez que falta \"{other}\"",
+    }
+}
+
+/// Asturian `UNPAIRED_BRACKETS` (generic rule, Asturian strings).
+pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_ast())
+}
+
 /// Esperanto `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_eo` strings):
 /// the default symbol lists `[ ( { " '` / `] ) } " '`.
 pub fn symbols_eo() -> UnpairedSymbols {

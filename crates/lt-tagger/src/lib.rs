@@ -8,8 +8,10 @@
 //! the automaton expanded into an in-memory map at load time (fast, simple);
 //! revisit streaming FSA queries in the P2.5 performance pass.
 
+pub mod asturian;
 pub mod catalan;
 pub mod catalan_synth;
+pub mod cfsa;
 pub mod charset;
 pub mod danish;
 pub mod dutch;
@@ -42,6 +44,7 @@ pub mod spanish_synth;
 pub mod swedish;
 pub mod swedish_synth;
 
+pub use asturian::AsturianTagger;
 pub use catalan::CatalanTagger;
 pub use catalan_synth::CatalanSynthesizer;
 pub use charset::Charset;
@@ -331,6 +334,7 @@ impl Cfsa2 {
 pub enum Automaton {
     Cfsa2(Cfsa2),
     Fsa5(Fsa5),
+    Cfsa(cfsa::Cfsa),
 }
 
 impl Automaton {
@@ -339,9 +343,10 @@ impl Automaton {
         match bytes.get(4) {
             Some(&VERSION_CFSA2) => Ok(Automaton::Cfsa2(Cfsa2::parse(bytes)?)),
             Some(&fsa5::VERSION_FSA5) => Ok(Automaton::Fsa5(Fsa5::parse(bytes)?)),
+            Some(&cfsa::VERSION_CFSA) => Ok(Automaton::Cfsa(cfsa::Cfsa::parse(bytes)?)),
             Some(&other) => Err(lt_core::CoreError::Parse(
                 "dict".into(),
-                format!("unsupported FSA version {other:#04x} (CFSA2/FSA5 supported)"),
+                format!("unsupported FSA version {other:#04x} (CFSA/CFSA2/FSA5 supported)"),
             )),
             None => Err(lt_core::CoreError::Parse(
                 "dict".into(),
@@ -354,6 +359,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.root_node(),
             Automaton::Fsa5(a) => a.root_node(),
+            Automaton::Cfsa(a) => a.root_node(),
         }
     }
 
@@ -361,6 +367,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.first_arc(node),
             Automaton::Fsa5(a) => a.first_arc(node),
+            Automaton::Cfsa(a) => a.first_arc(node),
         }
     }
 
@@ -368,6 +375,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.next_arc(arc),
             Automaton::Fsa5(a) => a.next_arc(arc),
+            Automaton::Cfsa(a) => a.next_arc(arc),
         }
     }
 
@@ -375,6 +383,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.arc_label(arc),
             Automaton::Fsa5(a) => a.arc_label(arc),
+            Automaton::Cfsa(a) => a.arc_label(arc),
         }
     }
 
@@ -382,6 +391,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.is_arc_final(arc),
             Automaton::Fsa5(a) => a.is_arc_final(arc),
+            Automaton::Cfsa(a) => a.is_arc_final(arc),
         }
     }
 
@@ -389,6 +399,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.is_arc_terminal(arc),
             Automaton::Fsa5(a) => a.is_arc_terminal(arc),
+            Automaton::Cfsa(a) => a.is_arc_terminal(arc),
         }
     }
 
@@ -396,6 +407,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.end_node(arc),
             Automaton::Fsa5(a) => a.end_node(arc),
+            Automaton::Cfsa(a) => a.end_node(arc),
         }
     }
 
@@ -403,6 +415,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.arc_by_label(node, label),
             Automaton::Fsa5(a) => a.arc_by_label(node, label),
+            Automaton::Cfsa(a) => a.arc_by_label(node, label),
         }
     }
 
@@ -410,6 +423,7 @@ impl Automaton {
         match self {
             Automaton::Cfsa2(a) => a.end_node(arc),
             Automaton::Fsa5(a) => a.end_node(arc),
+            Automaton::Cfsa(a) => a.end_node(arc),
         }
     }
 

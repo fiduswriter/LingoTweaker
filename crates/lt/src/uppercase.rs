@@ -231,6 +231,19 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Asturian `MessagesBundle_ast`
+/// strings.
+pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Esta frase nun entama con mayúscules",
+        "Mayúscules y minúscules",
+        "Comprueba qu'una frase entame con mayúscules",
+        "Mayúscules y minúscules",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Esperanto `MessagesBundle_eo`
 /// strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {

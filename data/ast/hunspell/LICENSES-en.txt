@@ -1,0 +1,9 @@
+LICENSE:
+"Asturian spellchecking dictionary"
+Version 2.80
+
+Dictionary based upon the Normative Dictionary from Asturian Language Academy (2000) by Softastur.org asociation.
+
+Asturies, 2010, 2011, 2024
+
+Distributed under GPL license v3

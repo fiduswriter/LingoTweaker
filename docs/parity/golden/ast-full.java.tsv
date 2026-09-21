@@ -1,0 +1,205 @@
+L	1	Foi a el cine cola so hermana.
+M	1	A_CONTR	1	4	8	Other	La preposición «a» contrái col artículu determináu: <suggestion>al</suggestion>.	al
+L	2	Foi al cine cola so hermana.
+L	3	Tienes que lo dicir a l’entamu.
+M	3	A_CONTR	2	20	30	Other	La preposición «a» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>al entamu</suggestion>.	al entamu
+L	4	Tienes que lo dicir al entamu.
+L	5	Nun l’aconseyara bien.
+M	5	A_CONTR	3	4	16	Other	El pronome personal «la» nun apostrofa: <suggestion>la aconseyara</suggestion>.	la aconseyara
+L	6	Nun la aconseyara bien.
+L	7	El fíu de el so hermanu llámase Colás.
+M	7	DE_CONTR	1	7	12	Other	La preposición «de» contrái col artículu determináu: <suggestion>del</suggestion>.	del
+L	8	El fíu del so hermanu llámase Colás.
+L	9	Tien les llaves de l’apartamentu.
+M	9	DE_CONTR	2	16	32	Other	La preposición «de» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>del apartamentu</suggestion>.	del apartamentu
+L	10	Tien les llaves del apartamentu.
+L	11	Foi pa el chigre hai dos hores.
+M	11	PA_CONTR	1	4	9	Other	La preposición «pa» contrái col artículu determináu: <suggestion>pal</suggestion>.	pal
+L	12	Foi pal chigre hai dos hores.
+L	13	Les perres foron pa l’herederu.
+M	13	PA_CONTR	2	17	30	Other	La preposición «pa» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>pal herederu</suggestion>.	pal herederu
+L	14	Les perres foron pal herederu.
+L	15	La caxa ta so el somier.
+M	15	SO_CONTR	1	11	16	Other	La preposición «so» contrái col artículu determináu: <suggestion>sol</suggestion>.	sol
+L	16	La caxa ta sol somier.
+L	17	Tienes la pota so l’armariu.
+M	17	SO_CONTR	2	15	27	Other	La preposición «so» contrái col artículu determináu en cuenta d'apostrofar: <suggestion>sol armariu</suggestion>.	sol armariu
+L	18	Tienes la pota sol armariu.
+L	19	Vieno al cine con la so hermana.
+M	19	CON_CONTR	1	14	20	Other	La preposición «con» contrái col artículu determináu: <suggestion>cola</suggestion>.	cola
+L	20	Vieno al cine cola so hermana.
+L	21	Vieno al cine con el so hermanu.
+M	21	CON_CONTR	2	14	20	Other	La preposición «con» contrái col artículu determináu: <suggestion>col</suggestion>.	col
+L	22	Vieno al cine col so hermanu.
+L	23	Habría tar bien delgáu con lo poco que xinta.
+M	23	CON_CONTR	3	23	29	Other	La preposición «con» contrái col artículu determináu: <suggestion>colo</suggestion>.	colo
+L	24	Habría tar bien delgáu colo poco que xinta.
+L	25	Pues mercar un pisu con les perres que tienes.
+M	25	CON_CONTR	4	20	27	Other	La preposición «con» contrái col artículu determináu: <suggestion>coles</suggestion>.	coles
+L	26	Pues mercar un pisu coles perres que tienes.
+L	27	Marchó pa en casa con los bolsos enllenos.
+M	27	CON_CONTR	5	18	25	Other	La preposición «con» contrái col artículu determináu: <suggestion>colos</suggestion>.	colos
+L	28	Marchó pa en casa colos bolsos enllenos.
+L	29	Marchóme con l’almuhada.
+M	29	CON_CONTR	6	9	23	Other	La preposición «con» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>cola almuhada</suggestion>.	cola almuhada
+L	30	Marchóme cola almuhada.
+L	31	Metióse con l’asturianu.
+M	31	CON_CONTR	7	8	23	Other	La preposición «con» contrái col artículu determináu en cuenta d'apostrofar: <suggestion>col asturianu</suggestion>.	col asturianu
+L	32	Metióse col asturianu.
+L	33	Espérote en la estación.
+M	33	EN_CONTR	1	9	14	Other	La preposición «en» contrái col artículu determináu: <suggestion>na</suggestion>.	na
+L	34	Espérote na estación.
+L	35	Espérote en el chigre.
+M	35	EN_CONTR	2	9	14	Other	La preposición «en» contrái col artículu determináu: <suggestion>nel</suggestion>.	nel
+L	36	Espérote nel chigre.
+L	37	Tas pensando en lo que yo.
+M	37	EN_CONTR	3	13	18	Other	La preposición «en» contrái col artículu determináu: <suggestion>no</suggestion>.	no
+L	38	Tas pensando no que yo.
+L	39	Tienes los llibros en les baldes.
+M	39	EN_CONTR	4	19	25	Other	La preposición «en» contrái col artículu determináu: <suggestion>nes</suggestion>.	nes
+L	40	Tienes los llibros nes baldes.
+L	41	Tienes manches en los pies.
+M	41	EN_CONTR	5	15	21	Other	La preposición «en» contrái col artículu determináu: <suggestion>nos</suggestion>.	nos
+L	42	Tienes manches nos pies.
+L	43	Cayóte agua en l’almuhada.
+M	43	EN_CONTR	6	12	25	Other	La preposición «en» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>na almuhada</suggestion>.	na almuhada
+L	44	Cayóte agua na almuhada.
+L	45	Pegó-y en l’ombligu.
+M	45	EN_CONTR	7	7	19	Other	La preposición «en» contrái col artículu determináu en cuenta d'apostrofar: <suggestion>nel ombligu</suggestion>.	nel ombligu
+L	46	Pegó-y nel ombligu.
+L	47	Vien per la cera.
+M	47	PER_CONTR	1	5	11	Other	La preposición «per» contrái col artículu determináu: <suggestion>pela</suggestion>.	pela
+L	48	Vien pela cera.
+L	49	Tien que venir per el camín.
+M	49	PER_CONTR	2	15	21	Other	La preposición «per» contrái col artículu determináu: <suggestion>pel</suggestion>.	pel
+L	50	Tien que venir pel camín.
+L	51	Vete per lo segao.
+M	51	PER_CONTR	3	5	11	Other	La preposición «per» contrái col artículu determináu: <suggestion>pelo</suggestion>.	pelo
+L	52	Vete pelo segao.
+L	53	Ta pingándo-y per les dees.
+M	53	PER_CONTR	4	14	21	Other	La preposición «per» contrái col artículu determináu: <suggestion>peles</suggestion>.	peles
+L	54	Ta pingándo-y peles dees.
+L	55	Da-y bien per los requexos.
+M	55	PER_CONTR	5	10	17	Other	La preposición «per» contrái col artículu determináu: <suggestion>pelos</suggestion>.	pelos
+L	56	Da-y bien pelos requexos.
+L	57	Pingóte agua per l’almuhada.
+M	57	PER_CONTR	6	13	27	Other	La preposición «per» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>pela almuhada</suggestion>.	pela almuhada
+L	58	Pingóte agua pela almuhada.
+L	59	Tien rebusquinos per l’abdome.
+M	59	PER_CONTR	7	17	29	Other	La preposición «per» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>pel abdome</suggestion>.	pel abdome
+L	60	Tien rebusquinos pel abdome.
+L	61	Préstame por la vida.
+M	61	POR_CONTR	1	9	15	Other	La preposición «por» contrái col artículu determináu: <suggestion>pola</suggestion>.	pola
+L	62	Préstame pola vida.
+L	63	Préstame por el vivir.
+M	63	POR_CONTR	2	9	15	Other	La preposición «por» contrái col artículu determináu: <suggestion>pol</suggestion>.	pol
+L	64	Préstame pol vivir.
+L	65	Nun te gusta nada, por lo que toi viendo.
+M	65	POR_CONTR	3	19	25	Other	La preposición «por» contrái col artículu determináu: <suggestion>polo</suggestion>.	polo
+L	66	Nun te gusta nada, polo que toi viendo.
+L	67	Calló la boca por les tos pallabres.
+M	67	POR_CONTR	4	14	21	Other	La preposición «por» contrái col artículu determináu: <suggestion>poles</suggestion>.	poles
+L	68	Calló la boca poles tos pallabres.
+L	69	Calló la boca por los sos comentarios.
+M	69	POR_CONTR	5	14	21	Other	La preposición «por» contrái col artículu determináu: <suggestion>polos</suggestion>.	polos
+L	70	Calló la boca polos sos comentarios.
+L	71	Dormisti mal por l’almuhada.
+M	71	POR_CONTR	6	13	27	Other	La preposición «por» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>pola almuhada</suggestion>.	pola almuhada
+L	72	Dormisti mal pola almuhada.
+L	73	Fízolo too por l’hermanu del so amigu.
+M	73	POR_CONTR	7	11	24	Other	La preposición «por» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>pol hermanu</suggestion>.	pol hermanu
+L	74	Fízolo too pol hermanu del so amigu.
+L	75	Lleva tou el día berrando.
+M	75	TOU_CONTR	1	6	12	Other	L’indefiníu «tou» contrái col artículu determináu: <suggestion>tol</suggestion>.	tol
+L	76	Lleva tol día berrando.
+L	77	Perdió tou l’honor.
+M	77	TOU_CONTR	2	7	18	Other	L’indefiníu «tou» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>tol honor</suggestion>.	tol honor
+L	78	Perdió tol honor.
+L	79	Lleva toa la falda emporcada.
+M	79	TOU_CONTR	3	6	12	Other	L’indefiníu «toa» contrái col artículu determináu: <suggestion>tola</suggestion>.	tola
+L	80	Lleva tola falda emporcada.
+L	81	Moyó toa l'almuhada.
+M	81	TOU_CONTR	4	5	19	Other	L’indefiníu «toa» contrái col artículu determináu en cuenta d’apostrofar: <suggestion>tola almuhada</suggestion>.	tola almuhada
+L	82	Moyó tola almuhada.
+L	83	Deprendió d'él too lo que sabe.
+M	83	MORFOLOGIK_RULE_AST		10	11	UnknownWord	Atopáu un posible fallu d'ortografía	D
+M	83	TOU_CONTR	5	15	21	Other	L’indefiníu «too» contrái col artículu determináu: <suggestion>tolo</suggestion>.	tolo
+L	84	Deprendió d'él tolo que sabe.
+M	84	MORFOLOGIK_RULE_AST		10	11	UnknownWord	Atopáu un posible fallu d'ortografía	D
+L	85	Traxo toos los llibros que tien.
+M	85	TOU_CONTR	6	6	14	Other	L’indefiníu «toos» contrái col artículu determináu: <suggestion>tolos</suggestion>.	tolos
+L	86	Traxo tolos llibros que tien.
+L	87	Traxo toes les perres con ella.
+M	87	TOU_CONTR	7	6	14	Other	L’indefiníu «toes» contrái col artículu determináu: <suggestion>toles</suggestion>.	toles
+L	88	Traxo toles perres con ella.
+L	89	Vien cada ún per separtao.
+M	89	CADA_UN_CONTR	1	5	12	Other	L'indefiníu «cada» contrái col artículu indefiníu: <suggestion>caún</suggestion>.	caún
+L	90	Vien caún per separtao.
+L	91	Metióse en un chigre.
+M	91	EN_UN_CONTR	1	8	13	Other	La preposición «en» contrái col indefiníu: <suggestion>nun</suggestion>.	nun
+L	92	Metióse nun chigre.
+L	93	Enfotóse en él.
+M	93	EN_EL_CONTR	1	9	14	Other	La preposición «en» contrái col pronome personal: <suggestion>nél</suggestion>.	nél
+L	94	Enfotóse nél.
+L	95	Ta metíu en esti chigre.
+M	95	EN_ESTI_CONTR	1	9	16	Other	La preposición «en» contrái col demostrativu: <suggestion>nesti</suggestion>.	nesti
+L	96	Ta metíu nesti chigre.
+L	97	Vése-y per ente los árboles.
+M	97	DOS_PREP_CONTR	1	7	15	Other	Les preposiciones "per ente" contraen: <suggestion>pente</suggestion>.	pente
+L	98	Tiró pa ente la follasca.
+M	98	DOS_PREP_CONTR	1	5	12	Other	Les preposiciones "pa ente" contraen: <suggestion>pante</suggestion>.	pante
+M	98	MORFOLOGIK_RULE_AST		16	24	UnknownWord	Atopáu un posible fallu d'ortografía	follisca
+L	99	Voi a en ca Xuan.
+M	99	DOS_PREP_CONTR	2	4	8	Other	Les preposiciones «a en» contraen: <suggestion>an</suggestion>.	an
+L	100	Voi an ca Xuan.
+L	101	el home
+M	101	DETERM_APOSTR	1	0	7	Other	L’artículu determináu «el» apostrofa delantre de vocal o h muda: <suggestion>l’home</suggestion>.	l’home
+L	102	garra el xatu
+M	102	DETERM_APOSTR	2	0	8	Other	L’artículu determináu «el» apostrofa per delantre acabando en vocal la pallabra anterior: <suggestion>garra’l</suggestion>.	garra’l
+L	103	la agonía
+M	103	DETERM_APOSTR	3	0	9	Other	L’artículu determináu «la» apostrofa delantre d’a o ha: <suggestion>l’agonía</suggestion>.	l’agonía
+L	104	pa aguantalu
+M	104	PREPOS_APOSTR	1	0	12	Other	La preposición «pa» apostrofa delantre d’a o ha: <suggestion>p’aguantalu</suggestion>.	p’aguantalu
+L	105	de home
+M	105	PREPOS_APOSTR	2	0	7	Other	La preposición «de» apostrofa delantre de vocal o h muda: <suggestion>d’home</suggestion>.	d’home
+L	106	en avientu
+M	106	PREPOS_APOSTR	3	0	10	Other	La preposición «en» apostrofa delantre de vocal o h muda: <suggestion>n’avientu</suggestion>.	n’avientu
+L	107	me aguanta
+M	107	PRON_APOSTR	1	0	10	Other	El pronome «me» apostrofa delantre de vocal o h muda: <suggestion>m’aguanta</suggestion>.	m’aguanta
+L	108	te aguanta
+M	108	PRON_APOSTR	2	0	10	Other	El pronome «te» apostrofa delantre de vocal o h muda: <suggestion>t’aguanta</suggestion>.	t’aguanta
+L	109	se aguanta
+M	109	PRON_APOSTR	3	0	10	Other	El pronome «se» apostrofa delantre de vocal o h muda: <suggestion>s’aguanta</suggestion>.	s’aguanta
+L	110	que aguanta
+M	110	QUE_APOSTR	1	0	11	Other	La conxunción y el relativu «que» apostrofen delantre de vocal o h muda: <suggestion>qu’aguanta</suggestion>.	qu’aguanta
+L	111	que el arume
+M	111	UPPERCASE_SENTENCE_START		0	3	Other	Esta frase nun entama con mayúscules	Que
+M	111	QUE_APOSTR	2	4	12	Other	La conxunción y el relativu «que» apostrofen col artículu «el»: <suggestion>l’arume</suggestion>.	l’arume
+L	112	Púnxose a parte.
+M	112	APARTE	1	8	15	Other	Valorar escribir <suggestion>aparte</suggestion>, si se quier dicir «de llau, separtáu».	aparte
+L	113	Nun nos lleva a parte nenguna.
+L	114	Trevesólu de parte a parte.
+L	115	Qu’a lo menos haiga delles opciones.
+M	115	MORFOLOGIK_RULE_AST		0	2	UnknownWord	Atopáu un posible fallu d'ortografía	Au|Aú|Bu|Cu|Dúu|Fu|Lu|Mu|Que|Qué|Tu|U|Íu|Ú
+M	115	HAIGA_HEBA	1	14	19	Other	¿Queríes dicir <suggestion>heba</suggestion> (del verbu «haber»)?	heba
+L	116	Qu’a lo menos haiga delles opciones.
+M	116	MORFOLOGIK_RULE_AST		0	2	UnknownWord	Atopáu un posible fallu d'ortografía	Au|Aú|Bu|Cu|Dúu|Fu|Lu|Mu|Que|Qué|Tu|U|Íu|Ú
+M	116	HAIGA_HEBA	1	14	19	Other	¿Queríes dicir <suggestion>heba</suggestion> (del verbu «haber»)?	heba
+L	117	Tien perres esgaya.
+M	117	ASGAYA	1	12	18	Other	La forma correuta ye <suggestion>a esgaya</suggestion>.	a esgaya
+L	118	Tien perres asgaya.
+M	118	ASGAYA	1	12	18	Other	La forma correuta ye <suggestion>a esgaya</suggestion>.	a esgaya
+L	119	Nun vieno naide, nin si quier Nel.
+M	119	SI_QUIER	1	17	29	Other	Como alverbiu o conxunción, escríbese <suggestion>nin siquier</suggestion>.	nin siquier
+L	120	Nun me diz si quier o non esti papel.
+L	121	Ye peor contra más anecies.
+M	121	CONTRA_MAS_CUANTO	1	8	18	Other	Espresión incorreuta. Ha escribise <suggestion>cuanto más</suggestion>.	cuanto más
+L	122	Ye peor contra más anecies.
+M	122	CONTRA_MAS_CUANTO	1	8	18	Other	Espresión incorreuta. Ha escribise <suggestion>cuanto más</suggestion>.	cuanto más
+L	123	Xuan va a garrar l’autobús.
+M	123	DIR_A_INF	1	5	16	Other	Aconséyase construyir la perífrasis ensin preposición: <suggestion>va garrar</suggestion>	va garrar
+M	123	MORFOLOGIK_RULE_AST		17	18	UnknownWord	Atopáu un posible fallu d'ortografía	
+L	124	Fáigolo agora mesmu.
+M	124	CONCORDANCIA_XENERU	1	8	19	Other	Concordancia de «mesmu» en neutru: <suggestion>agora mesmo</suggestion>.	agora mesmo
+L	125	Nos marchamos pal pueblu.
+M	125	PRON_NOS_VOS	1	0	3	Other	¿Queríes dicir <suggestion>Nós</suggestion>? Paez un pronome suxetu.	Nós

@@ -1,0 +1,10 @@
+LLICENCIA:
+"Correutor ortográficu d'asturianu"
+Versión 2.80
+
+Diccionariu pa OpenOffice basáu nel Diccionariu Normativu de l'Academia de la Llingua Asturiana (2000) pola Asociación Softastur.org.
+
+Asturies, 2010, 2011, 2024
+
+Distribuyíu baxo llicencia GPL v3
+

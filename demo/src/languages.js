@@ -74,6 +74,9 @@ const ICELANDIC = {
 const ESPERANTO = {
   sample: "Tio estas tesst. Mi amas ĉokoladon , kaj kafon.",
 };
+const ASTURIAN = {
+  sample: "Foi a el cine cola so hermana. Voi , y depués vengo.",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -98,6 +101,7 @@ export const LANGUAGES = [
   { code: "sv", pack: "sv", label: "Svenska", size: "1.6 MB", ...SWEDISH },
   { code: "is-IS", pack: "is", label: "Íslenska", size: "1.1 MB", ...ICELANDIC },
   { code: "eo", pack: "eo", label: "Esperanto", size: "0.64 MB", ...ESPERANTO },
+  { code: "ast-ES", pack: "ast", label: "Asturianu", size: "1.1 MB", ...ASTURIAN },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.1 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.7 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.35 MB", ...GUARANI },
