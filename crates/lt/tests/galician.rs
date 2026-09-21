@@ -2,12 +2,15 @@
 //! built-in-rule values.
 //!
 //! Stage gates follow internal development notes: this file pins the progress
-//! metric and gets updated by each stage. Offsets are UTF-8 bytes (the engine
-//! format); the Java probes print UTF-16 code units, converted in the comments.
+//! metric and gets updated by each stage. Probe offsets are the Java UTF-16
+//! code units and are asserted with the `common::assert_utf16` helper.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 /// One engine at a time: the Galician engines hold the tagger dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -86,14 +89,11 @@ fn galician_engine_state() {
 /// starts lowercase.
 #[test]
 fn galician_uppercase_sentence_start() {
-    let matches = one(
-        "Esta casa é vella. foi construida en 1950.",
-        "UPPERCASE_SENTENCE_START",
-    );
+    let text = "Esta casa é vella. foi construida en 1950.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
     let m = &matches[0];
-    assert_eq!(m.range.start, 20);
-    assert_eq!(m.range.end, 23);
+    assert_utf16(text, m, (19, 22));
     assert_eq!(m.suggestions[0].value, "Foi");
 }
 
@@ -138,12 +138,11 @@ fn galician_speller_accepts_affix_derived_e_acute() {
 /// split at non-letters, so the quoted word is spell-checked with the quotes.
 #[test]
 fn galician_speller_tokenizes_like_hunspell_rule() {
-    let matches = one("Examplo 'a'", "HUNSPELL_RULE");
+    let text = "Examplo 'a'";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 2, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 7);
-    assert_eq!(matches[1].range.start, 8);
-    assert_eq!(matches[1].range.end, 11);
+    assert_utf16(text, &matches[0], (0, 7));
+    assert_utf16(text, &matches[1], (8, 11));
 }
 
 /// Without a `BREAK` directive hunspell installs the default hyphen break
