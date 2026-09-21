@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -352,6 +352,13 @@ IN_TREE_ARTIFACTS = {
         "resource/sv/swedish_synth.info": "sv/dictionaries/swedish_synth.info",
         "resource/sv/swedish_synth.dict_tags.txt": "sv/dictionaries/swedish_synth_tags.txt",
     },
+    # Breton ships its `BaseTagger` Morfologik dictionary (FSA5 format) in-tree
+    # (`BretonTagger`); the FSA spelling dictionary (`hunspell/br_FR.dict`) is
+    # imported with the rest of the `hunspell/` directory.
+    "br": {
+        "resource/br/breton.dict": "br/dictionaries/breton.dict",
+        "resource/br/breton.info": "br/dictionaries/breton.info",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -416,6 +423,13 @@ UPSTREAM_FILE_LICENSES = {
         True,
         "upstream sv/README.txt",
     ),
+    "br/words/README.txt": (
+        "GPL (Breton POS data based on the Apertium Breton dictionary, with "
+        "permission of its authors; the FSA spelling dictionary is LGPL, "
+        "derived from the Drouizig hunspell dictionary)",
+        True,
+        "upstream br/README.txt",
+    ),
 }
 
 # In-tree (module resource) dictionaries that are not Maven artifacts.
@@ -471,6 +485,13 @@ IN_TREE_LICENSES = {
         "upstream sv/README.txt states LGPL-2.1-or-later)",
         True,
         "upstream sv/README.txt",
+    ),
+    "br": (
+        "GPL (Breton POS dictionary based on the Apertium Breton dictionary, "
+        "with permission of its authors; upstream br/README.txt states GPL) - "
+        "to be confirmed",
+        False,
+        "upstream br/README.txt",
     ),
 }
 
@@ -661,6 +682,19 @@ def hunspell_license(lang: str, name: str):
                 "header, eo/hunspell/README_eo.txt)",
                 verified,
                 "upstream eo/hunspell/README_eo.txt",
+            )
+    if lang == "br":
+        # The Breton FSA spelling dictionary is generated from the Drouizig
+        # hunspell dictionary 0.13 (LGPL); br/hunspell/README.txt points at
+        # br/README.txt, which states the LGPL for the FSA dictionary.
+        if name.startswith(("README", "br_FR.")):
+            verified = name.startswith("README")
+            return (
+                "LGPL (Breton FSA spelling dictionary generated from the "
+                "Drouizig hunspell dictionary 0.13; br/hunspell/README.txt, "
+                "br/README.txt)",
+                verified,
+                "upstream br/hunspell/README.txt; br/README.txt",
             )
     return None
 
@@ -1033,7 +1067,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

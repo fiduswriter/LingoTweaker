@@ -163,6 +163,8 @@ pub struct Pipeline {
     pub esperanto: Option<Arc<crate::eo::EsperantoPipeline>>,
     /// Asturian pipeline parts (`None` for the other languages)
     pub asturian: Option<Arc<crate::ast::AsturianPipeline>>,
+    /// Breton pipeline parts (`None` for the other languages)
+    pub breton: Option<Arc<crate::br::BretonPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Danish pipeline parts (`None` for the other languages)
@@ -1356,6 +1358,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1598,6 +1601,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1799,6 +1803,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2008,6 +2013,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2137,6 +2143,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2385,6 +2392,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2593,6 +2601,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2918,6 +2927,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3067,6 +3077,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3202,6 +3213,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3361,6 +3373,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3498,6 +3511,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3607,6 +3621,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3751,6 +3766,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: Some(greek),
             norwegian: None,
             nordum: None,
@@ -3825,6 +3841,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             da: Some(danish),
             sv: None,
@@ -3984,6 +4001,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             da: None,
             sv: Some(swedish),
@@ -4055,6 +4073,7 @@ impl Pipeline {
             icelandic: Some(icelandic),
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             da: None,
             sv: None,
@@ -4163,6 +4182,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: Some(esperanto),
             asturian: None,
+            breton: None,
             greek: None,
             da: None,
             sv: None,
@@ -4257,6 +4277,116 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: Some(asturian),
+            breton: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Breton (`br`) engine: the `BretonTagger` (FSA5 `breton.dict` + the
+    /// manual word lists), the `BretonWordTokenizer`, the plain
+    /// `XmlRuleDisambiguator` (`br/disambiguation.xml`, no global rules), the
+    /// `MorfologikBretonSpellerRule` and the `TopoReplaceRule` (`BR_TOPO`).
+    /// `Breton.getRelevantRules` adds those two Java rule classes plus the
+    /// generic built-ins; the XML-referenced `DateCheckFilter` is registered.
+    pub fn new_breton(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "br_two")?;
+
+        let tagger = Arc::new(lt_tagger::BretonTagger::load(data_dir.path())?);
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Br))?;
+        if data_dir.style_path(Lang::Br).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Br))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // XML-referenced filter classes: `DateCheckFilter` (DEIZ_DEIZIAD).
+        let filters = crate::br::filters::breton_filter_registry(today.unwrap_or_else(Ymd::today));
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        // `Breton.createDefaultDisambiguator` is `new XmlRuleDisambiguator(new
+        // Breton())`, which does NOT load `disambiguation-global.xml`.
+        let mut disambiguator =
+            lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Br))?;
+        disambiguator.set_filter_registry(filters);
+
+        let spelling = match crate::br::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[br] spelling rule disabled: {err}");
+                None
+            }
+        };
+
+        let topo = crate::br::topo::TopoReplaceRule::load(data_dir.path())?;
+
+        let breton = Arc::new(crate::br::BretonPipeline {
+            tagger,
+            disambiguator,
+            spelling,
+            topo,
+        });
+        Ok(Self {
+            lang: Lang::Br,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: Some(breton),
             greek: None,
             da: None,
             sv: None,
@@ -4393,6 +4523,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
@@ -4474,6 +4605,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
@@ -4559,6 +4691,7 @@ impl Pipeline {
             icelandic: None,
             esperanto: None,
             asturian: None,
+            breton: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -4670,12 +4803,18 @@ impl Pipeline {
                                                                                             asturian,
                                                                                             sentence_text,
                                                                                         ),
-                                                                                        None => analyze_sentence(
-                                                                                            self.tagger
-                                                                                                .as_deref()
-                                                                                                .expect("english tagger"),
-                                                                                            sentence_text,
-                                                                                        ),
+                                                                                        None => match &self.breton {
+                                                                                            Some(breton) => crate::br::analyze_breton_sentence(
+                                                                                                breton,
+                                                                                                sentence_text,
+                                                                                            ),
+                                                                                            None => analyze_sentence(
+                                                                                                self.tagger
+                                                                                                    .as_deref()
+                                                                                                    .expect("english tagger"),
+                                                                                                sentence_text,
+                                                                                            ),
+                                                                                        },
                                                                                     },
                                                                                 },
                                                                             },
@@ -6946,6 +7085,51 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_ast(&analyzed_sentences));
             }
         }
+        // Breton text-level rules (`Breton.getRelevantRules`):
+        // UppercaseSentenceStart (4), MultipleWhitespace (5) and
+        // SentenceWhitespace (6). Breton has no `GenericUnpairedBracketsRule`.
+        if self.lang == crate::Lang::Br {
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_br(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_br(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_br(&analyzed_sentences));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -7220,12 +7404,18 @@ impl Pipeline {
                                                                                         asturian,
                                                                                         &text[start..end],
                                                                                     ),
-                                                                                    None => analyze_sentence(
-                                                                                        self.tagger
-                                                                                            .as_deref()
-                                                                                            .expect("english tagger"),
-                                                                                        &text[start..end],
-                                                                                    ),
+                                                                                    None => match &self.breton {
+                                                                                        Some(breton) => crate::br::analyze_breton_sentence(
+                                                                                            breton,
+                                                                                            &text[start..end],
+                                                                                        ),
+                                                                                        None => analyze_sentence(
+                                                                                            self.tagger
+                                                                                                .as_deref()
+                                                                                                .expect("english tagger"),
+                                                                                            &text[start..end],
+                                                                                        ),
+                                                                                    },
                                                                                 },
                                                                             },
                                                                         },
@@ -9696,6 +9886,81 @@ impl Pipeline {
                 }
             }
         }
+        // Breton sentence-level Java rules in `Breton.getRelevantRules` order:
+        // CommaWhitespace (1), DoublePunctuation (2),
+        // MorfologikBretonSpellerRule (3) and TopoReplaceRule (7).
+        // UppercaseSentenceStart (4), MultipleWhitespace (5) and
+        // SentenceWhitespace (6) are text-level and run above.
+        if self.lang == crate::Lang::Br {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_br(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_br(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(breton) = &self.breton {
+                if let Some(spelling) = &breton.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::br::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::br::topo::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    breton.topo.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -11005,6 +11270,12 @@ impl Pipeline {
             // `Asturian` does not override `createDefaultDisambiguator`: the
             // base no-op `DemoDisambiguator` applies.
             asturian.disambiguate(sentence);
+            return;
+        }
+        if let Some(breton) = &self.breton {
+            // `Breton.createDefaultDisambiguator` is a plain
+            // `XmlRuleDisambiguator`: XML rules only (no global rules).
+            breton.disambiguate(sentence);
             return;
         }
         if let Some(greek) = &self.greek {

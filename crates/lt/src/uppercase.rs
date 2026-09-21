@@ -244,6 +244,18 @@ pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Breton `MessagesBundle_br` strings.
+pub fn check_br(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Ne grog ket ar frazenn-mañ gant ur bennlizherenn",
+        "Pennlizherennoù",
+        "Gwiriañ a ra ma krog ur frazenn gant ur bennlizherenn",
+        "Pennlizherennoù",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Esperanto `MessagesBundle_eo`
 /// strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {

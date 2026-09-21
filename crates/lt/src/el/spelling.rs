@@ -26,6 +26,8 @@ pub fn load(data_dir: &Path) -> Result<GreekSpellingRule> {
             category_id: "TYPOS",
             category_name: "Πιθανό λάθος",
             is_latin_script: false,
+            ignore_tagged_words: false,
+            split_on_hyphen: false,
         },
     )
 }

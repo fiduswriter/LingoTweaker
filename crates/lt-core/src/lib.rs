@@ -65,6 +65,8 @@ pub enum Lang {
     Eo,
     /// Asturian (`ast`).
     Ast,
+    /// Breton (`br`).
+    Br,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -76,7 +78,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 22] = [
+    pub const ALL: [Lang; 23] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -96,6 +98,7 @@ impl Lang {
         Lang::Is,
         Lang::Eo,
         Lang::Ast,
+        Lang::Br,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -125,6 +128,7 @@ impl Lang {
             "is" => Some(Lang::Is),
             "eo" => Some(Lang::Eo),
             "ast" => Some(Lang::Ast),
+            "br" => Some(Lang::Br),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -153,6 +157,7 @@ impl Lang {
             Lang::Is => "is",
             Lang::Eo => "eo",
             Lang::Ast => "ast",
+            Lang::Br => "br",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -256,6 +261,11 @@ impl Lang {
                 code: "ast",
                 long_code: "ast-ES",
                 name: "Asturian",
+            },
+            Lang::Br => Language {
+                code: "br",
+                long_code: "br-FR",
+                name: "Breton",
             },
             Lang::No => Language {
                 code: "no",

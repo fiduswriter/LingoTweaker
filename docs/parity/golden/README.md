@@ -27,6 +27,7 @@ re-runs the Rust side and diffs against the golden.
 | is | `is-full.txt` (45) | `is-full.java.tsv` |
 | eo | `eo-full.txt` (876) | `eo-full.java.tsv` |
 | ast | `ast-full.txt` (125) | `ast-full.java.tsv` |
+| br | `br-full.txt` (1,835) | `br-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -94,6 +95,11 @@ re-runs the Rust side and diffs against the golden.
   ast is exactly 0/0/0 (D-230; Asturian has no disambiguator/synthesizer, the
   `AsturianTagger` reads the old CFSA (`0xc5`) Morfologik dictionary — the
   `lt-tagger` CFSA reader is new — and `compile_failures()` is empty).
+  br is exactly 0/0/0 (D-236; `BretonTagger`, `BretonWordTokenizer` and the
+  `br/disambiguation.xml` are wired, `compile_failures()` is empty, and the
+  two shared gaps the corpus surfaced are fixed: `<match no="0"
+  regexp_match=... regexp_replace=...>` token references in patterns and the
+  multi-word `IGNORE_SPELLING` anti-patterns from the spelling word lists).
 
 Regenerate one language after an intentional corpus change (Docker):
 

@@ -51,6 +51,12 @@ pub struct MorfologikSpellerConfig {
     /// `SpellingCheckRule.isLatinScript()`: false for Greek (any non-Unicode
     /// letter token is ignored instead of only non-Latin ones).
     pub is_latin_script: bool,
+    /// `MorfologikSpellerRule.setIgnoreTaggedWords()`: tagged words are not
+    /// spell-checked (Breton).
+    pub ignore_tagged_words: bool,
+    /// `MorfologikSpellerRule.tokenizingPattern()` == `-`: the token is split
+    /// at hyphens and every segment is checked separately (Breton).
+    pub split_on_hyphen: bool,
 }
 
 pub struct MorfologikSpellingRule {
@@ -62,6 +68,10 @@ pub struct MorfologikSpellingRule {
     speller3: MultiSpeller,
     /// `SpellingCheckRule.wordsToBeIgnored` (case-sensitive, like Java)
     ignore: HashSet<String>,
+    /// `SpellingCheckRule.antiPatterns`: multi-word word-list entries
+    /// (`addIgnoreWords` tokenizes the line; >1 token becomes an
+    /// `IGNORE_SPELLING` anti-pattern). Keyed by the first phrase token.
+    ignore_phrases: std::collections::HashMap<String, Vec<Vec<String>>>,
     /// `SpellingCheckRule.wordsToBeProhibited`
     prohibit: HashSet<String>,
     /// the base class does not call `setIgnoreTaggedWords()`
@@ -91,6 +101,7 @@ impl MorfologikSpellingRule {
         let speller2 = MultiSpeller::new(vec![binary(2), plain(2)], vec![0, 1]);
         let speller3 = MultiSpeller::new(vec![binary(3), plain(3)], vec![0, 1]);
 
+        let ignore_tagged_words = config.ignore_tagged_words;
         let mut rule = Self {
             config,
             binary_speller,
@@ -98,8 +109,9 @@ impl MorfologikSpellingRule {
             speller2,
             speller3,
             ignore: HashSet::new(),
+            ignore_phrases: std::collections::HashMap::new(),
             prohibit: HashSet::new(),
-            ignore_tagged_words: false,
+            ignore_tagged_words,
             suggestion_cache: std::sync::Mutex::new(std::collections::HashMap::new()),
         };
         // `SpellingCheckRule.init`: ignore file, spelling file, additional
@@ -144,7 +156,24 @@ impl MorfologikSpellingRule {
 
     fn load_ignore(&mut self, path: &Path) {
         for word in cache_word_list(path) {
-            self.ignore.insert(word);
+            // `SpellingCheckRule.addIgnoreWords`: a multi-token line becomes a
+            // case-sensitive `IGNORE_SPELLING` anti-pattern instead of a
+            // single ignored word.
+            let tokens: Vec<String> = lt_tokenize::wordtokenizer::string_tokenize(
+                &word,
+                &lt_tokenize::wordtokenizer::base_tokenizing_characters(),
+            )
+            .into_iter()
+            .filter(|t| !t.trim().is_empty())
+            .collect();
+            if tokens.len() > 1 {
+                self.ignore_phrases
+                    .entry(tokens[0].clone())
+                    .or_default()
+                    .push(tokens);
+            } else {
+                self.ignore.insert(word);
+            }
         }
     }
 
@@ -214,6 +243,35 @@ impl MorfologikSpellingRule {
             || self.ignore_word_with_emoji(tokens[idx].surface())
     }
 
+    /// `SpellingCheckRule.getAntiPatterns()`: every multi-word word-list
+    /// entry is a case-sensitive `IGNORE_SPELLING` anti-pattern; the matched
+    /// tokens count as `isIgnoredBySpeller`. Returns one flag per token of
+    /// `tokens`.
+    fn phrase_ignored_flags(&self, tokens: &[&AnalyzedTokenReadings]) -> Vec<bool> {
+        let mut flags = vec![false; tokens.len()];
+        if self.ignore_phrases.is_empty() {
+            return flags;
+        }
+        for i in 0..tokens.len() {
+            let Some(phrases) = self.ignore_phrases.get(tokens[i].surface()) else {
+                continue;
+            };
+            for phrase in phrases {
+                if i + phrase.len() <= tokens.len()
+                    && phrase
+                        .iter()
+                        .enumerate()
+                        .all(|(k, p)| tokens[i + k].surface() == p)
+                {
+                    for k in 0..phrase.len() {
+                        flags[i + k] = true;
+                    }
+                }
+            }
+        }
+        flags
+    }
+
     /// `MorfologikSpellerRule.match` over one sentence's token stream
     /// (absolute byte offsets already applied by the caller).
     pub fn check_sentence(
@@ -227,8 +285,9 @@ impl MorfologikSpellingRule {
             .collect();
         let mut matches: Vec<Match> = Vec::new();
         let mut is_first_word = true;
+        let phrase_ignored = self.phrase_ignored_flags(&non_blank);
         for (idx, token) in non_blank.iter().enumerate() {
-            if self.can_be_ignored(&non_blank, idx, token) {
+            if phrase_ignored[idx] || self.can_be_ignored(&non_blank, idx, token) {
                 if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
                     is_first_word = false;
                 }
@@ -240,9 +299,36 @@ impl MorfologikSpellingRule {
                 .first()
                 .map(|r| r.token.clone())
                 .unwrap_or_else(|| token.surface().to_string());
-            let new_matches =
-                self.get_rule_matches(&word, start_pos, &mut matches, idx, &non_blank);
-            matches.extend(new_matches);
+            // `MorfologikSpellerRule.match`: a non-null `tokenizingPattern()`
+            // splits the word (Breton splits at every hyphen) and checks each
+            // segment separately, at `startPos + index`.
+            if self.config.split_on_hyphen && word.contains('-') {
+                let mut index = 0usize;
+                for (pos, _) in word.match_indices('-') {
+                    let segment = &word[index..pos];
+                    let new_matches = self.get_rule_matches(
+                        segment,
+                        start_pos + index,
+                        &mut matches,
+                        idx,
+                        &non_blank,
+                    );
+                    matches.extend(new_matches);
+                    index = pos + 1;
+                }
+                let new_matches = self.get_rule_matches(
+                    &word[index..],
+                    start_pos + index,
+                    &mut matches,
+                    idx,
+                    &non_blank,
+                );
+                matches.extend(new_matches);
+            } else {
+                let new_matches =
+                    self.get_rule_matches(&word, start_pos, &mut matches, idx, &non_blank);
+                matches.extend(new_matches);
+            }
 
             // Capitalize the (first) match's suggestions when the word is the
             // sentence's first word and not its last token.
@@ -297,6 +383,9 @@ impl MorfologikSpellingRule {
     ) -> Vec<Match> {
         let mut rule_matches: Vec<Match> = Vec::new();
         let mut rule_match: Option<Match> = None;
+        // Java `startPos + word.length()`: with `tokenizingPattern()` the
+        // covered word is the segment, not the whole token.
+        let word_end = start_pos + word.len();
 
         if !self.is_misspelled(word) && !self.is_prohibited(word) {
             return rule_matches;
@@ -333,7 +422,7 @@ impl MorfologikSpellingRule {
                     {
                         rule_match = Some(self.create_wrong_split_match(
                             rule_matches_so_far,
-                            tokens[idx].end_pos(),
+                            word_end,
                             &sugg1a,
                             &sugg1b,
                             prev_start_pos,
@@ -357,7 +446,7 @@ impl MorfologikSpellingRule {
                             {
                                 rule_match = Some(self.create_wrong_split_match(
                                     rule_matches_so_far,
-                                    tokens[idx].end_pos(),
+                                    word_end,
                                     &sugg2a,
                                     &sugg2b,
                                     prev_start_pos,
@@ -379,7 +468,7 @@ impl MorfologikSpellingRule {
                         if self.speller1.get_frequency(&sugg)
                             >= self.speller1.get_frequency(&prev_word)
                         {
-                            let mut m = self.new_rule_match(prev_start_pos, tokens[idx].end_pos());
+                            let mut m = self.new_rule_match(prev_start_pos, word_end);
                             before_suggestion_str = format!("{prev_word} ");
                             m.suggestions.push(Suggestion {
                                 value: sugg.clone(),
@@ -491,7 +580,7 @@ impl MorfologikSpellingRule {
         let mut clean_word = word.to_string();
 
         if rule_match.is_none() {
-            rule_match = Some(self.new_rule_match(start_pos, tokens[idx].end_pos()));
+            rule_match = Some(self.new_rule_match(start_pos, word_end));
         }
 
         // word starting with numbers or bullets

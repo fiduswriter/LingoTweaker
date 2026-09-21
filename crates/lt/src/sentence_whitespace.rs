@@ -182,6 +182,18 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &SV_STRINGS)
 }
 
+/// `SentenceWhitespaceRule` with the Breton `MessagesBundle_br` strings.
+pub fn check_br(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const BR_STRINGS: Strings = Strings {
+        description: "Ur spas a vank etre ar frazennoù",
+        repeated_message: "Fazi bizskrivañ posupl: daou spas ho peus lakaet",
+        add_space_message: "Ouzhpennañ ur spas etre ar frazennoù",
+        category_name: "Lizherennerezh",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &BR_STRINGS)
+}
+
 /// `SentenceWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings
 /// (the description and repeated message fall back to the core English
 /// bundle; only `addSpaceBetweenSentences` is translated).

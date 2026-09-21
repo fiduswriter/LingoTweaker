@@ -50,6 +50,8 @@ struct CompiledMatchRef {
     case_conversion: Option<String>,
     setpos: bool,
     postag: Option<String>,
+    regexp_match: Option<String>,
+    regexp_replace: Option<String>,
 }
 
 #[derive(Clone)]
@@ -662,6 +664,8 @@ pub(crate) fn compile_token(t: &PatternToken) -> Result<CompiledToken, String> {
             case_conversion: m.case_conversion.clone(),
             setpos: m.setpos,
             postag: m.postag.clone(),
+            regexp_match: m.regexp_match.clone(),
+            regexp_replace: m.regexp_replace.clone(),
         }),
         regexp: t.regexp,
         case_sensitive: t.case_sensitive,
@@ -1417,8 +1421,8 @@ fn resolve_references<T: Deref<Target = AnalyzedTokenReadings>>(
             postag: mref.postag.clone(),
             postag_replace: None,
             postag_regexp: false,
-            regexp_match: None,
-            regexp_replace: None,
+            regexp_match: mref.regexp_match.clone(),
+            regexp_replace: mref.regexp_replace.clone(),
             case_conversion: mref.case_conversion.clone().unwrap_or_default(),
             setpos: mref.setpos,
             static_lemma: None,

@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 729,
+  "file_count": 747,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -181,6 +181,199 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/dictionaries/breton.dict",
+      "sha256": "eb5ef06be9f3967b3ca068f8347cd0880548082c78776fe5d526705291bbd952",
+      "size": 3133920,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/breton.dict",
+        "license": "GPL (Breton POS dictionary based on the Apertium Breton dictionary, with permission of its authors; upstream br/README.txt states GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream br/README.txt"
+      }
+    },
+    {
+      "path": "br/dictionaries/breton.info",
+      "sha256": "000391816ca437c7f3bd5e1005f9b8e49a847c7bb390061a5758cf9fccded5ea",
+      "size": 100,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/breton.info",
+        "license": "GPL (Breton POS dictionary based on the Apertium Breton dictionary, with permission of its authors; upstream br/README.txt states GPL) - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream br/README.txt"
+      }
+    },
+    {
+      "path": "br/disambiguation.xml",
+      "sha256": "8e5e54ac1348562d8650059c10630b04573b654a8409fa4289287f9c1c077dd5",
+      "size": 19645,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/hunspell/README.txt",
+      "sha256": "913e1137a37f58ceaf720cbc01757f76a6773fb8a42370d613ba65a0f9b0c591",
+      "size": 122,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/hunspell/README.txt",
+        "license": "LGPL (Breton FSA spelling dictionary generated from the Drouizig hunspell dictionary 0.13; br/hunspell/README.txt, br/README.txt)",
+        "license_verified": true,
+        "license_source": "upstream br/hunspell/README.txt; br/README.txt"
+      }
+    },
+    {
+      "path": "br/hunspell/br_FR.dict",
+      "sha256": "11ce00eecc5ada79e4b83518c81185614a54e04d1b74b01f38845117003d1c28",
+      "size": 328125,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/hunspell/br_FR.dict",
+        "license": "LGPL (Breton FSA spelling dictionary generated from the Drouizig hunspell dictionary 0.13; br/hunspell/README.txt, br/README.txt)",
+        "license_verified": false,
+        "license_source": "upstream br/hunspell/README.txt; br/README.txt"
+      }
+    },
+    {
+      "path": "br/hunspell/br_FR.info",
+      "sha256": "8fc2179c859d721ba977a7185d064396eba044218670548f4c46e35c35c06a89",
+      "size": 134,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/hunspell/br_FR.info",
+        "license": "LGPL (Breton FSA spelling dictionary generated from the Drouizig hunspell dictionary 0.13; br/hunspell/README.txt, br/README.txt)",
+        "license_verified": false,
+        "license_source": "upstream br/hunspell/README.txt; br/README.txt"
+      }
+    },
+    {
+      "path": "br/hunspell/ignore.txt",
+      "sha256": "7a6d1163ffad73dbd9a28601941dc304cf0f84e212347c1d73df4a42d4ab1388",
+      "size": 65,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/hunspell/spelling.txt",
+      "sha256": "bc0979ae3e10aea352f1bc10a79481a84338e23936eb73bafaaddade3462723a",
+      "size": 147,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/rules/grammar.xml",
+      "sha256": "5c9fe81386606be33cfe1e8eba769859e659fc1f791ef43cf589000c531bed75",
+      "size": 428420,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/rules/br/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/rules/topo.txt",
+      "sha256": "dcb617997c0d5b8b7eddd6ad1cc504838c64e13b44916b64c3b0e318d7005dc4",
+      "size": 38018,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/rules/br/topo.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/words/README.txt",
+      "sha256": "7e1fc7dac81ea54cdc74b88f59f395c39c4e5b07cb8c97db5cee8dab63735a4e",
+      "size": 754,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/README.txt",
+        "license": "GPL (Breton POS data based on the Apertium Breton dictionary, with permission of its authors; the FSA spelling dictionary is LGPL, derived from the Drouizig hunspell dictionary)",
+        "license_verified": true,
+        "license_source": "upstream br/README.txt"
+      }
+    },
+    {
+      "path": "br/words/added.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/words/common_words.txt",
+      "sha256": "431cb831e1e10cb9b62bb3726d67fc177820143f657a33e3ca3f9210eeb24b0b",
+      "size": 33129,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/words/compounds.txt",
+      "sha256": "a7a8980b5ec8cbcf2968b2572c83a4eac6068ec7627ea9e3dd2843b48872a753",
+      "size": 246622,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/compounds.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "br/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/removed_custom.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
@@ -4767,6 +4960,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/MessagesBundle_ast.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_br.properties",
+      "sha256": "1eece19a9d166ba71d04302e41f53bb769411ce000d2172c3b2e7ed7bffb0668",
+      "size": 16367,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/MessagesBundle_br.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

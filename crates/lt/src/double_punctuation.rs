@@ -151,6 +151,23 @@ pub fn check_sentence_ast(tokens: &[AnalyzedTokenReadings], sentence_offset: usi
     matches
 }
 
+/// `DoublePunctuationRule` with the Breton `MessagesBundle_br` strings.
+pub fn check_sentence_br(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Poentadur".to_string();
+        m.description = "Daou skej pe daou bik diouzh renk".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Daou bik diouzh renk".to_string();
+            m.short_message = Some("Daou bik diouzh renk".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Daou skej diouzh renk".to_string();
+            m.short_message = Some("Daou skej diouzh renk".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

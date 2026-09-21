@@ -30,6 +30,7 @@ enum LangArg {
     Is,
     Eo,
     Ast,
+    Br,
     No,
     Nrd,
     Gn,
@@ -57,6 +58,7 @@ impl From<LangArg> for Lang {
             LangArg::Is => Lang::Is,
             LangArg::Eo => Lang::Eo,
             LangArg::Ast => Lang::Ast,
+            LangArg::Br => Lang::Br,
             LangArg::No => Lang::No,
             LangArg::Nrd => Lang::Nrd,
             LangArg::Gn => Lang::Gn,
@@ -393,8 +395,12 @@ fn cmd_analyze(
             | Lang::El
             | Lang::Is
             | Lang::Eo
+            | Lang::Ast
+            | Lang::Br
     ) {
-        bail!("analyze currently supports en/de/es/it/pt/nl/ca/gl/ro/pl/sk/sl/el/is/eo only");
+        bail!(
+            "analyze currently supports en/de/es/it/pt/nl/ca/gl/ro/pl/sk/sl/el/is/eo/ast/br only"
+        );
     }
     let data = data_dir(cli)?;
     let engine = lt::Engine::builder(lang)?.data_dir(data).build()?;

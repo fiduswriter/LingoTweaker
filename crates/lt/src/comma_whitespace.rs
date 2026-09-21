@@ -738,6 +738,44 @@ fn translate_comma_message_ast(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Breton `MessagesBundle_br` strings.
+pub fn check_sentence_br(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Lizherennerezh".to_string();
+        m.description = "Spasoù 'zo dirak ar skejoù «\u{00a0},\u{00a0}» ha dirak pe war-lerc'h ar c'hromelloù «\u{00a0}(\u{00a0}, \u{00a0})\u{00a0}»".to_string();
+        m.message = translate_comma_message_br(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_br` bundle.
+fn translate_comma_message_br(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Na lakait ket ur spas goude ur gromell digeriñ: \"(\"".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Na lakait ket ur spas goude ur gromell serriñ: \")\"".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Na lakait ket ur spas en daou du d'un arouezenn venegiñ".to_string()
+        }
+        "Put a space after the comma." => "Lakait ur spas goude ar skej".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Lakait ar spas war-lerc'h ar skej, ha neket dirazañ".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Na lakait ur spas dirak ur pik: \".\"".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],

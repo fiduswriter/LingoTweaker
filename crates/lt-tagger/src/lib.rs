@@ -9,6 +9,7 @@
 //! revisit streaming FSA queries in the P2.5 performance pass.
 
 pub mod asturian;
+pub mod breton;
 pub mod catalan;
 pub mod catalan_synth;
 pub mod cfsa;
@@ -45,6 +46,7 @@ pub mod swedish;
 pub mod swedish_synth;
 
 pub use asturian::AsturianTagger;
+pub use breton::BretonTagger;
 pub use catalan::CatalanTagger;
 pub use catalan_synth::CatalanSynthesizer;
 pub use charset::Charset;

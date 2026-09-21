@@ -27,6 +27,7 @@ pub use lt_tokenize::{EnglishWordTokenizer, SrxDocument, SrxTokenizer};
 // carry per-language entry points stay at the crate root (see `en.rs`/`de.rs`
 // for the split rationale).
 mod ast;
+mod br;
 mod ca;
 mod comma_whitespace;
 mod compound;
@@ -398,6 +399,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Ast => Pipeline::new_asturian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Br => Pipeline::new_breton(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

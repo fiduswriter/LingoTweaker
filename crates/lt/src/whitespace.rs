@@ -193,6 +193,16 @@ pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Breton `MessagesBundle_br` strings.
+pub fn check_br(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Spas-gwenn doublet (furmad fall)",
+        "Fazi bizskrivañ posupl: daou spas ho peus lakaet",
+        ("TYPOGRAPHY", "Lizherennerezh"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

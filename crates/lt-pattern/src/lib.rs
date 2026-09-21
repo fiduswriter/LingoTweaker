@@ -233,6 +233,13 @@ pub struct MatchSpec {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub case_conversion: Option<String>,
     pub setpos: bool,
+    /// `regexp_match`/`regexp_replace`: the referenced token's surface is
+    /// transformed before it becomes the token's regexp (Java
+    /// `MatchState.toFinalString`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub regexp_match: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub regexp_replace: Option<String>,
 }
 
 /// One `<equivalence>` of a top-level `<unification feature="...">`
@@ -2084,6 +2091,8 @@ impl Loader {
                     Some(spec.case_conversion.clone())
                 },
                 setpos: spec.setpos,
+                regexp_match: spec.regexp_match.clone(),
+                regexp_replace: spec.regexp_replace.clone(),
             });
             if let Some(buf) = self.content_stack.last_mut() {
                 buf.push('\\');
