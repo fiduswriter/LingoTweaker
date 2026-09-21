@@ -256,3 +256,117 @@ fn greek_tagger_analyzer_fallback() {
         "{readings:?}"
     );
 }
+
+/// `GreekRedundancyRule` (13), Java probe:
+/// `Μου αρέσει να ανεβαίνω πάνω σε δέντρα.` Java 14..27; UTF-8 bytes 25..50.
+#[test]
+fn greek_redundancy() {
+    let _guard = engine_guard();
+    let matches = one(
+        "Μου αρέσει να ανεβαίνω πάνω σε δέντρα.",
+        "EL_REDUNDANCY_REPLACE",
+    );
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 25);
+    assert_eq!(matches[0].range.end, 50);
+    assert_eq!(
+        matches[0].message,
+        "'ανεβαίνω πάνω' είναι πλεονασμός. Γενικά, είναι προτιμότερο το: <suggestion>ανεβαίνω</suggestion>"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["ανεβαίνω"]);
+}
+
+/// `ReplaceHomonymsRule` (10), Java probe: `πολικό κλήμα` 0..12 ->
+/// `πολικό κλίμα` (suggestion uppercased at sentence start).
+#[test]
+fn greek_homonyms() {
+    let _guard = engine_guard();
+    let matches = one("πολικό κλήμα", "GREEK_HOMONYMS_REPLACE");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 0);
+    assert_eq!(matches[0].range.end, 23);
+    assert_eq!(
+        matches[0].message,
+        "Μήπως εννοούσατε <suggestion>πολικό κλίμα</suggestion>?"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["Πολικό κλίμα"]);
+}
+
+/// `GreekSpecificCaseRule` (11), Java probe:
+/// `Κατοικώ στις Ηνωμένες πολιτείες.` Java 13..31; UTF-8 bytes 24..59.
+#[test]
+fn greek_specific_case() {
+    let _guard = engine_guard();
+    let matches = one("Κατοικώ στις Ηνωμένες πολιτείες.", "EL_SPECIFIC_CASE");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 24);
+    assert_eq!(matches[0].range.end, 59);
+    assert_eq!(
+        matches[0].message,
+        "Οι λέξεις της συγκεκριμένης έκφρασης χρείαζεται να ξεκινούν με κεφαλαία γράμματα."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["Ηνωμένες Πολιτείες"]);
+}
+
+/// `NumeralStressRule` (12), Java probe:
+/// `Ο 20ος αιώνας μαζί με τον 21ο αιώνα.` Java 2..6; UTF-8 bytes 3..9.
+#[test]
+fn greek_numeral_stress() {
+    let _guard = engine_guard();
+    let matches = one(
+        "Ο 20ος αιώνας μαζί με τον 21ο αιώνα.",
+        "GREEK_ORTHOGRAPHY_NUMERAL_STRESS",
+    );
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 3);
+    assert_eq!(matches[0].range.end, 9);
+    assert_eq!(matches[0].message, "<suggestion>20ός</suggestion>");
+    assert_eq!(suggestions(&matches[0]), vec!["20ός"]);
+    // 10ος is correct (no stress)
+    let none = one("Ο 10ος αιώνας.", "GREEK_ORTHOGRAPHY_NUMERAL_STRESS");
+    assert!(none.is_empty(), "{none:?}");
+}
+
+/// `GreekWordRepeatBeginningRule` (8), Java probe:
+/// `Επίσης, παίζω ποδόσφαιρο. Επίσης, παίζω μπάσκετ.` Java 26..32; bytes 47..59.
+#[test]
+fn greek_word_repeat_beginning() {
+    let _guard = engine_guard();
+    let matches = one(
+        "Επίσης, παίζω ποδόσφαιρο. Επίσης, παίζω μπάσκετ.",
+        "GREEK_WORD_REPEAT_BEGINNING_RULE",
+    );
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 47);
+    assert_eq!(matches[0].range.end, 59);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["Επιπρόσθετα", "Επιπλέον", "Συμπληρωματικά", "Ακόμη"]
+    );
+}
+
+/// The `el/disambiguation.xml` `HAVE_INF` rule: `πάει` keeps only the `INF`
+/// reading after `έχει` (Java probe: `πάω:INF|πάω:SENT_END`).
+#[test]
+fn greek_disambiguation_have_inf() {
+    let _guard = engine_guard();
+    let Some(el) = engine() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let sentences = el.analyze("έδρα αγωγός έχει πάει");
+    let paei: Vec<String> = sentences
+        .iter()
+        .flat_map(|s| s.tokens.iter())
+        .filter(|t| t.surface() == "πάει")
+        .flat_map(|t| t.readings.iter())
+        .map(|r| {
+            format!(
+                "{}:{}",
+                r.stem.clone().unwrap_or_default(),
+                r.pos_tag.clone().unwrap_or_default()
+            )
+        })
+        .collect();
+    assert_eq!(paei, vec!["πάω:INF", "πάω:SENT_END"], "{paei:?}");
+}

@@ -59,6 +59,7 @@ mod sentence_whitespace;
 mod simple_replace;
 mod sk;
 mod sl;
+mod specific_case;
 mod style_too_often;
 mod unit_conversion;
 mod unpaired_brackets;

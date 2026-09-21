@@ -3619,6 +3619,12 @@ impl Pipeline {
         };
         mark("speller");
 
+        // Stage-3 Greek rule classes (`Greek.getRelevantRules` 8, 10–13).
+        let homonyms = crate::el::rules::homonyms_instance(data_dir.path())?;
+        let specific_case = crate::el::rules::specific_case_instance(data_dir.path());
+        let redundancy = crate::el::rules::redundancy_instance(data_dir.path())?;
+        mark("rules-java");
+
         let greek = Arc::new(crate::el::GreekPipeline {
             tagger,
             synthesizer: synth,
@@ -3626,6 +3632,9 @@ impl Pipeline {
             disambiguator,
             spelling,
             word_repeat: crate::el::rules::word_repeat_rule(),
+            homonyms,
+            specific_case,
+            redundancy,
         });
         Ok(Self {
             lang: Lang::El,
@@ -6070,6 +6079,21 @@ impl Pipeline {
             ) {
                 text_level_matches.extend(crate::whitespace::check_el(&analyzed_sentences));
             }
+            // `GreekWordRepeatBeginningRule` (8), text level
+            if builtin_active(
+                "GREEK_WORD_REPEAT_BEGINNING_RULE",
+                "REPETITIONS_STYLE",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::el::rules::word_repeat_beginning(&analyzed_sentences));
+            }
         }
         text_level_matches.append(&mut matches);
         matches = text_level_matches;
@@ -8284,6 +8308,74 @@ impl Pipeline {
                         enabled_categories,
                     ),
                     greek.word_repeat.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `ReplaceHomonymsRule` (10)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "GREEK_HOMONYMS_REPLACE",
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    greek.homonyms.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `GreekSpecificCaseRule` (11)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "EL_SPECIFIC_CASE",
+                        "CASING",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    greek.specific_case.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `NumeralStressRule` (12)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "GREEK_ORTHOGRAPHY_NUMERAL_STRESS",
+                        "ORTHOGRAPHY",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    crate::el::rules::numeral_stress(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `GreekRedundancyRule` (13)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "EL_REDUNDANCY_REPLACE",
+                        "REDUNDANCY",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    greek.redundancy.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
             }

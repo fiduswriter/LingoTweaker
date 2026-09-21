@@ -28,6 +28,12 @@ pub struct GreekPipeline {
     pub spelling: Option<Arc<crate::el::spelling::GreekSpellingRule>>,
     /// `WordRepeatRule` (`WORD_REPEAT_RULE`), the generic built-in.
     pub word_repeat: crate::word_repeat::WordRepeatRule,
+    /// `ReplaceHomonymsRule` (`GREEK_HOMONYMS_REPLACE`, rule 10).
+    pub homonyms: crate::simple_replace::SimpleReplaceRule,
+    /// `GreekSpecificCaseRule` (`EL_SPECIFIC_CASE`, rule 11).
+    pub specific_case: crate::specific_case::SpecificCaseRule,
+    /// `GreekRedundancyRule` (`EL_REDUNDANCY_REPLACE`, rule 13).
+    pub redundancy: crate::simple_replace::SimpleReplaceRule,
 }
 
 impl GreekPipeline {
