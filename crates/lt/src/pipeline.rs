@@ -4946,6 +4946,11 @@ impl Pipeline {
         let srx = lt_tokenize::SrxTokenizer::new(&doc, "ru_two")?;
 
         let tagger = Arc::new(lt_tagger::RussianTagger::load(data_dir.path())?);
+        let synthesizer = Arc::new(lt_tagger::RussianSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::ru::RussianSynthesizerAdapter {
+            synth: Arc::clone(&synthesizer),
+            tagger: Arc::clone(&tagger),
+        });
 
         let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ru))?;
         if data_dir.style_path(Lang::Ru).lt_exists() {
@@ -5002,6 +5007,8 @@ impl Pipeline {
 
         let russian = Arc::new(crate::ru::RussianPipeline {
             tagger,
+            synthesizer,
+            synth_adapter,
             multiwords_chunker,
             disambiguator,
             post_chunker,
@@ -12664,6 +12671,9 @@ impl Pipeline {
         }
         if let Some(crh) = &self.crimean_tatar {
             return Some(crh.synth_adapter.as_ref());
+        }
+        if let Some(russian) = &self.russian {
+            return Some(russian.synth_adapter.as_ref());
         }
         self.synthesizer
             .as_deref()

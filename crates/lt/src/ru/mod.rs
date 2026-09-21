@@ -8,6 +8,7 @@
 use std::sync::Arc;
 
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
+use lt_pattern::Synthesizer;
 
 pub mod priorities;
 pub mod spelling;
@@ -15,6 +16,10 @@ pub mod spelling;
 /// Russian pipeline parts.
 pub struct RussianPipeline {
     pub tagger: Arc<lt_tagger::RussianTagger>,
+    /// `Russian.createDefaultSynthesizer` (`/ru/russian_synth.dict`).
+    pub synthesizer: Arc<lt_tagger::RussianSynthesizer>,
+    /// The same synthesizer through the pattern engine's trait.
+    pub synth_adapter: Arc<RussianSynthesizerAdapter>,
     /// `RussianHybridDisambiguator`'s first stage:
     /// `MultiWordChunker.getInstance("/ru/multiwords.txt")`.
     pub multiwords_chunker: lt_disambig::MultiWordChunker,
@@ -37,6 +42,43 @@ impl RussianPipeline {
         self.multiwords_chunker.apply(sentence);
         self.disambiguator.apply(sentence);
         self.post_chunker.add_chunk_tags(&mut sentence.tokens);
+    }
+}
+
+/// Adapter exposing the Russian synthesizer through the pattern engine's
+/// [`Synthesizer`] trait, plus the tagger for the `checksSpelling` check.
+pub struct RussianSynthesizerAdapter {
+    pub synth: Arc<lt_tagger::RussianSynthesizer>,
+    pub tagger: Arc<lt_tagger::RussianTagger>,
+}
+
+impl RussianSynthesizerAdapter {
+    pub fn inner(&self) -> &lt_tagger::RussianSynthesizer {
+        &self.synth
+    }
+}
+
+impl Synthesizer for RussianSynthesizerAdapter {
+    fn synthesize(
+        &self,
+        token: &AnalyzedToken,
+        pos_tag: &str,
+        pos_tag_regexp: bool,
+    ) -> Vec<String> {
+        self.synth.synthesize(token, pos_tag, pos_tag_regexp)
+    }
+
+    fn synthesize_plain(&self, token: &AnalyzedToken, pos_tag: &str) -> Vec<String> {
+        self.synth.synthesize_plain(token, pos_tag)
+    }
+
+    fn target_pos_tag(&self, pos_tags: &[String], fallback: &str) -> String {
+        self.synth.target_pos_tag(pos_tags, fallback)
+    }
+
+    fn is_known_word(&self, word: &str) -> bool {
+        // `MatchState.toFinalString`: `lemma == null && hasNoTag()`.
+        self.tagger.is_tagged_word(word)
     }
 }
 

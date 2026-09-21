@@ -285,3 +285,26 @@ fn yo_speller_is_default_off() {
         .collect();
     assert!(matches.is_empty(), "YO rule must be default off");
 }
+
+/// `scripts/oracle/ru/probe-synth.sh стол книга красивый` — Java probe:
+/// `стол|NN:Inanim:Masc:Sin:Nom` → `стол`, `красивый|ADJ:Posit:Masc:V` →
+/// `красивый|красивого`.
+#[test]
+fn synthesizer_matches_java() {
+    let Some(data) = data_dir() else {
+        return;
+    };
+    let synth = lt_tagger::RussianSynthesizer::from_data(data.path()).expect("synth");
+    let plain = |lemma: &str, tag: &str| {
+        synth.synthesize(
+            &lt::AnalyzedToken::new("", Some(lemma.to_string()), Some(tag.to_string())),
+            tag,
+            false,
+        )
+    };
+    assert_eq!(plain("стол", "NN:Inanim:Masc:Sin:Nom"), ["стол"]);
+    assert_eq!(
+        plain("красивый", "ADJ:Posit:Masc:V"),
+        ["красивый", "красивого"]
+    );
+}
