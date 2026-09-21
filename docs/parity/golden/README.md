@@ -22,6 +22,7 @@ re-runs the Rust side and diffs against the golden.
 | sk | `sk-full.txt` (352) | `sk-full.java.tsv` |
 | sl | `sl-full.txt` (104) | `sl-full.java.tsv` |
 | el | `el-full.txt` (118) | `el-full.java.tsv` |
+| da | `da-full.txt` (284) | `da-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -70,11 +71,16 @@ re-runs the Rust side and diffs against the golden.
   disambiguator). el is exactly 0/0/0 (D-214; the Greek tagger, synthesizer
   and `el/disambiguation.xml` are wired, and `Pipeline::synthesizer()` gained
   the Greek branch so `<match postag>` synthesis renders like Java).
+  da is 2 only-Java / 0 only-Rust / 12 field diffs, all `HUNSPELL_RULE`
+  (D-215/D-216): the suggestions come from the bounded dictionary search
+  instead of the unported native `hunspell.suggest` ranking, and the in-tree
+  checker accepts a small set of dotted abbreviations (`f.kr`) that native
+  hunspell rejects; the XML rules, tagger and disambiguator are at parity.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

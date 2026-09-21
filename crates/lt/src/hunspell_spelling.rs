@@ -244,12 +244,21 @@ impl HunspellSpellingRule {
                 .map(|r| r.token.clone())
                 .unwrap_or_else(|| token.surface().to_string());
             if self.is_misspelled(&word) {
+                // Java `HunspellRule.match`: `cleanWord` strips one trailing
+                // dot for the reported range and for `calcSuggestions`, while
+                // `isMisspelled` still sees the dot (`nonWordPattern` keeps it
+                // when the aff `WORDCHARS` lists `.`, as Danish does).
+                let clean_word = word.strip_suffix('.').filter(|w| !w.is_empty());
+                let end = match clean_word {
+                    Some(clean) => token.start_pos + clean.len(),
+                    None => token.end_pos(),
+                };
                 let mut m = self.new_rule_match(
                     token.start_pos,
-                    token.end_pos(),
+                    end,
                     is_first_word && idx < non_blank.len() - 1,
                 );
-                m.suggestions = self.suggestions(&word);
+                m.suggestions = self.suggestions(clean_word.unwrap_or(&word));
                 matches.push(m);
             }
             if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {

@@ -324,3 +324,37 @@ engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
   ```sh
   scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
   ```
+
+## 10. `HUNSPELL_RULE` (Danish) suggestion ranking and dotted abbreviations
+
+Like #7 this is a **known limitation, not a correctness judgement**. The
+Danish corpus (`docs/parity/golden/da-full.txt`, 284 examples) is at
+**2 only-Java / 0 only-Rust / 12 field diffs**, all on `HUNSPELL_RULE`:
+
+- 12 field diffs: the suggestions come from the bounded edit-distance search
+  over `da_DK.dic` instead of the legacy native `hunspell.suggest` ranking
+  (`suggestmgr.cxx` is not ported), so both candidate sets and ordering/casing
+  differ, e.g. `tset` (legacy `test|set|ætset|…`, Rust `teet|tiet|tuet`),
+  `1920'erne` (legacy `arne|rene|ene|…`, Rust `Eane|Ene|Erene|Erna|Erni`) and
+  `Treoghalvtreds` (legacy compound suggestions, Rust none).
+- 2 only-Java: the in-tree `lt-spell` checker accepts a small set of dotted
+  abbreviations that native hunspell rejects, e.g. the token `f.kr` in
+  `I år 753f.kr. blev Rom grundlagt.` (lines 177/179). The legacy engine flags
+  it as misspelled; Rust accepts it.
+
+Everything else is at parity: the XML rules (78 compiled, 69 default-active),
+the `DanishTagger`/`XmlRuleDisambiguator` foundations and the other five
+generic built-ins (CommaWhitespace, DoublePunctuation, GenericUnpairedBrackets
+with the explicit Danish bracket lists, UppercaseSentenceStart,
+MultipleWhitespace) match the legacy engine.
+
+Reproduce (pinned Java build):
+
+```sh
+scripts/oracle/da/check-diff-da.sh docs/parity/golden/da-full.txt
+```
+
+Pinned exactly as `--expect-only-java=HUNSPELL_RULE=2` and
+`--expect-field-diffs=HUNSPELL_RULE=12` in `scripts/ci/parity.sh`. Porting
+`suggestmgr` (or vendoring a compatible suggestion engine) and fixing the
+`lt-spell` dotted-word acceptance would remove the allowance.

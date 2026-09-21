@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn                 # tests-only gate
 ```
 
@@ -53,7 +53,8 @@ diffs (#7: same match set, suggestions from the bounded search instead of the
 unported native `hunspell.suggest`); pl the documented known fidelity gaps
 #9 (4 only-Java / 5 only-Rust / 0 field diffs, the `<unify negate="yes">`
 agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
-the PCON_VERB participle rule). `no`, `nrd` and `gn` are hand-authored
+the PCON_VERB participle rule); da allows the documented `HUNSPELL_RULE`
+divergences #10 (2 only-Java + 12 suggestion field diffs). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
 

@@ -64,9 +64,12 @@ impl DanishSpellingRule {
     ) -> Vec<Match> {
         // `HunspellRule.match` spell-checks `tokenizeText(text)` over the
         // sentence text (URLs/immunized tokens replaced by whitespace), not
-        // the engine token stream.
+        // the engine token stream. `nonWordPattern` keeps `-`/`.` inside the
+        // token, so the checked word keeps a trailing dot; Java reports the
+        // range up to `cleanWord.length()` (the trailing dot excluded).
         let mut matches: Vec<Match> = Vec::new();
         for m in LETTER_RUN.find_iter(sentence_text) {
+            let raw = m.as_str();
             let start = m.start();
             let skipped = tokens.iter().any(|tr| {
                 if tr.is_whitespace || start < tr.start_pos {
@@ -82,10 +85,9 @@ impl DanishSpellingRule {
             if skipped {
                 continue;
             }
-            let mut sub =
-                AnalyzedTokenReadings::new(vec![AnalyzedToken::new(m.as_str(), None, None)]);
+            let mut sub = AnalyzedTokenReadings::new(vec![AnalyzedToken::new(raw, None, None)]);
             sub.start_pos = start;
-            sub.raw_byte_len = m.end() - start;
+            sub.raw_byte_len = raw.len();
             matches.extend(self.0.check_sentence(&[sub], sentence_offset));
         }
         matches

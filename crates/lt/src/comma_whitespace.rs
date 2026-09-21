@@ -639,13 +639,24 @@ pub fn check_sentence_da(
     matches
 }
 
-/// Java `messages.getString` with the `MessagesBundle_da` bundle (the Danish
-/// bundle only overrides `no_space_around_quotes`; the rest fall back to the
-/// core English strings).
+/// Java `messages.getString` with the `MessagesBundle_da` bundle.
 fn translate_comma_message_da(msg: &str) -> String {
     match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Indsæt ikke et mellemrum efter parentesbegynd".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Indsæt ikke et mellemrum før parentesslut".to_string()
+        }
         "Don't put a space on both sides of a quote symbol." => {
             "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Indsæt et mellemrum efter kommaet".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Indsæt ikke et mellemrum før komma, men efter det.".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Indsæt ikke et mellemrum før punktum".to_string()
         }
         _ => msg.to_string(),
     }

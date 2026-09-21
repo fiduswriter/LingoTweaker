@@ -1,0 +1,404 @@
+L	1	Nu har hunden hunden aldrig gået så meget.
+M	1	Ordgentagelse	1	7	20	Other	Ordgentagelse: Du har gentaget <suggestion>hunden</suggestion>.	hunden
+L	2	Men så så drengen en drage.
+L	3	En skal skal op af havet.
+L	4	En hunds hunds hale er lang.
+L	5	Hundens skal skal fikses.
+L	6	Nu er er aldrig gået så meget.
+M	6	Ordgentagelse	2	3	8	Other	Ordgentagelse: Du har gentaget <suggestion>er</suggestion>.	er
+L	7	Men så så drengen en drage.
+L	8	En skal skal op af havet.
+L	9	Nu er jeg jeg meget træt.
+M	9	Ordgentagelse	1	6	13	Other	Ordgentagelse: Du har gentaget <suggestion>jeg</suggestion>.	jeg
+L	10	Men så så drengen en drage.
+L	11	En skal skal op af havet.
+L	12	Nu er min min hals meget træt.
+M	12	Ordgentagelse	4	6	13	Other	Ordgentagelse: Du har gentaget <suggestion>min</suggestion>.	min
+L	13	Men så så drengen en drage.
+L	14	En skal skal op af havet.
+L	15	Den mark er meget stor stor.
+M	15	Ordgentagelse	5	18	27	Other	Ordgentagelse: Du har gentaget <suggestion>stor</suggestion>.	stor
+L	16	En skal skal op af havet.
+L	17	I 1700 tallet fandtes ingen fly.
+M	17	Tal-bindestreger	1	2	13	Other	Det skal muligvis skrives med bindestreg: <suggestion>1700-tallet</suggestion>.	1700-tallet
+L	18	30 års-krigen varede 30 år.
+M	18	Tal-bindestreger	1	0	13	Other	Det skal muligvis skrives med bindestreg: <suggestion>30-års-krigen</suggestion>.	30-års-krigen
+L	19	Han er et 3 årigt barn.
+M	19	Tal-bindestreger	1	10	17	Other	Det skal muligvis skrives med bindestreg: <suggestion>3-årigt</suggestion>.	3-årigt
+L	20	Det er hans 70-års-fødselsdag.
+L	21	Pesten hærgede i 1300-tallet.
+L	22	I 1970erne opstod metalgenren.
+M	22	Tal_appostrof	1	2	10	Other	Mangler muligvis appostrof mellem tallet og endelsen: <suggestion>1970'erne</suggestion>.	1970'erne
+L	23	Han betalte med en 20er.
+M	23	Tal_appostrof	1	19	23	Other	Mangler muligvis appostrof mellem tallet og endelsen: <suggestion>20'er</suggestion>.	20'er
+L	24	Han blev født i 1920'erne.
+M	24	HUNSPELL_RULE		21	25	UnknownWord	Mulig stavefejl fundet	arne|rene|ene|rerne|terne|kerne|gerne|ferne|øerne|jerne|åerne|Terne|ener|orne|egne
+L	25	Agent 007's bil er funktionel.
+L	26	Det lå indeni et skab.
+L	27	Det lå udenfor et hus.
+L	28	Det lå ovenpå et træ.
+L	29	Vi går indenfor.
+L	30	Inden for et lands grænser.
+L	31	Vi gik udenfor et øjeblik.
+L	32	De legede udenfor kanoen.
+L	33	Pengene ligger indeni.
+L	34	De gik oven på taget.
+L	35	De legede udenfor store kanoer.
+L	36	Pengene ligger indeni.
+L	37	De gik oven på taget.
+L	38	Der var femtusindeogtreoghalvtreds kanoer.
+M	38	talord	1	8	34	Other	Talord over hundrede skrives i flere ord: <suggestion>fem tusinde og treoghalvtreds</suggestion>.	fem tusinde og treoghalvtreds
+L	39	Der var femtusindeoghalvtreds kanoer.
+M	39	talord	1	8	29	Other	Talord over hundrede skrives i flere ord: <suggestion>fem tusinde og halvtreds</suggestion>.	fem tusinde og halvtreds
+L	40	Der var femmillionerfemtusindetrehundredeoghalvtreds kanoer.
+M	40	talord	1	8	52	Other	Talord over hundrede skrives i flere ord: <suggestion>fem millioner fem tusinde tre hundrede og halvtreds</suggestion>.	fem millioner fem tusinde tre hundrede og halvtreds
+L	41	Der var femmillionerogtitusindogtrehundredeoghalvtreds kanoer.
+M	41	talord	1	8	54	Other	Talord over hundrede skrives i flere ord: <suggestion>fem millioner og ti tusind og tre hundrede og halvtreds</suggestion>.	fem millioner og ti tusind og tre hundrede og halvtreds
+L	42	Trehundredeogtres er en test.
+M	42	talord	1	0	17	Other	Talord over hundrede skrives i flere ord: <suggestion>Tre hundrede og tres</suggestion>.	Tre hundrede og tres
+L	43	Dette er en test.
+L	44	Her er et tusinde.
+L	45	Her er trehundrede som er stavet forkert, men ikke fanges her.
+M	45	talord	2	7	18	Other	Talord over hundrede skrives i flere ord: <suggestion>tre hundrede</suggestion>.	tre hundrede
+L	46	Treoghalvtreds er korrekt stavet og fanges ikke.
+M	46	HUNSPELL_RULE		0	14	UnknownWord	Mulig stavefejl fundet	Halvtredsårsdag|Halvtredsårigs|Halvtredsøre|Halvtredsårig
+L	47	Tretusindetohundrede er forkert korrekt stavet, men fanges ikke her.
+M	47	HUNSPELL_RULE		0	20	UnknownWord	Mulig stavefejl fundet	Hundredetusindernes|Hundredetusinderne|Hundredetusinders|Hundredetusinder
+L	48	Der var tretusinde kanoer.
+M	48	talord	2	8	18	Other	Talord over hundrede skrives i flere ord: <suggestion>tre tusinde</suggestion>.	tre tusinde
+L	49	Der var femhundrede kanoer.
+M	49	talord	2	8	19	Other	Talord over hundrede skrives i flere ord: <suggestion>fem hundrede</suggestion>.	fem hundrede
+L	50	Dette er en test.
+L	51	Her er et tusinde.
+L	52	Treoghalvtreds.
+M	52	HUNSPELL_RULE		0	14	UnknownWord	Mulig stavefejl fundet	Halvtredsårsdag|Halvtredsårigs|Halvtredsøre|Halvtredsårig
+L	53	Trehundredeoghalvtreds fanges ikke her, men er forket stavet.
+M	53	talord	1	0	22	Other	Talord over hundrede skrives i flere ord: <suggestion>Tre hundrede og halvtreds</suggestion>.	Tre hundrede og halvtreds
+L	54	Vi skal på oplevelses- eller badeferie.
+L	55	Vi skal på oplevelses-eller badeferie.
+M	55	bindestreg_og	1	11	27	Other	Mulig slåfejl manglende mellemrum efter bindestreg: <suggestion>oplevelses- eller</suggestion>.	oplevelses- eller
+L	56	De er hus-og haveejere.
+M	56	bindestreg_og	1	6	12	Other	Mulig slåfejl manglende mellemrum efter bindestreg: <suggestion>hus- og</suggestion>.	hus- og
+L	57	Jeg sætter haveboret ud.
+M	57	bor_bord	1	11	20	Other	Et bord sidder man ved, et bor laver man huller med: <suggestion>havebordet</suggestion>.	havebordet
+L	58	Eleven sidder ved skolebordet.
+L	59	Muren bruger et slagbord til at lave huller med.
+M	59	bor_bord	2	16	24	Other	Et bord sidder man ved, et bor laver man huller med: <suggestion>slagbor</suggestion>.	slagbor
+L	60	Vejen bliver brudt op med et trykluftsbor.
+L	61	Jeg heder Jens.
+M	61	heder_hedder	1	4	9	Other	Mente du: <suggestion>hedder</suggestion>=navn eller heder=lyngarealer	hedder
+L	62	Jeg hedder Jens.
+L	63	De heder på landet er bevaringsværdige.
+L	64	Jeg heder vil vandre.
+L	65	Det heder på Sjælland, da det er en ø.
+M	65	heder_hedder	2	4	9	Other	Mente du: <suggestion>hedder</suggestion>=navn eller heder=lyngarealer	hedder
+L	66	Det hedder Jens.
+L	67	Jeg heder Jens.
+M	67	heder_hedder	1	4	9	Other	Mente du: <suggestion>hedder</suggestion>=navn eller heder=lyngarealer	hedder
+L	68	Jeg hedder Jens.
+L	69	De heder Jens passer.
+M	69	heder_hedder	1	3	8	Other	Mente du: <suggestion>hedder</suggestion>=navn eller heder=lyngarealer	hedder
+L	70	Peder heder Sørnsen til efternavn.
+M	70	heder_hedder	4	6	11	Other	Mente du: <suggestion>hedder</suggestion>=navn eller heder=lyngarealer	hedder
+M	70	HUNSPELL_RULE		12	19	UnknownWord	Mulig stavefejl fundet	Sørensen|Sørenses|Sørejsen|Sørens|Sørenn
+L	71	Peter hedder Sørnsen til efternavn.
+M	71	HUNSPELL_RULE		13	20	UnknownWord	Mulig stavefejl fundet	Sørensen|Sørenses|Sørejsen|Sørens|Sørenn
+L	72	Peters heder er vel plejet.
+L	73	En kunne har altid ret!
+M	73	kunne_kunde	1	3	8	Other	Mente du: <suggestion>kunde</suggestion>=butikskunde eller kunne=kan	kunde
+L	74	Som kunde har du fri support.
+L	75	Bliv kunne hos os.
+M	75	kunne_kunde	2	5	10	Other	Mente du: <suggestion>kunde</suggestion>=butikskunde eller kunne=kan	kunde
+L	76	Vil du blive kunde hos os.
+L	77	Kan ske, at vi måske kunde stikke hovederne sammen.
+M	77	kunne_kunde	3	21	26	Other	Mente du: <suggestion>kunne</suggestion>=kan eller kunde=butikskunde	kunne
+L	78	Ville vi kunne forstå Gorm den Gamle?
+L	79	Det kunde bageren ikke vide.
+M	79	kunne_kunde	4	4	9	Other	Mente du: <suggestion>kunne</suggestion>=kan eller kunde=butikskunde	kunne
+L	80	Der skulde rigtignok have været læst, men det kunne han jo ikke nu.
+L	81	Hvordan bliver vi så kunde?
+L	82	Hvordan bliver han kunde?
+L	83	Hvordan bilver vi kunde?
+M	83	HUNSPELL_RULE		8	14	UnknownWord	Mulig stavefejl fundet	bliver|biler|biller|bilder|Silver
+L	84	Han kunde ikke komme.
+M	84	kunne_kunde	5	4	9	Other	Mente du: <suggestion>kunne</suggestion>=kan eller kunde=butikskunde	kunne
+L	85	En middag, som vi kunne være bekendt.
+L	86	Opskrifter som indeholder natural yoghurt.
+M	86	natural_naturel	1	26	33	Other	Mente du: <suggestion>naturel</suggestion>=i sin naturlige, ubearbejdede, rene form især om mad	naturel
+L	87	Tufu naturel restaurationen.
+M	87	HUNSPELL_RULE		0	4	UnknownWord	Mulig stavefejl fundet	Tofu|Tuf|Tufs
+L	88	Opskrifter som indeholder naturel yoghurt.
+L	89	Opskrifter som indeholder Yoghurt natural.
+M	89	natural_naturel	2	34	41	Other	Mente du: <suggestion>naturel</suggestion>=i sin naturlige, ubearbejdede, rene form især om mad	naturel
+L	90	Restaurationen byder på både gratineret hummer og hummer naturel.
+L	91	Opskrifter som indeholder Yoghurt naturel.
+L	92	Han var fuldtud tilfreds.
+M	92	fuldtud	1	8	15	Other	Det skal skrives i to ord <suggestion>fuldt ud</suggestion>.	fuldt ud
+L	93	Han levede livet fuldt ud.
+L	94	Hvorlænge skal vi vente?
+M	94	hvorlænge	1	0	9	Other	Det skal skrives i to ord <suggestion>hvor længe</suggestion>.	Hvor længe
+L	95	Han vidste ikke hvor længe det varede.
+L	96	Kaptajnen gik ombord på skibet.
+M	96	ombord	1	14	20	Other	Det skal skrives i to ord <suggestion>om bord</suggestion>.	om bord
+L	97	Han havde været om bord på skibet længe.
+L	98	Tilsidst var der ikke flere tilbage på skibet.
+M	98	tilsidst	1	0	8	Other	Det skal skrives i to ord <suggestion>til sidst</suggestion>.	Til sidst
+L	99	Han ventede for til sidst at gå hjem.
+L	100	Butikken havde al ting.
+M	100	alting	1	15	22	Other	Det skal skrives i et ord: <suggestion>alting</suggestion>.	alting
+L	101	Han havde købt hende alting.
+L	102	Kaptajnen gik extra meget ind for fiskeri.
+M	102	ekstra	1	14	19	Other	Extra er engelsk, på dansk staves det: <suggestion>ekstra</suggestion>.	ekstra
+L	103	Han havde været ekstra meget om bord på skibet.
+L	104	Vi kan lege en slidbane.
+M	104	leje_lege	1	7	11	Other	Man kan <suggestion>leje</suggestion> noget for penge og lege en leg for sjov.	leje
+L	105	Vi kan lege en leg.
+L	106	Skal vi leje en bil?
+L	107	Vi kan leje en leg.
+M	107	leje_lege	2	7	11	Other	Man kan <suggestion>lege</suggestion> en leg og leje noget for penge.	lege
+L	108	Vi kan lege en leg.
+L	109	Skal vi leje en bil?
+L	110	Du gik op af trappen.
+M	110	af_ad	1	10	12	Other	Han gik hen<suggestion>ad</suggestion> vejen.	ad
+L	111	Du går ned ad trappen.
+L	112	Han går hen ad vejen.
+L	113	Hun bakkes op af sociologen.
+L	114	Du gik op af en trappe.
+M	114	af_ad	2	10	12	Other	Han gik hen<suggestion>ad</suggestion> vejen.	ad
+L	115	Du går ned ad trappen.
+L	116	Han går hen ad en vej.
+L	117	Hun bakkes op af sociologen.
+L	118	De fandt ikke nogle bananer.
+L	119	De fandt ikke nogen bananer.
+L	120	De så ikke nogen film.
+L	121	De kendte deres besøgstid.
+M	121	besøgstid_besøgelsestid	1	16	25	Other	I vendingen "At kende sin besøgelsestid" skrives <suggestion>besøgelsestid</suggestion>, ikke besøgstid	besøgelsestid
+L	122	Jeg kender min besøgelsestid.
+L	123	De kendte ikke deres besøgstid.
+M	123	besøgstid_besøgelsestid	2	21	30	Other	I vendingen "At kende sin besøgelsestid" skrives <suggestion>besøgelsestid</suggestion>, ikke besøgstid	besøgelsestid
+L	124	Jeg kender aldrig min besøgelsestid.
+L	125	De kendte aldrig deres besøgstid.
+M	125	besøgstid_besøgelsestid	2	23	32	Other	I vendingen "At kende sin besøgelsestid" skrives <suggestion>besøgelsestid</suggestion>, ikke besøgstid	besøgelsestid
+L	126	Vi kender ikke vores besøgelsestid.
+L	127	De kender ikke besøgstiderne.
+M	127	besøgstid_besøgelsestid	4	15	28	Other	I vendingen "At kende sin besøgelsestid" skrives <suggestion>besøgelsestid</suggestion>, ikke besøgstid	besøgelsestid
+L	128	Jeg kender aldrig besøgelsestiden.
+M	128	HUNSPELL_RULE		18	33	UnknownWord	Mulig stavefejl fundet	besøgelsestid|besiddelsestrangen|bestikkelsespenge|tronbestigelsen
+L	129	Besøgstiden kendte vi ikke.
+M	129	besøgstid_besøgelsestid	5	0	11	Other	I vendingen "At kende sin besøgelsestid" skrives <suggestion>besøgelsestid</suggestion>, ikke besøgstid	Besøgelsestid
+L	130	Besøgelsestiderne kendte jeg ikke.
+M	130	HUNSPELL_RULE		0	17	UnknownWord	Mulig stavefejl fundet	Besøgelsestid|Forberedelsestiderne|Bestyrelsesmøderne|Tronbestigelserne
+L	131	Jens er et egenavn.
+M	131	egenavn_egennavn	1	11	18	Other	Et egenavn er navnet på et specifik egetræ, f.eks. Dun-Eg og Vinter-Eg. Hvor <suggestion>egennavn</suggestion> er alle navne f.eks. Jens, Sørnsen, Odense, og Vestas.	egennavn
+L	132	Et egennavn skrives med stort begyndelsesbogstav.
+L	133	Kaptajnen faldt overbord i den høje sø.
+M	133	overbord	1	16	24	Other	Et overbord er et bord der kan skubbes hen over et andet bord, hvor man falder <suggestion>over bord</suggestion> på et skib.	over bord
+L	134	Han kastede resterne over bord, til mågernes fornøjelse.
+L	135	Den der dokumentstandart følger vi.
+M	135	standart_standard	1	8	24	Other	Mente du: <suggestion>dokumentstandard</suggestion> som standard=niveau, procedure, el. norm eller standart=fane?	dokumentstandard
+L	136	Den der dokumentstandard følger vi.
+L	137	Den er fundet, vad så nu.
+M	137	vad	1	15	18	Other	Vad er et efternavn eller et vadested, mener du <suggestion>hvad</suggestion>.	hvad
+L	138	Hvad end de gjorde, så havde de held med det.
+L	139	Det er ham vel ondt.
+M	139	undt	1	15	19	Other	Udtrykket bruges normalt som "det er nogen vel <suggestion>undt</suggestion>", altså det er velfortjent.	undt
+L	140	Der er mig vel undt.
+L	141	Det kan jeg onde hende.
+M	141	unde	2	12	16	Other	Udtrykket skrives "jeg<suggestion>unde</suggestion>hende", altså det er ham velfortjent; det kan jeg godt give ham.	unde
+L	142	Jeg onder hende intet.
+M	142	unde	2	4	9	Other	Udtrykket skrives "Jeg<suggestion>under</suggestion>hende", altså det er ham velfortjent; det kan jeg godt give ham.	under
+L	143	Jeg under hende alt.
+L	144	Det kan jeg godt onde hende.
+M	144	unde	3	17	21	Other	Udtrykket skrives "jeg godt<suggestion>unde</suggestion> hende", altså det er ham velfortjent; det kan jeg godt give ham.	unde
+L	145	Det kan de aldrig onde hende.
+M	145	unde	3	18	22	Other	Udtrykket skrives "de aldrig<suggestion>unde</suggestion> hende", altså det er ham velfortjent; det kan jeg godt give ham.	unde
+L	146	Det vil jeg altid unde hende.
+L	147	Det onder jeg hende.
+M	147	unde	4	4	9	Other	Udtrykket skrives "<suggestion>under</suggestion> jeg hende", altså det er ham/hende velfortjent; det kan jeg godt give ham.	under
+L	148	Det under han hende trods alt.
+L	149	Det var en sand guldgruppe.
+M	149	grube	1	16	26	Other	Mente du <suggestion>guldgrube</suggestion>, altså en mine eller et hul i jorden?	guldgrube
+L	150	Faldgruppen var stor.
+M	150	grube	1	0	11	Other	Mente du <suggestion>Faldgruben</suggestion>, altså en mine eller et hul i jorden?	Faldgruben
+L	151	Der er mange faldgruper.
+M	151	grube	1	13	23	Other	Mente du <suggestion>faldgruber</suggestion>, altså en mine eller et hul i jorden?	faldgruber
+L	152	Der er mange faldgruber i det danske sprog.
+L	153	Han var skrællemand.
+M	153	skraldemand	1	8	19	Other	Mente du <suggestion>skraldemand</suggestion>, altså en person der indsamler skrald?	skraldemand
+L	154	Det var skrællemanden.
+M	154	skraldemand	1	8	21	Other	Mente du <suggestion>skraldemanden</suggestion>, altså en person der indsamler skrald?	skraldemanden
+L	155	Alle skrældemændene samlede skrald.
+M	155	skraldemand	1	5	19	Other	Mente du <suggestion>skraldemændene</suggestion>, altså en person der indsamler skrald?	skraldemændene
+L	156	De var skrældemænd.
+M	156	skraldemand	1	7	18	Other	Mente du <suggestion>skraldemænd</suggestion>, altså en person der indsamler skrald?	skraldemænd
+L	157	Skrællemanden var hutig.
+M	157	skraldemand	1	0	13	Other	Mente du <suggestion>Skraldemanden</suggestion>, altså en person der indsamler skrald?	Skraldemanden
+M	157	HUNSPELL_RULE		18	23	UnknownWord	Mulig stavefejl fundet	hurtig
+L	158	Der er brug for skraldemænd.
+L	159	Det var mit ynglingshold.
+M	159	yndlings	1	12	24	Other	Udtrykket staves <suggestion>yndlingshold</suggestion> .	yndlingshold
+L	160	Grøn er ming ynglingsfarve.
+M	160	HUNSPELL_RULE		8	12	UnknownWord	Mulig stavefejl fundet	mink|Ming|min|mig|mingl|mine|ring|ting|ling|mini|mind|ding|ping|mæng|jing
+M	160	yndlings	1	13	26	Other	Udtrykket staves <suggestion>yndlingsfarve</suggestion> .	yndlingsfarve
+L	161	Min yndlingsfarve er grøn.
+L	162	Det var vel og mærke ikke særlig godt.
+M	162	vel_at_mærke	1	8	20	Other	Udtrykket skrives <suggestion>vel at mærke</suggestion>.	vel at mærke
+L	163	Det var vel og mærket ikke særlig godt.
+M	163	vel_at_mærke	1	8	21	Other	Udtrykket skrives <suggestion>vel at mærke</suggestion>.	vel at mærke
+L	164	Det kan vel at mærke ikke gå længere.
+L	165	Tårnet var et varetegn for byen.
+M	165	vartegn	1	14	22	Other	Udtrykket skrives <suggestion>vartegn</suggestion>.	vartegn
+L	166	Det er et vartegn for egnen.
+L	167	Fisk findes bla. i havet.
+M	167	bl.a.	1	12	16	Other	Blandt andet forkortes <suggestion>bl.a.</suggestion>	bl.a.
+M	167	UPPERCASE_SENTENCE_START		17	18	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	I
+L	168	Man kan bl.a. købe fisk i supermarkedet.
+L	169	Fisk findes bl.a i havet.
+M	169	bl.a.	2	12	16	Other	Blandt andet forkortes <suggestion>bl.a.</suggestion>	bl.a.
+L	170	Man kan bl.a. købe fisk i supermarkedet.
+L	171	Fisk findes b.la i havet.
+M	171	bl.a.	3	12	16	Other	Blandt andet forkortes <suggestion>bl.a.</suggestion>	bl.a.
+L	172	Fisk findes b. la. i havet.
+M	172	bl.a.	3	12	17	Other	Blandt andet forkortes <suggestion>bl.a.</suggestion>	bl.a.
+M	172	UPPERCASE_SENTENCE_START		19	20	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	I
+L	173	Man kan bl.a. købe fisk i supermarkedet.
+L	174	Der er ca to fisk tilbage.
+M	174	ca	1	7	9	Other	Cirka forkortes <suggestion>ca.</suggestion>	ca.
+L	175	Der er ca. en liter mælk.
+L	176	I år 200 fkr. Kristendommen fandtes ikke.
+M	176	fkr.	1	9	13	Other	Før Kristus forkortes <suggestion>f.kr.</suggestion>	f.kr.
+L	177	I år 753f.kr. blev Rom grundlagt.
+M	177	HUNSPELL_RULE		8	12	UnknownWord	Mulig stavefejl fundet	frk.|f.Kr.
+L	178	I år 200 fkr Kristendommen fandtes ikke.
+M	178	fkr.	2	9	12	Other	Før Kristus forkortes <suggestion>f.kr.</suggestion>	f.kr.
+L	179	I år 753f.kr. blev Rom grundlagt.
+M	179	HUNSPELL_RULE		8	12	UnknownWord	Mulig stavefejl fundet	frk.|f.Kr.
+L	180	Som feks jern.
+M	180	f.eks._fx	1	4	8	Other	For eksempel forkortes <suggestion>fx</suggestion> uden punktum eller <suggestion>f.eks.</suggestion>	fx|f.eks.
+L	181	Som feks. jern.
+M	181	f.eks._fx	1	4	8	Other	For eksempel forkortes <suggestion>fx</suggestion> uden punktum eller <suggestion>f.eks.</suggestion>	fx|f.eks.
+M	181	UPPERCASE_SENTENCE_START		10	14	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	Jern
+L	182	Som fx jern.
+L	183	Som f.eks. jern.
+L	184	Som f.eks jern.
+M	184	f.eks._fx	2	4	9	Other	For eksempel forkortes <suggestion>fx</suggestion> uden punktum eller <suggestion>f.eks.</suggestion>	fx|f.eks.
+L	185	Som fx jern.
+L	186	Som f.eks. jern.
+L	187	Som fx. jern.
+M	187	f.eks._fx	3	4	7	Other	For eksempel forkortes <suggestion>fx</suggestion> uden punktum eller <suggestion>f.eks.</suggestion>	fx|f.eks.
+L	188	Som fx jern.
+L	189	Som f.eks. jern.
+L	190	Som f.x jern.
+M	190	f.eks._fx	4	4	7	Other	For eksempel forkortes <suggestion>fx</suggestion> uden punktum eller <suggestion>f.eks.</suggestion>	fx|f.eks.
+L	191	Som f.x. jern.
+M	191	f.eks._fx	4	4	7	Other	For eksempel forkortes <suggestion>fx</suggestion> uden punktum eller <suggestion>f.eks.</suggestion>	fx|f.eks.
+L	192	Som fx jern.
+L	193	Som f.eks. jern.
+L	194	Jeg bestiller en computer incl. mus.
+M	194	inkl.	1	26	31	Other	Hvis du mente inklusive; staves <suggestion>inkl.</suggestion>	inkl.
+L	195	Computeren er inkl. tastatur.
+L	196	Alt er inkl.
+L	197	Jeg bestiller en computer inkl mus.
+M	197	inkl.	2	26	30	Other	Inklusive forkortes <suggestion>inkl.</suggestion>	inkl.
+L	198	Computeren er inkl. tastaturet.
+L	199	Alt er inkl.
+L	200	Jeg bestiller en computer inkl . mus.
+M	200	inkl.	3	26	32	Other	Inklusive forkortes <suggestion>inkl.</suggestion>	inkl.
+M	200	UPPERCASE_SENTENCE_START		33	36	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	Mus
+L	201	Computeren er inkl. tastaturet.
+L	202	Alt er inkl.
+L	203	Jeg bestiller en computer inkls mus.
+M	203	inkl.	4	26	31	Other	Inklusive forkortes <suggestion>inkl.</suggestion>	inkl.
+L	204	Jeg bestiller en computer inkls. mus.
+M	204	inkl.	4	26	31	Other	Inklusive forkortes <suggestion>inkl.</suggestion>	inkl.
+M	204	UPPERCASE_SENTENCE_START		33	36	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	Mus
+L	205	Computeren er inkl. tastaturet.
+L	206	Alt er inkl.
+L	207	Jeg bestiller en computer excl. mus.
+M	207	ekskl.	1	26	31	Other	Eksklusive staves <suggestion>ekskl.</suggestion>	ekskl.
+M	207	UPPERCASE_SENTENCE_START		32	35	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	Mus
+L	208	Computeren er ekskl. tastatur.
+L	209	Jeg bestiller en computer ekskl mus.
+M	209	ekskl.	2	26	31	Other	Eksklusive forkortes <suggestion>ekskl.</suggestion>	ekskl.
+L	210	Computeren er ekskl. tastaturet.
+L	211	Alt er ekskl.
+L	212	Jeg bestiller en computer eksl. mus.
+M	212	ekskl.	3	26	30	Other	Eksklusive forkortes <suggestion>ekskl.</suggestion>	ekskl.
+M	212	UPPERCASE_SENTENCE_START		32	35	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	Mus
+L	213	Jeg bestiller en computer eksl mus.
+M	213	ekskl.	3	26	30	Other	Eksklusive forkortes <suggestion>ekskl.</suggestion>	ekskl.
+L	214	Computeren er ekskl. tastaturet.
+L	215	Alt er ekskl.
+L	216	Jeg bestiller en computer ekskl . mus.
+M	216	ekskl.	4	26	33	Other	Eksklusive forkortes <suggestion>ekskl.</suggestion>	ekskl.
+M	216	UPPERCASE_SENTENCE_START		34	37	Other	Denne sætning starter ikke med et stort begyndelsesbogstav	Mus
+L	217	Computeren er ekskl. tastaturet.
+L	218	Alt er ekskl.
+L	219	Det er et oval køkkenbord.
+L	220	Det er et ret visende eksempel.
+L	221	Et syndigt rod.
+L	222	Tidligere var det syndigt at vise sine ankler.
+L	223	En abe, ymer, løve drage og kano.
+L	224	Kage, krymmel, ymer og ko.
+L	225	Slidbanens slidbane, store slidbaners slidbane, slidbanens slidbanes slidbane slidbanens mors hale og din hale.
+L	226	Kanoens kano, kanoens slidbane, kanoens slidbane kanoens top og kagen.
+L	227	Din fars far, farfars far og dig.
+L	228	Slidbanens slidbane, slidbanens slidbanes slidbane, slidbanens kanos hale og din hale.
+L	229	Der var både kage, ymer, gris, og is.
+L	230	Kage, krymmel, ymer og ko.
+L	231	Det sagde han, og han mente det.
+L	232	Slidbanens slidbane, kanoens kano, slidbanens slidbanes slidbane, og en kano.
+L	233	Slidbanens slidbane, slidbanens slidbanes slidbane og slidbanens kanos hale.
+L	234	Et jeg er interresant.
+M	234	HUNSPELL_RULE		10	21	UnknownWord	Mulig stavefejl fundet	interessantes|interessante|interessant|interessent
+L	235	Hvem er du?
+L	236	Hunden løb hurtigt.
+L	237	Et stort jeg kan være i alle mennesker.
+L	238	Et, jeg er beskriver en selv, to, noget andet.
+L	239	Mig jeg er meget interessant.
+L	240	Kan jeg springe langt?
+L	241	Hunden løb hurtigt.
+L	242	Jeg kan hoppe højt.
+L	243	En skal er spist af en fugl.
+L	244	Hvem er du?
+L	245	Hunden løb hurtigt.
+L	246	En hund kan være alle størrelser.
+L	247	En skal blive noget stort.
+L	248	En stor skal er spist.
+L	249	En lille stor skal er interesseret i hvad du siger.
+L	250	Hvem er du?
+L	251	Hunden løb hurtigt.
+L	252	En hund kan være alle størrelser.
+L	253	En lille hund er lille.
+L	254	Hundens skal skal fiske i havet.
+L	255	Min skal skal fiske i havet.
+L	256	Vi skal fiske.
+L	257	Du skal gå en tur.
+L	258	Jeg skal skal gå.
+M	258	Ordgentagelse	2	4	13	Other	Ordgentagelse: Du har gentaget <suggestion>skal</suggestion>.	skal
+L	259	En skal skal noget.
+L	260	Hans skals skal er hård.
+L	261	Hans skal skal noget.
+L	262	Min skal skal noget.
+L	263	Hundens skal skal noget.
+L	264	Hans skals skal er hård.
+L	265	Vi skal fiske.
+L	266	En skal er hård.
+L	267	Du skal gå en tur.
+L	268	Udenfor skal hunden snakke med ham.
+L	269	Vi skal fiske.
+L	270	Du skal gå en tur.
+L	271	Skal jeg sejle til dig?
+L	272	Vi skal fiske.
+L	273	En skal jeg kender er hård.
+L	274	Hunden skal jeg sejle til.
+L	275	Vi skal fiske.
+L	276	En skal jeg kender er hård.
+L	277	Hundens skal jeg kender fra tidligere, er hård.
+L	278	Portvin skal jeg også se på.
+L	279	Vi skal fiske.
+L	280	En skal jeg kender er hård.
+L	281	Jeg er mig!
+L	282	Du kan gøre det.
+L	283	Dette er urørt!
+L	284	Jeg skal fisker i havet
