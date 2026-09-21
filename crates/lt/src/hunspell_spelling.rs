@@ -196,6 +196,22 @@ impl HunspellSpellingRule {
 
     /// The dictionary lookup, with a retry on ASCII-normalized puso
     /// (`’`/`ʼ` → `'`) for Guaraní input variants.
+    /// `HunspellRule.isMisspelled` for the wrong-split checks.
+    pub fn is_misspelled_word(&self, word: &str) -> bool {
+        self.is_misspelled(word)
+    }
+
+    /// `SpellingCheckRule.createWrongSplitMatch`'s `RuleMatch` (the caller
+    /// handles the previous-match pop).
+    pub fn wrong_split_match(&self, from: usize, to: usize, suggestion: String) -> Match {
+        let mut m = self.new_rule_match(from, to, false);
+        m.suggestions.push(Suggestion {
+            value: suggestion.trim().to_string(),
+            short_description: None,
+        });
+        m
+    }
+
     fn is_misspelled(&self, word: &str) -> bool {
         if self.is_prohibited(word) {
             return true;

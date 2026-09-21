@@ -88,10 +88,9 @@ re-runs the Rust side and diffs against the golden.
   is is exactly 0/0/0 (D-228; Icelandic has no tagger/synthesizer/
   disambiguator, `HunspellNoSuggestionRule` emits no suggestions and
   `compile_failures()` is empty).
-  eo is 1 only-Java / 1 only-Rust / 5 field diffs, the documented known
-  fidelity gaps of `docs/differences.md` #10 (the unported hunspell
-  wrong-split logic and the BREAK-based suggestion variants), pinned exactly
-  with `--expect-only-java`/`--expect-only-rust`/`--expect-field-diffs`.
+  eo is exactly 0/0/0 (D-229; the `HunspellRule` wrong-split check and the
+  `twowords` UTF-8 split indexing are ported, so the `BREAK`-based
+  space/hyphen recombinations match; `docs/differences.md` #10 resolved).
   ast is exactly 0/0/0 (D-230; Asturian has no disambiguator/synthesizer, the
   `AsturianTagger` reads the old CFSA (`0xc5`) Morfologik dictionary — the
   `lt-tagger` CFSA reader is new — and `compile_failures()` is empty).

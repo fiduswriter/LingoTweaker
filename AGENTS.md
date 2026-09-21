@@ -56,9 +56,8 @@ boundary); pl the documented known fidelity gaps
 agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
 the PCON_VERB participle rule); da is at 0/0/0 (#10, resolved by the
 suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
-resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at
-1 only-Java / 1 only-Rust / 5 field diffs (#10, the unported hunspell
-wrong-split and BREAK suggestion variants); ast is at 0/0/0 (#13). `no`, `nrd` and `gn` are hand-authored
+resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
+(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
 

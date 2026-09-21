@@ -4041,7 +4041,7 @@ impl<'a> SuggestMgr<'a> {
             if buf[p + 1] == 0 {
                 break;
             }
-            let full = |b: &[u8]| b[1..wl + 1].to_vec();
+            let full = |b: &[u8]| b[0..wl + 1].to_vec();
             // word pairs listed in the dictionary
             buf[p] = b' ';
             let cand = full(&buf);
@@ -4064,7 +4064,7 @@ impl<'a> SuggestMgr<'a> {
                 }
             }
             if wlst.len() < self.max_sug && !self.nosplitsugs && !good {
-                let first = buf[1..p].to_vec();
+                let first = buf[0..p].to_vec();
                 let c1 = self.c.sm_checkword(&first, cpdsuggest);
                 if c1 != 0 {
                     let second = buf[p + 1..wl + 1].to_vec();
@@ -4089,7 +4089,7 @@ impl<'a> SuggestMgr<'a> {
                             wlst.push(String::from_utf8_lossy(&cand).into_owned());
                         }
                         // add a two-word suggestion with dash
-                        if dash && char_count(&buf[p + 1..wl + 1]) > 1 && char_count(&buf[1..p]) > 1
+                        if dash && char_count(&buf[p + 1..wl + 1]) > 1 && char_count(&buf[0..p]) > 1
                         {
                             buf[p] = b'-';
                             let cand = full(&buf);
