@@ -1,15 +1,18 @@
 //! Slovenian engine tests: stage-1 XML wiring state plus Java-probed
 //! built-in-rule values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/sl/probe-rule.sh`, `check-diff-sl.sh`) print UTF-16 code
-//! units, so both are stated per case (the probes use real Slovenian
-//! orthography: č/š/ž). Slovenian has no tagger/synthesizer/
-//! disambiguator, so the analyzed sentence is the surface tokenization.
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/sl/probe-rule.sh`,
+//! `check-diff-sl.sh`); the probes use real Slovenian orthography (č/š/ž).
+//! Slovenian has no tagger/synthesizer/disambiguator, so the analyzed
+//! sentence is the surface tokenization.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 /// One engine at a time: the Slovenian engines hold the speller dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -84,15 +87,14 @@ fn slovenian_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `To je čaj , a kava.`
-/// UTF-16 9..11, UTF-8 10..12 (`č` adds one byte).
+/// `CommaWhitespaceRule` (1), Java probe.
 #[test]
 fn slovenian_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("To je čaj , a kava.", "COMMA_PARENTHESIS_WHITESPACE");
+    let text = "To je čaj , a kava.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 10);
-    assert_eq!(matches[0].range.end, 12);
+    assert_utf16(text, &matches[0], (9, 11));
     assert_eq!(
         matches[0].message,
         "Presledek vstavi po vejici, ne pa pred vejico"
@@ -100,28 +102,27 @@ fn slovenian_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `To je čaj..`
-/// UTF-16 9..11, UTF-8 10..12.
+/// `DoublePunctuationRule` (2), Java probe.
 #[test]
 fn slovenian_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("To je čaj..", "DOUBLE_PUNCTUATION");
+    let text = "To je čaj..";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 10);
-    assert_eq!(matches[0].range.end, 12);
+    assert_utf16(text, &matches[0], (9, 11));
     assert_eq!(matches[0].message, "Dve zaporedni piki");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
 /// `UppercaseSentenceStartRule` (5), Java probe: the second sentence starts
-/// lowercase, UTF-16 11..13, UTF-8 12..14 (`č` adds one byte).
+/// lowercase.
 #[test]
 fn slovenian_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("To je čaj. to je kava.", "UPPERCASE_SENTENCE_START");
+    let text = "To je čaj. to je kava.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 12);
-    assert_eq!(matches[0].range.end, 14);
+    assert_utf16(text, &matches[0], (11, 13));
     assert_eq!(
         matches[0].message,
         "Ta poved se ne začenja z veliko začetnico"
@@ -129,30 +130,28 @@ fn slovenian_uppercase_sentence_start() {
     assert_eq!(suggestions(&matches[0]), vec!["To"]);
 }
 
-/// `MultipleWhitespaceRule` (7), Java probe: `To je čaj  in kava.`
-/// UTF-16 9..11, UTF-8 10..12.
+/// `MultipleWhitespaceRule` (7), Java probe.
 #[test]
 fn slovenian_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("To je čaj  in kava.", "WHITESPACE_RULE");
+    let text = "To je čaj  in kava.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 10);
-    assert_eq!(matches[0].range.end, 12);
+    assert_utf16(text, &matches[0], (9, 11));
     assert_eq!(
         matches[0].message,
         "Možna tipkarska napaka: ponovili ste presledek"
     );
 }
 
-/// `WordRepeatRule` (6), Java probe: `Dober čaj čaj je.`
-/// UTF-16 6..13, UTF-8 6..15.
+/// `WordRepeatRule` (6), Java probe.
 #[test]
 fn slovenian_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Dober čaj čaj je.", "WORD_REPEAT_RULE");
+    let text = "Dober čaj čaj je.";
+    let matches = one(text, "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 6);
-    assert_eq!(matches[0].range.end, 15);
+    assert_utf16(text, &matches[0], (6, 13));
     assert_eq!(
         matches[0].message,
         "Možna tipkarska napaka: ponovili ste besedo"
@@ -167,10 +166,10 @@ fn slovenian_word_repeat() {
 fn slovenian_speller() {
     let _guard = engine_guard();
 
-    let matches = one("To je caj.", "MORFOLOGIK_RULE_SL_SI");
+    let text = "To je caj.";
+    let matches = one(text, "MORFOLOGIK_RULE_SL_SI");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 6);
-    assert_eq!(matches[0].range.end, 9);
+    assert_utf16(text, &matches[0], (6, 9));
     assert_eq!(
         matches[0].message,
         "Najdena morebitna napaka pri črkovanju."
@@ -185,10 +184,10 @@ fn slovenian_speller() {
         ]
     );
 
-    let matches = one("To je tezko.", "MORFOLOGIK_RULE_SL_SI");
+    let text = "To je tezko.";
+    let matches = one(text, "MORFOLOGIK_RULE_SL_SI");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 6);
-    assert_eq!(matches[0].range.end, 11);
+    assert_utf16(text, &matches[0], (6, 11));
     assert_eq!(
         suggestions(&matches[0]),
         vec![
@@ -197,10 +196,10 @@ fn slovenian_speller() {
         ]
     );
 
-    let matches = one("To je mogoce.", "MORFOLOGIK_RULE_SL_SI");
+    let text = "To je mogoce.";
+    let matches = one(text, "MORFOLOGIK_RULE_SL_SI");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 6);
-    assert_eq!(matches[0].range.end, 12);
+    assert_utf16(text, &matches[0], (6, 12));
     assert_eq!(
         suggestions(&matches[0]),
         vec![
@@ -215,11 +214,11 @@ fn slovenian_speller() {
 #[test]
 fn slovenian_xml_numbers() {
     let _guard = engine_guard();
-    let matches = one("0 oseb ni manjkalo", "STEVILA_DO_10");
+    let text = "0 oseb ni manjkalo";
+    let matches = one(text, "STEVILA_DO_10");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 1);
+    assert_utf16(text, &matches[0], (0, 1));
     assert_eq!(suggestions(&matches[0]), vec!["nič"]);
 }
 
@@ -228,11 +227,11 @@ fn slovenian_xml_numbers() {
 #[test]
 fn slovenian_xml_abbreviations() {
     let _guard = engine_guard();
-    let matches = one("Podjetje Krivolovec, doo je šlo v stečaj.", "KRATICE");
+    let text = "Podjetje Krivolovec, doo je šlo v stečaj.";
+    let matches = one(text, "KRATICE");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 21);
-    assert_eq!(matches[0].range.end, 24);
+    assert_utf16(text, &matches[0], (21, 24));
     assert_eq!(suggestions(&matches[0]), vec!["d. o. o."]);
 }
 
@@ -241,11 +240,11 @@ fn slovenian_xml_abbreviations() {
 #[test]
 fn slovenian_xml_repeated_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Ne prekinjaj me!!", "PONOVLJENA_LOČILA");
+    let text = "Ne prekinjaj me!!";
+    let matches = one(text, "PONOVLJENA_LOČILA");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 15);
-    assert_eq!(matches[0].range.end, 17);
+    assert_utf16(text, &matches[0], (15, 17));
     assert_eq!(suggestions(&matches[0]), vec!["!"]);
 }
 
@@ -254,11 +253,11 @@ fn slovenian_xml_repeated_punctuation() {
 #[test]
 fn slovenian_xml_preposition() {
     let _guard = engine_guard();
-    let matches = one("Predsednik ZDA je odletel z helikopterjem.", "PREDLOG_Z");
+    let text = "Predsednik ZDA je odletel z helikopterjem.";
+    let matches = one(text, "PREDLOG_Z");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 26);
-    assert_eq!(matches[0].range.end, 27);
+    assert_utf16(text, &matches[0], (26, 27));
     assert_eq!(suggestions(&matches[0]), vec!["s"]);
 }
 
@@ -267,11 +266,11 @@ fn slovenian_xml_preposition() {
 #[test]
 fn slovenian_xml_missing_comma() {
     let _guard = engine_guard();
-    let matches = one("Povej kaj mu manjka.", "KAJ_BREZ_VEJICE");
+    let text = "Povej kaj mu manjka.";
+    let matches = one(text, "KAJ_BREZ_VEJICE");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 5);
-    assert_eq!(matches[0].range.end, 9);
+    assert_utf16(text, &matches[0], (5, 9));
     assert_eq!(suggestions(&matches[0]), vec![", kaj"]);
 }
 
