@@ -1,14 +1,17 @@
 //! Italian engine tests: Java-probed tagger values (pinned LT build, Docker)
 //! and the stage-1 XML wiring state.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes print UTF-16
-//! code units, so non-ASCII probes are converted in the comments. Tagger
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/it/probe-rule.sh`). Tagger
 //! values come from `scripts/oracle/it/dump-tags.sh`
 //! (`scripts/oracle/it/tagger-sentences.txt`, 502 lines byte-identical).
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{Engine, Lang};
+
+mod common;
+use common::assert_utf16;
 
 /// One engine at a time: the Italian engine holds the tagger dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -121,8 +124,7 @@ fn italian_engine_stage3_state() {
 }
 
 /// `DateCheckFilter` (DATE_WEEKDAY) and `ItalianWordRepeatRule` values from
-/// `scripts/oracle/it/probe-rule.sh` (2026-09-19). Java reports UTF-16
-/// offsets; the ì in "Lunedì" makes the Rust byte end one larger.
+/// `scripts/oracle/it/probe-rule.sh` (2026-09-19).
 #[test]
 fn italian_date_and_word_repeat_match_java() {
     let _guard = engine_guard();
@@ -135,17 +137,15 @@ fn italian_date_and_word_repeat_match_java() {
         return;
     };
 
-    // Java: DATE_WEEKDAY 0..22, "Questa data non è un lunedì ma un martedì.",
-    // no suggestions.
-    let result = engine
-        .check("Lunedì, 7 ottobre 2014. Martedì, 7 ottobre 2014.")
-        .unwrap();
+    // "Questa data non è un lunedì ma un martedì.", no suggestions.
+    let text = "Lunedì, 7 ottobre 2014. Martedì, 7 ottobre 2014.";
+    let result = engine.check(text).unwrap();
     let date = result
         .matches
         .iter()
         .find(|m| m.rule_id == "DATE_WEEKDAY")
         .expect("DATE_WEEKDAY match");
-    assert_eq!((date.range.start, date.range.end), (0, 23));
+    assert_utf16(text, date, (0, 22));
     assert_eq!(date.message, "Questa data non è un lunedì ma un martedì.");
     assert!(date.suggestions.is_empty());
     assert_eq!(
@@ -159,31 +159,32 @@ fn italian_date_and_word_repeat_match_java() {
     );
 
     // no `year` argument: the pinned `today` year is assumed
-    // (Java: 0..16, "… (2026) … non è un lunedì ma un mercoledì.")
-    let result = engine.check("Lunedì 7 ottobre").unwrap();
+    // ("… (2026) … non è un lunedì ma un mercoledì.")
+    let text = "Lunedì 7 ottobre";
+    let result = engine.check(text).unwrap();
     let date = result
         .matches
         .iter()
         .find(|m| m.rule_id == "DATE_WEEKDAY")
         .expect("DATE_WEEKDAY match");
-    assert_eq!((date.range.start, date.range.end), (0, 17));
+    assert_utf16(text, date, (0, 16));
     assert_eq!(
         date.message,
         "Se si riferisce all'anno in corso (2026), questa data non è un lunedì ma un mercoledì."
     );
 
-    // Java: ITALIAN_WORD_REPEAT_RULE 3..14, suggestion "gatto"; the fixed
-    // `così così` / `via via` pairs must be ignored.
-    let result = engine
-        .check("Il gatto gatto dorme. Mi è sembrato così così. Il lessico si andava via via modificando.")
-        .unwrap();
+    // suggestion "gatto"; the fixed `così così` / `via via` pairs must be
+    // ignored.
+    let text =
+        "Il gatto gatto dorme. Mi è sembrato così così. Il lessico si andava via via modificando.";
+    let result = engine.check(text).unwrap();
     let repeats: Vec<_> = result
         .matches
         .iter()
         .filter(|m| m.rule_id == "ITALIAN_WORD_REPEAT_RULE")
         .collect();
     assert_eq!(repeats.len(), 1);
-    assert_eq!((repeats[0].range.start, repeats[0].range.end), (3, 14));
+    assert_utf16(text, repeats[0], (3, 14));
     assert_eq!(
         repeats[0].message,
         "Possibile errore di battitura: parola ripetuta"
