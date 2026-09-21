@@ -39,7 +39,12 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - run: cargo clippy --workspace --all-targets -- -D warnings
 
+  # Heavy jobs (test/bindings/wasm/parity) run on the GitHub mirror only: its
+  # runners have a warm cache and enough disk. The Forgejo runner has neither
+  # (workspace builds die with "No space left on device"), while the light
+  # jobs below (fmt/clippy/python-tools/affected) run on both hosts.
   test:
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     env:
       # the German tests build ~1 GB engines serially; without a single
@@ -110,7 +115,7 @@ jobs:
   # The matrix is the affected language set (P6.3/D-134), not a static list.
   parity:
     needs: affected
-    if: needs.affected.result == 'success' && needs.affected.outputs.langs != '[]'
+    if: needs.affected.result == 'success' && needs.affected.outputs.langs != '[]' && github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -136,6 +141,7 @@ jobs:
   # Python/Node smoke, thread-safety and (when granian is available) ASGI
   # integration tests.
   bindings:
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -160,6 +166,7 @@ jobs:
   # the actual wasm module from Node (engine built from an in-memory data
   # pack; no file system in the module).
   wasm:
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -182,7 +189,7 @@ jobs:
 
   # P0.4 drift job: scheduled upstream delta report (advisory until P5.4).
   upstream-drift:
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' && github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
