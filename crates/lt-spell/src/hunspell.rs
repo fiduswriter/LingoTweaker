@@ -26,17 +26,20 @@
 //!   `FORBIDDENWORD`, `NEEDAFFIX`/`PSEUDOROOT`, `ONLYINCOMPOUND`,
 //!   `CIRCUMFIX`, `FULLSTRIP`, `CHECKSHARPS`, `COMPOUNDFLAG`,
 //!   `COMPOUNDBEGIN`/`MIDDLE`/`END`, `COMPOUNDPERMITFLAG`,
-//!   `COMPOUNDFORBIDFLAG`, `COMPOUNDROOT`, `COMPOUNDMIN`, `COMPOUNDWORDMAX`;
+//!   `COMPOUNDFORBIDFLAG`, `COMPOUNDROOT`, `COMPOUNDMIN`, `COMPOUNDWORDMAX`,
+//!   `COMPOUNDRULE` (the `defcpdtable` walk, `suggestmgr`-independent),
+//!   `CHECKCOMPOUNDREP` (`cpdrep_check`), `CHECKCOMPOUNDDUP`,
+//!   `CHECKCOMPOUNDTRIPLE`;
 //! - parsed and ignored because no vendored dictionary uses them: `PHONE`,
-//!   `WARN`, `SYLLABLENUM`, `MAXSUGS`, `LEMMA_PRESENT`, `OCONV`, `ICONV`;
+//!   `WARN`, `SYLLABLENUM`, `MAXSUGS`, `LEMMA_PRESENT`, `OCONV`, `ICONV`,
+//!   `SIMPLIFIEDTRIPLE`;
 //! - still unsupported (error at load): `COMPLEXPREFIXES`, `AF`/`AM` flag
 //!   aliases, `IGNORE`, `CHECKCOMPOUNDPATTERN`, `CHECKCOMPOUNDCASE`,
 //!   `COMPOUNDMORESUFFIXES` (none occur in the vendored files);
-//! - audited gaps (used by `sv_SE`/`da_DK`, not enforced): `COMPOUNDRULE`
-//!   (13 rules), `CHECKCOMPOUNDTRIPLE`, `SIMPLIFIEDTRIPLE`,
-//!   `CHECKCOMPOUNDDUP`, `CHECKCOMPOUNDREP`. They only ever *reject*
-//!   compounds, so ignoring them can only miss accepted compounds (spelling
-//!   false positives); the vendored corpora show none (D-225).
+//! - residual `COMPOUNDRULE` gap: the optional-flag backtracking of
+//!   `defcpd_check` is reimplemented with consume-first semantics, which
+//!   accepts a few long (5+ part) compounds the reference rejects (see the
+//!   internal notes, D-226).
 //!
 //! The `FLAG` modes `char` (default), `long`, `num` and `UTF-8` are supported
 //! (`Flag = u16`).
@@ -504,6 +507,17 @@ struct Aff {
     langnum: u16,
     /// `AffixMgr::cpdwordmax` (`COMPOUNDWORDMAX`); `-1` = unlimited.
     compound_word_max: i32,
+    /// `AffixMgr::defcpdtable` (`COMPOUNDRULE`): flag-sequence patterns, with
+    /// `*`/`?` stored as their `char` code points.
+    compound_rules: Vec<Vec<Flag>>,
+    /// `AffixMgr::checkcompoundrep` (`CHECKCOMPOUNDREP`).
+    check_compound_rep: bool,
+    /// `AffixMgr::checkcompounddup` (`CHECKCOMPOUNDDUP`).
+    check_compound_dup: bool,
+    /// `AffixMgr::checkcompoundtriple` (`CHECKCOMPOUNDTRIPLE`).
+    check_compound_triple: bool,
+    /// `AffixMgr::simplifiedcpd` (`SIMPLIFIEDTRIPLE`).
+    simplified_triple: bool,
 }
 
 /// One `REP` entry (`replentry`): `pattern` with `^`/`$` anchoring stripped,
@@ -564,6 +578,11 @@ impl Default for Aff {
             sugswithdots: false,
             langnum: 0,
             compound_word_max: -1,
+            compound_rules: Vec::new(),
+            check_compound_rep: false,
+            check_compound_dup: false,
+            check_compound_triple: false,
+            simplified_triple: false,
         }
     }
 }
@@ -653,7 +672,8 @@ impl Aff {
         aff.compound = aff.compound_begin.is_some()
             || aff.compound_middle.is_some()
             || aff.compound_end.is_some()
-            || aff.compound_flag.is_some();
+            || aff.compound_flag.is_some()
+            || !aff.compound_rules.is_empty();
         // Index suffixes by exact `appnd` (and collect wildcard entries), so
         // `suffix_check` does not scan the whole first-byte bucket.
         for (i, e) in aff.suffixes.iter().enumerate() {
@@ -1005,18 +1025,34 @@ fn parse_directive<'a>(
         "COMPOUNDWORDMAX" => {
             aff.compound_word_max = it.next().and_then(|v| v.parse().ok()).unwrap_or(-1)
         }
+        // `AffixMgr::parse_defcpdtable`: `COMPOUNDRULE` flag-sequence patterns.
+        "COMPOUNDRULE" => {
+            let count: usize = it.next().and_then(|v| v.parse().ok()).unwrap_or(0);
+            for _ in 0..count {
+                let Some(rline) = lines.next() else { break };
+                let rline = rline.trim_end_matches('\r');
+                let rest = rline
+                    .split_once(char::is_whitespace)
+                    .map(|(_, r)| r)
+                    .unwrap_or("");
+                let rule = parse_compound_rule(aff.flag_mode, rest);
+                if rule.is_empty() {
+                    return Err(parse_err(rline));
+                }
+                aff.compound_rules.push(rule);
+            }
+        }
         // The remaining compound directives are parsed and ignored: the
         // in-tree `compound_check` implements only the German flag-based
         // subset, and the Swedish `sv_SE` dictionary relies on
-        // `COMPOUNDRULE`/`CHECKCOMPOUND*`/`SIMPLIFIEDTRIPLE` for some of its
-        // compounds. Ignoring them can only miss accepted compounds (spelling
-        // false positives), never accept an unknown word; tracked as a known
+        // `CHECKCOMPOUND*`/`SIMPLIFIEDTRIPLE` for some of its compounds.
+        // Ignoring them can only miss accepted compounds (spelling false
+        // positives), never accept an unknown word; tracked as a known
         // fidelity gap in the internal notes.
-        "COMPOUNDRULE"
-        | "CHECKCOMPOUNDTRIPLE"
-        | "SIMPLIFIEDTRIPLE"
-        | "CHECKCOMPOUNDDUP"
-        | "CHECKCOMPOUNDREP" => {}
+        "CHECKCOMPOUNDTRIPLE" => aff.check_compound_triple = true,
+        "SIMPLIFIEDTRIPLE" => aff.simplified_triple = true,
+        "CHECKCOMPOUNDDUP" => aff.check_compound_dup = true,
+        "CHECKCOMPOUNDREP" => aff.check_compound_rep = true,
         "FULLSTRIP" => aff.fullstrip = true,
         "CHECKSHARPS" => aff.checksharps = true,
         "COMPOUNDFLAG" => aff.compound_flag = Some(next_flag(it)?),
@@ -1125,6 +1161,99 @@ fn parse_map_row(rest: &str) -> Vec<Vec<u8>> {
         i += len;
     }
     row
+}
+
+/// `AffixMgr::parse_defcpdtable` flag parsing: `*`/`?` are kept as their
+/// `char` code points; a parenthesized group is decoded as a flag vector.
+fn parse_compound_rule(mode: FlagMode, rest: &str) -> Vec<Flag> {
+    if !rest.contains('(') {
+        return decode_flags(mode, rest);
+    }
+    let b = rest.as_bytes();
+    let mut rule = Vec::new();
+    let mut i = 0;
+    while i < b.len() {
+        if b[i] == b'(' {
+            if let Some(rel) = rest[i..].find(')') {
+                let end = i + rel;
+                rule.extend(decode_flags(mode, &rest[i + 1..end]));
+                i = end + 1;
+                continue;
+            }
+        }
+        if b[i] == b'*' || b[i] == b'?' {
+            rule.push(b[i] as Flag);
+        } else {
+            rule.extend(decode_flags(mode, &rest[i..i + 1]));
+        }
+        i += 1;
+    }
+    rule
+}
+
+/// `COMPOUNDRULE` pattern match: a flag is followed by `*` (zero or more) or
+/// `?` (zero or one). `require_full` also requires the whole pattern to be
+/// consumed (`AffixMgr::defcpd_check`'s `all`).
+fn rule_match(
+    rule: &[Flag],
+    parts: &[Vec<Flag>],
+    require_full: bool,
+    star: Flag,
+    question: Flag,
+) -> bool {
+    fn rest_matches_empty(rule: &[Flag], mut i: usize, star: Flag, question: Flag) -> bool {
+        while i < rule.len() {
+            if i + 1 < rule.len() && (rule[i + 1] == star || rule[i + 1] == question) {
+                i += 2;
+            } else {
+                return false;
+            }
+        }
+        true
+    }
+    fn go(
+        rule: &[Flag],
+        ri: usize,
+        parts: &[Vec<Flag>],
+        pi: usize,
+        require_full: bool,
+        star: Flag,
+        question: Flag,
+    ) -> bool {
+        if pi == parts.len() {
+            return !require_full || rest_matches_empty(rule, ri, star, question);
+        }
+        if ri == rule.len() {
+            return false;
+        }
+        let flag = rule[ri];
+        let meta = rule.get(ri + 1).copied();
+        if meta == Some(star) {
+            let mut max = pi;
+            while max < parts.len() && parts[max].contains(&flag) {
+                max += 1;
+            }
+            for k in (pi..=max).rev() {
+                if go(rule, ri + 2, parts, k, require_full, star, question) {
+                    return true;
+                }
+            }
+            false
+        } else if meta == Some(question) {
+            // hunspell consumes the current word when it carries the flag and
+            // only falls through to zero when it does not.
+            if parts[pi].contains(&flag)
+                && go(rule, ri + 2, parts, pi + 1, require_full, star, question)
+            {
+                return true;
+            }
+            go(rule, ri + 2, parts, pi, require_full, star, question)
+        } else {
+            parts[pi].contains(&flag)
+                && go(rule, ri + 1, parts, pi + 1, require_full, star, question)
+        }
+    }
+    go(rule, 0, parts, 0, require_full, star, question)
 }
 
 /// `HashMgr::load_tables`: split off the morphological description. Hunspell
@@ -1657,6 +1786,10 @@ impl HunspellChecker {
                 info.compound = true;
                 return he;
             }
+        }
+        if let Some(he) = self.defcpd_compound(word) {
+            info.compound = true;
+            return Some(he);
         }
         None
     }
@@ -2358,6 +2491,137 @@ impl HunspellChecker {
         self.aff.compound_word_max <= 0 || (wordnum + 1) < self.aff.compound_word_max as usize
     }
 
+    /// `AffixMgr::defcpd_check`: does the flag sequence `parts` match a
+    /// `COMPOUNDRULE` pattern? `all` requires the whole pattern to be consumed;
+    /// otherwise `parts` only has to be a valid prefix (used for pruning).
+    fn defcpd_check(&self, parts: &[Vec<Flag>], all: bool) -> bool {
+        const STAR: Flag = b'*' as Flag;
+        const QUESTION: Flag = b'?' as Flag;
+        if parts.is_empty() {
+            return false;
+        }
+        // the last word must carry at least one non-metacharacter rule flag
+        let rv = &parts[parts.len() - 1];
+        let any = self.aff.compound_rules.iter().any(|rule| {
+            rule.iter()
+                .any(|&j| j != STAR && j != QUESTION && rv.contains(&j))
+        });
+        if !any {
+            return false;
+        }
+        self.aff
+            .compound_rules
+            .iter()
+            .any(|rule| rule_match(rule, parts, all, STAR, QUESTION))
+    }
+
+    /// Candidate dictionary entries for one `COMPOUNDRULE` part. A non-final
+    /// part is a "first word" of the recursive `compound_check` and must be a
+    /// plain `lookup`; only the final part may be an affixed form.
+    fn defcpd_candidates(&self, part: &[u8], non_final: bool) -> Vec<DicEntry<'_>> {
+        let mut out: Vec<DicEntry<'_>> = Vec::new();
+        for packed in self.index.entries_for(part) {
+            let e = self.index.view(packed);
+            if e.flags.is_empty()
+                || self.has_flag(e, self.aff.need_affix)
+                || self.has_flag(e, self.aff.forbidden_word)
+                || e.only_upcase
+            {
+                continue;
+            }
+            if non_final && self.has_flag(e, self.aff.compound_forbid) {
+                continue;
+            }
+            out.push(e);
+        }
+        if !non_final {
+            let mut state = AffixState::default();
+            if let Some(e) =
+                self.affix_check(part, 0, part.len(), None, InCompound::End, &mut state)
+            {
+                let forbid = state
+                    .sfx
+                    .map(|s| {
+                        self.aff
+                            .compound_forbid
+                            .is_some_and(|f| self.sfx_entry(s).cont.contains(&f))
+                    })
+                    .unwrap_or(false)
+                    || state
+                        .pfx
+                        .map(|p| {
+                            self.aff
+                                .compound_forbid
+                                .is_some_and(|f| self.pfx_entry(p).cont.contains(&f))
+                        })
+                        .unwrap_or(false);
+                if !forbid && !self.has_flag(e, self.aff.forbidden_word) && !e.only_upcase {
+                    out.push(e);
+                }
+            }
+        }
+        out
+    }
+
+    fn defcpd_recurse<'a>(
+        &'a self,
+        word: &[u8],
+        start: usize,
+        parts: &mut Vec<Vec<Flag>>,
+        first: &mut Option<DicEntry<'a>>,
+        depth: usize,
+    ) -> bool {
+        if start == word.len() {
+            return parts.len() >= 2 && self.defcpd_check(parts, true);
+        }
+        if depth >= 20 {
+            return false;
+        }
+        let mut end = start;
+        while end < word.len() {
+            end += 1;
+            while end < word.len() && word[end] & 0xC0 == 0x80 {
+                end += 1;
+            }
+            let part = &word[start..end];
+            if char_count(part) < self.aff.compound_min {
+                continue;
+            }
+            for cand in self.defcpd_candidates(part, end != word.len()) {
+                let flags = cand.flags.to_vec();
+                parts.push(flags);
+                if self.defcpd_check(parts, false) {
+                    let saved = *first;
+                    if depth == 0 {
+                        *first = Some(cand);
+                    }
+                    if self.defcpd_recurse(word, end, parts, first, depth + 1) {
+                        parts.pop();
+                        return true;
+                    }
+                    *first = saved;
+                }
+                parts.pop();
+            }
+        }
+        false
+    }
+
+    /// The `onlycpdrule` pass of `AffixMgr::compound_check`: accept a word
+    /// whose split into dictionary parts matches a `COMPOUNDRULE` pattern.
+    fn defcpd_compound<'a>(&'a self, word: &[u8]) -> Option<DicEntry<'a>> {
+        if self.aff.compound_rules.is_empty() {
+            return None;
+        }
+        let mut parts: Vec<Vec<Flag>> = Vec::new();
+        let mut first: Option<DicEntry<'a>> = None;
+        if self.defcpd_recurse(word, 0, &mut parts, &mut first, 0) {
+            first
+        } else {
+            None
+        }
+    }
+
     fn compound_check(
         &self,
         word: &[u8],
@@ -2558,6 +2822,16 @@ impl HunspellChecker {
                     i += 1;
                     continue;
                 }
+                // CHECKCOMPOUNDTRIPLE: no triple letter at the seam.
+                if self.aff.check_compound_triple && i > 0 && i < st.len() {
+                    let prev = st[i - 1];
+                    if prev == st[i]
+                        && ((i > 1 && prev == st[i - 2]) || (i + 1 < st.len() && prev == st[i + 1]))
+                    {
+                        i += 1;
+                        continue;
+                    }
+                }
                 // --- SECOND WORD ---
                 let rv_first = entry;
                 let second_start = i;
@@ -2593,8 +2867,11 @@ impl HunspellChecker {
                             .compound_end
                             .is_some_and(|f| entry2.flags.contains(&f)))
                         && self.cpdword_max_ok(wordnum)
+                        && !(self.aff.check_compound_dup && Self::same_entry(entry2, rv_first))
                     {
-                        if self.cpdwordpair_check(word) {
+                        if (self.aff.check_compound_rep && self.cpdrep_check(word))
+                            || self.cpdwordpair_check(word)
+                        {
                             return None;
                         }
                         return Some(rv_first);
@@ -2627,12 +2904,17 @@ impl HunspellChecker {
                                         .is_some_and(|f| self.pfx_entry(p).cont.contains(&f))
                                 })
                                 .unwrap_or(false);
-                        if !forbid && self.cpdword_max_ok(wordnum) {
+                        if !forbid
+                            && self.cpdword_max_ok(wordnum)
+                            && !(self.aff.check_compound_dup && Self::same_entry(entry2, rv_first))
+                        {
                             if self.has_flag(entry2, self.aff.forbidden_word) || entry2.only_upcase
                             {
                                 return None;
                             }
-                            if self.cpdwordpair_check(word) {
+                            if (self.aff.check_compound_rep && self.cpdrep_check(word))
+                                || self.cpdwordpair_check(word)
+                            {
                                 return None;
                             }
                             return Some(rv_first);
@@ -2673,7 +2955,48 @@ impl HunspellChecker {
         None
     }
 
-    /// `AffixMgr::cpdwordpair_check` + `candidate_check`.
+    /// `AffixMgr::candidate_check`: a plain lookup or affix check.
+    fn candidate_check(&self, word: &[u8]) -> bool {
+        if !self.index.entries_for(word).is_empty() {
+            return true;
+        }
+        let mut st = AffixState::default();
+        self.affix_check(word, 0, word.len(), None, InCompound::Not, &mut st)
+            .is_some()
+    }
+
+    /// `AffixMgr::cpdrep_check`: reject a compound if a mid-`REP` replacement
+    /// yields a known word (`CHECKCOMPOUNDREP`).
+    fn cpdrep_check(&self, word: &[u8]) -> bool {
+        if word.len() < 2 || self.aff.rep_table.is_empty() {
+            return false;
+        }
+        for entry in &self.aff.rep_table {
+            if entry.out[0].is_empty() {
+                continue;
+            }
+            let mut r = 0usize;
+            while let Some(pos) = find_sub(word, &entry.pattern, r) {
+                let mut cand = Vec::with_capacity(word.len() + entry.out[0].len());
+                cand.extend_from_slice(&word[..pos]);
+                cand.extend_from_slice(&entry.out[0]);
+                cand.extend_from_slice(&word[pos + entry.pattern.len()..]);
+                if self.candidate_check(&cand) {
+                    return true;
+                }
+                r = pos + 1;
+            }
+        }
+        false
+    }
+
+    /// Same `hentry` (flag-slice identity).
+    fn same_entry(a: DicEntry<'_>, b: DicEntry<'_>) -> bool {
+        a.flags.as_ptr() == b.flags.as_ptr()
+            && a.flags.len() == b.flags.len()
+            && a.word_len == b.word_len
+    }
+
     fn cpdwordpair_check(&self, word: &[u8]) -> bool {
         if word.len() <= 2 {
             return false;
@@ -3832,7 +4155,9 @@ impl HunspellChecker {
                     compound_2: cpdsuggest == 1,
                     ..Default::default()
                 };
-                let rv = self.compound_check(word, 0, 0, 100, 0, &mut info);
+                let rv = self
+                    .compound_check(word, 0, 0, 100, 0, &mut info)
+                    .or_else(|| self.defcpd_compound(word));
                 if rv.is_some() {
                     let bad = self.lookup_first(word).is_some_and(|e| {
                         self.has_flag(e, self.aff.forbidden_word)
@@ -4629,5 +4954,49 @@ mod tests {
         let c = HunspellChecker::from_strs(aff, dic).unwrap();
         // the abbreviation's trailing dot is re-appended to every candidate.
         assert_eq!(c.suggest("cta."), vec!["cat."]);
+    }
+}
+
+#[cfg(test)]
+mod compound_rule_tests {
+    use super::{rule_match, Flag, HunspellChecker};
+
+    #[test]
+    fn match_semantics() {
+        let star = b'*' as Flag;
+        let q = b'?' as Flag;
+        let p = |cs: &str| cs.bytes().map(|b| b as Flag).collect::<Vec<Flag>>();
+        let rule = |cs: &str| cs.bytes().map(|b| b as Flag).collect::<Vec<Flag>>();
+        // plain sequence
+        assert!(rule_match(&rule("47"), &[p("4"), p("7")], true, star, q));
+        assert!(!rule_match(&rule("47"), &[p("4"), p("8")], true, star, q));
+        // optional flag: 4?78 matches 4,7,8 and (4? empty) 7,8
+        assert!(rule_match(
+            &rule("4?78"),
+            &[p("4"), p("7"), p("8")],
+            true,
+            star,
+            q
+        ));
+        assert!(rule_match(&rule("4?78"), &[p("7"), p("8")], true, star, q));
+        assert!(!rule_match(&rule("4?78"), &[p("7")], true, star, q));
+        // star: zero or more
+        assert!(rule_match(&rule("0*"), &[], true, star, q));
+        assert!(rule_match(&rule("0*"), &[p("0"), p("0")], true, star, q));
+        assert!(!rule_match(&rule("0*"), &[p("1")], true, star, q));
+        // prefix (all = false) allows an unfinished pattern
+        assert!(rule_match(&rule("4?78"), &[p("4"), p("7")], false, star, q));
+    }
+
+    #[test]
+    fn compound_rule_spell() {
+        let aff = "SET UTF-8\nCOMPOUNDMIN 1\nCOMPOUNDRULE 2\nCOMPOUNDRULE 47\nCOMPOUNDRULE 4?78\n";
+        let dic = "3\na/4\nb/7\nc/8\n";
+        let c = HunspellChecker::from_strs(aff, dic).unwrap();
+        assert!(c.spell("ab")); // 4 7
+        assert!(c.spell("abc")); // 4 7 8
+        assert!(c.spell("bc")); // 4? empty, 7 8
+        assert!(!c.spell("ac"));
+        assert!(!c.spell("cb"));
     }
 }
