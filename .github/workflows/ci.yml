@@ -33,7 +33,10 @@ jobs:
           command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
           "$HOME/.cargo/bin/rustup" toolchain install
-      - uses: Swatinem/rust-cache@v2
+      # rust-cache needs GitHub's cache service; the Forgejo runner has none
+      # (the cache request times out), so only cache on GitHub.
+      - if: github.server_url == 'https://github.com'
+        uses: Swatinem/rust-cache@v2
       - run: cargo clippy --workspace --all-targets -- -D warnings
 
   test:
@@ -50,7 +53,10 @@ jobs:
           command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
           "$HOME/.cargo/bin/rustup" toolchain install
-      - uses: Swatinem/rust-cache@v2
+      # rust-cache needs GitHub's cache service; the Forgejo runner has none
+      # (the cache request times out), so only cache on GitHub.
+      - if: github.server_url == 'https://github.com'
+        uses: Swatinem/rust-cache@v2
       - run: cargo test --workspace
 
   # Pure-Python dictionary tooling (tools/morfologik): self-contained, no JVM.
@@ -119,7 +125,7 @@ jobs:
           command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
           "$HOME/.cargo/bin/rustup" toolchain install
-      - if: matrix.lang != 'none'
+      - if: matrix.lang != 'none' && github.server_url == 'https://github.com'
         uses: Swatinem/rust-cache@v2
       - if: matrix.lang != 'none'
         run: cargo build --release -p lt-cli
@@ -162,7 +168,10 @@ jobs:
           command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
           "$HOME/.cargo/bin/rustup" toolchain install
-      - uses: Swatinem/rust-cache@v2
+      # rust-cache needs GitHub's cache service; the Forgejo runner has none
+      # (the cache request times out), so only cache on GitHub.
+      - if: github.server_url == 'https://github.com'
+        uses: Swatinem/rust-cache@v2
       - run: rustup target add wasm32-unknown-unknown
       - uses: jetli/wasm-pack-action@v0.4.0
         with:
