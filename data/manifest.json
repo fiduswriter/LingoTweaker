@@ -6107,8 +6107,8 @@
     },
     {
       "path": "no/README.md",
-      "sha256": "bd3f96e755343414e8fba5a8e1bda9adf084134ef4fd0efbf3e09221177e6f21",
-      "size": 10017,
+      "sha256": "ee6b80b29db8cd949553fa034263c5d231b7e1a4ebfc9688d6ddda2a64aa4c53",
+      "size": 10120,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
