@@ -339,33 +339,29 @@ engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
   scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
   ```
 
-## 10. `HUNSPELL_RULE` (Danish) dotted-abbreviation acceptance
+## 10. `HUNSPELL_RULE` (Danish) suggestion ranking (resolved)
 
-The native hunspell suggestion engine is ported (see #7), so the Danish
-suggestion lists match the legacy engine byte-for-byte. The corpus
+The native hunspell suggestion engine (generators + n-gram fallback, see #7)
+and the dotted-abbreviation acceptance are now ported, so the Danish corpus
 (`docs/parity/golden/da-full.txt`, 284 examples) is at
-**2 only-Java / 0 only-Rust / 0 field diffs**:
+**0 only-Java / 0 only-Rust / 0 field diffs**. The former 2 only-Java cases
+(`f.kr` in `I år 753f.kr. blev Rom grundlagt.`) match the legacy engine: the
+spelling rule only suppresses a WORDCHARS run when an ignored/URL/immunized
+token covers the *whole* run, so the engine's ignored sub-token `f` no longer
+hides the `f.kr.` token that the legacy engine spell-checks whole. No
+allowance remains in `scripts/ci/parity.sh`.
 
-- 2 only-Java: the in-tree `lt-spell` checker accepts a small set of dotted
-  abbreviations that native hunspell rejects, e.g. the token `f.kr` in
-  `I år 753f.kr. blev Rom grundlagt.` (lines 177/179). The legacy engine flags
-  it as misspelled; Rust accepts it.
-
-Everything else is at parity: the XML rules (78 compiled, 69 default-active),
-the `DanishTagger`/`XmlRuleDisambiguator` foundations and the other five
-generic built-ins (CommaWhitespace, DoublePunctuation, GenericUnpairedBrackets
-with the explicit Danish bracket lists, UppercaseSentenceStart,
-MultipleWhitespace) match the legacy engine.
+The XML rules (78 compiled, 69 default-active), the
+`DanishTagger`/`XmlRuleDisambiguator` foundations and the other five generic
+built-ins (CommaWhitespace, DoublePunctuation, GenericUnpairedBrackets with
+the explicit Danish bracket lists, UppercaseSentenceStart, MultipleWhitespace)
+are at parity.
 
 Reproduce (pinned Java build):
 
 ```sh
-scripts/oracle/da/check-diff-da.sh docs/parity/golden/da-full.txt
+scripts/oracle/da/probe-speller.sh "f.kr." "f.Kr."
 ```
-
-Pinned exactly as `--expect-only-java=HUNSPELL_RULE=2` in
-`scripts/ci/parity.sh`. Matching the `lt-spell` dotted-word acceptance to
-Java's `cleanWord` handling would remove the allowance.
 
 ## 11. `HUNSPELL_RULE` (Swedish) suggestion ranking (resolved)
 

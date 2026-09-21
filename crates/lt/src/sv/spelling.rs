@@ -66,12 +66,17 @@ impl SwedishSpellingRule {
         for m in LETTER_RUN.find_iter(sentence_text) {
             let raw = m.as_str();
             let start = m.start();
+            // Only a token that covers the whole WORDCHARS run suppresses it
+            // (an ignored sub-token must not hide the run), matching the
+            // legacy engine's `getSentenceTextWithoutUrlsAndImmunizedTokens`.
+            let run_end = start + raw.len();
             let skipped = tokens.iter().any(|tr| {
                 if tr.is_whitespace || start < tr.start_pos {
                     return false;
                 }
                 let end = tr.start_pos + tr.raw_byte_len.max(tr.surface().len());
-                start < end
+                end >= run_end
+                    && tr.start_pos <= start
                     && (tr.is_immunized
                         || tr.is_ignore_spelling
                         || is_url(tr.surface())

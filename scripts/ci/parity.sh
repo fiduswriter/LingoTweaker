@@ -124,11 +124,6 @@ elif [ "$LANG_ARG" = "gl" ]; then
   # identical; the native hunspell suggestion engine (generators + n-gram
   # fallback) is ported, leaving a small wall-clock-boundary residue
   EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=3)
-elif [ "$LANG_ARG" = "da" ]; then
-  # documented speller divergence (docs/differences.md #10): the native
-  # hunspell suggestion engine (generators + n-gram fallback) is ported, so
-  # only the dotted-abbreviation acceptance remains (2 only-Java).
-  EXTRA+=(--expect-only-java=HUNSPELL_RULE=2)
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)

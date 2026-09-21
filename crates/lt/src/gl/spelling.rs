@@ -71,13 +71,18 @@ impl GalicianSpellingRule {
         for m in LETTER_RUN.find_iter(sentence_text) {
             let start = m.start();
             // Skip runs inside URLs / e-mail / immunized / speller-ignored
-            // tokens (`getSentenceTextWithoutUrlsAndImmunizedTokens`).
+            // tokens (`getSentenceTextWithoutUrlsAndImmunizedTokens`). Only a
+            // token that covers the whole WORDCHARS run suppresses it (an
+            // ignored sub-token must not hide the run), matching the legacy
+            // engine.
+            let run_end = m.end();
             let skipped = tokens.iter().any(|tr| {
                 if tr.is_whitespace || start < tr.start_pos {
                     return false;
                 }
                 let end = tr.start_pos + tr.raw_byte_len.max(tr.surface().len());
-                start < end
+                end >= run_end
+                    && tr.start_pos <= start
                     && (tr.is_immunized
                         || tr.is_ignore_spelling
                         || is_url(tr.surface())

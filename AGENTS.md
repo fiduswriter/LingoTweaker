@@ -54,9 +54,9 @@ the n-gram fallback is ported, the residue is the upstream wall-clock timer
 boundary); pl the documented known fidelity gaps
 #9 (4 only-Java / 5 only-Rust / 0 field diffs, the `<unify negate="yes">`
 agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
-the PCON_VERB participle rule); da allows the documented `HUNSPELL_RULE`
-divergences #10 (2 only-Java dotted abbreviations, 0 field diffs); sv is at
-0/0/0 (#11, resolved by the suggestion-engine port). `no`, `nrd` and `gn` are hand-authored
+the PCON_VERB participle rule); da is at 0/0/0 (#10, resolved by the
+suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
+resolved by the suggestion-engine port). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
 

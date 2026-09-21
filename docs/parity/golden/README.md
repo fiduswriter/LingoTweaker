@@ -73,11 +73,10 @@ re-runs the Rust side and diffs against the golden.
   disambiguator). el is exactly 0/0/0 (D-214; the Greek tagger, synthesizer
   and `el/disambiguation.xml` are wired, and `Pipeline::synthesizer()` gained
   the Greek branch so `<match postag>` synthesis renders like Java).
-  da is 2 only-Java / 0 only-Rust / 0 field diffs (D-215/D-216 + D-224): the
-  native hunspell suggestion engine including the n-gram fallback is ported,
-  so only the in-tree checker's acceptance of a small set of dotted
-  abbreviations (`f.kr`) that native hunspell rejects remains; the XML rules,
-  tagger and disambiguator are at parity.
+  da is exactly 0/0/0 (D-215/D-216 + D-224): the native hunspell suggestion
+  engine including the n-gram fallback and the dotted-abbreviation
+  suppression are ported; the XML rules, tagger and disambiguator are at
+  parity.
   sv is exactly 0 only-Java / 0 only-Rust / 0 field diffs (D-218/D-219,
   resolved by the suggestion-engine port): the suggestion lists match the
   legacy engine byte-for-byte; the XML rules,
