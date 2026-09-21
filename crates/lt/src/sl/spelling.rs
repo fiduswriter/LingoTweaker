@@ -24,6 +24,7 @@ pub fn load(data_dir: &Path) -> Result<SlovenianSpellingRule> {
             short_message: "Napaka pri črkovanju",
             category_id: "TYPOS",
             category_name: "Možna tipkarska napaka",
+            is_latin_script: true,
         },
     )
 }

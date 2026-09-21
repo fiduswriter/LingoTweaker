@@ -24,6 +24,7 @@ pub fn load(data_dir: &Path) -> Result<SlovakSpellingRule> {
             short_message: "Preklep",
             category_id: "TYPOS",
             category_name: "Možný preklep",
+            is_latin_script: true,
         },
     )
 }

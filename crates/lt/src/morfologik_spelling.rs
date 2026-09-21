@@ -28,7 +28,9 @@ const MAX_FREQUENCY_FOR_SPLITTING: i32 = 21;
 /// `SpellingCheckRule.MAX_TOKEN_LENGTH`
 const MAX_TOKEN_LENGTH: usize = 200;
 
-static HAS_NO_LETTER: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[^\p{Latin}]+$").unwrap());
+static HAS_NO_LETTER_LATIN: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^[^\p{Latin}]+$").unwrap());
+static HAS_NO_LETTER: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[^\p{L}]+$").unwrap());
 static STARTS_WITH_NUMBERS_BULLETS: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^(\d[.,\d]*|\P{L}+)(.*)$").unwrap());
 static STARTS_WITH_NUMBERS_BULLETS_EXCEPTIONS: LazyLock<Regex> =
@@ -46,6 +48,9 @@ pub struct MorfologikSpellerConfig {
     pub short_message: &'static str,
     pub category_id: &'static str,
     pub category_name: &'static str,
+    /// `SpellingCheckRule.isLatinScript()`: false for Greek (any non-Unicode
+    /// letter token is ignored instead of only non-Latin ones).
+    pub is_latin_script: bool,
 }
 
 pub struct MorfologikSpellingRule {
@@ -172,7 +177,12 @@ impl MorfologikSpellingRule {
         if word.chars().count() > MAX_TOKEN_LENGTH {
             return true;
         }
-        if HAS_NO_LETTER.is_match(word) {
+        let has_no_letter = if self.config.is_latin_script {
+            &HAS_NO_LETTER_LATIN
+        } else {
+            &HAS_NO_LETTER
+        };
+        if has_no_letter.is_match(word) {
             return true;
         }
         if let Some(stripped) = word.strip_suffix('.') {

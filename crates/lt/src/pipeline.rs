@@ -3608,11 +3608,23 @@ impl Pipeline {
         disambiguator.set_filter_registry(filters);
         mark("disambiguator");
 
+        // `MorfologikGreekSpellerRule` (5), default on. A load failure would
+        // only disable the speller, not the engine.
+        let spelling = match crate::el::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[el] spelling rule disabled: {err}");
+                None
+            }
+        };
+        mark("speller");
+
         let greek = Arc::new(crate::el::GreekPipeline {
             tagger,
             synthesizer: synth,
             synth_adapter,
             disambiguator,
+            spelling,
             word_repeat: crate::el::rules::word_repeat_rule(),
         });
         Ok(Self {
@@ -8240,6 +8252,24 @@ impl Pipeline {
                 &mut seen,
             );
             if let Some(greek) = &self.greek {
+                if let Some(spelling) = &greek.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::el::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
                 append_active(
                     &mut matches,
                     builtin_active(

@@ -13,6 +13,7 @@ use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
 pub mod rules;
+pub mod spelling;
 
 /// `Greek.createDefaultDisambiguator` is a plain `XmlRuleDisambiguator`
 /// (XML rules + `core/disambiguation-global.xml`); Greek has no chunker.
@@ -22,6 +23,9 @@ pub struct GreekPipeline {
     /// The same synthesizer through the pattern engine's trait.
     pub synth_adapter: Arc<GreekSynthesizerAdapter>,
     pub disambiguator: lt_disambig::XmlDisambiguator,
+    /// `MorfologikGreekSpellerRule` (`MORFOLOGIK_RULE_EL_GR`, rule 5).
+    /// `None` only when the vendored `el_GR` dictionary cannot be read.
+    pub spelling: Option<Arc<crate::el::spelling::GreekSpellingRule>>,
     /// `WordRepeatRule` (`WORD_REPEAT_RULE`), the generic built-in.
     pub word_repeat: crate::word_repeat::WordRepeatRule,
 }

@@ -467,6 +467,9 @@ impl Engine {
         if let Some(polish) = &self.pipeline.polish {
             return polish.disambiguator.rules_len();
         }
+        if let Some(greek) = &self.pipeline.greek {
+            return greek.disambiguator.rules_len();
+        }
         if let Some(norwegian) = &self.pipeline.norwegian {
             return norwegian.disambiguator.rules_len();
         }

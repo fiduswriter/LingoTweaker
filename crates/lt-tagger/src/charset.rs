@@ -19,6 +19,8 @@ pub enum Charset {
     Iso88591,
     /// ISO-8859-2 (Latin-2, Central European).
     Iso88592,
+    /// ISO-8859-7 (Greek).
+    Iso88597,
 }
 
 /// The 8 code points where ISO-8859-15 differs from ISO-8859-1.
@@ -134,6 +136,108 @@ const LATIN2_HIGH: [(u8, char); 96] = [
     (0xFF, '\u{02D9}'),
 ];
 
+/// The high half (0xA0-0xFF) of ISO-8859-7 (Greek); bytes below 0xA0 are
+/// the identity mapping. Three code points (0xAE, 0xD2, 0xFF) are undefined
+/// and decode to U+FFFD, like Java's `ISO-8859-7`.
+const GREEK_88597_HIGH: [(u8, char); 96] = [
+    (0xA0, '\u{00A0}'),
+    (0xA1, '\u{2018}'),
+    (0xA2, '\u{2019}'),
+    (0xA3, '\u{00A3}'),
+    (0xA4, '\u{20AC}'),
+    (0xA5, '\u{20AF}'),
+    (0xA6, '\u{00A6}'),
+    (0xA7, '\u{00A7}'),
+    (0xA8, '\u{00A8}'),
+    (0xA9, '\u{00A9}'),
+    (0xAA, '\u{037A}'),
+    (0xAB, '\u{00AB}'),
+    (0xAC, '\u{00AC}'),
+    (0xAD, '\u{00AD}'),
+    (0xAE, '\u{FFFD}'),
+    (0xAF, '\u{2015}'),
+    (0xB0, '\u{00B0}'),
+    (0xB1, '\u{00B1}'),
+    (0xB2, '\u{00B2}'),
+    (0xB3, '\u{00B3}'),
+    (0xB4, '\u{0384}'),
+    (0xB5, '\u{0385}'),
+    (0xB6, '\u{0386}'),
+    (0xB7, '\u{00B7}'),
+    (0xB8, '\u{0388}'),
+    (0xB9, '\u{0389}'),
+    (0xBA, '\u{038A}'),
+    (0xBB, '\u{00BB}'),
+    (0xBC, '\u{038C}'),
+    (0xBD, '\u{00BD}'),
+    (0xBE, '\u{038E}'),
+    (0xBF, '\u{038F}'),
+    (0xC0, '\u{0390}'),
+    (0xC1, '\u{0391}'),
+    (0xC2, '\u{0392}'),
+    (0xC3, '\u{0393}'),
+    (0xC4, '\u{0394}'),
+    (0xC5, '\u{0395}'),
+    (0xC6, '\u{0396}'),
+    (0xC7, '\u{0397}'),
+    (0xC8, '\u{0398}'),
+    (0xC9, '\u{0399}'),
+    (0xCA, '\u{039A}'),
+    (0xCB, '\u{039B}'),
+    (0xCC, '\u{039C}'),
+    (0xCD, '\u{039D}'),
+    (0xCE, '\u{039E}'),
+    (0xCF, '\u{039F}'),
+    (0xD0, '\u{03A0}'),
+    (0xD1, '\u{03A1}'),
+    (0xD2, '\u{FFFD}'),
+    (0xD3, '\u{03A3}'),
+    (0xD4, '\u{03A4}'),
+    (0xD5, '\u{03A5}'),
+    (0xD6, '\u{03A6}'),
+    (0xD7, '\u{03A7}'),
+    (0xD8, '\u{03A8}'),
+    (0xD9, '\u{03A9}'),
+    (0xDA, '\u{03AA}'),
+    (0xDB, '\u{03AB}'),
+    (0xDC, '\u{03AC}'),
+    (0xDD, '\u{03AD}'),
+    (0xDE, '\u{03AE}'),
+    (0xDF, '\u{03AF}'),
+    (0xE0, '\u{03B0}'),
+    (0xE1, '\u{03B1}'),
+    (0xE2, '\u{03B2}'),
+    (0xE3, '\u{03B3}'),
+    (0xE4, '\u{03B4}'),
+    (0xE5, '\u{03B5}'),
+    (0xE6, '\u{03B6}'),
+    (0xE7, '\u{03B7}'),
+    (0xE8, '\u{03B8}'),
+    (0xE9, '\u{03B9}'),
+    (0xEA, '\u{03BA}'),
+    (0xEB, '\u{03BB}'),
+    (0xEC, '\u{03BC}'),
+    (0xED, '\u{03BD}'),
+    (0xEE, '\u{03BE}'),
+    (0xEF, '\u{03BF}'),
+    (0xF0, '\u{03C0}'),
+    (0xF1, '\u{03C1}'),
+    (0xF2, '\u{03C2}'),
+    (0xF3, '\u{03C3}'),
+    (0xF4, '\u{03C4}'),
+    (0xF5, '\u{03C5}'),
+    (0xF6, '\u{03C6}'),
+    (0xF7, '\u{03C7}'),
+    (0xF8, '\u{03C8}'),
+    (0xF9, '\u{03C9}'),
+    (0xFA, '\u{03CA}'),
+    (0xFB, '\u{03CB}'),
+    (0xFC, '\u{03CC}'),
+    (0xFD, '\u{03CD}'),
+    (0xFE, '\u{03CE}'),
+    (0xFF, '\u{FFFD}'),
+];
+
 impl Charset {
     pub fn from_info_name(name: &str) -> Option<Self> {
         let normalized = name.trim().to_ascii_lowercase().replace('_', "-");
@@ -142,6 +246,7 @@ impl Charset {
             "iso-8859-15" | "iso8859-15" | "latin9" | "l9" => Some(Charset::Iso885915),
             "iso-8859-1" | "iso8859-1" | "latin1" | "l1" => Some(Charset::Iso88591),
             "iso-8859-2" | "iso8859-2" | "latin2" | "l2" => Some(Charset::Iso88592),
+            "iso-8859-7" | "iso8859-7" | "greek" | "greek8" => Some(Charset::Iso88597),
             _ => None,
         }
     }
@@ -152,6 +257,7 @@ impl Charset {
         match self {
             Charset::Iso885915 => &LATIN9_OVERRIDES[..],
             Charset::Iso88592 => &LATIN2_HIGH[..],
+            Charset::Iso88597 => &GREEK_88597_HIGH[..],
             Charset::Utf8 | Charset::Iso88591 => &[][..],
         }
     }
@@ -161,7 +267,7 @@ impl Charset {
     pub fn decode(self, bytes: &[u8]) -> Cow<'_, str> {
         match self {
             Charset::Utf8 => String::from_utf8_lossy(bytes),
-            Charset::Iso885915 | Charset::Iso88591 | Charset::Iso88592 => {
+            Charset::Iso885915 | Charset::Iso88591 | Charset::Iso88592 | Charset::Iso88597 => {
                 let overrides = self.overrides();
                 Cow::Owned(
                     bytes
@@ -198,7 +304,7 @@ impl Charset {
     pub fn encode(self, text: &str) -> Option<Vec<u8>> {
         match self {
             Charset::Utf8 => Some(text.as_bytes().to_vec()),
-            Charset::Iso885915 | Charset::Iso88591 | Charset::Iso88592 => {
+            Charset::Iso885915 | Charset::Iso88591 | Charset::Iso88592 | Charset::Iso88597 => {
                 let overrides = self.overrides();
                 let mut out = Vec::with_capacity(text.len());
                 for c in text.chars() {
@@ -240,5 +346,21 @@ mod tests {
     #[test]
     fn latin2_rejects_unmappable() {
         assert!(Charset::Iso88592.encode("€").is_none());
+    }
+
+    #[test]
+    fn greek_88597_round_trips_greek() {
+        let cs = Charset::Iso88597;
+        let text = "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
+        let bytes = cs.encode(text).unwrap();
+        assert_eq!(bytes[0], 0xE1); // α
+        assert_eq!(*bytes.last().unwrap(), 0xD9); // Ω
+        assert_eq!(cs.decode(&bytes), text);
+    }
+
+    #[test]
+    fn greek_88597_rejects_unmappable() {
+        // Cyrillic is not in ISO-8859-7
+        assert!(Charset::Iso88597.encode("ж").is_none());
     }
 }
