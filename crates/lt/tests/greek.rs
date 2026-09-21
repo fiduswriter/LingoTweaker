@@ -1,14 +1,17 @@
 //! Greek engine tests: stage-1/2 XML wiring state plus Java-probed built-in
 //! values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/el/probe-rule.sh`) print UTF-16 code units, converted
-//! where a test exercises Greek letters. The Greek tagger combines the small
-//! `greek.dict` with the `morphology-el` analyzer fallback.
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/el/probe-rule.sh`). The
+//! Greek tagger combines the small `greek.dict` with the `morphology-el`
+//! analyzer fallback.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 /// One engine at a time: the Greek engines hold the speller dictionary.
 fn engine_guard() -> MutexGuard<'static, ()> {
@@ -83,14 +86,14 @@ fn greek_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Το , je test.` 2..4.
+/// `CommaWhitespaceRule` (1), Java probe.
 #[test]
 fn greek_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Το , je test.", "COMMA_PARENTHESIS_WHITESPACE");
+    let text = "Το , je test.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 4);
-    assert_eq!(matches[0].range.end, 6);
+    assert_utf16(text, &matches[0], (2, 4));
     assert_eq!(
         matches[0].message,
         "Προσθέστε ένα κενό μετά το κόμμα αλλά όχι πριν το κόμμα."
@@ -98,27 +101,27 @@ fn greek_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `Το κείμενο..` 10..12.
+/// `DoublePunctuationRule` (2), Java probe.
 #[test]
 fn greek_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Το κείμενο..", "DOUBLE_PUNCTUATION");
+    let text = "Το κείμενο..";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 19);
-    assert_eq!(matches[0].range.end, 21);
+    assert_utf16(text, &matches[0], (10, 12));
     assert_eq!(matches[0].message, "Δύο συνεχόμενες τελείες");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
 /// `UppercaseSentenceStartRule` (6), Java probe: the second sentence starts
-/// lowercase (Java 12..14; UTF-8 bytes 14..16).
+/// lowercase.
 #[test]
 fn greek_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("Το κείμενο. το κείμενο.", "UPPERCASE_SENTENCE_START");
+    let text = "Το κείμενο. το κείμενο.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 21);
-    assert_eq!(matches[0].range.end, 25);
+    assert_utf16(text, &matches[0], (12, 14));
     assert_eq!(
         matches[0].message,
         "Η πρόταση δεν ξεκινάει με κεφαλαίο γράμμα"
@@ -126,38 +129,38 @@ fn greek_uppercase_sentence_start() {
     assert_eq!(suggestions(&matches[0]), vec!["Το"]);
 }
 
-/// `MultipleWhitespaceRule` (7), Java probe: `Το  κείμενο.` 2..4.
+/// `MultipleWhitespaceRule` (7), Java probe.
 #[test]
 fn greek_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Το  κείμενο.", "WHITESPACE_RULE");
+    let text = "Το  κείμενο.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 4);
-    assert_eq!(matches[0].range.end, 6);
+    assert_utf16(text, &matches[0], (2, 4));
     assert_eq!(matches[0].message, "Πιθανό λάθος: επανάληψη κενού");
 }
 
-/// `WordRepeatRule` (9), Java probe: `Το το κείμενο.` 0..5.
+/// `WordRepeatRule` (9), Java probe.
 #[test]
 fn greek_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Το το κείμενο.", "WORD_REPEAT_RULE");
+    let text = "Το το κείμενο.";
+    let matches = one(text, "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 9);
+    assert_utf16(text, &matches[0], (0, 5));
     assert_eq!(matches[0].message, "Πιθανό λάθος: επαναλάβατε μία λέξη");
     assert_eq!(suggestions(&matches[0]), vec!["Το"]);
 }
 
-/// `MorfologikGreekSpellerRule` (5), Java probe: `Αυτό ειναι λαθος.` with the
-/// ISO-8859-7 dictionary. Java 5..10 / 11..16; UTF-8 bytes 9..19 / 20..30.
+/// `MorfologikGreekSpellerRule` (5), Java probe with the ISO-8859-7
+/// dictionary.
 #[test]
 fn greek_speller() {
     let _guard = engine_guard();
-    let matches = one("Αυτό ειναι λαθος.", "MORFOLOGIK_RULE_EL_GR");
+    let text = "Αυτό ειναι λαθος.";
+    let matches = one(text, "MORFOLOGIK_RULE_EL_GR");
     assert_eq!(matches.len(), 2, "{matches:?}");
-    assert_eq!(matches[0].range.start, 9);
-    assert_eq!(matches[0].range.end, 19);
+    assert_utf16(text, &matches[0], (5, 10));
     assert_eq!(matches[0].message, "Βρέθηκε πιθανό ορθογραφικό λάθος");
     assert_eq!(matches[0].match_type, "UnknownWord");
     assert_eq!(
@@ -172,8 +175,7 @@ fn greek_speller() {
             "ει ναι"
         ]
     );
-    assert_eq!(matches[1].range.start, 20);
-    assert_eq!(matches[1].range.end, 30);
+    assert_utf16(text, &matches[1], (11, 16));
     assert_eq!(
         suggestions(&matches[1]),
         vec![
@@ -199,28 +201,26 @@ fn greek_speller() {
     );
 }
 
-/// XML rule `GREEK_AGREEMENT_1` (grammar.xml), Java probe:
-/// `Οι μέθοδοι αυτοί είναι κατάλληλοι.` Java 11..16; UTF-8 bytes 20..30.
+/// XML rule `GREEK_AGREEMENT_1` (grammar.xml), Java probe.
 #[test]
 fn greek_xml_agreement() {
     let _guard = engine_guard();
-    let matches = one("Οι μέθοδοι αυτοί είναι κατάλληλοι.", "GREEK_AGREEMENT_1");
+    let text = "Οι μέθοδοι αυτοί είναι κατάλληλοι.";
+    let matches = one(text, "GREEK_AGREEMENT_1");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].sub_id.as_deref(), Some("1"));
-    assert_eq!(matches[0].range.start, 20);
-    assert_eq!(matches[0].range.end, 30);
+    assert_utf16(text, &matches[0], (11, 16));
     assert_eq!(suggestions(&matches[0]), vec!["αυτές"]);
 }
 
-/// XML rule `GREEK_WHERE-` (accented question word), Java probe:
-/// `Που πας;` 0..3 -> `Πού`.
+/// XML rule `GREEK_WHERE-` (accented question word), Java probe -> `Πού`.
 #[test]
 fn greek_xml_accented_question() {
     let _guard = engine_guard();
-    let matches = one("Που πας;", "GREEK_WHERE-");
+    let text = "Που πας;";
+    let matches = one(text, "GREEK_WHERE-");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 6);
+    assert_utf16(text, &matches[0], (0, 3));
     assert_eq!(suggestions(&matches[0]), vec!["Πού"]);
 }
 
@@ -257,18 +257,14 @@ fn greek_tagger_analyzer_fallback() {
     );
 }
 
-/// `GreekRedundancyRule` (13), Java probe:
-/// `Μου αρέσει να ανεβαίνω πάνω σε δέντρα.` Java 14..27; UTF-8 bytes 25..50.
+/// `GreekRedundancyRule` (13), Java probe.
 #[test]
 fn greek_redundancy() {
     let _guard = engine_guard();
-    let matches = one(
-        "Μου αρέσει να ανεβαίνω πάνω σε δέντρα.",
-        "EL_REDUNDANCY_REPLACE",
-    );
+    let text = "Μου αρέσει να ανεβαίνω πάνω σε δέντρα.";
+    let matches = one(text, "EL_REDUNDANCY_REPLACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 25);
-    assert_eq!(matches[0].range.end, 50);
+    assert_utf16(text, &matches[0], (14, 27));
     assert_eq!(
         matches[0].message,
         "'ανεβαίνω πάνω' είναι πλεονασμός. Γενικά, είναι προτιμότερο το: <suggestion>ανεβαίνω</suggestion>"
@@ -276,15 +272,15 @@ fn greek_redundancy() {
     assert_eq!(suggestions(&matches[0]), vec!["ανεβαίνω"]);
 }
 
-/// `ReplaceHomonymsRule` (10), Java probe: `πολικό κλήμα` 0..12 ->
-/// `πολικό κλίμα` (suggestion uppercased at sentence start).
+/// `ReplaceHomonymsRule` (10), Java probe -> `πολικό κλίμα` (suggestion
+/// uppercased at sentence start).
 #[test]
 fn greek_homonyms() {
     let _guard = engine_guard();
-    let matches = one("πολικό κλήμα", "GREEK_HOMONYMS_REPLACE");
+    let text = "πολικό κλήμα";
+    let matches = one(text, "GREEK_HOMONYMS_REPLACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 23);
+    assert_utf16(text, &matches[0], (0, 12));
     assert_eq!(
         matches[0].message,
         "Μήπως εννοούσατε <suggestion>πολικό κλίμα</suggestion>?"
@@ -292,15 +288,14 @@ fn greek_homonyms() {
     assert_eq!(suggestions(&matches[0]), vec!["Πολικό κλίμα"]);
 }
 
-/// `GreekSpecificCaseRule` (11), Java probe:
-/// `Κατοικώ στις Ηνωμένες πολιτείες.` Java 13..31; UTF-8 bytes 24..59.
+/// `GreekSpecificCaseRule` (11), Java probe.
 #[test]
 fn greek_specific_case() {
     let _guard = engine_guard();
-    let matches = one("Κατοικώ στις Ηνωμένες πολιτείες.", "EL_SPECIFIC_CASE");
+    let text = "Κατοικώ στις Ηνωμένες πολιτείες.";
+    let matches = one(text, "EL_SPECIFIC_CASE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 24);
-    assert_eq!(matches[0].range.end, 59);
+    assert_utf16(text, &matches[0], (13, 31));
     assert_eq!(
         matches[0].message,
         "Οι λέξεις της συγκεκριμένης έκφρασης χρείαζεται να ξεκινούν με κεφαλαία γράμματα."
@@ -308,18 +303,14 @@ fn greek_specific_case() {
     assert_eq!(suggestions(&matches[0]), vec!["Ηνωμένες Πολιτείες"]);
 }
 
-/// `NumeralStressRule` (12), Java probe:
-/// `Ο 20ος αιώνας μαζί με τον 21ο αιώνα.` Java 2..6; UTF-8 bytes 3..9.
+/// `NumeralStressRule` (12), Java probe.
 #[test]
 fn greek_numeral_stress() {
     let _guard = engine_guard();
-    let matches = one(
-        "Ο 20ος αιώνας μαζί με τον 21ο αιώνα.",
-        "GREEK_ORTHOGRAPHY_NUMERAL_STRESS",
-    );
+    let text = "Ο 20ος αιώνας μαζί με τον 21ο αιώνα.";
+    let matches = one(text, "GREEK_ORTHOGRAPHY_NUMERAL_STRESS");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 3);
-    assert_eq!(matches[0].range.end, 9);
+    assert_utf16(text, &matches[0], (2, 6));
     assert_eq!(matches[0].message, "<suggestion>20ός</suggestion>");
     assert_eq!(suggestions(&matches[0]), vec!["20ός"]);
     // 10ος is correct (no stress)
@@ -327,18 +318,14 @@ fn greek_numeral_stress() {
     assert!(none.is_empty(), "{none:?}");
 }
 
-/// `GreekWordRepeatBeginningRule` (8), Java probe:
-/// `Επίσης, παίζω ποδόσφαιρο. Επίσης, παίζω μπάσκετ.` Java 26..32; bytes 47..59.
+/// `GreekWordRepeatBeginningRule` (8), Java probe.
 #[test]
 fn greek_word_repeat_beginning() {
     let _guard = engine_guard();
-    let matches = one(
-        "Επίσης, παίζω ποδόσφαιρο. Επίσης, παίζω μπάσκετ.",
-        "GREEK_WORD_REPEAT_BEGINNING_RULE",
-    );
+    let text = "Επίσης, παίζω ποδόσφαιρο. Επίσης, παίζω μπάσκετ.";
+    let matches = one(text, "GREEK_WORD_REPEAT_BEGINNING_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 47);
-    assert_eq!(matches[0].range.end, 59);
+    assert_utf16(text, &matches[0], (26, 32));
     assert_eq!(
         suggestions(&matches[0]),
         vec!["Επιπρόσθετα", "Επιπλέον", "Συμπληρωματικά", "Ακόμη"]
@@ -371,16 +358,16 @@ fn greek_disambiguation_have_inf() {
     assert_eq!(paei, vec!["πάω:INF", "πάω:SENT_END"], "{paei:?}");
 }
 
-/// XML rule `HAVE_INF` (`grammar.xml`), Java probe: `Είχα πάω.` Java 5..8 ->
-/// the `<match no="2" postag="INF"/>` synthesis `πάει` (the Greek synthesizer
-/// must be wired for `<match postag>` rendering).
+/// XML rule `HAVE_INF` (`grammar.xml`), Java probe -> the `<match no="2"
+/// postag="INF"/>` synthesis `πάει` (the Greek synthesizer must be wired for
+/// `<match postag>` rendering).
 #[test]
 fn greek_xml_have_inf_synthesis() {
     let _guard = engine_guard();
-    let matches = one("Είχα πάω.", "HAVE_INF");
+    let text = "Είχα πάω.";
+    let matches = one(text, "HAVE_INF");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 9);
-    assert_eq!(matches[0].range.end, 15);
+    assert_utf16(text, &matches[0], (5, 8));
     assert_eq!(
         matches[0].message,
         "Πιθανόν να χρειάζεται να χρησιμοποιήσετε τον απαρεμφατικό τύπο <suggestion>πάει</suggestion>"
