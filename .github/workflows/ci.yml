@@ -13,15 +13,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: rustup component add rustfmt
+      # GitHub and Forgejo runners differ: GitHub's ubuntu-latest ships a Rust
+      # toolchain, Forgejo's image does not. Bootstrap rustup if absent, then
+      # install the pinned toolchain (rust-toolchain.toml). rustup reads the
+      # components (rustfmt/clippy) from that file.
+      - name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
       - run: cargo fmt --all --check
 
   clippy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
       - uses: Swatinem/rust-cache@v2
-      - run: rustup component add clippy
       - run: cargo clippy --workspace --all-targets -- -D warnings
 
   test:
@@ -33,6 +45,11 @@ jobs:
       MALLOC_ARENA_MAX: "1"
     steps:
       - uses: actions/checkout@v4
+      - name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
       - uses: Swatinem/rust-cache@v2
       - run: cargo test --workspace
 
@@ -97,6 +114,12 @@ jobs:
       - if: matrix.lang != 'none'
         uses: actions/checkout@v4
       - if: matrix.lang != 'none'
+        name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
+      - if: matrix.lang != 'none'
         uses: Swatinem/rust-cache@v2
       - if: matrix.lang != 'none'
         run: cargo build --release -p lt-cli
@@ -110,13 +133,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - run: pip install granian
+      - name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
+      # Both hosts already ship python3 and node (GitHub's ubuntu-latest and
+      # the Forgejo runner image). actions/setup-python/setup-node cannot
+      # provision their cached versions on Forgejo, so use the runner tools
+      # and a venv for granian (the ASGI smoke skips itself without granian).
+      - name: Set up Python venv + granian
+        run: |
+          python3 -m venv /tmp/lt-venv
+          /tmp/lt-venv/bin/pip install --upgrade pip
+          /tmp/lt-venv/bin/pip install granian
+          echo "/tmp/lt-venv/bin" >> "$GITHUB_PATH"
       - run: scripts/bindings/smoke.sh
 
   # wasm: build the browser bindings, package one small language and exercise
@@ -126,6 +157,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
       - uses: Swatinem/rust-cache@v2
       - run: rustup target add wasm32-unknown-unknown
       - uses: jetli/wasm-pack-action@v0.4.0

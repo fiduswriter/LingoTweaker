@@ -1,0 +1,7 @@
+# Pinned CI/dev toolchain (see .github/workflows/ci.yml). Both the GitHub and
+# Forgejo runners install this toolchain via `rustup show` after bootstrapping
+# rustup, so local lints match CI exactly.
+[toolchain]
+channel = "1.98.1"
+profile = "minimal"
+components = ["rustfmt", "clippy"]

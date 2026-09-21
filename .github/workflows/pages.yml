@@ -15,7 +15,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # GitHub Pages is GitHub-only; the Forgejo runner reads .github/workflows
+  # too, so skip the whole job there (Forgejo's github.server_url is its own
+  # host, GitHub's is https://github.com). The deploy job then skips as well.
   build:
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
