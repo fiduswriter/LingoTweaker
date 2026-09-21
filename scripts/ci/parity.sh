@@ -7,12 +7,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -76,6 +76,9 @@ fi
 if [ "$LANG_ARG" = "ro" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-20"
 fi
+if [ "$LANG_ARG" = "pl" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-20"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -111,6 +114,18 @@ elif [ "$LANG_ARG" = "fr" ]; then
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
+elif [ "$LANG_ARG" = "pl" ]; then
+  # documented known fidelity gaps (docs/differences.md #9): the
+  # <unify negate="yes"> agreement rules, the ZDANIA_ZLOZONE comp:comma
+  # disambiguation context and the PCON_VERB participle rule
+  EXTRA+=(--expect-only-java=ADJ_SUBST_ADJ_UNIFY=1)
+  EXTRA+=(--expect-only-java=SUBST_ADJ_UNIFY=1)
+  EXTRA+=(--expect-only-java=PCON_VERB=1)
+  EXTRA+=(--expect-only-java=ZDANIA_ZLOZONE=1)
+  EXTRA+=(--expect-only-rust=ADJ_SUBST_ADJ_UNIFY=1)
+  EXTRA+=(--expect-only-rust=NIEZGODNO_PRZYPADKW_PRZYMIOTNIKA_I_RZECZOWNIKA_RODZAJU_ESKIEGO=2)
+  EXTRA+=(--expect-only-rust=NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA=1)
+  EXTRA+=(--expect-only-rust=ZDANIA_ZLOZONE=1)
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

@@ -18,6 +18,7 @@ re-runs the Rust side and diffs against the golden.
 | ca | `ca-full.txt` (25,667) | `ca-full.java.tsv` |
 | gl | `gl-full.txt` (717) | `gl-full.java.tsv` |
 | ro | `ro-full.txt` (1,154) | `ro-full.java.tsv` |
+| pl | `pl-full.txt` (6,438) | `pl-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -30,7 +31,7 @@ re-runs the Rust side and diffs against the golden.
 - The date filters are pinned in `scripts/ci/parity.sh`: en/de use
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
-  their capture date `2026-09-19`, and es/ca/gl/ro/pt use `2026-09-20`.
+  their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -53,12 +54,17 @@ re-runs the Rust side and diffs against the golden.
   runs the affected languages, not a static list (all ten on shared
   changes, one language on language-local changes, none for docs-only
   changes; P6.3/D-134). nl is exactly 0/0/0 (D-133); ca is exactly 0/0/0
-  (D-188…D-190); gl is 0/0/83 (D-192…D-198); ro is exactly 0/0/0 (D-199).
+  (D-188…D-190); gl is 0/0/83 (D-192…D-198); ro is exactly 0/0/0 (D-199);
+  pl is 4 only-Java / 5 only-Rust / 0 field diffs, the documented known
+  fidelity gaps of `docs/differences.md` #9 (the `<unify negate="yes">`
+  agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
+  the PCON_VERB participle rule), pinned exactly with
+  `--expect-only-java`/`--expect-only-rust` in `scripts/ci/parity.sh`.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

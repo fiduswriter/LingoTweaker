@@ -285,3 +285,42 @@ Reproduce the Rust side:
 cargo run -p lt-cli -- check -l es --json "Estos es un problema."
 cargo run -p lt-cli -- check -l es --json "Este son un problema."
 ```
+
+## 9. Polish known fidelity gaps (agreement unification, ZDANIA_ZLOZONE, PCON_VERB)
+
+The Polish corpus (`docs/parity/golden/pl-full.txt`, 6,438 examples) is at
+**4 only-Java / 5 only-Rust / 0 field diffs**. All remaining differences are
+engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
+`scripts/ci/parity.sh`; the `pl` golden is captured at `PARITY_TODAY=2026-09-20`.
+
+- **`<unify negate="yes">` agreement rules** (`ADJ_SUBST_ADJ_UNIFY`,
+  `SUBST_ADJ_UNIFY`, `NIEZGODNO_PRZYPADKW_PRZYMIOTNIKA_I_RZECZOWNIKA_RODZAJU_ESKIEGO`,
+  `NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA`): the Rust matcher does not yet
+  reproduce Java's three-token negative-unification outcome, so these rules
+  can miss (`ADJ_SUBST_ADJ_UNIFY` / `SUBST_ADJ_UNIFY`, 1 only-Java each) or
+  over-fire (`ADJ_SUBST_ADJ_UNIFY`, `NIEZGODNO…`, `NIEZGODNOSC…`, 1–2
+  only-Rust each). Reproduce:
+
+  ```sh
+  scripts/oracle/pl/probe-rule.sh "Beztlenowe bakterie magnetotaktyczna mają funkcję wykrywania tlenu." ADJ_SUBST_ADJ_UNIFY
+  scripts/oracle/pl/probe-rule.sh "Szampon to RENE FURTERER OKARA przedłużający o 80% trwałość koloru włosów farbowanych." SUBST_ADJ_UNIFY
+  ```
+
+- **`ZDANIA_ZLOZONE` and the `comp:comma` disambiguation context** (1 only-Rust,
+  1 only-Java): Java's disambiguator adds `comp:comma` to a conjunction such as
+  `i`/`jak` in some clause contexts and drops it in others; the Rust tagger
+  differs in a few sentences, so the rule can over-fire
+  (`…gdyż jestem stary i nerwy moje są chore.`) or miss
+  (`Czy słyszałeś jak mój syn gra na skrzypcach?`). Reproduce:
+
+  ```sh
+  scripts/oracle/pl/probe-rule.sh "Muszę tam czekać śmierci, gdyż jestem stary i nerwy moje są chore." ZDANIA_ZLOZONE
+  scripts/oracle/pl/probe-rule.sh "Czy słyszałeś jak mój syn gra na skrzypcach?" ZDANIA_ZLOZONE
+  ```
+
+- **`PCON_VERB`** (1 only-Java): the participle-without-finite-verb rule does
+  not match `Widząc to jedna szpetna starucha...` in the Rust engine. Reproduce:
+
+  ```sh
+  scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
+  ```
