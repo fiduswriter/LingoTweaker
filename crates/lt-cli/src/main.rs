@@ -646,6 +646,12 @@ fn rule_files(data: &lt_data::DataDir, lang: Lang) -> Result<Vec<PathBuf>> {
             if p.file_name().is_some_and(|n| n == "bitext.xml") {
                 return false;
             }
+            // `grammar-nezaradene.xml` (Slovak) is not referenced by
+            // `Slovak.getRuleFileNames` (only grammar.xml and the
+            // `RULE_FILES` extra `grammar-typography.xml` are loaded).
+            if p.file_name().is_some_and(|n| n == "grammar-nezaradene.xml") {
+                return false;
+            }
             if p.is_file() {
                 return p.extension().is_some_and(|e| e == "xml");
             }

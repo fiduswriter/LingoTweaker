@@ -1,0 +1,458 @@
+L	1	Toto je ("test").
+M	1	POCITACOVE_UVODZOVKY	1	9	10	Other	Na tomto mieste by mali byť dolné (uvádzacie) úvodzovky: <suggestion>„</suggestion>.	„
+M	1	POCITACOVE_UVODZOVKY	3	14	15	Other	Na tomto mieste by mali byť horné (ukončovacie) úvodzovky: <suggestion>“</suggestion>.	“
+L	2	Toto je („test“).
+L	3	Toto je "test".
+M	3	POCITACOVE_UVODZOVKY	2	8	9	Other	Na tomto mieste by mali byť dolné (uvádzacie) úvodzovky: <suggestion>„</suggestion>.	„
+M	3	POCITACOVE_UVODZOVKY	3	13	14	Other	Na tomto mieste by mali byť horné (ukončovacie) úvodzovky: <suggestion>“</suggestion>.	“
+L	4	To jest „test“.
+L	5	Toto je („test").
+M	5	UNPAIRED_BRACKETS		8	9	Other	Nepárový symbol: zdá sa, že chýba ')'	
+M	5	POCITACOVE_UVODZOVKY	3	14	15	Other	Na tomto mieste by mali byť horné (ukončovacie) úvodzovky: <suggestion>“</suggestion>.	“
+M	5	UNPAIRED_BRACKETS		15	16	Other	Nepárový symbol: zdá sa, že chýba '('	
+L	6	Toto je („test“).
+L	7	Toto je „test".
+M	7	UNPAIRED_BRACKETS		8	9	Other	Nepárový symbol: zdá sa, že chýba '“'	
+M	7	POCITACOVE_UVODZOVKY	3	13	14	Other	Na tomto mieste by mali byť horné (ukončovacie) úvodzovky: <suggestion>“</suggestion>.	“
+L	8	Toto je „test“.
+L	9	Toto je „test" spoľahlivosti.
+M	9	UNPAIRED_BRACKETS		8	9	Other	Nepárový symbol: zdá sa, že chýba '“'	
+M	9	POCITACOVE_UVODZOVKY	4	13	14	Other	Na tomto mieste by mali byť horné (ukončovacie) úvodzovky:\n                    <suggestion>“</suggestion>.	“
+L	10	Toto je „test“ spoľahlivosti.
+L	11	Toto je test - alebo aj nie.
+M	11	SPOJOVNIK_1	1	8	20	Other	Spojovník nemá byť oddelený medzerou. Odstráňte medzery (<suggestion>test-alebo</suggestion>) alebo ho nahraďte pomlčkou (<suggestion>test – alebo</suggestion>).	test-alebo|test – alebo
+L	12	Toto je test – alebo aj nie.
+L	13	Toto je zeleno - žltý dres.
+M	13	SPOJOVNIK_1	1	8	21	Other	Spojovník nemá byť oddelený medzerou. Odstráňte medzery (<suggestion>zeleno-žltý</suggestion>) alebo ho nahraďte pomlčkou (<suggestion>zeleno – žltý</suggestion>).	zeleno-žltý|zeleno – žltý
+L	14	Toto je zeleno-žltý dres.
+M	14	MORFOLOGIK_RULE_SK_SK		8	19	UnknownWord	Nájdený pravdepodobný preklep	zelenožltý
+L	15	Toto je test -alebo aj nie.
+M	15	SPOJOVNIK_2	2	8	19	Other	Spojovník nemá byť oddelený medzerou. \n\t\t\tOdstráňte úvodnú medzeru (<suggestion>test-alebo</suggestion>) \n\t\t\talebo ho nahraďte pomlčkou a medzerou \n\t\t\t(<suggestion>test – alebo</suggestion>).\n\t\t	test-alebo|test – alebo
+L	16	Toto je test – alebo aj nie.
+L	17	Toto je zeleno -žltý dres.
+M	17	SPOJOVNIK_2	2	8	20	Other	Spojovník nemá byť oddelený medzerou. \n\t\t\tOdstráňte úvodnú medzeru (<suggestion>zeleno-žltý</suggestion>) \n\t\t\talebo ho nahraďte pomlčkou a medzerou \n\t\t\t(<suggestion>zeleno – žltý</suggestion>).\n\t\t	zeleno-žltý|zeleno – žltý
+L	18	Toto je zeleno-žltý dres.
+M	18	MORFOLOGIK_RULE_SK_SK		8	19	UnknownWord	Nájdený pravdepodobný preklep	zelenožltý
+L	19	Toto je test- alebo aj nie.
+M	19	SPOJOVNIK_3	3	8	19	Other	Spojovník nemá byť oddelený medzerou. \n\t\t\tOdstráňte medzeru (<suggestion>test-alebo</suggestion>) \n\t\t\talebo ho nahraďte medzerou a pomlčkou\n\t\t\t(<suggestion>test – alebo</suggestion>) alebo odstráňte medzeru\n\t\t	test-alebo|test – alebo
+L	20	Toto je test – alebo aj nie.
+L	21	Toto je zeleno- žltý dres.
+M	21	SPOJOVNIK_3	3	8	20	Other	Spojovník nemá byť oddelený medzerou. \n\t\t\tOdstráňte medzeru (<suggestion>zeleno-žltý</suggestion>) \n\t\t\talebo ho nahraďte medzerou a pomlčkou\n\t\t\t(<suggestion>zeleno – žltý</suggestion>) alebo odstráňte medzeru\n\t\t	zeleno-žltý|zeleno – žltý
+L	22	Toto je zeleno-žltý dres.
+M	22	MORFOLOGIK_RULE_SK_SK		8	19	UnknownWord	Nájdený pravdepodobný preklep	zelenožltý
+L	23	Pondelok–piatok.
+M	23	POMLCKA_1	1	0	15	Other	Pomlčka sa oddeľuje medzerami.\n\t\t\tPridajte medzery \n\t\t\t(<suggestion>Pondelok – piatok</suggestion>)\n\t\t\talebo ju nahraďte spojovníkom \n\t\t\t(<suggestion>Pondelok-piatok</suggestion>).\n\t\t	Pondelok – piatok|Pondelok-piatok
+L	24	Pondelok – piatok.
+L	25	Toto je test...
+M	25	TRIBODKY	1	12	15	Other	Na tomto mieste by mal byť znak trojbodka: <suggestion>…</suggestion>	…
+L	26	Toto je test…
+L	27	Bum ozvalo sa zo skrine.
+M	27	CIARKA_CITOSLOVCE	1	0	10	Other	Pridajte čiarku za citoslovce <suggestion>Bum, ozvalo</suggestion>	Bum, ozvalo
+L	28	Bum, ozvalo sa zo skrine.
+L	29	Bum sa ozvalo zo skrine.
+L	30	Však sme hriešni božemôj!
+M	30	CIARKA_CITOSLOVCE	2	9	24	Other	Pridajte čiarku pred citoslovce <suggestion>hriešni, božemôj</suggestion>	hriešni, božemôj
+L	31	Však sme hriešni, božemôj!
+L	32	Rozlíšenie obrazovky 800x600
+M	32	ZNAK_NASOBENIA_1	1	21	28	Other	Zameňte písmeno 'x' za znak násobenia: <suggestion>800×600</suggestion>.	800×600
+L	33	Rozlíšenie obrazovky 800×600
+L	34	Rozlíšenie obrazovky 800x600x400
+M	34	ZNAK_NASOBENIA_2	2	21	32	Other	Zameňte písmeno 'x' za znak násobenia: <suggestion>800×600×400</suggestion>.	800×600×400
+L	35	Rozlíšenie obrazovky 800×600×400
+L	36	Toto je tzv. „testík“ slova pomoc.
+M	36	tzv	1	13	21	Other	Odstránte úvodzovky po skratke tzv. <suggestion>testík</suggestion>.	testík
+L	37	Toto je tzv. testík slova pomoc.
+M	37	MORFOLOGIK_RULE_SK_SK		13	19	UnknownWord	Nájdený pravdepodobný preklep	gestík|testis|testín|textík
+L	38	Pri príležitosti medzinárodného dňa detí.
+M	38	PAMATNY_DEN	1	17	40	Other	Pri pamätných dňoch použite veľké začiatočné písmeno:\n\t\t\t<suggestion>Medzinárodného dňa detí</suggestion>.\n\t\t	Medzinárodného dňa detí
+L	39	Pri príležitosti medzinárodného Dňa detí.
+M	39	PAMATNY_DEN	1	17	40	Other	Pri pamätných dňoch použite veľké začiatočné písmeno:\n\t\t\t<suggestion>Medzinárodného dňa detí</suggestion>.\n\t\t	Medzinárodného dňa detí
+L	40	Pri príležitosti medzinárodného Dňa Detí.
+M	40	PAMATNY_DEN	1	17	40	Other	Pri pamätných dňoch použite veľké začiatočné písmeno:\n\t\t\t<suggestion>Medzinárodného dňa detí</suggestion>.\n\t\t	Medzinárodného dňa detí
+L	41	Pri príležitosti Medzinárodného dňa detí.
+L	42	Pri príležitosti dňa matiek.
+M	42	PAMATNY_DEN	2	17	27	Other	Pri pamätných dňoch použite veľké začiatočné písmeno:\n    \t\t    \n\t\t    <suggestion>Dňa matiek</suggestion>.\n\t    \t	Dňa matiek
+L	43	Pri príležitosti Dňa matiek.
+L	44	Pri príležitosti Medzinárodného dňa detí.
+L	45	Pred dňom slobody softvéru pršalo.
+M	45	den_slobody_softveru	3	5	26	Other	\n\t\t    Pri pamätných dňoch použite veľké začiatočné písmeno:\n\t\t    \n\t\t    <suggestion>Dňom slobody softvéru</suggestion>.\n\t        	Dňom slobody softvéru
+L	46	Pred Dňom slobody softvéru pršalo.
+L	47	Pri príležitosti dňa víťazstva nad fašizmom.
+M	47	víťazstva_nad_fašizmom	4	17	43	Other	\n\t\t    Pri pamätných dňoch použite veľké začiatočné písmeno:\n\t\t    \n\t\t    <suggestion>Dňa víťazstva nad fašizmom</suggestion>.\n\t        	Dňa víťazstva nad fašizmom
+L	48	Pri príležitosti Dňa víťazstva nad fašizmom.
+L	49	Pri príležitosti dňa vzniku Slovenskej republiky.
+M	49	vzniku_Slovenskej_republiky	5	17	48	Other	\n\t\t    Pri pamätných dňoch použite veľké začiatočné písmeno:\n\t\t    \n\t\t    <suggestion>Dňa vzniku Slovenskej republiky</suggestion>.\n\t        	Dňa vzniku Slovenskej republiky
+L	50	Pri príležitosti Dňa vzniku Slovenskej republiky.
+L	51	Nevedel, koho dom kúpil.
+M	51	KOHO_CI	1	9	17	Other	\n\t\t\tZámeno 'koho' nahraďte zámenom 'čí': \n\t\t\t<suggestion>čí dom</suggestion>.\n                	čí dom
+L	52	Nevedel, čí dom kúpil.
+L	53	Nevedel, koho nový vysoký dom kúpil.
+M	53	KOHO_CI	2	9	29	Other	\n\t\t\tZámeno 'koho' nahraďte zámenom 'čí': \n\t\t\t<suggestion>čí nový vysoký dom</suggestion>.\n                	čí nový vysoký dom
+L	54	Nevedel, čí nový vysoký dom kúpil.
+L	55	Nevedel, koho bol ten vysoký dom.
+M	55	KOHO_CI	1	9	17	Other	\n\t\t\tZámeno 'koho' nahraďte zámenom 'čí': \n\t\t\t<suggestion>čích bol</suggestion>.\n                	čích bol
+L	56	Nevedel, čí bol ten vysoký dom.
+L	57	Aha, aký peknému strom.
+L	58	Aha, aký pekný strom.
+L	59	Aha, aký pekný stromu.
+L	60	Aha, aký pekný strom.
+L	61	Zaťal do peknému stromu.
+L	62	Zaťal do pekného stromu.
+L	63	Zaťal do pekného strom.
+L	64	Zaťal do pekného stromu.
+L	65	Potešil sa pekný stromu.
+L	66	Poteśil sa peknému stromu.
+M	66	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	67	Potešil sa peknému strom.
+L	68	Potešil sa peknému stromu.
+L	69	Kúpil som peknému strom.
+L	70	Kúpil som pekný strom.
+L	71	Kúpil som pekný stromu.
+L	72	Kúpil som pekný strom.
+L	73	Hovoril o peknému strome.
+L	74	Hovoril o peknom strome.
+L	75	Hovoril o peknom stromu.
+L	76	Hovoril o peknom strome.
+L	77	Dom s peknému stromom.
+L	78	Dom s pekným stromom.
+L	79	Dom s pekným stromu.
+L	80	Dom s pekným stromom.
+L	81	Aha, aký peknému chlap.
+L	82	Aha, aký pekný chlap.
+L	83	Aha, aký pekný chlapa.
+L	84	Aha, aký pekný chlap.
+L	85	Zamilovala sa do peknému chlapa.
+L	86	Zamilovala sa do pekného chlapa.
+L	87	Zamilovalasa do pekného chlap.
+M	87	MORFOLOGIK_RULE_SK_SK		0	12	UnknownWord	Nájdený pravdepodobný preklep	Zamilovala sa
+L	88	Zamilovala sa do pekného chlapa..
+M	88	DOUBLE_PUNCTUATION		31	33	Other	Dve po sebe idúce bodky	.|…
+L	89	Potešil sa pekný chlapovi.
+L	90	Poteśil sa peknému chlapovi.
+M	90	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	91	Potešil sa peknému chlapa.
+L	92	Potešil sa peknému chlapovi.
+L	93	Zbadala peknému chlapa.
+L	94	Zbadala pekného chlapa.
+L	95	Zbadala pekného chlap.
+L	96	Zbadala pekného chlapa.
+L	97	Hovoril o peknému chlapovi.
+L	98	Hovoril o peknom chlapovi.
+L	99	Hovoril o peknom chlapa.
+L	100	Hovoril o peknom chlapovi.
+L	101	Dom s peknému chlapom.
+L	102	Dom s pekným chlapom.
+L	103	Dom s pekným chlapa.
+L	104	Dom s pekným chlapom.
+L	105	Aha, aký peknému stromy.
+L	106	Aha, aký pekné stromy.
+L	107	Aha, aké pekné strom.
+L	108	Aha, aké pekné stromy.
+L	109	Zaťal do peknému stromov.
+L	110	Zaťal do pekných stromov.
+L	111	Zaťal do pekných strom.
+L	112	Zaťal do pekných stromov.
+L	113	Potešil sa pekný stromom.
+L	114	Poteśil sa pekným stromom.
+M	114	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	115	Potešil sa pekným strom.
+L	116	Potešil sa pekným stromom.
+L	117	Kúpil som peknému stromy.
+L	118	Kúpil som pekné stromy.
+L	119	Kúpil som pekné strom.
+L	120	Kúpil som pekné stromy.
+L	121	Hovoril o peknému stromoch.
+L	122	Hovoril o pekných stromoch.
+L	123	Hovoril o pekných strom.
+L	124	Hovoril o pekných stromoch.
+L	125	Dom s peknému stromami.
+L	126	Dom s peknými stromami.
+L	127	Dom s peknými strom.
+L	128	Dom s peknými stromami.
+L	129	Aha, aký peknému Chlapi.
+L	130	Aha, aký pekní chlapi.
+L	131	Aha, aký pekní chlap.
+L	132	Aha, aký pekní chlapi.
+L	133	Zamilovala sa do peknému chlapov.
+L	134	Zamilovala sa do pekných chlapov.
+L	135	Zamilovala sado pekných chlap.
+M	135	MORFOLOGIK_RULE_SK_SK		11	15	UnknownWord	Nájdený pravdepodobný preklep	SAPO|Savo|hado|nado|rado|saco|sad|sada|sade|sadlo|sadol|sadom|sadou|sadov|sadu|sady|sadz|sadá|sadí|sako|saldo|salo|samo|sato|saď|srďo|stádo|sád|sáda|sádok|sádž|šajo|šaľo|šašo|šedo|šodó|sa do|sad o
+L	136	Zamilovala sa do pekných chlapov.
+L	137	Potešil sa pekný chlapom.
+L	138	Poteśil sa pekným chlapom.
+M	138	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	139	Potešil sa pekným chlap.
+L	140	Potešil sa pekným chlapom.
+L	141	Zbadala peknému chlapov.
+L	142	Zbadala pekných chlapov.
+L	143	Zbadala pekných chlap.
+L	144	Zbadala pekných chlapov.
+L	145	Hovoril o peknému chlapoch.
+L	146	Hovoril o pekných chlapoch.
+L	147	Hovoril o pekných chlap.
+L	148	Hovoril o pekných chlapoch.
+L	149	Dom s peknému chlapmi.
+L	150	Dom s peknými chlapmi.
+L	151	Dom s peknými chlap.
+L	152	Dom s peknými chlapmi.
+L	153	Aha, aký peknému žena.
+L	154	Aha, aký pekná žena.
+L	155	Aha, aká pekná žene.
+L	156	Aha, aká pekná žena.
+L	157	Zamiloval sa do peknému ženy.
+L	158	Zamiloval sa do peknej ženy.
+L	159	Zamiloval sa do peknej žene.
+L	160	Zamiloval sa do poknej ženy.
+M	160	MORFOLOGIK_RULE_SK_SK		16	22	UnknownWord	Nájdený pravdepodobný preklep	peknej|potnej|poľnej|pôdnej
+L	161	Potešil sa peknému žene.
+L	162	Poteśil sa peknej žene.
+M	162	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	163	Potešil sa peknej žena.
+L	164	Potešil sa peknej žene.
+L	165	Zbadal peknému ženu.
+L	166	Zbadal peknú ženu.
+L	167	Zbadal peknú žene.
+L	168	Zbadal peknú ženu.
+L	169	Hovoril o peknému žene.
+L	170	Hovoril o peknej žene.
+L	171	Hovoril o peknej žena.
+L	172	Hovoril o peknej žene.
+L	173	Dom s peknému ženou.
+L	174	Dom s peknou ženou.
+L	175	Dom s peknou žene.
+L	176	Dom s peknou ženou.
+L	177	Aha, aký peknému ženy.
+L	178	Aha, aké pekné ženy.
+L	179	Aha, aké pekné žene.
+L	180	Aha, aká pekné ženy.
+L	181	Zamiloval sa do peknému žien.
+L	182	Zamiloval sa do pekných žien.
+L	183	Zamiloval sa do pekných žene.
+L	184	Zamiloval sa do pekných žien.
+L	185	Potešil sa peknému ženám.
+L	186	Poteśil sa pekným ženám.
+M	186	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	187	Potešil sa pekným žene.
+L	188	Potešil sa pekným ženám.
+L	189	Zbadal peknému ženy.
+L	190	Zbadal pekné ženy.
+L	191	Zbadal pekné žene.
+L	192	Zbadal pekné ženy.
+L	193	Hovoril o peknému ženách.
+L	194	Hovoril o pekných ženách.
+L	195	Hovoril o pekných žene.
+L	196	Hovoril o pekných ženách.
+L	197	Dom s peknému ženami.
+L	198	Dom s peknými ženami.
+L	199	Dom s peknými žene.
+L	200	Dom s peknýni ženami.
+M	200	MORFOLOGIK_RULE_SK_SK		6	13	UnknownWord	Nájdený pravdepodobný preklep	peknými|pekný ni
+L	201	Aha, aké peknému dievča.
+L	202	Aha, aký pekné dievča.
+L	203	Aha, aké pekné dievčaťu.
+L	204	Aha, aká pekné dievča.
+L	205	Zamiloval sa do peknému dievčaťa.
+L	206	Zamiloval sa do pekného dievčaťa.
+L	207	Zamiloval sa dp pekného dievčaťu.
+M	207	MORFOLOGIK_RULE_SK_SK		13	15	UnknownWord	Nájdený pravdepodobný preklep	DP|AP|CP|D|DC|DD|DDP|DF|DJ|DK|DM|DN|DPA|DPB|DPH|DR|DS|DTP|DU|DV|DX|DZ|Dr|DÚ|EP|FDP|FP|GDP|GP|HDP|HP|IP|KP|LP|MP|NP|OP|P|PP|RP|Rp|SP|VP|XP|ZP|ap|d|dB|de|dep|dl|dm|do|dpi|du|dup|dv|dz|dá|dž|kp|odp|op|p|sp|up|Ď|ď|ŠP|šp|ŽP|d p|BP|UDP
+L	208	Zamiloval sa do pekného dievčaťa.
+L	209	Potešil sa pekný dievčaťu.
+L	210	Poteśil sa peknému dievčaťu.
+M	210	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	211	Potešil sa peknému dievča.
+L	212	Potešil sa peknému dievčaťu.
+L	213	Zbadal peknému dievča.
+L	214	Zbadal pekné dievča.
+L	215	Zbadal pekné dievčaťu.
+L	216	Zbadal pekné dievča.
+L	217	Hovoril o peknému dievčati.
+L	218	Hovoril o peknom dievčati.
+L	219	Hovoril o peknom dievčaťu.
+L	220	Hovoril o peknom dievčati.
+L	221	Dom s peknému dievčaťom.
+L	222	Dom s pekným dievčaťom.
+L	223	Dom s pekným dievčaťu.
+L	224	Dom s pekným dievčaťom.
+L	225	Aha, aké peknému dievčatá.
+L	226	Aha, aké pekné dievčatá.
+L	227	Aha, aké pekné dievčaťu.
+L	228	Aha, aká pekné dievčatá.
+L	229	Zamiloval sa do peknému dievčat.
+L	230	Zamiloval sa do pekných dievčat.
+L	231	Zamiloval sa do pekných dievčaťu.
+L	232	Zamiloval sa do pekných dievčat.
+L	233	Potešil sa pekný dievčatám.
+L	234	Poteśil sa pekným dievčatám.
+M	234	MORFOLOGIK_RULE_SK_SK		0	7	UnknownWord	Nájdený pravdepodobný preklep	Potešil|Podesil|Potešia|Potešila|Potešili|Potešilo|Potešiť|Poteší|Poteším|Potešíš|Povesil
+L	235	Potešil sa pekným dievčaťu.
+L	236	Potešil sa pekným dievčatám.
+L	237	Zbadal peknému dievčatá.
+L	238	Zbadal pekné dievčatá.
+L	239	Zbadal pekné dievčaťu.
+L	240	Zbadal pekné dievčatá.
+L	241	Hovoril o peknému dievčatách.
+L	242	Hovoril o pekných dievčatách.
+L	243	Hovoril o pekných dievčaťu.
+L	244	Hovoril o pekných dievčatách.
+L	245	Dom s peknému dievčatami.
+L	246	Dom s peknými dievčatami.
+L	247	Dom s peknými dievčaťu.
+L	248	Dom s peknými dievčatami.
+L	249	Aký pekné inteligentný chlap.
+M	249	MUZSKY_ROD_NEZIV_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekný</suggestion>\n          	pekný
+L	250	Aký pekný inteligentný chlap.
+L	251	Zamilovala sa do pekné inteligentného chlapa.
+M	251	STREDNY_ROD_A	2	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekného</suggestion>\n          	pekného
+L	252	Zamilovala sa do pekného inteligentného chlap.
+L	253	Dám pekné inteligentnému chlapovi.
+M	253	STREDNY_ROD_A	3	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknému</suggestion>\n          	peknému
+L	254	Dám peknému inteligentnému chlapovi.
+L	255	Vidím pekné inteligentného chlapa.
+M	255	STREDNY_ROD_A	2	6	11	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekného</suggestion>\n          	pekného
+L	256	Vidím pekného inteligentného chlapa.
+L	257	O pekné inteligentnom chlapovi.
+M	257	STREDNY_ROD_A	5	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknom</suggestion>\n          	peknom
+L	258	O peknom inteligentnom chlapovi.
+L	259	S pekné inteligentným chlapom.
+M	259	STREDNY_ROD_A	6	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	260	S pekným inteligentným chlapom.
+L	261	Aký pekné inteligentní chlapi.
+L	262	Aký pekní inteligentní chlapi.
+L	263	Zamilovala sa do pekné inteligentných chlapov.
+M	263	STREDNY_ROD_A	8	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	264	Zamilovala sa do peknéých inteligentných chlapov.
+M	264	MORFOLOGIK_RULE_SK_SK		17	25	UnknownWord	Nájdený pravdepodobný preklep	pekných
+L	265	Dám pekné inteligentným chlapom.
+M	265	STREDNY_ROD_A	6	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	266	Dám pekným inteligentným chlapom.
+L	267	Vidím pekné inteligentných chlapov.
+M	267	STREDNY_ROD_A	8	6	11	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	268	Vidím pekných inteligentných chlapov.
+L	269	O pekné inteligentných chlapoch.
+M	269	STREDNY_ROD_A	8	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	270	O pekných inteligentných chlapoch.
+L	271	S pekné inteligentnými chlapmi.
+M	271	STREDNY_ROD_A	12	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknými</suggestion>\n          	peknými
+L	272	S peknými inteligentnými chlapmi.
+L	273	Aký pekné inteligentný dub.
+M	273	MUZSKY_ROD_NEZIV_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekný</suggestion>\n          	pekný
+L	274	Aký pekný inteligentný dub.
+L	275	Zamilovala sa do pekné inteligentného duba.
+M	275	STREDNY_ROD_A	2	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekného</suggestion>\n          	pekného
+L	276	Zamilovala sa do pekného inteligentného duba.
+L	277	Dám pekné inteligentnému dubu.
+M	277	STREDNY_ROD_A	3	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknému</suggestion>\n          	peknému
+L	278	Dám peknému inteligentnému dubu.
+L	279	Vidím pekné inteligentný dub.
+M	279	MUZSKY_ROD_NEZIV_A	1	6	11	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekný</suggestion>\n          	pekný
+L	280	Vidím pekný inteligentný dub.
+L	281	O pekné inteligentnom dube.
+M	281	STREDNY_ROD_A	5	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknom</suggestion>\n          	peknom
+L	282	O peknom inteligentnom dube.
+L	283	S pekné inteligentným dubom.
+M	283	STREDNY_ROD_A	6	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	284	S pekným inteligentným dubom.
+L	285	Aký pekný inteligentné duby.
+M	285	STREDNY_ROD_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	286	Aký pekné inteligentné duby.
+L	287	Zamilovala sa do pekné inteligentných dubov.
+M	287	STREDNY_ROD_A	8	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	288	Zamilovala sa do peknéých inteligentných dubov.
+M	288	MORFOLOGIK_RULE_SK_SK		17	25	UnknownWord	Nájdený pravdepodobný preklep	pekných
+L	289	Dám pekné inteligentným dubom.
+M	289	STREDNY_ROD_A	6	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	290	Dám pekným inteligentným dubom.
+L	291	Vidím pekný inteligentné duby.
+M	291	STREDNY_ROD_A	1	6	11	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	292	Vidím pekné inteligentné duby.
+L	293	O pekné inteligentných duboch.
+M	293	STREDNY_ROD_A	8	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	294	O pekných inteligentných duboch.
+L	295	S pekné inteligentnými dubmi.
+M	295	STREDNY_ROD_A	12	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknými</suggestion>\n          	peknými
+L	296	S peknými inteligentnými dubmi.
+L	297	Aká pekné inteligentná žena.
+M	297	ZENSKY_ROD_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekná</suggestion>\n          	pekná
+L	298	Aká pekná inteligentná žena.
+L	299	Zamilovala sa do pekné inteligentnej ženy.
+M	299	ZENSKY_ROD_A	2	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknej</suggestion>\n          	peknej
+L	300	Zamilovala sa do peknej inteligentnej ženy.
+L	301	Dám pekné inteligentnej žene.
+M	301	ZENSKY_ROD_A	2	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknej</suggestion>\n          	peknej
+L	302	Dám peknej inteligentnej žene.
+L	303	Vidím pekné inteligentnú ženu.
+M	303	ZENSKY_ROD_A	4	6	11	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknú</suggestion>\n          	peknú
+L	304	Vidím peknú inteligentnú ženu.
+L	305	O pekné inteligentnej žene.
+M	305	ZENSKY_ROD_A	2	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknej</suggestion>\n          	peknej
+L	306	O peknej inteligentnej žene.
+L	307	S pekné inteligentnou ženou.
+M	307	ZENSKY_ROD_A	6	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknou</suggestion>\n          	peknou
+L	308	S peknou inteligentnou ženou.
+L	309	Aké pekný inteligentné ženy.
+M	309	STREDNY_ROD_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	310	Aké pekné inteligentné zeny.
+L	311	Zamilovala sa do pekné inteligentných žien.
+M	311	STREDNY_ROD_A	8	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	312	Zamilovala sa do pekných inteligentných žien.
+L	313	Dám pekné inteligentným ženám.
+M	313	STREDNY_ROD_A	6	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	314	Dám pekným inteligentným ženám.
+L	315	Vidím pekný inteligentné ženy.
+M	315	STREDNY_ROD_A	1	6	11	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	316	Vidím pekné inteligentné ženy.
+L	317	O pekné inteligentných ženách.
+M	317	STREDNY_ROD_A	8	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	318	O pekných inteligentných ženách.
+L	319	S pekné inteligentnými ženami.
+M	319	STREDNY_ROD_A	12	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknými</suggestion>\n          	peknými
+L	320	S peknými inteligentnými ženami.
+L	321	Aké pekný inteligentné dievča.
+M	321	STREDNY_ROD_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	322	Aké pekné inteligentné dievča.
+L	323	Zamilovala sa do pekné inteligentného dievčaťa.
+M	323	STREDNY_ROD_A	2	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekného</suggestion>\n          	pekného
+L	324	Zamilovala sa do pekného inteligentného dievčaťa.
+L	325	Dám pekné inteligentnému dievčaťu.
+M	325	STREDNY_ROD_A	3	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknému</suggestion>\n          	peknému
+L	326	Dám peknému inteligentnému dievčaťu.
+L	327	Vidím pekný inteligentné dievča.
+M	327	STREDNY_ROD_A	1	6	11	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	328	Vidím pekné inteligentné dievča.
+L	329	O pekné inteligentnom dievčati.
+M	329	STREDNY_ROD_A	5	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknom</suggestion>\n          	peknom
+L	330	O peknom inteligentnom dievčati.
+L	331	S pekné inteligentným dievčaťom.
+M	331	STREDNY_ROD_A	6	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	332	S pekným inteligentným dievčaťom.
+L	333	Aké pekný inteligentné dievčatá.
+M	333	STREDNY_ROD_A	1	4	9	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	334	Aké pekné inteligentné dievčatá.
+L	335	Zamilovala sa do pekné inteligentných dievčat.
+M	335	STREDNY_ROD_A	8	17	22	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	336	Zamilovala sa do peknéých inteligentných dievčat.
+M	336	MORFOLOGIK_RULE_SK_SK		17	25	UnknownWord	Nájdený pravdepodobný preklep	pekných
+L	337	Dám pekné inteligentným dievčatám.
+M	337	STREDNY_ROD_A	6	4	9	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekným</suggestion>\n          	pekným
+L	338	Dám pekným inteligentným dievčatám.
+L	339	Vidím pekný inteligentné dievčatá.
+M	339	STREDNY_ROD_A	1	6	11	Other	\n            Nespravny tvar prídavného mena (pekný)\n            <suggestion>pekné</suggestion>\n          	pekné
+L	340	Vidím pekné inteligentné dievčatá.
+L	341	O pekné inteligentných dievčatách.
+M	341	STREDNY_ROD_A	8	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>pekných</suggestion>\n          	pekných
+L	342	O pekných inteligentných dievčatách.
+L	343	S pekné inteligentnými dievčatami.
+M	343	STREDNY_ROD_A	12	2	7	Other	\n            Nespravny tvar prídavného mena (pekné)\n            <suggestion>peknými</suggestion>\n          	peknými
+L	344	S peknými inteligentnými dievčatami.
+L	345	Chlap ktorý odišiel.
+M	345	KTORY	1	5	11	Other	\n            Dajte čiarku pred „ktorý“: <suggestion>, ktorý</suggestion>.\n          	, ktorý
+L	346	Chlap, ktorý odišiel.
+L	347	Neučila sa a predsa si poradila.
+M	347	A	1	10	19	Other	\n            Chýbajúca čiarka: <suggestion>, a predsa</suggestion>.\n          	, a predsa
+L	348	Neučila sa, a predsa si poradila.
+L	349	Ako sa mohlo stať že sa reťaz uvoľnila.
+M	349	ZE	1	17	20	Other	\n            Dajte čiarku pred „že“: <suggestion>, že</suggestion>.\n          	, že
+L	350	Ako sa mohlo stať, že sa reťaz uvoľnila.
+L	351	Neviem ako sa to mohlo stať.
+M	351	AKO	1	6	10	Other	\n            Dajte čiarku pred „ako“: <suggestion>, ako</suggestion>.\n          	, ako
+L	352	Neviem, ako sa to mohlo stať.
