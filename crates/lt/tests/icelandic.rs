@@ -1,16 +1,18 @@
 //! Icelandic engine tests: stage-1 XML wiring state plus Java-probed
 //! built-in-rule and speller values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/is/check-diff-is.sh`) print UTF-16 code units. Every probe
-//! sentence below uses real Icelandic orthography (ð/þ/á/í/ö), so the two
-//! formats differ and both are stated per case. `Icelandic` has no Java rule
-//! classes: `getRelevantRules` is the generic built-ins plus
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/is/check-diff-is.sh`); the
+//! probes use real Icelandic orthography (ð/þ/á/í/ö). `Icelandic` has no Java
+//! rule classes: `getRelevantRules` is the generic built-ins plus
 //! `HunspellNoSuggestionRule`, which emits no suggestions.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 fn engine_guard() -> MutexGuard<'static, ()> {
     static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
@@ -83,71 +85,58 @@ fn icelandic_engine_state() {
     );
 }
 
-/// `ARFLEIFÐ` XML rule: `Þessi vandi er arfleið nýlendutímans.`
-/// Java UTF-16 15..22 / engine UTF-8 16..24 (`Þ` is one extra byte) ->
-/// `arfleifð`.
+/// `ARFLEIFÐ` XML rule -> `arfleifð`.
 #[test]
 fn icelandic_xml_arfleid() {
     let _guard = engine_guard();
-    let matches = one("Þessi vandi er arfleið nýlendutímans.", "ARFLEIFÐ");
+    let text = "Þessi vandi er arfleið nýlendutímans.";
+    let matches = one(text, "ARFLEIFÐ");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 16);
-    assert_eq!(matches[0].range.end, 24);
+    assert_utf16(text, &matches[0], (15, 22));
     assert_eq!(suggestions(&matches[0]), vec!["arfleifð"]);
 }
 
-/// `ÁNNA` XML rule (context `við|í|…`): `Veitingastaðurinn við ánna var
-/// frábær.` Java UTF-16 22..26 / engine UTF-8 24..29 -> `ána`.
+/// `ÁNNA` XML rule (context `við|í|…`) -> `ána`.
 #[test]
 fn icelandic_xml_anna() {
     let _guard = engine_guard();
-    let matches = one("Veitingastaðurinn við ánna var frábær.", "ÁNNA");
+    let text = "Veitingastaðurinn við ánna var frábær.";
+    let matches = one(text, "ÁNNA");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 24);
-    assert_eq!(matches[0].range.end, 29);
+    assert_utf16(text, &matches[0], (22, 26));
     assert_eq!(suggestions(&matches[0]), vec!["ána"]);
 }
 
-/// `FARM_FRAM` XML rule: `Við horfum farm á veginn.` Java UTF-16 11..15 /
-/// engine UTF-8 12..16 -> `fram`.
+/// `FARM_FRAM` XML rule -> `fram`.
 #[test]
 fn icelandic_xml_farm_fram() {
     let _guard = engine_guard();
-    let matches = one("Við horfum farm á veginn.", "FARM_FRAM");
+    let text = "Við horfum farm á veginn.";
+    let matches = one(text, "FARM_FRAM");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 12);
-    assert_eq!(matches[0].range.end, 16);
+    assert_utf16(text, &matches[0], (11, 15));
     assert_eq!(suggestions(&matches[0]), vec!["fram"]);
 }
 
-/// `LEITI` XML rule (`á næsta leyti`): `Skrifa skal leiti í orðasambandinu: á
-/// næsta leyti.` Java UTF-16 44..49 / engine UTF-8 48..53 -> `leiti`.
+/// `LEITI` XML rule (`á næsta leyti`) -> `leiti`.
 #[test]
 fn icelandic_xml_leiti() {
     let _guard = engine_guard();
-    let matches = one(
-        "Skrifa skal leiti í orðasambandinu: á næsta leyti.",
-        "LEITI",
-    );
+    let text = "Skrifa skal leiti í orðasambandinu: á næsta leyti.";
+    let matches = one(text, "LEITI");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 48);
-    assert_eq!(matches[0].range.end, 53);
+    assert_utf16(text, &matches[0], (44, 49));
     assert_eq!(suggestions(&matches[0]), vec!["leiti"]);
 }
 
-/// `COMMA_PARENTHESIS_WHITESPACE` (`space_after_comma`):
-/// `Ég elska íslensku , en ekki ensku.` Java UTF-16 17..19 / engine UTF-8
-/// 19..21 -> `,`.
+/// `COMMA_PARENTHESIS_WHITESPACE` (`space_after_comma`) -> `,`.
 #[test]
 fn icelandic_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one(
-        "Ég elska íslensku , en ekki ensku.",
-        "COMMA_PARENTHESIS_WHITESPACE",
-    );
+    let text = "Ég elska íslensku , en ekki ensku.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 19);
-    assert_eq!(matches[0].range.end, 21);
+    assert_utf16(text, &matches[0], (17, 19));
     assert_eq!(
         matches[0].message,
         "Bil skal vera á eftir kommu, ekki á undan henni"
@@ -155,99 +144,97 @@ fn icelandic_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DOUBLE_PUNCTUATION`: `Þetta er gott.. En hann er ekki hér.` Java UTF-16
-/// 13..15 / engine UTF-8 14..16 -> `.` with suggestions `.|…`.
+/// `DOUBLE_PUNCTUATION` -> `.` with suggestions `.|…`.
 #[test]
 fn icelandic_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Þetta er gott.. En hann er ekki hér.", "DOUBLE_PUNCTUATION");
+    let text = "Þetta er gott.. En hann er ekki hér.";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 14);
-    assert_eq!(matches[0].range.end, 16);
+    assert_utf16(text, &matches[0], (13, 15));
     assert_eq!(matches[0].message, "Tveir punktar í röð");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
-/// `UPPERCASE_SENTENCE_START`: `þetta er lítill setning.` Java UTF-16 0..5 /
-/// engine UTF-8 0..6 -> `þetta` -> `Þetta`.
+/// `UPPERCASE_SENTENCE_START` -> `Þetta`.
 #[test]
 fn icelandic_uppercase_start() {
     let _guard = engine_guard();
-    let matches = one("þetta er lítill setning.", "UPPERCASE_SENTENCE_START");
+    let text = "þetta er lítill setning.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 6);
+    assert_utf16(text, &matches[0], (0, 5));
     assert_eq!(matches[0].message, "Þessi setning hefst ekki á hástaf");
     assert_eq!(suggestions(&matches[0]), vec!["Þetta"]);
 }
 
-/// `WHITESPACE_RULE`: `Þetta  er gott.` Java UTF-16 5..7 / engine UTF-8 6..8.
+/// `WHITESPACE_RULE`.
 #[test]
 fn icelandic_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Þetta  er gott.", "WHITESPACE_RULE");
+    let text = "Þetta  er gott.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 6);
-    assert_eq!(matches[0].range.end, 8);
+    assert_utf16(text, &matches[0], (5, 7));
     assert_eq!(matches[0].message, "Hugsanleg ritvilla: endurtekið bil");
     assert_eq!(suggestions(&matches[0]), vec![" "]);
 }
 
-/// `WORD_REPEAT_RULE`: `Hann hann fór út.` Java UTF-16 0..9 / engine UTF-8
-/// 0..9 (all ASCII) -> `Hann`.
+/// `WORD_REPEAT_RULE` -> `Hann`.
 #[test]
 fn icelandic_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Hann hann fór út.", "WORD_REPEAT_RULE");
+    let text = "Hann hann fór út.";
+    let matches = one(text, "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 9);
+    assert_utf16(text, &matches[0], (0, 9));
     assert_eq!(matches[0].message, "Hugsanleg ritvilla: orð endurtekið");
     assert_eq!(suggestions(&matches[0]), vec!["Hann"]);
 }
 
-/// `UNPAIRED_BRACKETS`: `(Þetta er svigi.` Java UTF-16 0..1 / engine UTF-8
-/// 0..1 -> `(`.
+/// `UNPAIRED_BRACKETS` -> `(`.
 #[test]
 fn icelandic_unpaired_brackets() {
     let _guard = engine_guard();
-    let matches = one("(Þetta er svigi.", "UNPAIRED_BRACKETS");
+    let text = "(Þetta er svigi.";
+    let matches = one(text, "UNPAIRED_BRACKETS");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 1);
+    assert_utf16(text, &matches[0], (0, 1));
     assert_eq!(
         matches[0].message,
         "Unpaired symbol: ')' seems to be missing"
     );
 }
 
-/// `HunspellNoSuggestionRule`: `Þetta er tesst.` Java UTF-16 9..14 / engine
-/// UTF-8 10..15; the rule reports no suggestions (`getSuggestions` is empty).
+/// `HunspellNoSuggestionRule`: the rule reports no suggestions
+/// (`getSuggestions` is empty).
 #[test]
 fn icelandic_speller_no_suggestions() {
     let _guard = engine_guard();
-    let matches = one("Þetta er tesst.", "HUNSPELL_NO_SUGGEST_RULE");
+    let text = "Þetta er tesst.";
+    let matches = one(text, "HUNSPELL_NO_SUGGEST_RULE");
     assert_eq!(matches.len(), 1);
-    assert_eq!(matches[0].range.start, 10);
-    assert_eq!(matches[0].range.end, 15);
+    assert_utf16(text, &matches[0], (9, 14));
     assert_eq!(matches[0].message, "Possible spelling mistake found.");
     assert!(suggestions(&matches[0]).is_empty());
 }
 
 /// The `is_IS` dictionary keeps the orthography: the misspelling
-/// `rittgerninginn` (UTF-16 14..28 / UTF-8 15..29) and `íslands` for
-/// `Íslands` (UTF-16 11..18 / UTF-8 13..21) are flagged with no suggestions.
+/// `rittgerninginn` and `íslands` for `Íslands` are flagged with no
+/// suggestions.
 #[test]
 fn icelandic_speller_diacritics() {
     let _guard = engine_guard();
-    let m = one("Hann skrifaði rittgerninginn.", "HUNSPELL_NO_SUGGEST_RULE");
+    let text = "Hann skrifaði rittgerninginn.";
+    let m = one(text, "HUNSPELL_NO_SUGGEST_RULE");
     assert_eq!(m.len(), 1);
-    assert_eq!((m[0].range.start, m[0].range.end), (15, 29));
+    assert_utf16(text, &m[0], (14, 28));
     assert!(suggestions(&m[0]).is_empty());
 
-    let m = one("Ég fór til íslands í gær.", "HUNSPELL_NO_SUGGEST_RULE");
+    let text = "Ég fór til íslands í gær.";
+    let m = one(text, "HUNSPELL_NO_SUGGEST_RULE");
     assert_eq!(m.len(), 1);
-    assert_eq!((m[0].range.start, m[0].range.end), (13, 21));
+    assert_utf16(text, &m[0], (11, 18));
     assert!(suggestions(&m[0]).is_empty());
 }
 
