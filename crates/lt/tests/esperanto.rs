@@ -1,16 +1,19 @@
 //! Esperanto engine tests: stage-1 XML wiring state plus Java-probed
 //! built-in-rule, `DateCheckFilter` and speller values.
 //!
-//! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/eo/check-diff-eo.sh`) print UTF-16 code units. Every probe
-//! sentence uses real Esperanto orthography (ĉ/ĝ/ĥ/ĵ/ŝ/ŭ), so the two formats
-//! differ and both are stated per case. `Esperanto.getRelevantRules` is the
-//! generic built-ins (including `SentenceWhitespaceRule`) plus the
-//! `EsperantoTagger` and the XML `DateCheckFilter`.
+//! Probe offsets are the Java UTF-16 code units and are asserted with the
+//! `common::assert_utf16` helper (`scripts/oracle/eo/check-diff-eo.sh`); the
+//! probes use real Esperanto orthography (ĉ/ĝ/ĥ/ĵ/ŝ/ŭ).
+//! `Esperanto.getRelevantRules` is the generic built-ins (including
+//! `SentenceWhitespaceRule`) plus the `EsperantoTagger` and the XML
+//! `DateCheckFilter`.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use lt::{DataDir, Engine, EngineOptions, Lang};
+
+mod common;
+use common::assert_utf16;
 
 fn engine_guard() -> MutexGuard<'static, ()> {
     static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
@@ -83,18 +86,14 @@ fn esperanto_engine_state() {
     );
 }
 
-/// `COMMA_PARENTHESIS_WHITESPACE` (`space_after_comma`):
-/// `Mi amas ĉokoladon , kaj kafon.` Java UTF-16 17..19 / engine UTF-8
-/// 18..20 (`ĉ` is one extra byte) -> `,`.
+/// `COMMA_PARENTHESIS_WHITESPACE` (`space_after_comma`) -> `,`.
 #[test]
 fn esperanto_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one(
-        "Mi amas ĉokoladon , kaj kafon.",
-        "COMMA_PARENTHESIS_WHITESPACE",
-    );
+    let text = "Mi amas ĉokoladon , kaj kafon.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (18, 20));
+    assert_utf16(text, &matches[0], (17, 19));
     assert_eq!(
         matches[0].message,
         "Enmeti spaceton post la komo, sed ne antaŭ la komo"
@@ -102,26 +101,26 @@ fn esperanto_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DOUBLE_PUNCTUATION`: `Tio estas bona.. Sed li ne venis.` Java UTF-16
-/// 14..16 / engine UTF-8 14..16 (all ASCII) -> `.` with suggestions `.|…`.
+/// `DOUBLE_PUNCTUATION` -> `.` with suggestions `.|…`.
 #[test]
 fn esperanto_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Tio estas bona.. Sed li ne venis.", "DOUBLE_PUNCTUATION");
+    let text = "Tio estas bona.. Sed li ne venis.";
+    let matches = one(text, "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (14, 16));
+    assert_utf16(text, &matches[0], (14, 16));
     assert_eq!(matches[0].message, "Du sinsekvaj punktoj");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
-/// `UPPERCASE_SENTENCE_START`: `tio estas bela tago.` Java UTF-16 0..3 /
-/// engine UTF-8 0..3 -> `tio` -> `Tio`.
+/// `UPPERCASE_SENTENCE_START` -> `Tio`.
 #[test]
 fn esperanto_uppercase_start() {
     let _guard = engine_guard();
-    let matches = one("tio estas bela tago.", "UPPERCASE_SENTENCE_START");
+    let text = "tio estas bela tago.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 3));
+    assert_utf16(text, &matches[0], (0, 3));
     assert_eq!(
         matches[0].message,
         "Tiu frazo ne komenciĝas per majuskla litero"
@@ -129,49 +128,50 @@ fn esperanto_uppercase_start() {
     assert_eq!(suggestions(&matches[0]), vec!["Tio"]);
 }
 
-/// `WHITESPACE_RULE`: `Mi  amas vin.` Java UTF-16 2..4 / engine UTF-8 2..4.
+/// `WHITESPACE_RULE`.
 #[test]
 fn esperanto_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Mi  amas vin.", "WHITESPACE_RULE");
+    let text = "Mi  amas vin.";
+    let matches = one(text, "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (2, 4));
+    assert_utf16(text, &matches[0], (2, 4));
     assert_eq!(matches[0].message, "Ebla mistajpaĵo: vi ripetis spaceton");
     assert_eq!(suggestions(&matches[0]), vec![" "]);
 }
 
-/// `WORD_REPEAT_RULE`: `Li li iris hejmen.` Java UTF-16 0..5 / engine UTF-8
-/// 0..5 -> `Li`.
+/// `WORD_REPEAT_RULE` -> `Li`.
 #[test]
 fn esperanto_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Li li iris hejmen.", "WORD_REPEAT_RULE");
+    let text = "Li li iris hejmen.";
+    let matches = one(text, "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 5));
+    assert_utf16(text, &matches[0], (0, 5));
     assert_eq!(matches[0].message, "Ebla mistajpaĵo: vi ripetis vorton");
     assert_eq!(suggestions(&matches[0]), vec!["Li"]);
 }
 
-/// `SENTENCE_WHITESPACE`: `Tio estas bona.Sed li ne venis.` Java UTF-16
-/// 15..18 / engine UTF-8 15..18 -> ` Sed`.
+/// `SENTENCE_WHITESPACE` -> ` Sed`.
 #[test]
 fn esperanto_sentence_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Tio estas bona.Sed li ne venis.", "SENTENCE_WHITESPACE");
+    let text = "Tio estas bona.Sed li ne venis.";
+    let matches = one(text, "SENTENCE_WHITESPACE");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (15, 18));
+    assert_utf16(text, &matches[0], (15, 18));
     assert_eq!(matches[0].message, "Aldoni spaceton inter frazoj");
     assert_eq!(suggestions(&matches[0]), vec![" Sed"]);
 }
 
-/// `UNPAIRED_BRACKETS`: `(Tio estas bona.` Java UTF-16 0..1 / engine UTF-8
-/// 0..1 -> `(`.
+/// `UNPAIRED_BRACKETS` -> `(`.
 #[test]
 fn esperanto_unpaired_brackets() {
     let _guard = engine_guard();
-    let matches = one("(Tio estas bona.", "UNPAIRED_BRACKETS");
+    let text = "(Tio estas bona.";
+    let matches = one(text, "UNPAIRED_BRACKETS");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 1));
+    assert_utf16(text, &matches[0], (0, 1));
     assert_eq!(
         matches[0].message,
         "Nekongruaj simboloj: ŝajnas, ke \")\" mankas"
@@ -179,15 +179,15 @@ fn esperanto_unpaired_brackets() {
 }
 
 /// `DATO_TAGO` + `org.languagetool.rules.eo.DateCheckFilter`: the date
-/// `28-an de Aŭgusto 2014` is a Thursday, so `Vendredon` is wrong (Java
-/// UTF-16 0..34 / engine UTF-8 0..35, `ŭ` is one extra byte); `Ĵaŭdon` is
-/// correct and the filter rejects the match.
+/// `28-an de Aŭgusto 2014` is a Thursday, so `Vendredon` is wrong; `Ĵaŭdon`
+/// is correct and the filter rejects the match.
 #[test]
 fn esperanto_date_filter() {
     let _guard = engine_guard();
-    let matches = one("Vendredon la 28-an de Aŭgusto 2014.", "DATO_TAGO");
+    let text = "Vendredon la 28-an de Aŭgusto 2014.";
+    let matches = one(text, "DATO_TAGO");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (0, 35));
+    assert_utf16(text, &matches[0], (0, 34));
     assert_eq!(
         matches[0].message,
         "La tago de la dato «Vendredon la 28-an de Aŭgusto 2014» ne estas vendredo, sed jaŭdo."
@@ -196,14 +196,14 @@ fn esperanto_date_filter() {
 }
 
 /// `HunspellRule`: `Ĵaŭdon la 28-an de Aŭgusto 2014.` flags the `-an` suffix
-/// without the leading dash (Java UTF-16 13..15 / engine UTF-8 15..17) and
-/// pins the full native suggestion list.
+/// without the leading dash and pins the full native suggestion list.
 #[test]
 fn esperanto_speller_suggestions() {
     let _guard = engine_guard();
-    let matches = one("Ĵaŭdon la 28-an de Aŭgusto 2014.", "HUNSPELL_RULE");
+    let text = "Ĵaŭdon la 28-an de Aŭgusto 2014.";
+    let matches = one(text, "HUNSPELL_RULE");
     assert_eq!(matches.len(), 1);
-    assert_eq!((matches[0].range.start, matches[0].range.end), (15, 17));
+    assert_utf16(text, &matches[0], (13, 15));
     assert_eq!(matches[0].message, "Ebla mistajpaĵo trovita");
     assert_eq!(
         suggestions(&matches[0]),
