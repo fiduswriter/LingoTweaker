@@ -115,10 +115,7 @@ fn slovak_double_punctuation() {
 #[test]
 fn slovak_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one(
-        "Toto je test. toto je test.",
-        "UPPERCASE_SENTENCE_START",
-    );
+    let matches = one("Toto je test. toto je test.", "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 14);
     assert_eq!(matches[0].range.end, 18);
@@ -148,10 +145,7 @@ fn slovak_word_repeat() {
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 0);
     assert_eq!(matches[0].range.end, 9);
-    assert_eq!(
-        matches[0].message,
-        "Možný preklep: zopakovali ste slovo"
-    );
+    assert_eq!(matches[0].message, "Možný preklep: zopakovali ste slovo");
     assert_eq!(suggestions(&matches[0]), vec!["Toto"]);
 }
 
@@ -217,6 +211,8 @@ fn slovak_agreement_rule() {
     assert_eq!(matches[0].sub_id.as_deref(), Some("2"));
     assert_eq!(matches[0].range.start, 17);
     assert_eq!(matches[0].range.end, 23);
-    assert!(matches[0].message.contains("Nespravny tvar prídavného mena"));
+    assert!(matches[0]
+        .message
+        .contains("Nespravny tvar prídavného mena"));
     assert_eq!(suggestions(&matches[0]), vec!["pekného"]);
 }

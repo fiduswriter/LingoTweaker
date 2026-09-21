@@ -20,6 +20,7 @@ re-runs the Rust side and diffs against the golden.
 | ro | `ro-full.txt` (1,154) | `ro-full.java.tsv` |
 | pl | `pl-full.txt` (6,438) | `pl-full.java.tsv` |
 | sk | `sk-full.txt` (352) | `sk-full.java.tsv` |
+| sl | `sl-full.txt` (104) | `sl-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -33,7 +34,7 @@ re-runs the Rust side and diffs against the golden.
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk `2026-09-21`.
+  sk/sl `2026-09-21`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -64,11 +65,13 @@ re-runs the Rust side and diffs against the golden.
   `--expect-only-java`/`--expect-only-rust` in `scripts/ci/parity.sh`.
   sk is exactly 0/0/0 (D-212); the sk input excludes the parallel/unreferenced
   `grammar-nezaradene.xml` (not loaded by `Slovak.getRuleFileNames`).
+  sl is exactly 0/0/0 (D-213; Slovenian has no tagger/synthesizer/
+  disambiguator).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

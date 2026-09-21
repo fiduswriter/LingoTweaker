@@ -1,0 +1,202 @@
+L	1	0 oseb ni manjkalo
+M	1	STEVILA_DO_10	1	0	1	Other	<suggestion>nič</suggestion>	nič
+L	2	1 oseba je manjkala
+M	2	STEVILA_DO_10	2	0	1	Other	<suggestion>ena</suggestion>	ena
+L	3	2 osebi sta manjkali
+M	3	STEVILA_DO_10	3	0	1	Other	<suggestion>dve</suggestion>	dve
+L	4	3 osebe so manjkale
+M	4	STEVILA_DO_10	4	0	1	Other	<suggestion>tri</suggestion>	tri
+L	5	4 osebe so manjkale
+M	5	STEVILA_DO_10	5	0	1	Other	<suggestion>štiri</suggestion>	štiri
+L	6	5 oseb je manjkalo
+M	6	STEVILA_DO_10	6	0	1	Other	<suggestion>pet</suggestion>	pet
+L	7	6 oseb je manjkalo
+M	7	STEVILA_DO_10	7	0	1	Other	<suggestion>šest</suggestion>	šest
+L	8	7 oseb je manjkalo
+M	8	STEVILA_DO_10	8	0	1	Other	<suggestion>sedem</suggestion>	sedem
+L	9	8 oseb je manjkalo
+M	9	STEVILA_DO_10	9	0	1	Other	<suggestion>osem</suggestion>	osem
+L	10	9 oseb je manjkalo
+M	10	STEVILA_DO_10	10	0	1	Other	<suggestion>devet</suggestion>	devet
+L	11	99 steklenic na omari
+M	11	STEVILA_DO_100	1	0	2	Other	Zamenjajte z ustrezno ubeseditvijo	
+L	12	devetindevetdeset steklenic na omari
+M	12	UPPERCASE_SENTENCE_START		0	17	Other	Ta poved se ne začenja z veliko začetnico	Devetindevetdeset
+L	13	Podjetje Krivolovec, doo je šlo v stečaj.
+M	13	MORFOLOGIK_RULE_SL_SI		9	19	UnknownWord	Najdena morebitna napaka pri črkovanju.	Krivolove|Krivo lovec
+M	13	KRATICE	1	21	24	Other	Uporabite pravilno kratico: <suggestion>d. o. o.</suggestion>.	d. o. o.
+L	14	Podjetje Krivolovec, d.o.o. je šlo v stečaj.
+M	14	MORFOLOGIK_RULE_SL_SI		9	19	UnknownWord	Najdena morebitna napaka pri črkovanju.	Krivolove|Krivo lovec
+M	14	KRATICE	2	21	27	Other	Uporabite presledke: <suggestion>d. o. o.</suggestion>.	d. o. o.
+M	14	UPPERCASE_SENTENCE_START		28	30	Other	Ta poved se ne začenja z veliko začetnico	Je
+L	15	Umrl je 523 pr.n.št. v Atenah.
+M	15	KRATICE	3	12	20	Other	Uporabite presledke: <suggestion>pr. n. št.</suggestion>.	pr. n. št.
+M	15	UPPERCASE_SENTENCE_START		21	22	Other	Ta poved se ne začenja z veliko začetnico	V
+L	16	Ne prekinjaj me!!
+M	16	PONOVLJENA_LOČILA	1	15	17	Other	Potreben je samo en: <suggestion>!</suggestion>.	!
+L	17	Kdaj greva??
+M	17	PONOVLJENA_LOČILA	2	10	12	Other	Potreben je samo en: <suggestion>?</suggestion>.	?
+L	18	Bilo je vroče toda nisva odnehala.
+M	18	TODA_BREZ_VEJICE	1	13	18	Other	Ponavadi je pred 'toda' vejica: <suggestion>, toda</suggestion>!	, toda
+L	19	Bilo je vroče saj avto ni imel klimatske naprave.
+M	19	SAJ_BREZ_VEJICE	1	13	17	Other	Ponavadi je pred 'saj' vejica: <suggestion>, saj</suggestion>!	, saj
+L	20	Bilo je vroče kajti oken ni mogoče odpreti.
+M	20	KAJTI_BREZ_VEJICE	1	13	19	Other	Ponavadi je pred 'kajti' vejica: <suggestion>, kajti</suggestion>!	, kajti
+L	21	Bilo je vroče zato sva se slekli.
+M	21	ZATO_BREZ_VEJICE	1	13	18	Other	Ponavadi je pred 'zato' vejica: <suggestion>, zato</suggestion>!	, zato
+L	22	Bilo je vroče zatorej je odpela gumbe.
+M	22	ZATOREJ_BREZ_VEJICE	1	13	21	Other	Ponavadi je pred 'zatorej' vejica: <suggestion>, zatorej</suggestion>!	, zatorej
+L	23	Ulice so polne ljudi torej smo zmagali?
+M	23	TOREJ_BREZ_VEJICE	1	20	26	Other	Ponavadi je pred 'torej' vejica: <suggestion>, torej</suggestion>!	, torej
+L	24	Bilo je vroče, to je čez trideset stopinj.
+L	25	Bilo je vroče to je čez trideset stopinj.
+L	26	Bilo je vroče tj. čez trideset stopinj.
+M	26	TJ_BREZ_VEJICE	1	13	17	Other	Ponavadi je pred 'tj.' vejica: <suggestion>, tj.</suggestion>!	, tj.
+L	27	Ne samo vroče ampak tudi vlažno je bilo.
+M	27	AMPAK_TUDI_BREZ_VEJICE	1	13	24	Other	Ponavadi je pred 'ampak tudi' kot drugim delom stopnjevalnega veznika 'ne le/samo - ampak/temveč tudi' vejica: <suggestion>, ampak tudi</suggestion>!	, ampak tudi
+L	28	Ne le vroče, temveč tudi vlažno je bilo.
+L	29	Ne le vroče temveč tudi vlažno je bilo.
+M	29	TEMVEČ_TUDI_BREZ_VEJICE	1	11	23	Other	Ponavadi je pred 'temveč tudi' kot drugim delom stopnjevalnega veznika 'ne le/samo - ampak/temveč tudi' vejica: <suggestion>, ampak tudi</suggestion>!	, ampak tudi
+L	30	Bilo je vroče ampak nama še ni bilo dovolj.
+M	30	AMPAK_BREZ_VEJICE	1	13	19	Other	Ponavadi je pred 'ampak' vejica: <suggestion>, ampak</suggestion>!	, ampak
+L	31	Srečala sva poštarja ki je raznašal pokojnine.
+M	31	KI_BREZ_VEJICE	1	20	23	Other	V podredjih je pred 'ki' vejica: <suggestion>, ki</suggestion>!	, ki
+L	32	Ni vedel, o kateri je govorila.
+L	33	Ni vedel o kateri je govorila.
+M	33	PREDLOG_KATERI_BREZ_VEJICE	1	8	17	Other	V podredjih je pred predlogom in 'kateri' običajno vejica: <suggestion>, za kateri</suggestion>!	, za kateri
+L	34	Ni se predala na kar je ponosna.
+M	34	PREDLOG_KAR_BREZ_VEJICE	1	13	20	Other	V podredjih je pred predlogom in 'kar' običajno vejica: <suggestion>, na kar</suggestion>!	, na kar
+L	35	To je tisto kar mu manjka.
+M	35	KAR_BREZ_VEJICE	1	11	15	Other	V podredjih je pred 'kar' običajno vejica: <suggestion>, kar</suggestion>!	, kar
+L	36	Še vedno ni jasno na kaj se sklicuje.
+M	36	PREDLOG_KAJ_BREZ_VEJICE	1	17	24	Other	V podredjih je pred predlogom in 'kaj' običajno vejica: <suggestion>, na kaj</suggestion>!	, na kaj
+L	37	Povej kaj mu manjka.
+M	37	KAJ_BREZ_VEJICE	1	5	9	Other	V podredjih je pred 'kaj' običajno vejica: <suggestion>, kaj</suggestion>!	, kaj
+L	38	Ni vedel kateri je pravi.
+M	38	KATERI_BREZ_VEJICE	1	8	15	Other	V podredjih je pred 'kateri' vejica: <suggestion>, kateri</suggestion>!	, kateri
+L	39	To so bile magdalenice, kakršne je pekla moja mati.
+M	39	MORFOLOGIK_RULE_SL_SI		11	22	UnknownWord	Najdena morebitna napaka pri črkovanju.	Magdaleniče|Magdalenine|Magdalenič|Magdaleniča|Magdaleničem|Magdaleničev|Magdaleniči|Magdaleniču
+L	40	To so bile magdalenice kakršne je pekla moja mati.
+M	40	MORFOLOGIK_RULE_SL_SI		11	22	UnknownWord	Najdena morebitna napaka pri črkovanju.	Magdaleniče|Magdalenine|Magdalenič|Magdaleniča|Magdaleničem|Magdaleničev|Magdaleniči|Magdaleniču
+M	40	KAKRŠEN_BREZ_VEJICE	1	22	30	Other	V podredjih je pred 'kakršen' vejica: <suggestion>, kakršen</suggestion>!	, kakršen
+L	41	Kregali smo se, kakšne barve so njene oči.
+L	42	Kregali smo se kakšne barve so njene oči.
+M	42	KAKŠEN_BREZ_VEJICE	1	14	21	Other	V podredjih je pred 'kakšen' vejica: <suggestion>, kakšen</suggestion>!	, kakšen
+L	43	Prevaro so odkrili zaradi česar je odstopil.
+M	43	ZARADI_BREZ_VEJICE	1	18	25	Other	V podredjih je pred 'zaradi' vejica: <suggestion>, zaradi</suggestion>!	, zaradi
+L	44	Šla sva domov ko je pričelo deževati.
+M	44	KO_BREZ_VEJICE	1	13	16	Other	V podredjih je pred 'ko' vejica: <suggestion>, ko</suggestion>!	, ko
+L	45	Šla sva domov kadar je tako želela.
+M	45	KADAR_BREZ_VEJICE	1	13	19	Other	V podredjih je pred 'kadar' vejica: <suggestion>, kadar</suggestion>!	, kadar
+L	46	Peljala sva se kamor je želela.
+M	46	KAMOR_BREZ_VEJICE	1	14	20	Other	V podredjih je pred 'kamor' vejica: <suggestion>, kamor</suggestion>!	, kamor
+L	47	Plesala sva kolikor je hotela.
+M	47	KOLIKOR_BREZ_VEJICE	1	11	19	Other	V podredjih je pred 'kolikor' vejica: <suggestion>, kolikor</suggestion>!	, kolikor
+L	48	Dal sem ji naslov v kolikor bi se želela oglasiti.
+M	48	V_KOLIKOR_BREZ_VEJICE	1	17	27	Other	V podredjih je pred 'v kolikor' vejica: <suggestion>, v kolikor</suggestion>!	, v kolikor
+L	49	Bilo je tako kakor nam je opisoval ded.
+M	49	KAKOR_BREZ_VEJICE	1	12	18	Other	V podredjih je lahko pred 'kakor' vejica: <suggestion>, kakor</suggestion>!	, kakor
+L	50	Slišala je kako tepe ženo.
+M	50	KAKO_BREZ_VEJICE	1	10	15	Other	V podredjih je pred 'kako' vejica: <suggestion>, kako</suggestion>!	, kako
+L	51	Šla sva domov ker je pričelo deževati.
+M	51	KER_BREZ_VEJICE	1	13	17	Other	V podredjih je pred 'ker' vejica: <suggestion>, ker</suggestion>!	, ker
+L	52	Mislil je da je konec sveta.
+M	52	DA_BREZ_VEJICE	1	9	12	Other	V podredjih je pred 'da' vejica: <suggestion>, da</suggestion>!	, da
+L	53	Plesal je, kot da je hodil v baletno šolo.
+L	54	Ne le vroče kot da je hodil v baletno šolo.
+M	54	KOT_BREZ_VEJICE	1	11	15	Other	Pred 'kot' je včasih vejica: <suggestion>, kot</suggestion>!	, kot
+L	55	Vprašala naju je če sva plačala sladoled.
+M	55	ČE_BREZ_VEJICE	1	16	19	Other	V podredjih je pred 'če' vejica: <suggestion>, če</suggestion>!	, če
+L	56	Udaril je ne da bi prej premislil.
+M	56	NE_DA_BI_BREZ_VEJICE	1	9	18	Other	V podredjih je pred 'ne da bi' vejica: <suggestion>, ne da bi</suggestion>!	, ne da bi
+L	57	Gremo preden bo prepozno.
+M	57	PREDEN_BREZ_VEJICE	1	5	12	Other	V podredjih je pred 'preden' vejica: <suggestion>, preden</suggestion>!	, preden
+L	58	Sneži kajne?
+M	58	KAJNE_BREZ_VEJICE	1	5	11	Other	V podredjih je pred 'kajne' vejica: <suggestion>, kajne</suggestion>?	, kajne
+L	59	Povedali sta kje je parkirišče.
+M	59	KJE_BREZ_VEJICE	1	12	16	Other	V podredjih je pred 'kje' vejica: <suggestion>, kje</suggestion>!	, kje
+L	60	Ogenj je tam kjer je dim.
+M	60	KJER_BREZ_VEJICE	1	12	17	Other	V podredjih je pred 'kjer' vejica: <suggestion>, kjer</suggestion>!	, kjer
+L	61	Pisalo je kdaj je premiera.
+M	61	KDAJ_BREZ_VEJICE	1	9	14	Other	V podredjih je pred 'kdaj' vejica: <suggestion>, kdaj</suggestion>!	, kdaj
+L	62	Pustili so sporočilo kam so šli.
+M	62	KAM_BREZ_VEJICE	1	20	24	Other	V podredjih je pred 'kam' vejica: <suggestion>, kam</suggestion>!	, kam
+L	63	Upirali se bodo dokler ne dobijo avtonomije.
+M	63	DOKLER_BREZ_VEJICE	1	15	22	Other	V podredjih je pred 'dokler' vejica: <suggestion>, dokler</suggestion>!	, dokler
+L	64	Nisem ga prepoznal vse dokler ni snel lasulje.
+M	64	VSE_DOKLER_BREZ_VEJICE	1	18	29	Other	V podredjih je pred 'vse dokler' vejica: <suggestion>, vse dokler</suggestion>!	, vse dokler
+L	65	To je primer -ali pa tudi ne.
+M	65	POMISLJAJ_2	1	13	17	Other	Pred in po pomišljaju mora biti presledek. Vstavite presledek za njim (<suggestion>– ali</suggestion>) ali pa odstranite začetni presledek.	– ali
+L	66	To je primer – ali pa tudi ne.
+L	67	To je primer- ali pa tudi ne.
+M	67	POMISLJAJ_3	1	6	13	Other	Pred in po pomišljaju mora biti presledek. Vstavite presledek predenj (<suggestion>primer –</suggestion>) ali pa odstranite končni presledek.	primer –
+L	68	To je primer – ali pa tudi ne.
+L	69	Avstro–ogrska monarhija je razpadla 11. novembra 1918 s podpisom abdikacije cesarja Karla I.
+M	69	VEZAJ	1	0	13	Other	Namesto pomišljaja uporabite vezaj: <suggestion>Avstro-ogrska</suggestion>.	Avstro-ogrska
+L	70	Avstro-ogrska monarhija je razpadla 11. novembra 1918 s podpisom abdikacije cesarja Karla I.
+M	70	MORFOLOGIK_RULE_SL_SI		0	13	UnknownWord	Najdena morebitna napaka pri črkovanju.	
+L	71	Bilo je nekoč...
+M	71	TROPIČJETRI	1	13	16	Other	Pred tropičjem, ki pomeni prekinjeno poved, mora biti presledek: 1, 2,<suggestion> ...</suggestion>. Če gre za prekinjeno besedo, presledka ne sme biti.	 ...
+L	72	Bilo je nekoč ...
+L	73	Bilo je nekoč…
+M	73	TROPIČJEENO	2	13	14	Other	Pred tropičjem, ki pomeni prekinjeno poved, mora biti presledek: 1, 2,<suggestion> …</suggestion>. Če gre za prekinjeno besedo, presledka ne sme biti.	 …
+L	74	Bilo je nekoč …
+L	75	Bilo je nekoč ....
+M	75	TROPIČJEŠTIRI	3	14	18	Other	Tropičje sestavljajo natanko tri pike: <suggestion>...</suggestion>.	...
+L	76	Vnesel je popravljene URLje.
+M	76	KRATICA_IZJEM	1	22	27	Other	Nepravilno sklanjana kratica; manjka vezaj: <suggestion>URL-je</suggestion>\n                	URL-je
+L	77	Odšel sem k gospodu Kovaču.
+M	77	PREDLOG_K	1	10	11	Other	Pred besedami, ki se začnejo s črkama k in g, morate uporabiti namesto predloga "k" predlog <suggestion>h</suggestion>.	h
+L	78	K klobasam so ponudili kislo zelje.
+M	78	PREDLOG_K	1	0	1	Other	Pred besedami, ki se začnejo s črkama k in g, morate uporabiti namesto predloga "k" predlog <suggestion>h</suggestion>.	H
+L	79	Želite h njemu?
+M	79	PREDLOG_H	2	7	8	Other	Pred besedami, ki se ne začnejo s črko k ali g, morate uporabiti namesto predloga "h" predlog <suggestion>k</suggestion>.	k
+L	80	H vsemu temu nimam kaj dodati.
+M	80	PREDLOG_H	2	0	1	Other	Pred besedami, ki se ne začnejo s črko k ali g, morate uporabiti namesto predloga "h" predlog <suggestion>k</suggestion>.	K
+M	80	KAJ_BREZ_VEJICE	1	18	22	Other	V podredjih je pred 'kaj' običajno vejica: <suggestion>, kaj</suggestion>!	, kaj
+L	81	Predsednik ZDA je odletel z helikopterjem.
+M	81	PREDLOG_Z	1	26	27	Other	Pred besedami, ki se začnejo s črkami c, f, h, k, p, s, t, č in š, morate uporabiti namesto "z" predlog <suggestion>s</suggestion>.	s
+L	82	Z tem nisem bil seznanjen.
+M	82	PREDLOG_Z	1	0	1	Other	Pred besedami, ki se začnejo s črkami c, f, h, k, p, s, t, č in š, morate uporabiti namesto "z" predlog <suggestion>s</suggestion>.	S
+L	83	Šla je s njim.
+M	83	PREDLOG_S	2	7	8	Other	Pred besedami, ki se ne začnejo s črko c, f, h, k, p, s, t, č ali š, morate uporabiti namesto "s" predlog <suggestion>z</suggestion>.	z
+L	84	S izvijačem je potolkel po motorju.
+M	84	PREDLOG_S	2	0	1	Other	Pred besedami, ki se ne začnejo s črko c, f, h, k, p, s, t, č ali š, morate uporabiti namesto "s" predlog <suggestion>z</suggestion>.	Z
+L	85	Da je umrl, ste rekla.
+M	85	STE_REKLA	1	16	21	Other	Napačna raba onikanja, pravilno je: ste <suggestion>rekli</suggestion>!	rekli
+L	86	Rekla ste, da je živ.
+M	86	REKLA_STE	2	0	5	Other	Napačna raba vikanja, pravilno je: <suggestion>rekli</suggestion> ste!	Rekli
+L	87	Nikoli nebi kradel.
+M	87	NE_BI	1	7	11	Other	Najverjetneje manjka presledek: <suggestion>ne bi</suggestion>!	ne bi
+L	88	Pridi čimprej!
+M	88	ČIM_PREJ	2	6	13	Other	Manjka presledek: <suggestion>čim prej</suggestion>!	čim prej
+L	89	Kriv je voznik, kateri je prehiteval.
+M	89	KATERI	1	16	22	Other	Napačna raba besede kateri, pravilno je: <suggestion>ki</suggestion>!	ki
+L	90	Povedala je iskreno, za kaj se gre.
+M	90	SE_GRE	1	21	34	Other	Napačna raba fraze, pravilno je: <suggestion>za kaj gre</suggestion>!	za kaj gre
+L	91	Njeni otroki so že vsi v pokoju.
+M	91	OTROKI	2	6	12	Other	Napačna raba množine besede otrok v imenovalniku, pravilno je: <suggestion>otroci</suggestion>!	otroci
+L	92	V Ptuju so pogostili pisatelje.
+M	92	PTUJ	3	0	1	Other	Napačna raba predloga pred krajevnim imenom, pravilno je: <suggestion>na</suggestion> Ptuju!	Na
+L	93	V Bledu sva jedla kremne rezine.
+M	93	BLED	4	0	1	Other	Napačna raba predloga pred krajevnim imenom, pravilno je: <suggestion>na</suggestion> Bledu!	Na
+L	94	Novoletni koncert v Dunaju
+M	94	DUNAJ	5	18	19	Other	Napačna raba predloga pred krajevnim imenom, pravilno je: <suggestion>na</suggestion> Dunaju!	na
+L	95	Iz kje je ta jadrnica?
+M	95	IZ_KJE	6	0	6	Other	Napačna raba predloga in prislova, pravilno je: <suggestion>odkod</suggestion>	Odkod
+L	96	Prijave pošljite potom pošte.
+M	96	POTOM	7	17	28	Other	Neprimerno, priporočamo: <suggestion>po pošti</suggestion>	po pošti
+L	97	Njihova služba nam je bila ves čas na razpolago.
+M	97	NA_RAZPOLAGO	8	35	47	Other	Neprimerno, priporočamo: <suggestion>na voljo</suggestion>	na voljo
+L	98	Ob reklamaciji ne pozabite izpolniti obrazca.
+L	99	V slučaju reklamacije ne pozabite izpolniti obrazca.
+M	99	V_SLUCAJU	9	0	9	Other	Neprimerno, priporočamo: <suggestion>ob</suggestion>, obenem ustrezno spremenite sklon	Ob
+L	100	Z ozirom na vse težave se je dobro končalo.
+M	100	Z_OZIROM	10	0	8	Other	Neprimerno, priporočamo: <suggestion>glede</suggestion>	Glede
+L	101	Obvestili smo jih preko telefona.
+M	101	PREK_TELEFONA	11	18	32	Other	Neprimerno, priporočamo: <suggestion>po telefonu</suggestion>	po telefonu
+L	102	V škatli je bil en sam komad.
+M	102	KOMAD	12	23	28	Other	Neprimerno, priporočamo: <suggestion>kos</suggestion>	kos
+L	103	To je primer - verjeli ali ne.
+M	103	POMISLJAJ_5	1	13	14	Other	Pomišljaj je tipografsko različen od znaka za vezaj. Zato uporabite namesto vezaja znak tipografskega pomišljaja (<suggestion>–</suggestion>) ali pa ga sploh ne uporabite.	–
+L	104	To je primer – verjeli ali ne.
