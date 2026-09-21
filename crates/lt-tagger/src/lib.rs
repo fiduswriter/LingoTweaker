@@ -15,6 +15,7 @@ pub mod danish;
 pub mod dutch;
 pub mod dutch_synth;
 pub mod english;
+pub mod esperanto;
 pub mod french;
 pub mod french_synth;
 pub mod fsa5;
@@ -51,6 +52,7 @@ pub use english::{
     is_all_uppercase, is_capitalized_word, is_mixed_case, is_not_all_lowercase,
     lowercase_first_char, uppercase_first_char, EnglishTagger,
 };
+pub use esperanto::EsperantoTagger;
 pub use french::FrenchTagger;
 pub use french_synth::FrenchSynthesizer;
 pub use fsa5::Fsa5;

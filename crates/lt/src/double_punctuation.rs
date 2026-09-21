@@ -134,6 +134,23 @@ pub fn check_sentence_sv(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Esperanto `MessagesBundle_eo` strings.
+pub fn check_sentence_eo(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Interpunkcio".to_string();
+        m.description = "Uzo de sinsekvaj punktoj aŭ komoj".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Du sinsekvaj punktoj".to_string();
+            m.short_message = Some("Du sinsekvaj punktoj".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Du sinsekvaj komoj".to_string();
+            m.short_message = Some("Du sinsekvaj komoj".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Icelandic `MessagesBundle_is` strings.
 pub fn check_sentence_is(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

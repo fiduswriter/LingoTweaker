@@ -36,6 +36,7 @@ mod de;
 mod double_punctuation;
 mod el;
 mod en;
+mod eo;
 mod es;
 mod fr;
 mod gl;
@@ -384,6 +385,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Is => Pipeline::new_icelandic(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Eo => Pipeline::new_esperanto(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

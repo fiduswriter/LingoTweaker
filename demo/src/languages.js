@@ -71,6 +71,9 @@ const SWEDISH = {
 const ICELANDIC = {
   sample: "Þetta er tesst. Ég elska íslensku og Ísland.",
 };
+const ESPERANTO = {
+  sample: "Tio estas tesst. Mi amas ĉokoladon , kaj kafon.",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -94,6 +97,7 @@ export const LANGUAGES = [
   { code: "da", pack: "da", label: "Dansk", size: "1.5 MB", ...DANISH },
   { code: "sv", pack: "sv", label: "Svenska", size: "1.6 MB", ...SWEDISH },
   { code: "is-IS", pack: "is", label: "Íslenska", size: "1.1 MB", ...ICELANDIC },
+  { code: "eo", pack: "eo", label: "Esperanto", size: "0.64 MB", ...ESPERANTO },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.1 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.7 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.35 MB", ...GUARANI },

@@ -159,6 +159,8 @@ pub struct Pipeline {
     pub slovenian: Option<Arc<crate::sl::SlovenianPipeline>>,
     /// Icelandic pipeline parts (`None` for the other languages)
     pub icelandic: Option<Arc<crate::is::IcelandicPipeline>>,
+    /// Esperanto pipeline parts (`None` for the other languages)
+    pub esperanto: Option<Arc<crate::eo::EsperantoPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Danish pipeline parts (`None` for the other languages)
@@ -1350,6 +1352,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1590,6 +1593,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1789,6 +1793,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1996,6 +2001,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2123,6 +2129,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2369,6 +2376,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2575,6 +2583,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2898,6 +2907,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3045,6 +3055,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3178,6 +3189,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3335,6 +3347,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3470,6 +3483,7 @@ impl Pipeline {
             slovak: Some(slovak),
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3577,6 +3591,7 @@ impl Pipeline {
             slovak: None,
             slovenian: Some(slovenian),
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3719,6 +3734,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: Some(greek),
             norwegian: None,
             nordum: None,
@@ -3791,6 +3807,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             da: Some(danish),
             sv: None,
@@ -3948,6 +3965,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             da: None,
             sv: Some(swedish),
@@ -4017,6 +4035,114 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: Some(icelandic),
+            esperanto: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Esperanto (`eo`) engine: the `EsperantoTagger` + `EsperantoWordTokenizer`,
+    /// the plain `XmlRuleDisambiguator` (`eo/disambiguation.xml` + global
+    /// rules), the hunspell speller and the generic built-ins (including
+    /// `SentenceWhitespaceRule`). `Esperanto.getRelevantRules` adds no Java
+    /// rule classes beyond the generic built-ins; the XML `DateCheckFilter` is
+    /// registered for the `DATO_TAGO` rule.
+    pub fn new_esperanto(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "eo_two")?;
+
+        let tagger = Arc::new(lt_tagger::EsperantoTagger::load(data_dir.path())?);
+
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Eo))?;
+        if data_dir.style_path(Lang::Eo).lt_exists() {
+            let style = Grammar::load_file(data_dir.style_path(Lang::Eo))?;
+            grammar.rules.extend(style.rules);
+            grammar.categories.extend(style.categories);
+            grammar.equivalence_defs.extend(style.equivalence_defs);
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // XML-referenced filter classes: `DateCheckFilter` (`DATO_TAGO`).
+        let filters =
+            crate::eo::filters::esperanto_filter_registry(today.unwrap_or_else(Ymd::today));
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        // `Esperanto.createDefaultDisambiguator` is `new XmlRuleDisambiguator(new
+        // Esperanto())`, which does NOT load `disambiguation-global.xml`
+        // (`useGlobalDisambiguation = false`).
+        let mut disambiguator =
+            lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Eo))?;
+        disambiguator.set_filter_registry(filters);
+
+        let spelling = match crate::eo::spelling::EsperantoSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[eo] spelling rule disabled: {err}");
+                None
+            }
+        };
+
+        let esperanto = Arc::new(crate::eo::EsperantoPipeline {
+            tagger,
+            disambiguator,
+            spelling,
+            word_repeat: crate::eo::word_repeat_rule(),
+        });
+        Ok(Self {
+            lang: Lang::Eo,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: Some(esperanto),
             greek: None,
             da: None,
             sv: None,
@@ -4151,6 +4277,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
@@ -4230,6 +4357,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
@@ -4313,6 +4441,7 @@ impl Pipeline {
             slovak: None,
             slovenian: None,
             icelandic: None,
+            esperanto: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -4414,12 +4543,18 @@ impl Pipeline {
                                                                                 Some(_) => {
                                                                                     surface_sentence(sentence_text)
                                                                                 }
-                                                                                None => analyze_sentence(
-                                                                                    self.tagger
-                                                                                        .as_deref()
-                                                                                        .expect("english tagger"),
-                                                                                    sentence_text,
-                                                                                ),
+                                                                                None => match &self.esperanto {
+                                                                                    Some(esperanto) => crate::eo::analyze_esperanto_sentence(
+                                                                                        esperanto,
+                                                                                        sentence_text,
+                                                                                    ),
+                                                                                    None => analyze_sentence(
+                                                                                        self.tagger
+                                                                                            .as_deref()
+                                                                                            .expect("english tagger"),
+                                                                                        sentence_text,
+                                                                                    ),
+                                                                                },
                                                                             },
                                                                         },
                                                                     },
@@ -6586,6 +6721,64 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_is(&analyzed_sentences));
             }
         }
+        // Esperanto text-level rules (`Esperanto.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5),
+        // MultipleWhitespace (7) and SentenceWhitespace (8).
+        if self.lang == crate::Lang::Eo {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_eo(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_eo(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_eo(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_eo(&analyzed_sentences));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -6850,12 +7043,18 @@ impl Pipeline {
                                                                             Some(_) => surface_sentence(
                                                                                 &text[start..end],
                                                                             ),
-                                                                            None => analyze_sentence(
-                                                                                self.tagger
-                                                                                    .as_deref()
-                                                                                    .expect("english tagger"),
-                                                                                &text[start..end],
-                                                                            ),
+                                                                            None => match &self.esperanto {
+                                                                                Some(esperanto) => crate::eo::analyze_esperanto_sentence(
+                                                                                    esperanto,
+                                                                                    &text[start..end],
+                                                                                ),
+                                                                                None => analyze_sentence(
+                                                                                    self.tagger
+                                                                                        .as_deref()
+                                                                                        .expect("english tagger"),
+                                                                                    &text[start..end],
+                                                                                ),
+                                                                            },
                                                                         },
                                                                     },
                                                                 },
@@ -9190,6 +9389,81 @@ impl Pipeline {
                 );
             }
         }
+        // Esperanto sentence-level Java rules in `Esperanto.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2), HunspellRule (4)
+        // and WordRepeatRule (6).
+        if self.lang == crate::Lang::Eo {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_eo(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_eo(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(esperanto) = &self.esperanto {
+                if let Some(spelling) = &esperanto.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::eo::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
+                        &mut seen,
+                    );
+                }
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    esperanto
+                        .word_repeat
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -10487,6 +10761,12 @@ impl Pipeline {
             // `Icelandic` does not override `createDefaultDisambiguator`: the
             // base no-op `DemoDisambiguator` applies.
             icelandic.disambiguate(sentence);
+            return;
+        }
+        if let Some(esperanto) = &self.esperanto {
+            // `Esperanto.createDefaultDisambiguator` is a plain
+            // `XmlRuleDisambiguator`: XML rules (+ global rules).
+            esperanto.disambiguate(sentence);
             return;
         }
         if let Some(greek) = &self.greek {

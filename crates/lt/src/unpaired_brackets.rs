@@ -552,6 +552,26 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_sv())
 }
 
+/// Esperanto `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_eo` strings):
+/// the default symbol lists `[ ( { " '` / `] ) } " '`.
+pub fn symbols_eo() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Nekongruaj krampoj, rektaj krampoj, citiloj kaj similaj signoj",
+        category_id: "PUNCTUATION",
+        category_name: "Interpunkcio",
+        start: &["[", "(", "{", "\"", "'"],
+        end: &["]", ")", "}", "\"", "'"],
+        spanish: false,
+        message_template: "Nekongruaj simboloj: ŝajnas, ke \"{other}\" mankas",
+    }
+}
+
+/// Esperanto `UNPAIRED_BRACKETS` (generic rule, Esperanto strings).
+pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_eo())
+}
+
 /// Icelandic `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_is` strings):
 /// the default symbol lists `[ ( { " '` / `] ) } " '`.
 pub fn symbols_is() -> UnpairedSymbols {

@@ -182,6 +182,20 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &SV_STRINGS)
 }
 
+/// `SentenceWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings
+/// (the description and repeated message fall back to the core English
+/// bundle; only `addSpaceBetweenSentences` is translated).
+pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const EO_STRINGS: Strings = Strings {
+        description: "Missing space between sentences",
+        repeated_message: "Ebla mistajpaĵo: vi ripetis spaceton",
+        add_space_message: "Aldoni spaceton inter frazoj",
+        category_name: "Tipografio",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &EO_STRINGS)
+}
+
 /// `SentenceWhitespaceRule` with the Portuguese variant strings
 /// (`MessagesBundle_pt_PT` / `_pt_BR`; plain `pt`/`pt-AO`/`pt-MZ` fall back
 /// to the core English bundle).

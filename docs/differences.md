@@ -338,3 +338,41 @@ engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
   ```sh
   scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
   ```
+
+## 10. Esperanto (`eo`) known fidelity gaps (hunspell wrong-split and suggestions)
+
+The Esperanto corpus (`docs/parity/golden/eo-full.txt`, 876 examples) is at
+**1 only-Java / 1 only-Rust / 5 field diffs** (all `HUNSPELL_RULE`), pinned
+exactly in `scripts/ci/parity.sh` with `--expect-only-java=HUNSPELL_RULE=1`,
+`--expect-only-rust=UESTO=1` and `--expect-field-diffs=HUNSPELL_RULE=5`;
+`eo` runs with `PARITY_TODAY=2026-09-21`.
+
+- **`HunspellRule` wrong-split suggestions are not ported** (1 only-Java / 1
+  only-Rust). Java's `HunspellRule.match` checks whether the previous +
+  current token can be re-split into two known words and, when they can,
+  reports the whole span with the split suggestion. For
+  `La ŭesta parto de la urbo.` Java reports `HUNSPELL_RULE` 0-8 with
+  suggestion `Laŭ esta` (`La` + `ŭesta` → `Laŭ` + `esta`); the engine has no
+  wrong-split match, so the overlapping hand-authored `UESTO` XML rule
+  (3-8) survives `cleanOverlappingMatches` and is reported instead. The
+  Morfologik speller path ports its equivalent
+  (`morfologik_spelling.rs::create_wrong_split_match`); the hunspell path does
+  not yet. Reproduce:
+
+  ```sh
+  scripts/oracle/eo/probe-rule.sh "La ŭesta parto de la urbo." HUNSPELL_RULE
+  ```
+
+- **BREAK-based suggestion recombination differs** (5 field diffs; the match
+  set is identical). The `eo.aff` `BREAK` directives let hunspell suggest
+  space/hyphen recombinations (`inflamiĝis` → `inflami ĝis`, `inflami-ĝis`;
+  `semajnofinon` → `semajno finon`, `semajno-finon`) or suppress them
+  (`celcia` → `celsia`, `celen` without the `el cia` splits). The ported
+  native suggestion engine keeps its own split handling, so a few lists
+  differ in the split variants (and `nombrovortoj` → `ombro vortoj` drops the
+  leading `n`). Every other suggestion in the lists matches. Reproduce:
+
+  ```sh
+  scripts/oracle/eo/probe-rule.sh "La digesta aparato inflamiĝis." HUNSPELL_RULE
+  scripts/oracle/eo/probe-rule.sh "La nombrovortoj de Esperanto estas dekariaj." HUNSPELL_RULE
+  ```

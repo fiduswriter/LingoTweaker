@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 699,
+  "file_count": 713,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -2939,6 +2939,152 @@
       }
     },
     {
+      "path": "eo/disambiguation.xml",
+      "sha256": "ab2087359c851634588ee5f04da8238f0ff9fb94a6f3f6a52e60a236205843b2",
+      "size": 2976,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/hunspell/README_eo.txt",
+      "sha256": "e85e07760d0269956eb2906e00032bfd2e9caa6b66f70a02a2c6a4202298f851",
+      "size": 2289,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/hunspell/README_eo.txt",
+        "license": "GPL-2.0-or-later (Esperanto dictionary documentation; eo/hunspell/README_eo.txt)",
+        "license_verified": true,
+        "license_source": "upstream eo/hunspell/README_eo.txt"
+      }
+    },
+    {
+      "path": "eo/hunspell/eo.aff",
+      "sha256": "8c8db7432b3c87bb807847343159c992ddca923ddb8c4b746fcc8f39bac229b2",
+      "size": 16431,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/hunspell/eo.aff",
+        "license": "GPL-2.0-or-later (Esperantilo eo spelling dictionary; eo.aff header, eo/hunspell/README_eo.txt)",
+        "license_verified": true,
+        "license_source": "upstream eo/hunspell/README_eo.txt"
+      }
+    },
+    {
+      "path": "eo/hunspell/eo.dic",
+      "sha256": "75b09812254cd6b49c2849ed3b92f1c252117906f5a2ce281d25e1798c437ac1",
+      "size": 382137,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/hunspell/eo.dic",
+        "license": "GPL-2.0-or-later (Esperantilo eo spelling dictionary; eo.aff header, eo/hunspell/README_eo.txt)",
+        "license_verified": false,
+        "license_source": "upstream eo/hunspell/README_eo.txt"
+      }
+    },
+    {
+      "path": "eo/hunspell/ignore.txt",
+      "sha256": "d4fe7524d95fbd54bc91078648d465967a1e83e2813cd73d291ecae4332a19ce",
+      "size": 59,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/hunspell/spelling.txt",
+      "sha256": "8291e4fd631f38b5e988d7ba807ea9c1873a4c04f3214c330b62106d4a5c3840",
+      "size": 530,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/rules/grammar.xml",
+      "sha256": "47a0f4b444fe9289738a9a7ef113899d9430510852bf880fddfcd6870cd20bb3",
+      "size": 270573,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/rules/eo/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/rules/root-ant-at.txt",
+      "sha256": "57d57e429524f885861a42624039d0d5c82b37652d35076364b4f664079e463c",
+      "size": 5721,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/rules/eo/root-ant-at.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/rules/verb-ntr.txt",
+      "sha256": "d45c99580f203e66f66074dafe429cba4e5cd187ea32c0f6f843cbb6087de243",
+      "size": 10996,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/rules/eo/verb-ntr.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/rules/verb-tr.txt",
+      "sha256": "d87893cbbc8e392468fee6cd04209e3f5c0d2a9337488e37656caf25597b5648",
+      "size": 25561,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/rules/eo/verb-tr.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/words/common_words.txt",
+      "sha256": "92195789e3aa54b74317233f1ff3a74abc7dad9c72bcd7f713795da7039e914d",
+      "size": 80529,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/words/manual-tagger.txt",
+      "sha256": "7b89fe1194440c0b2da7f33d2b66ec1bacddfa37abf4fdd7cbe1a1d1f963152c",
+      "size": 3671,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/manual-tagger.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "eo/words/tagset.txt",
+      "sha256": "43224200bce6c889d90a126042dbe1bcab1cd85d0f3e7b792abd658607a48695",
+      "size": 4376,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/resource/eo/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "es/dictionaries/es-ES.dict",
       "sha256": "a3026f6457f2bf7bbf501f7d1c10a3a54bcdb10c8387da107532c934d75a39d3",
       "size": 2603354,
@@ -4482,6 +4628,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/MessagesBundle_en.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_eo.properties",
+      "sha256": "5a6f3ce66f7a1c5b380f849b27133e7b6faa8e1f1fc0d21b9159c5426c84d9f6",
+      "size": 14771,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/eo/src/main/resources/org/languagetool/MessagesBundle_eo.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

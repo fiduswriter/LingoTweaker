@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn                 # tests-only gate
 ```
 
@@ -56,7 +56,9 @@ boundary); pl the documented known fidelity gaps
 agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
 the PCON_VERB participle rule); da is at 0/0/0 (#10, resolved by the
 suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
-resolved by the suggestion-engine port); is is at 0/0/0 (#12). `no`, `nrd` and `gn` are hand-authored
+resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at
+1 only-Java / 1 only-Rust / 5 field diffs (#10, the unported hunspell
+wrong-split and BREAK suggestion variants). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle).
 

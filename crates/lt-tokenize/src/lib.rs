@@ -7,6 +7,7 @@
 pub mod catalan;
 pub mod dutch;
 pub mod english;
+pub mod esperanto;
 pub mod french;
 pub mod galician;
 pub mod german;
@@ -22,6 +23,7 @@ pub mod wordtokenizer;
 pub use catalan::CatalanWordTokenizer;
 pub use dutch::DutchWordTokenizer;
 pub use english::{EnglishWordTokenizer, IsTagged};
+pub use esperanto::EsperantoWordTokenizer;
 pub use french::FrenchWordTokenizer;
 pub use galician::GalicianWordTokenizer;
 pub use german::GermanWordTokenizer;

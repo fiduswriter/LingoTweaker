@@ -7,12 +7,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -97,6 +97,9 @@ fi
 if [ "$LANG_ARG" = "is" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-21"
 fi
+if [ "$LANG_ARG" = "eo" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-21"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -111,7 +114,13 @@ trap 'rm -f "$RUST"' EXIT
 "$BIN" check -l "$LANG_ARG" --lines --jobs "$JOBS" --today "$TODAY" --file "$INPUT" > "$RUST"
 
 EXTRA=()
-if [ "$LANG_ARG" = "en" ]; then
+if [ "$LANG_ARG" = "eo" ]; then
+  # documented known fidelity gaps (docs/differences.md #10): the unported
+  # hunspell wrong-split logic and the BREAK-based suggestion variants
+  EXTRA+=(--expect-only-java=HUNSPELL_RULE=1)
+  EXTRA+=(--expect-only-rust=UESTO=1)
+  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=5)
+elif [ "$LANG_ARG" = "en" ]; then
   # the one documented deliberate divergence (docs/differences.md #1)
   EXTRA+=(--expect-field-diffs=ADVERB_VERB_ADVERB_REPETITION=1)
 elif [ "$LANG_ARG" = "es" ]; then

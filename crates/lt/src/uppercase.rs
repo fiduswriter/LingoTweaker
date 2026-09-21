@@ -231,6 +231,19 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Esperanto `MessagesBundle_eo`
+/// strings.
+pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Tiu frazo ne komenciĝas per majuskla litero",
+        "Uskleco",
+        "Kontrolas, ĉu frazo komenciĝas per majuskla litero",
+        "Uskleco",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Icelandic `MessagesBundle_is`
 /// strings.
 pub fn check_is(sentences: &[AnalyzedSentence]) -> Vec<Match> {

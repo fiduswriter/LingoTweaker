@@ -1,0 +1,1491 @@
+L	1	Mi lernas Esperanton ek de la jaro 2005.
+M	1	EK_DE	1	21	26	Other	Ĉu vi intencis skribi <suggestion>ekde</suggestion>?	ekde
+L	2	Mi ne scias se li venos.
+M	2	SE_CXU	1	12	14	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>ĉu</suggestion>.	ĉu
+L	3	Mi ne scias, se li venos.
+M	3	SE_CXU	2	13	15	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>ĉu</suggestion>.	ĉu
+L	4	Ne serĉu pri tio!
+M	4	SERCXI	1	3	12	Other	Ĉu vi intencis <suggestion>ŝercu</suggestion> anstataŭ «serĉu»?	ŝercu
+L	5	Mi ĉie serĉis pri tio.
+L	6	La reportistoj havis neniun novaĵon.
+M	6	REPORTISTO	1	3	14	Other	Plej verŝajne vi intencis skribi <suggestion>raportisto</suggestion> anstataŭ «reportistoj»?	raportisto
+L	7	Li reportis pri la eventoj.
+M	7	REPORTISTO	2	3	11	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>raportis</suggestion> anstataŭ «reportis».	raportis
+L	8	Li reportis, ke la eventoj tiel okazis.
+M	8	REPORTISTO	3	3	11	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>raportis</suggestion> anstataŭ «reportis».	raportis
+L	9	La rebeloj venkis.
+M	9	REGARDI	1	3	10	Other	Uzo de «rebeloj» estas sufiĉe neverŝajna. Ĉu vi intencis skribi <suggestion>ribeloj</suggestion>?	ribeloj
+L	10	Flavio Rebelo funkciigis la retpaĝaron Ĝangalo.
+M	10	HUNSPELL_RULE		0	6	UnknownWord	Ebla mistajpaĵo trovita	Flavi|Flavo|Flavigo|Flaviĝo|Flavis|Malavio
+L	11	Ili estas tre dankemaj pro via helpo.
+M	11	DANKEMA	1	14	22	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>dankaj</suggestion>. Teorie «dankema» estas uzata por konstanta inklino al dankado, ne por provizora helpo.	dankaj
+L	12	Mi estas tre danka pro via helpo.
+L	13	Mi estas dankema al miaj infanoj.
+L	14	Li havas dankeman karakteron.
+L	15	Se vi helpus min, ni estus dankemaj.
+M	15	DANKEMA	2	27	35	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>dankaj</suggestion>. Teorie «dankema» estas uzata por konstanta inklino al dankado, ne por provizora helpo.	dankaj
+L	16	Se vi helpus min, ni estus tre dankemaj.
+M	16	DANKEMA	2	31	39	Other	Laŭ la kunteksto ŝajnas, ke vi intencis skribi <suggestion>dankaj</suggestion>. Teorie «dankema» estas uzata por konstanta inklino al dankado, ne por provizora helpo.	dankaj
+L	17	Mi dissendis la literon.
+M	17	LITERO_LETERO	1	16	23	Other	Ĉu vi intencis <suggestion>leteron</suggestion> anstataŭ «literon»?	leteron
+L	18	Mi ne povas legi etajn literojn.
+L	19	Por ricevi la literon Ĥ, longe premu H.
+M	19	HUNSPELL_RULE		22	23	UnknownWord	Ebla mistajpaĵo trovita	I|S|Aĥ
+M	19	HUNSPELL_RULE		37	38	UnknownWord	Ebla mistajpaĵo trovita	I|S|Ho|Ha|He
+L	20	Mi havas eblecon ŝanĝi laboron.
+M	20	EBLECO	1	9	16	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>eblon</suggestion> anstataŭ «eblecon».	eblon
+L	21	Li forte frapis la pilkon per lia nova tenisraketo.
+M	21	RAKETO_RAKEDO	1	39	50	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>tenisrakedo</suggestion> anstataŭ «tenisraketo».	tenisrakedo
+L	22	Mi aĉetis raketojn de tabloteniso.
+M	22	RAKETO_RAKEDO	2	10	18	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>rakedojn</suggestion> anstataŭ «tabloteniso».	rakedojn
+L	23	Ŝi havas fortan francan akcenton.
+M	23	AKCENTO_AKCXENTO	1	24	32	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>akĉenton</suggestion>.	akĉenton
+L	24	La vorto havas akcenton sur la antaŭlasta silabo.
+L	25	La akĉento en tiu vorto estas sur la lasta silabo.
+M	25	AKCENTO_AKCXENTO	2	3	10	Other	Laŭ la kunteksto, ŝajnas, ke vi intencis diri <suggestion>akcento</suggestion>.	akcento
+L	26	Ŝi ludas la violinon bonege.
+M	26	VIOLINO_VIOLONO	1	12	20	Other	Laŭ la kunteksto, ŝajnas, ke vi intencis diri <suggestion>violonon</suggestion>.	violonon
+L	27	Tio kostas 200 jenojn.
+M	27	JENO_ENO	1	15	21	Other	Se «jenojn» temas pri la japana monunuo, oni tiam skribas <suggestion>enojn</suggestion>.	enojn
+L	28	Tio kostas ducent jenojn.
+M	28	JENO_ENO	2	18	24	Other	Se «jenojn» temas pri la japana monunuo, oni tiam skribas <suggestion>enojn</suggestion>.	enojn
+L	29	Ŝi estas naturala virino.
+M	29	NATURALA	1	9	17	Other	«naturala» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>natura</suggestion>?	natura
+L	30	Tutmonda polucio estas danĝero por la planedo.
+M	30	POLUCIO_POLUO	1	9	16	Other	Laŭ la kunteksto, ŝajnas, ke vi intencis diri <suggestion>poluo</suggestion>.	poluo
+L	31	Danĝera aerpolucio en la urboj malsanigas la homojn.
+M	31	POLUCIO_POLUO	2	8	18	Other	Laŭ la kunteksto, ŝajnas, ke vi intencis diri <suggestion>aerpoluo</suggestion>.	aerpoluo
+L	32	Ŝia matro forpasis.
+M	32	MATRO	1	4	9	Other	«matro» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>patrino</suggestion>?	patrino
+L	33	Tiuj aŭtoj estas multekaraj.
+M	33	MULTEKARA	1	17	27	Other	Uzo de «multekaraj» estas verŝajne eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>multekostaj</suggestion>?	multekostaj
+L	34	Ŝi regardis lin.
+M	34	REGARDI	1	3	11	Other	Uzo de «regardis» estas sufiĉe neverŝajna. Ĉu vi intencis skribi <suggestion>rigardis</suggestion>?	rigardis
+L	35	Li eksploris la landon.
+M	35	EKSPLORI	1	3	12	Other	La vorto «eksploris» estas verŝajna eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>esploris</suggestion>?	esploris
+L	36	Ili estis eksploristoj.
+M	36	EKSPLORI	1	10	22	Other	La vorto «eksploristoj» estas verŝajna eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>esploristoj</suggestion>?	esploristoj
+L	37	Mi enkontris lian fraton.
+M	37	ENKONTRI	1	3	12	Other	La vorto «enkontris» estas verŝajna eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>renkontis</suggestion>?	renkontis
+L	38	La nova versiono tre bonas.
+M	38	VERSIONO	1	8	16	Other	La vorto «versiono» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>versio</suggestion>?	versio
+L	39	La interesoj de la naciono ofte kontraŭas tiujn de la individuoj.
+M	39	NACIONO	1	19	26	Other	La vorto «naciono» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>nacio</suggestion>?	nacio
+L	40	Estis magika vespero.
+M	40	MAGIKA	1	6	12	Other	La vorto «magika» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>magia</suggestion>?	magia
+L	41	Mi havas neniujn defektojn.
+M	41	DIFEKTO	1	17	26	Other	La vorto «defektojn» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>difektojn</suggestion>?	difektojn
+L	42	Li ludas eksterne.
+M	42	EKSTERNE	1	9	17	Other	La vorto «eksterne» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>ekstere</suggestion>?	ekstere
+L	43	La enloĝantoj de Argentino belas.
+M	43	ENLOGANTO	1	3	13	Other	La vorto «enloĝantoj» ŝajnas esti eraro pro influo de nacia lingvo. Ĉu vi intencis skribi <suggestion>loĝantoj</suggestion>?	loĝantoj
+L	44	Li estas jam adulto.
+M	44	ADULTO_ADOLTO	1	13	19	Other	Ĉu vi intencis skribi <suggestion>adolto</suggestion>?	adolto
+L	45	Adultoj kaj liaj infanoj rajtas partopreni.
+M	45	ADULTO_ADOLTO	2	0	7	Other	Ĉu vi intencis skribi <suggestion>Adoltoj</suggestion>?	Adoltoj
+L	46	Infanoj kaj adultoj partoprenis.
+M	46	ADULTO_ADOLTO	3	12	19	Other	Ĉu vi intencis skribi <suggestion>adoltoj</suggestion>?	adoltoj
+L	47	Maria baldaŭ fariĝos adultino.
+M	47	HUNSPELL_RULE		0	5	UnknownWord	Ebla mistajpaĵo trovita	Aria|Marsa|Saria|Malia|Karia|Varia|Paria|Baria|Maris|Mari|Mara|Maoria|Marina|Mariga|Amari
+M	47	ADULTO_ADOLTO	4	21	29	Other	Ĉu vi intencis skribi <suggestion>adoltino</suggestion>?	adoltino
+L	48	Mi instruas Esperanton al adultoj.
+M	48	ADULTO_ADOLTO	5	26	33	Other	Ĉu vi intencis skribi <suggestion>adoltoj</suggestion>?	adoltoj
+L	49	Ĉu vi havas plastikan sakon?
+M	49	PLASTA_PLASTIKA	1	12	21	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>plastan</suggestion>.	plastan
+L	50	Li estas plastika kirurgo.
+L	51	Post la rusia revolucio de 1905 la finlandanoj sukcesis havigi al si pliajn rajtojn.
+M	51	FINNLANDO	1	35	46	Other	Ĉu vi intencis skribi <suggestion>finnlandanoj</suggestion>?	finnlandanoj
+L	52	Mi vivas en Nederlando.
+M	52	VIVI_LOGXI	1	3	8	Other	Laŭ la kunteksto, ŝajnas, ke vi intencis skrivi <suggestion>loĝas</suggestion>.	loĝas
+L	53	Elefantoj vivas en Azio kaj Afriko.
+L	54	Zamenof kreis Esperanton.
+M	54	ZAMENHOF	1	0	7	Other	Ĉu vi intencis skribi <suggestion>Zamenhof</suggestion>, se temas pri L. L. Zamenhof, kiu kreis Esperanton?	Zamenhof
+L	55	Flavio Ribelo funkciigis la retpaĝaron Ĝangalo.
+M	55	FLAVIO_REBELO	1	0	13	Other	Ĉu vi intencis skribi <suggestion>Flavio Rebelo</suggestion>, se temas pri la Esperantisto, kiu kreis Ĝangalon?	Flavio Rebelo
+L	56	Bertilow Wennergren estas sveda esperantisto.
+M	56	BERTILO_WENNERGREN	1	0	19	Other	Ĉu vi intencis skribi <suggestion>Bertilo Wennergren</suggestion>, se temas pri la verkisto de PMEG?	Bertilo Wennergren
+L	57	Bertilo Wenergren estas sveda esperantisto.
+M	57	BERTILO_WENNERGREN	1	0	17	Other	Ĉu vi intencis skribi <suggestion>Bertilo Wennergren</suggestion>, se temas pri la verkisto de PMEG?	Bertilo Wennergren
+L	58	Bertilo Wennergren aŭ Bertil Wennergren estas ambaŭ ĝustaj.
+M	58	HUNSPELL_RULE		0	7	UnknownWord	Ebla mistajpaĵo trovita	Berilo|Belorusio
+M	58	HUNSPELL_RULE		8	18	UnknownWord	Ebla mistajpaĵo trovita	Grenadinoj
+M	58	HUNSPELL_RULE		22	28	UnknownWord	Ebla mistajpaĵo trovita	
+M	58	HUNSPELL_RULE		29	39	UnknownWord	Ebla mistajpaĵo trovita	Grenadinoj
+L	59	Mi ne jam studis la lecionon.
+M	59	NE_JAM	1	3	9	Other	Prefere skribu <suggestion>ankoraŭ ne</suggestion> anstataŭ «ne jam».	ankoraŭ ne
+L	60	Mi ne ankoraŭ vidis lin.
+M	60	NE_ANKORAUX	1	3	13	Other	Prefere skribu <suggestion>ankoraŭ ne</suggestion> anstataŭ «ne ankoraŭ».	ankoraŭ ne
+L	61	Li ne pasis la ekzamenon.
+M	61	PASI_EKZAMENON	1	6	24	Other	«Pasi ekzamenon» evitindas. Prefere skribu «sukcesi en ekzameno» aŭ «trapasi ekzamenon» laŭ tio, kion vi intencas.	
+L	62	Li ne sukcesis en la ekzameno.
+L	63	Pasinte la ekzamenon
+M	63	PASI_EKZAMENON	1	0	20	Other	«Pasi ekzamenon» evitindas. Prefere skribu «sukcesi en ekzameno» aŭ «trapasi ekzamenon» laŭ tio, kion vi intencas.	
+L	64	Trapasinte la ekzamenon
+L	65	Morgaŭ mi trapasos gravan ekzamenon.
+L	66	Mi adicias 2 al 2.
+M	66	ADICII_AL	1	13	15	Other	Laŭ ReVo, «adicias 2 al 2» estas evitinda. Prefere uzu la pli simetrian <suggestion>kaj</suggestion> anstataŭ «al».	kaj
+L	67	Vi darfas malfermi la fenestron.
+M	67	DARFI	1	3	9	Other	Laŭ PMEG, la verbo «darfi» estas superflua. Uzu <suggestion>rajtas</suggestion>.	rajtas
+L	68	Biliono da steloj
+M	68	BILIONO	1	0	7	Other	Laŭ ReVo, «Biliono» estas evitinda, ĉar diversaj vortaroj difinas ĝin malsame. Prefere skribu <suggestion>miliardo</suggestion> aŭ <suggestion>mil miliardoj</suggestion> laŭ tio, kion vi intencas.	Miliardo|Mil miliardoj
+L	69	Du biliardoj.
+M	69	BILIARDO	1	3	12	Other	Vortoj kiel «biliardo», «triliardo», «kvadriliardo» k.t.p. tute ne ekzistas en Esperanto.	
+L	70	Du bilionoj.
+M	70	BILIONO	1	3	11	Other	Laŭ ReVo, «bilionoj» estas evitinda, ĉar diversaj vortaroj difinas ĝin malsame. Prefere skribu <suggestion>miliardo</suggestion> aŭ <suggestion>mil miliardoj</suggestion> laŭ tio, kion vi intencas.	miliardo|mil miliardoj
+L	71	Ĝi opakiĝis.
+M	71	OPAKIGXI	1	3	11	Other	Laŭ ReVo, «opakiĝis» estas evitinda. Prefere skribu <suggestion>iĝis netravidebla</suggestion> aŭ <suggestion>iĝis maldiafana</suggestion>.	iĝis netravidebla|iĝis maldiafana
+L	72	La fenestroj estas opakaj.
+M	72	OPAKA	1	19	25	Other	Laŭ ReVo, «opakaj» estas evitinda. Prefere skribu <suggestion>netravideblaj</suggestion> aŭ <suggestion>maldiafanaj</suggestion> aŭ <suggestion>lumbaraj</suggestion>.	netravideblaj|maldiafanaj|lumbaraj
+L	73	Tiu brasikrapo bongustas.
+M	73	BRASIKRAPO	1	4	14	Other	«brasikrapo» estas evitinda. Prefere skribu <suggestion>tigobrasiko</suggestion>.	tigobrasiko
+L	74	Mi devis deflankiĝi.
+M	74	DEFLANKIGXI	1	9	19	Other	Laŭ ReVo, «deflankiĝi» estas evitinda. Prefere skribu <suggestion>forflankiĝi</suggestion>.	forflankiĝi
+L	75	La cifero de mortoj estas alta.
+M	75	CIFERO_DE	1	3	9	Other	Prefere skribu <suggestion>nombro de</suggestion>.	nombro de
+L	76	La teksto datiĝas de ok jaroj.
+M	76	DATIGXI	1	10	17	Other	Tiu uzo de «datiĝas» estas mallogika kaj evitinda laŭ ReVo en tiu kunteksto.	
+L	77	La teksto aperis antaŭ ok jaroj.
+L	78	sendifina modo.
+M	78	SENDIFINA_MODO	1	0	14	Other	«sendifina modo» evitinda laŭ ReVo. Uzu <suggestion>infinitivo</suggestion>.	infinitivo
+L	79	Dosiero en la kodigo UTF-8.
+M	79	KODIGO	1	14	20	Other	Ne uzu «kodigo» tiusence. Uzu <suggestion>kodoprezento</suggestion>.	kodoprezento
+M	79	HUNSPELL_RULE		21	25	UnknownWord	Ebla mistajpaĵo trovita	
+L	80	Li estas blankkolumulo.
+M	80	BLANKKOLUMULO	1	9	22	Other	Iuj rigardas la idiomaĵon «blankkolumulo» malklara, malmoderna kaj evitinda.	
+L	81	Li estas oficisto.
+L	82	Mi invitas vin al la videokonferenco.
+M	82	VIDEOKONFERENCO	1	21	36	Other	Laŭ ReVo, «videokonferenco» estas evitinda, uzu <suggestion>videkunveno</suggestion> aŭ <suggestion>telekunveno</suggestion>.	videkunveno|telekunveno
+L	83	Li laŭtlegis sian mesaĝon.
+M	83	LAUXTLEGI	1	3	12	Other	Laŭ ReVo, «laŭtlegis» estas evitinda, uzu <suggestion>voĉlegis</suggestion> aŭ <suggestion>laŭte voĉlegis</suggestion>.	voĉlegis|laŭte voĉlegis
+L	84	Mi ĵus lernis la novaĵon.
+M	84	LERNI	1	7	13	Other	Tiu uzo de «lernis» evitindas. Ŝajnas laŭ la kunteksto, ke vi intencis diri <suggestion>eksciis</suggestion>.	eksciis
+L	85	Li vidis lian mortan korpon.
+M	85	MORTA	1	14	20	Other	Tiu uzo de «mortan» evitindas. Ŝajnas laŭ la kunteksto, ke vi intencis diri <suggestion>malvivan</suggestion>.	malvivan
+L	86	Li vidis lian korpon mortan.
+M	86	MORTA	2	21	27	Other	Tiu uzo de «korpon» evitindas. Ŝajnas laŭ la kunteksto, ke vi intencis diri <suggestion>malvivan</suggestion>.	malvivan
+L	87	Li pentris mortan naturon.
+M	87	MORTA	3	11	25	Other	Tiu uzo de «mortan naturon» evitindas. Ŝajnas, ke vi intencis diri <suggestion>mutan naturon</suggestion>.	mutan naturon
+L	88	Li pentris naturon mortan.
+M	88	MORTA	4	11	25	Other	Tiu uzo de «naturon mortan» evitindas. Ŝajnas, ke vi intencis diri <suggestion>mutan naturon</suggestion>.	mutan naturon
+L	89	Sokrato estis stumpnaza.
+M	89	STUMPNAZA	1	14	23	Other	Laŭ ReVo, «stumpnaza» estas evitinda. Uzu <suggestion>kuspnaza</suggestion>.	kuspnaza
+L	90	Publika televido aĉas.
+M	90	PUBLIKA	1	0	7	Other	Laŭ ReVo, tiu uzo de «Publika» estas evitinda. Ĉu vi intencis <suggestion>ŝtata</suggestion>, nacia aŭ regna?	Ŝtata
+L	91	Estas nun alta tajdo.
+M	91	ALTA_TAJDO	1	10	20	Other	Laŭ ReVo, «alta tajdo» estas evitinda. Uzu <suggestion>altmaro</suggestion>.	altmaro
+L	92	Komputila tomografo
+M	92	TOMOGRAFO	1	10	19	Other	Laŭ ReVo, «tomografo» estas evitinda. Uzu <suggestion>tomografiilo</suggestion>.	tomografiilo
+L	93	Unika filo.
+M	93	UNIKA	1	0	5	Other	Laŭ ReVo, «Unika» estas evitinda en tiu kunteksto. Uzu <suggestion>ununura</suggestion>.	Ununura
+L	94	Filino unika.
+M	94	UNIKA	2	7	12	Other	Laŭ ReVo, «unika» estas evitinda en tiu kunteksto. Uzu <suggestion>ununura</suggestion>.	ununura
+L	95	Du pocentoj de la loĝantaro
+M	95	POCENTO	1	3	11	Other	Laŭ ReVo, «pocentoj» estas evitinda. Uzu <suggestion>elcentoj</suggestion>.	elcentoj
+L	96	Pasas kontinua kurento
+M	96	KONTINUA_KURENTO	1	6	22	Other	Laŭ ReVo, «kontinua kurento» estas evitinda. Uzu <suggestion>konstanta kurento</suggestion>.	konstanta kurento
+L	97	Ni kalkulas la ciklometrian funkcion
+M	97	CIKLOMETRIA_FUNKCIO	1	15	36	Other	Laŭ ReVo, «ciklometrian funkcion» estas evitinda. Uzu <suggestion>inversan trigonometrian funkcion</suggestion>.	inversan trigonometrian funkcion
+L	98	Diagonalo de kvadrato estas nekomunona.
+M	98	KOMUNONA	1	28	38	Other	Laŭ ReVo, «nekomunona» estas evitinda. Uzu <suggestion>nekunmezurebla</suggestion>.	nekunmezurebla
+L	99	La surrealismo de tiu artisto.
+M	99	SURREALISMO	1	3	14	Other	Laŭ ReVo, «surrealismo» estas evitinda. Uzu <suggestion>superrealismo</suggestion>.	superrealismo
+L	100	Mi studis en Pitsburgo.
+M	100	PITSBURGO	1	13	22	Other	Kvankam «Pitsburgo» estas en PIV, onu devus uzi <suggestion>Picburgo</suggestion> laŭ PMEG.	Picburgo
+L	101	Mi laboris en Potsdamo.
+M	101	POTSDAMO	1	14	22	Other	Kvankam «Potsdamo» estas en PIV, onu devus uzi <suggestion>Pocdamo</suggestion> laŭ PMEG.	Pocdamo
+L	102	Ŝi loĝas en Gŭatemalo.
+M	102	GUATEMALO	1	12	21	Other	Laŭ PMEG, «Gŭatemalo» estas evitinda. Uzu <suggestion>Gvatemalo</suggestion>.	Gvatemalo
+L	103	Mi ne ŝatas ŝin tielmaniere.
+M	103	TIELMANIERE	1	16	27	Other	Laŭ PMEG, «tielmaniere» estas eraro. Uzu <suggestion>tiumaniere</suggestion>.	tiumaniere
+L	104	Mi ne ŝatas tsetseojn.
+M	104	TSETSEO	1	12	21	Other	Laŭ ReVo, PIV kaj PMEG, la vorto «tsetseojn» estas misskribo, onu devus uzi <suggestion>ceceojn</suggestion>.	ceceojn
+L	105	10 Ŭaton.
+M	105	UATO	1	3	8	Other	Laŭ PMEG, «Ŭaton» estas evitinda. Uzu <suggestion>vaton</suggestion>.	Vaton
+L	106	La ŭesta parto de la urbo.
+M	106	HUNSPELL_RULE		0	8	UnknownWord	Ebla mistajpaĵo trovita	Laŭ esta
+L	107	Li alvenas hodie.
+M	107	HODIE	1	11	16	Other	Laŭ PMEG, nur en poezio oni povas trovi tian formon.	hodiaŭ
+L	108	Mi aĉetis termobotelon.
+M	108	TERMOBOTELO	1	10	22	Other	Laŭ PMEG, «termo» estas eksprefikso en kelkaj vortoj kun la signifo «varmo». Uzu kunmetaĵon kun «varm-».	varmbotelon
+L	109	Mi aĉetis termbotelon.
+M	109	TERMOBOTELO	1	10	21	Other	Laŭ PMEG, «termo» estas eksprefikso en kelkaj vortoj kun la signifo «varmo». Uzu kunmetaĵon kun «varm-».	varmbotelon
+L	110	Kie estas la termometro?
+L	111	Mi aĉetis diĝitan fotilon.
+M	111	DIGITA	1	10	17	Other	Laŭ ReVo kaj PIV, la vorto «diĝitan» estas evitinda. Uzu <suggestion>ciferecan</suggestion>.	ciferecan
+L	112	Kiam ili edziĝis?
+M	112	GEEDZIGXI	1	9	16	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>geedziĝis</suggestion>?	geedziĝis
+L	113	Kiam ili edziniĝis?
+M	113	GEEDZIGXI	1	9	18	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>geedziĝis</suggestion>?	geedziĝis
+L	114	Kiam ili geedziniĝis?
+M	114	GEEDZIGXI	1	9	20	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>geedziĝis</suggestion>?	geedziĝis
+L	115	Tiuj, kiuj edziĝas, feliĉas.
+L	116	Ili ĵus edziĝis?
+M	116	GEEDZIGXI	2	8	15	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>geedziĝis</suggestion>?	geedziĝis
+M	116	DEM_SEN_CXU	1	15	16	Other	Demando devas komenciĝi per la vorto «Ĉu» aŭ «Ki-» tabelvorto.	
+L	117	Ili ĵus edziniĝis?
+M	117	GEEDZIGXI	2	8	17	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>geedziĝis</suggestion>?	geedziĝis
+M	117	DEM_SEN_CXU	1	17	18	Other	Demando devas komenciĝi per la vorto «Ĉu» aŭ «Ki-» tabelvorto.	
+L	118	Ili ĵus geedziniĝis?
+M	118	GEEDZIGXI	2	8	19	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>geedziĝis</suggestion>?	geedziĝis
+M	118	DEM_SEN_CXU	1	19	20	Other	Demando devas komenciĝi per la vorto «Ĉu» aŭ «Ki-» tabelvorto.	
+L	119	Ili jxus edzigxis?
+M	119	X_SISTEMO	1	4	8	Other	La vorto «jxus» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+M	119	X_SISTEMO	1	9	17	Other	La vorto «edzigxis» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+M	119	DEM_SEN_CXU	1	17	18	Other	Demando devas komenciĝi per la vorto «Ĉu» aŭ «Ki-» tabelvorto.	
+L	120	Ŝi edziĝis kun li.
+M	120	GEEDZIGXI	3	3	10	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>edziniĝis</suggestion>?	edziniĝis
+L	121	Ŝi geedziĝis kun li.
+M	121	GEEDZIGXI	3	3	12	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>edziniĝis</suggestion>?	edziniĝis
+L	122	Ŝi geedziniĝis kun li.
+M	122	GEEDZIGXI	3	3	14	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>edziniĝis</suggestion>?	edziniĝis
+L	123	Li kun ŝi edziĝis.
+L	124	Li edziniĝis kun ŝi.
+M	124	GEEDZIGXI	4	3	12	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>edziĝis</suggestion>?	edziĝis
+L	125	Li geedziĝis kun ŝi.
+M	125	GEEDZIGXI	4	3	12	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>edziĝis</suggestion>?	edziĝis
+L	126	Li geedziniĝis kun ŝi.
+M	126	GEEDZIGXI	4	3	14	Other	Laŭ la kunteksto, ĉu vi eble intencis skribi <suggestion>edziĝis</suggestion>?	edziĝis
+L	127	Ŝi kun li edziniĝis.
+L	128	Tio estas semicirklo.
+M	128	SEMI	1	10	20	Other	La prefikso «semi-» estas superflua en Esperanto, kaj foje uzata pro influo de nacia lingvo. Oni anstataŭ uzas la prefikson «duon-». Ĉu vi volas skribi <suggestion>duoncirklo</suggestion>?	duoncirklo
+L	129	Mi iris al seminario.
+L	130	Ne ĉiam rikoltas tiu, kiu semis.
+L	131	Li estas fama kirurgisto.
+M	131	ISTO	1	14	24	Other	Oni ne uzas la sufikson «-ist» en tiuj vortoj, kiuj jam montras personon. Oni devas skribi <suggestion>kirurgo</suggestion> aŭ <suggestion>kirurgiisto</suggestion> anstataŭ «kirurgisto».	kirurgo|kirurgiisto
+L	132	Oni povas diri «fotografo» aŭ «fotografisto».
+L	133	Li estas fama aktoristo.
+M	133	ISTO	2	14	23	Other	Oni ne uzas la sufikson «-ist» en tiuj vortoj, kiuj jam montras personon. Oni devas skribi <suggestion>aktoro</suggestion> anstataŭ «aktoristo».	aktoro
+L	134	Oni povas diri «fotografo» aŭ «fotografisto».
+L	135	Estas dificila demando.
+M	135	DIFICILA	1	6	14	Other	Uzu <suggestion>malfacila</suggestion>.	malfacila
+L	136	Liaj humidaj okuloj.
+M	136	HUMIDA	1	5	12	Other	La vorto «humidaj» estas evitinda ekster scienca kunteksto, kiam ne temas pri kvanto de gasstata akvo en la aero.	malsekaj
+L	137	La humida vento.
+L	138	Liaj okuloj humidaj.
+M	138	HUMIDA	2	12	19	Other	La vorto «humidaj» estas evitinda ekster scienca kunteksto, kiam ne temas pri kvanto de gasstata akvo en la aero.	malsekaj
+L	139	Liaj okuloj preskaŭ humidaj.
+M	139	HUMIDA	2	20	27	Other	La vorto «humidaj» estas evitinda ekster scienca kunteksto, kiam ne temas pri kvanto de gasstata akvo en la aero.	malsekaj
+L	140	Liaj okuloj estis humidaj.
+M	140	HUMIDA	3	18	25	Other	La vorto «humidaj» estas evitinda ekster scienca kunteksto, kiam ne temas pri kvanto de gasstata akvo en la aero.	malsekaj
+L	141	Liaj okuloj estis tre humidaj.
+M	141	HUMIDA	3	22	29	Other	La vorto «humidaj» estas evitinda ekster scienca kunteksto, kiam ne temas pri kvanto de gasstata akvo en la aero.	malsekaj
+L	142	Liaj kampego estis tro humida.
+M	142	NEKONG_NOMBR	9	0	12	Other	Ne kongrua pluralo inter «Liaj» kaj «kampego».	
+M	142	HUMIDA	3	23	29	Other	La vorto «humida» estas evitinda ekster scienca kunteksto, kiam ne temas pri kvanto de gasstata akvo en la aero.	malseka
+L	143	La aero estas humida.
+L	144	Li perforis la muron.
+M	144	PERFORI	1	3	11	Other	La vorto «perforis» estas evitinda laŭ ReVo.	tratruis
+L	145	f(x) estas seminormo.
+M	145	HUNSPELL_RULE		0	1	UnknownWord	Ebla mistajpaĵo trovita	fi|i|s
+M	145	HUNSPELL_RULE		2	3	UnknownWord	Ebla mistajpaĵo trovita	i|s
+M	145	SEMINORMO	1	11	20	Other	La vorto «seminormo» estas evitinda laŭ ReVo.	duonnormo
+L	146	La aŭtoritatoj kaj humanitaraj organizaĵoj nun timas, ke infektaj malsanoj disvastiĝos.
+M	146	HUMANITARA	1	19	30	Other	La vorto «humanitaraj» estas evitinda laŭ ReVo.	homhelpaj
+L	147	Nekuiritaj legumenoj povas kaŭzi gravajn digestajn problemojn.
+M	147	LEGUMENO	1	11	20	Other	La vorto «legumenoj» estas evitinda laŭ ReVo.	guŝoj
+L	148	Ŝi ŝatas manĝi limetojn.
+M	148	LIMETO	1	15	23	Other	La vorto «limetojn» estas evitinda laŭ ReVo.	limedojn
+L	149	Folio konsistas el pluraj folioloj.
+M	149	FOLIOLO	1	26	34	Other	La vorto «folioloj» estas evitinda laŭ ReVo.	folieroj
+L	150	Li estis ŝinobo.
+M	150	SXINOBO	1	9	15	Other	La vorto «ŝinobo» estas evitinda laŭ ReVo. Uzu <suggestion>ninĵo</suggestion>.	ninĵo
+L	151	Li vidis sxinobojn.
+M	151	X_SISTEMO	1	9	18	Other	La vorto «sxinobojn» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+L	152	Mi marŝis en merdo.
+M	152	MERDO	1	13	18	Other	La vorto «merdo» estas evitinda laŭ ReVo. Uzu <suggestion>fekaĵo</suggestion>.	fekaĵo
+L	153	La digesta aparato inflamiĝis.
+M	153	APARATO	1	11	18	Other	La vorto «aparato» estas evitinda laŭ ReVo en tiu kunteksto. Uzu <suggestion>sistemo</suggestion> aŭ <suggestion>organaro</suggestion>.	sistemo|organaro
+M	153	HUNSPELL_RULE		19	29	UnknownWord	Ebla mistajpaĵo trovita	inflamigis|inflami ĝis|inflami-ĝis
+L	154	Lia filo estis morte naskita.
+M	154	MORTE_NASKITA	1	15	28	Other	Laŭ ReVo, «morte naskita» estas evitinda. Uzu <suggestion>malvive naskita</suggestion>.	malvive naskita
+L	155	La opinio de f-ino Rozo estas tute erara.
+M	155	F-INO	1	13	18	Other	Laŭ ReVo, la titolo «f-ino» estas evitinda. Uzu <suggestion>s-ino</suggestion>.	s-ino
+L	156	En nia kvartalo loĝas nur unu negro.
+M	156	NEGRO	1	30	35	Other	La vorto «negro» estas evitinda laŭ ReVo.	nigrulo
+L	157	Li naskiĝis en la XVII-a jarcento.
+M	157	ROMAJ_CIFEROJ	1	18	24	Other	Laŭ PMEG, la romaj ciferoj (I, II, III, IV, V…) estas evitindaj, ĉar ili ne estas tut-monde konataj.	
+L	158	Li naskiĝis en la ⅩⅦ-a jarcento.
+M	158	ROMAJ_CIFEROJ	1	18	22	Other	Laŭ PMEG, la romaj ciferoj (I, II, III, IV, V…) estas evitindaj, ĉar ili ne estas tut-monde konataj.	
+L	159	Kiel ci fartas?
+M	159	CI	1	5	7	Other	Laŭ ReVo, la pronomo «ci» estas evitinda. Prefere skribu <suggestion>vi</suggestion>.	vi
+L	160	Ci tute malpravas!
+M	160	CI	1	0	2	Other	Laŭ ReVo, la pronomo «Ci» estas evitinda. Prefere skribu <suggestion>vi</suggestion>.	Vi
+L	161	Ciaj libroj aĉas!
+M	161	CI	1	0	4	Other	Laŭ ReVo, la pronomo «Ciaj» estas evitinda. Prefere skribu <suggestion>viaj</suggestion>.	Viaj
+L	162	Ĉiu izotopo havas malsaman atompezon.
+M	162	ARKAISMO	1	27	36	Other	Laŭ PIV 2020, «atompezon» estas arkaismo. Uzu <suggestion>atommason</suggestion>.	atommason
+L	163	Ili faris abatison.
+M	163	ARKAISMO	2	10	18	Other	Laŭ PIV 2020, «abatison» estas arkaismo. Konsideru uzi <suggestion>arbobaraĵon</suggestion>.	arbobaraĵon
+L	164	Jen fiberoj.
+M	164	ARKAISMO	3	4	11	Other	Laŭ PIV 2020, «fiberoj» estas arkaismo. Konsideru uzi <suggestion>ondatroj</suggestion>.	ondatroj
+L	165	Mi aĉetis abaĵuron.
+M	165	ARKAISMO	4	10	18	Other	Laŭ ReVo, «abaĵuron» estas arkaismo. Uzu <suggestion>lumŝirmilon</suggestion>.	lumŝirmilon
+L	166	Estas multepeza valizo.
+M	166	ARKAISMO	5	6	15	Other	Laŭ ReVo, «multepeza» estas arkaismo. Uzu <suggestion>peza</suggestion>.	peza
+L	167	Troo da ĥolesterino en la sango povas kaŭzi malsanojn.
+M	167	ARKAISMO	6	8	19	Other	Laŭ ReVo, «ĥolesterino» estas arkaismo. Uzu <suggestion>ĥolesterolo</suggestion>.	ĥolesterolo
+L	168	Pasas aeroplanoj.
+M	168	ARKAISMO	7	6	16	Other	Laŭ ReVo, «aeroplanoj» estas arkaismo. Uzu <suggestion>avioj</suggestion>.	avioj
+L	169	La viruso de aideso
+M	169	ARKAISMO	8	13	19	Other	Laŭ ReVo, «aideso» estas arkaismo. Uzu <suggestion>aidoso</suggestion>.	aidoso
+L	170	Du estas alikvanto
+M	170	ARKAISMO	9	9	18	Other	Laŭ ReVo, «alikvanto» estas arkaismo. Uzu <suggestion>nedivizoro</suggestion>.	nedivizoro
+L	171	Ili ŝatas amaĵi
+M	171	ARKAISMO	10	10	15	Other	Laŭ ReVo, «amaĵi» estas arkaismo. Uzu <suggestion>amori</suggestion>.	amori
+L	172	Li pliamas vojaĝi aviadile.
+M	172	ARKAISMO	11	3	10	Other	Laŭ ReVo, «pliamas» estas arkaismo. Uzu <suggestion>preferas</suggestion>.	preferas
+L	173	Ŝi estas amovendistino.
+M	173	ARKAISMO	12	9	22	Other	Laŭ ReVo, «amovendistino» estas arkaismo. Uzu <suggestion>amoristino</suggestion>.	amoristino
+L	174	Ardejo
+M	174	ARKAISMO	13	0	6	Other	Laŭ ReVo, «Ardejo» estas arkaismo. Uzu <suggestion>fokuso</suggestion>, <suggestion>centro</suggestion>, <suggestion>kerno</suggestion> aŭ <suggestion>brulejo</suggestion>.	Fokuso|Centro|Kerno|Brulejo
+L	175	Li vendas armojn.
+M	175	ARKAISMO	14	10	16	Other	Laŭ ReVo, «armojn» estas arkaismo. Uzu <suggestion>armilojn</suggestion>.	armilojn
+L	176	Mi vojaĝas al la Baltiko
+M	176	ARKAISMO	15	17	24	Other	Laŭ ReVo, «Baltiko» estas arkaismo. Uzu <suggestion>Balta Maro</suggestion>.	Balta Maro
+L	177	Ŝi refaldoborderas
+M	177	ARKAISMO	16	3	18	Other	Laŭ ReVo, «refaldoborderas» estas arkaismo. Uzu <suggestion>orlas</suggestion>.	orlas
+L	178	Li estas dekstrano
+M	178	ARKAISMO	17	9	18	Other	Laŭ ReVo, «dekstrano» estas arkaismo. Uzu <suggestion>dekstrulo</suggestion>.	dekstrulo
+L	179	Li estas delegato
+M	179	ARKAISMO	18	9	17	Other	Laŭ ReVo, «delegato» estas arkaismo. Uzu <suggestion>delegito</suggestion>.	delegito
+L	180	Tio estas detalaĵo
+M	180	ARKAISMO	19	10	18	Other	Laŭ ReVo, «detalaĵo» estas arkaismo. Uzu <suggestion>detalo</suggestion>.	detalo
+L	181	Li ŝatas diletantismon
+M	181	ARKAISMO	20	9	22	Other	Laŭ ReVo, «diletantismon» estas arkaismo. Uzu <suggestion>diletantecon</suggestion>.	diletantecon
+L	182	Li legas pri diluvio
+M	182	ARKAISMO	21	13	20	Other	Laŭ ReVo, «diluvio» estas arkaismo. Uzu <suggestion>plejstoceno</suggestion>.	plejstoceno
+L	183	La aldoniteco de la loĝantaro
+M	183	ARKAISMO	22	3	13	Other	Laŭ ReVo, «aldoniteco» estas arkaismo. Uzu <suggestion>sindono</suggestion>.	sindono
+L	184	Ĉiuj ekster mi sciis pri tio.
+M	184	ARKAISMO	23	5	11	Other	Laŭ ReVo, tiu uzo de «ekster» estas arkaismo. Uzu <suggestion>krom</suggestion>.	krom
+L	185	Mi mezuras la elektran fluon.
+M	185	ARKAISMO	24	14	28	Other	Laŭ ReVo, tiu uzo «elektran fluon» estas arkaismo. Uzu <suggestion>kurenton</suggestion>.	kurenton
+L	186	Li eliras el de la lito.
+M	186	ARKAISMO	25	10	15	Other	Laŭ ReVo, «el de» estas arkaismo. Uzu <suggestion>de</suggestion>.	de
+L	187	Stranga esprimaĵo.
+M	187	ARKAISMO	26	8	17	Other	Laŭ ReVo, «esprimaĵo» estas arkaismo. Uzu <suggestion>esprimo</suggestion>.	esprimo
+L	188	Li apudestis.
+M	188	ARKAISMO	27	3	12	Other	Laŭ ReVo, «apudestis» estas arkaismo. Uzu <suggestion>ĉeestis</suggestion>.	ĉeestis
+L	189	Ĉu vi bezonas motorfiakron?
+M	189	ARKAISMO	28	14	26	Other	Laŭ ReVo, «motorfiakron» estas arkaismo. Uzu <suggestion>taksion</suggestion>.	taksion
+L	190	Li volas fariĝi fajroestingisto.
+M	190	ARKAISMO	29	16	31	Other	Laŭ ReVo, «fajroestingisto» estas arkaismo. Uzu <suggestion>fajrobrigadisto</suggestion> aŭ <suggestion>fajrobrigadano</suggestion>.	fajrobrigadisto|fajrobrigadano
+L	191	Li aĉetis floraĵojn.
+M	191	ARKAISMO	30	10	19	Other	Laŭ ReVo, «floraĵojn» estas arkaismo. Uzu <suggestion>florojn</suggestion> aŭ <suggestion>florarojn</suggestion>.	florojn|florarojn
+L	192	Nuboj flugpendas.
+M	192	ARKAISMO	31	6	16	Other	Laŭ ReVo, «flugpendas» estas arkaismo. Uzu <suggestion>ŝvebas</suggestion>.	ŝvebas
+L	193	Mi aĉetis fotografan aparaton.
+M	193	ARKAISMO	32	10	29	Other	Laŭ ReVo, «fotografan aparaton» estas arkaismo. Uzu <suggestion>fotilon</suggestion>.	fotilon
+L	194	Mi atendis sur la fruntaĵo.
+M	194	ARKAISMO	33	18	26	Other	Laŭ ReVo, «fruntaĵo» estas arkaismo. Uzu <suggestion>frontono</suggestion>.	frontono
+L	195	Tio estas cirkla funkcio.
+M	195	ARKAISMO	34	10	24	Other	Laŭ ReVo, «cirkla funkcio» estas arkaismo. Uzu <suggestion>trigonometria funkcio</suggestion>.	trigonometria funkcio
+L	196	Kostas mil sterlingaj funtoj.
+M	196	ARKAISMO	35	11	28	Other	Laŭ ReVo, «sterlingaj funtoj» estas arkaismo. Uzu <suggestion>pundoj</suggestion>.	pundoj
+L	197	Kostas mil sterlingfuntoj.
+M	197	ARKAISMO	36	11	25	Other	Laŭ ReVo, «sterlingfuntoj» estas arkaismo. Uzu <suggestion>pundoj</suggestion>.	pundoj
+L	198	Li estas ĝentilhomo.
+M	198	ARKAISMO	37	9	19	Other	Laŭ ReVo, «ĝentilhomo» estas arkaismo. Uzu <suggestion>ĝentlemano</suggestion>.	ĝentlemano
+L	199	Jen heksagono.
+M	199	ARKAISMO	38	4	13	Other	Laŭ ReVo, «heksagono» estas arkaismo. Uzu <suggestion>seslatero</suggestion>.	seslatero
+L	200	Alvenas la hidroaeroplano.
+M	200	ARKAISMO	39	11	25	Other	Laŭ ReVo, «hidroaeroplano» estas arkaismo. Uzu <suggestion>hidroplano</suggestion>.	hidroplano
+L	201	La hinĝo rompiĝis.
+M	201	ARKAISMO	40	3	8	Other	Laŭ ReVo, «hinĝo» estas arkaismo. Uzu <suggestion>pordhoko</suggestion>.	pordhoko
+L	202	Por tiu laboro, mi petas 10 stelojn pohore.
+M	202	ARKAISMO	41	36	42	Other	Laŭ ReVo, «pohore» estas arkaismo. Uzu <suggestion>hore</suggestion>.	hore
+L	203	Mi loĝas en Ĥinujo.
+M	203	ARKAISMO	42	12	18	Other	Laŭ ReVo, «Ĥinujo» estas arkaismo. Uzu <suggestion>ĉinujo</suggestion>.	Ĉinujo
+L	204	Ŝi estas ĥino.
+M	204	ARKAISMO	42	9	13	Other	Laŭ ReVo, «ĥino» estas arkaismo. Uzu <suggestion>ĉino</suggestion>.	ĉino
+L	205	Mia fratino nun loĝas en Vaskujo.
+M	205	ARKAISMO	43	25	32	Other	Laŭ ReVo, «Vaskujo» estas arkaismo. Uzu <suggestion>eŭskujo</suggestion>.	Eŭskujo
+L	206	Ili estas vaskoj.
+M	206	ARKAISMO	43	10	16	Other	Laŭ ReVo, «vaskoj» estas arkaismo. Uzu <suggestion>eŭskoj</suggestion>.	eŭskoj
+L	207	Sen ia eĉ plej malgranda difekto.
+M	207	ARKAISMO	44	0	24	Other	Laŭ ReVo, «Sen ia eĉ plej malgranda» estas arkaismo. Uzu <suggestion>sen ajna</suggestion> aŭ <suggestion>sen ia ajn</suggestion>.	Sen ajna|Sen ia ajn
+L	208	Tiu valoro estas imaginaro.
+M	208	ARKAISMO	45	17	26	Other	Laŭ ReVo, «imaginaro» estas arkaismo. Uzu <suggestion>komplekso</suggestion>.	komplekso
+L	209	Estis neniuj indicoj de la krimo.
+M	209	ARKAISMO	46	13	20	Other	Laŭ ReVo, «indicoj» estas arkaismo en tiu kunteksto. Uzu <suggestion>indikaĵoj</suggestion>.	indikaĵoj
+L	210	La plantoj bezonas irigacon.
+M	210	ARKAISMO	47	19	27	Other	Laŭ ReVo, «irigacon» estas arkaismo. Uzu <suggestion>irigacion</suggestion>.	irigacion
+L	211	Li irigacas la kultivejojn.
+M	211	ARKAISMO	47	3	11	Other	Laŭ ReVo, «irigacas» estas arkaismo. Uzu <suggestion>irigacias</suggestion>.	irigacias
+L	212	Daŭris du centjarojn.
+M	212	VNETR_AKU	1	10	20	Other	Netransitiva verbo «Daŭris» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	213	Tiom da grandaj kalorioj.
+M	213	ARKAISMO	49	8	24	Other	Laŭ ReVo, «grandaj kalorioj» estas arkaismo. Uzu <suggestion>kilokalorioj</suggestion>.	kilokalorioj
+L	214	Tiom da malgrandaj kalorioj.
+M	214	ARKAISMO	50	8	27	Other	Laŭ ReVo, «malgrandaj kalorioj» estas arkaismo. Uzu <suggestion>kalorioj</suggestion>.	kalorioj
+L	215	Karbolo malodoras.
+M	215	ARKAISMO	51	0	7	Other	Laŭ ReVo, «Karbolo» estas arkaismo. Uzu <suggestion>fenolo</suggestion>.	Fenolo
+L	216	Li estas sen karito.
+M	216	ARKAISMO	52	13	19	Other	Laŭ ReVo, «karito» estas arkaismo. Uzu <suggestion>karitato</suggestion>.	karitato
+L	217	Stariĝis du kapeldineroj ĉe la pordo.
+M	217	ARKAISMO	53	12	24	Other	Laŭ ReVo, «kapeldineroj» estas arkaismo. Uzu <suggestion>akceptistoj</suggestion>.	akceptistoj
+L	218	Mi aĉetis kaseton.
+M	218	ARKAISMO	54	10	17	Other	Laŭ ReVo, «kaseton» estas arkaismo. Uzu <suggestion>kasedon</suggestion>.	kasedon
+L	219	Mi estas klukklukanta.
+M	219	ARKAISMO	55	9	21	Other	Laŭ ReVo, «klukklukanta» estas arkaismo. Uzu <suggestion>guglanta</suggestion>.	guglanta
+L	220	La komisiitaro elektis lin.
+M	220	ARKAISMO	56	3	14	Other	Laŭ ReVo, «komisiitaro» estas arkaismo. Uzu <suggestion>komisiono</suggestion>.	komisiono
+L	221	La komisiulo elektis lin.
+M	221	ARKAISMO	57	3	12	Other	Laŭ ReVo, «komisiulo» estas arkaismo. Uzu <suggestion>komisiisto</suggestion>.	komisiisto
+L	222	La kompateco de Dio.
+M	222	ARKAISMO	58	3	12	Other	Laŭ ReVo, «kompateco» estas arkaismo. Uzu <suggestion>kompatemo</suggestion>.	kompatemo
+L	223	Mi aĉetis novan komputeron.
+M	223	ARKAISMO	59	16	26	Other	Laŭ ReVo, «komputeron» estas arkaismo. Uzu <suggestion>komputilon</suggestion>.	komputilon
+L	224	Ni enkomune decidis.
+M	224	ARKAISMO	60	3	11	Other	Laŭ ReVo, «enkomune» estas arkaismo. Uzu <suggestion>entute</suggestion>.	entute
+L	225	La akvokonduko de Romo.
+M	225	ARKAISMO	61	3	14	Other	Laŭ ReVo, «akvokonduko» estas arkaismo. Uzu <suggestion>akvokondukilo</suggestion>.	akvokondukilo
+L	226	Li faris konfidencion
+M	226	ARKAISMO	62	9	21	Other	Laŭ ReVo, «konfidencion» estas arkaismo. Uzu <suggestion>konfidencon</suggestion>.	konfidencon
+L	227	La kontaktingo tro malgrandas.
+M	227	ARKAISMO	63	3	14	Other	Laŭ ReVo, «kontaktingo» estas arkaismo. Uzu <suggestion>ampolingo</suggestion>.	ampolingo
+L	228	Mi havas dolorigan krampfon.
+M	228	ARKAISMO	64	19	27	Other	Laŭ ReVo, «krampfon» estas arkaismo. Uzu <suggestion>kramfon</suggestion>.	kramfon
+L	229	Ĉu vi ŝatas ksereson?
+M	229	ARKAISMO	65	12	20	Other	Laŭ ReVo, «ksereson» estas arkaismo. Uzu <suggestion>ŝereon</suggestion>.	ŝereon
+L	230	Prenu tiun likvaĵon.
+M	230	ARKAISMO	66	11	19	Other	Laŭ ReVo, «likvaĵon» estas arkaismo. Uzu <suggestion>likvon</suggestion>.	likvon
+L	231	Mi invitis literatorojn.
+M	231	ARKAISMO	67	11	23	Other	Laŭ ReVo, «literatorojn» estas arkaismo. Uzu <suggestion>literaturistojn</suggestion>.	literaturistojn
+L	232	Mi ŝatas belan literaturon.
+M	232	ARKAISMO	68	9	26	Other	Laŭ ReVo, «belan literaturon» estas arkaismo. Uzu <suggestion>beletron</suggestion>.	beletron
+L	233	La funkcio estas kontraŭlogaritmo.
+M	233	ARKAISMO	69	17	33	Other	Laŭ ReVo, «kontraŭlogaritmo» estas arkaismo. Uzu <suggestion>eksponencialo</suggestion>.	eksponencialo
+L	234	La renkontiĝo havas lokon en Bretonio.
+M	234	ARKAISMO	70	14	25	Other	Laŭ ReVo, «havas lokon en» estas arkaismo. Uzu <suggestion>okazas</suggestion>.	okazas
+L	235	Prenu plenmanon de sablo.
+M	235	ARKAISMO	71	6	15	Other	Laŭ ReVo, «plenmanon» estas arkaismo. Uzu <suggestion>manplenon</suggestion>.	manplenon
+L	236	Ni bezonas kontraŭmendi ĉion.
+M	236	ARKAISMO	72	11	23	Other	Laŭ ReVo, «kontraŭmendi» estas arkaismo. Uzu <suggestion>malmendi</suggestion>.	malmendi
+L	237	Tio estas la multiplikendo.
+M	237	ARKAISMO	73	13	26	Other	Laŭ ReVo, «multiplikendo» estas arkaismo. Uzu <suggestion>multiplikato</suggestion>.	multiplikato
+L	238	La nacionalismo estas forta en tiu lando.
+M	238	ARKAISMO	74	3	15	Other	Laŭ ReVo, «nacionalismo» estas arkaismo. Uzu <suggestion>naciismo</suggestion>.	naciismo
+L	239	La pafilkapo de fusilo.
+M	239	ARKAISMO	75	3	12	Other	Laŭ ReVo, «pafilkapo» estas arkaismo. Uzu <suggestion>kolbo</suggestion>.	kolbo
+L	240	Tiu rekto estas perpendiklo.
+M	240	ARKAISMO	76	16	27	Other	Laŭ ReVo, «perpendiklo» estas arkaismo. Uzu <suggestion>ortanto</suggestion>.	ortanto
+L	241	Tio estas poliedro.
+M	241	ARKAISMO	77	10	18	Other	Laŭ ReVo, «poliedro» estas arkaismo. Uzu <suggestion>pluredro</suggestion>.	pluredro
+L	242	Mi enradikas la planton.
+M	242	ARKAISMO	78	3	12	Other	Laŭ ReVo, «enradikas» estas arkaismo. Uzu <suggestion>enradikigas</suggestion>.	enradikigas
+L	243	Oni elradiku la alkoholismon.
+M	243	ARKAISMO	79	4	12	Other	Laŭ ReVo, «elradiku» estas arkaismo. Uzu <suggestion>elradikigu</suggestion>.	elradikigu
+L	244	Mi devas fari radiofotografiojn.
+M	244	ARKAISMO	80	14	31	Other	Laŭ ReVo, «radiofotografiojn» estas arkaismo. Uzu <suggestion>radiografiojn</suggestion>.	radiografiojn
+L	245	Mi ne povoscias la okcidentfrisan.
+M	245	ARKAISMO	81	6	15	Other	Laŭ ReVo, «povoscias» estas arkaismo. Uzu <suggestion>scipovas</suggestion>.	scipovas
+M	245	HUNSPELL_RULE		19	33	UnknownWord	Ebla mistajpaĵo trovita	okcidentalan
+L	246	Ŝi iam havis malgrandan harligon.
+M	246	HARLIGO	82	24	32	Other	Laŭ ReVo, «harligon» estas arkaismo. Uzu <suggestion>harplektaĵon</suggestion>.	harplektaĵon
+L	247	En la internlando okazis malmulte.
+M	247	INTERNLANDO	83	6	17	Other	La vorto «internlando» estas arkaismo kaj evitinda laŭ ReVo.	landinterno
+L	248	Multaj spektatoroj venis.
+M	248	SPEKTATORO	84	7	18	Other	La vorto «spektatoroj» estas arkaismo kaj evitinda laŭ ReVo.	spektantoj
+L	249	Li havis serajlon.
+M	249	SERAJLO	1	9	17	Other	La vorto «serajlon» estas arkaismo laŭ ReVo.	haremon|palacon
+L	250	Ili loĝas cis tiuj montoj.
+M	250	NEOFIC_PREP	1	10	13	Other	«cis» estas neoficiala kaj malmulte konata rolvorteto.	
+L	251	La prezo estas mil dolaroj fri haveno.
+M	251	NEOFIC_PREP	1	27	30	Other	«fri» estas neoficiala kaj malmulte konata rolvorteto.	
+L	252	Ŝi ŝategas na ambaŭ.
+M	252	NEOFIC_PREP	1	11	13	Other	«na» estas neoficiala kaj malmulte konata rolvorteto.	
+L	253	Zi estas bela.
+M	253	NEOFIC_SING_PRON	1	0	2	Other	«Zi» estas neoficiala kaj malmulte konata pronomo. Prefere skribu la pli konatan neoficialan pronomon <suggestion>ri</suggestion> aŭ skribi unu el la oficialaj pronomoj <suggestion>ĝi</suggestion>, <suggestion>li</suggestion> aŭ <suggestion>ŝi</suggestion>.	Ri|Ĝi|Li|Ŝi
+L	254	Mi amas ŝlin.
+M	254	NEOFIC_SING_PRON	1	8	12	Other	«ŝlin» estas neoficiala kaj malmulte konata pronomo. Prefere skribu la pli konatan neoficialan pronomon <suggestion>rin</suggestion> aŭ skribi unu el la oficialaj pronomoj <suggestion>ĝin</suggestion>, <suggestion>lin</suggestion> aŭ <suggestion>ŝin</suggestion>.	rin|ĝin|lin|ŝin
+L	255	Mi estas gia edzino.
+M	255	NEOFIC_SING_PRON	1	9	12	Other	«gia» estas neoficiala kaj malmulte konata pronomo. Prefere skribu la pli konatan neoficialan pronomon <suggestion>ria</suggestion> aŭ skribi unu el la oficialaj pronomoj <suggestion>ĝia</suggestion>, <suggestion>lia</suggestion> aŭ <suggestion>ŝia</suggestion>.	ria|ĝia|lia|ŝia
+L	256	Iŝi estas miaj fratinoj.
+M	256	NEOFIC_PLUR_PRON	1	0	3	Other	«Iŝi» estas neoficiala kaj malmulte konata pronomo. Prefere skribu <suggestion>ili</suggestion>. Tiu pronomo ne montras sekson.	Ili
+L	257	Mi amis iŝin.
+M	257	NEOFIC_PLUR_PRON	1	8	12	Other	«iŝin» estas neoficiala kaj malmulte konata pronomo. Prefere skribu <suggestion>ilin</suggestion>. Tiu pronomo ne montras sekson.	ilin
+L	258	Iŝiajn kukojn mi tre ŝatas.
+M	258	NEOFIC_PLUR_PRON	1	0	6	Other	«Iŝiajn» estas neoficiala kaj malmulte konata pronomo. Prefere skribu <suggestion>iliajn</suggestion>. Tiu pronomo ne montras sekson.	Iliajn
+L	259	Mi estiel franco ŝatas fromaĝon.
+M	259	NEOFIC_ESTIEL	1	3	9	Other	«estiel» estas neoficiala vorto. Konsideru uzi <suggestion>estante</suggestion> aŭ <suggestion>kiel</suggestion>.	estante|kiel
+L	260	Tiu aŭto estas mies.
+M	260	NEOFIC_MIES	1	15	19	Other	Tiu poseda pronomformo «mies» estas neregula kaj evitinda.	mia
+L	261	Mi kaŭ li ŝatas tion.
+M	261	NEOFIC_KAUX	1	3	6	Other	«kaŭ» estas neoficiala vorto. Konsideru uzi <suggestion>kaj/aŭ</suggestion>.	kaj/aŭ
+L	262	Men vinon, mi petas.
+M	262	NEOFIC_MEN	1	0	3	Other	«Men» estas neoficiala kaj malmulte konata vorto. Ĉu vi intencis diri <suggestion>malpli</suggestion>?	Malpli
+L	263	La libro estis verkita far fama aŭtoro.
+M	263	NEOFIC_FAR	1	23	26	Other	«far» estas neoficiala kaj malmulte konata rolvorteto. Uzu <suggestion>de</suggestion> aŭ <suggestion>fare de</suggestion>.	de|fare de
+L	264	Mi sukcesis graŭ ŝia helpo.
+M	264	NEOFIC_GRAUX	1	12	16	Other	«graŭ» estas neoficiala kaj malmulte konata rolvorteto. Uzu <suggestion>dank’ al</suggestion>.	dank’ al
+L	265	Mi iras sor.
+M	265	NEOFIC_SOR	1	8	11	Other	«sor» estas neoficiala kaj malmulte konata vorto. Uzu <suggestion>supren</suggestion>.	supren
+L	266	Mi iras sob.
+M	266	NEOFIC_SOB	1	8	11	Other	«sob» estas neoficiala kaj malmulte konata vorto. Uzu <suggestion>suben</suggestion>.	suben
+L	267	Li respondis nen.
+M	267	NEOFIC_NEN	1	13	16	Other	«nen» estas neoficiala kaj malmulte konata vorto. Uzu <suggestion>ne</suggestion>.	ne
+L	268	Mi demandos aliun.
+M	268	NEOFIC_TABELVORTO	1	12	17	Other	«aliun» estas neoficiala tabelvorto, kiu estas do evitinda.	
+L	269	Mi demandos iun alian.
+L	270	Ŝi havis sis infanojn.
+M	270	NEOFIC_SIS	1	9	12	Other	«sis» estas neoficiala kaj malmulte konata vorto por la vorto <suggestion>ses</suggestion>.	ses
+L	271	Ŝi havis sepen infanojn.
+M	271	NEOFIC_SEPEN	1	9	14	Other	«sepen» estas neoficiala kaj malmulte konata vorto por la vorto <suggestion>sep</suggestion>.	sep
+L	272	Morgaŭ mi desherbos la ĝardenon.
+M	272	NEOF_PREF_DES	1	10	19	Other	La prefikso «des-» estas neoficiala, prefere skribu <suggestion>senherbigos</suggestion>.	senherbigos
+L	273	Li tuj desinfektis la vundon.
+M	273	NEOF_PREF_DESINFEKTI	1	7	18	Other	Prefere skribu <suggestion>malinfektis</suggestion> aŭ <suggestion>seninfektigis</suggestion>. La ofta verbo «desinfekti» povas tamen esti akceptabla, se oni rigardas «desinfekt-» kiel propra radiko.	malinfektis|seninfektigis
+L	274	Estas pluvoza vetero.
+M	274	NEOF_SUF_OZ	1	6	13	Other	«-oz» estas neoficiala sufikso. Prefere skribu <suggestion>pluva</suggestion>.	pluva
+L	275	La altometro misfunkciis.
+M	275	NEOF_SUF_OMETR	1	3	12	Other	«-ometr» estas neoficiala sufikso. Prefere skribu <suggestion>altomezurilo</suggestion>.	altomezurilo
+L	276	Ŝi aĉetis malnovan pluvometron.
+M	276	NEOF_SUF_OMETR	1	19	30	Other	«-ometr» estas neoficiala sufikso. Prefere skribu <suggestion>pluvomezurilon</suggestion>.	pluvomezurilon
+L	277	Mi ŝatas tiun filmotekon.
+M	277	NEOF_SUF_OTEK	1	14	24	Other	«-otek» estas neoficiala sufikso. Prefere skribu <suggestion>filmokolekton</suggestion>.	filmokolekton
+L	278	Maŝinkodo estas duaria misfunkciis.
+M	278	HUNSPELL_RULE		0	9	UnknownWord	Ebla mistajpaĵo trovita	
+M	278	NEOF_SUF_ARI	1	16	22	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>duuma</suggestion>.	duuma
+L	279	La nombrovortoj de Esperanto estas dekariaj.
+M	279	HUNSPELL_RULE		3	15	UnknownWord	Ebla mistajpaĵo trovita	nombro vortoj|nombro-vortoj
+M	279	NEOF_SUF_ARI	1	35	43	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>dekumaj</suggestion>.	dekumaj
+L	280	La deksesaria nombrosistemo utilas por komputiloj.
+M	280	NEOF_SUF_ARI	1	3	13	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>deksesuma</suggestion>.	deksesuma
+L	281	Kelkaj protokoloj uzas trideksesarian nombrosistemon.
+M	281	NEOF_SUF_ARI	1	23	37	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>trideksesuman</suggestion>.	trideksesuman
+L	282	Ĉu oni uzas la naŭdekarian nombrosistemon?
+M	282	NEOF_SUF_ARI	1	15	26	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>naŭdekuman</suggestion>.	naŭdekuman
+L	283	La n-aria pozicia nombrosistemo uzas n ciferojn.
+M	283	NEOF_SUF_ARI	1	3	9	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>n-uma</suggestion>.	n-uma
+M	283	HUNSPELL_RULE		37	38	UnknownWord	Ebla mistajpaĵo trovita	ne|en|ni|tn|nu|i|s
+L	284	Ĝi estas centaria termometra sistemo.
+M	284	NEOF_SUF_ARI	1	9	17	Other	«-ari» estas neoficiala sufikso. Prefere skribu <suggestion>centuma</suggestion>.	centuma
+L	285	Ĝi estas bela aria kanto.
+L	286	Li estas ano de Esperantofona klubo.
+M	286	NEOF_SUF_OFON	1	16	29	Other	«-ofon» estas neoficiala sufikso, kaj tute superflua. Prefere skribu <suggestion>Esperantlingva</suggestion>.	Esperantlingva
+L	287	Ili estas ĉeĉenofoninoj.
+M	287	NEOF_SUF_OFON	2	10	23	Other	«-ofon» estas neoficiala sufikso, kaj tute superflua. Prefere skribu <suggestion>ĉeĉenlingvaninoj</suggestion>.	ĉeĉenlingvaninoj
+L	288	Mi vojaĝos ĉi jare.
+M	288	CXI_FOJE	1	11	18	Other	Ĉu vi intencis skribi <suggestion>ĉi-jare</suggestion> kun streketo?	ĉi-jare
+L	289	Ĉu tiu ĉi vere okazis?
+L	290	Mi loĝas ĉi tie.
+L	291	Je la 8 horo.
+M	291	HORO	1	6	7	Other	Ĉu vi intencis skribi <suggestion>8-a</suggestion>?	8-a
+L	292	Li naskiĝis en la 19 jarcento.
+M	292	JARCENTO	1	18	20	Other	Ĉu vi intencis skribi <suggestion>19-a</suggestion>?	19-a
+L	293	Tio okazis en la 2015 jaro.
+M	293	JARO	1	17	21	Other	Ĉu vi intencis skribi <suggestion>2015-a</suggestion>?	2015-a
+L	294	Ili estas dudek jaraĝaj.
+M	294	JARAGXA	1	10	23	Other	Oni devas uzi streketon en la vortkombino <suggestion>dudek-jaraĝaj</suggestion>.	dudek-jaraĝaj
+L	295	Ili estas 20 jaraĝaj.
+M	295	JARAGXA	2	10	20	Other	Oni devas uzi streketon en la vortkombino <suggestion>20-jaraĝaj</suggestion>.	20-jaraĝaj
+L	296	La 30 an de Marto.
+M	296	JARAGXA	2	3	8	Other	Oni devas uzi streketon en la vortkombino <suggestion>30-an</suggestion>.	30-an
+L	297	Mi ŝatis ĉi-libron.
+M	297	CXI_O	1	9	18	Other	Ĉu vi intencis skribi <suggestion>ĉi libron</suggestion> aŭ <suggestion>ĉi tiun libron</suggestion>?	ĉi libron|ĉi tiun libron
+L	298	Ĉi-tiu aŭto.
+M	298	CXI_TIU	1	0	6	Other	Ĉu vi intencis skribi <suggestion>Ĉi tiu</suggestion> sen streketo?	Ĉi tiu
+L	299	Ĉitiu aŭto.
+M	299	CXI_TIU	1	0	5	Other	Ĉu vi intencis skribi <suggestion>Ĉi tiu</suggestion> sen streketo?	Ĉi tiu
+L	300	Mi deziras ĉi-tiun.
+M	300	CXI_TIU	1	11	18	Other	Ĉu vi intencis skribi <suggestion>ĉi tiun</suggestion> sen streketo?	ĉi tiun
+L	301	Mi deziras ĉitiun.
+M	301	CXI_TIU	1	11	17	Other	Ĉu vi intencis skribi <suggestion>ĉi tiun</suggestion> sen streketo?	ĉi tiun
+L	302	Mi ŝatas la ĉi-tiean veteron.
+M	302	CXI_TIU	1	12	20	Other	Ĉu vi intencis skribi <suggestion>ĉi tiean</suggestion> sen streketo?	ĉi tiean
+L	303	Mi deziras tiun-ĉi.
+M	303	CXI_TIU	2	11	18	Other	Ĉu vi intencis skribi <suggestion>tiun ĉi</suggestion> sen streketo?	tiun ĉi
+L	304	Kion do signifas ĉio-ĉi?
+M	304	CXI_TIU	2	17	23	Other	Ĉu vi intencis skribi <suggestion>ĉio ĉi</suggestion> sen streketo?	ĉio ĉi
+L	305	Ĉion-ĉi mi ne memoras.
+M	305	CXI_TIU	2	0	7	Other	Ĉu vi intencis skribi <suggestion>Ĉion ĉi</suggestion> sen streketo?	Ĉion ĉi
+L	306	Li scias nur kelk dek anglajn vortojn.
+M	306	KELK	1	13	21	Other	Ne eblas disskribi vorton kiel «kelk dek».	kelkdek
+L	307	Kelkiu alvenis.
+M	307	KELKIU	1	0	6	Other	La iafoje uzata formo «Kelkiu» (sen j) estas memkontraŭdira: -iu montras precize unu individuon, dum kelk- montras pli ol unu.	Kelkiuj
+L	308	Mi vidis kelkiun.
+M	308	KELKIU	1	9	16	Other	La iafoje uzata formo «kelkiun» (sen j) estas memkontraŭdira: -iu montras precize unu individuon, dum kelk- montras pli ol unu.	kelkiujn
+L	309	Ja jes!
+M	309	JA_JES	1	0	6	Other	Oni ne uzas «Ja jes», ĉu vi intencis skribi <suggestion>jes Ja</suggestion>?	Jes Ja
+L	310	Mi demandas min se li baldaŭ alvenos
+M	310	SE_CXU2	1	16	18	Other	Demanda subfrazo komenciĝas per <suggestion>ĉu</suggestion>, ne per «se».	ĉu
+L	311	Mi demandas min, se li baldaŭ alvenos
+M	311	SE_CXU2	1	17	19	Other	Demanda subfrazo komenciĝas per <suggestion>ĉu</suggestion>, ne per «se».	ĉu
+L	312	Tre multo estas ankoraŭ farenda.
+M	312	TRE_O	1	0	9	Other	Vorto «Tre» ne povas priskribi vorton «multo».	
+L	313	Tre multe estas ankoraŭ farenda.
+L	314	Estas tre pli simple.
+L	315	Tro multo estas ankoraŭ farenda.
+M	315	TRO_O	1	0	9	Other	Vorto «Tro» ne povas priskribi vorton «multo».	
+L	316	Tro multe estas ankoraŭ farenda.
+L	317	Mi havis tro da kafo.
+L	318	Ne tro.
+L	319	Li havas multan da mono.
+M	319	MULTA_DA	1	9	18	Other	Kiam oni anstataŭigas kvantan E-vorton per kvanta A-vorto, tiam «da» malaperas.	multan|multe da
+L	320	Mi aĉetis kilogramon de terpomoj.
+M	320	KILO_DE	1	21	23	Other	Ĉu vi intencis <suggestion>kilogramon da</suggestion> anstataŭ «kilogramon de»?	kilogramon da
+L	321	Bonvolu fermu la fenestron.
+M	321	BONVOLU_U	1	8	13	Other	La verbo «» devus havi i-finaĵon.	
+L	322	Bonvolu fermi la fenestron.
+L	323	Bonvolu fermu la fenestron.
+M	323	BONVOLU_U	1	8	13	Other	La verbo «» devus havi i-finaĵon.	
+L	324	Bonvolu, fermi la fenestron.
+L	325	Kostas du eŭroj po persono.
+M	325	PO	1	16	26	Other	Misuzo de la vorto «po».	
+L	326	Kostas po du eŭroj por persono.
+L	327	Mi veturis 100 kilometrojn po horo.
+M	327	PO	1	27	34	Other	Misuzo de la vorto «po».	
+L	328	Ambaŭ teamo perdis.
+M	328	AMBAUX_SING	1	6	11	Other	La vorto «Ambaŭ» postulas pluralon.	
+L	329	Ambaux teamo perdis.
+M	329	X_SISTEMO	1	0	6	Other	La vorto «Ambaux» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+M	329	AMBAUX_SING	1	7	12	Other	La vorto «Ambaux» postulas pluralon.	
+L	330	Ambau teamo perdis.
+M	330	HUNSPELL_RULE		0	5	UnknownWord	Ebla mistajpaĵo trovita	Ambaŭ|Amblu
+M	330	AMBAUX_SING	1	6	11	Other	La vorto «Ambau» postulas pluralon.	
+L	331	Mi amas ambaŭ patron kaj patrinon.
+L	332	Ambaŭ la teamoj perdis.
+M	332	AMBAUX_LA	1	0	8	Other	Ne devas esti «la» post «Ambaŭ», ĉar «Ambaŭ» estas jam difinilo.	
+L	333	Ambaŭ teamoj perdis.
+L	334	La ambaŭ teamoj perdis.
+M	334	AMBAUX_LA	2	0	8	Other	Ne devas esti «La» antaŭ «ambaŭ», ĉar «ambaŭ» estas jam difinilo.	
+L	335	Ambaŭ teamoj perdis.
+L	336	Mi pensas pri vin.
+M	336	PREP_AKU	1	14	17	Other	Prepozicio «pri» neniam povas esti sekvita de akuzativo. Uzu <suggestion>vi</suggestion>.	vi
+L	337	Mi vojaĝas sen veturilon.
+M	337	VNETR_AKU	1	15	24	Other	Netransitiva verbo «vojaĝas» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	338	Por tion fari
+L	339	Por ĉion lerte kolekti.
+L	340	La teksto de Piron.
+L	341	Mi pensas pri la laboron.
+M	341	PREP_AKU	2	17	24	Other	Prepozicio «pri» neniam povas esti sekvita de akuzativo. Skribu <suggestion>laboro</suggestion>.	laboro
+L	342	Mi alvenis ekde kvar horojn.
+M	342	PREP_AKU	2	21	27	Other	Prepozicio «ekde» neniam povas esti sekvita de akuzativo. Skribu <suggestion>horoj</suggestion>.	horoj
+L	343	Ili loĝis tie ekde cent dek jarojn.
+M	343	PREP_AKU	3	28	34	Other	Prepozicio «ekde» neniam povas esti sekvita de akuzativo. Skribu <suggestion>jaroj</suggestion>.	jaroj
+L	344	Ili loĝis tie ekde preskaŭ cent dek jarojn.
+M	344	PREP_AKU	4	36	42	Other	Prepozicio «ekde» neniam povas esti sekvita de akuzativo. Skribu <suggestion>jaroj</suggestion>.	jaroj
+L	345	Mi volas fariĝi instruiston.
+M	345	VNETR_AKU	1	16	27	Other	Netransitiva verbo «fariĝi» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	346	Mi volas fariĝi instruisto.
+L	347	Mi estas lacan.
+M	347	VNETR_AKU	1	9	14	Other	Netransitiva verbo «estas» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	348	Mi estas laca.
+L	349	Mi iras en la domon.
+L	350	Mi iras tien.
+L	351	La festo daŭris ok tagojn.
+L	352	Dum la milito estis persekutinta esperantistojn.
+L	353	La kongreso okazos la 2-an de marto.
+M	353	HUNSPELL_RULE		24	26	UnknownWord	Ebla mistajpaĵo trovita	ano|ana|ane|ani|ian|anu|ajn|en|al|tn|aŭ|aĥ
+L	354	Okazas nenion.
+M	354	VNETR_AKU	1	7	13	Other	Netransitiva verbo «Okazas» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	355	Okazas nenio.
+L	356	Oni ne trompiĝu pri tio, kion diras la aŭtoro.
+L	357	Ĉu eblas tion fari?
+L	358	Tio okazis la antaŭan jaron.
+L	359	La tradukado daŭris proksimume du semajnojn.
+L	360	Bela estas Ĝon.
+M	360	HUNSPELL_RULE		11	14	UnknownWord	Ebla mistajpaĵo trovita	Ion|Ĝin|Aĝon|Eĝon|Iĝon|Ĝuon|Onin
+L	361	Temas pri informoj kiujn ni jam legis.
+L	362	Mi vojaĝis la semajnfinon.
+L	363	Mi vojaĝis la semajnofinon.
+M	363	HUNSPELL_RULE		14	26	UnknownWord	Ebla mistajpaĵo trovita	semajnfinon|semajno finon|semajno-finon|skorpenoformaj
+L	364	Ni restis duonhoron.
+L	365	Li lasis fali ĝin.
+L	366	Tio daŭros nur momenteton.
+L	367	Jen estas vorto kies signifon mi ne komprenas.
+L	368	Li estas ĉion leginta.
+L	369	La bebo pezis sep funtojn.
+L	370	Mi havis agrablajn feriojn.
+L	371	Mi vivis agrablajn feriojn.
+M	371	VNETR_AKU	1	9	18	Other	Netransitiva verbo «vivis» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	372	Mi vivis agrablan vivon.
+L	373	Ni veturis 10 km-ojn.
+M	373	HUNSPELL_RULE		14	20	UnknownWord	Ebla mistajpaĵo trovita	km-njo|km-oj|km-iojn|km-ajn
+L	374	Ĝi pluvos morgaŭ.
+M	374	SENSUBJEKTA_V	1	0	9	Other	La verbo «pluvos» estas sensubjekta verbo, do ne uzu «Ĝi». Skribu <suggestion>pluvos</suggestion>.	Pluvos
+L	375	Laŭ mi pluvos morgaŭ.
+L	376	Ĝi verŝajne pluvetos morgaŭ.
+M	376	SENSUBJEKTA_V	2	0	20	Other	La verbo «pluvetos» estas sensubjekta verbo, do ne uzu «Ĝi». Skribu <suggestion>verŝajne pluvetos</suggestion>.	Verŝajne pluvetos
+L	377	Verŝajne pluvetos morgaŭ.
+L	378	Mi forgesis la akuzativo.
+M	378	NAK_VTR_NAK	1	15	24	Other	Ĉu vi forgesis akuzativon post transitiva verbo «forgesis»?	
+L	379	Mi forgesis la akuzativon.
+L	380	Mi kantas kun amiko.
+L	381	Mi klarigis kial li ne venis.
+L	382	Mi trovis tie novan veturilon.
+L	383	Ŝi faris lin idealisto.
+L	384	Li sentis sin fremdulo.
+L	385	Mi sentas ke li timas.
+L	386	Tiu romano povas esti uzata kiel lernolibro.
+L	387	Mi venos, diris li.
+L	388	Mi ne scias sed mi kredas.
+L	389	La lernejo en kiu li instruis estis fermita pro la krizo.
+L	390	Ni entreprenas – li konfesis.
+L	391	Mi volas aĉeti la komputilo.
+M	391	NAK_VTR_NAK	1	18	27	Other	Ĉu vi forgesis akuzativon post transitiva verbo «volas»?	
+L	392	Mi volas esti la instruisto.
+L	393	Vi povas kontroli ĉu Esperanto funkcias.
+L	394	Mi dankas Barbara.
+L	395	Kiun rolon laŭ vi havis la teamo?
+L	396	Tion oni nomas religio.
+L	397	Tie loĝas mia amiko.
+L	398	Kie loĝas la homo?
+L	399	En la akvo ludas knaboj
+L	400	Post vetero malbela lumas suno denove.
+L	401	Ju pli ni havas des pli ni deziras.
+L	402	Nenio pli teruras ol tertremo.
+L	403	Jen la ĉambro en kiu manĝas centoj da infanoj.
+L	404	Kion vi konsideras vera?
+L	405	Li loĝas tie sola.
+L	406	Mi trovas tion inteligenta.
+L	407	Ni havis maltro por manĝi.
+L	408	Li studis kiamaniere la birdoj flugas.
+L	409	Aĉetu pano!
+M	409	VTR_NAK	1	6	10	Other	Ĉu vi forgesis akuzativon malantaŭ la transitiva verbo «Aĉetu»?	panon
+L	410	Lerni tio facilas.
+M	410	VTR_NAK	1	6	9	Other	Ĉu vi forgesis akuzativon malantaŭ la transitiva verbo «Lerni»?	tion
+L	411	Boligu la akvo!
+M	411	VTR_NAK	2	10	14	Other	Ĉu vi forgesis akuzativon malantaŭ la transitiva verbo «Boligu»?	
+L	412	Boligu la akvon!
+L	413	Aĉetu dek ovoj!
+M	413	VTR_NAK	2	10	14	Other	Ĉu vi forgesis akuzativon malantaŭ la transitiva verbo «Aĉetu»?	
+L	414	Aĉetu dek ovojn!
+L	415	Aĉetu dek du ovoj!
+M	415	VTR_NAK	2	13	17	Other	Ĉu vi forgesis akuzativon malantaŭ la transitiva verbo «Aĉetu»?	
+L	416	Aĉetu dek du ovojn!
+L	417	Mi vi vidas.
+M	417	NAK_NAK_VTR	1	3	5	Other	Ĉu vi forgesis akuzativon antaŭ transitiva verbo «vi»?	
+L	418	Mi vi vidas kaj vin aŭdas.
+M	418	NAK_NAK_VTR	1	3	5	Other	Ĉu vi forgesis akuzativon antaŭ transitiva verbo «vi»?	
+L	419	Mi vi ankoraŭ ne tre bone vidas.
+M	419	NAK_NAK_VTR	1	3	5	Other	Ĉu vi forgesis akuzativon antaŭ transitiva verbo «vi»?	
+L	420	Mi vin ankoraŭ ne tre bone vidas.
+L	421	Mi vi ne bone vidas.
+M	421	NAK_NAK_VTR	1	3	5	Other	Ĉu vi forgesis akuzativon antaŭ transitiva verbo «vi»?	
+L	422	Mi vin vidas.
+L	423	Ĉar hieraŭ mi vi vidis.
+M	423	NAK_NAK_VTR	1	14	16	Other	Ĉu vi forgesis akuzativon antaŭ transitiva verbo «vi»?	
+L	424	Ĉar hieraŭ mi vin vidis.
+L	425	Donu min akvon.
+M	425	AKZ_R_AKZ	1	5	8	Other	Ne eblas diri «min akvon». Ĉu vi intencis <suggestion>al mi</suggestion>?	al mi
+L	426	Mi vidis lin saltantan.
+L	427	Li surprizis nin ĉiujn.
+L	428	Donu akvon min.
+M	428	R_AKZ_AKZ	1	11	14	Other	Ne eblas uzi du akuzativojn. Ĉu vi intencis <suggestion>al mi</suggestion>?	al mi
+L	429	Ni estas laca.
+M	429	NEKONG_NOMBR	1	9	13	Other	Ne kongrua pluralo inter «Ni» kaj «laca».	
+L	430	Ni estas lacaj.
+L	431	Hodiaŭ ni estas tre laca.
+M	431	NEKONG_NOMBR	1	20	24	Other	Ne kongrua pluralo inter «ni» kaj «laca».	
+L	432	Hodiaŭ ni estas tre lacaj.
+L	433	Tiuj estas bona.
+M	433	NEKONG_NOMBR	1	11	15	Other	Ne kongrua pluralo inter «Tiuj» kaj «bona».	
+L	434	Tiuj estas bonaj.
+L	435	Ili estas granda parto de la sukceso.
+L	436	Ni estas frato kaj fratino.
+L	437	Niaj filinoj estas bela.
+M	437	NEKONG_NOMBR	1	19	23	Other	Ne kongrua pluralo inter «filinoj» kaj «bela».	
+L	438	Niaj filinoj estas belaj.
+L	439	Niaj filinoj estas tre bela.
+M	439	NEKONG_NOMBR	1	23	27	Other	Ne kongrua pluralo inter «filinoj» kaj «bela».	
+L	440	Niaj filinoj estas tre belaj.
+L	441	Niaj grandaj filinoj estas tre bela.
+M	441	NEKONG_NOMBR	1	31	35	Other	Ne kongrua pluralo inter «filinoj» kaj «bela».	
+L	442	Niaj grandaj filinoj estas tre belaj.
+L	443	Ni ne estas laca.
+M	443	NEKONG_NOMBR	2	12	16	Other	Ne kongrua pluralo inter «Ni» kaj «laca».	
+L	444	Ni ne estas lacaj.
+L	445	Hodiaŭ ni ne estas tre laca.
+M	445	NEKONG_NOMBR	2	23	27	Other	Ne kongrua pluralo inter «ni» kaj «laca».	
+L	446	Hodiaŭ ni ne estas tre lacaj.
+L	447	Tiuj ne estas bona.
+M	447	NEKONG_NOMBR	2	14	18	Other	Ne kongrua pluralo inter «Tiuj» kaj «bona».	
+L	448	Tiuj ne estas bonaj.
+L	449	Ili ne estas parto de tio.
+L	450	Ni ne estas frato kaj fratino.
+L	451	Niaj filinoj ne estas bela.
+M	451	NEKONG_NOMBR	2	22	26	Other	Ne kongrua pluralo inter «filinoj» kaj «bela».	
+L	452	Niaj filinoj ne estas belaj.
+L	453	Niaj filinoj ne estas tre bela.
+M	453	NEKONG_NOMBR	2	26	30	Other	Ne kongrua pluralo inter «filinoj» kaj «bela».	
+L	454	Niaj filinoj ne estas tre belaj.
+L	455	Niaj grandaj filinoj ne estas tre bela.
+M	455	NEKONG_NOMBR	2	34	38	Other	Ne kongrua pluralo inter «filinoj» kaj «bela».	
+L	456	Niaj grandaj filinoj ne estas tre belaj.
+L	457	Ni ne estu tiom serioza.
+M	457	NEKONG_NOMBR	2	16	23	Other	Ne kongrua pluralo inter «Ni» kaj «serioza».	
+L	458	Ni ne estu tiam serioza.
+M	458	NEKONG_NOMBR	2	16	23	Other	Ne kongrua pluralo inter «Ni» kaj «serioza».	
+L	459	Ni ne estu tiom seriozaj.
+L	460	Vi ĉiuj estas preta.
+M	460	NEKONG_NOMBR	3	14	19	Other	Ne kongrua pluralo inter «Vi» kaj «estas».	
+L	461	Vi ĉiuj estas pretaj.
+L	462	Ni ĉiuj estas preta.
+M	462	NEKONG_NOMBR	3	14	19	Other	Ne kongrua pluralo inter «Ni» kaj «estas».	
+L	463	Ni ĉiuj estas pretaj.
+L	464	Ni ĉiuj estas granda parto de la sukceso.
+L	465	Mi estas lacaj.
+M	465	NEKONG_NOMBR	4	9	14	Other	Ne kongrua pluralo inter «Mi» kaj «lacaj».	
+L	466	Mi estas laca.
+L	467	Mi estas tre lacaj.
+M	467	NEKONG_NOMBR	4	13	18	Other	Ne kongrua pluralo inter «Mi» kaj «lacaj».	
+L	468	Mi estas tre laca.
+L	469	Tiu estas tre bonaj.
+M	469	NEKONG_NOMBR	4	14	19	Other	Ne kongrua pluralo inter «Tiu» kaj «bonaj».	
+L	470	Tiu estas tre bona.
+L	471	Tie estas bona amiko.
+L	472	Tie estas bonaj amikoj.
+L	473	La aliĝo kaj aneco estas senpagaj.
+L	474	Mia nova aŭtomobilo estas multekostaj.
+M	474	NEKONG_NOMBR	4	26	37	Other	Ne kongrua pluralo inter «aŭtomobilo» kaj «multekostaj».	
+L	475	Mia nova aŭtomobilo estas multekosta.
+L	476	Mi aĉetis du panon.
+M	476	NEKONG_NOMBR	5	13	18	Other	Nombro «du» postulas pluralon. Ĉu vi intencis <suggestion>panojn</suggestion>?	panojn
+L	477	Mi aĉetis unu panon.
+L	478	Nul celcia grado.
+M	478	HUNSPELL_RULE		4	10	UnknownWord	Ebla mistajpaĵo trovita	celsia|celen
+L	479	Mi naskiĝis la dudek sepan de Septembro.
+M	479	VNETR_AKU	1	21	26	Other	Netransitiva verbo «naskiĝis» kun akuzativo: akuzativo povas anstataŭigi prepozicion, sed konsideru uzi prepozicion por pli da klareco.	
+L	480	Mi aĉetis unu panojn.
+M	480	NEKONG_NOMBR	6	14	20	Other	Nombro «unu» postulas singularon. Ĉu vi intencis <suggestion>panon</suggestion>?	panon
+L	481	Mi aĉetis cent unu panojn.
+L	482	Mi kaj li estas viro.
+M	482	NEKONG_NOMBR	7	16	20	Other	Ne kongrua pluralo inter «Mi», «li» kaj «viro».	
+L	483	Mi kaj li estas viroj.
+L	484	Piero kaj Marko estis ĉi tie.
+M	484	HUNSPELL_RULE		0	5	UnknownWord	Ebla mistajpaĵo trovita	Biero|Fiero|Liero|Pieto|Piro|Pero|Piedo|Pipro|Piego|Pigro|Pieco|Pomerio
+L	485	Mi ŝatas hundojn grandan.
+M	485	NEKONG_NOMBR	8	9	24	Other	Ne kongrua pluralo inter «hundojn» kaj «grandan».	
+L	486	Mi ŝatas hundojn grandajn.
+L	487	Mi havas du hundojn grandan kaj malgrandan.
+L	488	Li estas dudek jarojn aĝa.
+L	489	Je liaj vortoj ŝia koloro paliĝis.
+L	490	Post ok jaroj ŝia kazo estos la objekto de enketo.
+L	491	Mi ŝatas grandajn hundon.
+M	491	NEKONG_NOMBR	9	9	24	Other	Ne kongrua pluralo inter «grandajn» kaj «hundon».	
+L	492	Mi ŝatas grandajn hundojn.
+L	493	La lingvaj imperiismo kaj diskriminacio
+L	494	Homoj scipovantaj Esperanton
+L	495	Mi ŝatas hundon grandajn.
+M	495	NEKONG_NOMBR	10	9	24	Other	Ne kongrua pluralo inter «hundon» kaj «grandajn».	
+L	496	Mi ŝatas hundojn grandajn.
+L	497	Mi havas hundon kaj katon grandajn.
+L	498	Dum la milito multaj homoj estis mortigitaj.
+L	499	En la dudek unua jarcento multaj grandaj projektoj estos pretigataj.
+L	500	Mi ŝatas grandan hundojn.
+M	500	NEKONG_NOMBR	11	9	24	Other	Ne kongrua pluralo inter «grandan» kaj «hundojn».	
+L	501	Mi ŝatas grandan hundon.
+L	502	Mi havas grandan kaj malgrandan hundojn.
+L	503	Homo scipovanta lingvojn
+L	504	La farmisto trafis la knabon ŝtelantan pomojn.
+L	505	Unu el mia amikoj.
+M	505	NEKONG_NOMBR	11	7	17	Other	Ne kongrua pluralo inter «mia» kaj «amikoj».	
+L	506	Unu el mia amiko.
+M	506	UNU_EL	1	7	10	Other	Ĉu vi intencis uzi pluralon?	
+L	507	Unu el miaj amikoj.
+L	508	Unu el mia amikaro.
+L	509	La mia aŭto estas ruĝa.
+M	509	LA_MIA	1	0	6	Other	«La» ne povas stari kune kun pronomo «mia».	
+L	510	Mia aŭto estas ruĝa.
+L	511	Via deziro estas la mia.
+L	512	Ĉu la vi estas multekosta?
+M	512	LA_VORTO	1	3	8	Other	La vorto «la» ne povas esti antaŭ la vorto «vi».	
+L	513	Ĉu via estas multekosta?
+L	514	Mi patrino vizitos min.
+M	514	MI_MIA	1	0	2	Other	Ĉu vi intencis skribi <suggestion>Mia</suggestion>?	Mia
+L	515	Mia patrino vizitos min.
+L	516	Vi idioto!
+L	517	Vi fartas bone?
+M	517	DEM_SEN_CXU	1	14	15	Other	Demando devas komenciĝi per la vorto «Ĉu» aŭ «Ki-» tabelvorto.	
+L	518	Ĉu vi fartas bone?
+L	519	Kiel vi fartas?
+L	520	De kiu lando vi venas?
+L	521	Vi komprenas min, ĉu ne?
+L	522	Je la kioma horo okazis tio?
+L	523	Kiucele li tion faris?
+L	524	Ĉu vi volas nun manĝi.
+M	524	DEM_SEN_DEM_SIGNO	1	21	22	Other	La frazo komenciĝas per «Ĉu», sed ne havas demandosignon ĉe la fino de la frazo.	
+L	525	Ĉu vi volas nun manĝi?
+L	526	Ĉu li venas aŭ ne, mi tute ne scias.
+L	527	Mi ne scias, ĉu li venos.
+L	528	Mi ne scias, ĉu li venos.
+L	529	Kaj ĉu vi neniam ankoraŭ provis.
+M	529	DEM_SEN_DEM_SIGNO	1	31	32	Other	La frazo komenciĝas per «ĉu», sed ne havas demandosignon ĉe la fino de la frazo.	
+L	530	Kaj ĉu vi neniam ankoraŭ provis?
+L	531	Ĉu vere vidi lin?!
+L	532	Mi scivolas ĉi li venos.
+M	532	CXI	1	12	14	Other	Tiu uzo de «ĉi» ne eblas. Ĉu vi eblis intencis skribi <suggestion>ĉu</suggestion>?	ĉu
+M	532	NAK_VTR_NAK	1	15	17	Other	Ĉu vi forgesis akuzativon post transitiva verbo «scivolas»?	
+L	533	Mi scivolas ĉu vinon li alvenis.
+L	534	Mi deziras ĉi tiun.
+L	535	Mi deziras tiun ĉi.
+L	536	Mi konas ĉi homon.
+L	537	Mi volas, ke vi tien iras.
+M	537	VOLAS_KE_V	1	21	25	Other	Oni preskaŭ ĉiam uzas u-verbon kun ke-frazo, kiam la verbo de ĉeffrazo estas «volas». Ĉu vi intencis skribi <suggestion>iru</suggestion>?	iru
+L	538	Ĉu vi volas nei ke ili ekzistas?
+L	539	Mi studas, por ke mi sukcesos.
+M	539	POR_KE_V	1	11	29	Other	Oni preskaŭ ĉiam uzas volutivon post «por ke». Ĉu vi intencis <suggestion>por ke mi sukcesu</suggestion>?	por ke mi sukcesu
+L	540	Mi studas, por ke mi sukcesu.
+L	541	Mi venis kun sia frato.
+M	541	SI_TRIAPERSONA	1	0	16	Other	«sia» ne povas reprezenti la unuajn (mi, ni) aŭ duajn personojn (vi, ci).	
+L	542	Mi venis kun mia frato.
+L	543	Tri de ili scipovis Esperanton.
+M	543	UNU_DE_ILI	1	0	10	Other	Ĉu vi intencis skribi <suggestion>Tri el ili</suggestion>?	Tri el ili
+L	544	Tri el ili scipovas Esperanton.
+L	545	Mi loĝas en la ŝtato de Kalifornio.
+M	545	LA_URBO_DE	1	15	34	Other	Ne uzu «de» antaŭ identiga priskribo. Ĉu vi intencis <suggestion>ŝtato Kalifornio</suggestion>?	ŝtato Kalifornio
+L	546	Ju pli facile, pli bone.
+M	546	JU_SEN_DES	1	0	2	Other	Vorteto «Ju» ne povas aperi sen vorteto «des».	
+L	547	Ju pli facile, des pli bone.
+L	548	Ju facile, des pli bone.
+M	548	JU_SEN_PLI	1	0	2	Other	Vorteto «Ju» ne povas aperi sen «pli» aŭ «malpli» tuj poste.	
+L	549	Ju pli facile, des pli bone.
+L	550	La okazota vesto
+M	550	NTR_ATA	1	3	10	Other	Pasiva participo eblas nur kun transitivaj verboj.	
+L	551	La okazonta vesto
+L	552	La spirito de la lingvo
+L	553	Li aŭskultas sonaton.
+L	554	Gravito estas forto inter masoj.
+L	555	Kvanto da tempo
+L	556	Mi scipovas Esperanton ankaŭ
+M	556	ANKAUX_FINO	1	23	28	Other	Vorto «ankaŭ» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	557	Mi scipovas Esperanton ankaŭ
+M	557	ANKAUX_FINO	1	23	28	Other	Vorto «ankaŭ» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	558	Mi scipovas ankaŭ Esperanton
+L	559	Mi scipovas Esperanton ankaŭ.
+M	559	ANKAUX_FINO	2	23	28	Other	Prepozicio «ankaŭ» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	560	Mi scipovas Esperanton ankaux.
+M	560	X_SISTEMO	1	23	29	Other	La vorto «ankaux» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+L	561	Mi scipovas Esperanton ankau.
+M	561	ANKAUX_FINO	2	23	28	Other	Prepozicio «ankau» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	562	Mi scipovas ankaŭ Esperanton.
+L	563	Mi venis post
+M	563	PREP_FINO	1	9	13	Other	Prepozicio «post» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	564	Mi venis post li
+L	565	Mi venis poste
+L	566	Ĝis!
+L	567	Mi venis post.
+M	567	PREP_FINO	2	9	13	Other	Prepozicio «post» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	568	Mi venis post li.
+L	569	Mi venis poste.
+L	570	Ĝis!
+L	571	Tiu virino ne foriru de ŝi sen konsolo nek helpo.
+M	571	SEN_NEK	1	27	42	Other	Ne uzu «nek» por ligi du aferojn post «sen». Uzu <suggestion>sen konsolo kaj</suggestion>.	sen konsolo kaj
+L	572	Li ĵus venas.
+M	572	JXUS	1	3	6	Other	La vorto «ĵus» devas aperi antaŭ verbo en la pasinteco.	
+L	573	Li havas ĵus tiom da mono.
+M	573	JXUS	1	9	12	Other	La vorto «ĵus» devas aperi antaŭ verbo en la pasinteco.	
+L	574	Li loĝas ĵus apud la stacidomo.
+M	574	JXUS	1	9	12	Other	La vorto «ĵus» devas aperi antaŭ verbo en la pasinteco.	
+L	575	Mi ĵus eklernis Esperanton.
+L	576	Ne manĝu antaŭ naĝi.
+M	576	ANTAUX_V	1	9	19	Other	Inter «antaŭ» kaj verbo «naĝi», oni devas meti «ol».	antaŭ ol naĝi
+L	577	Ni alvenos antaŭ pluvos.
+M	577	ANTAUX_V	1	11	23	Other	Inter «antaŭ» kaj verbo «pluvos», oni devas meti «ol».	antaŭ ol pluvos
+L	578	Ni alvenos antaux pluvos.
+M	578	ANTAUX_V	1	11	24	Other	Inter «antaux» kaj verbo «pluvos», oni devas meti «ol».	antaux ol pluvos
+L	579	Pri flugi oni eĉ ne povis pensi.
+M	579	PRI_V	1	0	9	Other	Anstataŭ «pri + I-verbo», oni normale uzas I-verbon sen rolmontrilo. Sed se la senco (la frazrolo de la I-verbo) tiam fariĝus tro malklara, oni anstataŭe uzas pri + agan O-vorton».	
+L	580	Pri flugado oni eĉ ne povis pensi.
+L	581	Mi rigardis televidon dum manĝi.
+M	581	DUM_V	1	22	31	Other	Anstataŭ «dum + I-verbo», aŭ «ĝis + I-verbo», oni uzas dum aŭ ĝis antaŭ plena subfrazo (dum kaj ĝis estas ne nur rolvortetoj, sed ankaŭ frazenkondukiloj).	
+L	582	Mi rigardis televidon dum mi manĝis.
+L	583	Post diri tiujn vortojn li foriris.
+M	583	POST_V	1	0	9	Other	Anstataŭ «Post diri», oni uzas int-participon kun e-finaĵo, aŭ «post kiam + plenan subfrazon».	
+L	584	Post kiam li diris tiujn vortojn, li foriris.
+L	585	Malgraŭ fali, li batalis.
+M	585	MALGRAUX_V	1	0	12	Other	Anstataŭ «Malgraŭ fali», oni uzas participon kun e-finaĵo, aŭ «kvankam», aŭ «Malgraŭ tio, ke + plenan subfrazon».	
+L	586	Malgraŭ tio, ke li falis, li batalis.
+L	587	Kvankam li falis, li batalis.
+L	588	Mi studas pro sukcesi.
+M	588	PRO_VINF	1	10	13	Other	Post «pro» ne povas esti infinitiva verbo. Ĉu vi intencis skribi <suggestion>por</suggestion>?	por
+L	589	Mi studas pro ne malsukcesi.
+M	589	PRO_VINF	1	10	13	Other	Post «pro» ne povas esti infinitiva verbo. Ĉu vi intencis skribi <suggestion>por</suggestion>?	por
+L	590	Kuri estas povate de mi.
+M	590	POVATE	1	11	17	Other	Iuj verboj ĉiam havas samsubjektan I-verbon kiel objekton, ekz. «povi, devi kaj kuraĝi». Tiajn verbojn oni do praktike neniam pasivigas, kaj pasivaj participoj de tiaj verboj estas do praktike tute neuzataj. Oni ankaŭ ne uzas la sufiksojn EBL, IND kaj END ĉe tiaj verboj, ĉar tiuj sufiksoj ĉiam donas pasivan signifon.	
+L	591	Mi povas kuri.
+L	592	Li poveble alvenos.
+M	592	POVATE	1	3	10	Other	Iuj verboj ĉiam havas samsubjektan I-verbon kiel objekton, ekz. «povi, devi kaj kuraĝi». Tiajn verbojn oni do praktike neniam pasivigas, kaj pasivaj participoj de tiaj verboj estas do praktike tute neuzataj. Oni ankaŭ ne uzas la sufiksojn EBL, IND kaj END ĉe tiaj verboj, ĉar tiuj sufiksoj ĉiam donas pasivan signifon.	
+L	593	Li povos alveni.
+L	594	Esperanto estis kreita de la doktoro Zamenhof.
+M	594	LA_TITOLO	1	26	36	Other	Oni ne uzas «la» antaŭ titolo sekvita de propra nomo, uzu <suggestion>doktoro</suggestion>.	doktoro
+L	595	Esperanto estis kreita de doktoro Zamenhof.
+L	596	Mi manĝis da pano.
+M	596	DA_MEMSTARA	1	10	12	Other	Oni ne povas uzi «da» memstare.	
+L	597	Mi manĝis iom da pano.
+L	598	Mi volas, ke da panon vi manĝu.
+M	598	DA_MEMSTARA	2	13	15	Other	Oni ne povas uzi «da» memstare.	
+M	598	PREP_AKU	1	16	21	Other	Prepozicio «da» neniam povas esti sekvita de akuzativo. Uzu <suggestion>pano</suggestion>.	pano
+L	599	Mi volas, ke panon vi manĝu.
+L	600	Da pano mi manĝis.
+M	600	DA_MEMSTARA	3	0	2	Other	Oni ne povas uzi «da» memstare.	
+L	601	Iom da pano mi manĝis.
+L	602	Mi havas multe da.
+M	602	P_SENPOSTA	1	15	17	Other	Prepozicio «da» bezonas postan esprimon.	
+L	603	Mi havas multe da mono.
+L	604	Mi havas multe da ĉar mi laboras multe.
+M	604	P_SENPOSTA	1	15	17	Other	Prepozicio «da» bezonas postan esprimon.	
+L	605	Mi havas tiom da, ke mi bezonas nenion.
+M	605	P_SENPOSTA	2	14	16	Other	Prepozicio «da» bezonas postan esprimon.	
+L	606	Mi havas tiom da ili, ke mi bezonas nenion.
+M	606	DA_PERSONA_PRONOMO	1	14	16	Other	Persona pronomo ordinare montras unu aŭ plurajn difinitajn individuojn. Tial ne uzu «da» antaŭ persona pronomo, sed anstataŭe <suggestion>de</suggestion> aŭ <suggestion>el</suggestion>.	de|el
+L	607	Ili amas sin unu la alian.
+M	607	SI_UNU	1	9	25	Other	Oni neniam uzu la pronomon «si» kune kun «unu la alia».	
+L	608	Ili amas unu la alian.
+L	609	Ili amas sin.
+L	610	Ŝi ĵetis ŝin sur mi.
+M	610	SUR_NAK	1	13	19	Other	Laŭ la kunteksto, eble mankas akuzativo de direkto. Ĉu vi intencis <suggestion>sur min</suggestion>?	sur min
+L	611	Mi metas la libron sur la tablo.
+M	611	SUR_NAK	2	19	31	Other	Laŭ la kunteksto, eble mankas akuzativo de direkto. Ĉu vi intencis <suggestion>sur la tablon</suggestion>?	sur la tablon
+L	612	Mi sidas sur tiu seĝo.
+L	613	Li iras en ĉambro.
+M	613	EN_NAK	1	8	17	Other	Laŭ la kunteksto, eble mankas akuzativo de direkto. Ĉu vi intencis <suggestion>en ĉambron</suggestion>?	en ĉambron
+L	614	Mi loĝas en kastelo.
+L	615	La libro estas tradukita en Esperanto.
+M	615	EN_NAK	1	25	37	Other	Laŭ la kunteksto, eble mankas akuzativo de direkto. Ĉu vi intencis <suggestion>en Esperanton</suggestion>?	en Esperanton
+L	616	Li eniris ĝin en la jaro 2004.
+L	617	Li ĝin eniris en la jaro 2004.
+L	618	Li iras en la ĉambro.
+M	618	EN_NAK	2	8	20	Other	Laŭ la kunteksto, eble mankas akuzativo de direkto. Ĉu vi intencis <suggestion>en la ĉambron</suggestion>?	en la ĉambron
+L	619	Mi loĝas en tiu kastelo.
+L	620	Li eniris ĝin en tiu jaro.
+L	621	Li ĝin eniris en tiu jaro.
+L	622	Li iris en la komenco al la lernejo.
+L	623	Mi manĝis tion, kiun mi trovis.
+M	623	TIO_KIU	1	10	20	Other	«tion, kiun» ne ĝustas. Ĉu vi intencis <suggestion>tion, kion</suggestion>?	tion, kion
+L	624	Mi manĝis ĉion, kiun mi trovis.
+M	624	TIO_KIU	1	10	20	Other	«ĉion, kiun» ne ĝustas. Ĉu vi intencis <suggestion>ĉion, kion</suggestion>?	ĉion, kion
+L	625	Estis tio, kiu misfunkciis.
+M	625	TIO_KIU	1	6	14	Other	«tio, kiu» ne ĝustas. Ĉu vi intencis <suggestion>tio, kio</suggestion>?	tio, kio
+L	626	Mi uzas la tukon kiel kovrilo.
+M	626	AKZ_KIEL_NAK	1	22	29	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>kovrilon</suggestion>.	kovrilon
+L	627	Mi elektis lin kiel prezidanto.
+L	628	Mi elektis lin kiel prezidanton.
+L	629	Mi interesegas pri tio.
+M	629	NAK	1	3	14	Other	Oni preskaŭ ĉiam uzas la verbon «interesegas» kun akuzativo. Ĉu vi intencis <suggestion>interesegiĝas</suggestion>?	interesegiĝas
+L	630	Mi vekis kiam mi aŭdis tion.
+M	630	NAK	1	3	8	Other	Oni preskaŭ ĉiam uzas la verbon «vekis» kun akuzativo. Ĉu vi intencis <suggestion>vekiĝis</suggestion>?	vekiĝis
+L	631	Ni kolektu pli da informo.
+L	632	Ni renkontis nek lin, nek ŝin.
+L	633	Oni devas uzi aŭ Vindozon, aŭ Linukson.
+L	634	Mi uzas Firefox.
+L	635	La filmo komencos baldaŭ.
+M	635	NAK	2	9	17	Other	Oni preskaŭ ĉiam uzas la verbon «komencos» kun akuzativo. Ĉu vi intencis <suggestion>komenciĝos</suggestion>?	komenciĝos
+L	636	Ĝi komencos baldaŭ.
+M	636	NAK	2	3	11	Other	Oni preskaŭ ĉiam uzas la verbon «komencos» kun akuzativo. Ĉu vi intencis <suggestion>komenciĝos</suggestion>?	komenciĝos
+L	637	La kurso ekkomencas.
+M	637	NAK	2	9	19	Other	Oni preskaŭ ĉiam uzas la verbon «ekkomencas» kun akuzativo. Ĉu vi intencis <suggestion>ekkomenciĝas</suggestion>?	ekkomenciĝas
+L	638	Mi komencos baldaŭ.
+L	639	Kiam komenci?
+L	640	Mi devas komenci.
+L	641	La maristoj komencis kanti.
+L	642	Estas facila.
+M	642	V_A	1	6	12	Other	Nur adverbo priskribas sensubjektan frazon, ĉu vi intencis <suggestion>facile</suggestion>?	facile
+L	643	Estas facile.
+L	644	Estis tre facila.
+M	644	V_A	1	10	16	Other	Nur adverbo priskribas sensubjektan frazon, ĉu vi intencis <suggestion>facile</suggestion>?	facile
+L	645	Perfektigi kolektivan inteligenton.
+L	646	Komparu bonajn kaj malbonajn efikojn.
+L	647	Estu lavita!
+L	648	Estas preskaŭ la tria.
+L	649	Io libro mankas.
+M	649	IO_O	1	0	2	Other	Ne povas esti «Io» antaŭ o-vorto «libro». Ĉu vi intencis <suggestion>Iu</suggestion>?	Iu
+L	650	Estas tio, kio komputilo estas.
+L	651	Pro tio homoj ne komprenas.
+L	652	Temas pri io libro.
+M	652	IO_O	2	10	12	Other	Ne povas esti «io» antaŭ o-vorto «libro». Ĉu vi intencis <suggestion>iu</suggestion>?	iu
+L	653	Pro tio homoj ne komprenas.
+L	654	Mi legis ĉion la libron.
+M	654	IO_O	3	9	23	Other	Ne povas esti «ĉion» antaŭ o-vorto «libron».	
+L	655	Mi legis la tutan libron.
+L	656	Nenio la virinoj venis.
+M	656	IO_O	4	0	16	Other	Ne povas esti «Nenio» antaŭ o-vorto «la».	
+L	657	Neniu virino venis.
+L	658	Mi legis tion libron.
+M	658	IO_O	5	9	13	Other	Ne povas esti «tion» antaŭ o-vorto «libron». Ĉu vi intencis <suggestion>tiun</suggestion>?	tiun
+L	659	Mi havas du dek stelojn.
+M	659	DU_DEK	1	9	15	Other	«du dek» ne eblas, ĉu vi intencis <suggestion>dudek</suggestion>.	dudek
+L	660	Mi baldaŭ havos dudekok jarojn.
+M	660	DEKDU	1	16	23	Other	«dudekok» ne eblas, ĉu vi intencis <suggestion>dudek ok</suggestion>?	dudek ok
+L	661	Tio daŭros centdudek jaroj.
+M	661	DEKDU	2	11	20	Other	«centdudek» ne eblas, ĉu vi intencis <suggestion>cent dudek</suggestion>?	cent dudek
+L	662	Li naskiĝis en la jaro dumil.
+M	662	DEKDU	3	23	28	Other	Oni ne kunligas la vorton «mil».	
+L	663	Li naskiĝis en la jaro du mil.
+L	664	Mi lernis ĉiujn la vortojn.
+M	664	CXIUJ_LA	1	10	18	Other	Difinilo «la» ne povas esti kun tabelvorto «ĉiujn». Ĉu vi intencis <suggestion>ĉiujn</suggestion>?	ĉiujn
+L	665	La retejo donas al ĉiuj la eblon lerni Esperanton.
+L	666	Mi plaĉas legi.
+M	666	MI_PLACXAS	1	3	9	Other	«Mi» ne povas esti subjekto de la verbo «plaĉas». Ĉu vi intencis <suggestion>ŝatas</suggestion>?	ŝatas
+L	667	Mi ne tiom plaĉas legi.
+M	667	MI_PLACXAS	1	11	17	Other	«Mi» ne povas esti subjekto de la verbo «plaĉas». Ĉu vi intencis <suggestion>ŝatas</suggestion>?	ŝatas
+L	668	Mi plaĉas al vi
+L	669	Al mi plaĉas legi.
+L	670	Mi ŝatas legi.
+L	671	Esperanto plaĉas al mi.
+L	672	Espereble ne malŝatos al vi.
+M	672	SXATOS_AL	1	13	21	Other	La prepozicio «al» ne povas stari post la verbo «malŝatos». Ĉu vi intencis uzi la verbon <suggestion>malplaĉos</suggestion>?	malplaĉos
+L	673	Espereble ne ekmalŝatos al vi.
+M	673	SXATOS_AL	1	13	23	Other	La prepozicio «al» ne povas stari post la verbo «ekmalŝatos». Ĉu vi intencis uzi la verbon <suggestion>ekmalplaĉos</suggestion>?	ekmalplaĉos
+L	674	Espereble malplaĉos al vi.
+L	675	Al mi ŝatas sportumi.
+M	675	SXATOS_AL	2	6	11	Other	La prepozicio «al» ne povas stari kun la verbo «ŝatas». Ĉu vi intencis uzi la verbon <suggestion>plaĉas</suggestion>?	plaĉas
+L	676	Mi deziras al ĉiuj ŝatantoj de Esperanto feliĉan jaron.
+L	677	Al mi ne ŝatas sportumi.
+M	677	SXATOS_AL	3	9	14	Other	La prepozicio «al» ne povas stari kun la verbo «ŝatas». Ĉu vi intencis uzi la verbon <suggestion>plaĉas</suggestion>?	plaĉas
+L	678	Al mi ĉiam ŝatas sportumi.
+M	678	SXATOS_AL	4	11	16	Other	La prepozicio «al» ne povas stari kun la verbo «ŝatas». Ĉu vi intencis uzi la verbon <suggestion>plaĉas</suggestion>?	plaĉas
+L	679	Al mi ĉiam ne malŝatas sportumi.
+M	679	SXATOS_AL	5	14	22	Other	La prepozicio «al» ne povas stari kun la verbo «malŝatas». Ĉu vi intencis uzi la verbon <suggestion>malplaĉas</suggestion>?	malplaĉas
+L	680	Mi ne eblas legi.
+M	680	MI_EBLAS	1	6	11	Other	«Mi» ne povas esti subjekto de la verbo «eblas». Ĉu vi intencis <suggestion>povas</suggestion>?	povas
+L	681	Tio eblas.
+L	682	Mi pensas ke eblas.
+L	683	Ĝi ne eblas en ordinara Angla lingvo.
+L	684	Kiu esti tie?
+M	684	KIU_I	1	0	8	Other	Infinitivo «esti» ne povas sekvi «Kiu».	
+L	685	Kiu estis tie?
+L	686	Mi aĉetis ujon en kiu meti ĝin.
+L	687	Li rezignis anstataŭ ol lerni la lingvon.
+M	687	ANSTATAUX_OL	1	12	23	Other	Uzu <suggestion>anstataŭ</suggestion> (sen «ol»).	anstataŭ
+L	688	Morgaŭ mi foriras.
+M	688	ESTONTECO	1	10	17	Other	Ĉu vi intencis <suggestion>foriros</suggestion>?	foriros
+L	689	Morgaŭ mi planas veturi.
+L	690	Mi foriras morgaŭ.
+M	690	ESTONTECO	2	3	10	Other	Ĉu vi intencis <suggestion>foriros</suggestion>?	foriros
+L	691	Mi intencas morgaŭ foriri.
+L	692	Ĉu iru nun?
+L	693	Kiel faru tion?
+M	693	CXU_IRU	2	5	9	Other	Ĉu vi intencis <suggestion>fari</suggestion>?	fari
+L	694	Kie aĉetu ĝin hodiaŭ?
+L	695	La manĝi ne bonas
+M	695	LA_VORTO	1	0	8	Other	La vorto «La» ne povas esti antaŭ la vorto «manĝi».	
+L	696	La manĝaĵo ne bonas
+L	697	Jen aŭdiĝis ankaŭ la ĝis nun superbruita fontano.
+L	698	La ĉefa parto de la ĉirkaŭ 2 miliardoj de dolaroj.
+L	699	Unu el la tri knaboj.
+L	700	Si estas bela.
+M	700	SI_SUBJ	1	0	2	Other	La vorto «Si» ne povas esti subjekto.	
+L	701	Mi kredas, ke si ne venos.
+M	701	SI_SUBJ	1	14	16	Other	La vorto «si» ne povas esti subjekto.	
+L	702	Li kombas al si la harojn.
+L	703	Li ne estas si mem.
+L	704	Lin vidas si.
+M	704	SI_SUBJ	1	10	12	Other	La vorto «si» ne povas esti subjekto.	
+L	705	Sia frato alvenis.
+M	705	SIA_SUBJ	1	0	3	Other	La vorto «Sia» ne povas esti subjekto. Ĉu vi intencis diri <suggestion>lia</suggestion>?	Lia
+L	706	Li parolis al sia frato.
+L	707	Siaj fratinoj alvenis.
+M	707	SIA_SUBJ	2	0	4	Other	La vorto «Siaj» ne povas esti subjekto. Ĉu vi intencis diri <suggestion>ŝiaj</suggestion>?	Ŝiaj
+L	708	Tom kaj sia frato alvenis.
+M	708	HUNSPELL_RULE		0	3	UnknownWord	Ebla mistajpaĵo trovita	Iom|Tiom|Tomben
+M	708	SIA_SUBJ	3	8	11	Other	La vorto «sia» ne povas esti subjekto. Ĉu vi intencis diri <suggestion>lia</suggestion>?	lia
+L	709	Kun Tom kaj sia frato parolis la instruktoj.
+M	709	HUNSPELL_RULE		4	7	UnknownWord	Ebla mistajpaĵo trovita	Iom|Tiom|Tomben
+M	709	NAK_VTR_NAK	1	33	43	Other	Ĉu vi forgesis akuzativon post transitiva verbo «parolis»?	
+L	710	Tom kaj sia fratino alvenis.
+M	710	HUNSPELL_RULE		0	3	UnknownWord	Ebla mistajpaĵo trovita	Iom|Tiom|Tomben
+M	710	SIA_SUBJ	4	8	11	Other	La vorto «sia» ne povas esti subjekto. Ĉu vi intencis diri <suggestion>ŝia</suggestion>?	ŝia
+L	711	Kun Tom kaj sia fratino parolis la instruktoj.
+M	711	HUNSPELL_RULE		4	7	UnknownWord	Ebla mistajpaĵo trovita	Iom|Tiom|Tomben
+M	711	NAK_VTR_NAK	1	35	45	Other	Ĉu vi forgesis akuzativon post transitiva verbo «parolis»?	
+L	712	Ĉu vi scias iun ĉi tie?
+M	712	SCII_KONI	1	6	11	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>konas</suggestion> anstataŭ «scias».	konas
+M	712	MALKLARA_CXI	1	12	22	Other	Normale estas egale, ĉu oni metas ĉi antaŭ aŭ post la tabelvorto, sed ĉi-foje la loko de ĉi estas grava. Ĉu vi intencis skribi <suggestion>ĉi iun tie</suggestion> aŭ <suggestion>iun tie ĉi</suggestion>?	ĉi iun tie|iun tie ĉi
+L	713	Ĉu vi scias mian patrinon?
+M	713	SCII_KONI	2	6	11	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>konas</suggestion> anstataŭ «scias».	konas
+L	714	Li ne konas legi.
+M	714	SCII_KONI	3	6	11	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>scias</suggestion> anstataŭ «konas».	scias
+L	715	Ni konas pli ol miliardoj da galaksioj.
+L	716	Li konas la matematikon.
+M	716	SCII_KONI	4	3	8	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>scias</suggestion> anstataŭ «konas».	scias
+L	717	Li konas, ke li forpasis.
+M	717	SCII_KONI	5	3	8	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>scias</suggestion> anstataŭ «konas».	scias
+L	718	Mi demandas pardonon.
+M	718	DEMANDI	1	3	11	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>petas</suggestion> anstataŭ «demandas».	petas
+L	719	Mi demandas al vi pardonon.
+M	719	DEMANDI	2	3	11	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>petas</suggestion> anstataŭ «demandas».	petas
+L	720	Mi demandas al la instruisto pardonon.
+M	720	DEMANDI	3	3	11	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>petas</suggestion> anstataŭ «demandas».	petas
+L	721	Mia patro demandas, ke mi pli laboru.
+M	721	DEMANDI	4	10	18	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>petas</suggestion> anstataŭ «demandas».	petas
+L	722	Mia patro demandas ke mi pli laboru.
+M	722	DEMANDI	1	10	18	Other	Laŭ la kunteksto, ŝajnas ke vi intencis diri <suggestion>petas</suggestion> anstataŭ «demandas».	petas
+L	723	Ne kredu ties parolon kiu tro multe promesas.
+M	723	TIES_KIU	1	9	25	Other	Oni ne uzas «kiu» post «ties». Konsideru uzi <suggestion>parolon de tiu, kiu</suggestion>.	parolon de tiu, kiu
+L	724	Ne kredu ties parolon, kiu tro multe promesas.
+M	724	TIES_KIU	2	9	26	Other	Oni ne uzas «kiu» post «ties». Konsideru uzi <suggestion>parolon de tiu, kiu</suggestion>.	parolon de tiu, kiu
+L	725	Ili foriris tial kial mi foriris.
+M	725	TIAL_KIAL	1	12	21	Other	Oni ne uzas «tial, kial». Konsideru uzi <suggestion>pro la sama kaŭzo, kial</suggestion>, <suggestion>pro la sama kaŭzo, pro kio</suggestion> aŭ <suggestion>ĉar</suggestion>.	pro la sama kaŭzo, kial|pro la sama kaŭzo, pro kio|ĉar
+L	726	Ili foriris tial, kial mi foriris.
+M	726	TIAL_KIAL	2	12	22	Other	Oni ne uzas «tial, ,». Konsideru uzi <suggestion>pro la sama kaŭzo, kial</suggestion>, <suggestion>pro la sama kaŭzo, pro kio</suggestion> aŭ <suggestion>ĉar</suggestion>.	pro la sama kaŭzo, kial|pro la sama kaŭzo, pro kio|ĉar
+L	727	Ili foriris pro la sama kaŭzo, kial mi foriris.
+L	728	Mi scipovas Esperanton ekde pli malpli du jaroj.
+M	728	PLI_MALPLI	1	28	38	Other	Oni plej ofte skribas <suggestion>pli-malpli</suggestion>.	pli-malpli
+L	729	Neniuj ne fidas je li.
+M	729	DUOBLA_NEADO	1	0	9	Other	Evitu duoblan neadon.	
+L	730	Neniuj fidas je li.
+L	731	Mi neniam ne volas labori.
+M	731	DUOBLA_NEADO	1	3	12	Other	Evitu duoblan neadon.	
+L	732	Mi neniam volas labori.
+L	733	Mi ne vidis neniun.
+M	733	DUOBLA_NEADO	2	3	18	Other	Evitu duoblan neadon.	
+L	734	Mi vidis neniun.
+L	735	Ĉu vi ne promesis neniam mensogi?
+L	736	Li ĉiam loĝis en grande domoj.
+M	736	E_A	1	17	23	Other	Ĉu vi intencis skribi <suggestion>grandaj</suggestion>?	grandaj
+L	737	La legantaro konsistas el maksimume trideko da personoj.
+L	738	Li loĝas en la grande domo.
+M	738	E_A	2	15	21	Other	Ĉu vi intencis skribi <suggestion>granda</suggestion>?	granda
+L	739	Mi preferas vojaĝi per trajno al per aviadilo.
+M	739	P_P	1	30	36	Other	Kontrolu, ĉu la du sinsekvaj prepozicioj ĝustas.	
+L	740	Mi preferas vojaĝi per trajno ol per aviadilo.
+L	741	Danke al ĉirkaŭ 2 miliardoj da dolaroj
+L	742	Mi aĉetis unun panon.
+M	742	UNUN	1	10	14	Other	La vorto unu ne povas ricevi akuzativon.	
+L	743	Mi aĉetis unu panon.
+L	744	Mi ŝatas tiojn.
+M	744	TIOJ	1	9	14	Other	Normale tabelvortoj je O ne akceptas J-finaĵon.	
+L	745	Mi ŝatas tion.
+L	746	Mi kuras vesperej.
+M	746	E_VORT_PLUR	1	9	17	Other	Pluralo ne eblas kun e-vorto «vesperej».	
+L	747	Mi kuras vespere.
+L	748	Ŝi estas la plej bela knabino.
+L	749	Ĉu vi konas Sergej?
+M	749	HUNSPELL_RULE		12	18	UnknownWord	Ebla mistajpaĵo trovita	Seren
+L	750	O kej!
+M	750	HUNSPELL_RULE		0	1	UnknownWord	Ebla mistajpaĵo trovita	I|S|Io|Ol|Ok|Oj|Do|Po|Ho|Eo
+M	750	HUNSPELL_RULE		2	5	UnknownWord	Ebla mistajpaĵo trovita	ke|kaj|hej
+L	751	Ankaû mi venos.
+M	751	CXAPELO	1	0	5	Other	Neĝusta ĉapelo en la vorto «Ankaû». Ĉu vi intencis skribi <suggestion>Ankaŭ</suggestion>?	Ankaŭ
+L	752	Ankaǔ mi venos.
+M	752	CXAPELO	1	0	5	Other	Neĝusta ĉapelo en la vorto «Ankaǔ». Ĉu vi intencis skribi <suggestion>Ankaŭ</suggestion>?	Ankaŭ
+L	753	Ankaŭ mi venos.
+L	754	Inkluzive ili
+M	754	KONCERNE_N	1	10	13	Other	Rolvortaĵoj, kiuj devenas de objekta ago, povas konsisti el E-vorto + N-finaĵo. Oni uzas N-finaĵon, kiu tiam anstataŭas «de» aŭ «al». Ĉu vi intencis skribi <suggestion>ilin</suggestion>?	ilin
+L	755	Escepte tiu homo
+M	755	KONCERNE_N	1	8	11	Other	Rolvortaĵoj, kiuj devenas de objekta ago, povas konsisti el E-vorto + N-finaĵo. Oni uzas N-finaĵon, kiu tiam anstataŭas «de» aŭ «al». Ĉu vi intencis skribi <suggestion>tiun</suggestion>?	tiun
+L	756	Escepte tiun homon
+L	757	Escepte de tiu homo
+L	758	Koncerne la riskoj
+M	758	KONCERNE_N	2	12	18	Other	Rolvortaĵoj, kiuj devenas de objekta ago, povas konsisti el E-vorto + N-finaĵo. Oni uzas N-finaĵon, kiu tiam anstataŭas «de» aŭ «al». Ĉu vi intencis skribi <suggestion>riskojn</suggestion>?	riskojn
+L	759	Inkluzive la studentoj
+M	759	KONCERNE_N	2	13	22	Other	Rolvortaĵoj, kiuj devenas de objekta ago, povas konsisti el E-vorto + N-finaĵo. Oni uzas N-finaĵon, kiu tiam anstataŭas «de» aŭ «al». Ĉu vi intencis skribi <suggestion>studentojn</suggestion>?	studentojn
+L	760	Inkluzive de la studentoj
+L	761	Escepte tri studentoj
+M	761	KONCERNE_N	3	12	21	Other	Rolvortaĵoj, kiuj devenas de objekta ago, povas konsisti el E-vorto + N-finaĵo. Oni uzas N-finaĵon, kiu tiam anstataŭas «de» aŭ «al». Ĉu vi intencis skribi <suggestion>studentojn</suggestion>?	studentojn
+L	762	Cxi tiu frazo ne uzas Unikodon.
+M	762	X_SISTEMO	1	0	3	Other	La vorto «Cxi» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+L	763	CXi tiu frazo ne uzas Unikodon.
+M	763	X_SISTEMO	1	0	3	Other	La vorto «CXi» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+L	764	Ĉi tiu frazo uzas Unikodon.
+L	765	Ĉi tiu frazo uzas enhavas fremdan vorton: saxophone.
+M	765	HUNSPELL_RULE		42	51	UnknownWord	Ebla mistajpaĵo trovita	
+L	766	Ankaux.
+M	766	X_SISTEMO	1	0	6	Other	La vorto «Ankaux» ŝajnas skribita per la x-sistemo. Prefere uzu Unikodon. La kontrolilo pli bone funkcios kun Unikoda teksto.	
+L	767	Ankaŭ.
+M	767	ANKAUX_FINO	2	0	5	Other	Prepozicio «Ankaŭ» devas stari antaŭ tio, al kio ĝi rilatas.	
+L	768	La infano ploras pro tio, ĉar li volas manĝi.
+M	768	PRO_TIO_CXAR	1	17	29	Other	Oni ne uzas «pro tio, ĉar». Uzu <suggestion>pro tio, ke</suggestion>.	pro tio, ke
+L	769	La infano ploras pro tio ĉar li volas manĝi.
+M	769	PRO_TIO_CXAR	2	17	28	Other	Oni ne uzas «pro tio ĉar». Uzu <suggestion>pro tio, ke</suggestion>.	pro tio, ke
+L	770	Tio okazas dum kiam mi estas hejme.
+M	770	DUM_KIAM	1	11	19	Other	Oni de uzas «dum kiam». Uzi <suggestion>dum</suggestion>.	dum
+L	771	Tio okazas dum tio ke mi estas hejme.
+M	771	DUM_KIAM	2	11	21	Other	Oni de uzas «dum tio ke». Uzi <suggestion>dum</suggestion>.	dum
+L	772	Tio okazas dum tio, ke mi estas hejme.
+M	772	DUM_KIAM	3	11	22	Other	Oni de uzas «dum tio, ke». Uzi <suggestion>dum</suggestion>.	dum
+L	773	Li ronkis dum tuta la nokto.
+M	773	TUTA_LA	1	14	21	Other	Ne diru «tuta la» sed <suggestion>la tuta</suggestion>.	la tuta
+L	774	Li ronkis tutan la nokton.
+M	774	TUTA_LA	2	10	18	Other	Ne diru «tutan la» sed <suggestion>la tutan</suggestion>.	la tutan
+L	775	Mi lernas esperanton.
+M	775	PROPRA_NOMO_LINGVO	1	10	20	Other	Laŭ la kunteksto, ŝajnas, ke «esperanton» temas pri propra nomo de lingvo, ĝi tiam bezonas komencan majusklon. Ĉu vi intencis skribi <suggestion>Esperanton</suggestion>?	Esperanton
+L	776	Tio estas kurso de esperanto.
+M	776	PROPRA_NOMO_LINGVO	1	19	28	Other	Laŭ la kunteksto, ŝajnas, ke «esperanto» temas pri propra nomo de lingvo, ĝi tiam bezonas komencan majusklon. Ĉu vi intencis skribi <suggestion>Esperanto</suggestion>?	Esperanto
+L	777	Iu, kiu esperas, estas esperanto.
+L	778	Mi lernas volapukon.
+M	778	PROPRA_NOMO_LINGVO	2	10	19	Other	Ŝajnas, ke «volapukon» temas pri propra nomo de lingvo, ĝi tiam bezonas komencan majusklon. Ĉu vi intencis skribi <suggestion>Volapukon</suggestion>?	Volapukon
+L	779	Mi lernas la Esperanton.
+M	779	LA_LINGVO_O	1	10	23	Other	Laŭ la kunteksto, ŝajnas, ke <suggestion>Esperanton</suggestion> temas pri propra nomo de lingvo. Oni ne metas «la» antaŭ o-vortaj lingvonomoj.	Esperanton
+L	780	Mi lernas la Volapukon.
+M	780	LA_LINGVO_O	2	10	22	Other	Ŝajnas, ke <suggestion>Volapukon</suggestion> temas pri propra nomo de lingvo. Oni ne metas «la» antaŭ o-vortaj lingvonomoj.	Volapukon
+L	781	vi ricevis donacon por kristnasko?
+M	781	UPPERCASE_SENTENCE_START		0	2	Other	Tiu frazo ne komenciĝas per majuskla litero	Vi
+M	781	MAJ_FESTOJ	1	23	33	Other	Nomoj de festoj (Kristnasko, Pasko, Pentekosto, k.a.) estas plej ofte traktataj kiel normalaj propraj nomoj.	Kristnasko
+M	781	DEM_SEN_CXU	1	33	34	Other	Demando devas komenciĝi per la vorto «Ĉu» aŭ «Ki-» tabelvorto.	
+L	782	Hodiaŭ estas Dimanĉo.
+M	782	MIN_SEMAJNTAGOJ	1	13	20	Other	La nomoj de la semajntagoj (lundo, mardo, merkredo k.t.p.) ne estas propraj nomoj, kaj estas tial skribataj minuskle.	dimanĉo
+L	783	Hodiaŭ estas Dimancxo.
+M	783	MIN_SEMAJNTAGOJ	1	13	21	Other	La nomoj de la semajntagoj (lundo, mardo, merkredo k.t.p.) ne estas propraj nomoj, kaj estas tial skribataj minuskle.	dimancxo
+L	784	Hodiaŭ estas Dimancho.
+M	784	MIN_SEMAJNTAGOJ	1	13	21	Other	La nomoj de la semajntagoj (lundo, mardo, merkredo k.t.p.) ne estas propraj nomoj, kaj estas tial skribataj minuskle.	dimancho
+L	785	Mi alvenos Dimanĉon.
+M	785	MIN_SEMAJNTAGOJ	1	11	19	Other	La nomoj de la semajntagoj (lundo, mardo, merkredo k.t.p.) ne estas propraj nomoj, kaj estas tial skribataj minuskle.	dimanĉon
+L	786	Dimanĉon ni nin vidos.
+L	787	Mi loĝas en nederlando.
+M	787	MAJ_LANDOJ	1	12	22	Other	Landonomojn oni ĉiam skribas kun komenca majusklo, ĉar ili estas veraj propraj nomoj.	Nederlando
+L	788	En Nederlando estas nederlandanoj.
+L	789	L'espero.
+M	789	HUNSPELL_RULE		0	8	UnknownWord	Ebla mistajpaĵo trovita	Vespertoj
+L	790	Dank'al vi, mi sukcesis.
+M	790	APOS	2	0	7	Other	Normale oni skribas <suggestion>Dank' al</suggestion> kun spaceto.	Dank' al
+L	791	Neni' okazis.
+M	791	APOS	3	0	5	Other	La tabelvortoj je O finiĝas per «o», sed tiuj o-vokaloj ne estas veraj O-finaĵoj, kaj oni ne povas ilin anstataŭigi per apostrofoj. Uzu <suggestion>Nenio</suggestion>.	Nenio
+L	792	Mi havas un' fraton.
+M	792	APOS	4	9	12	Other	«Un'» estas oficiale permesata de la Akademio de Esperanto (Aktoj de la Akademio II, p. 39), sed ĝi povas aperi nur en memstara, kvazaŭ ekkria uzo. Uzu <suggestion>unu</suggestion>.	unu
+L	793	Un', du, tri!
+M	793	HUNSPELL_RULE		0	3	UnknownWord	Ebla mistajpaĵo trovita	Uni'|Urn'|Run'|Uln'|Tun'|Dun'|Ung'|Unc'|Unu
+L	794	Mi preferas ludi al studi.
+M	794	PREFERI_AL_OL	1	17	19	Other	Kun la verbo «preferas» ne eblas uzi «al» antaŭ i-verbo por la komparo. Uzu <suggestion>ol</suggestion> aŭ iafoje <suggestion>anstataŭ</suggestion>.	ol|anstataŭ
+L	795	Mi preferas esti mortigita de ili, al esti pinĉata de la anasoj.
+M	795	PREFERI_AL_OL	1	35	37	Other	Kun la verbo «preferas» ne eblas uzi «al» antaŭ i-verbo por la komparo. Uzu <suggestion>ol</suggestion> aŭ iafoje <suggestion>anstataŭ</suggestion>.	ol|anstataŭ
+L	796	Mi aĉetis dudek da ovoj.
+M	796	N_DA_O	1	10	18	Other	Kun la fundamentaj numeraloj «da» ne estas uzebla. Forigu «da» kaj uzu akuzativon laŭ bezone (ekz: dek ovojn), aŭ uzu substantivan numeralon (ekz: deko da ovoj).	
+L	797	Mi aĉetis dudek ovojn.
+L	798	Mi aĉetis dudekon da ovoj.
+L	799	Miliono da homoj mortis.
+L	800	Donu al mi glaseton da la vino.
+M	800	DA_LA	1	20	22	Other	Kiam antaŭ tio, kio estas mezurata, troviĝas artikolo (la), oni devas anstataŭ «da» uzi <suggestion>de</suggestion> aŭ <suggestion>el</suggestion>.	de|el
+L	801	La ĉambro estas plena da homoj.
+M	801	RICXA_DA	1	22	24	Other	Kun la vortoj plena, riĉa, abunda «da» ne estas uzebla, ĉar ili ne indikas mezuron. Uzu <suggestion>de</suggestion>.	de
+L	802	Pro perdo da kuraĝo.
+M	802	SPECO_DA	1	10	12	Other	La vorto «perdo» neniam povas esprimi kvanton, mezuron aŭ nombron.	de
+L	803	Ĉe ni estas manko da akvo.
+M	803	SPECO_DA	1	18	20	Other	La vorto «manko» neniam povas esprimi kvanton, mezuron aŭ nombron.	de
+L	804	Ni manĝis specon da fiŝo.
+M	804	SPECO_DA	1	17	19	Other	La vorto «specon» neniam povas esprimi kvanton, mezuron aŭ nombron.	de
+L	805	Ni manĝis iom da ĝi
+M	805	DA_PERSONA_PRONOMO	1	14	16	Other	Persona pronomo ordinare montras unu aŭ plurajn difinitajn individuojn. Tial ne uzu «da» antaŭ persona pronomo, sed anstataŭe <suggestion>de</suggestion> aŭ <suggestion>el</suggestion>.	de|el
+L	806	Kontaktu min por pluaj informoj.
+M	806	PLUA_PLIA	1	17	22	Other	Por paroli pri io aldona, oni uzas <suggestion>pliaj</suggestion>. «Plua» signifas «daŭranta plu», kaj estas malofta en tiu kunteksto.	pliaj
+L	807	Mi deziras pluajn informojn.
+M	807	PLUA_PLIA	1	11	17	Other	Por paroli pri io aldona, oni uzas <suggestion>pliajn</suggestion>. «Plua» signifas «daŭranta plu», kaj estas malofta en tiu kunteksto.	pliajn
+L	808	Per sia plua esplorado, ŝi sukcesis.
+L	809	Mi vundis al mi la fingron per vitrero.
+M	809	VITRERO	1	31	38	Other	Ero ne estas identa al peco aŭ parto, kaj estas granda diferenco inter ekzemple ĉenero kaj ĉenpeco. Tial uzu <suggestion>vitropeco</suggestion>.	vitropeco
+L	810	Ridindo ne mortigas.
+M	810	INDO	1	0	7	Other	Por substantivigo de -inda vortoj, la sufikso «ec» estas ĉiam uzata: amindeco (ne amindo), vidindeco (ne vidindo) k.t.p. Ĉu vi volas skribi <suggestion>Ridindeco</suggestion>?	Ridindeco
+L	811	Li estas Hindo, kaj li estas Sudhindo.
+M	811	HUNSPELL_RULE		29	37	UnknownWord	Ebla mistajpaĵo trovita	Hindoĉinio
+L	812	Mi laviĝis ĉi-matene.
+M	812	RAZIGXI	1	3	10	Other	Oni ne povas diri «mi laviĝis, kombiĝis, raziĝis, vestiĝis», ĉar tiuj agoj ne okazas aŭtomate, per si mem, kaj la homo ne restas pasiva ĉe tio; oni devas diri: mi lavis min, kombis min, razis min, vestis min.	
+L	813	Mi lavis min ĉi-matene.
+L	814	Ĉu Mary laviĝis?
+M	814	HUNSPELL_RULE		3	7	UnknownWord	Ebla mistajpaĵo trovita	Maru|Maro|Mara|Mare|Mari
+M	814	RAZIGXI	1	8	15	Other	Oni ne povas diri «mi laviĝis, kombiĝis, raziĝis, vestiĝis», ĉar tiuj agoj ne okazas aŭtomate, per si mem, kaj la homo ne restas pasiva ĉe tio; oni devas diri: mi lavis min, kombis min, razis min, vestis min.	
+L	815	Ĉu Mary lavis sin?
+M	815	HUNSPELL_RULE		3	7	UnknownWord	Ebla mistajpaĵo trovita	Maru|Maro|Mara|Mare|Mari
+L	816	Mia aŭto laviĝis per la pluvego.
+L	817	Mi ĵus laviĝis ĉi-matene.
+M	817	RAZIGXI	2	7	14	Other	Oni ne povas diri «mi laviĝis, kombiĝis, raziĝis, vestiĝis», ĉar tiuj agoj ne okazas aŭtomate, per si mem, kaj la homo ne restas pasiva ĉe tio; oni devas diri: mi lavis min, kombis min, razis min, vestis min.	
+L	818	Mi ĵus lavis min ĉi-matene.
+L	819	Mi ankoraŭ ne laviĝis ĉi-matene.
+M	819	RAZIGXI	3	14	21	Other	Oni ne povas diri «mi laviĝis, kombiĝis, raziĝis, vestiĝis», ĉar tiuj agoj ne okazas aŭtomate, per si mem, kaj la homo ne restas pasiva ĉe tio; oni devas diri: mi lavis min, kombis min, razis min, vestis min.	
+L	820	Mi ankoraŭ ne lavis min ĉi-matene.
+L	821	Mi loĝas en Nova-Zelando.
+M	821	NOVA_ZELANDO	1	12	24	Other	Oni devas skribi <suggestion>Nov-Zelando</suggestion> aŭ <suggestion>Nova Zelando</suggestion>.	Nov-Zelando|Nova Zelando
+L	822	Mi estas Francano.
+M	822	FRANCANO	1	9	17	Other	Oni ne aldonas la finaĵon «-an» al popoloj de lando kun finaĵo «-uj». Ĉu vi anstataŭ intencis skribi <suggestion>Franco</suggestion>?	Franco
+L	823	Ni estas Francanoj.
+M	823	FRANCANO	1	9	18	Other	Oni ne aldonas la finaĵon «-an» al popoloj de lando kun finaĵo «-uj». Ĉu vi anstataŭ intencis skribi <suggestion>Francoj</suggestion>?	Francoj
+L	824	Mi naskiĝis en Aŭstralujo.
+M	824	AUXSTRALUJO	1	15	25	Other	La lando «Aŭstralujo» ne havas finaĵon «-ujo», kaj do ne povas havi finaĵon «uj». Ĉu vi intencis skribi <suggestion>Aŭstralio</suggestion>?	Aŭstralio
+L	825	Mi translokiĝis al Zambujo.
+M	825	AUXSTRALUJO	1	19	26	Other	La lando «Zambujo» ne havas finaĵon «-ujo», kaj do ne povas havi finaĵon «uj». Ĉu vi intencis skribi <suggestion>Zambio</suggestion>?	Zambio
+L	826	Mi gastigis du aŭstralojn.
+M	826	AUXSTRALIANO	1	15	25	Other	Ĉu vi intencis skribi <suggestion>aŭstralianojn</suggestion>?	aŭstralianojn
+L	827	Ŝi estas tanzano.
+M	827	AUXSTRALIANO	1	9	16	Other	Ĉu vi intencis skribi <suggestion>tanzaniano</suggestion>?	tanzaniano
+L	828	La teksto estas korekta.
+M	828	KOREKTA_SENERARA	1	16	23	Other	Ĝusta uzo de la vorto «korekta» estas sufiĉe malofta. Ĝi signifas «senerariga». Ĉu vi tie intencis skribi <suggestion>senerara</suggestion>, aŭ <suggestion>ĝusta</suggestion> laŭ la kunteksto?	senerara|ĝusta
+L	829	Li donis korektan respondon.
+M	829	KOREKTA_SENERARA	1	9	17	Other	Ĝusta uzo de la vorto «korekta» estas sufiĉe malofta. Ĝi signifas «senerariga». Ĉu vi tie intencis skribi <suggestion>seneraran</suggestion>, aŭ <suggestion>ĝustan</suggestion> laŭ la kunteksto?	seneraran|ĝustan
+L	830	Via prononco estas tute korekta.
+M	830	KOREKTA_SENERARA	1	24	31	Other	Ĝusta uzo de la vorto «korekta» estas sufiĉe malofta. Ĝi signifas «senerariga». Ĉu vi tie intencis skribi <suggestion>senerara</suggestion>, aŭ <suggestion>ĝusta</suggestion> laŭ la kunteksto?	senerara|ĝusta
+L	831	Li donis malkorektan respondon.
+M	831	KOREKTA_SENERARA	2	9	20	Other	La vorto «malkorektan» estas preskaŭ ĉiam misuzata. Ĉu vi tie intencis skribi <suggestion>eraran</suggestion>, aŭ <suggestion>malĝustan</suggestion> laŭ la kunteksto?	eraran|malĝustan
+L	832	Li donis komplikan respondon.
+M	832	KOMPLIKA_MALSIMPLA	1	9	18	Other	La vorto «komplika» estas sufiĉe ofte misuzata. Ĝi pli-malpli signifas «malsimpliga». Ĉu vi tie intencis skribi <suggestion>malsimplan</suggestion>, <suggestion>malfacilan</suggestion> aŭ <suggestion>kompleksan</suggestion>?	malsimplan|malfacilan|kompleksan
+L	833	Li donis malkomplikan respondon.
+M	833	KOMPLIKA_MALSIMPLA	2	9	21	Other	La vorto «malkomplikan» estas preskaŭ ĉiam misuzata. Ĉu vi tie intencis skribi <suggestion>simplan</suggestion>, aŭ <suggestion>facilan</suggestion>?	simplan|facilan
+L	834	Tio komplikigas la aferon.
+M	834	KOMPLIKIGI	1	4	15	Other	La verbo «komplikigas» estas sufiĉe neverŝajna, kaj preskaŭ ĉiam misuzata. Ĉu vi eble intencis skribi <suggestion>komplikas</suggestion>?	komplikas
+L	835	Ŝi korektigis la dokumentojn.
+M	835	KOMPLIKIGI	1	3	13	Other	La verbo «korektigis» estas sufiĉe neverŝajna, kaj preskaŭ ĉiam misuzata. Ĉu vi eble intencis skribi <suggestion>korektis</suggestion>?	korektis
+L	836	Halo!
+M	836	HALO_HA_LO	1	0	4	Other	Oni uzas du vortojn <suggestion>ha lo</suggestion> por la ekkria vorto en telefonado.	Ha lo
+L	837	Granda halo de hotelo.
+L	838	Halo’
+M	838	HALO_HA_LO	2	0	5	Other	Oni uzas du vortojn <suggestion>ha lo</suggestion> sen apostrofo por la ekkria vorto en telefonado.	Ha lo
+L	839	Granda halo de hotelo.
+L	840	Ĝi estas malalmenaŭ tri metroj longa.
+M	840	MALALMENAUX	1	9	19	Other	«Almenaŭ = minimume», sed oni tamen neniam uzas «malalmenaŭ» por <suggestion>maksimume</suggestion>.	maksimume
+L	841	Okej!
+M	841	OKEJ	1	0	4	Other	Oni devas skribi <suggestion>o kej</suggestion>.	O kej
+L	842	Vendredon la 28-an de Aŭgusto 2014.
+M	842	DATO_TAGO	1	0	34	Other	La tago de la dato «Vendredon la 28-an de Aŭgusto 2014» ne estas vendredo, sed jaŭdo.	
+L	843	Ĵaŭdon la 28-an de Aŭgusto 2014.
+M	843	HUNSPELL_RULE		13	15	UnknownWord	Ebla mistajpaĵo trovita	ano|ana|ane|ani|ian|anu|ajn|en|al|tn|aŭ|aĥ
+L	844	Sabaton la duan de Oktobro 2014.
+M	844	DATO_TAGO	1	0	31	Other	La tago de la dato «Sabaton la duan de Oktobro 2014» ne estas sabato, sed jaŭdo.	
+L	845	Ĵaŭdon la duan de Oktobro 2014.
+L	846	Sabaton la dudek-duan de Oktobro 2014.
+M	846	DATO_TAGO	1	0	37	Other	La tago de la dato «Sabaton la dudek-duan de Oktobro 2014» ne estas sabato, sed merkredo.	
+L	847	Merkredon la dudek-duan de Oktobro 2014.
+L	848	Miaj virfratoj ne ĉeestis la eventon.
+M	848	VIRAJ_RADIKOJ_VIR	1	5	14	Other	Oni ne uzas la prefikson «vir-» en tiuj vortoj, kies radiko jam estas vira.	fratoj
+L	849	Li estas mia virpatro.
+M	849	VIRAJ_RADIKOJ_VIR	1	13	21	Other	Oni ne uzas la prefikson «vir-» en tiuj vortoj, kies radiko jam estas vira.	patro
+L	850	Kiu estas tiu sinjoriĉo?
+M	850	VIRAJ_RADIKOJ_ICX	1	14	23	Other	Oni ne uzas la sufikson «-iĉ» en tiuj vortoj, kies radiko jam estas vira.	sinjoro
+L	851	Mi vizitis mian neviĉon.
+M	851	VIRAJ_RADIKOJ_ICX	1	16	23	Other	Oni ne uzas la sufikson «-iĉ» en tiuj vortoj, kies radiko jam estas vira.	nevon
+L	852	Fremduloj loĝis en lia patriĉa domo.
+M	852	VIRAJ_RADIKOJ_ICX	1	23	30	Other	Oni ne uzas la sufikson «-iĉ» en tiuj vortoj, kies radiko jam estas vira.	patra
+L	853	Oni pensas, ke ŝi devenas de amazoninoj.
+M	853	INAJ_RADIKOJ	1	29	39	Other	Oni ne uzas la sufikson «-in» en tiuj vortoj, kies radiko jam estas ina.	amazonoj
+L	854	Ŝi estas mia muzino.
+M	854	INAJ_RADIKOJ	1	13	19	Other	Oni ne uzas la sufikson «-in» en tiuj vortoj, kies radiko jam estas ina.	muzo
+L	855	Ĉu estos konatuloj tie?
+M	855	SUPERFLUA_UL	1	9	18	Other	O-participo per si mem montras personon, kaj tial aldono de UL normale estas eraro.	konatoj
+L	856	Ŝi estas parolantulo de tiu lingvo.
+M	856	SUPERFLUA_UL	1	9	20	Other	O-participo per si mem montras personon, kaj tial aldono de UL normale estas eraro.	parolanto
+L	857	Estis multaj kurintuloj ĉe tiu evento.
+M	857	SUPERFLUA_UL	1	13	23	Other	O-participo per si mem montras personon, kaj tial aldono de UL normale estas eraro.	kurintoj
+L	858	Tie estis multaj arogantuloj kaj sprituloj.
+L	859	Kaj tie ĉi tiu persono loĝis.
+M	859	MALKLARA_CXI	1	4	14	Other	Normale estas egale, ĉu oni metas ĉi antaŭ aŭ post la tabelvorto, sed ĉi-foje la loko de ĉi estas grava. Ĉu vi intencis skribi <suggestion>ĉi tie tiu</suggestion> aŭ <suggestion>tie tiu ĉi</suggestion>?	ĉi tie tiu|tie tiu ĉi
+L	860	Vidu wwww.google.com.
+M	860	URL	1	5	20	Other	Devus verŝajne esti 3 literoj «wwww» en la URL.	
+L	861	Vidu www.google.com.
+L	862	Vidu http://wwww.google.com.
+M	862	URL	1	5	27	Other	Devus verŝajne esti 3 literoj «wwww» en la URL.	
+L	863	Vidu http://www.google.com.
+L	864	Vidu http://www.wwnorton.com.
+L	865	Vidu http:/www.google.com.
+M	865	URL	2	5	25	Other	Devus verŝajne esti 2 oblikvoj «//» en la URL.	
+L	866	Vidu http:www.google.com.
+M	866	URL	2	5	24	Other	Devus verŝajne esti 2 oblikvoj «//» en la URL.	
+L	867	Vidu http://www.google.com.
+L	868	Vidu http//www.google.com.
+M	868	URL	3	5	25	Other	Devus verŝajne esti dupunkto «:» malantaŭ la protokolo en la URL.	
+L	869	Vidu http://www.google.com.
+L	870	Vidu mailto://john.doe.com.
+M	870	URL	4	5	26	Other	La protokolo de URL mailto: aŭ news: ne devus esti sekvita de du oblikvoj «//».	
+L	871	Vidu mailto:john.doe.com.
+M	871	VTR_NAK	1	5	11	Other	Ĉu vi forgesis akuzativon malantaŭ la transitiva verbo «Vidu»?	mailton
+M	871	HUNSPELL_RULE		12	16	UnknownWord	Ebla mistajpaĵo trovita	
+M	871	HUNSPELL_RULE		17	20	UnknownWord	Ebla mistajpaĵo trovita	deo|die|do|de|done|dote|dome|dee|due|poe
+M	871	HUNSPELL_RULE		21	24	UnknownWord	Ebla mistajpaĵo trovita	iom|krom
+L	872	Vidu http://foobar.com/%foo.html
+M	872	URL	5	5	32	Other	La URL enhavas neĝustan signon «%» laŭ RFC 1738. Oni povas anstataŭigi specialajn signojn per % kun 2 deksesumaj nombroj.	
+L	873	Vidu http://foobar.com/%20foo.html
+L	874	Vidu http://foobar.com/^foo.html
+M	874	URL	5	5	32	Other	La URL enhavas neĝustan signon «^» laŭ RFC 1738. Oni povas anstataŭigi specialajn signojn per % kun 2 deksesumaj nombroj.	
+L	875	Vidu http://foobar.com/{foo.html
+M	875	URL	5	5	32	Other	La URL enhavas neĝustan signon «{» laŭ RFC 1738. Oni povas anstataŭigi specialajn signojn per % kun 2 deksesumaj nombroj.	
+L	876	Vidu http://foobar.com/|foo.html
+M	876	URL	5	5	32	Other	La URL enhavas neĝustan signon «|» laŭ RFC 1738. Oni povas anstataŭigi specialajn signojn per % kun 2 deksesumaj nombroj.	

@@ -183,6 +183,16 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
+pub fn check_eo(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Ripetita spaceto (neĝusta formato)",
+        "Ebla mistajpaĵo: vi ripetis spaceton",
+        ("TYPOGRAPHY", "Tipografio"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Icelandic `MessagesBundle_is` strings.
 pub fn check_is(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

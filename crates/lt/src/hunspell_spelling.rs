@@ -40,6 +40,12 @@ const MAX_SUGGESTION_WORD_LENGTH: usize = 30;
 
 static HAS_NO_LETTER: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[^\p{Latin}]+$").unwrap());
 
+/// `HunspellRule.MINUS_PLUS` (`-+`): a token made only of dashes.
+fn minus_plus() -> &'static Regex {
+    static MINUS_PLUS: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^-+$").unwrap());
+    &MINUS_PLUS
+}
+
 /// Configuration for one [`HunspellSpellingRule`].
 pub struct HunspellSpellingConfig {
     pub rule_id: &'static str,
@@ -252,16 +258,33 @@ impl HunspellSpellingRule {
                 // `isMisspelled` still sees the dot (`nonWordPattern` keeps it
                 // when the aff `WORDCHARS` lists `.`, as Danish does).
                 let clean_word = word.strip_suffix('.').filter(|w| !w.is_empty());
+                // Java: a leading-dash token is reported without the dash
+                // (`dashCorr`), or skipped when the rest is a known word.
+                let mut dash_corr = 0usize;
+                if word.starts_with('-') {
+                    let clean = clean_word.unwrap_or(&word);
+                    let rest = clean.strip_prefix('-').unwrap_or(clean);
+                    if !self.is_misspelled(rest) || minus_plus().is_match(clean) {
+                        if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
+                            is_first_word = false;
+                        }
+                        continue;
+                    }
+                    dash_corr = 1;
+                }
+                let start = token.start_pos + dash_corr;
                 let end = match clean_word {
                     Some(clean) => token.start_pos + clean.len(),
                     None => token.end_pos(),
                 };
                 let mut m = self.new_rule_match(
-                    token.start_pos,
-                    end,
+                    start,
+                    end.max(start),
                     is_first_word && idx < non_blank.len() - 1,
                 );
-                m.suggestions = self.suggestions(clean_word.unwrap_or(&word));
+                let sugg_word = clean_word.unwrap_or(&word);
+                let sugg_word = sugg_word.get(dash_corr..).unwrap_or(sugg_word);
+                m.suggestions = self.suggestions(sugg_word);
                 matches.push(m);
             }
             if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {

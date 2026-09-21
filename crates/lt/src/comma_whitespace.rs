@@ -700,6 +700,42 @@ fn translate_comma_message_sv(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
+pub fn check_sentence_eo(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Interpunkcio".to_string();
+        m.description = "Uzo de spaceto antaŭ komo kaj antaŭ/malantaŭ krampoj".to_string();
+        m.message = translate_comma_message_eo(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_eo` bundle.
+fn translate_comma_message_eo(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Ne metu spaceton malantaŭ malfermantaj krampoj".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Ne metu spaceton antaŭ fermanta krampo".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Enmetu spaceton post la komo".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Enmeti spaceton post la komo, sed ne antaŭ la komo".to_string()
+        }
+        "Don't put a space before the full stop." => "Ne enmetu spaceton antaŭ punkto".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Icelandic `MessagesBundle_is` strings.
 pub fn check_sentence_is(
     tokens: &[AnalyzedTokenReadings],
