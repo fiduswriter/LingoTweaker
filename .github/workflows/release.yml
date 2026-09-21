@@ -11,6 +11,11 @@ name: Release
 # distributions. The `lingotweaker` wheel uses PyPI trusted publishing
 # (`id-token: write`), so it needs no secret. The `data` job uses the workflow
 # token with `contents: write` to attach assets to the GitHub Release.
+#
+# Forgejo reads .github/workflows too, but publishing happens only from the
+# GitHub mirror (secrets, npm/PyPI trusted publishing and GitHub Release
+# assets are GitHub-only). Every job is gated to GitHub so a tag pushed to
+# Forgejo neither fails nor half-publishes.
 on:
   push:
     tags:
@@ -26,6 +31,7 @@ jobs:
   # Validate the tag against the workspace version and derive the PEP 440
   # version so every registry gets the same release.
   version:
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     outputs:
       cargo: ${{ steps.v.outputs.cargo }}
@@ -49,6 +55,7 @@ jobs:
   # extractable native archives and a sha256 manifest.
   data:
     needs: version
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -64,6 +71,7 @@ jobs:
   # One npm data package (all language packs) shared by both engine packages.
   npm-data:
     needs: version
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -82,6 +90,7 @@ jobs:
   # One PyPI data distribution per language (each well under the 100 MB limit).
   pypi-data:
     needs: version
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -95,6 +104,7 @@ jobs:
 
   crates:
     needs: version
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -109,6 +119,7 @@ jobs:
 
   pypi:
     needs: version
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     permissions:
       id-token: write # trusted publishing to PyPI
@@ -138,6 +149,7 @@ jobs:
 
   npm:
     needs: [version, npm-data]
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -155,6 +167,7 @@ jobs:
 
   wasm:
     needs: [version, npm-data]
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
