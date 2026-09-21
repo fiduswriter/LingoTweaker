@@ -42,6 +42,7 @@ impl IcelandicSpellingRule {
                 morfologik_dict: None,
                 max_suggestions: 0,
                 native_suggestions: false,
+                cap_native_suggestions: false,
             },
         )?))
     }

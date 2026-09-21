@@ -38,6 +38,7 @@ impl EsperantoSpellingRule {
                 morfologik_dict: None,
                 max_suggestions: 5,
                 native_suggestions: true,
+                cap_native_suggestions: false,
             },
         )?))
     }

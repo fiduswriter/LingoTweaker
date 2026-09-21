@@ -95,13 +95,14 @@ Give a new rule a non-zero priority there if it must beat the speller
   lexicon-driven check is a documented follow-up (false positives on phrases
   like `god morgen`, `til stede`).
 
-## Spelling suggestions (Morfologik, one-off)
+## Spelling suggestions (native hunspell)
 
 `NB_SPELLER` uses the 708k-word Hunspell dictionary as the spelling authority
-and, since the one-off Morfologik build, the vendored CFSA2 speller dictionary
-`dictionaries/no.dict` (~1 MB) for suggestions: the Hunspell dictionary is
-above the bounded edit-distance limit, so the error-tolerant FSA search is
-used instead. The artifact is built **once**; it is only refreshed when
+and the ported native hunspell `suggest()` for suggestions (capped at five,
+matching the documented product behaviour). The one-off Morfologik build
+below is **no longer used at runtime** (kept until the data removal is
+scheduled); the earlier bounded edit-distance search needed it because the
+Hunspell dictionary is above the bounded-search limit. The artifact is built **once**; it is only refreshed when
 `nb_NO.dic` changes. Exact build (reproducible, no JVM needed):
 
 ```sh

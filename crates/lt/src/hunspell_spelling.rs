@@ -72,6 +72,11 @@ pub struct HunspellSpellingConfig {
     /// Use the ported native hunspell `suggest()` (affix/compound/REP/MAP
     /// generators) instead of the bounded edit-distance search.
     pub native_suggestions: bool,
+    /// Cap the native hunspell suggestion list at [`Self::max_suggestions`].
+    /// The Java-parity spellers keep hunspell's own `MAXSUGGESTION` (15) to
+    /// match the legacy engine; the hand-authored languages (`no`, `nrd`,
+    /// `gn`) keep their documented five-suggestion product behaviour.
+    pub cap_native_suggestions: bool,
 }
 
 /// A Hunspell speller wired as an LT spelling rule.
@@ -107,7 +112,10 @@ impl HunspellSpellingRule {
             load_list(&path, &mut prohibit);
         }
 
-        let suggestion_words = if config.max_suggestions == 0 {
+        // The plain candidate list only feeds the bounded edit-distance
+        // search, so it is skipped when native hunspell suggestions are on
+        // (for `no` that list is the whole 708k-word dictionary).
+        let suggestion_words = if config.max_suggestions == 0 || config.native_suggestions {
             Vec::new()
         } else {
             let path = match config.suggestion_file {
@@ -125,8 +133,12 @@ impl HunspellSpellingRule {
         };
 
         // The Morfologik FSA is only loaded when it can actually be used:
-        // suggestions enabled and no plain candidate list available.
-        let morfologik = if config.max_suggestions == 0 || !suggestion_words.is_empty() {
+        // suggestions enabled, native hunspell suggestions off, and no plain
+        // candidate list available.
+        let morfologik = if config.max_suggestions == 0
+            || config.native_suggestions
+            || !suggestion_words.is_empty()
+        {
             None
         } else if let Some((dict, info)) = config.morfologik_dict {
             Some(MorfologikSpeller::from_dict_file(
@@ -364,6 +376,9 @@ impl HunspellSpellingRule {
                 value,
                 short_description: None,
             });
+        }
+        if self.config.cap_native_suggestions {
+            out.truncate(self.config.max_suggestions);
         }
         out
     }

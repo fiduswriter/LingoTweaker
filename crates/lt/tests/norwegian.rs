@@ -263,8 +263,9 @@ fn norwegian_speller() {
     assert_eq!(ids, vec!["NB_TYPOS".to_string()]);
 }
 
-/// Morfologik-backed suggestions for misspellings (`no.dict`, one-off build);
-/// Hunspell stays the spelling authority.
+/// Native hunspell suggestions for misspellings (capped at five); Hunspell
+/// stays the spelling authority. There is no legacy Java module for `no`, so
+/// these pin the engine's own hunspell-reference behaviour.
 #[test]
 fn norwegian_speller_suggestions() {
     let _guard = engine_guard();
@@ -298,6 +299,23 @@ fn norwegian_speller_suggestions() {
         values.len(),
         "duplicate suggestions: {values:?}"
     );
+}
+
+/// Suggestions keep Norwegian orthography (real ä/ø/å handling).
+#[test]
+fn norwegian_speller_suggestions_diacritics() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        return;
+    };
+    let result = engine.check("Jeg har gådd hjem.").unwrap();
+    let m = result
+        .matches
+        .iter()
+        .find(|m| m.rule_id == "NB_SPELLER")
+        .expect("gådd must be flagged");
+    let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
+    assert_eq!(values, vec!["nådd", "sådd", "gård", "rådd", "gidd"]);
     // the misspelling's capitalization is preserved
     let result = engine.check("Dette er Setnign.").unwrap();
     let spelling: Vec<_> = result

@@ -1,6 +1,8 @@
 //! Nordum spelling rule (`NDM_SPELLER`) over the generated `nrd` Hunspell
-//! dictionary. Suggestions come from the small authoritative core list
-//! (`nrd_core.dic`), not from the large generated dictionary.
+//! dictionary. Suggestions come from the ported native hunspell `suggest()`
+//! over that dictionary (capped at five); the small authoritative core list
+//! (`nrd_core.dic`) is only the bounded-search candidate list, which is
+//! unused while native suggestions are on.
 
 use std::path::Path;
 
@@ -29,7 +31,8 @@ impl NordumSpellingRule {
                 suggestion_file: Some("nrd_core.dic"),
                 morfologik_dict: None,
                 max_suggestions: 5,
-                native_suggestions: false,
+                native_suggestions: true,
+                cap_native_suggestions: true,
             },
         )?))
     }

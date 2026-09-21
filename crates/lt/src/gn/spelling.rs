@@ -1,7 +1,7 @@
 //! Guaraní spelling rule (`GN_SPELLER`) over the vendored LibreOffice `gug`
 //! Hunspell dictionary (4,216 words, GFDL-1.2-or-later, unmaintained since
-//! 2016). Suggestions come from the same word list with a bounded
-//! edit-distance search; the dictionary has no affix morphology, so
+//! 2016). Suggestions come from the ported native hunspell `suggest()`
+//! (capped at five); the dictionary has no affix morphology, so
 //! inflected/agglutinated forms are a known coverage gap.
 
 use std::path::Path;
@@ -31,7 +31,8 @@ impl GuaraniSpellingRule {
                 suggestion_file: None,
                 morfologik_dict: None,
                 max_suggestions: 5,
-                native_suggestions: false,
+                native_suggestions: true,
+                cap_native_suggestions: true,
             },
         )?))
     }

@@ -1,9 +1,9 @@
 //! Norwegian Bokmål spelling rule (`NB_SPELLER`) over the vendored
 //! `nb_NO` Hunspell dictionary (LibreOffice `no/`, data CC BY 4.0,
-//! `.aff` GPL-2.0). Hunspell remains the spelling authority; suggestions
-//! come from the one-off Morfologik build
-//! `data/no/dictionaries/no.dict` (see `data/no/README.md`), because the
-//! dictionary has ~700k entries, above the bounded edit-distance limit.
+//! `.aff` GPL-2.0). Hunspell remains the spelling authority; suggestions come
+//! from the ported native hunspell `suggest()` (affix/compound/REP/MAP/ngram
+//! generators), so the one-off Morfologik build
+//! `data/no/dictionaries/no.dict` is no longer used.
 
 use std::path::Path;
 
@@ -32,7 +32,8 @@ impl NorwegianSpellingRule {
                 suggestion_file: None,
                 morfologik_dict: Some(("no/dictionaries/no.dict", "no/dictionaries/no.info")),
                 max_suggestions: 5,
-                native_suggestions: false,
+                native_suggestions: true,
+                cap_native_suggestions: true,
             },
         )?))
     }
