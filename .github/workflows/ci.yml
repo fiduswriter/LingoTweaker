@@ -70,6 +70,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 -m unittest discover -s tools/morfologik/tests
+      - run: python3 scripts/ci/check-demo-languages.py
 
   # P6.3: the parity matrix is computed from the changed paths (owner
   # gate-scope rule: a change gates only the languages it can influence;

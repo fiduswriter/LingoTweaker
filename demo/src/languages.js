@@ -44,6 +44,31 @@ const GUARANI = {
     "Mba'éichapa, che angirũ. Ko'ẽrõ jajotopa tape pukúpe.",
 };
 
+const GALICIAN = {
+  sample: "Este son un probe. Habían moitas persoas na rua.",
+};
+const ROMANIAN = {
+  sample: "Acesta sunt un test. Au fost multe persoane pe strada.",
+};
+const POLISH = {
+  sample: "To jest test. Wczoraj poszłem do domu i widziałem ładny samochód.",
+};
+const SLOVAK = {
+  sample: "Toto su test. Včera som šiel domov a videl pekný dom.",
+};
+const SLOVENIAN = {
+  sample: "To so test. Včeraj sem šel domov in videl lep avto.",
+};
+const GREEK = {
+  sample: "Αυτό είναι ένα τέστ. Χτές πήγα σπίτι και είδα έναν φίλο.",
+};
+const DANISH = {
+  sample: "Dette er en tesst. Jeg har gådd hjem og spist aftensmad.",
+};
+const SWEDISH = {
+  sample: "Det här är ett tesst. Jag har gått hem och ätit middag.",
+};
+
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
   { code: "en-GB", pack: "en", label: "English (UK)", size: "15 MB", variant: "en-GB", ...ENGLISH },
@@ -57,6 +82,14 @@ export const LANGUAGES = [
   { code: "pt-BR", pack: "pt", label: "Português (BR)", size: "6.3 MB", variant: "pt-BR", ...PORTUGUESE },
   { code: "nl-NL", pack: "nl", label: "Nederlands", size: "37 MB", ...DUTCH },
   { code: "ca-ES", pack: "ca", label: "Català", size: "11 MB", ...CATALAN },
+  { code: "gl", pack: "gl", label: "Galego", size: "4.6 MB", ...GALICIAN },
+  { code: "ro", pack: "ro", label: "Română", size: "1.7 MB", ...ROMANIAN },
+  { code: "pl", pack: "pl", label: "Polski", size: "6.6 MB", ...POLISH },
+  { code: "sk", pack: "sk", label: "Slovenčina", size: "2.9 MB", ...SLOVAK },
+  { code: "sl", pack: "sl", label: "Slovenščina", size: "0.62 MB", ...SLOVENIAN },
+  { code: "el", pack: "el", label: "Ελληνικά", size: "0.92 MB", ...GREEK },
+  { code: "da", pack: "da", label: "Dansk", size: "1.5 MB", ...DANISH },
+  { code: "sv", pack: "sv", label: "Svenska", size: "1.6 MB", ...SWEDISH },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.1 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.7 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.35 MB", ...GUARANI },

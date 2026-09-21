@@ -18,7 +18,7 @@ the owner ever changes the project license.
 ## Vendored upstream data (pinned via `upstream.json`)
 
 - Source: <https://github.com/languagetool-org/languagetool>
-- Pinned commit: `01d07e1f61651d5ad7ea015cce36573314754ad8` (recorded in
+- Pinned commit: `7bd1f99b849b1de66845113010b3c9261c3f37e0` (recorded in
   `upstream.json` and `data/manifest.json`; sha256/size per file).
 - Default license: LGPL-2.1-or-later. Upstream's `pom.xml` notes that the license
   refers to the source code and that resources may be under different licenses, so

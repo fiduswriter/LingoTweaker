@@ -17,7 +17,7 @@ confirmed** instead of guessing.
 ## LanguageTool (upstream)
 
 - Source: <https://github.com/languagetool-org/languagetool>
-- Pinned commit: `01d07e1f61651d5ad7ea015cce36573314754ad8` (6.9-SNAPSHOT), see
+- Pinned commit: `7bd1f99b849b1de66845113010b3c9261c3f37e0` (6.9-SNAPSHOT), see
   [`upstream.json`](upstream.json).
 - License: the pinned `COPYING.txt` contains the LGPL-2.1 text; upstream
   `README.md` and `pom.xml` declare the "GNU Lesser General Public License"

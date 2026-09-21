@@ -70,7 +70,7 @@ no="0"/>` reference as the first matched token, so it flags exactly those
 repetitions.
 
 Pinned Java (single-line probe, `scripts/oracle/fr/probe-rule.sh "<text>"
-FRENCH_WORD_REPEAT_RULE`, Docker, commit `01d07e1f6165`):
+FRENCH_WORD_REPEAT_RULE`, Docker, commit `7bd1f99b849b`):
 
 ```
 Parfois, on dit ou on écrit, avec insouciance.   -> 9..15 "on dit",   suggestion "dit"
@@ -241,7 +241,7 @@ Este están muy bueno.   -> "están" -> "está"
 Este son un problema.   -> "son" -> "es"
 ```
 
-Pinned Java (`scripts/oracle/es/probe-rule.sh`, Docker, commit `01d07e1f6165`)
+Pinned Java (`scripts/oracle/es/probe-rule.sh`, Docker, commit `7bd1f99b849b`)
 reports **none** of these. The upstream agreement rule
 `AGREEMENT_SUBJECT_VERB_SG_PL` (`data/es/rules/grammar.xml:25242`) requires a
 full singular noun phrase (`<phraseref idref="_GN_SINGULAR"/>`) before the
