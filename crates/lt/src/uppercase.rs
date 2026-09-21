@@ -231,6 +231,19 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Icelandic `MessagesBundle_is`
+/// strings.
+pub fn check_is(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Þessi setning hefst ekki á hástaf",
+        "Hástafur/lágstafur",
+        "Athuga hvort setning hefst á stórum staf",
+        "Hástafur/lágstafur",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

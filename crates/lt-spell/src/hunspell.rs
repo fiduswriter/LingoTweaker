@@ -777,7 +777,10 @@ fn parse_affix_entry(
     }
     let strip = it.next().ok_or_else(|| parse_err(line))?;
     let add_field = it.next().ok_or_else(|| parse_err(line))?;
-    let cond_field = it.next().ok_or_else(|| parse_err(line))?;
+    // hunspell's `parse_affix` accepts a missing condition field (piece 5);
+    // e.g. the Icelandic `is_IS.aff` has `SFX 1\tur\t0` entries. It then
+    // defaults to "." (no condition), like `encodeit` with an empty string.
+    let cond_field = it.next().unwrap_or(".");
     let strip = if strip == "0" {
         Vec::new()
     } else {

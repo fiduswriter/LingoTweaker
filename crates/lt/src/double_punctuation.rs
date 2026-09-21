@@ -134,6 +134,23 @@ pub fn check_sentence_sv(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Icelandic `MessagesBundle_is` strings.
+pub fn check_sentence_is(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Punctuation".to_string();
+        m.description = "Tvítekinn punktur eða komma".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Tveir punktar í röð".to_string();
+            m.short_message = Some("Tveir punktar í röð".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Tvær kommur í röð".to_string();
+            m.short_message = Some("Tvær kommur í röð".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Spanish `MessagesBundle_es` strings.
 pub fn check_sentence_es(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

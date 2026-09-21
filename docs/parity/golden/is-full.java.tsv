@@ -1,0 +1,87 @@
+L	1	Þessi vandi er arfleið nýlendutímans.
+M	1	ARFLEIFÐ	1	15	22	Other	Ætlaðir þú að skrifa <suggestion>arfleifð</suggestion>?	arfleifð
+L	2	Veitingastaðurinn við ánna var frábær.
+M	2	ÁNNA	1	22	26	Other	Ætlaðir þú að skrifa <suggestion>ána</suggestion> (=fljótið)?	ána
+L	3	Við horfum farm á veginn.
+M	3	FARM_FRAM	1	11	15	Other	Ætlaðir þú að skrifa <suggestion>fram</suggestion> (=áfram)?	fram
+L	4	Breytingar eru á næsta leyti.
+M	4	LEITI	1	23	28	Other	Skrifa skal <suggestion>leiti</suggestion> í orðasambandinu: á næsta leiti	leiti
+L	5	Þetta er rétt að sumu leiti.
+M	5	LEYTI	1	22	27	Other	Skrifa skal 'y' í orðasambandinu: að sumu <suggestion>leyti</suggestion>	leyti
+L	6	Við mætum um svipað leiti og þið.
+M	6	LEYTI	2	20	25	Other	Skrifa skal 'y' þegar leyti vísar til tíma eins og í orðasambandinu: um svipað <suggestion>leyti</suggestion>.	leyti
+L	7	Hann ætlar að sína henni nýju buxurnar.
+M	7	SYNA	1	14	18	Other	Sögnin <suggestion>sýna</suggestion> er skrifuð með 'ý'	sýna
+L	8	Þessi langreiður er afar stór.
+M	8	LANGREYÐUR	1	6	16	Other	Rita skal <suggestion>langreyður</suggestion> með 'y'	langreyður
+L	9	Í fyrra rak langreiði á Reynisfjöru.
+M	9	LANGREYÐUR	2	12	21	Other	Rita skal: <suggestion>langreyði</suggestion> með 'y'	langreyði
+M	9	HUNSPELL_NO_SUGGEST_RULE		24	35	UnknownWord	Possible spelling mistake found.	
+L	10	Ég er ekki að skilja þetta.
+M	10	FRAMVINDUHORF	1	3	20	Other	Hér væri ef til vill betra að nota einfalda nútíð sagnarinnar skilja fremur en framvinduhorf (er að skilja ...)?	
+L	11	Ég skil þetta ekki.
+L	12	Ég var ekki að skilja þetta.
+M	12	FRAMVINDUHORF	2	3	21	Other	Hér væri ef til vill betra að nota einfalda þátíð sagnarinnar skilja fremur en framvinduhorf (var að skilja ...)?	
+L	13	Ég skildi þetta ekki.
+L	14	Þótt ég væri ekki að skilja þetta.
+M	14	FRAMVINDUHORF	3	8	27	Other	Hér væri ef til vill betra að nota viðtengingarhátt þátíðar af sögninni skilja fremur en framvinduhorf (væri að skilja ...)?	
+L	15	Þótt ég skildi þetta ekki.
+L	16	Þótt ég sért ekki að skilja þetta.
+M	16	FRAMVINDUHORF	4	8	27	Other	Hér væri ef til vill betra að nota viðtengingarhátt nútíðar af sögninni skilja fremur en framvinduhorf (sért að skilja ...)?	
+L	17	Þótt ég skildi þetta ekki.
+L	18	Ég mun af gefnu tilefni gera grein fyrir skoðun minni.
+M	18	AD_GEFNU_TILEFNI	1	7	9	Other	Rita skal: <suggestion>að</suggestion> gefnu tilefni	að
+L	19	Glæpurinn var framinn að ásettu ráði.
+M	19	AD_ASETTU_RADI	1	22	24	Other	Rita skal: <suggestion>af</suggestion> ásettu ráði	af
+L	20	Hún hefur illa bifur á súrmat.
+M	20	ILLAN_BIFUR	1	15	20	Other	Rita skal: <suggestion>illan</suggestion> bifur (karlkyn)	illan
+L	21	Hún hefur illan bifur á súrmat.
+L	22	Hann leysti nefndina frá þessari miklu kvöð.
+M	22	LEYSA_UNDAN_KVÖÐ	1	21	24	Other	Betra er: leysa <suggestion>undan</suggestion> kvöð	undan
+L	23	Bókaforlagið Mál og Menning hefur gefið út margar bækur.
+M	23	MAL_OG_MENNING	1	20	27	Other	Stórt 'M' í Mál en lítið 'm' í <suggestion>menning</suggestion>	menning
+L	24	Mörgum finnst Bláa Lónið vera einstakt náttúruundur.
+M	24	BLÁA_LÓNIÐ	1	19	24	Other	Stórt 'B' í Bláa en lítið 'l' í <suggestion>lónið</suggestion>	lónið
+L	25	Skýrslan var unnin af starfsmönnum í Menntamálaráðuneytinu.
+M	25	RADUNEYTI	1	37	58	Other	Rita skal lítinn upphafsstaf í <suggestion>menntamálaráðuneytinu</suggestion> (og öllum nöfnum ráðuneyta)	menntamálaráðuneytinu
+L	26	Höfundur Egils Sögu átti ekki fartölvu.
+M	26	EGILS_SAGA	1	9	19	Other	Aðeins stór upphafsstafur í fyrsta hluta nafns: <suggestion>Egils sögu</suggestion>	Egils sögu
+L	27	Verðlaunin voru afhent á Degi íslenskrar tungu.
+M	27	DAGUR_TUNGU	1	25	29	Other	Rita skal lítinn upphafsstaf í: <suggestion>degi</suggestion> íslenskrar tungu (og að jafnaði í öllum nöfnum daga og tímabila)	degi
+L	28	Ég sá annað hvort Jón eða Guðmund.
+M	28	ANNAÐHVORT_EÐA	1	6	17	Other	Rita skal <suggestion>annaðhvort</suggestion> í einu lagi í fleyguðu tengingunni annaðhvort ... eða	annaðhvort
+L	29	Þú ert ennþá í liðinu.
+M	29	ENN_ÞÁ	1	7	12	Other	Rita skal <suggestion>enn þá</suggestion> í tvennu lagi	enn þá
+L	30	Hún er ennfremur ráðin til að stýra nefndinni.
+M	30	ENN_FREMUR	1	7	16	Other	Rita skal <suggestion>enn fremur</suggestion> í tvennu lagi	enn fremur
+L	31	Kötturinn heldur sig jafnan bakatil í garðinum.
+M	31	BAKA_TIL	1	28	35	Other	Rita skal <suggestion>baka til</suggestion> í tvennu lagi	baka til
+L	32	María fékk verkefnið greitt fyrirfram.
+M	32	FYRIR_FRAM	1	28	37	Other	Rita skal <suggestion>fyrir fram</suggestion> í tvennu lagi	fyrir fram
+L	33	Blómið er gult einsog sólin.
+M	33	EINS_OG	1	15	21	Other	Rita skal <suggestion>eins og</suggestion> í tvennu lagi	eins og
+L	34	Við gengum meðfram ströndinni.
+M	34	MEÐ_FRAM	1	11	18	Other	Rita skal <suggestion>með fram</suggestion> í tvennu lagi	með fram
+L	35	Þær eru hérmeð skráðar í sambúð.
+M	35	HÉR_MEÐ	1	8	14	Other	Rita skal <suggestion>hér með</suggestion> í tvennu lagi	hér með
+L	36	Börnin örkuðu inní skólastofuna.
+M	36	INN_Í	1	14	18	Other	Rita skal <suggestion>inn í</suggestion> í tvennu lagi	inn í
+L	37	Það kviknaði í útfrá kertaskreytingu.
+M	37	ÚT_FRÁ	1	15	20	Other	Rita skal <suggestion>út frá</suggestion> í tvennu lagi	út frá
+M	37	HUNSPELL_NO_SUGGEST_RULE		21	36	UnknownWord	Possible spelling mistake found.	
+L	38	Músin læddist framhjá kettinum.
+M	38	FRAM_HJÁ	1	14	21	Other	Rita skal <suggestion>fram hjá</suggestion> í tvennu lagi	fram hjá
+L	39	Jón hljóp á fram eftir veginum.
+M	39	ÁFRAM	1	10	16	Other	Rita skal <suggestion>áfram</suggestion> í einu lagi	áfram
+L	40	Hagnaður var um fram væntingar.
+M	40	UMFRAM	1	13	20	Other	Rita skal <suggestion>umfram</suggestion> í einu lagi	umfram
+L	41	Þessi frammistaða dugar þeim ekki.
+M	41	DUGIR	1	18	23	Other	Betra þykir að rita <suggestion>dugir</suggestion> en dugar (upprunasjónarmið)	dugir
+L	42	Ekki tókst að forða gjaldþroti fyrirtækisins.
+M	42	AFSTÝRA	1	14	19	Other	Betra þykir: <suggestion>afstýra</suggestion> gjaldþroti	afstýra
+L	43	Heimabær mömmu minnar heitir Århus.
+M	43	ÁRÓSAR	1	29	34	Other	Íslenska: <suggestion>Árósar</suggestion>	Árósar
+L	44	Við fengum okkur hafragraut í brunch.
+M	44	BRUNCH	1	30	36	Other	Íslenska: <suggestion>árdegisverður</suggestion>	árdegisverður
+L	45	Við fengum okkur hafragraut í árdegisverð.
+M	45	HUNSPELL_NO_SUGGEST_RULE		30	41	UnknownWord	Possible spelling mistake found.	

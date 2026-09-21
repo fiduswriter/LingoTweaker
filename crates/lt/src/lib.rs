@@ -41,6 +41,7 @@ mod fr;
 mod gl;
 mod gn;
 mod hunspell_spelling;
+mod is;
 mod it;
 mod long_sentence;
 mod matchfilters;
@@ -377,6 +378,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Sv => Pipeline::new_swedish(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Is => Pipeline::new_icelandic(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

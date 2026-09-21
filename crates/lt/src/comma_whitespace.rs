@@ -700,6 +700,42 @@ fn translate_comma_message_sv(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Icelandic `MessagesBundle_is` strings.
+pub fn check_sentence_is(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Punctuation".to_string();
+        m.description = "Bil á undan kommu og á undan/eftir sviga".to_string();
+        m.message = translate_comma_message_is(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_is` bundle.
+fn translate_comma_message_is(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Ekki setja bil eftir að svigi er opnaður".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Ekki setja bil áður en sviga er lokað".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Bil vantar á eftir kommu".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Bil skal vera á eftir kommu, ekki á undan henni".to_string()
+        }
+        "Don't put a space before the full stop." => "Ekki setja bil á undan punkti".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_sk` bundle.
 fn translate_comma_message_sk(msg: &str) -> String {
     match msg {

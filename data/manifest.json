@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 692,
+  "file_count": 699,
   "files": [
     {
       "path": "ca/ca.sor",
@@ -4123,6 +4123,75 @@
       }
     },
     {
+      "path": "is/hunspell/ignore.txt",
+      "sha256": "44011cdb245fcf5ad5b63dfb42bb7a03c8d062533c054e413c9ceb87f6ed52a5",
+      "size": 75,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "is/hunspell/is_IS.aff",
+      "sha256": "a235afb8cdac0b7cadf37174bc487ea0e6ab8fc41a372b1cae410bb3d6dc459a",
+      "size": 8474,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/is_IS.aff",
+        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license_verified": true,
+        "license_source": "upstream is/hunspell/license.txt"
+      }
+    },
+    {
+      "path": "is/hunspell/is_IS.dic",
+      "sha256": "03785b138bfa869349349ee02101f5711a8ee2696fe257d4abb82756e887e0f6",
+      "size": 2506482,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/is_IS.dic",
+        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license_verified": false,
+        "license_source": "upstream is/hunspell/license.txt"
+      }
+    },
+    {
+      "path": "is/hunspell/license.txt",
+      "sha256": "6433255202e72849607991364f7c77f711b6bb7dc8b53988e8c07c40a133eb55",
+      "size": 22264,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/license.txt",
+        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license_verified": true,
+        "license_source": "upstream is/hunspell/license.txt"
+      }
+    },
+    {
+      "path": "is/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "is/rules/grammar.xml",
+      "sha256": "75ee0e93af2085b9ca403bb049200ebbd459c663af16a9d0748862a810670319",
+      "size": 22829,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/rules/is/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "it/dictionaries/italian.dict",
       "sha256": "3a0a11fb570051074e8e1fd0e15d1c34483fe0c3e557c95d0767ec567521b9f6",
       "size": 456530,
@@ -4446,6 +4515,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/MessagesBundle_gl.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_is.properties",
+      "sha256": "4ea75795b3df2ab60b627c9d7f554ca2afd44366d8b529d244c931ff8e9816e8",
+      "size": 16078,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/MessagesBundle_is.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

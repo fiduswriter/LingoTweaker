@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -609,6 +609,39 @@ def hunspell_license(lang: str, name: str):
                 verified,
                 "upstream sv/hunspell/LICENSE_sv_SE.txt",
             )
+    if lang == "is":
+        # Icelandic `is_IS` hunspell dictionary: the Orðabók Háskólans /
+        # Reiknistofnun Háskóla Íslands wordlist is public domain, the
+        # Wiktionary-derived morphological additions are CC-BY-SA-3.0;
+        # is/hunspell/license.txt documents both.
+        if name.startswith(("license", "is_IS.")):
+            verified = name.startswith("license") or name.endswith(".aff")
+            return (
+                "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla "
+                "Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic "
+                "Wiktionary-derived words); is/hunspell/license.txt",
+                verified,
+                "upstream is/hunspell/license.txt",
+            )
+    if lang == "eo":
+        # Esperanto `eo` hunspell dictionary from the Esperantilo OpenOffice
+        # extension; the `eo.aff` header states GPL-2.0-or-later and
+        # `README_eo.txt` documents the source and the Pellé patch.
+        if name.startswith("README_eo"):
+            return (
+                "GPL-2.0-or-later (Esperanto dictionary documentation; "
+                "eo/hunspell/README_eo.txt)",
+                True,
+                "upstream eo/hunspell/README_eo.txt",
+            )
+        if name.startswith("eo."):
+            verified = name.endswith(".aff")
+            return (
+                "GPL-2.0-or-later (Esperantilo eo spelling dictionary; eo.aff "
+                "header, eo/hunspell/README_eo.txt)",
+                verified,
+                "upstream eo/hunspell/README_eo.txt",
+            )
     return None
 
 
@@ -973,7 +1006,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

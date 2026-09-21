@@ -157,6 +157,8 @@ pub struct Pipeline {
     pub slovak: Option<Arc<crate::sk::SlovakPipeline>>,
     /// Slovenian pipeline parts (`None` for the other languages)
     pub slovenian: Option<Arc<crate::sl::SlovenianPipeline>>,
+    /// Icelandic pipeline parts (`None` for the other languages)
+    pub icelandic: Option<Arc<crate::is::IcelandicPipeline>>,
     /// Greek pipeline parts (`None` for the other languages)
     pub greek: Option<Arc<crate::el::GreekPipeline>>,
     /// Danish pipeline parts (`None` for the other languages)
@@ -1347,6 +1349,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1586,6 +1589,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1784,6 +1788,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -1990,6 +1995,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2116,6 +2122,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2361,6 +2368,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2566,6 +2574,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -2888,6 +2897,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3034,6 +3044,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3166,6 +3177,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3322,6 +3334,7 @@ impl Pipeline {
             polish: Some(polish),
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3456,6 +3469,7 @@ impl Pipeline {
             polish: None,
             slovak: Some(slovak),
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3562,6 +3576,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: Some(slovenian),
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -3703,6 +3718,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: Some(greek),
             norwegian: None,
             nordum: None,
@@ -3774,6 +3790,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             da: Some(danish),
             sv: None,
@@ -3930,9 +3947,79 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             da: None,
             sv: Some(swedish),
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Icelandic (`is`) engine: the XML rules over the surface tokenization
+    /// (`Icelandic` has no tagger/synthesizer/disambiguator) plus the
+    /// `HunspellNoSuggestionRule` speller and the generic `WordRepeatRule`.
+    pub fn new_icelandic(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Is, "is_two", enabled_rules)?;
+        let spelling = match crate::is::spelling::IcelandicSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[is] spelling rule disabled: {err}");
+                None
+            }
+        };
+        let icelandic = Arc::new(crate::is::IcelandicPipeline {
+            spelling,
+            word_repeat: crate::is::word_repeat_rule(),
+        });
+        Ok(Self {
+            lang: Lang::Is,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: Some(icelandic),
+            greek: None,
+            da: None,
+            sv: None,
             norwegian: None,
             nordum: None,
             guarani: None,
@@ -4063,6 +4150,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
@@ -4141,6 +4229,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
@@ -4223,6 +4312,7 @@ impl Pipeline {
             polish: None,
             slovak: None,
             slovenian: None,
+            icelandic: None,
             greek: None,
             norwegian: None,
             nordum: None,
@@ -4320,12 +4410,17 @@ impl Pipeline {
                                                                             Some(_) => {
                                                                                 surface_sentence(sentence_text)
                                                                             }
-                                                                            None => analyze_sentence(
-                                                                                self.tagger
-                                                                                    .as_deref()
-                                                                                    .expect("english tagger"),
-                                                                                sentence_text,
-                                                                            ),
+                                                                            None => match &self.icelandic {
+                                                                                Some(_) => {
+                                                                                    surface_sentence(sentence_text)
+                                                                                }
+                                                                                None => analyze_sentence(
+                                                                                    self.tagger
+                                                                                        .as_deref()
+                                                                                        .expect("english tagger"),
+                                                                                    sentence_text,
+                                                                                ),
+                                                                            },
                                                                         },
                                                                     },
                                                                 },
@@ -6447,6 +6542,50 @@ impl Pipeline {
                     .extend(crate::sentence_whitespace::check_sv(&analyzed_sentences));
             }
         }
+        // Icelandic text-level rules (`Icelandic.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (7).
+        if self.lang == crate::Lang::Is {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_is(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_is(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_is(&analyzed_sentences));
+            }
+        }
         // Greek text-level rules (`Greek.getRelevantRules`):
         // GenericUnpairedBrackets (3), LongSentence (4, picky),
         // UppercaseSentenceStart (6) and MultipleWhitespace (7).
@@ -6707,12 +6846,17 @@ impl Pipeline {
                                                                         Some(_) => surface_sentence(
                                                                             &text[start..end],
                                                                         ),
-                                                                        None => analyze_sentence(
-                                                                            self.tagger
-                                                                                .as_deref()
-                                                                                .expect("english tagger"),
-                                                                            &text[start..end],
-                                                                        ),
+                                                                        None => match &self.icelandic {
+                                                                            Some(_) => surface_sentence(
+                                                                                &text[start..end],
+                                                                            ),
+                                                                            None => analyze_sentence(
+                                                                                self.tagger
+                                                                                    .as_deref()
+                                                                                    .expect("english tagger"),
+                                                                                &text[start..end],
+                                                                            ),
+                                                                        },
                                                                     },
                                                                 },
                                                             },
@@ -8969,6 +9113,83 @@ impl Pipeline {
                 );
             }
         }
+        // Icelandic sentence-level Java rules in `Icelandic.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2),
+        // HunspellNoSuggestionRule (4) and WordRepeatRule (6).
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (7) are text-level and run above.
+        if self.lang == crate::Lang::Is {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_is(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_is(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(icelandic) = &self.icelandic {
+                if let Some(spelling) = &icelandic.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::is::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
+                        &mut seen,
+                    );
+                }
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    icelandic
+                        .word_repeat
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Catalan sentence-level Java rules in `Catalan.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2). The Catalan-only
         // built-ins and XML-referenced filters are stage 2/3.
@@ -10260,6 +10481,12 @@ impl Pipeline {
             // `Slovenian` does not override `createDefaultDisambiguator`
             // either: the base no-op `DemoDisambiguator` applies.
             slovenian.disambiguate(sentence);
+            return;
+        }
+        if let Some(icelandic) = &self.icelandic {
+            // `Icelandic` does not override `createDefaultDisambiguator`: the
+            // base no-op `DemoDisambiguator` applies.
+            icelandic.disambiguate(sentence);
             return;
         }
         if let Some(greek) = &self.greek {

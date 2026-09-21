@@ -552,6 +552,26 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_sv())
 }
 
+/// Icelandic `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_is` strings):
+/// the default symbol lists `[ ( { " '` / `] ) } " '`.
+pub fn symbols_is() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Svigar, hornklofar eða önnur greinarmerki standast ekki á",
+        category_id: "PUNCTUATION",
+        category_name: "Punctuation",
+        start: &["[", "(", "{", "\"", "'"],
+        end: &["]", ")", "}", "\"", "'"],
+        spanish: false,
+        message_template: "Unpaired symbol: '{other}' seems to be missing",
+    }
+}
+
+/// Icelandic `UNPAIRED_BRACKETS` (generic rule, Icelandic strings).
+pub fn check_is(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_is())
+}
+
 /// Catalan `UNPAIRED_BRACKETS` (`CatalanUnpairedBracketsRule`, the generic
 /// algorithm with the Catalan symbol lists and strings).
 pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {

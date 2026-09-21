@@ -183,6 +183,16 @@ pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Icelandic `MessagesBundle_is` strings.
+pub fn check_is(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Tvöfalt bil (galli á uppsetningu)",
+        "Hugsanleg ritvilla: endurtekið bil",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
 pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(
