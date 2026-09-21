@@ -2,8 +2,9 @@
 //! built-in-rule values.
 //!
 //! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/sl/probe-rule.sh`) print UTF-16 code units, converted
-//! where a test exercises diacritics. Slovenian has no tagger/synthesizer/
+//! (`scripts/oracle/sl/probe-rule.sh`, `check-diff-sl.sh`) print UTF-16 code
+//! units, so both are stated per case (the probes use real Slovenian
+//! orthography: č/š/ž). Slovenian has no tagger/synthesizer/
 //! disambiguator, so the analyzed sentence is the surface tokenization.
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
@@ -83,14 +84,15 @@ fn slovenian_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `To , je test.` 2..4.
+/// `CommaWhitespaceRule` (1), Java probe: `To je čaj , a kava.`
+/// UTF-16 9..11, UTF-8 10..12 (`č` adds one byte).
 #[test]
 fn slovenian_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("To , je test.", "COMMA_PARENTHESIS_WHITESPACE");
+    let matches = one("To je čaj , a kava.", "COMMA_PARENTHESIS_WHITESPACE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 2);
-    assert_eq!(matches[0].range.end, 4);
+    assert_eq!(matches[0].range.start, 10);
+    assert_eq!(matches[0].range.end, 12);
     assert_eq!(
         matches[0].message,
         "Presledek vstavi po vejici, ne pa pred vejico"
@@ -98,11 +100,12 @@ fn slovenian_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `To je test..` 10..12.
+/// `DoublePunctuationRule` (2), Java probe: `To je čaj..`
+/// UTF-16 9..11, UTF-8 10..12.
 #[test]
 fn slovenian_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("To je test..", "DOUBLE_PUNCTUATION");
+    let matches = one("To je čaj..", "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 10);
     assert_eq!(matches[0].range.end, 12);
@@ -111,11 +114,11 @@ fn slovenian_double_punctuation() {
 }
 
 /// `UppercaseSentenceStartRule` (5), Java probe: the second sentence starts
-/// lowercase, 12..14.
+/// lowercase, UTF-16 11..13, UTF-8 12..14 (`č` adds one byte).
 #[test]
 fn slovenian_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("To je test. to je test.", "UPPERCASE_SENTENCE_START");
+    let matches = one("To je čaj. to je kava.", "UPPERCASE_SENTENCE_START");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 12);
     assert_eq!(matches[0].range.end, 14);
@@ -126,41 +129,45 @@ fn slovenian_uppercase_sentence_start() {
     assert_eq!(suggestions(&matches[0]), vec!["To"]);
 }
 
-/// `MultipleWhitespaceRule` (7), Java probe: `To  je test.` 2..4.
+/// `MultipleWhitespaceRule` (7), Java probe: `To je čaj  in kava.`
+/// UTF-16 9..11, UTF-8 10..12.
 #[test]
 fn slovenian_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("To  je test.", "WHITESPACE_RULE");
+    let matches = one("To je čaj  in kava.", "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 2);
-    assert_eq!(matches[0].range.end, 4);
+    assert_eq!(matches[0].range.start, 10);
+    assert_eq!(matches[0].range.end, 12);
     assert_eq!(
         matches[0].message,
         "Možna tipkarska napaka: ponovili ste presledek"
     );
 }
 
-/// `WordRepeatRule` (6), Java probe: `To to je test.` 0..5.
+/// `WordRepeatRule` (6), Java probe: `Dober čaj čaj je.`
+/// UTF-16 6..13, UTF-8 6..15.
 #[test]
 fn slovenian_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("To to je test.", "WORD_REPEAT_RULE");
+    let matches = one("Dober čaj čaj je.", "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 5);
+    assert_eq!(matches[0].range.start, 6);
+    assert_eq!(matches[0].range.end, 15);
     assert_eq!(
         matches[0].message,
         "Možna tipkarska napaka: ponovili ste besedo"
     );
-    assert_eq!(suggestions(&matches[0]), vec!["To"]);
+    assert_eq!(suggestions(&matches[0]), vec!["čaj"]);
 }
 
-/// `MorfologikSlovenianSpellerRule` (4), Java probe: `To je tst.` 6..9 with
-/// the Java suggestion ranking (ISO-8859-2 dictionary).
+/// `MorfologikSlovenianSpellerRule` (4), Java probe with real Slovenian
+/// misspellings (`caj`, `tezko`, `mogoce`); the Java suggestion lists restore
+/// č/ž/č (ISO-8859-2 dictionary).
 #[test]
 fn slovenian_speller() {
     let _guard = engine_guard();
-    let matches = one("To je tst.", "MORFOLOGIK_RULE_SL_SI");
+
+    let matches = one("To je caj.", "MORFOLOGIK_RULE_SL_SI");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 6);
     assert_eq!(matches[0].range.end, 9);
@@ -172,8 +179,33 @@ fn slovenian_speller() {
     assert_eq!(
         suggestions(&matches[0]),
         vec![
-            "TNT", "Tit", "Tot", "Trst", "Tut", "ost", "pst", "tast", "tat", "test", "tet", "trst",
-            "trt", "ust", "TXT"
+            "čaj", "Car", "Gaj", "Kaj", "Maj", "Taj", "ca.", "cap", "car", "daj", "gaj", "kaj",
+            "maj", "naj", "raj", "saj", "vaj", "Čap", "čad", "čaja", "čaje", "čaji", "čaju", "čar",
+            "čas", "čaš"
+        ]
+    );
+
+    let matches = one("To je tezko.", "MORFOLOGIK_RULE_SL_SI");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 6);
+    assert_eq!(matches[0].range.end, 11);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "težko", "Nežko", "Rezko", "Terko", "Tezno", "rezko", "teko", "tenko", "tepko",
+            "tetko", "tezo", "težjo", "težka", "težke", "težki", "težno", "težo", "tez ko"
+        ]
+    );
+
+    let matches = one("To je mogoce.", "MORFOLOGIK_RULE_SL_SI");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 6);
+    assert_eq!(matches[0].range.end, 12);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "mogoče", "mogotce", "mogoč", "mogoča", "mogočem", "mogočen", "mogoči", "mogočne",
+            "mogočo"
         ]
     );
 }
