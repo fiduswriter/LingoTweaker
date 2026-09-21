@@ -216,6 +216,36 @@ fn polish_speller_multiword_ignore_matches_java_probe() {
     assert!(!matches("Maps.").is_empty());
 }
 
+/// `WLADCE` has `suppress_misspelled="yes"`; when the tagger does not know the
+/// synthesized suggestion (`Surowcę`, `stojącę`), the match is dropped
+/// (Java `removeSuppressMisspelled` + the `createRuleMatch` no-suggestion
+/// guard). Java-probed with `scripts/oracle/pl/probe-rule.sh`.
+#[test]
+fn polish_suppress_misspelled_matches_java_probe() {
+    let _guard = engine_guard();
+    let Some(pl) = engine_with_rules(&["WLADCE"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let check = |text: &str| -> Vec<lt::Match> {
+        pl.check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == "WLADCE")
+            .collect()
+    };
+    // unknown synthesized form -> whole match dropped
+    assert!(check("Surowce zawierające te alkaloidy").is_empty());
+    assert!(check("Zarząd określił w tym czasie zadania stojące przede nim.").is_empty());
+    // known form -> match kept
+    let text = "Uwielbiam tego gruzińskiego twórce ludowego.";
+    let ms = check(text);
+    assert_eq!(ms.len(), 1);
+    assert_eq!(range16(text, &ms[0]), (28, 34));
+    assert_eq!(suggestions(&ms[0]), vec!["twórcę"]);
+}
+
 /// The stage-3 Java rule classes, Java-probed with
 /// `scripts/oracle/pl/probe-rule.sh` (UTF-16 offsets; ASCII prefixes).
 #[test]

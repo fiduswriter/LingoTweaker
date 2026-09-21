@@ -8386,8 +8386,8 @@ impl Pipeline {
                         // Java marks both in-message and out-of-message
                         // suggestions with PLEASE_SPELL_ME when the rule
                         // (message) is suppress_misspelled
-                        message = remove_suppressed_suggestions(&message);
                         suggestions.retain(|s| !(s.value.contains('(') && s.value.contains(')')));
+                        message = remove_suppressed_suggestions(&message, &suggestions);
                         if !message.contains("<suggestion>") && suggestions.is_empty() {
                             continue;
                         }
@@ -8924,7 +8924,7 @@ fn match_preserves_case(rule: &CompiledRule) -> bool {
 
 /// Java `PatternRuleMatcher.SUGGESTION_PATTERN_SUPPRESS`: unsynthesized
 /// `(...)` replacements from `suppress_misspelled` suggestions are removed.
-fn remove_suppressed_suggestions(message: &str) -> String {
+fn remove_suppressed_suggestions(message: &str, suggestions: &[Suggestion]) -> String {
     let mut out = String::with_capacity(message.len());
     let mut rest = message;
     while let Some(start) = rest.find("<suggestion>") {
@@ -8934,7 +8934,10 @@ fn remove_suppressed_suggestions(message: &str) -> String {
         let block = &rest[start..start + end + "</suggestion>".len()];
         let inner = &rest[start + "<suggestion>".len()..start + end];
         out.push_str(&rest[..start]);
-        if !(inner.contains('(') && inner.contains(')')) {
+        // drop a `(...)` placeholder and any suggestion that did not survive
+        // the tagger-mistake suppression (`removeSuppressMisspelled`)
+        let kept = suggestions.iter().any(|s| s.value == inner);
+        if kept && !(inner.contains('(') && inner.contains(')')) {
             out.push_str(block);
         }
         rest = &rest[start + end + "</suggestion>".len()..];
