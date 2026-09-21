@@ -2,8 +2,9 @@
 //! built-in-rule values.
 //!
 //! Offsets are UTF-8 bytes (the engine format); the Java probes
-//! (`scripts/oracle/sk/probe-rule.sh`) print UTF-16 code units, converted
-//! where a test exercises diacritics.
+//! (`scripts/oracle/sk/probe-rule.sh`, `check-diff-sk.sh`) print UTF-16 code
+//! units, so both are stated per case (the probes use real Slovak
+//! orthography: á/ä/č/š/ž/ý/…).
 
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
@@ -83,14 +84,18 @@ fn slovak_engine_state() {
     );
 }
 
-/// `CommaWhitespaceRule` (1), Java probe: `Toto , je test.` 4..6.
+/// `CommaWhitespaceRule` (1), Java probe: `Mám rád čaj , kávu a mlieko.`
+/// UTF-16 11..13, UTF-8 14..16 (`č` adds one byte).
 #[test]
 fn slovak_comma_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Toto , je test.", "COMMA_PARENTHESIS_WHITESPACE");
+    let matches = one(
+        "Mám rád čaj , kávu a mlieko.",
+        "COMMA_PARENTHESIS_WHITESPACE",
+    );
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 4);
-    assert_eq!(matches[0].range.end, 6);
+    assert_eq!(matches[0].range.start, 14);
+    assert_eq!(matches[0].range.end, 16);
     assert_eq!(
         matches[0].message,
         "Vložte medzeru za čiarku, ale nie pred čiarku"
@@ -98,71 +103,116 @@ fn slovak_comma_whitespace() {
     assert_eq!(suggestions(&matches[0]), vec![","]);
 }
 
-/// `DoublePunctuationRule` (2), Java probe: `Toto je test..` 12..14.
+/// `DoublePunctuationRule` (2), Java probe: `To je pekný deň..`
+/// UTF-16 15..17, UTF-8 17..19 (`ý` adds one byte).
 #[test]
 fn slovak_double_punctuation() {
     let _guard = engine_guard();
-    let matches = one("Toto je test..", "DOUBLE_PUNCTUATION");
+    let matches = one("To je pekný deň..", "DOUBLE_PUNCTUATION");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 12);
-    assert_eq!(matches[0].range.end, 14);
+    assert_eq!(matches[0].range.start, 17);
+    assert_eq!(matches[0].range.end, 19);
     assert_eq!(matches[0].message, "Dve po sebe idúce bodky");
     assert_eq!(suggestions(&matches[0]), vec![".", "…"]);
 }
 
 /// `UppercaseSentenceStartRule` (4), Java probe: the second sentence starts
-/// lowercase, 14..18.
+/// lowercase, UTF-16 18..22, UTF-8 20..24 (`ž` adds one byte).
 #[test]
 fn slovak_uppercase_sentence_start() {
     let _guard = engine_guard();
-    let matches = one("Toto je test. toto je test.", "UPPERCASE_SENTENCE_START");
+    let matches = one(
+        "Toto je žltý dom. toto je zelený dom.",
+        "UPPERCASE_SENTENCE_START",
+    );
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 14);
-    assert_eq!(matches[0].range.end, 18);
+    assert_eq!(matches[0].range.start, 20);
+    assert_eq!(matches[0].range.end, 24);
     assert_eq!(matches[0].message, "Táto veta nezačína s veľkým písmenom");
     assert_eq!(suggestions(&matches[0]), vec!["Toto"]);
 }
 
-/// `MultipleWhitespaceRule` (6), Java probe: `Toto  je test.` 4..6.
+/// `MultipleWhitespaceRule` (6), Java probe: `Žltý  dom je tu.`
+/// UTF-16 4..6, UTF-8 6..8 (`Ž` adds one byte).
 #[test]
 fn slovak_multiple_whitespace() {
     let _guard = engine_guard();
-    let matches = one("Toto  je test.", "WHITESPACE_RULE");
+    let matches = one("Žltý  dom je tu.", "WHITESPACE_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
-    assert_eq!(matches[0].range.start, 4);
-    assert_eq!(matches[0].range.end, 6);
+    assert_eq!(matches[0].range.start, 6);
+    assert_eq!(matches[0].range.end, 8);
     assert_eq!(
         matches[0].message,
         "Možný preklep: zopakovali ste \"biely znak\" (whitespace)"
     );
 }
 
-/// `WordRepeatRule` (5), Java probe: `Toto toto je test.` 0..9.
+/// `WordRepeatRule` (5), Java probe: `Žltý žltý dom.`
+/// UTF-16 0..9, UTF-8 0..13.
 #[test]
 fn slovak_word_repeat() {
     let _guard = engine_guard();
-    let matches = one("Toto toto je test.", "WORD_REPEAT_RULE");
+    let matches = one("Žltý žltý dom.", "WORD_REPEAT_RULE");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 0);
-    assert_eq!(matches[0].range.end, 9);
+    assert_eq!(matches[0].range.end, 13);
     assert_eq!(matches[0].message, "Možný preklep: zopakovali ste slovo");
-    assert_eq!(suggestions(&matches[0]), vec!["Toto"]);
+    assert_eq!(suggestions(&matches[0]), vec!["Žltý"]);
 }
 
-/// `MorfologikSlovakSpellerRule` (8), Java probe: `Toto je tset.` 8..12 with
-/// the Java suggestion ranking.
+/// `MorfologikSlovakSpellerRule` (8), Java probe with real Slovak
+/// misspellings (`žlty`, `mäkky`); the Java suggestion lists restore the
+/// diacritics.
 #[test]
 fn slovak_speller() {
     let _guard = engine_guard();
-    let matches = one("Toto je tset.", "MORFOLOGIK_RULE_SK_SK");
+
+    // `žlty`: Java UTF-16 8..12, UTF-8 8..13 (`ž` adds one byte)
+    let matches = one("Toto je žlty dom.", "MORFOLOGIK_RULE_SK_SK");
     assert_eq!(matches.len(), 1, "{matches:?}");
     assert_eq!(matches[0].range.start, 8);
-    assert_eq!(matches[0].range.end, 12);
+    assert_eq!(matches[0].range.end, 13);
     assert_eq!(matches[0].message, "Nájdený pravdepodobný preklep");
     assert_eq!(matches[0].match_type, "UnknownWord");
     assert_eq!(
         suggestions(&matches[0]),
-        vec!["set", "test", "tesť", "tiet", "tse", "šét", "t set", "tse t"]
+        vec![
+            "žltý", "Zity", "Zlaty", "alty", "hlty", "zlatý", "zloty", "zlotý", "zlý", "žatý",
+            "žitý", "žlny", "žlta", "žlte", "žlti", "žlto", "žltá", "žlté", "žltí", "žltú",
+            "žltým", "žlť", "žutý", "žĺtky"
+        ]
+    );
+
+    // `mäkky`: Java UTF-16 8..13, UTF-8 8..14
+    let matches = one("Toto je mäkky chlieb.", "MORFOLOGIK_RULE_SK_SK");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].range.start, 8);
+    assert_eq!(matches[0].range.end, 14);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "mäkký",
+            "Mekky",
+            "macky",
+            "maky",
+            "mamky",
+            "mapky",
+            "marky",
+            "masky",
+            "matky",
+            "mačky",
+            "mokky",
+            "májky",
+            "máčky",
+            "mäkka",
+            "mäkko",
+            "mäkká",
+            "mäkké",
+            "mäkkí",
+            "mäkkú",
+            "mäkkým",
+            "mäkkýš"
+        ]
     );
 }
 
