@@ -358,3 +358,36 @@ Pinned exactly as `--expect-only-java=HUNSPELL_RULE=2` and
 `--expect-field-diffs=HUNSPELL_RULE=12` in `scripts/ci/parity.sh`. Porting
 `suggestmgr` (or vendoring a compatible suggestion engine) and fixing the
 `lt-spell` dotted-word acceptance would remove the allowance.
+
+## 11. `HUNSPELL_RULE` (Swedish) suggestion ranking not ported (2 corpus field diffs)
+
+Like #7/#10 this is a **known limitation, not a correctness judgement**. The
+Swedish corpus (`docs/parity/golden/sv-full.txt`, 45 examples) is at
+**0 only-Java / 0 only-Rust / 2 field diffs**, both `HUNSPELL_RULE`
+suggestion lists produced by the bounded edit-distance search over
+`sv_SE.dic` instead of the legacy native `hunspell.suggest` ranking
+(`suggestmgr.cxx` is not ported):
+
+- `Vi tar tex fem myror.`, token `tex` (7..10): legacy
+  `t.ex.|te|ex|text|tax|tee|ter|tes|sex|lex|teg|kex|te-`, Rust
+  `TEI|Tea|Ted|Tel|Teo`.
+- `Med det nya API:s fördelar, kan du hitta nya lösningar.`, token `API`
+  (12..15): legacy `PI|API:|APA|APP|AVI|AP-|ALI`, Rust `AI|AMI|AP-|API:|APU`.
+
+The match set is identical; the XML rules (32 compiled), the
+`SwedishTagger`/`SwedishSynthesizer`, the `SwedishHybridDisambiguator` order
+(XML rules → `sv/multiwords.txt` chunker), `SV_COMPOUNDS`,
+`SV_WORD_COHERENCY` and the other generic built-ins (CommaWhitespace,
+DoublePunctuation, GenericUnpairedBrackets, UppercaseSentenceStart,
+LongSentence, LongParagraph, MultipleWhitespace, SentenceWhitespace,
+WordRepeatRule) are at parity.
+
+Reproduce (pinned Java build):
+
+```sh
+scripts/oracle/sv/check-diff-sv.sh docs/parity/golden/sv-full.txt
+```
+
+Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=2` in
+`scripts/ci/parity.sh`. Porting `suggestmgr` (or vendoring a compatible
+suggestion engine) would remove the allowance.

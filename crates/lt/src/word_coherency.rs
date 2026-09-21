@@ -31,6 +31,10 @@ const CA_CATEGORY_NAME: &str = "Estil";
 const PL_RULE_ID: &str = "PL_WORD_COHERENCY";
 const PL_DESCRIPTION: &str = "Jednolita pisownia wyrazów o obocznej dopuszczalnej pisowni";
 const PL_CATEGORY_NAME: &str = "Błędy różne";
+const SV_RULE_ID: &str = "SV_WORD_COHERENCY";
+const SV_DESCRIPTION: &str =
+    "Enhetlig och konsekvent stavning av ord när det finns stavningsvarianter att välja på.";
+const SV_CATEGORY_NAME: &str = "Diverse";
 
 /// Which subclass's message/category/issue-type the loader applies.
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -42,6 +46,7 @@ enum CoherencyLang {
     Catalan,
     Valencian,
     Polish,
+    Swedish,
 }
 
 pub struct WordCoherencyRule {
@@ -92,6 +97,12 @@ impl WordCoherencyRule {
     /// category MISC (Błędy różne), issue type misspelling.
     pub fn polish(data_dir: &Path) -> Self {
         Self::load(data_dir, "pl/rules/coherency.txt", CoherencyLang::Polish)
+    }
+
+    /// `sv.WordCoherencyRule`: `sv/rules/coherency.txt`, Swedish message,
+    /// category MISC (Diverse), issue type misspelling.
+    pub fn swedish(data_dir: &Path) -> Self {
+        Self::load(data_dir, "sv/rules/coherency.txt", CoherencyLang::Swedish)
     }
 
     /// `ca.WordCoherencyRule`: `ca/rules/coherency.txt`, Catalan message,
@@ -159,6 +170,7 @@ impl WordCoherencyRule {
                 (CA_RULE_ID, CA_DESCRIPTION, Some(CA_SHORT), CA_CATEGORY_NAME)
             }
             CoherencyLang::Polish => (PL_RULE_ID, PL_DESCRIPTION, None, PL_CATEGORY_NAME),
+            CoherencyLang::Swedish => (SV_RULE_ID, SV_DESCRIPTION, None, SV_CATEGORY_NAME),
         };
         let rule_id = if lang == CoherencyLang::Valencian {
             CA_VALENCIA_RULE_ID
@@ -244,6 +256,9 @@ impl WordCoherencyRule {
                             ),
                             CoherencyLang::Polish => format!(
                                 "Formy „{token}” i „{other_spelling}” zwykle nie powinny być używane jednocześnie."
+                            ),
+                            CoherencyLang::Swedish => format!(
+                                "Använd endast en av stavningsvarianterna '{token}' och '{other_spelling}' i en och samma text."
                             ),
                         };
                         let marked = sentence

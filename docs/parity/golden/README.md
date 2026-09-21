@@ -23,6 +23,7 @@ re-runs the Rust side and diffs against the golden.
 | sl | `sl-full.txt` (104) | `sl-full.java.tsv` |
 | el | `el-full.txt` (118) | `el-full.java.tsv` |
 | da | `da-full.txt` (284) | `da-full.java.tsv` |
+| sv | `sv-full.txt` (45) | `sv-full.java.tsv` |
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -76,11 +77,16 @@ re-runs the Rust side and diffs against the golden.
   instead of the unported native `hunspell.suggest` ranking, and the in-tree
   checker accepts a small set of dotted abbreviations (`f.kr`) that native
   hunspell rejects; the XML rules, tagger and disambiguator are at parity.
+  sv is exactly 0 only-Java / 0 only-Rust / 2 `HUNSPELL_RULE` field diffs
+  (D-218/D-219): the suggestions come from the bounded dictionary search
+  instead of the unported native `hunspell.suggest` ranking; the XML rules,
+  `SwedishTagger`/`SwedishSynthesizer`, hybrid disambiguator, `SV_COMPOUNDS`
+  and `SV_WORD_COHERENCY` are at parity.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

@@ -511,25 +511,32 @@ fn parse_directive<'a>(
         | "AM"
         | "COMPLEXPREFIXES"
         | "IGNORE"
-        | "COMPOUNDRULE"
         | "CHECKCOMPOUNDPATTERN"
         | "CHECKCOMPOUNDCASE"
-        | "CHECKCOMPOUNDREP"
-        | "CHECKCOMPOUNDTRIPLE"
-        | "CHECKCOMPOUNDDUP"
-        | "SIMPLIFIEDTRIPLE"
         | "COMPOUNDMORESUFFIXES" => {
             return Err(CoreError::Data(format!(
                 "hunspell directive {kind:?} is not supported by the in-tree checker ({line:?})"
             )));
         }
         // `COMPOUNDWORDMAX`: the in-tree `compound_check` does not implement
-        // it (same as the other compound rules above), but the directive only
+        // it (same as the other compound rules below), but the directive only
         // lowers the accepted compound length, so ignoring it cannot cause
         // false positives; the Danish `da_DK` dictionary declares
         // `COMPOUNDWORDMAX 2`. Tracked as a known fidelity gap in the
         // internal notes.
         "COMPOUNDWORDMAX" => {}
+        // The remaining compound directives are parsed and ignored: the
+        // in-tree `compound_check` implements only the German flag-based
+        // subset, and the Swedish `sv_SE` dictionary relies on
+        // `COMPOUNDRULE`/`CHECKCOMPOUND*`/`SIMPLIFIEDTRIPLE` for some of its
+        // compounds. Ignoring them can only miss accepted compounds (spelling
+        // false positives), never accept an unknown word; tracked as a known
+        // fidelity gap in the internal notes.
+        "COMPOUNDRULE"
+        | "CHECKCOMPOUNDTRIPLE"
+        | "SIMPLIFIEDTRIPLE"
+        | "CHECKCOMPOUNDDUP"
+        | "CHECKCOMPOUNDREP" => {}
         "FULLSTRIP" => aff.fullstrip = true,
         "CHECKSHARPS" => aff.checksharps = true,
         "COMPOUNDFLAG" => aff.compound_flag = Some(next_flag(it)?),

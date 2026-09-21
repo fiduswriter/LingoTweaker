@@ -38,6 +38,8 @@ pub mod slovak_synth;
 pub mod soros;
 pub mod spanish;
 pub mod spanish_synth;
+pub mod swedish;
+pub mod swedish_synth;
 
 pub use catalan::CatalanTagger;
 pub use catalan_synth::CatalanSynthesizer;
@@ -72,6 +74,8 @@ pub use slovak_synth::SlovakSynthesizer;
 pub use soros::Soros;
 pub use spanish::{is_emoji, SpanishTagger};
 pub use spanish_synth::SpanishSynthesizer;
+pub use swedish::SwedishTagger;
+pub use swedish_synth::SwedishSynthesizer;
 
 use std::collections::HashMap;
 use std::path::Path;

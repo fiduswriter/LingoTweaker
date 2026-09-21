@@ -662,6 +662,44 @@ fn translate_comma_message_da(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Swedish `MessagesBundle_sv` strings.
+pub fn check_sentence_sv(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Typografi".to_string();
+        m.description = "Blanktecken före kommatecken samt före/efter parentes".to_string();
+        m.message = translate_comma_message_sv(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_sv` bundle.
+fn translate_comma_message_sv(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Använd inte blanksteg efter öppnande parentes.".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Använd inte blanksteg före avslutande parentes.".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Använd inte blanksteg på båda sidor om kvoteringssymboler.".to_string()
+        }
+        "Put a space after the comma." => "Lägg till ett blanksteg efter kommatecknet.".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Lägg till ett blanksteg efter kommatecknet, men inte före.".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "Använd inte blanksteg före punkt.".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_sk` bundle.
 fn translate_comma_message_sk(msg: &str) -> String {
     match msg {

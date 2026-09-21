@@ -117,6 +117,23 @@ pub fn check_sentence_da(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Swedish `MessagesBundle_sv` strings.
+pub fn check_sentence_sv(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Skiljetecken".to_string();
+        m.description = "Dubbla punkter eller kommatecken".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Dubbla punkter".to_string();
+            m.short_message = Some("Två punkter i följd".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Dubbla kommatecken".to_string();
+            m.short_message = Some("Två kommatecken i följd".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Spanish `MessagesBundle_es` strings.
 pub fn check_sentence_es(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

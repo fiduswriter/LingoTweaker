@@ -246,6 +246,29 @@ pub fn strings_gl() -> ParagraphStrings {
     }
 }
 
+/// `MessagesBundle_sv` strings for `Swedish.getRelevantRules`'s
+/// `LongParagraphRule(messages, this, userConfig, 150)`.
+pub fn strings_sv() -> ParagraphStrings {
+    ParagraphStrings {
+        style_category: ("STYLE", "Stil"),
+        punctuation_category: ("PUNCTUATION", "Skiljetecken"),
+        long_desc: |max| format!("Läsbarhet: stycke längre än {max} ord"),
+        long_msg: |max| {
+            format!("Stycket är längre än {max} ord. Överväg att skriva om det genom att dela upp i flera stycken om det passar strukturellt och innehållsmässigt.")
+        },
+        empty_line_msg: "Please delete empty line below and use formatting instead",
+        empty_line_desc: "Empty Line",
+        ws_begin_msg: "Please delete the space character at the beginning of the paragraph.",
+        ws_begin_desc: "Space character at the beginning of paragraph",
+        ws_end_msg: "Please delete the space character at the end of the paragraph.",
+        ws_end_desc: "Space character at the end of paragraph",
+        punct_msg: "Please add a punctuation mark at the end of paragraph.",
+        punct_desc: "No punctuation mark at the end of paragraph",
+        repetition_last_msg: "Same beginning as last paragraph",
+        repetition_desc: "Same beginning of paragraph",
+    }
+}
+
 pub fn strings_pt(variant: &str) -> ParagraphStrings {
     if variant == "pt-BR" {
         return ParagraphStrings {
@@ -295,7 +318,14 @@ pub fn long_paragraph_with(
     sentences: &[AnalyzedSentence],
     strings: &ParagraphStrings,
 ) -> Vec<Match> {
-    let max_words = LONG_PARAGRAPH_MAX_WORDS;
+    long_paragraph_with_max(sentences, strings, LONG_PARAGRAPH_MAX_WORDS)
+}
+
+pub fn long_paragraph_with_max(
+    sentences: &[AnalyzedSentence],
+    strings: &ParagraphStrings,
+    max_words: i32,
+) -> Vec<Match> {
     let mut rule_matches = Vec::new();
     let mut pos = 0usize;
     let mut start_pos = 0usize;

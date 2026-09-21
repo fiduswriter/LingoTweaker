@@ -219,6 +219,18 @@ pub fn check_da(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Swedish `MessagesBundle_sv` strings.
+pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Meningen börjar inte med stor bokstav",
+        "Stor eller liten bokstav",
+        "Kontrollera att meningar inleds med stor bokstav",
+        "Stor eller liten bokstav",
+        false,
+    )
+}
+
 /// `UppercaseSentenceStartRule` with the Galician `MessagesBundle_gl` strings.
 pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

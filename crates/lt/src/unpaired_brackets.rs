@@ -532,6 +532,26 @@ pub fn check_da(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_da())
 }
 
+/// `Swedish.getRelevantRules`: the generic rule with the default symbol
+/// lists and the Swedish strings (`unpaired_brackets` message).
+pub fn symbols_sv() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description: "Ej ihopparade klamrar, parenteser, citattecken eller liknande symboler",
+        category_id: "PUNCTUATION",
+        category_name: "Skiljetecken",
+        start: &["[", "(", "{"],
+        end: &["]", ")", "}"],
+        spanish: false,
+        message_template: "Grupperingssymboler: '{other}' ser ut att saknas",
+    }
+}
+
+/// Swedish `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_sv` strings).
+pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_sv())
+}
+
 /// Catalan `UNPAIRED_BRACKETS` (`CatalanUnpairedBracketsRule`, the generic
 /// algorithm with the Catalan symbol lists and strings).
 pub fn check_ca(sentences: &[AnalyzedSentence]) -> Vec<Match> {

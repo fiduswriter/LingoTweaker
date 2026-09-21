@@ -173,6 +173,16 @@ pub fn check_da(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Swedish `MessagesBundle_sv` strings.
+pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Upprepade blanktecken (dålig formatering)",
+        "Möjligt korrekturfel: du upprepade ett blanktecken",
+        ("TYPOGRAPHY", "Typografi"),
+    )
+}
+
 /// `MultipleWhitespaceRule` with the Polish `MessagesBundle_pl` strings.
 pub fn check_pl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(

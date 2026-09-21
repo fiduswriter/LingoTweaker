@@ -62,6 +62,7 @@ mod sk;
 mod sl;
 mod specific_case;
 mod style_too_often;
+mod sv;
 mod unit_conversion;
 mod unpaired_brackets;
 mod unpaired_quotes;
@@ -370,6 +371,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Da => Pipeline::new_danish(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Sv => Pipeline::new_swedish(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

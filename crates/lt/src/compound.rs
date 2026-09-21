@@ -616,6 +616,33 @@ impl CompoundRule {
         })
     }
 
+    /// `sv.CompoundRule` (`SV_COMPOUNDS`): `sv/words/compounds.txt`. The
+    /// Swedish class does not override `isMisspelled`, so every candidate
+    /// replacement passes `filterReplacements` (base `isMisspelled` = false).
+    pub fn swedish(data_dir: &Path) -> Result<Self> {
+        let data = CompoundData::from_path(&data_dir.join("sv/words/compounds.txt"))?;
+        Ok(Self {
+            data,
+            is_misspelled: Arc::new(|_| false),
+            config: CompoundConfig {
+                rule_id: "SV_COMPOUNDS",
+                description: "Särskrivningar, t.ex. 'e mail' bör skrivas 'e-mail'".to_string(),
+                with_hyphen_message: "Dessa ord skrivs samman med bindestreck.",
+                without_hyphen_message: "Dessa ord skrivs samman.",
+                with_or_without_hyphen_message:
+                    "Dessa ord skrivs samman med eller utan bindestreck.",
+                short_message: None,
+                category_id: "MISC",
+                category_name: "Diverse",
+                sub_rule_specific_ids: false,
+                to_id_german: false,
+                merge: merge_compound,
+                issue_type: "misspelling",
+            },
+            anti_patterns: Vec::new(),
+        })
+    }
+
     pub fn rule_id(&self) -> &str {
         self.config.rule_id
     }

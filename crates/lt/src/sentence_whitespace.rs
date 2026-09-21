@@ -4,7 +4,7 @@
 
 use lt_core::{AnalyzedSentence, AnalyzedTokenReadings, Match, Suggestion, TextRange};
 
-const RULE_ID: &str = "SENTENCE_WHITESPACE";
+pub const RULE_ID: &str = "SENTENCE_WHITESPACE";
 
 const REPEATED_MESSAGE: &str = "Possible typo: you repeated a whitespace";
 const ADD_SPACE_MESSAGE: &str = "Add a space between sentences.";
@@ -168,6 +168,18 @@ pub fn check(sentences: &[AnalyzedSentence]) -> Vec<Match> {
 /// `SentenceWhitespaceRule` with the French `MessagesBundle_fr` strings.
 pub fn check_fr(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &STRINGS_FR)
+}
+
+/// `SentenceWhitespaceRule` with the Swedish `MessagesBundle_sv` strings.
+pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const SV_STRINGS: Strings = Strings {
+        description: "Det saknas ett blanksteg mellan meningar",
+        repeated_message: "Möjligt korrekturfel: du upprepade ett blanktecken",
+        add_space_message: "Lägg till ett blanksteg mellan meningarna.",
+        category_name: "Typografi",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &SV_STRINGS)
 }
 
 /// `SentenceWhitespaceRule` with the Portuguese variant strings

@@ -77,6 +77,19 @@ pub fn check_gl(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `Swedish.getRelevantRules`: `new LongSentenceRule(messages, userConfig, 40)`
+/// (`MessagesBundle_sv` `long_sentence_rule_desc`/`_msg2`).
+pub fn check_sv(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_impl(
+        sentences,
+        RULE_ID,
+        "Läsbarhet: meningen fler än 40 ord",
+        "Meningen är över 40 ord lång. Överväg att dela upp den i flera för att göra texten lättare att läsa.",
+        ("STYLE", "Stil"),
+        MAX_WORDS,
+    )
+}
+
 /// `Greek.getRelevantRules`: `new LongSentenceRule(messages, userConfig, 50)`
 /// (`MessagesBundle_el` `long_sentence_rule_desc`/`_msg2`).
 pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {

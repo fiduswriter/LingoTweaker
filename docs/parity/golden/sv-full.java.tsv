@@ -1,0 +1,79 @@
+L	1	Det visade sig efterhand att orden borde särskrivas.
+M	1	efter-hand	1	15	24	Other	Felaktig sammanskrivning. Menade du <suggestion>efter hand</suggestion>?	efter hand
+L	2	Det blir allt mer vanligt att folk särskriver.
+M	2	ALLT_MER	1	9	17	Other	Enligt tt-språket och Svenska språknämnden bör ordet <suggestion>alltmer</suggestion> ej särskrivas.	alltmer
+L	3	Vi tar med oss Maria, Jens, Sara m fl och åker till Jönköping.
+M	3	M_FL	1	33	37	Other	Denna förkortning skrivs i regel med punkter: <suggestion>m.fl.</suggestion>.	m.fl.
+L	4	Vi tar t.ex. fem myror och fyra elefanter.
+L	5	Vi tar t ex fem myror och fyra elefanter.
+L	6	Vi tar t.ex. fem myror och fyra elefanter.
+L	7	Vi tar tex fem myror och fyra elefanter.
+M	7	HUNSPELL_RULE		7	10	UnknownWord	Hittat ett möjligt stavfel.	t.ex.|te|ex|text|tax|tee|ter|tes|sex|lex|teg|kex|te-
+L	8	Det var ett mörk kväll.
+M	8	JJ.OCH_n-ord.NN	1	8	22	Other	Adjektivet är böjt i positiv utrum (mörk) och bör då föregås av ordet "en" istället för "ett", alternativt böjas i positiv neutrum. Menade du: <suggestion>en mörk kväll</suggestion>?	en mörk kväll
+L	9	Det var en mörkt rum.
+M	9	JJ.OCH_t-ord.NN	1	8	20	Other	Adjektivet "mörkt" är böjt i positiv neutrum och bör då föregås av ordet "ett" istället för "en", alternativt böjas i positiv utrum. <suggestion>ett mörkt rum</suggestion>	ett mörkt rum
+L	10	Det var ett urholkad sten.
+M	10	ART_VB.n-ord	1	8	25	Other	Verbet i particip är böjt i utrum (urholkad) och bör då föregås av ordet "en" istället för "ett", alternativt böjas i neutrum. Menade du: <suggestion>en urholkad sten</suggestion>?	en urholkad sten
+L	11	Det var en urholkat sten.
+M	11	ART_VB_NN.n-ord	1	8	24	Other	Verbet i particip är böjt i neutrum (urholkat) men ska böjas i utrum som huvudordet (och artikeln). Menade du <suggestion>en urholkad sten</suggestion>?	en urholkad sten
+L	12	Det var en förvånat uppvaknande.
+M	12	ART_VB.t-ord	1	8	31	Other	Verbet "förvånat" i particip är böjt i neutrum och bör då föregås av ordet "ett" istället för "en", alternativt böjas i utrum. Menade du <suggestion>ett förvånat uppvaknande</suggestion>?	ett förvånat uppvaknande
+L	13	Det var ett urladdad batteri.
+M	13	ART_VB_NN.t-ord	1	8	28	Other	Verbet i particip är böjt i utrum (urladdad) men ska böjas i neutrum som huvudordet (och artikeln). Menade du <suggestion>ett urladdat batteri</suggestion>?	ett urladdat batteri
+L	14	Förra chefen på Arla var en trevlig prick.
+M	14	FORRE_FORE_TITEL	1	0	15	Other	Före titlar bör det stå <suggestion>förre chefen på</suggestion> och inte förra chefen på. Detta oavsett om det är en kvinna eller man som innehaft posten.	Förre chefen på
+L	15	Han brukade att komma sent.
+M	15	EJ_FORE_ATT	1	4	15	Other	Infinitivmärket "att" bör inte förekomma efter <suggestion>brukade</suggestion>.	brukade
+L	16	Det var finfint, sade Johan.
+L	17	Det var finfint sade Johan.
+L	18	Det är nog bäst att du får en till klubba.
+M	18	EnKlubbaTill	1	27	41	Other	Denna ordföljd är ofta otydlig, försök med att flytta "till" efter substantivet eller byt ut det mot ytterligare. Dvs. prova att skriva <suggestion>en klubba till</suggestion>.	en klubba till
+L	19	Flickorna kom överrens.
+M	19	OVERRENS	1	14	22	Other	Du menar antagligen <suggestion>överens</suggestion>.	överens
+L	20	Kan du masera mig?
+M	20	MASERA	1	7	13	Other	Du menar antagligen <suggestion>massera</suggestion> om du inte skriver om masarnas era förstås.	massera
+L	21	Alla hinder bör i möjligaste måtto undanröjas.
+L	22	Alla hinder bör i möjligaste motto undanröjas.
+M	22	mottoVSmatto	1	16	34	Other	I dessa uttryck används ordet måtto (från måtta) och inte motto (som betyder ung. valspråk)	
+L	23	ad foobar
+M	23	AD	1	0	9	Other	Detta ord brukar sällan stå ensamt på svenska. Menade du <suggestion>ad hoc</suggestion>, <suggestion>ad acta</suggestion> eller <suggestion>ad notam</suggestion>?	ad hoc|ad acta|ad notam
+L	24	ad acta
+M	24	UPPERCASE_SENTENCE_START		0	2	Other	Meningen börjar inte med stor bokstav	Ad
+L	25	Los Angeles
+L	26	Los Foobar
+M	26	LOS	1	0	3	Other	Menade du <suggestion>loss</suggestion> som i "släppa taget om", eller är det en del av ett namn?	Loss
+M	26	HUNSPELL_RULE		4	10	UnknownWord	Hittat ett möjligt stavfel.	
+L	27	Med det nya API:s fördelar, kan du hitta nya lösningar.
+M	27	HUNSPELL_RULE		12	15	UnknownWord	Hittat ett möjligt stavfel.	PI|API:|APA|APP|AVI|AP-|ALI
+L	28	Med det nya APIs fördelar, kan du hitta nya lösningar.
+M	28	Forkortning	1	12	16	Other	Förkortningar som böjs binds ihop med ett kolon: <suggestion>API:s</suggestion> 	API:s
+L	29	Hon kom på 2:a plats
+L	30	Hon kom på 2a plats
+M	30	ORDNINGSTAL2	1	11	13	Other	Siffror med ändelser binds ihop med ett kolon: <suggestion>2a</suggestion>	2a
+L	31	Han kom på 5:e plats
+L	32	Han kom på 5e plats
+M	32	ORDNINGSTAL2	1	11	13	Other	Siffror med ändelser binds ihop med ett kolon: <suggestion>5:e</suggestion>	5:e
+L	33	Hon hade stora planer om det nya systemet.
+M	33	NEG_PLANER_OM	1	15	24	Other	Undvik att blanda konstruktioner. "Planer om" bör vara <suggestion>planer på</suggestion> eller <suggestion>drömmar om</suggestion>.	planer på|drömmar om
+L	34	Hon hade stora drömmar om det nya systemet
+L	35	Hon hade stora planer på förändringar.
+L	36	Mellan klockan två till fyra.
+M	36	MELLAN_TILL	1	0	28	Other	Undvik att blanda två konstruktioner. Skriv hellre <suggestion>Mellan klockan två och fyra</suggestion> än Mellan klockan två till fyra.	Mellan klockan två och fyra
+L	37	Har du någonsin funderat på att ta självmord.
+M	37	NEG_TA_SJALVMORD	1	32	44	Other	Undvik att blanda konstruktioner. "Ta självmord" bör vara <suggestion>begå självmord</suggestion>, <suggestion>ta ditt liv</suggestion> eller <suggestion>ta sitt liv</suggestion>.	begå självmord|ta ditt liv|ta sitt liv
+L	38	Har du någonsin funderat på att begå självmord.
+L	39	Mellan Stockholm till Skara finns inget intressant.
+M	39	NEG_MELLAN_SYD_TILL_NORD	1	0	27	Other	Undvik att blanda konstruktioner. Använd antingen <suggestion>mellan Stockholm och Skara</suggestion> eller <suggestion>från Stockholm till Skara</suggestion>	Mellan Stockholm och Skara|Från Stockholm till Skara
+L	40	Mellan Stockholm och Skara finns inget intressant.
+L	41	Affärens kunder är i stor grad nöjda med servicen.
+M	41	I_STOR_GRAD	1	19	30	Other	Använd hellre <suggestion>i hög grad</suggestion> än "i stor grad".	i hög grad
+L	42	Maria framförde sina klagomål över socialen.
+M	42	NEG_KLAGOMAL_MOT	1	21	34	Other	Man framför <suggestion>klagomål mot</suggestion> någon, inte "över" någon.	klagomål mot
+L	43	Hon ångrade på att hon suttit ensam hemma den fredagen.
+M	43	NEG_ANGRA_PA_ATT	1	4	18	Other	Man ångrar inte "på" något utan man ångrar något. Skriv därför inte "ångrade på att" utan skriv <suggestion>ångrade att</suggestion>.	ångrade att
+L	44	idag är det Måndag.
+M	44	UPPERCASE_SENTENCE_START		0	4	Other	Meningen börjar inte med stor bokstav	Idag
+M	44	VECKODAGARS_NAMN	1	12	18	Other	Veckodagars namn skrivs med inledande gemen bokstav. Skriv <suggestion>måndag</suggestion> inte "Måndag".	måndag
+L	45	Den bästa månaden är September.
+M	45	MÅNADERS_NAMN	1	21	30	Other	Månaders namn skrivs med inledande gemen bokstav. Skriv <suggestion>september</suggestion> inte "September".	september
