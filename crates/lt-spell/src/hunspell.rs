@@ -73,20 +73,15 @@ struct SuggestMgr<'a> {
     lang_with_dash_usage: bool,
     /// `info` bit field (`SPELL_COMPOUND` only, as the caller uses it).
     info: u32,
-    /// `MINTIMER` counter for the timed generators (`mapchars`, `badchar`,
-    /// `forgotchar`), exactly like the reference: after 100 candidate checks
-    /// the wall clock is inspected, resetting the counter or stopping the
-    /// generator at `TIMELIMIT` (50 ms).
-    timer: i32,
-    timelimit: std::time::Instant,
-    /// Set once a timed generator hit `TIMELIMIT`; aborts the recursion.
-    timed_out: bool,
+    /// Remaining `map_related` nodes for the current `MAP` generator run.
+    /// The reference bounds this exponentially branching generator with a
+    /// wall clock (`MINTIMER`/`TIMELIMIT`); we use a deterministic node budget
+    /// so the parity gate is reproducible (documented in the internal notes).
+    map_budget: u64,
 }
 
-/// `TIMELIMIT` (`atypes.hxx`, `CLOCKS_PER_SEC / 20`).
-const TIMELIMIT_MS: u128 = 50;
-/// `MINTIMER` / `MAXPLUSTIMER` (`atypes.hxx`).
-const MINTIMER: i32 = 100;
+/// `MAP` generator node budget (see [`SuggestMgr::map_budget`]).
+const MAP_NODE_BUDGET: u64 = 5_000;
 
 fn bytes_to_chars(b: &[u8]) -> Vec<char> {
     String::from_utf8_lossy(b).chars().collect()
@@ -122,6 +117,151 @@ fn mkallsmall_str(s: &str) -> String {
 
 fn find_byte(hay: &[u8], needle: u8) -> Option<usize> {
     hay.iter().position(|&b| b == needle)
+}
+
+// --- n-gram suggestion scoring (`suggestmgr.cxx`, UTF-16 path on `char`) ---
+
+const NGRAM_LONGER_WORSE: i32 = 1 << 0;
+const NGRAM_ANY_MISMATCH: i32 = 1 << 1;
+const NGRAM_WEIGHTED: i32 = 1 << 3;
+/// `MAX_ROOTS` / `MAX_GUESS` / `MAX_WORDS` / `MAXNGRAMSUGS` (`suggestmgr.hxx`).
+const MAX_ROOTS: usize = 100;
+const MAX_GUESS: usize = 200;
+const MAX_WORDS: usize = 100;
+const MAXNGRAMSUGS: i32 = 4;
+
+/// `SuggestMgr::ngram` (the `w_char` overload; BMP code points as `char`).
+fn ngram_score(n: usize, su1: &[char], su2: &[char], opt: i32) -> i32 {
+    let l1 = su1.len() as i32;
+    let l2 = su2.len() as i32;
+    if l2 == 0 {
+        return 0;
+    }
+    let mut nscore = 0i32;
+    let mut j = 1i32;
+    while j <= n as i32 {
+        let mut ns = 0i32;
+        let mut i = 0i32;
+        while i <= l1 - j {
+            let mut found = false;
+            let mut l = 0i32;
+            while l <= l2 - j {
+                let mut k = 0i32;
+                while k < j {
+                    if su1[(i + k) as usize] != su2[(l + k) as usize] {
+                        break;
+                    }
+                    k += 1;
+                }
+                if k == j {
+                    ns += 1;
+                    found = true;
+                    break;
+                }
+                l += 1;
+            }
+            if !found && (opt & NGRAM_WEIGHTED) != 0 {
+                ns -= 1;
+                if i == 0 || i == l1 - j {
+                    ns -= 1; // side weight
+                }
+            }
+            i += 1;
+        }
+        nscore += ns;
+        if ns < 2 && (opt & NGRAM_WEIGHTED) == 0 {
+            break;
+        }
+        j += 1;
+    }
+    let mut ns = 0i32;
+    if opt & NGRAM_LONGER_WORSE != 0 {
+        ns = (l2 - l1) - 2;
+    }
+    if opt & NGRAM_ANY_MISMATCH != 0 {
+        ns = (l2 - l1).abs() - 2;
+    }
+    nscore - if ns > 0 { ns } else { 0 }
+}
+
+/// `SuggestMgr::leftcommonsubstring` (UTF-16 path): length of the left common
+/// substring of `su1` and the decapitalized `su2`.
+fn leftcommonsubstring(su1: &[char], su2: &[char], complexprefixes: bool) -> i32 {
+    let l1 = su1.len();
+    let l2 = su2.len();
+    if complexprefixes {
+        if l1 > 0 && l2 > 0 && su1[l1 - 1] == su2[l2 - 1] {
+            return 1;
+        }
+        return 0;
+    }
+    let idx = if l2 > 0 { su2[0] } else { '\0' };
+    let otheridx = if l1 > 0 { su1[0] } else { '\0' };
+    if otheridx != idx && otheridx != simple_lower(idx) {
+        return 0;
+    }
+    let mut i = 1;
+    while i < l1 && i < l2 && su1[i] == su2[i] {
+        i += 1;
+    }
+    i as i32
+}
+
+/// `SuggestMgr::commoncharacterpositions` (UTF-16 path): returns the number of
+/// equal positions and whether the two differences are a transposition.
+fn commoncharacterpositions(su1: &[char], su2: &[char]) -> (i32, bool) {
+    let l1 = su1.len();
+    let l2 = su2.len();
+    if l1 == 0 || l2 == 0 {
+        return (0, false);
+    }
+    let mut s2: Vec<char> = su2.to_vec();
+    s2[0] = simple_lower(s2[0]);
+    let mut num = 0i32;
+    let mut diff = 0usize;
+    let mut diffpos = [0usize; 2];
+    let m = l1.min(l2);
+    for i in 0..m {
+        if su1[i] == s2[i] {
+            num += 1;
+        } else {
+            if diff < 2 {
+                diffpos[diff] = i;
+            }
+            diff += 1;
+        }
+    }
+    let is_swap = diff == 2
+        && l1 == l2
+        && su1[diffpos[0]] == s2[diffpos[1]]
+        && su1[diffpos[1]] == s2[diffpos[0]];
+    (num, is_swap)
+}
+
+/// `SuggestMgr::lcslen`: longest common subsequence length.
+fn lcslen(s1: &[char], s2: &[char]) -> i32 {
+    let m = s1.len();
+    let n = s2.len();
+    let mut prev = vec![0i32; n + 1];
+    let mut cur = vec![0i32; n + 1];
+    for i in 1..=m {
+        for j in 1..=n {
+            cur[j] = if s1[i - 1] == s2[j - 1] {
+                prev[j - 1] + 1
+            } else {
+                prev[j].max(cur[j - 1])
+            };
+        }
+        std::mem::swap(&mut prev, &mut cur);
+    }
+    prev[n]
+}
+
+/// One `AffixMgr::expand_rootword` result (`struct guessword`); `orig` is only
+/// used by the (unported) `PHONE` path.
+struct GuessWord {
+    word: Vec<u8>,
+    allow: bool,
 }
 
 fn insert_sug(slst: &mut Vec<String>, word: Vec<u8>) {
@@ -181,6 +321,12 @@ struct PackedEntry {
     flags_off: u32,
     flags_len: u32,
     only_upcase: bool,
+    /// `hentry.var & H_OPT_INITCAP`: the entry's surface was `INITCAP` at
+    /// `add_word` time (used by the n-gram generator's capitalization skip).
+    initcap: bool,
+    /// Creation order (`add_word` call order), used to reproduce
+    /// `walk_hashtable`'s per-bucket order.
+    seq: u32,
 }
 
 /// The dictionary kept in its raw (compressed) form: the `.dic` bytes are
@@ -195,6 +341,11 @@ struct WordIndex {
     /// `entries_for` lookup is a single hash map probe instead of a binary
     /// search (the suffix/affix candidate scan calls it millions of times).
     by_word: std::collections::HashMap<Vec<u8>, (u32, u32)>,
+    /// Raw `.dic` bytes, for reconstructing entry words.
+    dic: Vec<u8>,
+    /// Indices into `entries` in `walk_hashtable` order: by hash bucket, then
+    /// by creation order within the bucket.
+    ngram_order: Vec<u32>,
 }
 
 impl WordIndex {
@@ -219,6 +370,28 @@ impl WordIndex {
             word_len: e.word_len as usize,
         }
     }
+
+    /// The entry's surface word (from the stored `.dic` bytes).
+    fn entry_word<'a>(&'a self, e: &PackedEntry) -> &'a [u8] {
+        Self::word(&self.dic, e)
+    }
+}
+
+/// `HashMgr::hash`: `unsigned long` with the 5-bit rotate and hunspell's
+/// signed-`char` XOR (`word[i]` is sign-extended on the reference platform).
+fn hunspell_hash(word: &[u8], tablesize: usize) -> usize {
+    let mut hv: u64 = 0;
+    let mut i = 0;
+    while i < 4 && i < word.len() {
+        hv = (hv << 8) | (word[i] as i8 as i64 as u64);
+        i += 1;
+    }
+    while i < word.len() {
+        hv = (hv << 5) | ((hv >> 27) & 0x1f);
+        hv ^= word[i] as i8 as i64 as u64;
+        i += 1;
+    }
+    (hv % tablesize as u64) as usize
 }
 
 #[derive(Debug, Clone)]
@@ -290,6 +463,13 @@ struct Aff {
     suffix_by_appnd: std::collections::HashMap<Vec<u8>, Vec<usize>>,
     /// Suffixes whose `appnd` contains a `.` wildcard (tested by full match).
     suffix_wild: Vec<usize>,
+    /// Affixes in `.aff` file order, for `AffixMgr::expand_rootword`.
+    suffixes_file: Vec<AffixEntry>,
+    prefixes_file: Vec<AffixEntry>,
+    /// `sFlag`/`pFlag` chains: affix indices per flag, in reverse file order
+    /// (head insertion in `build_sfxtree`/`build_pfxtree`).
+    sfx_by_flag: std::collections::HashMap<Flag, Vec<usize>>,
+    pfx_by_flag: std::collections::HashMap<Flag, Vec<usize>>,
     /// `AffixMgr::nosplitsugs` (`NOSPLITSUGS`).
     nosplitsugs: bool,
     /// `AffixMgr::maxngramsugs` (`-1` = unset, hunspell's `MAXNGRAMSUGS`).
@@ -352,6 +532,10 @@ impl Default for Aff {
             map_table: Vec::new(),
             suffix_by_appnd: std::collections::HashMap::new(),
             suffix_wild: Vec::new(),
+            suffixes_file: Vec::new(),
+            prefixes_file: Vec::new(),
+            sfx_by_flag: std::collections::HashMap::new(),
+            pfx_by_flag: std::collections::HashMap::new(),
             nosplitsugs: false,
             maxngramsugs: -1,
             maxcpdsugs: -1,
@@ -407,6 +591,11 @@ impl Aff {
         // file order.
         for (is_prefix, _flag, _cross, entry) in pending {
             if is_prefix {
+                aff.prefixes_file.push(entry.clone());
+            } else {
+                aff.suffixes_file.push(entry.clone());
+            }
+            if is_prefix {
                 if entry.appnd.is_empty() {
                     aff.empty_prefixes.insert(0, entry);
                 } else {
@@ -455,6 +644,19 @@ impl Aff {
                     .or_default()
                     .push(i);
             }
+        }
+        // `sFlag`/`pFlag` chains (reverse file order).
+        for (i, e) in aff.suffixes_file.iter().enumerate() {
+            aff.sfx_by_flag.entry(e.flag).or_default().push(i);
+        }
+        for v in aff.sfx_by_flag.values_mut() {
+            v.reverse();
+        }
+        for (i, e) in aff.prefixes_file.iter().enumerate() {
+            aff.pfx_by_flag.entry(e.flag).or_default().push(i);
+        }
+        for v in aff.pfx_by_flag.values_mut() {
+            v.reverse();
         }
         // `AffixMgr::parse_file`: without a BREAK directive hunspell installs
         // the default hyphen break table.
@@ -746,6 +948,7 @@ fn parse_directive<'a>(
         "MAXNGRAMSUGS" => aff.maxngramsugs = it.next().and_then(|v| v.parse().ok()).unwrap_or(-1),
         "MAXCPDSUGS" => aff.maxcpdsugs = it.next().and_then(|v| v.parse().ok()).unwrap_or(-1),
         "NOSUGGEST" => aff.nosuggest = Some(next_flag(it)?),
+        "NONGRAMSUGGEST" => aff.nongramsuggest = Some(next_flag(it)?),
         "SUBSTANDARD" => aff.substandard = Some(next_flag(it)?),
         "FORCEUCASE" => aff.forceucase = Some(next_flag(it)?),
         "FLAG" => {
@@ -956,8 +1159,19 @@ impl HunspellChecker {
         let mut dic: Vec<u8> = Vec::with_capacity(dic_text.len());
         let mut flag_arena: Vec<Flag> = Vec::new();
         let mut raw: Vec<PackedEntry> = Vec::new();
+        let mut seq: u32 = 0;
         let mut lines = dic_text.lines();
-        lines.next(); // entry count
+        let declared_count: usize = lines
+            .next()
+            .map(|l| {
+                l.trim_start_matches('\u{feff}')
+                    .chars()
+                    .take_while(|c| c.is_ascii_digit())
+                    .collect::<String>()
+                    .parse()
+                    .unwrap_or(0)
+            })
+            .unwrap_or(0);
         for line in lines {
             let line = line.trim_end_matches('\r');
             if line.starts_with('#') {
@@ -1008,18 +1222,24 @@ impl HunspellChecker {
             let flags_off = flag_arena.len() as u32;
             flag_arena.extend_from_slice(&flags);
             let flags_len = flags.len() as u32;
-            let push =
-                |dic: &mut Vec<u8>, raw: &mut Vec<PackedEntry>, word: &[u8], only_upcase: bool| {
-                    let word_off = dic.len() as u32;
-                    dic.extend_from_slice(word);
-                    raw.push(PackedEntry {
-                        word_off,
-                        word_len: word.len() as u32,
-                        flags_off,
-                        flags_len,
-                        only_upcase,
-                    });
-                };
+            let mut push = |dic: &mut Vec<u8>,
+                            raw: &mut Vec<PackedEntry>,
+                            word: &[u8],
+                            only_upcase: bool,
+                            initcap: bool| {
+                let word_off = dic.len() as u32;
+                dic.extend_from_slice(word);
+                raw.push(PackedEntry {
+                    word_off,
+                    word_len: word.len() as u32,
+                    flags_off,
+                    flags_len,
+                    only_upcase,
+                    initcap,
+                    seq,
+                });
+                seq += 1;
+            };
             // `add_word` + `add_hidden_capitalized_word` (hashmgr.cxx). The
             // hidden capitalized homonym is dropped when a homonym of the
             // same word already exists, and a normal entry replaces an
@@ -1035,10 +1255,16 @@ impl HunspellChecker {
                     let mut hidden = lowercase_bytes(&word);
                     let first = upper_bytes(&hidden[..char_len(&hidden)]);
                     hidden.splice(0..char_len(&hidden), first);
-                    push(&mut dic, &mut raw, &hidden, true);
+                    push(&mut dic, &mut raw, &hidden, true, true);
                 }
             }
-            push(&mut dic, &mut raw, &word, false);
+            push(
+                &mut dic,
+                &mut raw,
+                &word,
+                false,
+                captype == Captype::InitCap,
+            );
         }
         // stable sort by word bytes, then reproduce the ONLYUPCASE merge per
         // word group in insertion order
@@ -1078,12 +1304,35 @@ impl HunspellChecker {
             }
             by_word.insert(key, (first as u32, k as u32));
         }
+        // `HashMgr` hash table size (`tablesize += nExtra`, `nExtra = 5 +
+        // USERWORD`, and `USERWORD` is 1000).
+        let hash_tablesize = if declared_count == 0 {
+            1
+        } else {
+            let mut t = declared_count + 1005;
+            if t.is_multiple_of(2) {
+                t += 1;
+            }
+            t
+        };
+        // `walk_hashtable` visits bucket 0..tablesize, and within a bucket the
+        // hentries in creation order.
+        let mut ngram_order: Vec<u32> = (0..entries.len() as u32).collect();
+        ngram_order.sort_by_key(|&i| {
+            let e = &entries[i as usize];
+            (
+                hunspell_hash(WordIndex::word(&dic, e), hash_tablesize) as u64,
+                e.seq,
+            )
+        });
         Ok(Self {
             aff,
             index: WordIndex {
                 flags: flag_arena,
                 entries,
                 by_word,
+                dic,
+                ngram_order,
             },
         })
     }
@@ -2987,9 +3236,7 @@ impl<'a> SuggestMgr<'a> {
             maxcpdsugs,
             lang_with_dash_usage: ctry.contains(&b'-') || ctry.contains(&b'a'),
             info: 0,
-            timer: 0,
-            timelimit: std::time::Instant::now(),
-            timed_out: false,
+            map_budget: MAP_NODE_BUDGET,
         }
     }
 
@@ -3000,27 +3247,6 @@ impl<'a> SuggestMgr<'a> {
         }
         let as_str = String::from_utf8_lossy(&candidate).into_owned();
         if wlst.iter().any(|w| w == &as_str) {
-            return;
-        }
-        let result = self.c.sm_checkword(&candidate, cpdsuggest);
-        if result != 0 {
-            if cpdsuggest == 0 && result >= 2 {
-                self.info |= SPELL_COMPOUND;
-            }
-            wlst.push(as_str);
-        }
-    }
-
-    /// `testsug` with the generator timer (used by `badchar`/`forgotchar`).
-    fn testsug_timed(&mut self, wlst: &mut Vec<String>, candidate: Vec<u8>, cpdsuggest: i32) {
-        if wlst.len() == self.max_sug {
-            return;
-        }
-        let as_str = String::from_utf8_lossy(&candidate).into_owned();
-        if wlst.iter().any(|w| w == &as_str) {
-            return;
-        }
-        if !self.tick() {
             return;
         }
         let result = self.c.sm_checkword(&candidate, cpdsuggest);
@@ -3181,30 +3407,6 @@ impl<'a> SuggestMgr<'a> {
         }
     }
 
-    /// Start a timed generator (`mapchars`/`badchar`/`forgotchar`).
-    fn begin_timer(&mut self) {
-        self.timer = MINTIMER;
-        self.timelimit = std::time::Instant::now();
-        self.timed_out = false;
-    }
-
-    /// `checkword`'s timer bookkeeping: returns `false` once the generator's
-    /// time limit is reached.
-    fn tick(&mut self) -> bool {
-        if self.timer <= 0 {
-            return false;
-        }
-        self.timer -= 1;
-        if self.timer == 0 {
-            if self.timelimit.elapsed().as_millis() > TIMELIMIT_MS {
-                self.timed_out = true;
-                return false;
-            }
-            self.timer = MINTIMER;
-        }
-        true
-    }
-
     /// `SuggestMgr::mapchars`.
     fn mapchars(&mut self, wlst: &mut Vec<String>, word: &[u8], cpdsuggest: i32) {
         if word.len() < 2 || self.c.aff.map_table.is_empty() {
@@ -3213,7 +3415,7 @@ impl<'a> SuggestMgr<'a> {
         let c = self.c;
         let maptable: &'a [Vec<Vec<u8>>] = &c.aff.map_table;
         let mut candidate = Vec::new();
-        self.begin_timer();
+        self.map_budget = MAP_NODE_BUDGET;
         self.map_related(maptable, word, &mut candidate, 0, wlst, cpdsuggest, 0);
     }
 
@@ -3230,19 +3432,18 @@ impl<'a> SuggestMgr<'a> {
     ) {
         if word.len() == wn {
             let as_str = String::from_utf8_lossy(candidate).into_owned();
-            if !wlst.iter().any(|w| w == &as_str) {
-                if !self.tick() {
-                    return;
-                }
-                if self.c.sm_checkword(candidate, cpdsuggest) != 0 && wlst.len() < self.max_sug {
-                    wlst.push(as_str);
-                }
+            if !wlst.iter().any(|w| w == &as_str)
+                && self.c.sm_checkword(candidate, cpdsuggest) != 0
+                && wlst.len() < self.max_sug
+            {
+                wlst.push(as_str);
             }
             return;
         }
-        if depth > 16384 || self.timed_out {
+        if depth > 16384 || self.map_budget == 0 {
             return;
         }
+        self.map_budget -= 1;
         let mut in_map = false;
         for row in maptable {
             for entry in row {
@@ -3381,16 +3582,12 @@ impl<'a> SuggestMgr<'a> {
     fn forgotchar(&mut self, wlst: &mut Vec<String>, word: &[char], cpdsuggest: i32) {
         let mut candidate = word.to_vec();
         let ctry: Vec<char> = bytes_to_chars(self.ctry);
-        self.begin_timer();
         for &k in &ctry {
             let mut i = 0usize;
             while i <= candidate.len() {
                 let index = candidate.len() - i;
                 candidate.insert(index, k);
-                self.testsug_timed(wlst, chars_to_bytes(&candidate), cpdsuggest);
-                if self.timed_out {
-                    return;
-                }
+                self.testsug(wlst, chars_to_bytes(&candidate), cpdsuggest);
                 candidate.remove(index);
                 i += 1;
             }
@@ -3433,7 +3630,6 @@ impl<'a> SuggestMgr<'a> {
     fn badchar(&mut self, wlst: &mut Vec<String>, word: &[char], cpdsuggest: i32) {
         let mut candidate = word.to_vec();
         let ctry: Vec<char> = bytes_to_chars(self.ctry);
-        self.begin_timer();
         for &ch in &ctry {
             for i in (0..candidate.len()).rev() {
                 let tmpc = candidate[i];
@@ -3441,10 +3637,7 @@ impl<'a> SuggestMgr<'a> {
                     continue;
                 }
                 candidate[i] = ch;
-                self.testsug_timed(wlst, chars_to_bytes(&candidate), cpdsuggest);
-                if self.timed_out {
-                    return;
-                }
+                self.testsug(wlst, chars_to_bytes(&candidate), cpdsuggest);
                 candidate[i] = tmpc;
             }
         }
@@ -3707,6 +3900,38 @@ impl HunspellChecker {
         let mut stack: Vec<String> = Vec::new();
         sm.suggest_rec(word, &mut stack)
     }
+
+    /// `SfxEntry::add`: apply the suffix to `word` (used by
+    /// `AffixMgr::expand_rootword`).
+    fn sfx_add(&self, e: &AffixEntry, word: &[u8]) -> Option<Vec<u8>> {
+        let len = word.len();
+        if !((len > e.strip.len() || (len == 0 && self.aff.fullstrip))
+            && len >= e.numconds
+            && test_condition_suffix(&e.cond, e.numconds, word)
+            && (e.strip.is_empty() || (len >= e.strip.len() && word.ends_with(e.strip.as_slice()))))
+        {
+            return None;
+        }
+        let mut result = word[..len - e.strip.len()].to_vec();
+        result.extend_from_slice(&e.appnd);
+        Some(result)
+    }
+
+    /// `PfxEntry::add`.
+    fn pfx_add(&self, e: &AffixEntry, word: &[u8]) -> Option<Vec<u8>> {
+        let len = word.len();
+        if !((len > e.strip.len() || (len == 0 && self.aff.fullstrip))
+            && len >= e.numconds
+            && test_condition_prefix(&e.cond, e.numconds, word)
+            && (e.strip.is_empty()
+                || (len >= e.strip.len() && word.starts_with(e.strip.as_slice()))))
+        {
+            return None;
+        }
+        let mut result = e.appnd.clone();
+        result.extend_from_slice(&word[e.strip.len()..]);
+        Some(result)
+    }
 }
 
 impl<'a> SuggestMgr<'a> {
@@ -3791,26 +4016,37 @@ impl<'a> SuggestMgr<'a> {
         }
 
         let mut good = false;
+        let mut onlycmpdsug = false;
         match captype {
             Captype::NoCap => {
-                good |= self.suggest(&mut slst, &String::from_utf8_lossy(&scw)).0;
+                let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&scw));
+                good |= g;
+                onlycmpdsug |= o;
                 if abbv > 0 {
                     let mut wsp = scw.clone();
                     wsp.push(b'.');
-                    good |= self.suggest(&mut slst, &String::from_utf8_lossy(&wsp)).0;
+                    let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
+                    good |= g;
+                    onlycmpdsug |= o;
                 }
             }
             Captype::InitCap => {
                 capwords = true;
-                good |= self.suggest(&mut slst, &String::from_utf8_lossy(&scw)).0;
+                let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&scw));
+                good |= g;
+                onlycmpdsug |= o;
                 let wsp = lowercase_bytes(&scw);
-                good |= self.suggest(&mut slst, &String::from_utf8_lossy(&wsp)).0;
+                let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
+                good |= g;
+                onlycmpdsug |= o;
             }
             Captype::HuhInitCap | Captype::HuhCap => {
                 if captype == Captype::HuhInitCap {
                     capwords = true;
                 }
-                good |= self.suggest(&mut slst, &String::from_utf8_lossy(&scw)).0;
+                let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&scw));
+                good |= g;
+                onlycmpdsug |= o;
                 // something.The -> something. The
                 if let Some(dot_pos) = find_byte(&scw, b'.') {
                     let postdot = &scw[dot_pos + 1..];
@@ -3823,20 +4059,26 @@ impl<'a> SuggestMgr<'a> {
                 if captype == Captype::HuhInitCap {
                     // TheOpenOffice.org -> The OpenOffice.org
                     let wsp = mkinitsmall_str(&String::from_utf8_lossy(&scw));
-                    good |= self.suggest(&mut slst, &wsp).0;
+                    let (g, o) = self.suggest(&mut slst, &wsp);
+                    good |= g;
+                    onlycmpdsug |= o;
                 }
                 let wsp = lowercase_bytes(&scw);
                 if self.c.spell(&String::from_utf8_lossy(&wsp)) {
                     insert_sug(&mut slst, wsp.clone());
                 }
                 let prevns = slst.len();
-                good |= self.suggest(&mut slst, &String::from_utf8_lossy(&wsp)).0;
+                let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
+                good |= g;
+                onlycmpdsug |= o;
                 if captype == Captype::HuhInitCap {
                     let wspi = mkinitcap_str(&String::from_utf8_lossy(&wsp));
                     if self.c.spell(&wspi) {
                         insert_sug(&mut slst, wspi.clone().into_bytes());
                     }
-                    good |= self.suggest(&mut slst, &wspi).0;
+                    let (g, o) = self.suggest(&mut slst, &wspi);
+                    good |= g;
+                    onlycmpdsug |= o;
                 }
                 // aNew -> "a New" (instead of "a new")
                 let wl = scw.len();
@@ -3857,16 +4099,51 @@ impl<'a> SuggestMgr<'a> {
             }
             Captype::AllCap => {
                 let wsp = lowercase_bytes(&scw);
-                good |= self.suggest(&mut slst, &String::from_utf8_lossy(&wsp)).0;
+                let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
+                good |= g;
+                onlycmpdsug |= o;
                 if self.c.aff.keep_case.is_some() && self.c.spell(&String::from_utf8_lossy(&wsp)) {
                     insert_sug(&mut slst, wsp.clone());
                 }
                 let wspi = mkinitcap_str(&String::from_utf8_lossy(&wsp));
-                good |= self.suggest(&mut slst, &wspi).0;
+                let (g, o) = self.suggest(&mut slst, &wspi);
+                good |= g;
+                onlycmpdsug |= o;
                 for j in slst.iter_mut() {
                     *j = mkallcap_str(j);
                     if self.c.aff.checksharps {
                         *j = j.replace('ß', "SS");
+                    }
+                }
+            }
+        }
+
+        // try n-gram approach since no good suggestion was found
+        if !good && (slst.is_empty() || onlycmpdsug) && self.c.aff.maxngramsugs != 0 {
+            match captype {
+                Captype::NoCap => {
+                    self.ngsuggest(&mut slst, &String::from_utf8_lossy(&scw), Captype::NoCap);
+                }
+                Captype::HuhInitCap => {
+                    capwords = true;
+                    let wsp = lowercase_bytes(&scw);
+                    self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::HuhCap);
+                }
+                Captype::HuhCap => {
+                    let wsp = lowercase_bytes(&scw);
+                    self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::HuhCap);
+                }
+                Captype::InitCap => {
+                    capwords = true;
+                    let wsp = lowercase_bytes(&scw);
+                    self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::InitCap);
+                }
+                Captype::AllCap => {
+                    let wsp = lowercase_bytes(&scw);
+                    let oldns = slst.len();
+                    self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::AllCap);
+                    for j in slst.iter_mut().skip(oldns) {
+                        *j = mkallcap_str(j);
                     }
                 }
             }
@@ -3913,6 +4190,334 @@ impl<'a> SuggestMgr<'a> {
 
         (slst, capwords, abbv, captype)
     }
+
+    /// `AffixMgr::expand_rootword`: the root word plus its suffixed,
+    /// prefix+suffix cross and pure-prefix forms (capped at `MAX_WORDS`).
+    fn expand_rootword(&self, root_word: &[u8], flags: &[Flag], bad: &[u8]) -> Vec<GuessWord> {
+        let needaffix = self.c.aff.need_affix;
+        let onlyincompound = self.c.aff.only_in_compound;
+        let circumfix = self.c.aff.circumfix;
+        let cont_special = |e: &AffixEntry| {
+            e.cont.iter().any(|c| {
+                Some(*c) == needaffix || Some(*c) == circumfix || Some(*c) == onlyincompound
+            })
+        };
+        let mut wlst: Vec<GuessWord> = Vec::new();
+        if !flags
+            .iter()
+            .any(|f| Some(*f) == needaffix || Some(*f) == onlyincompound)
+        {
+            wlst.push(GuessWord {
+                word: root_word.to_vec(),
+                allow: false,
+            });
+        }
+        // suffixes
+        for &f in flags {
+            let Some(chain) = self.c.aff.sfx_by_flag.get(&f) else {
+                continue;
+            };
+            for &idx in chain {
+                let e = &self.c.aff.suffixes_file[idx];
+                if !(e.appnd.is_empty()
+                    || (bad.len() > e.appnd.len() && bad.ends_with(e.appnd.as_slice())))
+                {
+                    continue;
+                }
+                if cont_special(e) {
+                    continue;
+                }
+                if let Some(newword) = self.c.sfx_add(e, root_word) {
+                    if wlst.len() < MAX_WORDS {
+                        wlst.push(GuessWord {
+                            word: newword,
+                            allow: e.cross,
+                        });
+                    }
+                }
+            }
+        }
+        let n = wlst.len();
+        // cross products of prefixes and suffixes
+        for j in 1..n {
+            if !wlst[j].allow {
+                continue;
+            }
+            for &f in flags {
+                let Some(chain) = self.c.aff.pfx_by_flag.get(&f) else {
+                    continue;
+                };
+                for &idx in chain {
+                    let e = &self.c.aff.prefixes_file[idx];
+                    if !e.cross
+                        || !(e.appnd.is_empty()
+                            || (bad.len() > e.appnd.len() && bad.starts_with(e.appnd.as_slice())))
+                    {
+                        continue;
+                    }
+                    if let Some(newword) = self.c.pfx_add(e, &wlst[j].word) {
+                        if wlst.len() < MAX_WORDS {
+                            wlst.push(GuessWord {
+                                word: newword,
+                                allow: e.cross,
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        // pure prefixes
+        for &f in flags {
+            let Some(chain) = self.c.aff.pfx_by_flag.get(&f) else {
+                continue;
+            };
+            for &idx in chain {
+                let e = &self.c.aff.prefixes_file[idx];
+                if !(e.appnd.is_empty()
+                    || (bad.len() > e.appnd.len() && bad.starts_with(e.appnd.as_slice())))
+                {
+                    continue;
+                }
+                if cont_special(e) {
+                    continue;
+                }
+                if let Some(newword) = self.c.pfx_add(e, root_word) {
+                    if wlst.len() < MAX_WORDS {
+                        wlst.push(GuessWord {
+                            word: newword,
+                            allow: e.cross,
+                        });
+                    }
+                }
+            }
+        }
+        wlst
+    }
+
+    /// `SuggestMgr::ngsuggest`: the n-gram fallback, run when the generators
+    /// found nothing good. The `PHONE` and non-BMP branches are not ported
+    /// (no target dictionary ships a `PHONE` table; the words are BMP).
+    fn ngsuggest(&self, wlst: &mut Vec<String>, w: &str, captype: Captype) {
+        let word_chars: Vec<char> = w.chars().collect();
+        let n = word_chars.len() as i32;
+        let low = true;
+        let langnum = self.c.aff.langnum;
+        let complexprefixes = false;
+
+        // exhaustively walk the dictionary, keeping the MAX_ROOTS best roots
+        let mut roots: Vec<Option<u32>> = vec![None; MAX_ROOTS];
+        let mut scores: Vec<i32> = (0..MAX_ROOTS).map(|i| -100 * i as i32).collect();
+        let mut lp = MAX_ROOTS - 1;
+        for &idx in &self.c.index.ngram_order {
+            let packed = self.c.index.entries[idx as usize];
+            let hp_word = self.c.index.entry_word(&packed);
+            let clen = bytes_to_chars(hp_word).len() as i32;
+            if (n - clen).abs() > 4 {
+                continue;
+            }
+            // don't suggest capitalized dictionary words for lower-case
+            // misspellings (no PHONE, not German)
+            if captype == Captype::NoCap && packed.initcap && langnum != 49 {
+                continue;
+            }
+            let e = self.c.index.view(&packed);
+            if self.c.has_flag(e, self.c.aff.forbidden_word)
+                || self.c.has_flag(e, self.c.aff.nosuggest)
+                || self.c.has_flag(e, self.c.aff.nongramsuggest)
+                || self.c.has_flag(e, self.c.aff.only_in_compound)
+            {
+                continue;
+            }
+            let mut f_chars = bytes_to_chars(hp_word);
+            let leftcommon = leftcommonsubstring(&word_chars, &f_chars, complexprefixes);
+            if low {
+                for ch in f_chars.iter_mut() {
+                    *ch = simple_lower(*ch);
+                }
+            }
+            let sc = ngram_score(3, &word_chars, &f_chars, NGRAM_LONGER_WORSE) + leftcommon;
+            if sc > scores[lp] {
+                scores[lp] = sc;
+                roots[lp] = Some(idx);
+                let mut lval = sc;
+                for (j, &sj) in scores.iter().enumerate() {
+                    if sj < lval {
+                        lp = j;
+                        lval = sj;
+                    }
+                }
+            }
+        }
+
+        // minimum acceptable score: mangle the word three ways
+        let mut thresh = 0i32;
+        for sp in 1..4usize {
+            let mut mw = word_chars.clone();
+            let mut k = sp;
+            while k < word_chars.len() {
+                mw[k] = '*';
+                k += 4;
+            }
+            if low {
+                for ch in mw.iter_mut() {
+                    *ch = simple_lower(*ch);
+                }
+            }
+            thresh += ngram_score(n as usize, &word_chars, &mw, NGRAM_ANY_MISMATCH);
+        }
+        thresh = thresh / 3 - 1;
+
+        // expand each root and keep the MAX_GUESS best candidates
+        let mut guesses: Vec<Option<Vec<u8>>> = vec![None; MAX_GUESS];
+        let mut gscore: Vec<i32> = (0..MAX_GUESS).map(|i| -100 * i as i32).collect();
+        let mut lp = MAX_GUESS - 1;
+        for root in &roots {
+            let Some(ridx) = *root else { continue };
+            let packed = self.c.index.entries[ridx as usize];
+            let root_word = self.c.index.entry_word(&packed).to_vec();
+            let flags = self.c.index.view(&packed).flags.to_vec();
+            for g in self.expand_rootword(&root_word, &flags, w.as_bytes()) {
+                let mut f_chars = bytes_to_chars(&g.word);
+                let leftcommon = leftcommonsubstring(&word_chars, &f_chars, complexprefixes);
+                if low {
+                    for ch in f_chars.iter_mut() {
+                        *ch = simple_lower(*ch);
+                    }
+                }
+                let sc =
+                    ngram_score(n as usize, &word_chars, &f_chars, NGRAM_ANY_MISMATCH) + leftcommon;
+                if sc > thresh && sc > gscore[lp] {
+                    guesses[lp] = Some(g.word);
+                    gscore[lp] = sc;
+                    let mut lval = sc;
+                    for (j, &sj) in gscore.iter().enumerate() {
+                        if sj < lval {
+                            lp = j;
+                            lval = sj;
+                        }
+                    }
+                }
+            }
+        }
+
+        bubble_desc(&mut guesses, &mut gscore);
+
+        // weight with a similarity index based on LCS, then resort
+        let mut fact = 1.0f64;
+        if self.c.aff.maxdiff >= 0 {
+            fact = (10.0 - self.c.aff.maxdiff as f64) / 5.0;
+        }
+        for i in 0..MAX_GUESS {
+            let Some(g) = guesses[i].clone() else {
+                continue;
+            };
+            let gl = mkallsmall_str(&String::from_utf8_lossy(&g));
+            let gl_chars = bytes_to_chars(gl.as_bytes());
+            let len = gl_chars.len() as i32;
+            let lcs = lcslen(&word_chars, &gl_chars);
+            if n == len && n == lcs {
+                gscore[i] += 2000;
+                break;
+            }
+            let mut re = ngram_score(
+                2,
+                &word_chars,
+                &gl_chars,
+                NGRAM_ANY_MISMATCH | NGRAM_WEIGHTED,
+            );
+            if low {
+                let mut f = word_chars.clone();
+                for ch in f.iter_mut() {
+                    *ch = simple_lower(*ch);
+                }
+                re += ngram_score(2, &gl_chars, &f, NGRAM_ANY_MISMATCH | NGRAM_WEIGHTED);
+            } else {
+                re += ngram_score(
+                    2,
+                    &gl_chars,
+                    &word_chars,
+                    NGRAM_ANY_MISMATCH | NGRAM_WEIGHTED,
+                );
+            }
+            let ng4 = ngram_score(4, &word_chars, &gl_chars, NGRAM_ANY_MISMATCH);
+            let lc = leftcommonsubstring(&word_chars, &gl_chars, complexprefixes);
+            let (ccp, is_swap) = commoncharacterpositions(&word_chars, &gl_chars);
+            gscore[i] = 2 * lcs - (n - len).abs()
+                + lc
+                + if ccp > 0 { 1 } else { 0 }
+                + if is_swap { 10 } else { 0 }
+                + ng4
+                + re
+                + if (re as f64) < (n + len) as f64 * fact {
+                    -1000
+                } else {
+                    0
+                };
+        }
+
+        bubble_desc(&mut guesses, &mut gscore);
+
+        // copy over
+        let oldns = wlst.len();
+        let maxngramsugs = if self.c.aff.maxngramsugs >= 0 {
+            self.c.aff.maxngramsugs
+        } else {
+            MAXNGRAMSUGS
+        };
+        let onlymaxdiff = self.c.aff.onlymaxdiff;
+        let mut same = false;
+        for i in 0..MAX_GUESS {
+            let Some(g) = guesses[i].clone() else {
+                continue;
+            };
+            if wlst.len() < oldns + maxngramsugs as usize
+                && wlst.len() < self.max_sug
+                && (!same || gscore[i] > 1000)
+            {
+                let mut unique = true;
+                if gscore[i] > 1000 {
+                    same = true;
+                } else if gscore[i] < -100 {
+                    same = true;
+                    // keep the best n-gram suggestions, unless in ONLYMAXDIFF mode
+                    if wlst.len() > oldns || onlymaxdiff {
+                        continue;
+                    }
+                }
+                let gs = String::from_utf8_lossy(&g);
+                for j in wlst.iter() {
+                    // don't suggest previous suggestions or a previous
+                    // suggestion with prefixes or affixes; check forbidden words
+                    if gs.contains(j.as_str()) || self.c.sm_checkword(&g, 0) == 0 {
+                        unique = false;
+                        break;
+                    }
+                }
+                if unique {
+                    wlst.push(gs.into_owned());
+                }
+            }
+        }
+    }
+}
+
+/// `SuggestMgr::bubblesort`: descending insertion sort (stable for ties).
+fn bubble_desc<T>(items: &mut [Option<T>], scores: &mut [i32]) {
+    let n = scores.len();
+    let mut m = 1;
+    while m < n {
+        let mut j = m;
+        while j > 0 {
+            if scores[j - 1] < scores[j] {
+                scores.swap(j - 1, j);
+                items.swap(j - 1, j);
+                j -= 1;
+            } else {
+                break;
+            }
+        }
+        m += 1;
+    }
 }
 
 /// UTF-8 character count (`SuggestMgr::mystrlen` in UTF-8 mode).
@@ -3948,8 +4553,9 @@ mod tests {
     #[test]
     fn suggest_generators_and_order() {
         let c = suggest_test_checker();
-        // badchar (t -> r) then forgotchar (insert r): hunspell's order.
-        assert_eq!(c.suggest("cat"), vec!["car", "cart", "cut"]);
+        // badchar (t -> r) then forgotchar (insert r): hunspell's order; the
+        // trailing `cat` is the n-gram fallback (the word itself).
+        assert_eq!(c.suggest("cat"), vec!["car", "cart", "cut", "cat"]);
         // forgotchar inserts at the end first (cat -> cut, then cat -> cat? no).
         assert_eq!(c.suggest("ct"), vec!["cat", "cut"]);
         // adjacent-swap generator.
@@ -3957,6 +4563,16 @@ mod tests {
         // REP "ph" -> "f".
         assert_eq!(c.suggest("phish"), vec!["fish"]);
         assert!(c.suggest("hellp").is_empty());
+    }
+
+    #[test]
+    fn suggest_ngram_fallback() {
+        let c = suggest_test_checker();
+        // `plnt` -> `planet` is two edits away, so only the n-gram generator
+        // can find it.
+        assert_eq!(c.suggest("plnt"), vec!["planet"]);
+        assert_eq!(c.suggest("ctt"), vec!["cat", "cut"]);
+        assert_eq!(c.suggest("fsh"), vec!["fish"]);
     }
 
     #[test]

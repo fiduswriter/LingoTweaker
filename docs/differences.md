@@ -198,40 +198,46 @@ Reproduce:
 `scripts/oracle/pt/probe-rule.sh pt-PT "Vou estudar enquanto possa ser possível." PODER_SER_POSSIVEL`.
 This is the only remaining Portuguese corpus field diff.
 
-## 7. `HUNSPELL_RULE` (Galician) n-gram fallback not ported (60 corpus field diffs)
+## 7. `HUNSPELL_RULE` (Galician) suggestion timer boundary (3 corpus field diffs)
 
 Unlike the other entries this is a **known limitation, not a correctness
 judgement**: the Galician match set is identical to the legacy engine
 (0 only-Java / 0 only-Rust over the 717-example corpus). The native hunspell
-suggestion engine (`suggestmgr.cxx`, hunspell 1.7.2) is now ported into
+suggestion engine (`suggestmgr.cxx`, hunspell 1.7.2) is ported into
 `crates/lt-spell` (`HunspellChecker::suggest`): the capitalization, `REP`,
 `MAP`, adjacent/long swap, add/remove/move char, double-two-chars and
-two-word generators, their iteration order, the compound-aware candidate
-`checkword`, the `TRY`/`KEY` tables (with hunspell's QWERTY `KEY` default)
-and the `Hunspell::suggest` wrapper (case restoration, `SUGSWITHDOTS`,
-keepcase filtering, dedup, dash suggestions) all reproduce the legacy
+two-word generators and their iteration order, the compound-aware candidate
+`checkword`, the `TRY`/`KEY` tables (with hunspell's QWERTY `KEY` default),
+the `Hunspell::suggest` wrapper (case restoration, `SUGSWITHDOTS`, keepcase
+filtering, dedup, dash suggestions) **and the n-gram fallback
+(`ngsuggest`: dictionary hash-walk order, `expand_rootword`, n-gram/LCS
+scoring, `MAXNGRAMSUGS`/`ONLYMAXDIFF`/`MAXDIFF`)** all reproduce the legacy
 engine.
 
-The remaining 60 field diffs are the n-gram fallback
-(`SuggestMgr::ngsuggest`), which is deliberately not ported; it walks the
-whole dictionary, expands affixes and scores candidates with n-gram/LCS
-similarity. Where the generator stage finds nothing or fewer candidates, the
-legacy engine appends n-gram suggestions, e.g.:
+Three field diffs remain, all at upstream's wall-clock
+`TIMELIMIT_SUGGESTION`/`TIMELIMIT_GLOBAL` boundary: the legacy engine bails
+out of the generator loop (and therefore skips the n-gram stage) when a
+generator exceeds 100 ms / the whole suggestion exceeds 250 ms. That cutoff
+is machine-timing-dependent upstream, so it cannot be reproduced
+byte-for-byte; the in-tree port bounds the only exponentially branching
+generator (`MAP`) with a deterministic node budget instead (D-224). The
+residue:
 
-- line 7, `Hal`: the ported generators give the legacy list
-  `Cal|Mal|Sal|Tal|Val|Ha|Hala|Hale|Halo|Chal|Haa|Hai|Hao|Han` exactly.
-- line 7, `Frank`: legacy `Franxa` (n-gram only); the generators find
-  nothing.
-- `VEDRAS`: ported `…|REDRAS|VEDRA`; legacy appends `VEDRAÑAS` (n-gram).
+- line 288, `Maria`: generator-list ordering/casing near the boundary.
+- line 624, `percatamos`: the n-gram list adds `permutamos` and keeps
+  `percútamos` where the legacy run stopped earlier.
+- line 672, `monoméricas`: the legacy run hit the 100 ms generator limit and
+  skipped n-gram, the port appends n-gram candidates.
 
 Reproduce (pinned Java build):
 
 ```sh
-scripts/oracle/gl/probe-speller.sh Hal Frank VEDRAS
+scripts/oracle/gl/probe-speller.sh Maria percatamos monoméricas
 ```
 
-Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=60` in
-`scripts/ci/parity.sh`. Porting `ngsuggest` would remove the allowance.
+Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=3` in
+`scripts/ci/parity.sh`. A deterministic emulation of the upstream wall-clock
+cutoff would remove the allowance.
 
 ## 8. `AGREEMENT_DEMONSTRATIVE_VERB` (Spanish, hand-authored rule)
 
@@ -333,17 +339,13 @@ engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
   scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
   ```
 
-## 10. `HUNSPELL_RULE` (Danish) n-gram fallback and dotted abbreviations
+## 10. `HUNSPELL_RULE` (Danish) dotted-abbreviation acceptance
 
-Like #7 this is a **known limitation, not a correctness judgement**. The
-Danish corpus (`docs/parity/golden/da-full.txt`, 284 examples) is at
-**2 only-Java / 0 only-Rust / 8 field diffs**, all on `HUNSPELL_RULE`:
+The native hunspell suggestion engine is ported (see #7), so the Danish
+suggestion lists match the legacy engine byte-for-byte. The corpus
+(`docs/parity/golden/da-full.txt`, 284 examples) is at
+**2 only-Java / 0 only-Rust / 0 field diffs**:
 
-- 8 field diffs: the native hunspell suggestion generators are ported (see
-  #7) and match the legacy engine; the remaining diffs are the unported
-  n-gram fallback, e.g. `Treoghalvtreds` (legacy `Halvtredsårsdag|…`, port
-  none) and `Sørnsen` (legacy `Sørensen|Sørenses|Sørejsen|Sørens|Sørenn`,
-  port only `Sørensen`).
 - 2 only-Java: the in-tree `lt-spell` checker accepts a small set of dotted
   abbreviations that native hunspell rejects, e.g. the token `f.kr` in
   `I år 753f.kr. blev Rom grundlagt.` (lines 177/179). The legacy engine flags
@@ -361,10 +363,9 @@ Reproduce (pinned Java build):
 scripts/oracle/da/check-diff-da.sh docs/parity/golden/da-full.txt
 ```
 
-Pinned exactly as `--expect-only-java=HUNSPELL_RULE=2` and
-`--expect-field-diffs=HUNSPELL_RULE=8` in `scripts/ci/parity.sh`. Porting
-`ngsuggest` and fixing the `lt-spell` dotted-word acceptance would remove the
-allowance.
+Pinned exactly as `--expect-only-java=HUNSPELL_RULE=2` in
+`scripts/ci/parity.sh`. Matching the `lt-spell` dotted-word acceptance to
+Java's `cleanWord` handling would remove the allowance.
 
 ## 11. `HUNSPELL_RULE` (Swedish) suggestion ranking (resolved)
 

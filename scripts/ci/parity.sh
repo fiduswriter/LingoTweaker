@@ -121,17 +121,14 @@ elif [ "$LANG_ARG" = "pt" ]; then
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)
 elif [ "$LANG_ARG" = "gl" ]; then
   # documented speller divergence (docs/differences.md #7): the match set is
-  # identical; the native hunspell suggestion generators are ported, but the
-  # remaining HUNSPELL_RULE field diffs are the unported n-gram fallback
-  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=60)
+  # identical; the native hunspell suggestion engine (generators + n-gram
+  # fallback) is ported, leaving a small wall-clock-boundary residue
+  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=3)
 elif [ "$LANG_ARG" = "da" ]; then
-  # documented speller divergences (docs/differences.md #10): HUNSPELL_RULE
-  # suggestions come from the bounded dictionary search instead of the
-  # unported native hunspell.suggest ranking (12 field diffs), and the in-tree
-  # checker accepts a small set of dotted abbreviations that native hunspell
-  # rejects (2 only-Java).
+  # documented speller divergence (docs/differences.md #10): the native
+  # hunspell suggestion engine (generators + n-gram fallback) is ported, so
+  # only the dotted-abbreviation acceptance remains (2 only-Java).
   EXTRA+=(--expect-only-java=HUNSPELL_RULE=2)
-  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=8)
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)

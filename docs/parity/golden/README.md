@@ -46,9 +46,10 @@ re-runs the Rust side and diffs against the golden.
   only-Java (#3), `SUJET_AUXILIAIRE` = 1 only-Java (#4) and
   `AGREEMENT_PARTICULAR` = 1 field diff (#5); pt has exactly the documented
   `PODER_SER_POSSIVEL` = 1 field diff (#6). gl has 0 only-Java / 0 only-Rust
-  and exactly the documented `HUNSPELL_RULE` = 60 field diffs (#7: the match
-  set is identical; the native hunspell suggestion generators are ported, the
-  remaining diffs are the unported n-gram fallback). es has 0
+  and exactly the documented `HUNSPELL_RULE` = 3 field diffs (#7: the match
+  set is identical; the native hunspell suggestion engine including the
+  n-gram fallback is ported, the residue is the upstream wall-clock timer
+  boundary). es has 0
   only-Java / 0 field diffs and exactly the documented
   `AGREEMENT_DEMONSTRATIVE_VERB` = 11 only-Rust matches (#8: the 11 incorrect
   examples of the hand-authored demonstrative-verb rule, which Java does not
@@ -60,7 +61,7 @@ re-runs the Rust side and diffs against the golden.
   runs the affected languages, not a static list (all ten on shared
   changes, one language on language-local changes, none for docs-only
   changes; P6.3/D-134). nl is exactly 0/0/0 (D-133); ca is exactly 0/0/0
-  (D-188…D-190); gl is 0/0/60 (D-192…D-198, reduced by the suggestion port); ro is exactly 0/0/0 (D-199);
+  (D-188…D-190); gl is 0/0/3 (D-192…D-198 + D-224, reduced by the suggestion port); ro is exactly 0/0/0 (D-199);
   pl is 4 only-Java / 5 only-Rust / 0 field diffs,   the documented known
   fidelity gaps of `docs/differences.md` #9 (the `<unify negate="yes">`
   agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
@@ -72,12 +73,11 @@ re-runs the Rust side and diffs against the golden.
   disambiguator). el is exactly 0/0/0 (D-214; the Greek tagger, synthesizer
   and `el/disambiguation.xml` are wired, and `Pipeline::synthesizer()` gained
   the Greek branch so `<match postag>` synthesis renders like Java).
-  da is 2 only-Java / 0 only-Rust / 8 field diffs, all `HUNSPELL_RULE`
-  (D-215/D-216 + the suggestion port): the native hunspell suggestion
-  generators are ported, so the remaining diffs are the unported n-gram
-  fallback, and the in-tree checker accepts a small set of dotted
-  abbreviations (`f.kr`) that native hunspell rejects; the XML rules, tagger
-  and disambiguator are at parity.
+  da is 2 only-Java / 0 only-Rust / 0 field diffs (D-215/D-216 + D-224): the
+  native hunspell suggestion engine including the n-gram fallback is ported,
+  so only the in-tree checker's acceptance of a small set of dotted
+  abbreviations (`f.kr`) that native hunspell rejects remains; the XML rules,
+  tagger and disambiguator are at parity.
   sv is exactly 0 only-Java / 0 only-Rust / 0 field diffs (D-218/D-219,
   resolved by the suggestion-engine port): the suggestion lists match the
   legacy engine byte-for-byte; the XML rules,
