@@ -304,25 +304,34 @@ fn dutch_tagger_heuristics_match_java() {
 
 /// Stage-1 core built-ins with the Dutch `MessagesBundle_nl` strings, probed
 /// against the pinned Java build (`scripts/oracle/nl/probe-rule.sh nl-NL`,
-/// one rule enabled at a time, 2026-09-19). The offsets are ASCII in all
-/// probes, so UTF-8 and Java UTF-16 agree.
+/// one rule enabled at a time, 2026-09-21). The probes use real Dutch
+/// orthography (é/ü/ï, `IJ`), so the Java UTF-16 offsets and the UTF-8 engine
+/// offsets differ; both are stated per case.
 #[test]
 fn dutch_core_rules_match_java() {
     let _guard = engine_guard();
 
-    // UPPERCASE_SENTENCE_START (4): Java 0..2, suggestion "De"
+    // UPPERCASE_SENTENCE_START (4): `één appel is lekker.`
+    // Java UTF-16 0..3, UTF-8 0..5 (`é` is two bytes); suggestion "Één"
     let Some(engine) = engine_with_rules("nl-NL", &["UPPERCASE_SENTENCE_START"]) else {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("de kat zit op de mat.").unwrap();
+    let result = engine.check("één appel is lekker.").unwrap();
     let m = &result.matches[0];
     assert_eq!(m.rule_id, "UPPERCASE_SENTENCE_START");
-    assert_eq!((m.range.start, m.range.end), (0, 2));
+    assert_eq!((m.range.start, m.range.end), (0, 5));
     assert_eq!(m.message, "Deze zin begint niet met een hoofdletter");
-    assert_eq!(m.suggestions[0].value, "De");
+    assert_eq!(m.suggestions[0].value, "Één");
 
-    // COMMA_PARENTHESIS_WHITESPACE (1): Java 15..17, suggestion "."
+    // the `IJ` digraph: `ijs is lekker.` Java 0..3, suggestion "Ijs"
+    let result = engine.check("ijs is lekker.").unwrap();
+    let m = &result.matches[0];
+    assert_eq!((m.range.start, m.range.end), (0, 3));
+    assert_eq!(m.suggestions[0].value, "Ijs");
+
+    // COMMA_PARENTHESIS_WHITESPACE (1): `Het is een reünie , vandaag.`
+    // Java UTF-16 17..19, UTF-8 18..20 (`ü` shifts the byte offset)
     let Some(engine) = engine_with_rules(
         "nl-NL",
         &["COMMA_PARENTHESIS_WHITESPACE", "DOUBLE_PUNCTUATION"],
@@ -330,51 +339,123 @@ fn dutch_core_rules_match_java() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("Dit is een test .").unwrap();
+    let result = engine.check("Het is een reünie , vandaag.").unwrap();
     let m = result
         .matches
         .iter()
         .find(|m| m.rule_id == "COMMA_PARENTHESIS_WHITESPACE")
         .unwrap();
-    assert_eq!((m.range.start, m.range.end), (15, 17));
-    assert_eq!(m.message, "Zet geen spatie voor een punt");
-    assert_eq!(m.suggestions[0].value, ".");
+    assert_eq!((m.range.start, m.range.end), (18, 20));
+    assert_eq!(m.message, "Zet een spatie na een komma, maar niet ervoor");
+    assert_eq!(m.suggestions[0].value, ",");
 
-    // DOUBLE_PUNCTUATION (2): Java 6..8, suggestion ","
-    let result = engine.check("Dit is,, een test.").unwrap();
+    // DOUBLE_PUNCTUATION (2): `Het is mooi,, maar duur.` 11..13
+    let result = engine.check("Het is mooi,, maar duur.").unwrap();
     let m = result
         .matches
         .iter()
         .find(|m| m.rule_id == "DOUBLE_PUNCTUATION")
         .unwrap();
-    assert_eq!((m.range.start, m.range.end), (6, 8));
+    assert_eq!((m.range.start, m.range.end), (11, 13));
     assert_eq!(m.message, "Twee opeenvolgende komma's");
     assert_eq!(m.suggestions[0].value, ",");
 
-    // UNPAIRED_BRACKETS (3): Java 7..8, no suggestions
+    // UNPAIRED_BRACKETS (3): `(Het is een reünie.` 0..1, no suggestions
     let Some(engine) = engine_with_rules("nl-NL", &["UNPAIRED_BRACKETS"]) else {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("Dit is (een test.").unwrap();
+    let result = engine.check("(Het is een reünie.").unwrap();
     let m = &result.matches[0];
     assert_eq!(m.rule_id, "UNPAIRED_BRACKETS");
-    assert_eq!((m.range.start, m.range.end), (7, 8));
+    assert_eq!((m.range.start, m.range.end), (0, 1));
     assert_eq!(
         m.message,
         "Niet-gecombineerd symbool: \")\" lijkt te ontbreken"
     );
     assert!(m.suggestions.is_empty());
 
-    // WHITESPACE_RULE (6, MultipleWhitespaceRule): Java 6..8, suggestion " "
+    // WHITESPACE_RULE (6, MultipleWhitespaceRule): `Het  is een reünie.` 3..5
     let Some(engine) = engine_with_rules("nl-NL", &["WHITESPACE_RULE"]) else {
         eprintln!("skipping: no vendored data");
         return;
     };
-    let result = engine.check("Dit is  goed.").unwrap();
+    let result = engine.check("Het  is een reünie.").unwrap();
     let m = &result.matches[0];
     assert_eq!(m.rule_id, "WHITESPACE_RULE");
-    assert_eq!((m.range.start, m.range.end), (6, 8));
+    assert_eq!((m.range.start, m.range.end), (3, 5));
     assert_eq!(m.message, "Te veel witruimte");
     assert_eq!(m.suggestions[0].value, " ");
+}
+
+/// `MorfologikDutchSpellerRule` on real Dutch orthography: the diaeresis
+/// misspellings (`reunie`, `beinvloeden`, `financieen`, `ideen`) and the full
+/// Java suggestion lists, which restore ë/ï. Java probe
+/// (`scripts/oracle/nl/check-diff-nl.sh`, 2026-09-21); the word spans are
+/// all-ASCII so UTF-16 == UTF-8.
+#[test]
+fn dutch_speller_diacritics_match_java() {
+    let _guard = engine_guard();
+    let Some(engine) = engine_variant("nl-NL") else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let cases: &[(&str, (usize, usize), &[&str])] = &[
+        (
+            "Dit is een reunie.",
+            (11, 17),
+            &[
+                "reünie", "Rennie", "reünies", "Reinie", "Teunie", "Reunis", "reünie-",
+            ],
+        ),
+        (
+            "Het is een beinvloeden plan.",
+            (11, 22),
+            &[
+                "beïnvloeden",
+                "beïnvloedden",
+                "beïnvloede",
+                "beïnvloedend",
+                "beïnvloeder",
+                "beenvloeden",
+            ],
+        ),
+        (
+            "De financieen zijn op.",
+            (3, 13),
+            &["financieel", "financieren", "financiën", "financiëlen"],
+        ),
+        (
+            "De ideen zijn goed.",
+            (3, 8),
+            &[
+                "idee", "ideeën", "ineen", "Deen", "Ireen", "DEEN", "Ileen", "Iden", "idees",
+            ],
+        ),
+    ];
+    for (text, range, expected) in cases {
+        let result = engine.check(text).unwrap();
+        let m = result
+            .matches
+            .iter()
+            .find(|m| m.rule_id == "MORFOLOGIK_RULE_NL_NL")
+            .unwrap_or_else(|| panic!("no speller match for {text:?}"));
+        assert_eq!((m.range.start, m.range.end), *range, "{text:?}");
+        assert_eq!(m.message, "Er is een mogelijke spelfout gevonden.");
+        let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
+        assert_eq!(values, *expected, "{text:?}");
+    }
+
+    // correct forms with IJ/ë/ï are not flagged
+    let result = engine
+        .check("Het IJsselmeer is groot. De reünie was gezellig.")
+        .unwrap();
+    assert!(
+        !result
+            .matches
+            .iter()
+            .any(|m| m.rule_id == "MORFOLOGIK_RULE_NL_NL"),
+        "{:?}",
+        result.matches
+    );
 }

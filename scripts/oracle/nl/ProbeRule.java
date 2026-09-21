@@ -5,10 +5,10 @@ import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 
 /**
- * Checks one text with the pinned Portuguese LT and prints one line per
+ * Checks one text with the pinned Dutch LT and prints one line per
  * match: ruleId \t from \t to \t message \t suggestion1|suggestion2...
  *
- * Usage: java ProbeRule <pt-PT|pt-BR|pt-AO|pt-MZ> "<text>" [ruleId ...]
+ * Usage: java ProbeRule <nl-NL|nl-BE> "<text>" [ruleId ...]
  */
 public class ProbeRule {
   public static void main(String[] args) throws Exception {

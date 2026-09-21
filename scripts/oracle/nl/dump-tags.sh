@@ -3,7 +3,7 @@
 # sentence per line; prints the same S/T lines as
 # `cargo run -p lt-tagger --example dump_tags_nl`.
 #
-# Usage: scripts/oracle/pt/dump-tags.sh sentences.txt
+# Usage: scripts/oracle/nl/dump-tags.sh sentences.txt
 set -euo pipefail
 
 RS_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
