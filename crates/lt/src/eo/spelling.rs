@@ -39,6 +39,8 @@ impl EsperantoSpellingRule {
                 max_suggestions: 5,
                 native_suggestions: true,
                 cap_native_suggestions: false,
+                latin_script: true,
+                strip_tashkeel: false,
             },
         )?))
     }

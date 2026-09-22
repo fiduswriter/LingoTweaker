@@ -1,13 +1,11 @@
-//! Danish spelling rule: `org.languagetool.rules.spelling.hunspell.HunspellRule`
-//! over the vendored Stavekontrolden `da/hunspell/da_DK.{aff,dic}`.
+//! Arabic spelling rule (`ArabicHunspellSpellerRule`, `HUNSPELL_RULE_AR`) over
+//! the vendored Hunspell-ar dictionary (`ar/hunspell/ar.dic`, tri-licensed
+//! GPL-2.0+/LGPL-2.1+/MPL-1.1+; see `hunspell/COPYING`).
 //!
-//! `HunspellRule` is the plain `SpellingCheckRule` hunspell backend: the
-//! `da/hunspell/{ignore,spelling,spelling_custom}.txt` and
-//! `core/spelling_global.txt` word lists, `da/hunspell/prohibit*.txt` and the
-//! `desc_spelling`/`spelling`/`desc_spelling_short` messages. Suggestions come
-//! from the shared bounded search over the dictionary words
-//! (`HunspellSpellingRule`); the legacy engine's native `hunspell.suggest`
-//! ranking is not reproduced (internal notes).
+//! Faithful specifics: `isLatinScript() = false` (Arabic-script words are
+//! checked), `tokenizeText` splits on every non-letter/non-tashkeel character
+//! (here the [`LETTER_RUN`] regex over the sentence text, like `da`/`sv`), and
+//! both `ignoreWord`/`isMisspelled` strip tashkeel first.
 
 use std::path::Path;
 use std::sync::LazyLock;
@@ -18,35 +16,37 @@ use regex::Regex;
 use crate::hunspell_spelling::{HunspellSpellingConfig, HunspellSpellingRule as InnerRule};
 use crate::wordutil::{is_email, is_url};
 
-pub const RULE_ID: &str = "HUNSPELL_RULE";
+pub const RULE_ID: &str = "HUNSPELL_RULE_AR";
 
-/// `HunspellRule.tokenizeText` with the `da_DK.aff` `WORDCHARS -.`: maximal
-/// runs of letters plus `-` and `.` (`nonWordPattern = (?![-.])[^\p{L}]`).
-static LETTER_RUN: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[\p{L}.-]+").unwrap());
+/// `ArabicHunspellSpellerRule.tokenizeText`:
+/// `[^\p{L}\u064B-\u0656\u0640]` splits, so a checked word is a maximal run of
+/// letters plus tashkeel/tatweel.
+static LETTER_RUN: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"[\p{L}\u064B-\u0656\u0640]+").unwrap());
 
-pub struct DanishSpellingRule(InnerRule);
+pub struct ArabicSpellingRule(InnerRule);
 
-impl DanishSpellingRule {
+impl ArabicSpellingRule {
     pub fn load(data_dir: &Path) -> Result<Self> {
         Ok(Self(InnerRule::load(
             data_dir,
             HunspellSpellingConfig {
                 rule_id: RULE_ID,
-                description: "Mulig stavefejl",
-                message: "Mulig stavefejl fundet",
-                short_message: "Stavefejl",
+                description: "خطأ إملائي محتمل",
+                message: "وُجد خطأ إملائي محتمل",
+                short_message: "خطأ إملائي",
                 category_id: "TYPOS",
-                category_name: "Mulig slåfejl",
-                lang_dir: "da",
-                aff: "da_DK.aff",
-                dic: "da_DK.dic",
+                category_name: "أخطاء إملائية محتملة",
+                lang_dir: "ar",
+                aff: "ar.aff",
+                dic: "ar.dic",
                 suggestion_file: None,
                 morfologik_dict: None,
                 max_suggestions: 5,
                 native_suggestions: true,
                 cap_native_suggestions: false,
-                latin_script: true,
-                strip_tashkeel: false,
+                latin_script: false,
+                strip_tashkeel: true,
             },
         )?))
     }
@@ -55,31 +55,23 @@ impl DanishSpellingRule {
         self.0.rule_id()
     }
 
-    /// Dictionary membership for the context rules.
     pub fn is_known(&self, word: &str) -> bool {
         self.0.is_known(word)
     }
 
+    /// `HunspellRule.match`: spell-check `tokenizeText(sentence)` runs over the
+    /// sentence text (URL/immunized tokens suppressed), not the engine token
+    /// stream.
     pub fn check_sentence(
         &self,
         tokens: &[AnalyzedTokenReadings],
         sentence_text: &str,
         sentence_offset: usize,
     ) -> Vec<Match> {
-        // `HunspellRule.match` spell-checks `tokenizeText(text)` over the
-        // sentence text (URLs/immunized tokens replaced by whitespace), not
-        // the engine token stream. `nonWordPattern` keeps `-`/`.` inside the
-        // token, so the checked word keeps a trailing dot; Java reports the
-        // range up to `cleanWord.length()` (the trailing dot excluded).
         let mut matches: Vec<Match> = Vec::new();
         for m in LETTER_RUN.find_iter(sentence_text) {
             let raw = m.as_str();
             let start = m.start();
-            // `getSentenceTextWithoutUrlsAndImmunizedTokens` only removes a
-            // token that is itself ignored; an ignored *sub*-token (the engine
-            // splits `f.kr.` into `f` + `.` + `kr` + `.`) must not suppress
-            // the whole WORDCHARS run, matching the legacy engine, which
-            // spell-checks `f.kr.` as one token.
             let run_end = start + raw.len();
             let skipped = tokens.iter().any(|tr| {
                 if tr.is_whitespace || start < tr.start_pos {

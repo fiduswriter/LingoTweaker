@@ -47,6 +47,8 @@ impl LithuanianSpellingRule {
                 max_suggestions: 5,
                 native_suggestions: true,
                 cap_native_suggestions: true,
+                latin_script: true,
+                strip_tashkeel: false,
             },
         )?))
     }

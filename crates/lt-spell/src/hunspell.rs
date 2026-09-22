@@ -29,12 +29,13 @@
 //!   `COMPOUNDFORBIDFLAG`, `COMPOUNDROOT`, `COMPOUNDMIN`, `COMPOUNDWORDMAX`,
 //!   `COMPOUNDRULE` (the `defcpdtable` walk, `suggestmgr`-independent),
 //!   `CHECKCOMPOUNDREP` (`cpdrep_check`), `CHECKCOMPOUNDDUP`,
-//!   `CHECKCOMPOUNDTRIPLE`;
+//!   `CHECKCOMPOUNDTRIPLE`, `AF` flag aliases (`HashMgr::parse_aliasf` +
+//!   `aliasf` expansion of all-digit dictionary flag fields);
 //! - parsed and ignored because no vendored dictionary uses them: `PHONE`,
 //!   `WARN`, `SYLLABLENUM`, `MAXSUGS`, `LEMMA_PRESENT`, `OCONV`, `ICONV`,
-//!   `SIMPLIFIEDTRIPLE`;
-//! - still unsupported (error at load): `COMPLEXPREFIXES`, `AF`/`AM` flag
-//!   aliases, `IGNORE`, `CHECKCOMPOUNDPATTERN`, `CHECKCOMPOUNDCASE`,
+//!   `SIMPLIFIEDTRIPLE`, `AM` morphological aliases, `IGNORE`;
+//! - still unsupported (error at load): `COMPLEXPREFIXES`,
+//!   `CHECKCOMPOUNDPATTERN`, `CHECKCOMPOUNDCASE`,
 //!   `COMPOUNDMORESUFFIXES` (none occur in the vendored files);
 //! - residual `COMPOUNDRULE` gap: the optional-flag backtracking of
 //!   `defcpd_check` is reimplemented with consume-first semantics, which
@@ -518,6 +519,11 @@ struct Aff {
     check_compound_triple: bool,
     /// `AffixMgr::simplifiedcpd` (`SIMPLIFIEDTRIPLE`).
     simplified_triple: bool,
+    /// `AF` alias definitions in file order (raw flag strings, decoded after
+    /// the whole file is read because `FLAG` may follow `AF`).
+    af_alias_raw: Vec<String>,
+    /// `HashMgr::aliasf`: the decoded `AF` aliases, 1-indexed at the use site.
+    af_aliases: Vec<Vec<Flag>>,
 }
 
 /// One `REP` entry (`replentry`): `pattern` with `^`/`$` anchoring stripped,
@@ -583,6 +589,8 @@ impl Default for Aff {
             check_compound_dup: false,
             check_compound_triple: false,
             simplified_triple: false,
+            af_alias_raw: Vec::new(),
+            af_aliases: Vec::new(),
         }
     }
 }
@@ -612,7 +620,14 @@ impl Aff {
                     for _ in 0..count {
                         let eline = lines.next().ok_or_else(|| parse_err(line))?;
                         let eline = eline.trim_end_matches('\r');
-                        let entry = parse_affix_entry(eline, is_prefix, flag, cross, mode)?;
+                        let entry = parse_affix_entry(
+                            eline,
+                            is_prefix,
+                            flag,
+                            cross,
+                            mode,
+                            &aff.af_alias_raw,
+                        )?;
                         for &c in &entry.cont {
                             aff.have_cont_class = true;
                             aff.cont_classes[c as usize] = true;
@@ -704,6 +719,13 @@ impl Aff {
         if !aff.parsed_break {
             aff.break_patterns = vec![b"-".to_vec(), b"^-".to_vec(), b"-$".to_vec()];
         }
+        // `AF` aliases are stored raw while parsing (a `FLAG` directive may
+        // follow them) and decoded here with the final flag mode.
+        aff.af_aliases = aff
+            .af_alias_raw
+            .iter()
+            .map(|raw| decode_flags(aff.flag_mode, raw))
+            .collect();
         Ok(aff)
     }
 }
@@ -758,6 +780,43 @@ fn decode_flag(mode: FlagMode, token: &str) -> Flag {
 }
 
 /// `HashMgr::decode_flags` (`ap` is the text after the `/`).
+/// Decode a dictionary entry's flag field, expanding an `AF` alias number
+/// (`HashMgr::decode_flags` / `aliasf`): with `AF` aliases present, an
+/// all-digit field is a 1-based alias index.
+/// Decode a flag field, expanding an `AF` alias number (`HashMgr::decode_flags`
+/// / `aliasf`): with `AF` aliases present, an all-digit field is a 1-based
+/// alias index. Used for affix continuation classes (`SFX X 0 0/299 .`), which
+/// reference the aliases in the same way.
+fn decode_flags_alias(mode: FlagMode, af_alias_raw: &[String], flags: &str) -> Vec<Flag> {
+    let trimmed = flags.trim();
+    if !af_alias_raw.is_empty()
+        && !trimmed.is_empty()
+        && trimmed.bytes().all(|b| b.is_ascii_digit())
+    {
+        if let Ok(n) = trimmed.parse::<usize>() {
+            if n >= 1 && n <= af_alias_raw.len() {
+                return decode_flags(mode, &af_alias_raw[n - 1]);
+            }
+        }
+    }
+    decode_flags(mode, flags)
+}
+
+fn decode_entry_flags(aff: &Aff, flags: &str) -> Vec<Flag> {
+    let trimmed = flags.trim();
+    if !aff.af_aliases.is_empty()
+        && !trimmed.is_empty()
+        && trimmed.bytes().all(|b| b.is_ascii_digit())
+    {
+        if let Ok(n) = trimmed.parse::<usize>() {
+            if n >= 1 && n <= aff.af_aliases.len() {
+                return aff.af_aliases[n - 1].clone();
+            }
+        }
+    }
+    decode_flags(aff.flag_mode, flags)
+}
+
 fn decode_flags(mode: FlagMode, flags: &str) -> Vec<Flag> {
     if flags.is_empty() {
         return Vec::new();
@@ -785,6 +844,7 @@ fn parse_affix_entry(
     flag: Flag,
     cross: bool,
     mode: FlagMode,
+    af_alias_raw: &[String],
 ) -> Result<AffixEntry> {
     let mut it = line.split_whitespace();
     let _type = it.next().ok_or_else(|| parse_err(line))?;
@@ -808,7 +868,7 @@ fn parse_affix_entry(
     };
     let add_str = add_field.split('/').next().unwrap_or("");
     let mut cont = match add_field.split_once('/') {
-        Some((_, c)) => decode_flags(mode, c),
+        Some((_, c)) => decode_flags_alias(mode, af_alias_raw, c),
         None => Vec::new(),
     };
     // `AffixMgr::parse_affix` sorts the continuation classes.
@@ -1010,10 +1070,7 @@ fn parse_directive<'a>(
                 }
             };
         }
-        "AF"
-        | "AM"
-        | "COMPLEXPREFIXES"
-        | "IGNORE"
+        "COMPLEXPREFIXES"
         | "CHECKCOMPOUNDPATTERN"
         | "CHECKCOMPOUNDCASE"
         | "COMPOUNDMORESUFFIXES" => {
@@ -1021,6 +1078,26 @@ fn parse_directive<'a>(
                 "hunspell directive {kind:?} is not supported by the in-tree checker ({line:?})"
             )));
         }
+        // `HashMgr::parse_aliasf` (`AF`): the `AF <count>` line declares the
+        // alias table, each following line defines one alias. The aliases are
+        // stored raw here and decoded after the whole file is read (the
+        // `FLAG` directive may follow `AF`, as in the Hunspell-ar `.aff`).
+        "AF" => {
+            let rest: Vec<&str> = it.collect();
+            if let Some(first) = rest.first() {
+                if !(rest.len() == 1 && first.bytes().all(|b| b.is_ascii_digit())) {
+                    aff.af_alias_raw.push((*first).to_string());
+                }
+            }
+        }
+        // `HashMgr::parse_aliasm` (`AM`): the morphological aliases are parsed
+        // and ignored; no vendored dictionary needs the morphological data for
+        // spell/suggest.
+        "AM" => {}
+        // `AffixMgr::parse_ignore` (`IGNORE`): parsed and ignored; the
+        // language-specific speller rules strip the diacritics they need
+        // before the lookup (e.g. Arabic tashkeel).
+        "IGNORE" => {}
         // `AffixMgr::cpdwordmax`: lowers the accepted compound word count.
         "COMPOUNDWORDMAX" => {
             aff.compound_word_max = it.next().and_then(|v| v.parse().ok()).unwrap_or(-1)
@@ -1366,7 +1443,7 @@ impl HunspellChecker {
                 continue;
             }
             let mut flags: Vec<Flag> = flags_raw
-                .map(|f| decode_flags(aff.flag_mode, f))
+                .map(|f| decode_entry_flags(&aff, f))
                 .unwrap_or_default();
             flags.sort_unstable();
             let flags_off = flag_arena.len() as u32;

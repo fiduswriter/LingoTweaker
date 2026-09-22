@@ -77,6 +77,13 @@ pub struct HunspellSpellingConfig {
     /// match the legacy engine; the hand-authored languages (`no`, `nrd`,
     /// `gn`) keep their documented five-suggestion product behaviour.
     pub cap_native_suggestions: bool,
+    /// `SpellingCheckRule.isLatinScript()`: when true (every existing caller),
+    /// a pure non-Latin token is ignored. Arabic sets it false so Arabic-script
+    /// words are actually checked.
+    pub latin_script: bool,
+    /// `ArabicHunspellSpellerRule` strips the tashkeel characters before both
+    /// the ignore list and the dictionary lookup.
+    pub strip_tashkeel: bool,
 }
 
 /// A Hunspell speller wired as an LT spelling rule.
@@ -169,7 +176,14 @@ impl HunspellSpellingRule {
         if word.chars().count() > MAX_TOKEN_LENGTH {
             return true;
         }
-        if HAS_NO_LETTER.is_match(word) {
+        let stripped;
+        let word = if self.config.strip_tashkeel {
+            stripped = lt_tagger::arabic::remove_tashkeel(word);
+            stripped.as_str()
+        } else {
+            word
+        };
+        if self.config.latin_script && HAS_NO_LETTER.is_match(word) {
             return true;
         }
         if let Some(stripped) = word.strip_suffix('.') {
@@ -225,6 +239,13 @@ impl HunspellSpellingRule {
     }
 
     fn is_misspelled(&self, word: &str) -> bool {
+        let stripped;
+        let word = if self.config.strip_tashkeel {
+            stripped = lt_tagger::arabic::remove_tashkeel(word);
+            stripped.as_str()
+        } else {
+            word
+        };
         if self.is_prohibited(word) {
             return true;
         }

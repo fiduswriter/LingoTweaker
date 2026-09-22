@@ -5562,10 +5562,21 @@ impl Pipeline {
         )
         .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
 
+        // `ArabicHunspellSpellerRule` (`HUNSPELL_RULE_AR`, stage 2). A load
+        // failure only disables the speller, not the engine.
+        let spelling = match crate::ar::spelling::ArabicSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ar] spelling rule disabled: {err}");
+                None
+            }
+        };
+
         let arabic = Arc::new(crate::ar::ArabicPipeline {
             tagger,
             multiwords_chunker,
             disambiguator,
+            spelling,
         });
         Ok(Self {
             lang: Lang::Ar,
@@ -12123,6 +12134,31 @@ impl Pipeline {
                             enabled_categories,
                         ),
                         rule.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
+        }
+        // Arabic sentence-level rules (`Arabic.getRelevantRules` order):
+        // the Hunspell speller (stage 2); the generic built-ins and the 16
+        // Arabic-specific Java rules follow in later stages.
+        if self.lang == crate::Lang::Ar {
+            if let Some(arabic) = &self.arabic {
+                if let Some(spelling) = &arabic.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::ar::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
                         &mut seen,
                     );
                 }

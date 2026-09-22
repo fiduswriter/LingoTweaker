@@ -12,6 +12,7 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 
 pub mod filters;
+pub mod spelling;
 
 /// `ArabicWordTokenizer.getTokenizingCharacters` = the base set plus the
 /// Arabic comma/question/semicolon and the hyphen.
@@ -31,6 +32,9 @@ pub struct ArabicPipeline {
     pub multiwords_chunker: lt_disambig::MultiWordChunker,
     /// `new XmlRuleDisambiguator(new Arabic())` (no global rules).
     pub disambiguator: lt_disambig::XmlDisambiguator,
+    /// `ArabicHunspellSpellerRule` (`HUNSPELL_RULE_AR`, stage 2); `None` only
+    /// when the vendored Hunspell-ar dictionary cannot be read.
+    pub spelling: Option<Arc<spelling::ArabicSpellingRule>>,
 }
 
 impl ArabicPipeline {

@@ -146,3 +146,39 @@ fn arabic_date_check_filter_digit_day() {
     assert_utf16(text, &matches[0], (0, 17));
     assert!(one("الجمعة 25/03/2022", "DATE_IN_DIGIT_DAY").is_empty());
 }
+
+/// `ArabicHunspellSpellerRule` (`HUNSPELL_RULE_AR`): a nonsense word is flagged
+/// and real words (incl. the affix-generated definite forms) are accepted.
+/// Java probe (Docker, pinned 6.9): the same four verdicts and the same
+/// suggestions for `خقخق`/`بتبتب`/`كتاااب`.
+#[test]
+fn arabic_hunspell_speller() {
+    let _guard = engine_guard();
+    let text = "خقخق";
+    let matches = one(text, "HUNSPELL_RULE_AR");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 4));
+    assert_eq!(matches[0].message, "وُجد خطأ إملائي محتمل");
+    assert_eq!(matches[0].short_message.as_deref(), Some("خطأ إملائي"));
+    assert_eq!(
+        matches[0]
+            .suggestions
+            .iter()
+            .map(|s| s.value.as_str())
+            .collect::<Vec<_>>(),
+        vec!["خفخف", "حفحف"]
+    );
+}
+
+/// Real words are accepted, including the definite article generated through
+/// the `AF` alias continuation classes (`الكتاب`, `المدرسة`).
+#[test]
+fn arabic_hunspell_speller_accepts_real_words() {
+    let _guard = engine_guard();
+    for text in ["كتاب", "الكتاب", "مدرسة", "المدرسة"] {
+        assert!(
+            one(text, "HUNSPELL_RULE_AR").is_empty(),
+            "{text} must be accepted"
+        );
+    }
+}

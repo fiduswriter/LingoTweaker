@@ -43,6 +43,8 @@ impl IcelandicSpellingRule {
                 max_suggestions: 0,
                 native_suggestions: false,
                 cap_native_suggestions: false,
+                latin_script: true,
+                strip_tashkeel: false,
             },
         )?))
     }
