@@ -11,25 +11,34 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod disambig;
 pub mod filters;
 pub mod spelling;
 
 /// `Ukrainian.createDefaultDisambiguator` is
-/// `UkrainianHybridDisambiguator`; stage 1 uses the plain XML disambiguation
-/// subset (no global rules).
+/// `UkrainianHybridDisambiguator`: `SimpleDisambiguator` + the multiword
+/// chunker + the XML rules (the remaining hand-coded hybrid passes follow).
 pub struct UkrainianPipeline {
     pub tagger: Arc<lt_tagger::UkrainianTagger>,
     pub synthesizer: Arc<lt_tagger::UkrainianSynthesizer>,
     /// The same synthesizer through the pattern engine's trait.
     pub synth_adapter: Arc<UkrainianSynthesizerAdapter>,
     pub disambiguator: lt_disambig::XmlDisambiguator,
+    /// `UkrainianMultiwordChunker` (`uk/words/multiwords.txt`).
+    pub chunker: lt_disambig::MultiWordChunker,
+    /// `SimpleDisambiguator` (rare-form and duplicate-lemma removal).
+    pub simple: crate::uk::disambig::SimpleDisambiguator,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,
 }
 
 impl UkrainianPipeline {
+    /// `UkrainianHybridDisambiguator.disambiguate`: `preDisambiguate` (the
+    /// `SimpleDisambiguator` part), then the chunker, then the XML rules.
     pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
+        self.simple.remove_rare_forms(sentence);
+        self.chunker.apply(sentence);
         self.disambiguator.apply(sentence);
     }
 }

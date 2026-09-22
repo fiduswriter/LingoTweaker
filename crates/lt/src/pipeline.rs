@@ -5181,11 +5181,28 @@ impl Pipeline {
         disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
         disambiguator.set_filter_registry(filters);
 
+        // `UkrainianMultiwordChunker("/uk/multiwords.txt", true)`;
+        // no entry starts with `/`, so the tag-based `matches` override is
+        // not needed.
+        let chunker = lt_disambig::MultiWordChunker::load(
+            &data_dir.path().join("uk/words/multiwords.txt"),
+            false,
+            true,
+            false,
+            None,
+            false,
+        )
+        .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
+        let simple =
+            crate::uk::disambig::SimpleDisambiguator::load(&data_dir.path().join("uk/words"));
+
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
             synthesizer,
             synth_adapter,
             disambiguator,
+            chunker,
+            simple,
             spelling,
         });
         Ok(Self {
