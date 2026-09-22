@@ -91,6 +91,12 @@ impl Synthesizer for ArabicSynthesizerAdapter {
         // `MatchState.toFinalString`: `lemma == null && hasNoTag()`.
         self.tagger.is_tagged_word(word)
     }
+
+    /// `MatchState.toFinalString`: Arabic strips tashkeel from the matched
+    /// token before `regexp_match`/`regexp_replace`.
+    fn strip_tashkeel_before_regexp(&self) -> bool {
+        true
+    }
 }
 
 /// Arabic sentence tokenization + tagger.

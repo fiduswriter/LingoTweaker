@@ -1772,6 +1772,13 @@ pub trait Synthesizer: Send + Sync {
     fn is_known_word(&self, _word: &str) -> bool {
         true
     }
+
+    /// `MatchState.toFinalString`: Arabic strips the tashkeel characters from
+    /// the matched token before applying `regexp_match`/`regexp_replace`
+    /// (`lang.getShortCode().equals("ar")`).
+    fn strip_tashkeel_before_regexp(&self) -> bool {
+        false
+    }
 }
 
 /// Find all non-overlapping matches, left to right.
@@ -2645,6 +2652,9 @@ fn render_match_ref_forms(
         .clone()
         .unwrap_or_else(|| matched_surface.clone());
     if let (Some(m), Some(r)) = (&spec.regexp_match, &spec.regexp_replace) {
+        if synth.is_some_and(|s| s.strip_tashkeel_before_regexp()) {
+            form = remove_tashkeel(&form);
+        }
         form = regex_replace(&form, m, r);
     }
     let sample = matched_surface.clone();
@@ -2775,6 +2785,32 @@ fn render_match_ref_forms(
             .map(|f| apply_case_conversion(&f, case, &sample))
             .collect(),
     )
+}
+
+/// `StringTools.removeTashkeel` (the core LanguageTool copy, used by
+/// `MatchState.toFinalString` for Arabic): the 12 tashkeel characters plus
+/// tatweel.
+fn remove_tashkeel(s: &str) -> String {
+    s.chars()
+        .filter(|c| {
+            !matches!(
+                c,
+                '\u{064B}'
+                    | '\u{064C}'
+                    | '\u{064D}'
+                    | '\u{064E}'
+                    | '\u{064F}'
+                    | '\u{0650}'
+                    | '\u{0651}'
+                    | '\u{0652}'
+                    | '\u{0653}'
+                    | '\u{0654}'
+                    | '\u{0655}'
+                    | '\u{0656}'
+                    | '\u{0640}'
+            )
+        })
+        .collect()
 }
 
 /// `StringTools`-compatible `regexp_match`/`regexp_replace`: Java `$N`
