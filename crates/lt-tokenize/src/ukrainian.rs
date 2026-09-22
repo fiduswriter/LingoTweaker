@@ -298,6 +298,42 @@ fn split_with_delimiters(text: &str, delim: &Regex) -> Vec<String> {
     parts
 }
 
+/// Map the tokenizer's output tokens back to byte spans in the **original**
+/// text. `cleanup` is a 1:1 character map (typographic apostrophes/quotes to
+/// ASCII, `U+2011` to `-`) and every placeholder is removed again, so the
+/// tokens concatenate to the original text with those characters normalized;
+/// walking both in parallel recovers the original byte length even when a
+/// normalized character is 3 bytes in the original and 1 in the token.
+pub fn original_spans(original: &str, tokens: &[String]) -> Vec<(usize, usize)> {
+    fn normalize(c: char) -> char {
+        match c {
+            '\u{2019}' | '\u{02BC}' | '\u{2018}' => '\'',
+            '\u{201A}' => ',',
+            '\u{2011}' => '-',
+            other => other,
+        }
+    }
+    let chars: Vec<(char, usize, usize)> = original
+        .char_indices()
+        .map(|(i, c)| (normalize(c), i, i + c.len_utf8()))
+        .collect();
+    let mut oi = 0usize;
+    let mut spans = Vec::with_capacity(tokens.len());
+    for token in tokens {
+        let start = chars.get(oi).map_or(original.len(), |c| c.1);
+        for c in token.chars() {
+            if oi < chars.len() && chars[oi].0 == c {
+                oi += 1;
+            } else {
+                break;
+            }
+        }
+        let end = chars.get(oi).map_or(original.len(), |c| c.1);
+        spans.push((start, end.max(start)));
+    }
+    spans
+}
+
 fn cleanup(text: &str) -> String {
     let replaced: String = text
         .chars()

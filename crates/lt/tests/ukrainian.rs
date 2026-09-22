@@ -457,6 +457,28 @@ fn ukrainian_ignored_characters_are_stripped_for_tagging() {
     assert!(one(text, "MORFOLOGIK_RULE_UK_UA").is_empty(), "{text}");
 }
 
+/// The tokenizer normalizes typographic apostrophes/quotes to ASCII (1 byte
+/// instead of 3), so match ranges must still use the original byte span.
+#[test]
+fn ukrainian_normalized_character_offsets() {
+    let _guard = engine_guard();
+
+    let text = "зв’язок з науковцями втрачено";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 7));
+
+    let text = "До Кот д’Івуара";
+    let matches = one(text, "MORFOLOGIK_RULE_UK_UA");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (7, 15));
+
+    let text = "призначає нового прем’єра. щоправда, у Держдуми";
+    let matches = one(text, "comma_insert_words");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (25, 35));
+}
+
 /// Java-probed (`scripts/oracle/uk/probe-rule.sh`): XML multi-form `<match>`
 /// synthesis (`PatternRuleMatcher.formatMatches`) must expand the full
 /// cartesian product, re-scanning duplicated `<suggestion>` copies in place.

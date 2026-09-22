@@ -149,21 +149,20 @@ pub fn analyze_ukrainian_sentence(ukrainian: &UkrainianPipeline, text: &str) -> 
         is_pos_tag_unknown: false,
     });
 
-    let mut byte_pos = 0usize;
     let mut prev_was_whitespace = false;
     let mut last_non_ws_idx: Option<usize> = None;
-    for (raw, mut reading) in raw_tokens.iter().zip(tagged) {
+    let spans = lt_tokenize::ukrainian::original_spans(text, &raw_tokens);
+    for (idx, (raw, mut reading)) in raw_tokens.iter().zip(tagged).enumerate() {
         let is_whitespace = lt_core::is_whitespace(raw);
         reading.whitespace_before = prev_was_whitespace;
-        reading.start_pos = byte_pos;
-        reading.raw_byte_len = raw.len();
+        reading.start_pos = spans.get(idx).map_or(0, |s| s.0);
+        reading.raw_byte_len = spans.get(idx).map_or(raw.len(), |s| s.1 - s.0);
         reading.is_whitespace = is_whitespace;
         reading.is_tagged = reading.readings.iter().any(|r| r.pos_tag.is_some());
         tokens.push(reading);
         if !is_whitespace {
             last_non_ws_idx = Some(tokens.len() - 1);
         }
-        byte_pos += raw.len();
         prev_was_whitespace = is_whitespace;
     }
 

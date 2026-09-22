@@ -479,12 +479,17 @@ impl MorfologikSpellingRule {
         if rule_matches.is_empty() {
             if let Some((message, short_message)) = self.config.potential_spelling_error {
                 if !has_good_tag(tokens[idx]) {
+                    let end = if word == tokens[idx].surface() {
+                        tokens[idx].end_pos()
+                    } else {
+                        start_pos + word.len()
+                    };
                     let m = Match::new(
                         self.config.rule_id,
                         Option::<String>::None,
                         message,
                         Some(short_message.to_string()),
-                        TextRange::new(start_pos, start_pos + word.len()),
+                        TextRange::new(start_pos, end),
                         Vec::new(),
                         self.config.category_id,
                         self.config.category_name,
@@ -509,8 +514,14 @@ impl MorfologikSpellingRule {
         let mut rule_matches: Vec<Match> = Vec::new();
         let mut rule_match: Option<Match> = None;
         // Java `startPos + word.length()`: with `tokenizingPattern()` the
-        // covered word is the segment, not the whole token.
-        let word_end = start_pos + word.len();
+        // covered word is the segment, not the whole token. For a whole token
+        // the end must come from the original span (`end_pos`), because the
+        // cleaned surface can be shorter in bytes (normalized apostrophes).
+        let word_end = if word == tokens[idx].surface() {
+            tokens[idx].end_pos()
+        } else {
+            start_pos + word.len()
+        };
 
         if !self.is_misspelled(word) && !self.is_prohibited(word) {
             return rule_matches;
