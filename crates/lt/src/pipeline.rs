@@ -11651,6 +11651,22 @@ impl Pipeline {
                 crate::hidden_chars::check_sentence_uk(&analyzed.tokens, start),
                 &mut seen,
             );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::uk::mixed_alphabets::RULE_ID,
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::uk::mixed_alphabets::check_sentence_uk(&analyzed.tokens, start),
+                &mut seen,
+            );
             if let Some(ukrainian) = &self.ukrainian {
                 if let Some(spelling) = &ukrainian.spelling {
                     append_active(

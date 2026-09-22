@@ -16,6 +16,7 @@ pub mod filters;
 pub mod gov;
 pub mod hybrid;
 pub mod inflection;
+pub mod mixed_alphabets;
 pub mod spelling;
 
 /// `Ukrainian.createDefaultDisambiguator` is

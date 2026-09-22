@@ -293,3 +293,33 @@ fn ukrainian_text_rules() {
     assert_eq!(matches.len(), 1);
     assert_eq!(suggestions(&matches[0]), vec!["тексттекст".to_string()]);
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`): `MixedAlphabetsRule`.
+#[test]
+fn ukrainian_mixed_alphabets() {
+    let _guard = engine_guard();
+    assert!(one("Це test слово.", "UK_MIXED_ALPHABETS").is_empty());
+
+    let text = "Слово cлово.";
+    let matches = one(text, "UK_MIXED_ALPHABETS");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (6, 11));
+    assert_eq!(
+        matches[0].message,
+        "Вжито кириличні й латинські літери в одному слові"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["слово".to_string()]);
+
+    let text = "XІІ ст.";
+    let matches = one(text, "UK_MIXED_ALPHABETS");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 3));
+    assert_eq!(
+        matches[0].message,
+        "Вжито кириличні літери замість латинських"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["XII".to_string()]);
+
+    assert!(one("І. Франко", "UK_MIXED_ALPHABETS").is_empty());
+    assert!(one("5-й", "UK_MIXED_ALPHABETS").is_empty());
+}
