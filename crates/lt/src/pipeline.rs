@@ -5532,6 +5532,14 @@ impl Pipeline {
         let srx = lt_tokenize::SrxTokenizer::new(&doc, "ar_two")?;
 
         let tagger = Arc::new(lt_tagger::ArabicTagger::load(data_dir.path())?);
+        let synthesizer = Arc::new(lt_tagger::ArabicSynthesizer::from_data(
+            data_dir.path(),
+            Arc::clone(&tagger),
+        )?);
+        let synth_adapter = Arc::new(crate::ar::ArabicSynthesizerAdapter {
+            synth: Arc::clone(&synthesizer),
+            tagger: Arc::clone(&tagger),
+        });
 
         // `Arabic.getRuleFileNames` is the default: `grammar.xml` only.
         let grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ar))?;
@@ -5548,6 +5556,7 @@ impl Pipeline {
         // `new XmlRuleDisambiguator(new Arabic())` (no global rules).
         let mut disambiguator =
             lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Ar))?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
         disambiguator.set_filter_registry(filters);
 
         // `MultiWordChunker.getInstance("/ar/multiwords.txt")` (the list is
@@ -5574,6 +5583,8 @@ impl Pipeline {
 
         let arabic = Arc::new(crate::ar::ArabicPipeline {
             tagger,
+            synthesizer,
+            synth_adapter,
             multiwords_chunker,
             disambiguator,
             spelling,
@@ -13938,6 +13949,9 @@ impl Pipeline {
         }
         if let Some(serbian) = &self.serbian {
             return Some(serbian.synth_adapter.as_ref());
+        }
+        if let Some(arabic) = &self.arabic {
+            return Some(arabic.synth_adapter.as_ref());
         }
         self.synthesizer
             .as_deref()

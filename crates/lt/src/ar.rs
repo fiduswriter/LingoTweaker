@@ -10,6 +10,7 @@
 use std::sync::Arc;
 
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
+use lt_pattern::Synthesizer;
 
 pub mod filters;
 pub mod spelling;
@@ -27,6 +28,9 @@ pub fn arabic_tokenizing_characters() -> String {
 /// `new XmlRuleDisambiguator(new Arabic())` (no global rules).
 pub struct ArabicPipeline {
     pub tagger: Arc<lt_tagger::ArabicTagger>,
+    pub synthesizer: Arc<lt_tagger::ArabicSynthesizer>,
+    /// The same synthesizer through the pattern engine's trait.
+    pub synth_adapter: Arc<ArabicSynthesizerAdapter>,
     /// `MultiWordChunker.getInstance("/ar/multiwords.txt")` (the list is
     /// effectively empty upstream, but the chunker is still loaded).
     pub multiwords_chunker: lt_disambig::MultiWordChunker,
@@ -41,6 +45,42 @@ impl ArabicPipeline {
     pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
         self.multiwords_chunker.apply(sentence);
         self.disambiguator.apply(sentence);
+    }
+}
+
+/// Adapter exposing the Arabic synthesizer through the pattern engine's
+/// [`Synthesizer`] trait, plus the tagger for the `checksSpelling` check.
+pub struct ArabicSynthesizerAdapter {
+    pub synth: Arc<lt_tagger::ArabicSynthesizer>,
+    pub tagger: Arc<lt_tagger::ArabicTagger>,
+}
+
+impl ArabicSynthesizerAdapter {
+    pub fn inner(&self) -> &lt_tagger::ArabicSynthesizer {
+        &self.synth
+    }
+}
+
+impl Synthesizer for ArabicSynthesizerAdapter {
+    fn synthesize(&self, token: &AnalyzedToken, pos_tag: &str, pos_tag_regexp: bool) -> Vec<String> {
+        self.synth.synthesize_regexp(token, pos_tag, pos_tag_regexp)
+    }
+
+    fn synthesize_plain(&self, token: &AnalyzedToken, pos_tag: &str) -> Vec<String> {
+        self.synth.synthesize_plain(token, pos_tag)
+    }
+
+    fn target_pos_tag(&self, pos_tags: &[String], fallback: &str) -> String {
+        self.synth.target_pos_tag(pos_tags, fallback)
+    }
+
+    fn pos_tag_correction(&self, pos_tag: &str) -> String {
+        self.synth.pos_tag_correction(pos_tag)
+    }
+
+    fn is_known_word(&self, word: &str) -> bool {
+        // `MatchState.toFinalString`: `lemma == null && hasNoTag()`.
+        self.tagger.is_tagged_word(word)
     }
 }
 
