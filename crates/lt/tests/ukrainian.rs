@@ -376,3 +376,43 @@ fn ukrainian_typography_and_missing_hyphen() {
         vec!["прем'єр-міністр".to_string()]
     );
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`): `SimpleReplaceRule`
+/// (`UK_SIMPLE_REPLACE`, barbarisms via the lemma) and
+/// `SimpleReplaceSoftRule` (`UK_SIMPLE_REPLACE_SOFT`, incl. `ctx:` contexts).
+#[test]
+fn ukrainian_simple_replace() {
+    let _guard = engine_guard();
+    let text = "вживати міроприємства";
+    let matches = one(text, "UK_SIMPLE_REPLACE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (8, 21));
+    assert_eq!(
+        matches[0].message,
+        "«міроприємства» - помилкове слово, виправлення: захід."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["захід".to_string()]);
+
+    let text = "азіат";
+    let matches = one(text, "UK_SIMPLE_REPLACE_SOFT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 5));
+    assert_eq!(
+        matches[0].message,
+        "«азіат» — нерекомендоване слово, кращий варіант: азієць."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["азієць".to_string()]);
+
+    let text = "многогрішний";
+    let matches = one(text, "UK_SIMPLE_REPLACE_SOFT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 12));
+    assert_eq!(
+        matches[0].message,
+        "«многогрішний» вживається лише в таких контекстах: релігія, поезія, можливо, мали на увазі: великогрішний, великогрішник?"
+    );
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["великогрішний".to_string(), "великогрішник".to_string()]
+    );
+}

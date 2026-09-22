@@ -25,6 +25,9 @@ static BILSHATY_POS: LazyLock<Regex> =
 pub struct CaseGovernment {
     map: HashMap<String, HashSet<String>>,
     pub v_mis_preps: HashSet<String>,
+    /// `CaseGovernmentHelper.DERIVATIVES_MAP` (`derivats.txt`:
+    /// derivative -> verbs).
+    pub derivatives: HashMap<String, HashSet<String>>,
 }
 
 impl CaseGovernment {
@@ -34,14 +37,14 @@ impl CaseGovernment {
             .or_default()
             .insert("v_oru".to_string());
         let derivatives = load_map(&words_dir.join("derivats.txt"));
-        for (key, verbs) in derivatives {
+        for (key, verbs) in &derivatives {
             let mut set = HashSet::new();
-            for verb in &verbs {
+            for verb in verbs {
                 if let Some(rvs) = map.get(verb) {
                     set.extend(rvs.iter().cloned());
                 }
             }
-            map.insert(key, set);
+            map.insert(key.clone(), set);
         }
         let mut v_mis_preps: HashSet<String> = map
             .iter()
@@ -51,7 +54,11 @@ impl CaseGovernment {
         // add Latin y/B - often used instead of the real prep
         v_mis_preps.insert("y".to_string());
         v_mis_preps.insert("B".to_string());
-        Self { map, v_mis_preps }
+        Self {
+            map,
+            v_mis_preps,
+            derivatives,
+        }
     }
 
     /// `CaseGovernmentHelper.getCaseGovernments(readings, posTagRegex)`.

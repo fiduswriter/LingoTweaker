@@ -18,6 +18,7 @@ pub mod hybrid;
 pub mod inflection;
 pub mod missing_hyphen;
 pub mod mixed_alphabets;
+pub mod simple_replace;
 pub mod simple_replace_renamed;
 pub mod spelling;
 pub mod typography;
@@ -41,6 +42,10 @@ pub struct UkrainianPipeline {
     pub renamed: crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule,
     /// `MissingHyphenRule` (`UK_MISSING_HYPHEN`).
     pub missing_hyphen: crate::uk::missing_hyphen::MissingHyphenRule,
+    /// `SimpleReplaceRule` (`UK_SIMPLE_REPLACE`, barbarisms).
+    pub simple_replace: crate::uk::simple_replace::SimpleReplaceRule,
+    /// `SimpleReplaceSoftRule` (`UK_SIMPLE_REPLACE_SOFT`).
+    pub simple_replace_soft: crate::uk::simple_replace::SimpleReplaceSoftRule,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,

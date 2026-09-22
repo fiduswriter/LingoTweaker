@@ -5201,6 +5201,11 @@ impl Pipeline {
         );
         let missing_hyphen =
             crate::uk::missing_hyphen::MissingHyphenRule::load(&data_dir.path().join("uk/words"));
+        let simple_replace =
+            crate::uk::simple_replace::SimpleReplaceRule::load(&data_dir.path().join("uk/rules"));
+        let simple_replace_soft = crate::uk::simple_replace::SimpleReplaceSoftRule::load(
+            &data_dir.path().join("uk/rules"),
+        );
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5212,6 +5217,8 @@ impl Pipeline {
             gov,
             renamed,
             missing_hyphen,
+            simple_replace,
+            simple_replace_soft,
             spelling,
         });
         Ok(Self {
@@ -11725,6 +11732,51 @@ impl Pipeline {
                         &ukrainian.tagger,
                         start,
                     ),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::simple_replace::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian.simple_replace.check_sentence(
+                        &analyzed.tokens,
+                        &ukrainian.gov.derivatives,
+                        |word| {
+                            ukrainian
+                                .spelling
+                                .as_ref()
+                                .map(|s| s.suggestions(word))
+                                .unwrap_or_default()
+                        },
+                        start,
+                    ),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::simple_replace::SOFT_RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian
+                        .simple_replace_soft
+                        .check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
                 if let Some(spelling) = &ukrainian.spelling {
