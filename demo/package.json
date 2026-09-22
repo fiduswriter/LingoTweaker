@@ -6,7 +6,7 @@
   "description": "ProseMirror demo for the LingoTweaker wasm engine (GitHub Pages)",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/compress-wasm.mjs",
     "preview": "vite preview --port 4173"
   },
   "dependencies": {

@@ -4,6 +4,10 @@
 // construction or checks.
 
 import init, { LtEngine } from "../pkg/lt_wasm.js";
+// Vite emits the binary as a hashed asset; the build ships a `.gz` sidecar
+// next to it (scripts/compress-wasm.mjs) because GitHub Pages serves files
+// without content compression.
+import wasmUrl from "../pkg/lt_wasm_bg.wasm?url";
 
 let initPromise = null;
 let engine = null;
@@ -19,8 +23,38 @@ function post(message) {
 }
 
 function ensureInit() {
-  initPromise ??= init();
+  initPromise ??= fetchWasmBytes().then((bytes) => init(bytes));
   return initPromise;
+}
+
+/** Gunzip only when the bytes carry the gzip magic (see `fetchPack`). */
+async function decompressIfGzipped(raw) {
+  if (raw.length < 2 || raw[0] !== 0x1f || raw[1] !== 0x8b) {
+    return raw;
+  }
+  const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+/**
+ * Fetch the wasm binary: try the pre-compressed sidecar first (a third of
+ * the bytes on hosts without content compression), falling back to the
+ * plain binary when the sidecar is absent (e.g. `vite dev`).
+ */
+async function fetchWasmBytes() {
+  try {
+    const response = await fetch(`${wasmUrl}.gz`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return await decompressIfGzipped(new Uint8Array(await response.arrayBuffer()));
+  } catch {
+    const response = await fetch(wasmUrl);
+    if (!response.ok) {
+      throw new Error(`cannot load wasm: HTTP ${response.status}`);
+    }
+    return new Uint8Array(await response.arrayBuffer());
+  }
 }
 
 /** `packs/manifest.json` (content hashes) for cache-busted pack URLs. */
@@ -61,12 +95,8 @@ async function fetchPack(url, onProgress) {
   }
   const raw = new Uint8Array(await new Blob(chunks).arrayBuffer());
   // Servers may serve `.gz` files with `Content-Encoding: gzip` (the browser
-  // then hands us the decoded pack) or as opaque gzip bytes; sniff the magic.
-  if (raw.length < 2 || raw[0] !== 0x1f || raw[1] !== 0x8b) {
-    return raw;
-  }
-  const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip"));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
+  // then hands us the decoded pack) or as opaque gzip bytes.
+  return decompressIfGzipped(raw);
 }
 
 /** Build (or rebuild) the engine from the cached pack bytes. */
