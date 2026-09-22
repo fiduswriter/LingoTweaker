@@ -16,9 +16,11 @@ pub mod filters;
 pub mod gov;
 pub mod hybrid;
 pub mod inflection;
+pub mod missing_hyphen;
 pub mod mixed_alphabets;
 pub mod simple_replace_renamed;
 pub mod spelling;
+pub mod typography;
 
 /// `Ukrainian.createDefaultDisambiguator` is
 /// `UkrainianHybridDisambiguator`: `SimpleDisambiguator` + the multiword
@@ -37,6 +39,8 @@ pub struct UkrainianPipeline {
     pub gov: crate::uk::gov::CaseGovernment,
     /// `SimpleReplaceRenamedRule` (`UK_SIMPLE_REPLACE_RENAMED`).
     pub renamed: crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule,
+    /// `MissingHyphenRule` (`UK_MISSING_HYPHEN`).
+    pub missing_hyphen: crate::uk::missing_hyphen::MissingHyphenRule,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,

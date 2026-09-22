@@ -5199,6 +5199,8 @@ impl Pipeline {
         let renamed = crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule::load(
             &data_dir.path().join("uk/rules"),
         );
+        let missing_hyphen =
+            crate::uk::missing_hyphen::MissingHyphenRule::load(&data_dir.path().join("uk/words"));
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5209,6 +5211,7 @@ impl Pipeline {
             simple,
             gov,
             renamed,
+            missing_hyphen,
             spelling,
         });
         Ok(Self {
@@ -11671,6 +11674,22 @@ impl Pipeline {
                 crate::uk::mixed_alphabets::check_sentence_uk(&analyzed.tokens, start),
                 &mut seen,
             );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::uk::typography::RULE_ID,
+                    "TYPOGRAPHY",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::uk::typography::check_sentence_uk(&analyzed.tokens, start),
+                &mut seen,
+            );
             if let Some(ukrainian) = &self.ukrainian {
                 append_active(
                     &mut matches,
@@ -11686,6 +11705,26 @@ impl Pipeline {
                         enabled_categories,
                     ),
                     ukrainian.renamed.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::missing_hyphen::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian.missing_hyphen.check_sentence(
+                        &analyzed.tokens,
+                        &ukrainian.tagger,
+                        start,
+                    ),
                     &mut seen,
                 );
                 if let Some(spelling) = &ukrainian.spelling {

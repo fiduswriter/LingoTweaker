@@ -338,3 +338,41 @@ fn ukrainian_simple_replace_renamed() {
     // "Аврора" has a `fname` reading first, which aborts the renamed check
     assert!(one("Аврора місто", "UK_SIMPLE_REPLACE_RENAMED").is_empty());
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`): `TypographyRule` (`DASH`)
+/// and `MissingHyphenRule` (`UK_MISSING_HYPHEN`).
+#[test]
+fn ukrainian_typography_and_missing_hyphen() {
+    let _guard = engine_guard();
+    let text = "Київ—Львів";
+    let matches = one(text, "DASH");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 5));
+    assert_eq!(
+        matches[0].message,
+        "Риска всередині слова. Всередині слова вживайте дефіс, між словами виокремлюйте риску пробілами."
+    );
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["Київ-Львів".to_string(), "Київ — Львів".to_string()]
+    );
+    assert!(one("спорт-клуб", "DASH").is_empty());
+    assert!(one("Київ — Львів", "DASH").is_empty());
+
+    let text = "медіа центр";
+    let matches = one(text, "UK_MISSING_HYPHEN");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 11));
+    assert_eq!(matches[0].message, "Можливо, зайвий пробіл?");
+    assert_eq!(suggestions(&matches[0]), vec!["медіацентр".to_string()]);
+
+    let text = "прем'єр міністр";
+    let matches = one(text, "UK_MISSING_HYPHEN");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 15));
+    assert_eq!(matches[0].message, "Можливо, пропущено дефіс?");
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["прем'єр-міністр".to_string()]
+    );
+}

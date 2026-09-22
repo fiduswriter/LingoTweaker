@@ -129,6 +129,11 @@ impl UkrainianTagger {
         })
     }
 
+    /// Public wrapper for cross-crate use (the missing-hyphen rule).
+    pub fn lookup(&self, word: &str) -> Vec<(String, String)> {
+        self.word_lookup(word)
+    }
+
     pub fn dict(&self) -> &Dictionary {
         &self.dict
     }
