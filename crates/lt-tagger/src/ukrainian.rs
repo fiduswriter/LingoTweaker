@@ -173,12 +173,19 @@ impl UkrainianTagger {
     /// `BaseTagger.getAnalyzedTokens` (with virtual `additionalTags` and
     /// `tagLowercaseWithUppercase = false`).
     fn base_get_analyzed_tokens(&self, word: &str) -> Vec<AnalyzedToken> {
+        // `JLanguageTool.replaceSoftHyphens`: tokens are stripped of
+        // `language.getIgnoredCharactersRegex()` (uk: soft hyphen + combining
+        // acute) *before* the dictionary lookup, so `ґра́нтовий` matches
+        // `ґрантовий`. The original surface (and therefore the token offsets)
+        // is kept, like Java's `CleanToken`.
+        let lookup = IGNORED_CHARS.replace_all(word, "").into_owned();
+        let lookup = lookup.as_str();
         let mut result: Vec<AnalyzedToken> = Vec::new();
-        let lower_word = word.to_lowercase();
-        let is_lowercase = word == lower_word;
-        let is_mixed = is_mixed_case(word);
+        let lower_word = lookup.to_lowercase();
+        let is_lowercase = lookup == lower_word;
+        let is_mixed = is_mixed_case(lookup);
 
-        self.add_from_word_tagger(word, word, &mut result);
+        self.add_from_word_tagger(word, lookup, &mut result);
         if !is_lowercase && !is_mixed {
             self.add_from_word_tagger(word, &lower_word, &mut result);
         }

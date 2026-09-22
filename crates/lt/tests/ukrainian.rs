@@ -433,6 +433,23 @@ fn ukrainian_simple_replace() {
     );
 }
 
+/// Java-probed: `JLanguageTool.replaceSoftHyphens` strips the language's
+/// `getIgnoredCharactersRegex` (uk: soft hyphen + combining acute) from tokens
+/// before tagging, so a stressed word matches the unaccented dictionary entry.
+#[test]
+fn ukrainian_ignored_characters_are_stripped_for_tagging() {
+    let _guard = engine_guard();
+
+    let text = "ґра́нтовий";
+    let matches = one(text, "ALT_SPELLING");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 10));
+    assert!(one(text, "MORFOLOGIK_RULE_UK_UA").is_empty(), "{text}");
+
+    let text = "Снігопади паралізували пів Євро́пи.";
+    assert!(one(text, "MORFOLOGIK_RULE_UK_UA").is_empty(), "{text}");
+}
+
 /// Java-probed (`scripts/oracle/uk/probe-rule.sh`): XML multi-form `<match>`
 /// synthesis (`PatternRuleMatcher.formatMatches`) must expand the full
 /// cartesian product, re-scanning duplicated `<suggestion>` copies in place.
