@@ -130,9 +130,12 @@ pub fn get_noun_inflections(
 }
 
 /// `TokenAgreementAdjNounRule.formatInflections`.
-pub fn format_inflections(inflections: &[Inflection], adj: bool) -> String {
-    let mut sorted = inflections.to_vec();
-    sorted.sort_by(|a, b| {
+///
+/// Like the Java method, this sorts `inflections` **in place** (`Collections
+/// .sort`), which the callers rely on: the suggestion loops run after the
+/// message is built and iterate the now-sorted slice.
+pub fn format_inflections(inflections: &mut [Inflection], adj: bool) -> String {
+    inflections.sort_by(|a, b| {
         lt_tagger::uk_helpers::gen_order(&a.gender)
             .cmp(&lt_tagger::uk_helpers::gen_order(&b.gender))
             .then_with(|| {
@@ -141,7 +144,7 @@ pub fn format_inflections(inflections: &[Inflection], adj: bool) -> String {
             })
     });
     let mut groups: Vec<(String, Vec<String>)> = Vec::new();
-    for inf in &sorted {
+    for inf in inflections.iter() {
         let mut case_str = lt_tagger::uk_helpers::case_name(&inf.case_);
         if adj {
             if let Some(anim) = inf.anim_tag.as_deref() {

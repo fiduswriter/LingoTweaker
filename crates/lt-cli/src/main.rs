@@ -413,9 +413,10 @@ fn cmd_analyze(
             | Lang::Lt
             | Lang::Crh
             | Lang::Be
+            | Lang::Uk
     ) {
         bail!(
-            "analyze currently supports en/de/es/it/pt/nl/ca/gl/ro/pl/sk/sl/el/is/eo/ast/br/tl/lt/crh/be only"
+            "analyze currently supports en/de/es/it/pt/nl/ca/gl/ro/pl/sk/sl/el/is/eo/ast/br/tl/lt/crh/be/uk only"
         );
     }
     let data = data_dir(cli)?;

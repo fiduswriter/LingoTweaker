@@ -236,8 +236,8 @@ impl TokenAgreementAdjNounRule {
                 continue;
             }
 
-            let master = inflection::get_adj_inflections(&state.adj_readings);
-            let slave = inflection::get_noun_inflections(
+            let mut master = inflection::get_adj_inflections(&state.adj_readings);
+            let mut slave = inflection::get_noun_inflections(
                 &noun_readings,
                 Some(&Regex::new("v_zna:var").unwrap()),
             );
@@ -262,9 +262,9 @@ impl TokenAgreementAdjNounRule {
                 let mut msg = format!(
                     "Потенційна помилка: прикметник не узгоджений з іменником: \"{}\": [{}] і \"{}\": [{}]",
                     state.adj_readings.first().map(|r| r.token.clone()).unwrap_or_default(),
-                    inflection::format_inflections(&master, true),
+                    inflection::format_inflections(&mut master, true),
                     noun_readings.first().map(|r| r.token.clone()).unwrap_or_default(),
-                    inflection::format_inflections(&slave, false),
+                    inflection::format_inflections(&mut slave, false),
                 );
 
                 if has_part_readings(&state.adj_readings, ":m:v_rod")

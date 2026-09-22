@@ -479,6 +479,31 @@ fn ukrainian_adj_noun_agreement() {
     assert_utf16(text, &matches[0], (0, 12));
     assert_eq!(suggestions(&matches[0]), vec!["велике місто".to_string()]);
 
+    // Java sorts `master`/`slave` in place in `formatInflections` before the
+    // suggestion loops, so the suggestions follow the gen/vidm order.
+    let text = "в командну строку.";
+    let matches = one(text, "UK_ADJ_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "командного строку".to_string(),
+            "командному строку".to_string(),
+            "команднім строку".to_string()
+        ]
+    );
+
+    let text = "на добровільний дачі свідчень.";
+    let matches = one(text, "UK_ADJ_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "добровільної дачі".to_string(),
+            "добровільній дачі".to_string()
+        ]
+    );
+
     for ok in [
         "нова книга",
         "синя стіна",

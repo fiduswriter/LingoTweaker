@@ -330,7 +330,7 @@ impl TokenAgreementVerbNounRule {
                                 .first()
                                 .map(|r| r.token.clone())
                                 .unwrap_or_default(),
-                            inflection::format_inflections(&noun_adj_inflections, false),
+                            inflection::format_inflections(&mut noun_adj_inflections, false),
                         );
                         let mut verb_replace: Option<&str> = None;
                         let verb_lemma = state

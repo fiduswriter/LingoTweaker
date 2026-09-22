@@ -640,7 +640,7 @@ impl TokenAgreementNumrNounRule {
                 deduped.push(inf);
             }
         }
-        let noun_inflections = deduped;
+        let mut noun_inflections = deduped;
 
         let disjoint = master.iter().all(|m| !noun_inflections.contains(m));
         if gender_of_plural_not_found.is_none() && !disjoint {
@@ -663,9 +663,9 @@ impl TokenAgreementNumrNounRule {
         let mut msg = format!(
             "Потенційна помилка: числівник не узгоджений з іменником: \"{}\" вимагає: [{}], а далі йде \"{}\": [{}]",
             state.numr_readings.first().map(|r| r.token.clone()).unwrap_or_default(),
-            inflection::format_inflections(&master, true),
+            inflection::format_inflections(&mut master, true),
             noun_readings.first().map(|r| r.token.clone()).unwrap_or_default(),
-            inflection::format_inflections(&noun_inflections, false),
+            inflection::format_inflections(&mut noun_inflections, false),
         );
 
         if ONE_5.is_match(numr_clean).unwrap_or(false) {
