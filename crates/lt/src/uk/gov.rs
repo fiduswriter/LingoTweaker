@@ -23,11 +23,11 @@ static BILSHATY_POS: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^verb.*(?:inf|pres:s:3|futr:s:3|past:n).*$").unwrap());
 
 pub struct CaseGovernment {
-    map: HashMap<String, HashSet<String>>,
+    map: HashMap<String, Vec<String>>,
     pub v_mis_preps: HashSet<String>,
     /// `CaseGovernmentHelper.DERIVATIVES_MAP` (`derivats.txt`:
     /// derivative -> verbs).
-    pub derivatives: HashMap<String, HashSet<String>>,
+    pub derivatives: HashMap<String, Vec<String>>,
 }
 
 impl CaseGovernment {
@@ -35,20 +35,24 @@ impl CaseGovernment {
         let mut map = load_map(&words_dir.join("case_government.txt"));
         map.entry("згідно з".to_string())
             .or_default()
-            .insert("v_oru".to_string());
+            .push("v_oru".to_string());
         let derivatives = load_map(&words_dir.join("derivats.txt"));
         for (key, verbs) in &derivatives {
-            let mut set = HashSet::new();
+            let mut set: Vec<String> = Vec::new();
             for verb in verbs {
                 if let Some(rvs) = map.get(verb) {
-                    set.extend(rvs.iter().cloned());
+                    for rv in rvs {
+                        if !set.contains(rv) {
+                            set.push(rv.clone());
+                        }
+                    }
                 }
             }
             map.insert(key.clone(), set);
         }
         let mut v_mis_preps: HashSet<String> = map
             .iter()
-            .filter(|(_, v)| v.contains("v_mis"))
+            .filter(|(_, v)| v.iter().any(|c| c == "v_mis"))
             .map(|(k, _)| k.clone())
             .collect();
         // add Latin y/B - often used instead of the real prep
@@ -62,7 +66,7 @@ impl CaseGovernment {
     }
 
     /// `CaseGovernmentHelper.CASE_GOVERNMENT_MAP`.
-    pub fn case_map(&self) -> &HashMap<String, HashSet<String>> {
+    pub fn case_map(&self) -> &HashMap<String, Vec<String>> {
         &self.map
     }
 
@@ -74,7 +78,8 @@ impl CaseGovernment {
         rv_case: &str,
     ) -> bool {
         self.get_case_governments_opt(readings, start_pos_tag, None)
-            .contains(rv_case)
+            .iter()
+            .any(|c| c == rv_case)
     }
 
     /// `CaseGovernmentHelper.getCaseGovernments(readings, Pattern)`.
@@ -83,7 +88,7 @@ impl CaseGovernment {
         readings: &[AnalyzedToken],
         start_pos_tag: Option<&str>,
         pos_tag_regex: Option<&Regex>,
-    ) -> HashSet<String> {
+    ) -> Vec<String> {
         let mut list = get_custom_govs(readings);
         let mut start_pos_tag = start_pos_tag.map(|s| s.to_string());
         if start_pos_tag.as_deref() == Some("verb")
@@ -105,10 +110,14 @@ impl CaseGovernment {
             };
             if matches && self.map.contains_key(token.stem.as_deref().unwrap_or("")) {
                 if let Some(rv_list) = self.map.get(token.stem.as_deref().unwrap_or("")) {
-                    list.extend(rv_list.iter().cloned());
+                    for rv in rv_list {
+                        if !list.contains(rv) {
+                            list.push(rv.clone());
+                        }
+                    }
                 }
-                if pos_tag.contains("adjp:pasv") {
-                    list.insert("v_oru".to_string());
+                if pos_tag.contains("adjp:pasv") && !list.contains(&"v_oru".to_string()) {
+                    list.push("v_oru".to_string());
                 }
             }
         }
@@ -120,7 +129,7 @@ impl CaseGovernment {
         &self,
         readings: &[AnalyzedToken],
         pos_tag_regex: &Regex,
-    ) -> HashSet<String> {
+    ) -> Vec<String> {
         let mut list = get_custom_govs(readings);
         for token in readings {
             if token.pos_tag.is_none() {
@@ -147,8 +156,9 @@ impl CaseGovernment {
                 .pos_tag
                 .as_deref()
                 .is_some_and(|t| t.contains("adjp:pasv"))
+                && !list.contains(&"v_oru".to_string())
             {
-                list.insert("v_oru".to_string());
+                list.push("v_oru".to_string());
             }
         }
         list
@@ -159,7 +169,7 @@ impl CaseGovernment {
         &self,
         readings: &[AnalyzedToken],
         start_pos_tag: &str,
-    ) -> HashSet<String> {
+    ) -> Vec<String> {
         let mut start_pos_tag = start_pos_tag.to_string();
         if start_pos_tag == "verb"
             && readings
@@ -179,10 +189,14 @@ impl CaseGovernment {
                 && self.map.contains_key(token.stem.as_deref().unwrap_or(""))
             {
                 if let Some(rv_list) = self.map.get(token.stem.as_deref().unwrap_or("")) {
-                    list.extend(rv_list.iter().cloned());
+                    for rv in rv_list {
+                        if !list.contains(rv) {
+                            list.push(rv.clone());
+                        }
+                    }
                 }
-                if pos_tag.contains("adjp:pasv") {
-                    list.insert("v_oru".to_string());
+                if pos_tag.contains("adjp:pasv") && !list.contains(&"v_oru".to_string()) {
+                    list.push("v_oru".to_string());
                 }
             }
         }
@@ -190,8 +204,8 @@ impl CaseGovernment {
     }
 }
 
-fn load_map(path: &Path) -> HashMap<String, HashSet<String>> {
-    let mut result: HashMap<String, HashSet<String>> = HashMap::new();
+fn load_map(path: &Path) -> HashMap<String, Vec<String>> {
+    let mut result: HashMap<String, Vec<String>> = HashMap::new();
     let Ok(text) = lt_data::fs::read_to_string(path) else {
         return result;
     };
@@ -201,15 +215,17 @@ fn load_map(path: &Path) -> HashMap<String, HashSet<String>> {
         let Some(vidm) = parts.next() else { continue };
         let entry = result.entry(key.to_string()).or_default();
         for c in vidm.split(':') {
-            entry.insert(c.to_string());
+            if !entry.contains(&c.to_string()) {
+                entry.push(c.to_string());
+            }
         }
     }
     result
 }
 
 /// `CaseGovernmentHelper.getCustomGovs`.
-fn get_custom_govs(readings: &[AnalyzedToken]) -> HashSet<String> {
-    let mut list = HashSet::new();
+fn get_custom_govs(readings: &[AnalyzedToken]) -> Vec<String> {
+    let mut list: Vec<String> = Vec::new();
     let v_inf = lt_tagger::uk_helpers::has_lemma_with_pattern(readings, &["мати"], &MATY)
         || lt_tagger::uk_helpers::has_lemma_with_pattern(readings, &["бути"], &BUTY)
         || lt_tagger::uk_helpers::has_lemma_with_pattern(
@@ -235,13 +251,16 @@ fn get_custom_govs(readings: &[AnalyzedToken]) -> HashSet<String> {
         )
         || lt_tagger::uk_helpers::has_lemma_with_pattern(readings, &["належить"], &NALEZHYT);
     if v_inf {
-        list.insert("v_inf".to_string());
+        if !list.contains(&"v_inf".to_string()) {
+            list.push("v_inf".to_string());
+        }
     } else if lt_tagger::uk_helpers::has_lemma_regex_with_pattern(
         readings,
         &BILSHATY,
         &BILSHATY_POS,
-    ) {
-        list.insert("v_rod".to_string());
+    ) && !list.contains(&"v_rod".to_string())
+    {
+        list.push("v_rod".to_string());
     }
     list
 }

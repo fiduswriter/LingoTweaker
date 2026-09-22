@@ -937,10 +937,7 @@ pub fn is_unknown_word(tr: &AnalyzedTokenReadings) -> bool {
 }
 
 /// `TokenAgreementPrepNounRule.hasVidmPosTag(Collection, readings)`.
-pub fn has_vidm_pos_tag(
-    cases: &std::collections::HashSet<String>,
-    readings: &[AnalyzedToken],
-) -> bool {
+pub fn has_vidm_pos_tag(cases: &[String], readings: &[AnalyzedToken]) -> bool {
     let mut vidminok_found = false;
     for token in readings {
         match token.pos_tag.as_deref() {
@@ -969,10 +966,7 @@ pub fn has_vidm_pos_tag(
 }
 
 /// `TokenAgreementPrepNounRule.hasVidmPosTag(Collection, AnalyzedTokenReadings)`.
-pub fn has_vidm_pos_tag_token(
-    cases: &std::collections::HashSet<String>,
-    tr: &AnalyzedTokenReadings,
-) -> bool {
+pub fn has_vidm_pos_tag_token(cases: &[String], tr: &AnalyzedTokenReadings) -> bool {
     has_vidm_pos_tag(cases, &tr.readings)
 }
 
@@ -1210,6 +1204,39 @@ pub fn load_masc_fem_set(words_dir: &std::path::Path) -> std::collections::HashS
     let extra: Vec<String> = set.iter().map(|l| format!("екс-{l}")).collect();
     set.extend(extra);
     set
+}
+
+/// `LemmaHelper.tokenSearch` with a Pattern posTag.
+pub fn token_search_re(
+    tokens: &[&AnalyzedTokenReadings],
+    pos: i64,
+    pos_tag: Option<&fancy_regex::Regex>,
+    token: Option<&fancy_regex::Regex>,
+    pos_tags_to_ignore: Option<&fancy_regex::Regex>,
+    dir: Dir,
+) -> i64 {
+    static QUOTES: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^[«»„“\u{201C}]$").unwrap());
+    let step: i64 = match dir {
+        Dir::Forward => 1,
+        Dir::Reverse => -1,
+    };
+    let mut i = pos;
+    while i < tokens.len() as i64 && i > 0 {
+        let curr = tokens[i as usize];
+        let pos_ok = pos_tag.is_none_or(|re| has_pos_tag_re(curr, re));
+        let token_ok = token.is_none_or(|re| re.is_match(curr.surface()).unwrap_or(false));
+        if pos_ok && token_ok {
+            return i;
+        }
+        if let Some(ignore) = pos_tags_to_ignore {
+            if !has_pos_tag_re(curr, ignore) && !QUOTES.is_match(curr.surface()).unwrap_or(false) {
+                break;
+            }
+        }
+        i += step;
+    }
+    -1
 }
 
 #[cfg(test)]

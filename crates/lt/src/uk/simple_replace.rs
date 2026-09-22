@@ -3,7 +3,7 @@
 //! `findMatches` (active participle, derivats and the speller `:bad`
 //! fallback).
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::path::Path;
 use std::sync::LazyLock;
 
@@ -57,7 +57,7 @@ impl SimpleReplaceRule {
     pub fn check_sentence(
         &self,
         tokens: &[AnalyzedTokenReadings],
-        derivs: &HashMap<String, HashSet<String>>,
+        derivs: &HashMap<String, Vec<String>>,
         speller_suggestions: impl Fn(&str) -> Vec<String>,
         sentence_offset: usize,
     ) -> Vec<Match> {
@@ -76,7 +76,7 @@ impl SimpleReplaceRule {
     fn find_matches(
         &self,
         tr: &AnalyzedTokenReadings,
-        derivs: &HashMap<String, HashSet<String>>,
+        derivs: &HashMap<String, Vec<String>>,
         speller_suggestions: &impl Fn(&str) -> Vec<String>,
         sentence_offset: usize,
     ) -> Vec<Match> {
@@ -158,7 +158,7 @@ impl SimpleReplaceRule {
         base_replacements_in(&self.wrong_words, tr)
     }
 
-    fn find_in_deriv(&self, word: &str, derivs: &HashMap<String, HashSet<String>>) -> Vec<String> {
+    fn find_in_deriv(&self, word: &str, derivs: &HashMap<String, Vec<String>>) -> Vec<String> {
         let Some(verbs) = derivs.get(word) else {
             return Vec::new();
         };

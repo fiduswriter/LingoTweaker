@@ -1,7 +1,6 @@
 //! Port of `org.languagetool.rules.uk.TokenAgreementVerbNounRule`
 //! (`UK_VERB_NOUN_INFLECTION_AGREEMENT`) and
 //! `TokenAgreementVerbNounExceptionHelper`.
-#![allow(dead_code)]
 
 use std::collections::HashSet;
 use std::sync::LazyLock;
@@ -59,9 +58,6 @@ static VCHYTY_PATTERN: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^.*вч[аи]ти(ся)?$").unwrap());
 static ADV_PREDICT_PATTERN: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^(?:adv|noninfl:predic).*$").unwrap());
-static MODALS_ADJ: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"^(?:змушений|вимушений|повинний|здатний|готовий|ладний|радий)$").unwrap()
-});
 static V_ROD_DRIVER_PATTERN: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)^(?:не|(?:на)?с[кт]ільки|(?:най)?більше|(?:най)?менше|(?:не|за)?багато|(?:не|чи|за)?мало|трохи|годі|неможливо|а?ніж|вдосталь|купу)$").unwrap()
 });
@@ -72,7 +68,6 @@ static VERB_SN: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^.*:[sn](?::.*|$
 static VERB_F: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^verb.*:f(?::.*|$)$").unwrap());
 static V_FUTR_PAST_S3_N: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^verb.*?(?:futr|past):(?:s:3.*|n(?:$|:.+))$").unwrap());
-static V_IMPR: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^verb.*impr.*$").unwrap());
 
 pub struct State {
     verb_pos: usize,
@@ -80,7 +75,7 @@ pub struct State {
     verb_readings: Vec<AnalyzedToken>,
     verb_idx: Option<usize>,
     noun_adj_naz_inflections: Vec<VerbInflection>,
-    cases: HashSet<String>,
+    cases: Vec<String>,
     noun_adj_indir: Vec<AnalyzedToken>,
 }
 
@@ -92,7 +87,7 @@ impl State {
             verb_readings: Vec::new(),
             verb_idx: None,
             noun_adj_naz_inflections: Vec::new(),
-            cases: HashSet::new(),
+            cases: Vec::new(),
             noun_adj_indir: Vec::new(),
         }
     }
@@ -169,9 +164,6 @@ impl TokenAgreementVerbNounRule {
                 i += 1;
                 continue;
             };
-            if i >= n - 1 {
-                break;
-            }
 
             let hard = self.is_exception_hard_adj_noun(&view, i, &state);
             if let Some(skip) = hard {
@@ -260,12 +252,13 @@ impl TokenAgreementVerbNounRule {
                         &view[state.verb_pos].readings,
                         &Regex::new(r"^verb.*impers.*$").unwrap(),
                     )
+                    && !cases.contains(&"v_rod".to_string())
                 {
-                    cases.insert("v_rod".to_string());
+                    cases.push("v_rod".to_string());
                 }
                 state.cases = cases;
                 let token_lower = tr.surface().to_lowercase();
-                if state.cases.contains("v_zna")
+                if state.cases.iter().any(|c| c == "v_zna")
                     && Regex::new(r"^(?:грошей|грошенят|дров|товарів|пісень)$")
                         .unwrap()
                         .is_match(&token_lower)
@@ -444,7 +437,7 @@ impl TokenAgreementVerbNounRule {
         state
     }
 
-    fn get_suggestions(&self, cases: &HashSet<String>, tr: &AnalyzedTokenReadings) -> Vec<String> {
+    fn get_suggestions(&self, cases: &[String], tr: &AnalyzedTokenReadings) -> Vec<String> {
         if cases.is_empty() {
             return Vec::new();
         }
@@ -689,15 +682,13 @@ impl TokenAgreementVerbNounRule {
     }
 }
 
-fn format_inflections(cases: &HashSet<String>) -> String {
+fn format_inflections(cases: &[String]) -> String {
     if cases.is_empty() {
         return "неперех.".to_string();
     }
-    let mut sorted: Vec<&String> = cases.iter().collect();
-    sorted.sort();
     format!(
         "вимагає: {}",
-        sorted
+        cases
             .iter()
             .map(|c| uk_helpers::case_name(c))
             .collect::<Vec<_>>()
@@ -762,11 +753,6 @@ fn is_exception_inner(
     let n = tokens.len();
     let clean_lower = tokens[noun_adj_pos].surface().to_lowercase();
     let verb_at = tokens[verb_pos];
-
-    let gov_verb = |pos: usize| {
-        rule.gov
-            .get_case_governments_opt(&tokens[pos].readings, Some("verb"), None)
-    };
 
     // боротиметься кілька однопартійців / входило двоє студентів
     if has_re(
@@ -846,7 +832,8 @@ fn is_exception_inner(
         && rule
             .gov
             .get_case_governments_opt(&verb_at.readings, None, Some(uk_helpers::verb_pattern()))
-            .contains("v_zna")
+            .iter()
+            .any(|c| c == "v_zna")
     {
         return true;
     }
@@ -1046,7 +1033,7 @@ fn is_exception_inner(
     {
         return true;
     }
-    if state.cases.contains("v_rod")
+    if state.cases.iter().any(|c| c == "v_rod")
         && has(tokens[noun_adj_pos], "numr.*?v_zna.*|noun.*v_zna.*numr.*")
     {
         return true;
@@ -1258,7 +1245,8 @@ fn is_exception_inner(
                 None,
                 Some(uk_helpers::verb_advp_pattern()),
             )
-            .contains("v_inf")
+            .iter()
+            .any(|c| c == "v_inf")
     {
         let v2pos = uk_helpers::token_search(
             tokens,
@@ -1294,7 +1282,8 @@ fn is_exception_inner(
             if rule
                 .gov
                 .get_case_governments_opt(&v2.readings, None, Some(uk_helpers::verb_pattern()))
-                .contains("v_inf")
+                .iter()
+                .any(|c| c == "v_inf")
             {
                 if agrees(
                     rule,
@@ -1393,7 +1382,8 @@ fn is_exception_inner(
                     None,
                     Some(uk_helpers::adj_v_naz_pattern()),
                 )
-                .contains("v_inf")
+                .iter()
+                .any(|c| c == "v_inf")
         {
             let g1 = uk_helpers::get_genders_token(
                 tokens[noun_adj_pos],
@@ -1422,11 +1412,295 @@ fn is_exception_inner(
                 None,
                 Some(uk_helpers::adj_v_naz_pattern()),
             )
-            .contains("v_inf")
+            .iter()
+            .any(|c| c == "v_inf")
     {
         return true;
     }
-    let _ = gov_verb;
+    // V + V:INF + N
+    if verb_pos > 1 && has_part(verb_at, ":inf") {
+        let mut lookup_pos = state.verb_pos as i64 - 1;
+        if verb_pos > 3
+            && lemma(tokens[verb_pos - 1], &["і", "й", "та"])
+            && has_part(tokens[verb_pos - 2], ":inf")
+        {
+            lookup_pos = verb_pos as i64 - 3;
+        }
+        let v2pos = uk_helpers::token_search_re(
+            tokens,
+            lookup_pos,
+            Some(uk_helpers::verb_advp_pattern()),
+            None,
+            Some(&Regex::new(r"^[a-z].*$").unwrap()),
+            Dir::Reverse,
+        );
+        if v2pos >= 0
+            && v2pos >= state.verb_pos as i64 - 5
+            && (rule
+                .gov
+                .get_case_governments_opt(
+                    &tokens[v2pos as usize].readings,
+                    None,
+                    Some(uk_helpers::verb_advp_pattern()),
+                )
+                .iter()
+                .any(|c| c == "v_inf")
+                || Regex::new(r"^(?:по)?їсти$")
+                    .unwrap()
+                    .is_match(verb_at.surface())
+                    .unwrap_or(false))
+        {
+            if agrees(
+                rule,
+                tokens[v2pos as usize],
+                &state.noun_adj_naz_inflections,
+                &state.noun_adj_indir,
+            ) {
+                return true;
+            }
+            if has(tokens[v2pos as usize], "verb.*:p($|:.*)")
+                && has(tokens[state.noun_pos], ".*v_naz.*")
+            {
+                return true;
+            }
+        }
+    }
+
+    // ADV + V:INF + N
+    if verb_pos > 1 && has_part(verb_at, ":inf") {
+        let mut v2pos = uk_helpers::token_search_re(
+            tokens,
+            state.verb_pos as i64 - 1,
+            Some(&ADV_PREDICT_PATTERN),
+            None,
+            Some(&Regex::new(r"^[a-z].*$").unwrap()),
+            Dir::Reverse,
+        );
+        while v2pos >= 0 && v2pos >= state.verb_pos as i64 - 3 {
+            if has(tokens[v2pos as usize], "noninfl:predic.*")
+                && has_part(tokens[state.noun_pos], "v_naz")
+            {
+                return true;
+            }
+            let cases = rule.gov.get_case_governments_opt(
+                &tokens[v2pos as usize].readings,
+                None,
+                Some(&ADV_PREDICT_PATTERN),
+            );
+            if uk_helpers::has_vidm_pos_tag(&cases, &state.noun_adj_indir) {
+                return true;
+            }
+            v2pos = uk_helpers::token_search_re(
+                tokens,
+                v2pos - 1,
+                Some(&ADV_PREDICT_PATTERN),
+                None,
+                Some(&Regex::new(r"^[a-z].*$").unwrap()),
+                Dir::Reverse,
+            );
+        }
+    }
+
+    // ADJ + V:INF + N
+    if verb_pos > 1 && has_part(verb_at, ":inf") && has_part(tokens[noun_adj_pos], "v_naz") {
+        if Regex::new(r"^(?:змозі|змогу|силі|силах)$")
+            .unwrap()
+            .is_match(&tokens[verb_pos - 1].surface().to_lowercase())
+            .unwrap_or(false)
+        {
+            return true;
+        }
+        let v2pos = uk_helpers::token_search_re(
+            tokens,
+            state.verb_pos as i64 - 1,
+            Some(uk_helpers::adj_v_naz_pattern()),
+            None,
+            Some(&Regex::new(r"^[a-z].*$").unwrap()),
+            Dir::Reverse,
+        );
+        if v2pos >= 0
+            && v2pos >= state.verb_pos as i64 - 3
+            && rule
+                .gov
+                .get_case_governments_opt(
+                    &tokens[v2pos as usize].readings,
+                    None,
+                    Some(uk_helpers::adj_v_naz_pattern()),
+                )
+                .iter()
+                .any(|c| c == "v_inf")
+        {
+            let g1 = uk_helpers::get_genders_token(
+                tokens[noun_adj_pos],
+                &Regex::new(r"^(?:noun|adj|numr).*v_naz.*$").unwrap(),
+            );
+            let g2 = uk_helpers::get_genders_token(
+                tokens[v2pos as usize],
+                uk_helpers::adj_v_naz_pattern(),
+            );
+            if !g2.is_empty()
+                && Regex::new(&format!("^.*[{g2}].*$"))
+                    .unwrap()
+                    .is_match(&g1)
+                    .unwrap_or(false)
+            {
+                return true;
+            }
+        }
+    }
+
+    // ADJ + бути + N
+    if verb_pos > 1
+        && lemma(verb_at, &["бути"])
+        && has(tokens[verb_pos - 1], "adj:.:v_naz.*")
+        && rule
+            .gov
+            .get_case_governments_opt(
+                &tokens[verb_pos - 1].readings,
+                None,
+                Some(uk_helpers::verb_pattern()),
+            )
+            .iter()
+            .any(|c| c == "v_rod")
+        && has(tokens[noun_adj_pos], "(adj|noun).*v_rod.*")
+    {
+        return true;
+    }
+    if verb_pos > 1
+        && lemma(verb_at, &["бути"])
+        && rule
+            .gov
+            .get_case_governments_opt(&tokens[verb_pos - 1].readings, Some("verb"), None)
+            .iter()
+            .any(|c| c == "v_rod")
+        && has(tokens[verb_pos - 1], "adj:.:v_naz.*")
+        && has(tokens[noun_adj_pos], "(adj|noun).*v_rod.*")
+    {
+        return true;
+    }
+
+    // V:IMPERS + бути + N
+    if verb_pos > 1
+        && lemma(verb_at, &["бути"])
+        && has(tokens[verb_pos - 1], "verb.*impers.*")
+        && agrees(
+            rule,
+            tokens[verb_pos - 1],
+            &state.noun_adj_naz_inflections,
+            &state.noun_adj_indir,
+        )
+    {
+        return true;
+    }
+
+    // NOUN + V:INF + N
+    if verb_pos > 1
+        && has_part(verb_at, ":inf")
+        && (has_part(tokens[noun_adj_pos], "v_dav")
+            || has_part(tokens[noun_adj_pos], "v_rod")
+            || has(tokens[noun_adj_pos], "adj:.:v_naz.*"))
+    {
+        let v2pos = uk_helpers::token_search_re(
+            tokens,
+            state.verb_pos as i64 - 1,
+            Some(uk_helpers::noun_v_naz_pattern()),
+            None,
+            Some(&Regex::new(r"^[a-z].*$").unwrap()),
+            Dir::Reverse,
+        );
+        if v2pos >= 0
+            && v2pos >= state.verb_pos as i64 - 3
+            && rule
+                .gov
+                .get_case_governments_opt(
+                    &tokens[v2pos as usize].readings,
+                    None,
+                    Some(uk_helpers::noun_v_naz_pattern()),
+                )
+                .iter()
+                .any(|c| c == "v_inf")
+        {
+            if has_part(tokens[noun_adj_pos], "v_dav") && lemma_re(verb_at, r".*вчити(ся)?")
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    // V:INF + V + N
+    if verb_pos > 1
+        && rule
+            .gov
+            .get_case_governments_opt(&verb_at.readings, None, Some(uk_helpers::verb_pattern()))
+            .iter()
+            .any(|c| c == "v_inf")
+    {
+        let v2pos = uk_helpers::token_search_re(
+            tokens,
+            state.verb_pos as i64 - 1,
+            Some(uk_helpers::verb_pattern()),
+            None,
+            Some(&Regex::new(r"^[a-z].*$").unwrap()),
+            Dir::Reverse,
+        );
+        if v2pos >= 0
+            && v2pos >= state.verb_pos as i64 - 3
+            && has_part(tokens[v2pos as usize], ":inf")
+            && agrees(
+                rule,
+                tokens[v2pos as usize],
+                &state.noun_adj_naz_inflections,
+                &state.noun_adj_indir,
+            )
+        {
+            return true;
+        }
+    }
+
+    // в мені наростали впевеність і ...
+    if noun_adj_pos < n - 2
+        && has(tokens[verb_pos], "verb.*:p(:.*)?")
+        && has_part(tokens[noun_adj_pos], ":v_naz")
+    {
+        return true;
+    }
+
+    // змалював дивовижної краси церкву
+    if noun_adj_pos < n - 2
+        && has(tokens[noun_adj_pos], "adj:.:v_rod(?!.*pron).*")
+        && has(tokens[noun_adj_pos + 1], "noun:.*v_rod(?!.*pron).*")
+        && has(tokens[noun_adj_pos + 2], "(noun|adj)(?!.*pron).*")
+    {
+        let readings = &tokens[noun_adj_pos + 2].readings;
+        let vnaz: Vec<AnalyzedToken> = readings
+            .iter()
+            .filter(|r| has_part_readings(std::slice::from_ref(r), "v_naz"))
+            .cloned()
+            .collect();
+        let mut naz = verb_inflection::get_noun_inflections_v(&vnaz);
+        naz.extend(verb_inflection::get_adj_inflections_v(&vnaz));
+        let indir: Vec<AnalyzedToken> = readings
+            .iter()
+            .filter(|r| !has_part_readings(std::slice::from_ref(r), "v_naz"))
+            .cloned()
+            .collect();
+        if agrees(rule, verb_at, &naz, &indir) {
+            return true;
+        }
+    }
+
+    // могли б займатися структури
+    if verb_pos > 2
+        && has_part(verb_at, ":inf")
+        && has_start(tokens[verb_pos - 2], "verb")
+        && (lemma(tokens[verb_pos - 1], &["б", "би"])
+            || has(tokens[verb_pos - 1], "adv(?!p).*")
+            || lemma_with(tokens[verb_pos - 2], &["мати"], "verb"))
+    {
+        return true;
+    }
+
     false
 }
 

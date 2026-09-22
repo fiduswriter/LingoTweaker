@@ -776,7 +776,7 @@ fn remove_yih(sentence: &mut AnalyzedSentence, gov: &crate::uk::gov::CaseGovernm
             }
             if !has_tag_re(&next.readings, &ADJ_OR_NOUN) {
                 let cg = gov.get_case_governments(&next.readings, &VERB_ANY);
-                if cg.contains("v_rod") || cg.contains("v_zna") {
+                if cg.iter().any(|c| c == "v_rod") || cg.iter().any(|c| c == "v_zna") {
                     remove_readings_by_regex(&mut sentence.tokens[i], &ADJ_PRON);
                     continue;
                 }
@@ -785,7 +785,7 @@ fn remove_yih(sentence: &mut AnalyzedSentence, gov: &crate::uk::gov::CaseGovernm
         if k > 1 {
             let prev = &sentence.tokens[idxs[k - 1]];
             let cg = gov.get_case_governments(&prev.readings, &VERB_ADVP);
-            if cg.contains("v_rod") || cg.contains("v_zna") {
+            if cg.iter().any(|c| c == "v_rod") || cg.iter().any(|c| c == "v_zna") {
                 let next_surface = if k + 1 < n {
                     sentence.tokens[idxs[k + 1]].surface().to_string()
                 } else {
@@ -801,7 +801,7 @@ fn remove_yih(sentence: &mut AnalyzedSentence, gov: &crate::uk::gov::CaseGovernm
                 if k + 1 < n
                     && has_tag_re(&prev.readings, &VERB_ADVP)
                     && has_tag_re(&sentence.tokens[idxs[k + 1]].readings, &VERB_INF)
-                    && cg.contains("v_inf")
+                    && cg.iter().any(|c| c == "v_inf")
                 {
                     remove_readings_by_regex(&mut sentence.tokens[i], &ADJ_PRON);
                     continue;

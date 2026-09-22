@@ -2,7 +2,6 @@
 //! (`UK_ADJ_NOUN_INFLECTION_AGREEMENT`) and
 //! `TokenAgreementAdjNounExceptionHelper`.
 
-use std::collections::HashSet;
 use std::sync::LazyLock;
 
 use fancy_regex::Regex;
@@ -419,7 +418,7 @@ fn is_exception(
     let noun_at = tokens[noun_pos];
     let n = tokens.len();
 
-    let case_gov_adv = |pos: usize| -> HashSet<String> {
+    let case_gov_adv = |pos: usize| -> Vec<String> {
         gov.get_case_governments_opt(&tokens[pos].readings, Some("adv"), None)
     };
 
@@ -1114,7 +1113,8 @@ fn is_exception(
         && has(tokens[adj_pos - 1], "adv(?!p).*")
         && gov
             .get_case_governments_opt(&tokens[adj_pos - 2].readings, None, Some(&VERB_ADVP))
-            .contains("v_oru")
+            .iter()
+            .any(|c| c == "v_oru")
         && has_part(adj_at, "v_oru")
         && uk_helpers::has_reading_pos_tag(noun_readings, &Regex::new(r"^.*v_zna.*$").unwrap())
         && gender_matches(master, slave, Some("v_oru"), Some("v_zna"))

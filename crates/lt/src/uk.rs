@@ -55,6 +55,8 @@ pub struct UkrainianPipeline {
     pub numr_noun: crate::uk::numr_noun::TokenAgreementNumrNounRule,
     /// `TokenAgreementAdjNounRule` (`UK_ADJ_NOUN_INFLECTION_AGREEMENT`).
     pub adj_noun: crate::uk::adj_noun::TokenAgreementAdjNounRule,
+    /// `TokenAgreementVerbNounRule` (`UK_VERB_NOUN_INFLECTION_AGREEMENT`).
+    pub verb_noun: crate::uk::verb_noun::TokenAgreementVerbNounRule,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,

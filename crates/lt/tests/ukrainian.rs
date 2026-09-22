@@ -493,3 +493,49 @@ fn ukrainian_adj_noun_agreement() {
         );
     }
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
+/// `TokenAgreementVerbNounRule` + its exception helper.
+#[test]
+fn ukrainian_verb_noun_agreement() {
+    let _guard = engine_guard();
+    let text = "Працює студенти";
+    let matches = one(text, "UK_VERB_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 15));
+    assert_eq!(
+        matches[0].message,
+        "Не узгоджено дієслово з іменником: \"Працює\" (вимагає: орудний) і \"студенти\" (мн.: називний, кличний)"
+    );
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["Працює студентами".to_string()]
+    );
+
+    let text = "Було студенти";
+    let matches = one(text, "UK_VERB_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 13));
+    assert_eq!(
+        matches[0].message,
+        "Не узгоджено дієслово з іменником: \"Було\" (вимагає: інфінітив, орудний, давальний) і \"студенти\" (мн.: називний, кличний)"
+    );
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["Було студентам".to_string(), "Було студентами".to_string()]
+    );
+
+    for ok in [
+        "Прийшли студент",
+        "Прийшла студент",
+        "Прийшли студенти",
+        "Прийшла студентка",
+        "Працюють студенти",
+        "Пішли студент",
+    ] {
+        assert!(
+            one(ok, "UK_VERB_NOUN_INFLECTION_AGREEMENT").is_empty(),
+            "{ok}"
+        );
+    }
+}
