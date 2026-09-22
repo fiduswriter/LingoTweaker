@@ -502,6 +502,9 @@ fn ukrainian_numr_noun_agreement() {
         "1,5 метра",
         "багато людей",
         "два з половиною роки",
+        // month lemma + `:m:v_rod` suppresses (`LemmaHelper` partPos match)
+        "23 Липня",
+        "23 Листопада.",
     ] {
         assert!(
             one(ok, "UK_NUMR_NOUN_INFLECTION_AGREEMENT").is_empty(),

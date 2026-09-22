@@ -609,6 +609,15 @@ pub fn has_lemma_with_pattern(
     })
 }
 
+/// `LemmaHelper.hasLemma(readings, lemmas, partPos)`: the POS tag only has to
+/// *contain* `part_pos` (not match it fully).
+pub fn has_lemma_with_part(readings: &[AnalyzedToken], lemmas: &[&str], part_pos: &str) -> bool {
+    readings.iter().any(|r| {
+        r.stem.as_deref().is_some_and(|l| lemmas.contains(&l))
+            && r.pos_tag.as_deref().is_some_and(|t| t.contains(part_pos))
+    })
+}
+
 /// `LemmaHelper.hasLemma(readings, lemmaRegex, posTagPattern)`.
 pub fn has_lemma_regex_with_pattern(
     readings: &[AnalyzedToken],

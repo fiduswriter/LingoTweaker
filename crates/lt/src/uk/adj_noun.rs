@@ -873,11 +873,7 @@ fn is_exception(
             return true;
         }
         if has_part(adj_at, ":n:")
-            && uk_helpers::has_lemma_with_pattern(
-                &noun_at.readings,
-                uk_helpers::MONTH_LEMMAS,
-                &Regex::new(r"^v_rod$").unwrap(),
-            )
+            && uk_helpers::has_lemma_with_part(&noun_at.readings, uk_helpers::MONTH_LEMMAS, "v_rod")
         {
             return true;
         }

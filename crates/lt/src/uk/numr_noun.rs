@@ -1043,11 +1043,7 @@ fn is_exception(
     }
     // 22 червня
     if state.number
-        && has_lemma_with(
-            noun_at,
-            uk_helpers::MONTH_LEMMAS,
-            &Regex::new(r"^:m:v_rod$").unwrap(),
-        )
+        && uk_helpers::has_lemma_with_part(&noun_at.readings, uk_helpers::MONTH_LEMMAS, ":m:v_rod")
     {
         return true;
     }
