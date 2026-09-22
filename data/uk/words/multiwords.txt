@@ -1,0 +1,66 @@
+# Ukrainian multiwords file used for chunking
+# FR  frazeologism
+
+а капела	adv
+від і до	adv
+від малку	adv
+від темна до темна	adv
+#день у день	adv
+для годиться	adv
+задля годиться	adv
+за дякую	adv
+за спасибі	adv
+за прости Біг	adv
+на всіх і на вся	adv
+на галай-балай	adv
+на гора	adv
+#на зараз	adv
+належним чином	adv
+#особливим чином	adv
+#головним чином	adv
+#сумнівним чином	adv
+#значною мірою	adv
+певною мірою	adv
+#повною мірою	adv
+#тією мірою	adv
+час від часу	adv
+#як правило	adv
+
+без сумніву	insert
+бог знає	insert
+в кращому разі	insert
+в найкращому разі	insert
+у кращому разі	insert
+у найкращому разі	insert
+дивна річ	insert
+до речі	insert
+зверніть увагу	insert
+здавалося би	insert
+здавалося б	insert
+звичайно ж	insert
+інакше кажучи	insert
+іншими словами	insert
+крім того	insert
+між іншим	insert
+на щастя	insert
+на диво	insert
+на жаль	insert
+на сором	insert
+на мою думку	insert
+майте на увазі	insert
+між нами кажучи	insert
+образно кажучи	insert
+певна річ	insert
+по суті	insert
+правду кажучи	insert
+своєю чергою	insert
+слава Богу	insert
+таким чином	insert
+уяви собі	insert
+як на зло	insert
+як на мене	insert
+як навмисне	insert
+як на біду	insert
+як кажуть	insert
+як відомо	insert
+як правило	insert

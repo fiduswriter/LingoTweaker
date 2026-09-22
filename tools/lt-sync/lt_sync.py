@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -158,6 +158,17 @@ MAVEN_ARTIFACTS = {
         "license_verified": False,
         "license_source": f"{MAVEN_CENTRAL}/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom",
     },
+    # `UkrainianTagger`/`UkrainianSynthesizer`/`MorfologikUkrainianSpellerRule`:
+    # the POS/synthesis/spelling dictionaries are not in the checkout, only in
+    # this artifact (the module ships only the word lists and the FSA tagset);
+    # LGPL-2.1-or-later per the bundled `resource/uk/README` and
+    # `resource/uk/hunspell/README.txt`.
+    "morfologik-ukrainian-lt-6.8.6.jar": {
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": True,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt",
+    },
     "asturian-pos-dict-0.1.jar": {
         "coords": "org.languagetool:asturian-pos-dict:0.1",
         # POM: "GNU GENERAL PUBLIC LICENSE Version 3", data based on Morphy;
@@ -212,6 +223,19 @@ JAR_EXTRACTIONS = {
     "linguistics.grammardb.spell.languagetool-1.0.2.jar": {
         "org/languagetool/resource/be/hunspell/be_BY.dict": "be/hunspell/be_BY.dict",
         "org/languagetool/resource/be/hunspell/be_BY.info": "be/hunspell/be_BY.info",
+    },
+    "morfologik-ukrainian-lt-6.8.6.jar": {
+        "org/languagetool/resource/uk/ukrainian.dict": "uk/dictionaries/ukrainian.dict",
+        "org/languagetool/resource/uk/ukrainian.info": "uk/dictionaries/ukrainian.info",
+        "org/languagetool/resource/uk/ukrainian_synth.dict": "uk/dictionaries/ukrainian_synth.dict",
+        "org/languagetool/resource/uk/ukrainian_synth.info": "uk/dictionaries/ukrainian_synth.info",
+        "org/languagetool/resource/uk/ukrainian_synth.dict_tags.txt": "uk/dictionaries/ukrainian_synth.dict_tags.txt",
+        "org/languagetool/resource/uk/ukrainian_tags.txt": "uk/dictionaries/ukrainian_tags.txt",
+        "org/languagetool/resource/uk/tagset.txt": "uk/dictionaries/tagset.txt",
+        "org/languagetool/resource/uk/README": "uk/dictionaries/README.txt",
+        "org/languagetool/resource/uk/hunspell/uk_UA.dict": "uk/hunspell/uk_UA.dict",
+        "org/languagetool/resource/uk/hunspell/uk_UA.info": "uk/hunspell/uk_UA.info",
+        "org/languagetool/resource/uk/hunspell/README.txt": "uk/hunspell/README_uk_UA.txt",
     },
     "asturian-pos-dict-0.1.jar": {
         "org/languagetool/resource/ast/asturian.dict": "ast/dictionaries/asturian.dict",
@@ -1122,6 +1146,10 @@ def cmd_import(args: argparse.Namespace) -> None:
             for src in sorted(rules_dir.rglob("*")):
                 if not src.is_file() or src.suffix not in {".xml", ".txt"}:
                     continue
+                # Skip module-internal tooling/debug resources (`src/` helper
+                # scripts and logback configs, e.g. `uk/rules/src/`).
+                if "src" in src.relative_to(rules_dir).parts:
+                    continue
                 rel = src.relative_to(rules_dir)
                 copy_upstream_entry(upstream, src, f"{lang}/rules/{rel.as_posix()}", entries)
         disamb = base / "resource" / lang / "disambiguation.xml"
@@ -1256,7 +1284,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

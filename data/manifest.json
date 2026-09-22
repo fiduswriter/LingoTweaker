@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 829,
+  "file_count": 871,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -5617,6 +5617,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_uk.properties",
+      "sha256": "ce39fcf59537ad5edde57d22ea9eb31f3d24cde6e083cac257bd035dc931af47",
+      "size": 47811,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/MessagesBundle_uk.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "nl/compound_acceptor/acronym_exceptions.txt",
       "sha256": "d38a5f1beafb93cf8e7382c05e0e5705c4ea56692c495aab3c80a7c04fd7230c",
       "size": 271,
@@ -9502,6 +9513,490 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/tl/src/main/resources/org/languagetool/resource/tl/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/dictionaries/README.txt",
+      "sha256": "691c2a9b1aeafb7096a5146a3843bf25b6974423a3c5145766ac436aa6737c47",
+      "size": 697,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/README",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/tagset.txt",
+      "sha256": "63727b8d0d7e34b6181f5f950e12879bf1029a8993cc58f0ef53994119a07276",
+      "size": 6986,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/tagset.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian.dict",
+      "sha256": "8622bbd9acd6a92f41c0fe494f174ae994ca3621287f1eef15b1d19a409071f8",
+      "size": 3340126,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian.dict",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian.info",
+      "sha256": "7e0192504ace105bbb26165f77671249c1a63823aa4bc09c57ae391ea8c25315",
+      "size": 142,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian.info",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_synth.dict",
+      "sha256": "505222d77d5c9a3b16c719357031a1aef8159b35ce13a3951c6c648d32d87fff",
+      "size": 2528840,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_synth.dict",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_synth.dict_tags.txt",
+      "sha256": "e2b8e0f92067b685a34fc7825fc737912b53fe3acd5f4b79dbfc37147310f61e",
+      "size": 193248,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_synth.dict_tags.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_synth.info",
+      "sha256": "7e0192504ace105bbb26165f77671249c1a63823aa4bc09c57ae391ea8c25315",
+      "size": 142,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_synth.info",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_tags.txt",
+      "sha256": "6e878e58c3ea946bc53d745b479a5dd152c481cfe9a390be94a9c8d58e0e27ad",
+      "size": 220152,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_tags.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/disambiguation.xml",
+      "sha256": "fedce36aa8297d7b9b5fcd45fa9d9e6fd16adec9c4426843cb2e4a89822a73c4",
+      "size": 526877,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/hunspell/README_uk_UA.txt",
+      "sha256": "f31df5824820881252fea7edcb77cefd5ad36971ffd661daba60e97a79126fe3",
+      "size": 209,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/hunspell/README.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/hunspell/ignore.txt",
+      "sha256": "4c4991168c8646b1864923e25e6701988278a705e03947fc0e102b685551cc38",
+      "size": 512,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/hunspell/uk_UA.dict",
+      "sha256": "0e5042e1343c209a53e4be9b84d7026bc8dbf24dc595bd2358e2891004e5cf3b",
+      "size": 2275333,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/hunspell/uk_UA.dict",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/hunspell/uk_UA.info",
+      "sha256": "770382887cca1d7e56f748b0c227ded975c5800b3e5309718ec092deb1c38bc8",
+      "size": 257,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/hunspell/uk_UA.info",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/rules/grammar-barbarism.xml",
+      "sha256": "93f8ddf9dc0d7e5876cdecb0c032e7175e50069d174eda39c5780ea95d7107b1",
+      "size": 513678,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/grammar-barbarism.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/grammar-grammar.xml",
+      "sha256": "f6f81fffa6b27ea9d6df5c813104fc089885d302586376edd2ca5e8c46cb0487",
+      "size": 196820,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/grammar-grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/grammar-punctuation.xml",
+      "sha256": "17652b8528fa8d458967d086a4deac8973d31bd564d2a22658eb868d1e1bd032",
+      "size": 124702,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/grammar-punctuation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/grammar-spelling.xml",
+      "sha256": "6b82b87763f66fc79c42422565555dfc34aff181b24be9d5e44af7461f4d57db",
+      "size": 100868,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/grammar-spelling.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/grammar-style.xml",
+      "sha256": "2428fa3d5b545f38c34c8a0162a29a9890fe32cb371e865302077ae8813bdfe3",
+      "size": 256741,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/grammar-style.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/grammar.xml",
+      "sha256": "9655f4ddb75418610184c283b9a4d289c5d764f6b121a993c67d257bd8f81bf7",
+      "size": 3969,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/replace.txt",
+      "sha256": "b109f020b7f7e563a6025f11a4e486a3cc9f517dc9d21be3a46e1772e2befe08",
+      "size": 550149,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/replace_renamed.txt",
+      "sha256": "66316137eefd956499e67982b86ece11346fd35d07c9286c266f43a9e618f599",
+      "size": 44330,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/replace_renamed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/replace_soft.txt",
+      "sha256": "e9dfb84b636537e545dc203ba20175580159a2aa1a7b83ab02b869e97b4089b2",
+      "size": 88018,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/replace_soft.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/rules/replace_spelling_2019.txt",
+      "sha256": "ab955ec273c1c4fe15c21ef1c9049b0a5fe3a121a4db17fdae50b023ae254942",
+      "size": 66815,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/rules/uk/replace_spelling_2019.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/README.txt",
+      "sha256": "ca51272c0587784d75019b476d3f292ceb6e63fa049de7d446b42d1633505d65",
+      "size": 295,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/added.txt",
+      "sha256": "97877e76317742435b4cb6210b49e813a9901261834573afb9d982d28c67190d",
+      "size": 1178,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/case_government.txt",
+      "sha256": "ff6da4ecaff931bcb1d2a44263a071165db51a9ad50c8cde03851481956d6664",
+      "size": 1345981,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/case_government.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/common_words.txt",
+      "sha256": "65e8420e0443f9c4e109c34b21281f98d551b9704a4d215bd982bc9c7a63c4cf",
+      "size": 147628,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/dash_follower.txt",
+      "sha256": "ea753ed7b2fc9ef323f198faa5b28d3ab9461bcee949b3964ed821a04fd47cb8",
+      "size": 1492,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/dash_follower.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/dash_left_master.txt",
+      "sha256": "af6947f43d61db6e53e8ef261e87c3a00b443953785411f471ab4e17c535d413",
+      "size": 2269,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/dash_left_master.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/dash_prefixes.txt",
+      "sha256": "47efa85d680e6859808d6432663ce4d692e12d0aae8ddf61ca744d02485a9aef",
+      "size": 5871,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/dash_prefixes.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/dash_prefixes_invalid.txt",
+      "sha256": "7915a47e8dc397aba8168911becce5e50123b6d1075321728598af25151359f1",
+      "size": 682,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/dash_prefixes_invalid.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/derivats.txt",
+      "sha256": "28a5622c7d8905c5f28453e4d6ac75c19a79efe5e8840d3af20737a8ed0bb564",
+      "size": 3276124,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/derivats.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/disambig_dups.txt",
+      "sha256": "b77740295e6dbabd897d3bd35c5f5b0a8e51058f79f75c46a4544aa4fd3e9680",
+      "size": 3505,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/disambig_dups.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/disambig_remove.txt",
+      "sha256": "30d01b75b2f39f680402cfc238d6ebad79bd09c7c7e32f1cdfbe90ad2ea6e305",
+      "size": 33560,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/disambig_remove.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/entities.txt",
+      "sha256": "157df900f67b6b74596c103e741be5259a9ec087e63f77dc19555f3410be6d70",
+      "size": 3606,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/entities.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/masc_fem.txt",
+      "sha256": "ed0e246c0fc8d71da5f3d48d8f055a4f7a4127b5ab7b9b6e4584f2d61251a4d6",
+      "size": 3702,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/masc_fem.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/multiwords.txt",
+      "sha256": "545e17b4bb8dab12bee5a8e57842aaeff479d6effa4a742e759bff12a49a672f",
+      "size": 1810,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/multiwords.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "uk/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/removed_custom.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
