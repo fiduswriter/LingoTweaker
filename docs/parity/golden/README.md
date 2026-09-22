@@ -33,6 +33,7 @@ re-runs the Rust side and diffs against the golden.
 | be | `be-full.txt` (161) | `be-full.java.tsv` |
 | ru | `ru-full.txt` (2,457) | `ru-full.java.tsv` |
 | uk | `uk-full.txt` (4,437) | `uk-full.java.tsv` |
+| sr | `sr-full.txt` (49) | `sr-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -130,11 +131,18 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   overlap tie-break), pinned exactly with
   `--expect-only-java`/`--expect-only-rust`/`--expect-field-diffs` in
   `scripts/ci/parity.sh` (D-273…D-281).
+  sr is exactly 0/0/0 (D-288): the pinned `sr` module is excluded from the LT
+  reactor and does not compile against any released core (D-285), so the
+  golden is captured from a forward-ported in-container copy
+  (`scripts/oracle/sr/sr-module-6.9.patch` + `check-diff-sr.sh`, D-287). The
+  12 XML rules, the generic built-ins, the ekavian tagger/synthesizer, the
+  hybrid disambiguator, the `MorfologikEkavianSpellerRule` and the two legacy
+  replace rules match Java exactly.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in
