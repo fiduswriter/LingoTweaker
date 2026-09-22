@@ -29,6 +29,7 @@ pub fn load(data_dir: &Path) -> Result<SlovakSpellingRule> {
             split_on_hyphen: false,
             no_suggest_words: &[],
             ignore_token_pattern: None,
+            ..Default::default()
         },
     )
 }

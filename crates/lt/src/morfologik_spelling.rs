@@ -35,8 +35,20 @@ static STARTS_WITH_NUMBERS_BULLETS: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^(\d[.,\d]*|\P{L}+)(.*)$").unwrap());
 static STARTS_WITH_NUMBERS_BULLETS_EXCEPTIONS: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^([\p{C}\-\$%&]+)(.*)$").unwrap());
+/// `MorfologikUkrainianSpellerRule.PATTERN`: a single capital letter (an
+/// initial).
+static UK_INITIAL_CAPITAL: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[А-ЯІЇЄҐ]$").unwrap());
+/// `MorfologikUkrainianSpellerRule.DO_NOT_SUGGEST_SPACED_PATTERN` (Java
+/// `Matcher.matches()` = full match).
+static UK_DO_NOT_SUGGEST_SPACED: LazyLock<Regex> = LazyLock::new(|| {
+    Regex::new(
+        "^(?:авіа|авто|анти|аудіо|відео|водо|гідро|екстра|квазі|кіно|лже|мета|моно|мото|псевдо|пост|радіо|стерео|супер|ультра|фото) .*$",
+    )
+    .unwrap()
+});
 
 /// Per-language configuration of the generic rule.
+#[derive(Default)]
 pub struct MorfologikSpellerConfig {
     /// Directory under `data/`, e.g. `sk`.
     pub lang_dir: &'static str,
@@ -63,6 +75,26 @@ pub struct MorfologikSpellerConfig {
     /// `MorfologikSpellerRule.ignoreToken` override: a word that does not
     /// fully match this pattern is ignored (Russian `RUSSIAN_LETTERS`).
     pub ignore_token_pattern: Option<&'static str>,
+    /// `MorfologikUkrainianSpellerRule.ignoreToken`: when the next token is a
+    /// lone `.`, ignore the word if `ignoreWord(word + ".")` holds or the word
+    /// is a single capital letter (`[А-ЯІЇЄҐ]`).
+    pub ignore_initial_with_dot: bool,
+    /// `MorfologikUkrainianSpellerRule.isMisspelled`: a trailing `-` makes the
+    /// word misspelled unless it also starts with `-`.
+    pub hyphen_end_misspelled: bool,
+    /// `MorfologikUkrainianSpellerRule.getRuleMatches`: when the base speller
+    /// returns no match and the token has no good POS tag, report this
+    /// `(message, short_message)` as a potential spelling error.
+    pub potential_spelling_error: Option<(&'static str, &'static str)>,
+    /// `MorfologikUkrainianSpellerRule.getAdditionalSuggestions`: the
+    /// `dash_prefixes.txt` keys (already filtered like the Java static
+    /// initializer); for a word starting with a key (and longer than key+2,
+    /// next char not `-`) add `key-second`.
+    pub dash_prefix_suggestions: Option<Vec<String>>,
+    /// `MorfologikUkrainianSpellerRule.filterSuggestions`: remove suggestions
+    /// that contain a space and match `DO_NOT_SUGGEST_SPACED_PATTERN`, or that
+    /// contain `- `.
+    pub filter_spaced_suggestions: bool,
 }
 
 pub struct MorfologikSpellingRule {
@@ -202,6 +234,11 @@ impl MorfologikSpellingRule {
     /// `MorfologikSpellerRule.isMisspelled(speller1, word)` (`checkCompound`
     /// is false).
     pub(crate) fn is_misspelled(&self, word: &str) -> bool {
+        // `MorfologikUkrainianSpellerRule.isMisspelled`: a trailing `-` is
+        // misspelled unless the word also starts with `-`.
+        if self.config.hyphen_end_misspelled && word.ends_with('-') {
+            return !word.starts_with('-');
+        }
         self.speller1.is_misspelled(word)
     }
 
@@ -257,7 +294,20 @@ impl MorfologikSpellingRule {
             || is_email(token.surface())
             || (self.ignore_tagged_words && token.is_tagged && !self.is_prohibited(token.surface()))
             || self.ignore_token_override(tokens[idx].surface())
+            || self.ignore_initial_with_dot(tokens, idx)
             || self.ignore_word_with_emoji(tokens[idx].surface())
+    }
+
+    /// `MorfologikUkrainianSpellerRule.ignoreToken` initial guard.
+    fn ignore_initial_with_dot(&self, tokens: &[&AnalyzedTokenReadings], idx: usize) -> bool {
+        if !self.config.ignore_initial_with_dot || idx + 1 >= tokens.len() {
+            return false;
+        }
+        if tokens[idx + 1].surface() != "." {
+            return false;
+        }
+        let word = tokens[idx].surface();
+        self.ignore_word(&format!("{word}.")) || UK_INITIAL_CAPITAL.is_match(word)
     }
 
     /// `MorfologikSpellerRule.ignoreToken` override: when a language sets an
@@ -399,8 +449,43 @@ impl MorfologikSpellingRule {
         out
     }
 
-    /// `MorfologikSpellerRule.getRuleMatches` (no language override).
+    /// `MorfologikSpellerRule.getRuleMatches` (+ the language override hook:
+    /// `MorfologikUkrainianSpellerRule` reports a potential spelling error when the
+    /// base returns nothing and the token has no good POS tag).
     fn get_rule_matches(
+        &self,
+        word: &str,
+        start_pos: usize,
+        rule_matches_so_far: &mut Vec<Match>,
+        idx: usize,
+        tokens: &[&AnalyzedTokenReadings],
+    ) -> Vec<Match> {
+        let rule_matches =
+            self.get_rule_matches_inner(word, start_pos, rule_matches_so_far, idx, tokens);
+        if rule_matches.is_empty() {
+            if let Some((message, short_message)) = self.config.potential_spelling_error {
+                if !has_good_tag(tokens[idx]) {
+                    let m = Match::new(
+                        self.config.rule_id,
+                        Option::<String>::None,
+                        message,
+                        Some(short_message.to_string()),
+                        TextRange::new(start_pos, start_pos + word.len()),
+                        Vec::new(),
+                        self.config.category_id,
+                        self.config.category_name,
+                    )
+                    .with_metadata(self.config.description, "misspelling", 0)
+                    .with_match_type("UnknownWord");
+                    return vec![m];
+                }
+            }
+        }
+        rule_matches
+    }
+
+    /// `MorfologikSpellerRule.getRuleMatches` (no language override).
+    fn get_rule_matches_inner(
         &self,
         word: &str,
         start_pos: usize,
@@ -761,6 +846,9 @@ impl MorfologikSpellingRule {
         let mut top_suggestions = self.additional_top_suggestions(&default_suggestions, word);
         default_suggestions.splice(0..0, top_suggestions.drain(..));
 
+        // `MorfologikUkrainianSpellerRule.getAdditionalSuggestions`.
+        self.add_additional_suggestions(&mut default_suggestions, word);
+
         if default_suggestions.is_empty() && user_suggestions.is_empty() {
             return Vec::new();
         }
@@ -815,10 +903,51 @@ impl MorfologikSpellingRule {
             .into_iter()
             .filter(|s| !self.is_prohibited(&s.value))
             .collect();
-        dedupe(filtered)
+        let filtered: Vec<Suggestion> = dedupe(filtered)
             .into_iter()
             .filter(|s| !self.is_no_suggest_word(&s.value))
-            .collect()
+            .collect();
+        if self.config.filter_spaced_suggestions {
+            // `MorfologikUkrainianSpellerRule.filterSuggestions`:
+            // `replacement.contains(" ") && DO_NOT_SUGGEST_SPACED.matches()`
+            // `|| replacement.contains("- ")`.
+            filtered
+                .into_iter()
+                .filter(|s| {
+                    !((s.value.contains(' ') && UK_DO_NOT_SUGGEST_SPACED.is_match(&s.value))
+                        || s.value.contains("- "))
+                })
+                .collect()
+        } else {
+            filtered
+        }
+    }
+
+    /// `MorfologikUkrainianSpellerRule.getAdditionalSuggestions`: the 2019
+    /// dash prefixes.
+    fn add_additional_suggestions(&self, suggestions: &mut Vec<Suggestion>, word: &str) {
+        let Some(prefixes) = &self.config.dash_prefix_suggestions else {
+            return;
+        };
+        let mut word = word.to_string();
+        if morfologik::is_capitalized_word(&word) {
+            word = word.to_lowercase();
+        }
+        let word_chars: Vec<char> = word.chars().collect();
+        for key in prefixes {
+            let key_chars: Vec<char> = key.chars().collect();
+            if word_chars.len() <= key_chars.len() + 2 {
+                continue;
+            }
+            if word_chars[..key_chars.len()] == key_chars[..] && word_chars[key_chars.len()] != '-'
+            {
+                let second: String = word_chars[key_chars.len()..].iter().collect();
+                suggestions.push(Suggestion {
+                    value: format!("{key}-{second}"),
+                    short_description: None,
+                });
+            }
+        }
     }
 
     /// `filterNoSuggestWords`: the language list holds lowercase words and
@@ -902,6 +1031,17 @@ fn split_last_char(word: &str) -> Option<(&str, &str)> {
     chars
         .next_back()
         .map(|(split, _)| (&word[..split], &word[split..]))
+}
+
+/// `MorfologikUkrainianSpellerRule.hasGoodTag`: any reading with a POS tag
+/// other than the synthetic sentence/paragraph-end tags.
+fn has_good_tag(token: &AnalyzedTokenReadings) -> bool {
+    token.readings.iter().any(|r| {
+        matches!(
+            r.pos_tag.as_deref(),
+            Some(tag) if tag != "SENT_END" && tag != "PARA_END"
+        )
+    })
 }
 
 /// CachingWordListLoader: skip empty/`#` lines, cut at `#`, trim.

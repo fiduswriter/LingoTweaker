@@ -5134,6 +5134,16 @@ impl Pipeline {
             tagger: Arc::clone(&tagger),
         });
 
+        // `MorfologikUkrainianSpellerRule` (stage 2). A load failure only
+        // disables the speller, not the engine.
+        let spelling = match crate::uk::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[uk] spelling rule disabled: {err}");
+                None
+            }
+        };
+
         // `Language.getRuleFileNames`: grammar.xml then `Ukrainian.RULE_FILES`
         // (`grammar-spelling`, `grammar-grammar`, `grammar-barbarism`,
         // `grammar-style`, `grammar-punctuation`).
@@ -5176,6 +5186,7 @@ impl Pipeline {
             synthesizer,
             synth_adapter,
             disambiguator,
+            spelling,
         });
         Ok(Self {
             lang: Lang::Uk,
@@ -11542,6 +11553,30 @@ impl Pipeline {
                         &mut matches,
                         builtin_active(
                             crate::be::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+            }
+        }
+        // Ukrainian sentence-level Java rules in `Ukrainian.getRelevantRules` order:
+        // the speller (stage 2); the custom rules follow in stage 3.
+        if self.lang == crate::Lang::Uk {
+            if let Some(ukrainian) = &self.ukrainian {
+                if let Some(spelling) = &ukrainian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::uk::spelling::RULE_ID,
                             "TYPOS",
                             true,
                             false,

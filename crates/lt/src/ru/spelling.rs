@@ -47,6 +47,7 @@ pub fn load(data_dir: &Path) -> Result<RussianSpellingRule> {
             split_on_hyphen: false,
             no_suggest_words: RU_NO_SUGGEST,
             ignore_token_pattern: Some(RUSSIAN_LETTERS),
+            ..Default::default()
         },
     )
 }
@@ -68,6 +69,7 @@ pub fn load_yo(data_dir: &Path) -> Result<RussianYOSpellingRule> {
             split_on_hyphen: false,
             no_suggest_words: RU_YO_NO_SUGGEST,
             ignore_token_pattern: Some(RUSSIAN_LETTERS),
+            ..Default::default()
         },
     )
 }

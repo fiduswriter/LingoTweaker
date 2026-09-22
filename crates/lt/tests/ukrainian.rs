@@ -64,6 +64,10 @@ fn one(text: &str, rule: &str) -> Vec<lt::Match> {
         .collect()
 }
 
+fn suggestions(m: &lt::Match) -> Vec<String> {
+    m.suggestions.iter().map(|s| s.value.clone()).collect()
+}
+
 /// Stage state: 1,247 default-active XML rules, one XML-referenced filter
 /// (`uk.DateCheckFilter`, ported in stage 3) and `compile_failures()` = 1.
 #[test]
@@ -93,4 +97,64 @@ fn ukrainian_multiple_whitespace() {
     assert_eq!(matches[0].category_id, "TYPOGRAPHY");
     assert_eq!(matches[0].category_name, "Оформлення");
     assert_utf16(text, &matches[0], (2, 4));
+}
+
+/// `MORFOLOGIK_RULE_UK_UA` over `uk/hunspell/uk_UA.dict`
+/// (`scripts/oracle/uk/probe-speller.sh`): `кампутар` -> `Каптар`/`кампусам`/
+/// `кампусах` (Java-probed list and UTF-16 range).
+#[test]
+fn ukrainian_speller_кампутар() {
+    let _guard = engine_guard();
+    let text = "кампутар";
+    let matches = one(text, "MORFOLOGIK_RULE_UK_UA");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 8));
+    assert_eq!(
+        matches[0].message,
+        "Знайдено потенційну орфографічну помилку."
+    );
+    assert_eq!(
+        matches[0].short_message.as_deref(),
+        Some("Орфографічна помилка")
+    );
+    assert_eq!(matches[0].description, "Ймовірна орфографічна помилка");
+    assert_eq!(matches[0].category_id, "TYPOS");
+    assert_eq!(matches[0].category_name, "Можлива механічна помилка");
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["Каптар", "кампусам", "кампусах"]
+    );
+}
+
+/// The 2019 `dash_prefixes.txt` additional suggestions (Java-probed): the
+/// dash-split form is appended after the speller suggestions.
+#[test]
+fn ukrainian_speller_dash_prefix_suggestions() {
+    let _guard = engine_guard();
+    for (text, expected_last) in [("блогерр", "блог-ерр"), ("бізнесменн", "бізнес-менн")]
+    {
+        let matches = one(text, "MORFOLOGIK_RULE_UK_UA");
+        assert_eq!(matches.len(), 1, "{text}");
+        let got = suggestions(&matches[0]);
+        assert_eq!(
+            got.last().map(String::as_str),
+            Some(expected_last),
+            "{text}: {got:?}"
+        );
+    }
+}
+
+/// A correctly spelled dictionary word is clean (the speller ignores tagged
+/// tokens).
+#[test]
+fn ukrainian_speller_accepts_known_words() {
+    let _guard = engine_guard();
+    let Some(uk) = engine_with_rules(&["MORFOLOGIK_RULE_UK_UA"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    for text in ["автомобіль", "тест", "кінопрокат", "їжак"] {
+        let result = uk.check(text).expect("check");
+        assert!(result.matches.is_empty(), "{text}: {:?}", result.matches);
+    }
 }

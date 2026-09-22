@@ -30,6 +30,7 @@ pub fn load(data_dir: &Path) -> Result<BretonSpellingRule> {
             split_on_hyphen: true,
             no_suggest_words: &[],
             ignore_token_pattern: None,
+            ..Default::default()
         },
     )
 }

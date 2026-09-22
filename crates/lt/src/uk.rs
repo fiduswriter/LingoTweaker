@@ -11,6 +11,8 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod spelling;
+
 /// `Ukrainian.createDefaultDisambiguator` is
 /// `UkrainianHybridDisambiguator`; stage 1 uses the plain XML disambiguation
 /// subset (no global rules).
@@ -20,6 +22,9 @@ pub struct UkrainianPipeline {
     /// The same synthesizer through the pattern engine's trait.
     pub synth_adapter: Arc<UkrainianSynthesizerAdapter>,
     pub disambiguator: lt_disambig::XmlDisambiguator,
+    /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
+    /// when the vendored `uk_UA` dictionary cannot be read.
+    pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,
 }
 
 impl UkrainianPipeline {
