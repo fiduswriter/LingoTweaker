@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 851,
+  "file_count": 948,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -485,6 +485,90 @@
       }
     },
     {
+      "path": "ast/dictionaries/asturian.dict",
+      "sha256": "943c672b9cbcb444354004ba981c2ea3fed20445dd1fe87c1266a4dcb107bb92",
+      "size": 269710,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/asturian.dict",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/dictionaries/asturian.info",
+      "sha256": "ba17868a63587eddca7d76bab724f9f88c3f3753985e22a033cc1dfd9dc52f6f",
+      "size": 101,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/asturian.info",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/LICENCES-ast.txt",
+      "sha256": "7bc2de0902fbfd3965b3c26c5154ffdc80f733c20e8290988b176f3f7e2b299b",
+      "size": 264,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/LICENCES-ast.txt",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/LICENSES-en.txt",
+      "sha256": "b4bb22d3cb3ed83e2f3f635c2ba7237b03f21bb7bd150f98b09a78f0404071d6",
+      "size": 235,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/LICENSES-en.txt",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/ast_ES.dict",
+      "sha256": "6753c049b8202078125b13bef7d25b3063243c520130b7e2e1294a451593a65b",
+      "size": 746168,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/ast_ES.dict",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
+      "path": "ast/hunspell/ast_ES.info",
+      "sha256": "edc79d361bd65b553a0f250e98250063363f7b235c1a59d42bab64b0ffde8240",
+      "size": 652,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:asturian-pos-dict:0.1",
+        "artifact_sha256": "772fc113d9da478a242e4539f1c963561c45443dd63a9f1838b2564e0018be44",
+        "artifact_inner_path": "org/languagetool/resource/ast/hunspell/ast_ES.info",
+        "license": "GPL-3.0-only (asturian-pos-dict POM; Softastur dictionary, ast/hunspell/LICENCES-ast.txt)",
+        "license_verified": true,
+        "license_source": "asturian-pos-dict POM; bundled ast/hunspell/LICENCES-ast.txt"
+      }
+    },
+    {
       "path": "ast/hunspell/ignore.txt",
       "sha256": "d4fe7524d95fbd54bc91078648d465967a1e83e2813cd73d291ecae4332a19ce",
       "size": 59,
@@ -581,6 +665,34 @@
         "upstream_path": "languagetool-language-modules/ast/src/main/resources/org/languagetool/resource/ast/removed_custom.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "be/hunspell/be_BY.dict",
+      "sha256": "67dbaae9f09c2352ad645462407b5becf47466225608b4cd9bbc28daad4444c6",
+      "size": 781594,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
+        "artifact_sha256": "1d1a55e905faa9740d648144cf05c4a460f0f26416d2ee01157bad0877be31c2",
+        "artifact_inner_path": "org/languagetool/resource/be/hunspell/be_BY.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom"
+      }
+    },
+    {
+      "path": "be/hunspell/be_BY.info",
+      "sha256": "68497eca22b2f8679e6f43cafbef8013e21a3dd017da607a9a4b2cab34571d6a",
+      "size": 568,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
+        "artifact_sha256": "1d1a55e905faa9740d648144cf05c4a460f0f26416d2ee01157bad0877be31c2",
+        "artifact_inner_path": "org/languagetool/resource/be/hunspell/be_BY.info",
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom"
       }
     },
     {
@@ -898,6 +1010,76 @@
       }
     },
     {
+      "path": "ca/dictionaries/ca-ES.dict",
+      "sha256": "7c0b26c77dd844d06a77c013c199419f330387d924eade178d1dd2027c2afa3b",
+      "size": 1461925,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES.dict",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/dictionaries/ca-ES.info",
+      "sha256": "e663a6b7a69064555a3121fa7fe1479db0d7d283687d48a7ac2ecd5021526efc",
+      "size": 100,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES.info",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/dictionaries/ca-ES_synth.dict",
+      "sha256": "e79ca89d1d9de24bb72c290c3c4629516adb293bdaea46b522545988df0f7422",
+      "size": 1188349,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_synth.dict",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/dictionaries/ca-ES_synth.info",
+      "sha256": "c76f93f31b93ac5f11e569c23fe574d3d81649d3fe498c838dbeabbde6ceb651",
+      "size": 99,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_synth.info",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/dictionaries/ca-ES_tags.txt",
+      "sha256": "7f865a4d6c77c1b8788f46d60e8f9fef0eb0357f1b21dca6b11cbbab6a15e9a7",
+      "size": 4287,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_tags.txt",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
       "path": "ca/disambiguation.xml",
       "sha256": "5f2e3d358fa9e38e1a18a2eaa6e7970995a7a695e1e88abd9854d431192c9df3",
       "size": 984063,
@@ -1173,6 +1355,62 @@
       }
     },
     {
+      "path": "ca/spelling/ca-ES_spelling.dict",
+      "sha256": "4705147c22e4d687bc903baffed42a149f4d4cf6b96aa9c204c187f4dbdae18e",
+      "size": 2082380,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling.dict",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/spelling/ca-ES_spelling.info",
+      "sha256": "ef1967dc5b18616cc4ab0bd355d51036f817ee1e58236c035dac740e50e060b3",
+      "size": 907,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling.info",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/spelling/ca-ES_spelling_multitoken.dict",
+      "sha256": "08f66266d060ac5fc04da32a66f077f74a5016e9118ef75fba9bcd64b2a829f7",
+      "size": 6504613,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling_multitoken.dict",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
+      "path": "ca/spelling/ca-ES_spelling_multitoken.info",
+      "sha256": "442991d182ae4c0a1454f13a55ba148f02d555c0ebb91fa2dc325f0510a742dc",
+      "size": 873,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:catalan-pos-dict:3.3",
+        "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
+        "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling_multitoken.info",
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
+      }
+    },
+    {
       "path": "ca/words/README.txt",
       "sha256": "1ae61674fe4cfa17d9582deef4e7d721b91106db853c00efbd951028cdaeffb7",
       "size": 209,
@@ -1379,6 +1617,104 @@
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/resource/spelling_global.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar.dict",
+      "sha256": "60b6da80e1356bf9106a2ad1d2d8f0f8539ff7e5a0bf035c5ff5707b50eb04ba",
+      "size": 1935268,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar.dict",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar.info",
+      "sha256": "000391816ca437c7f3bd5e1005f9b8e49a847c7bb390061a5758cf9fccded5ea",
+      "size": 100,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar.info",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar_synth.dict",
+      "sha256": "ef194964f241f19028f4d2067d747925fde45a18f0cacef1d7c43e66710aad19",
+      "size": 2023563,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar_synth.dict",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar_synth.info",
+      "sha256": "7e0192504ace105bbb26165f77671249c1a63823aa4bc09c57ae391ea8c25315",
+      "size": 142,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar_synth.info",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/dictionaries/crimean_tatar_synth_tags.txt",
+      "sha256": "e85539164d7bbbd4478f768543f3f026e904a9976f696fcd4b6c9bfd2ffe9ffb",
+      "size": 77164,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/crimean_tatar_synth.dict_tags.txt",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/hunspell/crh_UA.dict",
+      "sha256": "060212e75a3a9a36ebb4153c40845bb9cd86ac08de79b6d0e29d87fd11828197",
+      "size": 348088,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/hunspell/crh_UA.dict",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
+      }
+    },
+    {
+      "path": "crh/hunspell/crh_UA.info",
+      "sha256": "91eebca5f3881495b74a2d7bf79408692458e9856e78d666b0df219dd7aebc8a",
+      "size": 223,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.qirimca.nlp:morfologik-crh-lt:1.0.1",
+        "artifact_sha256": "62d0dea38eabdc4d4ea4e6417026e1dd4e338624bbacd692340f8ee647831311",
+        "artifact_inner_path": "org/languagetool/resource/crh/hunspell/crh_UA.info",
+        "license": "LGPL (artifact POM, org.qirimca.nlp:morfologik-crh-lt)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom"
       }
     },
     {
@@ -1630,6 +1966,34 @@
       }
     },
     {
+      "path": "de/compound/exceptionsGerman.txt",
+      "sha256": "64e20db77f9bbe776075d44b0a817ec550969871945aa9f103d4185a346583ee",
+      "size": 16477,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:jwordsplitter:4.7",
+        "artifact_sha256": "0435e604abe8b4a0b27f568db9349fbe0546df286bbe62f667c9fd9663df71b2",
+        "artifact_inner_path": "de/danielnaber/jwordsplitter/exceptionsGerman.txt",
+        "license": "Apache-2.0 (artifact POM; jWordSplitter, Sven Abels / Daniel Naber)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/jwordsplitter/4.7/jwordsplitter-4.7.pom"
+      }
+    },
+    {
+      "path": "de/compound/wordsGerman.txt",
+      "sha256": "93742bb73050c58e1edca845a7f03b50e938b0515d8041c7e885859df605b951",
+      "size": 639695,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:jwordsplitter:4.7",
+        "artifact_sha256": "0435e604abe8b4a0b27f568db9349fbe0546df286bbe62f667c9fd9663df71b2",
+        "artifact_inner_path": "de/danielnaber/jwordsplitter/wordsGerman.txt",
+        "license": "Apache-2.0 (artifact POM; jWordSplitter, Sven Abels / Daniel Naber)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/jwordsplitter/4.7/jwordsplitter-4.7.pom"
+      }
+    },
+    {
       "path": "de/de.sor",
       "sha256": "8e4fb98ef7ef55ddfce191b62e3f7348108482f0a7fd2050e915713af59d6f61",
       "size": 2458,
@@ -1638,6 +2002,76 @@
         "upstream_path": "languagetool-language-modules/de/src/main/resources/org/languagetool/resource/de/de.sor",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "de/dictionaries/german.dict",
+      "sha256": "c9e1365054bc0c507e4d4de219c6a6794ae9e5616c2f6e985eb122684a8ad58b",
+      "size": 879291,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:german-pos-dict:1.2.4",
+        "artifact_sha256": "56f0b00adb704cbc1e86776b45f6890efe90685ab370a34b5b299593cdcaae22",
+        "artifact_inner_path": "org/languagetool/resource/de/german.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM, data based on Morphy)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/german-pos-dict/1.2.4/german-pos-dict-1.2.4.pom"
+      }
+    },
+    {
+      "path": "de/dictionaries/german.info",
+      "sha256": "836d85cd34282b15a7a553e46246f1e42ed934d03d07f512a9a1079407257725",
+      "size": 98,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:german-pos-dict:1.2.4",
+        "artifact_sha256": "56f0b00adb704cbc1e86776b45f6890efe90685ab370a34b5b299593cdcaae22",
+        "artifact_inner_path": "org/languagetool/resource/de/german.info",
+        "license": "CC-BY-SA-4.0 (artifact POM, data based on Morphy)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/german-pos-dict/1.2.4/german-pos-dict-1.2.4.pom"
+      }
+    },
+    {
+      "path": "de/dictionaries/german_synth.dict",
+      "sha256": "60a5e31535cb45901881e157c0c59ae1c9b42f91487e75321d181b56150d7a5b",
+      "size": 1608062,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:german-pos-dict:1.2.4",
+        "artifact_sha256": "56f0b00adb704cbc1e86776b45f6890efe90685ab370a34b5b299593cdcaae22",
+        "artifact_inner_path": "org/languagetool/resource/de/german_synth.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM, data based on Morphy)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/german-pos-dict/1.2.4/german-pos-dict-1.2.4.pom"
+      }
+    },
+    {
+      "path": "de/dictionaries/german_synth.info",
+      "sha256": "82fc3a8220009ebb2000f4b1f9e08a724de313b7c066024ac63f46c421b3010d",
+      "size": 100,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:german-pos-dict:1.2.4",
+        "artifact_sha256": "56f0b00adb704cbc1e86776b45f6890efe90685ab370a34b5b299593cdcaae22",
+        "artifact_inner_path": "org/languagetool/resource/de/german_synth.info",
+        "license": "CC-BY-SA-4.0 (artifact POM, data based on Morphy)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/german-pos-dict/1.2.4/german-pos-dict-1.2.4.pom"
+      }
+    },
+    {
+      "path": "de/dictionaries/german_tags.txt",
+      "sha256": "b650826b48657583913a8dc41a75031b8fd6499d1542b07bf70705fd3c1124c6",
+      "size": 49353,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "de.danielnaber:german-pos-dict:1.2.4",
+        "artifact_sha256": "56f0b00adb704cbc1e86776b45f6890efe90685ab370a34b5b299593cdcaae22",
+        "artifact_inner_path": "org/languagetool/resource/de/german_tags.txt",
+        "license": "CC-BY-SA-4.0 (artifact POM, data based on Morphy)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/de/danielnaber/german-pos-dict/1.2.4/german-pos-dict-1.2.4.pom"
       }
     },
     {
@@ -2503,6 +2937,34 @@
       }
     },
     {
+      "path": "el/morphology/analysis.dict",
+      "sha256": "9e6bbc3b47cdf90b02c7a81f3a443a3306f61db8b82dbf80b5d21b8f5223ecc9",
+      "size": 2929,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.ioperm:morphology-el:1.0.0",
+        "artifact_sha256": "caa36b7e96fd4c1804b3f4763de803ce87468d86908087087814f7d47caee668",
+        "artifact_inner_path": "org/ioperm/morphology/el/analysis.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM, linguistic data; source code Apache-2.0)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom"
+      }
+    },
+    {
+      "path": "el/morphology/analysis.info",
+      "sha256": "afda62092d85a58c853da6b1859bd387051c06e6d32daada86354a2846ec1f96",
+      "size": 114,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.ioperm:morphology-el:1.0.0",
+        "artifact_sha256": "caa36b7e96fd4c1804b3f4763de803ce87468d86908087087814f7d47caee668",
+        "artifact_inner_path": "org/ioperm/morphology/el/analysis.info",
+        "license": "CC-BY-SA-4.0 (artifact POM, linguistic data; source code Apache-2.0)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom"
+      }
+    },
+    {
       "path": "el/rules/grammar.xml",
       "sha256": "4b74b9e37c8a9f23266ad9547641781732dcc7bf4e60b94622c322dd45bfe249",
       "size": 53984,
@@ -2624,6 +3086,76 @@
       }
     },
     {
+      "path": "en/dictionaries/english.dict",
+      "sha256": "f2a0ea88cff225d1073321ad8ad795c9aa8eb08613f1d74a88895bfe9b992142",
+      "size": 625361,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/english.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/english-pos-dict/0.6/english-pos-dict-0.6.pom"
+      }
+    },
+    {
+      "path": "en/dictionaries/english.info",
+      "sha256": "41cbd7b6d67d7b4af8240d560974f992a58da7a9e3f31d1e1f7521cea6cc1589",
+      "size": 99,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/english.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/english-pos-dict/0.6/english-pos-dict-0.6.pom"
+      }
+    },
+    {
+      "path": "en/dictionaries/english_synth.dict",
+      "sha256": "b86fc704dbaa9d8088d2c66963ac66d295bf786827e80bc9b91a994ac698b318",
+      "size": 591310,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/english_synth.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/english-pos-dict/0.6/english-pos-dict-0.6.pom"
+      }
+    },
+    {
+      "path": "en/dictionaries/english_synth.info",
+      "sha256": "4ad141c83a5a5aef1354059327bb4f2c3aa38fd468e53232c3999dd119396523",
+      "size": 98,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/english_synth.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/english-pos-dict/0.6/english-pos-dict-0.6.pom"
+      }
+    },
+    {
+      "path": "en/dictionaries/english_tags.txt",
+      "sha256": "1670adb3abfffb3ca9f02e78a614f386b7f16c8374b0afdbf19db1dd141de872",
+      "size": 543,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/english_tags.txt",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/english-pos-dict/0.6/english-pos-dict-0.6.pom"
+      }
+    },
+    {
       "path": "en/disambiguation.xml",
       "sha256": "61b02a3b577c03e7a1197968238404f56915fcb862096fbf745ab3b3c77f7edc",
       "size": 840186,
@@ -2643,6 +3175,146 @@
         "upstream_path": "languagetool-language-modules/en/src/main/resources/org/languagetool/resource/en/en.sor",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "en/hunspell/en_AU.dict",
+      "sha256": "0213938d6a8c4f7723e8a1919ab43f067d889a841e0289dcddbc010e4982fd64",
+      "size": 716861,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_AU.dict",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_AU.info",
+      "sha256": "9e18f1cfb30b0d717196792217559ae14628aa11ffb90b2a818cba94003e96fd",
+      "size": 531,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_AU.info",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_CA.dict",
+      "sha256": "5bc4ea96428b9738a54a9c5891fe6b428cf817a299fe3f7903855243945cb2c8",
+      "size": 718706,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_CA.dict",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_CA.info",
+      "sha256": "85d7f84821de62b8cec7f29877cb52a8e03432122dd3d409668e09fd88ffda05",
+      "size": 436,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_CA.info",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_GB.dict",
+      "sha256": "9f059749aaa293dfd9bd64967adef1fbb4980eaa30ee6196a7b015d1b1241032",
+      "size": 720262,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_GB.dict",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_GB.info",
+      "sha256": "41784595e6048ad138966b88b7651779acb75c6bd1bb31e9a26a78ccaddde4b3",
+      "size": 518,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_GB.info",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_NZ.dict",
+      "sha256": "0298288f30a5fc9d33f755947a8e34734cfb81a5bccfca32d59437d5f4c1cd9d",
+      "size": 716647,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_NZ.dict",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_NZ.info",
+      "sha256": "c7c232c3492980728ab10e8061b591614cd664d20408dd50a63f764c3445a5ba",
+      "size": 682,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_NZ.info",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_US.dict",
+      "sha256": "9ca20ca1dd0bda6d6484331ab72459ffe49bd2624e506c63b1b47651c28451d2",
+      "size": 718075,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_US.dict",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
+      }
+    },
+    {
+      "path": "en/hunspell/en_US.info",
+      "sha256": "7590576c518b51e0b87b05df9339499d5d7875fc141c5dc941266e1b2a718258",
+      "size": 759,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:english-pos-dict:0.6",
+        "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
+        "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_US.info",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license_verified": false,
+        "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
     },
     {
@@ -2775,6 +3447,48 @@
         "upstream_path": "languagetool-language-modules/en/src/main/resources/org/languagetool/resource/en/hunspell/spelling_merged.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "en/models/en-chunker.bin",
+      "sha256": "7861a0c2f134d9c12a022a1ba501e88bc7039f6db72b4140e1bafd1fb5ef76cc",
+      "size": 2560304,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "edu.washington.cs.knowitall:opennlp-chunk-models:1.5",
+        "artifact_sha256": "e7090de37093d2b91a0136f9e1e9cf60567bc27f72781cfdd083d86e342d7cb0",
+        "artifact_inner_path": "en-chunker.bin",
+        "license": "Apache-2.0 (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/edu/washington/cs/knowitall/opennlp-chunk-models/1.5/opennlp-chunk-models-1.5.pom"
+      }
+    },
+    {
+      "path": "en/models/en-pos-maxent.bin",
+      "sha256": "645a094f45a866687a617385233fd23ae8b0f5fa8b1b76996781a50c17bdcf3d",
+      "size": 5696197,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "edu.washington.cs.knowitall:opennlp-postag-models:1.5",
+        "artifact_sha256": "4d58462b891dbe478a8a68c8a93749af5bedd874af1974596a72f5667fffc8c9",
+        "artifact_inner_path": "en-pos-maxent.bin",
+        "license": "Apache-2.0 (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/edu/washington/cs/knowitall/opennlp-postag-models/1.5/opennlp-postag-models-1.5.pom"
+      }
+    },
+    {
+      "path": "en/models/en-token.bin",
+      "sha256": "2d0dd64ffb3d084382d7bdb65e7bd004c5001ba5503c36413d97c3e46321437c",
+      "size": 439890,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "edu.washington.cs.knowitall:opennlp-tokenize-models:1.5",
+        "artifact_sha256": "1c10141d547b9ae1de1238d5a9ec69db043289cd6f8caf0d7d2f14bbfcda9502",
+        "artifact_inner_path": "en-token.bin",
+        "license": "Apache-2.0 (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/edu/washington/cs/knowitall/opennlp-tokenize-models/1.5/opennlp-tokenize-models-1.5.pom"
       }
     },
     {
@@ -3531,6 +4245,76 @@
       }
     },
     {
+      "path": "es/dictionaries/es-ES.dict",
+      "sha256": "a3026f6457f2bf7bbf501f7d1c10a3a54bcdb10c8387da107532c934d75a39d3",
+      "size": 2603354,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:spanish-pos-dict:2.5",
+        "artifact_sha256": "f5cf2f9939c0fd17dd0cad75a8fd05893c7a0c035bbf159b5dc8f81740271b9a",
+        "artifact_inner_path": "org/languagetool/resource/es/es-ES.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/spanish-pos-dict/2.5/spanish-pos-dict-2.5.pom"
+      }
+    },
+    {
+      "path": "es/dictionaries/es-ES.info",
+      "sha256": "10e0e91608037639f2fb6d1def77f481cd93a631cfaee4853dcfe14558f3ece5",
+      "size": 664,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:spanish-pos-dict:2.5",
+        "artifact_sha256": "f5cf2f9939c0fd17dd0cad75a8fd05893c7a0c035bbf159b5dc8f81740271b9a",
+        "artifact_inner_path": "org/languagetool/resource/es/es-ES.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/spanish-pos-dict/2.5/spanish-pos-dict-2.5.pom"
+      }
+    },
+    {
+      "path": "es/dictionaries/es-ES_synth.dict",
+      "sha256": "25665f3ab9690f8c15e7c6efddf2973bd887545b79e43f08545554813a3c4c95",
+      "size": 1895870,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:spanish-pos-dict:2.5",
+        "artifact_sha256": "f5cf2f9939c0fd17dd0cad75a8fd05893c7a0c035bbf159b5dc8f81740271b9a",
+        "artifact_inner_path": "org/languagetool/resource/es/es-ES_synth.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/spanish-pos-dict/2.5/spanish-pos-dict-2.5.pom"
+      }
+    },
+    {
+      "path": "es/dictionaries/es-ES_synth.info",
+      "sha256": "c76f93f31b93ac5f11e569c23fe574d3d81649d3fe498c838dbeabbde6ceb651",
+      "size": 99,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:spanish-pos-dict:2.5",
+        "artifact_sha256": "f5cf2f9939c0fd17dd0cad75a8fd05893c7a0c035bbf159b5dc8f81740271b9a",
+        "artifact_inner_path": "org/languagetool/resource/es/es-ES_synth.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/spanish-pos-dict/2.5/spanish-pos-dict-2.5.pom"
+      }
+    },
+    {
+      "path": "es/dictionaries/es-ES_tags.txt",
+      "sha256": "56d69729f576d88e2ea7aff7b50d853be978f615f8555f6d4bba7ab9abfb1ce5",
+      "size": 25101,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.softcatala:spanish-pos-dict:2.5",
+        "artifact_sha256": "f5cf2f9939c0fd17dd0cad75a8fd05893c7a0c035bbf159b5dc8f81740271b9a",
+        "artifact_inner_path": "org/languagetool/resource/es/es-ES_tags.txt",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/softcatala/spanish-pos-dict/2.5/spanish-pos-dict-2.5.pom"
+      }
+    },
+    {
       "path": "es/disambiguation.xml",
       "sha256": "d2caa2b8613c0d6b0274586595064361845b34b03971770c803e39838ae77602",
       "size": 339156,
@@ -3880,6 +4664,120 @@
         "upstream_path": "languagetool-language-modules/es/src/main/resources/org/languagetool/resource/es/verb_noun.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "fa/rules/coherency.txt",
+      "sha256": "65e2865bf6723da67379ac18505cebec69743597bde1247bf6360102193a1e2a",
+      "size": 357,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/fa/src/main/resources/org/languagetool/rules/fa/coherency.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "fa/rules/grammar.xml",
+      "sha256": "6390e9b4cab20b844a65dd0e8060f98b8d4616646672d4bf607c87021a912f2c",
+      "size": 230887,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/fa/src/main/resources/org/languagetool/rules/fa/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "fa/rules/replace.txt",
+      "sha256": "bbf592601f9be7880af140a2236ac0ac2bb474f5c6c2a2d9fd6f10b09ebf679b",
+      "size": 13720,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/fa/src/main/resources/org/languagetool/rules/fa/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "fa/words/common_words.txt",
+      "sha256": "aead1c48f39dc8c3beadd1341db44103fe94c43608b3de8aeef118b97dc592ad",
+      "size": 112514,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/fa/src/main/resources/org/languagetool/resource/fa/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "fr/dictionaries/french.dict",
+      "sha256": "ec8af90493eac0797e16755503dcaeeab1333204ca63896497a87c05baa3675a",
+      "size": 1137949,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:french-pos-dict:0.7",
+        "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
+        "artifact_inner_path": "org/languagetool/resource/fr/french.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
+      }
+    },
+    {
+      "path": "fr/dictionaries/french.info",
+      "sha256": "4270fa91f3ec08b91f26ff7d4298fa5253df003b24a0a3a9e0aef2836c3ece7f",
+      "size": 1013,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:french-pos-dict:0.7",
+        "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
+        "artifact_inner_path": "org/languagetool/resource/fr/french.info",
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
+      }
+    },
+    {
+      "path": "fr/dictionaries/french_synth.dict",
+      "sha256": "b841cd7f12bbeaf64778a9b5c19077419225b88ebf6c4d150657bae9eb444f38",
+      "size": 649325,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:french-pos-dict:0.7",
+        "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
+        "artifact_inner_path": "org/languagetool/resource/fr/french_synth.dict",
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
+      }
+    },
+    {
+      "path": "fr/dictionaries/french_synth.info",
+      "sha256": "05dc81620a99bda944e44205082a47f811660918f577eca5fe270a1feea5d816",
+      "size": 94,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:french-pos-dict:0.7",
+        "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
+        "artifact_inner_path": "org/languagetool/resource/fr/french_synth.info",
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
+      }
+    },
+    {
+      "path": "fr/dictionaries/french_tags.txt",
+      "sha256": "44204d48d135e67086fb7ff879f346481b31585213e17d5d62faa1b6c2253058",
+      "size": 3744,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:french-pos-dict:0.7",
+        "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
+        "artifact_inner_path": "org/languagetool/resource/fr/french_tags.txt",
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
       }
     },
     {
@@ -5091,6 +5989,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_fa.properties",
+      "sha256": "56350aebb076dbcf19b6d6f004aed32311b46d6307157ad117abdacf5f3ef4dc",
+      "size": 27281,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/fa/src/main/resources/org/languagetool/MessagesBundle_fa.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle_fr.properties",
       "sha256": "faedbdc77ddd20b6cea2375b43e7b79959d2341cec3946077acbd301890fb80c",
       "size": 17334,
@@ -5366,6 +6275,90 @@
       }
     },
     {
+      "path": "nl/dictionaries/README.txt",
+      "sha256": "54c5b6782fa0ebeab918fc8a5e09337e4940aae743f9fa314ed862209ebfd5e5",
+      "size": 144,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/README.txt",
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
+      }
+    },
+    {
+      "path": "nl/dictionaries/dutch.dict",
+      "sha256": "b9564fc2951eea5bf939efc0d9728930d6cbe6b62c58521c925f4f5cc73d6b47",
+      "size": 13416746,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/dutch.dict",
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
+      }
+    },
+    {
+      "path": "nl/dictionaries/dutch.info",
+      "sha256": "93917133f443c8a9ad571dfba19fcb86d934d1588d75a91e004dbe1d54fa9f1b",
+      "size": 140,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/dutch.info",
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
+      }
+    },
+    {
+      "path": "nl/dictionaries/dutch_synth.dict",
+      "sha256": "6d8d58169f67b2219fe16f1506c35734548326c459f9323166de2c909521a4f8",
+      "size": 14117414,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/dutch_synth.dict",
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
+      }
+    },
+    {
+      "path": "nl/dictionaries/dutch_synth.info",
+      "sha256": "60d023c49cd2103762a01738dd67548f34fb83b45eeed615245f32ab24eff8b1",
+      "size": 108,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/dutch_synth.info",
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
+      }
+    },
+    {
+      "path": "nl/dictionaries/dutch_tags.txt",
+      "sha256": "31f991b8e3679ec876acc8e51df8449e745432fdf2dd2720015853891f803454",
+      "size": 1739,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/dutch_tags.txt",
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
+        "license_verified": false,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
+      }
+    },
+    {
       "path": "nl/disambiguation.xml",
       "sha256": "e0ee9f81750f5374bef0291c6f970a80f7aa981ec410b120a620a22b65c76b2c",
       "size": 421929,
@@ -5498,6 +6491,20 @@
       }
     },
     {
+      "path": "nl/spelling/README.txt",
+      "sha256": "aed9afe349c5d4d8959a23be385ca04293815a28fd20ab74f396764d452c8746",
+      "size": 1166,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/spelling/README.txt",
+        "license": "LGPL-2.1-or-later (nl/spelling/README.txt, TaalTik)",
+        "license_verified": true,
+        "license_source": "bundled nl/spelling/README.txt"
+      }
+    },
+    {
       "path": "nl/spelling/ignore.txt",
       "sha256": "293af9166da1e41fdd8eee57eda744e2d91631e70ec7c5cd5509d03f651e9684",
       "size": 48780,
@@ -5506,6 +6513,34 @@
         "upstream_path": "languagetool-language-modules/nl/src/main/resources/org/languagetool/resource/nl/spelling/ignore.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "nl/spelling/nl_NL.dict",
+      "sha256": "5958b68ae9007f0a31f62c4aba5fac285ea81429bea499cf3ae7f566e5d8c171",
+      "size": 14959766,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/spelling/nl_NL.dict",
+        "license": "LGPL-2.1-or-later (nl/spelling/README.txt, TaalTik)",
+        "license_verified": true,
+        "license_source": "bundled nl/spelling/README.txt"
+      }
+    },
+    {
+      "path": "nl/spelling/nl_NL.info",
+      "sha256": "a113d7454cffa2fdb49f1921f0a452dba6ef464d8445b2709b7c7fa4f79b5ee3",
+      "size": 1124,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:dutch-pos-dict:0.1",
+        "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
+        "artifact_inner_path": "org/languagetool/resource/nl/spelling/nl_NL.info",
+        "license": "LGPL-2.1-or-later (nl/spelling/README.txt, TaalTik)",
+        "license_verified": true,
+        "license_source": "bundled nl/spelling/README.txt"
       }
     },
     {
@@ -6598,6 +7633,76 @@
       }
     },
     {
+      "path": "pt/dictionaries/portuguese.dict",
+      "sha256": "3042e59f434be68d1544456015bac68f8e77fdbfd2fdce0a56d07c9a23e6f119",
+      "size": 1223161,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/portuguese.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/dictionaries/portuguese.info",
+      "sha256": "7468845ef856bc2733ea282573a1790cebee804e7dad1fab72b6f80d5dd10e59",
+      "size": 99,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/portuguese.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/dictionaries/portuguese_synth.dict",
+      "sha256": "9271cf26f90afbcbd004aed04162d5d97bf36d6bb8ae95361f95d52c526a4629",
+      "size": 948068,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/portuguese_synth.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/dictionaries/portuguese_synth.info",
+      "sha256": "7468845ef856bc2733ea282573a1790cebee804e7dad1fab72b6f80d5dd10e59",
+      "size": 99,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/portuguese_synth.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/dictionaries/portuguese_tags.txt",
+      "sha256": "68262192e64d1ffa35b39febd6ef0ed02cadcacf1a578ca417f73d1b96b32060",
+      "size": 23238,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/portuguese_tags.txt",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
       "path": "pt/disambiguation.xml",
       "sha256": "6e5abcc62814350494bfbc07ff2779e225eabc79271f9b3844163e3d63363ba5",
       "size": 293145,
@@ -7222,6 +8327,90 @@
         "upstream_path": "languagetool-language-modules/pt/src/main/resources/org/languagetool/rules/pt/wrongWordInContext.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "pt/spelling/pt-BR.dict",
+      "sha256": "0c0f4d2502753ad3e7d00d1749715a89a72c70cf78a10327f3157289b455eeb3",
+      "size": 2293645,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/spelling/pt-BR.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/spelling/pt-BR.info",
+      "sha256": "c91d1a688207b297f8426ced18f96b869de76b732418f530bd4aff7c08895918",
+      "size": 1401,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/spelling/pt-BR.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/spelling/pt-PT-45.dict",
+      "sha256": "8badf728ad0d8b4e6c2feeadc2191372023e2c2113877d9ce1485d05d69e0006",
+      "size": 702614,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/spelling/pt-PT-45.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/spelling/pt-PT-45.info",
+      "sha256": "d743044e9d5a1c251821ebeb2c8788e3b238747932b1de01f0d26f94aaac6d75",
+      "size": 1042,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/spelling/pt-PT-45.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/spelling/pt-PT-90.dict",
+      "sha256": "767c003ea80ddc10711bee446e36c7746e3856a9f8362e72ac8883485bc9d61e",
+      "size": 700866,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/spelling/pt-PT-90.dict",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
+      }
+    },
+    {
+      "path": "pt/spelling/pt-PT-90.info",
+      "sha256": "c726ba3964579b88da7295adc8f77f007d05343d96bb15f682ea1f3e5f7f1757",
+      "size": 1042,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "org.languagetool:portuguese-pos-dict:1.2.0",
+        "artifact_sha256": "fe8da88bb31b6372855741fbd81ee1c7477b4f8a0624d3dafd20ee23e184650e",
+        "artifact_inner_path": "org/languagetool/resource/pt/spelling/pt-PT-90.info",
+        "license": "LGPL-2.1-only (artifact POM)",
+        "license_verified": true,
+        "license_source": "https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom"
       }
     },
     {
@@ -9194,6 +10383,118 @@
       }
     },
     {
+      "path": "uk/dictionaries/README.txt",
+      "sha256": "691c2a9b1aeafb7096a5146a3843bf25b6974423a3c5145766ac436aa6737c47",
+      "size": 697,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/README",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/tagset.txt",
+      "sha256": "63727b8d0d7e34b6181f5f950e12879bf1029a8993cc58f0ef53994119a07276",
+      "size": 6986,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/tagset.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian.dict",
+      "sha256": "8622bbd9acd6a92f41c0fe494f174ae994ca3621287f1eef15b1d19a409071f8",
+      "size": 3340126,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian.dict",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian.info",
+      "sha256": "7e0192504ace105bbb26165f77671249c1a63823aa4bc09c57ae391ea8c25315",
+      "size": 142,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian.info",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_synth.dict",
+      "sha256": "505222d77d5c9a3b16c719357031a1aef8159b35ce13a3951c6c648d32d87fff",
+      "size": 2528840,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_synth.dict",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_synth.dict_tags.txt",
+      "sha256": "e2b8e0f92067b685a34fc7825fc737912b53fe3acd5f4b79dbfc37147310f61e",
+      "size": 193248,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_synth.dict_tags.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_synth.info",
+      "sha256": "7e0192504ace105bbb26165f77671249c1a63823aa4bc09c57ae391ea8c25315",
+      "size": 142,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_synth.info",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/dictionaries/ukrainian_tags.txt",
+      "sha256": "6e878e58c3ea946bc53d745b479a5dd152c481cfe9a390be94a9c8d58e0e27ad",
+      "size": 220152,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/ukrainian_tags.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
       "path": "uk/disambiguation.xml",
       "sha256": "fedce36aa8297d7b9b5fcd45fa9d9e6fd16adec9c4426843cb2e4a89822a73c4",
       "size": 526877,
@@ -9202,6 +10503,20 @@
         "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/disambiguation.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "uk/hunspell/README_uk_UA.txt",
+      "sha256": "f31df5824820881252fea7edcb77cefd5ad36971ffd661daba60e97a79126fe3",
+      "size": 209,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/hunspell/README.txt",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
       }
     },
     {
@@ -9224,6 +10539,34 @@
         "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/hunspell/spelling.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
+      }
+    },
+    {
+      "path": "uk/hunspell/uk_UA.dict",
+      "sha256": "0e5042e1343c209a53e4be9b84d7026bc8dbf24dc595bd2358e2891004e5cf3b",
+      "size": 2275333,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/hunspell/uk_UA.dict",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
+      }
+    },
+    {
+      "path": "uk/hunspell/uk_UA.info",
+      "sha256": "770382887cca1d7e56f748b0c227ded975c5800b3e5309718ec092deb1c38bc8",
+      "size": 257,
+      "source": {
+        "kind": "maven-artifact",
+        "coords": "ua.net.nlp:morfologik-ukrainian-lt:6.8.6",
+        "artifact_sha256": "4b8a06a731d12047dd91bfb3a63638f258b4477f1591e167fe0b286a4c22c645",
+        "artifact_inner_path": "org/languagetool/resource/uk/hunspell/uk_UA.info",
+        "license": "LGPL-2.1-or-later (artifact bundled resource/uk/README + resource/uk/hunspell/README.txt; dict_uk/brown-uk)",
+        "license_verified": true,
+        "license_source": "artifact org/languagetool/resource/uk/README, org/languagetool/resource/uk/hunspell/README.txt"
       }
     },
     {
