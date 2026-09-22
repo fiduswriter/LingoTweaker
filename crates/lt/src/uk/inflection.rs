@@ -28,7 +28,7 @@ impl Inflection {
             || (b == "s" && MFN.is_match(a).unwrap_or(false))
     }
 
-    fn anim_matters(&self) -> bool {
+    pub fn anim_matters(&self) -> bool {
         self.anim_tag.is_some()
             && self.anim_tag.as_deref() != Some("unanim")
             && self.case_ == "v_zna"
@@ -119,7 +119,6 @@ pub fn get_noun_inflections(
 }
 
 /// `TokenAgreementAdjNounRule.formatInflections`.
-#[allow(dead_code)]
 pub fn format_inflections(inflections: &[Inflection], adj: bool) -> String {
     let mut sorted = inflections.to_vec();
     sorted.sort_by(|a, b| {

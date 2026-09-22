@@ -18,6 +18,7 @@ pub mod hybrid;
 pub mod inflection;
 pub mod missing_hyphen;
 pub mod mixed_alphabets;
+pub mod numr_noun;
 pub mod search_helper;
 pub mod simple_replace;
 pub mod simple_replace_renamed;
@@ -48,6 +49,8 @@ pub struct UkrainianPipeline {
     pub simple_replace: crate::uk::simple_replace::SimpleReplaceRule,
     /// `SimpleReplaceSoftRule` (`UK_SIMPLE_REPLACE_SOFT`).
     pub simple_replace_soft: crate::uk::simple_replace::SimpleReplaceSoftRule,
+    /// `TokenAgreementNumrNounRule` (`UK_NUMR_NOUN_INFLECTION_AGREEMENT`).
+    pub numr_noun: crate::uk::numr_noun::TokenAgreementNumrNounRule,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,

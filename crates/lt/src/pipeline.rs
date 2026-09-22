@@ -5206,6 +5206,8 @@ impl Pipeline {
         let simple_replace_soft = crate::uk::simple_replace::SimpleReplaceSoftRule::load(
             &data_dir.path().join("uk/rules"),
         );
+        let numr_noun =
+            crate::uk::numr_noun::TokenAgreementNumrNounRule::new(Arc::clone(&synthesizer));
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5219,6 +5221,7 @@ impl Pipeline {
             missing_hyphen,
             simple_replace,
             simple_replace_soft,
+            numr_noun,
             spelling,
         });
         Ok(Self {
@@ -11777,6 +11780,22 @@ impl Pipeline {
                     ukrainian
                         .simple_replace_soft
                         .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::numr_noun::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian.numr_noun.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
                 if let Some(spelling) = &ukrainian.spelling {

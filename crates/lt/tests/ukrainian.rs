@@ -416,3 +416,44 @@ fn ukrainian_simple_replace() {
         vec!["великогрішний".to_string(), "великогрішник".to_string()]
     );
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
+/// `TokenAgreementNumrNounRule` + its exception helper.
+#[test]
+fn ukrainian_numr_noun_agreement() {
+    let _guard = engine_guard();
+    let text = "два стола";
+    let matches = one(text, "UK_NUMR_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 9));
+    assert_eq!(
+        matches[0].message,
+        "Потенційна помилка: числівник не узгоджений з іменником: \"два\" вимагає: [мн.: називний], а далі йде \"стола\": [ч.р.: родовий, знахідний]"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["два столи".to_string()]);
+
+    let text = "півтора роки";
+    let matches = one(text, "UK_NUMR_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 12));
+    assert_eq!(
+        matches[0].message,
+        "Існує правило, що після «півтора» треба вживати родовий відмінок ч. або с.р., однак у текстах в багатьох випадках вживають і форму множини, надто коли перед іменником іде прикметник"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["півтора року".to_string()]);
+
+    for ok in [
+        "два столи",
+        "пять столів",
+        "дві книги",
+        "три столи",
+        "1,5 метра",
+        "багато людей",
+        "два з половиною роки",
+    ] {
+        assert!(
+            one(ok, "UK_NUMR_NOUN_INFLECTION_AGREEMENT").is_empty(),
+            "{ok}"
+        );
+    }
+}
