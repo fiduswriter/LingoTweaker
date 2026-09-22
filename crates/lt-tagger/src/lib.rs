@@ -8,6 +8,7 @@
 //! the automaton expanded into an in-memory map at load time (fast, simple);
 //! revisit streaming FSA queries in the P2.5 performance pass.
 
+pub mod arabic;
 pub mod asturian;
 pub mod breton;
 pub mod catalan;
@@ -56,6 +57,7 @@ pub mod uk_helpers;
 pub mod ukrainian;
 pub mod ukrainian_synth;
 
+pub use arabic::ArabicTagger;
 pub use asturian::AsturianTagger;
 pub use breton::BretonTagger;
 pub use catalan::CatalanTagger;

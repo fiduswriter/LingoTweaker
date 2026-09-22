@@ -26,6 +26,7 @@ pub use lt_tokenize::{EnglishWordTokenizer, SrxDocument, SrxTokenizer};
 // Language-specific modules live in `en/` and `de/`; rule families that
 // carry per-language entry points stay at the crate root (see `en.rs`/`de.rs`
 // for the split rationale).
+mod ar;
 mod ast;
 mod be;
 mod br;
@@ -454,6 +455,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Sr => Pipeline::new_serbian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Ar => Pipeline::new_arabic(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

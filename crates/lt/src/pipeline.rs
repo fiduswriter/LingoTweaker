@@ -191,6 +191,8 @@ pub struct Pipeline {
     pub ukrainian: Option<Arc<crate::uk::UkrainianPipeline>>,
     /// Serbian pipeline parts (`None` for the other languages)
     pub serbian: Option<Arc<crate::sr::SerbianPipeline>>,
+    /// Arabic pipeline parts (`None` for the other languages)
+    pub arabic: Option<Arc<crate::ar::ArabicPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1384,6 +1386,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1634,6 +1637,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1843,6 +1847,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2060,6 +2065,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2197,6 +2203,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2453,6 +2460,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2669,6 +2677,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3002,6 +3011,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3159,6 +3169,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3302,6 +3313,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3469,6 +3481,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3614,6 +3627,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3731,6 +3745,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3883,6 +3898,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3967,6 +3983,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4134,6 +4151,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4213,6 +4231,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4329,6 +4348,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4431,6 +4451,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4547,6 +4568,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4651,6 +4673,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4756,6 +4779,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4871,6 +4895,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4975,6 +5000,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5132,6 +5158,7 @@ impl Pipeline {
             russian: Some(russian),
             ukrainian: None,
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5328,6 +5355,7 @@ impl Pipeline {
             russian: None,
             ukrainian: Some(ukrainian),
             serbian: None,
+            arabic: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5480,6 +5508,120 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: Some(serbian),
+            arabic: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Arabic (`ar`) engine. Stage 1 wires the XML rules (`grammar.xml` only:
+    /// `Arabic` overrides no `getRuleFileNames`) with the stage-1 dictionary
+    /// `ArabicTagger` subset and the `ArabicHybridDisambiguator` order
+    /// (`ar/multiwords.txt` chunker → XML disambiguation); the speller and the
+    /// Java rule classes follow in stages 2/3.
+    pub fn new_arabic(
+        data_dir: &lt_data::DataDir,
+        today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "ar_two")?;
+
+        let tagger = Arc::new(lt_tagger::ArabicTagger::load(data_dir.path())?);
+
+        // `Arabic.getRuleFileNames` is the default: `grammar.xml` only.
+        let grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ar))?;
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Arabic references four active `<filter>` classes; the three
+        // synthesizer-dependent ones are stage-3 placeholders (reject).
+        let filters = crate::ar::filters::arabic_filter_registry(today.unwrap_or_else(Ymd::today));
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        // `ArabicHybridDisambiguator`'s XML stage:
+        // `new XmlRuleDisambiguator(new Arabic())` (no global rules).
+        let mut disambiguator =
+            lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Ar))?;
+        disambiguator.set_filter_registry(filters);
+
+        // `MultiWordChunker.getInstance("/ar/multiwords.txt")` (the list is
+        // effectively empty upstream, but the chunker is still loaded).
+        let multiwords_chunker = lt_disambig::MultiWordChunker::load(
+            &data_dir.path().join("ar/words/multiwords.txt"),
+            false,
+            false,
+            false,
+            None,
+            false,
+        )
+        .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
+
+        let arabic = Arc::new(crate::ar::ArabicPipeline {
+            tagger,
+            multiwords_chunker,
+            disambiguator,
+        });
+        Ok(Self {
+            lang: Lang::Ar,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: Some(arabic),
             clean_overlapping_matches: true,
         })
     }
@@ -5622,6 +5764,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5711,6 +5854,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5804,6 +5948,7 @@ impl Pipeline {
             russian: None,
             ukrainian: None,
             serbian: None,
+            arabic: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5830,6 +5975,8 @@ impl Pipeline {
                 crate::uk::analyze_ukrainian_sentence(ukrainian, sentence_text)
             } else if let Some(serbian) = &self.serbian {
                 crate::sr::analyze_serbian_sentence(serbian, sentence_text)
+            } else if let Some(arabic) = &self.arabic {
+                crate::ar::analyze_arabic_sentence(arabic, sentence_text)
             } else {
                 match &self.german {
                     Some(german) => {
@@ -9040,6 +9187,8 @@ impl Pipeline {
             crate::uk::analyze_ukrainian_sentence(ukrainian, &text[start..end])
         } else if let Some(serbian) = &self.serbian {
             crate::sr::analyze_serbian_sentence(serbian, &text[start..end])
+        } else if let Some(arabic) = &self.arabic {
+            crate::ar::analyze_arabic_sentence(arabic, &text[start..end])
         } else {
             match &self.german {
                 Some(german) => {
@@ -13922,6 +14071,12 @@ impl Pipeline {
             // `SerbianHybridDisambiguator`: `sr/multiwords.txt` chunker →
             // XML rules.
             serbian.disambiguate(sentence);
+            return;
+        }
+        if let Some(arabic) = &self.arabic {
+            // `ArabicHybridDisambiguator`: `ar/multiwords.txt` chunker →
+            // XML rules.
+            arabic.disambiguate(sentence);
             return;
         }
         self.global_chunker.apply(sentence);

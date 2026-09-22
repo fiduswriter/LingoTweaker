@@ -83,6 +83,8 @@ pub enum Lang {
     Uk,
     /// Serbian (`sr`; default variant `sr-RS`, ekavian).
     Sr,
+    /// Arabic (`ar`; default variant has no country, like `es`).
+    Ar,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -94,7 +96,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 30] = [
+    pub const ALL: [Lang; 31] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -122,6 +124,7 @@ impl Lang {
         Lang::Ru,
         Lang::Uk,
         Lang::Sr,
+        Lang::Ar,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -159,6 +162,7 @@ impl Lang {
             "ru" => Some(Lang::Ru),
             "uk" => Some(Lang::Uk),
             "sr" => Some(Lang::Sr),
+            "ar" => Some(Lang::Ar),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -195,6 +199,7 @@ impl Lang {
             Lang::Ru => "ru",
             Lang::Uk => "uk",
             Lang::Sr => "sr",
+            Lang::Ar => "ar",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -338,6 +343,11 @@ impl Lang {
                 code: "sr",
                 long_code: "sr-RS",
                 name: "Serbian",
+            },
+            Lang::Ar => Language {
+                code: "ar",
+                long_code: "ar",
+                name: "Arabic",
             },
             Lang::No => Language {
                 code: "no",
