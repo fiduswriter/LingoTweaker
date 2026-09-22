@@ -22,6 +22,7 @@ pub mod mixed_alphabets;
 pub mod noun_verb;
 pub mod numr_noun;
 pub mod prep_noun;
+pub mod priorities;
 pub mod search_helper;
 pub mod simple_replace;
 pub mod simple_replace_renamed;
