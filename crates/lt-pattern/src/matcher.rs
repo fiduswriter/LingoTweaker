@@ -941,20 +941,23 @@ pub fn expand_message_backrefs(
             }
             let n: usize = s[i + 1..j].parse().unwrap_or(0);
             let spec = refs.iter().find(|r| r.offset == i && r.spec.no == n);
-            match resolve(n) {
-                Some(v) => {
-                    let value = match spec {
-                        Some(r) => apply_match_transforms(
-                            &v,
-                            &r.spec.case_conversion,
-                            r.spec.regexp_match.as_deref(),
-                            r.spec.regexp_replace.as_deref(),
-                        ),
-                        None => v,
-                    };
-                    out.push_str(&value);
+            let value = resolve(n).map(|v| match spec {
+                Some(r) => apply_match_transforms(
+                    &v,
+                    &r.spec.case_conversion,
+                    r.spec.regexp_match.as_deref(),
+                    r.spec.regexp_replace.as_deref(),
+                ),
+                None => v,
+            });
+            match value {
+                // Java `concatWithoutExtraSpace`: an empty match value (e.g.
+                // `\2` referring to an unmatched optional element) behaves
+                // exactly like an unresolved reference.
+                Some(v) if !v.is_empty() => {
+                    out.push_str(&v);
                 }
-                None => {
+                _ => {
                     let mut k = j;
                     while k < bytes.len() && (bytes[k] as char).is_whitespace() {
                         k += 1;
@@ -1105,7 +1108,14 @@ fn expand_message_matches_into<T: Deref<Target = AnalyzedTokenReadings>>(
                                 k += 1;
                             }
                             let right_starts_ws = k > j && k < bytes.len();
-                            if out.ends_with(' ') && (right_starts_ws || punct_after(s, j)) {
+                            // Java `concatWithoutExtraSpace`: a reference
+                            // directly before `</suggestion>` also drops the
+                            // preceding space (e.g. `бути \2` with `\2` an
+                            // unmatched optional element).
+                            let before_closing_tag = s[j..].starts_with("</suggestion>");
+                            if out.ends_with(' ')
+                                && (right_starts_ws || punct_after(s, j) || before_closing_tag)
+                            {
                                 out.pop();
                             } else if (out.is_empty() || out.ends_with("suggestion>"))
                                 && right_starts_ws
