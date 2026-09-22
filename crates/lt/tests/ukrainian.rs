@@ -393,6 +393,22 @@ fn ukrainian_simple_replace() {
     );
     assert_eq!(suggestions(&matches[0]), vec!["захід".to_string()]);
 
+    // `:bad` fallback: Java uses the edit-distance-1
+    // `getSuggestionsFromDefaultDicts`, not the tiered
+    // `getSpellingSuggestions` (speller2/3).
+    let text = "дорожному";
+    let matches = one(text, "UK_SIMPLE_REPLACE");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(matches[0].message, "Неправильно написане слово.");
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "Дорожному".to_string(),
+            "дорожньому".to_string(),
+            "дорожчому".to_string()
+        ]
+    );
+
     let text = "азіат";
     let matches = one(text, "UK_SIMPLE_REPLACE_SOFT");
     assert_eq!(matches.len(), 1);

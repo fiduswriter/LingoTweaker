@@ -202,6 +202,20 @@ impl MorfologikSpellingRule {
             .unwrap_or_default()
     }
 
+    /// `MorfologikMultiSpeller.getSuggestionsFromDefaultDicts` (the
+    /// `SimpleReplaceRule` `:bad` fallback): the edit-distance-1 suggestions
+    /// from the default dictionaries only, without the speller2/speller3
+    /// tiers (`getSpellingSuggestions`). Space-containing suggestions are
+    /// dropped like Java's `removeIf(s -> s.contains(" "))`.
+    pub fn default_dict_suggestions(&self, word: &str) -> Vec<String> {
+        self.speller1
+            .get_weighted_suggestions_from_default_dicts(word)
+            .into_iter()
+            .map(|s| s.word)
+            .filter(|s| !s.contains(' '))
+            .collect()
+    }
+
     fn load_ignore(&mut self, path: &Path) {
         for word in cache_word_list(path) {
             // `SpellingCheckRule.addIgnoreWords`: a multi-token line becomes a

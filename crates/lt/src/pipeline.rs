@@ -11780,7 +11780,7 @@ impl Pipeline {
                             ukrainian
                                 .spelling
                                 .as_ref()
-                                .map(|s| s.suggestions(word))
+                                .map(|s| s.default_dict_suggestions(word))
                                 .unwrap_or_default()
                         },
                         start,
