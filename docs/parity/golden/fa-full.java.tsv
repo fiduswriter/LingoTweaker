@@ -1,0 +1,855 @@
+L	1	ڪادو
+M	1	ReplaceLettersInSameLangs	1	0	4	Other	آیا منظور شما «<suggestion>کادو</suggestion>» است؟	کادو
+L	2	کادو
+L	3	ېاور
+M	3	ReplaceLettersInSameLangs	2	0	4	Other	آیا منظور شما «<suggestion>یاور</suggestion>» است؟	یاور
+L	4	یاور
+L	5	ھارون
+M	5	ReplaceLettersInSameLangs	3	0	5	Other	آیا منظور شما «<suggestion>هارون</suggestion>» است؟	هارون
+L	6	هارون
+L	7	خانﮥ دوست
+M	7	ReplaceLettersInSameLangs	4	0	4	Other	آیا منظور شما «<suggestion>خانهٔ</suggestion>» است؟	خانهٔ
+L	8	خانهٔ دوست
+L	9	چرا ?
+M	9	ReplaceEnglishMarks	1	4	5	Other	 آیا منظور شما«<suggestion>؟</suggestion>» است؟	؟
+L	10	چرا؟
+L	11	درست, ولی
+M	11	ReplaceEnglishMarks	2	0	5	Other	آیا منظور شما «<suggestion>درست،</suggestion>» است؟	درست،
+L	12	درست، ولی
+L	13	۱۹.۷۵
+M	13	ReplaceEnglishMarks	3	0	5	Other	 آیا منظور شما«<suggestion>۱۹٫۷۵</suggestion>» است؟	۱۹٫۷۵
+L	14	۱۹٫۷۵
+L	15	۱,۹۹۹
+M	15	ReplaceEnglishMarks	2	0	2	Other	آیا منظور شما «<suggestion>۱،</suggestion>» است؟	۱،
+L	16	۱٬۹۹۹
+L	17	امروز تا الی فردا
+M	17	RemoveThesePhrases-to	1	6	12	Other	آیا منظور شما «<suggestion>تا</suggestion>» است؟	تا
+L	18	امروز تا فردا
+L	19	از سن ۱۰ سالگی
+M	19	RemoveThesePhrases-age	1	3	14	Other	آیا منظور شما «<suggestion>۱۰ سالگی</suggestion>» است؟	۱۰ سالگی
+L	20	از ۱۰ سالگی
+L	21	آیا چگونه به کار تو رسیدگی کنم؟
+M	21	RemoveThesePhrases-QuestionWords	1	0	9	Other	آیا منظور شما «<suggestion>چگونه</suggestion>» است؟	چگونه
+L	22	چگونه به کار تو رسیدگی کنم؟
+L	23	رسماًً
+M	23	FixDoubleTanvin	1	0	6	Other	آیا منظور شما «<suggestion>رسماً</suggestion>» است؟	رسماً
+L	24	رسماً
+L	25	۱۹٬
+M	25	RemoveAdditionMarks	1	0	3	Other	آیا منظور شما «<suggestion>۱۹</suggestion>» است؟	۱۹
+L	26	۱۹
+L	27	و‌ارد
+M	27	Bad_ZWNJ	1	0	2	Other	 آیا منظور شما«<suggestion>و</suggestion>» است؟	و
+L	28	وارد
+L	29	‌:
+M	29	Bad_ZWNJ	2	0	2	Other	 آیا منظور شما«<suggestion>:</suggestion>» است؟	:
+L	30	:
+L	31	می ایستادند
+L	32	می‌ایستادند
+L	33	می ورزند
+L	34	می‌ورزند
+L	35	سرشناس تر
+M	35	Tar_Tarin_Fix	1	0	9	Other	آیا منظور شما «<suggestion>سرشناس‌تر</suggestion>» است؟	سرشناس‌تر
+L	36	سرشناس‌تر
+L	37	واژه های
+L	38	واژه‌های
+L	39	قرمز فام
+M	39	ZWNJ_Connection	98	0	8	Other	آیا منظور شما  «<suggestion>قرمزفام</suggestion>» است؟	قرمزفام
+L	40	قرمزفام
+L	41	یک گانه
+M	41	Complex_Number_Word	1	0	7	Other	آیا منظور شما «<suggestion>یک‌گانه</suggestion>» است؟	یک‌گانه
+L	42	یک‌گانه
+L	43	شاهرخ نژاد
+M	43	Complex_Family_Name	1	0	10	Other	آیا منظور شما «<suggestion>شاهرخ‌نژاد</suggestion>» است؟	شاهرخ‌نژاد
+L	44	شاهرخ‌نژاد
+L	45	خون آشام
+M	45	ZWNJ_Connection	1	0	8	Other	 آیا منظور شما«<suggestion>خون‌آشام</suggestion>» است؟	خون‌آشام
+L	46	خون‌آشام
+L	47	تفریق گر
+M	47	ZWNJ_Connection	2	0	8	Other	آیا منظور شما  «<suggestion>تفریق‌گر</suggestion>» است؟	تفریق‌گر
+L	48	تفریق‌گر
+L	49	دائم الصوم
+M	49	ZWNJ_Connection	3	0	10	Other	آیا منظور شما  «<suggestion>دائم‌الصوم</suggestion>» است؟	دائم‌الصوم
+L	50	دائم‌الصوم
+L	51	نام نویس
+M	51	ZWNJ_Connection	4	0	8	Other	آیا منظور شما  «<suggestion>نام‌نویس</suggestion>» است؟	نام‌نویس
+L	52	نام‌نویس
+L	53	پای آور
+M	53	ZWNJ_Connection	5	0	7	Other	آیا منظور شما  «<suggestion>پای‌آور</suggestion>» است؟	پای‌آور
+L	54	پای‌آور
+L	55	انسان شناس
+M	55	ZWNJ_Connection	6	0	10	Other	آیا منظور شما  «<suggestion>انسان‌شناس</suggestion>» است؟	انسان‌شناس
+L	56	انسان‌شناس
+L	57	نقاره چی
+M	57	ZWNJ_Connection	7	0	8	Other	آیا منظور شما  «<suggestion>نقاره‌چی</suggestion>» است؟	نقاره‌چی
+L	58	نقاره‌چی
+L	59	دو پایه
+M	59	ZWNJ_Connection	8	0	7	Other	آیا منظور شما  «<suggestion>دوپایه</suggestion>» است؟	دوپایه
+L	60	دو‌پایه
+M	60	Bad_ZWNJ	1	0	3	Other	 آیا منظور شما«<suggestion>دو</suggestion>» است؟	دو
+L	61	کاه دزد
+M	61	ZWNJ_Connection	9	0	7	Other	آیا منظور شما  «<suggestion>کاه‌دزد</suggestion>» است؟	کاه‌دزد
+L	62	کاه‌دزد
+L	63	روز افزون
+M	63	ZWNJ_Connection	10	0	9	Other	آیا منظور شما  «<suggestion>روزافزون</suggestion>» است؟	روزافزون
+L	64	روز‌افزون
+M	64	Bad_ZWNJ	1	0	4	Other	 آیا منظور شما«<suggestion>روز</suggestion>» است؟	روز
+L	65	طیف سنج
+M	65	ZWNJ_Connection	11	0	7	Other	آیا منظور شما  «<suggestion>طیف‌سنج</suggestion>» است؟	طیف‌سنج
+L	66	طیف‌سنج
+L	67	ابر آلود
+M	67	ZWNJ_Connection	12	0	8	Other	آیا منظور شما  «<suggestion>ابرآلود</suggestion>» است؟	ابرآلود
+L	68	ابر‌آلود
+L	69	تیز پا
+M	69	ZWNJ_Connection	13	0	6	Other	آیا منظور شما  «<suggestion>تیزپا</suggestion>» است؟	تیزپا
+L	70	تیز‌پا
+L	71	ابو العجب
+M	71	ZWNJ_Connection	14	0	9	Other	آیا منظور شما  «<suggestion>ابوالعجب</suggestion>» است؟	ابوالعجب
+L	72	ابو‌العجب
+L	73	با پرستیژ
+M	73	ZWNJ_Connection	15	0	9	Other	آیا منظور شما  «<suggestion>باپرستیژ</suggestion>» است؟	باپرستیژ
+L	74	با‌پرستیژ
+L	75	خوش رو
+M	75	ZWNJ_Connection	16	0	6	Other	آیا منظور شما  «<suggestion>خوش‌رو</suggestion>» است؟	خوش‌رو
+L	76	خوش‌رو
+L	77	شکسته ناخن
+M	77	ZWNJ_Connection	17	0	10	Other	آیا منظور شما  «<suggestion>شکسته‌ناخن</suggestion>» است؟	شکسته‌ناخن
+L	78	شکسته‌ناخن
+L	79	چادر نشین
+M	79	ZWNJ_Connection	18	0	9	Other	آیا منظور شما  «<suggestion>چادرنشین</suggestion>» است؟	چادرنشین
+L	80	چادر‌نشین
+L	81	همه کاره
+M	81	ZWNJ_Connection	19	0	8	Other	آیا منظور شما  «<suggestion>همه‌کاره</suggestion>» است؟	همه‌کاره
+L	82	همه‌کاره
+L	83	پایین تر
+M	83	ZWNJ_Connection	20	0	8	Other	آیا منظور شما  «<suggestion>پایین‌تر</suggestion>» است؟	پایین‌تر
+L	84	پایین‌تر
+L	85	می دانستم
+M	85	ZWNJ_Connection	21	0	9	Other	آیا منظور شما  «<suggestion>می‌دانستم</suggestion>» است؟	می‌دانستم
+L	86	می‌دانستم
+L	87	گل چهره
+M	87	ZWNJ_Connection	22	0	7	Other	آیا منظور شما  «<suggestion>گل‌چهره</suggestion>» است؟	گل‌چهره
+L	88	گل‌چهره
+L	89	ذوی القربی
+M	89	ZWNJ_Connection	23	0	10	Other	آیا منظور شما  «<suggestion>ذوی‌القربی</suggestion>» است؟	ذوی‌القربی
+L	90	ذوی‌القربی
+L	91	سیاه مست
+M	91	ZWNJ_Connection	24	0	8	Other	آیا منظور شما  «<suggestion>سیاه‌مست</suggestion>» است؟	سیاه‌مست
+L	92	سیاه‌مست
+L	93	ذبیح الله
+M	93	ZWNJ_Connection	25	0	9	Other	آیا منظور شما  «<suggestion>ذبیح‌الله</suggestion>» است؟	ذبیح‌الله
+L	94	ذبیح‌الله
+L	95	خنده رو
+M	95	ZWNJ_Connection	26	0	7	Other	آیا منظور شما  «<suggestion>خنده‌رو</suggestion>» است؟	خنده‌رو
+L	96	خنده‌رو
+L	97	هیچ کاره
+M	97	ZWNJ_Connection	27	0	8	Other	آیا منظور شما  «<suggestion>هیچ‌کاره</suggestion>» است؟	هیچ‌کاره
+L	98	هیچ‌کاره
+L	99	تصویب نامه
+M	99	ZWNJ_Connection	28	0	10	Other	آیا منظور شما  «<suggestion>تصویب‌نامه</suggestion>» است؟	تصویب‌نامه
+L	100	تصویب‌نامه
+L	101	شوخ طبع
+M	101	ZWNJ_Connection	29	0	7	Other	آیا منظور شما  «<suggestion>شوخ‌طبع</suggestion>» است؟	شوخ‌طبع
+L	102	شوخ‌طبع
+L	103	هم اندیشی
+M	103	ZWNJ_Connection	30	0	9	Other	آیا منظور شما  «<suggestion>هم‌اندیشی</suggestion>» است؟	هم‌اندیشی
+L	104	هم‌اندیشی
+L	105	چل کلید
+M	105	ZWNJ_Connection	31	0	7	Other	آیا منظور شما  «<suggestion>چل‌کلید</suggestion>» است؟	چل‌کلید
+L	106	چل‌کلید
+L	107	بد انجام
+M	107	ZWNJ_Connection	32	0	8	Other	آیا منظور شما  «<suggestion>بدانجام</suggestion>» است؟	بدانجام
+L	108	بد‌انجام
+L	109	زود پز
+M	109	ZWNJ_Connection	33	0	6	Other	آیا منظور شما  «<suggestion>زودپز</suggestion>» است؟	زودپز
+L	110	زود‌پز
+M	110	Bad_ZWNJ	1	0	4	Other	 آیا منظور شما«<suggestion>زود</suggestion>» است؟	زود
+L	111	حق السکوت
+M	111	ZWNJ_Connection	34	0	9	Other	آیا منظور شما  «<suggestion>حق‌السکوت</suggestion>» است؟	حق‌السکوت
+L	112	حق‌السکوت
+L	113	آزرده دل
+M	113	ZWNJ_Connection	35	0	8	Other	آیا منظور شما  «<suggestion>آزرده‌دل</suggestion>» است؟	آزرده‌دل
+L	114	آزرده‌دل
+L	115	آسوده دل
+M	115	ZWNJ_Connection	36	0	8	Other	آیا منظور شما  «<suggestion>آسوده‌دل</suggestion>» است؟	آسوده‌دل
+L	116	آسوده‌دل
+L	117	ذی نفع
+M	117	ZWNJ_Connection	37	0	6	Other	آیا منظور شما  «<suggestion>ذی‌نفع</suggestion>» است؟	ذی‌نفع
+L	118	ذی‌نفع
+L	119	فوق الذکر
+M	119	ZWNJ_Connection	38	0	9	Other	آیا منظور شما  «<suggestion>فوق‌الذکر</suggestion>» است؟	فوق‌الذکر
+L	120	فوق‌الذکر
+L	121	سریع السیر
+M	121	ZWNJ_Connection	39	0	10	Other	آیا منظور شما  «<suggestion>سریع‌السیر</suggestion>» است؟	سریع‌السیر
+L	122	سریع‌السیر
+L	123	شهر بانو
+M	123	ZWNJ_Connection	40	0	8	Other	آیا منظور شما  «<suggestion>شهربانو</suggestion>» است؟	شهربانو
+L	124	شهر‌بانو
+L	125	تازه وارد
+M	125	ZWNJ_Connection	41	0	9	Other	آیا منظور شما  «<suggestion>تازه‌وارد</suggestion>» است؟	تازه‌وارد
+L	126	تازه‌وارد
+L	127	سنگ دانه
+M	127	ZWNJ_Connection	42	0	8	Other	آیا منظور شما  «<suggestion>سنگ‌دانه</suggestion>» است؟	سنگ‌دانه
+L	128	سنگ‌دانه
+L	129	آشفته سامان
+M	129	ZWNJ_Connection	43	0	11	Other	آیا منظور شما  «<suggestion>آشفته‌سامان</suggestion>» است؟	آشفته‌سامان
+L	130	آشفته‌سامان
+L	131	خوش یمن
+M	131	ZWNJ_Connection	44	0	7	Other	آیا منظور شما  «<suggestion>خوش‌یمن</suggestion>» است؟	خوش‌یمن
+L	132	خوش‌یمن
+L	133	بهره گیر
+M	133	ZWNJ_Connection	45	0	8	Other	آیا منظور شما  «<suggestion>بهره‌گیر</suggestion>» است؟	بهره‌گیر
+L	134	بهره‌گیر
+L	135	پاک نفس
+M	135	ZWNJ_Connection	46	0	7	Other	آیا منظور شما  «<suggestion>پاک‌نفس</suggestion>» است؟	پاک‌نفس
+L	136	پاک‌نفس
+L	137	حمله ور
+M	137	ZWNJ_Connection	47	0	7	Other	آیا منظور شما  «<suggestion>حمله‌ور</suggestion>» است؟	حمله‌ور
+L	138	حمله‌ور
+L	139	حرام زاده
+M	139	ZWNJ_Connection	48	0	9	Other	آیا منظور شما  «<suggestion>حرام‌زاده</suggestion>» است؟	حرام‌زاده
+L	140	حرام‌زاده
+L	141	خام طمع
+M	141	ZWNJ_Connection	49	0	7	Other	آیا منظور شما  «<suggestion>خام‌طمع</suggestion>» است؟	خام‌طمع
+L	142	خام‌طمع
+L	143	شاد روان
+M	143	ZWNJ_Connection	50	0	8	Other	آیا منظور شما  «<suggestion>شادروان</suggestion>» است؟	شادروان
+L	144	شاد‌روان
+L	145	دل ربا
+M	145	ZWNJ_Connection	51	0	6	Other	آیا منظور شما  «<suggestion>دل‌ربا</suggestion>» است؟	دل‌ربا
+L	146	دل‌ربا
+L	147	سست زخم
+M	147	ZWNJ_Connection	52	0	7	Other	آیا منظور شما  «<suggestion>سست‌زخم</suggestion>» است؟	سست‌زخم
+L	148	سست‌زخم
+L	149	رئیس الوزراء
+M	149	ZWNJ_Connection	53	0	12	Other	آیا منظور شما  «<suggestion>رئیس‌الوزراء</suggestion>» است؟	رئیس‌الوزراء
+L	150	رئیس‌الوزراء
+L	151	سبک مغز
+M	151	ZWNJ_Connection	54	0	7	Other	آیا منظور شما  «<suggestion>سبک‌مغز</suggestion>» است؟	سبک‌مغز
+L	152	سبک‌مغز
+L	153	آتش بس
+M	153	ZWNJ_Connection	55	0	6	Other	آیا منظور شما  «<suggestion>آتش‌بس</suggestion>» است؟	آتش‌بس
+L	154	آتش‌بس
+L	155	سگ دانی
+M	155	ZWNJ_Connection	56	0	7	Other	آیا منظور شما  «<suggestion>سگ‌دانی</suggestion>» است؟	سگ‌دانی
+L	156	سگ‌دانی
+L	157	لازم الوصول
+M	157	ZWNJ_Connection	57	0	11	Other	آیا منظور شما  «<suggestion>لازم‌الوصول</suggestion>» است؟	لازم‌الوصول
+L	158	لازم‌الوصول
+L	159	نیم ته
+M	159	ZWNJ_Connection	58	0	6	Other	آیا منظور شما  «<suggestion>نیم‌ته</suggestion>» است؟	نیم‌ته
+L	160	نیم‌ته
+L	161	پایه گذار
+M	161	ZWNJ_Connection	59	0	9	Other	آیا منظور شما  «<suggestion>پایه‌گذار</suggestion>» است؟	پایه‌گذار
+L	162	پایه‌گذار
+L	163	مه شکن
+M	163	ZWNJ_Connection	60	0	6	Other	آیا منظور شما  «<suggestion>مه‌شکن</suggestion>» است؟	مه‌شکن
+L	164	مه‌شکن
+L	165	بزرگ سال
+M	165	ZWNJ_Connection	61	0	8	Other	آیا منظور شما  «<suggestion>بزرگ‌سال</suggestion>» است؟	بزرگ‌سال
+L	166	بزرگ‌سال
+L	167	ریش ریش
+M	167	ZWNJ_Connection	62	0	7	Other	آیا منظور شما  «<suggestion>ریش‌ریش</suggestion>» است؟	ریش‌ریش
+L	168	ریش‌ریش
+L	169	معلوم الحال
+M	169	ZWNJ_Connection	63	0	11	Other	آیا منظور شما  «<suggestion>معلوم‌الحال</suggestion>» است؟	معلوم‌الحال
+L	170	معلوم‌الحال
+L	171	کهن سال
+M	171	ZWNJ_Connection	64	0	7	Other	آیا منظور شما  «<suggestion>کهن‌سال</suggestion>» است؟	کهن‌سال
+L	172	کهن‌سال
+L	173	مهر انگیز
+M	173	ZWNJ_Connection	65	0	9	Other	آیا منظور شما  «<suggestion>مهرانگیز</suggestion>» است؟	مهرانگیز
+L	174	مهر‌انگیز
+L	175	پر رو
+M	175	ZWNJ_Connection	66	0	5	Other	آیا منظور شما  «<suggestion>پررو</suggestion>» است؟	پررو
+L	176	پر‌رو
+L	177	رقیق القلب
+M	177	ZWNJ_Connection	67	0	10	Other	آیا منظور شما  «<suggestion>رقیق‌القلب</suggestion>» است؟	رقیق‌القلب
+L	178	رقیق‌القلب
+L	179	اجاق کور
+M	179	ZWNJ_Connection	68	0	8	Other	آیا منظور شما  «<suggestion>اجاق‌کور</suggestion>» است؟	اجاق‌کور
+L	180	اجاق‌کور
+L	181	نا جوانمرد
+M	181	ZWNJ_Connection	69	0	10	Other	آیا منظور شما  «<suggestion>ناجوانمرد</suggestion>» است؟	ناجوانمرد
+L	182	نا‌جوانمرد
+L	183	گربه گون
+M	183	ZWNJ_Connection	70	0	8	Other	آیا منظور شما  «<suggestion>گربه‌گون</suggestion>» است؟	گربه‌گون
+L	184	گربه‌گون
+L	185	پالان ساییده
+M	185	ZWNJ_Connection	71	0	12	Other	آیا منظور شما  «<suggestion>پالان‌ساییده</suggestion>» است؟	پالان‌ساییده
+L	186	پالان‌ساییده
+L	187	ذو الجلال
+M	187	ZWNJ_Connection	72	0	9	Other	آیا منظور شما  «<suggestion>ذوالجلال</suggestion>» است؟	ذوالجلال
+L	188	ذو‌الجلال
+M	188	Bad_ZWNJ	1	0	3	Other	 آیا منظور شما«<suggestion>ذو</suggestion>» است؟	ذو
+L	189	بد سیرت
+M	189	ZWNJ_Connection	73	0	7	Other	آیا منظور شما  «<suggestion>بدسیرت</suggestion>» است؟	بدسیرت
+L	190	بد‌سیرت
+L	191	یکه شناس
+M	191	ZWNJ_Connection	74	0	8	Other	آیا منظور شما  «<suggestion>یکه‌شناس</suggestion>» است؟	یکه‌شناس
+L	192	یکه‌شناس
+L	193	فارغ الاکناف
+M	193	ZWNJ_Connection	75	0	12	Other	آیا منظور شما  «<suggestion>فارغ‌الاکناف</suggestion>» است؟	فارغ‌الاکناف
+L	194	فارغ‌الاکناف
+L	195	نازک نی
+M	195	ZWNJ_Connection	76	0	7	Other	آیا منظور شما  «<suggestion>نازک‌نی</suggestion>» است؟	نازک‌نی
+L	196	نازک‌نی
+L	197	باز خرید
+M	197	ZWNJ_Connection	77	0	8	Other	آیا منظور شما  «<suggestion>بازخرید</suggestion>» است؟	بازخرید
+L	198	باز‌خرید
+L	199	پری نژاد
+M	199	ZWNJ_Connection	78	0	8	Other	آیا منظور شما  «<suggestion>پری‌نژاد</suggestion>» است؟	پری‌نژاد
+L	200	پری‌نژاد
+L	201	نیک روز
+M	201	ZWNJ_Connection	79	0	7	Other	آیا منظور شما  «<suggestion>نیک‌روز</suggestion>» است؟	نیک‌روز
+L	202	نیک‌روز
+L	203	باد نشسته
+M	203	ZWNJ_Connection	80	0	9	Other	آیا منظور شما  «<suggestion>بادنشسته</suggestion>» است؟	بادنشسته
+L	204	باد‌نشسته
+L	205	هنر پیشه
+M	205	ZWNJ_Connection	81	0	8	Other	آیا منظور شما  «<suggestion>هنرپیشه</suggestion>» است؟	هنرپیشه
+L	206	هنر‌پیشه
+L	207	باب الحوائج
+M	207	ZWNJ_Connection	82	0	11	Other	آیا منظور شما  «<suggestion>باب‌الحوائج</suggestion>» است؟	باب‌الحوائج
+L	208	باب‌الحوائج
+L	209	حاضر جواب
+M	209	ZWNJ_Connection	83	0	9	Other	آیا منظور شما  «<suggestion>حاضرجواب</suggestion>» است؟	حاضرجواب
+L	210	حاضر‌جواب
+L	211	جامع الشرایط
+M	211	ZWNJ_Connection	84	0	12	Other	آیا منظور شما  «<suggestion>جامع‌الشرایط</suggestion>» است؟	جامع‌الشرایط
+L	212	جامع‌الشرایط
+L	213	نگون طشت
+M	213	ZWNJ_Connection	85	0	8	Other	آیا منظور شما  «<suggestion>نگون‌طشت</suggestion>» است؟	نگون‌طشت
+L	214	نگون‌طشت
+L	215	طبقه بندی
+M	215	ZWNJ_Connection	86	0	9	Other	آیا منظور شما  «<suggestion>طبقه‌بندی</suggestion>» است؟	طبقه‌بندی
+L	216	طبقه‌بندی
+L	217	چرب زبان
+M	217	ZWNJ_Connection	87	0	8	Other	آیا منظور شما  «<suggestion>چرب‌زبان</suggestion>» است؟	چرب‌زبان
+L	218	چرب‌زبان
+L	219	زبانه دار
+M	219	ZWNJ_Connection	88	0	9	Other	آیا منظور شما  «<suggestion>زبانه‌دار</suggestion>» است؟	زبانه‌دار
+L	220	زبانه‌دار
+L	221	تند خو
+M	221	ZWNJ_Connection	89	0	6	Other	آیا منظور شما  «<suggestion>تندخو</suggestion>» است؟	تندخو
+L	222	تند‌خو
+L	223	چابک سوار
+M	223	ZWNJ_Connection	90	0	9	Other	آیا منظور شما  «<suggestion>چابک‌سوار</suggestion>» است؟	چابک‌سوار
+L	224	چابک‌سوار
+L	225	خود سوز
+M	225	ZWNJ_Connection	91	0	7	Other	آیا منظور شما  «<suggestion>خودسوز</suggestion>» است؟	خودسوز
+L	226	خود‌سوز
+L	227	معظم له
+M	227	ZWNJ_Connection	92	0	7	Other	آیا منظور شما  «<suggestion>معظم‌له</suggestion>» است؟	معظم‌له
+L	228	معظم‌له
+L	229	غیر قابل
+M	229	ZWNJ_Connection	93	0	8	Other	آیا منظور شما  «<suggestion>غیرقابل</suggestion>» است؟	غیرقابل
+L	230	غیر‌قابل
+L	231	پیش مرگ
+M	231	ZWNJ_Connection	94	0	7	Other	آیا منظور شما  «<suggestion>پیش‌مرگ</suggestion>» است؟	پیش‌مرگ
+L	232	پیش‌مرگ
+L	233	رو سفید
+M	233	ZWNJ_Connection	95	0	7	Other	آیا منظور شما  «<suggestion>روسفید</suggestion>» است؟	روسفید
+L	234	رو‌سفید
+M	234	Bad_ZWNJ	1	0	3	Other	 آیا منظور شما«<suggestion>رو</suggestion>» است؟	رو
+L	235	بزن دررو
+M	235	ZWNJ_Connection	96	0	8	Other	آیا منظور شما  «<suggestion>بزن‌دررو</suggestion>» است؟	بزن‌دررو
+L	236	بزن‌دررو
+L	237	آمد نیامد
+M	237	ZWNJ_Connection	97	0	9	Other	آیا منظور شما  «<suggestion>آمدنیامد</suggestion>» است؟	آمدنیامد
+L	238	آمد‌نیامد
+L	239	سفید فام
+M	239	ZWNJ_Connection	98	0	8	Other	آیا منظور شما  «<suggestion>سفیدفام</suggestion>» است؟	سفیدفام
+L	240	سفید‌فام
+L	241	خونین دل
+M	241	ZWNJ_Connection	99	0	8	Other	آیا منظور شما  «<suggestion>خونین‌دل</suggestion>» است؟	خونین‌دل
+L	242	خونین‌دل
+L	243	فرو نهادن
+M	243	ZWNJ_Connection	100	0	9	Other	آیا منظور شما  «<suggestion>فرونهادن</suggestion>» است؟	فرونهادن
+L	244	فرو‌نهادن
+L	245	پی گم
+M	245	ZWNJ_Connection	101	0	5	Other	آیا منظور شما  «<suggestion>پی‌گم</suggestion>» است؟	پی‌گم
+L	246	پی‌گم
+L	247	کاسه یکی
+M	247	ZWNJ_Connection	102	0	8	Other	آیا منظور شما  «<suggestion>کاسه‌یکی</suggestion>» است؟	کاسه‌یکی
+L	248	کاسه‌یکی
+L	249	همایون فال
+M	249	ZWNJ_Connection	103	0	10	Other	آیا منظور شما  «<suggestion>همایون‌فال</suggestion>» است؟	همایون‌فال
+L	250	همایون‌فال
+L	251	کشتی بان
+M	251	ZWNJ_Connection	104	0	8	Other	آیا منظور شما  «<suggestion>کشتی‌بان</suggestion>» است؟	کشتی‌بان
+L	252	کشتی‌بان
+L	253	دو برجی
+M	253	ZWNJ_Connection	105	0	7	Other	آیا منظور شما  «<suggestion>دوبرجی</suggestion>» است؟	دوبرجی
+L	254	دو‌برجی
+M	254	Bad_ZWNJ	1	0	3	Other	 آیا منظور شما«<suggestion>دو</suggestion>» است؟	دو
+L	255	تکه پاره
+M	255	ZWNJ_Connection	106	0	8	Other	آیا منظور شما  «<suggestion>تکه‌پاره</suggestion>» است؟	تکه‌پاره
+L	256	تکه‌پاره
+L	257	اولو الالباب
+M	257	ZWNJ_Connection	107	0	12	Other	آیا منظور شما  «<suggestion>اولوالالباب</suggestion>» است؟	اولوالالباب
+L	258	اولو‌الالباب
+L	259	دانش آموخته
+M	259	ZWNJ_Connection	108	0	11	Other	آیا منظور شما  «<suggestion>دانش‌آموخته</suggestion>» است؟	دانش‌آموخته
+L	260	دانش‌آموخته
+L	261	بین النهرین
+M	261	ZWNJ_Connection	109	0	11	Other	آیا منظور شما  «<suggestion>بین‌النهرین</suggestion>» است؟	بین‌النهرین
+L	262	بین‌النهرین
+L	263	پیاده روی
+M	263	ZWNJ_Connection	110	0	9	Other	آیا منظور شما  «<suggestion>پیاده‌روی</suggestion>» است؟	پیاده‌روی
+L	264	پیاده‌روی
+L	265	آدم خوار
+M	265	ZWNJ_Connection	111	0	8	Other	آیا منظور شما  «<suggestion>آدم‌خوار</suggestion>» است؟	آدم‌خوار
+L	266	آدم‌خوار
+L	267	آزاد مرد
+M	267	ZWNJ_Connection	112	0	8	Other	آیا منظور شما  «<suggestion>آزادمرد</suggestion>» است؟	آزادمرد
+L	268	آزاد‌مرد
+M	268	Bad_ZWNJ	1	0	5	Other	 آیا منظور شما«<suggestion>آزاد</suggestion>» است؟	آزاد
+L	269	نیک فطرت
+M	269	ZWNJ_Connection	113	0	8	Other	آیا منظور شما  «<suggestion>نیک‌فطرت</suggestion>» است؟	نیک‌فطرت
+L	270	نیک‌فطرت
+L	271	قتل عام
+M	271	ZWNJ_Connection	114	0	7	Other	آیا منظور شما  «<suggestion>قتل‌عام</suggestion>» است؟	قتل‌عام
+L	272	قتل‌عام
+L	273	پاچه ورمالیده
+M	273	ZWNJ_Connection	115	0	13	Other	آیا منظور شما  «<suggestion>پاچه‌ورمالیده</suggestion>» است؟	پاچه‌ورمالیده
+L	274	پاچه‌ورمالیده
+L	275	کله معلق
+M	275	ZWNJ_Connection	116	0	8	Other	آیا منظور شما  «<suggestion>کله‌معلق</suggestion>» است؟	کله‌معلق
+L	276	کله‌معلق
+L	277	ایمن سازی
+M	277	ZWNJ_Connection	117	0	9	Other	آیا منظور شما  «<suggestion>ایمن‌سازی</suggestion>» است؟	ایمن‌سازی
+L	278	ایمن‌سازی
+L	279	اولیاء الله
+M	279	ZWNJ_Connection	118	0	11	Other	آیا منظور شما  «<suggestion>اولیاء‌الله</suggestion>» است؟	اولیاء‌الله
+L	280	اولیاء‌الله
+L	281	مادر خوانده
+M	281	ZWNJ_Connection	119	0	11	Other	آیا منظور شما  «<suggestion>مادرخوانده</suggestion>» است؟	مادرخوانده
+L	282	مادر‌خوانده
+L	283	فراخ کندوری
+M	283	ZWNJ_Connection	120	0	11	Other	آیا منظور شما  «<suggestion>فراخ‌کندوری</suggestion>» است؟	فراخ‌کندوری
+L	284	فراخ‌کندوری
+L	285	چهره نگار
+M	285	ZWNJ_Connection	121	0	9	Other	آیا منظور شما  «<suggestion>چهره‌نگار</suggestion>» است؟	چهره‌نگار
+L	286	چهره‌نگار
+L	287	مستند ساز
+M	287	ZWNJ_Connection	122	0	9	Other	آیا منظور شما  «<suggestion>مستندساز</suggestion>» است؟	مستندساز
+L	288	مستند‌ساز
+L	289	کج نهاد
+M	289	ZWNJ_Connection	123	0	7	Other	آیا منظور شما  «<suggestion>کج‌نهاد</suggestion>» است؟	کج‌نهاد
+L	290	کج‌نهاد
+L	291	کیلو متر
+M	291	ZWNJ_Connection	124	0	8	Other	آیا منظور شما  «<suggestion>کیلومتر</suggestion>» است؟	کیلومتر
+L	292	کیلو‌متر
+L	293	برگشت پذیر
+M	293	ZWNJ_Connection	125	0	10	Other	آیا منظور شما  «<suggestion>برگشت‌پذیر</suggestion>» است؟	برگشت‌پذیر
+L	294	برگشت‌پذیر
+L	295	خود نویس
+M	295	ZWNJ_Connection	4	0	8	Other	آیا منظور شما  «<suggestion>خودنویس</suggestion>» است؟	خودنویس
+L	296	خود‌نویس
+L	297	انگشت نما
+M	297	ZWNJ_Connection	127	0	9	Other	آیا منظور شما  «<suggestion>انگشت‌نما</suggestion>» است؟	انگشت‌نما
+L	298	انگشت‌نما
+L	299	بار گذار
+M	299	ZWNJ_Connection	128	0	8	Other	آیا منظور شما  «<suggestion>بارگذار</suggestion>» است؟	بارگذار
+L	300	بار‌گذار
+L	301	کد خدا
+M	301	ZWNJ_Connection	129	0	6	Other	آیا منظور شما  «<suggestion>کدخدا</suggestion>» است؟	کدخدا
+L	302	کد‌خدا
+L	303	شیطان پرست
+M	303	ZWNJ_Connection	130	0	10	Other	آیا منظور شما  «<suggestion>شیطان‌پرست</suggestion>» است؟	شیطان‌پرست
+L	304	شیطان‌پرست
+L	305	فرمان روا
+M	305	ZWNJ_Connection	131	0	9	Other	آیا منظور شما  «<suggestion>فرمان‌روا</suggestion>» است؟	فرمان‌روا
+L	306	فرمان‌روا
+L	307	میرزا قلمدان
+M	307	ZWNJ_Connection	132	0	12	Other	آیا منظور شما  «<suggestion>میرزاقلمدان</suggestion>» است؟	میرزاقلمدان
+L	308	میرزا‌قلمدان
+L	309	بهره برداری
+M	309	ZWNJ_Connection	133	0	11	Other	آیا منظور شما  «<suggestion>بهره‌برداری</suggestion>» است؟	بهره‌برداری
+L	310	بهره‌برداری
+L	311	کینه توز
+M	311	ZWNJ_Connection	134	0	8	Other	آیا منظور شما  «<suggestion>کینه‌توز</suggestion>» است؟	کینه‌توز
+L	312	کینه‌توز
+L	313	دل گشا
+M	313	ZWNJ_Connection	135	0	6	Other	آیا منظور شما  «<suggestion>دل‌گشا</suggestion>» است؟	دل‌گشا
+L	314	دل‌گشا
+L	315	فرا خور
+M	315	ZWNJ_Connection	136	0	7	Other	آیا منظور شما  «<suggestion>فراخور</suggestion>» است؟	فراخور
+L	316	فرا‌خور
+L	317	شب رنگ
+M	317	ZWNJ_Connection	137	0	6	Other	آیا منظور شما  «<suggestion>شب‌رنگ</suggestion>» است؟	شب‌رنگ
+L	318	شب‌رنگ
+L	319	گرم کننده
+M	319	ZWNJ_Connection	138	0	9	Other	آیا منظور شما  «<suggestion>گرم‌کننده</suggestion>» است؟	گرم‌کننده
+L	320	گرم‌کننده
+L	321	جمع آوری
+M	321	ZWNJ_Connection	139	0	8	Other	آیا منظور شما  «<suggestion>جمع‌آوری</suggestion>» است؟	جمع‌آوری
+L	322	جمع‌آوری
+L	323	تن فروش
+M	323	ZWNJ_Connection	140	0	7	Other	آیا منظور شما  «<suggestion>تن‌فروش</suggestion>» است؟	تن‌فروش
+L	324	تن‌فروش
+L	325	فرخ لقا
+M	325	ZWNJ_Connection	141	0	7	Other	آیا منظور شما  «<suggestion>فرخ‌لقا</suggestion>» است؟	فرخ‌لقا
+L	326	فرخ‌لقا
+L	327	ابرو کمان
+M	327	ZWNJ_Connection	142	0	9	Other	آیا منظور شما  «<suggestion>ابروکمان</suggestion>» است؟	ابروکمان
+L	328	ابرو‌کمان
+L	329	فیزیک دان
+M	329	ZWNJ_Connection	143	0	9	Other	آیا منظور شما  «<suggestion>فیزیک‌دان</suggestion>» است؟	فیزیک‌دان
+L	330	فیزیک‌دان
+L	331	بر آورد
+M	331	ZWNJ_Connection	144	0	7	Other	آیا منظور شما  «<suggestion>برآورد</suggestion>» است؟	برآورد
+L	332	بر‌آورد
+L	333	آکنده گوش
+M	333	ZWNJ_Connection	145	0	9	Other	آیا منظور شما  «<suggestion>آکنده‌گوش</suggestion>» است؟	آکنده‌گوش
+L	334	آکنده‌گوش
+L	335	گشاده کار
+M	335	ZWNJ_Connection	146	0	9	Other	آیا منظور شما  «<suggestion>گشاده‌کار</suggestion>» است؟	گشاده‌کار
+L	336	گشاده‌کار
+L	337	ناهم گون
+M	337	ZWNJ_Connection	147	0	8	Other	آیا منظور شما  «<suggestion>ناهم‌گون</suggestion>» است؟	ناهم‌گون
+L	338	ناهم‌گون
+L	339	آش دهن
+M	339	ZWNJ_Connection	148	0	6	Other	آیا منظور شما  «<suggestion>آش‌دهن</suggestion>» است؟	آش‌دهن
+L	340	آش‌دهن
+L	341	دست نویس
+M	341	ZWNJ_Connection	126	0	8	Other	آیا منظور شما  «<suggestion>دست‌نویس</suggestion>» است؟	دست‌نویس
+L	342	دست‌نویس
+L	343	وفا مند
+M	343	ZWNJ_Connection	150	0	7	Other	آیا منظور شما  «<suggestion>وفامند</suggestion>» است؟	وفامند
+L	344	وفا‌مند
+L	345	پا برجا
+M	345	ZWNJ_Connection	151	0	7	Other	آیا منظور شما  «<suggestion>پابرجا</suggestion>» است؟	پابرجا
+L	346	پا‌برجا
+L	347	ذوات الارحام
+M	347	ZWNJ_Connection	152	0	12	Other	آیا منظور شما  «<suggestion>ذوات‌الارحام</suggestion>» است؟	ذوات‌الارحام
+L	348	ذوات‌الارحام
+L	349	لت لت
+M	349	ZWNJ_Connection	153	0	5	Other	آیا منظور شما  «<suggestion>لت‌لت</suggestion>» است؟	لت‌لت
+L	350	لت‌لت
+L	351	گل گون
+M	351	ZWNJ_Connection	22	0	6	Other	آیا منظور شما  «<suggestion>گل‌گون</suggestion>» است؟	گل‌گون
+L	352	گل‌گون
+L	353	لا ابالی
+M	353	ZWNJ_Connection	155	0	8	Other	آیا منظور شما  «<suggestion>لاابالی</suggestion>» است؟	لاابالی
+L	354	لا‌ابالی
+L	355	پیچ واپیچ
+M	355	ZWNJ_Connection	156	0	9	Other	آیا منظور شما  «<suggestion>پیچ‌واپیچ</suggestion>» است؟	پیچ‌واپیچ
+L	356	پیچ‌واپیچ
+L	357	جان سخت
+M	357	ZWNJ_Connection	157	0	7	Other	آیا منظور شما  «<suggestion>جان‌سخت</suggestion>» است؟	جان‌سخت
+L	358	جان‌سخت
+L	359	ابن الیوم
+M	359	ZWNJ_Connection	158	0	9	Other	آیا منظور شما  «<suggestion>ابن‌الیوم</suggestion>» است؟	ابن‌الیوم
+L	360	ابن‌الیوم
+L	361	شیرین عقل
+M	361	ZWNJ_Connection	159	0	9	Other	آیا منظور شما  «<suggestion>شیرین‌عقل</suggestion>» است؟	شیرین‌عقل
+L	362	شیرین‌عقل
+L	363	خواجه سرا
+M	363	ZWNJ_Connection	160	0	9	Other	آیا منظور شما  «<suggestion>خواجه‌سرا</suggestion>» است؟	خواجه‌سرا
+L	364	خواجه‌سرا
+L	365	ناقاره زن
+M	365	ZWNJ_Connection	161	0	9	Other	آیا منظور شما  «<suggestion>ناقاره‌زن</suggestion>» است؟	ناقاره‌زن
+L	366	ناقاره‌زن
+L	367	گران مغز
+M	367	ZWNJ_Connection	162	0	8	Other	آیا منظور شما  «<suggestion>گران‌مغز</suggestion>» است؟	گران‌مغز
+L	368	گران‌مغز
+L	369	کم نظیر
+M	369	ZWNJ_Connection	163	0	7	Other	آیا منظور شما  «<suggestion>کم‌نظیر</suggestion>» است؟	کم‌نظیر
+L	370	کم‌نظیر
+L	371	لحاف کش
+M	371	ZWNJ_Connection	164	0	7	Other	آیا منظور شما  «<suggestion>لحاف‌کش</suggestion>» است؟	لحاف‌کش
+L	372	لحاف‌کش
+L	373	خاله زنک
+M	373	ZWNJ_Connection	165	0	8	Other	آیا منظور شما  «<suggestion>خاله‌زنک</suggestion>» است؟	خاله‌زنک
+L	374	خاله‌زنک
+L	375	بقیة لله
+M	375	ZWNJ_Connection	166	0	8	Other	آیا منظور شما  «<suggestion>بقیةلله</suggestion>» است؟	بقیةلله
+L	376	بقیة‌لله
+L	377	اندود کاری
+M	377	ZWNJ_Connection	167	0	10	Other	آیا منظور شما  «<suggestion>اندودکاری</suggestion>» است؟	اندودکاری
+L	378	اندود‌کاری
+L	379	زنگی مزاج
+M	379	ZWNJ_Connection	168	0	9	Other	آیا منظور شما  «<suggestion>زنگی‌مزاج</suggestion>» است؟	زنگی‌مزاج
+L	380	زنگی‌مزاج
+L	381	صف آوار
+M	381	ZWNJ_Connection	169	0	7	Other	آیا منظور شما  «<suggestion>صف‌آوار</suggestion>» است؟	صف‌آوار
+L	382	صف‌آوار
+L	383	طویل المدت
+M	383	ZWNJ_Connection	170	0	10	Other	آیا منظور شما  «<suggestion>طویل‌المدت</suggestion>» است؟	طویل‌المدت
+L	384	طویل‌المدت
+L	385	راست راستکی
+M	385	ZWNJ_Connection	171	0	11	Other	آیا منظور شما  «<suggestion>راست‌راستکی</suggestion>» است؟	راست‌راستکی
+L	386	راست‌راستکی
+L	387	نسل کشی
+M	387	ZWNJ_Connection	172	0	7	Other	آیا منظور شما  «<suggestion>نسل‌کشی</suggestion>» است؟	نسل‌کشی
+L	388	نسل‌کشی
+L	389	چیز فهم
+M	389	ZWNJ_Connection	173	0	7	Other	آیا منظور شما  «<suggestion>چیزفهم</suggestion>» است؟	چیزفهم
+L	390	چیز‌فهم
+L	391	آلاخون والاخون
+M	391	ZWNJ_Connection	174	0	14	Other	آیا منظور شما  «<suggestion>آلاخون‌والاخون</suggestion>» است؟	آلاخون‌والاخون
+L	392	آلاخون‌والاخون
+L	393	کشتی گیر
+M	393	ZWNJ_Connection	175	0	8	Other	آیا منظور شما  «<suggestion>کشتی‌گیر</suggestion>» است؟	کشتی‌گیر
+L	394	کشتی‌گیر
+L	395	پراگنده دل
+M	395	ZWNJ_Connection	176	0	10	Other	آیا منظور شما  «<suggestion>پراگنده‌دل</suggestion>» است؟	پراگنده‌دل
+L	396	پراگنده‌دل
+L	397	فرنگی مآب
+M	397	ZWNJ_Connection	177	0	9	Other	آیا منظور شما  «<suggestion>فرنگی‌مآب</suggestion>» است؟	فرنگی‌مآب
+L	398	فرنگی‌مآب
+L	399	شوم اختر
+M	399	ZWNJ_Connection	178	0	8	Other	آیا منظور شما  «<suggestion>شوم‌اختر</suggestion>» است؟	شوم‌اختر
+L	400	شوم‌اختر
+L	401	بن بست
+M	401	ZWNJ_Connection	179	0	6	Other	آیا منظور شما  «<suggestion>بن‌بست</suggestion>» است؟	بن‌بست
+L	402	بن‌بست
+L	403	به غایت
+M	403	ZWNJ_Connection	180	0	7	Other	آیا منظور شما  «<suggestion>به‌غایت</suggestion>» است؟	به‌غایت
+L	404	به‌غایت
+L	405	عدیم النظیر
+M	405	ZWNJ_Connection	181	0	11	Other	آیا منظور شما  «<suggestion>عدیم‌النظیر</suggestion>» است؟	عدیم‌النظیر
+L	406	عدیم‌النظیر
+L	407	نظریه پرداز
+M	407	ZWNJ_Connection	182	0	11	Other	آیا منظور شما  «<suggestion>نظریه‌پرداز</suggestion>» است؟	نظریه‌پرداز
+L	408	نظریه‌پرداز
+L	409	جهان بخش
+M	409	ZWNJ_Connection	183	0	8	Other	آیا منظور شما  «<suggestion>جهان‌بخش</suggestion>» است؟	جهان‌بخش
+L	410	جهان‌بخش
+L	411	رویین تن
+M	411	ZWNJ_Connection	184	0	8	Other	آیا منظور شما  «<suggestion>رویین‌تن</suggestion>» است؟	رویین‌تن
+L	412	رویین‌تن
+L	413	رنگا رنگ
+M	413	ZWNJ_Connection	185	0	8	Other	آیا منظور شما  «<suggestion>رنگارنگ</suggestion>» است؟	رنگارنگ
+L	414	رنگا‌رنگ
+L	415	آسیمه سر
+M	415	ZWNJ_Connection	186	0	8	Other	آیا منظور شما  «<suggestion>آسیمه‌سر</suggestion>» است؟	آسیمه‌سر
+L	416	آسیمه‌سر
+L	417	خرد سال
+M	417	ZWNJ_Connection	187	0	7	Other	آیا منظور شما  «<suggestion>خردسال</suggestion>» است؟	خردسال
+L	418	خرد‌سال
+L	419	رسم الخط
+M	419	ZWNJ_Connection	188	0	8	Other	آیا منظور شما  «<suggestion>رسم‌الخط</suggestion>» است؟	رسم‌الخط
+L	420	رسم‌الخط
+L	421	درشت خو
+M	421	ZWNJ_Connection	189	0	7	Other	آیا منظور شما  «<suggestion>درشت‌خو</suggestion>» است؟	درشت‌خو
+L	422	درشت‌خو
+L	423	صد شاخ
+M	423	ZWNJ_Connection	190	0	6	Other	آیا منظور شما  «<suggestion>صدشاخ</suggestion>» است؟	صدشاخ
+L	424	صد‌شاخ
+L	425	تیره روز
+M	425	ZWNJ_Connection	191	0	8	Other	آیا منظور شما  «<suggestion>تیره‌روز</suggestion>» است؟	تیره‌روز
+L	426	تیره‌روز
+L	427	چهار شانه
+M	427	ZWNJ_Connection	192	0	9	Other	آیا منظور شما  «<suggestion>چهارشانه</suggestion>» است؟	چهارشانه
+L	428	چهار‌شانه
+L	429	قایم الزاویه
+M	429	ZWNJ_Connection	193	0	12	Other	آیا منظور شما  «<suggestion>قایم‌الزاویه</suggestion>» است؟	قایم‌الزاویه
+L	430	قایم‌الزاویه
+L	431	مالک الرقاب
+M	431	ZWNJ_Connection	194	0	11	Other	آیا منظور شما  «<suggestion>مالک‌الرقاب</suggestion>» است؟	مالک‌الرقاب
+L	432	مالک‌الرقاب
+L	433	ول خرج
+M	433	ZWNJ_Connection	195	0	6	Other	آیا منظور شما  «<suggestion>ول‌خرج</suggestion>» است؟	ول‌خرج
+L	434	ول‌خرج
+L	435	حرف شنو
+M	435	ZWNJ_Connection	196	0	7	Other	آیا منظور شما  «<suggestion>حرف‌شنو</suggestion>» است؟	حرف‌شنو
+L	436	حرف‌شنو
+L	437	عام المنفعه
+M	437	ZWNJ_Connection	197	0	11	Other	آیا منظور شما  «<suggestion>عام‌المنفعه</suggestion>» است؟	عام‌المنفعه
+L	438	عام‌المنفعه
+L	439	شوی دیده
+M	439	ZWNJ_Connection	198	0	8	Other	آیا منظور شما  «<suggestion>شوی‌دیده</suggestion>» است؟	شوی‌دیده
+L	440	شوی‌دیده
+L	441	زود باور
+M	441	ZWNJ_Connection	199	0	8	Other	آیا منظور شما  «<suggestion>زودباور</suggestion>» است؟	زودباور
+L	442	زود‌باور
+M	442	Bad_ZWNJ	1	0	4	Other	 آیا منظور شما«<suggestion>زود</suggestion>» است؟	زود
+L	443	یکتا پرست
+M	443	ZWNJ_Connection	200	0	9	Other	آیا منظور شما  «<suggestion>یکتاپرست</suggestion>» است؟	یکتاپرست
+L	444	یکتا‌پرست
+L	445	تنگا تنگ
+M	445	ZWNJ_Connection	201	0	8	Other	آیا منظور شما  «<suggestion>تنگاتنگ</suggestion>» است؟	تنگاتنگ
+L	446	تنگا‌تنگ
+L	447	تاریک دل
+M	447	ZWNJ_Connection	202	0	8	Other	آیا منظور شما  «<suggestion>تاریک‌دل</suggestion>» است؟	تاریک‌دل
+L	448	تاریک‌دل
+L	449	هرکن پرکن
+M	449	ZWNJ_Connection	203	0	9	Other	آیا منظور شما  «<suggestion>هرکن‌پرکن</suggestion>» است؟	هرکن‌پرکن
+L	450	هرکن‌پرکن
+L	451	رحمت العالمین
+M	451	ZWNJ_Connection	204	0	13	Other	آیا منظور شما  «<suggestion>رحمت‌العالمین</suggestion>» است؟	رحمت‌العالمین
+L	452	رحمت‌العالمین
+L	453	سابقه سالار
+M	453	ZWNJ_Connection	205	0	11	Other	آیا منظور شما  «<suggestion>سابقه‌سالار</suggestion>» است؟	سابقه‌سالار
+L	454	سابقه‌سالار
+L	455	قبة الخضرا
+M	455	ZWNJ_Connection	206	0	10	Other	آیا منظور شما  «<suggestion>قبةالخضرا</suggestion>» است؟	قبةالخضرا
+L	456	قبة‌الخضرا
+L	457	پاس بخش
+M	457	ZWNJ_Connection	207	0	7	Other	آیا منظور شما  «<suggestion>پاس‌بخش</suggestion>» است؟	پاس‌بخش
+L	458	پاس‌بخش
+L	459	بار خاطر
+M	459	ZWNJ_Connection	208	0	8	Other	آیا منظور شما  «<suggestion>بارخاطر</suggestion>» است؟	بارخاطر
+L	460	بار‌خاطر
+L	461	جرعه کش
+M	461	ZWNJ_Connection	209	0	7	Other	آیا منظور شما  «<suggestion>جرعه‌کش</suggestion>» است؟	جرعه‌کش
+L	462	جرعه‌کش
+L	463	رنگ وارنگ
+M	463	ZWNJ_Connection	210	0	9	Other	آیا منظور شما  «<suggestion>رنگ‌وارنگ</suggestion>» است؟	رنگ‌وارنگ
+L	464	رنگ‌وارنگ
+L	465	حیرت زده
+M	465	ZWNJ_Connection	211	0	8	Other	آیا منظور شما  «<suggestion>حیرت‌زده</suggestion>» است؟	حیرت‌زده
+L	466	حیرت‌زده
+L	467	چیره دست
+M	467	ZWNJ_Connection	212	0	8	Other	آیا منظور شما  «<suggestion>چیره‌دست</suggestion>» است؟	چیره‌دست
+L	468	چیره‌دست
+L	469	لسان الغیب
+M	469	ZWNJ_Connection	213	0	10	Other	آیا منظور شما  «<suggestion>لسان‌الغیب</suggestion>» است؟	لسان‌الغیب
+L	470	لسان‌الغیب
+L	471	کلاه گوشه
+M	471	ZWNJ_Connection	214	0	9	Other	آیا منظور شما  «<suggestion>کلاه‌گوشه</suggestion>» است؟	کلاه‌گوشه
+L	472	کلاه‌گوشه
+L	473	خود سوز
+M	473	ZWNJ_Connection	91	0	7	Other	آیا منظور شما  «<suggestion>خودسوز</suggestion>» است؟	خودسوز
+L	474	خود‌سوز
+L	475	ناخن خشک
+M	475	ZWNJ_Connection	216	0	8	Other	آیا منظور شما  «<suggestion>ناخن‌خشک</suggestion>» است؟	ناخن‌خشک
+L	476	ناخن‌خشک
+L	477	نق نقو
+M	477	ZWNJ_Connection	217	0	6	Other	آیا منظور شما  «<suggestion>نق‌نقو</suggestion>» است؟	نق‌نقو
+L	478	نق‌نقو
+L	479	دایم الخمر
+M	479	ZWNJ_Connection	218	0	10	Other	آیا منظور شما  «<suggestion>دایم‌الخمر</suggestion>» است؟	دایم‌الخمر
+L	480	دایم‌الخمر
+L	481	راه اندازی
+M	481	ZWNJ_Connection	219	0	10	Other	آیا منظور شما  «<suggestion>راه‌اندازی</suggestion>» است؟	راه‌اندازی
+L	482	راه‌اندازی
+L	483	ندید بدید
+M	483	ZWNJ_Connection	220	0	9	Other	آیا منظور شما  «<suggestion>ندیدبدید</suggestion>» است؟	ندیدبدید
+L	484	ندید‌بدید
+L	485	بلند آوازه
+M	485	ZWNJ_Connection	221	0	10	Other	آیا منظور شما  «<suggestion>بلندآوازه</suggestion>» است؟	بلندآوازه
+L	486	بلند‌آوازه
+L	487	سابق الذکر
+M	487	ZWNJ_Connection	222	0	10	Other	آیا منظور شما  «<suggestion>سابق‌الذکر</suggestion>» است؟	سابق‌الذکر
+L	488	سابق‌الذکر
+L	489	قافله سالار
+M	489	ZWNJ_Connection	223	0	11	Other	آیا منظور شما  «<suggestion>قافله‌سالار</suggestion>» است؟	قافله‌سالار
+L	490	قافله‌سالار
+L	491	شبانه روزی
+M	491	ZWNJ_Connection	224	0	10	Other	آیا منظور شما  «<suggestion>شبانه‌روزی</suggestion>» است؟	شبانه‌روزی
+L	492	شبانه‌روزی
+L	493	عالی نسب
+M	493	ZWNJ_Connection	225	0	8	Other	آیا منظور شما  «<suggestion>عالی‌نسب</suggestion>» است؟	عالی‌نسب
+L	494	عالی‌نسب
+L	495	طی الارض
+M	495	ZWNJ_Connection	226	0	8	Other	آیا منظور شما  «<suggestion>طی‌الارض</suggestion>» است؟	طی‌الارض
+L	496	طی‌الارض
+L	497	عیال وار
+M	497	ZWNJ_Connection	227	0	8	Other	آیا منظور شما  «<suggestion>عیال‌وار</suggestion>» است؟	عیال‌وار
+L	498	عیال‌وار
+L	499	تی تیش
+M	499	ZWNJ_Connection	228	0	6	Other	آیا منظور شما  «<suggestion>تی‌تیش</suggestion>» است؟	تی‌تیش
+L	500	تی‌تیش
+L	501	سنگ فرش
+M	501	ZWNJ_Connection	229	0	7	Other	آیا منظور شما  «<suggestion>سنگ‌فرش</suggestion>» است؟	سنگ‌فرش
+L	502	سنگ‌فرش
+L	503	گلوله باران
+M	503	ZWNJ_Connection	230	0	11	Other	آیا منظور شما  «<suggestion>گلوله‌باران</suggestion>» است؟	گلوله‌باران
+L	504	گلوله‌باران
+L	505	ویکی پدیا
+M	505	ZWNJ_Connection	231	0	9	Other	آیا منظور شما  «<suggestion>ویکی‌پدیا</suggestion>» است؟	ویکی‌پدیا
+L	506	ویکی‌پدیا
+L	507	غلط غلوط
+M	507	ZWNJ_Connection	232	0	8	Other	آیا منظور شما  «<suggestion>غلط‌غلوط</suggestion>» است؟	غلط‌غلوط
+L	508	غلط‌غلوط
+L	509	زوار دررفته
+M	509	ZWNJ_Connection	233	0	11	Other	آیا منظور شما  «<suggestion>زواردررفته</suggestion>» است؟	زواردررفته
+L	510	زوار‌دررفته
+M	510	Bad_ZWNJ	1	0	5	Other	 آیا منظور شما«<suggestion>زوار</suggestion>» است؟	زوار
+L	511	اجل برگشته
+M	511	ZWNJ_Connection	234	0	10	Other	آیا منظور شما  «<suggestion>اجل‌برگشته</suggestion>» است؟	اجل‌برگشته
+L	512	اجل‌برگشته
+L	513	حکیم باشی
+M	513	ZWNJ_Connection	235	0	9	Other	آیا منظور شما  «<suggestion>حکیم‌باشی</suggestion>» است؟	حکیم‌باشی
+L	514	حکیم‌باشی
+L	515	ابجد خوان
+M	515	ZWNJ_Connection	236	0	9	Other	آیا منظور شما  «<suggestion>ابجدخوان</suggestion>» است؟	ابجدخوان
+L	516	ابجد‌خوان
+L	517	مشغول الذمه
+M	517	ZWNJ_Connection	237	0	11	Other	آیا منظور شما  «<suggestion>مشغول‌الذمه</suggestion>» است؟	مشغول‌الذمه
+L	518	مشغول‌الذمه
+L	519	دودوزه باز
+M	519	ZWNJ_Connection	238	0	10	Other	آیا منظور شما  «<suggestion>دودوزه‌باز</suggestion>» است؟	دودوزه‌باز
+L	520	دودوزه‌باز
+L	521	قره قاطی
+M	521	ZWNJ_Connection	239	0	8	Other	آیا منظور شما  «<suggestion>قره‌قاطی</suggestion>» است؟	قره‌قاطی
+L	522	قره‌قاطی
+L	523	دندان گرد
+M	523	ZWNJ_Connection	240	0	9	Other	آیا منظور شما  «<suggestion>دندان‌گرد</suggestion>» است؟	دندان‌گرد
+L	524	دندان‌گرد
+L	525	قوی پنجه
+M	525	ZWNJ_Connection	241	0	8	Other	آیا منظور شما  «<suggestion>قوی‌پنجه</suggestion>» است؟	قوی‌پنجه
+L	526	قوی‌پنجه
+L	527	سخت افزار
+M	527	ZWNJ_Connection	242	0	9	Other	آیا منظور شما  «<suggestion>سخت‌افزار</suggestion>» است؟	سخت‌افزار
+L	528	سخت‌افزار
+L	529	علی البدل
+M	529	ZWNJ_Connection	243	0	9	Other	آیا منظور شما  «<suggestion>علی‌البدل</suggestion>» است؟	علی‌البدل
+L	530	علی‌البدل
+L	531	تنگ چشم
+M	531	ZWNJ_Connection	244	0	7	Other	آیا منظور شما  «<suggestion>تنگ‌چشم</suggestion>» است؟	تنگ‌چشم
+L	532	تنگ‌چشم
+L	533	دم کلفت
+M	533	ZWNJ_Connection	245	0	7	Other	آیا منظور شما  «<suggestion>دم‌کلفت</suggestion>» است؟	دم‌کلفت
+L	534	دم‌کلفت
+L	535	دل افگار
+M	535	ZWNJ_Connection	246	0	8	Other	آیا منظور شما  «<suggestion>دل‌افگار</suggestion>» است؟	دل‌افگار
+L	536	دل‌افگار
+L	537	تام الاختیار
+M	537	ZWNJ_Connection	247	0	12	Other	آیا منظور شما  «<suggestion>تام‌الاختیار</suggestion>» است؟	تام‌الاختیار
+L	538	تام‌الاختیار
+L	539	عقب گرد
+M	539	ZWNJ_Connection	248	0	7	Other	آیا منظور شما  «<suggestion>عقب‌گرد</suggestion>» است؟	عقب‌گرد
+L	540	عقب‌گرد
+L	541	شکم بند
+M	541	ZWNJ_Connection	249	0	7	Other	آیا منظور شما  «<suggestion>شکم‌بند</suggestion>» است؟	شکم‌بند
+L	542	شکم‌بند
+L	543	طوطی وار
+M	543	ZWNJ_Connection	250	0	8	Other	آیا منظور شما  «<suggestion>طوطی‌وار</suggestion>» است؟	طوطی‌وار
+L	544	طوطی‌وار
+L	545	سینه چاک
+M	545	ZWNJ_Connection	251	0	8	Other	آیا منظور شما  «<suggestion>سینه‌چاک</suggestion>» است؟	سینه‌چاک
+L	546	سینه‌چاک
+L	547	ماه طلعت
+M	547	ZWNJ_Connection	252	0	8	Other	آیا منظور شما  «<suggestion>ماه‌طلعت</suggestion>» است؟	ماه‌طلعت
+L	548	ماه‌طلعت
+L	549	آب لمبو
+M	549	ZWNJ_Connection	253	0	7	Other	آیا منظور شما  «<suggestion>آب‌لمبو</suggestion>» است؟	آب‌لمبو
+L	550	آب‌لمبو
+L	551	شلم شوربا
+M	551	ZWNJ_Connection	254	0	9	Other	آیا منظور شما  «<suggestion>شلم‌شوربا</suggestion>» است؟	شلم‌شوربا
+L	552	شلم‌شوربا
+L	553	قریب الوقوع
+M	553	ZWNJ_Connection	255	0	11	Other	آیا منظور شما  «<suggestion>قریب‌الوقوع</suggestion>» است؟	قریب‌الوقوع
+L	554	قریب‌الوقوع
+L	555	ملی گرا
+M	555	ZWNJ_Connection	256	0	7	Other	آیا منظور شما  «<suggestion>ملی‌گرا</suggestion>» است؟	ملی‌گرا
+L	556	ملی‌گرا
+L	557	گردا گرد
+M	557	ZWNJ_Connection	257	0	8	Other	آیا منظور شما  «<suggestion>گرداگرد</suggestion>» است؟	گرداگرد
+L	558	گردا‌گرد
+L	559	سربه مهر
+M	559	ZWNJ_Connection	258	0	8	Other	آیا منظور شما  «<suggestion>سربه‌مهر</suggestion>» است؟	سربه‌مهر
+L	560	سربه‌مهر
+L	561	آتشین پنجه
+M	561	ZWNJ_Connection	259	0	10	Other	آیا منظور شما  «<suggestion>آتشین‌پنجه</suggestion>» است؟	آتشین‌پنجه
+L	562	آتشین‌پنجه
+L	563	اسفل السافلین
+M	563	ZWNJ_Connection	260	0	13	Other	آیا منظور شما  «<suggestion>اسفل‌السافلین</suggestion>» است؟	اسفل‌السافلین
+L	564	اسفل‌السافلین
+L	565	ابله گونه
+M	565	ZWNJ_Connection	261	0	9	Other	آیا منظور شما  «<suggestion>ابله‌گونه</suggestion>» است؟	ابله‌گونه
+L	566	ابله‌گونه

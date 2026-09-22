@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
@@ -70,7 +70,10 @@ plural-adjective/proper-name overlap tie-break). `ar` is at 14 only-Java / 8 onl
 differences.md #15: the
 `syntax_numeric_0003` number-phrase rule whose `ArabicNumbersWords` engine is
 not ported, the two unported rule classes and two Hunspell range/wildcard
-residues).
+residues). `fa` is at 0 only-Java / 258 only-Rust / 0 field diffs
+(#22; docs/differences.md #16: Java's token `\w` is ASCII but the Rust `regex`
+crate's is Unicode, so the first `Bad_ZWNJ` rule matches Persian letters before
+a ZWNJ on the `ZWNJ_Connection` correct examples).
 
 ## Data tooling
 

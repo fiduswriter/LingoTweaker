@@ -603,3 +603,41 @@ Pinned Java reproductions (all from the committed corpus/Java golden):
 
 `scripts/ci/parity.sh ar` pins all ten counts exactly with
 `--expect-only-java`/`--expect-only-rust`.
+
+## 16. Persian (`fa`) token `\w` is ASCII in Java, Unicode in Rust (258 only-Rust `Bad_ZWNJ`)
+
+The `fa` corpus (`docs/parity/corpora/fa-examples.jsonl`, 566 sentences;
+golden `fa-full.{txt,java.tsv}`) reaches **0 only-Java / 0 field diffs**. The
+residual match set is exactly **258 only-Rust `Bad_ZWNJ`** matches on the
+`ZWNJ_Connection` correct examples (e.g. `می‌ایستادند`, `سرشناس‌تر`).
+
+Cause: Java compiles `<token regexp="yes">` values with
+`Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE` but **without**
+`Pattern.UNICODE_CHARACTER_CLASS` (`StringMatcher.create`), so `\w` is ASCII
+`[a-zA-Z_0-9]`; the Rust `lt_pattern` engine compiles with the `regex` crate's
+default Unicode mode, so `\w` also matches Persian letters. The first
+`Bad_ZWNJ` rule's pattern
+`([\.\w۰-۹إأةؤورزژاآدذ،؛,:«»\/@#$٪×*()ـ-]+)‌` therefore matches `می` before
+a ZWNJ in Rust but not in Java. (Only `fa`, `de`, `en`, `fr`, `pt`, `gl`,
+`es`, `pl` use `\w` in XML rules; the other languages' corpora do not expose
+the difference.)
+
+Pinned Java reproductions:
+
+```sh
+scripts/oracle/fa/probe-rule.sh "و‌ارد"          # Bad_ZWNJ 0-2  -> suggestion و
+scripts/oracle/fa/probe-rule.sh "می‌ایستادند"    # (no match)
+```
+
+The gate allowance (validated exactly):
+
+```sh
+scripts/ci/parity.sh fa
+# only Java: 0; only Rust: 0; field diffs: 0; missing lines: 0
+# allowed only-Rust: 258/258 Bad_ZWNJ
+```
+
+A future shared fix could translate the `\w`/`\W`/`\d`/`\D`/`\s`/`\S` shorthand
+classes in token/`regexp_match` patterns to their Java ASCII definitions (and
+`\b`/`\B` accordingly); that would need re-running all gates that use `\w`
+(`de`, `en`, `fr`, `pt`, `gl`, `es`, `pl`, `fa`).

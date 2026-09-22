@@ -35,6 +35,7 @@ re-runs the Rust side and diffs against the golden.
 | uk | `uk-full.txt` (4,437) | `uk-full.java.tsv` |
 | sr | `sr-full.txt` (49) | `sr-full.java.tsv` |
 | ar | `ar-full.txt` (1,045) | `ar-full.java.tsv` |
+| fa | `fa-full.txt` (566) | `fa-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -54,7 +55,8 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru/uk/sr/ar `2026-09-22`.
+  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru/uk/sr/ar `2026-09-22`,
+and fa `2026-09-23` (Persian has no date-filter rules, so the value is inert).
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -146,11 +148,16 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   rule classes `AR_INFLECTED_ONE_WORD`/`AR_VERB_TRANSITIVE_IINDIRECT` and two
   Hunspell range/wrong-split residues), pinned exactly with
   `--expect-only-java`/`--expect-only-rust` in `scripts/ci/parity.sh` (D-293+).
+  fa is 0 only-Java / 258 only-Rust / 0 field diffs, the documented shared
+  regex-semantics divergence of `docs/differences.md` #16 (Java's token `\w` is
+  ASCII, the Rust `regex` crate's is Unicode, so the first `Bad_ZWNJ` rule
+  matches Persian letters before a ZWNJ on the `ZWNJ_Connection` correct
+  examples), pinned exactly with `--expect-only-rust=Bad_ZWNJ=258`.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

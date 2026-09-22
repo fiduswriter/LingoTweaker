@@ -8,12 +8,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -134,6 +134,9 @@ fi
 if [ "$LANG_ARG" = "ar" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-22"
 fi
+if [ "$LANG_ARG" = "fa" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-23"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -220,6 +223,12 @@ elif [ "$LANG_ARG" = "ar" ]; then
   EXTRA+=(--expect-only-rust=grammar_0000_jar_dual=1)
   EXTRA+=(--expect-only-rust=grammar_0000_jar_plural=1)
   EXTRA+=(--expect-only-rust=number_21to99_majrour_separate_jar=1)
+elif [ "$LANG_ARG" = "fa" ]; then
+  # documented shared regex-semantics divergence (docs/differences.md #16):
+  # Java's token `\w` is ASCII (no UNICODE_CHARACTER_CLASS), the Rust regex
+  # crate's is Unicode, so the first Bad_ZWNJ rule matches the Persian letters
+  # before a ZWNJ on the ZWNJ_Connection correct examples.
+  EXTRA+=(--expect-only-rust=Bad_ZWNJ=258)
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

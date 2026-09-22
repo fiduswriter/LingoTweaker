@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","no","nrd","gn"]'
+ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","no","nrd","gn"]'
 fails=0
 
 check() {
@@ -102,6 +102,9 @@ check "ar integration test" '["ar"]' crates/lt/tests/arabic.rs
 check "ar module" '["ar"]' crates/lt/src/ar/filters.rs
 check "ar oracle" '["ar"]' scripts/oracle/ar/check-diff-ar.sh
 check "ar golden" '["ar"]' docs/parity/golden/ar-full.java.tsv
+check "fa integration test" '["fa"]' crates/lt/tests/persian.rs
+check "fa oracle" '["fa"]' scripts/oracle/fa/check-diff-fa.sh
+check "fa golden" '["fa"]' docs/parity/golden/fa-full.java.tsv
 
 # hand-authored languages (tests-only parity gate): local layout plus the
 # no/nrd/gn module entry files and the Nordum dictionary generator
