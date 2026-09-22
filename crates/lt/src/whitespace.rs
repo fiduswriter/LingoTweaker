@@ -354,3 +354,14 @@ pub fn check_uk(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         ("TYPOGRAPHY", "Оформлення"),
     )
 }
+
+/// `MultipleWhitespaceRule` with the Persian `MessagesBundle_fa` strings
+/// (`desc_whitespacerepetition` / `whitespace_repetition` / `category_typography`).
+pub fn check_fa(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "تکرار فاصله (قالب‌بندی بد)",
+        "اشتباه تایپی محتمل: شما فاصله را تکرار کرده‌اید",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}

@@ -310,3 +310,17 @@ pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         RU_MAX_WORDS,
     )
 }
+
+/// `Persian.getRelevantRules`: `new LongSentenceRule(messages, userConfig,
+/// 50)` (`MessagesBundle_fa` `long_sentence_rule_desc`/`_msg2`).
+pub fn check_fa(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const FA_MAX_WORDS: usize = 50;
+    check_impl(
+        sentences,
+        RULE_ID,
+        "قابلیت خواندن: جمله‌های روی 50 کلمه",
+        "This sentence is over 50 words long at the marked position, consider revising",
+        ("STYLE", "Style"),
+        FA_MAX_WORDS,
+    )
+}

@@ -108,6 +108,9 @@ const SERBIAN = {
 const ARABIC = {
   sample: "على الرغم من أنّ المسألة صعبة، كما أن استخدامه سيزداد.",
 };
+const PERSIAN = {
+  sample: "چرا? این یک آزمایش است . ممنون از شما",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -142,6 +145,7 @@ export const LANGUAGES = [
   { code: "uk-UA", pack: "uk", label: "Українська", size: "6.8 MB", ...UKRAINIAN },
   { code: "sr-RS", pack: "sr", label: "Српски", size: "5.2 MB", ...SERBIAN },
   { code: "ar", pack: "ar", label: "العربية", size: "14 MB", ...ARABIC },
+  { code: "fa-IR", pack: "fa", label: "فارسی", size: "0.32 MB", ...PERSIAN },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.0 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.6 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.28 MB", ...GUARANI },

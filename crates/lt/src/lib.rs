@@ -43,6 +43,7 @@ mod el;
 mod en;
 mod eo;
 mod es;
+mod fa;
 mod fr;
 mod gl;
 mod gn;
@@ -461,6 +462,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Ar => Pipeline::new_arabic(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Fa => Pipeline::new_persian(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

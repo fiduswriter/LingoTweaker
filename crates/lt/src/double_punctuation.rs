@@ -516,3 +516,28 @@ pub fn check_sentence_be(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     }
     matches
 }
+
+/// `DoublePunctuationRule` parameterized by the comma character and rule id,
+/// with the `MessagesBundle_fa` strings: the generic `DoublePunctuationRule`
+/// (`DOUBLE_PUNCTUATION`, comma `,`) and `PersianDoublePunctuationRule`
+/// (`PERSIAN_DOUBLE_PUNCTUATION`, comma `،`).
+pub fn check_sentence_fa(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_offset: usize,
+    comma: &str,
+    rule_id: &str,
+) -> Vec<Match> {
+    let mut matches = check_sentence_with_comma(tokens, sentence_offset, comma, rule_id);
+    for m in &mut matches {
+        m.category_name = "Punctuation".to_string();
+        m.description = "استفاده از دو نقطهٔ پشت‌سر هم یا کاماها".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "دو نقطهٔ پشت سر هم".to_string();
+            m.short_message = Some("دو نقطهٔ پشت‌سرهم".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "دو کامای پشت سر هم".to_string();
+            m.short_message = Some("دو کامای پشت‌سرهم".to_string());
+        }
+    }
+    matches
+}

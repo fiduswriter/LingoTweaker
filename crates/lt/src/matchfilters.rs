@@ -256,6 +256,10 @@ fn priority(m: &Match, lang: Lang, variant: Option<&str>) -> i32 {
         // Java's `Language.getRulePriority` returns 0 for every rule. Do not
         // fall back to the English style penalty (D-271).
         Lang::Ar => 0,
+        // Persian also overrides neither `getPriorityForId` nor
+        // `getDefaultRulePriorityForStyle` and has no `priority` attributes,
+        // so Java's `Language.getRulePriority` returns 0 for every rule.
+        Lang::Fa => 0,
         _ => crate::en::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0),
     }
 }

@@ -1146,6 +1146,56 @@ fn translate_comma_message_sk(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` parameterized by the comma character and rule id,
+/// with the `MessagesBundle_fa` strings: the generic
+/// `CommaWhitespaceRule(messages)` (`COMMA_PARENTHESIS_WHITESPACE`, comma `,`)
+/// and `PersianCommaWhitespaceRule` (`PERSIAN_COMMA_PARENTHESIS_WHITESPACE`,
+/// comma `،`, default off).
+pub fn check_sentence_fa(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+    comma: &str,
+    rule_id: &str,
+) -> Vec<Match> {
+    let mut matches = check_sentence_with_comma(
+        tokens,
+        sentence_text,
+        sentence_offset,
+        true,
+        comma,
+        rule_id,
+        None,
+    );
+    for m in &mut matches {
+        m.category_name = "Typography".to_string();
+        m.description = "استفاده از فاصله‌های پیش از کاما و بعد و قبل از پرانتزها".to_string();
+        m.message = translate_comma_message_fa(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_fa` bundle.
+fn translate_comma_message_fa(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "بعد از پرانتز باز فاصله نگذارید".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "قبل از پرانتز بسته فاصله نگذارید".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "گذاشتن یک فاصله بعد از کاما".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "پس از کاما فاصله بگذارید، ولی نه قبل از آن".to_string()
+        }
+        "Don't put a space before the full stop." => "قبل از نقطه فاصله نگذارید".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
 /// Java `messages.getString` with the `MessagesBundle_sl` bundle.
 fn translate_comma_message_sl(msg: &str) -> String {
     match msg {

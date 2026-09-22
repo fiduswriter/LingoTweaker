@@ -193,6 +193,8 @@ pub struct Pipeline {
     pub serbian: Option<Arc<crate::sr::SerbianPipeline>>,
     /// Arabic pipeline parts (`None` for the other languages)
     pub arabic: Option<Arc<crate::ar::ArabicPipeline>>,
+    /// Persian pipeline parts (`None` for the other languages)
+    pub persian: Option<Arc<crate::fa::PersianPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1387,6 +1389,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1638,6 +1641,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1848,6 +1852,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2066,6 +2071,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2204,6 +2210,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2461,6 +2468,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2678,6 +2686,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3012,6 +3021,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3170,6 +3180,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3314,6 +3325,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3482,6 +3494,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3628,6 +3641,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3746,6 +3760,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3899,6 +3914,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3984,6 +4000,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4152,6 +4169,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4232,6 +4250,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4349,6 +4368,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4452,6 +4472,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4569,6 +4590,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4674,6 +4696,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4780,6 +4803,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4896,6 +4920,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5001,6 +5026,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5159,6 +5185,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5356,6 +5383,7 @@ impl Pipeline {
             ukrainian: Some(ukrainian),
             serbian: None,
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5509,6 +5537,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: Some(serbian),
             arabic: None,
+            persian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5649,6 +5678,78 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: Some(arabic),
+            persian: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Persian (`fa`) engine: `Persian` has no tagger, disambiguator,
+    /// synthesizer, speller or XML filters, so the XML `<pattern>` rules run
+    /// over the `PersianWordTokenizer` surface tokenization (`fa_two` SRX).
+    pub fn new_persian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Fa, "fa_two", enabled_rules)?;
+        let persian = Arc::new(crate::fa::PersianPipeline {});
+        Ok(Self {
+            lang: Lang::Fa,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: Some(persian),
             clean_overlapping_matches: true,
         })
     }
@@ -5792,6 +5893,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5882,6 +5984,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5976,6 +6079,7 @@ impl Pipeline {
             ukrainian: None,
             serbian: None,
             arabic: None,
+            persian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5990,7 +6094,9 @@ impl Pipeline {
         let mut out = Vec::new();
         for (start, end) in self.srx.split(text) {
             let sentence_text = &text[start..end];
-            let mut analyzed = if self.norwegian.is_some() || self.nordum.is_some() {
+            let mut analyzed = if self.persian.is_some() {
+                crate::fa::analyze_persian_sentence(sentence_text)
+            } else if self.norwegian.is_some() || self.nordum.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
                 crate::gn::analyze_guarani_sentence(sentence_text)
@@ -8288,6 +8394,36 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_is(&analyzed_sentences));
             }
         }
+        // Persian text-level rules (`Persian.getRelevantRules`):
+        // MultipleWhitespace (3) and LongSentence (4, picky, 50 words).
+        if self.lang == crate::Lang::Fa {
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_fa(&analyzed_sentences));
+            }
+            if builtin_active(
+                "TOO_LONG_SENTENCE",
+                "STYLE",
+                true,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::long_sentence::check_fa(&analyzed_sentences));
+            }
+        }
         // Esperanto text-level rules (`Esperanto.getRelevantRules`):
         // GenericUnpairedBrackets (3), UppercaseSentenceStart (5),
         // MultipleWhitespace (7) and SentenceWhitespace (8).
@@ -9202,7 +9338,9 @@ impl Pipeline {
         end: usize,
         is_last: bool,
     ) -> (lt_core::AnalyzedSentence, usize) {
-        let mut analyzed = if self.norwegian.is_some() || self.nordum.is_some() {
+        let mut analyzed = if self.persian.is_some() {
+            crate::fa::analyze_persian_sentence(&text[start..end])
+        } else if self.norwegian.is_some() || self.nordum.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
             crate::gn::analyze_guarani_sentence(&text[start..end])
@@ -11672,6 +11810,54 @@ impl Pipeline {
                     &mut seen,
                 );
             }
+        }
+        // Persian sentence-level rules in `Persian.getRelevantRules` order:
+        // CommaWhitespace (1), DoublePunctuation (2) and the Persian-specific
+        // rules (5–11, stage 3).
+        if self.lang == crate::Lang::Fa {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "TYPOGRAPHY",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_fa(
+                    &analyzed.tokens,
+                    sentence_text,
+                    start,
+                    ",",
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                ),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_fa(
+                    &analyzed.tokens,
+                    start,
+                    ",",
+                    "DOUBLE_PUNCTUATION",
+                ),
+                &mut seen,
+            );
         }
         // Esperanto sentence-level Java rules in `Esperanto.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2), HunspellRule (4)
