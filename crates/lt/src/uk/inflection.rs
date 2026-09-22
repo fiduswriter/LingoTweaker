@@ -117,3 +117,45 @@ pub fn get_noun_inflections(
     }
     out
 }
+
+/// `TokenAgreementAdjNounRule.formatInflections`.
+pub fn format_inflections(inflections: &[Inflection], adj: bool) -> String {
+    let mut sorted = inflections.to_vec();
+    sorted.sort_by(|a, b| {
+        lt_tagger::uk_helpers::gen_order(&a.gender)
+            .cmp(&lt_tagger::uk_helpers::gen_order(&b.gender))
+            .then_with(|| {
+                lt_tagger::uk_helpers::vidm_order(&a.case_)
+                    .cmp(&lt_tagger::uk_helpers::vidm_order(&b.case_))
+            })
+    });
+    let mut groups: Vec<(String, Vec<String>)> = Vec::new();
+    for inf in &sorted {
+        let mut case_str = lt_tagger::uk_helpers::case_name(&inf.case_);
+        if adj {
+            if let Some(anim) = inf.anim_tag.as_deref() {
+                case_str += if anim == "anim" {
+                    " (іст.)"
+                } else {
+                    " (неіст.)"
+                };
+            }
+        }
+        if let Some(group) = groups.iter_mut().find(|(g, _)| g == &inf.gender) {
+            group.1.push(case_str);
+        } else {
+            groups.push((inf.gender.clone(), vec![case_str]));
+        }
+    }
+    groups
+        .iter()
+        .map(|(g, cases)| {
+            format!(
+                "{}: {}",
+                lt_tagger::uk_helpers::gender_name(g),
+                cases.join(", ")
+            )
+        })
+        .collect::<Vec<_>>()
+        .join(", ")
+}

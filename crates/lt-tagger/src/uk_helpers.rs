@@ -811,6 +811,65 @@ pub const TIME_PLUS_LEMMAS: &[&str] = &[
     "крок",
 ];
 
+/// `PosTagHelper.VIDMINKY_MAP` display name.
+pub fn case_name(case_: &str) -> String {
+    match case_ {
+        "v_naz" => "називний",
+        "v_rod" => "родовий",
+        "v_dav" => "давальний",
+        "v_zna" => "знахідний",
+        "v_oru" => "орудний",
+        "v_mis" => "місцевий",
+        "v_kly" => "кличний",
+        "v_inf" => "інфінітив",
+        other => other,
+    }
+    .to_string()
+}
+
+/// `PosTagHelper.GENDER_MAP` display name.
+pub fn gender_name(gender: &str) -> String {
+    match gender {
+        "m" => "ч.р.",
+        "f" => "ж.р.",
+        "n" => "с.р.",
+        "p" => "мн.",
+        "s" => "одн.",
+        "i" => "інф.",
+        "o" => "безос. форма",
+        other => other,
+    }
+    .to_string()
+}
+
+/// `PosTagHelper.GEN_ORDER` (sorting key; unknown -> 0).
+pub fn gen_order(gender: &str) -> i32 {
+    match gender {
+        "m" => 0,
+        "f" => 1,
+        "n" => 3,
+        "s" => 4,
+        "p" => 5,
+        "i" => 6,
+        "o" => 7,
+        _ => 0,
+    }
+}
+
+/// `PosTagHelper.VIDM_ORDER` (sorting key; unknown -> 0).
+pub fn vidm_order(case_: &str) -> i32 {
+    match case_ {
+        "v_naz" => 10,
+        "v_rod" => 20,
+        "v_dav" => 30,
+        "v_zna" => 40,
+        "v_oru" => 50,
+        "v_mis" => 60,
+        "v_kly" => 70,
+        _ => 0,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
