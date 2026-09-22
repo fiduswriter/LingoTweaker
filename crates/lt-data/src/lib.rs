@@ -83,7 +83,7 @@ impl DataDir {
         } else {
             raw
         };
-        let dir = Self::from_pack(&bytes)?;
+        let dir = Self::from_pack_bytes(bytes)?;
         pack_cache()
             .lock()
             .expect("pack cache poisoned")
@@ -95,11 +95,21 @@ impl DataDir {
     ///
     /// The pack is registered as a mount and the returned handle points at a
     /// virtual base path, so all existing `join`/`&Path` plumbing works while
-    /// reads resolve from memory.
-    pub fn from_pack(bytes: &[u8]) -> Result<Self> {
-        let index = pack::parse(bytes)?;
-        let base = fs::register(bytes.to_vec(), index);
+    /// reads resolve from memory. The bytes are consumed as-is (the mount
+    /// keeps them); use [`DataDir::from_pack`] when only a borrowed slice is
+    /// available.
+    pub fn from_pack_bytes(bytes: Vec<u8>) -> Result<Self> {
+        let index = pack::parse(&bytes)?;
+        let base = fs::register(bytes, index);
         Ok(Self(base))
+    }
+
+    /// A data directory backed by an in-memory pack (see [`pack`]).
+    ///
+    /// Borrows and copies the pack bytes; [`DataDir::from_pack_bytes`] avoids
+    /// the copy when the bytes are no longer needed by the caller.
+    pub fn from_pack(bytes: &[u8]) -> Result<Self> {
+        Self::from_pack_bytes(bytes.to_vec())
     }
 
     pub fn discover() -> Result<Self> {

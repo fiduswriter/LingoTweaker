@@ -15,7 +15,7 @@ use std::collections::{HashMap, HashSet};
 use std::path::Path;
 
 use lt_core::{CoreError, Result};
-use lt_tagger::{Cfsa2, Charset, DictionaryInfo};
+use lt_tagger::{Automaton, Charset, DictionaryInfo};
 use unicode_normalization::UnicodeNormalization;
 
 pub const LANGUAGETOOL: &str = "LanguageTool";
@@ -417,16 +417,18 @@ impl ByteTrie {
 /// one source per dictionary at edit distances 1/2/3).
 #[derive(Debug, Clone)]
 pub enum DictSource {
-    Fsa(Cfsa2),
+    Fsa(std::sync::Arc<Automaton>),
     Trie(ByteTrie),
 }
 
 impl DictSource {
     /// Load a binary Morfologik `.dict` speller dictionary (`speller.dict`).
+    ///
+    /// The parsed automaton is shared with any other loader of the same path
+    /// (see [`Automaton::parse_cached`]); all shipped speller dictionaries are
+    /// CFSA2, as before.
     pub fn from_dict_file(dict_path: &Path, _info_path: &Path) -> Result<Self> {
-        let dict_bytes = lt_data::fs::read(dict_path)
-            .map_err(|e| CoreError::Data(format!("cannot read {}: {e}", dict_path.display())))?;
-        Ok(DictSource::Fsa(Cfsa2::parse(&dict_bytes)?))
+        Ok(DictSource::Fsa(Automaton::parse_cached(dict_path)?))
     }
 
     /// Build a source from plain text dictionary lines.

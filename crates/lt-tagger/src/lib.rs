@@ -367,6 +367,35 @@ impl Automaton {
         }
     }
 
+    /// Load a `.dict` file, sharing the parsed automaton between callers that
+    /// open the same path: the engine's tagger and its spellers both load
+    /// `english.dict`, for example, and the parse copies the whole arc table.
+    /// Data packs are immutable, so a path always names the same bytes.
+    ///
+    /// Weak cache values share the automaton between the simultaneous loads
+    /// of one engine build but let it go once no live engine uses it, so
+    /// engines built later (or from a different data directory) re-read
+    /// cleanly instead of pinning every dictionary ever opened.
+    pub fn parse_cached(path: &Path) -> Result<std::sync::Arc<Automaton>> {
+        static CACHE: std::sync::OnceLock<
+            std::sync::Mutex<HashMap<std::path::PathBuf, std::sync::Weak<Automaton>>>,
+        > = std::sync::OnceLock::new();
+        let key = path.to_path_buf();
+        if let Ok(cache) = CACHE.get_or_init(Default::default).lock() {
+            if let Some(found) = cache.get(&key).and_then(|weak| weak.upgrade()) {
+                return Ok(found);
+            }
+        }
+        let bytes = lt_data::fs::read(path).map_err(|e| {
+            lt_core::CoreError::Data(format!("cannot read {}: {e}", path.display()))
+        })?;
+        let parsed = std::sync::Arc::new(Automaton::parse(&bytes)?);
+        if let Ok(mut cache) = CACHE.get_or_init(Default::default).lock() {
+            cache.insert(key, std::sync::Arc::downgrade(&parsed));
+        }
+        Ok(parsed)
+    }
+
     pub fn root_node(&self) -> usize {
         match self {
             Automaton::Cfsa2(a) => a.root_node(),
@@ -657,7 +686,7 @@ impl DictEncoder {
 /// and several seconds of load time (D-033).
 #[derive(Debug, Clone)]
 pub struct Dictionary {
-    automaton: Automaton,
+    automaton: std::sync::Arc<Automaton>,
     separator: u8,
     encoder: DictEncoder,
     /// `.info` `fsa.dict.encoding` (ISO-8859-15 for Italian).
@@ -670,10 +699,7 @@ pub struct Dictionary {
 impl Dictionary {
     /// Load `.dict` + `.info` pair.
     pub fn load(dict_path: &Path, info: &DictionaryInfo) -> Result<Self> {
-        let bytes = lt_data::fs::read(dict_path).map_err(|e| {
-            lt_core::CoreError::Data(format!("cannot read {}: {e}", dict_path.display()))
-        })?;
-        let automaton = Automaton::parse(&bytes)?;
+        let automaton = Automaton::parse_cached(dict_path)?;
         let separator = info
             .fields
             .get("fsa.dict.separator")
@@ -793,7 +819,7 @@ fn decode_annotation(
 /// `lookup("lemma|tag")` decodes the inflected forms.
 #[derive(Debug, Clone)]
 pub struct SynthDictionary {
-    automaton: Automaton,
+    automaton: std::sync::Arc<Automaton>,
     separator: u8,
     encoder: DictEncoder,
     charset: Charset,
@@ -801,10 +827,7 @@ pub struct SynthDictionary {
 
 impl SynthDictionary {
     pub fn load(dict_path: &Path, info: &DictionaryInfo) -> Result<Self> {
-        let bytes = lt_data::fs::read(dict_path).map_err(|e| {
-            lt_core::CoreError::Data(format!("cannot read {}: {e}", dict_path.display()))
-        })?;
-        let automaton = Automaton::parse(&bytes)?;
+        let automaton = Automaton::parse_cached(dict_path)?;
         let separator = info
             .fields
             .get("fsa.dict.separator")

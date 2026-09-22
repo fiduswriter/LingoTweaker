@@ -31,7 +31,7 @@
 use std::path::Path;
 
 use lt_core::{CoreError, Result};
-use lt_tagger::{Cfsa2, DictionaryInfo};
+use lt_tagger::{Automaton, DictionaryInfo};
 
 /// Maximum length of a word for which edit-distance-2 candidates are generated.
 const MAX_DISTANCE_2_LENGTH: usize = 12;
@@ -46,7 +46,7 @@ const DEFAULT_SEPARATOR: char = '+';
 /// suggestions.
 #[derive(Debug, Clone)]
 pub struct SpellChecker {
-    automaton: Cfsa2,
+    automaton: std::sync::Arc<Automaton>,
     separator: u8,
     frequency_included: bool,
     word_count: usize,
@@ -102,9 +102,7 @@ impl SpellChecker {
         let ignore_camel_case = flag("fsa.dict.speller.ignore-camel-case", true);
         let ignore_all_uppercase = flag("fsa.dict.speller.ignore-all-uppercase", true);
 
-        let dict_bytes = lt_data::fs::read(dict_path)
-            .map_err(|e| CoreError::Data(format!("cannot read {}: {e}", dict_path.display())))?;
-        let automaton = Cfsa2::parse(&dict_bytes)?;
+        let automaton = Automaton::parse_cached(dict_path)?;
 
         // one traversal for the suggestion alphabet and the word count (the
         // words themselves are decoded per lookup; morfologik dictionaries

@@ -92,10 +92,10 @@ impl LtEngine {
     /// `disabledRules`, `enabledCategories`, `disabledCategories`,
     /// `enabledOnly` configure rule selection.
     #[wasm_bindgen(constructor)]
-    pub fn new(lang: &str, pack: &[u8], options: Option<String>) -> Result<LtEngine, JsError> {
+    pub fn new(lang: &str, pack: Vec<u8>, options: Option<String>) -> Result<LtEngine, JsError> {
         let code = lt::Lang::from_long_code(lang)
             .ok_or_else(|| JsError::new(&format!("unknown language: {lang}")))?;
-        let data = lt::DataDir::from_pack(pack).map_err(js_error)?;
+        let data = lt::DataDir::from_pack_bytes(pack).map_err(js_error)?;
         let options = match &options {
             Some(json) => serde_json::from_str::<WasmOptions>(json).map_err(js_error)?,
             None => WasmOptions::default(),
