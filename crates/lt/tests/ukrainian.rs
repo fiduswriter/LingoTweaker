@@ -433,6 +433,42 @@ fn ukrainian_simple_replace() {
     );
 }
 
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`): XML multi-form `<match>`
+/// synthesis (`PatternRuleMatcher.formatMatches`) must expand the full
+/// cartesian product, re-scanning duplicated `<suggestion>` copies in place.
+#[test]
+fn ukrainian_multiple_synthesis() {
+    let _guard = engine_guard();
+
+    let text = "на повістці дня.";
+    let matches = one(text, "povistka_dnya");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "порядкові денному".to_string(),
+            "порядкові деннім".to_string(),
+            "порядку денному".to_string(),
+            "порядку деннім".to_string()
+        ]
+    );
+
+    let text = "він рахуватися народним депутатом";
+    let matches = one(text, "RAHUVATYSIA_SCHO");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec![
+            "вважатись за народне депутата".to_string(),
+            "вважатись за народний депутата".to_string(),
+            "вважатись за народного депутата".to_string(),
+            "вважатися за народне депутата".to_string(),
+            "вважатися за народний депутата".to_string(),
+            "вважатися за народного депутата".to_string()
+        ]
+    );
+}
+
 /// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
 /// `TokenAgreementNumrNounRule` + its exception helper.
 #[test]

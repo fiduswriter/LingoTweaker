@@ -993,6 +993,11 @@ pub fn expand_message_backrefs(
 /// `PatternRuleMatcher.formatMatches` with a synthesizer: expands the `\N`
 /// placeholders of a rule message, using the message's `<match>` elements in
 /// occurrence order (Java `suggestionMatches` + `matchCounter`).
+///
+/// Operates on a single mutable string like Java, so a multi-form `<match>`
+/// expansion is re-scanned in place: later placeholders inside the duplicated
+/// `<suggestion>` copies still see the enclosing `</suggestion>` and expand
+/// into the full cartesian product.
 pub fn expand_message_matches<T: Deref<Target = AnalyzedTokenReadings>>(
     s: &str,
     refs: &[MessageMatchRef],
@@ -1003,152 +1008,128 @@ pub fn expand_message_matches<T: Deref<Target = AnalyzedTokenReadings>>(
     if !s.contains('\\') {
         return s.to_string();
     }
-    let mut out = String::with_capacity(s.len());
-    let mut spec_by_no: std::collections::HashMap<usize, MatchRefSpec> =
+    let mut message = s.to_string();
+    let mut match_counter = 0usize;
+    // Java `numbersToMatches`: placeholder number (0-based) -> match index.
+    let mut numbers_to_matches: std::collections::HashMap<usize, usize> =
         std::collections::HashMap::new();
-    let _ = expand_message_matches_into(
-        s,
-        refs,
-        tokens,
-        positions,
-        synth,
-        0,
-        &mut out,
-        &mut spec_by_no,
-    );
-    out
-}
-
-#[allow(clippy::too_many_arguments)]
-fn expand_message_matches_into<T: Deref<Target = AnalyzedTokenReadings>>(
-    s: &str,
-    refs: &[MessageMatchRef],
-    tokens: &[T],
-    positions: &[Option<usize>],
-    synth: Option<&dyn Synthesizer>,
-    mut match_counter: usize,
-    out: &mut String,
-    spec_by_no: &mut std::collections::HashMap<usize, MatchRefSpec>,
-) -> usize {
-    let bytes = s.as_bytes();
-    let mut i = 0usize;
-    while i < bytes.len() {
-        if bytes[i] == b'\\' && i + 1 < bytes.len() && bytes[i + 1].is_ascii_digit() {
-            let mut j = i + 1;
-            while j < bytes.len() && bytes[j].is_ascii_digit() {
-                j += 1;
-            }
-            let n: usize = s[i + 1..j].parse().unwrap_or(0);
-            // Java `formatMatches`: the first occurrence of `\N` records its
-            // `Match` in `numbersToMatches`; a repeated `\N` (e.g. duplicated
-            // inside a multi-form suggestion) reuses the same match spec.
-            let from_refs = refs.get(match_counter).map(|r| r.spec.clone());
-            let spec = from_refs.clone().or_else(|| spec_by_no.get(&n).cloned());
-            match spec {
-                Some(spec) => {
-                    let mut spec = spec;
-                    spec.no = n;
-                    if from_refs.is_some() {
-                        spec_by_no.entry(n).or_insert_with(|| spec.clone());
-                    }
-                    match render_match_ref(&spec, tokens, positions, synth) {
-                        // Java `formatMatches`: a single *empty* match (e.g.
-                        // `\1` on the empty SENT_START token) goes through
-                        // `concatWithoutExtraSpace` like an unmatched optional
-                        // element, so `« \1 »` renders `« »` (one space).
-                        Some(forms) if forms.len() == 1 && !forms[0].is_empty() => {
-                            out.push_str(&forms[0]);
-                            i = j;
-                        }
-                        Some(forms) if forms.len() > 1 => {
-                            // Java concatenates the replacement and keeps
-                            // scanning in place; here the already-processed
-                            // prefix plus the replacement is committed and
-                            // the untouched remainder is scanned recursively.
-                            let right = &s[j..];
-                            let left = out.clone();
-                            let (joined, right_new) =
-                                format_multiple_synthesis(&forms, &left, right);
-                            // `joined` always ends with the whole `right`
-                            // (when `suggestionRight` is empty, `rightNew` is
-                            // `right`); commit only the replacement and
-                            // re-scan the untouched remainder so placeholders
-                            // inside the suggestion text still expand.
-                            let replacement =
-                                joined[left.len()..joined.len() - right_new.len()].to_string();
-                            let next_counter = expand_message_matches_into(
-                                &replacement,
-                                refs,
-                                tokens,
-                                positions,
-                                synth,
-                                match_counter + 1,
-                                out,
-                                spec_by_no,
-                            );
-                            expand_message_matches_into(
-                                &s[j + right.len() - right_new.len()..],
-                                refs,
-                                tokens,
-                                positions,
-                                synth,
-                                next_counter,
-                                out,
-                                spec_by_no,
-                            );
-                            return next_counter;
-                        }
-                        _ => {
-                            // unmatched optional element: collapse a space.
-                            // Java's `WHITESPACE_OR_PUNCT` uses the ASCII
-                            // `\s` class, so an NBSP does *not* trigger the
-                            // space collapse (French messages embed NBSPs).
-                            let mut k = j;
-                            while k < bytes.len() && is_java_whitespace(bytes[k]) {
-                                k += 1;
-                            }
-                            let right_starts_ws = k > j && k < bytes.len();
-                            // Java `concatWithoutExtraSpace`: a reference
-                            // directly before `</suggestion>` also drops the
-                            // preceding space (e.g. `бути \2` with `\2` an
-                            // unmatched optional element).
-                            let before_closing_tag = s[j..].starts_with("</suggestion>");
-                            if out.ends_with(' ')
-                                && (right_starts_ws || punct_after(s, j) || before_closing_tag)
-                            {
-                                out.pop();
-                            } else if (out.is_empty() || out.ends_with("suggestion>"))
-                                && right_starts_ws
-                            {
-                                // Java `concatWithoutExtraSpace`: drop the space
-                                // right after a suggestion tag
-                                j = k;
-                            } else if right_starts_ws {
-                                j = k - 1;
-                            }
-                            i = j;
-                        }
-                    }
-                    match_counter += 1;
+    // Java `suggestionMatches`: the `<match>` list, grown by one when a
+    // repeated placeholder runs past it (`suggestionMatches.add(...)`).
+    let suggestion_matches: Vec<MatchRefSpec> = refs.iter().map(|r| r.spec.clone()).collect();
+    let mut processed = 0usize;
+    while let Some(rel) = message[processed..].find('\\') {
+        let backslash = processed + rel;
+        let bytes = message.as_bytes();
+        if backslash + 1 >= bytes.len() || !bytes[backslash + 1].is_ascii_digit() {
+            break;
+        }
+        let mut digit_end = backslash + 1;
+        while digit_end < bytes.len() && bytes[digit_end].is_ascii_digit() {
+            digit_end += 1;
+        }
+        let n: usize = message[backslash + 1..digit_end].parse().unwrap_or(0);
+        if n == 0 {
+            break;
+        }
+        let j = n - 1;
+        let mut new_way = false;
+        // Java `numbersToMatches` + `suggestionMatches`: the first occurrence
+        // of `\N` consumes the next `<match>`; a repeated `\N` (inside a
+        // duplicated multi-form suggestion) reuses the recorded match.
+        let spec_index =
+            if !suggestion_matches.is_empty() && match_counter < suggestion_matches.len() {
+                let index = match_counter;
+                numbers_to_matches.insert(j, index);
+                match_counter += 1;
+                Some(index)
+            } else {
+                numbers_to_matches.get(&j).copied()
+            };
+        if let Some(index) = spec_index {
+            let mut spec = suggestion_matches[index].clone();
+            spec.no = n;
+            // Java: an unmatched optional element yields `{""}` without
+            // consulting the synthesizer.
+            let renders = if j < positions.len() && positions[j].is_none() {
+                Some(vec![String::new()])
+            } else {
+                render_match_ref(&spec, tokens, positions, synth)
+            };
+            let left = &message[..backslash];
+            let right = &message[digit_end..];
+            match renders {
+                Some(forms) if forms.len() > 1 => {
+                    // Java leaves `errorMessageProcessed` unchanged; the
+                    // duplicated suggestion forms are re-scanned in place.
+                    message = format_multiple_synthesis(&forms, left, right).0;
                 }
-                None => {
-                    // no `<match>` element: Java's `!newWay` fallback replaces
-                    // the placeholder with the referenced token's surface
-                    if let Some(idx) = fallback_placeholder_token(n, positions) {
-                        if let Some(t) = tokens.get(idx) {
-                            out.push_str(t.surface());
-                        }
-                    }
-                    i = j;
+                Some(forms) if forms.first().is_some_and(|f| !f.is_empty()) => {
+                    let form = &forms[0];
+                    let new_processed = backslash + form.len();
+                    let mut new_message =
+                        String::with_capacity(backslash + form.len() + right.len());
+                    new_message.push_str(left);
+                    new_message.push_str(form);
+                    new_message.push_str(right);
+                    message = new_message;
+                    processed = new_processed;
+                }
+                _ => {
+                    let (new_message, new_processed) = concat_without_extra_space(left, right);
+                    message = new_message;
+                    processed = new_processed;
                 }
             }
-        } else {
-            let ch = s[i..].chars().next().unwrap();
-            out.push(ch);
-            i += ch.len_utf8();
+            new_way = true;
+        }
+        if !new_way {
+            // Java `!newWay` fallback (no usable `<match>` element): replace
+            // the remaining `\N` with the referenced token's surface.
+            if let Some(idx) = fallback_placeholder_token(n, positions) {
+                if let Some(t) = tokens.get(idx) {
+                    let surface = t.surface().to_string();
+                    let needle = format!("\\{n}");
+                    // Java's `lastIndexOf(...) + length` can land mid-character
+                    // in UTF-8; clamp to the previous char boundary.
+                    let new_processed = message
+                        .rfind(&needle)
+                        .map(|p| p + surface.len())
+                        .unwrap_or(processed)
+                        .min(message.len());
+                    let new_processed = (0..=new_processed)
+                        .rev()
+                        .find(|&k| message.is_char_boundary(k))
+                        .unwrap_or(processed);
+                    let head = message[..processed].to_string();
+                    let tail = message[processed..].replace(&needle, &surface);
+                    message = head + &tail;
+                    processed = new_processed.min(message.len());
+                }
+            }
         }
     }
-    match_counter
+    message
+}
+
+/// Java `PatternRuleMatcher.concatWithoutExtraSpace`. Returns the new string
+/// and Java's `errorMessageProcessed = leftSide.length()`.
+fn concat_without_extra_space(left: &str, right: &str) -> (String, usize) {
+    // `WHITESPACE_OR_PUNCT = [\s,:;.!?].*` (Java `\s`, so no NBSP).
+    let starts_ws_or_punct = right.chars().next().is_some_and(|c| {
+        is_java_whitespace_char(c) || matches!(c, ',' | ':' | ';' | '.' | '!' | '?')
+    });
+    if left.ends_with(' ') && (right.starts_with("</suggestion>") || starts_ws_or_punct) {
+        // Java's `errorMessageProcessed = leftSide.length()` skips the removed
+        // space plus the first character of `rightSide`: translate that
+        // code-unit position to a UTF-8 byte boundary.
+        let processed = left.len() - 1 + right.chars().next().map_or(0, char::len_utf8);
+        return (format!("{}{}", &left[..left.len() - 1], right), processed);
+    }
+    let processed = left.len();
+    if left.ends_with("suggestion>") && right.starts_with(' ') {
+        return (format!("{left}{}", &right[1..]), processed);
+    }
+    (format!("{left}{right}"), processed)
 }
 
 /// Java `formatMatches` fallback without a `<match>` element: the placeholder
