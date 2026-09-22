@@ -89,6 +89,24 @@ pub fn check_sentence_with_quotes(
     sentence_offset: usize,
     quotes_whitespace: bool,
 ) -> Vec<Match> {
+    check_sentence_with_quotes_exception(
+        tokens,
+        sentence_text,
+        sentence_offset,
+        quotes_whitespace,
+        None,
+    )
+}
+
+/// `CommaWhitespaceRule.match` with the language `isException` hook.
+#[allow(clippy::type_complexity)]
+pub fn check_sentence_with_quotes_exception(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+    quotes_whitespace: bool,
+    exception: Option<&dyn Fn(&[AnalyzedTokenReadings], usize) -> bool>,
+) -> Vec<Match> {
     let mut rule_matches: Vec<Match> = Vec::new();
     let mut prev_token = String::new();
     let mut prev_prev_token = String::new();
@@ -168,7 +186,7 @@ pub fn check_sentence_with_quotes(
             }
         }
         if let Some(msg) = msg {
-            if !tokens[i].is_immunized {
+            if !tokens[i].is_immunized && exception.is_none_or(|f| !f(tokens, i)) {
                 let mut from_pos = tokens[i - 1].start_pos;
                 if two_suggestions {
                     from_pos = tokens[i - 2].start_pos;
@@ -885,6 +903,52 @@ fn translate_comma_message_be(msg: &str) -> String {
         "Don't put a space before the full stop." => {
             "Не стаўце прабел пасля заканчэння сказа".to_string()
         }
+        _ => msg.to_string(),
+    }
+}
+
+/// `UkrainianCommaWhitespaceRule`: the dash exception plus the
+/// `MessagesBundle_uk` strings.
+pub fn check_sentence_uk(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let exception = |tokens: &[AnalyzedTokenReadings], i: usize| {
+        matches!(tokens[i].surface(), "\u{2014}" | "\u{2013}")
+    };
+    let mut matches = check_sentence_with_quotes_exception(
+        tokens,
+        sentence_text,
+        sentence_offset,
+        true,
+        Some(&exception),
+    );
+    for m in &mut matches {
+        m.category_name = "Можлива механічна помилка".to_string();
+        m.description = "Вживання пробілу перед комою та перед і після дужок".to_string();
+        m.message = translate_comma_message_uk(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_uk` bundle.
+fn translate_comma_message_uk(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Не ставте пробіл після лівої дужки".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Не ставте пробіл перед правою дужкою".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            "Не ставте пробіл з обох боків символу лапок.".to_string()
+        }
+        "Put a space after the comma." => "Вставте пробіл після коми.".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Поставте пробіл після коми, а не перед комою.".to_string()
+        }
+        "Don't put a space before the full stop." => "Не ставте пробіл перед крапкою.".to_string(),
         _ => msg.to_string(),
     }
 }

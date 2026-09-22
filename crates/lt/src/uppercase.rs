@@ -339,6 +339,27 @@ fn check_with(
     category_name: &str,
     dutch_special: bool,
 ) -> Vec<Match> {
+    check_with_exception(
+        sentences,
+        message,
+        short_message,
+        description,
+        category_name,
+        dutch_special,
+        None,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn check_with_exception(
+    sentences: &[AnalyzedSentence],
+    message: &str,
+    short_message: &str,
+    description: &str,
+    category_name: &str,
+    dutch_special: bool,
+    cyrillic_list: Option<&regex::Regex>,
+) -> Vec<Match> {
     let mut rule_matches: Vec<Match> = Vec::new();
     if sentences.len() == 1 && sentences[0].tokens.len() == 2 {
         // special case for a single "sentence" with a single word (Java
@@ -408,7 +429,10 @@ fn check_with(
 
         // allows enumeration with lowercase letters: a), iv., etc.
         if match_token_pos + 1 < tokens.len()
-            && NUMERALS_EN.is_match(tokens[match_token_pos].surface())
+            && (NUMERALS_EN.is_match(tokens[match_token_pos].surface())
+                || match_token_pos == 1
+                    && cyrillic_list
+                        .is_some_and(|re| re.is_match(tokens[match_token_pos].surface())))
             && matches!(tokens[match_token_pos + 1].surface(), "." | ")")
         {
             prevent_error = true;
@@ -483,5 +507,20 @@ pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         "Предложение должно начинаться с заглавной буквы",
         "Заглавные буквы",
         false,
+    )
+}
+
+/// `UkrainianUppercaseSentenceStartRule` (the `а) б) в)` list exception).
+pub fn check_uk(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    static CYRILLIC_LOWER: std::sync::LazyLock<regex::Regex> =
+        std::sync::LazyLock::new(|| regex::Regex::new(r"^[а-яіїєґ]$").unwrap());
+    check_with_exception(
+        sentences,
+        "Це речення не починається з великої літери.",
+        "Великі літери",
+        "Перевіряє, чи речення починається з великої літери",
+        "Великі літери",
+        false,
+        Some(&CYRILLIC_LOWER),
     )
 }

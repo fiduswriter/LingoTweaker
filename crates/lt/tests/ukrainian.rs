@@ -236,3 +236,60 @@ fn ukrainian_hybrid_disambiguation() {
     assert_eq!(got[1].0, "кг");
     assert_eq!(got[1].1.matches("nv:abbr").count(), 12);
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`) text/sentence rules:
+/// `UkrainianUppercaseSentenceStartRule` (`а) б) в)` exception),
+/// `UkrainianCommaWhitespaceRule`, `UkrainianWordRepeatRule` and
+/// `HiddenCharacterRule`.
+#[test]
+fn ukrainian_text_rules() {
+    let _guard = engine_guard();
+    // uppercase: only the first lowercase sentence start is flagged, the
+    // `а)` list item is an exception
+    let text = "це речення. а) наступне.";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 2));
+    assert_eq!(
+        matches[0].message,
+        "Це речення не починається з великої літери."
+    );
+    assert_eq!(matches[0].category_name, "Великі літери");
+
+    // comma whitespace (uk strings)
+    let text = "Слово , слово.";
+    let matches = one(text, "COMMA_PARENTHESIS_WHITESPACE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (5, 7));
+    assert_eq!(
+        matches[0].message,
+        "Поставте пробіл після коми, а не перед комою."
+    );
+    assert_eq!(matches[0].category_name, "Можлива механічна помилка");
+
+    // word repeat + exceptions
+    let text = "Він буде буде тут.";
+    let matches = one(text, "UKRAINIAN_WORD_REPEAT_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (4, 13));
+    assert!(one("Тому що що?", "UKRAINIAN_WORD_REPEAT_RULE").is_empty());
+    assert!(one("від добра добра не шукають.", "UKRAINIAN_WORD_REPEAT_RULE").is_empty());
+    let text = "І і знову.";
+    let matches = one(text, "UKRAINIAN_WORD_REPEAT_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 3));
+    assert_eq!(
+        matches[0].message,
+        "Можлива механічна помилка: повторення слова або, можливо, перша І має бути латинською."
+    );
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["І".to_string(), "I і".to_string()]
+    );
+
+    // hidden soft hyphen
+    let text = "текст\u{00AD}текст";
+    let matches = one(text, "UK_HIDDEN_CHARS");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(suggestions(&matches[0]), vec!["тексттекст".to_string()]);
+}

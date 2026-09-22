@@ -8465,8 +8465,21 @@ impl Pipeline {
         // generic built-in is `MultipleWhitespaceRule`. The custom
         // `UkrainianCommaWhitespaceRule`/`UkrainianUppercaseSentenceStartRule`
         // and the remaining classes follow in stage 3.
-        if self.lang == crate::Lang::Uk
-            && builtin_active(
+        if self.lang == crate::Lang::Uk {
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_uk(&analyzed_sentences));
+            }
+            if builtin_active(
                 crate::whitespace::RULE_ID,
                 "TYPOGRAPHY",
                 true,
@@ -8476,9 +8489,9 @@ impl Pipeline {
                 &disabled_rules,
                 &disabled_categories,
                 &enabled_categories,
-            )
-        {
-            text_level_matches.extend(crate::whitespace::check_uk(&analyzed_sentences));
+            ) {
+                text_level_matches.extend(crate::whitespace::check_uk(&analyzed_sentences));
+            }
         }
         // Crimean Tatar text-level rules (`CrimeanTatar.getRelevantRules`):
         // GenericUnpairedBrackets (2), UppercaseSentenceStart (3),
@@ -11590,6 +11603,54 @@ impl Pipeline {
         // Ukrainian sentence-level Java rules in `Ukrainian.getRelevantRules` order:
         // the speller (stage 2); the custom rules follow in stage 3.
         if self.lang == crate::Lang::Uk {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "TYPOGRAPHY",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_uk(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::word_repeat::UK_RULE_ID,
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::word_repeat::check_sentence_uk(&analyzed.tokens, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::hidden_chars::RULE_ID,
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::hidden_chars::check_sentence_uk(&analyzed.tokens, start),
+                &mut seen,
+            );
             if let Some(ukrainian) = &self.ukrainian {
                 if let Some(spelling) = &ukrainian.spelling {
                     append_active(

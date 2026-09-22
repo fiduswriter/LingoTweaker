@@ -91,3 +91,114 @@ impl WordRepeatRule {
         rule_matches
     }
 }
+
+pub const UK_RULE_ID: &str = "UKRAINIAN_WORD_REPEAT_RULE";
+const UK_DESCRIPTION: &str = "Повторення слів (напр., 'буде буде')";
+const UK_MESSAGE: &str = "Можлива механічна помилка: повторення слова";
+const UK_SHORT: &str = "Повторення слів";
+const UK_CATEGORY_NAME: &str = "Можлива механічна помилка";
+
+fn has_pos_tag(readings: &[lt_core::AnalyzedToken], re: &regex::Regex) -> bool {
+    readings
+        .iter()
+        .any(|r| r.pos_tag.as_deref().is_some_and(|t| re.is_match(t)))
+}
+
+/// `UkrainianWordRepeatRule.ignore`.
+fn uk_ignore(tokens: &[&AnalyzedTokenReadings], position: usize) -> bool {
+    static DATE_TIME_NUM: std::sync::LazyLock<regex::Regex> =
+        std::sync::LazyLock::new(|| regex::Regex::new(r"^(?:date|time|number.*)$").unwrap());
+    let tr = tokens[position];
+    let token = tr.surface();
+    if position > 2 && token == "добра" && eq_ignore_case(tokens[position - 2].surface(), "від")
+    {
+        return true;
+    }
+    if position > 1 && token == "що" && eq_ignore_case(tokens[position - 2].surface(), "тому")
+    {
+        return true;
+    }
+    if position > 3
+        && token == "ні"
+        && tokens[position - 2].surface() == ","
+        && eq_ignore_case(tokens[position - 3].surface(), "так")
+    {
+        return true;
+    }
+    if token.to_lowercase() == "ст." {
+        return true;
+    }
+    if ["Джей", "Бі", "Сі", "Ла"].contains(&token) {
+        return true;
+    }
+    if has_pos_tag(&tr.readings, &DATE_TIME_NUM) {
+        return true;
+    }
+    for at in &tr.readings {
+        if let Some(pos_tag) = at.pos_tag.as_deref() {
+            let is_initial = pos_tag.contains("abbr")
+                || (at.token.chars().count() == 1
+                    && at.token.chars().next().is_some_and(|c| c.is_uppercase())
+                    && position < tokens.len() - 1
+                    && tokens[position + 1].surface() == ".");
+            if !is_initial && pos_tag != "SENT_END" {
+                return false;
+            }
+        }
+    }
+    true
+}
+
+/// `UkrainianWordRepeatRule` over one sentence.
+pub fn check_sentence_uk(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let view: Vec<&AnalyzedTokenReadings> = tokens
+        .iter()
+        .filter(|t| !t.is_whitespace || t.is_sentence_start || t.is_sentence_end)
+        .collect();
+    let mut rule_matches = Vec::new();
+    let mut prev_token = String::new();
+    for i in 1..view.len() {
+        let token = view[i].surface().to_string();
+        if view[i].is_immunized {
+            prev_token.clear();
+            continue;
+        }
+        if is_word(&token) && eq_ignore_case(&prev_token, &token) && !uk_ignore(&view, i) {
+            let double_i = prev_token == "І" && token == "і";
+            let mut msg = UK_MESSAGE.to_string();
+            if double_i {
+                msg.push_str(" або, можливо, перша І має бути латинською.");
+            }
+            let prev_pos = view[i - 1].start_pos;
+            let pos = view[i].start_pos;
+            let mut suggestions = vec![Suggestion {
+                value: prev_token.clone(),
+                short_description: None,
+            }];
+            if double_i {
+                suggestions.push(Suggestion {
+                    value: "I і".to_string(),
+                    short_description: None,
+                });
+            }
+            rule_matches.push(
+                Match::new(
+                    UK_RULE_ID,
+                    Option::<String>::None,
+                    msg,
+                    Some(UK_SHORT.to_string()),
+                    TextRange::new(
+                        sentence_offset + prev_pos,
+                        sentence_offset + pos + prev_token.len(),
+                    ),
+                    suggestions,
+                    "MISC",
+                    UK_CATEGORY_NAME,
+                )
+                .with_metadata(UK_DESCRIPTION, "duplication", 1),
+            );
+        }
+        prev_token = token;
+    }
+    rule_matches
+}

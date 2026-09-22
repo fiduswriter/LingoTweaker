@@ -45,6 +45,7 @@ mod es;
 mod fr;
 mod gl;
 mod gn;
+mod hidden_chars;
 mod hunspell_spelling;
 mod is;
 mod it;
