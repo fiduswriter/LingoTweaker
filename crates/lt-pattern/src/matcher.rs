@@ -66,7 +66,7 @@ pub struct CompiledToken {
     /// the matcher is case-insensitive
     pub(crate) value_set: Option<(std::collections::HashSet<String>, bool)>,
     negate: bool,
-    pub postag: Option<std::sync::Arc<TextRegex>>,
+    pub postag: Option<PosTagMatcher>,
     /// raw `postag` attribute (Java `PatternToken.getPOStag`; the
     /// disambiguation `filterall` fallback stores the literal selector tag)
     pub postag_source: Option<String>,
@@ -117,7 +117,7 @@ pub struct CompiledException {
     pub(crate) literal: Option<(String, bool)>,
     /// fast path for regexps whose complete value set is known
     pub(crate) value_set: Option<(std::collections::HashSet<String>, bool)>,
-    pub postag: Option<std::sync::Arc<TextRegex>>,
+    pub postag: Option<PosTagMatcher>,
     /// `postag` matches the special `UNKNOWN` tag (precomputed)
     pos_unknown: bool,
     negate: bool,
@@ -158,6 +158,26 @@ impl std::fmt::Debug for TextRegex {
         match self {
             TextRegex::Fast(re) => f.debug_tuple("Fast").field(re).finish(),
             TextRegex::Fancy(re) => f.debug_tuple("Fancy").field(re).finish(),
+        }
+    }
+}
+
+/// Compiled POS-tag condition. `postag_regexp="no"` — the common case — is
+/// an exact tag compare, kept out of the regex engine so engine build does
+/// not compile a `^(?:NN)$` program for every distinct tag; the attribute
+/// carries no case-insensitive flag, so the compare is case-sensitive like
+/// the anchored regex it replaces.
+#[derive(Clone)]
+pub enum PosTagMatcher {
+    Literal(String),
+    Regex(std::sync::Arc<TextRegex>),
+}
+
+impl PosTagMatcher {
+    pub fn is_match(&self, tag: &str) -> bool {
+        match self {
+            PosTagMatcher::Literal(want) => want == tag,
+            PosTagMatcher::Regex(re) => re.is_match(tag),
         }
     }
 }
@@ -582,13 +602,13 @@ pub(crate) fn compile_token(t: &PatternToken) -> Result<CompiledToken, String> {
         t.match_ref.is_none(),
     )?;
     let postag = match (&t.postag, t.postag_regexp) {
-        (Some(tag), true) => Some(compile_regex_fast(tag, true, true)?),
-        (Some(tag), false) => Some(compile_regex_fast(&regex::escape(tag), true, true)?),
+        (Some(tag), true) => Some(PosTagMatcher::Regex(compile_regex_fast(tag, true, true)?)),
+        (Some(tag), false) => Some(PosTagMatcher::Literal(tag.clone())),
         (None, _) => None,
     };
     let pos_unknown = postag
         .as_ref()
-        .map(|re: &std::sync::Arc<TextRegex>| re.is_match("UNKNOWN"))
+        .map(|matcher| matcher.is_match("UNKNOWN"))
         .unwrap_or(false);
     let exceptions = t
         .exceptions
@@ -596,27 +616,23 @@ pub(crate) fn compile_token(t: &PatternToken) -> Result<CompiledToken, String> {
         .map(|e| -> Result<CompiledException, String> {
             let (text, literal, value_set) =
                 compile_text_matcher(e.text.as_deref(), e.regexp, e.case_sensitive, true)?;
+            let exc_postag = match (&e.postag, e.postag_regexp) {
+                (Some(tag), true) => {
+                    Some(PosTagMatcher::Regex(compile_regex_fast(tag, true, true)?))
+                }
+                (Some(tag), false) => Some(PosTagMatcher::Literal(tag.clone())),
+                (None, _) => None,
+            };
             Ok(CompiledException {
                 has_text: e.text.is_some(),
                 text,
                 literal,
                 value_set,
-                postag: match (&e.postag, e.postag_regexp) {
-                    (Some(tag), true) => Some(compile_regex_fast(tag, true, true)?),
-                    (Some(tag), false) => {
-                        Some(compile_regex_fast(&regex::escape(tag), true, true)?)
-                    }
-                    (None, _) => None,
-                },
-                pos_unknown: e
-                    .postag
+                pos_unknown: exc_postag
                     .as_ref()
-                    .map(|tag| {
-                        compile_regex_fast(tag, true, true)
-                            .map(|re| re.is_match("UNKNOWN"))
-                            .unwrap_or(false)
-                    })
+                    .map(|matcher| matcher.is_match("UNKNOWN"))
                     .unwrap_or(false),
+                postag: exc_postag,
                 negate: e.negate,
                 negate_pos: e.negate_pos,
                 inflected: e.inflected,
@@ -1477,7 +1493,7 @@ pub(crate) fn reading_matches(
         hit ^ token.negate
     };
     let pos_ok = match &token.postag {
-        Some(re) => {
+        Some(matcher) => {
             // LT PatternToken.isPosTokenMatched: the special UNKNOWN tag
             // matches readings without a real POS tag (null, SENT_END,
             // PARAGRAPH_END)
@@ -1487,7 +1503,7 @@ pub(crate) fn reading_matches(
             } else {
                 match &r.pos_tag {
                     None => pos_unknown,
-                    Some(tag) => re.is_match(tag),
+                    Some(tag) => matcher.is_match(tag),
                 }
             };
             hit ^ token.negate_pos
@@ -1612,14 +1628,14 @@ fn exception_matches_reading(
             hit ^ exc.negate
         };
         let pos_ok = match &exc.postag {
-            Some(re) => {
+            Some(matcher) => {
                 let pos_unknown = exc.pos_unknown;
                 let hit = if pos_unknown && unknown_hits(r, token_untagged) {
                     true
                 } else {
                     match &r.pos_tag {
                         None => pos_unknown,
-                        Some(tag) => re.is_match(tag),
+                        Some(tag) => matcher.is_match(tag),
                     }
                 };
                 hit ^ exc.negate_pos
