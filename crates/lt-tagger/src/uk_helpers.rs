@@ -1,9 +1,18 @@
 //! Ukrainian tagging helpers: `PosTagHelper`, `LetterEndingForNumericHelper`
-//! (suffix key lookup) and the `LemmaHelper` text functions used by
-//! `UkrainianTagger`.
+//! and the `LemmaHelper` text functions used by `UkrainianTagger`.
+
+use lt_core::AnalyzedToken;
 
 /// `LemmaHelper.IGNORE_CHARS` (`\u00AD\u0301`).
 const IGNORE_CHARS: &str = "\u{00AD}\u{0301}";
+
+/// Java `Matcher.matches()`: the match must cover the whole string.
+pub(crate) fn full_match(re: &fancy_regex::Regex, s: &str) -> bool {
+    match re.find(s) {
+        Ok(Some(m)) => m.start() == 0 && m.end() == s.len(),
+        _ => false,
+    }
+}
 
 /// `LemmaHelper.isAllUppercaseUk`.
 pub fn is_all_uppercase_uk(word: &str) -> bool {
@@ -154,6 +163,218 @@ pub fn is_possible_noun_noun_ending(right_word: &str) -> bool {
         right_word,
         "ти" | "ці" | "ма" | "ми" | "ох" | "ві" | "ть" | "ка"
     )
+}
+
+/// `PosTagHelper.VIDMINKY_MAP` keys in Java `LinkedHashMap` order.
+pub const VIDMINKY: &[&str] = &[
+    "v_naz", "v_rod", "v_dav", "v_zna", "v_oru", "v_mis", "v_kly",
+];
+
+/// `PosTagHelper.BASE_GENDERS`.
+pub const BASE_GENDERS: &[&str] = &["m", "f", "n", "p"];
+
+/// `PosTagHelper.generateTokensForNv`.
+pub fn generate_tokens_for_nv(
+    word: &str,
+    genders: &str,
+    extra_tags: Option<&str>,
+) -> Vec<AnalyzedToken> {
+    let mut out = Vec::new();
+    for gen in genders.chars() {
+        let pos_tag_base = format!("noun:inanim:{gen}:");
+        for vidm in VIDMINKY {
+            if *vidm == "v_kly" {
+                continue;
+            }
+            let mut pos_tag = format!("{pos_tag_base}{vidm}:nv");
+            if let Some(extra) = extra_tags {
+                pos_tag.push_str(extra);
+            }
+            out.push(AnalyzedToken::new(
+                word,
+                Some(word.to_string()),
+                Some(pos_tag),
+            ));
+        }
+    }
+    out
+}
+
+/// One `LetterEndingForNumericHelper.RegexToCaseList` entry: an optional
+/// full-match regex (empty = always) plus the case tags.
+type CaseList = (&'static str, &'static [&'static str]);
+
+fn adj_ending_map(right_word: &str) -> Option<&'static [CaseList]> {
+    Some(match right_word {
+        "й" => &[(
+            "",
+            &[":m:v_naz", ":m:v_zna:rinanim", ":f:v_dav", ":f:v_mis"],
+        )],
+        "ий" => &[("", &[":m:v_naz", ":m:v_zna:rinanim"])],
+        "ій" => &[
+            (".*([^3]|13)", &[":f:v_dav", ":f:v_mis"]),
+            (
+                "",
+                &[":m:v_naz", ":m:v_zna:rinanim", ":f:v_dav", ":f:v_mis"],
+            ),
+        ],
+        "го" => &[("", &[":m:v_rod", ":m:v_zna:ranim", ":n:v_rod"])],
+        "му" => &[
+            (
+                ".*(?!<1)7",
+                &[":m:v_dav", ":m:v_mis", ":n:v_dav", ":n:v_mis", ":f:v_zna"],
+            ),
+            (
+                ".*(?!<1)8",
+                &[":f:v_zna", ":m:v_dav", ":m:v_mis", ":n:v_dav", ":n:v_mis"],
+            ),
+            ("", &[":m:v_dav", ":m:v_mis", ":n:v_dav", ":n:v_mis"]),
+        ],
+        "ма" => &[(".*(?!<1)[78]", &[":f:v_naz"])],
+        "м" => &[("", &[":m:v_oru", ":n:v_oru", ":p:v_dav"])],
+        "им" => &[("", &[":m:v_oru", ":n:v_oru", ":p:v_dav"])],
+        "ім" => &[
+            (
+                ".*(?!<1)3",
+                &[":m:v_oru", ":m:v_mis", ":n:v_oru", ":n:v_mis"],
+            ),
+            ("", &[":m:v_mis", ":n:v_oru", ":n:v_mis"]),
+        ],
+        "а" => &[("", &[":f:v_naz"])],
+        "ва" => &[("", &[":f:v_naz"])],
+        "ша" => &[("", &[":f:v_naz"])],
+        "га" => &[("", &[":f:v_naz"])],
+        "тя" => &[("", &[":f:v_naz"])],
+        "я" => &[(".*(?!<1)3", &[":f:v_naz"])],
+        "та" => &[("", &[":f:v_naz"])],
+        "ї" => &[("", &[":f:v_rod"])],
+        "ої" => &[("", &[":f:v_rod"])],
+        "у" => &[("", &[":f:v_zna"])],
+        "шу" => &[("", &[":f:v_zna"])],
+        "гу" => &[("", &[":f:v_zna"])],
+        "ту" => &[("", &[":f:v_zna"])],
+        "тю" => &[("", &[":f:v_zna"])],
+        "ою" => &[("", &[":f:v_oru"])],
+        "ю" => &[
+            (".*([^3]|13)", &[":f:v_oru"]),
+            ("", &[":f:v_zna", ":f:v_oru"]),
+        ],
+        "е" => &[("", &[":n:v_naz", ":n:v_zna"])],
+        "є" => &[("", &[":n:v_naz", ":n:v_zna"])],
+        "ше" => &[("", &[":n:v_naz", ":n:v_zna"])],
+        "ге" => &[("", &[":n:v_naz", ":n:v_zna"])],
+        "тє" => &[("", &[":n:v_naz", ":n:v_zna"])],
+        "те" => &[("", &[":n:v_naz", ":n:v_zna"])],
+        "ме" => &[(".*(?!<1)[78]", &[":n:v_naz", ":n:v_zna"])],
+        "і" => &[("", &[":p:v_naz", ":p:v_zna:rinanim"])],
+        "ті" => &[("", &[":p:v_naz", ":p:v_zna:rinanim"])],
+        "ні" => &[("", &[":p:v_naz", ":p:v_zna:rinanim"])],
+        "ми" => &[("", &[":p:v_oru"])],
+        "х" => &[("", &[":p:v_rod", ":p:v_zna:ranim", ":p:v_mis"])],
+        "их" => &[("", &[":p:v_rod", ":p:v_zna:ranim", ":p:v_mis"])],
+        "ві" => &[
+            (".*40", &[":p:v_naz", ":p:v_zna:rinanim"]),
+            (".*%", &[":p:v_naz", ":p:v_zna:rinanim"]),
+        ],
+        "тій" => &[
+            (".*([^3]|13)", &[":f:v_dav:bad", ":f:v_mis:bad"]),
+            (
+                "",
+                &[
+                    ":m:v_naz:bad",
+                    ":m:v_zna:rinanim:bad",
+                    ":f:v_dav:bad",
+                    ":f:v_mis:bad",
+                ],
+            ),
+        ],
+        "мій" => &[("", &[":f:v_dav:bad", ":f:v_mis:bad"])],
+        "мою" => &[("", &[":f:v_oru:bad"])],
+        "тою" => &[("", &[":f:v_oru:bad"])],
+        "тої" => &[("", &[":f:v_rod:bad"])],
+        "того" => &[("", &[":m:v_rod:bad", ":n:v_rod:bad"])],
+        "тього" => &[("", &[":m:v_rod:bad", ":n:v_rod:bad"])],
+        "тому" => &[(
+            "",
+            &[
+                ":m:v_dav:bad",
+                ":m:v_mis:bad",
+                ":n:v_rod:bad",
+                ":n:v_mis:bad",
+            ],
+        )],
+        "тьому" => &[(
+            "",
+            &[
+                ":m:v_dav:bad",
+                ":m:v_mis:bad",
+                ":n:v_rod:bad",
+                ":n:v_mis:bad",
+            ],
+        )],
+        "тими" => &[("", &[":p:v_oru:bad"])],
+        "тім" => &[("", &[":m:v_mis:bad", ":n:v_mis:bad"])],
+        "мої" => &[("", &[":f:v_rod:bad"])],
+        "тий" => &[("", &[":m:v_naz:bad", ":m:v_zna:rinanim:bad"])],
+        "мий" => &[("", &[":m:v_naz:bad", ":m:v_zna:rinanim:bad"])],
+        "тих" => &[("", &[":p:v_rod:bad", ":p:v_mis:bad"])],
+        "ого" => &[("", &[":m:v_rod:bad", ":m:v_zna:ranim:bad", ":n:v_rod:bad"])],
+        "ому" => &[(
+            "",
+            &[
+                ":m:v_dav:bad",
+                ":m:v_mis:bad",
+                ":n:v_dav:bad",
+                ":n:v_mis:bad",
+            ],
+        )],
+        "тим" => &[("", &[":m:v_oru:bad", ":n:v_oru:bad", ":p:v_dav:bad"])],
+        "ома" => &[("", &[":f:v_naz:bad", ":p:v_oru:bad"])],
+        "ший" => &[("", &[":m:v_naz:bad", ":m:v_zna:rinanim:bad"])],
+        "гій" => &[("", &[":f:v_mis:bad", ":f:v_dav:bad"])],
+        _ => return None,
+    })
+}
+
+fn noun_ending_map(right_word: &str) -> Option<&'static [CaseList]> {
+    Some(match right_word {
+        "ти" => &[(
+            ".*([0569]|1[0-9])",
+            &[":p:v_rod:bad", ":p:v_dav:bad", ":p:v_mis:bad"],
+        )],
+        "ці" => &[(".*([03456789]|1[0-9])", &[":f:v_dav:bad", ":f:v_mis:bad"])],
+        "ма" => &[(".*([023456789]|1[0-9])", &[":p:v_oru:bad"])],
+        "ми" => &[("", &[":p:v_rod:bad", ":p:v_mis:bad"])],
+        "ох" => &[("", &[":p:v_rod:bad", ":p:v_zna:ranim:bad"])],
+        "ві" => &[(".*(?!<1)2", &[":p:v_naz:bad", ":p:v_zna:rinanim:bad"])],
+        "ть" => &[("", &[":p:v_naz:bad", ":p:v_zna:rinanim:bad"])],
+        "ка" => &[("", &[":f:v_naz:bad"])],
+        _ => return None,
+    })
+}
+
+fn get_case_tags(left_word: &str, lists: &[CaseList]) -> Option<Vec<&'static str>> {
+    for (regex, cases) in lists {
+        if regex.is_empty()
+            || fancy_regex::Regex::new(regex)
+                .unwrap()
+                .is_match(left_word)
+                .unwrap_or(false)
+        {
+            return Some(cases.to_vec());
+        }
+    }
+    None
+}
+
+/// `LetterEndingForNumericHelper.findTagsAdj`.
+pub fn find_tags_adj(left_word: &str, right_word: &str) -> Option<Vec<&'static str>> {
+    adj_ending_map(right_word).and_then(|lists| get_case_tags(left_word, lists))
+}
+
+/// `LetterEndingForNumericHelper.findTagsNoun`.
+pub fn find_tags_noun(left_word: &str, right_word: &str) -> Option<Vec<&'static str>> {
+    noun_ending_map(right_word).and_then(|lists| get_case_tags(left_word, lists))
 }
 
 /// `PosTagHelper.getGender` (group 2 of the gender regex).

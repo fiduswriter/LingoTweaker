@@ -49,6 +49,7 @@ pub mod spanish_synth;
 pub mod swedish;
 pub mod swedish_synth;
 pub mod tagalog;
+pub mod uk_compound;
 pub mod uk_helpers;
 pub mod ukrainian;
 pub mod ukrainian_synth;

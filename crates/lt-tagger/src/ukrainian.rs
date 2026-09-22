@@ -21,7 +21,10 @@ use fancy_regex::Regex;
 use lt_core::{AnalyzedToken, AnalyzedTokenReadings, Result};
 
 use crate::english::is_mixed_case;
-use crate::uk_helpers::{add_if_not_contains, capitalize_proper_name, is_all_uppercase_uk};
+use crate::uk_compound::{adjust, CompoundTagger};
+use crate::uk_helpers::{
+    add_if_not_contains, capitalize_proper_name, full_match, is_all_uppercase_uk,
+};
 use crate::{Dictionary, DictionaryInfo, ManualTagger};
 
 static NUMBER: LazyLock<Regex> = LazyLock::new(|| {
@@ -101,6 +104,7 @@ pub struct UkrainianTagger {
     manual: ManualTagger,
     /// `/uk/removed.txt` + `/uk/removed_custom.txt`
     removals: ManualTagger,
+    compound: CompoundTagger,
 }
 
 impl UkrainianTagger {
@@ -121,6 +125,7 @@ impl UkrainianTagger {
             dict,
             manual,
             removals,
+            compound: CompoundTagger::load(data_dir),
         })
     }
 
@@ -131,7 +136,7 @@ impl UkrainianTagger {
     /// `CombiningTagger.tag`: manual readings first, dictionary readings
     /// appended, removal tagger applied last (`overwriteWithManualTagger` is
     /// false).
-    fn word_lookup(&self, word: &str) -> Vec<(String, String)> {
+    pub(crate) fn word_lookup(&self, word: &str) -> Vec<(String, String)> {
         let mut result: Vec<(String, String)> = self.manual.lookup(word).to_vec();
         result.extend(self.dict.lookup(word));
         if !self.removals.is_empty() {
@@ -144,7 +149,11 @@ impl UkrainianTagger {
     }
 
     /// `BaseTagger.asAnalyzedTokenListForTaggedWords`.
-    fn tagged_to_at(&self, surface: &str, tagged: &[(String, String)]) -> Vec<AnalyzedToken> {
+    pub(crate) fn tagged_to_at(
+        &self,
+        surface: &str,
+        tagged: &[(String, String)],
+    ) -> Vec<AnalyzedToken> {
         tagged
             .iter()
             .map(|(lemma, tag)| AnalyzedToken::new(surface, Some(lemma.clone()), Some(tag.clone())))
@@ -224,7 +233,13 @@ impl UkrainianTagger {
                 Some("date".into()),
             )];
         }
-        // compoundTagger.generateEntities(word) — stage 3c part 2.
+        // compoundTagger.generateEntities(word)
+        if word.find('(').is_some_and(|i| i > 0) || word.find('/').is_some_and(|i| i > 0) {
+            let entities = self.compound.generate_entities(word);
+            if !entities.is_empty() {
+                return entities;
+            }
+        }
         if word.starts_with('#') && full_match(&HASHTAG, word) {
             return vec![AnalyzedToken::new(
                 word,
@@ -235,7 +250,7 @@ impl UkrainianTagger {
         if word.chars().count() > 5 && full_match(&CAPS_INSIDE_WORD, word) {
             let tagged = self.word_lookup(&word.to_lowercase());
             if !tagged.is_empty() {
-                let tagged = adjust_tags(&tagged, None, None, ":alt");
+                let tagged = adjust(&tagged, None, None, ":alt");
                 return self.tagged_to_at(word, &tagged);
             }
         }
@@ -259,7 +274,7 @@ impl UkrainianTagger {
             let word2 = YI_PATTERN.replace_all(word, "${1}і").into_owned();
             let tagged = self.word_lookup(&word2);
             if !tagged.is_empty() {
-                let tagged = adjust_tags(&tagged, None, None, ":alt");
+                let tagged = adjust(&tagged, None, None, ":alt");
                 return self.tagged_to_at(word, &tagged);
             }
         }
@@ -284,7 +299,7 @@ impl UkrainianTagger {
                 let tagged = self.word_lookup(&head);
                 if !tagged.is_empty() && tagged.iter().any(|(_, tag)| tag.contains("pron")) {
                     let suffix = format!("-{}", caps[2].to_lowercase());
-                    let tagged = adjust_tags(&tagged, None, Some(&suffix), ":bad");
+                    let tagged = adjust(&tagged, None, Some(&suffix), ":bad");
                     return self.tagged_to_at(word, &tagged);
                 }
             }
@@ -292,18 +307,28 @@ impl UkrainianTagger {
 
         let word = IGNORED_CHARS.replace_all(word, "").into_owned();
 
-        if word.chars().count() >= 3
-            && word.find('-').is_some_and(|i| i > 0)
-            && word.chars().count() >= 6
-            && (COMPOUND_WITH_QUOTES_REGEX.is_match(&word).unwrap_or(false)
-                || COMPOUND_WITH_QUOTES_REGEX2.is_match(&word).unwrap_or(false))
-        {
-            let adjusted_word = QUOTES.replace_all(&word, "").into_owned();
-            return self.get_adjusted_analyzed_tokens(&word, &adjusted_word, None, None, &|l| {
-                l.to_string()
-            });
+        if word.chars().count() >= 3 && word.find('-').is_some_and(|i| i > 0) {
+            // екс-«депутат», "заступницю"-колаборантку
+            if word.chars().count() >= 6
+                && (COMPOUND_WITH_QUOTES_REGEX.is_match(&word).unwrap_or(false)
+                    || COMPOUND_WITH_QUOTES_REGEX2.is_match(&word).unwrap_or(false))
+            {
+                let adjusted_word = QUOTES.replace_all(&word, "").into_owned();
+                return self.get_adjusted_analyzed_tokens(
+                    &word,
+                    &adjusted_word,
+                    None,
+                    None,
+                    &|l| l.to_string(),
+                );
+            }
+            // Java returns here regardless (`compoundTagger.guessCompoundTag`);
+            // the deeper dash-compound branches are not ported yet.
+            return self
+                .compound
+                .guess_compound_tag(self, &word)
+                .unwrap_or_default();
         }
-        // compoundTagger.guessCompoundTag(word) — stage 3c part 2.
 
         // стодвадцятиріччя
         if word.chars().count() >= 10 {
@@ -361,6 +386,33 @@ impl UkrainianTagger {
 
     /// `CompoundTagger.tagBothCases(leftWord, null)`.
     fn tag_both_cases(&self, word: &str) -> Vec<(String, String)> {
+        let mut out = self.word_lookup(word);
+        let lower = word.to_lowercase();
+        if word != lower {
+            out.extend(self.word_lookup(&lower));
+        } else {
+            let upper = crate::english::uppercase_first_char(word);
+            if word != upper {
+                out.extend(self.word_lookup(&upper));
+            }
+        }
+        out
+    }
+
+    /// `CompoundTagger.tagEitherCase`.
+    pub(crate) fn tag_either_case(&self, word: &str) -> Vec<(String, String)> {
+        if word.is_empty() {
+            return Vec::new();
+        }
+        let mut out = self.word_lookup(word);
+        if out.is_empty() && word.chars().next().is_some_and(|c| c.is_uppercase()) {
+            out = self.word_lookup(&word.to_lowercase());
+        }
+        out
+    }
+
+    /// `CompoundTagger.tagAsIsAndWithLowerCase`.
+    pub(crate) fn tag_as_is_and_with_lowercase(&self, word: &str) -> Vec<(String, String)> {
         let mut out = self.word_lookup(word);
         let lower = word.to_lowercase();
         if word != lower {
@@ -627,14 +679,6 @@ impl UkrainianTagger {
     }
 }
 
-/// Java `Matcher.matches()`: the match must cover the whole string.
-fn full_match(re: &Regex, s: &str) -> bool {
-    match re.find(s) {
-        Ok(Some(m)) => m.start() == 0 && m.end() == s.len(),
-        _ => false,
-    }
-}
-
 /// Java `Matcher.matches()` with captures.
 fn full_captures<'r>(re: &Regex, s: &'r str) -> Option<fancy_regex::Captures<'r>> {
     let caps = re.captures(s).ok().flatten()?;
@@ -646,31 +690,7 @@ fn full_captures<'r>(re: &Regex, s: &'r str) -> Option<fancy_regex::Captures<'r>
     }
 }
 
-/// `PosTagHelper.adjust(taggedWords, lemmaPrefix, lemmaSuffix, addTags)`.
-fn adjust_tags(
-    tagged: &[(String, String)],
-    lemma_prefix: Option<&str>,
-    lemma_suffix: Option<&str>,
-    add_tag: &str,
-) -> Vec<(String, String)> {
-    let cleanup = LazyLock::new(|| Regex::new(r":(comp.|adjp:.*?(:(im)?perf)+)").unwrap());
-    tagged
-        .iter()
-        .map(|(lemma, tag)| {
-            let mut lemma = lemma.clone();
-            if let Some(p) = lemma_prefix {
-                lemma = format!("{p}{lemma}");
-            }
-            if let Some(s) = lemma_suffix {
-                lemma = format!("{lemma}{s}");
-            }
-            let tag = cleanup.replace_all(tag, "").into_owned();
-            (lemma, add_if_not_contains(&tag, add_tag))
-        })
-        .collect()
-}
-
-/// `UkrainianTagger.concatGroups`.
+/// `UkrainainTagger.concatGroups`.
 fn concat_groups(caps: &fancy_regex::Captures, i: usize, j: usize) -> String {
     let mut out = String::new();
     for ii in i..=j {
@@ -750,5 +770,52 @@ mod tests {
         assert!(readings(&t, "ІванІван").is_empty());
         assert!(readings(&t, "пять").is_empty());
         assert!(readings(&t, "небудьщо").is_empty());
+    }
+
+    /// Java-probed (`scripts/oracle/uk/probe-tagger.sh`): the entity and
+    /// numeric-compound `CompoundTagger` paths.
+    #[test]
+    fn ukrainian_compounds() {
+        let Some(t) = tagger() else { return };
+        assert_eq!(
+            readings(&t, "5-й"),
+            [
+                "5-й:adj:m:v_naz:numr",
+                "5-й:adj:m:v_zna:rinanim:numr",
+                "5-й:adj:f:v_dav:numr",
+                "5-й:adj:f:v_mis:numr"
+            ]
+        );
+        assert_eq!(
+            readings(&t, "100-річному"),
+            [
+                "100-річний:adj:m:v_dav",
+                "100-річний:adj:m:v_mis",
+                "100-річний:adj:n:v_dav",
+                "100-річний:adj:n:v_mis"
+            ]
+        );
+        assert_eq!(readings(&t, "Ан-140").len(), 12);
+        assert_eq!(readings(&t, "А-4").len(), 13);
+        assert_eq!(
+            readings(&t, "Вибори-2014"),
+            [
+                "Вибори-2014:noun:inanim:p:v_naz:ns:prop",
+                "Вибори-2014:noun:inanim:p:v_zna:ns:prop"
+            ]
+        );
+        assert_eq!(
+            readings(&t, "Формула-1"),
+            ["Формула-1:noun:inanim:f:v_naz:prop"]
+        );
+        assert_eq!(
+            readings(&t, "авто-пенсіонер"),
+            ["авто-пенсіонер:noun:anim:m:v_naz:bad"]
+        );
+        assert_eq!(
+            readings(&t, "з-зателефоную"),
+            ["зателефонувати:verb:perf:futr:s:1:alt"]
+        );
+        assert_eq!(readings(&t, "ла-ла"), ["ла-ла:noninfl:onomat:predic"]);
     }
 }
