@@ -58,7 +58,7 @@ pub fn check_sentence_uk(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
                     Some(SHORT.to_string()),
                     TextRange::new(
                         sentence_offset + tr.start_pos,
-                        sentence_offset + tr.start_pos + tr.surface().len(),
+                        sentence_offset + tr.end_pos(),
                     ),
                     replacements
                         .into_iter()

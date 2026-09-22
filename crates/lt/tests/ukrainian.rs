@@ -359,6 +359,13 @@ fn ukrainian_typography_and_missing_hyphen() {
     assert!(one("спорт-клуб", "DASH").is_empty());
     assert!(one("Київ — Львів", "DASH").is_empty());
 
+    // the short-dash range spans the original token (the en dash is 3 bytes
+    // but `surface()` holds the normalized `-`)
+    let text = "при вступі до ВНЗ здавали два–три екзамени.";
+    let matches = one(text, "DASH");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (26, 33));
+
     let text = "медіа центр";
     let matches = one(text, "UK_MISSING_HYPHEN");
     assert_eq!(matches.len(), 1);
