@@ -17,6 +17,7 @@ pub mod gov;
 pub mod hybrid;
 pub mod inflection;
 pub mod mixed_alphabets;
+pub mod simple_replace_renamed;
 pub mod spelling;
 
 /// `Ukrainian.createDefaultDisambiguator` is
@@ -34,6 +35,8 @@ pub struct UkrainianPipeline {
     pub simple: crate::uk::disambig::SimpleDisambiguator,
     /// `CaseGovernmentHelper` (case government for the hybrid passes).
     pub gov: crate::uk::gov::CaseGovernment,
+    /// `SimpleReplaceRenamedRule` (`UK_SIMPLE_REPLACE_RENAMED`).
+    pub renamed: crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,

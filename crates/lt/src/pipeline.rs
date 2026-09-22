@@ -5196,6 +5196,9 @@ impl Pipeline {
         let simple =
             crate::uk::disambig::SimpleDisambiguator::load(&data_dir.path().join("uk/words"));
         let gov = crate::uk::gov::CaseGovernment::load(&data_dir.path().join("uk/words"));
+        let renamed = crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule::load(
+            &data_dir.path().join("uk/rules"),
+        );
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5205,6 +5208,7 @@ impl Pipeline {
             chunker,
             simple,
             gov,
+            renamed,
             spelling,
         });
         Ok(Self {
@@ -11668,6 +11672,22 @@ impl Pipeline {
                 &mut seen,
             );
             if let Some(ukrainian) = &self.ukrainian {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::simple_replace_renamed::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian.renamed.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
                 if let Some(spelling) = &ukrainian.spelling {
                     append_active(
                         &mut matches,

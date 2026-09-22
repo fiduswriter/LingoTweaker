@@ -323,3 +323,18 @@ fn ukrainian_mixed_alphabets() {
     assert!(one("І. Франко", "UK_MIXED_ALPHABETS").is_empty());
     assert!(one("5-й", "UK_MIXED_ALPHABETS").is_empty());
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
+/// `SimpleReplaceRenamedRule` (`UK_SIMPLE_REPLACE_RENAMED`).
+#[test]
+fn ukrainian_simple_replace_renamed() {
+    let _guard = engine_guard();
+    let text = "Альошинське село";
+    let matches = one(text, "UK_SIMPLE_REPLACE_RENAMED");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 11));
+    assert_eq!(matches[0].message, "«Альошинське» було перейменовано");
+    assert_eq!(suggestions(&matches[0]), vec!["Загороднє".to_string()]);
+    // "Аврора" has a `fname` reading first, which aborts the renamed check
+    assert!(one("Аврора місто", "UK_SIMPLE_REPLACE_RENAMED").is_empty());
+}
