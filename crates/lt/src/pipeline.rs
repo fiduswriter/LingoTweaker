@@ -5195,6 +5195,7 @@ impl Pipeline {
         .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
         let simple =
             crate::uk::disambig::SimpleDisambiguator::load(&data_dir.path().join("uk/words"));
+        let gov = crate::uk::gov::CaseGovernment::load(&data_dir.path().join("uk/words"));
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5203,6 +5204,7 @@ impl Pipeline {
             disambiguator,
             chunker,
             simple,
+            gov,
             spelling,
         });
         Ok(Self {

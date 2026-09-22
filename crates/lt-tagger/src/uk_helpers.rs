@@ -595,6 +595,34 @@ pub fn has_reading_pos_tag_start(readings: &[AnalyzedToken], part: &str) -> bool
         .any(|r| r.pos_tag.as_deref().is_some_and(|t| t.starts_with(part)))
 }
 
+/// `LemmaHelper.hasLemma(readings, lemmas, posTagPattern)`.
+pub fn has_lemma_with_pattern(
+    readings: &[AnalyzedToken],
+    lemmas: &[&str],
+    regex: &fancy_regex::Regex,
+) -> bool {
+    readings.iter().any(|r| {
+        r.stem.as_deref().is_some_and(|l| lemmas.contains(&l))
+            && r.pos_tag.as_deref().is_some_and(|t| full_match(regex, t))
+    })
+}
+
+/// `LemmaHelper.hasLemma(readings, lemmaRegex, posTagPattern)`.
+pub fn has_lemma_regex_with_pattern(
+    readings: &[AnalyzedToken],
+    lemma_regex: &fancy_regex::Regex,
+    pos_regex: &fancy_regex::Regex,
+) -> bool {
+    readings.iter().any(|r| {
+        r.stem
+            .as_deref()
+            .is_some_and(|l| full_match(lemma_regex, l))
+            && r.pos_tag
+                .as_deref()
+                .is_some_and(|t| full_match(pos_regex, t))
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

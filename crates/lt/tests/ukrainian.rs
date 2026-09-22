@@ -176,3 +176,63 @@ fn ukrainian_speller_accepts_known_words() {
         assert!(result.matches.is_empty(), "{text}: {:?}", result.matches);
     }
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-disambig.sh`) disambiguation output,
+/// restricted to content tokens (SENT_START/SENT_END excluded).
+fn disambiguated(uk: &lt::Engine, text: &str) -> Vec<(String, String)> {
+    let mut out = Vec::new();
+    for sentence in uk.analyze(text) {
+        for tr in sentence.tokens_without_whitespace() {
+            if tr.is_sentence_start {
+                continue;
+            }
+            let readings: Vec<String> = tr
+                .readings
+                .iter()
+                .filter(|a| !matches!(a.pos_tag.as_deref(), Some("SENT_END") | Some("PARA_END")))
+                .map(|a| {
+                    format!(
+                        "{}:{}",
+                        a.stem.as_deref().unwrap_or(""),
+                        a.pos_tag.as_deref().unwrap_or("")
+                    )
+                })
+                .collect();
+            if readings.is_empty() {
+                continue;
+            }
+            out.push((tr.surface().to_string(), readings.join(";")));
+        }
+    }
+    out
+}
+
+/// `UkrainianHybridDisambiguator.preDisambiguate` passes, Java-probed.
+#[test]
+fn ukrainian_hybrid_disambiguation() {
+    let _guard = engine_guard();
+    let Some(uk) = engine() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let got = disambiguated(&uk, "Прийшов їх син.");
+    assert_eq!(got.len(), 3, "{got:?}");
+    assert_eq!(
+        got[1].1,
+        "їх:adj:m:v_naz:nv:pron:pos:bad;вони:noun:unanim:p:v_rod:pron:pers:3;вони:noun:unanim:p:v_zna:pron:pers:3",
+        "{got:?}"
+    );
+
+    // removeVmis: only the `f:v_mis` reading is dropped
+    let got = disambiguated(&uk, "Петро Іванович");
+    assert_eq!(got.len(), 2, "{got:?}");
+    assert_eq!(
+        got[1].1,
+        "Іванович:noun:anim:f:v_dav:nv:prop:lname;Іванович:noun:anim:f:v_naz:nv:prop:lname;Іванович:noun:anim:f:v_oru:nv:prop:lname;Іванович:noun:anim:f:v_rod:nv:prop:lname;Іванович:noun:anim:f:v_zna:nv:prop:lname;Іванович:noun:anim:m:v_naz:prop:lname;Іванович:noun:anim:m:v_naz:prop:pname"
+    );
+
+    let got = disambiguated(&uk, "5 кг");
+    assert_eq!(got.len(), 2);
+    assert_eq!(got[1].0, "кг");
+    assert_eq!(got[1].1.matches("nv:abbr").count(), 12);
+}

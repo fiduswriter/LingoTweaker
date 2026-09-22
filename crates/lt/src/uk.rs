@@ -13,6 +13,9 @@ use lt_pattern::Synthesizer;
 
 pub mod disambig;
 pub mod filters;
+pub mod gov;
+pub mod hybrid;
+pub mod inflection;
 pub mod spelling;
 
 /// `Ukrainian.createDefaultDisambiguator` is
@@ -28,6 +31,8 @@ pub struct UkrainianPipeline {
     pub chunker: lt_disambig::MultiWordChunker,
     /// `SimpleDisambiguator` (rare-form and duplicate-lemma removal).
     pub simple: crate::uk::disambig::SimpleDisambiguator,
+    /// `CaseGovernmentHelper` (case government for the hybrid passes).
+    pub gov: crate::uk::gov::CaseGovernment,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,
@@ -37,6 +42,7 @@ impl UkrainianPipeline {
     /// `UkrainianHybridDisambiguator.disambiguate`: `preDisambiguate` (the
     /// `SimpleDisambiguator` part), then the chunker, then the XML rules.
     pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
+        crate::uk::hybrid::pre_disambiguate(sentence, &self.gov);
         self.simple.remove_rare_forms(sentence);
         self.chunker.apply(sentence);
         self.disambiguator.apply(sentence);
