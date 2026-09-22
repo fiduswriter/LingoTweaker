@@ -455,3 +455,109 @@ Reproduce (pinned Java build):
 ```sh
 scripts/oracle/crh/probe-rule.sh "21fayız." COMPLEX_NUMBER_DEFIS_MISSING
 ```
+
+## 14. Ukrainian (`uk`) remaining corpus residue (3 only-Java / 1 only-Rust / 2 field diffs)
+
+The Ukrainian port is at **3 only-Java / 1 only-Rust / 2 field diffs** on the
+4,437-line corpus (Java 4,613 vs Rust 4,611 matches). All four divergences are
+pinned exactly in `scripts/ci/parity.sh` and are documented here with a
+pinned-Java reproduction. They are all engine-fidelity gaps in the XML
+disambiguation stage, not rule-data differences.
+
+### 14a. XML disambiguation forward-scan cascade (`non_v_kly_2`) — 2 field diffs
+
+Java's `DisambiguationPatternRuleReplacer.replace` runs `doMatch`, which scans
+start positions in order and applies each match's action **immediately**; the
+actions mutate the shared `AnalyzedTokenReadings` in place, so a later start
+sees readings removed by an earlier match. The uk rule `non_v_kly_2`
+("Не кличний після некличного") removes `v_kly` from `старший` (preceded by
+`він`), and then the *same rule* removes `v_kly` from the following `сестри`,
+because `старший` no longer carries `v_kly` when the scan reaches it:
+
+```
+він старший сестри на 3 роки
+Java: сестри -> [ж.р.: родовий, мн.: називний]
+Rust: сестри -> [ж.р.: родовий, мн.: називний, кличний]
+```
+
+The Rust `XmlDisambiguator::apply` collects all matches for a rule against a
+single snapshot (`phase 1 (immutable)`) and then applies them, so the cascade
+does not happen. This is the same limitation as the Polish
+`<unify negate="yes">`/ZDANIA_ZLOZONE gaps (#9). It affects the two
+`UK_ADJ_NOUN_INFLECTION_AGREEMENT` messages at corpus lines 2519/2520.
+
+Reproduce (pinned Java build, full `preDisambiguate` + XML stage):
+
+```sh
+scripts/oracle/uk/probe-disambig.sh "він старший сестри на 3 роки"
+# (the manual probe uses `disambiguate` only; use FullProbe.java for the
+#  full `analyzeText` readings)
+```
+
+### 14b. `TokenAgreementPrepNounRule`: preposition + `не` + noun — 1 only-Java
+
+Java flags `UK_PREP_NOUN_INFLECTION_AGREEMENT` when a `part` token (`не`)
+stands between the preposition `незважаючи` and the nominative `це`; the Rust
+rule aborts on the intervening particle:
+
+```
+і незважаючи не це.
+Java: UK_PREP_NOUN_INFLECTION_AGREEMENT 16-18
+Rust: (none)
+```
+
+Reproduce:
+
+```sh
+scripts/oracle/uk/probe-rule.sh "незважаючи не це" UK_PREP_NOUN_INFLECTION_AGREEMENT
+```
+
+### 14c. Abbreviation sentence segmentation — 1 only-Java
+
+`т. 2 ч. 1` is one sentence in Java (the abbreviation dot does not end the
+sentence), so `UkrainianUppercaseSentenceStartRule` reports the lowercase
+start (0-1). The Rust engine splits sentences with the shared SRX before
+tokenization and segments after `т.`, so no rule sees a lowercase sentence
+start:
+
+```
+т. 2 ч. 1
+Java: UPPERCASE_SENTENCE_START 0-1
+Rust: (none)
+```
+
+Reproduce:
+
+```sh
+scripts/oracle/uk/probe-rule.sh "т. 2 ч. 1" UPPERCASE_SENTENCE_START
+```
+
+### 14d. Plural adjective + proper-name list — 1 only-Java / 1 only-Rust
+
+For `молодші Олександр Ірванець, Оксана Луцишина` Java reports the lowercase
+sentence start and does **not** report `UK_ADJ_NOUN_INFLECTION_AGREEMENT`; the
+Rust engine reports the agreement rule (0-17) instead (the exception helper
+branch Java uses here is not ported). Same span, so the overlap filter keeps a
+different rule on each side:
+
+```
+молодші Олександр Ірванець, Оксана Луцишина
+Java: UPPERCASE_SENTENCE_START 0-7
+Rust: UK_ADJ_NOUN_INFLECTION_AGREEMENT 0-17
+```
+
+Reproduce:
+
+```sh
+scripts/oracle/uk/probe-rule.sh "молодші Олександр Ірванець, Оксана Луцишина" UK_ADJ_NOUN_INFLECTION_AGREEMENT UPPERCASE_SENTENCE_START
+```
+
+The gate allowance:
+
+```sh
+scripts/ci/parity.sh uk
+# allowed field diffs: 2/2 UK_ADJ_NOUN_INFLECTION_AGREEMENT
+# allowed only-Java: 1/1 UK_PREP_NOUN_INFLECTION_AGREEMENT
+# allowed only-Java: 2/2 UPPERCASE_SENTENCE_START
+# allowed only-Rust: 1/1 UK_ADJ_NOUN_INFLECTION_AGREEMENT
+```

@@ -67,6 +67,7 @@ lt lithuanian
 crh crimean_tatar
 be belarusian
 ru russian
+uk ukrainian
 no norwegian crates/lt/src/no*.rs
 nrd nordum crates/lt/src/nrd*.rs tools/nordum-dict/*
 gn guarani crates/lt/src/gn*.rs

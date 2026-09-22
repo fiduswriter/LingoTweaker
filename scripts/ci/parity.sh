@@ -8,12 +8,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -125,6 +125,9 @@ fi
 if [ "$LANG_ARG" = "ru" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-22"
 fi
+if [ "$LANG_ARG" = "uk" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-22"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -184,6 +187,15 @@ elif [ "$LANG_ARG" = "pl" ]; then
   EXTRA+=(--expect-only-rust=NIEZGODNO_PRZYPADKW_PRZYMIOTNIKA_I_RZECZOWNIKA_RODZAJU_ESKIEGO=2)
   EXTRA+=(--expect-only-rust=NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA=1)
   EXTRA+=(--expect-only-rust=ZDANIA_ZLOZONE=1)
+elif [ "$LANG_ARG" = "uk" ]; then
+  # documented known fidelity gaps (docs/differences.md #14): the XML
+  # disambiguation forward-scan cascade (`non_v_kly_2`), a prep+`не`+noun
+  # case-government gap, an overlap tie-break for a proper-name list and the
+  # abbreviation sentence segmentation (`т. 2 ч. 1`).
+  EXTRA+=(--expect-only-java=UK_PREP_NOUN_INFLECTION_AGREEMENT=1)
+  EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
+  EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
+  EXTRA+=(--expect-field-diffs=UK_ADJ_NOUN_INFLECTION_AGREEMENT=2)
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

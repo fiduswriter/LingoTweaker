@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","no","nrd","gn"]'
+ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","no","nrd","gn"]'
 fails=0
 
 check() {
@@ -91,6 +91,9 @@ check "be golden" '["be"]' docs/parity/golden/be-full.java.tsv
 check "ru integration test" '["ru"]' crates/lt/tests/russian.rs
 check "ru module" '["ru"]' crates/lt/src/ru/rules.rs
 check "ru golden" '["ru"]' docs/parity/golden/ru-full.java.tsv
+check "uk integration test" '["uk"]' crates/lt/tests/ukrainian.rs
+check "uk module" '["uk"]' crates/lt/src/uk/hybrid.rs
+check "uk golden" '["uk"]' docs/parity/golden/uk-full.java.tsv
 
 # hand-authored languages (tests-only parity gate): local layout plus the
 # no/nrd/gn module entry files and the Nordum dictionary generator
@@ -107,6 +110,7 @@ check "gn integration test" '["gn"]' crates/lt/tests/guarani.rs
 
 # multiple languages, emitted in matrix order
 check "multi language (fr + nl)" '["fr","nl"]' crates/lt/src/nl/rules.rs data/fr/grammar.xml
+check "multi language (uk + ru)" '["ru","uk"]' crates/lt/src/uk/hybrid.rs crates/lt/src/ru/rules.rs
 check "multi language (no + gn)" '["no","gn"]' crates/lt/src/gn/rules.rs data/no/hunspell/index.dic
 check "comma-separated path list" '["nl"]' "crates/lt/src/nl/rules.rs,README.md"
 

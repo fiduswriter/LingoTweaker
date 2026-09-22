@@ -32,6 +32,7 @@ re-runs the Rust side and diffs against the golden.
 | crh | `crh-full.txt` (98) | `crh-full.java.tsv` |
 | be | `be-full.txt` (161) | `be-full.java.tsv` |
 | ru | `ru-full.txt` (2,457) | `ru-full.java.tsv` |
+| uk | `uk-full.txt` (4,437) | `uk-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -51,7 +52,7 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru `2026-09-22`.
+  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru/uk `2026-09-22`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -122,11 +123,18 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   handling, `RussianWordTokenizer`, hybrid disambiguator, `RussianChunker`,
   both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules
   and `compile_failures()` is empty).
+  uk is 3 only-Java / 1 only-Rust / 2 field diffs, the documented known
+  fidelity gaps of `docs/differences.md` #14 (the XML disambiguation
+  forward-scan cascade, a prep+`не`+noun case-government gap, the `т. 2 ч. 1`
+  abbreviation sentence segmentation and one plural-adjective/proper-name
+  overlap tie-break), pinned exactly with
+  `--expect-only-java`/`--expect-only-rust`/`--expect-field-diffs` in
+  `scripts/ci/parity.sh` (D-273…D-281).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in
