@@ -4934,7 +4934,7 @@ impl Pipeline {
     /// speller and the language's Java rule classes follow in stages 2/3.
     pub fn new_russian(
         data_dir: &lt_data::DataDir,
-        _today: Option<Ymd>,
+        today: Option<Ymd>,
         enabled_rules: &[String],
         _variant: Option<&str>,
     ) -> Result<Self> {
@@ -4952,6 +4952,21 @@ impl Pipeline {
             tagger: Arc::clone(&tagger),
         });
 
+        let spelling = match crate::ru::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ru] spelling rule disabled: {err}");
+                None
+            }
+        };
+        let spelling_yo = match crate::ru::spelling::load_yo(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ru] yo spelling rule disabled: {err}");
+                None
+            }
+        };
+
         let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Ru))?;
         if data_dir.style_path(Lang::Ru).lt_exists() {
             let style = Grammar::load_file(data_dir.style_path(Lang::Ru))?;
@@ -4962,12 +4977,19 @@ impl Pipeline {
         let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
             .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
 
-        // Russian references `<filter>` classes (DateCheckFilter,
-        // FutureDateFilter, INNNumberFilter, AdvancedSynthesizerFilter,
-        // RussianPartialPosTagFilter,
-        // RussianSuppressMisspelledSuggestionsFilter) that are wired in
-        // stage 3.
-        let filters = lt_pattern::FilterRegistry::builder().build();
+        // `RussianPartialPosTagFilter` calls the language's default
+        // disambiguator; the pipeline (and thus the disambiguator) is created
+        // after the registry, so it is published through this slot.
+        let pipeline_slot: Arc<std::sync::OnceLock<Arc<crate::ru::RussianPipeline>>> =
+            Arc::new(std::sync::OnceLock::new());
+        let filter_env = Arc::new(crate::ru::filters::RuFilterEnv {
+            tagger: Arc::clone(&tagger),
+            synth: Arc::clone(&synth_adapter),
+            spelling: spelling.clone(),
+            today: today.unwrap_or_else(Ymd::today),
+            pipeline: Arc::clone(&pipeline_slot),
+        });
+        let filters = crate::ru::filters::russian_filter_registry(filter_env);
         let (compiled_rules, skipped, compile_failures) =
             compile_rules(&grammar, &filters, enabled_rules);
 
@@ -4986,24 +5008,10 @@ impl Pipeline {
         // `useGlobalDisambiguation = false`.
         let mut disambiguator =
             lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Ru))?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
         disambiguator.set_filter_registry(filters);
 
         let post_chunker = lt_chunk::RussianChunker::new()?;
-
-        let spelling = match crate::ru::spelling::load(data_dir.path()) {
-            Ok(rule) => Some(Arc::new(rule)),
-            Err(err) => {
-                eprintln!("[ru] spelling rule disabled: {err}");
-                None
-            }
-        };
-        let spelling_yo = match crate::ru::spelling::load_yo(data_dir.path()) {
-            Ok(rule) => Some(Arc::new(rule)),
-            Err(err) => {
-                eprintln!("[ru] yo spelling rule disabled: {err}");
-                None
-            }
-        };
 
         let russian = Arc::new(crate::ru::RussianPipeline {
             tagger,
@@ -5015,6 +5023,7 @@ impl Pipeline {
             spelling,
             spelling_yo,
         });
+        let _ = pipeline_slot.set(Arc::clone(&russian));
         Ok(Self {
             lang: Lang::Ru,
             unify_config,

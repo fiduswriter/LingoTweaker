@@ -10,6 +10,7 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod filters;
 pub mod priorities;
 pub mod spelling;
 
@@ -37,10 +38,17 @@ pub struct RussianPipeline {
 
 impl RussianPipeline {
     /// `RussianHybridDisambiguator.disambiguate`: the multiword chunker first,
-    /// then the XML disambiguator; the post-disambiguation chunker runs after.
-    pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
+    /// then the XML disambiguator (used by `RussianPartialPosTagFilter`, which
+    /// calls the language's default disambiguator without the
+    /// post-disambiguation chunker).
+    pub fn disambiguate_hybrid(&self, sentence: &mut AnalyzedSentence) {
         self.multiwords_chunker.apply(sentence);
         self.disambiguator.apply(sentence);
+    }
+
+    /// Full pipeline disambiguation: hybrid + post-disambiguation chunker.
+    pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
+        self.disambiguate_hybrid(sentence);
         self.post_chunker.add_chunk_tags(&mut sentence.tokens);
     }
 }

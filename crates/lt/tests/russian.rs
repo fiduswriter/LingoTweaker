@@ -64,36 +64,17 @@ fn one(text: &str, rule: &str) -> Vec<lt::Match> {
 }
 
 #[test]
-fn stage1_unmapped_filters() {
+fn filters_are_all_mapped() {
     let _guard = engine_guard();
     let Some(ru) = engine() else {
         return;
     };
-    // Stage 1 reports the XML-referenced filter classes that stage 3 wires;
-    // the compile failures must shrink to zero once they are ported.
-    let mut classes: Vec<&str> = ru
-        .compile_failures()
-        .iter()
-        .map(|(_, msg)| {
-            msg.strip_prefix("unmapped filter class ")
-                .and_then(|c| c.rsplit('.').next())
-                .unwrap_or(msg)
-        })
-        .collect();
-    classes.sort_unstable();
-    classes.dedup();
-    assert_eq!(
-        classes,
-        [
-            "AdvancedSynthesizerFilter",
-            "DateCheckFilter",
-            "FutureDateFilter",
-            "INNNumberFilter",
-            "RussianPartialPosTagFilter",
-            "RussianSuppressMisspelledSuggestionsFilter",
-        ]
+    // All six XML-referenced filter classes are ported (stage 3).
+    assert!(
+        ru.compile_failures().is_empty(),
+        "unexpected compile failures: {:?}",
+        ru.compile_failures()
     );
-    assert_eq!(ru.compile_failures().len(), 22);
 }
 
 #[test]
@@ -307,4 +288,109 @@ fn synthesizer_matches_java() {
         plain("красивый", "ADJ:Posit:Masc:V"),
         ["красивый", "красивого"]
     );
+}
+
+// Filter probes (`scripts/oracle/ru/probe-rule.sh`), Java UTF-16 offsets.
+
+#[test]
+fn date_check_filter_matches_java() {
+    let _guard = engine_guard();
+    let text = "Конференция состоится в понедельник, 7 октября 2014 г.";
+    let matches = one(text, "DATE_WEEKDAY1");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (24, 51));
+    assert_eq!(
+        matches[0].message,
+        "Днём недели 7 октября 2014 года является вторник."
+    );
+}
+
+#[test]
+fn wrong_inn_filter_matches_java() {
+    let _guard = engine_guard();
+    let text = "ИНН: 1234567890";
+    let matches = one(text, "WRONG_INN");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (0, 15));
+    assert_eq!(matches[0].message, "Некорректный ИНН: 1234567890");
+}
+
+#[test]
+fn future_date_filter_matches_java() {
+    let _guard = engine_guard();
+    let text = "Мы посетили клиента 17 июня 2039 г.";
+    let matches = one(text, "INVALID_TENSE_DATE");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (20, 32));
+    assert_eq!(
+        matches[0].message,
+        "Данная дата находится в будущем, но глагол стоит в прошедшем времени."
+    );
+}
+
+#[test]
+fn advanced_synthesizer_filter_matches_java() {
+    let _guard = engine_guard();
+    let text = "Я терпеть не могу эту глупою женщину.";
+    let matches = one(text, "Unify_Adj_NN_case");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (22, 36));
+    assert_eq!(
+        matches[0].message,
+        "Прилагательное не согласуется с существительным по падежу."
+    );
+    let suggestions: Vec<&str> = matches[0]
+        .suggestions
+        .iter()
+        .map(|s| s.value.as_str())
+        .collect();
+    assert_eq!(suggestions, ["глупую женщину"]);
+}
+
+#[test]
+fn partial_pos_tag_filter_matches_java() {
+    let _guard = engine_guard();
+    let text = "Южнокорейский консорциум может по участвовать в проекте.";
+    let matches = one(text, "pouchastvovat");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (31, 45));
+    let suggestions: Vec<&str> = matches[0]
+        .suggestions
+        .iter()
+        .map(|s| s.value.as_str())
+        .collect();
+    assert_eq!(suggestions, ["поучаствовать"]);
+}
+
+#[test]
+fn suppress_misspelled_filter_matches_java() {
+    let _guard = engine_guard();
+    let text = "Сегодня на ужин жареная на масле картошка.";
+    let matches = one(text, "NN_N_pril_prich");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (16, 23));
+    let suggestions: Vec<&str> = matches[0]
+        .suggestions
+        .iter()
+        .map(|s| s.value.as_str())
+        .collect();
+    assert_eq!(suggestions, ["жаренная"]);
 }
