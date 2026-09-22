@@ -475,8 +475,7 @@ impl MorfologikSpellingRule {
                         self.config.category_id,
                         self.config.category_name,
                     )
-                    .with_metadata(self.config.description, "misspelling", 0)
-                    .with_match_type("UnknownWord");
+                    .with_metadata(self.config.description, "misspelling", 0);
                     return vec![m];
                 }
             }
