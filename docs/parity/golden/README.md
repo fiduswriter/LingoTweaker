@@ -31,6 +31,7 @@ re-runs the Rust side and diffs against the golden.
 | tl | `tl-full.txt` (99) | `tl-full.java.tsv` |
 | crh | `crh-full.txt` (98) | `crh-full.java.tsv` |
 | be | `be-full.txt` (161) | `be-full.java.tsv` |
+| ru | `ru-full.txt` (2,457) | `ru-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -50,7 +51,7 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   `2026-09-18` (the date at which those goldens reproduce; the Rust corpus
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
-  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`.
+  sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru `2026-09-22`.
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -117,11 +118,15 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   `COMPLEX_NUMBER_DEFIS_MISSING` = 1 only-Java match (docs/differences.md
   #13; Java's `UNICODE_CASE` folds `ı` into `[A-Za-z]`, Rust's simple case
   folding does not).
+  ru is exactly 0/0/0 (D-247; the `RussianTagger` stress-mark/`MayMissingYO`
+  handling, `RussianWordTokenizer`, hybrid disambiguator, `RussianChunker`,
+  both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules
+  and `compile_failures()` is empty).
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in
