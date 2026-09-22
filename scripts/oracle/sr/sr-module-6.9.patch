@@ -1,0 +1,286 @@
+diff --git a/languagetool-language-modules/sr/pom.xml b/languagetool-language-modules/sr/pom.xml
+index cfac92c8ba7..e138287b14d 100644
+--- a/languagetool-language-modules/sr/pom.xml
++++ b/languagetool-language-modules/sr/pom.xml
+@@ -5,7 +5,7 @@
+     <parent>
+         <groupId>org.languagetool</groupId>
+         <artifactId>languagetool-parent</artifactId>
+-        <version>4.5-SNAPSHOT</version>
++        <version>${revision}</version>
+         <relativePath>../../pom.xml</relativePath>
+     </parent>
+ 
+@@ -58,14 +58,14 @@
+         <dependency>
+             <groupId>org.languagetool</groupId>
+             <artifactId>languagetool-core</artifactId>
+-            <version>5.8</version>
++            <version>${revision}</version>
+         </dependency>
+ 
+         <dependency>
+             <!-- see http://stackoverflow.com/questions/174560/sharing-test-code-in-maven#174670 -->
+             <groupId>org.languagetool</groupId>
+             <artifactId>languagetool-core</artifactId>
+-            <version>5.8</version>
++            <version>${revision}</version>
+             <type>test-jar</type>
+             <scope>test</scope>
+         </dependency>
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/language/JekavianSerbian.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/language/JekavianSerbian.java
+index c2ce06c8046..d4545b8bc4d 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/language/JekavianSerbian.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/language/JekavianSerbian.java
+@@ -63,12 +63,12 @@ public class JekavianSerbian extends Serbian {
+   }
+ 
+   @Override
+-  public List<Rule> getRelevantRules(ResourceBundle messages, UserConfig userConfig, List<Language> altLanguages) throws IOException {
++  public List<Rule> getRelevantRules(ResourceBundle messages, UserConfig userConfig, Language motherTongue, List<Language> altLanguages) throws IOException {
+     List<Rule> rules = new ArrayList<>(getBasicRules(messages));
+     // Rules specific for Jekavian Serbian
+     rules.add(new MorfologikJekavianSpellerRule(messages, this, userConfig, altLanguages));
+-    rules.add(new SimpleGrammarJekavianReplaceRule(messages));
+-    rules.add(new SimpleStyleJekavianReplaceRule(messages));
++    rules.add(new SimpleGrammarJekavianReplaceRule(messages, this));
++    rules.add(new SimpleStyleJekavianReplaceRule(messages, this));
+     return rules;
+   }
+ }
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/language/Serbian.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/language/Serbian.java
+index 755fab66355..df9824f2996 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/language/Serbian.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/language/Serbian.java
+@@ -158,12 +158,12 @@ public class Serbian extends Language {
+   }
+ 
+   @Override
+-  public List<Rule> getRelevantRules(ResourceBundle messages, UserConfig userConfig, List<Language> altLanguages)
++  public List<Rule> getRelevantRules(ResourceBundle messages, UserConfig userConfig, Language motherTongue, List<Language> altLanguages)
+           throws IOException {
+     List<Rule> rules = new ArrayList<>(getBasicRules(messages));
+     rules.add(new MorfologikEkavianSpellerRule(messages, this, userConfig, altLanguages));
+-    rules.add(new SimpleGrammarEkavianReplaceRule(messages));
+-    rules.add(new SimpleStyleEkavianReplaceRule(messages));
++    rules.add(new SimpleGrammarEkavianReplaceRule(messages, this));
++    rules.add(new SimpleStyleEkavianReplaceRule(messages, this));
+     return rules;
+   }
+ 
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleGrammarEkavianReplaceRule.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleGrammarEkavianReplaceRule.java
+index bb36c22cae7..fb9cb86084a 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleGrammarEkavianReplaceRule.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleGrammarEkavianReplaceRule.java
+@@ -18,6 +18,7 @@
+  */
+ package org.languagetool.rules.sr.ekavian;
+ 
++import org.languagetool.Language;
+ import org.languagetool.rules.AbstractSimpleReplaceRule;
+ 
+ import java.io.IOException;
+@@ -37,11 +38,11 @@ import java.util.ResourceBundle;
+  */
+ public class SimpleGrammarEkavianReplaceRule extends AbstractSimpleReplaceRule {
+ 
+-  private static final Map<String, List<String>> wrongWords = load("/sr/ekavian/replace-grammar.txt");
++  private static final Map<String, List<String>> wrongWords = loadFromPath("/sr/ekavian/replace-grammar.txt");
+   private static final Locale SR_LOCALE = new Locale("sr");  // locale used on case-conversion
+ 
+-  public SimpleGrammarEkavianReplaceRule(ResourceBundle messages) throws IOException {
+-    super(messages);
++  public SimpleGrammarEkavianReplaceRule(ResourceBundle messages, Language language) throws IOException {
++    super(messages, language);
+   }
+ 
+   @Override
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleStyleEkavianReplaceRule.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleStyleEkavianReplaceRule.java
+index ca6b6b19403..bc8c7cd76e3 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleStyleEkavianReplaceRule.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/SimpleStyleEkavianReplaceRule.java
+@@ -18,6 +18,7 @@
+  */
+ package org.languagetool.rules.sr.ekavian;
+ 
++import org.languagetool.Language;
+ import org.languagetool.rules.AbstractSimpleReplaceRule;
+ 
+ import java.io.IOException;
+@@ -36,11 +37,11 @@ import java.util.ResourceBundle;
+  */
+ public class SimpleStyleEkavianReplaceRule extends AbstractSimpleReplaceRule {
+ 
+-  private static final Map<String, List<String>> wrongWords = load("/sr/ekavian/replace-style.txt");
++  private static final Map<String, List<String>> wrongWords = loadFromPath("/sr/ekavian/replace-style.txt");
+   private static final Locale SR_LOCALE = new Locale("sr");  // locale used on case-conversion
+ 
+-  public SimpleStyleEkavianReplaceRule(ResourceBundle messages) throws IOException {
+-    super(messages);
++  public SimpleStyleEkavianReplaceRule(ResourceBundle messages, Language language) throws IOException {
++    super(messages, language);
+   }
+ 
+   @Override
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleGrammarJekavianReplaceRule.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleGrammarJekavianReplaceRule.java
+index c28baf3e585..09c911cc5a9 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleGrammarJekavianReplaceRule.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleGrammarJekavianReplaceRule.java
+@@ -18,6 +18,7 @@
+  */
+ package org.languagetool.rules.sr.jekavian;
+ 
++import org.languagetool.Language;
+ import org.languagetool.rules.AbstractSimpleReplaceRule;
+ 
+ import java.io.IOException;
+@@ -37,11 +38,11 @@ import java.util.ResourceBundle;
+  */
+ public class SimpleGrammarJekavianReplaceRule extends AbstractSimpleReplaceRule {
+ 
+-  private static final Map<String, List<String>> wrongWords = load("/sr/jekavian/replace-grammar.txt");
++  private static final Map<String, List<String>> wrongWords = loadFromPath("/sr/jekavian/replace-grammar.txt");
+   private static final Locale SR_LOCALE = new Locale("sr");  // locale used on case-conversion
+ 
+-  public SimpleGrammarJekavianReplaceRule(ResourceBundle messages) throws IOException {
+-    super(messages);
++  public SimpleGrammarJekavianReplaceRule(ResourceBundle messages, Language language) throws IOException {
++    super(messages, language);
+   }
+ 
+   @Override
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleStyleJekavianReplaceRule.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleStyleJekavianReplaceRule.java
+index c46c5e68404..ade8334984c 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleStyleJekavianReplaceRule.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/jekavian/SimpleStyleJekavianReplaceRule.java
+@@ -18,6 +18,7 @@
+  */
+ package org.languagetool.rules.sr.jekavian;
+ 
++import org.languagetool.Language;
+ import org.languagetool.rules.AbstractSimpleReplaceRule;
+ 
+ import java.io.IOException;
+@@ -36,11 +37,11 @@ import java.util.ResourceBundle;
+  */
+ public class SimpleStyleJekavianReplaceRule extends AbstractSimpleReplaceRule {
+ 
+-  private static final Map<String, List<String>> wrongWords = load("/sr/jekavian/replace-style.txt");
++  private static final Map<String, List<String>> wrongWords = loadFromPath("/sr/jekavian/replace-style.txt");
+   private static final Locale SR_LOCALE = new Locale("sr");  // locale used on case-conversion
+ 
+-  public SimpleStyleJekavianReplaceRule(ResourceBundle messages) throws IOException {
+-    super(messages);
++  public SimpleStyleJekavianReplaceRule(ResourceBundle messages, Language language) throws IOException {
++    super(messages, language);
+   }
+ 
+   @Override
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/synthesis/sr/SerbianSynthesizer.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/synthesis/sr/SerbianSynthesizer.java
+index e11d12305f0..151ed8dfb7a 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/synthesis/sr/SerbianSynthesizer.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/synthesis/sr/SerbianSynthesizer.java
+@@ -36,6 +36,6 @@ public class SerbianSynthesizer extends BaseSynthesizer {
+    * @param tagFileName      The name of a file containing all possible tags.
+    */
+   public SerbianSynthesizer(String resourceFileName, String tagFileName) {
+-    super(resourceFileName, tagFileName);
++    super(resourceFileName, tagFileName, "sr");
+   }
+ }
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/disambiguation/sr/SerbianHybridDisambiguator.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/disambiguation/sr/SerbianHybridDisambiguator.java
+index a24278cf32d..4ec2fa865fe 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/disambiguation/sr/SerbianHybridDisambiguator.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/disambiguation/sr/SerbianHybridDisambiguator.java
+@@ -37,7 +37,7 @@ import java.io.IOException;
+ 
+ public class SerbianHybridDisambiguator extends AbstractDisambiguator {
+ 
+-  private final Disambiguator chunker = new MultiWordChunker("/sr/multiwords.txt");
++  private final Disambiguator chunker = MultiWordChunker.getInstance("/sr/multiwords.txt");
+   private final Disambiguator disambiguator = new XmlRuleDisambiguator(new Serbian());
+ 
+   /**
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/EkavianTagger.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/EkavianTagger.java
+index a13f1290ef7..0ee4af872aa 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/EkavianTagger.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/EkavianTagger.java
+@@ -19,6 +19,8 @@
+ package org.languagetool.tagging.sr;
+ 
+ 
++import java.util.Arrays;
++import java.util.List;
+ import java.util.Locale;
+ 
+ /** @since 4.0 */
+@@ -29,12 +31,12 @@ public class EkavianTagger extends SerbianTagger {
+   }
+ 
+   @Override
+-  public String getManualAdditionsFileName() {
+-    return EKAVIAN_DICTIONARY_PATH + "added.txt";
++  public List<String> getManualAdditionsFileNames() {
++    return Arrays.asList(EKAVIAN_DICTIONARY_PATH + "added.txt");
+   }
+ 
+   @Override
+-  public String getManualRemovalsFileName() {
+-    return EKAVIAN_DICTIONARY_PATH + "removed.txt";
++  public List<String> getManualRemovalsFileNames() {
++    return Arrays.asList(EKAVIAN_DICTIONARY_PATH + "removed.txt");
+   }
+ }
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/JekavianTagger.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/JekavianTagger.java
+index 840c8bc691e..2e549e51c06 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/JekavianTagger.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/JekavianTagger.java
+@@ -18,6 +18,8 @@
+  */
+ package org.languagetool.tagging.sr;
+ 
++import java.util.Arrays;
++import java.util.List;
+ import java.util.Locale;
+ 
+ /** @since 4.0 */
+@@ -30,12 +32,12 @@ public class JekavianTagger extends SerbianTagger {
+   }
+ 
+   @Override
+-  public String getManualAdditionsFileName() {
+-    return DICTIONARY_PATH + "added.txt";
++  public List<String> getManualAdditionsFileNames() {
++    return Arrays.asList(DICTIONARY_PATH + "added.txt");
+   }
+ 
+   @Override
+-  public String getManualRemovalsFileName() {
+-    return DICTIONARY_PATH + "removed.txt";
++  public List<String> getManualRemovalsFileNames() {
++    return Arrays.asList(DICTIONARY_PATH + "removed.txt");
+   }
+ }
+diff --git a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/SerbianTagger.java b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/SerbianTagger.java
+index 8d27a9f8974..5dddc38d4cc 100644
+--- a/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/SerbianTagger.java
++++ b/languagetool-language-modules/sr/src/main/java/org/languagetool/tagging/sr/SerbianTagger.java
+@@ -20,6 +20,8 @@ package org.languagetool.tagging.sr;
+ 
+ import org.languagetool.tagging.BaseTagger;
+ 
++import java.util.Collections;
++import java.util.List;
+ import java.util.Locale;
+ 
+ /** @since 4.0 */
+@@ -37,7 +39,7 @@ public class SerbianTagger extends BaseTagger {
+   }
+ 
+   @Override
+-  public String getManualAdditionsFileName() {
+-    return "/sr/dictionary/added.txt";
++  public List<String> getManualAdditionsFileNames() {
++    return Collections.singletonList("/sr/dictionary/added.txt");
+   }
+ }
