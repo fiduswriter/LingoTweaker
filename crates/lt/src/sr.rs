@@ -12,6 +12,8 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod spelling;
+
 /// `Serbian.createDefaultDisambiguator` is `SerbianHybridDisambiguator`:
 /// `MultiWordChunker("/sr/multiwords.txt")` then
 /// `new XmlRuleDisambiguator(new Serbian())` (no global rules). The
@@ -28,6 +30,9 @@ pub struct SerbianPipeline {
     /// `WordRepeatRule` (`WORD_REPEAT_RULE`, rule 7), the generic built-in
     /// with the `MessagesBundle_sr` strings.
     pub word_repeat: crate::word_repeat::WordRepeatRule,
+    /// `MorfologikEkavianSpellerRule` (`MORFOLOGIK_RULE_SR_EKAVIAN`, rule 8);
+    /// `None` only when the vendored ekavian dictionary cannot be read.
+    pub spelling: Option<Arc<crate::sr::spelling::SerbianSpellingRule>>,
 }
 
 impl SerbianPipeline {

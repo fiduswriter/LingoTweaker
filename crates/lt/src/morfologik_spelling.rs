@@ -52,8 +52,12 @@ static UK_DO_NOT_SUGGEST_SPACED: LazyLock<Regex> = LazyLock::new(|| {
 pub struct MorfologikSpellerConfig {
     /// Directory under `data/`, e.g. `sk`.
     pub lang_dir: &'static str,
-    /// Binary dictionary stem under `<lang>/hunspell/`, e.g. `sk_SK`.
+    /// Binary dictionary stem under `<lang>/<dict_subdir>/`, e.g. `sk_SK`.
     pub dict_stem: &'static str,
+    /// Directory under `<lang>/` holding the `.dict`/`.info` and the
+    /// ignore/spelling/prohibit lists; empty means `hunspell` (Serbian keeps
+    /// them under `dictionaries/ekavian`).
+    pub dict_subdir: &'static str,
     pub rule_id: &'static str,
     pub description: &'static str,
     pub message: &'static str,
@@ -123,7 +127,12 @@ pub struct MorfologikSpellingRule {
 
 impl MorfologikSpellingRule {
     pub fn load(data_dir: &Path, config: MorfologikSpellerConfig) -> Result<Self> {
-        let hunspell = data_dir.join(config.lang_dir).join("hunspell");
+        let subdir = if config.dict_subdir.is_empty() {
+            "hunspell"
+        } else {
+            config.dict_subdir
+        };
+        let hunspell = data_dir.join(config.lang_dir).join(subdir);
         let dict_file = hunspell.join(format!("{}.dict", config.dict_stem));
         let info_file = hunspell.join(format!("{}.info", config.dict_stem));
         let info = DictionaryInfo::load(&info_file)?;
@@ -132,7 +141,7 @@ impl MorfologikSpellingRule {
         let binary = |distance: i32| -> MorfologikSpeller {
             MorfologikSpeller::from_source(Arc::clone(&binary_source), meta.clone(), distance)
         };
-        let lines = load_plain_text_dict_lines(data_dir, config.lang_dir);
+        let lines = load_plain_text_dict_lines(data_dir, config.lang_dir, subdir);
         let plain_source = Arc::new(DictSource::from_lines(&lines));
         let plain = |distance: i32| -> MorfologikSpeller {
             MorfologikSpeller::from_source(Arc::clone(&plain_source), meta.clone(), distance)
@@ -1090,8 +1099,8 @@ fn cache_word_list(path: &Path) -> Vec<String> {
 /// Plain-text speller dictionary lines: `spelling.txt`,
 /// `spelling_custom.txt`, `spelling_global.txt`. The base
 /// `Language.prepareLineForSpeller` is the identity for Slovak/Slovenian.
-fn load_plain_text_dict_lines(data_dir: &Path, lang_dir: &str) -> Vec<Vec<u8>> {
-    let hunspell = data_dir.join(lang_dir).join("hunspell");
+fn load_plain_text_dict_lines(data_dir: &Path, lang_dir: &str, subdir: &str) -> Vec<Vec<u8>> {
+    let hunspell = data_dir.join(lang_dir).join(subdir);
     let mut paths: Vec<PathBuf> = Vec::new();
     for path in [
         hunspell.join("spelling.txt"),

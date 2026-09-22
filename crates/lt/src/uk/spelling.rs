@@ -28,6 +28,7 @@ pub fn load(data_dir: &Path) -> Result<UkrainianSpellingRule> {
         MorfologikSpellerConfig {
             lang_dir: "uk",
             dict_stem: "uk_UA",
+            dict_subdir: "hunspell",
             rule_id: RULE_ID,
             description: "Ймовірна орфографічна помилка",
             message: "Знайдено потенційну орфографічну помилку.",

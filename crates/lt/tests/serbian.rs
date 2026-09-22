@@ -249,3 +249,44 @@ fn serbian_unpaired_brackets() {
         "Распарени симбол: изгледа да ')' недостаје"
     );
 }
+
+/// `MorfologikEkavianSpellerRule` (`MORFOLOGIK_RULE_SR_EKAVIAN`): the
+/// frequency-included ekavian dictionary. Latin-script words are checked.
+#[test]
+fn serbian_speller_flags_latin_word() {
+    let _guard = engine_guard();
+    let text = "kafana";
+    let matches = one(text, "MORFOLOGIK_RULE_SR_EKAVIAN");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 6));
+    assert_eq!(matches[0].message, "Пронађена вероватна грешка спеловања");
+    assert_eq!(
+        matches[0].short_message.as_deref(),
+        Some("Грешка спеловања")
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["Asana", "Grafana", "Kamala"]);
+}
+
+/// Upstream `MorfologikEkavianSpellerRule` does not override
+/// `isLatinScript()`, so the base `true` makes `ignoreWord` drop every
+/// pure-Cyrillic token (`^[^\p{script=latin}]+$`): the Serbian speller is
+/// effectively inert for its own script. The port reproduces this exactly
+/// (no Java probe is possible, see the checklist).
+#[test]
+fn serbian_speller_ignores_cyrillic_upstream_bug() {
+    let _guard = engine_guard();
+    for text in ["бткие", "теест", "Тамо је леп цвет"] {
+        assert!(
+            one(text, "MORFOLOGIK_RULE_SR_EKAVIAN").is_empty(),
+            "Cyrillic token {text:?} must be ignored like Java"
+        );
+    }
+}
+
+/// `sr/disambiguation.xml` `RIMSKI_BROJEVI` (`action="ignore_spelling"`) marks
+/// Roman numerals as not-to-be-spell-checked.
+#[test]
+fn serbian_disambiguation_roman_numerals() {
+    let _guard = engine_guard();
+    assert!(one("III", "MORFOLOGIK_RULE_SR_EKAVIAN").is_empty());
+}

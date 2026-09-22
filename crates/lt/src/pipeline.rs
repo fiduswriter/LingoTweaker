@@ -5406,6 +5406,16 @@ impl Pipeline {
         )
         .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
 
+        // `MorfologikEkavianSpellerRule` (stage 2). A load failure only
+        // disables the speller, not the engine.
+        let spelling = match crate::sr::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[sr] spelling rule disabled: {err}");
+                None
+            }
+        };
+
         let serbian = Arc::new(crate::sr::SerbianPipeline {
             tagger,
             synthesizer,
@@ -5413,6 +5423,7 @@ impl Pipeline {
             multiwords_chunker,
             disambiguator,
             word_repeat: crate::sr::word_repeat_rule(),
+            spelling,
         });
         Ok(Self {
             lang: Lang::Sr,
@@ -11927,6 +11938,24 @@ impl Pipeline {
                     serbian.word_repeat.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
+                if let Some(spelling) = &serbian.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::sr::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
             }
         }
         // Ukrainian sentence-level Java rules in `Ukrainian.getRelevantRules` order:
