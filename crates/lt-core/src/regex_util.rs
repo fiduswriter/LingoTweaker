@@ -228,8 +228,12 @@ fn expand_branch_paths(
                 let inner: String = chars[i + 1..i + close_chars].iter().collect();
                 // A group is itself a (possibly alternation) sub-pattern; its
                 // paths multiply into the branch. Java lookbehind may contain
-                // variable-length alternations, `fancy-regex` may not.
-                let mut base_paths = expand_body_paths(&inner, unbounded_max, max_paths)?;
+                // variable-length alternations, `fancy-regex` may not. The
+                // non-capturing `?:` prefix is dropped (only lookbehind bodies
+                // are expanded, so capture numbering of the outer pattern is
+                // unaffected).
+                let inner = inner.strip_prefix("?:").unwrap_or(inner.as_str());
+                let mut base_paths = expand_body_paths(inner, unbounded_max, max_paths)?;
                 if base_paths.is_empty() {
                     base_paths.push(String::new());
                 }

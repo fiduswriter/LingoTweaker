@@ -75,17 +75,10 @@ impl Synthesizer for UkrainianSynthesizerAdapter {
     }
 }
 
-/// Ukrainian sentence tokenization + tagger. Stage 1 uses the base word
-/// tokenizer (the custom `UkrainianWordTokenizer` follows in stage 3); the
-/// token stream concatenates back to the original text so the byte offsets
-/// accumulate.
+/// Ukrainian sentence tokenization + tagger. Stage 1 used the base word
+/// tokenizer; the custom `UkrainianWordTokenizer` is now wired.
 pub fn analyze_ukrainian_sentence(ukrainian: &UkrainianPipeline, text: &str) -> AnalyzedSentence {
-    let raw_tokens = lt_tokenize::wordtokenizer::join_emails_and_urls(
-        lt_tokenize::wordtokenizer::string_tokenize(
-            text,
-            &lt_tokenize::wordtokenizer::base_tokenizing_characters(),
-        ),
-    );
+    let raw_tokens = lt_tokenize::ukrainian::tokenize(text);
     let tagged = ukrainian.tagger.tag(&raw_tokens);
 
     let mut tokens: Vec<AnalyzedTokenReadings> = Vec::with_capacity(tagged.len() + 1);

@@ -23,6 +23,7 @@ pub mod russian;
 pub mod spanish;
 pub mod srx;
 pub mod tagalog;
+pub mod ukrainian;
 pub mod wordtokenizer;
 
 pub use belarusian::BelarusianWordTokenizer;
