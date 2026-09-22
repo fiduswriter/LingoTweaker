@@ -18,10 +18,12 @@ pub mod hybrid;
 pub mod inflection;
 pub mod missing_hyphen;
 pub mod mixed_alphabets;
+pub mod search_helper;
 pub mod simple_replace;
 pub mod simple_replace_renamed;
 pub mod spelling;
 pub mod typography;
+pub mod verb_inflection;
 
 /// `Ukrainian.createDefaultDisambiguator` is
 /// `UkrainianHybridDisambiguator`: `SimpleDisambiguator` + the multiword

@@ -1,7 +1,9 @@
 //! Ukrainian tagging helpers: `PosTagHelper`, `LetterEndingForNumericHelper`
 //! and the `LemmaHelper` text functions used by `UkrainianTagger`.
 
-use lt_core::AnalyzedToken;
+use std::sync::LazyLock;
+
+use lt_core::{AnalyzedToken, AnalyzedTokenReadings};
 
 /// `LemmaHelper.IGNORE_CHARS` (`\u00AD\u0301`).
 const IGNORE_CHARS: &str = "\u{00AD}\u{0301}";
@@ -622,6 +624,192 @@ pub fn has_lemma_regex_with_pattern(
                 .is_some_and(|t| full_match(pos_regex, t))
     })
 }
+
+/// `PosTagHelper.PREDICT_INSERT_PATTERN`.
+pub fn is_predict_or_insert(token: &AnalyzedToken) -> bool {
+    token
+        .pos_tag
+        .as_deref()
+        .is_some_and(|t| full_match(&PREDICT_INSERT, t))
+}
+
+static PREDICT_INSERT: LazyLock<fancy_regex::Regex> =
+    LazyLock::new(|| fancy_regex::Regex::new(r"^noninfl:(?:predic|insert).*$").unwrap());
+
+/// `PosTagHelper.hasMaleUA`.
+pub fn has_male_ua(token: &AnalyzedTokenReadings) -> bool {
+    static POS: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^noun:inanim:m:v_dav(?!:nv).*$").unwrap());
+    static TOK: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^.*[ую]$").unwrap());
+    has_pos_tag_and_token(token, &POS, &TOK)
+}
+
+/// `PosTagHelper.hasPosTag(AnalyzedTokenReadings, Pattern)`.
+pub fn has_pos_tag_re(token: &AnalyzedTokenReadings, re: &fancy_regex::Regex) -> bool {
+    token
+        .readings
+        .iter()
+        .any(|r| r.pos_tag.as_deref().is_some_and(|t| full_match(re, t)))
+}
+
+/// `PosTagHelper.hasPosTag(AnalyzedTokenReadings, String)`.
+pub fn has_pos_tag_str2(token: &AnalyzedTokenReadings, pattern: &str) -> bool {
+    let re = fancy_regex::Regex::new(&format!("^(?:{pattern})$")).unwrap();
+    has_pos_tag_re(token, &re)
+}
+
+/// `PosTagHelper.filter(AnalyzedTokenReadings, postag, token)`.
+pub fn filter_token(
+    token: &AnalyzedTokenReadings,
+    postag: &fancy_regex::Regex,
+    token_re: &fancy_regex::Regex,
+) -> Vec<AnalyzedToken> {
+    token
+        .readings
+        .iter()
+        .filter(|t| {
+            t.pos_tag.as_deref().is_some_and(|p| full_match(postag, p))
+                && full_match(token_re, &t.token)
+        })
+        .cloned()
+        .collect()
+}
+
+/// `PosTagHelper.hasPosTagAndToken`.
+pub fn has_pos_tag_and_token(
+    token: &AnalyzedTokenReadings,
+    postag: &fancy_regex::Regex,
+    token_re: &fancy_regex::Regex,
+) -> bool {
+    !filter_token(token, postag, token_re).is_empty()
+}
+
+/// `PosTagHelper.getGenders(AnalyzedTokenReadings, Pattern)`.
+pub fn get_genders_token(token: &AnalyzedTokenReadings, postag: &fancy_regex::Regex) -> String {
+    let mut out = String::new();
+    for r in &token.readings {
+        if let Some(tag) = r.pos_tag.as_deref() {
+            if full_match(postag, tag) {
+                if let Some(g) = get_gender(tag) {
+                    if !out.contains(&g) {
+                        out.push_str(&g);
+                    }
+                }
+            }
+        }
+    }
+    out
+}
+
+/// `LemmaHelper.QUOTES_PATTERN`.
+pub fn quotes_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^[\p{Pi}\p{Pf}]$").unwrap());
+    &RE
+}
+
+/// `LemmaHelper.TIME_PLUS_LEMMAS`.
+pub const TIME_PLUS_LEMMAS: &[&str] = &[
+    "секунда",
+    "хвилина",
+    "хвилинка",
+    "хвилина-дві",
+    "хвилинка-друга",
+    "година",
+    "годинка",
+    "півгодини",
+    "година-друга",
+    "година-дві",
+    "час",
+    "день",
+    "день-другий",
+    "півдня",
+    "ніч",
+    "ніченька",
+    "вечір",
+    "ранок",
+    "тиждень",
+    "тиждень-два",
+    "тиждень-другий",
+    "місяць",
+    "місяць-два",
+    "місяць-другий",
+    "місяць-півтора",
+    "доба",
+    "мить",
+    "хвилька",
+    "рік",
+    "рік-два",
+    "рік-півтора",
+    "півроку",
+    "півроку-рік",
+    "десятиліття",
+    "десятиріччя",
+    "століття",
+    "півстоліття",
+    "сторіччя",
+    "півсторіччя",
+    "тисячоліття",
+    "півтисячоліття",
+    "квартал",
+    "годочок",
+    "літо",
+    "зима",
+    "весна",
+    "осінь",
+    "тайм",
+    "період",
+    "термін",
+    "сезон",
+    "декада",
+    "каденція",
+    "раунд",
+    "міліметр",
+    "сантиметр",
+    "метр",
+    "кілометр",
+    "кілограм",
+    "кілограм–півтора",
+    "гектар",
+    "миля",
+    "аршин",
+    "дециметр",
+    "верства",
+    "верста",
+    "грам",
+    "літр",
+    "фунт",
+    "тонна",
+    "центнер",
+    "десяток",
+    "десяток-другий",
+    "сотня",
+    "сотка",
+    "тисяча",
+    "п'ятірка",
+    "пара",
+    "третина",
+    "чверть",
+    "половина",
+    "дюжина",
+    "жменя",
+    "жменька",
+    "купа",
+    "купка",
+    "парочка",
+    "оберемок",
+    "безліч",
+    "гривня",
+    "копійка",
+    "вихідний",
+    "уїк-енд",
+    "уїкенд",
+    "вікенд",
+    "відсоток",
+    "раз",
+    "крок",
+];
 
 #[cfg(test)]
 mod tests {
