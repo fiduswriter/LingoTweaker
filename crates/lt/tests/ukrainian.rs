@@ -571,3 +571,44 @@ fn ukrainian_noun_verb_agreement() {
     assert!(one("Вона прийшла", "UK_NOUN_VERB_INFLECTION_AGREEMENT").is_empty());
     assert!(one("Місто розташувалися", "UK_NOUN_VERB_INFLECTION_AGREEMENT").is_empty());
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
+/// `TokenAgreementPrepNounRule` + its exception helper.
+#[test]
+fn ukrainian_prep_noun_agreement() {
+    let _guard = engine_guard();
+    let text = "згідно з документа";
+    let matches = one(text, "UK_PREP_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (9, 18));
+    assert_eq!(
+        matches[0].message,
+        "Прийменник «з» вимагає іншого відмінка: орудний, а знайдено: родовий, знахідний"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["документом".to_string()]);
+
+    let text = "завдяки його зусиллі";
+    let matches = one(text, "UK_PREP_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (13, 20));
+    assert_eq!(suggestions(&matches[0]), vec!["зусиллю".to_string()]);
+
+    let text = "до Київ";
+    let matches = one(text, "UK_PREP_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (3, 7));
+    assert_eq!(suggestions(&matches[0]), vec!["Києва".to_string()]);
+
+    for ok in [
+        "згідно з документом",
+        "завдяки його зусиллям",
+        "на вулиці",
+        "до Києва",
+        "при його ділянці",
+    ] {
+        assert!(
+            one(ok, "UK_PREP_NOUN_INFLECTION_AGREEMENT").is_empty(),
+            "{ok}"
+        );
+    }
+}
