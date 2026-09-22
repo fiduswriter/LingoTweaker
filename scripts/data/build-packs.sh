@@ -10,7 +10,8 @@
 #   <out-dir>/manifest.json      { "<lang>": { file, bytes, sha256 } }
 #
 # The pack format is `lt-data`'s (`crates/lt-data/src/pack.rs`): one file per
-# language holding `manifest.json`, `core/**`, `messages/**` and `<lang>/**`.
+# language holding `core/**` and `<lang>/**` (the engine never reads the data
+# directory's `manifest.json` or `messages/**` at runtime, so they stay out).
 #
 # Used by the GitHub Pages demo (demo/scripts/build-packs.sh) and the release
 # data artifacts (scripts/release/build-data.sh), so both serve byte-identical

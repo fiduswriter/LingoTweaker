@@ -293,7 +293,6 @@ impl EngineBuilder {
             Some(dir) => dir,
             None => DataDir::discover()?,
         };
-        data_dir.load_manifest()?;
         let pipeline = match self.lang {
             Lang::En => Pipeline::new_english(
                 &data_dir,

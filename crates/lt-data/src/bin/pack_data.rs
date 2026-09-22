@@ -4,9 +4,9 @@
 //! cargo run -p lt-data --bin pack_data -- data gn /tmp/lt-gn.pack
 //! ```
 //!
-//! The pack contains `manifest.json`, `core/**`, `messages/**` and
-//! `data/<lang>/**`; see [`lt_data::pack::collect_language`] for why the set
-//! is deliberately conservative.
+//! The pack contains `core/**` and `data/<lang>/**`; see
+//! [`lt_data::pack::collect_language`] for why the set is deliberately
+//! conservative (and why `manifest.json`/`messages/**` stay out).
 
 use std::path::PathBuf;
 
