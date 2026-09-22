@@ -127,7 +127,7 @@ export const LANGUAGES = [
   { code: "lt-LT", pack: "lt", label: "Lietuvių", size: "0.41 MB", ...LITHUANIAN },
   { code: "crh-UA", pack: "crh", label: "Qırımtatar tili", size: "2.7 MB", ...CRIMEAN_TATAR },
   { code: "be-BY", pack: "be", label: "Беларуская", size: "1.1 MB", ...BELARUSIAN },
-  { code: "ru-RU", pack: "ru", label: "Русский", size: "6.2 MB", ...RUSSIAN },
+  { code: "ru-RU", pack: "ru", label: "Русский", size: "6.1 MB", ...RUSSIAN },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.1 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.7 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.35 MB", ...GUARANI },
