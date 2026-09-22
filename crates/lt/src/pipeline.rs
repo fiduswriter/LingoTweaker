@@ -5693,7 +5693,11 @@ impl Pipeline {
         _variant: Option<&str>,
     ) -> Result<Self> {
         let f = Self::hand_authored_foundations(data_dir, Lang::Fa, "fa_two", enabled_rules)?;
-        let persian = Arc::new(crate::fa::PersianPipeline {});
+        let persian = Arc::new(crate::fa::PersianPipeline {
+            space_before: crate::space_before::SpaceBeforeRule::persian(),
+            simple_replace: crate::fa::PersianSimpleReplaceRule::load(data_dir.path()),
+            word_coherency: crate::word_coherency::WordCoherencyRule::persian(data_dir.path()),
+        });
         Ok(Self {
             lang: Lang::Fa,
             unify_config: f.unify_config,
@@ -8422,6 +8426,37 @@ impl Pipeline {
                 &enabled_categories,
             ) {
                 text_level_matches.extend(crate::long_sentence::check_fa(&analyzed_sentences));
+            }
+            // `PersianWordRepeatBeginningRule`
+            // (`PERSIAN_WORD_REPEAT_BEGINNING_RULE`).
+            if builtin_active(
+                "PERSIAN_WORD_REPEAT_BEGINNING_RULE",
+                "REPETITIONS_STYLE",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::fa::word_repeat_beginning(&analyzed_sentences));
+            }
+            // `WordCoherencyRule` (`FA_WORD_COHERENCY`, text level).
+            if let Some(persian) = &self.persian {
+                if builtin_active(
+                    "FA_WORD_COHERENCY",
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    &enabled_rules,
+                    &disabled_rules,
+                    &disabled_categories,
+                    &enabled_categories,
+                ) {
+                    text_level_matches.extend(persian.word_coherency.check(&analyzed_sentences));
+                }
             }
         }
         // Esperanto text-level rules (`Esperanto.getRelevantRules`):
@@ -11858,6 +11893,109 @@ impl Pipeline {
                 ),
                 &mut seen,
             );
+            // `PersianCommaWhitespaceRule` (`PERSIAN_COMMA_PARENTHESIS_WHITESPACE`,
+            // comma `،`, default off).
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "PERSIAN_COMMA_PARENTHESIS_WHITESPACE",
+                    "TYPOGRAPHY",
+                    false,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_fa(
+                    &analyzed.tokens,
+                    sentence_text,
+                    start,
+                    "\u{060C}",
+                    "PERSIAN_COMMA_PARENTHESIS_WHITESPACE",
+                ),
+                &mut seen,
+            );
+            // `PersianDoublePunctuationRule` (`PERSIAN_DOUBLE_PUNCTUATION`,
+            // comma `،`).
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "PERSIAN_DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_fa(
+                    &analyzed.tokens,
+                    start,
+                    "\u{060C}",
+                    "PERSIAN_DOUBLE_PUNCTUATION",
+                ),
+                &mut seen,
+            );
+            // `PersianWordRepeatRule` (`PERSIAN_WORD_REPEAT_RULE`).
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::word_repeat::FA_RULE_ID,
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::word_repeat::check_sentence_fa(&analyzed.tokens, start),
+                &mut seen,
+            );
+            // `SimpleReplaceRule` (`FA_SIMPLE_REPLACE`).
+            if let Some(persian) = &self.persian {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "FA_SIMPLE_REPLACE",
+                        "CONFUSED_WORDS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    persian
+                        .simple_replace
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `PersianSpaceBeforeRule` (`FA_SPACE_BEFORE_CONJUNCTION`,
+                // default off).
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        persian.space_before.rule_id(),
+                        "MISC",
+                        false,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    persian.space_before.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
         }
         // Esperanto sentence-level Java rules in `Esperanto.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2), HunspellRule (4)

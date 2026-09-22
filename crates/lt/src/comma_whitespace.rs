@@ -181,7 +181,7 @@ pub fn check_sentence_with_comma(
                 msg = Some(SPACE_AFTER_COMMA);
                 suggestion_text = Some(comma.to_string());
                 // exception for duplicated comma (we already have another rule)
-                if i + 1 < tokens.len() && tokens[i + 1].surface() == "," {
+                if i + 1 < tokens.len() && tokens[i + 1].surface() == comma {
                     msg = None;
                 }
                 if i + 1 < tokens.len() && !tokens[i + 1].is_whitespace {

@@ -71,6 +71,7 @@ mod sentence_whitespace;
 mod simple_replace;
 mod sk;
 mod sl;
+mod space_before;
 mod specific_case;
 mod sr;
 mod style_too_often;

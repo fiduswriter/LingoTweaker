@@ -40,6 +40,8 @@ const RU_DESCRIPTION: &str = "Единообразное написание сл
 const RU_ROOT_RULE_ID: &str = "RU_WORD_ROOT_REPEAT";
 const RU_ROOT_DESCRIPTION: &str = "Повтор однокоренных слов";
 const RU_CATEGORY_NAME: &str = "Общие правила";
+const FA_RULE_ID: &str = "FA_WORD_COHERENCY";
+const FA_DESCRIPTION: &str = "چند املا برای یک کلمه که یکی از آنها اولویت بیشتری دارد";
 
 /// Which subclass's message/category/issue-type the loader applies.
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -54,6 +56,7 @@ enum CoherencyLang {
     Swedish,
     Russian,
     RussianRoot,
+    Persian,
 }
 
 pub struct WordCoherencyRule {
@@ -127,6 +130,12 @@ impl WordCoherencyRule {
         )
     }
 
+    /// `fa.WordCoherencyRule`: `fa/rules/coherency.txt`, Persian message,
+    /// category MISC (`متفرقه`).
+    pub fn persian(data_dir: &Path) -> Self {
+        Self::load(data_dir, "fa/rules/coherency.txt", CoherencyLang::Persian)
+    }
+
     /// `ca.WordCoherencyRule`: `ca/rules/coherency.txt`, Catalan message,
     /// category STYLE.
     pub fn catalan(data_dir: &Path, synth: Arc<lt_tagger::CatalanSynthesizer>) -> Self {
@@ -197,6 +206,7 @@ impl WordCoherencyRule {
             CoherencyLang::RussianRoot => {
                 (RU_ROOT_RULE_ID, RU_ROOT_DESCRIPTION, None, RU_CATEGORY_NAME)
             }
+            CoherencyLang::Persian => (FA_RULE_ID, FA_DESCRIPTION, None, "متفرقه"),
         };
         let rule_id = if lang == CoherencyLang::Valencian {
             CA_VALENCIA_RULE_ID
@@ -291,6 +301,9 @@ impl WordCoherencyRule {
                             ),
                             CoherencyLang::RussianRoot => format!(
                                 "«{token}» и «{other_spelling}» – однокоренные слова, их не стоит использовать одновременно"
+                            ),
+                            CoherencyLang::Persian => format!(
+                                "'{token}' و '{other_spelling}' نباید در یک جا استفاده شوند"
                             ),
                         };
                         let marked = sentence

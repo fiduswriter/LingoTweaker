@@ -202,3 +202,69 @@ pub fn check_sentence_uk(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     }
     rule_matches
 }
+
+pub const FA_RULE_ID: &str = "PERSIAN_WORD_REPEAT_RULE";
+const FA_DESCRIPTION: &str = "تکرار کلمه (برای نمونه 'شد شد)";
+const FA_MESSAGE: &str = "اشتباه تایپی متحمل: شما یک کلمه را تکرار کرده‌اید";
+const FA_SHORT: &str = "تکرار کلمه";
+const FA_CATEGORY_NAME: &str = "متفرقه";
+
+/// `PersianWordRepeatRule.ignore`: the base list plus the Persian exceptions
+/// (exact, case-sensitive `wordRepetitionOf`, unlike the case-insensitive
+/// repetition test itself).
+fn fa_ignore(tokens: &[&AnalyzedTokenReadings], position: usize) -> bool {
+    if base_ignore(tokens, position) {
+        return true;
+    }
+    for name in ["لی", "سی", "لک", "ریز", "جز", "کل"] {
+        if position > 0
+            && tokens[position - 1].surface() == name
+            && tokens[position].surface() == name
+        {
+            return true;
+        }
+    }
+    false
+}
+
+/// `PersianWordRepeatRule` (`PERSIAN_WORD_REPEAT_RULE`) over one sentence.
+pub fn check_sentence_fa(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let view: Vec<&AnalyzedTokenReadings> = tokens
+        .iter()
+        .filter(|t| !t.is_whitespace || t.is_sentence_start || t.is_sentence_end)
+        .collect();
+    let mut rule_matches = Vec::new();
+    let mut prev_token = String::new();
+    for i in 1..view.len() {
+        let token = view[i].surface().to_string();
+        if view[i].is_immunized {
+            prev_token.clear();
+            continue;
+        }
+        if is_word(&token) && eq_ignore_case(&prev_token, &token) && !fa_ignore(&view, i) {
+            let prev_pos = view[i - 1].start_pos;
+            let pos = view[i].start_pos;
+            rule_matches.push(
+                Match::new(
+                    FA_RULE_ID,
+                    Option::<String>::None,
+                    FA_MESSAGE,
+                    Some(FA_SHORT.to_string()),
+                    TextRange::new(
+                        sentence_offset + prev_pos,
+                        sentence_offset + pos + prev_token.len(),
+                    ),
+                    vec![Suggestion {
+                        value: prev_token.clone(),
+                        short_description: None,
+                    }],
+                    "MISC",
+                    FA_CATEGORY_NAME,
+                )
+                .with_metadata(FA_DESCRIPTION, "duplication", 1),
+            );
+        }
+        prev_token = token;
+    }
+    rule_matches
+}

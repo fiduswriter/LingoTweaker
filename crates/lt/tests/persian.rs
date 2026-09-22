@@ -134,3 +134,95 @@ fn persian_generic_multiple_whitespace() {
         "اشتباه تایپی محتمل: شما فاصله را تکرار کرده‌اید"
     );
 }
+
+/// `PersianCommaWhitespaceRule` (`PERSIAN_COMMA_PARENTHESIS_WHITESPACE`,
+/// default off, comma `،`): a space before the Persian comma.
+#[test]
+fn persian_comma_whitespace() {
+    let _guard = engine_guard();
+    let text = "چرا ، بله";
+    let matches = one(text, "PERSIAN_COMMA_PARENTHESIS_WHITESPACE");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        matches[0].message,
+        "پس از کاما فاصله بگذارید، ولی نه قبل از آن"
+    );
+    assert_utf16(text, &matches[0], (3, 5));
+}
+
+/// `PersianDoublePunctuationRule` (`PERSIAN_DOUBLE_PUNCTUATION`, comma `،`).
+#[test]
+fn persian_double_punctuation() {
+    let _guard = engine_guard();
+    let text = "الف،، ب";
+    let matches = one(text, "PERSIAN_DOUBLE_PUNCTUATION");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(matches[0].message, "دو کامای پشت سر هم");
+    assert_eq!(
+        matches[0].short_message.as_deref(),
+        Some("دو کامای پشت‌سرهم")
+    );
+    assert_utf16(text, &matches[0], (3, 4));
+}
+
+/// `PersianSpaceBeforeRule` (`FA_SPACE_BEFORE_CONJUNCTION`, default off):
+/// mirrors `PersianSpaceBeforeRuleTest`.
+#[test]
+fn persian_space_before_conjunction() {
+    let _guard = engine_guard();
+    assert_eq!(one("به اینجا", "FA_SPACE_BEFORE_CONJUNCTION").len(), 1);
+    assert_eq!(one("من به اینجا", "FA_SPACE_BEFORE_CONJUNCTION").len(), 0);
+    assert_eq!(one("(به اینجا", "FA_SPACE_BEFORE_CONJUNCTION").len(), 0);
+}
+
+/// `SimpleReplaceRule` (`FA_SIMPLE_REPLACE`) over `fa/rules/replace.txt`.
+#[test]
+fn persian_simple_replace() {
+    let _guard = engine_guard();
+    let text = "وی حاظر به همکاری شد.";
+    let matches = one(text, "FA_SIMPLE_REPLACE");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(matches[0].message, "اشتباه محتمل املائی پیداشده: حاضر.");
+    assert_eq!(matches[0].suggestions[0].value, "حاضر");
+    assert_utf16(text, &matches[0], (3, 7));
+}
+
+/// `PersianWordRepeatRule` (`PERSIAN_WORD_REPEAT_RULE`).
+#[test]
+fn persian_word_repeat() {
+    let _guard = engine_guard();
+    let text = "این کار برای برای تو بود.";
+    let matches = one(text, "PERSIAN_WORD_REPEAT_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (8, 17));
+    // `ignore` list: "لی لی" must not match.
+    assert_eq!(
+        one("من لی لی را دیدم.", "PERSIAN_WORD_REPEAT_RULE").len(),
+        0
+    );
+}
+
+/// `PersianWordRepeatBeginningRule` (`PERSIAN_WORD_REPEAT_BEGINNING_RULE`).
+#[test]
+fn persian_word_repeat_beginning() {
+    let _guard = engine_guard();
+    let text = "همچنین، خیابان تقریباً مسکونی است. همچنین، به افتخار یک شاعر نامگذاری شده‌است.";
+    let matches = one(text, "PERSIAN_WORD_REPEAT_BEGINNING_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (35, 41));
+}
+
+/// `WordCoherencyRule` (`FA_WORD_COHERENCY`): mirrors `WordCoherencyRuleTest`.
+#[test]
+fn persian_word_coherency() {
+    let _guard = engine_guard();
+    let text = "این یک اتاق است. این یک اطاق است.";
+    let matches = one(text, "FA_WORD_COHERENCY");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        matches[0].message,
+        "'اطاق' و 'اتاق' نباید در یک جا استفاده شوند"
+    );
+    assert_eq!(matches[0].suggestions[0].value, "اتاق");
+    assert_utf16(text, &matches[0], (24, 28));
+}
