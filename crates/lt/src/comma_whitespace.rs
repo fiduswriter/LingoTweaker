@@ -107,6 +107,31 @@ pub fn check_sentence_with_quotes_exception(
     quotes_whitespace: bool,
     exception: Option<&dyn Fn(&[AnalyzedTokenReadings], usize) -> bool>,
 ) -> Vec<Match> {
+    check_sentence_with_comma(
+        tokens,
+        sentence_text,
+        sentence_offset,
+        quotes_whitespace,
+        ",",
+        "COMMA_PARENTHESIS_WHITESPACE",
+        exception,
+    )
+}
+
+/// `CommaWhitespaceRule.match` parameterized by the rule's comma character
+/// (`getCommaCharacter()`) and rule id, for the Arabic subclasses
+/// (`ARABIC_COMMA_PARENTHESIS_WHITESPACE`, `ARABIC_QM_WHITESPACE`,
+/// `ARABIC_SC_WHITESPACE`).
+#[allow(clippy::type_complexity)]
+pub fn check_sentence_with_comma(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+    quotes_whitespace: bool,
+    comma: &str,
+    rule_id: &str,
+    exception: Option<&dyn Fn(&[AnalyzedTokenReadings], usize) -> bool>,
+) -> Vec<Match> {
     let mut rule_matches: Vec<Match> = Vec::new();
     let mut prev_token = String::new();
     let mut prev_prev_token = String::new();
@@ -136,7 +161,7 @@ pub fn check_sentence_with_quotes_exception(
             suggestion_text = Some(prev_token.clone());
             two_suggestions = true;
         } else if !is_whitespace
-            && prev_token == ","
+            && prev_token == comma
             && !is_quote(&token)
             && !is_hyphen_or_comma(&token)
             && !contains_digit(&prev_prev_token)
@@ -144,7 +169,7 @@ pub fn check_sentence_with_quotes_exception(
             && prev_prev_token != ","
         {
             msg = Some(MISSING_SPACE_AFTER_COMMA);
-            suggestion_text = Some(format!(", {}", tokens[i].surface()));
+            suggestion_text = Some(format!("{comma} {}", tokens[i].surface()));
         } else if prev_white {
             if is_right_bracket(&token) {
                 let is_exception = token == "]" && prev_token == " " && prev_prev_token == "[";
@@ -152,15 +177,15 @@ pub fn check_sentence_with_quotes_exception(
                     msg = Some(NO_SPACE_BEFORE);
                     suggestion_text = Some(token.clone());
                 }
-            } else if token == "," {
+            } else if token == comma {
                 msg = Some(SPACE_AFTER_COMMA);
-                suggestion_text = Some(",".to_string());
+                suggestion_text = Some(comma.to_string());
                 // exception for duplicated comma (we already have another rule)
                 if i + 1 < tokens.len() && tokens[i + 1].surface() == "," {
                     msg = None;
                 }
                 if i + 1 < tokens.len() && !tokens[i + 1].is_whitespace {
-                    suggestion_text = Some(", ".to_string());
+                    suggestion_text = Some(format!("{comma} "));
                 }
             } else if token == "."
                 && !is_domain(tokens, i + 1)
@@ -221,7 +246,7 @@ pub fn check_sentence_with_quotes_exception(
                 };
                 rule_matches.push(
                     Match::new(
-                        "COMMA_PARENTHESIS_WHITESPACE",
+                        rule_id,
                         Option::<String>::None,
                         msg,
                         Option::<String>::None,

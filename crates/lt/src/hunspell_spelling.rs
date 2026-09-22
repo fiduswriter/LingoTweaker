@@ -368,6 +368,17 @@ impl HunspellSpellingRule {
     /// `.dict` is configured, otherwise the bounded edit-distance search over
     /// the candidate word list.
     fn suggestions(&self, word: &str) -> Vec<Suggestion> {
+        // `ArabicHunspellSpellerRule` strips tashkeel for the lookup; the
+        // hunspell `IGNORE` directive (which the in-tree checker does not
+        // implement) strips the same characters inside Java's `suggest()`, so
+        // the Arabic suggestions are computed on the stripped word too.
+        let stripped;
+        let word = if self.config.strip_tashkeel {
+            stripped = lt_tagger::arabic::remove_tashkeel(word);
+            stripped.as_str()
+        } else {
+            word
+        };
         if self.config.native_suggestions {
             return self.native_suggestions(word);
         }

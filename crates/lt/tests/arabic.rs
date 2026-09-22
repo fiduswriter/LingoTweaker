@@ -227,3 +227,38 @@ fn arabic_masdar_to_verb_filter_conjunction() {
     assert_utf16(text, &matches[0], (0, 15));
     assert_eq!(suggestions(&matches[0]), vec!["وسيأكلون"]);
 }
+
+/// `ArabicCommaWhitespaceRule` (`ARABIC_COMMA_PARENTHESIS_WHITESPACE`): the
+/// Arabic comma character `،` preceded by whitespace.
+#[test]
+fn arabic_comma_whitespace() {
+    let _guard = engine_guard();
+    let text = "وأخيرا وليس آخرا ، أختم كلامي بكذا";
+    let matches = one(text, "ARABIC_COMMA_PARENTHESIS_WHITESPACE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (16, 18));
+    assert_eq!(matches[0].message, "ضع فراغا بعد الفاصلة، وليس قبلها.");
+    assert_eq!(suggestions(&matches[0]), vec!["،"]);
+}
+
+/// `ArabicDiacriticsRule` (`AR_DIACRITICS_REPLACE`): the `diacritics.txt`
+/// replacement list.
+#[test]
+fn arabic_diacritics_replace() {
+    let _guard = engine_guard();
+    let text = "هو عالم فذ ولكن تنقصه التجارب";
+    let matches = one(text, "AR_DIACRITICS_REPLACE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (22, 29));
+    assert_eq!(suggestions(&matches[0]), vec!["التجارِب"]);
+}
+
+/// `ArabicDoublePunctuationRule` (`ARABIC_DOUBLE_PUNCTUATION`, comma `،`).
+#[test]
+fn arabic_double_punctuation() {
+    let _guard = engine_guard();
+    let text = "نعم،، لقد نجحنا";
+    let matches = one(text, "ARABIC_DOUBLE_PUNCTUATION");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(suggestions(&matches[0]), vec!["،"]);
+}

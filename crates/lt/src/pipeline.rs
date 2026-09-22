@@ -5592,6 +5592,7 @@ impl Pipeline {
             multiwords_chunker,
             disambiguator,
             spelling,
+            simple_replace: crate::ar::rules::simple_replace_instances(data_dir.path())?,
         });
         Ok(Self {
             lang: Lang::Ar,
@@ -12158,6 +12159,74 @@ impl Pipeline {
         // the Hunspell speller (stage 2); the generic built-ins and the 16
         // Arabic-specific Java rules follow in later stages.
         if self.lang == crate::Lang::Ar {
+            // `CommaWhitespaceRule(messages, true)` (`COMMA_PARENTHESIS_WHITESPACE`)
+            // and the three Arabic comma-character subclasses.
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::ar::punctuation::comma_whitespace(
+                    &analyzed.tokens,
+                    sentence_text,
+                    start,
+                    ",",
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                ),
+                &mut seen,
+            );
+            for (rule_id, comma) in [
+                ("ARABIC_COMMA_PARENTHESIS_WHITESPACE", "،"),
+                ("ARABIC_QM_WHITESPACE", "؟"),
+                ("ARABIC_SC_WHITESPACE", "؛"),
+            ] {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        rule_id,
+                        "PUNCTUATION",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    crate::ar::punctuation::comma_whitespace(
+                        &analyzed.tokens,
+                        sentence_text,
+                        start,
+                        comma,
+                        rule_id,
+                    ),
+                    &mut seen,
+                );
+            }
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "ARABIC_DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::ar::punctuation::double_punctuation(&analyzed.tokens, start),
+                &mut seen,
+            );
             if let Some(arabic) = &self.arabic {
                 if let Some(spelling) = &arabic.spelling {
                     append_active(
@@ -12174,6 +12243,33 @@ impl Pipeline {
                             enabled_categories,
                         ),
                         spelling.check_sentence(&analyzed.tokens, sentence_text, start),
+                        &mut seen,
+                    );
+                }
+                // `AbstractSimpleReplaceRule2` family (8, 12–15, 17).
+                let rule2_categories = [
+                    "CONFUSED_WORDS",
+                    "STYLE",
+                    "STYLE",
+                    "CONFUSED_WORDS",
+                    "REDUNDANCY",
+                    "REDUNDANCY",
+                ];
+                for (rule, category) in arabic.simple_replace.iter().zip(rule2_categories) {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            rule.rule_id(),
+                            category,
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        rule.check_sentence(&analyzed.tokens, start),
                         &mut seen,
                     );
                 }

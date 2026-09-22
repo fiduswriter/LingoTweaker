@@ -13,6 +13,8 @@ use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
 pub mod filters;
+pub mod punctuation;
+pub mod rules;
 pub mod spelling;
 
 /// `ArabicWordTokenizer.getTokenizingCharacters` = the base set plus the
@@ -39,6 +41,8 @@ pub struct ArabicPipeline {
     /// `ArabicHunspellSpellerRule` (`HUNSPELL_RULE_AR`, stage 2); `None` only
     /// when the vendored Hunspell-ar dictionary cannot be read.
     pub spelling: Option<Arc<spelling::ArabicSpellingRule>>,
+    /// The six `AbstractSimpleReplaceRule2` instances (rules 8, 12–15, 17).
+    pub simple_replace: Vec<crate::simple_replace::SimpleReplaceRule>,
 }
 
 impl ArabicPipeline {

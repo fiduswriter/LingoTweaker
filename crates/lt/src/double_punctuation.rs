@@ -386,6 +386,18 @@ pub fn check_sentence_gl(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
 
 /// `DoublePunctuationRule.match` over one sentence.
 pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    check_sentence_with_comma(tokens, sentence_offset, ",", "DOUBLE_PUNCTUATION")
+}
+
+/// `DoublePunctuationRule.match` parameterized by the rule's comma character
+/// (`getCommaCharacter()`) and rule id (the Arabic `ARABIC_DOUBLE_PUNCTUATION`
+/// uses `،`).
+pub fn check_sentence_with_comma(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_offset: usize,
+    comma: &str,
+    rule_id: &str,
+) -> Vec<Match> {
     let mut rule_matches: Vec<Match> = Vec::new();
     let view: Vec<&AnalyzedTokenReadings> = tokens
         .iter()
@@ -410,7 +422,7 @@ pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) 
             dot_count += 1;
             comma_count = 0;
             start_pos = view[i].start_pos;
-        } else if token == "," {
+        } else if token == comma {
             comma_count += 1;
             dot_count = 0;
             start_pos = view[i].start_pos;
@@ -431,7 +443,7 @@ pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) 
             let from_pos = start_pos.saturating_sub(1);
             rule_matches.push(
                 Match::new(
-                    "DOUBLE_PUNCTUATION",
+                    rule_id,
                     Option::<String>::None,
                     TWO_DOTS,
                     Some(DOUBLE_DOTS_SHORT.to_string()),
@@ -456,17 +468,17 @@ pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) 
                 ),
             );
             dot_count = 0;
-        } else if comma_count == 2 && next_token != Some(",") {
+        } else if comma_count == 2 && next_token != Some(comma) {
             let from_pos = start_pos.saturating_sub(1);
             rule_matches.push(
                 Match::new(
-                    "DOUBLE_PUNCTUATION",
+                    rule_id,
                     Option::<String>::None,
                     TWO_COMMAS,
                     Some(DOUBLE_COMMAS_SHORT.to_string()),
                     TextRange::new(sentence_offset + from_pos, sentence_offset + start_pos + 1),
                     vec![Suggestion {
-                        value: ",".to_string(),
+                        value: comma.to_string(),
                         short_description: None,
                     }],
                     "PUNCTUATION",
@@ -480,7 +492,7 @@ pub fn check_sentence(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) 
             );
             comma_count = 0;
         }
-        if token != "." && token != "," {
+        if token != "." && token != comma {
             dot_count = 0;
             comma_count = 0;
         }
