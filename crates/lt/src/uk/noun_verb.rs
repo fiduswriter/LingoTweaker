@@ -342,7 +342,7 @@ fn disjoint_inf2(a: &[inflection::Inflection], b: &[inflection::Inflection]) -> 
     a.iter().all(|x| !b.contains(x))
 }
 
-fn is_non_plural_a(tokens: &[&AnalyzedTokenReadings], pos: usize) -> bool {
+pub(crate) fn is_non_plural_a(tokens: &[&AnalyzedTokenReadings], pos: usize) -> bool {
     (tokens[pos].surface() == "а" || tokens[pos].surface() == "a")
         && !uk_helpers::has_lemma(&tokens[pos + 1].readings, &["також", "потім", "пізніше"])
 }

@@ -583,6 +583,9 @@ fn ukrainian_adj_noun_agreement() {
         "добра людина",
         "старого будинку",
         "цікава книжка",
+        // `reverseConjFind`/`reverseConjAdvFind` (plural noun after `та <adj>`)
+        "середня та старша сестри",
+        "права та ліва частини",
     ] {
         assert!(
             one(ok, "UK_ADJ_NOUN_INFLECTION_AGREEMENT").is_empty(),

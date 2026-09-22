@@ -1139,6 +1139,122 @@ fn is_exception(
             return true;
         }
     }
+    // навчальної та середньої шкіл
+    if adj_pos > 2
+        && has(noun_at, "noun:.*:p:.*")
+        && (reverse_conj_find(tokens, adj_pos - 1, 3)
+            || reverse_conj_adv_find(tokens, adj_pos - 1, 3))
+        && has_overlap_ignore_gender(master, slave, None, Some("p"))
+        && uk_helpers::reverse_search(
+            tokens,
+            adj_pos as i64 - 2,
+            100,
+            None,
+            Some(&Regex::new(r"(adj|numr).*").unwrap()),
+        )
+    {
+        return true;
+    }
+    // Большого та Маріїнського театрів
+    if adj_pos > 2
+        && has(noun_at, "noun:.*:p:.*")
+        && reverse_conj_find2(tokens, adj_pos - 1, 3)
+        && has_overlap_ignore_gender(master, slave, None, Some("p"))
+    {
+        return true;
+    }
+    false
+}
+
+/// `TokenAgreementAdjNounExceptionHelper.reverseConjAdvFind`.
+fn reverse_conj_adv_find(tokens: &[&AnalyzedTokenReadings], pos: usize, depth: usize) -> bool {
+    let start = pos as i64;
+    let mut i = start;
+    while i > start - depth as i64 && i >= 2 {
+        let tr = tokens[i as usize];
+        if CONJ_FOR_PLURAL_WITH_COMMA.contains(&tok_lower(tr).as_str())
+            && (has(tokens[i as usize - 1], "adv(?!p).*")
+                || has(tokens[i as usize + 1], "(adv(?!p)|part).*"))
+        {
+            return true;
+        }
+        if has_part(tr, "verb") {
+            return false;
+        }
+        i -= 1;
+    }
+    false
+}
+
+/// `TokenAgreementAdjNounExceptionHelper.reverseConjFind`.
+fn reverse_conj_find(tokens: &[&AnalyzedTokenReadings], pos: usize, depth: usize) -> bool {
+    let start = pos as i64;
+    let mut i = start;
+    while i > start - depth as i64 && i >= 1 {
+        let tr = tokens[i as usize];
+        if CONJ_FOR_PLURAL_WITH_COMMA.contains(&tok_lower(tr).as_str()) {
+            if i < 2 || !has(tokens[i as usize - 1], "(adj|numr|conj:coord).*") {
+                return false;
+            }
+            return true;
+        }
+        if i >= 1
+            && !has(
+                tokens[i as usize - 1],
+                "(adj|conj:coord|num|prep|adv(?!p)).*",
+            )
+            && tokens[i as usize - 1].surface() != ","
+        {
+            return false;
+        }
+        i -= 1;
+    }
+    false
+}
+
+/// `TokenAgreementAdjNounExceptionHelper.reverseConjFind2`.
+fn reverse_conj_find2(tokens: &[&AnalyzedTokenReadings], pos: usize, depth: usize) -> bool {
+    let start = pos as i64;
+    let mut i = start;
+    while i > start - depth as i64 && i >= 1 {
+        let tr = tokens[i as usize];
+        if CONJ_FOR_PLURAL_WITH_COMMA.contains(&tok_lower(tr).as_str()) {
+            if crate::uk::noun_verb::is_non_plural_a(tokens, i as usize) {
+                return false;
+            }
+            let prev = tokens[i as usize - 1];
+            let next = tokens[i as usize + 1];
+            let a = !has(prev, "number") || !has(next, "adj.*?numr.*");
+            let b = prev.surface() != ",";
+            let reject = i < 2
+                || (a
+                    && b
+                    && !Regex::new(r".*[\u{2013}-]$")
+                        .unwrap()
+                        .is_match(prev.surface())
+                        .unwrap_or(false)
+                    && !Regex::new(r"[)»”]")
+                        .unwrap()
+                        .is_match(prev.surface())
+                        .unwrap_or(false)
+                    && !(prev.surface() == "/" && tr.surface() == "або")
+                    && !uk_helpers::is_unknown_word(prev));
+            if reject {
+                return false;
+            }
+            return true;
+        }
+        if i >= 1
+            && !has(
+                tokens[i as usize - 1],
+                "(adj|conj:coord|num|prep|adv(?!p)).*",
+            )
+            && tokens[i as usize - 1].surface() != ","
+        {
+            return false;
+        }
+        i -= 1;
+    }
     false
 }
 
