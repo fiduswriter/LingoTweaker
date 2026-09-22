@@ -5116,7 +5116,7 @@ impl Pipeline {
     /// follow in stages 2/3.
     pub fn new_ukrainian(
         data_dir: &lt_data::DataDir,
-        _today: Option<Ymd>,
+        today: Option<Ymd>,
         enabled_rules: &[String],
         _variant: Option<&str>,
     ) -> Result<Self> {
@@ -5168,9 +5168,9 @@ impl Pipeline {
         let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
             .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
 
-        // Ukrainian references one `<filter>` class (`uk.DateCheckFilter`),
-        // ported in stage 3.
-        let filters = lt_pattern::FilterRegistry::builder().build();
+        // Ukrainian references one `<filter>` class (`uk.DateCheckFilter`).
+        let filters =
+            crate::uk::filters::ukrainian_filter_registry(today.unwrap_or_else(Ymd::today));
         let (compiled_rules, skipped, compile_failures) =
             compile_rules(&grammar, &filters, enabled_rules);
 

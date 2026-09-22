@@ -68,8 +68,8 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
     m.suggestions.iter().map(|s| s.value.clone()).collect()
 }
 
-/// Stage state: 1,247 default-active XML rules, one XML-referenced filter
-/// (`uk.DateCheckFilter`, ported in stage 3) and `compile_failures()` = 1.
+/// Stage state: 1,248 default-active XML rules, the XML-referenced
+/// `uk.DateCheckFilter` compiled and `compile_failures()` = 0.
 #[test]
 fn ukrainian_engine_state() {
     let _guard = engine_guard();
@@ -77,12 +77,30 @@ fn ukrainian_engine_state() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    assert_eq!(uk.active_rule_count(), 1247);
-    assert_eq!(uk.skipped_counts().filters, 1);
-    let failures = uk.compile_failures();
-    assert_eq!(failures.len(), 1, "{failures:?}");
-    assert_eq!(failures[0].0, "DATE_WEEKDAY1");
-    assert!(failures[0].1.contains("DateCheckFilter"), "{failures:?}");
+    assert_eq!(uk.active_rule_count(), 1248);
+    assert_eq!(uk.skipped_counts().filters, 0);
+    assert!(
+        uk.compile_failures().is_empty(),
+        "{:?}",
+        uk.compile_failures()
+    );
+}
+
+/// `DATE_WEEKDAY1` + `uk.DateCheckFilter` (Java-probed via
+/// `scripts/oracle/uk/probe-rule.sh`): `понеділок, 7 жовтня 2014` was a
+/// Tuesday.
+#[test]
+fn ukrainian_date_weekday_filter() {
+    let _guard = engine_guard();
+    let text = "Конференція відбудеться в понеділок, 7 жовтня 2014 р.";
+    let matches = one(text, "DATE_WEEKDAY1");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (26, 50));
+    assert_eq!(
+        matches[0].message,
+        "Днем тижня 7 жовтня 2014 є не понеділок, а вівторок."
+    );
+    assert_eq!(matches[0].category_id, "LOGICAL_ERRORS");
 }
 
 /// `MultipleWhitespaceRule` with the `MessagesBundle_uk` strings.
