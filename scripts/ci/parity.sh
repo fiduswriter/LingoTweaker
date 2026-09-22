@@ -8,12 +8,12 @@
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
@@ -131,6 +131,9 @@ fi
 if [ "$LANG_ARG" = "sr" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-22"
 fi
+if [ "$LANG_ARG" = "ar" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-22"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 BIN="$RS_ROOT/target/release/lt-cli"
 
@@ -199,6 +202,24 @@ elif [ "$LANG_ARG" = "uk" ]; then
   EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
   EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
   EXTRA+=(--expect-field-diffs=UK_ADJ_NOUN_INFLECTION_AGREEMENT=2)
+elif [ "$LANG_ARG" = "ar" ]; then
+  # documented known fidelity gaps (docs/differences.md #15): the
+  # `syntax_numeric_0003` number-phrase rule (its `ArabicNumbersWords`
+  # number-to-words engine is not ported, so the filter rejects and the rule is
+  # inert) and the rule classes still unported (`AR_INFLECTED_ONE_WORD`,
+  # `AR_VERB_TRANSITIVE_IINDIRECT`). The only-Rust matches are the secondary
+  # rules that leak through where Java's missing number match would win the
+  # overlap; the two speller boundaries are Hunspell range/wrong-split residue.
+  EXTRA+=(--expect-only-java=syntax_numeric_0003=10)
+  EXTRA+=(--expect-only-java=AR_INFLECTED_ONE_WORD=1)
+  EXTRA+=(--expect-only-java=AR_VERB_TRANSITIVE_IINDIRECT=1)
+  EXTRA+=(--expect-only-java=HUNSPELL_RULE_AR=2)
+  EXTRA+=(--expect-only-rust=typo_000_tanwin_nasb=3)
+  EXTRA+=(--expect-only-rust=AR_SIMPLE_REPLACE=1)
+  EXTRA+=(--expect-only-rust=verb_287_yTAlhA_AlqAnwn=1)
+  EXTRA+=(--expect-only-rust=grammar_0000_jar_dual=1)
+  EXTRA+=(--expect-only-rust=grammar_0000_jar_plural=1)
+  EXTRA+=(--expect-only-rust=number_21to99_majrour_separate_jar=1)
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

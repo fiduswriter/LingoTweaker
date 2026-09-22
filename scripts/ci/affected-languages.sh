@@ -69,6 +69,7 @@ be belarusian
 ru russian
 uk ukrainian
 sr serbian
+ar arabic
 no norwegian crates/lt/src/no*.rs
 nrd nordum crates/lt/src/nrd*.rs tools/nordum-dict/*
 gn guarani crates/lt/src/gn*.rs

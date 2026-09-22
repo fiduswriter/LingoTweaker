@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
@@ -66,7 +66,11 @@ third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
 id (docs/differences.md #12). `uk` is at 3 only-Java / 1 only-Rust / 2 field
 diffs (#14: the XML disambiguation forward-scan cascade, a prep+`не`+noun
 case-government gap, abbreviation sentence segmentation and one
-plural-adjective/proper-name overlap tie-break).
+plural-adjective/proper-name overlap tie-break). `ar` is at 14 only-Java / 8 only-Rust / 0 field diffs (#21; docs/
+differences.md #15: the
+`syntax_numeric_0003` number-phrase rule whose `ArabicNumbersWords` engine is
+not ported, the two unported rule classes and two Hunspell range/wildcard
+residues).
 
 ## Data tooling
 
