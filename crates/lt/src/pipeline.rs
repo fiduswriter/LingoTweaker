@@ -5548,7 +5548,11 @@ impl Pipeline {
 
         // Arabic references four active `<filter>` classes; the three
         // synthesizer-dependent ones are stage-3 placeholders (reject).
-        let filters = crate::ar::filters::arabic_filter_registry(today.unwrap_or_else(Ymd::today));
+        let filters = crate::ar::filters::arabic_filter_registry(
+            data_dir.path(),
+            today.unwrap_or_else(Ymd::today),
+            Arc::clone(&synthesizer),
+        );
         let (compiled_rules, skipped, compile_failures) =
             compile_rules(&grammar, &filters, enabled_rules);
 

@@ -182,3 +182,48 @@ fn arabic_hunspell_speller_accepts_real_words() {
         );
     }
 }
+
+fn suggestions(m: &lt::Match) -> Vec<String> {
+    m.suggestions.iter().map(|s| s.value.clone()).collect()
+}
+
+/// `ArabicVerbToMafoulMutlaqFilter` (`collo_0081_shkl_3am_Test`): the verb
+/// lemma drives the `arabic_verb_masdar.txt` masdar list and the
+/// `inflectMafoulMutlq`/`inflectAdjectiveTanwinNasb` helpers. Java probe:
+/// suggestions `يعمل إعمالًا عامًا|يعمل عملةً عامةً|يعمل عملًا عامًا`.
+#[test]
+fn arabic_verb_to_mafoul_mutlaq_filter() {
+    let _guard = engine_guard();
+    let text = "الأمر مستقر يعمل بأسلوب عام في البلاد.";
+    let matches = one(text, "collo_0081_shkl_3am_Test");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (12, 27));
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["يعمل إعمالًا عامًا", "يعمل عملةً عامةً", "يعمل عملًا عامًا"]
+    );
+}
+
+/// `ArabicMasdarToVerbFilter` (`syntax_0000_Qam_bi_test`): `قمت بالعمل` ->
+/// `عملت` (the auxiliary `قَامَ` inflection is reused via
+/// `ArabicSynthesizer.inflectLemmaLike`).
+#[test]
+fn arabic_masdar_to_verb_filter() {
+    let _guard = engine_guard();
+    let text = "قمت بالعمل في الامتحان";
+    let matches = one(text, "syntax_0000_Qam_bi_test");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 10));
+    assert_eq!(suggestions(&matches[0]), vec!["عملت"]);
+}
+
+/// The future/conjunction auxiliaries chain through the tag manager.
+#[test]
+fn arabic_masdar_to_verb_filter_conjunction() {
+    let _guard = engine_guard();
+    let text = "وسيقومون بالأكل في الامتحان";
+    let matches = one(text, "syntax_0000_Qam_bi_test");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 15));
+    assert_eq!(suggestions(&matches[0]), vec!["وسيأكلون"]);
+}

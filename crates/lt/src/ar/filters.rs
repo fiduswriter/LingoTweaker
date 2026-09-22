@@ -10,6 +10,11 @@
 //! `ArabicAdjectiveToExclamationFilter` is commented out in the XML and is
 //! not registered (it is listed as a documented exception in the checklist).
 
+use std::collections::HashMap;
+use std::path::Path;
+use std::sync::Arc;
+
+use lt_core::Suggestion;
 use lt_pattern::{FilterContext, FilterOutcome, FilterRegistry, RuleFilter};
 
 use crate::dates::{self, trim_special_characters, Ymd};
@@ -137,9 +142,158 @@ impl RuleFilter for ArabicDateCheckFilter {
     }
 }
 
-/// Stage-3 placeholder for a tagger/synthesizer-dependent Arabic filter: it
-/// rejects, so the owning rule never fires until the stage-3 machinery is
-/// ported.
+/// `SimpleReplaceDataLoader.loadWords`: `word=replacement1|replacement2`
+/// lines (comments with `#`).
+fn load_replace_map(path: &Path) -> HashMap<String, Vec<String>> {
+    let mut map = HashMap::new();
+    let Ok(text) = lt_data::fs::read_to_string(path) else {
+        return map;
+    };
+    for line in text.lines() {
+        if line.is_empty() || line.starts_with('#') {
+            continue;
+        }
+        let Some((left, right)) = line.split_once('=') else {
+            continue;
+        };
+        if right.trim().is_empty() {
+            continue;
+        }
+        let replacements: Vec<String> = right.split('|').map(str::to_string).collect();
+        for wrong_form in left.split('|') {
+            map.insert(wrong_form.to_string(), replacements.clone());
+        }
+    }
+    map
+}
+
+/// `org.languagetool.rules.ar.filters.ArabicVerbToMafoulMutlaqFilter`
+/// (rule `collo_0081_shkl_3am_Test`).
+pub struct ArabicVerbToMafoulMutlaqFilter {
+    verb2masdar: HashMap<String, Vec<String>>,
+}
+
+impl RuleFilter for ArabicVerbToMafoulMutlaqFilter {
+    fn accept(&self, ctx: &FilterContext) -> FilterOutcome {
+        let Some(verb) = required(ctx, "verb") else {
+            return FilterOutcome::reject();
+        };
+        let Some(adj) = required(ctx, "adj") else {
+            return FilterOutcome::reject();
+        };
+        let Some(verb_readings) = ctx.pattern_tokens.first() else {
+            return FilterOutcome::reject();
+        };
+        let verb_lemmas = lt_tagger::ArabicTagger::get_lemmas(verb_readings, "verb");
+        let inflected_adj_masculine =
+            lt_tagger::arabic_synth::inflect_adjective_tanwin_nasb(adj, false);
+        let inflected_adj_feminine =
+            lt_tagger::arabic_synth::inflect_adjective_tanwin_nasb(adj, true);
+        let mut inflected_masdar_list: Vec<String> = Vec::new();
+        let mut inflected_adj_list: Vec<String> = Vec::new();
+        for lemma in verb_lemmas {
+            let Some(msdr_list) = self.verb2masdar.get(&lemma) else {
+                continue;
+            };
+            for msdr in msdr_list {
+                let inflected_masdar = lt_tagger::arabic_synth::inflect_mafoul_mutlq(msdr);
+                let inflected_adj = if msdr.ends_with('\u{0629}') {
+                    inflected_adj_feminine.clone()
+                } else {
+                    inflected_adj_masculine.clone()
+                };
+                inflected_masdar_list.push(inflected_masdar);
+                inflected_adj_list.push(inflected_adj);
+            }
+        }
+        let mut suggestions: Vec<Suggestion> = Vec::new();
+        for (i, msdr) in inflected_masdar_list.iter().enumerate() {
+            let phrase = format!("{verb} {msdr} {}", inflected_adj_list[i]);
+            if !suggestions.iter().any(|s| s.value == phrase) {
+                suggestions.push(Suggestion {
+                    value: phrase,
+                    short_description: None,
+                });
+            }
+        }
+        FilterOutcome {
+            accepted: true,
+            range: None,
+            message: None,
+            suggestions: Some(suggestions),
+        }
+    }
+}
+
+/// `org.languagetool.rules.ar.filters.ArabicMasdarToVerbFilter`
+/// (rule `syntax_0000_Qam_bi_test`).
+pub struct ArabicMasdarToVerbFilter {
+    synthesizer: Arc<lt_tagger::ArabicSynthesizer>,
+    masdar2verb: HashMap<String, Vec<String>>,
+}
+
+impl ArabicMasdarToVerbFilter {
+    /// `filterLemmas`: keep the authorized lemmas in their own order.
+    fn filter_lemmas(lemmas: &[String]) -> Vec<String> {
+        let authorize = ["قَامَ"];
+        authorize
+            .iter()
+            .filter(|l| lemmas.iter().any(|x| x == *l))
+            .map(|l| l.to_string())
+            .collect()
+    }
+}
+
+impl RuleFilter for ArabicMasdarToVerbFilter {
+    fn accept(&self, ctx: &FilterContext) -> FilterOutcome {
+        let (Some(aux_readings), Some(masdar_readings)) =
+            (ctx.pattern_tokens.first(), ctx.pattern_tokens.get(1))
+        else {
+            return FilterOutcome::reject();
+        };
+        let aux_lemmas =
+            Self::filter_lemmas(&lt_tagger::ArabicTagger::get_lemmas(aux_readings, "verb"));
+        let masdar_lemmas = lt_tagger::ArabicTagger::get_lemmas(masdar_readings, "masdar");
+        let mut verb_list: Vec<String> = Vec::new();
+        for aux_token in &aux_readings.readings {
+            let Some(lemma) = aux_token.stem.as_deref() else {
+                continue;
+            };
+            if !aux_lemmas.iter().any(|l| l == lemma) {
+                continue;
+            }
+            for masdar_lemma in &masdar_lemmas {
+                let Some(verb_lemmas) = self.masdar2verb.get(masdar_lemma) else {
+                    continue;
+                };
+                for verb_lemma in verb_lemmas {
+                    for form in self.synthesizer.inflect_lemma_like(verb_lemma, aux_token) {
+                        if !verb_list.contains(&form) {
+                            verb_list.push(form);
+                        }
+                    }
+                }
+            }
+        }
+        let suggestions = verb_list
+            .into_iter()
+            .map(|value| Suggestion {
+                value,
+                short_description: None,
+            })
+            .collect();
+        FilterOutcome {
+            accepted: true,
+            range: None,
+            message: None,
+            suggestions: Some(suggestions),
+        }
+    }
+}
+
+/// Stage-3 placeholder for the `ArabicNumberPhraseFilter` (its
+/// `ArabicNumbersWords` number-to-words engine is not ported yet): it rejects,
+/// so `syntax_numeric_0003` stays inert rather than emitting wrong matches.
 struct Stage3PendingFilter {
     /// Java class name, for diagnostics.
     #[allow(dead_code)]
@@ -153,18 +307,34 @@ impl RuleFilter for Stage3PendingFilter {
 }
 
 /// The Arabic XML-referenced filter registry.
-pub fn arabic_filter_registry(today: Ymd) -> FilterRegistry {
+pub fn arabic_filter_registry(
+    data_dir: &Path,
+    today: Ymd,
+    synthesizer: Arc<lt_tagger::ArabicSynthesizer>,
+) -> FilterRegistry {
     let mut builder = FilterRegistry::builder();
     builder = builder.register(
         "org.languagetool.rules.ar.filters.ArabicDateCheckFilter",
-        std::sync::Arc::new(ArabicDateCheckFilter { today }),
+        Arc::new(ArabicDateCheckFilter { today }),
     );
-    for class in [
+    builder = builder.register(
         "org.languagetool.rules.ar.filters.ArabicVerbToMafoulMutlaqFilter",
+        Arc::new(ArabicVerbToMafoulMutlaqFilter {
+            verb2masdar: load_replace_map(&data_dir.join("ar/rules/arabic_verb_masdar.txt")),
+        }),
+    );
+    builder = builder.register(
         "org.languagetool.rules.ar.filters.ArabicMasdarToVerbFilter",
+        Arc::new(ArabicMasdarToVerbFilter {
+            synthesizer,
+            masdar2verb: load_replace_map(&data_dir.join("ar/rules/arabic_masdar_verb.txt")),
+        }),
+    );
+    builder = builder.register(
         "org.languagetool.rules.ar.filters.ArabicNumberPhraseFilter",
-    ] {
-        builder = builder.register(class, std::sync::Arc::new(Stage3PendingFilter { class }));
-    }
+        Arc::new(Stage3PendingFilter {
+            class: "org.languagetool.rules.ar.filters.ArabicNumberPhraseFilter",
+        }),
+    );
     builder.build()
 }
