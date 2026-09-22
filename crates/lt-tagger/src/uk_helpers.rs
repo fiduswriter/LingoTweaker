@@ -402,6 +402,199 @@ pub fn get_num(pos_tag: &str) -> Option<String> {
         })
 }
 
+/// `PosTagHelper.getConj` (`CONJ_REGEX`, group 2).
+pub fn get_conj(pos_tag: &str) -> Option<String> {
+    let re =
+        fancy_regex::Regex::new(r"(noun:(?:[iu]n)?anim|numr|adj|adjp.*):[mfnp]:(v_...).*").unwrap();
+    re.captures(pos_tag)
+        .ok()
+        .flatten()
+        .and_then(|c| c.get(2).map(|m| m.as_str().to_string()))
+}
+
+/// `PosTagHelper.getGenderConj` (`GENDER_CONJ_REGEX`, group 2).
+pub fn get_gender_conj(pos_tag: &str) -> Option<String> {
+    let re = fancy_regex::Regex::new(r"(noun:(?:[iu]n)?anim|adj|numr|adjp.*):(.:v_...).*").unwrap();
+    re.captures(pos_tag)
+        .ok()
+        .flatten()
+        .and_then(|c| c.get(2).map(|m| m.as_str().to_string()))
+}
+
+/// `PosTagHelper.ADJ_COMP_REGEX`.
+pub fn adj_comp_regex() -> &'static fancy_regex::Regex {
+    static RE: std::sync::OnceLock<fancy_regex::Regex> = std::sync::OnceLock::new();
+    RE.get_or_init(|| fancy_regex::Regex::new(":comp[bcs]").unwrap())
+}
+
+/// `PosTagHelper.hasPosTag(taggedWords, pattern)`.
+pub fn has_pos_tag2(tagged: &[(String, String)], regex: &fancy_regex::Regex) -> bool {
+    tagged.iter().any(|(_, tag)| full_match(regex, tag))
+}
+
+/// `PosTagHelper.hasPosTagPart2`.
+pub fn has_pos_tag_part2(tagged: &[(String, String)], part: &str) -> bool {
+    tagged.iter().any(|(_, tag)| tag.contains(part))
+}
+
+/// `PosTagHelper.hasPosTagStart2`.
+pub fn has_pos_tag_start2(tagged: &[(String, String)], part: &str) -> bool {
+    tagged.iter().any(|(_, tag)| tag.starts_with(part))
+}
+
+/// `PosTagHelper.filter2` / `filter2Negative`.
+pub fn filter2(tagged: Vec<(String, String)>, regex: &fancy_regex::Regex) -> Vec<(String, String)> {
+    tagged
+        .into_iter()
+        .filter(|(_, tag)| full_match(regex, tag))
+        .collect()
+}
+
+/// `PosTagHelper.filter2Negative`.
+pub fn filter2_negative(
+    tagged: Vec<(String, String)>,
+    regex: &fancy_regex::Regex,
+) -> Vec<(String, String)> {
+    tagged
+        .into_iter()
+        .filter(|(_, tag)| !full_match(regex, tag))
+        .collect()
+}
+
+/// `PosTagHelper.hasPosTagPart(taggedWords, part)`.
+pub fn has_pos_tag_part(tagged: &[(String, String)], part: &str) -> bool {
+    tagged.iter().any(|(_, tag)| tag.contains(part))
+}
+
+/// `PosTagHelper.hasPosTagStart`.
+pub fn has_pos_tag_start(tagged: &[(String, String)], part: &str) -> bool {
+    tagged.iter().any(|(_, tag)| tag.starts_with(part))
+}
+
+/// `PosTagHelper.hasPosTagPart(readings, part)`.
+pub fn has_reading_pos_tag_part(readings: &[AnalyzedToken], part: &str) -> bool {
+    readings
+        .iter()
+        .any(|r| r.pos_tag.as_deref().is_some_and(|t| t.contains(part)))
+}
+
+/// `PosTagHelper.hasPosTag(readings, pattern)`.
+pub fn has_reading_pos_tag(readings: &[AnalyzedToken], regex: &fancy_regex::Regex) -> bool {
+    readings
+        .iter()
+        .any(|r| r.pos_tag.as_deref().is_some_and(|t| full_match(regex, t)))
+}
+
+/// `PosTagHelper.filter(readings, pattern)`.
+pub fn filter_readings(
+    readings: &[AnalyzedToken],
+    regex: &fancy_regex::Regex,
+) -> Vec<AnalyzedToken> {
+    readings
+        .iter()
+        .filter(|r| r.pos_tag.as_deref().is_some_and(|t| full_match(regex, t)))
+        .cloned()
+        .collect()
+}
+
+/// `PosTagHelper.hasPosTagPartAll`.
+pub fn has_pos_tag_part_all(readings: &[AnalyzedToken], part: &str) -> bool {
+    let mut found = false;
+    for r in readings {
+        if let Some(tag) = r.pos_tag.as_deref() {
+            if tag == "SENT_END" || tag == "PARA_END" {
+                continue;
+            }
+            if !tag.contains(part) {
+                return false;
+            }
+            found = true;
+        }
+    }
+    found
+}
+
+/// `PosTagHelper.getGenders`.
+pub fn get_genders(readings: &[AnalyzedToken], regex: &fancy_regex::Regex) -> String {
+    let mut out = String::new();
+    for r in readings {
+        if let Some(tag) = r.pos_tag.as_deref() {
+            if full_match(regex, tag) {
+                if let Some(g) = get_gender(tag) {
+                    if !out.contains(&g) {
+                        out.push_str(&g);
+                    }
+                }
+            }
+        }
+    }
+    out
+}
+
+/// `LemmaHelper.CITY_AVENU`.
+pub const CITY_AVENU: &[&str] = &[
+    "сіті",
+    "ситі",
+    "стріт",
+    "стрит",
+    "рівер",
+    "ривер",
+    "авеню",
+    "штрасе",
+    "штрассе",
+    "сьоркл",
+    "сквер",
+    "плац",
+];
+
+/// `LemmaHelper.DAYS_OF_WEEK`.
+pub const DAYS_OF_WEEK: &[&str] = &[
+    "понеділок",
+    "вівторок",
+    "середа",
+    "четвер",
+    "п'ятниця",
+    "субота",
+    "неділя",
+];
+
+/// `LemmaHelper.MONTH_LEMMAS`.
+pub const MONTH_LEMMAS: &[&str] = &[
+    "січень",
+    "лютий",
+    "березень",
+    "квітень",
+    "травень",
+    "червень",
+    "липень",
+    "серпень",
+    "вересень",
+    "жовтень",
+    "листопад",
+    "грудень",
+];
+
+/// `LemmaHelper.hasLemma(readings, lemmas)`.
+pub fn has_lemma(readings: &[AnalyzedToken], lemmas: &[&str]) -> bool {
+    readings
+        .iter()
+        .any(|r| r.stem.as_deref().is_some_and(|l| lemmas.contains(&l)))
+}
+
+/// `LemmaHelper.hasLemma(readings, lemmaRegex)`.
+pub fn has_lemma_regex(readings: &[AnalyzedToken], regex: &fancy_regex::Regex) -> bool {
+    readings
+        .iter()
+        .any(|r| r.stem.as_deref().is_some_and(|l| full_match(regex, l)))
+}
+
+/// `PosTagHelper.hasPosTagStart(readings, part)`.
+pub fn has_reading_pos_tag_start(readings: &[AnalyzedToken], part: &str) -> bool {
+    readings
+        .iter()
+        .any(|r| r.pos_tag.as_deref().is_some_and(|t| t.starts_with(part)))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

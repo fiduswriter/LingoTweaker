@@ -380,8 +380,10 @@ impl UkrainianTagger {
             }
         }
 
-        // compoundTagger.guessOtherTags(word) — stage 3c part 2.
-        Vec::new()
+        // compoundTagger.guessOtherTags(word)
+        self.compound
+            .guess_other_tags(self, &word)
+            .unwrap_or_default()
     }
 
     /// `CompoundTagger.tagBothCases(leftWord, null)`.
@@ -579,7 +581,7 @@ impl UkrainianTagger {
         tokens
     }
 
-    fn analyze_all_capitalized_adj(&self, word: &str) -> Vec<AnalyzedToken> {
+    pub(crate) fn analyze_all_capitalized_adj(&self, word: &str) -> Vec<AnalyzedToken> {
         if word.find('-').is_some_and(|i| i > 1) && !word.ends_with('-') {
             let parts: Vec<&str> = word.split('-').collect();
             if parts.iter().all(|p| crate::uk_helpers::is_capitalized(p)) {
@@ -817,5 +819,80 @@ mod tests {
             ["зателефонувати:verb:perf:futr:s:1:alt"]
         );
         assert_eq!(readings(&t, "ла-ла"), ["ла-ла:noninfl:onomat:predic"]);
+    }
+
+    /// Java-probed (`scripts/oracle/uk/probe-tagger.sh`): the dash-compound
+    /// agreement logic.
+    #[test]
+    fn ukrainian_dash_compounds() {
+        let Some(t) = tagger() else { return };
+        let nv_bad = |g: &str| {
+            ["v_naz", "v_rod", "v_dav", "v_zna", "v_oru", "v_mis"]
+                .iter()
+                .map(move |v| format!("пів-качана:noun:inanim:{g}:{v}:nv:bad"))
+                .collect::<Vec<_>>()
+        };
+        assert_eq!(readings(&t, "пів-качана"), nv_bad("p"));
+        assert_eq!(
+            readings(&t, "майстер-класу"),
+            [
+                "майстер-клас:noun:inanim:m:v_dav",
+                "майстер-клас:noun:inanim:m:v_mis",
+                "майстер-клас:noun:inanim:m:v_rod"
+            ]
+        );
+        assert_eq!(
+            readings(&t, "прем'єр-міністр"),
+            ["прем'єр-міністр:noun:anim:m:v_naz"]
+        );
+        assert_eq!(
+            readings(&t, "яскраво-барвистий"),
+            [
+                "яскраво-барвистий:adj:m:v_kly",
+                "яскраво-барвистий:adj:m:v_naz",
+                "яскраво-барвистий:adj:m:v_zna:rinanim"
+            ]
+        );
+        assert_eq!(
+            readings(&t, "дво-триметровий"),
+            [
+                "дво-триметровий:adj:m:v_kly",
+                "дво-триметровий:adj:m:v_naz",
+                "дво-триметровий:adj:m:v_zna:rinanim"
+            ]
+        );
+        assert_eq!(readings(&t, "по-болгарськи"), ["по-болгарськи:adv"]);
+        assert_eq!(readings(&t, "по-болгарському"), ["по-болгарському:adv"]);
+        assert_eq!(readings(&t, "Київ-Прага"), ["Київ-Прага:noninfl:prop:geo"]);
+        assert_eq!(
+            readings(&t, "Мустафа-ага"),
+            ["Мустафа-ага:noun:anim:m:v_naz:prop:fname"]
+        );
+        assert_eq!(readings(&t, "був-би"), ["бути:verb:imperf:past:m:bad"]);
+        assert_eq!(readings(&t, "вгору-вниз"), ["вгору-вниз:adv"]);
+        assert_eq!(
+            readings(&t, "Івано-Франківської"),
+            ["івано-франківський:adj:f:v_rod"]
+        );
+        assert_eq!(
+            readings(&t, "інтернет-пошуковик"),
+            [
+                "інтернет-пошуковик:noun:inanim:m:v_naz",
+                "інтернет-пошуковик:noun:inanim:m:v_zna"
+            ]
+        );
+        assert_eq!(readings(&t, "міні-БПЛА").len(), 12);
+        assert_eq!(
+            readings(&t, "Fe-вмісний"),
+            ["Fe-вмісний:adj:m:v_naz", "Fe-вмісний:adj:m:v_zna:rinanim"]
+        );
+        assert_eq!(
+            readings(&t, "екс-президент"),
+            ["екс-президент:noun:anim:m:v_naz:alt"]
+        );
+        assert_eq!(
+            readings(&t, "авіа-пенсіонер"),
+            ["авіа-пенсіонер:noun:anim:m:v_naz:bad"]
+        );
     }
 }
