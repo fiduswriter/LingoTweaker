@@ -119,6 +119,7 @@ pub fn get_noun_inflections(
 }
 
 /// `TokenAgreementAdjNounRule.formatInflections`.
+#[allow(dead_code)]
 pub fn format_inflections(inflections: &[Inflection], adj: bool) -> String {
     let mut sorted = inflections.to_vec();
     sorted.sort_by(|a, b| {
