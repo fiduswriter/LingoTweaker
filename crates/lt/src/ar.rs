@@ -62,7 +62,12 @@ impl ArabicSynthesizerAdapter {
 }
 
 impl Synthesizer for ArabicSynthesizerAdapter {
-    fn synthesize(&self, token: &AnalyzedToken, pos_tag: &str, pos_tag_regexp: bool) -> Vec<String> {
+    fn synthesize(
+        &self,
+        token: &AnalyzedToken,
+        pos_tag: &str,
+        pos_tag_regexp: bool,
+    ) -> Vec<String> {
         self.synth.synthesize_regexp(token, pos_tag, pos_tag_regexp)
     }
 
