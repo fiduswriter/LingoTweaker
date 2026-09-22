@@ -72,6 +72,7 @@ mod specific_case;
 mod style_too_often;
 mod sv;
 mod tl;
+mod uk;
 mod unit_conversion;
 mod unpaired_brackets;
 mod unpaired_quotes;
@@ -439,6 +440,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Ru => Pipeline::new_russian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Uk => Pipeline::new_ukrainian(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

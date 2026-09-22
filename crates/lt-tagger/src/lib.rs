@@ -49,6 +49,8 @@ pub mod spanish_synth;
 pub mod swedish;
 pub mod swedish_synth;
 pub mod tagalog;
+pub mod ukrainian;
+pub mod ukrainian_synth;
 
 pub use asturian::AsturianTagger;
 pub use breton::BretonTagger;
@@ -93,6 +95,8 @@ pub use spanish_synth::SpanishSynthesizer;
 pub use swedish::SwedishTagger;
 pub use swedish_synth::SwedishSynthesizer;
 pub use tagalog::TagalogTagger;
+pub use ukrainian::UkrainianTagger;
+pub use ukrainian_synth::UkrainianSynthesizer;
 
 use std::collections::HashMap;
 use std::path::Path;

@@ -187,6 +187,8 @@ pub struct Pipeline {
     pub belarusian: Option<Arc<crate::be::BelarusianPipeline>>,
     /// Russian pipeline parts (`None` for the other languages)
     pub russian: Option<Arc<crate::ru::RussianPipeline>>,
+    /// Ukrainian pipeline parts (`None` for the other languages)
+    pub ukrainian: Option<Arc<crate::uk::UkrainianPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1378,6 +1380,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1626,6 +1629,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1833,6 +1837,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2048,6 +2053,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2183,6 +2189,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2437,6 +2444,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2651,6 +2659,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2982,6 +2991,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3137,6 +3147,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3278,6 +3289,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3443,6 +3455,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3586,6 +3599,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3701,6 +3715,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3851,6 +3866,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3933,6 +3949,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4098,6 +4115,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4175,6 +4193,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4289,6 +4308,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4389,6 +4409,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4503,6 +4524,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4605,6 +4627,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4708,6 +4731,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4821,6 +4845,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4923,6 +4948,7 @@ impl Pipeline {
             guarani: None,
             belarusian: Some(belarusian),
             russian: None,
+            ukrainian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5078,6 +5104,132 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: Some(russian),
+            ukrainian: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Ukrainian (`uk`) engine. Stage 1 wires the XML rules
+    /// (`grammar.xml` + `Ukrainian.RULE_FILES`) with the plain `BaseTagger`
+    /// `UkrainianTagger` and the `uk/disambiguation.xml` rules; the custom
+    /// tokenizer/tagger/disambiguator, the speller and the Java rule classes
+    /// follow in stages 2/3.
+    pub fn new_ukrainian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "uk_two")?;
+
+        let tagger = Arc::new(lt_tagger::UkrainianTagger::load(data_dir.path())?);
+        let synthesizer = Arc::new(lt_tagger::UkrainianSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::uk::UkrainianSynthesizerAdapter {
+            synth: Arc::clone(&synthesizer),
+            tagger: Arc::clone(&tagger),
+        });
+
+        // `Language.getRuleFileNames`: grammar.xml then `Ukrainian.RULE_FILES`
+        // (`grammar-spelling`, `grammar-grammar`, `grammar-barbarism`,
+        // `grammar-style`, `grammar-punctuation`).
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Uk))?;
+        for name in [
+            "grammar-spelling.xml",
+            "grammar-grammar.xml",
+            "grammar-barbarism.xml",
+            "grammar-style.xml",
+            "grammar-punctuation.xml",
+        ] {
+            let path = data_dir.path().join("uk/rules").join(name);
+            if path.lt_exists() {
+                let extra = Grammar::load_file(&path)?;
+                grammar.rules.extend(extra.rules);
+                grammar.categories.extend(extra.categories);
+                grammar.equivalence_defs.extend(extra.equivalence_defs);
+            } else {
+                eprintln!("[uk] rule file not found: {}", path.display());
+            }
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Ukrainian references one `<filter>` class (`uk.DateCheckFilter`),
+        // ported in stage 3.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        // `UkrainianHybridDisambiguator`'s XML stage; the hybrid chunker /
+        // `SimpleDisambiguator` land in stage 3.
+        let mut disambiguator =
+            lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Uk))?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+
+        let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
+            tagger,
+            synthesizer,
+            synth_adapter,
+            disambiguator,
+        });
+        Ok(Self {
+            lang: Lang::Uk,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: Some(ukrainian),
             clean_overlapping_matches: true,
         })
     }
@@ -5218,6 +5370,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5305,6 +5458,7 @@ impl Pipeline {
             guarani: None,
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5396,6 +5550,7 @@ impl Pipeline {
             guarani: Some(guarani),
             belarusian: None,
             russian: None,
+            ukrainian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5418,6 +5573,8 @@ impl Pipeline {
                 crate::be::analyze_belarusian_sentence(sentence_text)
             } else if let Some(russian) = &self.russian {
                 crate::ru::analyze_russian_sentence(russian, sentence_text)
+            } else if let Some(ukrainian) = &self.ukrainian {
+                crate::uk::analyze_ukrainian_sentence(ukrainian, sentence_text)
             } else {
                 match &self.german {
                     Some(german) => {
@@ -8274,6 +8431,25 @@ impl Pipeline {
                 }
             }
         }
+        // Ukrainian text-level rules (`Ukrainian.getRelevantRules`): the only
+        // generic built-in is `MultipleWhitespaceRule`. The custom
+        // `UkrainianCommaWhitespaceRule`/`UkrainianUppercaseSentenceStartRule`
+        // and the remaining classes follow in stage 3.
+        if self.lang == crate::Lang::Uk
+            && builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            )
+        {
+            text_level_matches.extend(crate::whitespace::check_uk(&analyzed_sentences));
+        }
         // Crimean Tatar text-level rules (`CrimeanTatar.getRelevantRules`):
         // GenericUnpairedBrackets (2), UppercaseSentenceStart (3),
         // MultipleWhitespace (4), SentenceWhitespace (5) and the two
@@ -8533,6 +8709,8 @@ impl Pipeline {
             crate::be::analyze_belarusian_sentence(&text[start..end])
         } else if let Some(russian) = &self.russian {
             crate::ru::analyze_russian_sentence(russian, &text[start..end])
+        } else if let Some(ukrainian) = &self.ukrainian {
+            crate::uk::analyze_ukrainian_sentence(ukrainian, &text[start..end])
         } else {
             match &self.german {
                 Some(german) => {
@@ -12883,6 +13061,9 @@ impl Pipeline {
         if let Some(russian) = &self.russian {
             return Some(russian.synth_adapter.as_ref());
         }
+        if let Some(ukrainian) = &self.ukrainian {
+            return Some(ukrainian.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)
@@ -13039,6 +13220,12 @@ impl Pipeline {
             // `RussianHybridDisambiguator`: `ru/multiwords.txt` chunker →
             // XML rules; the post-disambiguation `RussianChunker` runs after.
             russian.disambiguate(sentence);
+            return;
+        }
+        if let Some(ukrainian) = &self.ukrainian {
+            // Stage 1: the `uk/disambiguation.xml` subset; the
+            // `UkrainianHybridDisambiguator` chunker follows in stage 3.
+            ukrainian.disambiguate(sentence);
             return;
         }
         self.global_chunker.apply(sentence);

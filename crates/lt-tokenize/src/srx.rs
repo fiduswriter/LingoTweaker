@@ -257,7 +257,61 @@ struct Cursor {
 fn normalize_srx_pattern(pattern: &str) -> String {
     let pattern = pattern.replace("(?<=[XVI]+)", "(?<=[XVI])");
     let pattern = escape_class_hyphens(&pattern);
-    strip_java_unicode_flags(&pattern)
+    let pattern = strip_java_unicode_flags(&pattern);
+    let pattern = expand_java_whitespace_classes(&pattern);
+    // Java accepts variable-length lookbehinds; `fancy-regex` requires a
+    // constant size. Expand bounded quantifiers, and approximate an unbounded
+    // quantifier inside a lookbehind (the Ukrainian `І. Коваль` rule) by a
+    // bounded expansion so the pattern compiles.
+    lt_core::regex_util::expand_lookbehinds_bounded(&pattern, 4)
+}
+
+/// Java's `\h`/`\v` classes (horizontal/vertical whitespace) are not
+/// understood by the Rust regex crate (it parses them as never-matching
+/// escapes). Translate them to explicit character classes. Inside an existing
+/// character class the bare contents are inserted; outside one the contents
+/// are wrapped in `[...]`.
+fn expand_java_whitespace_classes(pattern: &str) -> String {
+    const H: &str = r" \t\u{00A0}\u{1680}\u{180E}\u{2000}-\u{200A}\u{202F}\u{205F}\u{3000}";
+    const V: &str = r"\n\u{000B}\f\r\u{0085}\u{2028}\u{2029}";
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len());
+    let mut in_class = false;
+    let mut i = 0usize;
+    while i < chars.len() {
+        let c = chars[i];
+        if c == '\\' {
+            if let Some(next) = chars.get(i + 1) {
+                if *next == 'h' || *next == 'v' {
+                    let content = if *next == 'h' { H } else { V };
+                    if in_class {
+                        out.push_str(content);
+                    } else {
+                        out.push('[');
+                        out.push_str(content);
+                        out.push(']');
+                    }
+                    i += 2;
+                    continue;
+                }
+                out.push(c);
+                out.push(*next);
+                i += 2;
+                continue;
+            }
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        match c {
+            '[' if !in_class => in_class = true,
+            ']' if in_class => in_class = false,
+            _ => {}
+        }
+        out.push(c);
+        i += 1;
+    }
+    out
 }
 
 /// Java allows a literal `-` right after a character-class escape or a nested

@@ -6,6 +6,8 @@
 
 use serde::{Deserialize, Serialize};
 
+pub mod regex_util;
+
 /// A half-open range `[start, end)` in UTF-8 bytes.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TextRange {
@@ -77,6 +79,8 @@ pub enum Lang {
     Be,
     /// Russian (`ru`).
     Ru,
+    /// Ukrainian (`uk`).
+    Uk,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -88,7 +92,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 28] = [
+    pub const ALL: [Lang; 29] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -114,6 +118,7 @@ impl Lang {
         Lang::Crh,
         Lang::Be,
         Lang::Ru,
+        Lang::Uk,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -149,6 +154,7 @@ impl Lang {
             "crh" => Some(Lang::Crh),
             "be" => Some(Lang::Be),
             "ru" => Some(Lang::Ru),
+            "uk" => Some(Lang::Uk),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -183,6 +189,7 @@ impl Lang {
             Lang::Crh => "crh",
             Lang::Be => "be",
             Lang::Ru => "ru",
+            Lang::Uk => "uk",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -316,6 +323,11 @@ impl Lang {
                 code: "ru",
                 long_code: "ru-RU",
                 name: "Russian",
+            },
+            Lang::Uk => Language {
+                code: "uk",
+                long_code: "uk-UA",
+                name: "Ukrainian",
             },
             Lang::No => Language {
                 code: "no",

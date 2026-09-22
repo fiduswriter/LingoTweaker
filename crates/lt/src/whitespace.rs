@@ -333,3 +333,14 @@ pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         ("TYPOGRAPHY", "Типографика"),
     )
 }
+
+/// `MultipleWhitespaceRule` with the Ukrainian `MessagesBundle_uk` strings
+/// (`desc_whitespacerepetition` / `whitespace_repetition` / `category_typography`).
+pub fn check_uk(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Повтор пробілу",
+        "Ймовірна помилка: повтор пробілу",
+        ("TYPOGRAPHY", "Оформлення"),
+    )
+}

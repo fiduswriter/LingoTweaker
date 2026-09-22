@@ -613,6 +613,7 @@ mod tests {
         assert!(arr.iter().any(|l| l["longCode"] == "crh-UA"));
         assert!(arr.iter().any(|l| l["longCode"] == "be-BY"));
         assert!(arr.iter().any(|l| l["longCode"] == "ru-RU"));
+        assert!(arr.iter().any(|l| l["longCode"] == "uk-UA"));
         assert!(arr.iter().any(|l| l["longCode"] == "no"));
         assert!(arr.iter().any(|l| l["longCode"] == "nrd"));
         assert!(arr.iter().any(|l| l["longCode"] == "gn"));
