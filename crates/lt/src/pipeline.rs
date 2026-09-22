@@ -5195,7 +5195,9 @@ impl Pipeline {
         .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
         let simple =
             crate::uk::disambig::SimpleDisambiguator::load(&data_dir.path().join("uk/words"));
-        let gov = crate::uk::gov::CaseGovernment::load(&data_dir.path().join("uk/words"));
+        let gov = Arc::new(crate::uk::gov::CaseGovernment::load(
+            &data_dir.path().join("uk/words"),
+        ));
         let renamed = crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule::load(
             &data_dir.path().join("uk/rules"),
         );
@@ -5208,6 +5210,10 @@ impl Pipeline {
         );
         let numr_noun =
             crate::uk::numr_noun::TokenAgreementNumrNounRule::new(Arc::clone(&synthesizer));
+        let adj_noun = crate::uk::adj_noun::TokenAgreementAdjNounRule::new(
+            Arc::clone(&synthesizer),
+            Arc::clone(&gov),
+        );
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5222,6 +5228,7 @@ impl Pipeline {
             simple_replace,
             simple_replace_soft,
             numr_noun,
+            adj_noun,
             spelling,
         });
         Ok(Self {
@@ -11796,6 +11803,22 @@ impl Pipeline {
                         enabled_categories,
                     ),
                     ukrainian.numr_noun.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::adj_noun::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian.adj_noun.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
                 if let Some(spelling) = &ukrainian.spelling {

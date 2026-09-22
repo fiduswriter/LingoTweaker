@@ -709,6 +709,64 @@ pub fn quotes_pattern() -> &'static fancy_regex::Regex {
     &RE
 }
 
+/// `LemmaHelper.TIME_LEMMAS`.
+pub const TIME_LEMMAS: &[&str] = &[
+    "секунда",
+    "хвилина",
+    "хвилинка",
+    "хвилина-дві",
+    "хвилинка-друга",
+    "година",
+    "годинка",
+    "півгодини",
+    "година-друга",
+    "година-дві",
+    "час",
+    "день",
+    "день-другий",
+    "півдня",
+    "ніч",
+    "ніченька",
+    "вечір",
+    "ранок",
+    "тиждень",
+    "тиждень-два",
+    "тиждень-другий",
+    "місяць",
+    "місяць-два",
+    "місяць-другий",
+    "місяць-півтора",
+    "доба",
+    "мить",
+    "хвилька",
+    "рік",
+    "рік-два",
+    "рік-півтора",
+    "півроку",
+    "півроку-рік",
+    "десятиліття",
+    "десятиріччя",
+    "століття",
+    "півстоліття",
+    "сторіччя",
+    "півсторіччя",
+    "тисячоліття",
+    "півтисячоліття",
+    "квартал",
+    "годочок",
+    "літо",
+    "зима",
+    "весна",
+    "осінь",
+    "тайм",
+    "період",
+    "термін",
+    "сезон",
+    "декада",
+    "каденція",
+    "раунд",
+];
+
 /// `LemmaHelper.TIME_PLUS_LEMMAS`.
 pub const TIME_PLUS_LEMMAS: &[&str] = &[
     "секунда",
@@ -868,6 +926,169 @@ pub fn vidm_order(case_: &str) -> i32 {
         "v_kly" => 70,
         _ => 0,
     }
+}
+
+/// `PosTagHelper.isUnknownWord`.
+pub fn is_unknown_word(tr: &AnalyzedTokenReadings) -> bool {
+    static WORD_PATTERN: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"(?i)^[а-яіїєґa-z'-]+$").unwrap());
+    tr.readings.first().is_some_and(|r| r.pos_tag.is_none())
+        && WORD_PATTERN.is_match(tr.surface()).unwrap_or(false)
+}
+
+/// `TokenAgreementPrepNounRule.hasVidmPosTag(Collection, readings)`.
+pub fn has_vidm_pos_tag(
+    cases: &std::collections::HashSet<String>,
+    readings: &[AnalyzedToken],
+) -> bool {
+    let mut vidminok_found = false;
+    for token in readings {
+        match token.pos_tag.as_deref() {
+            None => {
+                if readings.len() == 1 {
+                    return true;
+                }
+                continue;
+            }
+            Some(pos_tag) => {
+                if pos_tag.contains(":nv") {
+                    return true;
+                }
+                if pos_tag.contains(":v_") {
+                    vidminok_found = true;
+                    for case in cases {
+                        if pos_tag.contains(case.as_str()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    !vidminok_found
+}
+
+/// `TokenAgreementPrepNounRule.hasVidmPosTag(Collection, AnalyzedTokenReadings)`.
+pub fn has_vidm_pos_tag_token(
+    cases: &std::collections::HashSet<String>,
+    tr: &AnalyzedTokenReadings,
+) -> bool {
+    has_vidm_pos_tag(cases, &tr.readings)
+}
+
+#[derive(Clone, Copy)]
+pub enum Dir {
+    Forward,
+    Reverse,
+}
+
+/// `LemmaHelper.reverseSearchIdx`.
+pub fn reverse_search_idx(
+    tokens: &[&AnalyzedTokenReadings],
+    pos: i64,
+    depth: i64,
+    lemma: Option<&fancy_regex::Regex>,
+    postag: Option<&fancy_regex::Regex>,
+) -> i64 {
+    let mut i = pos;
+    while i > pos - depth && i >= 0 {
+        let tr = tokens[i as usize];
+        let lemma_ok = lemma.is_none_or(|re| has_lemma_regex(&tr.readings, re));
+        let pos_ok = postag.is_none_or(|re| has_pos_tag_re(tr, re));
+        if lemma_ok && pos_ok {
+            return i;
+        }
+        i -= 1;
+    }
+    -1
+}
+
+/// `LemmaHelper.reverseSearch`.
+pub fn reverse_search(
+    tokens: &[&AnalyzedTokenReadings],
+    pos: i64,
+    depth: i64,
+    lemma: Option<&fancy_regex::Regex>,
+    postag: Option<&fancy_regex::Regex>,
+) -> bool {
+    reverse_search_idx(tokens, pos, depth, lemma, postag) >= 0
+}
+
+/// `LemmaHelper.revSearchIdx`.
+pub fn rev_search_idx(
+    tokens: &[&AnalyzedTokenReadings],
+    start_pos: i64,
+    lemma: Option<&fancy_regex::Regex>,
+    postag_regex: Option<&str>,
+) -> i64 {
+    let mut start_pos = start_pos;
+    if start_pos > 0 && has_pos_tag_str2(tokens[start_pos as usize], "part.*") {
+        start_pos -= 1;
+    }
+    if start_pos > 0 && has_pos_tag_str2(tokens[start_pos as usize], "adv(:.*)?|.*pron.*") {
+        start_pos -= 1;
+    }
+    if start_pos > 0 && has_pos_tag_str2(tokens[start_pos as usize], "part.*") {
+        start_pos -= 1;
+    }
+    if start_pos > 0 {
+        let tr = tokens[start_pos as usize];
+        if lemma.is_some_and(|re| !has_lemma_regex(&tr.readings, re)) {
+            return -1;
+        }
+        if postag_regex.is_some_and(|p| !has_pos_tag_str2(tr, p)) {
+            return -1;
+        }
+        return start_pos;
+    }
+    -1
+}
+
+/// `LemmaHelper.revSearch`.
+pub fn rev_search(
+    tokens: &[&AnalyzedTokenReadings],
+    start_pos: i64,
+    lemma: Option<&fancy_regex::Regex>,
+    postag_regex: Option<&str>,
+) -> bool {
+    rev_search_idx(tokens, start_pos, lemma, postag_regex) != -1
+}
+
+/// `LemmaHelper.tokenSearch`.
+pub fn token_search(
+    tokens: &[&AnalyzedTokenReadings],
+    pos: i64,
+    pos_tag: Option<&str>,
+    token: Option<&fancy_regex::Regex>,
+    pos_tags_to_ignore: Option<&fancy_regex::Regex>,
+    dir: Dir,
+) -> i64 {
+    static QUOTES: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^[«»„“\u{201C}]$").unwrap());
+    let step: i64 = match dir {
+        Dir::Forward => 1,
+        Dir::Reverse => -1,
+    };
+    let mut i = pos;
+    while i < tokens.len() as i64 && i > 0 {
+        let curr = tokens[i as usize];
+        let pos_ok = pos_tag.is_none_or(|p| {
+            curr.readings
+                .iter()
+                .any(|r| r.pos_tag.as_deref().is_some_and(|t| t.contains(p)))
+        });
+        let token_ok = token.is_none_or(|re| re.is_match(curr.surface()).unwrap_or(false));
+        if pos_ok && token_ok {
+            return i;
+        }
+        if let Some(ignore) = pos_tags_to_ignore {
+            if !has_pos_tag_re(curr, ignore) && !QUOTES.is_match(curr.surface()).unwrap_or(false) {
+                break;
+            }
+        }
+        i += step;
+    }
+    -1
 }
 
 #[cfg(test)]

@@ -40,6 +40,17 @@ impl Inflection {
     }
 }
 
+impl Inflection {
+    /// `InflectionHelper.Inflection.equalsIgnoreGender`.
+    pub fn equals_ignore_gender(&self, other: &Inflection) -> bool {
+        self.case_ == other.case_
+            && (self.anim_tag.is_none()
+                || other.anim_tag.is_none()
+                || !self.anim_matters()
+                || self.anim_tag == other.anim_tag)
+    }
+}
+
 impl PartialEq for Inflection {
     fn eq(&self, other: &Self) -> bool {
         Self::gender_equals(&self.gender, &other.gender)

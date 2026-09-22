@@ -457,3 +457,39 @@ fn ukrainian_numr_noun_agreement() {
         );
     }
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
+/// `TokenAgreementAdjNounRule` + its exception helper.
+#[test]
+fn ukrainian_adj_noun_agreement() {
+    let _guard = engine_guard();
+    let text = "новий книга";
+    let matches = one(text, "UK_ADJ_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 11));
+    assert_eq!(
+        matches[0].message,
+        "Потенційна помилка: прикметник не узгоджений з іменником: \"новий\": [ч.р.: називний, знахідний (неіст.), кличний] і \"книга\": [ж.р.: називний]"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["нова книга".to_string()]);
+
+    let text = "велика місто";
+    let matches = one(text, "UK_ADJ_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 12));
+    assert_eq!(suggestions(&matches[0]), vec!["велике місто".to_string()]);
+
+    for ok in [
+        "нова книга",
+        "синя стіна",
+        "зелений стіл",
+        "добра людина",
+        "старого будинку",
+        "цікава книжка",
+    ] {
+        assert!(
+            one(ok, "UK_ADJ_NOUN_INFLECTION_AGREEMENT").is_empty(),
+            "{ok}"
+        );
+    }
+}

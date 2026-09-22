@@ -11,6 +11,7 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod adj_noun;
 pub mod disambig;
 pub mod filters;
 pub mod gov;
@@ -40,7 +41,7 @@ pub struct UkrainianPipeline {
     /// `SimpleDisambiguator` (rare-form and duplicate-lemma removal).
     pub simple: crate::uk::disambig::SimpleDisambiguator,
     /// `CaseGovernmentHelper` (case government for the hybrid passes).
-    pub gov: crate::uk::gov::CaseGovernment,
+    pub gov: Arc<crate::uk::gov::CaseGovernment>,
     /// `SimpleReplaceRenamedRule` (`UK_SIMPLE_REPLACE_RENAMED`).
     pub renamed: crate::uk::simple_replace_renamed::SimpleReplaceRenamedRule,
     /// `MissingHyphenRule` (`UK_MISSING_HYPHEN`).
@@ -51,6 +52,8 @@ pub struct UkrainianPipeline {
     pub simple_replace_soft: crate::uk::simple_replace::SimpleReplaceSoftRule,
     /// `TokenAgreementNumrNounRule` (`UK_NUMR_NOUN_INFLECTION_AGREEMENT`).
     pub numr_noun: crate::uk::numr_noun::TokenAgreementNumrNounRule,
+    /// `TokenAgreementAdjNounRule` (`UK_ADJ_NOUN_INFLECTION_AGREEMENT`).
+    pub adj_noun: crate::uk::adj_noun::TokenAgreementAdjNounRule,
     /// `MorfologikUkrainianSpellerRule` (`MORFOLOGIK_RULE_UK_UA`); `None` only
     /// when the vendored `uk_UA` dictionary cannot be read.
     pub spelling: Option<Arc<crate::uk::spelling::UkrainianSpellingRule>>,

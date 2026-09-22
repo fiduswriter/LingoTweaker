@@ -61,6 +61,60 @@ impl CaseGovernment {
         }
     }
 
+    /// `CaseGovernmentHelper.CASE_GOVERNMENT_MAP`.
+    pub fn case_map(&self) -> &HashMap<String, HashSet<String>> {
+        &self.map
+    }
+
+    /// `CaseGovernmentHelper.hasCaseGovernment(readings, startPosTag, rvCase)`.
+    pub fn has_case_government(
+        &self,
+        readings: &[AnalyzedToken],
+        start_pos_tag: Option<&str>,
+        rv_case: &str,
+    ) -> bool {
+        self.get_case_governments_opt(readings, start_pos_tag, None)
+            .contains(rv_case)
+    }
+
+    /// `CaseGovernmentHelper.getCaseGovernments(readings, Pattern)`.
+    pub fn get_case_governments_opt(
+        &self,
+        readings: &[AnalyzedToken],
+        start_pos_tag: Option<&str>,
+        pos_tag_regex: Option<&Regex>,
+    ) -> HashSet<String> {
+        let mut list = get_custom_govs(readings);
+        let mut start_pos_tag = start_pos_tag.map(|s| s.to_string());
+        if start_pos_tag.as_deref() == Some("verb")
+            && readings
+                .first()
+                .and_then(|r| r.pos_tag.as_deref())
+                .is_some_and(|t| t.starts_with("advp"))
+        {
+            start_pos_tag = Some("advp".to_string());
+        }
+        for token in readings {
+            let Some(pos_tag) = token.pos_tag.as_deref() else {
+                continue;
+            };
+            let matches = match (&start_pos_tag, pos_tag_regex) {
+                (_, Some(re)) => re.is_match(pos_tag).unwrap_or(false),
+                (Some(start), None) => pos_tag.starts_with(start.as_str()),
+                (None, None) => true,
+            };
+            if matches && self.map.contains_key(token.stem.as_deref().unwrap_or("")) {
+                if let Some(rv_list) = self.map.get(token.stem.as_deref().unwrap_or("")) {
+                    list.extend(rv_list.iter().cloned());
+                }
+                if pos_tag.contains("adjp:pasv") {
+                    list.insert("v_oru".to_string());
+                }
+            }
+        }
+        list
+    }
+
     /// `CaseGovernmentHelper.getCaseGovernments(readings, posTagRegex)`.
     pub fn get_case_governments(
         &self,
