@@ -12,6 +12,7 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod rules;
 pub mod spelling;
 
 /// `Serbian.createDefaultDisambiguator` is `SerbianHybridDisambiguator`:
@@ -33,6 +34,9 @@ pub struct SerbianPipeline {
     /// `MorfologikEkavianSpellerRule` (`MORFOLOGIK_RULE_SR_EKAVIAN`, rule 8);
     /// `None` only when the vendored ekavian dictionary cannot be read.
     pub spelling: Option<Arc<crate::sr::spelling::SerbianSpellingRule>>,
+    /// The two legacy `AbstractSimpleReplaceRule` instances (rules 9–10):
+    /// grammar then style.
+    pub legacy_replace: Vec<crate::sr::rules::LegacyReplaceRule>,
 }
 
 impl SerbianPipeline {

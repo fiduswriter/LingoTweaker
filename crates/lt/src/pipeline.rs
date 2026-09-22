@@ -5424,6 +5424,7 @@ impl Pipeline {
             disambiguator,
             word_repeat: crate::sr::word_repeat_rule(),
             spelling,
+            legacy_replace: crate::sr::rules::legacy_replace_instances(data_dir.path())?,
         });
         Ok(Self {
             lang: Lang::Sr,
@@ -11953,6 +11954,26 @@ impl Pipeline {
                             enabled_categories,
                         ),
                         spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                // The two legacy `AbstractSimpleReplaceRule` instances (9–10):
+                // `SimpleGrammarEkavianReplaceRule`, `SimpleStyleEkavianReplaceRule`.
+                for rule in &serbian.legacy_replace {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            rule.rule_id(),
+                            "MISC",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        rule.check_sentence(&analyzed.tokens, start),
                         &mut seen,
                     );
                 }

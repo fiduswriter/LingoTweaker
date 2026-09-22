@@ -290,3 +290,83 @@ fn serbian_disambiguation_roman_numerals() {
     let _guard = engine_guard();
     assert!(one("III", "MORFOLOGIK_RULE_SR_EKAVIAN").is_empty());
 }
+
+/// `SimpleGrammarEkavianReplaceRule`
+/// (`SR_EKAVIAN_SIMPLE_GRAMMAR_REPLACE_RULE`, `replace-grammar.txt`).
+#[test]
+fn serbian_grammar_replace_rule() {
+    let _guard = engine_guard();
+    let text = "То је било предходно.";
+    let matches = one(text, "SR_EKAVIAN_SIMPLE_GRAMMAR_REPLACE_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (11, 20));
+    assert_eq!(
+        matches[0].message,
+        "Не каже се „предходно“ него „претходно“."
+    );
+    assert_eq!(
+        matches[0].short_message.as_deref(),
+        Some("Граматички погрешна реч тј. израз")
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["претходно"]);
+}
+
+/// `SimpleStyleEkavianReplaceRule`
+/// (`SR_EKAVIAN_SIMPLE_STYLE_REPLACE_RULE`, `replace-style.txt`).
+#[test]
+fn serbian_style_replace_rule() {
+    let _guard = engine_guard();
+    let text = "Купио сам нови компјутер.";
+    let matches = one(text, "SR_EKAVIAN_SIMPLE_STYLE_REPLACE_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (15, 24));
+    assert_eq!(
+        matches[0].message,
+        "Уместо израза „компјутер“ било би боље да користите: рачунар."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["рачунар"]);
+}
+
+/// The style rule with multiple `|` replacements (`бенефит`).
+#[test]
+fn serbian_style_replace_multiple_suggestions() {
+    let _guard = engine_guard();
+    let text = "То је велики бенефит.";
+    let matches = one(text, "SR_EKAVIAN_SIMPLE_STYLE_REPLACE_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["повластица", "погодност", "корист", "предност"]
+    );
+}
+
+/// `AbstractSimpleReplaceRule.findMatches`: an all-uppercase token uppercases
+/// every replacement (message keeps the original surface).
+#[test]
+fn serbian_replace_rule_all_uppercase() {
+    let _guard = engine_guard();
+    let text = "ПРЕДХОДНО је било.";
+    let matches = one(text, "SR_EKAVIAN_SIMPLE_GRAMMAR_REPLACE_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        matches[0].message,
+        "Не каже се „ПРЕДХОДНО“ него „ПРЕТХОДНО“."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["ПРЕТХОДНО"]);
+}
+
+/// The rules are case-sensitive (`isCaseSensitive()` is not overridden), but
+/// `checkLemmas` still matches `Предходно` through the lowercased lemma; the
+/// suggestion is not case-converted.
+#[test]
+fn serbian_replace_rule_lemma_and_case() {
+    let _guard = engine_guard();
+    let text = "Предходно је било.";
+    let matches = one(text, "SR_EKAVIAN_SIMPLE_GRAMMAR_REPLACE_RULE");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        matches[0].message,
+        "Не каже се „Предходно“ него „претходно“."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["претходно"]);
+}
