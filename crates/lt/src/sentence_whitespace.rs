@@ -387,6 +387,18 @@ pub fn check_be(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &BE_STRINGS)
 }
 
+/// `SentenceWhitespaceRule` with the Serbian `MessagesBundle_sr` strings.
+pub fn check_sr(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const SR_STRINGS: Strings = Strings {
+        description: "Недостаје размак између реченица",
+        repeated_message: "Могућа грешка: поновили сте белину",
+        add_space_message: "Додајте размак између реченица",
+        category_name: "Типографија",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &SR_STRINGS)
+}
+
 /// `SentenceWhitespaceRule` with the Russian `MessagesBundle_ru` strings.
 pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     const RU_STRINGS: Strings = Strings {

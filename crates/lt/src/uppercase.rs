@@ -350,6 +350,18 @@ fn check_with(
     )
 }
 
+/// `UppercaseSentenceStartRule` with the Serbian `MessagesBundle_sr` strings.
+pub fn check_sr(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Ова реченица не почиње великим словом",
+        "Велико/мало почетно слово",
+        "Проверава да ли реченица почиње великим словом",
+        "Велико/мало почетно слово",
+        false,
+    )
+}
+
 #[allow(clippy::too_many_arguments)]
 fn check_with_exception(
     sentences: &[AnalyzedSentence],

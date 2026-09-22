@@ -70,6 +70,7 @@ mod simple_replace;
 mod sk;
 mod sl;
 mod specific_case;
+mod sr;
 mod style_too_often;
 mod sv;
 mod tl;
@@ -447,6 +448,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Uk => Pipeline::new_ukrainian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Sr => Pipeline::new_serbian(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -465,6 +465,22 @@ IN_TREE_ARTIFACTS = {
         "resource/ru/russian_synth.info": "ru/dictionaries/russian_synth.info",
         "resource/ru/tags_russian.txt": "ru/dictionaries/tags_russian.txt",
     },
+    # Serbian ships its ekavian POS/synthesis/spelling Morfologik dictionaries
+    # and the tagger's manual `added`/`removed` lists in-tree
+    # (`SerbianTagger`/`EkavianSynthesizer`/`MorfologikEkavianSpellerRule`).
+    # The jekavian dictionaries are deferred with the variant question (see
+    # the sr checklist); only the default `sr-RS` (ekavian) data is imported.
+    "sr": {
+        "resource/sr/dictionary/ekavian/serbian.dict": "sr/dictionaries/ekavian/serbian.dict",
+        "resource/sr/dictionary/ekavian/serbian.info": "sr/dictionaries/ekavian/serbian.info",
+        "resource/sr/dictionary/ekavian/serbian_synth.dict": "sr/dictionaries/ekavian/serbian_synth.dict",
+        "resource/sr/dictionary/ekavian/serbian_synth.info": "sr/dictionaries/ekavian/serbian_synth.info",
+        "resource/sr/dictionary/ekavian/added.txt": "sr/dictionaries/ekavian/added.txt",
+        "resource/sr/dictionary/ekavian/removed.txt": "sr/dictionaries/ekavian/removed.txt",
+        "resource/sr/dictionary/ekavian/ignored.txt": "sr/dictionaries/ekavian/ignored.txt",
+        "resource/sr/dictionary/ekavian/spelling.txt": "sr/dictionaries/ekavian/spelling.txt",
+        "resource/sr/dictionary/serbian_synth_tags.txt": "sr/dictionaries/serbian_synth_tags.txt",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -615,6 +631,17 @@ IN_TREE_LICENSES = {
         'states the aot.ru dictionary is "licensed under LGPL")',
         True,
         "upstream ru/README.txt",
+    ),
+    "sr": (
+        "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik "
+        "dictionaries generated from the Serbian corpus; upstream sr/README.md "
+        'states "LGPL 2.1 или касније" — the hunspell conversion '
+        "serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/"
+        "GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and "
+        "is not vendored)",
+        False,
+        "upstream sr/README.md; sr/dictionary/README_dictionary.txt; "
+        "sr/dictionary/ekavian/README_hunspell.txt",
     ),
 }
 

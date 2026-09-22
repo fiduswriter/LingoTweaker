@@ -991,6 +991,43 @@ fn translate_comma_message_ru(msg: &str) -> String {
     }
 }
 
+/// `CommaWhitespaceRule` with the Serbian `MessagesBundle_sr` strings.
+pub fn check_sentence_sr(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Интерпункција".to_string();
+        m.description = "Употребљене белине пре запете и пре/после заграда".to_string();
+        m.message = translate_comma_message_sr(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_sr` bundle.
+fn translate_comma_message_sr(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "Немојте стављати размак после отворене заграде".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "Немојте стављати размак пре затворене заграде".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            // Untranslated in `MessagesBundle_sr` (English fallback).
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "Ставите размак после запете".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "Ставите размак после запете, никако пре".to_string()
+        }
+        "Don't put a space before the full stop." => "Не стављајте размак пре тачке".to_string(),
+        _ => msg.to_string(),
+    }
+}
+
 /// `CommaWhitespaceRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(
     tokens: &[AnalyzedTokenReadings],

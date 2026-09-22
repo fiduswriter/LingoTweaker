@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 871,
+  "file_count": 899,
   "files": [
     {
       "path": "ast/dictionaries/asturian.dict",
@@ -5595,6 +5595,17 @@
       }
     },
     {
+      "path": "messages/MessagesBundle_sr.properties",
+      "sha256": "db7d7bd007dfb9fbf3e152e381362ed9de8ecde8912c3aca6c6a0c037f4a629c",
+      "size": 41158,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/MessagesBundle_sr.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "messages/MessagesBundle_sv.properties",
       "sha256": "231f943022ca09466d5ff784a736d4d9023039752ccd2b0e335d74de918c4e31",
       "size": 15999,
@@ -9056,6 +9067,312 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/added.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/added.txt",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/ignored.txt",
+      "sha256": "d4fe7524d95fbd54bc91078648d465967a1e83e2813cd73d291ecae4332a19ce",
+      "size": 59,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/ignored.txt",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/removed.txt",
+      "sha256": "daf6c81ddbf491b723d34b77869e73052e56d372898a281fb537340c2c9c57f1",
+      "size": 224,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/removed.txt",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/serbian.dict",
+      "sha256": "b5dc77c0698503d712ae61367780dbf468f50fbba7649524de81479cee39e041",
+      "size": 4810606,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian.dict",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/serbian.info",
+      "sha256": "7e9e0b2bb3b9e65c14e1a0d7cb7b1d9080b3b450104122a1c8acfcd6a32f7092",
+      "size": 132,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian.info",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/serbian_synth.dict",
+      "sha256": "e0d033484d3bfc6c68e386468f8402235fc9ffb47e1f7a14d8632772aa9c9342",
+      "size": 7603775,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian_synth.dict",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/serbian_synth.info",
+      "sha256": "7e9e0b2bb3b9e65c14e1a0d7cb7b1d9080b3b450104122a1c8acfcd6a32f7092",
+      "size": 132,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian_synth.info",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/ekavian/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/spelling.txt",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/dictionaries/serbian_synth_tags.txt",
+      "sha256": "4342c4f05cae0a4bb183961221bea9bd7afd8aef1df1482afd8372f51255a285",
+      "size": 405071,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/serbian_synth_tags.txt",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license_verified": false,
+        "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
+      }
+    },
+    {
+      "path": "sr/disambiguation.xml",
+      "sha256": "ff17d71b6e4734530419a81ce248e7193b9c527faf6424f5df95bdb2a5b9832d",
+      "size": 653,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/ekavian/replace-grammar.txt",
+      "sha256": "74ba891ee542c051eb5d20d1cade226882528d5d3fc3fa345e0ca2df3966edb1",
+      "size": 409,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/ekavian/replace-grammar.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/ekavian/replace-soft.txt",
+      "sha256": "6b73591128451ecd3a432de6a05d63a65b94bbc1413b3b1f7ca75ec71ee230b7",
+      "size": 110,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/ekavian/replace-soft.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/ekavian/replace-style.txt",
+      "sha256": "739b6d7e702fbb466cd45e826855c3bec2ebb411e526ab0724e2d67fda9c7a29",
+      "size": 1154,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/ekavian/replace-style.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/grammar-barbarism.xml",
+      "sha256": "35a4fecb240f0254f55de43a3e9abc2b707572514aef64f542371af55dd3d969",
+      "size": 1653,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/grammar-barbarism.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/grammar-logical.xml",
+      "sha256": "09e14f19288e96d9f57e3aa12cf6c44d29d815caf73c01815fcde6de5dcbfd50",
+      "size": 11043,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/grammar-logical.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/grammar-punctuation.xml",
+      "sha256": "014bba123895a26e04bd1d8f732d08ac950243bcdbc04401279a07985a06518a",
+      "size": 2557,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/grammar-punctuation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/grammar-spelling.xml",
+      "sha256": "cd41e3c8963e63b3e14bb72fbf3ed2b94c6ba42767a39055e19cb8adb0f107a0",
+      "size": 1660,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/grammar-spelling.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/grammar-style.xml",
+      "sha256": "e62bafd465a45a6fa31f0d2a1c1a7c787713479b2079ab5d05b0862933de8a53",
+      "size": 2668,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/grammar-style.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/grammar.xml",
+      "sha256": "5b07a55d8fc4c9b32064765cdb1d093ffec5ed71cb5ff839d47a85d283a8b351",
+      "size": 2916,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/jekavian/replace-grammar.txt",
+      "sha256": "5ca38c82dbf06a9d18fc62831e9ae9ea0135ba3b44929c52a63e257abbe83147",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/jekavian/replace-grammar.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/jekavian/replace-soft.txt",
+      "sha256": "6b73591128451ecd3a432de6a05d63a65b94bbc1413b3b1f7ca75ec71ee230b7",
+      "size": 110,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/jekavian/replace-soft.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/rules/jekavian/replace-style.txt",
+      "sha256": "71489765b414f78a251b65a5c456b03a1b101b6ab882df533a833ba62142f50e",
+      "size": 77,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/rules/sr/jekavian/replace-style.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/words/common_words.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/common_words.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/words/multiwords.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/multiwords.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/words/pos2lt_tags.txt",
+      "sha256": "0944197468424ed3b80f4405024e88a46c658da37e5b385289108a8362868b96",
+      "size": 141079,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/pos2lt_tags.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/words/postags.txt",
+      "sha256": "2068b87b41e74052e5023b11aec10fd2046f11f33c1f263aba65abd197811bb6",
+      "size": 6455,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/postags.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "sr/words/serbian_tags.txt",
+      "sha256": "86d20c7b9d9568512abafad914c65c45b235c2bb5b02f58f1c64fa3ab6f0e788",
+      "size": 5873,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/serbian_tags.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

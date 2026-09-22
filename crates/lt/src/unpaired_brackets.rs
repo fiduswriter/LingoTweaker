@@ -604,6 +604,29 @@ pub fn check_ast(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_ast())
 }
 
+/// Serbian `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_sr` strings):
+/// the explicit `GenericUnpairedBracketsRule(messages, left, right)` lists
+/// `[ ( { „ „ "` / `] ) } ” “ "` and the default `NUMERALS_EN`.
+pub fn symbols_sr() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "UNPAIRED_BRACKETS",
+        description:
+            "Распарене заграде (обичне, витичасте или угласте), знаци навода и слични симболи",
+        category_id: "PUNCTUATION",
+        category_name: "Интерпункција",
+        start: &["[", "(", "{", "„", "„", "\""],
+        end: &["]", ")", "}", "”", "“", "\""],
+        spanish: false,
+        numerals: numerals_en,
+        message_template: "Распарени симбол: изгледа да '{other}' недостаје",
+    }
+}
+
+/// Serbian `UNPAIRED_BRACKETS` (generic rule, Serbian strings).
+pub fn check_sr(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_sr())
+}
+
 /// Tagalog `UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_tl` strings):
 /// the default symbol lists `[ ( { " '` / `] ) } " '`.
 pub fn symbols_tl() -> UnpairedSymbols {

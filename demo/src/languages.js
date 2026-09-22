@@ -101,6 +101,10 @@ const UKRAINIAN = {
   sample:
     "Закінчилось літо. діти знову сіли за шкільні парти.  кожна сім'я щаслива.",
 };
+const SERBIAN = {
+  sample:
+    "Није шија , него врат. Почела је школа. ђаци су поново сели у клупе. То се догодило 31. новембра 2014.",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -133,6 +137,7 @@ export const LANGUAGES = [
   { code: "be-BY", pack: "be", label: "Беларуская", size: "0.89 MB", ...BELARUSIAN },
   { code: "ru-RU", pack: "ru", label: "Русский", size: "6.0 MB", ...RUSSIAN },
   { code: "uk-UA", pack: "uk", label: "Українська", size: "6.8 MB", ...UKRAINIAN },
+  { code: "sr-RS", pack: "sr", label: "Српски", size: "5.2 MB", ...SERBIAN },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.0 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.6 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.28 MB", ...GUARANI },

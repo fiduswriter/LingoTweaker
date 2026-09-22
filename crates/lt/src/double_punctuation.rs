@@ -202,6 +202,23 @@ pub fn check_sentence_lt(tokens: &[AnalyzedTokenReadings], sentence_offset: usiz
     matches
 }
 
+/// `DoublePunctuationRule` with the Serbian `MessagesBundle_sr` strings.
+pub fn check_sentence_sr(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "Интерпункција".to_string();
+        m.description = "Употребљене две узастопне тачке или запете".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "Две узастопне тачке".to_string();
+            m.short_message = Some("Две узастопне тачке".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "Две узастопне запете".to_string();
+            m.short_message = Some("Две узастопне запете".to_string());
+        }
+    }
+    matches
+}
+
 /// `DoublePunctuationRule` with the Esperanto `MessagesBundle_eo` strings.
 pub fn check_sentence_eo(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
     let mut matches = check_sentence(tokens, sentence_offset);

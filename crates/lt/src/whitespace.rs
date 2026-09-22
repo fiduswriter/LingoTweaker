@@ -263,6 +263,16 @@ pub fn check(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `MultipleWhitespaceRule` with the Serbian `MessagesBundle_sr` strings.
+pub fn check_sr(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "Понављање белине (лоше обликовање)",
+        "Могућа грешка: поновили сте белину",
+        ("TYPOGRAPHY", "Типографија"),
+    )
+}
+
 fn check_with(
     sentences: &[AnalyzedSentence],
     description: &str,

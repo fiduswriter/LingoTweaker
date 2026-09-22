@@ -189,6 +189,8 @@ pub struct Pipeline {
     pub russian: Option<Arc<crate::ru::RussianPipeline>>,
     /// Ukrainian pipeline parts (`None` for the other languages)
     pub ukrainian: Option<Arc<crate::uk::UkrainianPipeline>>,
+    /// Serbian pipeline parts (`None` for the other languages)
+    pub serbian: Option<Arc<crate::sr::SerbianPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1381,6 +1383,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1630,6 +1633,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1838,6 +1842,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2054,6 +2059,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2190,6 +2196,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2445,6 +2452,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2660,6 +2668,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2992,6 +3001,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3148,6 +3158,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3290,6 +3301,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3456,6 +3468,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3600,6 +3613,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3716,6 +3730,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3867,6 +3882,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3950,6 +3966,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4116,6 +4133,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4194,6 +4212,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4309,6 +4328,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4410,6 +4430,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4525,6 +4546,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4628,6 +4650,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4732,6 +4755,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4846,6 +4870,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4949,6 +4974,7 @@ impl Pipeline {
             belarusian: Some(belarusian),
             russian: None,
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5105,6 +5131,7 @@ impl Pipeline {
             belarusian: None,
             russian: Some(russian),
             ukrainian: None,
+            serbian: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5300,6 +5327,147 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: Some(ukrainian),
+            serbian: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Serbian (`sr`, default variant `sr-RS`/ekavian) engine. Stage 1 wires
+    /// the XML rules (`grammar.xml` + the five `Serbian.RULE_FILES`) with the
+    /// plain `EkavianTagger`/`EkavianSynthesizer` and the
+    /// `SerbianHybridDisambiguator` order (`sr/multiwords.txt` chunker → XML
+    /// disambiguation); the speller and the Java rule classes follow in
+    /// stages 2/3.
+    pub fn new_serbian(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let srx_path = data_dir.path().join("core/segment.srx");
+        if !srx_path.lt_exists() {
+            return Err(CoreError::Data("missing core/segment.srx".into()));
+        }
+        let doc = lt_tokenize::SrxDocument::load_file(&srx_path)?;
+        let srx = lt_tokenize::SrxTokenizer::new(&doc, "sr_two")?;
+
+        let tagger = Arc::new(lt_tagger::EkavianTagger::load(data_dir.path())?);
+        let synthesizer = Arc::new(lt_tagger::EkavianSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::sr::SerbianSynthesizerAdapter {
+            synth: Arc::clone(&synthesizer),
+            tagger: Arc::clone(&tagger),
+        });
+
+        // `Language.getRuleFileNames`: grammar.xml then `Serbian.RULE_FILES`
+        // (`grammar-barbarism`, `grammar-logical`, `grammar-punctuation`,
+        // `grammar-spelling`, `grammar-style`).
+        let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::Sr))?;
+        for name in [
+            "grammar-barbarism.xml",
+            "grammar-logical.xml",
+            "grammar-punctuation.xml",
+            "grammar-spelling.xml",
+            "grammar-style.xml",
+        ] {
+            let path = data_dir.path().join("sr/rules").join(name);
+            if path.lt_exists() {
+                let extra = Grammar::load_file(&path)?;
+                grammar.rules.extend(extra.rules);
+                grammar.categories.extend(extra.categories);
+                grammar.equivalence_defs.extend(extra.equivalence_defs);
+            } else {
+                eprintln!("[sr] rule file not found: {}", path.display());
+            }
+        }
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+
+        // Serbian references no `<filter>` classes from its rule XML.
+        let filters = lt_pattern::FilterRegistry::builder().build();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+
+        // `SerbianHybridDisambiguator`'s XML stage:
+        // `new XmlRuleDisambiguator(new Serbian())` (no global rules).
+        let mut disambiguator =
+            lt_disambig::XmlDisambiguator::load(&data_dir.disambiguation_path(Lang::Sr))?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+
+        // `MultiWordChunker.getInstance("/sr/multiwords.txt")` (the list is
+        // empty upstream, but the chunker is still loaded).
+        let multiwords_chunker = lt_disambig::MultiWordChunker::load(
+            &data_dir.path().join("sr/words/multiwords.txt"),
+            false,
+            false,
+            false,
+            None,
+            false,
+        )
+        .unwrap_or_else(|_| lt_disambig::MultiWordChunker::load_empty(false, false));
+
+        let serbian = Arc::new(crate::sr::SerbianPipeline {
+            tagger,
+            synthesizer,
+            synth_adapter,
+            multiwords_chunker,
+            disambiguator,
+            word_repeat: crate::sr::word_repeat_rule(),
+        });
+        Ok(Self {
+            lang: Lang::Sr,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: Some(serbian),
             clean_overlapping_matches: true,
         })
     }
@@ -5441,6 +5609,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5529,6 +5698,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5621,6 +5791,7 @@ impl Pipeline {
             belarusian: None,
             russian: None,
             ukrainian: None,
+            serbian: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -5645,6 +5816,8 @@ impl Pipeline {
                 crate::ru::analyze_russian_sentence(russian, sentence_text)
             } else if let Some(ukrainian) = &self.ukrainian {
                 crate::uk::analyze_ukrainian_sentence(ukrainian, sentence_text)
+            } else if let Some(serbian) = &self.serbian {
+                crate::sr::analyze_serbian_sentence(serbian, sentence_text)
             } else {
                 match &self.german {
                     Some(german) => {
@@ -8302,6 +8475,65 @@ impl Pipeline {
                 ));
             }
         }
+        // Serbian text-level rules (`Serbian.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (4),
+        // MultipleWhitespace (5) and SentenceWhitespace (6). Serbian has no
+        // paragraph/long-sentence built-ins.
+        if self.lang == crate::Lang::Sr {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check_sr(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check_sr(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_sr(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_sr(&analyzed_sentences));
+            }
+        }
         // Russian text-level rules (`Russian.getRelevantRules`):
         // UppercaseSentenceStart (1), MultipleWhitespace (3),
         // SentenceWhitespace (4) and the default-off/picky paragraph rules
@@ -8794,6 +9026,8 @@ impl Pipeline {
             crate::ru::analyze_russian_sentence(russian, &text[start..end])
         } else if let Some(ukrainian) = &self.ukrainian {
             crate::uk::analyze_ukrainian_sentence(ukrainian, &text[start..end])
+        } else if let Some(serbian) = &self.serbian {
+            crate::sr::analyze_serbian_sentence(serbian, &text[start..end])
         } else {
             match &self.german {
                 Some(german) => {
@@ -11640,6 +11874,61 @@ impl Pipeline {
                 }
             }
         }
+        // Serbian sentence-level built-ins in `Serbian.getRelevantRules` order:
+        // CommaWhitespace (1), DoublePunctuation (2) and WordRepeat (7). The
+        // speller (8) and the two replace rules follow in stages 2/3.
+        if self.lang == crate::Lang::Sr {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_sr(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_sr(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(serbian) = &self.serbian {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    serbian.word_repeat.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
         // Ukrainian sentence-level Java rules in `Ukrainian.getRelevantRules` order:
         // the speller (stage 2); the custom rules follow in stage 3.
         if self.lang == crate::Lang::Uk {
@@ -13412,6 +13701,9 @@ impl Pipeline {
         if let Some(ukrainian) = &self.ukrainian {
             return Some(ukrainian.synth_adapter.as_ref());
         }
+        if let Some(serbian) = &self.serbian {
+            return Some(serbian.synth_adapter.as_ref());
+        }
         self.synthesizer
             .as_deref()
             .map(|s| s as &dyn pm::Synthesizer)
@@ -13574,6 +13866,12 @@ impl Pipeline {
             // Stage 1: the `uk/disambiguation.xml` subset; the
             // `UkrainianHybridDisambiguator` chunker follows in stage 3.
             ukrainian.disambiguate(sentence);
+            return;
+        }
+        if let Some(serbian) = &self.serbian {
+            // `SerbianHybridDisambiguator`: `sr/multiwords.txt` chunker →
+            // XML rules.
+            serbian.disambiguate(sentence);
             return;
         }
         self.global_chunker.apply(sentence);
