@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -481,6 +481,21 @@ IN_TREE_ARTIFACTS = {
         "resource/sr/dictionary/ekavian/spelling.txt": "sr/dictionaries/ekavian/spelling.txt",
         "resource/sr/dictionary/serbian_synth_tags.txt": "sr/dictionaries/serbian_synth_tags.txt",
     },
+    # Arabic ships its POS/synthesis Morfologik dictionaries (Arramooz-derived)
+    # in-tree (`ArabicTagger` / `ArabicSynthesizer`). The hunspell speller
+    # dictionary (`hunspell/ar.dic`, tri-licensed GPL-2.0+/LGPL-2.1+/
+    # MPL-1.1+) is imported with the rest of the `hunspell/` directory; its
+    # bare `COPYING`/`AUTHORS`/`THANKS` files have no recognised suffix, so
+    # they are vendored here explicitly.
+    "ar": {
+        "resource/ar/arabic.dict": "ar/dictionaries/arabic.dict",
+        "resource/ar/arabic.info": "ar/dictionaries/arabic.info",
+        "resource/ar/arabic_synth.dict": "ar/dictionaries/arabic_synth.dict",
+        "resource/ar/arabic_synth.info": "ar/dictionaries/arabic_synth.info",
+        "resource/ar/hunspell/COPYING": "ar/hunspell/COPYING",
+        "resource/ar/hunspell/AUTHORS": "ar/hunspell/AUTHORS",
+        "resource/ar/hunspell/THANKS": "ar/hunspell/THANKS",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -642,6 +657,16 @@ IN_TREE_LICENSES = {
         False,
         "upstream sr/README.md; sr/dictionary/README_dictionary.txt; "
         "sr/dictionary/ekavian/README_hunspell.txt",
+    ),
+    "ar": (
+        "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; "
+        "upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all "
+        "GPL) and the Hunspell-ar speller dictionary (tri-licensed "
+        "GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, "
+        "ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
+        False,
+        "upstream ar/README.txt; ar/wordlist-flat/about.txt; "
+        "ar/hunspell/COPYING",
     ),
 }
 
@@ -877,6 +902,20 @@ def hunspell_license(lang: str, name: str):
                 "ru/hunspell/README.txt)",
                 verified,
                 "upstream ru/hunspell/README.txt",
+            )
+    if lang == "ar":
+        # Hunspell-ar (Mohamed Kebdani): the bundled COPYING states the
+        # GPL-2.0-or-later / LGPL-2.1-or-later / MPL-1.1-or-later
+        # tri-license; the ar.aff header repeats it. The layout is
+        # ayaspell-derived.
+        if name.startswith("ar."):
+            verified = name.endswith(".aff")
+            return (
+                "GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later "
+                "(Hunspell-ar, Mohamed Kebdani; ar/hunspell/COPYING, ar.aff "
+                "header)",
+                verified,
+                "upstream ar/hunspell/COPYING",
             )
     return None
 
