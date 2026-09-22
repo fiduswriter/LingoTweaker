@@ -47,6 +47,25 @@ impl Condition {
         c
     }
 
+    pub fn lemma_re(re: &Regex) -> Self {
+        let mut c = Self::new();
+        c.lemma = Some(Regex::new(&format!("^(?:{})$", re.as_str())).unwrap());
+        c
+    }
+
+    pub fn postag_re(re: &Regex) -> Self {
+        let mut c = Self::new();
+        c.postag = Some(Regex::new(&format!("^(?:{})$", re.as_str())).unwrap());
+        c
+    }
+
+    pub fn lemma_postag(lemma: &str, postag: &str) -> Self {
+        let mut c = Self::new();
+        c.lemma = Regex::new(&format!("^(?:{lemma})$")).ok();
+        c.postag = Regex::new(&format!("^(?:{postag})$")).ok();
+        c
+    }
+
     pub fn token(token: &str) -> Self {
         let mut c = Self::new();
         c.token_str = Some(token.to_string());

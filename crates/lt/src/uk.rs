@@ -26,6 +26,7 @@ pub mod simple_replace_renamed;
 pub mod spelling;
 pub mod typography;
 pub mod verb_inflection;
+pub mod verb_noun;
 
 /// `Ukrainian.createDefaultDisambiguator` is
 /// `UkrainianHybridDisambiguator`: `SimpleDisambiguator` + the multiword
