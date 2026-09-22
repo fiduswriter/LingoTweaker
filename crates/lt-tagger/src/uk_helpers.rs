@@ -1091,6 +1091,127 @@ pub fn token_search(
     -1
 }
 
+/// `PosTagHelper.hasPosTagAll`.
+pub fn has_pos_tag_all(readings: &[AnalyzedToken], re: &fancy_regex::Regex) -> bool {
+    for r in readings {
+        match r.pos_tag.as_deref() {
+            Some(tag) => {
+                if !full_match(re, tag) {
+                    return false;
+                }
+            }
+            None => return false,
+        }
+    }
+    true
+}
+
+/// `LemmaHelper.isDash`.
+pub fn is_dash(tr: &AnalyzedTokenReadings) -> bool {
+    static DASHES: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^[\u{2010}-\u{2015}-]$").unwrap());
+    full_match(&DASHES, tr.surface())
+}
+
+/// `LemmaHelper.ADV_QUANT_PATTERN`.
+pub fn adv_quant_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> = LazyLock::new(|| {
+        fancy_regex::Regex::new(concat!(
+            "^(?:більше|менше|чимало|багато|мало|забагато|замало|немало|багатенько|чималенько|стільки|обмаль|вдосталь|удосталь|трохи|трошки|досить|достатньо|недостатньо|предостатньо",
+            "|багацько|чимбільше|побільше|порівну|більшість|трішки|предосить|повно|повнісінько",
+            "|мільйон|тисяча|сотня|мільярд|трильйон|десяток|нуль|безліч",
+            "|кілька|декілька|пара|парочка|купа|купка|безліч|мінімум|максимум)$"
+        ))
+        .unwrap()
+    });
+    &RE
+}
+
+/// `LemmaHelper.TIME_PLUS_LEMMAS_PATTERN` (alternation of the lemmas).
+pub fn time_plus_lemmas_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> = LazyLock::new(|| {
+        fancy_regex::Regex::new(&format!("^(?:{})$", TIME_PLUS_LEMMAS.join("|"))).unwrap()
+    });
+    &RE
+}
+
+/// `LemmaHelper.PLUS_MINUS`.
+pub const PLUS_MINUS: &[&str] = &["плюс", "мінус", "максимум", "мінімум"];
+
+/// `PosTagHelper.VERB_PATTERN`.
+pub fn verb_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^verb.*$").unwrap());
+    &RE
+}
+
+/// `PosTagHelper.VERB_ADVP_PATTERN`.
+pub fn verb_advp_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^(?:verb|advp).*$").unwrap());
+    &RE
+}
+
+/// `PosTagHelper.ADJ_V_NAZ_PATTERN`.
+pub fn adj_v_naz_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^adj:.:v_naz.*$").unwrap());
+    &RE
+}
+
+/// `PosTagHelper.NOUN_V_NAZ_PATTERN`.
+pub fn noun_v_naz_pattern() -> &'static fancy_regex::Regex {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^noun.*:v_naz.*$").unwrap());
+    &RE
+}
+
+/// `TokenAgreementNounVerbExceptionHelper.hasMascFemLemma`.
+pub fn has_masc_fem_lemma(
+    readings: &[AnalyzedToken],
+    masc_fem_set: &std::collections::HashSet<String>,
+) -> bool {
+    let Some(token) = readings.first().map(|r| r.token.as_str()) else {
+        return false;
+    };
+    if token.ends_with("олог") || token.ends_with("знавець") {
+        return true;
+    }
+    for at in readings {
+        if let Some(pos_tag) = at.pos_tag.as_deref() {
+            if pos_tag.contains("noun:anim:m:v_naz") {
+                if let Some(lemma) = at.stem.as_deref() {
+                    let lemma = lemma.replace('\u{2018}', "-");
+                    let base = lemma.split('-').next().unwrap_or("");
+                    if masc_fem_set.contains(&lemma) || masc_fem_set.contains(base) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    false
+}
+
+/// `ExtraDictionaryLoader.loadSet` + `extendSet(..., "екс-")` for
+/// `masc_fem.txt`.
+pub fn load_masc_fem_set(words_dir: &std::path::Path) -> std::collections::HashSet<String> {
+    let mut set = std::collections::HashSet::new();
+    let Ok(text) = lt_data::fs::read_to_string(words_dir.join("masc_fem.txt")) else {
+        return set;
+    };
+    for line in text.lines() {
+        let line = line.split('#').next().unwrap_or("").trim();
+        if line.is_empty() {
+            continue;
+        }
+        set.insert(line.to_string());
+    }
+    let extra: Vec<String> = set.iter().map(|l| format!("екс-{l}")).collect();
+    set.extend(extra);
+    set
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
