@@ -394,3 +394,108 @@ fn suppress_misspelled_filter_matches_java() {
         .collect();
     assert_eq!(suggestions, ["жаренная"]);
 }
+
+// `getRelevantRules` Java rule classes (`scripts/oracle/ru/probe-rule.sh`).
+
+#[test]
+fn simple_replace_matches_java() {
+    let _guard = engine_guard();
+    let text = "Экспрессо – крепкий кофе.";
+    let matches = one(text, "RU_SIMPLE_REPLACE");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (0, 9));
+    assert_eq!(matches[0].message, "Опечатка");
+    assert_eq!(matches[0].suggestions[0].value, "Эспрессо");
+}
+
+#[test]
+fn specific_case_matches_java() {
+    let _guard = engine_guard();
+    let text = "Река рытый банк находится в Прикаспийской низменности.";
+    let matches = one(text, "RU_SPECIFIC_CASE");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (5, 15));
+    assert_eq!(matches[0].suggestions[0].value, "Рытый Банк");
+}
+
+#[test]
+fn compound_matches_java() {
+    let _guard = engine_guard();
+    let text = "Собрание состоится в конференц зале.";
+    let matches = one(text, "RU_COMPOUNDS");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (21, 35));
+    assert_eq!(matches[0].suggestions[0].value, "конференц-зале");
+}
+
+#[test]
+fn verb_conjugation_matches_java() {
+    let _guard = engine_guard();
+    let text = "Я идёт.";
+    let matches = one(text, "RU_VERB_CONJUGATION");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (0, 6));
+    assert_eq!(
+        matches[0].message,
+        "Неверное спряжение глагола или неверное местоимение"
+    );
+}
+
+#[test]
+fn dash_matches_java() {
+    let _guard = engine_guard();
+    let text = "Он пришёл из — за угла.";
+    let matches = one(text, "RU_DASH_RULE");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (10, 17));
+    assert_eq!(matches[0].message, "Использовано тире вместо дефиса.");
+    assert_eq!(matches[0].suggestions[0].value, "из-за");
+}
+
+#[test]
+fn unpaired_brackets_matches_java() {
+    let _guard = engine_guard();
+    let text = "Самоотверженный поступок Оленина (подарок Лукашке коня вызывает удивление.";
+    let matches = one(text, "RU_UNPAIRED_BRACKETS");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (33, 34));
+    assert_eq!(
+        matches[0].message,
+        "Непарный символ: «)» скорей всего пропущен"
+    );
+}
+
+#[test]
+fn word_coherency_matches_java() {
+    let _guard = engine_guard();
+    let text = "Понятие «оффлайн» тоже имеет корни. Принтер перешёл в состояние офлайн.";
+    let matches = one(text, "RU_WORD_COHERENCY");
+    if matches.is_empty() {
+        eprintln!("skipping: no vendored data");
+        return;
+    }
+    assert_utf16(text, &matches[0], (64, 70));
+    assert_eq!(
+        matches[0].message,
+        "«офлайн» и «оффлайн» не следует использовать одновременно"
+    );
+    assert_eq!(matches[0].suggestions[0].value, "оффлайн");
+}

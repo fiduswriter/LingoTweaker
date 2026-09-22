@@ -83,7 +83,14 @@ impl DashRule {
                 let begin = from + idx;
                 let end = begin + compound.len();
                 hits.push((begin, end));
-                from = begin + 1;
+                // slide by one character (not one byte: non-ASCII compounds
+                // would otherwise land mid-`char`)
+                from = begin
+                    + text[begin..]
+                        .chars()
+                        .next()
+                        .map(char::len_utf8)
+                        .unwrap_or(1);
             }
         }
         // Java reverses the Aho-Corasick hits (ordered by end position), so

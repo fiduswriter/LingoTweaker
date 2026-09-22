@@ -560,6 +560,33 @@ impl CompoundRule {
         })
     }
 
+    /// `ru.CompoundRule` (`RU_COMPOUNDS`): `ru/words/compounds.txt`. The
+    /// Russian class does not override `isMisspelled`, so every candidate
+    /// replacement passes `filterReplacements` (base `isMisspelled` = false).
+    pub fn russian(data_dir: &Path) -> Result<Self> {
+        let data = CompoundData::from_path(&data_dir.join("ru/words/compounds.txt"))?;
+        Ok(Self {
+            data,
+            is_misspelled: Arc::new(|_| false),
+            config: CompoundConfig {
+                rule_id: "RU_COMPOUNDS",
+                description: "Правописание через дефис".to_string(),
+                with_hyphen_message: "Эти слова должны быть написаны через дефис.",
+                without_hyphen_message: "Эти слова должны быть написаны слитно.",
+                with_or_without_hyphen_message:
+                    "Эти слова могут быть написаны через дефис или слитно.",
+                short_message: None,
+                category_id: "MISC",
+                category_name: "Общие правила",
+                sub_rule_specific_ids: false,
+                to_id_german: false,
+                merge: merge_compound,
+                issue_type: "misspelling",
+            },
+            anti_patterns: Vec::new(),
+        })
+    }
+
     /// `ro.CompoundRule` (`RO_COMPOUND`): `ro/words/compounds.txt`. The
     /// Romanian class does not override `isMisspelled`, so every candidate
     /// replacement passes `filterReplacements` (base `isMisspelled` = false).

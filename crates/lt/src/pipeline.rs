@@ -5012,6 +5012,7 @@ impl Pipeline {
         disambiguator.set_filter_registry(filters);
 
         let post_chunker = lt_chunk::RussianChunker::new()?;
+        let rules = crate::ru::rules::RussianRules::load(data_dir.path())?;
 
         let russian = Arc::new(crate::ru::RussianPipeline {
             tagger,
@@ -5022,6 +5023,7 @@ impl Pipeline {
             post_chunker,
             spelling,
             spelling_yo,
+            rules,
         });
         let _ = pipeline_slot.set(Arc::clone(&russian));
         Ok(Self {
@@ -8210,6 +8212,67 @@ impl Pipeline {
                     &para,
                 ));
             }
+            // The remaining Russian text-level Java rules:
+            // `RussianFillerWordsRule` (10, default off), `RussianUnpairedBracketsRule`
+            // (13, default on), `RussianWordCoherencyRule` (18) and
+            // `RussianWordRootRepeatRule` (20, default off).
+            if let Some(russian) = &self.russian {
+                if builtin_active(
+                    crate::ru::rules::FILLER_WORDS_ID,
+                    "CREATIVE_WRITING",
+                    false,
+                    false,
+                    options,
+                    &enabled_rules,
+                    &disabled_rules,
+                    &disabled_categories,
+                    &enabled_categories,
+                ) {
+                    text_level_matches.extend(crate::ru::rules::filler_words(&analyzed_sentences));
+                }
+                if builtin_active(
+                    "RU_UNPAIRED_BRACKETS",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    &enabled_rules,
+                    &disabled_rules,
+                    &disabled_categories,
+                    &enabled_categories,
+                ) {
+                    text_level_matches
+                        .extend(crate::unpaired_brackets::check_ru(&analyzed_sentences));
+                }
+                if builtin_active(
+                    russian.rules.word_coherency.rule_id(),
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    &enabled_rules,
+                    &disabled_rules,
+                    &disabled_categories,
+                    &enabled_categories,
+                ) {
+                    text_level_matches
+                        .extend(russian.rules.word_coherency.check(&analyzed_sentences));
+                }
+                if builtin_active(
+                    russian.rules.word_root_repeat.rule_id(),
+                    "MISC",
+                    false,
+                    false,
+                    options,
+                    &enabled_rules,
+                    &disabled_rules,
+                    &disabled_categories,
+                    &enabled_categories,
+                ) {
+                    text_level_matches
+                        .extend(russian.rules.word_root_repeat.check(&analyzed_sentences));
+                }
+            }
         }
         // Crimean Tatar text-level rules (`CrimeanTatar.getRelevantRules`):
         // GenericUnpairedBrackets (2), UppercaseSentenceStart (3),
@@ -11373,6 +11436,142 @@ impl Pipeline {
                         &mut seen,
                     );
                 }
+                // `RussianCompoundRule` (14)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        russian.rules.compound.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    russian
+                        .rules
+                        .compound
+                        .check_sentence(&analyzed.tokens, sentence_text, start),
+                    &mut seen,
+                );
+                // `RussianSimpleReplaceRule` (15)
+                if let Some(simple_replace) = &russian.rules.simple_replace {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            simple_replace.rule_id(),
+                            "MISC",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        simple_replace.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                // `RussianSimpleWordRepeatRule` (16)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        russian.rules.simple_word_repeat.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    russian
+                        .rules
+                        .simple_word_repeat
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `RussianWordRepeatRule` (18), default off
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        russian.rules.word_repeat.rule_id(),
+                        "MISC",
+                        false,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    russian
+                        .rules
+                        .word_repeat
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `RussianVerbConjugationRule` (20)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        russian.rules.verb_conjugation.rule_id(),
+                        "GRAMMAR",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    russian
+                        .rules
+                        .verb_conjugation
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `RussianDashRule` (21)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        russian.rules.dash.rule_id(),
+                        "TYPOGRAPHY",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    russian.rules.dash.check_sentence(analyzed),
+                    &mut seen,
+                );
+                // `RussianSpecificCaseRule` (22)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        russian.rules.specific_case.rule_id(),
+                        "CASING",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    russian
+                        .rules
+                        .specific_case
+                        .check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
             }
         }
         // Crimean Tatar sentence-level Java rules in

@@ -12,6 +12,7 @@ use lt_pattern::Synthesizer;
 
 pub mod filters;
 pub mod priorities;
+pub mod rules;
 pub mod spelling;
 
 /// Russian pipeline parts.
@@ -34,6 +35,8 @@ pub struct RussianPipeline {
     /// `MorfologikRussianYOSpellerRule` (`MORFOLOGIK_RULE_RU_RU_YO`, default
     /// off).
     pub spelling_yo: Option<Arc<crate::ru::spelling::RussianYOSpellingRule>>,
+    /// The remaining `getRelevantRules` Java rule classes.
+    pub rules: crate::ru::rules::RussianRules,
 }
 
 impl RussianPipeline {

@@ -17,6 +17,9 @@ pub struct UnpairedSymbols {
     /// `GenericUnpairedBracketsRule.getMessage` template; `{other}` is the
     /// missing counterpart symbol.
     pub message_template: &'static str,
+    /// `GenericUnpairedBracketsRule.NUMERALS_*` (the constructor's numerals
+    /// argument), matched with Java `Matcher.matches()`.
+    pub numerals: fn() -> &'static regex::Regex,
 }
 
 pub fn symbols_en() -> UnpairedSymbols {
@@ -28,6 +31,7 @@ pub fn symbols_en() -> UnpairedSymbols {
         start: &["[", "(", "{"],
         end: &["]", ")", "}"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Unpaired symbol: '{other}' seems to be missing",
     }
 }
@@ -43,6 +47,7 @@ pub fn symbols_it() -> UnpairedSymbols {
         start: &["[", "(", "{", "»", "«"],
         end: &["]", ")", "}", "«", "»"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Manca chiusura: \"{other}\" sembra mancare",
     }
 }
@@ -59,6 +64,7 @@ pub fn symbols_fr() -> UnpairedSymbols {
         start: &["[", "(", "{"],
         end: &["]", ")", "}"],
         spanish: false,
+        numerals: numerals_en,
         message_template:
             "Pas de correspondance fermante ou ouvrante pour le caractère « {other} »",
     }
@@ -75,6 +81,7 @@ pub fn symbols_de() -> UnpairedSymbols {
         start: &["[", "(", "{"],
         end: &["]", ")", "}"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Zeichen ohne sein Gegenstück: '{other}' scheint zu fehlen",
     }
 }
@@ -90,6 +97,7 @@ pub fn symbols_es() -> UnpairedSymbols {
         start: &["[", "(", "{", "“", "«", "\"", "'", "‘"],
         end: &["]", ")", "}", "”", "»", "\"", "'", "’"],
         spanish: true,
+        numerals: numerals_en,
         message_template: "Símbolo desparejado: Parece que falta un ‘{other}’.",
     }
 }
@@ -105,6 +113,25 @@ fn numerals_re() -> &'static regex::Regex {
     static RE: std::sync::LazyLock<regex::Regex> = std::sync::LazyLock::new(|| {
         regex::Regex::new(
             r"(?i)^(?:\d{1,2}?[a-z']*|M*(?:D?C{0,3}|C[DM])(?:L?X{0,3}|X[LC])(?:V?I{0,3}|I[VX])$)$",
+        )
+        .unwrap()
+    });
+    &RE
+}
+
+/// `GenericUnpairedBracketsRule.NUMERALS_EN` as a function pointer for
+/// [`UnpairedSymbols::numerals`].
+pub fn numerals_en() -> &'static regex::Regex {
+    numerals_re()
+}
+
+/// `RussianUnpairedBracketsRule.NUMERALS_RU` (`matches()`,
+/// case-insensitive): additionally single/double Cyrillic letters and
+/// digit+Cyrillic list markers.
+pub fn numerals_ru() -> &'static regex::Regex {
+    static RE: std::sync::LazyLock<regex::Regex> = std::sync::LazyLock::new(|| {
+        regex::Regex::new(
+            r"(?i)^(?:\d{1,2}?[а-я]*|[а-я]|[А-Я]|[а-я][а-я]|[А-Я][А-Я]|\d{1,2}?[a-z']*|M*(?:D?C{0,3}|C[DM])(?:L?X{0,3}|X[LC])(?:V?I{0,3}|I[VX])$)$",
         )
         .unwrap()
     });
@@ -308,11 +335,11 @@ fn fill_symbol_stack(
                 && sym.end[j] == ")"
                 && (tokens[i - 3].has_pos_tag("SENT_START") || tokens[i - 2].whitespace_before)
                 && tokens[i - 1].surface() == "."
-                && numerals_re().is_match(tokens[i - 2].surface())
+                && (sym.numerals)().is_match(tokens[i - 2].surface())
                 && !top_is_open_paren)
                 || (i > 1
                     && sym.end[j] == ")"
-                    && numerals_re().is_match(tokens[i - 1].surface())
+                    && (sym.numerals)().is_match(tokens[i - 1].surface())
                     && !top_is_open_paren);
             if !numeral_suppressed {
                 if symbol_stack.is_empty() {
@@ -479,6 +506,7 @@ pub fn symbols_nl() -> UnpairedSymbols {
             "]", ")", "}", "\u{201D}", "\u{203A}", "\u{201D}", "\u{201D}", "\"",
         ],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Niet-gecombineerd symbool: \"{other}\" lijkt te ontbreken",
     }
 }
@@ -508,6 +536,7 @@ pub fn symbols_ca() -> UnpairedSymbols {
             "]", ")", "}", "\u{201D}", "\u{00BB}", "\"", "'", "\u{2019}",
         ],
         spanish: true,
+        numerals: numerals_en,
         message_template: "Símbol sense parella. Afegiu-lo i situeu-lo manualment en el lloc adequat, o bé esborreu-lo.",
     }
 }
@@ -523,6 +552,7 @@ pub fn symbols_da() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "\u{201D}"],
         end: &["]", ")", "}", "\"", "\u{201D}"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Ikke parret symbol: \"{other}\" ser ud til at mangle",
     }
 }
@@ -543,6 +573,7 @@ pub fn symbols_sv() -> UnpairedSymbols {
         start: &["[", "(", "{"],
         end: &["]", ")", "}"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Grupperingssymboler: '{other}' ser ut att saknas",
     }
 }
@@ -563,6 +594,7 @@ pub fn symbols_ast() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "'"],
         end: &["]", ")", "}", "\"", "'"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Símbolu despareyáu: paez que falta \"{other}\"",
     }
 }
@@ -583,6 +615,7 @@ pub fn symbols_tl() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "'"],
         end: &["]", ")", "}", "\"", "'"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Unpaired symbol: '{other}' seems to be missing",
     }
 }
@@ -603,6 +636,7 @@ pub fn symbols_lt() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "'"],
         end: &["]", ")", "}", "\"", "'"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Unpaired symbol: '{other}' seems to be missing",
     }
 }
@@ -610,6 +644,27 @@ pub fn symbols_lt() -> UnpairedSymbols {
 /// Lithuanian `UNPAIRED_BRACKETS` (generic rule, Lithuanian strings).
 pub fn check_lt(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_lt())
+}
+
+/// `RussianUnpairedBracketsRule` (`RU_UNPAIRED_BRACKETS`): the Russian symbol
+/// lists and `NUMERALS_RU`; the description falls back to the core bundle.
+pub fn symbols_ru() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "RU_UNPAIRED_BRACKETS",
+        description: "Unpaired braces, brackets, quotation marks and similar symbols",
+        category_id: "PUNCTUATION",
+        category_name: "Пунктуация",
+        start: &["(", "{", "„", "\"", "'", "“"],
+        end: &[")", "}", "“", "\"", "'", "”"],
+        spanish: false,
+        numerals: numerals_ru,
+        message_template: "Непарный символ: «{other}» скорей всего пропущен",
+    }
+}
+
+/// Russian `RU_UNPAIRED_BRACKETS`.
+pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_ru())
 }
 
 /// Crimean Tatar `UNPAIRED_BRACKETS` (generic rule; the module has no
@@ -624,6 +679,7 @@ pub fn symbols_crh() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "'"],
         end: &["]", ")", "}", "\"", "'"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Unpaired symbol: '{other}' seems to be missing",
     }
 }
@@ -644,6 +700,7 @@ pub fn symbols_eo() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "'"],
         end: &["]", ")", "}", "\"", "'"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Nekongruaj simboloj: ŝajnas, ke \"{other}\" mankas",
     }
 }
@@ -664,6 +721,7 @@ pub fn symbols_is() -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "'"],
         end: &["]", ")", "}", "\"", "'"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Unpaired symbol: '{other}' seems to be missing",
     }
 }
@@ -697,6 +755,7 @@ pub fn symbols_pt(variant: &str) -> UnpairedSymbols {
         start: &["[", "(", "{", "\"", "“"],
         end: &["]", ")", "}", "\"", "”"],
         spanish: false,
+        numerals: numerals_en,
         message_template: if br {
             "Símbolo sem par: \"{other}\" aparentemente está ausente"
         } else {
@@ -721,6 +780,7 @@ pub fn symbols_ro() -> UnpairedSymbols {
         start: &["[", "(", "{", "\u{201E}", "\u{00AB}", "\u{00BB}"],
         end: &["]", ")", "}", "\u{201D}", "\u{00BB}", "\u{00AB}"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Unpaired symbol: '{other}' seems to be missing",
     }
 }
@@ -741,6 +801,7 @@ pub fn symbols_sk() -> UnpairedSymbols {
         start: &["[", "(", "{", "\u{201E}", "\u{00BB}", "\u{00AB}", "\""],
         end: &["]", ")", "}", "\u{201C}", "\u{00AB}", "\u{00BB}", "\""],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Nepárový symbol: zdá sa, že chýba '{other}'",
     }
 }
@@ -761,6 +822,7 @@ pub fn symbols_sl() -> UnpairedSymbols {
         start: &["[", "(", "{", "\u{201E}", "\u{00BB}", "\u{00AB}", "\""],
         end: &["]", ")", "}", "\u{201D}", "\u{00AB}", "\u{00BB}", "\""],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Neparni simbol: zdi se, da \u{00BB}{other}\u{00AB} manjka",
     }
 }
@@ -781,6 +843,7 @@ pub fn symbols_el() -> UnpairedSymbols {
         start: &["[", "(", "{", "\u{201C}", "\"", "\u{00AB}"],
         end: &["]", ")", "}", "\u{201D}", "\"", "\u{00BB}"],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Αταίριαστο σύμβολο: το '{other}' φαίνεται πως λείπει",
     }
 }
@@ -806,6 +869,7 @@ pub fn symbols_gl() -> UnpairedSymbols {
             "]", ")", "}", "\u{201D}", "\u{00BB}", "\u{00AB}", "\u{2019}", "\"", "'",
         ],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Símbolo desemparellado: Parece que falta «{other}»",
     }
 }
@@ -826,6 +890,7 @@ pub fn symbols_pl() -> UnpairedSymbols {
         start: &["[", "(", "{", "\u{201E}", "\u{00BB}", "\""],
         end: &["]", ")", "}", "\u{201D}", "\u{00AB}", "\""],
         spanish: false,
+        numerals: numerals_en,
         message_template: "Brak niesparowanego symbolu: „{other}”",
     }
 }

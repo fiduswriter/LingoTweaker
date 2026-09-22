@@ -30,6 +30,10 @@ pub struct SpecificCaseRule {
 }
 
 impl SpecificCaseRule {
+    pub fn rule_id(&self) -> &'static str {
+        self.config.rule_id
+    }
+
     /// `EnglishSpecificCaseRule` (`EN_SPECIFIC_CASE`).
     pub fn from_data(data_dir: &Path) -> Self {
         Self::from_data_with(

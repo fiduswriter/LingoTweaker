@@ -35,6 +35,11 @@ const SV_RULE_ID: &str = "SV_WORD_COHERENCY";
 const SV_DESCRIPTION: &str =
     "Enhetlig och konsekvent stavning av ord när det finns stavningsvarianter att välja på.";
 const SV_CATEGORY_NAME: &str = "Diverse";
+const RU_RULE_ID: &str = "RU_WORD_COHERENCY";
+const RU_DESCRIPTION: &str = "Единообразное написание слов с более чем одним допустимым написанием";
+const RU_ROOT_RULE_ID: &str = "RU_WORD_ROOT_REPEAT";
+const RU_ROOT_DESCRIPTION: &str = "Повтор однокоренных слов";
+const RU_CATEGORY_NAME: &str = "Общие правила";
 
 /// Which subclass's message/category/issue-type the loader applies.
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -47,6 +52,8 @@ enum CoherencyLang {
     Valencian,
     Polish,
     Swedish,
+    Russian,
+    RussianRoot,
 }
 
 pub struct WordCoherencyRule {
@@ -103,6 +110,21 @@ impl WordCoherencyRule {
     /// category MISC (Diverse), issue type misspelling.
     pub fn swedish(data_dir: &Path) -> Self {
         Self::load(data_dir, "sv/rules/coherency.txt", CoherencyLang::Swedish)
+    }
+
+    /// `ru.WordCoherencyRule`: `ru/rules/coherency.txt`, Russian message,
+    /// category MISC.
+    pub fn russian(data_dir: &Path) -> Self {
+        Self::load(data_dir, "ru/rules/coherency.txt", CoherencyLang::Russian)
+    }
+
+    /// `ru.WordRootRepeatRule`: `ru/rules/wordrootrep.txt`, default off.
+    pub fn russian_word_root(data_dir: &Path) -> Self {
+        Self::load(
+            data_dir,
+            "ru/rules/wordrootrep.txt",
+            CoherencyLang::RussianRoot,
+        )
     }
 
     /// `ca.WordCoherencyRule`: `ca/rules/coherency.txt`, Catalan message,
@@ -171,6 +193,10 @@ impl WordCoherencyRule {
             }
             CoherencyLang::Polish => (PL_RULE_ID, PL_DESCRIPTION, None, PL_CATEGORY_NAME),
             CoherencyLang::Swedish => (SV_RULE_ID, SV_DESCRIPTION, None, SV_CATEGORY_NAME),
+            CoherencyLang::Russian => (RU_RULE_ID, RU_DESCRIPTION, None, RU_CATEGORY_NAME),
+            CoherencyLang::RussianRoot => {
+                (RU_ROOT_RULE_ID, RU_ROOT_DESCRIPTION, None, RU_CATEGORY_NAME)
+            }
         };
         let rule_id = if lang == CoherencyLang::Valencian {
             CA_VALENCIA_RULE_ID
@@ -259,6 +285,12 @@ impl WordCoherencyRule {
                             ),
                             CoherencyLang::Swedish => format!(
                                 "Använd endast en av stavningsvarianterna '{token}' och '{other_spelling}' i en och samma text."
+                            ),
+                            CoherencyLang::Russian => format!(
+                                "«{token}» и «{other_spelling}» не следует использовать одновременно"
+                            ),
+                            CoherencyLang::RussianRoot => format!(
+                                "«{token}» и «{other_spelling}» – однокоренные слова, их не стоит использовать одновременно"
                             ),
                         };
                         let marked = sentence
