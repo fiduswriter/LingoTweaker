@@ -539,3 +539,35 @@ fn ukrainian_verb_noun_agreement() {
         );
     }
 }
+
+/// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
+/// `TokenAgreementNounVerbRule` + its exception helper.
+#[test]
+fn ukrainian_noun_verb_agreement() {
+    let _guard = engine_guard();
+    for (text, rng) in [
+        ("Студент прийшли", (0, 15)),
+        ("Студенти прийшов", (0, 16)),
+        ("Діти прийшла", (0, 12)),
+        ("Він прийшли", (0, 11)),
+        ("Людина прийшли", (0, 14)),
+    ] {
+        let matches = one(text, "UK_NOUN_VERB_INFLECTION_AGREEMENT");
+        assert_eq!(matches.len(), 1, "{text}");
+        assert_utf16(text, &matches[0], rng);
+        assert!(
+            matches[0]
+                .message
+                .starts_with("Не узгоджено іменник з дієсловом:"),
+            "{text}: {}",
+            matches[0].message
+        );
+        assert!(matches[0].suggestions.is_empty());
+    }
+    assert_eq!(
+        one("Студент прийшли", "UK_NOUN_VERB_INFLECTION_AGREEMENT")[0].message,
+        "Не узгоджено іменник з дієсловом: \"Студент\" (ч.р.) і \"прийшли\" (мн.)"
+    );
+    assert!(one("Вона прийшла", "UK_NOUN_VERB_INFLECTION_AGREEMENT").is_empty());
+    assert!(one("Місто розташувалися", "UK_NOUN_VERB_INFLECTION_AGREEMENT").is_empty());
+}

@@ -900,6 +900,19 @@ pub fn gender_name(gender: &str) -> String {
     .to_string()
 }
 
+/// `PosTagHelper.PERSON_MAP`.
+pub fn person_name(person: &str) -> String {
+    match person {
+        "1" => "1-а особа",
+        "2" => "2-а особа",
+        "3" => "3-я особа",
+        "s" => "одн.",
+        "p" => "мн.",
+        other => other,
+    }
+    .to_string()
+}
+
 /// `PosTagHelper.GEN_ORDER` (sorting key; unknown -> 0).
 pub fn gen_order(gender: &str) -> i32 {
     match gender {
@@ -1238,6 +1251,83 @@ pub fn token_search_re(
     }
     -1
 }
+
+/// `PosTagHelper.VERB_INF_PATTERN`.
+pub fn verb_inf_pattern() -> &'static LazyLock<fancy_regex::Regex> {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^verb.*:inf.*$").unwrap());
+    &RE
+}
+
+/// `PosTagHelper.NOUN_NON_PRON_V_NAZ_PATTERN`.
+pub fn noun_non_pron_v_naz_pattern() -> &'static LazyLock<fancy_regex::Regex> {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^noun.*:v_naz(?!.*pron).*$").unwrap());
+    &RE
+}
+
+/// `LemmaHelper.isPossiblyProperNoun`.
+pub fn is_possibly_proper_noun(tr: &AnalyzedTokenReadings) -> bool {
+    is_capitalized(tr.surface())
+}
+
+/// `LemmaHelper.isInitial`.
+pub fn is_initial(tr: &AnalyzedTokenReadings) -> bool {
+    static RE: LazyLock<fancy_regex::Regex> =
+        LazyLock::new(|| fancy_regex::Regex::new(r"^[А-ЯІЇЄҐA-Z]\.$").unwrap());
+    tr.surface().ends_with('.') && RE.is_match(tr.surface()).unwrap_or(false)
+}
+
+/// `StringUtils.isAllUpperCase`.
+pub fn is_all_upper(s: &str) -> bool {
+    s.chars().all(|c| !c.is_lowercase()) && s.chars().any(|c| c.is_uppercase())
+}
+
+/// `LemmaHelper.forwardLemmaSearchIdx`.
+pub fn forward_lemma_search_idx(
+    tokens: &[&AnalyzedTokenReadings],
+    pos: i64,
+    depth: i64,
+    lemma: Option<&fancy_regex::Regex>,
+    postag: Option<&fancy_regex::Regex>,
+) -> i64 {
+    let mut i = pos;
+    while i < pos + depth && i < tokens.len() as i64 {
+        let tr = tokens[i as usize];
+        let lemma_ok = lemma.is_none_or(|re| has_lemma_regex(&tr.readings, re));
+        let pos_ok = postag.is_none_or(|re| has_pos_tag_re(tr, re));
+        if lemma_ok && pos_ok {
+            return i;
+        }
+        i += 1;
+    }
+    -1
+}
+
+/// `LemmaHelper.CONJ_FOR_PLURAL` as a regex.
+pub fn conj_for_plural_pattern() -> &'static LazyLock<fancy_regex::Regex> {
+    static RE: LazyLock<fancy_regex::Regex> = LazyLock::new(|| {
+        fancy_regex::Regex::new(r"^(?:і|а|й|та|чи|або|ані|також|то|a|i)$").unwrap()
+    });
+    &RE
+}
+
+/// `LemmaHelper.CONJ_FOR_PLURAL_WITH_COMMA`.
+pub const CONJ_FOR_PLURAL_WITH_COMMA: &[&str] = &[
+    "і",
+    "а",
+    "й",
+    "та",
+    "чи",
+    "або",
+    "ані",
+    "також",
+    "плюс",
+    "то",
+    "a",
+    "i",
+    ",",
+];
 
 #[cfg(test)]
 mod tests {

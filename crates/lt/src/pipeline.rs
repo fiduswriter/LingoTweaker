@@ -5214,11 +5214,14 @@ impl Pipeline {
             Arc::clone(&synthesizer),
             Arc::clone(&gov),
         );
+        let masc_fem = lt_tagger::uk_helpers::load_masc_fem_set(&data_dir.path().join("uk/words"));
         let verb_noun = crate::uk::verb_noun::TokenAgreementVerbNounRule::new(
             Arc::clone(&synthesizer),
             Arc::clone(&gov),
-            lt_tagger::uk_helpers::load_masc_fem_set(&data_dir.path().join("uk/words")),
+            masc_fem.clone(),
         );
+        let noun_verb =
+            crate::uk::noun_verb::TokenAgreementNounVerbRule::new(Arc::clone(&gov), masc_fem);
 
         let ukrainian = Arc::new(crate::uk::UkrainianPipeline {
             tagger,
@@ -5235,6 +5238,7 @@ impl Pipeline {
             numr_noun,
             adj_noun,
             verb_noun,
+            noun_verb,
             spelling,
         });
         Ok(Self {
@@ -11841,6 +11845,22 @@ impl Pipeline {
                         enabled_categories,
                     ),
                     ukrainian.verb_noun.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::uk::noun_verb::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    ukrainian.noun_verb.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
                 if let Some(spelling) = &ukrainian.spelling {
