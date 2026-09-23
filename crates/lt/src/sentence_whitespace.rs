@@ -410,3 +410,17 @@ pub fn check_ru(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     };
     check_with(sentences, &RU_STRINGS)
 }
+
+/// `SentenceWhitespaceRule` with the Tamil `MessagesBundle_ta` strings
+/// (`missing_space_between_sentences` / `whitespace_repetition` /
+/// `addSpaceBetweenSentences` / `category_typography`).
+pub fn check_ta(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const TA_STRINGS: Strings = Strings {
+        description: "வாக்கியங்களுக்கு இடையிலுள்ள வெளியைக் காணவில்லை",
+        repeated_message: "அச்சுப்பிழை: நீங்கள் ஒரு வெண்வெளியைத் திரும்ப இட்டிருக்கிறீர்கள்",
+        add_space_message: "வாக்கியங்களுக்கு இடையில் வெளியைச் சேர்",
+        category_name: "அச்சுக்கலை",
+        max_spaces_between_sentences: 1,
+    };
+    check_with(sentences, &TA_STRINGS)
+}

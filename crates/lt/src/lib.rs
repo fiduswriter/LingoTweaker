@@ -80,6 +80,7 @@ mod specific_case;
 mod sr;
 mod style_too_often;
 mod sv;
+mod ta;
 mod tl;
 mod uk;
 mod unit_conversion;
@@ -485,6 +486,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Ml => Pipeline::new_malayalam(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Ta => Pipeline::new_tamil(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

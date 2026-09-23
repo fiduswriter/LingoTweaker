@@ -266,6 +266,9 @@ fn priority(m: &Match, lang: Lang, variant: Option<&str>) -> i32 {
         // Malayalam also overrides neither `getPriorityForId` nor
         // `getDefaultRulePriorityForStyle` and has no `priority` attributes.
         Lang::Ml => 0,
+        // Tamil also overrides neither `getPriorityForId` nor
+        // `getDefaultRulePriorityForStyle` and has no `priority` attributes.
+        Lang::Ta => 0,
         _ => crate::en::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0),
     }
 }

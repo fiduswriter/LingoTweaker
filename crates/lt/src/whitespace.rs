@@ -365,3 +365,14 @@ pub fn check_fa(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         ("TYPOGRAPHY", "Typography"),
     )
 }
+
+/// `MultipleWhitespaceRule` with the Tamil `MessagesBundle_ta` strings
+/// (`desc_whitespacerepetition` / `whitespace_repetition` / `category_typography`).
+pub fn check_ta(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "திரும்பப் பயன்படுத்திய வெற்றிடம் (தவறான வடிவூட்டம்)",
+        "அச்சுப்பிழை: நீங்கள் ஒரு வெண்வெளியைத் திரும்ப இட்டிருக்கிறீர்கள்",
+        ("TYPOGRAPHY", "அச்சுக்கலை"),
+    )
+}

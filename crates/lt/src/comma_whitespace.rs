@@ -1330,3 +1330,44 @@ fn regex_domain() -> &'static regex::Regex {
         std::sync::LazyLock::new(|| regex::Regex::new(r"^[a-z]{2,10}-Domains?$").unwrap());
     &RE
 }
+
+/// `CommaWhitespaceRule` with the Tamil `MessagesBundle_ta` strings
+/// (`desc_comma_whitespace` / the `no_space_*` / `missing_space_after_comma` /
+/// `space_after_comma` / `category_typography`).
+pub fn check_sentence_ta(
+    tokens: &[AnalyzedTokenReadings],
+    sentence_text: &str,
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_text, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "அச்சுக்கலை".to_string();
+        m.description = "காற்புள்ளி மற்றும் அடைப்புகளுக்கு முன்னும் பின்னும் வெற்றிடத்தைப் பயன்படுத்து".to_string();
+        m.message = translate_comma_message_ta(&m.message);
+    }
+    matches
+}
+
+/// Java `messages.getString` with the `MessagesBundle_ta` bundle.
+fn translate_comma_message_ta(msg: &str) -> String {
+    match msg {
+        "Don't put a space after the opening parenthesis." => {
+            "திறப்பு அடைப்புக்குப் பின் ஒரு வெளியை இடாதே".to_string()
+        }
+        "Don't put a space before the closing parenthesis." => {
+            "மூடும் அடைப்புக்கு முன் ஒரு வெளியை இடாதே".to_string()
+        }
+        "Don't put a space on both sides of a quote symbol." => {
+            // Untranslated in `MessagesBundle_ta` (English fallback).
+            "Don't put a space on both sides of a quote symbol".to_string()
+        }
+        "Put a space after the comma." => "காற்புள்ளிக்குப் பின் ஒரு வெளியை இடு".to_string(),
+        "Put a space after the comma, but not before the comma." => {
+            "ஒரு வெளியைக் காற்புள்ளிக்கு முன்னர் இடாமல் பின்னர் இடுக".to_string()
+        }
+        "Don't put a space before the full stop." => {
+            "முற்றுப்புள்ளிக்கு முன் ஒரு வெளியை இடாதே".to_string()
+        }
+        _ => msg.to_string(),
+    }
+}

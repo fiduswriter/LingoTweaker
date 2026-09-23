@@ -204,6 +204,8 @@ pub struct Pipeline {
     pub khmer: Option<Arc<crate::km::KhmerPipeline>>,
     /// Malayalam pipeline parts (`None` for the other languages)
     pub malayalam: Option<Arc<crate::ml::MalayalamPipeline>>,
+    /// Tamil pipeline parts (`None` for the other languages)
+    pub tamil: Option<Arc<crate::ta::TamilPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1425,6 +1427,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1679,6 +1682,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1892,6 +1896,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2113,6 +2118,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2254,6 +2260,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2514,6 +2521,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2734,6 +2742,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3071,6 +3080,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3232,6 +3242,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3379,6 +3390,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3550,6 +3562,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3699,6 +3712,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3820,6 +3834,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3976,6 +3991,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -4064,6 +4080,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4235,6 +4252,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4318,6 +4336,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4438,6 +4457,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4544,6 +4564,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4664,6 +4685,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4772,6 +4794,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4881,6 +4904,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5000,6 +5024,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5108,6 +5133,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5269,6 +5295,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5469,6 +5496,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5625,6 +5653,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5768,6 +5797,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5845,6 +5875,7 @@ impl Pipeline {
             persian: Some(persian),
             khmer: None,
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5935,6 +5966,7 @@ impl Pipeline {
             persian: None,
             khmer: Some(khmer),
             malayalam: None,
+            tamil: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6023,6 +6055,84 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: Some(malayalam),
+            tamil: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Tamil (`ta`) engine: `Tamil` has a `BaseTagger` (`TamilTagger` over the
+    /// in-tree FSA5 `tamil.dict`), the base `WordTokenizer` (Tamil is written
+    /// with spaces) and the base no-op disambiguator (there is no
+    /// `ta/disambiguation.xml`). There is no synthesizer and no speller. The
+    /// five `Tamil.getRelevantRules` classes are the generic built-ins.
+    pub fn new_tamil(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Ta, "ta", enabled_rules)?;
+        let tagger = Arc::new(lt_tagger::TamilTagger::load(data_dir.path())?);
+        let tamil = Arc::new(crate::ta::TamilPipeline { tagger });
+        Ok(Self {
+            lang: Lang::Ta,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: None,
+            malayalam: None,
+            tamil: Some(tamil),
             clean_overlapping_matches: true,
         })
     }
@@ -6169,6 +6279,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6262,6 +6373,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6359,6 +6471,7 @@ impl Pipeline {
             persian: None,
             khmer: None,
             malayalam: None,
+            tamil: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6379,6 +6492,8 @@ impl Pipeline {
                 crate::km::analyze_khmer_sentence(khmer, sentence_text)
             } else if let Some(malayalam) = &self.malayalam {
                 crate::ml::analyze_malayalam_sentence(malayalam, sentence_text)
+            } else if let Some(tamil) = &self.tamil {
+                crate::ta::analyze_tamil_sentence(tamil, sentence_text)
             } else if self.norwegian.is_some() || self.nordum.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
@@ -8800,6 +8915,42 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check(&analyzed_sentences));
             }
         }
+        // Tamil text-level rules (`Tamil.getRelevantRules`): MultipleWhitespace
+        // (3), LongSentence (4, picky, 50 words) and SentenceWhitespace (5),
+        // all with the `MessagesBundle_ta` strings.
+        if self.lang == crate::Lang::Ta {
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check_ta(&analyzed_sentences));
+            }
+            // `TOO_LONG_SENTENCE` (4), `tags="picky"` (50 words)
+            if options.picky && !disabled_rules.contains("TOO_LONG_SENTENCE") {
+                text_level_matches.extend(crate::long_sentence::check_ta(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::sentence_whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches
+                    .extend(crate::sentence_whitespace::check_ta(&analyzed_sentences));
+            }
+        }
         // Esperanto text-level rules (`Esperanto.getRelevantRules`):
         // GenericUnpairedBrackets (3), UppercaseSentenceStart (5),
         // MultipleWhitespace (7) and SentenceWhitespace (8).
@@ -9720,6 +9871,8 @@ impl Pipeline {
             crate::km::analyze_khmer_sentence(khmer, &text[start..end])
         } else if let Some(malayalam) = &self.malayalam {
             crate::ml::analyze_malayalam_sentence(malayalam, &text[start..end])
+        } else if let Some(tamil) = &self.tamil {
+            crate::ta::analyze_tamil_sentence(tamil, &text[start..end])
         } else if self.norwegian.is_some() || self.nordum.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
@@ -12482,6 +12635,44 @@ impl Pipeline {
                     &mut seen,
                 );
             }
+        }
+        // Tamil sentence-level rules in `Tamil.getRelevantRules` order:
+        // CommaWhitespace (1) and DoublePunctuation (2). MultipleWhitespace
+        // (3), LongSentence (4) and SentenceWhitespace (5) are text-level
+        // above. There is no speller and no ta-specific rule class.
+        if self.lang == crate::Lang::Ta {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence_ta(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence_ta(&analyzed.tokens, start),
+                &mut seen,
+            );
         }
         // Esperanto sentence-level Java rules in `Esperanto.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2), HunspellRule (4)

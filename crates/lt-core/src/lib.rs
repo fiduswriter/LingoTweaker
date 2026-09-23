@@ -91,6 +91,8 @@ pub enum Lang {
     Km,
     /// Malayalam (`ml`; default variant `ml-IN`).
     Ml,
+    /// Tamil (`ta`; default variant `ta-IN`).
+    Ta,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -102,7 +104,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 34] = [
+    pub const ALL: [Lang; 35] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -134,6 +136,7 @@ impl Lang {
         Lang::Fa,
         Lang::Km,
         Lang::Ml,
+        Lang::Ta,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -175,6 +178,7 @@ impl Lang {
             "fa" => Some(Lang::Fa),
             "km" => Some(Lang::Km),
             "ml" => Some(Lang::Ml),
+            "ta" => Some(Lang::Ta),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -215,6 +219,7 @@ impl Lang {
             Lang::Fa => "fa",
             Lang::Km => "km",
             Lang::Ml => "ml",
+            Lang::Ta => "ta",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -378,6 +383,11 @@ impl Lang {
                 code: "ml",
                 long_code: "ml-IN",
                 name: "Malayalam",
+            },
+            Lang::Ta => Language {
+                code: "ta",
+                long_code: "ta-IN",
+                name: "Tamil",
             },
             Lang::No => Language {
                 code: "no",

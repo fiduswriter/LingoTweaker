@@ -324,3 +324,19 @@ pub fn check_fa(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         FA_MAX_WORDS,
     )
 }
+
+/// `Tamil.getRelevantRules`: `new LongSentenceRule(messages, userConfig, 50)`
+/// (`MessagesBundle_ta` `long_sentence_rule_desc`/`_msg2`; the `_msg2` value
+/// is untranslated in the Tamil bundle, so Java falls back to the English
+/// base bundle).
+pub fn check_ta(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const TA_MAX_WORDS: usize = 50;
+    check_impl(
+        sentences,
+        RULE_ID,
+        "வாசிப்பு: 50 சொற்களுக்குக் கூடுதலான வாக்கியம்",
+        "This sentence is over 50 words long at the marked position, consider revising",
+        ("STYLE", "பாணி"),
+        TA_MAX_WORDS,
+    )
+}

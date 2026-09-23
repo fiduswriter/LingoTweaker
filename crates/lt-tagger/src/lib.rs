@@ -55,6 +55,7 @@ pub mod spanish_synth;
 pub mod swedish;
 pub mod swedish_synth;
 pub mod tagalog;
+pub mod tamil;
 pub mod uk_compound;
 pub mod uk_helpers;
 pub mod ukrainian;
@@ -109,6 +110,7 @@ pub use spanish_synth::SpanishSynthesizer;
 pub use swedish::SwedishTagger;
 pub use swedish_synth::SwedishSynthesizer;
 pub use tagalog::TagalogTagger;
+pub use tamil::TamilTagger;
 pub use ukrainian::UkrainianTagger;
 pub use ukrainian_synth::UkrainianSynthesizer;
 

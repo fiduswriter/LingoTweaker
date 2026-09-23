@@ -541,3 +541,22 @@ pub fn check_sentence_fa(
     }
     matches
 }
+
+/// `DoublePunctuationRule` with the Tamil `MessagesBundle_ta` strings
+/// (`desc_double_punct` / `two_dots` / `two_commas` / `double_*_short` /
+/// `category_punctuation`).
+pub fn check_sentence_ta(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Match> {
+    let mut matches = check_sentence(tokens, sentence_offset);
+    for m in &mut matches {
+        m.category_name = "நிறுத்தக்குறியீடு".to_string();
+        m.description = "இரண்டு அடுத்தடுத்த புள்ளிகளையோ காற்புள்ளிகளையோ பயன்படுத்து".to_string();
+        if m.message == TWO_DOTS {
+            m.message = "இரு அடுத்தடுத்த புள்ளிகள்".to_string();
+            m.short_message = Some("இரு அடுத்தடுத்த புள்ளிகள்".to_string());
+        } else if m.message == TWO_COMMAS {
+            m.message = "இரு அடுத்தடுத்த காற்புள்ளிகள்".to_string();
+            m.short_message = Some("இரு அடுத்தடுத்த காற்புள்ளிகள்".to_string());
+        }
+    }
+    matches
+}
