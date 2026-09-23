@@ -145,12 +145,12 @@ date-filter rules either).
   handling, `RussianWordTokenizer`, hybrid disambiguator, `RussianChunker`,
   both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules
   and `compile_failures()` is empty).
-  uk is 3 only-Java / 1 only-Rust / 2 field diffs, the documented known
-  fidelity gaps of `docs/differences.md` #14 (the XML disambiguation
-  forward-scan cascade, a prep+`не`+noun case-government gap, the `т. 2 ч. 1`
-  abbreviation sentence segmentation and one plural-adjective/proper-name
-  overlap tie-break), pinned exactly with
-  `--expect-only-java`/`--expect-only-rust`/`--expect-field-diffs` in
+  uk is 3 only-Java / 1 only-Rust / 0 field diffs, the documented known
+  fidelity gaps of `docs/differences.md` #14 (a prep+`не`+noun
+  case-government gap, the `т. 2 ч. 1` abbreviation sentence segmentation and
+  one plural-adjective/proper-name overlap tie-break; the XML disambiguation
+  forward-scan cascade #14a is fixed), pinned exactly with
+  `--expect-only-java`/`--expect-only-rust` in
   `scripts/ci/parity.sh` (D-273…D-281).
   sr is exactly 0/0/0 (D-288): the pinned `sr` module is excluded from the LT
   reactor and does not compile against any released core (D-285), so the

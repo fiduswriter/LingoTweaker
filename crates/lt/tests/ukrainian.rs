@@ -623,6 +623,29 @@ fn ukrainian_adj_noun_agreement() {
     }
 }
 
+/// Java-probed (`scripts/oracle/uk/probe-disambig.sh`): the XML
+/// disambiguation forward-scan cascade. `non_v_kly_2` removes the vocative
+/// reading from `старший` and then, because the scan continues on the mutated
+/// readings, from the following `сестри`; `lt-disambig` now re-scans
+/// single-pattern `remove` rules forward like Java's `doMatch`. Regression:
+/// `сестри` kept a spurious `кличний` reading and the message exposed it.
+#[test]
+fn ukrainian_disambiguation_vocative_cascade() {
+    let _guard = engine_guard();
+    for text in [
+        "він старший сестри на 3 роки",
+        "вона старша сестри на 3 роки",
+    ] {
+        let matches = one(text, "UK_ADJ_NOUN_INFLECTION_AGREEMENT");
+        assert_eq!(matches.len(), 1, "{text}");
+        assert!(
+            !matches[0].message.contains("кличний"),
+            "spurious vocative reading in {text}: {}",
+            matches[0].message
+        );
+    }
+}
+
 /// Java-probed (`scripts/oracle/uk/probe-rule.sh`):
 /// `TokenAgreementVerbNounRule` + its exception helper.
 #[test]

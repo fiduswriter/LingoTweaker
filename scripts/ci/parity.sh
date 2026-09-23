@@ -215,14 +215,15 @@ elif [ "$LANG_ARG" = "pl" ]; then
   EXTRA+=(--expect-only-rust=NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA=1)
   EXTRA+=(--expect-only-rust=ZDANIA_ZLOZONE=1)
 elif [ "$LANG_ARG" = "uk" ]; then
-  # documented known fidelity gaps (docs/differences.md #14): the XML
-  # disambiguation forward-scan cascade (`non_v_kly_2`), a prep+`не`+noun
-  # case-government gap, an overlap tie-break for a proper-name list and the
-  # abbreviation sentence segmentation (`т. 2 ч. 1`).
+  # documented known fidelity gaps (docs/differences.md #14): the prep+`не`+
+  # noun case-government gap, an overlap tie-break for a proper-name list and
+  # the abbreviation sentence segmentation (`т. 2 ч. 1`). The XML
+  # disambiguation forward-scan cascade (#14a) is fixed: `lt-disambig` now
+  # re-scans single-pattern `remove` rules forward like Java's `doMatch`, so
+  # the 2 `UK_ADJ_NOUN_INFLECTION_AGREEMENT` field diffs are gone.
   EXTRA+=(--expect-only-java=UK_PREP_NOUN_INFLECTION_AGREEMENT=1)
   EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
   EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
-  EXTRA+=(--expect-field-diffs=UK_ADJ_NOUN_INFLECTION_AGREEMENT=2)
 elif [ "$LANG_ARG" = "ar" ]; then
   # documented known fidelity gaps (docs/differences.md #15): the
   # `syntax_numeric_0003` number-phrase rule (its `ArabicNumbersWords`
