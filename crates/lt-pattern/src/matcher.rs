@@ -2280,7 +2280,11 @@ enum UnifyEntry {
 }
 
 #[allow(clippy::too_many_arguments)]
-fn try_match_at<T: Deref<Target = AnalyzedTokenReadings>>(
+/// Attempt a match of `pattern` at exactly `start` (Java
+/// `AbstractPatternRulePerformer.matchFrom`). `find_matches*` loop over starts
+/// with this; callers that need a forward scan (disambiguation) call it
+/// directly so each start is tried once.
+pub fn try_match_at<T: Deref<Target = AnalyzedTokenReadings>>(
     pattern: &CompiledPattern,
     suggestions: &[Vec<SuggestionPart>],
     suppress_misspelled: &[bool],

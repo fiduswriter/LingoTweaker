@@ -206,35 +206,30 @@ impl XmlDisambiguator {
             .collect();
         let view_refs: Vec<&lt_core::AnalyzedTokenReadings> =
             view.iter().map(|&i| &sentence.tokens[i]).collect();
-        let mut applications: Vec<Application> = Vec::new();
+        let mut raw: Vec<(Arc<CompiledPattern>, pm::PatternMatch)> = Vec::new();
         for compiled in &rule.compiled {
-            let matches = pm::find_matches_with_unify(
+            for m in pm::find_matches_with_unify(
                 compiled,
                 &[],
                 &view_refs,
                 None,
                 Some(&self.unify_config),
-            );
-            applications.extend(
-                matches
-                    .into_iter()
-                    .filter(|m| {
-                        !rule.antipatterns.iter().any(|ap| {
-                            antipattern_overlaps(
-                                ap,
-                                &view_refs,
-                                m.start_tok(),
-                                m.end_tok(),
-                                self.synth.as_deref(),
-                            )
-                        })
-                    })
-                    .filter(|m| {
-                        filter_accepts(rule, self.filters.as_ref(), &view_refs, m, sentence)
-                    })
-                    .map(|m| (Arc::clone(compiled), m.positions, m.unified)),
-            );
+            ) {
+                raw.push((Arc::clone(compiled), m));
+            }
         }
+        let applications: Vec<Application> = if raw.is_empty() {
+            Vec::new()
+        } else {
+            let anti_ranges = AntipatternRanges::build(rule, &view_refs, self.synth.as_deref());
+            raw.into_iter()
+                .filter(|(_, m)| !anti_ranges.overlaps(m.start_tok(), m.end_tok()))
+                .filter(|(_, m)| {
+                    filter_accepts(rule, self.filters.as_ref(), &view_refs, m, sentence)
+                })
+                .map(|(compiled, m)| (compiled, m.positions, m.unified))
+                .collect()
+        };
         drop(view_refs);
         for (compiled, positions, unified) in applications {
             apply_action(
@@ -328,77 +323,100 @@ impl XmlDisambiguator {
                 }
             }
             // Java `DisambiguationPatternRuleReplacer.replace`: `doMatch`
-            // scans start positions in order and applies each match's action
-            // immediately; the action mutates the shared token readings in
-            // place, so a later start sees the change. This matters for `add`
-            // (readings added by an earlier match enable a later one,
-            // `propaga_marca_reflexiu` chains han→pogut→tornar) and for
-            // `remove` (a removal lets the pattern match a later start, e.g.
-            // uk `non_v_kly_2` cascades the vocative removal through
-            // `він старший сестри`). For a single-pattern rule, re-scan after
-            // each application, only for starts after the applied one,
-            // mirroring Java's forward scan.
+            // scans the candidate start positions once, in order, and applies
+            // each match's action immediately; the action mutates the shared
+            // token readings in place, so a later start sees the change. This
+            // matters for `add` (readings added by an earlier match enable a
+            // later one, `propaga_marca_reflexiu` chains
+            // han→pogut→tornar) and for `remove` (a removal lets the pattern
+            // match a later start, e.g. uk `non_v_kly_2` cascades the vocative
+            // removal through `він старший сестри`). Each start is attempted
+            // only once: re-scanning the whole sentence per application made
+            // this O(n^2) on long sentences (German `UNIFY_PRP_DET_SUB` matched
+            // 152 times in one 31k-char sentence and spent ~47 s re-scanning).
             if rule.compiled.len() == 1 && matches!(rule.disambig.action.as_str(), "add" | "remove")
             {
                 let compiled = &rule.compiled[0];
-                let starts = compiled
+                let limit = view.len().saturating_sub(compiled.min_len) + 1;
+                let candidates: Vec<usize> = match compiled
                     .anchor
                     .as_ref()
-                    .map(|a| pm::anchor_starts(a, &token_lower, &lemma_lower));
-                if starts.as_ref().is_some_and(|s| s.is_empty()) {
+                    .map(|a| pm::anchor_starts(a, &token_lower, &lemma_lower))
+                {
+                    Some(starts) => {
+                        let mut v = starts;
+                        v.retain(|&i| i < limit);
+                        v.sort_unstable();
+                        v.dedup();
+                        v
+                    }
+                    None => (0..limit.min(view.len())).collect(),
+                };
+                if candidates.is_empty() {
                     continue;
                 }
-                let mut min_start = 0usize;
-                let mut applied: Vec<(usize, usize)> = Vec::new();
-                loop {
-                    let view_refs: Vec<&lt_core::AnalyzedTokenReadings> =
-                        view.iter().map(|&i| &sentence.tokens[i]).collect();
-                    let mut best: Option<Application> = None;
-                    let mut best_start = usize::MAX;
-                    let mut best_end = 0usize;
-                    let matches = pm::find_matches_with_unify(
-                        compiled,
-                        &[],
-                        &view_refs,
-                        starts.as_deref(),
-                        Some(&self.unify_config),
-                    );
-                    for m in matches {
-                        let s = m.start_tok();
-                        let e = m.end_tok();
-                        if s < min_start || applied.contains(&(s, e)) {
-                            continue;
+                let mut cursor = 0usize;
+                let mut applied = 0usize;
+                let mut view_refs: Vec<&lt_core::AnalyzedTokenReadings> =
+                    view.iter().map(|&i| &sentence.tokens[i]).collect();
+                let mut anti_ranges: Option<AntipatternRanges> = None;
+                while cursor < candidates.len() {
+                    let mut hit: Option<(usize, pm::PatternMatch)> = None;
+                    while cursor < candidates.len() {
+                        let start = candidates[cursor];
+                        if let Some(m) = pm::try_match_at(
+                            compiled,
+                            &[],
+                            &[],
+                            &view_refs,
+                            start,
+                            Some(&self.unify_config),
+                            None,
+                        ) {
+                            let s = m.start_tok();
+                            let e = m.end_tok();
+                            let anti = anti_ranges
+                                .get_or_insert_with(|| {
+                                    AntipatternRanges::build(
+                                        rule,
+                                        &view_refs,
+                                        self.synth.as_deref(),
+                                    )
+                                })
+                                .overlaps(s, e);
+                            if !anti
+                                && filter_accepts(
+                                    rule,
+                                    self.filters.as_ref(),
+                                    &view_refs,
+                                    &m,
+                                    sentence,
+                                )
+                            {
+                                hit = Some((cursor, m));
+                                break;
+                            }
                         }
-                        if rule.antipatterns.iter().any(|ap| {
-                            antipattern_overlaps(ap, &view_refs, s, e, self.synth.as_deref())
-                        }) {
-                            continue;
-                        }
-                        if !filter_accepts(rule, self.filters.as_ref(), &view_refs, &m, sentence) {
-                            continue;
-                        }
-                        if s < best_start {
-                            best_start = s;
-                            best_end = e;
-                            best = Some((Arc::clone(compiled), m.positions, m.unified));
-                        }
+                        cursor += 1;
                     }
-                    drop(view_refs);
-                    let Some((compiled, positions, unified)) = best else {
+                    let Some((hit_cursor, m)) = hit else {
                         break;
                     };
+                    drop(view_refs);
                     apply_action(
                         &rule.disambig,
-                        &compiled,
+                        compiled,
                         sentence,
                         &view,
-                        &positions,
-                        unified.as_deref(),
+                        &m.positions,
+                        m.unified.as_deref(),
                     );
-                    applied.push((best_start, best_end));
-                    min_start = best_start + 1;
                     maps_dirty = true;
-                    if applied.len() > view.len() + 8 {
+                    applied += 1;
+                    cursor = hit_cursor + 1;
+                    view_refs = view.iter().map(|&i| &sentence.tokens[i]).collect();
+                    anti_ranges = None;
+                    if applied > view.len() + 8 {
                         break;
                     }
                 }
@@ -408,7 +426,7 @@ impl XmlDisambiguator {
             let applications: Vec<Application> = {
                 let view_refs: Vec<&lt_core::AnalyzedTokenReadings> =
                     view.iter().map(|&i| &sentence.tokens[i]).collect();
-                let mut applications = Vec::new();
+                let mut raw: Vec<(Arc<CompiledPattern>, pm::PatternMatch)> = Vec::new();
                 for compiled in &rule.compiled {
                     // Java `AbstractPatternRulePerformer.doMatch`: the anchor
                     // hint restricts the candidate start positions
@@ -419,34 +437,32 @@ impl XmlDisambiguator {
                     if starts.as_ref().is_some_and(|s| s.is_empty()) {
                         continue;
                     }
-                    let matches = pm::find_matches_with_unify(
+                    for m in pm::find_matches_with_unify(
                         compiled,
                         &[],
                         &view_refs,
                         starts.as_deref(),
                         Some(&self.unify_config),
-                    );
-                    applications.extend(
-                        matches
-                            .into_iter()
-                            .filter(|m| {
-                                !rule.antipatterns.iter().any(|ap| {
-                                    antipattern_overlaps(
-                                        ap,
-                                        &view_refs,
-                                        m.start_tok(),
-                                        m.end_tok(),
-                                        self.synth.as_deref(),
-                                    )
-                                })
-                            })
-                            .filter(|m| {
-                                filter_accepts(rule, self.filters.as_ref(), &view_refs, m, sentence)
-                            })
-                            .map(|m| (Arc::clone(compiled), m.positions, m.unified)),
-                    );
+                    ) {
+                        raw.push((Arc::clone(compiled), m));
+                    }
                 }
-                applications
+                // Antipattern ranges are only needed once the rule actually
+                // matched; building them eagerly made rules with antipatterns
+                // but no match pay a full antipattern scan per sentence.
+                if raw.is_empty() {
+                    Vec::new()
+                } else {
+                    let anti_ranges =
+                        AntipatternRanges::build(rule, &view_refs, self.synth.as_deref());
+                    raw.into_iter()
+                        .filter(|(_, m)| !anti_ranges.overlaps(m.start_tok(), m.end_tok()))
+                        .filter(|(_, m)| {
+                            filter_accepts(rule, self.filters.as_ref(), &view_refs, m, sentence)
+                        })
+                        .map(|(compiled, m)| (compiled, m.positions, m.unified))
+                        .collect()
+                }
             };
             // phase 2 (mutable): apply actions
             if !applications.is_empty() {
@@ -527,21 +543,37 @@ fn filter_accepts(
     filter.accept(&ctx).accepted
 }
 
-fn antipattern_overlaps(
-    anti: &CompiledPattern,
-    tokens: &[&lt_core::AnalyzedTokenReadings],
-    first: usize,
-    last: usize,
-    synth: Option<&dyn pm::Synthesizer>,
-) -> bool {
-    for m in pm::find_matches_with_synth(anti, &[], &[], tokens, None, None, synth) {
-        let a_first = m.start_tok();
-        let a_last = m.end_tok();
-        if a_first <= last && a_last >= first {
-            return true;
+/// All antipattern match ranges for one rule against the current tokens.
+/// `DisambiguationPatternRuleReplacer.keepByDisambig` re-runs every antipattern
+/// per candidate match, which is O(candidates * antipatterns * n); the sentence
+/// is immutable while a rule's candidates are collected, so the ranges are
+/// computed once and reused (same result, no O(n^2)).
+struct AntipatternRanges {
+    ranges: Vec<(usize, usize)>,
+}
+
+impl AntipatternRanges {
+    fn build(
+        rule: &CompiledDisambigRule,
+        tokens: &[&lt_core::AnalyzedTokenReadings],
+        synth: Option<&dyn pm::Synthesizer>,
+    ) -> Self {
+        let mut ranges = Vec::new();
+        for anti in &rule.antipatterns {
+            for m in pm::find_matches_with_synth(anti, &[], &[], tokens, None, None, synth) {
+                ranges.push((m.start_tok(), m.end_tok()));
+            }
         }
+        Self { ranges }
     }
-    false
+
+    /// Java's three-way overlap test: any antipattern match touching
+    /// `[first, last]` rejects the candidate.
+    fn overlaps(&self, first: usize, last: usize) -> bool {
+        self.ranges
+            .iter()
+            .any(|&(a_first, a_last)| a_first <= last && a_last >= first)
+    }
 }
 
 /// Java `AnalyzedTokenReadings` copy constructor: keeps the SENT_END and
