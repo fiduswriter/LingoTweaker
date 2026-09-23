@@ -58,6 +58,12 @@ fn js_error(error: impl std::fmt::Display) -> JsError {
     JsError::new(&error.to_string())
 }
 
+/// JSON body of [`LtEngine::check_matches_json`].
+#[derive(serde::Serialize)]
+struct MatchesOnly<'a> {
+    matches: &'a [lt::Match],
+}
+
 /// Parse `YYYY-MM-DD` (an ISO timestamp may carry a time suffix).
 fn parse_ymd(text: &str) -> Option<(i32, u32, u32)> {
     let date = text.split(['T', ' ']).next().unwrap_or(text);
@@ -125,6 +131,20 @@ impl LtEngine {
     pub fn check_json(&self, text: &str) -> Result<String, JsError> {
         let result = self.engine.check(text).map_err(js_error)?;
         serde_json::to_string(&result).map_err(js_error)
+    }
+
+    /// Check `text` and return only the matches as JSON: `{"matches":[…]}`.
+    ///
+    /// The demo (and any UI that only renders issues) never needs the input
+    /// text and per-sentence text spans that [`Self::check_json`] also
+    /// serializes; for long paragraphs this JSON round-trip is a measurable
+    /// share of the per-check latency.
+    pub fn check_matches_json(&self, text: &str) -> Result<String, JsError> {
+        let result = self.engine.check(text).map_err(js_error)?;
+        serde_json::to_string(&MatchesOnly {
+            matches: &result.matches,
+        })
+        .map_err(js_error)
     }
 
     /// The language code this engine was built for.

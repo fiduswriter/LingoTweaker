@@ -79,7 +79,7 @@ fn arabic_engine_state() {
     // `grammar.xml` parses to 450 rule units; one rule (`gender_0103`) is
     // `default="off"`, so 449 are active by default. `lt-cli inventory` reports
     // the parsed 450.
-    assert_eq!(ar.grammar().expect("grammar").rules.len(), 450);
+    assert_eq!(ar.grammar_rule_count(), 450);
     assert_eq!(ar.active_rule_count(), 449);
     assert_eq!(ar.skipped_counts().filters, 0);
     assert_eq!(ar.skipped_counts().off_by_default, 1);

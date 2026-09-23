@@ -82,7 +82,7 @@ fn khmer_engine_state() {
     // `grammar.xml` parses to 33 rule units; four are `default="off"`
     // (`NOUN_POSESIVEPRONOUN`, `ADJ_NOUN`, `Gender_spec`, `NEG_PART_POS`), so
     // 29 are active by default. `lt-cli inventory` reports the parsed 33.
-    assert_eq!(km.grammar().expect("grammar").rules.len(), 33);
+    assert_eq!(km.grammar_rule_count(), 33);
     assert_eq!(km.active_rule_count(), 29);
     assert_eq!(km.skipped_counts().filters, 0);
     assert_eq!(km.skipped_counts().off_by_default, 4);

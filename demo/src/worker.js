@@ -17,6 +17,12 @@ let loadGeneration = 0;
 let phase = "idle";
 let activeUrl = null;
 let packManifestPromise = null;
+// per-paragraph check results (text -> matches): an edit burst re-checks
+// every paragraph, but only the edited ones changed; capped LRU-style by
+// insertion, cleared on engine rebuild (rule settings may change results)
+const paragraphCache = new Map();
+const PARAGRAPH_CACHE_MAX = 200;
+let zstdSupported = null;
 
 function post(message) {
   self.postMessage(message);
@@ -27,13 +33,35 @@ function ensureInit() {
   return initPromise;
 }
 
-/** Gunzip only when the bytes carry the gzip magic (see `fetchPack`). */
-async function decompressIfGzipped(raw) {
-  if (raw.length < 2 || raw[0] !== 0x1f || raw[1] !== 0x8b) {
-    return raw;
+/** Decompress the sniffed codec: gzip (0x1f8b) or zstd (0x28B52FFD). */
+async function decompressIfCompressed(raw) {
+  if (raw.length >= 4 && raw[0] === 0x28 && raw[1] === 0xb5 && raw[2] === 0x2f && raw[3] === 0xfd) {
+    const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("zstd"));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
   }
-  const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip"));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
+  if (raw.length >= 2 && raw[0] === 0x1f && raw[1] === 0x8b) {
+    const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+  return raw;
+}
+
+/** `DecompressionStream("zstd")` is Chrome/Edge-only (Safari: no, Firefox:
+ * flag) — probe once so the pack fetch can prefer `.pack.zst`. */
+function ensureZstdSupport() {
+  if (zstdSupported === null) {
+    zstdSupported = typeof DecompressionStream === "function";
+    if (zstdSupported) {
+      zstdSupported = (async () => {
+        // Safari throws InvalidStateError on construction even when the
+        // constructor exists
+        const probe = new DecompressionStream("zstd");
+        await probe.writable.getWriter().close().catch(() => {});
+        return true;
+      })().catch(() => false);
+    }
+  }
+  return zstdSupported;
 }
 
 /**
@@ -47,7 +75,7 @@ async function fetchWasmBytes() {
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
-    return await decompressIfGzipped(new Uint8Array(await response.arrayBuffer()));
+    return await decompressIfCompressed(new Uint8Array(await response.arrayBuffer()));
   } catch {
     const response = await fetch(wasmUrl);
     if (!response.ok) {
@@ -95,13 +123,15 @@ async function fetchPack(url, onProgress) {
   }
   const raw = new Uint8Array(await new Blob(chunks).arrayBuffer());
   // Servers may serve `.gz` files with `Content-Encoding: gzip` (the browser
-  // then hands us the decoded pack) or as opaque gzip bytes.
-  return decompressIfGzipped(raw);
+  // then hands us the decoded pack) or as opaque gzip bytes; `.zst` files
+  // are always opaque zstd frames.
+  return decompressIfCompressed(raw);
 }
 
 /** Build (or rebuild) the engine from the cached pack bytes. */
 async function build(options) {
   const generation = loadGeneration;
+  paragraphCache.clear();
   post({ type: "status", phase: "build", lang: current.lang });
   await ensureInit();
   const started = performance.now();
@@ -133,8 +163,10 @@ async function load({ lang, variant, pack, options }) {
   if (!packBytes || !current || current.pack !== pack) {
     const manifest = await ensurePackManifest();
     const entry = manifest[pack];
-    const version = entry?.sha256 ? `?v=${entry.sha256.slice(0, 12)}` : "";
-    const file = entry?.file ?? `${pack}.pack.gz`;
+    const useZst = Boolean((await ensureZstdSupport()) && entry?.zst);
+    const chosen = useZst ? entry.zst : entry;
+    const version = chosen?.sha256 ? `?v=${chosen.sha256.slice(0, 12)}` : "";
+    const file = chosen?.file ?? `${pack}.pack.gz`;
     const url = new URL(
       `${import.meta.env.BASE_URL}packs/${file}${version}`,
       self.location.origin,
@@ -164,8 +196,15 @@ function check({ id, paragraphs }) {
     if (!text || text.trim().length === 0) {
       return { index, matches: [] };
     }
-    const result = JSON.parse(engine.check_json(text));
-    return { index, matches: result.matches };
+    let matches = paragraphCache.get(text);
+    if (!matches) {
+      matches = JSON.parse(engine.check_matches_json(text)).matches;
+      if (paragraphCache.size >= PARAGRAPH_CACHE_MAX) {
+        paragraphCache.delete(paragraphCache.keys().next().value);
+      }
+      paragraphCache.set(text, matches);
+    }
+    return { index, matches };
   });
   post({ type: "result", id, results, ms: performance.now() - started });
 }

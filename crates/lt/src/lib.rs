@@ -522,6 +522,14 @@ impl EngineBuilder {
                 )))
             }
         };
+        let mut pipeline = pipeline;
+        // the parsed grammar's owned rule payloads (thousands of `String`
+        // clones for en) are only needed for compilation and
+        // `Engine::grammar()`; the compiled rules and disambiguator own
+        // their copies, so the payloads are dropped here and only the
+        // original count is retained
+        pipeline.grammar.rules_loaded = pipeline.grammar.rules.len();
+        pipeline.grammar.rules = Vec::new();
         let pipeline = std::sync::Arc::new(pipeline);
         // `SuppressIfAnyRuleMatchesFilter` needs the assembled pipeline to run
         // the listed rules on a candidate sentence (`JLanguageTool`).
@@ -653,8 +661,19 @@ impl Engine {
     }
 
     /// Load the XML rule grammar for the engine's language.
+    ///
+    /// The owned rule payloads are drained after compilation (they live on
+    /// in the compiled rules and disambiguator), so the returned grammar is
+    /// the loaded skeleton: categories, equivalence defs and counters, with
+    /// an empty `rules` list. Use [`Engine::grammar_rule_count`] for the
+    /// number of rules the loader read.
     pub fn grammar(&self) -> Result<Grammar> {
         Ok(self.pipeline.grammar.clone())
+    }
+
+    /// Number of rules the grammar loader read (before the payload drain).
+    pub fn grammar_rule_count(&self) -> usize {
+        self.pipeline.grammar.rules_loaded
     }
 
     /// Check `text` and return sentences plus matches (UTF-8 byte offsets).
@@ -735,7 +754,10 @@ mod tests {
                 return;
             }
         };
-        let grammar = engine.grammar().unwrap();
-        assert!(grammar.rules.len() > 5000, "rules: {}", grammar.rules.len());
+        assert!(
+            engine.grammar_rule_count() > 5000,
+            "rules: {}",
+            engine.grammar_rule_count()
+        );
     }
 }

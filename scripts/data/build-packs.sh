@@ -7,6 +7,9 @@
 # `rules/` is packed. Output:
 #
 #   <out-dir>/<lang>.pack.gz
+#   <out-dir>/<lang>.pack.zst    (sidecar; browsers with
+#                                DecompressionStream("zstd") fetch it instead
+#                                and save ~16-19% over gzip)
 #   <out-dir>/manifest.json      { "<lang>": { file, bytes, sha256 } }
 #
 # The pack format is `lt-data`'s (`crates/lt-data/src/pack.rs`): one file per
@@ -51,10 +54,26 @@ fi
 
 rm -rf "$out_dir"
 mkdir -p "$out_dir"
+# zstd sidecars are optional: without the CLI, only gzip is produced and the
+# demo falls back to `.pack.gz` (DecompressionStream("zstd") is not
+# universally available anyway).
+if command -v zstd >/dev/null 2>&1; then
+  HAVE_ZSTD=1
+else
+  HAVE_ZSTD=""
+  echo "build-packs: zstd not found, skipping .pack.zst sidecars" >&2
+fi
 for lang in $langs; do
-  # -n keeps the output deterministic (no timestamp in the gzip header).
+  # Build the raw pack once; both codecs compress those exact bytes.
   "$pack_data" "$data_dir" "$lang" "$out_dir/$lang.pack"
-  gzip -9 -n -f "$out_dir/$lang.pack"
+  # -n keeps the output deterministic (no timestamp in the gzip header).
+  gzip -9 -n -f -k "$out_dir/$lang.pack"
+  if [ -n "$HAVE_ZSTD" ]; then
+    # -19: the pack is a build artifact downloaded once, ratio is everything.
+    # zstd -f refuses to overwrite via a pipe mismatch; plain file input.
+    zstd -q -19 -f --no-progress "$out_dir/$lang.pack"
+  fi
+  rm -f "$out_dir/$lang.pack"
 done
 
 python3 - "$out_dir" <<'PY'
@@ -67,11 +86,19 @@ out = pathlib.Path(sys.argv[1])
 manifest = {}
 for path in sorted(out.glob("*.pack.gz")):
     lang = path.name[: -len(".pack.gz")]
-    manifest[lang] = {
+    entry = {
         "file": path.name,
         "bytes": path.stat().st_size,
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
     }
+    zst = out / f"{lang}.pack.zst"
+    if zst.exists():
+        entry["zst"] = {
+            "file": zst.name,
+            "bytes": zst.stat().st_size,
+            "sha256": hashlib.sha256(zst.read_bytes()).hexdigest(),
+        }
+    manifest[lang] = entry
 (out / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 print(f"build-packs: {len(manifest)} languages -> {out}")
 PY
