@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build the napi-rs Node addon, smoke-test it and publish to npm under a
-# dist-tag. Prereleases default to the `next` tag so `latest` keeps pointing at
-# the last stable release (currently the 0.0.1 placeholder).
+# dist-tag: stable versions go to `latest`, prereleases to `next` (so `latest`
+# keeps pointing at the last stable release). Override with NPM_TAG.
 #
 # Auth: `npm login` must be logged in for the `johanneswilm` account. With 2FA
 # set NPM_OTP (e.g. NPM_OTP="$(otp npm)") to pass --otp non-interactively.
@@ -35,7 +35,12 @@ if [ "$BUILD_ONLY" = 1 ]; then
   exit 0
 fi
 
-TAG="${NPM_TAG:-next}"
+TAG="${NPM_TAG:-$(
+  case "$(sed -nE 's/^version = "(.*)"/\1/p' "$ROOT/Cargo.toml" | head -1)" in
+    *-*) echo next ;;
+    *) echo latest ;;
+  esac
+)}"
 args=(--tag "$TAG")
 if [ -n "${NPM_OTP:-}" ]; then
   args+=(--otp "$NPM_OTP")

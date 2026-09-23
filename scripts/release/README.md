@@ -45,8 +45,9 @@ Notes:
 
 - `crates.io` rate-limits *new* crates and returns a retry time in the 429
   response. Re-run `publish-crates.sh`; it continues where it stopped.
-- PyPI/npm dist-tags: prereleases go to npm `next` so `latest` stays on the
-  last stable release. PyPI marks prereleases via the PEP 440 version itself.
+- PyPI/npm dist-tags: stable versions go to npm `latest`, prereleases to `next`
+  (so `latest` stays on the last stable release). PyPI marks prereleases via
+  the PEP 440 version itself.
 - `publish-pypi-data.sh` needs a `PYPI_API_TOKEN` secret (or `TWINE_PASSWORD`);
   without it the workflow builds the wheels and skips the upload. PyPI trusted
   publishing would have to be configured separately for each of the ~18 data

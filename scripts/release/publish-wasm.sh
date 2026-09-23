@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build the wasm-bindgen bindings for the browser (ESM) and Node (CJS),
 # smoke-test the Node build and publish the `lingotweaker-wasm` npm package
-# under a dist-tag. Prereleases default to the `next` tag.
+# under a dist-tag: stable versions go to `latest`, prereleases to `next`.
 #
 # Data is not bundled: the package depends on `lingotweaker-data`, and
 # `lingotweaker-wasm/pack` resolves that package locally in Node or fetches the
@@ -46,7 +46,12 @@ if [ "$BUILD_ONLY" = 1 ]; then
   exit 0
 fi
 
-TAG="${NPM_TAG:-next}"
+TAG="${NPM_TAG:-$(
+  case "$(sed -nE 's/^version = "(.*)"/\1/p' "$ROOT/Cargo.toml" | head -1)" in
+    *-*) echo next ;;
+    *) echo latest ;;
+  esac
+)}"
 args=(--tag "$TAG")
 if [ -n "${NPM_OTP:-}" ]; then
   args+=(--otp "$NPM_OTP")

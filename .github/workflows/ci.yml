@@ -39,6 +39,24 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - run: cargo clippy --workspace --all-targets -- -D warnings
 
+  # The publish-only `lingotweaker` facade lives in its own workspace (excluded
+  # from the root) and compiles the same engine source through a symlink, so it
+  # needs its own dependency list. A dependency added to `crates/lt` but not to
+  # the facade manifest made `cargo publish lingotweaker` fail to build (found
+  # while preparing 0.1.0), so build it here too.
+  facade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        run: |
+          command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          "$HOME/.cargo/bin/rustup" toolchain install
+      - if: github.server_url == 'https://github.com'
+        uses: Swatinem/rust-cache@v2
+      - run: cargo check --manifest-path crates/lingotweaker/Cargo.toml
+
   # Heavy jobs (test/bindings/wasm/parity) run on the GitHub mirror only: its
   # runners have a warm cache and enough disk. The Forgejo runner has neither
   # (workspace builds die with "No space left on device"), while the light

@@ -1,6 +1,6 @@
 {
   "name": "lingotweaker",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "Proofreading engine for many languages: Rust core with Node.js bindings",
   "license": "LGPL-2.1-or-later",
   "repository": {
@@ -18,7 +18,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "lingotweaker-data": "0.1.0-alpha.1"
+    "lingotweaker-data": "0.1.0"
   },
   "files": [
     "index.js",

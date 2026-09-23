@@ -35,7 +35,12 @@ if [ "$BUILD_ONLY" = 1 ]; then
   exit 0
 fi
 
-TAG="${NPM_TAG:-next}"
+TAG="${NPM_TAG:-$(
+  case "$(sed -nE 's/^version = "(.*)"/\1/p' "$ROOT/Cargo.toml" | head -1)" in
+    *-*) echo next ;;
+    *) echo latest ;;
+  esac
+)}"
 args=(--tag "$TAG")
 if [ -n "${NPM_OTP:-}" ]; then
   args+=(--otp "$NPM_OTP")
