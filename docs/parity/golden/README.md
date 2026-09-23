@@ -39,6 +39,7 @@ re-runs the Rust side and diffs against the golden.
 | km | `km-full.txt` (66) | `km-full.java.tsv` |
 | ml | `ml-full.txt` (38) | `ml-full.java.tsv` |
 | ta | `ta-full.txt` (216) | `ta-full.java.tsv` |
+| de-x-simple | `de-x-simple-full.txt` (238) | `de-x-simple-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -62,6 +63,11 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
 and fa `2026-09-23` (Persian has no date-filter rules, so the value is inert),
 and km `2026-09-23` (Khmer has no date-filter rules either), and ta
 `2026-09-23` (Tamil has no date-filter rules either).
+`de-x-simple` is the Simple German variant (`de-DE-x-simple-language`), gated
+as `de-x-simple`; its input is the 238 `grammar.xml` example texts (the
+variant shares the German disambiguation, so no German disambiguation
+examples enter its corpus), captured `2026-09-23` (the variant has no
+date-filter rules either).
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -175,11 +181,18 @@ and km `2026-09-23` (Khmer has no date-filter rules either), and ta
   Java module, captured from the unpatched checkout
   (`scripts/oracle/ta/check-diff-ta.sh`). Tamil has no speller, no
   disambiguator and no synthesizer; `compile_failures()` is empty.
+  de-x-simple is exactly 0/0/0: the Simple German variant
+  (`de-DE-x-simple-language`) reuses the German foundations
+  (tagger/synthesizer/disambiguator/chunker) and runs only its 92 active
+  `grammar.xml` rules, matching the pinned `SimpleGerman` module
+  (`scripts/oracle/de-x-simple/check-diff-de-x-simple.sh`); the 12-word
+  `TOO_LONG_SENTENCE_DE` is `tags="picky"` and does not run at the default
+  level.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

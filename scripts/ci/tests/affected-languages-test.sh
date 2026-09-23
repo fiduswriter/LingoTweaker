@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","no","nrd","gn"]'
+ALL='["en","de-x-simple","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","no","nrd","gn"]'
 fails=0
 
 check() {
@@ -36,7 +36,11 @@ check "common oracle script" "$ALL" scripts/oracle/compare-checks.py
 check "unrecognized path" "$ALL" new/unknown/file.txt
 
 # language-local paths gate one language
-check "de data" '["de"]' data/de/grammar.xml
+check "de data" '["de-x-simple","de"]' data/de/grammar.xml
+check "de-x-simple rule data" '["de-x-simple"]' data/de/rules/de-DE-x-simple-language/grammar.xml
+check "de-x-simple integration test" '["de-x-simple"]' crates/lt/tests/de_x_simple.rs
+check "de-x-simple oracle" '["de-x-simple"]' scripts/oracle/de-x-simple/check-diff-de-x-simple.sh
+check "de-x-simple golden" '["de-x-simple"]' docs/parity/golden/de-x-simple-full.java.tsv
 check "es oracle" '["es"]' scripts/oracle/es/probe-rule.sh
 check "fr integration test" '["fr"]' crates/lt/tests/french.rs
 check "it golden" '["it"]' docs/parity/golden/it-full.java.tsv

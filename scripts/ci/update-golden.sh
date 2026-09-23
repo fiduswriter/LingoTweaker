@@ -3,10 +3,10 @@
 # Only run after an intentional corpus/input change; then check whether
 # PARITY_TODAY in scripts/ci/parity.sh must be updated to the capture date.
 #
-# Usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta>
+# Usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple>
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta>}"
+LANG_ARG="${1:?usage: scripts/ci/update-golden.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 GOLDEN="$RS_ROOT/docs/parity/golden"
 PREFIX="/tmp/lt-golden-$LANG_ARG"
@@ -43,6 +43,7 @@ case "$LANG_ARG" in
   km) "$RS_ROOT/scripts/oracle/km/check-diff-km.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
   ml) "$RS_ROOT/scripts/oracle/ml/check-diff-ml.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
   ta) "$RS_ROOT/scripts/oracle/ta/check-diff-ta.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
+  de-x-simple) "$RS_ROOT/scripts/oracle/de-x-simple/check-diff-de-x-simple.sh" "$GOLDEN/$LANG_ARG-full.txt" "$PREFIX" ;;
   *) echo "unknown language: $LANG_ARG" >&2; exit 2 ;;
 esac
 

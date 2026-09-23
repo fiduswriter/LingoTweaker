@@ -1,0 +1,498 @@
+L	1	Ich ging einkaufen.
+L	2	Ich bin einkaufen gegangen.
+L	3	Er musste gestern kommen.
+L	4	Er behauptet, dass sie die Tat verschwiegen hat.
+M	4	NEBENSAETZE	2	14	18	Other	Vermeiden Sie Nebensätze.	
+L	5	Das über sie in den Medien verbreitete Kompromat...
+L	6	Hallo¹
+M	6	FUSSNOTE	1	5	6	Other	Benutzen Sie keine Fußnoten. Erklären Sie alles gleich im Text.	
+L	7	Hallo, hier steht mehr
+L	8	Peter will nicht länger bleiben.
+M	8	VERNEINUNG	1	11	16	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	9	Peter will gehen.
+L	10	Weil sie krank ist, kommt sie nicht zur Schule.
+M	10	NEBENSAETZE	1	0	4	Other	Vermeiden Sie Nebensätze.	
+M	10	VERNEINUNG	1	30	35	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	11	Sie ist krank. Deshalb kommt sie nicht zur Schule.
+M	11	VERNEINUNG	1	33	38	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	12	Sie ist nicht in die Schule gekommen, weil sie erkältet war.
+M	12	VERNEINUNG	1	8	13	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	12	NEBENSAETZE	2	38	42	Other	Vermeiden Sie Nebensätze.	
+L	13	Sie war erkältet. Deshalb ist sie nicht zur Schule gekommen.
+M	13	VERNEINUNG	1	34	39	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	14	Ich mag, dass das Taschentuch so weich ist.
+M	14	NEBENSAETZE	2	9	13	Other	Vermeiden Sie Nebensätze.	
+L	15	Das Taschentuch ist weich. Ich mag das.
+L	16	Ich weiß nicht, was dieser Test bringt.
+M	16	VERNEINUNG	1	9	14	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	16	NEBENSAETZE	3	16	19	Other	Vermeiden Sie Nebensätze.	
+L	17	Ich weiß nicht, über wen du sprichst.
+M	17	VERNEINUNG	1	9	14	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	17	NEBENSAETZE	4	16	24	Other	Vermeiden Sie Nebensätze.	
+L	18	Über wen du sprichst, weiß ich nicht.
+M	18	NEBENSAETZE	5	0	8	Other	Vermeiden Sie Nebensätze.	
+L	19	Was dieser Test bringt, weiß ich nicht.
+M	19	NEBENSAETZE	6	0	3	Other	Vermeiden Sie Nebensätze.	
+L	20	Sie hat geschlafen, statt fleißig zu arbeiten.
+M	20	NEBENSAETZE	10	18	25	Other	Vermeiden Sie Infinitivsätze.	
+L	21	Sie sollte fleißig arbeiten. Doch sie hat lieber geschlafen.
+M	21	KONJUNKTIV	2	4	10	Other	Vermeiden Sie den Konjunktiv.	
+L	22	Sie besuchte ihn, um ihm bei der Arbeit zu helfen.
+M	22	NEBENSAETZE	10	16	20	Other	Vermeiden Sie Infinitivsätze.	
+L	23	Sie besuchte ihn. Sie half ihm dann bei der Arbeit.
+L	24	Können Sie um neun vorbeikommen?
+M	24	ZAHLWOERTER	1	14	18	Hint	Zahlwort gefunden. Meistens sind Ziffern leichter als Worte.	
+L	25	Sie hat geschalfen, statt aufzupassen.
+M	25	NEBENSAETZE	9	18	25	Other	Vermeiden Sie Infinitivsätze.	
+L	26	Sie sollte aufpassen. Doch sie hat lieber geschlafen.
+M	26	KONJUNKTIV	2	4	10	Other	Vermeiden Sie den Konjunktiv.	
+L	27	Sie besucht ihn, um ihm beizustehen.
+M	27	NEBENSAETZE	9	15	19	Other	Vermeiden Sie Infinitivsätze.	
+L	28	Sie besuchte ihn. Sie half ihm dann bei der Arbeit.
+L	29	Er redet um den Brei herum, statt das Problem richtig anzusprechen.
+M	29	NEBENSAETZE	9	26	33	Other	Vermeiden Sie Infinitivsätze.	
+M	29	SCHWIERIGE_WOERTER	1	38	45	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	30	Er hat ihr befohlen, auf das Geld aufzupassen.
+M	30	NEBENSAETZE	9	19	24	Other	Vermeiden Sie Infinitivsätze.	
+L	31	Er hat ihr einen Befehl gegeben: Sie sollte auf das Geld aufpassen
+M	31	KONJUNKTIV	2	37	43	Other	Vermeiden Sie den Konjunktiv.	
+L	32	Er hat vor, seine Tante zu besuchen.
+M	32	NEBENSAETZE	10	10	17	Other	Vermeiden Sie Infinitivsätze.	
+L	33	Er wollte seine Tante besuchen.
+M	33	KONJUNKTIV	2	3	9	Other	Vermeiden Sie den Konjunktiv.	
+L	34	Er hat vor, seine Tante zu besuchen und ihr bei der Gartenarbeit zu helfen.
+M	34	NEBENSAETZE	11	10	17	Other	Vermeiden Sie Infinitivsätze.	
+M	34	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	2	36	39	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	35	Er hat vor, seine Tante zu besuchen und ihr beizustehen.
+M	35	NEBENSAETZE	9	10	17	Other	Vermeiden Sie Infinitivsätze.	
+L	36	Darüber zu sprechen, fällt ihm schwer.
+M	36	NEBENSAETZE	12	11	20	Other	Vermeiden Sie Infinitivsätze.	
+L	37	Das zuzugeben, fällt ihm schwer.
+M	37	NEBENSAETZE	13	4	14	Other	Vermeiden Sie Infinitivsätze.	
+L	38	Studien, dass Obst und Gemüse gesund sind, gibt es viele.
+M	38	NEBENSAETZE	14	9	13	Other	Vermeiden Sie Nebensätze.	
+L	39	Seine Antwort auf die Frage, wann er angekommen war, war unbefriedigend.
+M	39	NEBENSAETZE	15	29	33	Other	Vermeiden Sie Nebensätze.	
+M	39	LANGES_WORT	1	57	71	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	40	Der Mann, der gut singt, tritt heute abend auf.
+M	40	RELATIVSAETZE	1	8	13	Other	Verzichten Sie auf Relativsätze.	
+L	41	Der Mann, dem ich so gerne zuhöre, tritt heute abend auf.
+M	41	RELATIVSAETZE	1	8	13	Other	Verzichten Sie auf Relativsätze.	
+L	42	Der Mann, dessen Stimme so schön klingt, tritt heute abend auf.
+M	42	RELATIVSAETZE	1	8	16	Other	Verzichten Sie auf Relativsätze.	
+L	43	Der Mann, über den viel gesprochen wird, tritt heute abend auf.
+M	43	RELATIVSAETZE	1	8	18	Other	Verzichten Sie auf Relativsätze.	
+M	43	PASSIV	2	24	39	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+L	44	Das sind die Freunde, mit denen ich viel Zeit verbringe.
+M	44	RELATIVSAETZE	1	20	31	Other	Verzichten Sie auf Relativsätze.	
+L	45	Bodo, den ich schon ewig kenne, ist sehr lustig.
+M	45	RELATIVSAETZE	1	4	9	Other	Verzichten Sie auf Relativsätze.	
+L	46	Marta, die eine Brille trägt, geht in meine Klasse.
+M	46	RELATIVSAETZE	1	5	10	Other	Verzichten Sie auf Relativsätze.	
+L	47	Linda, deren Lächeln bezaubernd ist, kann toll tanzen.
+M	47	RELATIVSAETZE	1	5	12	Other	Verzichten Sie auf Relativsätze.	
+L	48	Und hier ist Knut, dem ich viel verdanke.
+M	48	RELATIVSAETZE	1	17	22	Other	Verzichten Sie auf Relativsätze.	
+L	49	Der Mann, den ich gerne singen höre, tritt heute abend auf.
+M	49	RELATIVSAETZE	1	8	13	Other	Verzichten Sie auf Relativsätze.	
+L	50	Bodo, den ich öfter bummeln sehe, kommt gern her.
+M	50	RELATIVSAETZE	1	4	9	Other	Verzichten Sie auf Relativsätze.	
+L	51	Die Mutter, der Vater und das Kind spielen im Garten.
+L	52	Die Mutter, der Vater und das Kind spielen.
+L	53	Er ist jemand, der gern lacht und selten schimpft.
+M	53	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	53	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	4	30	33	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	54	Er ist jemand, der gern lacht, viel isst und selten schimpft.
+M	54	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	54	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	4	41	44	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	55	Er ist jemand, der gern lacht und auf den alle hören.
+M	55	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	55	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	30	33	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	56	Er ist jemand, der gern lacht, aber wenig Kritik verträgt.
+M	56	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	56	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	31	35	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	57	Er ist jemand, der gern lacht, dem alles egal ist und über den keiner schimpft.
+M	57	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	57	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	50	53	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	58	Er ist jemand, der gern lacht, nichts nachträgt und auf den alle hören.
+M	58	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	58	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	48	51	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	59	Er ist jemand, der gern lacht, der selten schimpft und viel Geduld hat
+M	59	RELATIVSAETZE	1	13	18	Other	Verzichten Sie auf Relativsätze.	
+M	59	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	51	54	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	60	Ich badete gerade, als das Telefon klingelte.
+M	60	NEBENSAETZE	2	19	22	Other	Vermeiden Sie Nebensätze.	
+L	61	Jemand feuerte den Manager.
+M	61	ANGLIZISMEN	1	19	26	Other	Vermeiden Sie Fremdwörter / Anglizismen.	
+L	62	Der Manager wurde gefeuert.
+M	62	ANGLIZISMEN	1	4	11	Other	Vermeiden Sie Fremdwörter / Anglizismen.	
+M	62	PASSIV	1	18	26	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+L	63	Der Manager wurde gefeuert.
+M	63	ANGLIZISMEN	1	4	11	Other	Vermeiden Sie Fremdwörter / Anglizismen.	
+M	63	PASSIV	1	18	26	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+L	64	Sie nimmt an, er werde das vergessen.
+M	64	KONJUNKTIV	1	12	22	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	65	Sie hat den Manager entlassen.
+M	65	ANGLIZISMEN	1	12	19	Other	Vermeiden Sie Fremdwörter / Anglizismen.	
+L	66	Als der Manager gefeuert wurde.
+M	66	ANGLIZISMEN	1	8	15	Other	Vermeiden Sie Fremdwörter / Anglizismen.	
+M	66	PASSIV	2	16	30	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+L	67	Der Sattel von dem Fahrrad.
+L	68	Der Sattel des Fahrrads.
+M	68	GENITIV	1	11	23	Other	Vermeiden Sie den Genitiv.	
+L	69	Der Sattel von deinem Fahrrad.
+L	70	Der Sattel deines Fahrrads.
+M	70	GENITIV	2	11	26	Other	Vermeiden Sie den Genitiv.	
+L	71	Er bezieht sich auf deren Angebot.
+M	71	GENITIV	3	20	25	Other	Vermeiden Sie den Genitiv.	
+L	72	Er bezieht sich auf dessen Angebot.
+M	72	GENITIV	3	20	26	Other	Vermeiden Sie den Genitiv.	
+L	73	Er bezieht sich auf jemandes Angebot.
+M	73	GENITIV	3	20	28	Other	Vermeiden Sie den Genitiv.	
+L	74	Er sagte: ich bin 30 Jahre alt.
+L	75	Er sagte, er sei 30 Jahre alt.
+M	75	KONJUNKTIV	1	8	16	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	76	Weißt du zufälligerweise, wo sie wohnt?
+M	76	LANGES_WORT	1	9	24	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	77	Er stellte fest: sie ist schön.
+L	78	Er stellte fest, sie sie sei schön.
+M	78	KONJUNKTIV	1	15	28	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	79	Er gibt an: sie ist um 10 Uhr gekommen.
+L	80	Er gibt an, sie sei um 10 Uhr gekommen.
+M	80	KONJUNKTIV	1	10	19	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	81	Er teilt mit: sie ist um 10 Uhr gekommen.
+L	82	Er teilt mit, sie sei um 10 Uhr gekommen.
+M	82	KONJUNKTIV	1	12	21	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	83	Er nimmt an: sie ist um 10 Uhr gekommen.
+L	84	Er nimmt an, sie sei um 10 Uhr gekommen.
+M	84	KONJUNKTIV	1	11	20	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	85	Ihre Behauptung, er könne das niemals schaffen, kränkte ihn.
+M	85	ABSTRAKTE_WOERTER	1	5	15	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	85	KONJUNKTIV	1	15	25	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	86	Ihre Behauptung, er habe unfair gespielt, kränkte ihn.
+M	86	ABSTRAKTE_WOERTER	1	5	15	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	86	KONJUNKTIV	1	15	24	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	87	Ihre Behauptung, er wisse überhaupt nichts, kränkte ihn.
+M	87	ABSTRAKTE_WOERTER	1	5	15	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	87	KONJUNKTIV	1	15	25	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+M	87	INDIREKTE_REDE	1	42	51	Other	Indirekte Rede gefunden. Benutzen Sie direkte Rede.	
+L	88	Mit ihrer Behauptung, er wisse überhaupt nichts, kränkte sie ihn.
+M	88	ABSTRAKTE_WOERTER	1	10	20	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	88	KONJUNKTIV	1	20	30	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+M	88	INDIREKTE_REDE	1	47	56	Other	Indirekte Rede gefunden. Benutzen Sie direkte Rede.	
+L	89	Gemäß ihrer Aussage, er habe unfair gespielt, disqualifizierte man ihn.
+M	89	KONJUNKTIV	1	19	28	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+M	89	SCHWIERIGE_WOERTER	1	46	62	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	90	Durch seine Behauptung, er könne das schaffen, war ich besonders motiviert.
+M	90	ABSTRAKTE_WOERTER	1	12	22	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	90	KONJUNKTIV	1	22	32	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+M	90	SCHWIERIGE_WOERTER	1	65	74	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	91	Wir essen gerne Milchreis mit Zucker und Zimt.
+M	91	KONJUNKTIV	2	4	9	Other	Vermeiden Sie den Konjunktiv.	
+L	92	Tim liebt Tina und Tina liebt Tim.
+M	92	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	15	18	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	93	Max und Moritz heißen die beiden Hauptfiguren.
+L	94	Er hat Eier und Milch bei einem Bauern gekauft.
+L	95	Er sollte Schrauben und Muttern trennen.
+M	95	KONJUNKTIV	2	3	9	Other	Vermeiden Sie den Konjunktiv.	
+L	96	Ist er groß oder klein?
+L	97	Es gibt immer mehr vegetarische und vegane Fertigprodukte.
+M	97	LANGES_WORT	1	43	57	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	98	Ihr macht das jetzt fertig und ich gehe.
+M	98	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	27	30	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	99	Ich mache das jetzt fertig und ihr könnt gehen.
+M	99	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	27	30	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	100	Er besitzt zwischen 50 und 100 Spiele.
+M	100	ZAHLEN	1	27	30	Hint	Vermeiden Sie hohe Zahlen.	
+L	101	Es trafen sich alle Ministerpräsidenten und -präsidentinnen.
+M	101	LANGES_WORT	1	20	39	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	102	Lassen Sie das Kind zwischen dem achten und neunten Monat impfen.
+L	103	Das tut sie auch, um ihre Themen durchzusetzen und ihre Haltung mehrheitsfähig zu machen.
+M	103	NEBENSAETZE	10	16	20	Other	Vermeiden Sie Infinitivsätze.	
+M	103	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	2	47	50	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	103	ABSTRAKTE_WOERTER	1	56	63	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	103	LANGES_WORT	1	64	78	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	104	Die Elternzeit erlaubt es den Eltern, drei Jahre lang aus ihrem Beruf auszusteigen und danach wieder zu den gleichen Bedingungen wie vorher einzusteigen.
+M	104	ZAHLWOERTER	1	38	42	Hint	Zahlwort gefunden. Meistens sind Ziffern leichter als Worte.	
+M	104	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	2	83	86	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	104	ABSTRAKTE_WOERTER	1	117	128	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+L	105	Das tut sie auch, um ihre Themen durchzusetzen und ihre Haltung mehrheitsfähig zu machen.
+M	105	NEBENSAETZE	10	16	20	Other	Vermeiden Sie Infinitivsätze.	
+M	105	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	2	47	50	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	105	ABSTRAKTE_WOERTER	1	56	63	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	105	LANGES_WORT	1	64	78	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	106	Die Elternzeit erlaubt es den Eltern, drei Jahre lang aus ihrem Beruf auszusteigen und danach wieder zu den gleichen Bedingungen wie vorher einzusteigen.
+M	106	ZAHLWOERTER	1	38	42	Hint	Zahlwort gefunden. Meistens sind Ziffern leichter als Worte.	
+M	106	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	2	83	86	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	106	ABSTRAKTE_WOERTER	1	117	128	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+L	107	Ich glaubte ihm und folgte ihm auf sein Zimmer.
+M	107	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	3	16	19	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	108	Sie spielen am Abend Schach und tanzen bis Mitternacht Polka.
+M	108	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	3	28	31	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	109	Ich sah etwas oder glaubte, etwas zu sehen.
+M	109	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	3	14	18	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	109	INDIREKTE_REDE	1	26	33	Other	Indirekte Rede gefunden. Benutzen Sie direkte Rede.	
+L	110	Die Milch hat er beim Bauern gekauft und die Wurst beim Metzger.
+M	110	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	4	37	40	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	111	Es ist besser, wenn du Käse isst und Oskar Milch trinkt.
+M	111	NEBENSAETZE	2	15	19	Other	Vermeiden Sie Nebensätze.	
+M	111	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	33	36	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	112	Er fragte, ob er aus Kanada stammt oder ob er dort länger gelebt hat.
+M	112	NEBENSAETZE	2	11	13	Other	Vermeiden Sie Nebensätze.	
+M	112	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	35	39	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	113	Er hat entweder Eier gesammelt, oder er hat Milch gekauft.
+M	113	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	32	36	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	114	Entweder gehst du jetzt oder ich rufe du Polizei.
+M	114	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	1	24	28	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	115	Weder habe ich dich gesehen noch habe ich dich gehört.
+M	115	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	6	28	32	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	116	Ich habe dich nicht gesehen. Ich habe dich auch nicht gehört.
+M	116	VERNEINUNG	1	14	19	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	116	VERNEINUNG	1	48	53	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	117	Er hat weder Eier gesammelt noch Milch gekauft.
+M	117	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	6	28	32	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	118	Er hat nicht nur Hunde, sondern auch Katzen.
+M	118	VERNEINUNG	1	7	12	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	118	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	7	24	31	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	119	Er isst nicht nur Eier, sondern er trinkt auch Milch.
+M	119	VERNEINUNG	1	8	13	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	119	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	7	24	31	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	120	Er hat Hunde. Er hat auch Katzen.
+L	121	Ich trinke keinen Kaffee, sondern esse lieber ein Eis.
+M	121	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	26	33	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	121	KONJUNKTIV	2	34	38	Other	Vermeiden Sie den Konjunktiv.	
+L	122	Er hat Hunde. Er hat auch Katzen.
+L	123	Der Mann ist schon 80, aber er läuft noch flink.
+M	123	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	23	27	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	124	Das Kino hat schon begonnen, aber das ist egal.
+M	124	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	29	33	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	125	Ich will ihm helfen, aber weiß nicht genug.
+M	125	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	21	25	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+M	125	VERNEINUNG	1	31	36	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	126	Er schreibt ein Buch, liest es vor, aber keiner hört zu.
+M	126	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	36	40	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	127	Wir gehen zu Fuß, denn der Bus ist schon abgefahren.
+M	127	KONJUNKTIV	2	4	9	Other	Vermeiden Sie den Konjunktiv.	
+M	127	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	18	22	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	128	Ich kündige heute, denn morgen ist es zu spät.
+M	128	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	19	23	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	129	Er will kündigen, denn der Job gefällt ihm nicht.
+M	129	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	18	22	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	130	Ich mache heute den Abwasch, denn morgen hab ich Dienst.
+M	130	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	8	29	33	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	131	Er hat 5 Katzen sowie 12 Kühe.
+M	131	ZWEI_INFORMATIONSEINHEITEN_PRO_SATZ	9	16	21	Other	Jeder Satz sollte nur eine Aussage enthalten. Können Sie diesen Satz in mehrere Sätze aufteilen?	
+L	132	Er hat 5 Katzen. Er hat auch 12 Kühe.
+L	133	Sie sagte, man sei bereit.
+M	133	KONJUNKTIV	1	9	18	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	134	Angeblich sind sie bereit.
+L	135	Man sei bereit.
+M	135	KONJUNKTIV	2	4	7	Other	Vermeiden Sie den Konjunktiv.	
+L	136	Ich schlafe nicht mehr.
+M	136	VERNEINUNG	1	12	17	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	137	Sie nimmt an, er habe das verschwiegen.
+M	137	KONJUNKTIV	1	12	21	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	138	Er behauptet, dass sie die Tat verschwiegen hat.
+M	138	NEBENSAETZE	2	14	18	Other	Vermeiden Sie Nebensätze.	
+L	139	Wir können lesen, sie müssen arbeiten, wir sollen lernen.
+M	139	KONJUNKTIV	1	16	28	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+M	139	KONJUNKTIV	1	37	49	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	140	Morgen regnet es vielleicht.
+L	141	Sie sagte, morgen könnte es regnen.
+M	141	KONJUNKTIV	1	9	24	Other	Vermeiden Sie den Konjunktiv. Vermeiden Sie auch indirekte Rede.	
+L	142	Morgen regnet es vielleicht.
+L	143	Morgen könnte es regnen.
+M	143	KONJUNKTIV	2	7	13	Other	Vermeiden Sie den Konjunktiv.	
+L	144	Sie nimmt an, ihr habet es vergessen.
+M	144	INDIREKTE_REDE	5	12	17	Other	Indirekte Rede gefunden. Benutzen Sie direkte Rede.	
+M	144	KONJUNKTIV	5	18	23	Other	Vermeiden Sie den Konjunktiv.	
+L	145	Was machen wir heute?
+L	146	Lass uns heute etwas machen.
+L	147	Das Köchelverzeichnis ist ein Verzeichnis der Kompositionen von Mozart.
+M	147	LANGES_WORT	1	4	21	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+M	147	ABSTRAKTE_WOERTER	1	30	41	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	147	GENITIV	1	42	59	Other	Vermeiden Sie den Genitiv.	
+L	148	Das KV ist ein Verzeichnis der Kompositionen von Mozart.
+M	148	ABKUERZUNG	1	4	6	Other	Verzichten Sie auf Abkürzungen.	
+M	148	ABSTRAKTE_WOERTER	1	15	26	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	148	GENITIV	1	27	44	Other	Vermeiden Sie den Genitiv.	
+L	149	Die Sozialdemokratische Partei Deutschlands.
+M	149	LANGES_WORT	1	4	23	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	150	Die S.P.D.
+M	150	ABKUERZUNG	2	4	10	Other	Verzichten Sie auf Abkürzungen.	
+L	151	Der Tiger ist z. B. ein Tier.
+M	151	ABKUERZUNG	3	14	19	Other	Verzichten Sie auf Abkürzungen.	
+L	152	Er ist krank, d. h. er kann nicht kommen.
+M	152	ABKUERZUNG	3	14	19	Other	Verzichten Sie auf Abkürzungen.	
+M	152	VERNEINUNG	1	28	33	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	153	Das ist Hr. Meier.
+M	153	ABKUERZUNG	4	8	11	Other	Verzichten Sie auf Abkürzungen.	
+L	154	Das ist Herr Meier.
+L	155	Wir brauchen Milch, Eier und so weiter.
+L	156	Wir brauchen Milch, Eier usw.
+M	156	ABKUERZUNG	4	25	29	Other	Verzichten Sie auf Abkürzungen.	
+L	157	Sie haben ihm damit geschadet.
+L	158	Sie erwiesen ihm einen Bärendienst.
+M	158	KONJUNKTIV	2	4	12	Other	Vermeiden Sie den Konjunktiv.	
+M	158	METAPHERN	1	23	34	Other	Vermeiden Sie Metaphern und bildhafte Sprache.	
+L	159	Sie erwiesen ihm Bärendienste.
+M	159	KONJUNKTIV	2	4	12	Other	Vermeiden Sie den Konjunktiv.	
+M	159	METAPHERN	1	17	29	Other	Vermeiden Sie Metaphern und bildhafte Sprache.	
+L	160	Dafür gibt es keine Eselsbrücken.
+M	160	METAPHERN	1	20	32	Other	Vermeiden Sie Metaphern und bildhafte Sprache.	
+L	161	Sie zeigen einen Blockbuster.
+M	161	ANGLIZISMEN	1	17	28	Other	Vermeiden Sie Fremdwörter / Anglizismen.	
+L	162	Sie zeigen einen tollen Film.
+L	163	Sie hat es ihm erlaubt.
+L	164	Sie hat es ihm gestattet.
+M	164	SCHWIERIGE_WOERTER	1	15	24	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	165	Eine asymmetrische Anordnung.
+M	165	SCHWIERIGE_WOERTER	1	5	18	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+M	165	ABSTRAKTE_WOERTER	1	19	28	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+L	166	Die Polizei sorgt für Ordnung.
+M	166	ABSTRAKTE_WOERTER	1	22	29	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+L	167	Sie sucht nach einer Lösung.
+M	167	ABSTRAKTE_WOERTER	1	21	27	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+L	168	Sie möchte das Rätsel lösen.
+M	168	KONJUNKTIV	2	4	10	Other	Vermeiden Sie den Konjunktiv.	
+L	169	Sie sucht nach einer Lösungsidee.
+M	169	ABSTRAKTE_WOERTER	1	21	32	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+L	170	Öffnen Sie die Zip-Datei.
+M	170	FACHBEGRIFFE	1	15	24	Other	Vermeiden Sie Fachwörter oder erklären Sie diese.	
+L	171	Die Schifffahrt auf der Donau ist beliebt.
+L	172	Die Donaudampfschifffahrt ist beliebt.
+M	172	LANGES_WORT	1	4	25	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	173	Sie hat mich außen vor gelassen.
+M	173	SCHWIERIGE_WENDUNGEN	1	13	31	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	174	Sie hat mich ausgeschlossen.
+M	174	LANGES_WORT	1	13	27	Other	Dieses Wort hat mehr als dreizehn Buchstaben. Benutzen Sie kurze Wörter.	
+L	175	Sie wird das Kind schon schaukeln.
+M	175	SCHWIERIGE_WENDUNGEN	2	13	33	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	176	Sie wird es schaffen.
+L	177	Da sollte man nicht das Kind mit dem Bade ausschütten.
+M	177	KONJUNKTIV	2	3	9	Other	Vermeiden Sie den Konjunktiv.	
+M	177	VERNEINUNG	1	14	19	Other	Wenn möglich, keine Verneinungen benutzen.	
+M	177	SCHWIERIGE_WENDUNGEN	3	24	41	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	178	Überlegen Sie gut!
+L	179	Er warf die Flinte ins Korn.
+M	179	SCHWIERIGE_WENDUNGEN	4	12	27	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	180	Er hat aufgegeben.
+L	181	Er hat etwas im Schilde geführt.
+M	181	SCHWIERIGE_WENDUNGEN	5	13	31	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	182	Ich gebe dir Brief und Siegel darauf.
+M	182	SCHWIERIGE_WENDUNGEN	6	13	29	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	183	Sie ist das Zünglein an der Waage.
+M	183	SCHWIERIGE_WENDUNGEN	7	12	33	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	184	Sie entscheidet.
+L	185	Er bringt ihn hinter Schloss und Riegel.
+M	185	SCHWIERIGE_WENDUNGEN	8	21	39	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	186	Er stand ihm mit Rat und Tat zur Seite.
+M	186	SCHWIERIGE_WENDUNGEN	9	17	28	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	187	Er verliebte sich Hals über Kopf zur Seite.
+M	187	SCHWIERIGE_WENDUNGEN	10	18	32	Other	Verwenden Sie keine schwierigen Wendungen.	
+L	188	Das ist per se nicht richtig.
+M	188	SCHWIERIGE_WENDUNGEN	11	8	14	Other	Verwenden Sie keine schwierigen Wendungen.	
+M	188	VERNEINUNG	1	15	20	Other	Wenn möglich, keine Verneinungen benutzen.	
+L	189	In Heft 3 steht mehr dazu.
+L	190	Es gibt viele Informationen dazu (siehe Heft 3).
+M	190	SCHWIERIGE_WOERTER	1	14	27	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+M	190	SONDERZEICHEN	1	33	34	Hint	Vermeiden Sie Sonderzeichen.	
+M	190	QUERVERWEIS	1	34	39	Hint	Vermeiden Sie Querverweise.	
+M	190	SONDERZEICHEN	1	46	47	Hint	Vermeiden Sie Sonderzeichen.	
+L	191	Stufe 4
+L	192	Das ist 4 cm lang.
+M	192	ABKUERZUNG	5	10	12	Other	Verzichten Sie auf Abkürzungen.	
+L	193	Stufe IV
+M	193	ABKUERZUNG	1	6	8	Other	Verzichten Sie auf Abkürzungen.	
+L	194	Stufe vii
+M	194	ROEMISCHE_ZAHL	1	6	9	Hint	Benutzen Sie arabische Zahlen.	
+L	195	Sehr viele Menschen
+L	196	Bis zu 100000 Menschen
+M	196	ZAHLEN	1	7	13	Hint	Vermeiden Sie hohe Zahlen.	
+L	197	Das erste Weltkrieg hat im Jahr 1914 begonnen.
+L	198	Im März 1914 hat es begonnen.
+L	199	Sehr viele Menschen
+L	200	100.000 Menschen
+M	200	ZAHLEN	2	0	7	Hint	Vermeiden Sie hohe Zahlen.	
+L	201	Etwa 4
+L	202	3,91
+M	202	ZAHLEN	3	0	4	Hint	Vermeiden Sie Kommazahlen.	
+L	203	14 Prozent
+M	203	SCHWIERIGE_WOERTER	1	3	10	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	204	14%
+M	204	ZAHLEN	4	0	3	Hint	Vermeiden Sie Prozentzahlen.	
+L	205	14 Prozent
+M	205	SCHWIERIGE_WOERTER	1	3	10	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	206	14 %
+M	206	ZAHLEN	5	0	4	Hint	Vermeiden Sie Prozentzahlen.	
+L	207	Pilze von A bis Z.
+L	208	Die Buchstaben A–Z.
+L	209	Pilze von A-Z.
+M	209	VON_BIS	1	10	13	Hint	Schreiben Sie 'bis' bei vorangehendem 'von' aus.	A bis Z
+L	210	Pilze von A bis Z.
+L	211	Die Buchstaben A–Z.
+L	212	Pilze von A - Z.
+M	212	VON_BIS	2	10	15	Hint	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	A bis Z
+L	213	Pilze von A – Z.
+M	213	VON_BIS	2	10	15	Hint	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	A bis Z
+L	214	Von 9-10 Uhr.
+M	214	VON_BIS	3	0	8	Hint	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von 9 bis 10
+L	215	Von 9 – 10 Uhr.
+M	215	VON_BIS	4	0	10	Hint	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von 9 bis 10
+L	216	Von 9–10 Uhr.
+M	216	VON_BIS	4	0	8	Hint	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von 9 bis 10
+L	217	Von Zeile 7-11 wird geprüft, ob die Zahl eine Primzahl ist.
+M	217	VON_BIS	5	0	14	Other	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von Zeile 7 bis 11
+M	217	PASSIV	1	20	27	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+M	217	NEBENSAETZE	2	29	31	Other	Vermeiden Sie Nebensätze.	
+L	218	Von Zeile 7–11 wird geprüft, ob die Zahl eine Primzahl ist.
+M	218	VON_BIS	5	0	14	Other	Schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von Zeile 7 bis 11
+M	218	PASSIV	1	20	27	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+M	218	NEBENSAETZE	2	29	31	Other	Vermeiden Sie Nebensätze.	
+L	219	Von Zeile 7 - 11 wird geprüft, ob die Zahl eine Primzahl ist.
+M	219	VON_BIS	6	0	16	Other	Bitte schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von Zeile 7 bis 11
+M	219	PASSIV	1	22	29	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+M	219	NEBENSAETZE	2	31	33	Other	Vermeiden Sie Nebensätze.	
+L	220	Von Zeile 7 – 11 wird geprüft, ob die Zahl eine Primzahl ist.
+M	220	VON_BIS	6	0	16	Other	Bitte schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Von Zeile 7 bis 11
+M	220	PASSIV	1	22	29	Other	Passiv gefunden. Benutzen Sie aktive Wörter.	
+M	220	NEBENSAETZE	2	31	33	Other	Vermeiden Sie Nebensätze.	
+L	221	Vom 9. bis 10. April.
+M	221	DATUM	1	11	20	Hint	Schreiben Sie das Datum deutlich.	
+L	222	Vom 7.-10. März.
+M	222	VON_BIS	7	0	10	Other	Bitte schreiben Sie 'bis' bei vorhergehendem 'von' aus.	Vom 7. bis 10.
+L	223	Es waren 7 Leute da.
+L	224	Es waren sieben Leute da.
+M	224	ZAHLWOERTER	1	9	15	Hint	Zahlwort gefunden. Meistens sind Ziffern leichter als Worte.	
+L	225	Es sind 200 Leute da.
+M	225	ZAHLEN	1	8	11	Hint	Vermeiden Sie hohe Zahlen.	
+L	226	Es sind zweihundert Leute da.
+M	226	ZAHLWOERTER	1	8	19	Hint	Zahlwort gefunden. Meistens sind Ziffern leichter als Worte.	
+L	227	Am 31. Januar 2022 geht es los.
+M	227	ZAHLEN	1	14	18	Hint	Vermeiden Sie hohe Zahlen.	
+L	228	Am 31. Januar geht es los.
+M	228	DATUM	1	3	13	Hint	Schreiben Sie das Datum deutlich.	
+L	229	Am 31.01.2020 geht es los.
+L	230	Am 31.01.20 geht es los.
+M	230	DATUM	2	9	11	Hint	Schreiben Sie das Datum deutlich.	2020
+L	231	Am 31. Januar geht es los.
+M	231	DATUM	1	3	13	Hint	Schreiben Sie das Datum deutlich.	
+L	232	Am 31.01. geht es los.
+M	232	DATUM	3	3	9	Hint	Schreiben Sie das Datum deutlich.	
+L	233	Hier steht was, und noch was...
+L	234	Hier steht was (und noch was...
+M	234	SONDERZEICHEN	1	15	16	Hint	Vermeiden Sie Sonderzeichen.	
+L	235	Erhöhung um einige Prozent
+M	235	ABSTRAKTE_WOERTER	1	0	8	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	235	SCHWIERIGE_WOERTER	1	19	26	Other	Vermeiden Sie schwierige Wörter und Fremdwörter.	
+L	236	Erhöhung um einige %
+M	236	ABSTRAKTE_WOERTER	1	0	8	Other	Vermeiden Sie abstrakte Wörter. Benutzen Sie möglichst konkrete Aussagen.	
+M	236	SONDERZEICHEN	2	19	20	Hint	Vermeiden Sie Sonderzeichen.	
+L	237	Hier arbeiten viele Lehrer/-innen
+M	237	SONDERZEICHEN	3	20	33	Hint	Vermeiden Sie Sonderzeichen.	Lehrer oder Lehrerinnen|Lehrer und Lehrerinnen
+L	238	Sie wählen heute eine(n) neue(n) Bürgermeister/in
+M	238	SONDERZEICHEN	1	21	22	Hint	Vermeiden Sie Sonderzeichen.	
+M	238	SONDERZEICHEN	1	23	24	Hint	Vermeiden Sie Sonderzeichen.	
+M	238	SONDERZEICHEN	1	29	30	Hint	Vermeiden Sie Sonderzeichen.	
+M	238	SONDERZEICHEN	1	31	32	Hint	Vermeiden Sie Sonderzeichen.	
+M	238	SONDERZEICHEN	3	33	49	Hint	Vermeiden Sie Sonderzeichen.	Bürgermeister oder Bürgermeisterin|Bürgermeister und Bürgermeisterin

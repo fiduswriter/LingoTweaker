@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
@@ -86,6 +86,11 @@ rules, the `TamilTagger` over `ta/dictionaries/tamil.dict` and the five
 `Tamil.getRelevantRules` generic built-ins (the ta-localized copy/punctuation/
 whitespace/long-sentence/sentence-whitespace rules) match the pinned module
 exactly; Tamil has no speller, disambiguator or synthesizer).
+`de-x-simple` is at 0 only-Java / 0 only-Rust / 0 field diffs (#26; the Simple
+German variant `de-DE-x-simple-language` is a `Lang::De` variant string that
+reuses the German tagger/synthesizer/disambiguator/chunker but runs only its
+92 active XML rules — never the German rule classes or speller; the 12-word
+`TOO_LONG_SENTENCE_DE` is `tags="picky"`).
 
 ## Data tooling
 

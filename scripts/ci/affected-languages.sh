@@ -43,6 +43,7 @@ set -euo pipefail
 # [<extra language-local path globs, space-separated>]
 LANGUAGES="
 en english
+de-x-simple de_x_simple data/de/rules/de-DE-x-simple-language/*
 de german
 es spanish
 fr french
@@ -223,6 +224,14 @@ for f in "${files[@]}"; do
     summary+=("  $f -> shared (all languages)")
   fi
 done
+
+# Simple German is a variant implemented in the shared `crates/lt/src/de/**`
+# module and reusing the German foundations, so every change that gates `de`
+# also gates `de-x-simple` (D-309). A change local to the variant's rule data
+# (`data/de/rules/de-DE-x-simple-language/**`) gates only `de-x-simple`.
+if [ "${seen[de]:-0}" -eq 1 ]; then
+  seen[de-x-simple]=1
+fi
 
 declare -a result=()
 reason=""

@@ -13,8 +13,12 @@
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+# The parity-matrix gate name may differ from the engine language code (the
+# Simple German variant is gated as `de-x-simple` but checked as its
+# BCP-47 private-use long code, D-309).
+CHECK_LANG="$LANG_ARG"
 
 # Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
 # no pinned golden to diff, so assert the integration test passes and that
@@ -146,6 +150,10 @@ fi
 if [ "$LANG_ARG" = "ta" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-23"
 fi
+if [ "$LANG_ARG" = "de-x-simple" ]; then
+  CHECK_LANG="de-DE-x-simple-language"
+  [ -n "${PARITY_TODAY:-}" ] || TODAY="2026-09-23"
+fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 # PARITY_BIN overrides the checked binary (e.g. an out-of-tree build)
 BIN="${PARITY_BIN:-$RS_ROOT/target/release/lt-cli}"
@@ -158,7 +166,7 @@ JAVA="$GOLDEN/$LANG_ARG-full.java.tsv"
 
 RUST="$(mktemp)"
 trap 'rm -f "$RUST"' EXIT
-"$BIN" check -l "$LANG_ARG" --lines --jobs "$JOBS" --today "$TODAY" --file "$INPUT" > "$RUST"
+"$BIN" check -l "$CHECK_LANG" --lines --jobs "$JOBS" --today "$TODAY" --file "$INPUT" > "$RUST"
 
 EXTRA=()
 if [ "$LANG_ARG" = "en" ]; then
