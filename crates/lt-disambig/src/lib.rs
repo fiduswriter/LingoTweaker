@@ -329,12 +329,17 @@ impl XmlDisambiguator {
             }
             // Java `DisambiguationPatternRuleReplacer.replace`: `doMatch`
             // scans start positions in order and applies each match's action
-            // immediately; `add` mutates the shared token readings in place,
-            // so a later start sees readings added by an earlier match
-            // (`propaga_marca_reflexiu` chains han→pogut→tornar). For a single
-            // standalone `add` rule, re-scan after each application, only for
-            // starts after the applied one, mirroring Java's forward scan.
-            if rule.compiled.len() == 1 && rule.disambig.action == "add" {
+            // immediately; the action mutates the shared token readings in
+            // place, so a later start sees the change. This matters for `add`
+            // (readings added by an earlier match enable a later one,
+            // `propaga_marca_reflexiu` chains han→pogut→tornar) and for
+            // `remove` (a removal lets the pattern match a later start, e.g.
+            // uk `non_v_kly_2` cascades the vocative removal through
+            // `він старший сестри`). For a single-pattern rule, re-scan after
+            // each application, only for starts after the applied one,
+            // mirroring Java's forward scan.
+            if rule.compiled.len() == 1 && matches!(rule.disambig.action.as_str(), "add" | "remove")
+            {
                 let compiled = &rule.compiled[0];
                 let starts = compiled
                     .anchor

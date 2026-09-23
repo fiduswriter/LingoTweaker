@@ -466,18 +466,19 @@ Reproduce (pinned Java build):
 scripts/oracle/crh/probe-rule.sh "21fayız." COMPLEX_NUMBER_DEFIS_MISSING
 ```
 
-## 14. Ukrainian (`uk`) remaining corpus residue (3 only-Java / 1 only-Rust / 2 field diffs)
+## 14. Ukrainian (`uk`) remaining corpus residue (3 only-Java / 1 only-Rust / 0 field diffs)
 
-The Ukrainian port is at **3 only-Java / 1 only-Rust / 2 field diffs** on the
-4,437-line corpus (Java 4,613 vs Rust 4,611 matches). All four divergences are
-pinned exactly in `scripts/ci/parity.sh` and are documented here with a
-pinned-Java reproduction. They are all engine-fidelity gaps in the XML
-disambiguation stage, not rule-data differences.
+The Ukrainian port is at **3 only-Java / 1 only-Rust / 0 field diffs** on the
+4,437-line corpus (Java 4,613 vs Rust 4,611 matches). The three remaining
+divergences are pinned exactly in `scripts/ci/parity.sh` and are documented
+here with a pinned-Java reproduction. They are engine-fidelity gaps in the XML
+disambiguation stage and sentence segmentation, not rule-data differences.
 
-### 14a. XML disambiguation forward-scan cascade (`non_v_kly_2`) — 2 field diffs
+### 14a. XML disambiguation forward-scan cascade (`non_v_kly_2`) — resolved
 
-Java's `DisambiguationPatternRuleReplacer.replace` runs `doMatch`, which scans
-start positions in order and applies each match's action **immediately**; the
+**Verdict: Java is more correct; fixed (D-310).** Java's
+`DisambiguationPatternRuleReplacer.replace` runs `doMatch`, which scans start
+positions in order and applies each match's action **immediately**; the
 actions mutate the shared `AnalyzedTokenReadings` in place, so a later start
 sees readings removed by an earlier match. The uk rule `non_v_kly_2`
 ("Не кличний після некличного") removes `v_kly` from `старший` (preceded by
@@ -487,14 +488,24 @@ because `старший` no longer carries `v_kly` when the scan reaches it:
 ```
 він старший сестри на 3 роки
 Java: сестри -> [ж.р.: родовий, мн.: називний]
-Rust: сестри -> [ж.р.: родовий, мн.: називний, кличний]
+Rust: сестри -> [ж.р.: родовий, мн.: називний, кличний]   (before the fix)
 ```
 
-The Rust `XmlDisambiguator::apply` collects all matches for a rule against a
-single snapshot (`phase 1 (immutable)`) and then applies them, so the cascade
-does not happen. This is the same limitation as the Polish
-`<unify negate="yes">`/ZDANIA_ZLOZONE gaps (#9). It affects the two
-`UK_ADJ_NOUN_INFLECTION_AGREEMENT` messages at corpus lines 2519/2520.
+The Rust `XmlDisambiguator::apply` collected all matches for a rule against a
+single snapshot, so the cascade did not happen and the spurious `кличний`
+reading leaked into the two `UK_ADJ_NOUN_INFLECTION_AGREEMENT` messages at
+corpus lines 2519/2520.
+
+Fixed in `crates/lt-disambig/src/lib.rs`: the existing forward re-scan loop
+that emulated Java's `doMatch` for single-pattern `add` rules now also covers
+single-pattern `remove` rules (the condition is
+`compiled.len() == 1 && action in {add, remove}`), so a removal can enable a
+later match of the same rule. The loop keeps the existing forward-only scan
+and iteration guard, so the cost stays bounded (the `uk` gate still runs in
+~2 s). Real-orthography regression test:
+`crates/lt/tests/ukrainian.rs::ukrainian_disambiguation_vocative_cascade`.
+Every gated language was re-run green after the change (the shared
+disambiguator affects all of them).
 
 Reproduce (pinned Java build, full `preDisambiguate` + XML stage):
 
@@ -566,10 +577,10 @@ The gate allowance:
 
 ```sh
 scripts/ci/parity.sh uk
-# allowed field diffs: 2/2 UK_ADJ_NOUN_INFLECTION_AGREEMENT
 # allowed only-Java: 1/1 UK_PREP_NOUN_INFLECTION_AGREEMENT
 # allowed only-Java: 2/2 UPPERCASE_SENTENCE_START
 # allowed only-Rust: 1/1 UK_ADJ_NOUN_INFLECTION_AGREEMENT
+# field diffs: 0 (the #14a cascade is fixed)
 ```
 
 ## 15. Arabic (`ar`) remaining corpus residue (14 only-Java / 8 only-Rust / 0 field diffs)
