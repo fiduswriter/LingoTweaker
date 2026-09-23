@@ -54,6 +54,11 @@ pub struct CompiledRule {
     pub distance_tokens: i32,
     /// enclosing category is default-off (cannot be enabled per rule)
     pub category_default_on: bool,
+    /// precomputed `ignoreRule` + `isRuleActiveForLevelAndToneTags` for the
+    /// default option set (no enabled/disabled lists, default level): the
+    /// per-sentence fast path only needs this flag instead of the set
+    /// lookups and tag scans
+    pub active_at_default_level: bool,
     /// rule tags (`tags="picky"` etc.)
     pub tags: Vec<String>,
     /// rule `tone_tags` (`Rule.getToneTags`; with default tone tags a
@@ -1064,6 +1069,9 @@ fn compile_rules(
                     min_prev_matches: rule.min_prev_matches,
                     distance_tokens: rule.distance_tokens,
                     category_default_on: rule.category_default_on,
+                    active_at_default_level: rule.category_default_on
+                        && !rule.tags.iter().any(|t| t == "picky")
+                        && !(rule.goal_specific && !rule.tone_tags.is_empty()),
                     tags: rule.tags.clone(),
                     tone_tags: rule.tone_tags.clone(),
                     goal_specific: rule.goal_specific,
@@ -1107,6 +1115,9 @@ fn compile_rules(
                             min_prev_matches: rule.min_prev_matches,
                             distance_tokens: rule.distance_tokens,
                             category_default_on: rule.category_default_on,
+                            active_at_default_level: rule.category_default_on
+                                && !rule.tags.iter().any(|t| t == "picky")
+                                && !(rule.goal_specific && !rule.tone_tags.is_empty()),
                             tags: rule.tags.clone(),
                             tone_tags: rule.tone_tags.clone(),
                             goal_specific: rule.goal_specific,
@@ -9872,7 +9883,11 @@ impl Pipeline {
         enabled_categories: &HashSet<&str>,
     ) -> (Vec<Match>, Vec<RepeatingMatch>) {
         let mut matches: Vec<Match> = Vec::new();
-        let mut seen: HashSet<(String, usize, usize)> = HashSet::new();
+        // rebuilt per sentence and keyed by (rule id, offset, offset): the
+        // default randomized SipHash showed up in the profile, the Fx hasher
+        // is deterministic and much cheaper
+        let mut seen: HashSet<(String, usize, usize), rustc_hash::FxBuildHasher> =
+            HashSet::with_hasher(rustc_hash::FxBuildHasher);
         let mut repeating: Vec<RepeatingMatch> = Vec::new();
 
         // pattern rules match on the non-blank token view (LT
@@ -13944,7 +13959,21 @@ impl Pipeline {
                 &mut seen,
             );
         }
+        // Fast path for the default option set: with no enabled/disabled
+        // rule or category lists the per-rule activity is fully static
+        // (precomputed `active_at_default_level`), so the per-rule
+        // `HashSet<&str>` lookups (empty-set `contains` still hashes the
+        // rule id, several percent of the profile) are skipped entirely.
+        let fast_gating = enabled_rules.is_empty()
+            && disabled_rules.is_empty()
+            && enabled_categories.is_empty()
+            && disabled_categories.is_empty()
+            && !options.enabled_only
+            && !options.picky;
         for rule in &self.compiled_rules {
+            if fast_gating && !rule.active_at_default_level {
+                continue;
+            }
             // Java `AbstractTokenBasedRule.canBeIgnoredFor`
             if token_refs.len() < rule.min_token_count {
                 continue;
@@ -13962,49 +13991,54 @@ impl Pipeline {
             {
                 continue;
             }
-            // Java `ignoreRule`: a default-off category stays disabled
-            // unless the rule is explicitly enabled
-            let explicitly_enabled = enabled_rules.contains(rule.rule_id.as_str());
-            if !rule.category_default_on && !explicitly_enabled {
-                continue;
-            }
-            // Java `isRuleActiveForLevelAndToneTags`: the default level
-            // skips `tags="picky"` rules
-            if !options.picky && rule.tags.iter().any(|t| t == "picky") {
-                continue;
-            }
-            // Java `isRuleActiveForLevelAndToneTags` with the default
-            // tone-tag set (this harness configures no goals): a rule that
-            // carries tone tags and is goal-specific stays inactive at every
-            // supported level, even when explicitly enabled.
-            if rule.goal_specific && !rule.tone_tags.is_empty() {
-                continue;
-            }
-            if !enabled_rules.is_empty() && options.enabled_only {
-                if !enabled_categories.is_empty() {
-                    // With both an explicit rule list and a category list,
-                    // `enabledOnly` keeps the union (Java `Tools.selectRules`,
-                    // #12194/#aece4da), not the intersection.
-                    let enabled_by_category =
-                        enabled_categories.contains(rule.category_id.as_str());
-                    if !enabled_rules.contains(rule.rule_id.as_str()) && !enabled_by_category {
+            if fast_gating {
+                // static activity already decided by
+                // `rule.active_at_default_level`
+            } else {
+                // Java `ignoreRule`: a default-off category stays disabled
+                // unless the rule is explicitly enabled
+                let explicitly_enabled = enabled_rules.contains(rule.rule_id.as_str());
+                if !rule.category_default_on && !explicitly_enabled {
+                    continue;
+                }
+                // Java `isRuleActiveForLevelAndToneTags`: the default level
+                // skips `tags="picky"` rules
+                if !options.picky && rule.tags.iter().any(|t| t == "picky") {
+                    continue;
+                }
+                // Java `isRuleActiveForLevelAndToneTags` with the default
+                // tone-tag set (this harness configures no goals): a rule that
+                // carries tone tags and is goal-specific stays inactive at every
+                // supported level, even when explicitly enabled.
+                if rule.goal_specific && !rule.tone_tags.is_empty() {
+                    continue;
+                }
+                if !enabled_rules.is_empty() && options.enabled_only {
+                    if !enabled_categories.is_empty() {
+                        // With both an explicit rule list and a category list,
+                        // `enabledOnly` keeps the union (Java `Tools.selectRules`,
+                        // #12194/#aece4da), not the intersection.
+                        let enabled_by_category =
+                            enabled_categories.contains(rule.category_id.as_str());
+                        if !enabled_rules.contains(rule.rule_id.as_str()) && !enabled_by_category {
+                            continue;
+                        }
+                    } else if !enabled_rules.contains(rule.rule_id.as_str()) {
                         continue;
                     }
-                } else if !enabled_rules.contains(rule.rule_id.as_str()) {
-                    continue;
-                }
-            } else {
-                if disabled_rules.contains(rule.rule_id.as_str()) {
-                    continue;
-                }
-                if disabled_categories.contains(rule.category_id.as_str()) {
-                    continue;
-                }
-                if options.enabled_only
-                    && !enabled_categories.is_empty()
-                    && !enabled_categories.contains(rule.category_id.as_str())
-                {
-                    continue;
+                } else {
+                    if disabled_rules.contains(rule.rule_id.as_str()) {
+                        continue;
+                    }
+                    if disabled_categories.contains(rule.category_id.as_str()) {
+                        continue;
+                    }
+                    if options.enabled_only
+                        && !enabled_categories.is_empty()
+                        && !enabled_categories.contains(rule.category_id.as_str())
+                    {
+                        continue;
+                    }
                 }
             }
 
@@ -14844,7 +14878,7 @@ fn append_active(
     matches: &mut Vec<Match>,
     active: bool,
     found: Vec<Match>,
-    seen: &mut HashSet<(String, usize, usize)>,
+    seen: &mut HashSet<(String, usize, usize), rustc_hash::FxBuildHasher>,
 ) {
     if !active {
         return;

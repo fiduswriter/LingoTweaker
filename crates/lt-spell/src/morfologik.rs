@@ -819,13 +819,20 @@ impl Speller {
                 } else {
                     self.edit_distance
                 };
+                // Java allocates the matrix per candidate word; the sentinel
+                // state is fully reset by `init`, so one buffer serves the
+                // whole candidate loop
+                let mut h = HMatrix::new(self.edit_distance, MAX_WORD_LENGTH);
+                let mut candidate_buf = vec!['\0'; MAX_WORD_LENGTH];
+                h.init();
+                candidate_buf.fill('\0');
                 let mut search = Search {
                     speller: self,
-                    h: HMatrix::new(self.edit_distance, MAX_WORD_LENGTH),
+                    h: &mut h,
                     word: word_chars,
                     word_len,
                     effect_ed: effect_edit_distance,
-                    candidate: vec!['\0'; MAX_WORD_LENGTH],
+                    candidate: &mut candidate_buf,
                     out: std::mem::take(&mut candidates),
                 };
                 search.find_repl(0, self.source.root(), &[], 0, 0, -1, None, '\0');
@@ -1009,17 +1016,17 @@ fn index_of_chars(haystack: &[char], needle: &[char], from: usize) -> Option<usi
 }
 
 /// Mutable state of one Oflazer search (`Speller.findRepl`).
-struct Search<'a> {
+struct Search<'a, 'm> {
     speller: &'a Speller,
-    h: HMatrix,
+    h: &'m mut HMatrix,
     word: Vec<char>,
     word_len: i32,
     effect_ed: i32,
-    candidate: Vec<char>,
+    candidate: &'m mut Vec<char>,
     out: Vec<CandidateData>,
 }
 
-impl Search<'_> {
+impl Search<'_, '_> {
     fn set_candidate(&mut self, index: i32, ch: char) {
         let index = index as usize;
         if index >= self.candidate.len() {
@@ -1460,7 +1467,13 @@ fn get_suggestion_index(suggestions: &[WeightedSuggestion], word: &str) -> Optio
 }
 
 fn strip_diacritics(c: char) -> char {
-    c.to_string().nfd().next().unwrap_or(c)
+    // ASCII is its own NFD decomposition; skip the `to_string` heap
+    // round-trip that showed up in the steady-state profile
+    if c.is_ascii() {
+        return c;
+    }
+    let mut buf = [0u8; 4];
+    c.encode_utf8(&mut buf).nfd().next().unwrap_or(c)
 }
 
 /// LT `MorfologikMultiSpeller`: merges a binary dictionary with the plain
