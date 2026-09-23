@@ -47,6 +47,7 @@ impl AppState {
             ("de-DE", Some("de-DE")),
             ("de-AT", Some("de-AT")),
             ("de-CH", Some("de-CH")),
+            ("de-DE-x-simple-language", Some("de-DE-x-simple-language")),
             ("pt-PT", Some("pt-PT")),
             ("pt-BR", Some("pt-BR")),
             ("no", None),

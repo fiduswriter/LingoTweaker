@@ -10,6 +10,10 @@ const ENGLISH = {
 const GERMAN = {
   sample: "Das ist ein schönes Haus. Vieleicht habe ich nach Hause gegangen.",
 };
+const SIMPLE_GERMAN = {
+  sample:
+    "Die Durchführung der Untersuchung war erfolgreich. Das ist ein Haus, das groß ist.",
+};
 const SPANISH = {
   sample: "Este son un prueba. Habían muchas personas en la calle.",
 };
@@ -127,6 +131,7 @@ export const LANGUAGES = [
   { code: "de-DE", pack: "de", label: "Deutsch (DE)", size: "21 MB", ...GERMAN },
   { code: "de-AT", pack: "de", label: "Deutsch (AT)", size: "21 MB", variant: "de-AT", ...GERMAN },
   { code: "de-CH", pack: "de", label: "Deutsch (CH)", size: "21 MB", variant: "de-CH", ...GERMAN },
+  { code: "de-DE-x-simple-language", pack: "de", label: "Leichte Sprache", size: "21 MB", variant: "de-DE-x-simple-language", ...SIMPLE_GERMAN },
   { code: "es-ES", pack: "es", label: "Español", size: "3.6 MB", ...SPANISH },
   { code: "fr", pack: "fr", label: "Français", size: "3.1 MB", ...FRENCH },
   { code: "it-IT", pack: "it", label: "Italiano", size: "1.1 MB", ...ITALIAN },

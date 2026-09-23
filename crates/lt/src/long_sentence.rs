@@ -104,6 +104,23 @@ pub fn check_el(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     )
 }
 
+/// `SimpleGerman.getRelevantRules`: `new de.LongSentenceRule(messages,
+/// userConfig, 12)` — id `TOO_LONG_SENTENCE_DE`, 12 words, German messages,
+/// `tags="picky"` (so it only runs at the picky level, like the German rule).
+pub fn check_de_simple(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    const SIMPLE_MAX_WORDS: usize = 12;
+    check_impl(
+        sentences,
+        "TOO_LONG_SENTENCE_DE",
+        &format!("Lesbarkeit: Satz mit mehr als {SIMPLE_MAX_WORDS} Wörtern"),
+        &format!(
+            "Dieser Satz hat mehr als {SIMPLE_MAX_WORDS} Wörter. Kürzen Sie den Satz oder teilen Sie ihn, um die Lesbarkeit zu verbessern."
+        ),
+        ("STYLE", "Stil"),
+        SIMPLE_MAX_WORDS,
+    )
+}
+
 /// `de.LongSentenceRule` (`TOO_LONG_SENTENCE_DE`, 40 words, German messages).
 pub fn check_de(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_impl(

@@ -351,3 +351,21 @@ pub fn rule_priority(
     }
     0
 }
+
+/// `SimpleGerman.getPriorityForId`: the German map plus
+/// `TOO_LONG_SENTENCE` → 10 and `LANGES_WORT` → −1, then the German fallback
+/// (`SimpleGerman.getPriorityForId` calls `super.getPriorityForId`).
+pub fn simple_rule_priority(
+    rule_id: &str,
+    category_id: &str,
+    issue_type: &str,
+    rule_priority: i32,
+) -> i32 {
+    if rule_id == "LANGES_WORT" {
+        return -1;
+    }
+    if rule_id == "TOO_LONG_SENTENCE" {
+        return 10;
+    }
+    crate::de::priorities::rule_priority(rule_id, category_id, issue_type, rule_priority)
+}

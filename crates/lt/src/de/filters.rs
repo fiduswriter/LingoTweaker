@@ -441,12 +441,16 @@ impl RuleFilter for PotentialCompoundFilter {
 /// named by `formPositions` are English words (or match the `postags`
 /// regexes).
 struct IsEnglishWordFilter {
-    env: Env,
+    /// `IsEnglishWordFilter` only reads the language's English tagger
+    /// (`GermanyGerman.getTagger()` never provides one in the pinned build),
+    /// so it needs no other German state. This lets the Simple German variant
+    /// register it without building the German speller (D-309).
+    english_tagger: Option<Arc<lt_tagger::EnglishTagger>>,
 }
 
 impl IsEnglishWordFilter {
     fn tagger(&self) -> Option<&lt_tagger::EnglishTagger> {
-        self.env.english_tagger.as_deref()
+        self.english_tagger.as_deref()
     }
 
     fn is_tagged(&self, word: &str) -> bool {
@@ -1056,7 +1060,7 @@ pub fn german_filter_registry(env: Env) -> FilterRegistry {
     builder = builder.register(
         "org.languagetool.rules.IsEnglishWordFilter",
         Arc::new(IsEnglishWordFilter {
-            env: Arc::clone(&env),
+            english_tagger: env.english_tagger.clone(),
         }),
     );
     let today = env.today;
@@ -1106,6 +1110,22 @@ pub fn german_filter_registry(env: Env) -> FilterRegistry {
         "org.languagetool.rules.de.GermanSuppressMisspelledSuggestionsFilter",
         Arc::new(GermanSuppressMisspelledSuggestionsFilter {
             env: Arc::clone(&env),
+        }),
+    );
+    builder.build()
+}
+
+/// The minimal German filter registry the Simple German variant needs: only
+/// `IsEnglishWordFilter`, which `de/disambiguation.xml` references 11 times
+/// (reject-all in the pinned build, exactly like plain German, D-039). The
+/// simple `grammar.xml` has no `<filter>` at all, so no speller-backed filter
+/// is needed and the German speller is never built for the variant (D-309).
+pub fn german_disambiguation_filter_registry() -> FilterRegistry {
+    let mut builder = FilterRegistry::builder();
+    builder = builder.register(
+        "org.languagetool.rules.IsEnglishWordFilter",
+        Arc::new(IsEnglishWordFilter {
+            english_tagger: None,
         }),
     );
     builder.build()

@@ -106,13 +106,42 @@ impl GermanPipeline {
     }
 }
 
+/// `SimpleGerman` (`de-DE-x-simple-language`) foundations: the variant
+/// inherits every German foundation (tagger, synthesizer, the
+/// `GermanRuleDisambiguator` chunker order, `de/disambiguation.xml` and the
+/// `GermanChunker`) but runs only its own `grammar.xml` and the 12-word
+/// `LongSentenceRule` — never the German rule classes or speller (D-309).
+pub struct GermanSimplePipeline {
+    pub tagger: GermanTaggerKind,
+    pub synth_adapter: Arc<crate::de::synthesizer::GermanSynthesizerAdapter>,
+    pub global_chunker: lt_disambig::MultiWordChunker,
+    pub multitoken_chunker: lt_disambig::MultiWordChunker,
+    pub multitoken_suggest_chunker: lt_disambig::MultiWordChunker,
+    pub disambiguator: lt_disambig::XmlDisambiguator,
+    /// `German.createDefaultPostDisambiguationChunker` (inherited).
+    pub chunker: lt_chunk::german::GermanChunker,
+    /// `de-DE-x-simple-language`
+    pub variant: String,
+}
+
+impl GermanSimplePipeline {
+    /// `GermanRuleDisambiguator` order: multitoken-ignore → spelling_global →
+    /// multitoken-suggest → XML rules.
+    pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
+        self.multitoken_chunker.apply(sentence);
+        self.global_chunker.apply(sentence);
+        self.multitoken_suggest_chunker.apply(sentence);
+        self.disambiguator.apply(sentence);
+    }
+}
+
 /// German sentence tokenization + tagger (`GermanWordTokenizer` produces the
 /// token stream including whitespace; `GermanTagger.tag(List)` needs the whole
 /// list at once for its case heuristics).
-pub fn analyze_german_sentence(german: &GermanPipeline, text: &str) -> AnalyzedSentence {
+pub fn analyze_german_sentence(tagger: &GermanTaggerKind, text: &str) -> AnalyzedSentence {
     let tokenizer = GermanWordTokenizer::new();
     let raw_tokens = tokenizer.tokenize(text);
-    let tagged = german.tagger.tag(&raw_tokens, true);
+    let tagged = tagger.tag(&raw_tokens, true);
 
     let mut tokens: Vec<AnalyzedTokenReadings> = Vec::with_capacity(tagged.len() + 1);
     // synthetic sentence-start entry (LT: AnalyzedToken("", "SENT_START", null))

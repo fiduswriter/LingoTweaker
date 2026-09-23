@@ -203,7 +203,16 @@ fn utf16_len(text: &str, m: &Match) -> i32 {
 fn priority(m: &Match, lang: Lang, variant: Option<&str>) -> i32 {
     match lang {
         Lang::De => {
-            crate::de::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0)
+            if variant == Some("de-DE-x-simple-language") {
+                crate::de::priorities::simple_rule_priority(
+                    &m.rule_id,
+                    &m.category_id,
+                    &m.issue_type,
+                    0,
+                )
+            } else {
+                crate::de::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0)
+            }
         }
         Lang::Es => {
             crate::es::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0)

@@ -139,15 +139,17 @@ enum Command {
     },
     /// Extract the <example> corpus for a language to JSONL.
     Examples {
+        /// Language code (e.g. `en`, `de`, `de-DE-x-simple-language`)
         #[arg(short, long)]
-        lang: LangArg,
+        lang: String,
         #[arg(long)]
         out: Option<PathBuf>,
     },
     /// Print rule inventory statistics for a language.
     Inventory {
+        /// Language code (e.g. `en`, `de`, `de-DE-x-simple-language`)
         #[arg(short, long)]
-        lang: LangArg,
+        lang: String,
         /// print every rule id (with sub id) instead of the summary
         #[arg(long)]
         rules: bool,
@@ -226,8 +228,8 @@ fn main() -> Result<()> {
             text,
             file,
         } => cmd_analyze(&cli, *lang, *raw, text.clone(), file.clone()),
-        Command::Examples { lang, out } => cmd_examples(&cli, *lang, out.clone()),
-        Command::Inventory { lang, rules, json } => cmd_inventory(&cli, *lang, *rules, *json),
+        Command::Examples { lang, out } => cmd_examples(&cli, lang, out.clone()),
+        Command::Inventory { lang, rules, json } => cmd_inventory(&cli, lang, *rules, *json),
         Command::Serve { addr } => cmd_serve(addr.clone()),
         Command::Smoke {
             lang,
@@ -512,8 +514,9 @@ fn cmd_analyze(
     Ok(())
 }
 
-fn cmd_examples(cli: &Cli, lang: LangArg, out: Option<PathBuf>) -> Result<()> {
-    let lang: Lang = lang.into();
+fn cmd_examples(cli: &Cli, lang_code: &str, out: Option<PathBuf>) -> Result<()> {
+    let lang: Lang = parse_lang(lang_code)?;
+    let variant = variant_of(lang_code);
     let data = data_dir(cli)?;
     let mut count = 0usize;
     let stdout = std::io::stdout();
@@ -522,7 +525,7 @@ fn cmd_examples(cli: &Cli, lang: LangArg, out: Option<PathBuf>) -> Result<()> {
         Some(path) => Box::new(std::fs::File::create(&path)?),
         None => Box::new(stdout.lock()),
     };
-    for path in rule_files(&data, lang)? {
+    for path in rule_files(&data, lang, variant.as_deref())? {
         let grammar = lt_pattern::Grammar::load_file(&path)
             .with_context(|| format!("loading {}", path.display()))?;
         for rule in &grammar.rules {
@@ -547,7 +550,10 @@ fn cmd_examples(cli: &Cli, lang: LangArg, out: Option<PathBuf>) -> Result<()> {
         }
     }
     let disambig_path = data.disambiguation_path(lang);
-    if disambig_path.exists() {
+    // The Simple German variant shares the German `de/disambiguation.xml`
+    // (already part of the German corpus), so it contributes no disambiguation
+    // examples of its own (D-309).
+    if variant.as_deref() != Some("de-DE-x-simple-language") && disambig_path.exists() {
         let file = lt_pattern::Grammar::load_file(&disambig_path)
             .with_context(|| format!("loading {}", disambig_path.display()))?;
         for rule in &file.rules {
@@ -576,8 +582,9 @@ fn cmd_examples(cli: &Cli, lang: LangArg, out: Option<PathBuf>) -> Result<()> {
     Ok(())
 }
 
-fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool, as_json: bool) -> Result<()> {
-    let lang: Lang = lang.into();
+fn cmd_inventory(cli: &Cli, lang_code: &str, list_rules: bool, as_json: bool) -> Result<()> {
+    let lang: Lang = parse_lang(lang_code)?;
+    let variant = variant_of(lang_code);
     let data = data_dir(cli)?;
     let mut total_rules = 0usize;
     let mut total_examples = 0usize;
@@ -586,7 +593,7 @@ fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool, as_json: bool) -> R
     let mut categories = std::collections::BTreeMap::new();
     let mut files = 0usize;
     let mut json_rules: Vec<serde_json::Value> = Vec::new();
-    for path in rule_files(&data, lang)? {
+    for path in rule_files(&data, lang, variant.as_deref())? {
         files += 1;
         let grammar = lt_pattern::Grammar::load_file(&path)
             .with_context(|| format!("loading {}", path.display()))?;
@@ -637,7 +644,10 @@ fn cmd_inventory(cli: &Cli, lang: LangArg, list_rules: bool, as_json: bool) -> R
     if list_rules {
         return Ok(());
     }
-    println!("language: {}", lang.info().long_code);
+    println!(
+        "language: {}",
+        variant.as_deref().unwrap_or(lang.info().long_code)
+    );
     println!("files: {files}");
     println!("rules: {total_rules}");
     println!("examples: {total_examples}");
@@ -672,8 +682,13 @@ fn parse_lang(code: &str) -> Result<Lang> {
 }
 
 /// Language variant part of a long code (`de-AT` -> `de-AT`), used to select
-/// the variant spelling dictionary/rule files.
+/// the variant spelling dictionary/rule files. The Simple German private-use
+/// tag is kept whole (`de-DE-x-simple-language`), since it selects a whole
+/// variant rule file (D-309).
 fn variant_of(code: &str) -> Option<String> {
+    if code.eq_ignore_ascii_case("de-DE-x-simple-language") {
+        return Some("de-DE-x-simple-language".to_string());
+    }
     let parts: Vec<&str> = code.split(['-', '_']).collect();
     if parts.len() >= 2 && !parts[1].is_empty() {
         Some(format!(
@@ -686,10 +701,24 @@ fn variant_of(code: &str) -> Option<String> {
     }
 }
 
-fn rule_files(data: &lt_data::DataDir, lang: Lang) -> Result<Vec<PathBuf>> {
+fn rule_files(data: &lt_data::DataDir, lang: Lang, variant: Option<&str>) -> Result<Vec<PathBuf>> {
+    // Simple German is a variant of `de` whose grammar lives in a
+    // subdirectory of the German rules dir (`de/rules/de-DE-x-simple-language/`).
+    // For that variant only the subdirectory is the rule set; for plain `de`
+    // the subdirectory is excluded (it is not part of `German.getRuleFileNames`).
+    const SIMPLE: &str = "de-DE-x-simple-language";
     let dir = data.path().join(lang.base_code()).join("rules");
     if !dir.is_dir() {
         bail!("no vendored rules at {}", dir.display());
+    }
+    if variant == Some(SIMPLE) {
+        let sub = dir.join(SIMPLE);
+        if !sub.is_dir() {
+            bail!("no vendored rules at {}", sub.display());
+        }
+        let mut files = walk_xml(&sub);
+        files.sort();
+        return Ok(files);
     }
     let mut files: Vec<PathBuf> = std::fs::read_dir(&dir)?
         .filter_map(|e| e.ok())
@@ -705,6 +734,10 @@ fn rule_files(data: &lt_data::DataDir, lang: Lang) -> Result<Vec<PathBuf>> {
             // `Slovak.getRuleFileNames` (only grammar.xml and the
             // `RULE_FILES` extra `grammar-typography.xml` are loaded).
             if p.file_name().is_some_and(|n| n == "grammar-nezaradene.xml") {
+                return false;
+            }
+            // The Simple German variant's own grammar (D-309).
+            if p.file_name().is_some_and(|n| n == SIMPLE) {
                 return false;
             }
             if p.is_file() {

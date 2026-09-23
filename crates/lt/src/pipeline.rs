@@ -140,6 +140,10 @@ pub struct Pipeline {
     pub repeated_words: Option<crate::repeated_words::RepeatedWordsRule>,
     /// German pipeline parts (`None` for English engines)
     pub german: Option<Box<crate::de::pipeline::GermanPipeline>>,
+    /// Simple German (`de-DE-x-simple-language`) foundations: German tagger/
+    /// synthesizer/disambiguator/chunker plus its own `grammar.xml` rules and
+    /// the 12-word `LongSentenceRule` (D-309). `None` for plain German.
+    pub german_simple: Option<Box<crate::de::pipeline::GermanSimplePipeline>>,
     /// Spanish pipeline parts (`None` for English/German engines)
     pub spanish: Option<Box<crate::es::pipeline::SpanishPipeline>>,
     /// French pipeline parts (`None` for English/German/Spanish engines)
@@ -1397,6 +1401,7 @@ impl Pipeline {
             readability,
             repeated_words,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -1500,6 +1505,16 @@ impl Pipeline {
         };
 
         mark("tagger");
+        if variant == "de-DE-x-simple-language" {
+            return Self::new_german_simple(
+                data_dir,
+                enabled_rules,
+                variant,
+                srx,
+                tagger,
+                synth_adapter,
+            );
+        }
         let mut grammar = Grammar::load_file(data_dir.grammar_path(Lang::De))?;
         if data_dir.style_path(Lang::De).lt_exists() {
             let style = Grammar::load_file(data_dir.style_path(Lang::De))?;
@@ -1652,6 +1667,124 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: Some(Box::new(german)),
+            german_simple: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: None,
+            malayalam: None,
+            tamil: None,
+            da: None,
+            sv: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Build the Simple German (`de-DE-x-simple-language`) variant: German
+    /// foundations (tagger/synthesizer/disambiguator/chunker) plus only the
+    /// variant's own `grammar.xml` rules and the 12-word `LongSentenceRule`
+    /// (D-309). Never builds the German speller.
+    fn new_german_simple(
+        data_dir: &lt_data::DataDir,
+        enabled_rules: &[String],
+        variant: String,
+        srx: lt_tokenize::SrxTokenizer,
+        tagger: crate::de::pipeline::GermanTaggerKind,
+        synth_adapter: Arc<crate::de::synthesizer::GermanSynthesizerAdapter>,
+    ) -> Result<Self> {
+        let grammar = Grammar::load_file(
+            data_dir
+                .path()
+                .join("de/rules/de-DE-x-simple-language/grammar.xml"),
+        )?;
+        let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
+            .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
+        let filters = crate::de::filters::german_disambiguation_filter_registry();
+        let (compiled_rules, skipped, compile_failures) =
+            compile_rules(&grammar, &filters, enabled_rules);
+        // `SimpleGerman.createDefaultDisambiguator` = `GermanRuleDisambiguator`:
+        // multitoken-ignore → spelling_global → multitoken-suggest → XML rules
+        // (the German `de/disambiguation.xml` + global rules).
+        let global_disambig = data_dir.path().join("core/disambiguation-global.xml");
+        let mut disambiguator = lt_disambig::XmlDisambiguator::load_with_extra(
+            &data_dir.disambiguation_path(Lang::De),
+            Some(&global_disambig),
+        )?;
+        disambiguator.set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
+        disambiguator.set_filter_registry(filters);
+        let global_chunker = load_chunker(&data_dir.path().join("core/spelling_global.txt"), false);
+        let multitoken_chunker = load_chunker(
+            &data_dir.path().join("de/words/multitoken-ignore.txt"),
+            true,
+        );
+        let multitoken_suggest_chunker = load_chunker(
+            &data_dir.path().join("de/words/multitoken-suggest.txt"),
+            true,
+        );
+        let german_simple = crate::de::pipeline::GermanSimplePipeline {
+            tagger,
+            synth_adapter,
+            global_chunker,
+            multitoken_chunker,
+            multitoken_suggest_chunker,
+            disambiguator,
+            chunker: lt_chunk::german::GermanChunker::new()?,
+            variant,
+        };
+        Ok(Self {
+            lang: Lang::De,
+            unify_config,
+            srx,
+            tagger: None,
+            grammar,
+            compiled_rules,
+            skipped_counts: skipped,
+            compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            // the German `SimpleReplaceRule` (11) is a German rule class, not a
+            // simple-language rule, so it does not run here.
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            german_simple: Some(Box::new(german_simple)),
             spanish: None,
             french: None,
             italian: None,
@@ -1866,6 +1999,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: Some(Box::new(spanish)),
             french: None,
             italian: None,
@@ -2088,6 +2222,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: Some(french),
             italian: None,
@@ -2230,6 +2365,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: Some(italian),
@@ -2491,6 +2627,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -2712,6 +2849,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3050,6 +3188,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3212,6 +3351,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3360,6 +3500,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3532,6 +3673,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3682,6 +3824,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3804,6 +3947,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -3961,6 +4105,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4048,6 +4193,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4220,6 +4366,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4304,6 +4451,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4425,6 +4573,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4532,6 +4681,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4653,6 +4803,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4762,6 +4913,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4872,6 +5024,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -4992,6 +5145,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5101,6 +5255,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5263,6 +5418,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5464,6 +5620,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5621,6 +5778,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5765,6 +5923,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5843,6 +6002,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -5934,6 +6094,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -6023,6 +6184,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -6100,6 +6262,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -6249,6 +6412,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -6343,6 +6507,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -6441,6 +6606,7 @@ impl Pipeline {
             readability: Vec::new(),
             repeated_words: None,
             german: None,
+            german_simple: None,
             spanish: None,
             french: None,
             italian: None,
@@ -6508,10 +6674,12 @@ impl Pipeline {
                 crate::sr::analyze_serbian_sentence(serbian, sentence_text)
             } else if let Some(arabic) = &self.arabic {
                 crate::ar::analyze_arabic_sentence(arabic, sentence_text)
+            } else if let Some(german_simple) = &self.german_simple {
+                crate::de::pipeline::analyze_german_sentence(&german_simple.tagger, sentence_text)
             } else {
                 match &self.german {
                     Some(german) => {
-                        crate::de::pipeline::analyze_german_sentence(german, sentence_text)
+                        crate::de::pipeline::analyze_german_sentence(&german.tagger, sentence_text)
                     }
                     None => match &self.spanish {
                         Some(spanish) => {
@@ -6658,6 +6826,9 @@ impl Pipeline {
                 // Java's `getChunker()` == null for German)
                 if let Some(german) = &self.german {
                     german.chunker.add_chunk_tags(&mut analyzed.tokens);
+                }
+                if let Some(german_simple) = &self.german_simple {
+                    german_simple.chunker.add_chunk_tags(&mut analyzed.tokens);
                 }
             }
             out.push(analyzed);
@@ -6967,7 +7138,7 @@ impl Pipeline {
                 }
             }
         }
-        if self.lang == crate::Lang::De {
+        if self.lang == crate::Lang::De && self.german.is_some() {
             // German text-level Java rules in `German.getRelevantRules` order
             // (`DE_SENTENCE_WHITESPACE` (13), `DE_SIMILAR_NAMES` (26) before
             // `DE_DU_UPPER_LOWER` (39)).
@@ -7381,6 +7552,25 @@ impl Pipeline {
                     ));
                 }
             }
+        }
+        // Simple German (`de-DE-x-simple-language`): `SimpleGerman
+        // .getRelevantRules` adds only `new de.LongSentenceRule(messages,
+        // userConfig, 12)` (id `TOO_LONG_SENTENCE_DE`, `tags="picky"`); the
+        // rest of the rule set is the compiled `grammar.xml`. D-309.
+        if self.german_simple.is_some()
+            && builtin_active(
+                "TOO_LONG_SENTENCE_DE",
+                "STYLE",
+                true,
+                true,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            )
+        {
+            text_level_matches.extend(crate::long_sentence::check_de_simple(&analyzed_sentences));
         }
         if self.lang == crate::Lang::Es {
             let para = crate::paragraph::strings_es();
@@ -9839,9 +10029,14 @@ impl Pipeline {
             );
         }
         if self.clean_overlapping_matches {
-            let pt_variant = self.portuguese.as_ref().map(|p| p.variant.as_str());
+            let variant = self
+                .portuguese
+                .as_ref()
+                .map(|p| p.variant.as_str())
+                .or_else(|| self.german.as_ref().map(|g| g.variant.as_str()))
+                .or_else(|| self.german_simple.as_ref().map(|g| g.variant.as_str()));
             matches =
-                crate::matchfilters::clean_overlapping_filter(matches, text, self.lang, pt_variant);
+                crate::matchfilters::clean_overlapping_filter(matches, text, self.lang, variant);
         }
         if self.lang == crate::Lang::Ca {
             // `Catalan.filterRuleMatchesAfterOverlapping` (`trimMatchEnds`).
@@ -9887,10 +10082,12 @@ impl Pipeline {
             crate::sr::analyze_serbian_sentence(serbian, &text[start..end])
         } else if let Some(arabic) = &self.arabic {
             crate::ar::analyze_arabic_sentence(arabic, &text[start..end])
+        } else if let Some(german_simple) = &self.german_simple {
+            crate::de::pipeline::analyze_german_sentence(&german_simple.tagger, &text[start..end])
         } else {
             match &self.german {
                 Some(german) => {
-                    crate::de::pipeline::analyze_german_sentence(german, &text[start..end])
+                    crate::de::pipeline::analyze_german_sentence(&german.tagger, &text[start..end])
                 }
                 None => match &self.spanish {
                     Some(spanish) => {
@@ -10050,6 +10247,9 @@ impl Pipeline {
         // DisambiguationChunker`), after the XML disambiguation
         if let Some(german) = &self.german {
             german.chunker.add_chunk_tags(&mut analyzed.tokens);
+        }
+        if let Some(german_simple) = &self.german_simple {
+            german_simple.chunker.add_chunk_tags(&mut analyzed.tokens);
         }
         // Java `analyzeSentences`: the last sentence of the text carries the
         // paragraph-end marker on its final token (`markAsParagraphEnd`).
@@ -10602,7 +10802,7 @@ impl Pipeline {
         // German sentence-level Java rules in `German.getRelevantRules`
         // order: GermanCommaWhitespace (1) … GermanDoublePunctuation (14),
         // MissingVerb (15), WiederVsWider (27) — before the XML rules.
-        if self.lang == crate::Lang::De {
+        if self.lang == crate::Lang::De && self.german.is_some() {
             // `OLD_SPELLING_RULE` (12), default on; Java runs it right after
             // the `SimpleReplaceRule` (11) built-ins
             if let Some(german) = &self.german {
@@ -15022,6 +15222,9 @@ impl Pipeline {
         if let Some(german) = &self.german {
             return Some(german.synth_adapter.as_ref());
         }
+        if let Some(german_simple) = &self.german_simple {
+            return Some(german_simple.synth_adapter.as_ref());
+        }
         if let Some(spanish) = &self.spanish {
             return Some(spanish.synth_adapter.as_ref());
         }
@@ -15081,6 +15284,11 @@ impl Pipeline {
     /// EnglishHybridDisambiguator order: global multiword chunker
     /// (spelling_global.txt, `_NONE_` tags), multiwords chunker, XML rules.
     fn apply_disambiguation(&self, sentence: &mut AnalyzedSentence, snapshot_catalan_pre: bool) {
+        if let Some(german_simple) = &self.german_simple {
+            // Simple German inherits `GermanRuleDisambiguator` (D-309).
+            german_simple.disambiguate(sentence);
+            return;
+        }
         if let Some(german) = &self.german {
             // GermanRuleDisambiguator order: multitoken-ignore →
             // spelling_global → multitoken-suggest → XML rules
