@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
@@ -81,6 +81,11 @@ Java's does, so two suggestion lists differ by one entry).
 rules, the six generic built-ins and the Morfologik `MORFOLOGIK_RULE_ML_IN`
 speller match the pinned module exactly; the speller is inert for Malayalam
 script, `isLatinScript() = true`, as in Java).
+`ta` is at 0 only-Java / 0 only-Rust / 0 field diffs (#25; the 210 active XML
+rules, the `TamilTagger` over `ta/dictionaries/tamil.dict` and the five
+`Tamil.getRelevantRules` generic built-ins (the ta-localized copy/punctuation/
+whitespace/long-sentence/sentence-whitespace rules) match the pinned module
+exactly; Tamil has no speller, disambiguator or synthesizer).
 
 ## Data tooling
 

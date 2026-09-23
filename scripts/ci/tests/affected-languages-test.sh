@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","no","nrd","gn"]'
+ALL='["en","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","no","nrd","gn"]'
 fails=0
 
 check() {
@@ -111,6 +111,9 @@ check "km golden" '["km"]' docs/parity/golden/km-full.java.tsv
 check "ml integration test" '["ml"]' crates/lt/tests/malayalam.rs
 check "ml oracle" '["ml"]' scripts/oracle/ml/check-diff-ml.sh
 check "ml golden" '["ml"]' docs/parity/golden/ml-full.java.tsv
+check "ta integration test" '["ta"]' crates/lt/tests/tamil.rs
+check "ta oracle" '["ta"]' scripts/oracle/ta/check-diff-ta.sh
+check "ta golden" '["ta"]' docs/parity/golden/ta-full.java.tsv
 
 # hand-authored languages (tests-only parity gate): local layout plus the
 # no/nrd/gn module entry files and the Nordum dictionary generator

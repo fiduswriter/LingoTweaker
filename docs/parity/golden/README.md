@@ -38,6 +38,7 @@ re-runs the Rust side and diffs against the golden.
 | fa | `fa-full.txt` (566) | `fa-full.java.tsv` |
 | km | `km-full.txt` (66) | `km-full.java.tsv` |
 | ml | `ml-full.txt` (38) | `ml-full.java.tsv` |
+| ta | `ta-full.txt` (216) | `ta-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -59,7 +60,8 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
   sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru/uk/sr/ar `2026-09-22`,
 and fa `2026-09-23` (Persian has no date-filter rules, so the value is inert),
-and km `2026-09-23` (Khmer has no date-filter rules either).
+and km `2026-09-23` (Khmer has no date-filter rules either), and ta
+`2026-09-23` (Tamil has no date-filter rules either).
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -165,11 +167,19 @@ and km `2026-09-23` (Khmer has no date-filter rules either).
   from the unpatched checkout (`scripts/oracle/ml/check-diff-ml.sh`). The
   speller is inert for Malayalam script (`isLatinScript() = true`), exactly
   like Java.
+  ta is exactly 0/0/0: the 210 active XML rules (including the rulegroup
+  sub-rules), the `TamilTagger` (`ta/dictionaries/tamil.dict`) and the five
+  `Tamil.getRelevantRules` generic built-ins (the ta-localized
+  `CommaWhitespaceRule`, `DoublePunctuationRule`, `MultipleWhitespaceRule`,
+  `LongSentenceRule(…, 50)` and `SentenceWhitespaceRule`) match the pinned
+  Java module, captured from the unpatched checkout
+  (`scripts/oracle/ta/check-diff-ta.sh`). Tamil has no speller, no
+  disambiguator and no synthesizer; `compile_failures()` is empty.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

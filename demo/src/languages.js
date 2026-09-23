@@ -157,7 +157,7 @@ export const LANGUAGES = [
   { code: "fa-IR", pack: "fa", label: "فارسی", size: "0.32 MB", ...PERSIAN },
   { code: "km-KH", pack: "km", label: "ខ្មែរ", size: "0.81 MB", ...KHMER },
   { code: "ml-IN", pack: "ml", label: "മലയാളം", size: "0.94 MB", ...MALAYALAM },
-  { code: "ta-IN", pack: "ta", label: "தமிழ்", size: "0.45 MB", ...TAMIL },
+  { code: "ta-IN", pack: "ta", label: "தமிழ்", size: "0.31 MB", ...TAMIL },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.0 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.6 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.28 MB", ...GUARANI },
