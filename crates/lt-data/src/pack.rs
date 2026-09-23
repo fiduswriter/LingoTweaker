@@ -144,6 +144,72 @@ pub fn collect_language(data_dir: &Path, lang: &str) -> Result<Vec<(PathBuf, Vec
     Ok(files)
 }
 
+/// Pack a subset of the data tree: exactly the files under `roots` (relative
+/// to `data_dir`, may be files or directories), minus those under any
+/// `excludes` prefix. Used for the split packs: a base pack that omits
+/// optional resources and per-variant sidecar packs (see
+/// attic/docs/wasm-demo-future-optimizations.md, item 9).
+pub fn collect_paths(
+    data_dir: &Path,
+    roots: &[&Path],
+    excludes: &[&Path],
+) -> Result<Vec<(PathBuf, Vec<u8>)>> {
+    let mut files = Vec::new();
+    for root in roots {
+        let abs = data_dir.join(root);
+        if abs.is_dir() {
+            collect_tree(data_dir, &abs, &mut files)?;
+        } else if abs.is_file() {
+            push_file(data_dir, &abs, &mut files)?;
+        } else {
+            // a prefix like `en/hunspell/en_GB` (the dictionary files are
+            // `en_GB.dict`/`en_GB.info`): collect the nearest existing
+            // ancestor directory and keep the matching subtree. The match is
+            // a string prefix with `/` (pack paths always use `/`), not
+            // `Path::starts_with`, which compares whole components.
+            let mut ancestor = abs.parent();
+            while let Some(dir) = ancestor {
+                if dir.is_dir() {
+                    let mut tree = Vec::new();
+                    collect_tree(data_dir, dir, &mut tree)?;
+                    files.extend(
+                        tree.into_iter()
+                            .filter(|(path, _)| is_under_prefix(path, root)),
+                    );
+                    break;
+                }
+                ancestor = dir.parent();
+            }
+        }
+    }
+    if excludes.is_empty() {
+        return Ok(files);
+    }
+    // the collected paths are `data_dir`-relative; same prefix semantics as
+    // the roots above
+    files.retain(|(path, _)| !excludes.iter().any(|ex| is_under_prefix(path, ex)));
+    Ok(files)
+}
+
+/// `path` is the root itself, a child directory (`root/…`), or a file whose
+/// name starts with the root's final component (the hunspell dictionary
+/// convention: `en_GB` → `en_GB.dict`, `en_GB.info`). Component-wise
+/// `Path::starts_with` misses the file-prefix case.
+fn is_under_prefix(path: &Path, root: &Path) -> bool {
+    if path.starts_with(root) {
+        return true;
+    }
+    let path = path.to_string_lossy();
+    let root = root.to_string_lossy();
+    if !path.starts_with(root.as_ref()) {
+        return false;
+    }
+    matches!(
+        path[root.len()..].chars().next(),
+        None | Some('/') | Some('.')
+    )
+}
+
 fn collect_tree(data_dir: &Path, dir: &Path, files: &mut Vec<(PathBuf, Vec<u8>)>) -> Result<()> {
     let entries = match std::fs::read_dir(dir) {
         Ok(entries) => entries,
