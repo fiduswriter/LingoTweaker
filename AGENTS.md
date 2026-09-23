@@ -73,11 +73,10 @@ third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
 id (docs/differences.md #11). `uk` is at 3 only-Java / 1 only-Rust / 0 field
 diffs (#12: a prep+`не`+noun case-government gap, abbreviation sentence
 segmentation and one plural-adjective/proper-name overlap tie-break; the XML
-disambiguation forward-scan cascade is fixed). `ar` is at 14 only-Java / 8 only-Rust / 0 field diffs (#21; docs/
-differences.md #13: the
-`syntax_numeric_0003` number-phrase rule whose `ArabicNumbersWords` engine is
-not ported, the two unported rule classes and two Hunspell range/wildcard
-residues). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; resolved: the
+disambiguation forward-scan cascade is fixed). `ar` is at 0 only-Java / 0 only-Rust / 0 field diffs (#21; resolved: the
+`ArabicNumbersWords` number engine (with `ArabicNumberPhraseFilter`), the
+`AR_INFLECTED_ONE_WORD` / `AR_VERB_TRANSITIVE_IINDIRECT` rule classes and the
+speller wrong-split range logic are ported). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; resolved: the
 former 258 only-Rust `Bad_ZWNJ` false positives came from
 Java's token `\w` being ASCII while the Rust `regex` crate's is Unicode; the
 shared `lt_pattern` translation now rewrites the shorthands to Java's ASCII
