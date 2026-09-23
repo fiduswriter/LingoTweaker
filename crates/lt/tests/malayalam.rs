@@ -82,7 +82,7 @@ fn malayalam_engine_state() {
         "{:?}",
         ml.compile_failures()
     );
-    assert_eq!(ml.grammar().expect("grammar").rules.len(), 18);
+    assert_eq!(ml.grammar_rule_count(), 18);
     assert_eq!(ml.active_rule_count(), 18);
     assert_eq!(ml.skipped_counts().filters, 0);
     assert_eq!(ml.skipped_counts().off_by_default, 0);

@@ -91,7 +91,7 @@ fn tamil_engine_state() {
         "{:?}",
         ta.compile_failures()
     );
-    assert_eq!(ta.grammar().expect("grammar").rules.len(), 210);
+    assert_eq!(ta.grammar_rule_count(), 210);
     assert_eq!(ta.active_rule_count(), 210);
     assert_eq!(ta.skipped_counts().filters, 0);
     assert_eq!(ta.skipped_counts().off_by_default, 0);
