@@ -210,7 +210,9 @@ This is the only remaining Portuguese corpus field diff.
 
 ## 7. `HUNSPELL_RULE` (Galician) suggestion timer boundary (2 corpus field diffs)
 
-Unlike the other entries this is a **known limitation, not a correctness
+**Verdict: residue to fix** (a known limitation, not a correctness judgement;
+the match set is identical and the residue is upstream's machine-timing
+cutoff). Unlike the other entries this is a **known limitation, not a correctness
 judgement**: the Galician match set is identical to the legacy engine
 (0 only-Java / 0 only-Rust over the 717-example corpus). The native hunspell
 suggestion engine (`suggestmgr.cxx`, hunspell 1.7.2) is ported into
@@ -318,6 +320,9 @@ cargo run -p lt-cli -- check -l es --json "Este son un problema."
 
 ## 9. Polish known fidelity gaps (agreement unification, ZDANIA_ZLOZONE, PCON_VERB)
 
+**Verdict: residue to fix** — engine-fidelity gaps where Java is the reference
+(the Rust matcher is incomplete, not deliberately different).
+
 The Polish corpus (`docs/parity/golden/pl-full.txt`, 6,438 examples) is at
 **4 only-Java / 5 only-Rust / 0 field diffs**. All remaining differences are
 engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
@@ -381,6 +386,9 @@ scripts/oracle/eo/probe-rule.sh "La digesta aparato inflamiĝis." HUNSPELL_RULE
 
 ## 11. Tagalog (`tl`) `MORFOLOGIK_RULE_TL` suggestion ordering (5 corpus field diffs)
 
+**Verdict: residue to fix** — the match and suggestion *sets* are identical;
+only the frequency-weighted ordering differs, and Java is the reference.
+
 The Tagalog speller dictionary (`tl/hunspell/tl_PH.dict`) is the only vendored
 Morfologik dictionary with `fsa.dict.frequency-included=true`, so its
 suggestion weights use the morfologik
@@ -407,6 +415,10 @@ scripts/oracle/tl/probe-rule.sh "Sa DLSU rin ako nag-aral." MORFOLOGIK_RULE_TL
 ```
 
 ## 12. Lithuanian (`lt`): vendored third-party dictionary, no Java baseline
+
+**Verdict: intentional** — the legacy module is broken (it throws on every
+check), so there is no Java reference to match; the Rust engine deliberately
+vendors a third-party dictionary under the unchanged rule id.
 
 The pinned upstream Lithuanian module (`Lithuanian.getRelevantRules`)
 includes `MorfologikLithuanianSpellerRule` over `/lt/hunspell/lt_LT.dict`,
@@ -594,6 +606,11 @@ scripts/ci/parity.sh uk
 ```
 
 ## 15. Arabic (`ar`) remaining corpus residue (14 only-Java / 8 only-Rust / 0 field diffs)
+
+**Verdict: residue to fix** — unported features (`ArabicNumbersWords`,
+`AR_INFLECTED_ONE_WORD`, `AR_VERB_TRANSITIVE_IINDIRECT`) where Java is more
+complete, plus Hunspell range/wrong-split residue. Porting the number engine is
+the remaining work (D-310).
 
 The `ar` corpus (`docs/parity/corpora/ar-examples.jsonl`, 1,045 sentences;
 golden `ar-full.{txt,java.tsv}`) reaches **0 field diffs**; the residual match
