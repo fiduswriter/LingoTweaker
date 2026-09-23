@@ -82,9 +82,10 @@ residues). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; docs/diffe
 Java's token `\w` being ASCII while the Rust `regex` crate's is Unicode; the
 shared `lt_pattern` translation now rewrites the shorthands to Java's ASCII
 classes). `km` is at 0 only-Java / 0
-only-Rust / 3 field diffs (#23; docs/differences.md #17: the Rust hunspell
-`testsug` does not accept the `COMPOUNDMIN 1` single-character compounds
-Java's does, so two suggestion lists differ by one entry).
+only-Rust / 0 field diffs (#23; docs/differences.md #17 resolved: the
+`IGNORE ៗ` directive is now implemented in `lt-spell`, so the swapchar/
+extrachar candidates `ញប`/`មៃ` match the stored `ញបៗ`/`មៃៗ` entries like
+Java's hunspell).
 `ml` is at 0 only-Java / 0 only-Rust / 0 field diffs (#24; the 18 active XML
 rules, the six generic built-ins and the Morfologik `MORFOLOGIK_RULE_ML_IN`
 speller match the pinned module exactly; the speller is inert for Malayalam

@@ -661,41 +661,38 @@ scripts/oracle/fa/probe-rule.sh "و‌ارد"          # Bad_ZWNJ 0-2  -> sugges
 scripts/oracle/fa/probe-rule.sh "می‌ایستادند"    # (no match)
 ```
 
-## 17. Khmer (`km`) hunspell single-character compounds in `testsug` (3 field diffs)
+## 17. Khmer (`km`) hunspell `IGNORE ៗ` handling in `testsug` — resolved
 
-The `km` corpus (`docs/parity/corpora/km-examples.jsonl`, 66 examples; golden
-`km-full.{txt,java.tsv}`) reaches **0 only-Java / 0 only-Rust**. The residual
-difference is exactly **3 `HUNSPELL_RULE` suggestion field diffs** on two
-words (`បញ` and `មណ`):
+**Verdict: Java is more correct; fixed (D-310).** The former residue was
+exactly **3 `HUNSPELL_RULE` suggestion field diffs** on two words (`បញ` and
+`មណ`): Java's lists contained the swapchar/extrachar candidates `ញប`/`មៃ`
+while Rust's did not, so the 15-entry cap admitted a different last entry
+(`បន`/`មួ`). The match set was identical.
 
-| Java suggestions | Rust suggestions |
-|---|---|
-| `ញប\|ប\|ញ\|បាញ\|…\|បម` | `ប\|ញ\|បាញ\|…\|បម\|បន` |
-| `មន\|ម\|ណ\|…\|មៃ\|…\|វណ` | `មន\|ម\|ណ\|…\|មួ` |
+The documented cause (single-character compounds via `COMPOUNDFLAG a` +
+`COMPOUNDMIN 1`) was **wrong**. The real cause is the `km_KH.aff` directive
+`IGNORE ៗ`: hunspell removes `IGNORE` code points from both the input word and
+the stored dictionary entries (`HashMgr::add_word`/`clean_ignore`), so the
+dictionary entry `ញបៗ` is stored as `ញប` and the candidate `ញប` is a valid
+word. The Rust `lt-spell` parsed `IGNORE` but ignored it, so `ញប`/`មៃ` were
+rejected. Verified directly against hunspell 1.7.2 (the library LT binds):
 
-Cause: `km_KH.aff` sets `COMPOUNDFLAG a` and `COMPOUNDMIN 1`, so Java's
-hunspell accepts single-character compounds (`ញប`, `មៃ`) in
-`SuggestMgr::testsug`; the Rust `lt-spell` `sm_checkword` does not, so the
-`swapchar`/`extrachar` candidate is dropped and the 15-entry cap then admits
-a different last entry (`បន`, `មួ`). The match **set** is identical — only the
-suggestion lists differ.
+```
+Hunspell_spell("ញប") = 1   Hunspell_spell("មៃ") = 1   Hunspell_spell("ញណ") = 0
+Hunspell_suggest("បញ") = ញប|ប|ញ|បាញ|…   (exactly the Java golden list)
+```
 
-Pinned Java reproductions:
+`lt-spell` now implements `IGNORE` (`Aff::strip_ignore`): the code points are
+stripped from dictionary entries at load, from the input in `spell`/
+`suggest` (hunspell's `cleanword2`), matching hunspell. `SuggestMgr::checkword`
+does **not** strip them (verified in `suggestmgr.cxx`), so a generated
+candidate containing one is still rejected — this keeps the Arabic `TRY`
+tashkeel behaviour (the ar gate is unchanged). The `km` gate is now
+**0 only-Java / 0 only-Rust / 0 field diffs** (no allowance). Reproduce
+(pinned Java build):
 
 ```sh
 scripts/oracle/km/probe-rule.sh "មានបញ្ញត្តិជាអារម្មណ៍" HUNSPELL_RULE
 # 5-7 ញប|ប|ញ|…   and   23-25 …|មៃ|…
 ```
-
-The gate allowance (validated exactly):
-
-```sh
-scripts/ci/parity.sh km
-# only Java: 0; only Rust: 0; field diffs: 0; missing lines: 0
-# allowed field diffs: 3/3 HUNSPELL_RULE
-```
-
-A future shared fix would make `lt-spell`'s compound acceptance honour
-`COMPOUNDMIN 1` single-character compounds in `testsug`; that would need
-re-running the `gl`/`da`/`sv`/`nl`/`de`/`en`/`no` speller gates.
 
