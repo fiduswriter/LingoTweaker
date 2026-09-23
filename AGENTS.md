@@ -34,6 +34,13 @@ shared/unrecognized paths → all, docs-only → none). Predict a push with
 `scripts/ci/affected-languages.sh <base> <head>`; the filter's tests are
 `scripts/ci/tests/affected-languages-test.sh`.
 
+Divergence policy (D-310, owner 2026-09-23): fix a Rust/Java divergence only
+when Java is more correct; where Rust is more correct, keep Rust and record the
+divergence as intentional. Every `docs/differences.md` entry and every
+`scripts/ci/parity.sh` allowance must state the correctness verdict and
+distinguish **residue to fix** (Java-reference fidelity gap) from
+**intentional: Rust more correct**.
+
 Offline corpus gate (CI, no Docker):
 
 ```sh

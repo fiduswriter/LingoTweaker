@@ -6,6 +6,13 @@ from the pinned checkout (`7bd1f99b849b`, `maven:3.9-eclipse-temurin-21`)
 with the same scripts as the interactive oracles; `scripts/ci/parity.sh`
 re-runs the Rust side and diffs against the golden.
 
+Parity policy (D-310, owner 2026-09-23): a divergence is fixed only where the
+Java implementation is more correct; where the Rust implementation is more
+correct it is kept and recorded as an intentional divergence. Every allowance
+below is therefore either **residue to fix** (a Java-reference fidelity gap /
+unported feature) or **intentional: Rust more correct** (Java's output is wrong
+or an artifact), and `docs/differences.md` states the verdict per entry.
+
 | language | input (lines) | Java golden |
 |---|---|---|
 | en | `en-full.txt` (23,818) | `en-full.java.tsv` |

@@ -1,5 +1,15 @@
 # Intentional differences from the Java engine
 
+Policy (D-310, owner 2026-09-23): a divergence is **fixed** only when the Java
+implementation is more correct; where the **Rust** implementation is more
+correct, Rust is kept and the divergence is documented here as intentional.
+Every entry must state which side is more correct and why. Entries are labelled
+either **intentional: Rust more correct** (Java's output is wrong or an
+artifact, so the Rust behaviour is deliberately kept) or **residue to fix**
+(an engine-fidelity gap / unported feature where Java is the reference and
+Rust should eventually be brought up to it). The same distinction is annotated
+in the `scripts/ci/parity.sh` allowances.
+
 This file records cases where the Rust engine deliberately does **not**
 replicate the Java engine's behavior because Java's decision is (or appears
 to be) wrong. Every entry has a reproduction and says which engine is more
