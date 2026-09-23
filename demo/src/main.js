@@ -25,32 +25,40 @@ const statusElement = document.getElementById("status");
 const progressElement = document.getElementById("progress");
 const progressBar = document.getElementById("progress-bar");
 
-const optionByPack = new Map();
+const optionByCode = new Map();
 for (const language of LANGUAGES) {
   const option = document.createElement("option");
   option.value = language.code;
   // the `size` field in languages.js reflects the old monolithic packs; the
-  // real default-download size comes from the pack manifest below
+  // real sizes come from the pack manifest below
   option.textContent = language.label;
-  if (!optionByPack.has(language.pack)) {
-    optionByPack.set(language.pack, option);
-  }
+  optionByCode.set(language.code, option);
   languageSelect.append(option);
 }
 
-// replace the hard-coded sizes with the manifest's actual default-download
-// size per pack (split packs: the base pack only; models/variant sidecars
-// are fetched on demand and not part of the initial download)
+// replace the hard-coded sizes with the manifest's actual sizes:
+// - the default variant shows the base-pack download (models/variant
+//   sidecars are fetched on demand and not part of the initial download)
+// - a non-default variant shows "+X MB": its sidecar in addition to the
+//   base pack every variant of that language downloads
 fetch(`${import.meta.env.BASE_URL}packs/manifest.json`, { cache: "no-store" })
   .then((response) => (response.ok ? response.json() : {}))
   .then((manifest) => {
-    for (const [pack, option] of optionByPack) {
-      const entry = manifest[pack];
-      if (!entry) {
+    const mb = (bytes) => `${(bytes / 1048576).toFixed(1)} MB`;
+    for (const language of LANGUAGES) {
+      const option = optionByCode.get(language.code);
+      const entry = manifest[language.pack];
+      if (!option || !entry) {
         continue;
       }
-      const bytes = entry.split ? entry.split.base.bytes : entry.bytes;
-      option.textContent = `${option.textContent.replace(/ \(.*\)$/, "")} (${(bytes / 1048576).toFixed(1)} MB)`;
+      if (entry.split) {
+        const extra = language.variant && entry.split.extra[language.variant];
+        option.textContent = extra
+          ? `${language.label} (+${mb(extra.bytes)})`
+          : `${language.label} (${mb(entry.split.base.bytes)})`;
+      } else {
+        option.textContent = `${language.label} (${mb(entry.bytes)})`;
+      }
     }
   })
   .catch(() => {});
