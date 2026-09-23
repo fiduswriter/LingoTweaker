@@ -18,7 +18,7 @@ scripts/release/publish-pypi.sh [--build-only] # maturin wheel+sdist, smoke, twi
 scripts/release/publish-npm-data.sh [--build-only]  # npm lingotweaker-data (all packs)
 scripts/release/publish-npm.sh  [--build-only] # napi build, smoke, npm (dist-tag from version)
 scripts/release/publish-wasm.sh [--build-only] # wasm-pack web+nodejs, smoke, npm (dist-tag from version)
-scripts/release/publish-pypi-data.sh [--build-only]  # PyPI lingotweaker-data-<lang> (data/pypi-version)
+scripts/release/publish-pypi-data.sh [--build-only]  # PyPI lingotweaker-data-<lang> (data/pypi-versions.json)
 scripts/release/publish-data.sh v0.1.0-alpha.1 [--build-only]  # GitHub Release data assets
 scripts/release/verify-crates.sh 0.1.0-alpha.1 # scratch `cargo add` build check
 ```
@@ -42,21 +42,33 @@ one build (`scripts/release/build-data.sh`, which reuses
 under PyPI's 100 MB/file limit). `lingotweaker` and `lingotweaker-wasm` declare
 `lingotweaker-data` as a dependency.
 
-### PyPI data packages are versioned separately
+### PyPI data packages are versioned per language
 
-The per-language PyPI distributions have **their own version** in
-`data/pypi-version`, independent of the engine release:
+Each `lingotweaker-data-<lang>` distribution has its **own version** in
+`data/pypi-versions.json` (keyed by language, together with the content hash it
+was bumped for), independent of the engine release:
 
-- bump `data/pypi-version` only when the contents of `data/` actually change;
-- publish them with the manual **Publish PyPI data** workflow
-  (`.github/workflows/publish-pypi-data.yml`) or
-  `scripts/release/publish-pypi-data.sh`.
+```sh
+# after changing data/, bump only the languages whose contents changed
+scripts/release/update-pypi-data-versions.py
+git commit -am "data: bump PyPI data versions"
+
+# build + upload; only files that are not already on PyPI are sent
+scripts/release/publish-pypi-data.sh
+```
+
+`update-pypi-data-versions.py` hashes everything that goes into each wheel
+(`data/manifest.json`, `data/core/**`, `data/messages/**`, `data/<lang>/**`)
+and patch-bumps any language whose hash changed (a language seen for the first
+time starts at `data/pypi-version`). `--check` exits non-zero when anything
+changed, for CI. `publish-pypi-data.sh` builds every wheel at its own version
+and asks PyPI before uploading, so unchanged languages are never re-sent.
 
 They are deliberately **not** part of the tag-driven release: publishing on
 every engine release would re-upload identical wheels and re-trip PyPI's
-new-project rate limit (HTTP 429). The upload is idempotent (one wheel at a
-time, `--skip-existing`, backoff/retry), so it can be re-run until all projects
-exist. To keep the wheels for a later upload:
+new-project rate limit (HTTP 429). Uploads go one file at a time with
+`--skip-existing` and backoff/retry, so a run interrupted by the rate limit can
+simply be re-run. To keep the wheels for a manual twine upload:
 
 ```sh
 scripts/release/publish-pypi-data.sh --build-only   # wheels in target/data-dist/pypi/dist

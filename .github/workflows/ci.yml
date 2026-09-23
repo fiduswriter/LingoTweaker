@@ -57,6 +57,15 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - run: cargo check --manifest-path crates/lingotweaker/Cargo.toml
 
+  # The per-language PyPI data versions in data/pypi-versions.json are bumped
+  # from a content hash; fail when data/ changed without re-running
+  # scripts/release/update-pypi-data-versions.py (which updates the file).
+  pypi-data-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/release/update-pypi-data-versions.py --check
+
   # Heavy jobs (test/bindings/wasm/parity) run on the GitHub mirror only: its
   # runners have a warm cache and enough disk. The Forgejo runner has neither
   # (workspace builds die with "No space left on device"), while the light

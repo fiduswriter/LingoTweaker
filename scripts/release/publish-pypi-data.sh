@@ -34,26 +34,54 @@ for arg in "$@"; do
   esac
 done
 
-# The PyPI data distributions carry their own version, independent of the
-# engine release: bump data/pypi-version only when the contents of data/
-# actually change, so a new engine release does not republish identical data
-# packages (and re-trigger PyPI's new-project rate limit for no reason).
-version_file="$ROOT/data/pypi-version"
-if [ ! -f "$version_file" ]; then
-  echo "publish-pypi-data: missing $version_file (the PyPI data version)" >&2
+# Each `lingotweaker-data-<lang>` distribution is versioned independently of
+# the engine release. `data/pypi-versions.json` records every language's
+# version and the content hash it was bumped for; refresh it with
+# scripts/release/update-pypi-data-versions.py after changing data/ (that bumps
+# only the languages whose contents changed). Because unchanged languages keep
+# their version, the upload below skips files already on PyPI and therefore
+# publishes only what actually changed.
+registry="$ROOT/data/pypi-versions.json"
+if [ ! -f "$registry" ]; then
+  echo "publish-pypi-data: missing $registry; run scripts/release/update-pypi-data-versions.py first" >&2
   exit 1
 fi
-version="$(tr -d '[:space:]' < "$version_file")"
-pyver="$(python3 - "$version" <<'PY'
-import sys
-v = sys.argv[1]
-core, _, pre = v.partition("-")
-if pre.startswith("alpha."):
-    print(f"{core}a{pre.split('.')[1]}")
-else:
-    print(v)
+
+# PEP 440 version for one language, straight from the registry.
+pep440_version() {
+  python3 - "$registry" "$1" <<'PY'
+import json, sys
+registry, lang = sys.argv[1], sys.argv[2]
+languages = json.load(open(registry)).get("languages", {})
+try:
+    version = languages[lang]["version"]
+except KeyError:
+    raise SystemExit(
+        f"publish-pypi-data: {lang} is not in {registry}; "
+        "run scripts/release/update-pypi-data-versions.py first"
+    )
+core, _, pre = version.partition("-")
+print(f"{core}a{pre.split('.')[1]}" if pre.startswith("alpha.") else version)
 PY
-)"
+}
+
+# Is <filename> already published under <pkg> on PyPI?
+on_pypi() {
+  python3 - "$1" "$2" <<'PY'
+import json, sys, urllib.request
+pkg, filename = sys.argv[1], sys.argv[2]
+try:
+    with urllib.request.urlopen(f"https://pypi.org/pypi/{pkg}/json", timeout=20) as r:
+        data = json.load(r)
+except Exception:
+    sys.exit(1)  # unknown -> attempt the upload
+for files in data.get("releases", {}).values():
+    for f in files:
+        if f.get("filename") == filename:
+            sys.exit(0)
+sys.exit(1)
+PY
+}
 
 if [ -n "${LT_DATA_LANGS:-}" ]; then
   langs="$LT_DATA_LANGS"
@@ -79,7 +107,8 @@ for lang in $langs; do
   pkg="lingotweaker-data-$lang"
   mod="lingotweaker_data_$lang"
   src="$out/$pkg"
-  echo "== source $pkg"
+  lang_pyver="$(pep440_version "$lang")"
+  echo "== source $pkg ($lang_pyver)"
   mkdir -p "$src/$mod/data"
   cp "$ROOT/data/manifest.json" "$src/$mod/data/"
   cp -r "$ROOT/data/core" "$ROOT/data/messages" "$src/$mod/data/"
@@ -135,7 +164,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "$pkg"
-version = "$pyver"
+version = "$lang_pyver"
 description = "LingoTweaker runtime data for language '$lang'"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -178,10 +207,11 @@ if [ -n "${PYPI_API_TOKEN:-}" ] && [ -z "${TWINE_PASSWORD:-}" ]; then
   export TWINE_PASSWORD="$PYPI_API_TOKEN"
 fi
 
-echo "== twine upload (per file, --skip-existing, retry on transient errors)"
-# Uploading ~35 wheels in one twine call trips PyPI's rate limit (HTTP 429) and
-# aborts mid-list. Upload one at a time, skip files already on the index, and
-# back off-and-retry transient failures so the step is resumable.
+echo "== twine upload (only files not already on PyPI)"
+# Upload one file at a time, skip anything already on the index (so unchanged
+# languages are never re-uploaded), and back off-and-retry transient failures
+# (PyPI's new-project limit and burst uploads return HTTP 429) so the step is
+# resumable.
 upload_one() {
   f="$1"
   attempt=1
@@ -196,10 +226,37 @@ upload_one() {
   done
   return 1
 }
+
+# distribution name / version from a wheel or sdist filename
+file_pkg() {
+  base="$(basename "$1")"
+  base="${base%.whl}"
+  base="${base%.tar.gz}"
+  printf '%s' "${base%%-*}" | tr '_' '-'
+}
+file_ver() {
+  base="$(basename "$1")"
+  base="${base%.whl}"
+  base="${base%.tar.gz}"
+  rest="${base#*-}"
+  printf '%s' "${rest%%-*}"
+}
+
+uploaded=0
+skipped=0
 for f in "$out"/dist/*.whl "$out"/dist/*.tar.gz; do
   [ -e "$f" ] || continue
-  echo "== upload $(basename "$f")"
+  name="$(basename "$f")"
+  pkg="$(file_pkg "$name")"
+  ver="$(file_ver "$name")"
+  if on_pypi "$pkg" "$name"; then
+    skipped=$((skipped + 1))
+    echo "== up to date: $name"
+    continue
+  fi
+  echo "== upload $pkg $ver ($name)"
   upload_one "$f"
+  uploaded=$((uploaded + 1))
   sleep 3
 done
-echo "== PyPI data publish complete"
+echo "== PyPI data publish complete ($uploaded uploaded, $skipped already present)"
