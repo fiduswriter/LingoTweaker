@@ -98,3 +98,15 @@ Default: dynamically linked core + source/object offer in releases, pending lega
 review before publishing wheels/add-ons (plan §11/§12). The notices and per-file
 license records required by that model are in place (`LICENSE`,
 `THIRD_PARTY_NOTICES.md`, `data/README.md`, `data/manifest.json`).
+
+**Owner sign-off (2026-09-23):** the owner approved the distribution model for
+the reviewed components — the copyleft and CC-BY-SA dictionaries/data are
+shipped as separately licensed data components (aggregation) alongside the
+LGPL-2.1-or-later engine. Cleared: `km` (CC-BY-NC-SA-3.0 POS component +
+GPL-3.0 SBBIC speller), `ml` (GPL data), `ta` (GPLv3), `be` (CC-BY-SA-4.0),
+`el` (CC-BY-SA-4.0 analyzer + GPL/LGPL/MPL hunspell), `de` (CC-BY-SA-4.0 POS +
+GPL hunspell) and the German/Greek/Italian hunspell "related items"; the
+`no`/`nrd`/`gn` items were recorded earlier (D-163/D-164). Still open (not
+covered): the conflicting-statement `fr`/`nl` POS dictionaries, the Italian
+Morph-it! dual license, the undocumented `en` hunspell/word-list provenance and
+the `ar`/`br`/`ca`/`gl` entries. See `THIRD_PARTY_NOTICES.md`.

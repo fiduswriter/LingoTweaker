@@ -157,12 +157,12 @@ MAVEN_ARTIFACTS = {
         "license_source": f"{MAVEN_CENTRAL}/org/qirimca/nlp/morfologik-crh-lt/1.0.1/morfologik-crh-lt-1.0.1.pom",
     },
     # `MorfologikBelarusianSpellerRule`: the `be_BY` dictionary is not in the
-    # checkout, only in this artifact (CC-BY-SA-4.0 per the POM -> owner/legal
-    # review, see THIRD_PARTY_NOTICES.md).
+    # checkout, only in this artifact (CC-BY-SA-4.0 per the POM -> owner signed
+    # off 2026-09-23, see THIRD_PARTY_NOTICES.md).
     "linguistics.grammardb.spell.languagetool-1.0.2.jar": {
         "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
-        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
-        "license_verified": False,
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - owner signed off 2026-09-23",
+        "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom",
     },
     # `UkrainianTagger`/`UkrainianSynthesizer`/`MorfologikUkrainianSpellerRule`:
@@ -702,9 +702,9 @@ IN_TREE_LICENSES = {
         "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, "
         "Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC "
         "additions BSD; km/README.txt) and the SBBIC hunspell speller "
-        "(GPLv3, km/hunspell/LICENCES-km.txt) - owner/legal review: the "
-        "CC-BY-NC-SA-3.0 component is non-commercial",
-        False,
+        "(GPLv3, km/hunspell/LICENCES-km.txt) - owner signed off 2026-09-23: "
+        "the CC-BY-NC-SA-3.0 component is non-commercial but accepted",
+        True,
         "upstream km/README.txt; km/hunspell/LICENCES-km.txt",
     ),
     "ml": (
@@ -718,8 +718,8 @@ IN_TREE_LICENSES = {
         "GPLv3 (Tamil dictionary, tagset and rules created by Ve. Elanjelian "
         "<tamiliam@gmail.com>; upstream ta/README.txt states the work is "
         "released under GPLv3, also using the Crubadan 2.0 Tamil corpus, "
-        "GPLv3) - owner/legal review",
-        False,
+        "GPLv3) - owner signed off 2026-09-23",
+        True,
         "upstream ta/README.txt",
     ),
 }
@@ -977,10 +977,14 @@ def hunspell_license(lang: str, name: str):
         # text. The LT-authored ignore/spelling lists stay under the default
         # resource license.
         if name.startswith("km_KH.") or name.startswith("LICENCES-km"):
-            verified = name.startswith("LICENCES-km") or name.endswith(".aff")
+            verified = (
+                name.startswith("LICENCES-km")
+                or name.endswith(".aff")
+                or name.endswith(".dic")
+            )
             return (
                 "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; "
-                "km/hunspell/LICENCES-km.txt)",
+                "km/hunspell/LICENCES-km.txt; owner signed off 2026-09-23)",
                 verified,
                 "upstream km/hunspell/LICENCES-km.txt",
             )
@@ -992,8 +996,9 @@ def hunspell_license(lang: str, name: str):
         if name.startswith("ml_IN."):
             return (
                 "GPL (Malayalam Morfologik speller dictionary, converted from "
-                "the GPL data collected by Jithesh.V.S.; ml/README.txt)",
-                False,
+                "the GPL data collected by Jithesh.V.S.; ml/README.txt; owner "
+                "signed off 2026-09-23)",
+                True,
                 "upstream ml/README.txt",
             )
     return None

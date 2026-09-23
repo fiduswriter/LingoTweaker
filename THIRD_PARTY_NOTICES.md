@@ -74,7 +74,12 @@ must decide. Data paths are relative to `data/`.
 | OpenRegex (Java library ported to Rust; not vendored data) | `crates/lt-chunk/src/openregex.rs` | LGPL-2.1-or-later | `edu.washington.cs.knowitall:openregex:1.1.1` Maven POM `<license>`; sources jar sha256 pinned in `licenses/README.md` | Confirmed (D-027) |
 | Morfologik + LanguageTool dictionary tools (Java, ported to Python; not vendored data) | `tools/morfologik/**` | Morfologik: BSD-3-Clause; LanguageTool `languagetool-tools`: LGPL-2.1-or-later | [morfologik-stemming](https://github.com/morfologik/morfologik-stemming) `LICENSE.txt` (BSD-3-Clause); upstream `COPYING.txt` / `pom.xml` | Confirmed |
 | Lithuanian hunspell dictionary (ispell-lt, vendored because upstream ships none) | `lt/hunspell/lt_LT.aff`, `lt_LT.dic`, `README_lt_LT.txt`, `COPYING_lt_LT.txt`, `AUTHORS_lt_LT.txt` | BSD-3-Clause (© 2000–2020 Albertas Agejevas and contributors) | [LibreOffice/dictionaries `lt_LT`](https://github.com/LibreOffice/dictionaries/tree/master/lt_LT) at `8c45ec68d6b0346467c7ee23a6901139d129e468` (ispell-lt 1.3.2); bundled `COPYING_lt_LT.txt` | Confirmed |
-| Belarusian POS/spelling dictionaries (`io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2`) | `be/hunspell/be_BY.dict`, `be_BY.info` | CC-BY-SA-4.0 (artifact POM, Grammardb) | [artifact POM](https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom) | **License to be confirmed** (CC-BY-SA-4.0 share-alike data in an LGPL distribution) |
+| Belarusian POS/spelling dictionaries (`io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2`) | `be/hunspell/be_BY.dict`, `be_BY.info` | CC-BY-SA-4.0 (artifact POM, Grammardb) | [artifact POM](https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom) | Confirmed; owner signed off 2026-09-23 |
+| Khmer POS dictionary (`KhmerTagger`) | `km/dictionaries/khmer.dict`, `khmer.info` | BSD (Chuon Nath/Buddhist Institute, Robert Headley, SBBIC) + CC-BY-NC-SA-3.0 (PanL10N KhmerCorpus) | upstream `km/README.txt` | Confirmed; owner signed off 2026-09-23 (non-commercial component accepted) |
+| Khmer hunspell speller (SBBIC) | `km/hunspell/km_KH.aff`, `km_KH.dic`, `LICENCES-km.txt` | GPL-3.0-only | upstream `km/hunspell/LICENCES-km.txt` | Confirmed; owner signed off 2026-09-23 |
+| Malayalam POS/speller dictionaries | `ml/dictionaries/malayalam.*`, `ml/hunspell/ml_IN.*` | GPL (Jithesh.V.S. / C-DIT, public sources; `ml_IN` is a derived Morfologik build) | upstream `ml/README.txt` | Confirmed; owner signed off 2026-09-23 |
+| Tamil dictionary/tagset | `ta/dictionaries/tamil.dict`, `tamil.info` | GPLv3 (Ve. Elanjelian; Crubadan 2.0 corpus GPLv3) | upstream `ta/README.txt` | Confirmed; owner signed off 2026-09-23 |
+| Simple German rule XML | `de/rules/de-DE-x-simple-language/grammar.xml` | LGPL-2.1-or-later (LanguageTool resource; per-file license varies) | upstream module pom (LGPL-2.1) | Confirmed; owner signed off 2026-09-23 |
 
 Notices for the German/Italian/French/Dutch dictionaries in the table come from
 files that are themselves vendored, so the notice texts travel with the data
@@ -82,12 +87,57 @@ files that are themselves vendored, so the notice texts travel with the data
 `data/it/hunspell/README_it_IT.txt`, `data/nl/dictionaries/README.txt`,
 `data/nl/spelling/README.txt`).
 
+## Owner sign-off (2026-09-23)
+
+**Decision (owner, 2026-09-23):** the owner has signed off on the legal-review
+items below, accepting the current distribution model (project code stays
+LGPL-2.1-or-later; each vendored component keeps its own license and notice,
+and the copyleft/CC-BY-SA data loaded at runtime is treated as a separately
+licensed data component rather than a combined work with the LGPL engine). This
+clears the corresponding "owner decisions" items further down, and the
+per-file records in `data/manifest.json` (and `tools/lt-sync/lt_sync.py`) now
+carry an `owner signed off 2026-09-23` note:
+
+- **Khmer (`km`)**: the POS dictionary mixes BSD components with a
+  **CC-BY-NC-SA-3.0** component (PanL10N KhmerCorpus, non-commercial) and the
+  SBBIC hunspell speller is **GPL-3.0-only**; the non-commercial component is
+  accepted.
+- **Malayalam (`ml`)**: the POS dictionary and the derived `ml_IN` Morfologik
+  speller data are **GPL** (Jithesh.V.S. / C-DIT, public sources).
+- **Tamil (`ta`)**: the dictionary, tagset and rules are **GPLv3**
+  (Ve. Elanjelian; Crubadan 2.0 corpus GPLv3).
+- **Belarusian (`be`)**: the `be_BY` speller dictionary is **CC-BY-SA-4.0**
+  (Grammardb artifact POM).
+- **Greek (`el`)**: the analyzer data (`org.ioperm:morphology-el`) is
+  **CC-BY-SA-4.0** (source code Apache-2.0) and the `el_GR` hunspell dictionary
+  is the **GPL-2.0 / LGPL-2.1 / MPL-1.1** tri-license.
+- **German (`de`)**: the POS dictionary is **CC-BY-SA-4.0** (Morphy-derived)
+  and the igerman98/frami hunspell dictionaries are **GPL-2.0-or-later OR
+  GPL-3.0-or-later**; the `de-DE-x-simple-language` rule XML is an upstream
+  LanguageTool resource under the default upstream license.
+- The earlier `no`/`nrd`/`gn` review items (D-163/D-164) remain as recorded;
+  the German POS, German/Greek/Italian hunspell and Greek analyzer data are
+  the "related items" covered by the same sign-off.
+
+**Not covered by this sign-off** (unchanged, still open): the conflicting
+POS-dictionary statements (`fr` POM CC-BY-SA-4.0 vs Dicollecte MPL-2.0, `nl`
+README CC-BY-3.0-or-later/BSD vs POM LGPL-2.1), the Italian Morph-it! dual
+license (`it`), the undocumented English hunspell dictionary and word-list
+provenance (`en`), and the `ar`/`br`/`ca`/`gl` "to be confirmed" entries.
+
+`license_verified` in `data/manifest.json` records whether the license
+declaration is found at `license_source`. Where a legal-review item's only
+outstanding question was the owner decision, that flag is now `true` and the
+`license` note carries the sign-off date; derived Morfologik builds of
+components that were already cleared keep the same treatment.
+
 ## License to be confirmed — owner decisions
 
 1. **German POS dictionary (`german-pos-dict`)** is CC-BY-SA-4.0 per its POM and
    upstream README, not LGPL as the Phase-0 assumption recorded. CC-BY-SA
    requires attribution/share-alike for the dictionary data; whether to keep
    shipping it in an LGPL distribution needs the owner's sign-off.
+   **Owner signed off 2026-09-23** (see above).
 2. **French POS dictionary (`french-pos-dict`)** has conflicting statements:
    POM CC-BY-SA-4.0 vs bundled Dicollecte lexicon docs MPL-2.0. The Dicollecte
    dictionary sources are the likely true origin.
@@ -103,6 +153,9 @@ files that are themselves vendored, so the notice texts travel with the data
    it_IT hunspell dictionary (GPL-3.0-only) are copyleft data loaded at runtime.
    The LGPL allows conversion to the GPL (LGPL-2.1 §3), but the owner/legal
    review should confirm the distribution model before publishing binaries.
+   **Owner signed off 2026-09-23**: the copyleft data is distributed as a
+   separately licensed data component (aggregation), not as a combined work
+   with the LGPL engine.
 7. **Italian Morph-it! dictionaries/tagsets** are dual-licensed; pick a branch
    (CC-BY-SA-2.0 vs LGPL) and confirm it covers the derived Morfologik builds.
 8. **Nordum speller dictionary** (`nrd/hunspell/nrd.dic`) is generated by
@@ -121,14 +174,14 @@ files that are themselves vendored, so the notice texts travel with the data
    (linguistic data; the source code is Apache-2.0) per its POM. CC-BY-SA
    requires attribution/share-alike for the dictionary data; whether to keep
    shipping it in an LGPL distribution needs the owner's sign-off, like the
-   German POS dictionary above.
+   German POS dictionary above. **Owner signed off 2026-09-23.**
 10. **Belarusian dictionaries
     (`io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2`)** are
     CC-BY-SA-4.0 per the artifact POM. As with the German POS and Greek
     analyzer data, CC-BY-SA requires attribution/share-alike for the
     dictionary data; whether to keep shipping it in an LGPL distribution needs
     the owner's sign-off. (The Lithuanian ispell-lt dictionary, by contrast, is
-    BSD-3-Clause and needs no such review.)
+    BSD-3-Clause and needs no such review.) **Owner signed off 2026-09-23.**
 
 ## Why this file exists
 

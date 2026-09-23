@@ -676,8 +676,8 @@
         "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
         "artifact_sha256": "1d1a55e905faa9740d648144cf05c4a460f0f26416d2ee01157bad0877be31c2",
         "artifact_inner_path": "org/languagetool/resource/be/hunspell/be_BY.dict",
-        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom"
       }
     },
@@ -690,8 +690,8 @@
         "coords": "io.github.belarus:linguistics.grammardb.spell.languagetool:1.0.2",
         "artifact_sha256": "1d1a55e905faa9740d648144cf05c4a460f0f26416d2ee01157bad0877be31c2",
         "artifact_inner_path": "org/languagetool/resource/be/hunspell/be_BY.info",
-        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM, Grammardb) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/io/github/belarus/linguistics.grammardb.spell.languagetool/1.0.2/linguistics.grammardb.spell.languagetool-1.0.2.pom"
       }
     },
@@ -5788,8 +5788,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/khmer.dict",
-        "license": "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC additions BSD; km/README.txt) and the SBBIC hunspell speller (GPLv3, km/hunspell/LICENCES-km.txt) - owner/legal review: the CC-BY-NC-SA-3.0 component is non-commercial",
-        "license_verified": false,
+        "license": "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC additions BSD; km/README.txt) and the SBBIC hunspell speller (GPLv3, km/hunspell/LICENCES-km.txt) - owner signed off 2026-09-23: the CC-BY-NC-SA-3.0 component is non-commercial but accepted",
+        "license_verified": true,
         "license_source": "upstream km/README.txt; km/hunspell/LICENCES-km.txt"
       }
     },
@@ -5800,8 +5800,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/khmer.info",
-        "license": "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC additions BSD; km/README.txt) and the SBBIC hunspell speller (GPLv3, km/hunspell/LICENCES-km.txt) - owner/legal review: the CC-BY-NC-SA-3.0 component is non-commercial",
-        "license_verified": false,
+        "license": "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC additions BSD; km/README.txt) and the SBBIC hunspell speller (GPLv3, km/hunspell/LICENCES-km.txt) - owner signed off 2026-09-23: the CC-BY-NC-SA-3.0 component is non-commercial but accepted",
+        "license_verified": true,
         "license_source": "upstream km/README.txt; km/hunspell/LICENCES-km.txt"
       }
     },
@@ -5823,7 +5823,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/LICENCES-km.txt",
-        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt)",
+        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt; owner signed off 2026-09-23)",
         "license_verified": true,
         "license_source": "upstream km/hunspell/LICENCES-km.txt"
       }
@@ -5857,7 +5857,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/km_KH.aff",
-        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt)",
+        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt; owner signed off 2026-09-23)",
         "license_verified": true,
         "license_source": "upstream km/hunspell/LICENCES-km.txt"
       }
@@ -5869,8 +5869,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/km_KH.dic",
-        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt)",
-        "license_verified": false,
+        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt; owner signed off 2026-09-23)",
+        "license_verified": true,
         "license_source": "upstream km/hunspell/LICENCES-km.txt"
       }
     },
@@ -6475,8 +6475,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/hunspell/ml_IN.dict",
-        "license": "GPL (Malayalam Morfologik speller dictionary, converted from the GPL data collected by Jithesh.V.S.; ml/README.txt)",
-        "license_verified": false,
+        "license": "GPL (Malayalam Morfologik speller dictionary, converted from the GPL data collected by Jithesh.V.S.; ml/README.txt; owner signed off 2026-09-23)",
+        "license_verified": true,
         "license_source": "upstream ml/README.txt"
       }
     },
@@ -6487,8 +6487,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/hunspell/ml_IN.info",
-        "license": "GPL (Malayalam Morfologik speller dictionary, converted from the GPL data collected by Jithesh.V.S.; ml/README.txt)",
-        "license_verified": false,
+        "license": "GPL (Malayalam Morfologik speller dictionary, converted from the GPL data collected by Jithesh.V.S.; ml/README.txt; owner signed off 2026-09-23)",
+        "license_verified": true,
         "license_source": "upstream ml/README.txt"
       }
     },
@@ -10589,8 +10589,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ta/src/main/resources/org/languagetool/resource/ta/tamil.dict",
-        "license": "GPLv3 (Tamil dictionary, tagset and rules created by Ve. Elanjelian <tamiliam@gmail.com>; upstream ta/README.txt states the work is released under GPLv3, also using the Crubadan 2.0 Tamil corpus, GPLv3) - owner/legal review",
-        "license_verified": false,
+        "license": "GPLv3 (Tamil dictionary, tagset and rules created by Ve. Elanjelian <tamiliam@gmail.com>; upstream ta/README.txt states the work is released under GPLv3, also using the Crubadan 2.0 Tamil corpus, GPLv3) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream ta/README.txt"
       }
     },
@@ -10601,8 +10601,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ta/src/main/resources/org/languagetool/resource/ta/tamil.info",
-        "license": "GPLv3 (Tamil dictionary, tagset and rules created by Ve. Elanjelian <tamiliam@gmail.com>; upstream ta/README.txt states the work is released under GPLv3, also using the Crubadan 2.0 Tamil corpus, GPLv3) - owner/legal review",
-        "license_verified": false,
+        "license": "GPLv3 (Tamil dictionary, tagset and rules created by Ve. Elanjelian <tamiliam@gmail.com>; upstream ta/README.txt states the work is released under GPLv3, also using the Crubadan 2.0 Tamil corpus, GPLv3) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream ta/README.txt"
       }
     },
