@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km", "ml"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km", "ml", "ta"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -512,6 +512,13 @@ IN_TREE_ARTIFACTS = {
         "resource/ml/malayalam.dict": "ml/dictionaries/malayalam.dict",
         "resource/ml/malayalam.info": "ml/dictionaries/malayalam.info",
     },
+    # Tamil ships its `BaseTagger` Morfologik dictionary (FSA5, SUFFIX
+    # encoder, UTF-8) in-tree (`TamilTagger`); there is no speller
+    # (`createDefaultSpellingRule` is the base `null`).
+    "ta": {
+        "resource/ta/tamil.dict": "ta/dictionaries/tamil.dict",
+        "resource/ta/tamil.info": "ta/dictionaries/tamil.info",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -699,6 +706,14 @@ IN_TREE_LICENSES = {
         "upstream ml/README.txt states the data is made available under GPL)",
         True,
         "upstream ml/README.txt",
+    ),
+    "ta": (
+        "GPLv3 (Tamil dictionary, tagset and rules created by Ve. Elanjelian "
+        "<tamiliam@gmail.com>; upstream ta/README.txt states the work is "
+        "released under GPLv3, also using the Crubadan 2.0 Tamil corpus, "
+        "GPLv3) - owner/legal review",
+        False,
+        "upstream ta/README.txt",
     ),
 }
 
@@ -1407,7 +1422,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL
