@@ -10,13 +10,12 @@ artifact, so the Rust behaviour is deliberately kept) or **residue to fix**
 Rust should eventually be brought up to it). The same distinction is annotated
 in the `scripts/ci/parity.sh` allowances.
 
-This file records cases where the Rust engine deliberately does **not**
-replicate the Java engine's behavior because Java's decision is (or appears
-to be) wrong. Every entry has a reproduction and says which engine is more
-correct and why. Everything not listed here matches Java; verify with
-`scripts/oracle/gate.sh` (2k sample) and the full-corpus oracle
-(D-016/D-017). As of D-032 this is the only remaining difference
-(0 only-Java, 0 only-Rust, 1 field diff over 23,818 examples).
+This file records every case where the Rust engine does **not** exactly match
+the Java engine. Each entry has a reproduction and states which side is more
+correct and why (see the policy above). Entries that reach exact parity are
+deleted rather than kept — the decision log preserves the history. Everything
+not listed here matches Java; verify with `scripts/oracle/gate.sh` (2k sample)
+and the per-language full-corpus oracle (`scripts/ci/parity.sh <lang>`).
 
 ## 1. `ADVERB_VERB_ADVERB_REPETITION` suggestion (` do n't`) (line 7156)
 
@@ -360,31 +359,7 @@ engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
   scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
   ```
 
-## 10. Esperanto (`eo`) suggestion ranking (resolved)
-
-The `HunspellRule` wrong-split check (`La ŭesta` -> `Laŭ esta`) is ported into
-`crates/lt/src/eo/spelling.rs`, and the `SuggestMgr::twowords` UTF-8 buffer
-indexing was corrected (it used a one-off 1-based view, dropping the first
-character of the first split part), so the `eo.aff` `BREAK`-based
-space/hyphen recombinations (`inflamiĝis` -> `inflami ĝis`, `inflami-ĝis`;
-`semajnofinon` -> `semajno finon`, `semajno-finon`) now match the legacy
-engine.
-
-The Esperanto corpus (`docs/parity/golden/eo-full.txt`, 876 examples) is now
-at **0 only-Java / 0 only-Rust / 0 field diffs**; the former
-`--expect-only-java=HUNSPELL_RULE=1`, `--expect-only-rust=UESTO=1` and
-`--expect-field-diffs=HUNSPELL_RULE=5` allowances are removed from
-`scripts/ci/parity.sh`.
-
-Reproduce (pinned Java build):
-
-```sh
-scripts/oracle/eo/probe-rule.sh "La ŭesta parto de la urbo." HUNSPELL_RULE
-scripts/oracle/eo/probe-rule.sh "La digesta aparato inflamiĝis." HUNSPELL_RULE
-```
-
-
-## 11. Tagalog (`tl`) `MORFOLOGIK_RULE_TL` suggestion ordering (5 corpus field diffs)
+## 10. Tagalog (`tl`) `MORFOLOGIK_RULE_TL` suggestion ordering (5 corpus field diffs)
 
 **Verdict: residue to fix** — the match and suggestion *sets* are identical;
 only the frequency-weighted ordering differs, and Java is the reference.
@@ -414,7 +389,7 @@ Reproduce (pinned Java build):
 scripts/oracle/tl/probe-rule.sh "Sa DLSU rin ako nag-aral." MORFOLOGIK_RULE_TL
 ```
 
-## 12. Lithuanian (`lt`): vendored third-party dictionary, no Java baseline
+## 11. Lithuanian (`lt`): vendored third-party dictionary, no Java baseline
 
 **Verdict: intentional** — the legacy module is broken (it throws on every
 check), so there is no Java reference to match; the Rust engine deliberately
@@ -451,93 +426,16 @@ Reproduce (pinned Java build, per-rule probe):
 scripts/oracle/lt/probe-rule.sh "Jaroslavas pajuto kad jo draugas yra Mantas." BRAK_PRZECINKA_ZE
 ```
 
-## 13. Crimean Tatar (`crh`) Java `UNICODE_CASE` folding of `ı` — resolved
-
-**Verdict: Java is more correct; fixed (D-310).** Java compiles pattern-token
-regexps with `Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE` (unless
-`case_sensitive` is set). Under that flag `Character.toUpperCase('ı')`
-(U+0131, dotless i) is `I`, so `[A-Za-z…]` matches `ı`:
-
-```java
-Pattern.compile("[A-Za-zñğüşöçâ][A-Za-zñğüşöçâ-]*",
-    Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)
-  .matcher("21fayız").matches()   // true
-```
-
-The Rust `regex` crate uses Unicode *simple* case folding, where U+0131 folds
-to itself, so `(?i)[A-Za-z…]` did **not** match `ı`, and the corpus line
-`21fayız.` missed `COMPLEX_NUMBER_DEFIS_MISSING` — a false negative, because
-`21fayız` is that rule's own `<example>` (the rule must flag it). `ı` is a
-Crimean Tatar letter and Java's Turkish-aware folding is the correct one for
-this module.
-
-Fixed in `lt_pattern` (`apply_java_turkish_case`,
-`crates/lt-pattern/src/matcher.rs`): for case-insensitive patterns, the
-Turkish dotless i `ı` (U+0131) and dotted capital I `İ` (U+0130) are added to
-the ASCII letter classes/literals they fold into — `[A-Z]`/literal `I` also
-match `ı`, `[a-z]`/literal `i` also match `İ` (mirroring Java's
-`toUpperCase`/`toLowerCase` comparison). Inline `(?-i)` regions and braced
-escapes (`\p{IsLatin}`) are respected. Real-orthography regression test:
-`crates/lt-pattern/src/matcher.rs::java_turkish_case_folds_dotless_i`. The
-`crh` gate is now **0 only-Java / 0 only-Rust / 0 field diffs** (no
-allowance); every gated language was re-run green.
-
-Reproduce (pinned Java build):
-
-```sh
-scripts/oracle/crh/probe-rule.sh "21fayız." COMPLEX_NUMBER_DEFIS_MISSING
-```
-
-## 14. Ukrainian (`uk`) remaining corpus residue (3 only-Java / 1 only-Rust / 0 field diffs)
+## 12. Ukrainian (`uk`) remaining corpus residue (3 only-Java / 1 only-Rust / 0 field diffs)
 
 The Ukrainian port is at **3 only-Java / 1 only-Rust / 0 field diffs** on the
 4,437-line corpus (Java 4,613 vs Rust 4,611 matches). The three remaining
 divergences are pinned exactly in `scripts/ci/parity.sh` and are documented
-here with a pinned-Java reproduction. They are engine-fidelity gaps in the XML
-disambiguation stage and sentence segmentation, not rule-data differences.
+here with a pinned-Java reproduction. They are engine-fidelity gaps (a rule
+abort, sentence segmentation and an overlap tie-break), not rule-data
+differences.
 
-### 14a. XML disambiguation forward-scan cascade (`non_v_kly_2`) — resolved
-
-**Verdict: Java is more correct; fixed (D-310).** Java's
-`DisambiguationPatternRuleReplacer.replace` runs `doMatch`, which scans start
-positions in order and applies each match's action **immediately**; the
-actions mutate the shared `AnalyzedTokenReadings` in place, so a later start
-sees readings removed by an earlier match. The uk rule `non_v_kly_2`
-("Не кличний після некличного") removes `v_kly` from `старший` (preceded by
-`він`), and then the *same rule* removes `v_kly` from the following `сестри`,
-because `старший` no longer carries `v_kly` when the scan reaches it:
-
-```
-він старший сестри на 3 роки
-Java: сестри -> [ж.р.: родовий, мн.: називний]
-Rust: сестри -> [ж.р.: родовий, мн.: називний, кличний]   (before the fix)
-```
-
-The Rust `XmlDisambiguator::apply` collected all matches for a rule against a
-single snapshot, so the cascade did not happen and the spurious `кличний`
-reading leaked into the two `UK_ADJ_NOUN_INFLECTION_AGREEMENT` messages at
-corpus lines 2519/2520.
-
-Fixed in `crates/lt-disambig/src/lib.rs`: the existing forward re-scan loop
-that emulated Java's `doMatch` for single-pattern `add` rules now also covers
-single-pattern `remove` rules (the condition is
-`compiled.len() == 1 && action in {add, remove}`), so a removal can enable a
-later match of the same rule. The loop keeps the existing forward-only scan
-and iteration guard, so the cost stays bounded (the `uk` gate still runs in
-~2 s). Real-orthography regression test:
-`crates/lt/tests/ukrainian.rs::ukrainian_disambiguation_vocative_cascade`.
-Every gated language was re-run green after the change (the shared
-disambiguator affects all of them).
-
-Reproduce (pinned Java build, full `preDisambiguate` + XML stage):
-
-```sh
-scripts/oracle/uk/probe-disambig.sh "він старший сестри на 3 роки"
-# (the manual probe uses `disambiguate` only; use FullProbe.java for the
-#  full `analyzeText` readings)
-```
-
-### 14b. `TokenAgreementPrepNounRule`: preposition + `не` + noun — 1 only-Java
+### 12a. `TokenAgreementPrepNounRule`: preposition + `не` + noun — 1 only-Java
 
 Java flags `UK_PREP_NOUN_INFLECTION_AGREEMENT` when a `part` token (`не`)
 stands between the preposition `незважаючи` and the nominative `це`; the Rust
@@ -555,7 +453,7 @@ Reproduce:
 scripts/oracle/uk/probe-rule.sh "незважаючи не це" UK_PREP_NOUN_INFLECTION_AGREEMENT
 ```
 
-### 14c. Abbreviation sentence segmentation — 1 only-Java
+### 12b. Abbreviation sentence segmentation — 1 only-Java
 
 `т. 2 ч. 1` is one sentence in Java (the abbreviation dot does not end the
 sentence), so `UkrainianUppercaseSentenceStartRule` reports the lowercase
@@ -575,7 +473,7 @@ Reproduce:
 scripts/oracle/uk/probe-rule.sh "т. 2 ч. 1" UPPERCASE_SENTENCE_START
 ```
 
-### 14d. Plural adjective + proper-name list — 1 only-Java / 1 only-Rust
+### 12c. Plural adjective + proper-name list — 1 only-Java / 1 only-Rust
 
 For `молодші Олександр Ірванець, Оксана Луцишина` Java reports the lowercase
 sentence start and does **not** report `UK_ADJ_NOUN_INFLECTION_AGREEMENT`; the
@@ -602,10 +500,10 @@ scripts/ci/parity.sh uk
 # allowed only-Java: 1/1 UK_PREP_NOUN_INFLECTION_AGREEMENT
 # allowed only-Java: 2/2 UPPERCASE_SENTENCE_START
 # allowed only-Rust: 1/1 UK_ADJ_NOUN_INFLECTION_AGREEMENT
-# field diffs: 0 (the #14a cascade is fixed)
+# field diffs: 0
 ```
 
-## 15. Arabic (`ar`) remaining corpus residue (14 only-Java / 8 only-Rust / 0 field diffs)
+## 13. Arabic (`ar`) remaining corpus residue (14 only-Java / 8 only-Rust / 0 field diffs)
 
 **Verdict: residue to fix** — unported features (`ArabicNumbersWords`,
 `AR_INFLECTED_ONE_WORD`, `AR_VERB_TRANSITIVE_IINDIRECT`) where Java is more
@@ -651,75 +549,4 @@ Pinned Java reproductions (all from the committed corpus/Java golden):
 
 `scripts/ci/parity.sh ar` pins all ten counts exactly with
 `--expect-only-java`/`--expect-only-rust`.
-
-## 16. Persian (`fa`) token `\w` is ASCII in Java, Unicode in Rust — resolved
-
-**Verdict: Java is more correct; fixed (D-310).** The former residue was
-exactly **258 only-Rust `Bad_ZWNJ`** matches on the `ZWNJ_Connection` correct
-examples (e.g. `می‌ایستادند`, `سرشناس‌تر`). Cause: Java compiles
-`<token regexp="yes">` with `Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE`
-but **without** `Pattern.UNICODE_CHARACTER_CLASS` (`StringMatcher.create`), so
-`\w` is ASCII `[a-zA-Z_0-9]`; the Rust `lt_pattern` engine compiled with the
-`regex` crate's default Unicode mode, so `\w` also matched Persian letters. The
-first `Bad_ZWNJ` rule's pattern
-`([\.\w۰-۹إأةؤورزژاآدذ،؛,:«»\/@#$٪×*()ـ-]+)‌` therefore matched `می` before a
-ZWNJ in Rust but not in Java.
-
-The rule's own short text ("a ZWNJ after punctuation, numbers and **some**
-Persian letters is not allowed") and its explicit non-joining letter list show
-the `\w` was intended as ASCII: `می‌ایستادند` is **correct** Persian (the ZWNJ
-joins the imperfective prefix `می` to the verb), so Rust's extra matches were
-false positives, not ZWNJ errors Java misses. Java is more correct.
-
-Fixed in the shared `lt_pattern` translation
-(`normalize_java_ascii_classes`, `crates/lt-pattern/src/matcher.rs`): `\w`,
-`\W`, `\d`, `\D`, `\s`, `\S` and `\b`/`\B` are rewritten to Java's ASCII
-definitions (the `fancy-regex` path uses an ASCII look-around form because it
-cannot disable Unicode mode). Real-orthography regression test:
-`crates/lt/tests/persian.rs::persian_bad_zwnj_is_ascii_word_only`. The `fa`
-gate is now **0 only-Java / 0 only-Rust / 0 field diffs** (no allowance); the
-`\w`-using `de`/`en`/`fr`/`pt`/`gl`/`es`/`pl` gates and every other gated
-language were re-run green.
-
-Pinned Java reproductions (unchanged):
-
-```sh
-scripts/oracle/fa/probe-rule.sh "و‌ارد"          # Bad_ZWNJ 0-2  -> suggestion و
-scripts/oracle/fa/probe-rule.sh "می‌ایستادند"    # (no match)
-```
-
-## 17. Khmer (`km`) hunspell `IGNORE ៗ` handling in `testsug` — resolved
-
-**Verdict: Java is more correct; fixed (D-310).** The former residue was
-exactly **3 `HUNSPELL_RULE` suggestion field diffs** on two words (`បញ` and
-`មណ`): Java's lists contained the swapchar/extrachar candidates `ញប`/`មៃ`
-while Rust's did not, so the 15-entry cap admitted a different last entry
-(`បន`/`មួ`). The match set was identical.
-
-The documented cause (single-character compounds via `COMPOUNDFLAG a` +
-`COMPOUNDMIN 1`) was **wrong**. The real cause is the `km_KH.aff` directive
-`IGNORE ៗ`: hunspell removes `IGNORE` code points from both the input word and
-the stored dictionary entries (`HashMgr::add_word`/`clean_ignore`), so the
-dictionary entry `ញបៗ` is stored as `ញប` and the candidate `ញប` is a valid
-word. The Rust `lt-spell` parsed `IGNORE` but ignored it, so `ញប`/`មៃ` were
-rejected. Verified directly against hunspell 1.7.2 (the library LT binds):
-
-```
-Hunspell_spell("ញប") = 1   Hunspell_spell("មៃ") = 1   Hunspell_spell("ញណ") = 0
-Hunspell_suggest("បញ") = ញប|ប|ញ|បាញ|…   (exactly the Java golden list)
-```
-
-`lt-spell` now implements `IGNORE` (`Aff::strip_ignore`): the code points are
-stripped from dictionary entries at load, from the input in `spell`/
-`suggest` (hunspell's `cleanword2`), matching hunspell. `SuggestMgr::checkword`
-does **not** strip them (verified in `suggestmgr.cxx`), so a generated
-candidate containing one is still rejected — this keeps the Arabic `TRY`
-tashkeel behaviour (the ar gate is unchanged). The `km` gate is now
-**0 only-Java / 0 only-Rust / 0 field diffs** (no allowance). Reproduce
-(pinned Java build):
-
-```sh
-scripts/oracle/km/probe-rule.sh "មានបញ្ញត្តិជាអារម្មណ៍" HUNSPELL_RULE
-# 5-7 ញប|ប|ញ|…   and   23-25 …|មៃ|…
-```
 

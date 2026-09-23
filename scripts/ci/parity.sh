@@ -31,7 +31,7 @@ no | nrd | gn | lt)
   gn) TEST_SUITE=guarani ;;
   # `lt` has a legacy module but it is unusable: the referenced
   # `lt/hunspell/lt_LT.dict` is not shipped upstream, so the legacy engine
-  # throws on every check (docs/differences.md #12). The Rust engine vendors a
+  # throws on every check (docs/differences.md #11). The Rust engine vendors a
   # third-party ispell-lt dictionary under the unchanged rule id and runs the
   # XML + generic rules; there is no Java baseline, so the gate is tests-only.
   lt) TEST_SUITE=lithuanian ;;
@@ -191,14 +191,13 @@ elif [ "$LANG_ARG" = "fr" ]; then
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
 elif [ "$LANG_ARG" = "crh" ]; then
-  # `crh` is at 0/0/0. The former only-Java COMPLEX_NUMBER_DEFIS_MISSING
-  # (docs/differences.md #13) is fixed: Java's CASE_INSENSITIVE|UNICODE_CASE
-  # folds U+0131 (dotless i)/U+0130 into the ASCII i/I class, and `lt_pattern`
-  # now adds those code points to case-insensitive ASCII letter classes. No
-  # allowance.
+  # `crh` is at 0/0/0. The former only-Java COMPLEX_NUMBER_DEFIS_MISSING is
+  # fixed: Java's CASE_INSENSITIVE|UNICODE_CASE folds U+0131 (dotless
+  # i)/U+0130 into the ASCII i/I class, and `lt_pattern` now adds those code
+  # points to case-insensitive ASCII letter classes. No allowance.
   :
 elif [ "$LANG_ARG" = "tl" ]; then
-  # documented suggestion-order divergence (docs/differences.md #11): the
+  # documented suggestion-order divergence (docs/differences.md #10): the
   # match and suggestion *sets* are identical; the frequency-included
   # tl_PH Morfologik dictionary orders the frequency-weighted candidates
   # differently for `nag`.
@@ -216,17 +215,17 @@ elif [ "$LANG_ARG" = "pl" ]; then
   EXTRA+=(--expect-only-rust=NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA=1)
   EXTRA+=(--expect-only-rust=ZDANIA_ZLOZONE=1)
 elif [ "$LANG_ARG" = "uk" ]; then
-  # documented known fidelity gaps (docs/differences.md #14): the prep+`не`+
+  # documented known fidelity gaps (docs/differences.md #12): the prep+`не`+
   # noun case-government gap, an overlap tie-break for a proper-name list and
   # the abbreviation sentence segmentation (`т. 2 ч. 1`). The XML
-  # disambiguation forward-scan cascade (#14a) is fixed: `lt-disambig` now
+  # disambiguation forward-scan cascade is fixed: `lt-disambig` now
   # re-scans single-pattern `remove` rules forward like Java's `doMatch`, so
   # the 2 `UK_ADJ_NOUN_INFLECTION_AGREEMENT` field diffs are gone.
   EXTRA+=(--expect-only-java=UK_PREP_NOUN_INFLECTION_AGREEMENT=1)
   EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
   EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
 elif [ "$LANG_ARG" = "ar" ]; then
-  # documented known fidelity gaps (docs/differences.md #15): the
+  # documented known fidelity gaps (docs/differences.md #13): the
   # `syntax_numeric_0003` number-phrase rule (its `ArabicNumbersWords`
   # number-to-words engine is not ported, so the filter rejects and the rule is
   # inert) and the rule classes still unported (`AR_INFLECTED_ONE_WORD`,
@@ -244,17 +243,16 @@ elif [ "$LANG_ARG" = "ar" ]; then
   EXTRA+=(--expect-only-rust=grammar_0000_jar_plural=1)
   EXTRA+=(--expect-only-rust=number_21to99_majrour_separate_jar=1)
 elif [ "$LANG_ARG" = "fa" ]; then
-  # `fa` is at 0/0/0. The former 258 only-Rust `Bad_ZWNJ` false positives
-  # (docs/differences.md #16) are fixed: Java compiles token `\w` as ASCII
-  # (no UNICODE_CHARACTER_CLASS), and `lt_pattern` now rewrites the shorthands
-  # to their ASCII classes. No allowance.
+  # `fa` is at 0/0/0. The former 258 only-Rust `Bad_ZWNJ` false positives are
+  # fixed: Java compiles token `\w` as ASCII (no UNICODE_CHARACTER_CLASS),
+  # and `lt_pattern` now rewrites the shorthands to their ASCII classes. No
+  # allowance.
   :
 elif [ "$LANG_ARG" = "km" ]; then
-  # `km` is at 0/0/0. The former 3 `HUNSPELL_RULE` suggestion field diffs
-  # (docs/differences.md #17) are fixed: the `IGNORE ៗ` directive is now
-  # implemented in `lt-spell`, so `ញប` matches the stored `ញបៗ` entry and the
-  # swapchar/extrachar candidates are accepted like Java's hunspell. No
-  # allowance.
+  # `km` is at 0/0/0. The former 3 `HUNSPELL_RULE` suggestion field diffs are
+  # fixed: the `IGNORE ៗ` directive is now implemented in `lt-spell`, so `ញប`
+  # matches the stored `ញបៗ` entry and the swapchar/extrachar candidates are
+  # accepted like Java's hunspell. No allowance.
   :
 fi
 

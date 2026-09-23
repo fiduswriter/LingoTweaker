@@ -52,7 +52,7 @@ or an artifact), and `docs/differences.md` states the verdict per entry.
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
 third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
 id; there is no Java baseline, so `lt` runs the tests-only gate
-(`docs/differences.md` #12).
+(`docs/differences.md` #11).
 
 - Inputs are the exact corpus extractions: en = incorrect, non-trigger
   examples of `en-examples.jsonl`; de/es/fr/pt/gl/ro = all example texts
@@ -124,7 +124,7 @@ date-filter rules either).
   `compile_failures()` is empty).
   eo is exactly 0/0/0 (D-229; the `HunspellRule` wrong-split check and the
   `twowords` UTF-8 split indexing are ported, so the `BREAK`-based
-  space/hyphen recombinations match; `docs/differences.md` #10 resolved).
+  space/hyphen recombinations match).
   ast is exactly 0/0/0 (D-230; Asturian has no disambiguator/synthesizer, the
   `AsturianTagger` reads the old CFSA (`0xc5`) Morfologik dictionary — the
   `lt-tagger` CFSA reader is new — and `compile_failures()` is empty).
@@ -135,10 +135,10 @@ date-filter rules either).
   multi-word `IGNORE_SPELLING` anti-patterns from the spelling word lists).
   tl is 0 only-Java / 0 only-Rust / exactly the documented
   `MORFOLOGIK_RULE_TL` = 5 suggestion-order field diffs (docs/differences.md
-  #11; the frequency-included `tl_PH` dictionary orders the weighted
+  #10; the frequency-included `tl_PH` dictionary orders the weighted
   candidates differently, the match and suggestion sets are identical).
-  crh is exactly 0/0/0: the documented `COMPLEX_NUMBER_DEFIS_MISSING` only-Java
-  match (docs/differences.md #13) is resolved (Java's `UNICODE_CASE` folds
+  crh is exactly 0/0/0: the former `COMPLEX_NUMBER_DEFIS_MISSING` only-Java
+  match is resolved (Java's `UNICODE_CASE` folds
   `ı`/`İ` into `[A-Za-z]`; `lt_pattern` now adds them to case-insensitive
   ASCII letter classes).
   ru is exactly 0/0/0 (D-247; the `RussianTagger` stress-mark/`MayMissingYO`
@@ -146,10 +146,10 @@ date-filter rules either).
   both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules
   and `compile_failures()` is empty).
   uk is 3 only-Java / 1 only-Rust / 0 field diffs, the documented known
-  fidelity gaps of `docs/differences.md` #14 (a prep+`не`+noun
+  fidelity gaps of `docs/differences.md` #12 (a prep+`не`+noun
   case-government gap, the `т. 2 ч. 1` abbreviation sentence segmentation and
   one plural-adjective/proper-name overlap tie-break; the XML disambiguation
-  forward-scan cascade #14a is fixed), pinned exactly with
+  forward-scan cascade is fixed), pinned exactly with
   `--expect-only-java`/`--expect-only-rust` in
   `scripts/ci/parity.sh` (D-273…D-281).
   sr is exactly 0/0/0 (D-288): the pinned `sr` module is excluded from the LT
@@ -160,19 +160,19 @@ date-filter rules either).
   hybrid disambiguator, the `MorfologikEkavianSpellerRule` and the two legacy
   replace rules match Java exactly.
   ar is 14 only-Java / 8 only-Rust / 0 field diffs, the documented known
-  fidelity gaps of `docs/differences.md` #15 (the `syntax_numeric_0003`
+  fidelity gaps of `docs/differences.md` #13 (the `syntax_numeric_0003`
   number-phrase rule, whose `ArabicNumbersWords` number-to-words engine is not
   ported so the filter rejects and the rule is inert, plus the two unported
   rule classes `AR_INFLECTED_ONE_WORD`/`AR_VERB_TRANSITIVE_IINDIRECT` and two
   Hunspell range/wrong-split residues), pinned exactly with
   `--expect-only-java`/`--expect-only-rust` in `scripts/ci/parity.sh` (D-293+).
-  fa is exactly 0/0/0: the documented shared regex-semantics divergence of
-  `docs/differences.md` #16 is resolved (Java's token `\w` is ASCII, the Rust
+  fa is exactly 0/0/0: the former shared regex-semantics divergence is resolved
+  (Java's token `\w` is ASCII, the Rust
   `regex` crate's is Unicode; the shared `lt_pattern` translation now rewrites
   `\w`/`\W`/`\d`/`\D`/`\s`/`\S`/`\b`/`\B` to Java's ASCII definitions, which
   removed the 258 `Bad_ZWNJ` false positives).
-  km is exactly 0/0/0: the documented speller divergence of
-  `docs/differences.md` #17 is resolved (the `IGNORE ៗ` directive is now
+  km is exactly 0/0/0: the former speller divergence is resolved (the `IGNORE ៗ`
+  directive is now
   implemented in `lt-spell`, so the swapchar/extrachar candidates `ញប`/`មៃ`
   match the stored `ញបៗ`/`មៃៗ` entries like Java's hunspell).
   ml is exactly 0/0/0: the 18 active XML rules, the six generic built-ins and

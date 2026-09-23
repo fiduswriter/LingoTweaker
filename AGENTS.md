@@ -64,25 +64,25 @@ agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
 the PCON_VERB participle rule); da is at 0/0/0 (#10, resolved by the
 suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
-(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/5 (#15, docs/differences.md #11 suggestion ordering); crh is at 0/0/0 (#16, docs/differences.md #13 resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #14); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
+(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/5 (#15, docs/differences.md #10 suggestion ordering); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #12); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
 runs the same tests-only gate because its legacy module references an
 unshipped `lt_LT.dict` and throws on every check, so the Rust engine vendors a
 third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
-id (docs/differences.md #12). `uk` is at 3 only-Java / 1 only-Rust / 0 field
-diffs (#14: a prep+`не`+noun case-government gap, abbreviation sentence
+id (docs/differences.md #11). `uk` is at 3 only-Java / 1 only-Rust / 0 field
+diffs (#12: a prep+`не`+noun case-government gap, abbreviation sentence
 segmentation and one plural-adjective/proper-name overlap tie-break; the XML
-disambiguation forward-scan cascade #14a is fixed). `ar` is at 14 only-Java / 8 only-Rust / 0 field diffs (#21; docs/
-differences.md #15: the
+disambiguation forward-scan cascade is fixed). `ar` is at 14 only-Java / 8 only-Rust / 0 field diffs (#21; docs/
+differences.md #13: the
 `syntax_numeric_0003` number-phrase rule whose `ArabicNumbersWords` engine is
 not ported, the two unported rule classes and two Hunspell range/wildcard
-residues). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; docs/differences.md
-#16 resolved: the former 258 only-Rust `Bad_ZWNJ` false positives came from
+residues). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; resolved: the
+former 258 only-Rust `Bad_ZWNJ` false positives came from
 Java's token `\w` being ASCII while the Rust `regex` crate's is Unicode; the
 shared `lt_pattern` translation now rewrites the shorthands to Java's ASCII
 classes). `km` is at 0 only-Java / 0
-only-Rust / 0 field diffs (#23; docs/differences.md #17 resolved: the
+only-Rust / 0 field diffs (#23; resolved: the
 `IGNORE ៗ` directive is now implemented in `lt-spell`, so the swapchar/
 extrachar candidates `ញប`/`មៃ` match the stored `ញបៗ`/`មៃៗ` entries like
 Java's hunspell).
