@@ -16,8 +16,9 @@ fn regex(pattern: &str) -> regex::Regex {
     regex::Regex::new(pattern).unwrap()
 }
 
-// PROTOTYPE: previously these four patterns were compiled on every
-// `glue_parts` call (i.e. per line of multipartcompounds.txt).
+// These four patterns are interned in `OnceLock`s so each is compiled once
+// instead of on every `glue_parts` call (i.e. per line of
+// multipartcompounds.txt).
 fn digits_end() -> &'static regex::Regex {
     static RE: OnceLock<regex::Regex> = OnceLock::new();
     RE.get_or_init(|| regex(r".*[0-9]$"))

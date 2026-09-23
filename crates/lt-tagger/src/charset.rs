@@ -400,7 +400,7 @@ impl Charset {
     }
 
     /// Decode FSA bytes into a string. Invalid UTF-8 falls back to a lossy
-    /// decode like the previous UTF-8-only code.
+    /// decode.
     pub fn decode(self, bytes: &[u8]) -> Cow<'_, str> {
         match self {
             Charset::Utf8 => String::from_utf8_lossy(bytes),

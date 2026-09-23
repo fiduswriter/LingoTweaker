@@ -467,8 +467,7 @@ impl XmlDisambiguator {
 }
 
 /// `PatternRuleMatcher` filter evaluation for disambiguation rules: an
-/// unmapped class (or no registry) keeps the rule applying, like before the
-/// filter support was added.
+/// unmapped class (or no registry) keeps the rule applying.
 fn filter_accepts(
     rule: &CompiledDisambigRule,
     filters: Option<&lt_pattern::FilterRegistry>,

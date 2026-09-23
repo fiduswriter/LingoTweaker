@@ -189,8 +189,8 @@ impl PosTagMatcher {
 
 /// Compiled regexes are interned by `(pattern, case_sensitive, anchored)`:
 /// rule tokens repeat the same patterns (POS patterns like `NN.*` appear in
-/// thousands of rules) and each `regex` program costs a few KB, so the
-/// duplicate programs used to add up to hundreds of MB (D-033).
+/// thousands of rules) and each `regex` program costs a few KB, so without
+/// interning the duplicate programs would add up to hundreds of MB (D-033).
 type RegexCache =
     std::sync::Mutex<std::collections::HashMap<(String, bool, bool), std::sync::Arc<TextRegex>>>;
 
@@ -3339,7 +3339,7 @@ mod tests {
     /// reference with no skipped tokens as `""`; `formatMatches` then runs
     /// `concatWithoutExtraSpace`, which removes the space before the
     /// reference (`com en va ser de fàcil ` + `""` -> `com en va ser de
-    /// fàcil`). Regression: LO_MALA_PERSONA kept a trailing space.
+    /// fàcil`).
     #[test]
     fn empty_following_match_ref_collapses_the_preceding_space() {
         let token = AnalyzedTokenReadings::new(vec![AnalyzedToken::new("fàcil", None, None)]);

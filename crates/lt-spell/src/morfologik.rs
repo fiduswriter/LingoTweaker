@@ -969,9 +969,9 @@ impl Speller {
                 // `ind > -1` guard comes first, then
                 // `ind == index || ind == index - rep.length() + 1` in Java
                 // `int` arithmetic. A negative target can therefore never
-                // match; compute it signed to avoid the debug overflow the
-                // former `usize` expression had (release wrapped and matched
-                // Java by accident).
+                // match; compute it signed so it is representable (an
+                // unsigned subtraction would overflow in debug and wrap in
+                // release).
                 if rep_chars.len() > selected_chars.len() && ind.is_some() {
                     let target = index as i64 - rep_chars.len() as i64 + 1;
                     if ind == Some(index) || ind.map(|i| i as i64) == Some(target) {
@@ -1639,9 +1639,9 @@ mod tests {
 
     /// `DictionaryAttribute.SUPPORT_RUN_ON_WORDS` is spelled
     /// `fsa.dict.speller.runon-words` (no hyphen between `run` and `on`);
-    /// the Dutch `nl_NL.info` sets it false (regression: reading
-    /// `run-on-words` left run-on candidates enabled and added
-    /// space-inserted suggestions like `ttets` -> `t tets`).
+    /// the Dutch `nl_NL.info` sets it false (reading `run-on-words` instead
+    /// leaves run-on candidates enabled and adds space-inserted suggestions
+    /// like `ttets` -> `t tets`).
     #[test]
     fn runon_words_metadata_uses_the_morfologik_key() {
         let info = DictionaryInfo::parse(

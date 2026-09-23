@@ -626,9 +626,8 @@ fn ukrainian_adj_noun_agreement() {
 /// Java-probed (`scripts/oracle/uk/probe-disambig.sh`): the XML
 /// disambiguation forward-scan cascade. `non_v_kly_2` removes the vocative
 /// reading from `старший` and then, because the scan continues on the mutated
-/// readings, from the following `сестри`; `lt-disambig` now re-scans
-/// single-pattern `remove` rules forward like Java's `doMatch`. Regression:
-/// `сестри` kept a spurious `кличний` reading and the message exposed it.
+/// readings, from the following `сестри`; `lt-disambig` re-scans single-pattern
+/// `remove` rules forward like Java's `doMatch`.
 #[test]
 fn ukrainian_disambiguation_vocative_cascade() {
     let _guard = engine_guard();

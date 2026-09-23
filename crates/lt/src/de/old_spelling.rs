@@ -113,8 +113,8 @@ impl OldSpellingRule {
 
     /// `OldSpellingRule.ignoreMatch`. Java mixes `hit.begin`/`hit.end`
     /// (UTF-16 indices) with `substring`, so the byte offsets are converted
-    /// to char indices first; the multibyte case (`begin - 6` inside a `ß`)
-    /// previously panicked.
+    /// to char indices first, keeping a `begin - 6` region inside a multibyte
+    /// `ß` valid.
     fn ignore_match(&self, begin: usize, end: usize, text: &str) -> bool {
         let chars: Vec<char> = text.chars().collect();
         let char_begin = text[..begin].chars().count();

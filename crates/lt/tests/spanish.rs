@@ -690,7 +690,7 @@ fn spanish_repeated_onomatopeyas_match_java() {
 
 /// Self-closing `<token min="2" .../>` duplicates the element like Java
 /// (`XMLRuleHandler.setToken`), so the rulegroup antipatterns that need two
-/// consecutive `_GN_` tokens no longer fire on a single noun.
+/// consecutive `_GN_` tokens do not fire on a single noun.
 #[test]
 fn spanish_self_closing_min_tokens_match_java() {
     let _guard = engine_guard();
@@ -830,8 +830,6 @@ fn spanish_phraseref_rules_match_java() {
 /// `MatchState.toFinalString` marks a rendered suggestion unknown to the
 /// language tagger as `<mistake/>`; `removeSuppressMisspelled` then drops the
 /// whole suggestion and a match left without suggestions disappears.
-/// Regression: D-089 (the tagger check only ran for French after the
-/// `Synthesizer::is_known_word` refactor).
 #[test]
 fn suppress_misspelled_drops_unknown_joins() {
     let _guard = engine_guard();

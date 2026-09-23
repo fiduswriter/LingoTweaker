@@ -230,7 +230,6 @@ fn persian_word_coherency() {
 /// `Bad_ZWNJ` sub-rule 1 uses Java's ASCII `\w`, so a ZWNJ after a joining
 /// Persian letter (e.g. `ی` in `می‌ایستادند`) is correct and must not match;
 /// the explicit non-joining letters (`و`) and punctuation still match.
-/// Regression: the Rust `regex` crate's Unicode `\w` flagged correct ZWNJ.
 #[test]
 fn persian_bad_zwnj_is_ascii_word_only() {
     let _guard = engine_guard();

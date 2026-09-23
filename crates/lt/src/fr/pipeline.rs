@@ -217,7 +217,7 @@ pub fn analyze_french_sentence(french: &FrenchPipeline, text: &str) -> AnalyzedS
     // .getIgnoredCharactersRegex` strips `[\u00AD]`): the tagger sees the
     // cleaned token; the original surface comes back as an appended untagged
     // reading, so `massive` stays a tagged `massif:J f s` word and the
-    // speller no longer flags it.
+    // speller does not flag it.
     let cleaned: Vec<String> = raw_tokens
         .iter()
         .map(|t| t.replace('\u{00AD}', ""))

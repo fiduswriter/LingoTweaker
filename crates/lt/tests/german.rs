@@ -556,8 +556,7 @@ fn german_unify_disambiguation_matches_java() {
         return;
     };
     // Java probe (`ProbeChunk`, de-DE): after UNIFY_DET_ADJ_SUB the shared
-    // number/case/gender features must prune the Tag readings to nominative;
-    // Rust kept an extra `SUB:AKK:SIN:NEU` before the unifier map-sharing fix.
+    // number/case/gender features must prune the Tag readings to nominative.
     let sentence = &engine.analyze("Das ist ein schöner Tag.")[0];
     let readings = |surface: &str| -> Vec<String> {
         sentence

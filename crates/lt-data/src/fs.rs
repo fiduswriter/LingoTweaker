@@ -8,8 +8,8 @@
 //!
 //! Only the read-side subset the engine uses is wrapped:
 //! [`read`], [`read_to_string`], [`open`], [`exists`], [`is_dir`],
-//! [`is_file`], plus the [`PathExt`] convenience trait used by call sites
-//! that previously wrote `.exists()` / `.is_dir()`.
+//! [`is_file`], plus the [`PathExt`] convenience trait that gives a `Path`
+//! the mount-aware `lt_exists` / `lt_is_dir` / `lt_is_file` methods.
 
 use std::collections::HashMap;
 use std::io::{self, Cursor};
@@ -160,8 +160,8 @@ pub fn is_file(path: impl AsRef<Path>) -> bool {
 }
 
 /// Mount-aware counterparts of `Path::exists` / `Path::is_dir` /
-/// `Path::is_file`. Import anonymously (`use lt_data::PathExt as _;`) where a
-/// loader previously called the `std` methods.
+/// `Path::is_file`. Import anonymously (`use lt_data::PathExt as _;`) to use
+/// these in place of the `std` methods.
 pub trait PathExt {
     fn lt_exists(&self) -> bool;
     fn lt_is_dir(&self) -> bool;

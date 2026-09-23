@@ -2,8 +2,8 @@
 //! `nb_NO` Hunspell dictionary (LibreOffice `no/`, data CC BY 4.0,
 //! `.aff` GPL-2.0). Hunspell remains the spelling authority; suggestions come
 //! from the ported native hunspell `suggest()` (affix/compound/REP/MAP/ngram
-//! generators), so the one-off Morfologik build
-//! `data/no/dictionaries/no.dict` is no longer used.
+//! generators). The one-off Morfologik build `data/no/dictionaries/no.dict`
+//! is not used by this rule.
 
 use std::path::Path;
 

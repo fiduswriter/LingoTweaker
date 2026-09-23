@@ -121,8 +121,8 @@ impl Synthesizer for UkrainianSynthesizerAdapter {
     }
 }
 
-/// Ukrainian sentence tokenization + tagger. Stage 1 used the base word
-/// tokenizer; the custom `UkrainianWordTokenizer` is now wired.
+/// Ukrainian sentence tokenization + tagger (the ported
+/// `UkrainianWordTokenizer`).
 pub fn analyze_ukrainian_sentence(ukrainian: &UkrainianPipeline, text: &str) -> AnalyzedSentence {
     let raw_tokens = lt_tokenize::ukrainian::tokenize(text);
     let tagged = ukrainian.tagger.tag(&raw_tokens);
