@@ -1,5 +1,3 @@
-use std::path::PathBuf;
-
 fn build(data: lt::DataDir, variant: Option<&str>) -> Result<usize, Box<dyn std::error::Error>> {
     let mut b = lt::Engine::builder(lt::Lang::En)?.data_dir(data);
     if let Some(v) = variant {
