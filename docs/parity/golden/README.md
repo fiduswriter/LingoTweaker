@@ -166,11 +166,11 @@ date-filter rules either).
   rule classes `AR_INFLECTED_ONE_WORD`/`AR_VERB_TRANSITIVE_IINDIRECT` and two
   Hunspell range/wrong-split residues), pinned exactly with
   `--expect-only-java`/`--expect-only-rust` in `scripts/ci/parity.sh` (D-293+).
-  fa is 0 only-Java / 258 only-Rust / 0 field diffs, the documented shared
-  regex-semantics divergence of `docs/differences.md` #16 (Java's token `\w` is
-  ASCII, the Rust `regex` crate's is Unicode, so the first `Bad_ZWNJ` rule
-  matches Persian letters before a ZWNJ on the `ZWNJ_Connection` correct
-  examples), pinned exactly with `--expect-only-rust=Bad_ZWNJ=258`.
+  fa is exactly 0/0/0: the documented shared regex-semantics divergence of
+  `docs/differences.md` #16 is resolved (Java's token `\w` is ASCII, the Rust
+  `regex` crate's is Unicode; the shared `lt_pattern` translation now rewrites
+  `\w`/`\W`/`\d`/`\D`/`\s`/`\S`/`\b`/`\B` to Java's ASCII definitions, which
+  removed the 258 `Bad_ZWNJ` false positives).
   km is 0 only-Java / 0 only-Rust / 3 field diffs, the documented speller
   divergence of `docs/differences.md` #17 (the Rust hunspell `testsug` does not
   accept the `COMPOUNDMIN 1` single-character compounds Java's does), pinned

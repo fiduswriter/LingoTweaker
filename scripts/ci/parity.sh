@@ -242,11 +242,11 @@ elif [ "$LANG_ARG" = "ar" ]; then
   EXTRA+=(--expect-only-rust=grammar_0000_jar_plural=1)
   EXTRA+=(--expect-only-rust=number_21to99_majrour_separate_jar=1)
 elif [ "$LANG_ARG" = "fa" ]; then
-  # documented shared regex-semantics divergence (docs/differences.md #16):
-  # Java's token `\w` is ASCII (no UNICODE_CHARACTER_CLASS), the Rust regex
-  # crate's is Unicode, so the first Bad_ZWNJ rule matches the Persian letters
-  # before a ZWNJ on the ZWNJ_Connection correct examples.
-  EXTRA+=(--expect-only-rust=Bad_ZWNJ=258)
+  # `fa` is at 0/0/0. The former 258 only-Rust `Bad_ZWNJ` false positives
+  # (docs/differences.md #16) are fixed: Java compiles token `\w` as ASCII
+  # (no UNICODE_CHARACTER_CLASS), and `lt_pattern` now rewrites the shorthands
+  # to their ASCII classes. No allowance.
+  :
 elif [ "$LANG_ARG" = "km" ]; then
   # documented speller divergence (docs/differences.md #17): the match set is
   # identical (0 only-Java / 0 only-Rust); the Rust hunspell `testsug` does not

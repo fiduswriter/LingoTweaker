@@ -245,6 +245,10 @@ fn compile_regex_uncached(
     // Java accepts `(?-)` as a flag reset with no flags (used by the French
     // rules as `(?-)[A-Z]`); the Rust engines reject the empty flag list.
     let pattern = pattern.replace("(?-)", "");
+    // Java compiles patterns without `Pattern.UNICODE_CHARACTER_CLASS` (LT
+    // uses only `CASE_INSENSITIVE | UNICODE_CASE`), so `\w`/`\d`/`\s`/`\b`
+    // are the ASCII classes; the Rust regex crate's are Unicode by default.
+    let pattern = normalize_java_ascii_classes(&pattern, false);
     let mut s = String::new();
     if !case_sensitive {
         s.push_str("(?i)");
@@ -331,6 +335,103 @@ fn normalize_java_punct(pattern: &str) -> String {
         .replace("\\P{Punct}", "[^!-/:-@\\[-`{-~]")
 }
 
+/// Java compiles rule/token regexps with `CASE_INSENSITIVE | UNICODE_CASE` but
+/// **not** `UNICODE_CHARACTER_CLASS`, so the shorthand classes are the ASCII
+/// ones: `\w` = `[a-zA-Z_0-9]`, `\d` = `[0-9]`, `\s` = `[ \t\n\x0B\f\r]`,
+/// `\b`/`\B` are ASCII word boundaries. The Rust `regex` crate's shorthands are
+/// Unicode by default (and `(?-u:\W)` is rejected because it can match invalid
+/// UTF-8), so rewrite them to explicit ASCII classes / an ASCII-boundary group.
+/// `(?U)`/`(?u)` inline flags never appear in the rule data (the `u` flag is
+/// `UNICODE_CASE`, which does not change the class), so every occurrence is
+/// ASCII. `\b`/`\B` inside a character class mean backspace in Java and are
+/// left untouched.
+///
+/// `fancy` selects the `\b`/`\B` rendering: the `regex` crate supports the
+/// ASCII boundary as `(?-u:\b)`, while `fancy-regex` rejects disabling
+/// Unicode mode and needs the equivalent ASCII look-around form instead.
+fn normalize_java_ascii_classes(pattern: &str, fancy: bool) -> String {
+    const ASCII_B: &str = "(?:(?<=[a-zA-Z0-9_])(?![a-zA-Z0-9_])|(?<![a-zA-Z0-9_])(?=[a-zA-Z0-9_]))";
+    const ASCII_NOT_B: &str =
+        "(?:(?<=[a-zA-Z0-9_])(?=[a-zA-Z0-9_])|(?<![a-zA-Z0-9_])(?![a-zA-Z0-9_]))";
+    if !pattern.contains("\\w")
+        && !pattern.contains("\\W")
+        && !pattern.contains("\\d")
+        && !pattern.contains("\\D")
+        && !pattern.contains("\\s")
+        && !pattern.contains("\\S")
+        && !pattern.contains("\\b")
+        && !pattern.contains("\\B")
+    {
+        return pattern.to_string();
+    }
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len());
+    let mut in_class = 0usize;
+    let mut i = 0usize;
+    while i < chars.len() {
+        let c = chars[i];
+        if c == '\\' {
+            match chars.get(i + 1).copied() {
+                Some(kind @ ('w' | 'W' | 'd' | 'D' | 's' | 'S')) => {
+                    let (pos, neg) = match kind.to_ascii_lowercase() {
+                        'w' => ("a-zA-Z_0-9", "a-zA-Z_0-9"),
+                        'd' => ("0-9", "0-9"),
+                        _ => (" \\t\\n\\x0B\\f\\r", " \\t\\n\\x0B\\f\\r"),
+                    };
+                    let negated = kind.is_ascii_uppercase();
+                    if in_class == 0 {
+                        out.push('[');
+                        if negated {
+                            out.push('^');
+                        }
+                        out.push_str(if negated { neg } else { pos });
+                        out.push(']');
+                    } else if negated {
+                        out.push_str("[^");
+                        out.push_str(neg);
+                        out.push(']');
+                    } else {
+                        out.push_str(pos);
+                    }
+                    i += 2;
+                    continue;
+                }
+                Some(kind @ ('b' | 'B')) if in_class == 0 => {
+                    if fancy {
+                        out.push_str(if kind == 'b' { ASCII_B } else { ASCII_NOT_B });
+                    } else {
+                        out.push_str(if kind == 'b' {
+                            "(?-u:\\b)"
+                        } else {
+                            "(?-u:\\B)"
+                        });
+                    }
+                    i += 2;
+                    continue;
+                }
+                Some(next) => {
+                    out.push('\\');
+                    out.push(next);
+                    i += 2;
+                    continue;
+                }
+                None => {
+                    out.push('\\');
+                    i += 1;
+                    continue;
+                }
+            }
+        }
+        if c == '[' {
+            in_class += 1;
+        } else if c == ']' {
+            in_class = in_class.saturating_sub(1);
+        }
+        out.push(c);
+        i += 1;
+    }
+    out
+}
 /// Java allows a literal `-` right after a character-class escape or a nested
 /// class inside a character class (`[\d-–]`, `[\p{Lu}-–]`); the Rust regex
 /// crate reads it as an invalid range start. Escape such hyphens. A `}` that
@@ -1328,6 +1429,7 @@ fn java_regex_uncached(pattern: &str) -> Option<FancyRegex> {
     let pattern = normalize_java_punct(&pattern);
     let pattern = escape_class_hyphens(&pattern);
     let pattern = strip_java_unicode_flags(&pattern);
+    let pattern = normalize_java_ascii_classes(&pattern, true);
     if let Ok(re) = FancyRegex::new(&pattern) {
         return Some(re);
     }
@@ -2944,6 +3046,44 @@ mod tests {
             normalize_java_surrogate_escapes("\\\\ud83d\\u2600"),
             "\\\\ud83d\\u2600"
         );
+    }
+
+    #[test]
+    fn java_ascii_shorthand_classes() {
+        // Java compiles without `UNICODE_CHARACTER_CLASS`, so the shorthands
+        // are the ASCII classes; the Rust regex crate's are Unicode.
+        assert_eq!(normalize_java_ascii_classes(r"\w+", false), "[a-zA-Z_0-9]+");
+        assert_eq!(normalize_java_ascii_classes(r"\W", false), "[^a-zA-Z_0-9]");
+        assert_eq!(normalize_java_ascii_classes(r"\d", false), "[0-9]");
+        assert_eq!(
+            normalize_java_ascii_classes(r"\S", false),
+            "[^ \\t\\n\\x0B\\f\\r]"
+        );
+        assert_eq!(normalize_java_ascii_classes(r"[\w]", false), "[a-zA-Z_0-9]");
+        assert_eq!(
+            normalize_java_ascii_classes(r"[\W]", false),
+            "[[^a-zA-Z_0-9]]"
+        );
+        assert_eq!(normalize_java_ascii_classes(r"[\d-]", false), "[0-9-]");
+        assert_eq!(
+            normalize_java_ascii_classes(r"\bfoo\B", false),
+            "(?-u:\\b)foo(?-u:\\B)"
+        );
+        // `\b` inside a class is backspace in Java, left untouched
+        assert_eq!(normalize_java_ascii_classes(r"[\b]", false), "[\\b]");
+        // no shorthands: unchanged
+        assert_eq!(normalize_java_ascii_classes(r"[a-z]+", false), "[a-z]+");
+    }
+
+    /// The `fa` `Bad_ZWNJ` pattern must not match Persian letters through
+    /// `\w`: `می` is not an ASCII word, so a ZWNJ after `ی` is correct.
+    #[test]
+    fn java_ascii_classes_do_not_match_persian_letters() {
+        let re = compile_regex_uncached(r"([\.\w۰-۹إأةؤورزژاآدذ،؛,:«»\/@#$٪×*()ـ-]+)", true, true)
+            .expect("compile");
+        assert!(re.is_match("و"), "the explicit و still matches");
+        assert!(!re.is_match("می"), "Unicode \\w must not match م/ی");
+        assert!(re.is_match("abc_1"), "ASCII word chars still match");
     }
 
     #[test]

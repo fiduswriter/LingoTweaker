@@ -77,10 +77,11 @@ plural-adjective/proper-name overlap tie-break). `ar` is at 14 only-Java / 8 onl
 differences.md #15: the
 `syntax_numeric_0003` number-phrase rule whose `ArabicNumbersWords` engine is
 not ported, the two unported rule classes and two Hunspell range/wildcard
-residues). `fa` is at 0 only-Java / 258 only-Rust / 0 field diffs
-(#22; docs/differences.md #16: Java's token `\w` is ASCII but the Rust `regex`
-crate's is Unicode, so the first `Bad_ZWNJ` rule matches Persian letters before
-a ZWNJ on the `ZWNJ_Connection` correct examples). `km` is at 0 only-Java / 0
+residues). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; docs/differences.md
+#16 resolved: the former 258 only-Rust `Bad_ZWNJ` false positives came from
+Java's token `\w` being ASCII while the Rust `regex` crate's is Unicode; the
+shared `lt_pattern` translation now rewrites the shorthands to Java's ASCII
+classes). `km` is at 0 only-Java / 0
 only-Rust / 3 field diffs (#23; docs/differences.md #17: the Rust hunspell
 `testsug` does not accept the `COMPOUNDMIN 1` single-character compounds
 Java's does, so two suggestion lists differ by one entry).
