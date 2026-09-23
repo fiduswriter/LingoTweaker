@@ -83,31 +83,48 @@ for lang in $langs; do
   rm -f "$out_dir/$lang.pack"
 done
 
+# Split specs (SPLIT_PACKS=1): for each language a base pack without the
+# optional/variant resources plus `<lang>.<side>.pack` sidecars. Only
+# resources the engine loads on demand are split (variant dictionaries,
+# OpenNLP models); the core dictionaries stay in the base pack.
+#   en: models sidecar + en-{GB,AU,CA,NZ} variant dictionaries
+#       (base default variant en-US)
+#   de: de-{AT,CH} variant dictionaries + their spelling word lists
+#       (base default variant de-DE); ~14 MB raw of the 21 MB pack
 if [ -n "${SPLIT_PACKS:-}" ]; then
-  # en split: base pack without the optional OpenNLP chunker models
-  # (en-lite, the demo default) and without the four non-default variant
-  # dictionaries (fetched on demand, ~1.9 MB gz total); the default
-  # variant (en_US) stays in the base pack.
-  for side in models en-GB en-AU en-CA en-NZ; do
-    case "$side" in
-      models) "$pack_data" "$data_dir" en "$out_dir/en.$side.pack" --only en/models ;;
-      # en-GB -> en/hunspell/en_GB (the dictionary file stem)
-      *) "$pack_data" "$data_dir" en "$out_dir/en.$side.pack" --only "en/hunspell/en_${side#en-}" ;;
+  # spec: lang, then `side=only-paths` pairs (multiple paths comma-separated)
+  for spec in \
+    "en models=en/models en-GB=en/hunspell/en_GB en-AU=en/hunspell/en_AU en-CA=en/hunspell/en_CA en-NZ=en/hunspell/en_NZ" \
+    "de de-AT=de/hunspell/de_AT,de/hunspell/spelling-de-AT.txt de-CH=de/hunspell/de_CH,de/hunspell/spelling-de-CH.txt"
+  do
+    set -- $spec
+    lang=$1
+    shift
+    for side_spec in "$@"; do
+      side=${side_spec%%=*}
+      # shellcheck disable=SC2086
+      "$pack_data" "$data_dir" "$lang" "$out_dir/$lang.$side.pack" --only \
+        $(echo "${side_spec#*=}" | tr ',' ' ')
+      gzip -9 -n -f -k "$out_dir/$lang.$side.pack"
+      if [ -n "$HAVE_ZSTD" ]; then
+        zstd -q -19 -f --no-progress "$out_dir/$lang.$side.pack"
+      fi
+      rm -f "$out_dir/$lang.$side.pack"
+    done
+    # the base pack: default variant resources stay, the sidecar resources go
+    case "$lang" in
+      en) excludes="en/models en/hunspell/en_GB en/hunspell/en_AU en/hunspell/en_CA en/hunspell/en_NZ" ;;
+      de) excludes="de/hunspell/de_AT de/hunspell/de_CH de/hunspell/spelling-de-AT.txt de/hunspell/spelling-de-CH.txt" ;;
+      *) excludes="" ;;
     esac
-    gzip -9 -n -f -k "$out_dir/en.$side.pack"
+    # shellcheck disable=SC2086
+    "$pack_data" "$data_dir" "$lang" "$out_dir/$lang.base.pack" --exclude $excludes
+    gzip -9 -n -f -k "$out_dir/$lang.base.pack"
     if [ -n "$HAVE_ZSTD" ]; then
-      zstd -q -19 -f --no-progress "$out_dir/en.$side.pack"
+      zstd -q -19 -f --no-progress "$out_dir/$lang.base.pack"
     fi
-    rm -f "$out_dir/en.$side.pack"
+    rm -f "$out_dir/$lang.base.pack"
   done
-  "$pack_data" "$data_dir" en "$out_dir/en.base.pack" \
-    --exclude en/models en/hunspell/en_GB en/hunspell/en_AU \
-    en/hunspell/en_CA en/hunspell/en_NZ
-  gzip -9 -n -f -k "$out_dir/en.base.pack"
-  if [ -n "$HAVE_ZSTD" ]; then
-    zstd -q -19 -f --no-progress "$out_dir/en.base.pack"
-  fi
-  rm -f "$out_dir/en.base.pack"
 fi
 
 python3 - "$out_dir" <<'PY'
@@ -136,21 +153,42 @@ def describe(pack_gz, suffix):
 
 
 out = pathlib.Path(sys.argv[1])
-split_en = (out / "en.base.pack.gz").exists() and (out / "en.models.pack.gz").exists()
+# per-language split specs: default variant + sidecar name -> pack stem
+SPLITS = {
+    "en": {
+        "defaultVariant": "en-US",
+        "sides": {
+            "models": "en.models",
+            "en-GB": "en.en-GB",
+            "en-AU": "en.en-AU",
+            "en-CA": "en.en-CA",
+            "en-NZ": "en.en-NZ",
+        },
+    },
+    "de": {
+        "defaultVariant": "de-DE",
+        "sides": {
+            "de-AT": "de.de-AT",
+            "de-CH": "de.de-CH",
+        },
+    },
+}
 manifest = {}
 for path in sorted(out.glob("*.pack.gz")):
     lang = path.name[: -len(".pack.gz")]
     entry = describe(path, ".pack.gz")
-    if lang == "en" and split_en:
-        # en is additionally shipped split (see SPLIT_PACKS above): the demo
-        # fetches the base pack plus the sidecars it needs; the full pack
-        # stays under `file` for release consumers
+    spec = SPLITS.get(lang)
+    if spec and (out / f"{lang}.base.pack.gz").exists():
+        # the language is additionally shipped split (see SPLIT_PACKS):
+        # the demo fetches the base pack plus the sidecars it needs; the
+        # full pack stays under `file` for release consumers
         entry["split"] = {
-            "base": describe(out / "en.base.pack.gz", ".pack.gz"),
+            "base": describe(out / f"{lang}.base.pack.gz", ".pack.gz"),
+            "defaultVariant": spec["defaultVariant"],
             "extra": {},
         }
-        for name in ("models", "en-GB", "en-AU", "en-CA", "en-NZ"):
-            gz = out / f"en.{name}.pack.gz"
+        for name, stem in spec["sides"].items():
+            gz = out / f"{stem}.pack.gz"
             if gz.exists():
                 entry["split"]["extra"][name] = describe(gz, ".pack.gz")
     manifest[lang] = entry

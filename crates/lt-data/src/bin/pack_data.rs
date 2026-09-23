@@ -25,8 +25,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "--only" => flag = Some("only"),
             "--exclude" => flag = Some("exclude"),
             _ => match flag {
-                Some("only") => only.push(PathBuf::from(arg)),
-                Some("exclude") => exclude.push(PathBuf::from(arg)),
+                // comma-separated path lists (`--only a/b,c/d`)
+                Some("only") => only.extend(arg.split(',').map(PathBuf::from)),
+                Some("exclude") => exclude.extend(arg.split(',').map(PathBuf::from)),
                 Some(_) | None => positional.push(arg),
             },
         }

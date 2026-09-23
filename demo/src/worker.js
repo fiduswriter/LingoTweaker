@@ -180,12 +180,14 @@ async function load({ lang, variant, pack, options }) {
     : [{ entry: entry ?? {}, key: entry?.sha256 ?? `${pack}.pack.gz` }];
   if (split) {
     const extra = split.extra ?? {};
-    const variantKey = variant && variant !== "en-US" ? variant : null;
+    // a variant sidecar is needed when the variant differs from the pack's
+    // default (en: en-US, de: de-DE); the OpenNLP chunker models only when
+    // the user opted into full grammar checking
+    const variantKey =
+      variant && variant !== split.defaultVariant ? variant : null;
     if (variantKey && extra[variantKey]) {
       parts.push({ entry: extra[variantKey], key: extra[variantKey].sha256 });
     }
-    // the OpenNLP chunker models, only when the user opted into full
-    // grammar checking
     if (options?.models && extra.models) {
       parts.push({ entry: extra.models, key: extra.models.sha256 });
     }
