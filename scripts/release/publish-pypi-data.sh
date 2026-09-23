@@ -169,6 +169,28 @@ if [ -n "${PYPI_API_TOKEN:-}" ] && [ -z "${TWINE_PASSWORD:-}" ]; then
   export TWINE_PASSWORD="$PYPI_API_TOKEN"
 fi
 
-echo "== twine upload"
-"$VENV/bin/twine" upload "$out/dist"/*.whl "$out/dist"/*.tar.gz
+echo "== twine upload (per file, --skip-existing, retry on transient errors)"
+# Uploading ~35 wheels in one twine call trips PyPI's rate limit (HTTP 429) and
+# aborts mid-list. Upload one at a time, skip files already on the index, and
+# back off-and-retry transient failures so the step is resumable.
+upload_one() {
+  f="$1"
+  attempt=1
+  while [ "$attempt" -le 6 ]; do
+    if "$VENV/bin/twine" upload --skip-existing --disable-progress-bar "$f"; then
+      return 0
+    fi
+    delay=$((attempt * 20))
+    echo "== upload failed for $(basename "$f") (attempt $attempt); retrying in ${delay}s" >&2
+    sleep "$delay"
+    attempt=$((attempt + 1))
+  done
+  return 1
+}
+for f in "$out"/dist/*.whl "$out"/dist/*.tar.gz; do
+  [ -e "$f" ] || continue
+  echo "== upload $(basename "$f")"
+  upload_one "$f"
+  sleep 3
+done
 echo "== PyPI data publish complete"

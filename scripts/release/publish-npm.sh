@@ -18,7 +18,20 @@ if [ "${1:-}" = "--build-only" ]; then BUILD_ONLY=1; shift; fi
 cd "$NODE_DIR"
 if [ ! -d node_modules ]; then
   echo "== npm install (@napi-rs/cli)"
-  npm install --no-audit --no-fund
+  # The engine depends on lingotweaker-data, which the npm-data job publishes
+  # immediately before this one; the registry read can lag the write by a few
+  # seconds, so retry ETARGET instead of failing the release.
+  for attempt in 1 2 3 4 5; do
+    if npm install --no-audit --no-fund; then
+      break
+    fi
+    if [ "$attempt" = 5 ]; then
+      echo "npm install failed after $attempt attempts" >&2
+      exit 1
+    fi
+    echo "== npm install failed (attempt $attempt); retrying in $((attempt * 15))s" >&2
+    sleep $((attempt * 15))
+  done
 fi
 
 echo "== napi build"
