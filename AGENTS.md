@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
@@ -73,7 +73,10 @@ not ported, the two unported rule classes and two Hunspell range/wildcard
 residues). `fa` is at 0 only-Java / 258 only-Rust / 0 field diffs
 (#22; docs/differences.md #16: Java's token `\w` is ASCII but the Rust `regex`
 crate's is Unicode, so the first `Bad_ZWNJ` rule matches Persian letters before
-a ZWNJ on the `ZWNJ_Connection` correct examples).
+a ZWNJ on the `ZWNJ_Connection` correct examples). `km` is at 0 only-Java / 0
+only-Rust / 3 field diffs (#23; docs/differences.md #17: the Rust hunspell
+`testsug` does not accept the `COMPOUNDMIN 1` single-character compounds
+Java's does, so two suggestion lists differ by one entry).
 
 ## Data tooling
 

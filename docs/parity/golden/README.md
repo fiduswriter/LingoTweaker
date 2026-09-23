@@ -36,6 +36,7 @@ re-runs the Rust side and diffs against the golden.
 | sr | `sr-full.txt` (49) | `sr-full.java.tsv` |
 | ar | `ar-full.txt` (1,045) | `ar-full.java.tsv` |
 | fa | `fa-full.txt` (566) | `fa-full.java.tsv` |
+| km | `km-full.txt` (66) | `km-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -56,7 +57,8 @@ id; there is no Java baseline, so `lt` runs the tests-only gate
   runs passed with the container clock on 2026-09-16/18), fr/it/pt/nl use
   their capture date `2026-09-19`, and es/ca/gl/ro/pl/pt use `2026-09-20`,
   sk/sl/el/da/sv/is/eo/ast/br/tl/crh `2026-09-21`, and be/ru/uk/sr/ar `2026-09-22`,
-and fa `2026-09-23` (Persian has no date-filter rules, so the value is inert).
+and fa `2026-09-23` (Persian has no date-filter rules, so the value is inert),
+and km `2026-09-23` (Khmer has no date-filter rules either).
 - Expected state: de/it/nl/ca/ro exactly 0 only-Java / 0 only-Rust / 0 field
   diffs;
   en has exactly one documented field diff
@@ -153,11 +155,15 @@ and fa `2026-09-23` (Persian has no date-filter rules, so the value is inert).
   ASCII, the Rust `regex` crate's is Unicode, so the first `Bad_ZWNJ` rule
   matches Persian letters before a ZWNJ on the `ZWNJ_Connection` correct
   examples), pinned exactly with `--expect-only-rust=Bad_ZWNJ=258`.
+  km is 0 only-Java / 0 only-Rust / 3 field diffs, the documented speller
+  divergence of `docs/differences.md` #17 (the Rust hunspell `testsug` does not
+  accept the `COMPOUNDMIN 1` single-character compounds Java's does), pinned
+  exactly with `--expect-field-diffs=HUNSPELL_RULE=3`.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

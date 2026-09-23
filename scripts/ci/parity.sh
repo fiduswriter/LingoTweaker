@@ -233,6 +233,13 @@ elif [ "$LANG_ARG" = "fa" ]; then
   # crate's is Unicode, so the first Bad_ZWNJ rule matches the Persian letters
   # before a ZWNJ on the ZWNJ_Connection correct examples.
   EXTRA+=(--expect-only-rust=Bad_ZWNJ=258)
+elif [ "$LANG_ARG" = "km" ]; then
+  # documented speller divergence (docs/differences.md #17): the match set is
+  # identical (0 only-Java / 0 only-Rust); the Rust hunspell `testsug` does not
+  # accept the single-character compounds (`COMPOUNDFLAG a` + `COMPOUNDMIN 1`)
+  # that Java's hunspell accepts, so two suggestion lists differ by one entry
+  # (`ញប`/`មៃ` vs `បន`/`មួ`).
+  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=3)
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

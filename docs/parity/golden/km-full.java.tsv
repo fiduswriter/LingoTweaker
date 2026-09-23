@@ -1,0 +1,134 @@
+L	1	នោះ​ហើយ​និង​នេះ។
+M	1	KM_SPACE_BEFORE_CONJUNCTION		8	11	Other	Missing white space before conjunction	 និង
+L	2	នោះ​ហើយ​នឹង​នេះ។
+M	2	HOUY_NUNG	1	4	11	Other	Did you mean\n                <suggestion>ហើយ​និង</suggestion>?\n            	ហើយ​និង
+L	3	នោះ​ហើយនិង​នេះ។
+M	3	HUNSPELL_RULE		4	8	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ហយ ន
+L	4	នោះ​ហើយនឹង​នេះ។
+M	4	HOUYNUNG	1	4	10	Other	Did you mean\n                <suggestion>ហើយនិង</suggestion>?\n            	ហើយនិង
+L	5	របស់​ពួក​​ហោរា​​ម្នាក់
+M	5	HUNSPELL_RULE		0	3	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រប|រស|របស់|របួស|របើស|របា|របក|របរ|របង|របៃ|របប|រូស|រួស|របះ|រើស
+L	6	របស់​ពួក​​ហោរ៉ា​ម្នាក់
+M	6	HUNSPELL_RULE		0	3	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រប|រស|របស់|របួស|របើស|របា|របក|របរ|របង|របៃ|របប|រូស|រួស|របះ|រើស
+M	6	HARA_PLANT	1	10	15	Other	Did you really mean the plant or a prophet?\n                <suggestion>ហោរា</suggestion>?\n            	ហោរា
+L	7	ខ្ញុំ​អរសប្បាយ​ខ្លាំង
+M	7	HUNSPELL_RULE		6	10	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	អរូប|អរ សប|អរសរូប
+L	8	ខ្ញុំ​អសប្បាយ​ខ្លាំង
+M	8	A_SABAY	1	6	13	Other	Did you really mean feeling sick?\n                <suggestion>អរសប្បាយ</suggestion>?\n            	អរសប្បាយ
+L	9	កាត់​ដ្បិត​សេចក្តី​សប្បុរស
+L	10	​​​កាត់​ត្បិត​សេចក្តី​សប្បុរស
+M	10	TBUT_DBUT	1	8	13	Other	Consider using the spelling of Chuon Nath\n                <suggestion>ដ្បិត</suggestion>?\n            	ដ្បិត
+L	11	ជីវិត​ខាងឯវិញ្ញាណ​ដ៏​ល្អ
+M	11	HUNSPELL_RULE		8	11	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ងាវ|ងីវ|ឯវំ
+L	12	​​​ជីវិត​ខាង​វិញ្ញាណ​ដ៏​ល្អ
+M	12	KHANG_VITNEAN	1	9	20	Other	Stylistic suggestion. Use:\n                <suggestion>ខាងឯវិញ្ញាណ</suggestion>?\n            	ខាងឯវិញ្ញាណ
+L	13	ខ្លួន​ទោះ​បី​ជា​ប្រឈម
+M	13	HUNSPELL_RULE		16	21	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	បរ ឈម
+L	14	ខ្លួន​ទោះ​បើ​ជា​ប្រឈម
+M	14	THUA_BAU	1	10	12	Other	Stylistic suggestion. Use:\n                ទោះ<suggestion>បី</suggestion> instead.\n            	បី
+M	14	HUNSPELL_RULE		16	21	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	បរ ឈម
+L	15	មាន​​បញ្ញត្តិ​​ជា​អារម្មណ៍
+M	15	HUNSPELL_RULE		5	7	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ញប|ប|ញ|បាញ|បូញ|អញ|បា|បក|កញ|បរ|បង|បថ|បេ|បៃ|បម
+M	15	HUNSPELL_RULE		8	10	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ញរ|ញ|ត|ញៀត|អត|ញក|កត|រត|ញង|ថត|លត|តត|ញយ|ផត|ជត
+M	15	HUNSPELL_RULE		23	25	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	មន|ម|ណ|មរណ|មណី|មា|មក|មរ|មង|មេ|មែ|មៃ|ផណ|មី|វណ
+L	16	មាន​​បញ្ញត្ត​ជា​អារម្មណ៍
+M	16	BANAT_VERB	1	5	12	Other	បញ្ញត្ត is a verb, did you mean to use បញ្ញត្តិ the noun form?\n                <suggestion>បញ្ញត្តិ</suggestion>?\n            	បញ្ញត្តិ
+M	16	HUNSPELL_RULE		21	23	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	មន|ម|ណ|មរណ|មណី|មា|មក|មរ|មង|មេ|មែ|មៃ|ផណ|មី|វណ
+L	17	ទឹក​ដែល​​​ស្អាត ហើយ​នឹង​ថ្កល់។
+L	18	ទឹក​ដែល​​​ស្អាត ហើយ​និង​ថ្កល់។
+M	18	NUNG_PDOAL	1	20	29	Other	Did you mean\n                <suggestion>នឹង​ថ្កល់</suggestion>?\n            	នឹង​ថ្កល់
+L	19	ខ្ញុំ​រាង​ចំណាស់​បន្តិច​​ហើយ។
+L	20	ខ្ញុំ​ចំណាស់​បន្តិច​​ហើយ។
+M	20	PRO_CHOMNAH	1	0	12	Other	Did you mean\n                <suggestion>ខ្ញុំ​រាង​ចំណាស់</suggestion>?\n            	ខ្ញុំ​រាង​ចំណាស់
+L	21	ខ្ញុំ​ឡើង​ទៅ​លើ​ផ្ទះ។
+L	22	ខ្ញុំ​លើង​ទៅ​លើ​ផ្ទះ។
+M	22	LENG_TOV	1	6	12	Other	Did you mean\n                <suggestion>ឡើង​ទៅ</suggestion>?\n            	ឡើង​ទៅ
+L	23	សូម​ជួយ​កូន​របស់​អ្នក​ឲ្យ​ហាត់​អត់ធ្មត់​ជាមួយ​​នឹង​ក្រុម​គ្រួសារ។
+M	23	HUNSPELL_RULE		12	15	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រប|រស|របស់|របួស|របើស|របា|របក|របរ|របង|របៃ|របប|រូស|រួស|របះ|រើស
+M	23	HUNSPELL_RULE		22	23	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	អ|ក|រ|ហ|ង|ថ|ដ|ល|ត|យ|ផ|ជ|ឆ|ម|ន
+M	23	HUNSPELL_RULE		36	38	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	តម|កត|មរ|ម|ត|មត់|អមត|មតក|មតិ|មិត|មុត|មូត|មួត|មឹត|មឺត
+L	24	សូម​ជួយ​កូន​របស់​អ្នក​អោយ​ហាត់​អត់ធ្មត់​ជាមួយ​និង​ក្រុម​គ្រួសារ។
+M	24	HUNSPELL_RULE		12	15	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រប|រស|របស់|របួស|របើស|របា|របក|របរ|របង|របៃ|របប|រូស|រួស|របះ|រើស
+M	24	KM_SIMPLE_REPLACE		22	25	Other	 Consider following the spelling of Chuon Nath 	ឲ្យ
+M	24	HUNSPELL_RULE		36	38	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	តម|កត|មរ|ម|ត|មត់|អមត|មតក|មតិ|មិត|មុត|មូត|មួត|មឹត|មឺត
+M	24	JEAMUY_NENG	1	46	49	Other	Did you mean\n                ជាមួយ​<suggestion>នឹង</suggestion>?\n            	នឹង
+L	25	សូម​ជួយ​កូន​របស់​អ្នក​ឲ្យ​ហាត់​អត់ធ្មត់​ជា​មួយ​​នឹង​ក្រុម​គ្រួសារ។
+M	25	HUNSPELL_RULE		12	15	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រប|រស|របស់|របួស|របើស|របា|របក|របរ|របង|របៃ|របប|រូស|រួស|របះ|រើស
+M	25	HUNSPELL_RULE		22	23	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	អ|ក|រ|ហ|ង|ថ|ដ|ល|ត|យ|ផ|ជ|ឆ|ម|ន
+M	25	HUNSPELL_RULE		36	38	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	តម|កត|មរ|ម|ត|មត់|អមត|មតក|មតិ|មិត|មុត|មូត|មួត|មឹត|មឺត
+L	26	សូម​ជួយ​កូន​របស់​អ្នក​អោយ​ហាត់​អត់ធ្មត់​ជា​មួយ​និង​ក្រុម​គ្រួសារ។
+M	26	HUNSPELL_RULE		12	15	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រប|រស|របស់|របួស|របើស|របា|របក|របរ|របង|របៃ|របប|រូស|រួស|របះ|រើស
+M	26	KM_SIMPLE_REPLACE		22	25	Other	 Consider following the spelling of Chuon Nath 	ឲ្យ
+M	26	HUNSPELL_RULE		36	38	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	តម|កត|មរ|ម|ត|មត់|អមត|មតក|មតិ|មិត|មុត|មូត|មួត|មឹត|មឺត
+M	26	JEA_MUY_NENG	1	47	50	Other	Did you mean\n                ជា​មួយ​<suggestion>នឹង</suggestion>?\n            	នឹង
+L	27	ទាំង​ពីរ​នាក់​។
+L	28	ទាំង​ពីរ​អ្នក​។
+M	28	BI_NEAK	1	9	13	Other	Did you mean\n                ពីរ​<suggestion>នាក់</suggestion>?\n            	នាក់
+L	29	វា​មក​ពី​អ្នក។
+L	30	វា​មក​ពីរ​អ្នក។
+M	30	MOK_BI_NEAK	1	6	14	Other	Did you mean\n                មក​<suggestion>ពី​អ្នក</suggestion> or\n                មក​<suggestion>ពីរ​នាក់</suggestion>?\n            	ពី​អ្នក|ពីរ​នាក់
+L	31	តើ​អ្នក​រក​ឃើញ​កំហុស​ដែរ​ឬ​ទេ
+L	32	តើ​អ្នក​រក​ឃើញ​កំហុស​ដែល​ឬ​ទេ
+M	32	DIAL_RU_TE	1	21	29	Other	Did you mean\n                <suggestion>ដែរ​ឬ​ទេ</suggestion>\n            	ដែរ​ឬ​ទេ
+L	33	នេះ​គឺ​ជា​ឡាន​ខ្ញុំ។
+L	34	នេះ​គឺ​ជា​​ខ្ញុំ​ឡាន។
+L	35	ខ្ញុំ​មាន​ឡាន​ក្រហម​។
+M	35	HUNSPELL_RULE		16	19	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រហក|រហ|រម|រហាម|រហេម|រហឹម|រហា|រាម|រកម|រលម|រហែ|រិម|រហប|រវម|រួម
+L	36	ខ្ញុំ​មាន​ក្រហម​ឡាន​។
+M	36	HUNSPELL_RULE		12	15	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រហក|រហ|រម|រហាម|រហេម|រហឹម|រហា|រាម|រកម|រលម|រហែ|រិម|រហប|រវម|រួម
+L	37	លោក​ស្រី។
+L	38	ស្រី​លោក។
+L	39	ឡាន​នោះ​មិន​ខៀវ​ទេ។
+L	40	ឡាន​នោះ​ខៀវ​មិន​ទេ។
+L	41	ខ្ញុំ​ចង់​បាន​ឡាន​នោះ។
+L	42	ខ្ញុំ​ចង់​ឡាន​នោះ។
+M	42	WANT_NOUN	1	6	9	Other	You should write\n                <suggestion>ចង់​បាន</suggestion> instead.\n            	ចង់​បាន
+L	43	ខ្ញុំ​ចង់​ទៅ។
+L	44	ខ្ញុំ​ចង់បាន​ទៅ។
+M	44	WANT_VERB1	1	6	12	Other	You should write\n                <suggestion>ចង់</suggestion> instead.\n            	ចង់
+L	45	ខ្ញុំ​ចង់​ទៅ។
+L	46	ខ្ញុំ​ចង់​បាន​ទៅ។
+M	46	WANT_VERB2	1	6	13	Other	You should write\n                <suggestion>ចង់</suggestion> instead.\n            	ចង់
+L	47	ដើមឈើ​ពីរ​ដើម។
+M	47	HUNSPELL_RULE		0	4	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ដម ឈ
+L	48	ដើមឈើ​ពី​ដើម។
+M	48	HUNSPELL_RULE		0	4	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ដម ឈ
+M	48	FROM_Classifier	1	6	8	Other	You should write\n                <suggestion>ពីរ</suggestion> instead.\n            	ពីរ
+L	49	មនុស្ស​ពីរ​នាក់​បាន​ទៅ​ផ្សារ។
+L	50	មនុស្ស​​ពីរ​បាន​ទៅ​ផ្សារ។
+M	50	Classifier_PEOPLE	1	0	15	Other	You should write\n                    <suggestion>មនុស្ស​ពីរ​នាក់​បាន</suggestion>\n                    <suggestion>មនុស្ស​ពីរ​ក្រុម​បាន</suggestion>\n                    <suggestion>មនុស្ស​ពីរ​ពួក​បាន​</suggestion> or\n                    <suggestion>មនុស្ស​ពីរ​គូ​បាន</suggestion> instead.\n                	មនុស្ស​ពីរ​នាក់​បាន|មនុស្ស​ពីរ​ក្រុម​បាន|មនុស្ស​ពីរ​ពួក​បាន​|មនុស្ស​ពីរ​គូ​បាន
+L	51	មនុស្ស​ពីរ​នាក់​បាន​ទៅ​ផ្សារ។
+L	52	មនុស្ស​​ពីរ​ក្បាល​បាន​ទៅ​ផ្សារ។
+M	52	Classifier_PEOPLE	2	0	17	Other	You should write\n                    <suggestion>មនុស្ស​ពីរ​នាក់</suggestion>\n                    <suggestion>មនុស្ស​ពីរ​ក្រុម</suggestion>\n                    <suggestion>មនុស្ស​ពីរ​ពួក</suggestion> or\n                    <suggestion>មនុស្ស​ពីរ​គូ</suggestion> instead.\n                	មនុស្ស​ពីរ​នាក់|មនុស្ស​ពីរ​ក្រុម|មនុស្ស​ពីរ​ពួក|មនុស្ស​ពីរ​គូ
+L	53	ម្តាយ​និង​ឪពុក។
+M	53	KM_SPACE_BEFORE_CONJUNCTION		6	9	Other	Missing white space before conjunction	 និង
+M	53	HUNSPELL_RULE		10	12	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ឪ|ព|នព|ឪវ|ឪឡ|ភព|ឪ ព
+L	54	ម្តាយ​ហើយ​និង​ឪពុក។
+M	54	NOUN_NENG_NOUN	1	6	13	Other	You should write\n                <suggestion>និង</suggestion> instead.\n            	និង
+M	54	HUNSPELL_RULE		14	16	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ឪ|ព|នព|ឪវ|ឪឡ|ភព|ឪ ព
+L	55	ម្តាយ​និង​ឪពុក។
+M	55	KM_SPACE_BEFORE_CONJUNCTION		6	9	Other	Missing white space before conjunction	 និង
+M	55	HUNSPELL_RULE		10	12	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ឪ|ព|នព|ឪវ|ឪឡ|ភព|ឪ ព
+L	56	ម្តាយ​ហើយនិង​ឪពុក។
+M	56	NOUN_NENG_NOUN2	1	6	12	Other	You should write\n                <suggestion>និង</suggestion> instead.\n            	និង
+M	56	HUNSPELL_RULE		13	15	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ឪ|ព|នព|ឪវ|ឪឡ|ភព|ឪ ព
+L	57	ខ្ញុំ​​ទៅ​ហើយនិង​មក​វិញ។
+M	57	HUNSPELL_RULE		10	14	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ហយ ន
+L	58	ខ្ញុំ​​ទៅ​និង​មក​វិញ។
+M	58	VERB_NENG_VERB	1	10	13	Other	You should write\n                <suggestion>ហើយនិង</suggestion> instead.\n            	ហើយនិង
+L	59	ការ​អភិវឌ្ឍ​សង្គម។
+M	59	HUNSPELL_RULE		4	6	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	ថភ|អ|ភ|អភយ|អភិ|អា|អក|អរ|អង|អត|អែ|អៃ|អយ|អម|អន
+M	59	HUNSPELL_RULE		7	9	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	វ|ឌ|វា|វក|វរ|វង|វែ|វៃ|វយ|វន|វណ|វី|វូ|វឺ|វះ
+L	60	ការ​អភិវឌ្ឍន៍​សង្គម។
+M	60	TonakeatWithNoun	1	4	13	Other	Remove ន៍ because the word is already a modified noun.\n                <suggestion>អភិវឌ្ឍ</suggestion>\n            	អភិវឌ្ឍ
+L	61	ការអភិវឌ្ឍ​សង្គម។
+M	61	HUNSPELL_RULE		2	5	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	រអា|រអែ|រអៃ
+M	61	HUNSPELL_RULE		6	8	UnknownWord	អាចរកឃើញការប្រកបដែលមានកុំហុស	វ|ឌ|វា|វក|វរ|វង|វែ|វៃ|វយ|វន|វណ|វី|វូ|វឺ|វះ
+L	62	ការអភិវឌ្ឍន៍​សង្គម។
+M	62	TonakeatWithNoun2	1	0	12	Other	Remove ន៍ because the word is already a modified noun.\n                <suggestion>ការអភិវឌ្ឍ</suggestion>\n            	ការអភិវឌ្ឍ
+L	63	ជំនឿដ៏​ពិត។
+L	64	ការជំនឿ​ដ៏​ពិត។
+M	64	DOUBLE_NOUNS	1	0	7	Other	Do not add a noun modifier to a word that is already a noun.\n                <suggestion>ជំនឿ</suggestion>\n            	ជំនឿ
+L	65	ជំនឿដ៏​ពិត។
+L	66	ការ​ជំនឿ​ដ៏​ពិត។
+M	66	DOUBLE_NOUNS2	1	0	8	Other	Do not add a noun modifier to a word that is already a noun.\n                <suggestion>ជំនឿ</suggestion>\n            	ជំនឿ

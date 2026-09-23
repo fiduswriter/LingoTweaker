@@ -641,3 +641,42 @@ A future shared fix could translate the `\w`/`\W`/`\d`/`\D`/`\s`/`\S` shorthand
 classes in token/`regexp_match` patterns to their Java ASCII definitions (and
 `\b`/`\B` accordingly); that would need re-running all gates that use `\w`
 (`de`, `en`, `fr`, `pt`, `gl`, `es`, `pl`, `fa`).
+
+## 17. Khmer (`km`) hunspell single-character compounds in `testsug` (3 field diffs)
+
+The `km` corpus (`docs/parity/corpora/km-examples.jsonl`, 66 examples; golden
+`km-full.{txt,java.tsv}`) reaches **0 only-Java / 0 only-Rust**. The residual
+difference is exactly **3 `HUNSPELL_RULE` suggestion field diffs** on two
+words (`បញ` and `មណ`):
+
+| Java suggestions | Rust suggestions |
+|---|---|
+| `ញប\|ប\|ញ\|បាញ\|…\|បម` | `ប\|ញ\|បាញ\|…\|បម\|បន` |
+| `មន\|ម\|ណ\|…\|មៃ\|…\|វណ` | `មន\|ម\|ណ\|…\|មួ` |
+
+Cause: `km_KH.aff` sets `COMPOUNDFLAG a` and `COMPOUNDMIN 1`, so Java's
+hunspell accepts single-character compounds (`ញប`, `មៃ`) in
+`SuggestMgr::testsug`; the Rust `lt-spell` `sm_checkword` does not, so the
+`swapchar`/`extrachar` candidate is dropped and the 15-entry cap then admits
+a different last entry (`បន`, `មួ`). The match **set** is identical — only the
+suggestion lists differ.
+
+Pinned Java reproductions:
+
+```sh
+scripts/oracle/km/probe-rule.sh "មានបញ្ញត្តិជាអារម្មណ៍" HUNSPELL_RULE
+# 5-7 ញប|ប|ញ|…   and   23-25 …|មៃ|…
+```
+
+The gate allowance (validated exactly):
+
+```sh
+scripts/ci/parity.sh km
+# only Java: 0; only Rust: 0; field diffs: 0; missing lines: 0
+# allowed field diffs: 3/3 HUNSPELL_RULE
+```
+
+A future shared fix would make `lt-spell`'s compound acceptance honour
+`COMPOUNDMIN 1` single-character compounds in `testsug`; that would need
+re-running the `gl`/`da`/`sv`/`nl`/`de`/`en`/`no` speller gates.
+
