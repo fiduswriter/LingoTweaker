@@ -1,8 +1,9 @@
 # Release helpers
 
-One prerelease version is shared by all three registries. Cargo uses
-`0.1.0-alpha.N`, the tag is `v0.1.0-alpha.N`, npm uses `0.1.0-alpha.N`, and
-maturin derives the PEP 440 version `0.1.0aN` from the Cargo version.
+One version is shared by all three registries (stable `0.1.0` or prerelease
+`0.1.0-alpha.N`). Cargo and npm use the Cargo workspace version, the tag is
+`v<version>`, and maturin derives the PEP 440 version (`0.1.0-alpha.N` ->
+`0.1.0aN`).
 
 ```sh
 scripts/release/set-version.sh 0.1.0-alpha.2   # bump once, commit
@@ -60,9 +61,10 @@ Secrets used by the workflow (set in the GitHub repo):
 | secret | registry | notes |
 |--------|----------|-------|
 | `CARGO_REGISTRY_TOKEN` | crates.io | `cargo login` token |
-| `NPM_TOKEN` | npm | automation token for `johanneswilm` |
-| `NPM_OTP` | npm | optional, only if the token still needs a 2FA code |
-| `PYPI_API_TOKEN` | PyPI | uploads the per-language data packages; without it they are only built |
+| `PYPI_API_TOKEN` | PyPI | publishes the per-language data packages and the `lingotweaker` wheel; without it they are only built |
 
-PyPI uses trusted publishing (`id-token: write`) for the `lingotweaker` wheel,
-so no PyPI secret is stored for it.
+npm publishes the three packages through **trusted publishing (OIDC)**, so no
+npm secret is stored. Configure it once per package on npmjs.com (Settings ->
+Trusted Publisher: organization/user `fiduswriter`, repository `LingoTweaker`,
+workflow `release.yml`). The publish jobs set `id-token: write` and use Node 24
+(npm >= 11.5.1, required for trusted publishing).

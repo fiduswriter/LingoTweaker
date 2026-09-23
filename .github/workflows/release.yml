@@ -6,11 +6,13 @@ name: Release
 # publishes the prerelease. This workflow is intentionally separate from
 # ci.yml and does not touch the `parity` or `test` jobs.
 #
-# Secrets: CARGO_REGISTRY_TOKEN (crates.io), NPM_TOKEN (+ optional NPM_OTP) for
-# the npm engine and data packages, PYPI_API_TOKEN for the per-language data
-# distributions. The `lingotweaker` wheel uses PyPI trusted publishing
-# (`id-token: write`), so it needs no secret. The `data` job uses the workflow
-# token with `contents: write` to attach assets to the GitHub Release.
+# Secrets: CARGO_REGISTRY_TOKEN (crates.io) and PYPI_API_TOKEN (the per-language
+# PyPI data distributions and the `lingotweaker` wheel). npm uses trusted
+# publishing (OIDC) for `lingotweaker`, `lingotweaker-wasm` and
+# `lingotweaker-data` (configured on npmjs.com: owner `fiduswriter`, repo
+# `LingoTweaker`, workflow `release.yml`), which only needs `id-token: write`.
+# The `data` job uses the workflow token with `contents: write` to attach
+# assets to the GitHub Release.
 #
 # Forgejo reads .github/workflows too, but publishing happens only from the
 # GitHub mirror (secrets, npm/PyPI trusted publishing and GitHub Release
@@ -73,19 +75,18 @@ jobs:
     needs: version
     if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # npm trusted publishing (OIDC)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - uses: Swatinem/rust-cache@v2
       - run: rustup toolchain install 1.98.1 --profile minimal
       - name: Build and publish lingotweaker-data
         run: scripts/release/publish-npm-data.sh
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_OTP: ${{ secrets.NPM_OTP }}
 
   # One PyPI data distribution per language (each well under the 100 MB limit).
   pypi-data:
@@ -121,8 +122,6 @@ jobs:
     needs: version
     if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # trusted publishing to PyPI
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -146,34 +145,36 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
   npm:
     needs: [version, npm-data]
     if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # npm trusted publishing (OIDC)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - uses: Swatinem/rust-cache@v2
       - run: rustup toolchain install 1.98.1 --profile minimal
       - name: Build, smoke-test and publish the addon
         run: scripts/release/publish-npm.sh
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_OTP: ${{ secrets.NPM_OTP }}
 
   wasm:
     needs: [version, npm-data]
     if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # npm trusted publishing (OIDC)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - uses: jetli/wasm-pack-action@v0.4.0
         with:
@@ -182,6 +183,3 @@ jobs:
       - run: rustup toolchain install 1.98.1 --profile minimal
       - name: Build, smoke-test and publish lingotweaker-wasm
         run: scripts/release/publish-wasm.sh
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_OTP: ${{ secrets.NPM_OTP }}
