@@ -1,6 +1,6 @@
 {
   "name": "lingotweaker-data",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Runtime language data packs for the LingoTweaker proofreading engine",
   "license": "LGPL-2.1-or-later",
   "repository": {

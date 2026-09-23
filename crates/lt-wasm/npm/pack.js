@@ -10,7 +10,7 @@
 
 // Updated by scripts/release/set-version.sh together with the package version.
 export const DEFAULT_DATA_BASE_URL =
-  "https://github.com/fiduswriter/LingoTweaker/releases/download/v0.1.0";
+  "https://github.com/fiduswriter/LingoTweaker/releases/download/v0.1.1";
 
 /** The URL of the release data manifest (`{ <lang>: { file, bytes, sha256 } }`). */
 export function manifestUrl(baseUrl = DEFAULT_DATA_BASE_URL) {
