@@ -171,10 +171,10 @@ date-filter rules either).
   `regex` crate's is Unicode; the shared `lt_pattern` translation now rewrites
   `\w`/`\W`/`\d`/`\D`/`\s`/`\S`/`\b`/`\B` to Java's ASCII definitions, which
   removed the 258 `Bad_ZWNJ` false positives).
-  km is 0 only-Java / 0 only-Rust / 3 field diffs, the documented speller
-  divergence of `docs/differences.md` #17 (the Rust hunspell `testsug` does not
-  accept the `COMPOUNDMIN 1` single-character compounds Java's does), pinned
-  exactly with `--expect-field-diffs=HUNSPELL_RULE=3`.
+  km is exactly 0/0/0: the documented speller divergence of
+  `docs/differences.md` #17 is resolved (the `IGNORE ៗ` directive is now
+  implemented in `lt-spell`, so the swapchar/extrachar candidates `ញប`/`មៃ`
+  match the stored `ញបៗ`/`មៃៗ` entries like Java's hunspell).
   ml is exactly 0/0/0: the 18 active XML rules, the six generic built-ins and
   the `MORFOLOGIK_RULE_ML_IN` speller match the pinned Java module, captured
   from the unpatched checkout (`scripts/oracle/ml/check-diff-ml.sh`). The

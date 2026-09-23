@@ -468,6 +468,10 @@ struct Aff {
     /// `AffixMgr::parsedbreaktable`: a `BREAK` directive was present (even
     /// `BREAK 0`), suppressing the default hyphen break table.
     parsed_break: bool,
+    /// `AffixMgr::ignorechars` (`IGNORE`): code points removed from the input
+    /// word and from dictionary entries before lookup/suggestion (hunspell's
+    /// `clean_ignore`). Khmer ignores `ៗ`, Arabic the tashkeel marks.
+    ignore_chars: Vec<char>,
     /// `AffixMgr::try_string` (`TRY`): extra characters for candidate
     /// generation.
     try_string: Vec<u8>,
@@ -566,6 +570,7 @@ impl Default for Aff {
             cont_classes: Box::new([false; CONTSIZE]),
             break_patterns: Vec::new(),
             parsed_break: false,
+            ignore_chars: Vec::new(),
             try_string: Vec::new(),
             key_string: Vec::new(),
             rep_table: Vec::new(),
@@ -596,6 +601,26 @@ impl Default for Aff {
 }
 
 impl Aff {
+    /// `clean_ignore`: remove every `IGNORE` code point from `word`.
+    fn strip_ignore<'a>(&self, word: &'a [u8]) -> std::borrow::Cow<'a, [u8]> {
+        use std::borrow::Cow;
+        if self.ignore_chars.is_empty() {
+            return Cow::Borrowed(word);
+        }
+        let Ok(s) = std::str::from_utf8(word) else {
+            return Cow::Borrowed(word);
+        };
+        if !s.chars().any(|c| self.ignore_chars.contains(&c)) {
+            return Cow::Borrowed(word);
+        }
+        Cow::Owned(
+            s.chars()
+                .filter(|c| !self.ignore_chars.contains(c))
+                .collect::<String>()
+                .into_bytes(),
+        )
+    }
+
     fn parse(text: &str) -> Result<Aff> {
         let mut aff = Aff::default();
         let mut pending: Vec<(bool, Flag, bool, AffixEntry)> = Vec::new();
@@ -1094,10 +1119,15 @@ fn parse_directive<'a>(
         // and ignored; no vendored dictionary needs the morphological data for
         // spell/suggest.
         "AM" => {}
-        // `AffixMgr::parse_ignore` (`IGNORE`): parsed and ignored; the
-        // language-specific speller rules strip the diacritics they need
-        // before the lookup (e.g. Arabic tashkeel).
-        "IGNORE" => {}
+        // `AffixMgr::parse_ignore` (`IGNORE`): code points removed from the
+        // input word and from dictionary entries before lookup/suggestion
+        // (hunspell's `clean_ignore`). Khmer ignores `ៗ` (`ញបៗ` is stored as
+        // `ញប`), Arabic the tashkeel marks.
+        "IGNORE" => {
+            if let Some(chars) = it.next() {
+                aff.ignore_chars = chars.chars().collect();
+            }
+        }
         // `AffixMgr::cpdwordmax`: lowers the accepted compound word count.
         "COMPOUNDWORDMAX" => {
             aff.compound_word_max = it.next().and_then(|v| v.parse().ok()).unwrap_or(-1)
@@ -1439,6 +1469,9 @@ impl HunspellChecker {
                     k += 1;
                 }
             }
+            // `HashMgr::add_word`/`clean_ignore`: `IGNORE` code points are
+            // removed from the stored entry (`ញបៗ` is stored as `ញប`).
+            let word = aff.strip_ignore(&word).into_owned();
             if word.is_empty() {
                 continue;
             }
@@ -1573,6 +1606,9 @@ impl HunspellChecker {
         if word.len() >= MAXWORDUTF8LEN {
             return false;
         }
+        // `cleanword2`/`clean_ignore`: remove `IGNORE` code points first.
+        let cleaned = self.aff.strip_ignore(word);
+        let word: &[u8] = &cleaned;
         // `cleanword2`: skip leading blanks, strip trailing periods.
         let src = skip_leading_bytes(word, b' ');
         let mut end = src.len();
@@ -4226,6 +4262,10 @@ impl HunspellChecker {
         if word.is_empty() {
             return 0;
         }
+        // NB: unlike `HunspellImpl::checkword`, `SuggestMgr::checkword` does
+        // **not** strip `IGNORE` code points; a generated candidate that
+        // contains one (Arabic `TRY` includes `ًٍ`) is looked up verbatim and
+        // rejected against the `IGNORE`-stripped dictionary entries.
         if cpdsuggest >= 1 {
             if self.aff.compound {
                 let mut info = Info {
@@ -4324,6 +4364,13 @@ impl HunspellChecker {
 
     /// `Hunspell::suggest`: suggestions for `word`, in hunspell's order.
     pub fn suggest(&self, word: &str) -> Vec<String> {
+        // `HunspellImpl::suggest` cleans the word first (`cleanword2`), which
+        // removes the `IGNORE` code points.
+        let cleaned = self.aff.strip_ignore(word.as_bytes());
+        let word = match std::str::from_utf8(&cleaned) {
+            Ok(w) => w,
+            Err(_) => word,
+        };
         let mut sm = SuggestMgr::new(self);
         let mut stack: Vec<String> = Vec::new();
         sm.suggest_rec(word, &mut stack)
@@ -5075,5 +5122,23 @@ mod compound_rule_tests {
         assert!(c.spell("bc")); // 4? empty, 7 8
         assert!(!c.spell("ac"));
         assert!(!c.spell("cb"));
+    }
+
+    /// `IGNORE`: the code point is stripped from the input word and from the
+    /// stored dictionary entry (hunspell `clean_ignore`/`HashMgr::add_word`),
+    /// so `x·` matches the entry `xy·` (Khmer `ញប` vs `ញបៗ`).
+    #[test]
+    fn ignore_chars_are_stripped() {
+        let aff = "SET UTF-8\nIGNORE ·\n";
+        let dic = "2\nxy·\nz\n";
+        let c = HunspellChecker::from_strs(aff, dic).unwrap();
+        assert!(c.spell("xy·"));
+        assert!(c.spell("xy"));
+        assert!(c.spell("xy··"));
+        assert!(!c.spell("xz"));
+        // `SuggestMgr::checkword` does not strip, so a generated candidate
+        // that still contains the ignored char is rejected (Arabic `TRY`).
+        assert_eq!(c.sm_checkword("xy·".as_bytes(), 0), 0);
+        assert_ne!(c.sm_checkword("xy".as_bytes(), 0), 0);
     }
 }
