@@ -20,6 +20,17 @@ use crate::string_matcher;
 
 use crate::{MatchRefSpec, MessageMatchRef, PatternToken, SuggestionPart};
 
+/// Extracted text-value sets (`StringMatcher.getPossibleRegexpValues`) with a
+/// fast hasher: `text_set_hit` is one of the hottest matcher paths.
+pub(crate) type TextSet = std::collections::HashSet<String, rustc_hash::FxBuildHasher>;
+
+// Reusable buffer for the case-insensitive value-set lookup so the hot path
+// does not allocate a `String` per comparison (see `text_set_hit`).
+thread_local! {
+    static LOWER_BUF: std::cell::RefCell<String> =
+        const { std::cell::RefCell::new(String::new()) };
+}
+
 /// Upper bound for `skip="-1"` (unlimited) gaps.
 const MAX_GAP: i32 = 30;
 
@@ -65,7 +76,7 @@ pub struct CompiledToken {
     /// fast path for regexps whose complete value set is known
     /// (`StringMatcher.getPossibleRegexpValues`); values are lowercased when
     /// the matcher is case-insensitive
-    pub(crate) value_set: Option<(std::collections::HashSet<String>, bool)>,
+    pub(crate) value_set: Option<(TextSet, bool)>,
     negate: bool,
     pub postag: Option<PosTagMatcher>,
     /// raw `postag` attribute (Java `PatternToken.getPOStag`; the
@@ -121,7 +132,7 @@ pub struct CompiledException {
     /// fast path for non-regexp text matchers: literal + case_sensitive
     pub(crate) literal: Option<(String, bool)>,
     /// fast path for regexps whose complete value set is known
-    pub(crate) value_set: Option<(std::collections::HashSet<String>, bool)>,
+    pub(crate) value_set: Option<(TextSet, bool)>,
     pub postag: Option<PosTagMatcher>,
     /// `postag` matches the special `UNKNOWN` tag (precomputed)
     pos_unknown: bool,
@@ -885,7 +896,7 @@ fn compile_text_matcher(
     (
         Option<std::sync::Arc<TextRegex>>,
         Option<(String, bool)>,
-        Option<(std::collections::HashSet<String>, bool)>,
+        Option<(TextSet, bool)>,
     ),
     String,
 > {
@@ -904,7 +915,7 @@ fn compile_text_matcher(
             Ok((None, Some((values[0].clone(), case_sensitive)), None))
         }
         Some(values) => {
-            let set: std::collections::HashSet<String> = if case_sensitive {
+            let set: TextSet = if case_sensitive {
                 values.into_iter().collect()
             } else {
                 values.iter().map(|v| v.to_lowercase()).collect()
@@ -1895,8 +1906,20 @@ fn text_literal_hit(lit: &(String, bool), test: &str) -> bool {
     }
 }
 
+/// Lowercases `s` into `out` with the same result as `str::to_lowercase`.
+/// The only contextual mapping there is the Greek capital sigma (word-final
+/// `Σ` -> `ς`), so that case delegates; everything else is char-wise.
+fn lowercase_into(s: &str, out: &mut String) {
+    out.clear();
+    if s.contains('\u{03A3}') {
+        out.push_str(&s.to_lowercase());
+    } else {
+        out.extend(s.chars().flat_map(char::to_lowercase));
+    }
+}
+
 /// `StringMatcher.matches` for the extracted value-set fast path.
-fn text_set_hit(set: &(std::collections::HashSet<String>, bool), test: &str) -> bool {
+fn text_set_hit(set: &(TextSet, bool), test: &str) -> bool {
     if test.chars().count() > 250 {
         return false;
     }
@@ -1904,7 +1927,11 @@ fn text_set_hit(set: &(std::collections::HashSet<String>, bool), test: &str) -> 
     if *case_sensitive {
         set.contains(test)
     } else {
-        set.contains(&test.to_lowercase())
+        LOWER_BUF.with(|buf| {
+            let mut buf = buf.borrow_mut();
+            lowercase_into(test, &mut buf);
+            set.contains(buf.as_str())
+        })
     }
 }
 
