@@ -38,7 +38,7 @@ Offline corpus gate (CI, no Docker):
 
 ```sh
 cargo build --release -p lt-cli
-scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km   # Java-golden languages
+scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml   # Java-golden languages
 scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
 ```
 
@@ -77,6 +77,10 @@ a ZWNJ on the `ZWNJ_Connection` correct examples). `km` is at 0 only-Java / 0
 only-Rust / 3 field diffs (#23; docs/differences.md #17: the Rust hunspell
 `testsug` does not accept the `COMPOUNDMIN 1` single-character compounds
 Java's does, so two suggestion lists differ by one entry).
+`ml` is at 0 only-Java / 0 only-Rust / 0 field diffs (#24; the 18 active XML
+rules, the six generic built-ins and the Morfologik `MORFOLOGIK_RULE_ML_IN`
+speller match the pinned module exactly; the speller is inert for Malayalam
+script, `isLatinScript() = true`, as in Java).
 
 ## Data tooling
 

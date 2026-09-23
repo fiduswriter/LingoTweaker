@@ -114,6 +114,9 @@ const PERSIAN = {
 const KHMER = {
   sample: "នោះ\u200bហើយ\u200bនឹង\u200bនេះ។ ខ្ញុំ\u200bបាន\u200bបាន\u200bទៅ។",
 };
+const MALAYALAM = {
+  sample: "ഞാന്‍ അവളെ ഒരു പുസ്തകം നല്‍കി.",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -150,6 +153,7 @@ export const LANGUAGES = [
   { code: "ar", pack: "ar", label: "العربية", size: "14 MB", ...ARABIC },
   { code: "fa-IR", pack: "fa", label: "فارسی", size: "0.32 MB", ...PERSIAN },
   { code: "km-KH", pack: "km", label: "ខ្មែរ", size: "0.81 MB", ...KHMER },
+  { code: "ml-IN", pack: "ml", label: "മലയാളം", size: "0.94 MB", ...MALAYALAM },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.0 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.6 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.28 MB", ...GUARANI },

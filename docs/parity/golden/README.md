@@ -37,6 +37,7 @@ re-runs the Rust side and diffs against the golden.
 | ar | `ar-full.txt` (1,045) | `ar-full.java.tsv` |
 | fa | `fa-full.txt` (566) | `fa-full.java.tsv` |
 | km | `km-full.txt` (66) | `km-full.java.tsv` |
+| ml | `ml-full.txt` (38) | `ml-full.java.tsv` |
 
 `lt` has no golden: the legacy module references a `lt_LT.dict` that is not
 shipped, so the legacy engine throws on every check. The Rust engine vendors a
@@ -159,11 +160,16 @@ and km `2026-09-23` (Khmer has no date-filter rules either).
   divergence of `docs/differences.md` #17 (the Rust hunspell `testsug` does not
   accept the `COMPOUNDMIN 1` single-character compounds Java's does), pinned
   exactly with `--expect-field-diffs=HUNSPELL_RULE=3`.
+  ml is exactly 0/0/0: the 18 active XML rules, the six generic built-ins and
+  the `MORFOLOGIK_RULE_ML_IN` speller match the pinned Java module, captured
+  from the unpatched checkout (`scripts/oracle/ml/check-diff-ml.sh`). The
+  speller is inert for Malayalam script (`isLatinScript() = true`), exactly
+  like Java.
 
 Regenerate one language after an intentional corpus change (Docker):
 
 ```sh
-scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km   # rewrites <lang>-full.java.tsv
+scripts/ci/update-golden.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml   # rewrites <lang>-full.java.tsv
 ```
 
 If the capture date differs from `PARITY_TODAY`, update the pin in

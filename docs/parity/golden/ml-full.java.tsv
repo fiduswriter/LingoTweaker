@@ -1,0 +1,68 @@
+L	1	ഞാന്‍ അവളെ ഒരു പുസ്തകം നല്‍കി.
+M	1	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+M	1	അവളെ	1	6	10	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>അവള്‍ക്ക്</suggestion>? 	അവള്‍ക്ക്
+L	2	ഞാന്‍ അവള്‍ക്ക് ഒരു പുസ്തകം നല്‍കി.
+M	2	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	3	ഞാന്‍ അവനെ ഒരു പുസ്തകം നല്‍കി.
+M	3	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+M	3	അവനെ	1	6	10	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>അവന്</suggestion>? 	അവന്
+L	4	ഞാന്‍ അവന് ഒരു പുസ്തകം നല്‍കി.
+M	4	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	5	രാമന്‍ രാജന് സംസാരിക്കുന്നു.
+M	5	രാജന്	1	7	12	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (use sociative case with indirect object of verb സംസാരിക്കുക). <suggestion>രാജനോട്</suggestion>? 	രാജനോട്
+L	6	രാമന്‍ രാജനോട് സംസാരിക്കുന്നു.
+L	7	ഇത് രാധയുടെ വീട് ആണ്.
+L	8	ഇത് രാധയെ വീട് ആണ്.
+M	8	rule4	1	4	9	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (genitive case as relation of two NPs). <suggestion>രാധയുടെ</suggestion>? 	രാധയുടെ
+L	9	ഞാന്‍ നൂറ് രൂപ വേണം.
+M	9	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	10	എനിക്ക് നൂറ് രൂപ വേണം.
+L	11	ഹീന മീരയോട് കണ്ടു.
+M	11	rule7	1	4	11	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>മീരയെ</suggestion>? 	മീരയെ
+L	12	ഹീന മീരയെ കണ്ടു.
+L	13	മാങ്ങ പുഴയ്ക്ക് വീണു.
+M	13	rule8	1	6	15	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>പുഴയില്‍</suggestion>? 	പുഴയില്‍
+L	14	മാങ്ങ പുഴയില്‍ വീണു.
+L	15	പാര്‍ട്ടിയുടെ ഓരോ പ്രവര്‍ത്തകരെയും ഞാന്‍ അഭിനന്ദിക്കുന്നു.
+M	15	rule10	1	18	34	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>പ്രവര്‍ത്തകനേയും</suggestion>?	പ്രവര്‍ത്തകനേയും
+M	15	rule5	1	35	40	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	16	പാര്‍ട്ടിയുടെ ഓരോ പ്രവര്‍ത്തകനേയും ഞാന്‍ അഭിനന്ദിക്കുന്നു.
+M	16	rule5	1	35	40	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	17	ഓരോ കാര്യങ്ങളും ശ്രദ്ധയോടെ ചെയ്യണം.
+M	17	rule_11	1	4	15	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>കാര്യവും</suggestion>?	കാര്യവും
+L	18	ഓരോ കാര്യവും ശ്രദ്ധയോടെ ചെയ്യണം.
+L	19	വേറെയും ഒരു കാര്യം കൂടി പറയാന്‍ ഞാന്‍ ആഗ്രഹിക്കുന്നു .
+M	19	rule12	1	0	23	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>ഒരു കാര്യം കൂടി</suggestion>, <suggestion>വേറെയും ഒരു കാര്യം</suggestion>? 	ഒരു കാര്യം കൂടി|വേറെയും ഒരു കാര്യം
+M	19	rule5	1	32	37	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+M	19	COMMA_PARENTHESIS_WHITESPACE		52	54	Other	Don't put a space before the full stop.	.
+L	20	ഒരു കാര്യം കൂടി പറയാന്‍ ഞാന്‍ ആഗ്രഹിക്കുന്നു.
+M	20	rule5	1	24	29	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	21	വേറെയും ഒരു കാര്യം പറയാന്‍ ഞാന്‍ ആഗ്രഹിക്കുന്നു.
+M	21	rule5	1	27	32	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	22	അച്ഛന്‍റെ കൂടെ അവളും കൂടി പോയി.
+M	22	rule14	1	21	30	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>പോയി</suggestion>? 	പോയി
+L	23	അച്ഛന്‍റെ കൂടെ അവളും പോയി.
+L	24	ഇന്നത്തെ ജാഥയ് ക്ക് ആകെ മൊത്തം 500 പേര്‍ പങ്കെടുത്തു.
+M	24	rule15	1	20	30	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>ആകെ</suggestion> <suggestion>മൊത്തം</suggestion>? 	ആകെ|മൊത്തം
+L	25	ഇന്നത്തെ ജാഥയ് ക്ക് ആകെ 500 പേര്‍ പങ്കെടുത്തു.
+L	26	ഇന്നത്തെ ജാഥയ് ക്ക് മൊത്തം 500 പേര്‍ പങ്കെടുത്തു.
+L	27	രാജനും ഗോപിയും ചങ്ങാതികള്‍ ആണ്.
+M	27	rule17	1	15	26	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>ചങ്ങാതിമാര്‍</suggestion>?	ചങ്ങാതിമാര്‍
+L	28	രാജനും ഗോപിയും ചങ്ങാതിമാര്‍ ആണ്.
+L	29	എന്‍റെ മുന്നിലിരിക്കുന്ന ജനങ്ങള്‍ സംസ്കാരസമ്പന്മാര്‍ ആണ്.
+M	29	rule19	1	34	52	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>സംസ്കാരസമ്പന്നര്‍</suggestion>? 	സംസ്കാരസമ്പന്നര്‍
+L	30	എന്‍റെ മുന്നിലിരിക്കുന്ന ജനങ്ങള്‍ സംസ്കാരസമ്പന്നര്‍ ആണ്.
+L	31	ഞാന്‍ പത്തു തേങ്ങകള്‍ വാങ്ങി.
+M	31	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+M	31	rule20	1	12	21	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>തേങ്ങ</suggestion>? 	തേങ്ങ
+L	32	ഞാന്‍ പത്തു തേങ്ങ വാങ്ങി.
+M	32	rule5	1	0	5	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (Noun with dative case as subject of verb വേണം). <suggestion>എനിക്ക്</suggestion>? 	എനിക്ക്
+L	33	ഈയിടെയായി ഉറക്കങ്ങള്‍ ഒന്നും ഇല്ല.
+M	33	rule21	1	10	21	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>ഉറക്കം</suggestion>? 	ഉറക്കം
+L	34	ഈയിടെയായി ഉറക്കം ഒന്നും ഇല്ല.
+L	35	ഈ കത്തിന് ഉള്ളടക്കങ്ങള്‍ ഒന്നും ഇല്ല.
+M	35	rule22	1	10	24	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത്  <suggestion>ഉള്ളടക്കം</suggestion>? 	ഉള്ളടക്കം
+L	36	ഈ കത്തിന് ഉള്ളടക്കം ഒന്നും ഇല്ല.
+L	37	അമ്മയ്ക്ക് എന്നെ വളരെ ഇഷ്ടമാണ്.
+L	38	അമ്മ്യക്ക് എന്നെ ഭയങ്കര ഇഷ്ടമാണ്.
+M	38	ഭയങ്കര	1	17	23	Other	നിങ്ങള്‍ ആഗ്രഹിക്കുന്നത് (genitive case as relation of two NPs). <suggestion>വളരെ</suggestion>? 	വളരെ
