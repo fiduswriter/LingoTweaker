@@ -1,5 +1,3 @@
-use std::path::PathBuf;
-
 fn build(data: lt::DataDir, variant: Option<&str>) -> Result<(), Box<dyn std::error::Error>> {
     let mut b = lt::Engine::builder(lt::Lang::De)?.data_dir(data);
     if let Some(v) = variant {
@@ -36,7 +34,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let data = if mode == "full" {
         lt::DataDir::from_pack_path(&pack_args[0])?
     } else {
-        let packs: Vec<Vec<u8>> = pack_args.iter().map(|p| std::fs::read(p).unwrap()).collect();
+        let packs: Vec<Vec<u8>> = pack_args
+            .iter()
+            .map(|p| std::fs::read(p).unwrap())
+            .collect();
         lt::DataDir::from_packs(packs)?
     };
     build(data, variant)?;
