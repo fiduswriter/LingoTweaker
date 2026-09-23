@@ -16,9 +16,9 @@ Manual equivalents (what `.github/workflows/release.yml` runs):
 scripts/release/publish-crates.sh              # crates.io, dependency order + facade
 scripts/release/publish-pypi.sh [--build-only] # maturin wheel+sdist, smoke, twine
 scripts/release/publish-npm-data.sh [--build-only]  # npm lingotweaker-data (all packs)
-scripts/release/publish-npm.sh  [--build-only] # napi build, smoke, npm --tag next
-scripts/release/publish-wasm.sh [--build-only] # wasm-pack web+nodejs, smoke, npm next
-scripts/release/publish-pypi-data.sh [--build-only]  # PyPI lingotweaker-data-<lang>
+scripts/release/publish-npm.sh  [--build-only] # napi build, smoke, npm (dist-tag from version)
+scripts/release/publish-wasm.sh [--build-only] # wasm-pack web+nodejs, smoke, npm (dist-tag from version)
+scripts/release/publish-pypi-data.sh [--build-only]  # PyPI lingotweaker-data-<lang> (data/pypi-version)
 scripts/release/publish-data.sh v0.1.0-alpha.1 [--build-only]  # GitHub Release data assets
 scripts/release/verify-crates.sh 0.1.0-alpha.1 # scratch `cargo add` build check
 ```
@@ -42,6 +42,28 @@ one build (`scripts/release/build-data.sh`, which reuses
 under PyPI's 100 MB/file limit). `lingotweaker` and `lingotweaker-wasm` declare
 `lingotweaker-data` as a dependency.
 
+### PyPI data packages are versioned separately
+
+The per-language PyPI distributions have **their own version** in
+`data/pypi-version`, independent of the engine release:
+
+- bump `data/pypi-version` only when the contents of `data/` actually change;
+- publish them with the manual **Publish PyPI data** workflow
+  (`.github/workflows/publish-pypi-data.yml`) or
+  `scripts/release/publish-pypi-data.sh`.
+
+They are deliberately **not** part of the tag-driven release: publishing on
+every engine release would re-upload identical wheels and re-trip PyPI's
+new-project rate limit (HTTP 429). The upload is idempotent (one wheel at a
+time, `--skip-existing`, backoff/retry), so it can be re-run until all projects
+exist. To keep the wheels for a later upload:
+
+```sh
+scripts/release/publish-pypi-data.sh --build-only   # wheels in target/data-dist/pypi/dist
+TWINE_USERNAME=__token__ TWINE_PASSWORD="$PYPI_API_TOKEN" \
+  twine upload --skip-existing target/data-dist/pypi/dist/*.whl
+```
+
 Notes:
 
 - `crates.io` rate-limits *new* crates and returns a retry time in the 429
@@ -50,9 +72,7 @@ Notes:
   (so `latest` stays on the last stable release). PyPI marks prereleases via
   the PEP 440 version itself.
 - `publish-pypi-data.sh` needs a `PYPI_API_TOKEN` secret (or `TWINE_PASSWORD`);
-  without it the workflow builds the wheels and skips the upload. PyPI trusted
-  publishing would have to be configured separately for each of the ~18 data
-  projects, so a token is simpler.
+  without it the workflow builds the wheels and skips the upload.
 - Data packages must be published before the npm engine packages, since the
   latter depend on `lingotweaker-data` (the workflow orders the jobs).
 

@@ -1,0 +1,35 @@
+name: Publish PyPI data
+
+# Publishes the per-language PyPI data distributions (`lingotweaker-data-<lang>`)
+# for the version in `data/pypi-version`. Run this manually — NOT on every
+# engine release — and only after the contents of `data/` have changed (bump
+# `data/pypi-version` when they do).
+#
+# The step is idempotent: publish-pypi-data.sh uploads one wheel at a time,
+# skips files already on the index and retries transient errors (PyPI's
+# new-project rate limit returns HTTP 429), so it can be re-run until all
+# projects exist.
+on:
+  workflow_dispatch:
+    inputs:
+      build_only:
+        description: "Build the wheels only, do not upload"
+        type: boolean
+        default: false
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  pypi-data:
+    if: github.server_url == 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Publish the per-language PyPI data packages
+        run: scripts/release/publish-pypi-data.sh ${{ inputs.build_only && '--build-only' || '' }}
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}

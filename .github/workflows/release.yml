@@ -6,13 +6,18 @@ name: Release
 # publishes the prerelease. This workflow is intentionally separate from
 # ci.yml and does not touch the `parity` or `test` jobs.
 #
-# Secrets: CARGO_REGISTRY_TOKEN (crates.io) and PYPI_API_TOKEN (the per-language
-# PyPI data distributions and the `lingotweaker` wheel). npm uses trusted
-# publishing (OIDC) for `lingotweaker`, `lingotweaker-wasm` and
-# `lingotweaker-data` (configured on npmjs.com: owner `fiduswriter`, repo
-# `LingoTweaker`, workflow `release.yml`), which only needs `id-token: write`.
-# The `data` job uses the workflow token with `contents: write` to attach
-# assets to the GitHub Release.
+# Secrets: CARGO_REGISTRY_TOKEN (crates.io) and PYPI_API_TOKEN (the
+# `lingotweaker` wheel). npm uses trusted publishing (OIDC) for
+# `lingotweaker`, `lingotweaker-wasm` and `lingotweaker-data` (configured on
+# npmjs.com: owner `fiduswriter`, repo `LingoTweaker`, workflow `release.yml`),
+# which only needs `id-token: write`. The `data` job uses the workflow token
+# with `contents: write` to attach assets to the GitHub Release.
+#
+# The per-language PyPI data distributions are NOT published here: they have
+# their own version (data/pypi-version) and are only republished when data/
+# actually changes, via the manual `publish-pypi-data` workflow. Publishing
+# them on every engine release would re-upload identical wheels and retrip
+# PyPI's new-project rate limit.
 #
 # Forgejo reads .github/workflows too, but publishing happens only from the
 # GitHub mirror (secrets, npm/PyPI trusted publishing and GitHub Release
@@ -87,21 +92,6 @@ jobs:
       - run: rustup toolchain install 1.98.1 --profile minimal
       - name: Build and publish lingotweaker-data
         run: scripts/release/publish-npm-data.sh
-
-  # One PyPI data distribution per language (each well under the 100 MB limit).
-  pypi-data:
-    needs: version
-    if: github.server_url == 'https://github.com'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Build (and upload when PYPI_API_TOKEN is set) data packages
-        run: scripts/release/publish-pypi-data.sh
-        env:
-          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
 
   crates:
     needs: version

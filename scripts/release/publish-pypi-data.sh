@@ -34,7 +34,16 @@ for arg in "$@"; do
   esac
 done
 
-version="$(sed -nE 's/^version = "(.*)"/\1/p' "$ROOT/Cargo.toml" | head -1)"
+# The PyPI data distributions carry their own version, independent of the
+# engine release: bump data/pypi-version only when the contents of data/
+# actually change, so a new engine release does not republish identical data
+# packages (and re-trigger PyPI's new-project rate limit for no reason).
+version_file="$ROOT/data/pypi-version"
+if [ ! -f "$version_file" ]; then
+  echo "publish-pypi-data: missing $version_file (the PyPI data version)" >&2
+  exit 1
+fi
+version="$(tr -d '[:space:]' < "$version_file")"
 pyver="$(python3 - "$version" <<'PY'
 import sys
 v = sys.argv[1]
