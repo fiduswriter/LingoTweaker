@@ -25,12 +25,35 @@ const statusElement = document.getElementById("status");
 const progressElement = document.getElementById("progress");
 const progressBar = document.getElementById("progress-bar");
 
+const optionByPack = new Map();
 for (const language of LANGUAGES) {
   const option = document.createElement("option");
   option.value = language.code;
-  option.textContent = `${language.label} (${language.size})`;
+  // the `size` field in languages.js reflects the old monolithic packs; the
+  // real default-download size comes from the pack manifest below
+  option.textContent = language.label;
+  if (!optionByPack.has(language.pack)) {
+    optionByPack.set(language.pack, option);
+  }
   languageSelect.append(option);
 }
+
+// replace the hard-coded sizes with the manifest's actual default-download
+// size per pack (split packs: the base pack only; models/variant sidecars
+// are fetched on demand and not part of the initial download)
+fetch(`${import.meta.env.BASE_URL}packs/manifest.json`, { cache: "no-store" })
+  .then((response) => (response.ok ? response.json() : {}))
+  .then((manifest) => {
+    for (const [pack, option] of optionByPack) {
+      const entry = manifest[pack];
+      if (!entry) {
+        continue;
+      }
+      const bytes = entry.split ? entry.split.base.bytes : entry.bytes;
+      option.textContent = `${option.textContent.replace(/ \(.*\)$/, "")} (${(bytes / 1048576).toFixed(1)} MB)`;
+    }
+  })
+  .catch(() => {});
 
 let ready = false;
 let checkSequence = 0;

@@ -405,3 +405,8 @@ button:disabled {
 .rules-footer .status {
   margin-right: auto;
 }
+
+
+[hidden] {
+  display: none !important;
+}

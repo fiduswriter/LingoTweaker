@@ -12,7 +12,6 @@ import wasmUrl from "../pkg/lt_wasm_bg.wasm?url";
 let initPromise = null;
 let engine = null;
 let packBytes = null;
-let packParts = false;
 let current = null;
 let loadGeneration = 0;
 let phase = "idle";
@@ -23,7 +22,6 @@ let packManifestPromise = null;
 // insertion, cleared on engine rebuild (rule settings may change results)
 const paragraphCache = new Map();
 const PARAGRAPH_CACHE_MAX = 200;
-let zstdSupported = null;
 
 function post(message) {
   self.postMessage(message);
@@ -34,12 +32,8 @@ function ensureInit() {
   return initPromise;
 }
 
-/** Decompress the sniffed codec: gzip (0x1f8b) or zstd (0x28B52FFD). */
-async function decompressIfCompressed(raw) {
-  if (raw.length >= 4 && raw[0] === 0x28 && raw[1] === 0xb5 && raw[2] === 0x2f && raw[3] === 0xfd) {
-    const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("zstd"));
-    return new Uint8Array(await new Response(stream).arrayBuffer());
-  }
+/** Decompress the sniffed gzip (0x1f8b magic). */
+async function decompressIfGzipped(raw) {
   if (raw.length >= 2 && raw[0] === 0x1f && raw[1] === 0x8b) {
     const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip"));
     return new Uint8Array(await new Response(stream).arrayBuffer());
@@ -47,25 +41,11 @@ async function decompressIfCompressed(raw) {
   return raw;
 }
 
-/** `DecompressionStream("zstd")` is Chrome/Edge-only (Safari: no, Firefox:
- * flag) — probe once so the pack fetch can prefer `.pack.zst`. */
-async function ensureZstdSupport() {
-  zstdSupported ??= await (async () => {
-    if (typeof DecompressionStream !== "function") {
-      return false;
-    }
-    try {
-      // Safari throws InvalidStateError on construction even when the
-      // constructor exists
-      const probe = new DecompressionStream("zstd");
-      await probe.writable.getWriter().close();
-      return true;
-    } catch {
-      return false;
-    }
-  })();
-  return zstdSupported;
-}
+// `.pack.zst` sidecars exist in the build output, but no browser ships
+// DecompressionStream("zstd") yet (MDN bcd, 2026-09: chrome/edge/safari
+// false, Firefox behind dom.compression_streams.zstd.enabled), and GitHub
+// Pages cannot set `Content-Encoding: zstd` for transparent transport
+// decompression — so packs are always fetched gzip here.
 
 /**
  * Fetch the wasm binary: try the pre-compressed sidecar first (a third of
@@ -78,7 +58,7 @@ async function fetchWasmBytes() {
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
-    return await decompressIfCompressed(new Uint8Array(await response.arrayBuffer()));
+    return await decompressIfGzipped(new Uint8Array(await response.arrayBuffer()));
   } catch {
     const response = await fetch(wasmUrl);
     if (!response.ok) {
@@ -128,7 +108,7 @@ async function fetchPack(url, onProgress) {
   // Servers may serve `.gz` files with `Content-Encoding: gzip` (the browser
   // then hands us the decoded pack) or as opaque gzip bytes; `.zst` files
   // are always opaque zstd frames.
-  return decompressIfCompressed(raw);
+  return decompressIfGzipped(raw);
 }
 
 /** Build (or rebuild) the engine from the cached pack bytes. */
@@ -143,25 +123,24 @@ async function build(options) {
     today: new Date().toISOString(),
     ...(options ?? {}),
   });
-  const built = Array.isArray(packBytes)
-    ? LtEngine.new_multi(
-        current.lang,
-        packBytes.map((part) => new Uint8Array(part.bytes)),
-        engineOptions,
-      )
-    : new LtEngine(current.lang, packBytes, engineOptions);
+  const built = LtEngine.new_multi(
+    current.lang,
+    packBytes.map((part) => new Uint8Array(part.bytes)),
+    engineOptions,
+  );
   if (generation !== loadGeneration) {
     return;
   }
   const failures = JSON.parse(built.compile_failures_json());
   engine = built;
   phase = "idle";
+  const totalBytes = packBytes.reduce((sum, part) => sum + part.bytes.length, 0);
   post({
     type: "ready",
     lang: current.lang,
     rules: built.active_rule_count(),
     compileFailures: failures.length,
-    packBytes: packBytes.length,
+    packBytes: totalBytes,
     buildMs: performance.now() - started,
   });
 }
@@ -171,11 +150,9 @@ async function build(options) {
  * progress across all concurrently-downloaded packs.
  */
 function fetchPackEntry(entry, onProgress) {
-  const useZst = Boolean(entry?.zst && zstdSupported === true);
-  const chosen = useZst ? entry.zst : entry;
-  const version = chosen?.sha256 ? `?v=${chosen.sha256.slice(0, 12)}` : "";
+  const version = entry?.sha256 ? `?v=${entry.sha256.slice(0, 12)}` : "";
   const url = new URL(
-    `${import.meta.env.BASE_URL}packs/${chosen?.file ?? entry.file}${version}`,
+    `${import.meta.env.BASE_URL}packs/${entry.file}${version}`,
     self.location.origin,
   ).href;
   const local = { received: 0 };
@@ -184,67 +161,65 @@ function fetchPackEntry(entry, onProgress) {
   });
 }
 
+/**
+ * Pack parts are content-addressed by their manifest sha256, so toggling
+ * "full grammar checking" on/off (or switching variant) reuses what is
+ * already in memory and only downloads the newly-needed sidecar.
+ */
+const partCache = new Map();
+
 async function load({ lang, variant, pack, options }) {
   const generation = ++loadGeneration;
   engine = null;
-  if (!packBytes || !current || current.pack !== pack) {
-    const manifest = await ensurePackManifest();
-    await ensureZstdSupport();
-    const entry = manifest[pack];
-    phase = "download";
-    post({ type: "status", phase, lang });
-    if (entry?.split) {
-      // split pack: base + the sidecars this engine instance needs (the
-      // variant dictionary when the variant is not the default; the OpenNLP
-      // chunker models when the user opted into full grammar checking)
-      const parts = [{ entry: entry.split.base, key: "base" }];
-      const extra = entry.split.extra ?? {};
-      const variantKey = variant && variant !== "en-US" ? variant : null;
-      if (variantKey && extra[variantKey]) {
-        parts.push({ entry: extra[variantKey], key: variantKey });
-      }
-      if (options?.models && extra.models) {
-        parts.push({ entry: extra.models, key: "models" });
-      }
-      const tracks = parts.map((part) => ({ part, received: 0, total: 0 }));
-      const postAggregate = () => {
-        let received = 0;
-        let total = 0;
-        for (const track of tracks) {
-          received += track.received;
-          total += track.total;
-        }
-        post({ type: "progress", received, total });
-      };
-      const fetched = await Promise.all(
-        tracks.map(async (track) => {
-          const bytes = await fetchPackEntry(track.part.entry, (received, total) => {
-            track.received = received;
-            track.total = total;
-            postAggregate();
-          });
-          return { bytes };
-        }),
-      );
-      if (generation !== loadGeneration) {
-        return;
-      }
-      packBytes = fetched;
-      packParts = true;
-    } else {
-      const bytes = await fetchPackEntry(entry ?? {}, (received, total) => {
-        post({ type: "progress", received, total });
-      });
-      if (generation !== loadGeneration) {
-        return;
-      }
-      packBytes = bytes;
-      packParts = false;
+  const manifest = await ensurePackManifest();
+  const entry = manifest[pack];
+  // split packs mount base + sidecars; single packs are a one-element list
+  const split = entry?.split;
+  const parts = split
+    ? [{ entry: split.base, key: split.base.sha256 }]
+    : [{ entry: entry ?? {}, key: entry?.sha256 ?? `${pack}.pack.gz` }];
+  if (split) {
+    const extra = split.extra ?? {};
+    const variantKey = variant && variant !== "en-US" ? variant : null;
+    if (variantKey && extra[variantKey]) {
+      parts.push({ entry: extra[variantKey], key: extra[variantKey].sha256 });
+    }
+    // the OpenNLP chunker models, only when the user opted into full
+    // grammar checking
+    if (options?.models && extra.models) {
+      parts.push({ entry: extra.models, key: extra.models.sha256 });
     }
   }
-  if (generation !== loadGeneration) {
-    return;
+  // fetch only what is not already in memory
+  const missing = parts.filter((part) => !partCache.has(part.key));
+  if (missing.length > 0 || !current || current.pack !== pack) {
+    phase = "download";
+    post({ type: "status", phase, lang });
+    const tracks = missing.map((part) => ({ part, received: 0, total: 0 }));
+    const postAggregate = () => {
+      let received = 0;
+      let total = 0;
+      for (const track of tracks) {
+        received += track.received;
+        total += track.total;
+      }
+      post({ type: "progress", received, total });
+    };
+    await Promise.all(
+      tracks.map(async (track) => {
+        const bytes = await fetchPackEntry(track.part.entry, (received, total) => {
+          track.received = received;
+          track.total = total;
+          postAggregate();
+        });
+        partCache.set(track.part.key, bytes);
+      }),
+    );
+    if (generation !== loadGeneration) {
+      return;
+    }
   }
+  packBytes = parts.map((part) => ({ bytes: partCache.get(part.key) }));
   current = { lang, variant, pack };
   activeUrl = null;
   await build(options);
