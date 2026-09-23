@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -496,6 +496,14 @@ IN_TREE_ARTIFACTS = {
         "resource/ar/hunspell/AUTHORS": "ar/hunspell/AUTHORS",
         "resource/ar/hunspell/THANKS": "ar/hunspell/THANKS",
     },
+    # Khmer ships its `BaseTagger` Morfologik dictionary (FSA5, SUFFIX
+    # encoder, UTF-8) in-tree (`KhmerTagger`); the hunspell speller
+    # (`hunspell/km_KH.{aff,dic}`, GPLv3) is imported with the rest of the
+    # `hunspell/` directory.
+    "km": {
+        "resource/km/khmer.dict": "km/dictionaries/khmer.dict",
+        "resource/km/khmer.info": "km/dictionaries/khmer.info",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -667,6 +675,15 @@ IN_TREE_LICENSES = {
         False,
         "upstream ar/README.txt; ar/wordlist-flat/about.txt; "
         "ar/hunspell/COPYING",
+    ),
+    "km": (
+        "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, "
+        "Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC "
+        "additions BSD; km/README.txt) and the SBBIC hunspell speller "
+        "(GPLv3, km/hunspell/LICENCES-km.txt) - owner/legal review: the "
+        "CC-BY-NC-SA-3.0 component is non-commercial",
+        False,
+        "upstream km/README.txt; km/hunspell/LICENCES-km.txt",
     ),
 }
 
@@ -916,6 +933,19 @@ def hunspell_license(lang: str, name: str):
                 "header)",
                 verified,
                 "upstream ar/hunspell/COPYING",
+            )
+    if lang == "km":
+        # SBBIC spelling checker for OpenOffice (km_KH): LICENCES-km.txt
+        # states GPLv3; the LICENSES-en.txt is the generic hunspell license
+        # text. The LT-authored ignore/spelling lists stay under the default
+        # resource license.
+        if name.startswith("km_KH.") or name.startswith("LICENCES-km"):
+            verified = name.startswith("LICENCES-km") or name.endswith(".aff")
+            return (
+                "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; "
+                "km/hunspell/LICENCES-km.txt)",
+                verified,
+                "upstream km/hunspell/LICENCES-km.txt",
             )
     return None
 
@@ -1350,7 +1380,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

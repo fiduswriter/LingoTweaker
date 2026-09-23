@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 948,
+  "file_count": 968,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -5771,6 +5771,220 @@
       }
     },
     {
+      "path": "km/dictionaries/khmer.dict",
+      "sha256": "ef475bef9a9ac23e0f3842e6f316f8b69f86001b7be069959e290c2eac37553b",
+      "size": 269276,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/khmer.dict",
+        "license": "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC additions BSD; km/README.txt) and the SBBIC hunspell speller (GPLv3, km/hunspell/LICENCES-km.txt) - owner/legal review: the CC-BY-NC-SA-3.0 component is non-commercial",
+        "license_verified": false,
+        "license_source": "upstream km/README.txt; km/hunspell/LICENCES-km.txt"
+      }
+    },
+    {
+      "path": "km/dictionaries/khmer.info",
+      "sha256": "d1689f978468c4be3d181f3c8cf7e9ca270316298311069bc6c0edbab29e4955",
+      "size": 110,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/khmer.info",
+        "license": "Khmer POS dictionary (Chuon Nath / Buddhist Institute BSD, Robert Headley BSD, PanL10N KhmerCorpus CC-BY-NC-SA-3.0, SBBIC additions BSD; km/README.txt) and the SBBIC hunspell speller (GPLv3, km/hunspell/LICENCES-km.txt) - owner/legal review: the CC-BY-NC-SA-3.0 component is non-commercial",
+        "license_verified": false,
+        "license_source": "upstream km/README.txt; km/hunspell/LICENCES-km.txt"
+      }
+    },
+    {
+      "path": "km/disambiguation.xml",
+      "sha256": "b30e17ae22d3dbbf690ee497dc318b750bcaa17ab9bcfb7e22b056bc2ebef7a1",
+      "size": 11539,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/disambiguation.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/hunspell/LICENCES-km.txt",
+      "sha256": "83b49824a9193432fdd0d023816c17605f6c44600db2e8de40b9bda4be77fe22",
+      "size": 484,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/LICENCES-km.txt",
+        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt)",
+        "license_verified": true,
+        "license_source": "upstream km/hunspell/LICENCES-km.txt"
+      }
+    },
+    {
+      "path": "km/hunspell/LICENSES-en.txt",
+      "sha256": "83b49824a9193432fdd0d023816c17605f6c44600db2e8de40b9bda4be77fe22",
+      "size": 484,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/LICENSES-en.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/hunspell/ignore.txt",
+      "sha256": "e49a958404f6c151844bc8c67b4c46e000811164e9543a429d2d8972cf52fb49",
+      "size": 137,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/hunspell/km_KH.aff",
+      "sha256": "43bd6077d4975e2c2d06a6fdacd04104a111aeadb86ce1bd26a19232b3108437",
+      "size": 933,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/km_KH.aff",
+        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt)",
+        "license_verified": true,
+        "license_source": "upstream km/hunspell/LICENCES-km.txt"
+      }
+    },
+    {
+      "path": "km/hunspell/km_KH.dic",
+      "sha256": "9657dd5b7e30c7ba1a55d1b8915735cbd5d897a4bb124bba70eb32a526ec6337",
+      "size": 2180495,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/km_KH.dic",
+        "license": "GPL-3.0-only (SBBIC Khmer spelling checker km_KH; km/hunspell/LICENCES-km.txt)",
+        "license_verified": false,
+        "license_source": "upstream km/hunspell/LICENCES-km.txt"
+      }
+    },
+    {
+      "path": "km/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/rules/coherency.txt",
+      "sha256": "277d0784c64d963aff733866179a86f4cbb25c7ada63eb5111aa739a4542b9d1",
+      "size": 72509,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/rules/km/coherency.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/rules/grammar.xml",
+      "sha256": "9fae16ebceef1d915c7969daa5f53d34b690cda52a9aae4c10357df3d0333c11",
+      "size": 31971,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/rules/km/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/rules/replace.txt",
+      "sha256": "9ae3a86beebb4719067945d85eaf2299baaccb116ae42749dd9169c0abffbffd",
+      "size": 415,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/rules/km/replace.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/README.txt",
+      "sha256": "52a916c681b4a6c7e2497b575f5c983984c1a48944e22620771db0fd479d6adf",
+      "size": 1955,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/khmertags.txt",
+      "sha256": "8a9c137ea357cbb29ec53d919831ba6600b8f43e498266926df245cfb86ae774",
+      "size": 193,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/khmertags.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "km/words/tagset.txt",
+      "sha256": "61fc14d15d3dfaab3d679993274ee94e27ae0de297d81c5b7bf380c9318323ab",
+      "size": 1562,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/resource/km/tagset.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "lt/hunspell/AUTHORS_lt_LT.txt",
       "sha256": "bf195fd983d656de3f1d7972d659b6b1cc0cc3730fb9e38ce31541a25ca168f6",
       "size": 691,
@@ -6039,6 +6253,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/MessagesBundle_it.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "messages/MessagesBundle_km.properties",
+      "sha256": "7b50292fa6b17c0f03b849d4084adfbd41b07b32e3c780ebf7a01af32c1796b8",
+      "size": 27271,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/km/src/main/resources/org/languagetool/MessagesBundle_km.properties",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
