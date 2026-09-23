@@ -56,22 +56,32 @@ enum Backend {
 
 fn classify(path: &Path) -> Backend {
     let mounts = mounts().read().expect("mount lock poisoned");
+    // The path must live under exactly one mount's base (the `DataDir`
+    // handle); split packs mount a base pack plus sidecars (models, variant
+    // dictionaries), and a resource missing in the base pack falls through
+    // to the sidecar mounts by its mount-relative path.
+    let mut rel_path: Option<PathBuf> = None;
     for mount in mounts.iter() {
-        let Ok(rel) = path.strip_prefix(&mount.base) else {
-            continue;
-        };
-        if rel.as_os_str().is_empty() {
-            return Backend::PackDir;
+        if let Ok(rel) = path.strip_prefix(&mount.base) {
+            if rel.as_os_str().is_empty() {
+                return Backend::PackDir;
+            }
+            rel_path = Some(rel.to_path_buf());
+            break;
         }
-        if let Some(&(offset, len)) = mount.index.get(rel) {
+    }
+    let Some(rel) = rel_path else {
+        return Backend::Fs;
+    };
+    for mount in mounts.iter() {
+        if let Some(&(offset, len)) = mount.index.get(&rel) {
             return Backend::PackFile(Arc::clone(&mount.bytes), offset, len);
         }
-        if mount.index.keys().any(|key| key.starts_with(rel)) {
+        if mount.index.keys().any(|key| key.starts_with(&rel)) {
             return Backend::PackDir;
         }
-        return Backend::PackMissing;
     }
-    Backend::Fs
+    Backend::PackMissing
 }
 
 fn not_found(path: &Path) -> io::Error {

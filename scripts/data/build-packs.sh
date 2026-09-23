@@ -16,6 +16,13 @@
 # language holding `core/**` and `<lang>/**` (the engine never reads the data
 # directory's `manifest.json` or `messages/**` at runtime, so they stay out).
 #
+# With SPLIT_PACKS=1, the demo additionally gets split packs (see
+# attic/docs/wasm-demo-future-optimizations.md, item 9): for `en` a base pack
+# without the optional OpenNLP chunker models and without the four
+# non-default variant dictionaries, plus sidecar packs for each. The full
+# `<lang>.pack.gz` is always built unchanged (release artifacts depend on
+# it); the manifest lists the split parts under `extra`.
+#
 # Used by the GitHub Pages demo (demo/scripts/build-packs.sh) and the release
 # data artifacts (scripts/release/build-data.sh), so both serve byte-identical
 # packs.
@@ -49,7 +56,7 @@ if [ -n "${PACK_DATA:-}" ]; then
   pack_data="$PACK_DATA"
 else
   cargo build --release -p lt-data --bin pack_data --manifest-path "$root/Cargo.toml"
-  pack_data="$root/target/release/pack_data"
+  pack_data="$root/${CARGO_TARGET_DIR:-target}/release/pack_data"
 fi
 
 rm -rf "$out_dir"
@@ -76,6 +83,33 @@ for lang in $langs; do
   rm -f "$out_dir/$lang.pack"
 done
 
+if [ -n "${SPLIT_PACKS:-}" ]; then
+  # en split: base pack without the optional OpenNLP chunker models
+  # (en-lite, the demo default) and without the four non-default variant
+  # dictionaries (fetched on demand, ~1.9 MB gz total); the default
+  # variant (en_US) stays in the base pack.
+  for side in models en-GB en-AU en-CA en-NZ; do
+    case "$side" in
+      models) "$pack_data" "$data_dir" en "$out_dir/en.$side.pack" --only en/models ;;
+      # en-GB -> en/hunspell/en_GB (the dictionary file stem)
+      *) "$pack_data" "$data_dir" en "$out_dir/en.$side.pack" --only "en/hunspell/en_${side#en-}" ;;
+    esac
+    gzip -9 -n -f -k "$out_dir/en.$side.pack"
+    if [ -n "$HAVE_ZSTD" ]; then
+      zstd -q -19 -f --no-progress "$out_dir/en.$side.pack"
+    fi
+    rm -f "$out_dir/en.$side.pack"
+  done
+  "$pack_data" "$data_dir" en "$out_dir/en.base.pack" \
+    --exclude en/models en/hunspell/en_GB en/hunspell/en_AU \
+    en/hunspell/en_CA en/hunspell/en_NZ
+  gzip -9 -n -f -k "$out_dir/en.base.pack"
+  if [ -n "$HAVE_ZSTD" ]; then
+    zstd -q -19 -f --no-progress "$out_dir/en.base.pack"
+  fi
+  rm -f "$out_dir/en.base.pack"
+fi
+
 python3 - "$out_dir" <<'PY'
 import hashlib
 import json
@@ -83,21 +117,42 @@ import pathlib
 import sys
 
 out = pathlib.Path(sys.argv[1])
-manifest = {}
-for path in sorted(out.glob("*.pack.gz")):
-    lang = path.name[: -len(".pack.gz")]
+
+
+def describe(pack_gz, suffix):
     entry = {
-        "file": path.name,
-        "bytes": path.stat().st_size,
-        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "file": pack_gz.name,
+        "bytes": pack_gz.stat().st_size,
+        "sha256": hashlib.sha256(pack_gz.read_bytes()).hexdigest(),
     }
-    zst = out / f"{lang}.pack.zst"
+    zst = pathlib.Path(str(pack_gz)[: -len(suffix)] + ".pack.zst")
     if zst.exists():
         entry["zst"] = {
             "file": zst.name,
             "bytes": zst.stat().st_size,
             "sha256": hashlib.sha256(zst.read_bytes()).hexdigest(),
         }
+    return entry
+
+
+out = pathlib.Path(sys.argv[1])
+split_en = (out / "en.base.pack.gz").exists() and (out / "en.models.pack.gz").exists()
+manifest = {}
+for path in sorted(out.glob("*.pack.gz")):
+    lang = path.name[: -len(".pack.gz")]
+    entry = describe(path, ".pack.gz")
+    if lang == "en" and split_en:
+        # en is additionally shipped split (see SPLIT_PACKS above): the demo
+        # fetches the base pack plus the sidecars it needs; the full pack
+        # stays under `file` for release consumers
+        entry["split"] = {
+            "base": describe(out / "en.base.pack.gz", ".pack.gz"),
+            "extra": {},
+        }
+        for name in ("models", "en-GB", "en-AU", "en-CA", "en-NZ"):
+            gz = out / f"en.{name}.pack.gz"
+            if gz.exists():
+                entry["split"]["extra"][name] = describe(gz, ".pack.gz")
     manifest[lang] = entry
 (out / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 print(f"build-packs: {len(manifest)} languages -> {out}")

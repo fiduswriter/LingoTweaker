@@ -16,6 +16,8 @@ import { DEFAULT_LANGUAGE, LANGUAGES, findLanguage } from "./languages.js";
 import { createRulesPanel } from "./rules.js";
 
 const languageSelect = document.getElementById("language");
+const fullQualityInput = document.getElementById("full-quality");
+const fullQualityLabel = document.getElementById("full-quality-label");
 const checkButton = document.getElementById("check");
 const rulesButton = document.getElementById("rules");
 const autoCheck = document.getElementById("auto-check");
@@ -34,7 +36,11 @@ let ready = false;
 let checkSequence = 0;
 let lastRequest = null;
 let debounceTimer = null;
+let currentLanguage = null;
 let settings = { picky: false, enabledRules: [], disabledRules: [] };
+// split packs only: downloading the OpenNLP chunker models opts English into
+// the chunker-based grammar rules (+~9 MB sidecar)
+let fullQuality = false;
 
 const worker = new Worker(new URL("./worker.js", import.meta.url), { type: "module" });
 
@@ -72,6 +78,7 @@ const rulesPanel = createRulesPanel({
 
 function currentOptions() {
   return {
+    models: fullQuality,
     picky: settings.picky,
     enabledRules: settings.enabledRules,
     disabledRules: settings.disabledRules,
@@ -109,9 +116,13 @@ function runCheck() {
 }
 
 function loadLanguage(language) {
+  currentLanguage = language;
   ready = false;
   checkButton.disabled = true;
   rulesButton.disabled = true;
+  // the models sidecar exists only for split English
+  fullQuality = language.pack === "en" && fullQualityInput.checked;
+  fullQualityLabel.hidden = language.pack !== "en";
   settings = { picky: false, enabledRules: [], disabledRules: [] };
   setStatus(`loading ${language.label}…`);
   setMatches(view, []);
@@ -163,6 +174,19 @@ worker.onmessage = (event) => {
       break;
   }
 };
+
+fullQualityInput.addEventListener("change", () => {
+  if (!ready) {
+    return;
+  }
+  ready = false;
+  checkButton.disabled = true;
+  rulesButton.disabled = true;
+  fullQuality = fullQualityInput.checked;
+  setStatus(fullQuality ? "downloading grammar models…" : "rebuilding engine…");
+  setMatches(view, []);
+  worker.postMessage({ type: "load", lang: currentLanguage.code, variant: currentLanguage.variant, pack: currentLanguage.pack, options: currentOptions() });
+});
 
 function applyResult(message) {
   if (!lastRequest || message.id !== lastRequest.id) {

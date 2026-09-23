@@ -12,6 +12,7 @@ import wasmUrl from "../pkg/lt_wasm_bg.wasm?url";
 let initPromise = null;
 let engine = null;
 let packBytes = null;
+let packParts = false;
 let current = null;
 let loadGeneration = 0;
 let phase = "idle";
@@ -48,19 +49,21 @@ async function decompressIfCompressed(raw) {
 
 /** `DecompressionStream("zstd")` is Chrome/Edge-only (Safari: no, Firefox:
  * flag) — probe once so the pack fetch can prefer `.pack.zst`. */
-function ensureZstdSupport() {
-  if (zstdSupported === null) {
-    zstdSupported = typeof DecompressionStream === "function";
-    if (zstdSupported) {
-      zstdSupported = (async () => {
-        // Safari throws InvalidStateError on construction even when the
-        // constructor exists
-        const probe = new DecompressionStream("zstd");
-        await probe.writable.getWriter().close().catch(() => {});
-        return true;
-      })().catch(() => false);
+async function ensureZstdSupport() {
+  zstdSupported ??= await (async () => {
+    if (typeof DecompressionStream !== "function") {
+      return false;
     }
-  }
+    try {
+      // Safari throws InvalidStateError on construction even when the
+      // constructor exists
+      const probe = new DecompressionStream("zstd");
+      await probe.writable.getWriter().close();
+      return true;
+    } catch {
+      return false;
+    }
+  })();
   return zstdSupported;
 }
 
@@ -140,7 +143,13 @@ async function build(options) {
     today: new Date().toISOString(),
     ...(options ?? {}),
   });
-  const built = new LtEngine(current.lang, packBytes, engineOptions);
+  const built = Array.isArray(packBytes)
+    ? LtEngine.new_multi(
+        current.lang,
+        packBytes.map((part) => new Uint8Array(part.bytes)),
+        engineOptions,
+      )
+    : new LtEngine(current.lang, packBytes, engineOptions);
   if (generation !== loadGeneration) {
     return;
   }
@@ -157,26 +166,81 @@ async function build(options) {
   });
 }
 
+/**
+ * Fetch a pack (gz or zst sidecar per manifest entry), reporting aggregate
+ * progress across all concurrently-downloaded packs.
+ */
+function fetchPackEntry(entry, onProgress) {
+  const useZst = Boolean(entry?.zst && zstdSupported === true);
+  const chosen = useZst ? entry.zst : entry;
+  const version = chosen?.sha256 ? `?v=${chosen.sha256.slice(0, 12)}` : "";
+  const url = new URL(
+    `${import.meta.env.BASE_URL}packs/${chosen?.file ?? entry.file}${version}`,
+    self.location.origin,
+  ).href;
+  const local = { received: 0 };
+  return fetchPack(url, (received, total) => {
+    onProgress(local, received, total);
+  });
+}
+
 async function load({ lang, variant, pack, options }) {
   const generation = ++loadGeneration;
   engine = null;
   if (!packBytes || !current || current.pack !== pack) {
     const manifest = await ensurePackManifest();
+    await ensureZstdSupport();
     const entry = manifest[pack];
-    const useZst = Boolean((await ensureZstdSupport()) && entry?.zst);
-    const chosen = useZst ? entry.zst : entry;
-    const version = chosen?.sha256 ? `?v=${chosen.sha256.slice(0, 12)}` : "";
-    const file = chosen?.file ?? `${pack}.pack.gz`;
-    const url = new URL(
-      `${import.meta.env.BASE_URL}packs/${file}${version}`,
-      self.location.origin,
-    ).href;
-    activeUrl = url;
     phase = "download";
-    post({ type: "status", phase, lang, url });
-    packBytes = await fetchPack(url, (received, total) => {
-      post({ type: "progress", received, total });
-    });
+    post({ type: "status", phase, lang });
+    if (entry?.split) {
+      // split pack: base + the sidecars this engine instance needs (the
+      // variant dictionary when the variant is not the default; the OpenNLP
+      // chunker models when the user opted into full grammar checking)
+      const parts = [{ entry: entry.split.base, key: "base" }];
+      const extra = entry.split.extra ?? {};
+      const variantKey = variant && variant !== "en-US" ? variant : null;
+      if (variantKey && extra[variantKey]) {
+        parts.push({ entry: extra[variantKey], key: variantKey });
+      }
+      if (options?.models && extra.models) {
+        parts.push({ entry: extra.models, key: "models" });
+      }
+      const tracks = parts.map((part) => ({ part, received: 0, total: 0 }));
+      const postAggregate = () => {
+        let received = 0;
+        let total = 0;
+        for (const track of tracks) {
+          received += track.received;
+          total += track.total;
+        }
+        post({ type: "progress", received, total });
+      };
+      const fetched = await Promise.all(
+        tracks.map(async (track) => {
+          const bytes = await fetchPackEntry(track.part.entry, (received, total) => {
+            track.received = received;
+            track.total = total;
+            postAggregate();
+          });
+          return { bytes };
+        }),
+      );
+      if (generation !== loadGeneration) {
+        return;
+      }
+      packBytes = fetched;
+      packParts = true;
+    } else {
+      const bytes = await fetchPackEntry(entry ?? {}, (received, total) => {
+        post({ type: "progress", received, total });
+      });
+      if (generation !== loadGeneration) {
+        return;
+      }
+      packBytes = bytes;
+      packParts = false;
+    }
   }
   if (generation !== loadGeneration) {
     return;

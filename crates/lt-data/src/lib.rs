@@ -112,6 +112,25 @@ impl DataDir {
         Self::from_pack_bytes(bytes.to_vec())
     }
 
+    /// A data directory backed by several in-memory packs (see [`pack`]).
+    ///
+    /// Each pack is registered as its own mount; reads resolve in
+    /// registration order and fall through to the later mounts, so this
+    /// composes a base pack with optional sidecars (the split packs:
+    /// `en/models`, per-variant dictionaries). The returned handle points at
+    /// the first pack's virtual base path.
+    pub fn from_packs(bytes: Vec<Vec<u8>>) -> Result<Self> {
+        let mut first = None;
+        for pack_bytes in bytes {
+            let index = pack::parse(&pack_bytes)?;
+            let base = fs::register(pack_bytes, index);
+            if first.is_none() {
+                first = Some(Self(base));
+            }
+        }
+        first.ok_or_else(|| CoreError::Data("no packs given".into()))
+    }
+
     pub fn discover() -> Result<Self> {
         if let Some(p) = std::env::var_os("LT_DATA_DIR") {
             let p = PathBuf::from(p);
@@ -303,6 +322,26 @@ mod tests {
         assert!(data.pos_dict_path(Lang::En).exists());
         assert!(data.disambiguation_path(Lang::En).exists());
         assert!(data.grammar_path(Lang::Fr).exists());
+    }
+
+    #[test]
+    fn packs_compose_base_and_sidecars() {
+        // base pack with one file; sidecar holding a different subtree; reads
+        // resolve in both (split packs: en base + models/variant sidecars)
+        let base = pack::write(&[
+            (PathBuf::from("core/a.txt"), b"core".to_vec()),
+            (PathBuf::from("en/x.txt"), b"base".to_vec()),
+        ]);
+        let sidecar = pack::write(&[(PathBuf::from("en/models/m.bin"), b"model".to_vec())]);
+        let dir = DataDir::from_packs(vec![base, sidecar]).expect("packs mount");
+        assert_eq!(fs::read(dir.path().join("en/x.txt")).unwrap(), b"base");
+        assert_eq!(
+            fs::read(dir.path().join("en/models/m.bin")).unwrap(),
+            b"model"
+        );
+        assert_eq!(fs::read(dir.path().join("core/a.txt")).unwrap(), b"core");
+        assert!(dir.path().join("en/models").lt_is_dir());
+        assert!(!dir.path().join("en/missing").lt_exists());
     }
 
     #[test]

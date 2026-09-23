@@ -99,9 +99,13 @@ impl LtEngine {
     /// `enabledOnly` configure rule selection.
     #[wasm_bindgen(constructor)]
     pub fn new(lang: &str, pack: Vec<u8>, options: Option<String>) -> Result<LtEngine, JsError> {
+        let data = lt::DataDir::from_pack_bytes(pack).map_err(js_error)?;
+        Self::build(lang, data, options)
+    }
+
+    fn build(lang: &str, data: lt::DataDir, options: Option<String>) -> Result<LtEngine, JsError> {
         let code = lt::Lang::from_long_code(lang)
             .ok_or_else(|| JsError::new(&format!("unknown language: {lang}")))?;
-        let data = lt::DataDir::from_pack_bytes(pack).map_err(js_error)?;
         let options = match &options {
             Some(json) => serde_json::from_str::<WasmOptions>(json).map_err(js_error)?,
             None => WasmOptions::default(),
@@ -125,6 +129,20 @@ impl LtEngine {
             lang: lang.to_string(),
             variant,
         })
+    }
+
+    /// Like [`LtEngine::new`] but built from several packs: the first is the
+    /// base pack, later ones are sidecars (split packs: `en` base + optional
+    /// `en.models`/`en-GB`-style variant dictionaries; reads fall through to
+    /// the later packs). `packs` is a JS array of `Uint8Array`s.
+    pub fn new_multi(
+        lang: &str,
+        packs: Vec<js_sys::Uint8Array>,
+        options: Option<String>,
+    ) -> Result<LtEngine, JsError> {
+        let bytes: Vec<Vec<u8>> = packs.iter().map(|p| p.to_vec()).collect();
+        let data = lt::DataDir::from_packs(bytes).map_err(js_error)?;
+        Self::build(lang, data, options)
     }
 
     /// Check `text` and return the LT-shaped JSON of `CheckResult`.
