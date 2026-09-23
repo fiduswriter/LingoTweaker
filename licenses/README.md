@@ -55,9 +55,10 @@ file in the manifest (`license_source`). See `THIRD_PARTY_NOTICES.md` for the
 | english-pos-dict | org.languagetool:english-pos-dict:0.6 | LGPL-2.1-only | artifact POM | yes |
 | german-pos-dict | de.danielnaber:german-pos-dict:1.2.4 | CC-BY-SA-4.0 (Morphy-derived) | artifact POM + upstream `resource/de/README.txt` | yes (owner review advised) |
 | spanish-pos-dict | org.softcatala:spanish-pos-dict:2.5 | LGPL-2.1-only | artifact POM | yes |
-| french-pos-dict | org.languagetool:french-pos-dict:0.7 | POM CC-BY-SA-4.0; bundled Dicollecte docs MPL-2.0 | artifact POM + bundled READMEs | no (conflict) |
+| french-pos-dict | org.languagetool:french-pos-dict:0.7 | POM CC-BY-SA-4.0; bundled Dicollecte docs MPL-2.0 | artifact POM + bundled READMEs | owner signed off 2026-09-23 (conflict accepted) |
 | portuguese-pos-dict | org.languagetool:portuguese-pos-dict:1.2.0 | LGPL-2.1-only | artifact POM | yes |
-| dutch-pos-dict | org.languagetool:dutch-pos-dict:0.1 | README CC-BY-3.0-or-later OR BSD; POM LGPL-2.1 | bundled READMEs + artifact POM | no (conflict) |
+| dutch-pos-dict | org.languagetool:dutch-pos-dict:0.1 | README CC-BY-3.0-or-later OR BSD; POM LGPL-2.1 | bundled READMEs + artifact POM | owner signed off 2026-09-23 (conflict accepted) |
+| catalan-pos-dict | org.softcatala:catalan-pos-dict:3.3 | POM GPL-2.0-only; upstream `ca/README.txt` dual LGPL-2.1 OR GPL-2.0 | artifact POM + upstream README | owner signed off 2026-09-23 (dual statement accepted) |
 | opennlp-tokenize/postag/chunk-models | edu.washington.cs.knowitall:opennlp-*-models:1.5 | Apache-2.0 | artifact POMs | yes |
 | jwordsplitter | de.danielnaber:jwordsplitter:4.7 | Apache-2.0 | artifact POM | yes (data files only) |
 
@@ -102,11 +103,17 @@ license records required by that model are in place (`LICENSE`,
 **Owner sign-off (2026-09-23):** the owner approved the distribution model for
 the reviewed components — the copyleft and CC-BY-SA dictionaries/data are
 shipped as separately licensed data components (aggregation) alongside the
-LGPL-2.1-or-later engine. Cleared: `km` (CC-BY-NC-SA-3.0 POS component +
-GPL-3.0 SBBIC speller), `ml` (GPL data), `ta` (GPLv3), `be` (CC-BY-SA-4.0),
-`el` (CC-BY-SA-4.0 analyzer + GPL/LGPL/MPL hunspell), `de` (CC-BY-SA-4.0 POS +
-GPL hunspell) and the German/Greek/Italian hunspell "related items"; the
-`no`/`nrd`/`gn` items were recorded earlier (D-163/D-164). Still open (not
-covered): the conflicting-statement `fr`/`nl` POS dictionaries, the Italian
-Morph-it! dual license, the undocumented `en` hunspell/word-list provenance and
-the `ar`/`br`/`ca`/`gl` entries. See `THIRD_PARTY_NOTICES.md`.
+LGPL-2.1-or-later engine. First sign-off (D-311): `km` (CC-BY-NC-SA-3.0 POS
+component + GPL-3.0 SBBIC speller), `ml` (GPL data), `ta` (GPLv3), `be`
+(CC-BY-SA-4.0), `el` (CC-BY-SA-4.0 analyzer + GPL/LGPL/MPL hunspell), `de`
+(CC-BY-SA-4.0 POS + GPL hunspell) and the German/Greek/Italian hunspell
+"related items"; the `no`/`nrd`/`gn` items were recorded earlier (D-163/D-164).
+
+**Second sign-off (D-313, 2026-09-23):** all remaining items are cleared — the
+conflicting-statement `fr` (POM CC-BY-SA-4.0 vs Dicollecte MPL-2.0) and `nl`
+(README CC-BY-3.0-or-later/BSD vs POM LGPL-2.1) POS dictionaries, the `ca` dual
+statement (POM GPL-2.0-only vs README LGPL-2.1/GPL-2.0), the Italian Morph-it!
+dual license, and the `ar`/`br`/`gl` entries. The undocumented `en` hunspell /
+word-list provenance is accepted as an **evidence gap**: the owner's acceptance
+is recorded, but `license_verified` stays `false` because the provenance/terms
+remain unverified. See `THIRD_PARTY_NOTICES.md`.

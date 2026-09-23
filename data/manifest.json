@@ -9,8 +9,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/arabic.dict",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -21,8 +21,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/arabic.info",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -33,8 +33,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/arabic_synth.dict",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -45,8 +45,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/arabic_synth.info",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -68,8 +68,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/hunspell/AUTHORS",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -80,8 +80,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/hunspell/COPYING",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -92,8 +92,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/ar/src/main/resources/org/languagetool/resource/ar/hunspell/THANKS",
-        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        "license_verified": false,
+        "license": "Arabic POS/synthesis Morfologik dictionaries (Arramooz-derived; upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all GPL) and the Hunspell-ar speller dictionary (tri-licensed GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path recorded)",
+        "license_verified": true,
         "license_source": "upstream ar/README.txt; ar/wordlist-flat/about.txt; ar/hunspell/COPYING"
       }
     },
@@ -812,8 +812,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/breton.dict",
-        "license": "GPL (Breton POS dictionary based on the Apertium Breton dictionary, with permission of its authors; upstream br/README.txt states GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Breton POS dictionary based on the Apertium Breton dictionary, with permission of its authors; upstream br/README.txt states GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream br/README.txt"
       }
     },
@@ -824,8 +824,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/br/src/main/resources/org/languagetool/resource/br/breton.info",
-        "license": "GPL (Breton POS dictionary based on the Apertium Breton dictionary, with permission of its authors; upstream br/README.txt states GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Breton POS dictionary based on the Apertium Breton dictionary, with permission of its authors; upstream br/README.txt states GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream br/README.txt"
       }
     },
@@ -1018,8 +1018,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES.dict",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1032,8 +1032,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES.info",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1046,8 +1046,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_synth.dict",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1060,8 +1060,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_synth.info",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1074,8 +1074,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_tags.txt",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1363,8 +1363,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling.dict",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1377,8 +1377,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling.info",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1391,8 +1391,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling_multitoken.dict",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -1405,8 +1405,8 @@
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         "artifact_sha256": "e5f32aadd1852e8e442810611d89906c06369a94d2a62c1a142eb3e8f5bda2f1",
         "artifact_inner_path": "org/languagetool/resource/ca/ca-ES_spelling_multitoken.info",
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt"
       }
     },
@@ -3197,7 +3197,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_AU.dict",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3211,7 +3211,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_AU.info",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3225,7 +3225,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_CA.dict",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3239,7 +3239,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_CA.info",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3253,7 +3253,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_GB.dict",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3267,7 +3267,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_GB.info",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3281,7 +3281,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_NZ.dict",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3295,7 +3295,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_NZ.info",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3309,7 +3309,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_US.dict",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3323,7 +3323,7 @@
         "coords": "org.languagetool:english-pos-dict:0.6",
         "artifact_sha256": "2a3e96b49854e5275f8eb7a1bb5b3b85b82f687fed272f3043882ccc0b1634b1",
         "artifact_inner_path": "org/languagetool/resource/en/hunspell/en_US.info",
-        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - to be confirmed",
+        "license": "LGPL-2.1-only (artifact POM); underlying hunspell dictionary provenance not documented upstream - owner signed off 2026-09-23 (acceptance recorded; provenance not verified)",
         "license_verified": false,
         "license_source": "upstream english-pos-dict POM; no hunspell license note in the LT checkout"
       }
@@ -3828,7 +3828,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/en/src/main/resources/org/languagetool/resource/en/agid-readme.txt",
-        "license": "Word-list provenance documentation (AGID (c) Kevin Atkinson; Moby/WordNet terms); exact terms to be confirmed",
+        "license": "Word-list provenance documentation (AGID (c) Kevin Atkinson; Moby/WordNet terms); exact terms undocumented - owner signed off 2026-09-23 (acceptance recorded; terms not verified)",
         "license_verified": false,
         "license_source": "upstream en/agid-readme.txt"
       }
@@ -4038,7 +4038,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/en/src/main/resources/org/languagetool/resource/en/pos-readme.txt",
-        "license": "Word-list provenance documentation (Moby Part-of-Speech II / WordNet); exact terms to be confirmed",
+        "license": "Word-list provenance documentation (Moby Part-of-Speech II / WordNet); exact terms undocumented - owner signed off 2026-09-23 (acceptance recorded; terms not verified)",
         "license_verified": false,
         "license_source": "upstream en/pos-readme.txt"
       }
@@ -4730,8 +4730,8 @@
         "coords": "org.languagetool:french-pos-dict:0.7",
         "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
         "artifact_inner_path": "org/languagetool/resource/fr/french.dict",
-        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
       }
     },
@@ -4744,8 +4744,8 @@
         "coords": "org.languagetool:french-pos-dict:0.7",
         "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
         "artifact_inner_path": "org/languagetool/resource/fr/french.info",
-        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
       }
     },
@@ -4758,8 +4758,8 @@
         "coords": "org.languagetool:french-pos-dict:0.7",
         "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
         "artifact_inner_path": "org/languagetool/resource/fr/french_synth.dict",
-        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
       }
     },
@@ -4772,8 +4772,8 @@
         "coords": "org.languagetool:french-pos-dict:0.7",
         "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
         "artifact_inner_path": "org/languagetool/resource/fr/french_synth.info",
-        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
       }
     },
@@ -4786,8 +4786,8 @@
         "coords": "org.languagetool:french-pos-dict:0.7",
         "artifact_sha256": "d3a92261ef88802b648dd63387794947fe1e3cae984f1150f87b809ca8350ade",
         "artifact_inner_path": "org/languagetool/resource/fr/french_tags.txt",
-        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt"
       }
     },
@@ -5064,8 +5064,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician.dict",
-        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/README.txt"
       }
     },
@@ -5076,8 +5076,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician.info",
-        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/README.txt"
       }
     },
@@ -5088,8 +5088,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician_synth.dict",
-        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/README.txt"
       }
     },
@@ -5100,8 +5100,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician_synth.info",
-        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/README.txt"
       }
     },
@@ -5112,8 +5112,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/galician_tags.txt",
-        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt states both source dictionaries are GPL) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/README.txt"
       }
     },
@@ -5146,8 +5146,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/README-gl-ES.txt",
-        "license": "GPL (hunspell-gl_ES / VOLGa dictionary documentation; README states GPL, LICENCES-en.txt is GPL-3.0) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (hunspell-gl_ES / VOLGa dictionary documentation; README states GPL, LICENCES-en.txt is GPL-3.0) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/hunspell/README-gl-ES.txt"
       }
     },
@@ -5158,8 +5158,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/gl_ES.aff",
-        "license": "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/hunspell/README-gl-ES.txt"
       }
     },
@@ -5170,8 +5170,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/gl/src/main/resources/org/languagetool/resource/gl/hunspell/gl_ES.dic",
-        "license": "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - to be confirmed",
-        "license_verified": false,
+        "license": "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - owner signed off 2026-09-23",
+        "license_verified": true,
         "license_source": "upstream gl/hunspell/README-gl-ES.txt"
       }
     },
@@ -5559,8 +5559,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/resource/it/italian.dict",
-        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt)",
-        "license_verified": false,
+        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt) - owner signed off 2026-09-23 (dual-license branch accepted for the derived Morfologik builds)",
+        "license_verified": true,
         "license_source": "upstream it/README.txt (Morph-it! statement), it/tagset.txt (LICENSING INFORMATION)"
       }
     },
@@ -5571,8 +5571,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/resource/it/italian.info",
-        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt)",
-        "license_verified": false,
+        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt) - owner signed off 2026-09-23 (dual-license branch accepted for the derived Morfologik builds)",
+        "license_verified": true,
         "license_source": "upstream it/README.txt (Morph-it! statement), it/tagset.txt (LICENSING INFORMATION)"
       }
     },
@@ -5583,8 +5583,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/resource/it/italian_synth.dict",
-        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt)",
-        "license_verified": false,
+        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt) - owner signed off 2026-09-23 (dual-license branch accepted for the derived Morfologik builds)",
+        "license_verified": true,
         "license_source": "upstream it/README.txt (Morph-it! statement), it/tagset.txt (LICENSING INFORMATION)"
       }
     },
@@ -5595,8 +5595,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/resource/it/italian_synth.info",
-        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt)",
-        "license_verified": false,
+        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt) - owner signed off 2026-09-23 (dual-license branch accepted for the derived Morfologik builds)",
+        "license_verified": true,
         "license_source": "upstream it/README.txt (Morph-it! statement), it/tagset.txt (LICENSING INFORMATION)"
       }
     },
@@ -5607,8 +5607,8 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/it/src/main/resources/org/languagetool/resource/it/italian_tags.txt",
-        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt)",
-        "license_verified": false,
+        "license": "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, it/tagset.txt) - owner signed off 2026-09-23 (dual-license branch accepted for the derived Morfologik builds)",
+        "license_verified": true,
         "license_source": "upstream it/README.txt (Morph-it! statement), it/tagset.txt (LICENSING INFORMATION)"
       }
     },
@@ -6666,8 +6666,8 @@
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
         "artifact_inner_path": "org/languagetool/resource/nl/README.txt",
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
       }
     },
@@ -6680,8 +6680,8 @@
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
         "artifact_inner_path": "org/languagetool/resource/nl/dutch.dict",
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
       }
     },
@@ -6694,8 +6694,8 @@
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
         "artifact_inner_path": "org/languagetool/resource/nl/dutch.info",
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
       }
     },
@@ -6708,8 +6708,8 @@
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
         "artifact_inner_path": "org/languagetool/resource/nl/dutch_synth.dict",
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
       }
     },
@@ -6722,8 +6722,8 @@
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
         "artifact_inner_path": "org/languagetool/resource/nl/dutch_synth.info",
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
       }
     },
@@ -6736,8 +6736,8 @@
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         "artifact_sha256": "f91c712ee961889f2950a5c9c97f4f84791b2fec59706af1970dadee5baba677",
         "artifact_inner_path": "org/languagetool/resource/nl/dutch_tags.txt",
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": false,
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": true,
         "license_source": "https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt"
       }
     },

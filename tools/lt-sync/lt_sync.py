@@ -95,9 +95,10 @@ MAVEN_ARTIFACTS = {
         "coords": "org.languagetool:french-pos-dict:0.7",
         # POM declares CC-BY-SA-4.0, but the bundled lexicon documentation
         # (fr/words/README_lexique.txt, fr/hunspell/README_fr.txt) states
-        # MPL-2.0 for the Dicollecte lexique -> owner must confirm.
-        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - to be confirmed",
-        "license_verified": False,
+        # MPL-2.0 for the Dicollecte lexique; the owner accepted the
+        # conflicting statements (2026-09-23).
+        "license": "CC-BY-SA-4.0 (artifact POM); Dicollecte lexicon docs state MPL-2.0 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom; upstream fr/words/README_lexique.txt",
     },
     "portuguese-pos-dict-1.2.0.jar": {
@@ -111,20 +112,22 @@ MAVEN_ARTIFACTS = {
         "coords": "org.languagetool:dutch-pos-dict:0.1",
         # The bundled nl/dictionaries/README.txt licenses the dictionaries as
         # CC-BY-3.0-or-later OR BSD (TaalTik); the artifact POM declares
-        # LGPL-2.1 -> both statements recorded, owner must confirm. The
-        # nl/spelling/README.txt dicts are LGPL-2.1-or-later (TaalTik).
-        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - to be confirmed",
-        "license_verified": False,
+        # LGPL-2.1 -> both statements recorded; the owner accepted the
+        # conflicting statements (2026-09-23). The nl/spelling/README.txt dicts
+        # are LGPL-2.1-or-later (TaalTik).
+        "license": "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt); LGPL-2.1-or-later (nl/spelling/README.txt); POM declares LGPL-2.1 - owner signed off 2026-09-23 (conflicting statements accepted)",
+        "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom; bundled nl/dictionaries/README.txt, nl/spelling/README.txt",
     },
     "catalan-pos-dict-3.3.jar": {
         "coords": "org.softcatala:catalan-pos-dict:3.3",
         # POM declares "GNU General Public License, Version 2" (GPL-2.0-only);
         # the upstream module README (resource/ca/README.txt) documents the
-        # Softcatalà dictionaries as dual LGPL-2.1/GPL-2.0 -> owner must
-        # confirm. The dictionary conversion is a build of those sources.
-        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - to be confirmed",
-        "license_verified": False,
+        # Softcatalà dictionaries as dual LGPL-2.1/GPL-2.0; the owner accepted
+        # the dual-license statements (2026-09-23). The dictionary conversion is
+        # a build of those sources.
+        "license": "GPL-2.0-only (artifact POM); upstream ca/README.txt documents dual LGPL-2.1 OR GPL-2.0 - owner signed off 2026-09-23 (dual-license statements accepted)",
+        "license_verified": True,
         "license_source": f"{MAVEN_CENTRAL}/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom; upstream ca/README.txt",
     },
     "morphology-el-1.0.0.jar": {
@@ -562,13 +565,15 @@ UPSTREAM_FILE_LICENSES = {
     ),
     "en/words/agid-readme.txt": (
         "Word-list provenance documentation (AGID (c) Kevin Atkinson; "
-        "Moby/WordNet terms); exact terms to be confirmed",
+        "Moby/WordNet terms); exact terms undocumented - owner signed off "
+        "2026-09-23 (acceptance recorded; terms not verified)",
         False,
         "upstream en/agid-readme.txt",
     ),
     "en/words/pos-readme.txt": (
         "Word-list provenance documentation (Moby Part-of-Speech II / "
-        "WordNet); exact terms to be confirmed",
+        "WordNet); exact terms undocumented - owner signed off 2026-09-23 "
+        "(acceptance recorded; terms not verified)",
         False,
         "upstream en/pos-readme.txt",
     ),
@@ -609,15 +614,16 @@ UPSTREAM_FILE_LICENSES = {
 IN_TREE_LICENSES = {
     "it": (
         "CC-BY-SA-2.0 OR LGPL (Morph-it! dual license; upstream it/README.txt, "
-        "it/tagset.txt)",
-        False,  # dual-licensed; the artifact is a build, owner must confirm terms
+        "it/tagset.txt) - owner signed off 2026-09-23 (dual-license branch "
+        "accepted for the derived Morfologik builds)",
+        True,
         "upstream it/README.txt (Morph-it! statement), it/tagset.txt "
         "(LICENSING INFORMATION)",
     ),
     "gl": (
         "GPL (Freeling/Apertium-derived dictionaries; upstream gl/README.txt "
-        "states both source dictionaries are GPL) - to be confirmed",
-        False,
+        "states both source dictionaries are GPL) - owner signed off 2026-09-23",
+        True,
         "upstream gl/README.txt",
     ),
     "ro": (
@@ -661,8 +667,8 @@ IN_TREE_LICENSES = {
     "br": (
         "GPL (Breton POS dictionary based on the Apertium Breton dictionary, "
         "with permission of its authors; upstream br/README.txt states GPL) - "
-        "to be confirmed",
-        False,
+        "owner signed off 2026-09-23",
+        True,
         "upstream br/README.txt",
     ),
     "tl": (
@@ -693,8 +699,9 @@ IN_TREE_LICENSES = {
         "upstream ar/README.txt names Arramooz/Ayaspell/mysam-tagmanager, all "
         "GPL) and the Hunspell-ar speller dictionary (tri-licensed "
         "GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later, "
-        "ar/hunspell/COPYING) - owner/legal review (LGPL-2.1+ path recorded)",
-        False,
+        "ar/hunspell/COPYING) - owner signed off 2026-09-23 (LGPL-2.1+ path "
+        "recorded)",
+        True,
         "upstream ar/README.txt; ar/wordlist-flat/about.txt; "
         "ar/hunspell/COPYING",
     ),
@@ -760,16 +767,17 @@ def hunspell_license(lang: str, name: str):
         if name == "README-gl-ES.txt":
             return (
                 "GPL (hunspell-gl_ES / VOLGa dictionary documentation; "
-                "README states GPL, LICENCES-en.txt is GPL-3.0) - to be confirmed",
-                False,
+                "README states GPL, LICENCES-en.txt is GPL-3.0) - owner signed "
+                "off 2026-09-23",
+                True,
                 "upstream gl/hunspell/README-gl-ES.txt",
             )
         if name.startswith("gl_ES."):
             # Raw .aff/.dic of the VOLGa-based hunspell dictionary.
             return (
                 "GPL (hunspell gl_ES VOLGa dictionary; README-gl-ES.txt) - "
-                "to be confirmed",
-                False,
+                "owner signed off 2026-09-23",
+                True,
                 "upstream gl/hunspell/README-gl-ES.txt",
             )
     if lang == "ro":
@@ -1009,10 +1017,13 @@ def jar_inner_license(inner: str):
     if inner.startswith("org/languagetool/resource/en/hunspell/"):
         # The english-pos-dict artifact bundles hunspell conversions; upstream
         # documents no license for the underlying hunspell dictionaries
-        # (SCOWL-derived), so they stay "to be confirmed".
+        # (SCOWL-derived). Genuine evidence gap: the owner accepted the
+        # component (2026-09-23) but the provenance is not asserted as
+        # verified, so `license_verified` stays false.
         return (
             "LGPL-2.1-only (artifact POM); underlying hunspell dictionary "
-            "provenance not documented upstream - to be confirmed",
+            "provenance not documented upstream - owner signed off 2026-09-23 "
+            "(acceptance recorded; provenance not verified)",
             False,
             "upstream english-pos-dict POM; no hunspell license note in the LT checkout",
         )
@@ -1032,8 +1043,9 @@ def jar_inner_license(inner: str):
     if inner.startswith("org/languagetool/resource/nl/dictionaries/"):
         return (
             "CC-BY-3.0-or-later OR BSD (nl/dictionaries/README.txt, TaalTik); "
-            "artifact POM declares LGPL-2.1 - to be confirmed",
-            False,
+            "artifact POM declares LGPL-2.1 - owner signed off 2026-09-23 "
+            "(conflicting statements accepted)",
+            True,
             "bundled nl/dictionaries/README.txt; artifact POM",
         )
     return None

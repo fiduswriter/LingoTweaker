@@ -34,27 +34,29 @@ confirmed** instead of guessing.
 
 ## Components
 
-"Confirmed" means the license is stated at the cited source; "to be confirmed"
-means no upstream statement was found (or two statements conflict) and the owner
-must decide. Data paths are relative to `data/`.
+"Confirmed" means the license is stated at the cited source. "Owner accepted"
+marks a component the owner has cleared even though the underlying evidence is
+an evidence gap (e.g. undocumented provenance); the manifest keeps
+`license_verified=false` for those. All legal-review items are now decided
+(the two 2026-09-23 sign-offs). Data paths are relative to `data/`.
 
 | Component | Vendored data | License | Evidence | Status |
 |-----------|---------------|---------|----------|--------|
 | LanguageTool core + rule resources | `core/**`, `schemas/**`, `messages/**`, `<lang>/rules/**`, `<lang>/disambiguation.xml`, `<lang>/*.sor`, LT-authored `<lang>/words/**` | LGPL-2.1-or-later | upstream `COPYING.txt`, `pom.xml` (`<licenses>`); resources may differ per file | Confirmed (default; per-file exceptions below) |
 | English POS/spelling dictionaries (`org.languagetool:english-pos-dict:0.6`) | `en/dictionaries/*` | LGPL-2.1-only | [artifact POM](https://repo1.maven.org/maven2/org/languagetool/english-pos-dict/0.6/english-pos-dict-0.6.pom) (`<licenses>`, LGPL 2.1) | Confirmed |
-| English hunspell dictionaries (inside the same artifact) | `en/hunspell/*.dict`, `en/hunspell/*.info` | artifact POM: LGPL-2.1-only; underlying hunspell data (SCOWL-derived) | no license note for the hunspell files in the LT checkout or artifact | **License to be confirmed** |
-| English word-list provenance docs | `en/words/agid-readme.txt`, `en/words/pos-readme.txt` | AGID © Kevin Atkinson; Moby Part-of-Speech II / WordNet terms | the readmes state copyright, not a license | **License to be confirmed** |
+| English hunspell dictionaries (inside the same artifact) | `en/hunspell/*.dict`, `en/hunspell/*.info` | artifact POM: LGPL-2.1-only; underlying hunspell data (SCOWL-derived) | no license note for the hunspell files in the LT checkout or artifact | Owner accepted 2026-09-23 (evidence gap: underlying hunspell provenance undocumented, so **not** asserted as verified) |
+| English word-list provenance docs | `en/words/agid-readme.txt`, `en/words/pos-readme.txt` | AGID © Kevin Atkinson; Moby Part-of-Speech II / WordNet terms | the readmes state copyright, not a license | Owner accepted 2026-09-23 (evidence gap: exact terms undocumented, so **not** asserted as verified) |
 | German POS dictionary (`de.danielnaber:german-pos-dict:1.2.4`) | `de/dictionaries/*` | CC-BY-SA-4.0 | [artifact POM](https://repo1.maven.org/maven2/de/danielnaber/german-pos-dict/1.2.4/german-pos-dict-1.2.4.pom) ("data originally based on Morphy"); upstream `resource/de/README.txt` (= `de/words/README.txt`) | Confirmed |
 | German hunspell dictionary (igerman98, frami extension) | `de/hunspell/de_*.aff`, `de_*.dic`, `de_DE.README`, `de_*_frami_README.txt`, `COPYING_GPLv2/3.txt`, converted `de_*.dict`/`de_*.info` | GPL-2.0-or-later OR GPL-3.0-or-later | `de_DE_frami_README.txt` ("GNU GPL, Version 2 oder 3"), vendored `COPYING_GPLv2/3.txt` | Confirmed for raw/dictionary docs; derived `.dict`/`.info` tracked as unverified |
 | jWordSplitter compound word lists (`de.danielnaber:jwordsplitter:4.7`) | `de/compound/*.txt` | Apache-2.0 (Sven Abels / Daniel Naber) | [artifact POM](https://repo1.maven.org/maven2/de/danielnaber/jwordsplitter/4.7/jwordsplitter-4.7.pom) | Confirmed |
 | Spanish POS dictionary (`org.softcatala:spanish-pos-dict:2.5`) | `es/dictionaries/*` | LGPL-2.1-only | [artifact POM](https://repo1.maven.org/maven2/org/softcatala/spanish-pos-dict/2.5/spanish-pos-dict-2.5.pom) | Confirmed |
-| French POS dictionary (`org.languagetool:french-pos-dict:0.7`) | `fr/dictionaries/*` | POM: CC-BY-SA-4.0; bundled Dicollecte docs: MPL-2.0 | [artifact POM](https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom); `fr/words/README_lexique.txt`, `fr/hunspell/README_fr.txt` | **License to be confirmed** (conflicting statements) |
+| French POS dictionary (`org.languagetool:french-pos-dict:0.7`) | `fr/dictionaries/*` | POM: CC-BY-SA-4.0; bundled Dicollecte docs: MPL-2.0 | [artifact POM](https://repo1.maven.org/maven2/org/languagetool/french-pos-dict/0.7/french-pos-dict-0.7.pom); `fr/words/README_lexique.txt`, `fr/hunspell/README_fr.txt` | Owner signed off 2026-09-23 (conflicting POM/Dicollecte statements accepted) |
 | Dicollecte lexicon documentation | `fr/words/README_lexique.txt`, `fr/hunspell/README_fr.txt` | MPL-2.0 | the readmes state "MPL : Mozilla Public License version 2.0" | Confirmed (docs) |
-| Italian POS/synthesis dictionaries (Morph-it!) | `it/dictionaries/*` | dual: CC-BY-SA-2.0 OR LGPL | upstream `resource/it/README.txt`, `resource/it/tagset.txt` ("LICENSING INFORMATION") | **License to be confirmed** (dual choice / build artifact) |
+| Italian POS/synthesis dictionaries (Morph-it!) | `it/dictionaries/*` | dual: CC-BY-SA-2.0 OR LGPL | upstream `resource/it/README.txt`, `resource/it/tagset.txt` ("LICENSING INFORMATION") | Owner signed off 2026-09-23 (dual-license branch accepted for the derived builds) |
 | Italian tagset | `it/words/tagset.txt` | dual: CC-BY-SA-2.0 OR LGPL | "LICENSING INFORMATION" section in the file (Morph-it!) | Confirmed (dual) |
 | Italian hunspell dictionary | `it/hunspell/it_IT.dict`, `it_IT.info`, `README_it_IT.txt` | GPL-3.0-only | `README_it_IT.txt` ("License: GNU GPL 3", © 2010/2011 Andrea Pescetti) | Confirmed for the README; converted `.dict`/`.info` tracked as unverified |
 | Portuguese POS dictionary + speller dictionaries (`org.languagetool:portuguese-pos-dict:1.2.0`) | `pt/dictionaries/*`, `pt/spelling/*` | LGPL-2.1-only | [artifact POM](https://repo1.maven.org/maven2/org/languagetool/portuguese-pos-dict/1.2.0/portuguese-pos-dict-1.2.0.pom) | Confirmed |
-| Dutch POS dictionary (`org.languagetool:dutch-pos-dict:0.1`) | `nl/dictionaries/*` | README: CC-BY-3.0-or-later OR BSD (TaalTik); artifact POM: LGPL-2.1 | bundled `nl/dictionaries/README.txt`; [artifact POM](https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom) | **License to be confirmed** (conflicting statements) |
+| Dutch POS dictionary (`org.languagetool:dutch-pos-dict:0.1`) | `nl/dictionaries/*` | README: CC-BY-3.0-or-later OR BSD (TaalTik); artifact POM: LGPL-2.1 | bundled `nl/dictionaries/README.txt`; [artifact POM](https://repo1.maven.org/maven2/org/languagetool/dutch-pos-dict/0.1/dutch-pos-dict-0.1.pom) | Owner signed off 2026-09-23 (conflicting README/POM statements accepted) |
 | Dutch speller dictionary (TaalTik) | `nl/spelling/nl_NL.dict`, `nl_NL.info`, `README.txt` | LGPL-2.1-or-later | bundled `nl/spelling/README.txt` (Ruud Baars / TaalTik) | Confirmed |
 | Greek POS/synthesis dictionaries (`GreekTagger`/`GreekSynthesizer`) | `el/dictionaries/*` | LGPL (upstream `el/README.txt`: the few test entries are "made available here under LGPL") | upstream `resource/el/README.txt` | Confirmed |
 | Greek analyzer data (`org.ioperm:morphology-el:1.0.0`, `GreekAnalyzer`) | `el/morphology/analysis.dict`, `analysis.info` | POM: Apache-2.0 (source code) + CC-BY-SA-4.0 (linguistic data) | [artifact POM](https://repo1.maven.org/maven2/org/ioperm/morphology-el/1.0.0/morphology-el-1.0.0.pom) | **License to be confirmed** (CC-BY-SA-4.0 share-alike data in an LGPL distribution, like the German POS dictionary) |
@@ -80,6 +82,10 @@ must decide. Data paths are relative to `data/`.
 | Malayalam POS/speller dictionaries | `ml/dictionaries/malayalam.*`, `ml/hunspell/ml_IN.*` | GPL (Jithesh.V.S. / C-DIT, public sources; `ml_IN` is a derived Morfologik build) | upstream `ml/README.txt` | Confirmed; owner signed off 2026-09-23 |
 | Tamil dictionary/tagset | `ta/dictionaries/tamil.dict`, `tamil.info` | GPLv3 (Ve. Elanjelian; Crubadan 2.0 corpus GPLv3) | upstream `ta/README.txt` | Confirmed; owner signed off 2026-09-23 |
 | Simple German rule XML | `de/rules/de-DE-x-simple-language/grammar.xml` | LGPL-2.1-or-later (LanguageTool resource; per-file license varies) | upstream module pom (LGPL-2.1) | Confirmed; owner signed off 2026-09-23 |
+| Arabic POS/synthesis dictionaries + Hunspell-ar speller | `ar/dictionaries/*`, `ar/hunspell/ar.*` | Arramooz-derived GPL (upstream `ar/README.txt`); Hunspell-ar tri-license GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later (`ar/hunspell/COPYING`) | upstream `ar/README.txt`, `ar/hunspell/COPYING` | Confirmed; owner signed off 2026-09-23 (LGPL-2.1+ path recorded) |
+| Breton POS dictionary | `br/dictionaries/*` | GPL (Apertium-derived, with permission of its authors; upstream `br/README.txt`) | upstream `br/README.txt` | Confirmed; owner signed off 2026-09-23 |
+| Catalan POS/spelling dictionaries (`org.softcatala:catalan-pos-dict:3.3`) | `ca/dictionaries/*`, `ca/spelling/*` | POM: GPL-2.0-only; upstream `ca/README.txt` documents dual LGPL-2.1 OR GPL-2.0 | [artifact POM](https://repo1.maven.org/maven2/org/softcatala/catalan-pos-dict/3.3/catalan-pos-dict-3.3.pom); upstream `ca/README.txt` | Confirmed; owner signed off 2026-09-23 (dual-license statements accepted) |
+| Galician POS/spelling dictionaries + hunspell `gl_ES` | `gl/dictionaries/*`, `gl/hunspell/gl_ES.*`, `gl/hunspell/README-gl-ES.txt` | GPL (Freeling/Apertium-derived; upstream `gl/README.txt`; VOLGa `gl_ES` per `README-gl-ES.txt`) | upstream `gl/README.txt`, `gl/hunspell/README-gl-ES.txt` | Confirmed; owner signed off 2026-09-23 |
 
 Notices for the German/Italian/French/Dutch dictionaries in the table come from
 files that are themselves vendored, so the notice texts travel with the data
@@ -87,7 +93,7 @@ files that are themselves vendored, so the notice texts travel with the data
 `data/it/hunspell/README_it_IT.txt`, `data/nl/dictionaries/README.txt`,
 `data/nl/spelling/README.txt`).
 
-## Owner sign-off (2026-09-23)
+## Owner sign-offs (2026-09-23)
 
 **Decision (owner, 2026-09-23):** the owner has signed off on the legal-review
 items below, accepting the current distribution model (project code stays
@@ -115,23 +121,53 @@ carry an `owner signed off 2026-09-23` note:
   and the igerman98/frami hunspell dictionaries are **GPL-2.0-or-later OR
   GPL-3.0-or-later**; the `de-DE-x-simple-language` rule XML is an upstream
   LanguageTool resource under the default upstream license.
+- **French (`fr`)**: the POS dictionary's conflicting statements (artifact POM
+  **CC-BY-SA-4.0** vs bundled Dicollecte lexicon docs **MPL-2.0**) are accepted.
+- **Dutch (`nl`)**: the POS dictionary's conflicting statements (bundled README
+  **CC-BY-3.0-or-later OR BSD** vs artifact POM **LGPL-2.1**) are accepted.
+- **Catalan (`ca`)**: the POS/spelling dictionary's dual statements (artifact
+  POM **GPL-2.0-only**, upstream `ca/README.txt` **LGPL-2.1 OR GPL-2.0**) are
+  accepted.
+- **Italian (`it`)**: the Morph-it! POS/synthesis dictionaries' dual license
+  (**CC-BY-SA-2.0 OR LGPL**) is accepted for the derived Morfologik builds.
+- **Arabic (`ar`)**: the Arramooz-derived GPL POS/synthesis dictionaries and
+  the Hunspell-ar **GPL-2.0-or-later OR LGPL-2.1-or-later OR MPL-1.1-or-later**
+  speller are accepted (LGPL-2.1+ path recorded).
+- **Breton (`br`)**: the Apertium-derived **GPL** POS dictionary (used with the
+  authors' permission) is accepted.
+- **Galician (`gl`)**: the Freeling/Apertium-derived **GPL** POS/synthesis
+  dictionaries and the VOLGa `gl_ES` hunspell dictionary are accepted.
+- **English (`en`) — evidence gap, accepted but not asserted as verified**: the
+  hunspell dictionaries bundled in `english-pos-dict` carry the artifact's
+  **LGPL-2.1-only** POM license but their underlying SCOWL/hunspell provenance
+  is undocumented, and the `en/words/agid-readme.txt` / `pos-readme.txt`
+  provenance docs state copyrights rather than license terms. The owner accepted
+  these components on 2026-09-23; `license_verified` remains `false` for them
+  because the provenance/terms were **not** verified.
 - The earlier `no`/`nrd`/`gn` review items (D-163/D-164) remain as recorded;
   the German POS, German/Greek/Italian hunspell and Greek analyzer data are
   the "related items" covered by the same sign-off.
 
-**Not covered by this sign-off** (unchanged, still open): the conflicting
-POS-dictionary statements (`fr` POM CC-BY-SA-4.0 vs Dicollecte MPL-2.0, `nl`
-README CC-BY-3.0-or-later/BSD vs POM LGPL-2.1), the Italian Morph-it! dual
-license (`it`), the undocumented English hunspell dictionary and word-list
-provenance (`en`), and the `ar`/`br`/`ca`/`gl` "to be confirmed" entries.
+**All legal-review items are now covered by the owner's sign-off.** The
+previously "not covered" items — the conflicting POS-dictionary statements
+(`fr`, `nl`), the Catalan dual statement (`ca`), the Italian Morph-it! dual
+license (`it`), the undocumented English hunspell/word-list provenance (`en`,
+accepted as an evidence gap), and the `ar`/`br`/`gl` entries — are cleared
+above (second owner sign-off, 2026-09-23; decision D-313). Only the `en`
+provenance items keep `license_verified=false`, and only because the
+underlying evidence itself remains undocumented; the owner's acceptance is
+recorded in the license note.
 
 `license_verified` in `data/manifest.json` records whether the license
 declaration is found at `license_source`. Where a legal-review item's only
 outstanding question was the owner decision, that flag is now `true` and the
-`license` note carries the sign-off date; derived Morfologik builds of
-components that were already cleared keep the same treatment.
+`license` note carries the sign-off date (the conflicting/dual-statement and
+`ar`/`br`/`gl` items, and the earlier `be`/`km`/`ta`/`ml` items). For the
+genuine evidence gaps (`en`) the flag stays `false` and the note records the
+owner's acceptance without asserting the undocumented provenance. Derived
+Morfologik builds keep the unchanged derived-conversion flag convention.
 
-## License to be confirmed — owner decisions
+## Owner decisions — license questions (all resolved 2026-09-23)
 
 1. **German POS dictionary (`german-pos-dict`)** is CC-BY-SA-4.0 per its POM and
    upstream README, not LGPL as the Phase-0 assumption recorded. CC-BY-SA
@@ -140,14 +176,19 @@ components that were already cleared keep the same treatment.
    **Owner signed off 2026-09-23** (see above).
 2. **French POS dictionary (`french-pos-dict`)** has conflicting statements:
    POM CC-BY-SA-4.0 vs bundled Dicollecte lexicon docs MPL-2.0. The Dicollecte
-   dictionary sources are the likely true origin.
+   dictionary sources are the likely true origin. **Owner signed off
+   2026-09-23** (conflicting statements accepted).
 3. **Dutch POS dictionary (`dutch-pos-dict`)** licenses the dictionaries as
    CC-BY-3.0-or-later OR BSD in the bundled README, while the artifact POM says
-   LGPL-2.1.
+   LGPL-2.1. **Owner signed off 2026-09-23** (conflicting statements accepted).
 4. **English hunspell dictionaries** bundled in `english-pos-dict` carry no
-   license note; their SCOWL/hunspell origin should be confirmed.
+   license note; their SCOWL/hunspell origin should be confirmed. **Owner
+   accepted 2026-09-23 as an evidence gap** — the provenance remains
+   undocumented, so it is recorded as accepted rather than asserted verified.
 5. **English word-list provenance docs** (AGID/Moby/WordNet) state copyrights
-   but no license terms.
+   but no license terms. **Owner accepted 2026-09-23 as an evidence gap** —
+   the exact terms remain undocumented, so recorded as accepted rather than
+   asserted verified.
 6. **GPL dictionaries in an LGPL distribution**: the German igerman98/frami
    hunspell dictionaries (GPL-2.0-or-later OR GPL-3.0-or-later) and the Italian
    it_IT hunspell dictionary (GPL-3.0-only) are copyleft data loaded at runtime.
@@ -158,6 +199,8 @@ components that were already cleared keep the same treatment.
    with the LGPL engine.
 7. **Italian Morph-it! dictionaries/tagsets** are dual-licensed; pick a branch
    (CC-BY-SA-2.0 vs LGPL) and confirm it covers the derived Morfologik builds.
+   **Owner signed off 2026-09-23** (dual-license branch accepted for the
+   derived builds).
 8. **Nordum speller dictionary** (`nrd/hunspell/nrd.dic`) is generated by
    transforming the **word lists** of the Norwegian (`nb_NO.dic`), Danish
    (`da_DK.dic`) and Swedish (`sv_SE.dic`) dictionaries with the Nordum
