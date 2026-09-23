@@ -21,6 +21,10 @@ jobs:
   build:
     if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
+    env:
+      # build the split packs (en-lite base + models/variant sidecars); the
+      # worker falls back to the full packs when the split is absent
+      SPLIT_PACKS: "1"
     steps:
       - uses: actions/checkout@v4
 
