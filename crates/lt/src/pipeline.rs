@@ -5896,6 +5896,10 @@ impl Pipeline {
             disambiguator,
             spelling,
             simple_replace: crate::ar::rules::simple_replace_instances(data_dir.path())?,
+            verb_trans: crate::ar::rules::ArabicTransVerbRule::load(data_dir.path()),
+            inflected_one_word: crate::ar::rules::ArabicInflectedOneWordReplaceRule::load(
+                data_dir.path(),
+            ),
         });
         Ok(Self {
             lang: Lang::Ar,
@@ -13474,6 +13478,47 @@ impl Pipeline {
                         &mut seen,
                     );
                 }
+                // `ArabicTransVerbRule` (18) and
+                // `ArabicInflectedOneWordReplaceRule` (19), the last two
+                // `Arabic.getRelevantRules` classes.
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        arabic.verb_trans.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    arabic
+                        .verb_trans
+                        .check_sentence(&arabic.synthesizer, &analyzed.tokens, start),
+                    &mut seen,
+                );
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        arabic.inflected_one_word.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    arabic.inflected_one_word.check_sentence(
+                        &arabic.synthesizer,
+                        &analyzed.tokens,
+                        start,
+                    ),
+                    &mut seen,
+                );
             }
         }
         // Ukrainian sentence-level Java rules in `Ukrainian.getRelevantRules` order:

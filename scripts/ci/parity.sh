@@ -215,24 +215,6 @@ elif [ "$LANG_ARG" = "uk" ]; then
   EXTRA+=(--expect-only-java=UK_PREP_NOUN_INFLECTION_AGREEMENT=1)
   EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
   EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
-elif [ "$LANG_ARG" = "ar" ]; then
-  # documented known fidelity gaps (docs/differences.md #13): the
-  # `syntax_numeric_0003` number-phrase rule (its `ArabicNumbersWords`
-  # number-to-words engine is not ported, so the filter rejects and the rule is
-  # inert) and the rule classes still unported (`AR_INFLECTED_ONE_WORD`,
-  # `AR_VERB_TRANSITIVE_IINDIRECT`). The only-Rust matches are the secondary
-  # rules that leak through where Java's missing number match would win the
-  # overlap; the two speller boundaries are Hunspell range/wrong-split residue.
-  EXTRA+=(--expect-only-java=syntax_numeric_0003=10)
-  EXTRA+=(--expect-only-java=AR_INFLECTED_ONE_WORD=1)
-  EXTRA+=(--expect-only-java=AR_VERB_TRANSITIVE_IINDIRECT=1)
-  EXTRA+=(--expect-only-java=HUNSPELL_RULE_AR=2)
-  EXTRA+=(--expect-only-rust=typo_000_tanwin_nasb=3)
-  EXTRA+=(--expect-only-rust=AR_SIMPLE_REPLACE=1)
-  EXTRA+=(--expect-only-rust=verb_287_yTAlhA_AlqAnwn=1)
-  EXTRA+=(--expect-only-rust=grammar_0000_jar_dual=1)
-  EXTRA+=(--expect-only-rust=grammar_0000_jar_plural=1)
-  EXTRA+=(--expect-only-rust=number_21to99_majrour_separate_jar=1)
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

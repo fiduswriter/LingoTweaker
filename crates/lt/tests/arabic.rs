@@ -262,3 +262,95 @@ fn arabic_double_punctuation() {
     assert_eq!(matches.len(), 1);
     assert_eq!(suggestions(&matches[0]), vec!["،"]);
 }
+
+/// `HunspellRule`'s wrong-split check (`HUNSPELL_RULE_AR`): `فهو مقفول` is
+/// re-split into the known words `فهوم`/`قفول`, so Java reports one speller
+/// match over both tokens (11-20) instead of `مقفول` alone; the contained
+/// plain match is dropped by the overlap cleanup.
+#[test]
+fn arabic_hunspell_wrong_split() {
+    let _guard = engine_guard();
+    let text = "قفل الباب، فهو مقفول";
+    let matches = one(text, "HUNSPELL_RULE_AR");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (11, 20));
+    assert_eq!(suggestions(&matches[0]), vec!["فهوم قفول"]);
+}
+
+/// The wrong-split across `جرائم يطالها` (`جرائمي طالها`), reported over
+/// `جرائم يطالها` (4-16); the XML `verb_287_yTAlhA_AlqAnwn` match inside the
+/// span is dropped like Java's overlap cleanup.
+#[test]
+fn arabic_hunspell_wrong_split_leading_token() {
+    let _guard = engine_guard();
+    let text = "هذه جرائم يطالها القانون";
+    let matches = one(text, "HUNSPELL_RULE_AR");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (4, 16));
+    assert_eq!(suggestions(&matches[0]), vec!["جرائمي طالها"]);
+}
+
+/// `ArabicNumberPhraseFilter` (`syntax_numeric_0003`): the number phrase is
+/// rewritten through `ArabicNumbersWords` with the `jar` inflection detected
+/// from the `PR` postag of `في`.
+#[test]
+fn arabic_number_phrase_filter() {
+    let _guard = engine_guard();
+    let text = "في مليونان ومئتان وخمسة وأربعون ألفاً وسبعمائة وواحد صندوق.";
+    let matches = one(text, "syntax_numeric_0003");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 52));
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["في مليونين ومئتين وخمسة وأربعين ألفا وسبعمائة وواحد"]
+    );
+}
+
+/// The decade-only phrase (`في ثلاثون` -> `في ثلاثين`).
+#[test]
+fn arabic_number_phrase_filter_decade() {
+    let _guard = engine_guard();
+    let text = "في ثلاثون صندوقا.";
+    let matches = one(text, "syntax_numeric_0003");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 9));
+    assert_eq!(suggestions(&matches[0]), vec!["في ثلاثين"]);
+}
+
+/// `ArabicTransVerbRule` (`AR_VERB_TRANSITIVE_IINDIRECT`): the transitive
+/// `أفاضَ` gets the indirect-transitive `أفاض في` (the reported range is the
+/// verb token only, like the Java `RuleMatch` position pair).
+#[test]
+fn arabic_trans_verb_rule() {
+    let _guard = engine_guard();
+    let text = "أسبغ / أفاضَ الخيرَ عليهم";
+    let matches = one(text, "AR_VERB_TRANSITIVE_IINDIRECT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (7, 12));
+    assert_eq!(
+        matches[0].message,
+        "قل <suggestion>أفاض في</suggestion> بدلا من 'أفاضَ' لأنّ الفعل  متعد بحرف  ."
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["أفاض في"]);
+}
+
+/// `ArabicInflectedOneWordReplaceRule` (`AR_INFLECTED_ONE_WORD`): `أبحاثه`
+/// carries the wrong lemma `أبحاث`, replaced with `بحوث` inflected like the
+/// source token (`ArabicSynthesizer.inflectLemmaLike`, Java `HashSet`
+/// order).
+#[test]
+fn arabic_inflected_one_word_replace() {
+    let _guard = engine_guard();
+    let text = "تأكد الباحث من خلال أبحاثه أنّ الدواء نافع.";
+    let matches = one(text, "AR_INFLECTED_ONE_WORD");
+    assert_eq!(matches.len(), 1);
+    assert_eq!(
+        suggestions(&matches[0]),
+        vec!["بحوثياته", "بحوثته", "بحوثه", "بحوثاته"]
+    );
+    assert!(
+        matches[0].message.contains("بحوث أفصح وأصحّ"),
+        "{}",
+        matches[0].message
+    );
+}

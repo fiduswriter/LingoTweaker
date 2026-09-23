@@ -301,13 +301,54 @@ impl ArabicSynthesizer {
             let word = format!("{prefix}{target_lemma}");
             let token = AnalyzedToken::new(word, Some(target_lemma.to_string()), Some(merged));
             for form in self.set_enclitic_multiple(&token, &suffix) {
-                if !wordlist.contains(&form) {
-                    wordlist.push(form);
-                }
+                wordlist.push(form);
             }
         }
-        wordlist
+        // Java returns `new ArrayList<>(new HashSet<>(wordlist))`, so the
+        // duplicates are gone and the order is the `HashSet` bucket order.
+        java_hash_set_order(&wordlist)
     }
+}
+
+/// `java.lang.String.hashCode` (UTF-16 code units, wrapping i32).
+fn java_string_hash(s: &str) -> u32 {
+    let mut h: i32 = 0;
+    for c in s.encode_utf16() {
+        h = h.wrapping_mul(31).wrapping_add(c as i32);
+    }
+    h as u32
+}
+
+/// The iteration order of Java's `new HashSet<String>(list)` (a `HashMap`
+/// under the hood): the collection constructor pre-sizes the table to
+/// `tableSizeFor(max((int) (size/.75f) + 1, 16))`, each key lands in the
+/// bucket `(h ^ (h >>> 16)) & (cap - 1)`, and iteration walks the buckets in
+/// index order, insertion order within a bucket. No resize happens because
+/// the pre-sized capacity already holds `size` above the load factor.
+fn java_hash_set_order(list: &[String]) -> Vec<String> {
+    let mut unique: Vec<String> = Vec::with_capacity(list.len());
+    for s in list {
+        if !unique.contains(s) {
+            unique.push(s.clone());
+        }
+    }
+    if unique.len() <= 1 {
+        return unique;
+    }
+    // `HashSet(Collection)` initial capacity, then `HashMap.tableSizeFor`.
+    let n = list.len();
+    let init_cap = ((n as f32 / 0.75f32) as i32 + 1).max(16);
+    let mut cap: u32 = 1;
+    while cap < init_cap as u32 {
+        cap <<= 1;
+    }
+    let mask = cap - 1;
+    let mut buckets: Vec<Vec<String>> = vec![Vec::new(); cap as usize];
+    for s in &unique {
+        let h = java_string_hash(s);
+        buckets[((h ^ (h >> 16)) & mask) as usize].push(s.clone());
+    }
+    buckets.into_iter().flatten().collect()
 }
 
 /// `ArabicSynthesizer.inflectMafoulMutlq`.

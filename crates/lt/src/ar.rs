@@ -13,6 +13,7 @@ use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
 pub mod filters;
+pub mod numbers;
 pub mod punctuation;
 pub mod rules;
 pub mod spelling;
@@ -43,6 +44,10 @@ pub struct ArabicPipeline {
     pub spelling: Option<Arc<spelling::ArabicSpellingRule>>,
     /// The six `AbstractSimpleReplaceRule2` instances (rules 8, 12–15, 17).
     pub simple_replace: Vec<crate::simple_replace::SimpleReplaceRule>,
+    /// `ArabicTransVerbRule` (`AR_VERB_TRANSITIVE_IINDIRECT`, stage 3).
+    pub verb_trans: rules::ArabicTransVerbRule,
+    /// `ArabicInflectedOneWordReplaceRule` (`AR_INFLECTED_ONE_WORD`, stage 3).
+    pub inflected_one_word: rules::ArabicInflectedOneWordReplaceRule,
 }
 
 impl ArabicPipeline {
