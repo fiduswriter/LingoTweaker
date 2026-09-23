@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 68,
+  "file_count": 69,
   "files": [
     {
       "path": "core/Roman.sor",
@@ -42,6 +42,17 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-core/src/main/resources/org/languagetool/resource/spelling_global.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "de/rules/de-DE-x-simple-language/grammar.xml",
+      "sha256": "5c668ca6d244a3600ec33371c6e07cb56123a5aaaff56b6ff130f920c927476c",
+      "size": 86945,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/de-DE-x-simple-language/src/main/resources/org/languagetool/rules/de-DE-x-simple-language/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

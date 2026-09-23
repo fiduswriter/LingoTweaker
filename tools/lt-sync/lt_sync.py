@@ -39,7 +39,14 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km", "ml", "ta"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km", "ml", "ta", "de-DE-x-simple-language"]
+
+# Simple German is a separate upstream module (`language-de-DE-x-simple-language`)
+# but a variant of the German language in the Rust engine: its rule XML is
+# vendored inside the German data directory (so the `de` data pack carries it)
+# rather than a top-level `data/<cc>/` directory.
+SIMPLE_GERMAN = "de-DE-x-simple-language"
+SIMPLE_GERMAN_RULE_DEST = "de/rules/de-DE-x-simple-language"
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -1289,7 +1296,12 @@ def cmd_import(args: argparse.Namespace) -> None:
                 if "src" in src.relative_to(rules_dir).parts:
                     continue
                 rel = src.relative_to(rules_dir)
-                copy_upstream_entry(upstream, src, f"{lang}/rules/{rel.as_posix()}", entries)
+                if lang == SIMPLE_GERMAN:
+                    copy_upstream_entry(
+                        upstream, src, f"{SIMPLE_GERMAN_RULE_DEST}/{rel.as_posix()}", entries
+                    )
+                else:
+                    copy_upstream_entry(upstream, src, f"{lang}/rules/{rel.as_posix()}", entries)
         disamb = base / "resource" / lang / "disambiguation.xml"
         if disamb.exists():
             copy_upstream_entry(upstream, disamb, f"{lang}/disambiguation.xml", entries)
@@ -1422,7 +1434,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-de-x-simple-language)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL
