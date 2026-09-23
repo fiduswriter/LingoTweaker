@@ -57,6 +57,7 @@ mod km;
 mod long_sentence;
 mod lt;
 mod matchfilters;
+mod ml;
 mod morfologik_spelling;
 mod multitoken;
 mod nl;
@@ -478,6 +479,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Km => Pipeline::new_khmer(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Ml => Pipeline::new_malayalam(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

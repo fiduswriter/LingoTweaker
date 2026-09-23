@@ -202,6 +202,8 @@ pub struct Pipeline {
     pub persian: Option<Arc<crate::fa::PersianPipeline>>,
     /// Khmer pipeline parts (`None` for the other languages)
     pub khmer: Option<Arc<crate::km::KhmerPipeline>>,
+    /// Malayalam pipeline parts (`None` for the other languages)
+    pub malayalam: Option<Arc<crate::ml::MalayalamPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1422,6 +1424,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1675,6 +1678,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1887,6 +1891,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2107,6 +2112,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2247,6 +2253,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2506,6 +2513,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2725,6 +2733,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3061,6 +3070,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3221,6 +3231,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3367,6 +3378,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3537,6 +3549,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3685,6 +3698,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3805,6 +3819,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3960,6 +3975,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -4047,6 +4063,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4217,6 +4234,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4299,6 +4317,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4418,6 +4437,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4523,6 +4543,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4642,6 +4663,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4749,6 +4771,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4857,6 +4880,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4975,6 +4999,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5082,6 +5107,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5242,6 +5268,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5441,6 +5468,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5596,6 +5624,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5738,6 +5767,7 @@ impl Pipeline {
             arabic: Some(arabic),
             persian: None,
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5814,6 +5844,7 @@ impl Pipeline {
             arabic: None,
             persian: Some(persian),
             khmer: None,
+            malayalam: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5903,6 +5934,95 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: Some(khmer),
+            malayalam: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Malayalam (`ml`) engine: `Malayalam` has a `BaseTagger`
+    /// (`MalayalamTagger` over the in-tree FSA5 `malayalam.dict`), the
+    /// `MalayalamWordTokenizer` (a small delimiter `StringTokenizer` set) and
+    /// the base no-op disambiguator (no `ml/disambiguation.xml`). The seven
+    /// `Malayalam.getRelevantRules` classes are the generic built-ins plus the
+    /// Morfologik speller; there are no ml-specific rule classes.
+    pub fn new_malayalam(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Ml, "ml_two", enabled_rules)?;
+        let tagger = Arc::new(lt_tagger::MalayalamTagger::load(data_dir.path())?);
+        let spelling = match crate::ml::spelling::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[ml] spelling rule disabled: {err}");
+                None
+            }
+        };
+        let malayalam = Arc::new(crate::ml::MalayalamPipeline {
+            tagger,
+            spelling,
+            word_repeat: crate::ml::word_repeat_rule(),
+        });
+        Ok(Self {
+            lang: Lang::Ml,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: None,
+            malayalam: Some(malayalam),
             clean_overlapping_matches: true,
         })
     }
@@ -6048,6 +6168,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6140,6 +6261,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6236,6 +6358,7 @@ impl Pipeline {
             arabic: None,
             persian: None,
             khmer: None,
+            malayalam: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6254,6 +6377,8 @@ impl Pipeline {
                 crate::fa::analyze_persian_sentence(sentence_text)
             } else if let Some(khmer) = &self.khmer {
                 crate::km::analyze_khmer_sentence(khmer, sentence_text)
+            } else if let Some(malayalam) = &self.malayalam {
+                crate::ml::analyze_malayalam_sentence(malayalam, sentence_text)
             } else if self.norwegian.is_some() || self.nordum.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
@@ -8630,6 +8755,51 @@ impl Pipeline {
         {
             text_level_matches.extend(crate::unpaired_brackets::check_km(&analyzed_sentences));
         }
+        // Malayalam text-level rules (`Malayalam.getRelevantRules`):
+        // GenericUnpairedBrackets (3), UppercaseSentenceStart (5) and
+        // MultipleWhitespace (7). There is no `MessagesBundle_ml`, so the
+        // generic base English strings are used.
+        if self.lang == crate::Lang::Ml {
+            if builtin_active(
+                "UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::unpaired_brackets::check(&analyzed_sentences));
+            }
+            if builtin_active(
+                "UPPERCASE_SENTENCE_START",
+                "CASING",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::uppercase::check(&analyzed_sentences));
+            }
+            if builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            ) {
+                text_level_matches.extend(crate::whitespace::check(&analyzed_sentences));
+            }
+        }
         // Esperanto text-level rules (`Esperanto.getRelevantRules`):
         // GenericUnpairedBrackets (3), UppercaseSentenceStart (5),
         // MultipleWhitespace (7) and SentenceWhitespace (8).
@@ -9548,6 +9718,8 @@ impl Pipeline {
             crate::fa::analyze_persian_sentence(&text[start..end])
         } else if let Some(khmer) = &self.khmer {
             crate::km::analyze_khmer_sentence(khmer, &text[start..end])
+        } else if let Some(malayalam) = &self.malayalam {
+            crate::ml::analyze_malayalam_sentence(malayalam, &text[start..end])
         } else if self.norwegian.is_some() || self.nordum.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
@@ -12230,6 +12402,83 @@ impl Pipeline {
                         enabled_categories,
                     ),
                     khmer.space_before.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
+        // Malayalam sentence-level rules in `Malayalam.getRelevantRules`
+        // order: CommaWhitespace (1), DoublePunctuation (2), the Morfologik
+        // speller (4) and WordRepeat (6). GenericUnpairedBrackets (3),
+        // UppercaseSentenceStart (5) and MultipleWhitespace (7) are text-level
+        // above.
+        if self.lang == crate::Lang::Ml {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::comma_whitespace::check_sentence(&analyzed.tokens, sentence_text, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "DOUBLE_PUNCTUATION",
+                    "PUNCTUATION",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::double_punctuation::check_sentence(&analyzed.tokens, start),
+                &mut seen,
+            );
+            if let Some(malayalam) = &self.malayalam {
+                if let Some(spelling) = &malayalam.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::ml::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, start),
+                        &mut seen,
+                    );
+                }
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::word_repeat::RULE_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    malayalam
+                        .word_repeat
+                        .check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
             }
