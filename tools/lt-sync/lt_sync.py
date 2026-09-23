@@ -39,7 +39,7 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 
 UPSTREAM_REPO_URL = "https://github.com/languagetool-org/languagetool.git"
 
-LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km"]
+LANGS = ["en", "de", "es", "fr", "it", "pt", "nl", "ca", "gl", "ro", "pl", "sk", "sl", "el", "da", "sv", "is", "eo", "ast", "br", "tl", "lt", "crh", "be", "ru", "uk", "sr", "ar", "fa", "km", "ml"]
 
 # Manifest kinds that are not imported from upstream. `add-local` records
 # them; `import` preserves them (upstream sync must never drop hand-authored
@@ -504,6 +504,14 @@ IN_TREE_ARTIFACTS = {
         "resource/km/khmer.dict": "km/dictionaries/khmer.dict",
         "resource/km/khmer.info": "km/dictionaries/khmer.info",
     },
+    # Malayalam ships its `BaseTagger` Morfologik dictionary (FSA5, SUFFIX
+    # encoder, UTF-8) in-tree (`MalayalamTagger`); the Morfologik speller
+    # dictionary (`hunspell/ml_IN.{dict,info}`) is imported with the rest of
+    # the `hunspell/` directory.
+    "ml": {
+        "resource/ml/malayalam.dict": "ml/dictionaries/malayalam.dict",
+        "resource/ml/malayalam.info": "ml/dictionaries/malayalam.info",
+    },
 }
 
 # Language-specific resource subdirectories whose word lists are referenced
@@ -684,6 +692,13 @@ IN_TREE_LICENSES = {
         "CC-BY-NC-SA-3.0 component is non-commercial",
         False,
         "upstream km/README.txt; km/hunspell/LICENCES-km.txt",
+    ),
+    "ml": (
+        "GPL (Malayalam POS dictionary and Morfologik speller data collected "
+        "by Jithesh.V.S. of C-DIT, Thiruvananthapuram, from public sources; "
+        "upstream ml/README.txt states the data is made available under GPL)",
+        True,
+        "upstream ml/README.txt",
     ),
 }
 
@@ -946,6 +961,18 @@ def hunspell_license(lang: str, name: str):
                 "km/hunspell/LICENCES-km.txt)",
                 verified,
                 "upstream km/hunspell/LICENCES-km.txt",
+            )
+    if lang == "ml":
+        # Malayalam `ml_IN` Morfologik speller dictionary, converted from the
+        # GPL data collected by Jithesh.V.S. (ml/README.txt); the conversion
+        # is a derived build. The LT-authored ignore/spelling lists stay under
+        # the default resource license.
+        if name.startswith("ml_IN."):
+            return (
+                "GPL (Malayalam Morfologik speller dictionary, converted from "
+                "the GPL data collected by Jithesh.V.S.; ml/README.txt)",
+                False,
+                "upstream ml/README.txt",
             )
     return None
 
@@ -1380,7 +1407,7 @@ def classify_upstream_path(rel: str) -> str:
         return CLASS_SCHEMA
     if "disambiguation" in p and p.endswith(".xml"):
         return CLASS_DISAMBIG_XML
-    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km)/.*\.xml$", p):
+    if re.search(r"rules/(en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml)/.*\.xml$", p):
         return CLASS_RULE_XML
     if p.endswith((".dict", ".info", ".bin")):
         return CLASS_DICT_MODEL

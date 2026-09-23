@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 968,
+  "file_count": 980,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -6407,6 +6407,142 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/MessagesBundle_uk.properties",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/dictionaries/malayalam.dict",
+      "sha256": "4c28d6c799d34d268f96d60f90cc1944927500b7139128919f685a073919a43a",
+      "size": 3410,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/malayalam.dict",
+        "license": "GPL (Malayalam POS dictionary and Morfologik speller data collected by Jithesh.V.S. of C-DIT, Thiruvananthapuram, from public sources; upstream ml/README.txt states the data is made available under GPL)",
+        "license_verified": true,
+        "license_source": "upstream ml/README.txt"
+      }
+    },
+    {
+      "path": "ml/dictionaries/malayalam.info",
+      "sha256": "e0bb94a1c6bd402c775b3e32f2295fa59a695a60a847a4e894e024cd04990488",
+      "size": 101,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/malayalam.info",
+        "license": "GPL (Malayalam POS dictionary and Morfologik speller data collected by Jithesh.V.S. of C-DIT, Thiruvananthapuram, from public sources; upstream ml/README.txt states the data is made available under GPL)",
+        "license_verified": true,
+        "license_source": "upstream ml/README.txt"
+      }
+    },
+    {
+      "path": "ml/hunspell/ignore.txt",
+      "sha256": "ce4e860c5c061559409e61daa31b78e8df40d04c63aa41d1c11b20d0c86989e5",
+      "size": 198,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/hunspell/ignore.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/hunspell/ml_IN.dict",
+      "sha256": "65fd439d2f49e4dbefb824f884851566b542966c5a1fca336cdb7438ed555875",
+      "size": 1076013,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/hunspell/ml_IN.dict",
+        "license": "GPL (Malayalam Morfologik speller dictionary, converted from the GPL data collected by Jithesh.V.S.; ml/README.txt)",
+        "license_verified": false,
+        "license_source": "upstream ml/README.txt"
+      }
+    },
+    {
+      "path": "ml/hunspell/ml_IN.info",
+      "sha256": "41cbd7b6d67d7b4af8240d560974f992a58da7a9e3f31d1e1f7521cea6cc1589",
+      "size": 99,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/hunspell/ml_IN.info",
+        "license": "GPL (Malayalam Morfologik speller dictionary, converted from the GPL data collected by Jithesh.V.S.; ml/README.txt)",
+        "license_verified": false,
+        "license_source": "upstream ml/README.txt"
+      }
+    },
+    {
+      "path": "ml/hunspell/spelling.txt",
+      "sha256": "36c0c333040a7f9238f6be3e4d3280b01eb4b6b63c84abf97551eab7c737a263",
+      "size": 139,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/hunspell/spelling.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/rules/grammar.xml",
+      "sha256": "3852e6b58159e9da3e4bfe199ea432fc02e40dd82c5cffdb4af4ac584039580a",
+      "size": 18753,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/rules/ml/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/words/README.txt",
+      "sha256": "31db8502b415c5dc9ec3a91264422608edf3e7cdc74623499656eb8026fb9249",
+      "size": 274,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/README.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/words/added.txt",
+      "sha256": "5c4751340383496db14c0ccc6de53a756d56c6cac244c185af6eb16ffcbd41fd",
+      "size": 261,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/added.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/words/added_custom.txt",
+      "sha256": "30c7602fe9a69730e194dbe5f5b332fba6adf00f49af85d8c5358055c17d339b",
+      "size": 260,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/added_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/removed.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "ml/words/removed_custom.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ml/src/main/resources/org/languagetool/resource/ml/removed_custom.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }
