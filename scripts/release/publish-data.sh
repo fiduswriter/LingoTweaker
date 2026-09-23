@@ -31,7 +31,12 @@ fi
 dist="$ROOT/target/data-dist"
 if ! gh release view "$tag" >/dev/null 2>&1; then
   echo "== create release $tag"
-  gh release create "$tag" --verify-tag --prerelease \
+  # stable versions get a normal GitHub Release; prereleases get --prerelease
+  pre=()
+  case "$tag" in
+    *-*) pre=(--prerelease) ;;
+  esac
+  gh release create "$tag" --verify-tag "${pre[@]}" \
     --title "$tag" \
     --notes "LingoTweaker $tag. Engine data for this release is attached below (per-language packs and native archives)."
 fi
