@@ -17,6 +17,46 @@ use std::sync::Arc;
 use fancy_regex::Regex as FancyRegex;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings, CoreError, Result};
 
+/// Interned compiled regexes for XML disambiguation attributes: the same
+/// handful of `postag`/`regexp` patterns recur across rule applications per
+/// sentence, and a fresh `FancyRegex::new` per call showed up in the
+/// steady-state profile (the `lt-pattern` matcher intern cache is the model).
+fn cached_regex_inner(
+    cache: &std::sync::Mutex<std::collections::HashMap<String, Option<Arc<FancyRegex>>>>,
+    compile: impl FnOnce() -> Option<FancyRegex>,
+    pattern: &str,
+) -> Option<Arc<FancyRegex>> {
+    let mut cache = cache.lock().unwrap();
+    if let Some(found) = cache.get(pattern) {
+        return found.clone();
+    }
+    let compiled = compile().map(Arc::new);
+    cache.insert(pattern.to_string(), compiled.clone());
+    compiled
+}
+
+/// Full-match regex for `postag` attributes (`String.matches` semantics).
+fn cached_postag_regex(pattern: &str) -> Option<Arc<FancyRegex>> {
+    static CACHE: std::sync::OnceLock<
+        std::sync::Mutex<std::collections::HashMap<String, Option<Arc<FancyRegex>>>>,
+    > = std::sync::OnceLock::new();
+    let cache = CACHE.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()));
+    cached_regex_inner(
+        cache,
+        || FancyRegex::new(&format!("^(?:{pattern})$")).ok(),
+        pattern,
+    )
+}
+
+/// Plain (search, not anchored) regex for `regexp_match` filters.
+fn cached_plain_regex(pattern: &str) -> Option<Arc<FancyRegex>> {
+    static CACHE: std::sync::OnceLock<
+        std::sync::Mutex<std::collections::HashMap<String, Option<Arc<FancyRegex>>>>,
+    > = std::sync::OnceLock::new();
+    let cache = CACHE.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()));
+    cached_regex_inner(cache, || FancyRegex::new(pattern).ok(), pattern)
+}
+
 /// (compiled pattern, view-relative match positions, unified readings)
 type Application = (
     Arc<CompiledPattern>,
@@ -742,7 +782,7 @@ fn apply_action(
                     });
                 }
             } else if let Some(pos) = &action.postag {
-                if let Ok(re) = FancyRegex::new(&format!("^(?:{})$", pos)) {
+                if let Some(re) = cached_postag_regex(pos) {
                     if let Some(idx) = at(t.from_view) {
                         let first = &mut sentence.tokens[idx];
                         let surface = first
@@ -837,7 +877,7 @@ fn apply_action(
         }
         "filter" => {
             if let Some(pos) = &action.postag {
-                if let Ok(re) = FancyRegex::new(&format!("^(?:{})$", pos)) {
+                if let Some(re) = cached_postag_regex(pos) {
                     if let Some(idx) = at(t.from_view) {
                         let first = &mut sentence.tokens[idx];
                         let any_match = first.readings.iter().any(|r| {
@@ -997,7 +1037,7 @@ fn apply_match_filter(tr: &mut AnalyzedTokenReadings, filter: &DisambigMatchFilt
         .unwrap_or_default();
     let mut token = surface;
     if let (Some(pattern), Some(replace)) = (&filter.regexp_match, &filter.regexp_replace) {
-        if let Ok(re) = FancyRegex::new(pattern) {
+        if let Some(re) = cached_plain_regex(pattern) {
             token = re.replace_all(&token, replace.as_str()).into_owned();
         }
     }
@@ -1005,7 +1045,7 @@ fn apply_match_filter(tr: &mut AnalyzedTokenReadings, filter: &DisambigMatchFilt
         .postag
         .as_deref()
         .filter(|_| filter.postag_regexp)
-        .and_then(|p| FancyRegex::new(&format!("^(?:{p})$")).ok());
+        .and_then(cached_postag_regex);
     let mut kept: Vec<AnalyzedToken> = Vec::new();
     for r in &tr.readings {
         let tag = r.pos_tag.as_deref().unwrap_or("UNKNOWN");

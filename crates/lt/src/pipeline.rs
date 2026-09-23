@@ -455,7 +455,7 @@ impl std::fmt::Debug for Pipeline {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("Pipeline")
             .field("lang", &self.lang)
-            .field("grammar_rules", &self.grammar.rules.len())
+            .field("grammar_rules", &self.grammar.rules_loaded)
             .field("compiled_rules", &self.compiled_rules.len())
             .field("disambig_rules", &self.disambiguator.rules_len())
             .field("skipped_counts", &self.skipped_counts)

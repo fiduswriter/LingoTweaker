@@ -380,6 +380,11 @@ pub struct Grammar {
     pub unification_features: usize,
     /// top-level `<unification>` equivalence definitions
     pub equivalence_defs: Vec<EquivalenceDef>,
+    /// how many rules were loaded (the compiled engine drains the owned
+    /// `rules` payloads after compilation to bound engine memory; this
+    /// records the original count)
+    #[serde(default, skip)]
+    pub rules_loaded: usize,
 }
 
 impl Grammar {

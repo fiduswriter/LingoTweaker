@@ -80,7 +80,7 @@ fn persian_engine_state() {
     // `grammar.xml` parses to 283 rule units; three are `default="off"`
     // (`Complex_Past_Verbs`, `Complex_Present_Verbs`, `PluralFix`), so 280 are
     // active by default. `lt-cli inventory` reports the parsed 283.
-    assert_eq!(fa.grammar().expect("grammar").rules.len(), 283);
+    assert_eq!(fa.grammar_rule_count(), 283);
     assert_eq!(fa.active_rule_count(), 280);
     assert_eq!(fa.skipped_counts().filters, 0);
     assert_eq!(fa.skipped_counts().off_by_default, 3);
