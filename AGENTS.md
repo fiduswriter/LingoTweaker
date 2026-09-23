@@ -64,7 +64,7 @@ agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
 the PCON_VERB participle rule); da is at 0/0/0 (#10, resolved by the
 suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
-(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/5 (#15, docs/differences.md #11 suggestion ordering); crh is at 1/0/0 (#16, docs/differences.md #13 Java UNICODE_CASE folding of `ı`); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #14); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
+(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/5 (#15, docs/differences.md #11 suggestion ordering); crh is at 0/0/0 (#16, docs/differences.md #13 resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #14); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
 runs the same tests-only gate because its legacy module references an

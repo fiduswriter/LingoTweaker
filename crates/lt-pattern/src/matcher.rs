@@ -249,6 +249,17 @@ fn compile_regex_uncached(
     // uses only `CASE_INSENSITIVE | UNICODE_CASE`), so `\w`/`\d`/`\s`/`\b`
     // are the ASCII classes; the Rust regex crate's are Unicode by default.
     let pattern = normalize_java_ascii_classes(&pattern, false);
+    // Java `CASE_INSENSITIVE | UNICODE_CASE` folds the Turkish dotless/dotted
+    // i (`ı` U+0131, `İ` U+0130) into the ASCII `i`/`I` equivalence class
+    // (`Character.toUpperCase('ı') == 'I'`, `toLowerCase('İ') == 'i'`); the
+    // Rust regex simple case folding keeps them distinct, so add them to the
+    // case-insensitive ASCII-letter classes and literals (crh
+    // `COMPLEX_NUMBER_DEFIS_MISSING` matches `21fayız` in Java only).
+    let pattern = if case_sensitive {
+        pattern
+    } else {
+        apply_java_turkish_case(&pattern)
+    };
     let mut s = String::new();
     if !case_sensitive {
         s.push_str("(?i)");
@@ -322,6 +333,215 @@ fn normalize_java_surrogate_escapes(pattern: &str) -> String {
         i += ch.len_utf8();
     }
     out
+}
+
+/// Java `CASE_INSENSITIVE | UNICODE_CASE` folds the Turkish dotless i `ı`
+/// (U+0131) and dotted capital I `İ` (U+0130) into the ASCII `i`/`I`
+/// equivalence class; the Rust regex simple case folding does not. Add the two
+/// code points to every case-insensitive ASCII letter class that contains `i`
+/// or `I` (as a literal or inside a range) and replace bare `i`/`I` literals
+/// with an explicit class. Only called when the pattern is compiled with a
+/// global `(?i)`.
+fn apply_java_turkish_case(pattern: &str) -> String {
+    const TR_I: char = '\u{0130}';
+    const TR_DOTLESS: char = '\u{0131}';
+    let chars: Vec<char> = pattern.chars().collect();
+    let mut out = String::with_capacity(pattern.len() + 8);
+    // The caller applies a global `(?i)`; `(?-i)`/`(?i)` groups switch it.
+    let mut ci = true;
+    let mut ci_stack: Vec<bool> = Vec::new();
+    let mut i = 0usize;
+    while i < chars.len() {
+        let c = chars[i];
+        if c == '\\' {
+            out.push(c);
+            if i + 1 < chars.len() {
+                let n = chars[i + 1];
+                out.push(n);
+                // Copy a braced escape (`\p{IsLatin}`, `\u{...}`, `\x{...}`,
+                // `\N{...}`) wholesale; its letters are not literals.
+                if matches!(n, 'p' | 'P' | 'u' | 'x' | 'N')
+                    && i + 2 < chars.len()
+                    && chars[i + 2] == '{'
+                {
+                    let mut k = i + 2;
+                    while k < chars.len() && chars[k] != '}' {
+                        out.push(chars[k]);
+                        k += 1;
+                    }
+                    if k < chars.len() {
+                        out.push('}');
+                        k += 1;
+                    }
+                    i = k;
+                    continue;
+                }
+                i += 2;
+            } else {
+                i += 1;
+            }
+            continue;
+        }
+        if c == '(' {
+            if i + 1 < chars.len() && chars[i + 1] == '?' {
+                // Named-group header `(?<name>`: copy verbatim.
+                if i + 2 < chars.len() && chars[i + 2] == '<' {
+                    let mut j = i + 2;
+                    while j < chars.len() && chars[j] != '>' {
+                        j += 1;
+                    }
+                    if j < chars.len() {
+                        out.extend(chars[i..=j].iter());
+                        ci_stack.push(ci);
+                        i = j + 1;
+                        continue;
+                    }
+                } else {
+                    // Inline flag group `(?flags)` or `(?flags:`.
+                    let mut j = i + 2;
+                    while j < chars.len()
+                        && matches!(chars[j], 'i' | 'm' | 's' | 'x' | 'u' | 'U' | 'd' | '-')
+                    {
+                        j += 1;
+                    }
+                    if j < chars.len() && (chars[j] == ')' || chars[j] == ':') {
+                        let flags: String = chars[i + 2..j].iter().collect();
+                        let new_ci = apply_ci_flags(&flags, ci);
+                        out.extend(chars[i..=j].iter());
+                        if chars[j] == ':' {
+                            ci_stack.push(ci);
+                        }
+                        ci = new_ci;
+                        i = j + 1;
+                        continue;
+                    }
+                }
+            }
+            ci_stack.push(ci);
+            out.push(c);
+            i += 1;
+            continue;
+        }
+        if c == ')' {
+            out.push(c);
+            if let Some(prev) = ci_stack.pop() {
+                ci = prev;
+            }
+            i += 1;
+            continue;
+        }
+        if c == '[' {
+            // find the matching `]`, accounting for escapes and nesting
+            let mut depth = 0i32;
+            let mut j = i;
+            while j < chars.len() {
+                if chars[j] == '\\' {
+                    j += 2;
+                    continue;
+                }
+                if chars[j] == '[' {
+                    depth += 1;
+                } else if chars[j] == ']' {
+                    depth -= 1;
+                    if depth == 0 {
+                        break;
+                    }
+                }
+                j += 1;
+            }
+            let end = j.min(chars.len());
+            let mut content: String = chars[i + 1..end].iter().collect();
+            out.push('[');
+            if ci {
+                let (has_lower_i, has_upper_i) = class_ascii_i(content.as_str());
+                if has_lower_i || has_upper_i {
+                    // A trailing literal `-` would form an invalid range with
+                    // the appended code points (`ـ-İ`); escape it first.
+                    if content.ends_with('-') && !content.ends_with("\\-") {
+                        content.pop();
+                        content.push_str("\\-");
+                    }
+                    // Java: `[a-z]` matches `İ` (lowercase folds to `i`) but
+                    // not `ı`; `[A-Z]` matches `ı` (uppercase folds to `I`)
+                    // but not `İ`; a class with both matches both.
+                    if has_upper_i {
+                        content.push(TR_DOTLESS);
+                    }
+                    if has_lower_i {
+                        content.push(TR_I);
+                    }
+                }
+            }
+            out.push_str(&content);
+            out.push(']');
+            i = end + 1;
+            continue;
+        }
+        if ci && (c == 'i' || c == 'I') {
+            // A literal `i`/`I` matches both Turkish variants in Java.
+            out.push('[');
+            out.push(c);
+            out.push('i');
+            out.push('I');
+            out.push(TR_I);
+            out.push(TR_DOTLESS);
+            out.push(']');
+            i += 1;
+            continue;
+        }
+        out.push(c);
+        i += 1;
+    }
+    out
+}
+
+/// Apply a Java inline flag string (`i`, `-i`, `im`, `-im`, …) to the current
+/// case-insensitivity state.
+fn apply_ci_flags(flags: &str, current: bool) -> bool {
+    let mut ci = current;
+    let mut negate = false;
+    for ch in flags.chars() {
+        match ch {
+            '-' => negate = true,
+            'i' => ci = !negate,
+            _ => {}
+        }
+    }
+    ci
+}
+
+/// Does a character-class body contain the ASCII `i` (lowercase) and/or `I`
+/// (uppercase), as a literal or inside a range?
+fn class_ascii_i(content: &str) -> (bool, bool) {
+    let cs: Vec<char> = content.chars().collect();
+    let mut lower = false;
+    let mut upper = false;
+    let mut k = 0usize;
+    while k < cs.len() {
+        if cs[k] == '\\' {
+            k += 2;
+            continue;
+        }
+        if k + 2 < cs.len() && cs[k + 1] == '-' {
+            let lo = cs[k];
+            let hi = cs[k + 2];
+            if lo <= 'i' && 'i' <= hi {
+                lower = true;
+            }
+            if lo <= 'I' && 'I' <= hi {
+                upper = true;
+            }
+            k += 3;
+            continue;
+        }
+        if cs[k] == 'i' {
+            lower = true;
+        } else if cs[k] == 'I' {
+            upper = true;
+        }
+        k += 1;
+    }
+    (lower, upper)
 }
 
 /// Java's `\p{Punct}`/`\P{Punct}` are the POSIX ASCII punctuation class
@@ -3084,6 +3304,25 @@ mod tests {
         assert!(re.is_match("و"), "the explicit و still matches");
         assert!(!re.is_match("می"), "Unicode \\w must not match م/ی");
         assert!(re.is_match("abc_1"), "ASCII word chars still match");
+    }
+
+    #[test]
+    fn java_turkish_case_folds_dotless_i() {
+        // crh `COMPLEX_NUMBER_DEFIS_MISSING`: Java `UNICODE_CASE` folds `ı`
+        // into `[A-Za-z]`, so `21fayız` matches; Rust simple folding must be
+        // taught the two Turkish i code points.
+        let re = compile_regex_uncached(
+            r"[$+-]?[0-9,-]*[0-9,][A-Za-zñğüşöçâ][A-Za-zñğüşöçâ-]*[.²³]?",
+            false,
+            true,
+        )
+        .unwrap();
+        assert!(re.is_match("21fayız"), "dotless i must match");
+        assert!(re.is_match("21fayiz"));
+        assert!(re.is_match("5nci"));
+        // literal i/I literals also fold
+        let lit = compile_regex_uncached(r"kitap", false, true).unwrap();
+        assert!(lit.is_match("kıtap"), "literal i folds dotless i");
     }
 
     #[test]

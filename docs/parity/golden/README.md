@@ -137,10 +137,10 @@ date-filter rules either).
   `MORFOLOGIK_RULE_TL` = 5 suggestion-order field diffs (docs/differences.md
   #11; the frequency-included `tl_PH` dictionary orders the weighted
   candidates differently, the match and suggestion sets are identical).
-  crh is 0 only-Rust / 0 field diffs and exactly the documented
-  `COMPLEX_NUMBER_DEFIS_MISSING` = 1 only-Java match (docs/differences.md
-  #13; Java's `UNICODE_CASE` folds `ı` into `[A-Za-z]`, Rust's simple case
-  folding does not).
+  crh is exactly 0/0/0: the documented `COMPLEX_NUMBER_DEFIS_MISSING` only-Java
+  match (docs/differences.md #13) is resolved (Java's `UNICODE_CASE` folds
+  `ı`/`İ` into `[A-Za-z]`; `lt_pattern` now adds them to case-insensitive
+  ASCII letter classes).
   ru is exactly 0/0/0 (D-247; the `RussianTagger` stress-mark/`MayMissingYO`
   handling, `RussianWordTokenizer`, hybrid disambiguator, `RussianChunker`,
   both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules

@@ -439,12 +439,12 @@ Reproduce (pinned Java build, per-rule probe):
 scripts/oracle/lt/probe-rule.sh "Jaroslavas pajuto kad jo draugas yra Mantas." BRAK_PRZECINKA_ZE
 ```
 
-## 13. Crimean Tatar (`crh`) Java `UNICODE_CASE` folding of `ı` (1 corpus match)
+## 13. Crimean Tatar (`crh`) Java `UNICODE_CASE` folding of `ı` — resolved
 
-Java compiles pattern-token regexps with
-`Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE` (unless `case_sensitive`
-is set). Under that flag `Character.toUpperCase('ı')` (U+0131, dotless i)
-is `I`, so `[A-Za-z…]` matches `ı`:
+**Verdict: Java is more correct; fixed (D-310).** Java compiles pattern-token
+regexps with `Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE` (unless
+`case_sensitive` is set). Under that flag `Character.toUpperCase('ı')`
+(U+0131, dotless i) is `I`, so `[A-Za-z…]` matches `ı`:
 
 ```java
 Pattern.compile("[A-Za-zñğüşöçâ][A-Za-zñğüşöçâ-]*",
@@ -452,13 +452,23 @@ Pattern.compile("[A-Za-zñğüşöçâ][A-Za-zñğüşöçâ-]*",
   .matcher("21fayız").matches()   // true
 ```
 
-The Rust `regex` crate uses Unicode *simple* case folding, where U+0131
-folds to itself, so `(?i)[A-Za-z…]` does **not** match `ı`. The corpus line
-`21fayız.` therefore matches `COMPLEX_NUMBER_DEFIS_MISSING` in the legacy
-engine but not in the Rust engine (1 only-Java match; no only-Rust matches,
-0 field diffs). Pinned exactly with
-`--expect-only-java=COMPLEX_NUMBER_DEFIS_MISSING=1` in
-`scripts/ci/parity.sh`.
+The Rust `regex` crate uses Unicode *simple* case folding, where U+0131 folds
+to itself, so `(?i)[A-Za-z…]` did **not** match `ı`, and the corpus line
+`21fayız.` missed `COMPLEX_NUMBER_DEFIS_MISSING` — a false negative, because
+`21fayız` is that rule's own `<example>` (the rule must flag it). `ı` is a
+Crimean Tatar letter and Java's Turkish-aware folding is the correct one for
+this module.
+
+Fixed in `lt_pattern` (`apply_java_turkish_case`,
+`crates/lt-pattern/src/matcher.rs`): for case-insensitive patterns, the
+Turkish dotless i `ı` (U+0131) and dotted capital I `İ` (U+0130) are added to
+the ASCII letter classes/literals they fold into — `[A-Z]`/literal `I` also
+match `ı`, `[a-z]`/literal `i` also match `İ` (mirroring Java's
+`toUpperCase`/`toLowerCase` comparison). Inline `(?-i)` regions and braced
+escapes (`\p{IsLatin}`) are respected. Real-orthography regression test:
+`crates/lt-pattern/src/matcher.rs::java_turkish_case_folds_dotless_i`. The
+`crh` gate is now **0 only-Java / 0 only-Rust / 0 field diffs** (no
+allowance); every gated language was re-run green.
 
 Reproduce (pinned Java build):
 

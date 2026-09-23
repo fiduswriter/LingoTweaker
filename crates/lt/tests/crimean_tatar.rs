@@ -164,6 +164,21 @@ fn crimean_tatar_synthesis_suggestion() {
     assert_eq!(suggestions(&matches[0]), vec!["Terekke"]);
 }
 
+/// `COMPLEX_NUMBER_DEFIS_MISSING`: the rule's own example `21fayız` must
+/// match. Java's `UNICODE_CASE` folds `ı` into `[A-Za-z]`; `lt_pattern` now
+/// adds the Turkish i code points to case-insensitive ASCII letter classes.
+#[test]
+fn crimean_tatar_number_defis_missing_folds_dotless_i() {
+    let _guard = engine_guard();
+    let text = "21fayız.";
+    let matches = one(text, "COMPLEX_NUMBER_DEFIS_MISSING");
+    assert_eq!(matches.len(), 1, "the rule's own example must match");
+    assert_utf16(text, &matches[0], (0, 7));
+    assert_eq!(suggestions(&matches[0]), vec!["21 fayız"]);
+    // a plain ASCII-i word still matches
+    assert_eq!(one("5nci.", "COMPLEX_NUMBER_DEFIS_MISSING").len(), 1);
+}
+
 /// `MorfologikCrimeanTatarSpellerRule` (`MORFOLOGIK_RULE_CRH_UA`) with the
 /// Java suggestion list.
 #[test]

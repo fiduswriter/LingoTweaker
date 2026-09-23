@@ -191,11 +191,12 @@ elif [ "$LANG_ARG" = "fr" ]; then
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
 elif [ "$LANG_ARG" = "crh" ]; then
-  # documented divergence (docs/differences.md #13): Java's
-  # CASE_INSENSITIVE|UNICODE_CASE folds U+0131 (dotless i) into [A-Za-z],
-  # so `21fayız` matches COMPLEX_NUMBER_DEFIS_MISSING; the Rust regex crate's
-  # simple case folding does not.
-  EXTRA+=(--expect-only-java=COMPLEX_NUMBER_DEFIS_MISSING=1)
+  # `crh` is at 0/0/0. The former only-Java COMPLEX_NUMBER_DEFIS_MISSING
+  # (docs/differences.md #13) is fixed: Java's CASE_INSENSITIVE|UNICODE_CASE
+  # folds U+0131 (dotless i)/U+0130 into the ASCII i/I class, and `lt_pattern`
+  # now adds those code points to case-insensitive ASCII letter classes. No
+  # allowance.
+  :
 elif [ "$LANG_ARG" = "tl" ]; then
   # documented suggestion-order divergence (docs/differences.md #11): the
   # match and suggestion *sets* are identical; the frequency-included
