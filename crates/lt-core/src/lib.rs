@@ -87,6 +87,8 @@ pub enum Lang {
     Ar,
     /// Persian (`fa`; default variant `fa-IR`).
     Fa,
+    /// Khmer (`km`; default variant `km-KH`).
+    Km,
     /// Norwegian Bokmål (legacy dynamic language code `no`; `nb`
     /// accepted as an alias).
     No,
@@ -98,7 +100,7 @@ pub enum Lang {
 }
 
 impl Lang {
-    pub const ALL: [Lang; 32] = [
+    pub const ALL: [Lang; 33] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -128,6 +130,7 @@ impl Lang {
         Lang::Sr,
         Lang::Ar,
         Lang::Fa,
+        Lang::Km,
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
@@ -167,6 +170,7 @@ impl Lang {
             "sr" => Some(Lang::Sr),
             "ar" => Some(Lang::Ar),
             "fa" => Some(Lang::Fa),
+            "km" => Some(Lang::Km),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
@@ -205,6 +209,7 @@ impl Lang {
             Lang::Sr => "sr",
             Lang::Ar => "ar",
             Lang::Fa => "fa",
+            Lang::Km => "km",
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
@@ -358,6 +363,11 @@ impl Lang {
                 code: "fa",
                 long_code: "fa-IR",
                 name: "Persian",
+            },
+            Lang::Km => Language {
+                code: "km",
+                long_code: "km-KH",
+                name: "Khmer",
             },
             Lang::No => Language {
                 code: "no",

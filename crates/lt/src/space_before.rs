@@ -40,6 +40,22 @@ impl SpaceBeforeRule {
         }
     }
 
+    /// `KhmerSpaceBeforeRule` (`KM_SPACE_BEFORE_CONJUNCTION`): the
+    /// conjunction set `ដើម្បី|និង|ពីព្រោះ`, category MISC, default **on**
+    /// (Khmer does not call `setDefaultOff`). The base `AbstractSpaceBeforeRule`
+    /// strings are hardcoded English, not bundle keys.
+    pub fn khmer() -> Self {
+        Self {
+            rule_id: "KM_SPACE_BEFORE_CONJUNCTION",
+            conjunctions: Regex::new(r"(?i)^(?:ដើម្បី|និង|ពីព្រោះ)$").expect("khmer conjunctions"),
+            description: "Checks for missing space before some conjunctions",
+            short: "Missing white space",
+            suggestion: "Missing white space before conjunction",
+            category_id: "MISC",
+            category_name: "របស់ផ្សេងៗ",
+        }
+    }
+
     /// `AbstractSpaceBeforeRule.match` over one sentence (raw token view,
     /// including whitespace: the previous token is compared to `" "`/`"("`).
     pub fn check_sentence(

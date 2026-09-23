@@ -260,6 +260,9 @@ fn priority(m: &Match, lang: Lang, variant: Option<&str>) -> i32 {
         // `getDefaultRulePriorityForStyle` and has no `priority` attributes,
         // so Java's `Language.getRulePriority` returns 0 for every rule.
         Lang::Fa => 0,
+        // Khmer also overrides neither `getPriorityForId` nor
+        // `getDefaultRulePriorityForStyle` and has no `priority` attributes.
+        Lang::Km => 0,
         _ => crate::en::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0),
     }
 }

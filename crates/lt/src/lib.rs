@@ -53,6 +53,7 @@ mod hidden_chars;
 mod hunspell_spelling;
 mod is;
 mod it;
+mod km;
 mod long_sentence;
 mod lt;
 mod matchfilters;
@@ -471,6 +472,12 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Fa => Pipeline::new_persian(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Km => Pipeline::new_khmer(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

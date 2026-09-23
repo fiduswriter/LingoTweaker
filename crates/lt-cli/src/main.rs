@@ -40,6 +40,7 @@ enum LangArg {
     Sr,
     Ar,
     Fa,
+    Km,
     No,
     Nrd,
     Gn,
@@ -77,6 +78,7 @@ impl From<LangArg> for Lang {
             LangArg::Sr => Lang::Sr,
             LangArg::Ar => Lang::Ar,
             LangArg::Fa => Lang::Fa,
+            LangArg::Km => Lang::Km,
             LangArg::No => Lang::No,
             LangArg::Nrd => Lang::Nrd,
             LangArg::Gn => Lang::Gn,
@@ -422,9 +424,10 @@ fn cmd_analyze(
             | Lang::Uk
             | Lang::Ar
             | Lang::Fa
+            | Lang::Km
     ) {
         bail!(
-            "analyze currently supports en/de/es/it/pt/nl/ca/gl/ro/pl/sk/sl/el/is/eo/ast/br/tl/lt/crh/be/uk/ar/fa only"
+            "analyze currently supports en/de/es/it/pt/nl/ca/gl/ro/pl/sk/sl/el/is/eo/ast/br/tl/lt/crh/be/uk/ar/fa/km only"
         );
     }
     let data = data_dir(cli)?;

@@ -195,6 +195,8 @@ pub struct Pipeline {
     pub arabic: Option<Arc<crate::ar::ArabicPipeline>>,
     /// Persian pipeline parts (`None` for the other languages)
     pub persian: Option<Arc<crate::fa::PersianPipeline>>,
+    /// Khmer pipeline parts (`None` for the other languages)
+    pub khmer: Option<Arc<crate::km::KhmerPipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1408,6 +1410,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1660,6 +1663,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -1871,6 +1875,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2090,6 +2095,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2229,6 +2235,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2487,6 +2494,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -2705,6 +2713,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3040,6 +3049,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3199,6 +3209,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3344,6 +3355,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3513,6 +3525,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3660,6 +3673,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3779,6 +3793,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -3933,6 +3948,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -4019,6 +4035,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4188,6 +4205,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4269,6 +4287,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4387,6 +4406,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4491,6 +4511,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4609,6 +4630,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4715,6 +4737,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4822,6 +4845,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4939,6 +4963,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5045,6 +5070,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5204,6 +5230,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5402,6 +5429,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5556,6 +5584,7 @@ impl Pipeline {
             serbian: Some(serbian),
             arabic: None,
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5697,6 +5726,7 @@ impl Pipeline {
             serbian: None,
             arabic: Some(arabic),
             persian: None,
+            khmer: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5772,6 +5802,96 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: Some(persian),
+            khmer: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Khmer (`km`) engine: `Khmer` has a `BaseTagger` (`KhmerTagger` over the
+    /// in-tree FSA5 `khmer.dict`), the `KhmerWordTokenizer` (a delimiter
+    /// `WordTokenizer` subclass) and the plain `XmlRuleDisambiguator`
+    /// (`km/disambiguation.xml` + global). The five `Khmer.getRelevantRules`
+    /// classes are the hunspell speller, the simple-replace/word-repeat rules,
+    /// the unpaired-brackets rule and the space-before rule; the generic
+    /// built-ins are absent.
+    pub fn new_khmer(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Km, "km_two", enabled_rules)?;
+        let tagger = Arc::new(lt_tagger::KhmerTagger::load(data_dir.path())?);
+        let spelling = match crate::km::spelling::KhmerSpellingRule::load(data_dir.path()) {
+            Ok(rule) => Some(Arc::new(rule)),
+            Err(err) => {
+                eprintln!("[km] spelling rule disabled: {err}");
+                None
+            }
+        };
+        let khmer = Arc::new(crate::km::KhmerPipeline {
+            tagger,
+            disambiguator: f.disambiguator,
+            spelling,
+            space_before: crate::space_before::SpaceBeforeRule::khmer(),
+        });
+        Ok(Self {
+            lang: Lang::Km,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: crate::km::simple_replace_instances(data_dir.path())?,
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: Some(khmer),
             clean_overlapping_matches: true,
         })
     }
@@ -5916,6 +6036,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6007,6 +6128,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6102,6 +6224,7 @@ impl Pipeline {
             serbian: None,
             arabic: None,
             persian: None,
+            khmer: None,
             da: None,
             sv: None,
             clean_overlapping_matches: true,
@@ -6118,6 +6241,8 @@ impl Pipeline {
             let sentence_text = &text[start..end];
             let mut analyzed = if self.persian.is_some() {
                 crate::fa::analyze_persian_sentence(sentence_text)
+            } else if let Some(khmer) = &self.khmer {
+                crate::km::analyze_khmer_sentence(khmer, sentence_text)
             } else if self.norwegian.is_some() || self.nordum.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
@@ -8477,6 +8602,23 @@ impl Pipeline {
                 }
             }
         }
+        // Khmer text-level rules (`Khmer.getRelevantRules`):
+        // GenericUnpairedBrackets (4).
+        if self.lang == crate::Lang::Km
+            && builtin_active(
+                "KM_UNPAIRED_BRACKETS",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            )
+        {
+            text_level_matches.extend(crate::unpaired_brackets::check_km(&analyzed_sentences));
+        }
         // Esperanto text-level rules (`Esperanto.getRelevantRules`):
         // GenericUnpairedBrackets (3), UppercaseSentenceStart (5),
         // MultipleWhitespace (7) and SentenceWhitespace (8).
@@ -9393,6 +9535,8 @@ impl Pipeline {
     ) -> (lt_core::AnalyzedSentence, usize) {
         let mut analyzed = if self.persian.is_some() {
             crate::fa::analyze_persian_sentence(&text[start..end])
+        } else if let Some(khmer) = &self.khmer {
+            crate::km::analyze_khmer_sentence(khmer, &text[start..end])
         } else if self.norwegian.is_some() || self.nordum.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
@@ -12009,6 +12153,68 @@ impl Pipeline {
                         enabled_categories,
                     ),
                     persian.space_before.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
+            }
+        }
+        // Khmer sentence-level rules in `Khmer.getRelevantRules` order:
+        // HunspellRule (1), SimpleReplace (2, generic `self.simple_replace`),
+        // WordRepeat (3) and SpaceBefore (5). `KM_UNPAIRED_BRACKETS` (4) is
+        // text-level above.
+        if self.lang == crate::Lang::Km {
+            if let Some(khmer) = &self.khmer {
+                // `KhmerHunspellRule` (`HUNSPELL_RULE`, default on).
+                if let Some(spelling) = &khmer.spelling {
+                    append_active(
+                        &mut matches,
+                        builtin_active(
+                            crate::km::spelling::RULE_ID,
+                            "TYPOS",
+                            true,
+                            false,
+                            options,
+                            enabled_rules,
+                            disabled_rules,
+                            disabled_categories,
+                            enabled_categories,
+                        ),
+                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
+                        &mut seen,
+                    );
+                }
+                // `KhmerWordRepeatRule` (`KM_WORD_REPEAT_RULE`).
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "KM_WORD_REPEAT_RULE",
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    crate::km::check_word_repeat_km(&analyzed.tokens, start),
+                    &mut seen,
+                );
+                // `KhmerSpaceBeforeRule` (`KM_SPACE_BEFORE_CONJUNCTION`,
+                // default on).
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        khmer.space_before.rule_id(),
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    khmer.space_before.check_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
             }

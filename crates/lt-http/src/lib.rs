@@ -620,6 +620,7 @@ mod tests {
         assert!(arr.iter().any(|l| l["longCode"] == "gn"));
         assert!(arr.iter().any(|l| l["longCode"] == "ar"));
         assert!(arr.iter().any(|l| l["longCode"] == "fa-IR"));
+        assert!(arr.iter().any(|l| l["longCode"] == "km-KH"));
     }
 
     #[tokio::test]

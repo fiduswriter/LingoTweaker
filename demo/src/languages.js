@@ -111,6 +111,9 @@ const ARABIC = {
 const PERSIAN = {
   sample: "چرا? این یک آزمایش است . ممنون از شما",
 };
+const KHMER = {
+  sample: "នោះ\u200bហើយ\u200bនឹង\u200bនេះ។ ខ្ញុំ\u200bបាន\u200bបាន\u200bទៅ។",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", size: "15 MB", ...ENGLISH },
@@ -146,6 +149,7 @@ export const LANGUAGES = [
   { code: "sr-RS", pack: "sr", label: "Српски", size: "5.2 MB", ...SERBIAN },
   { code: "ar", pack: "ar", label: "العربية", size: "14 MB", ...ARABIC },
   { code: "fa-IR", pack: "fa", label: "فارسی", size: "0.32 MB", ...PERSIAN },
+  { code: "km-KH", pack: "km", label: "ខ្មែរ", size: "0.90 MB", ...KHMER },
   { code: "no", pack: "no", label: "Norsk bokmål", size: "3.0 MB", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", size: "3.6 MB", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", size: "0.28 MB", ...GUARANI },

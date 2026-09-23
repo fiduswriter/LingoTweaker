@@ -491,6 +491,29 @@ pub fn check_it(sentences: &[AnalyzedSentence]) -> Vec<Match> {
     check_with(sentences, &symbols_it())
 }
 
+/// `KhmerUnpairedBracketsRule` (`KM_UNPAIRED_BRACKETS`): the generic rule with
+/// `[ ( { “ " ' «` / `] ) } ” " ' »` and the `MessagesBundle_km` strings.
+/// `GenericUnpairedBracketsRule` is constructed with `ruleId = null`, but the
+/// subclass overrides `getId()`, so the reported rule id is the km one.
+pub fn symbols_km() -> UnpairedSymbols {
+    UnpairedSymbols {
+        rule_id: "KM_UNPAIRED_BRACKETS",
+        description: "មាន\u{200b}រ៉ាត់ ឃ្នាប អព្ភន្តរ\u{200b}សញ្ញា ឬ\u{200b}សញ្ញា\u{200b}មួយ\u{200b}ណា\u{200b}ផ្សេង\u{200b}ទៀត\u{200b}ដែល\u{200b}ភ្លេច\u{200b}ដាក់\u{200b}គូ",
+        category_id: "PUNCTUATION",
+        category_name: "Punctuation",
+        start: &["[", "(", "{", "\u{201C}", "\"", "'", "«"],
+        end: &["]", ")", "}", "\u{201D}", "\"", "'", "»"],
+        spanish: false,
+        numerals: numerals_en,
+        message_template: "Unpaired symbol: '{other}' seems to be missing",
+    }
+}
+
+/// Khmer `KM_UNPAIRED_BRACKETS` (generic rule, `MessagesBundle_km` strings).
+pub fn check_km(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(sentences, &symbols_km())
+}
+
 /// `Dutch.getRelevantRules`: the generic rule with the Dutch quote lists
 /// `[ ( { “ ‹ “ „ "` / `] ) } ” › ” ” "` and the Dutch strings.
 pub fn symbols_nl() -> UnpairedSymbols {
