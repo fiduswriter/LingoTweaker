@@ -4,7 +4,7 @@
 
 use std::collections::HashMap;
 use std::path::Path;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 
 use lt_core::{
     AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings, Match, Result, Suggestion, TextRange,
@@ -389,17 +389,36 @@ fn to_id(input: &str, german: bool) -> String {
         .collect()
 }
 
+/// Interned full-match regex for `synonyms.txt` patterns: the same handful
+/// of patterns is re-tested for every token, and a fresh `Regex::new` per
+/// call showed up prominently in the steady-state profile. Compile failures
+/// are cached as `None` (Java `String.matches` → no match).
+fn cached_full_match_regex(pattern: &str) -> Option<std::sync::Arc<regex::Regex>> {
+    static CACHE: std::sync::OnceLock<
+        Mutex<HashMap<String, Option<std::sync::Arc<regex::Regex>>>>,
+    > = std::sync::OnceLock::new();
+    let cache = CACHE.get_or_init(|| Mutex::new(HashMap::new()));
+    let mut cache = cache.lock().unwrap();
+    cache.get(pattern).cloned().unwrap_or_else(|| {
+        let compiled = regex::Regex::new(&format!("^(?:{pattern})$"))
+            .ok()
+            .map(std::sync::Arc::new);
+        cache.insert(pattern.to_string(), compiled.clone());
+        compiled
+    })
+}
+
 /// `PatternToken` pos matching is a full regex match; the `synonyms.txt`
 /// tags are regexes even without `postag_regexp` (Java `String.matches`).
 fn pos_tag_matches(pattern: &str, tag: &str) -> bool {
-    regex::Regex::new(&format!("^(?:{pattern})$"))
+    cached_full_match_regex(pattern)
         .map(|re| re.is_match(tag))
         .unwrap_or(false)
 }
 
 /// `AnalyzedTokenReadings.matchesChunkRegex`: full match on any chunk tag.
 fn chunk_regex_matches(token: &AnalyzedTokenReadings, chunk_regex: &str) -> bool {
-    let Ok(re) = regex::Regex::new(&format!("^(?:{chunk_regex})$")) else {
+    let Some(re) = cached_full_match_regex(chunk_regex) else {
         return false;
     };
     token.chunk_tags.iter().any(|c| re.is_match(c))

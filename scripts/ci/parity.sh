@@ -138,7 +138,8 @@ if [ "$LANG_ARG" = "fa" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-23"
 fi
 JOBS="${PARITY_JOBS:-$(nproc 2>/dev/null || echo 4)}"
-BIN="$RS_ROOT/target/release/lt-cli"
+# PARITY_BIN overrides the checked binary (e.g. an out-of-tree build)
+BIN="${PARITY_BIN:-$RS_ROOT/target/release/lt-cli}"
 
 INPUT="$GOLDEN/$LANG_ARG-full.txt"
 JAVA="$GOLDEN/$LANG_ARG-full.java.tsv"

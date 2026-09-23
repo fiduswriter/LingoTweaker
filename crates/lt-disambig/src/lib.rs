@@ -239,13 +239,13 @@ impl XmlDisambiguator {
         let build_maps = |sentence: &AnalyzedSentence,
                           view: &[usize]|
          -> (
-            std::collections::HashMap<String, Vec<usize>>,
-            std::collections::HashMap<String, Vec<usize>>,
+            lt_pattern::matcher::LowerIndexMap,
+            lt_pattern::matcher::LowerIndexMap,
         ) {
-            let mut token_lower: std::collections::HashMap<String, Vec<usize>> =
-                std::collections::HashMap::with_capacity(view.len());
-            let mut lemma_lower: std::collections::HashMap<String, Vec<usize>> =
-                std::collections::HashMap::with_capacity(view.len() * 2);
+            let mut token_lower: lt_pattern::matcher::LowerIndexMap =
+                lt_pattern::lower_index_map(view.len());
+            let mut lemma_lower: lt_pattern::matcher::LowerIndexMap =
+                lt_pattern::lower_index_map(view.len() * 2);
             for (vi, &i) in view.iter().enumerate() {
                 let t = &sentence.tokens[i];
                 token_lower

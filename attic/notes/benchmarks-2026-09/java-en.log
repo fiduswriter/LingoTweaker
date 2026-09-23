@@ -1,0 +1,4 @@
+build 1466 ms
+init_first_check 1575 ms (1 sentences)
+warmup 100 830 ms
+steady 5000 18865 ms 3.773 ms/sentence

@@ -19,7 +19,9 @@ lt-disambig = { workspace = true }
 lt-data = { workspace = true }
 lt-pattern = { workspace = true }
 regex = { workspace = true }
+aho-corasick = { workspace = true }
 fancy-regex = { workspace = true }
+rustc-hash = { workspace = true }
 unicode-normalization = { workspace = true }
 
 [dev-dependencies]

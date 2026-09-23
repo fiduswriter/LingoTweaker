@@ -26,15 +26,17 @@ const EXCEPTIONS: [&str; 7] = [
 /// `do-not-synthesize.txt`), with the SUFFIX `+` marker encoding.
 #[derive(Default)]
 struct ManualSynthesizer {
-    map: HashMap<(String, String), Vec<String>>,
-    possible_tags: HashSet<String>,
+    map: HashMap<(String, String), Vec<String>, rustc_hash::FxBuildHasher>,
+    possible_tags: HashSet<String, rustc_hash::FxBuildHasher>,
 }
 
 impl ManualSynthesizer {
     fn load(path: &Path) -> Option<Self> {
         let text = lt_data::fs::read_to_string(path).ok()?;
-        let mut map: HashMap<(String, String), Vec<String>> = HashMap::new();
-        let mut possible_tags = HashSet::new();
+        let mut map: HashMap<(String, String), Vec<String>, rustc_hash::FxBuildHasher> =
+            HashMap::with_hasher(rustc_hash::FxBuildHasher);
+        let mut possible_tags: HashSet<String, rustc_hash::FxBuildHasher> =
+            HashSet::with_hasher(rustc_hash::FxBuildHasher);
         let mut separator = "\t".to_string();
         for raw in text.lines() {
             let line = raw.trim();

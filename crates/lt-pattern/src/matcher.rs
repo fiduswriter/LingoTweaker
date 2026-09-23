@@ -11,6 +11,7 @@
 //! `has_chunk_attrs`).
 
 use fancy_regex::Regex as FancyRegex;
+use std::collections::HashMap;
 use std::ops::Deref;
 
 use lt_core::{AnalyzedToken, AnalyzedTokenReadings, TextRange};
@@ -84,6 +85,10 @@ pub struct CompiledToken {
 
     /// chunk tag requirement (`chunk` / `chunk_re`, D-002)
     chunk: Option<(String, bool)>,
+    /// the compiled chunk regex (`chunk_re`), compiled once at pattern
+    /// build time instead of per token comparison (fast `regex` crate DFA
+    /// unless the pattern needs fancy features)
+    chunk_regex: Option<std::sync::Arc<TextRegex>>,
     /// LT `isInsideMarker` (needed by `estimateContextForSureMatch`)
     pub in_marker: bool,
     /// LT `skip` attribute (-1 = unbounded)
@@ -192,6 +197,14 @@ type RegexCache =
 fn regex_cache() -> &'static RegexCache {
     static CACHE: std::sync::OnceLock<RegexCache> = std::sync::OnceLock::new();
     CACHE.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()))
+}
+
+/// Interned, anchored full-match regex for rule data patterns (`String`
+/// patterns that are matched token-by-token at check time, e.g. POS-tag
+/// patterns from `synonyms.txt`). Rules recompile the same few patterns for
+/// every token comparison, so they must go through the shared cache.
+pub fn compile_full_match_regex(pattern: &str) -> Result<std::sync::Arc<TextRegex>, String> {
+    compile_regex_fast(pattern, true, true)
 }
 
 fn compile_regex_fast(
@@ -671,6 +684,10 @@ pub(crate) fn compile_token(t: &PatternToken) -> Result<CompiledToken, String> {
             (Some(c), None) => Some((c.clone(), false)),
             _ => None,
         },
+        chunk_regex: t
+            .chunk_re
+            .as_ref()
+            .and_then(|re| compile_regex_fast(re, true, true).ok()),
         in_marker: t.in_marker,
         skip: t.skip.unwrap_or(0),
         spacebefore: t.spacebefore,
@@ -1291,7 +1308,21 @@ pub fn normalize_java_quantifiers(pattern: &str) -> String {
 
 /// Java's regex syntax allows an empty inline-flag group `(?)` (no-op);
 /// `fancy-regex` rejects it, so normalize that one case.
+/// Interned `java_regex` compiles: match rendering re-tests the same
+/// `regexp_match` patterns for every match, so the programs are cached.
 fn java_regex(pattern: &str) -> Option<FancyRegex> {
+    static CACHE: std::sync::OnceLock<std::sync::Mutex<HashMap<String, Option<FancyRegex>>>> =
+        std::sync::OnceLock::new();
+    let cache = CACHE.get_or_init(|| std::sync::Mutex::new(HashMap::new()));
+    let mut cache = cache.lock().unwrap();
+    cache.get(pattern).cloned().unwrap_or_else(|| {
+        let compiled = java_regex_uncached(pattern);
+        cache.insert(pattern.to_string(), compiled.clone());
+        compiled
+    })
+}
+
+fn java_regex_uncached(pattern: &str) -> Option<FancyRegex> {
     let pattern = normalize_java_quantifiers(pattern);
     let pattern = normalize_java_octal_escapes(&pattern);
     let pattern = normalize_java_punct(&pattern);
@@ -1856,10 +1887,20 @@ pub fn find_matches_with_unify<T: Deref<Target = AnalyzedTokenReadings>>(
 
 /// Java `TokenHint.getPossibleIndices`: candidate match starts derived from
 /// an anchor hint (`AbstractPatternRulePerformer.doMatch`).
+///
+/// The index maps are rebuilt per sentence, so they use the fast non-SipHash
+/// hasher (the randomized `RandomState` hash showed up as ~10% of the
+/// steady-state profile).
+pub type LowerIndexMap = std::collections::HashMap<String, Vec<usize>, rustc_hash::FxBuildHasher>;
+
+pub fn lower_index_map(capacity: usize) -> LowerIndexMap {
+    std::collections::HashMap::with_capacity_and_hasher(capacity, rustc_hash::FxBuildHasher)
+}
+
 pub fn anchor_starts(
     anchor: &CompiledHint,
-    token_lower: &std::collections::HashMap<String, Vec<usize>>,
-    lemma_lower: &std::collections::HashMap<String, Vec<usize>>,
+    token_lower: &LowerIndexMap,
+    lemma_lower: &LowerIndexMap,
 ) -> Vec<usize> {
     let map = if anchor.inflected {
         lemma_lower
@@ -2324,13 +2365,10 @@ fn chunk_matches(token: &CompiledToken, tr: &AnalyzedTokenReadings) -> bool {
         return true;
     };
     let hit = if *is_re {
-        FancyRegex::new(&format!("^(?:{spec})$"))
-            .map(|re| {
-                tr.chunk_tags
-                    .iter()
-                    .any(|t| re.is_match(t).unwrap_or(false))
-            })
-            .unwrap_or(false)
+        match &token.chunk_regex {
+            Some(re) => tr.chunk_tags.iter().any(|t| re.is_match(t)),
+            None => false,
+        }
     } else {
         tr.chunk_tags.iter().any(|t| t == spec)
     };
@@ -2683,11 +2721,11 @@ fn render_match_ref_forms(
 
     let mut forms: std::collections::BTreeSet<String> = std::collections::BTreeSet::new();
     if spec.postag_regexp {
-        let re = fancy_regex::Regex::new(&format!("^(?:{pos_tag})$")).ok()?;
+        let re = compile_regex_fast(pos_tag, true, true).ok()?;
         let mut pos_tags: Vec<String> = target_readings
             .iter()
             .filter_map(|r| r.pos_tag.as_deref())
-            .filter(|t| re.is_match(t).unwrap_or(false))
+            .filter(|t| re.is_match(t))
             .map(str::to_string)
             .collect();
         synth.sort_target_pos_tags(&mut pos_tags);

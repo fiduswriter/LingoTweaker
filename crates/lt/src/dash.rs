@@ -26,8 +26,11 @@ pub struct DashConfig {
 }
 
 pub struct DashRule {
-    /// variant (with dash) -> variant; all four dash spellings per compound
-    compounds: Vec<String>,
+    /// one automaton over all compound variants (all four dash spellings per
+    /// compound): Java uses Aho-Corasick; the naive per-compound `str::find`
+    /// scan was 60%+ of the Portuguese check time (every compound rescans
+    /// the sentence)
+    automaton: aho_corasick::AhoCorasick,
     config: DashConfig,
 }
 
@@ -66,7 +69,11 @@ impl DashRule {
         }
         compounds.sort();
         compounds.dedup();
-        Ok(Self { compounds, config })
+        // Java `AbstractDashRule` builds an AhoCorasick over the compounds
+        // and finds all overlapping occurrences in one pass over the text.
+        let automaton = aho_corasick::AhoCorasick::new(&compounds)
+            .map_err(|e| lt_core::CoreError::Data(format!("dash automaton: {e}")))?;
+        Ok(Self { automaton, config })
     }
 
     pub fn rule_id(&self) -> &str {
@@ -77,21 +84,11 @@ impl DashRule {
     pub fn check_sentence(&self, sentence: &AnalyzedSentence) -> Vec<Match> {
         let text = &sentence.text;
         let mut hits: Vec<(usize, usize)> = Vec::new();
-        for compound in &self.compounds {
-            let mut from = 0usize;
-            while let Some(idx) = text[from..].find(compound.as_str()) {
-                let begin = from + idx;
-                let end = begin + compound.len();
-                hits.push((begin, end));
-                // slide by one character (not one byte: non-ASCII compounds
-                // would otherwise land mid-`char`)
-                from = begin
-                    + text[begin..]
-                        .chars()
-                        .next()
-                        .map(char::len_utf8)
-                        .unwrap_or(1);
-            }
+        // overlapping (byte-level) matches over all compounds at once; a
+        // UTF-8 continuation byte can never start a match, so byte offsets
+        // are char-aligned like the old slide-by-one-char scan
+        for m in self.automaton.find_overlapping_iter(text.as_bytes()) {
+            hits.push((m.start(), m.end()));
         }
         // Java reverses the Aho-Corasick hits (ordered by end position), so
         // later matches are processed first and win the overlap check.

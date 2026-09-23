@@ -24,9 +24,9 @@ pub use filters::{
 };
 
 pub use matcher::{
-    compile_pattern, compile_patterns, expand_message_matches, find_matches,
-    find_matches_with_synth, find_matches_with_unify, match_range, render_match_ref,
-    CompiledPattern, PatternMatch, Synthesizer,
+    compile_full_match_regex, compile_pattern, compile_patterns, expand_message_matches,
+    find_matches, find_matches_with_synth, find_matches_with_unify, lower_index_map, match_range,
+    render_match_ref, CompiledPattern, LowerIndexMap, PatternMatch, Synthesizer, TextRegex,
 };
 pub use unify::{EquivalenceConfig, Unifier};
 

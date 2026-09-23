@@ -8,7 +8,7 @@
 //! allowlist mechanism (P1.7).
 use lt_data::PathExt as _;
 
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 
 use lt_core::{
@@ -487,6 +487,21 @@ fn replace_spaces_in_regex(s: &str) -> String {
     out
 }
 
+/// Interned compiled regex for `<suggestion>` `regexp_match` patterns: the
+/// same back-ref pattern recurs across matches, so compile once and reuse.
+fn cached_suggestion_regex(pattern: &str) -> std::result::Result<fancy_regex::Regex, String> {
+    static CACHE: std::sync::OnceLock<
+        std::sync::Mutex<HashMap<String, std::result::Result<fancy_regex::Regex, String>>>,
+    > = std::sync::OnceLock::new();
+    let cache = CACHE.get_or_init(|| std::sync::Mutex::new(HashMap::new()));
+    let mut cache = cache.lock().unwrap();
+    cache.get(pattern).cloned().unwrap_or_else(|| {
+        let compiled = fancy_regex::Regex::new(pattern).map_err(|e| e.to_string());
+        cache.insert(pattern.to_string(), compiled.clone());
+        compiled
+    })
+}
+
 /// Resolve `<suggestion>` parts for `<regexp>` rules: `<match no>` refers to
 /// capture groups, `regexp_match`/`regexp_replace` use replace-first, and
 /// case conversion uses the original group as the case sample.
@@ -511,7 +526,10 @@ fn resolve_regexp_suggestions(
                         // (`(X*){1,30}` ≡ `X*`), which the Rust engines
                         // read as a literal brace (D-022)
                         let rm = pm::normalize_java_quantifiers(rm);
-                        if let Ok(re) = fancy_regex::Regex::new(&rm) {
+                        // interned: the same back-ref pattern recurs across
+                        // matches (a fresh compile per suggestion showed up
+                        // in the steady-state profile)
+                        if let Ok(re) = cached_suggestion_regex(&rm) {
                             let replacement = pm::normalize_java_replacement(
                                 spec.regexp_replace.as_deref().unwrap_or(""),
                                 re.captures_len().saturating_sub(1),
@@ -9744,10 +9762,8 @@ impl Pipeline {
             .map(|&i| &analyzed.pre_disambig_tokens[i])
             .collect();
         // Java `AnalyzedSentence.tokenOffsets`/`lemmaOffsets` (lowercased)
-        let mut token_lower: std::collections::HashMap<String, Vec<usize>> =
-            std::collections::HashMap::with_capacity(token_refs.len());
-        let mut lemma_lower: std::collections::HashMap<String, Vec<usize>> =
-            std::collections::HashMap::with_capacity(token_refs.len() * 2);
+        let mut token_lower: lt_pattern::LowerIndexMap = pm::lower_index_map(token_refs.len());
+        let mut lemma_lower: lt_pattern::LowerIndexMap = pm::lower_index_map(token_refs.len() * 2);
         for (i, t) in token_refs.iter().enumerate() {
             token_lower
                 .entry(t.surface().to_lowercase())

@@ -801,6 +801,7 @@ checksum = "f9f8bd3e56ce4dfc153cf470fffbfa98c7620958b312ca5c3a4b8d5181fd13c6"
 name = "lt"
 version = "0.1.0-alpha.1"
 dependencies = [
+ "aho-corasick",
  "fancy-regex",
  "lt-chunk",
  "lt-core",
@@ -811,6 +812,7 @@ dependencies = [
  "lt-tagger",
  "lt-tokenize",
  "regex",
+ "rustc-hash",
  "serde_json",
  "unicode-normalization",
 ]
@@ -914,6 +916,7 @@ dependencies = [
  "lt-data",
  "quick-xml",
  "regex",
+ "rustc-hash",
  "serde",
 ]
 
@@ -945,6 +948,7 @@ dependencies = [
  "lt-data",
  "lt-tokenize",
  "regex",
+ "rustc-hash",
  "thiserror",
  "unicode-normalization",
 ]

@@ -9,6 +9,7 @@ readme.workspace = true
 
 [dependencies]
 lt-core = { workspace = true }
+rustc-hash = { workspace = true }
 lt-data = { workspace = true }
 lt-tokenize = { workspace = true }
 regex = { workspace = true }

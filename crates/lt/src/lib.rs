@@ -20,8 +20,10 @@ pub use lt_core::{
     Match, Result, Sentence, Suggestion, TextRange,
 };
 pub use lt_data::DataDir;
+
 pub use lt_pattern::{Example, Grammar, RuleDef};
 pub use lt_tokenize::{EnglishWordTokenizer, SrxDocument, SrxTokenizer};
+use std::collections::HashMap;
 
 // Language-specific modules live in `en/` and `de/`; rule families that
 // carry per-language entry points stay at the crate root (see `en.rs`/`de.rs`
@@ -527,6 +529,35 @@ pub struct Engine {
 impl Engine {
     pub fn builder(lang: Lang) -> Result<EngineBuilder> {
         EngineBuilder::new(lang)
+    }
+
+    /// Process-wide cache for the default-configuration engine
+    /// (`Engine::shared`): engine construction reparses the dictionaries and
+    /// recompiles thousands of rule regexes (several seconds for de), so
+    /// repeated builds in one process (CLI tools, servers, bindings) reuse
+    /// the built pipeline. Keyed by language + variant; engines built with
+    /// non-default options or a pinned `today` bypass the cache.
+    pub fn shared(lang: Lang) -> Result<std::sync::Arc<Engine>> {
+        Self::shared_variant(lang, None)
+    }
+
+    /// Like [`Engine::shared`] with an explicit variant (e.g. `en-GB`).
+    pub fn shared_variant(lang: Lang, variant: Option<String>) -> Result<std::sync::Arc<Engine>> {
+        type EngineCache = HashMap<(Lang, Option<String>), std::sync::Arc<Engine>>;
+        static CACHE: std::sync::OnceLock<std::sync::Mutex<EngineCache>> =
+            std::sync::OnceLock::new();
+        let cache = CACHE.get_or_init(|| std::sync::Mutex::new(HashMap::new()));
+        let mut cache = cache.lock().unwrap();
+        if let Some(engine) = cache.get(&(lang, variant.clone())) {
+            return Ok(std::sync::Arc::clone(engine));
+        }
+        let mut builder = EngineBuilder::new(lang)?;
+        if let Some(variant) = &variant {
+            builder = builder.variant(variant.clone());
+        }
+        let engine = std::sync::Arc::new(builder.build()?);
+        cache.insert((lang, variant), std::sync::Arc::clone(&engine));
+        Ok(engine)
     }
 
     pub fn lang(&self) -> Lang {

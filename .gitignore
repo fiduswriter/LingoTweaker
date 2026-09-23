@@ -1,4 +1,5 @@
 /target
+/target-bench
 /docs/parity/lt-sync-status.json
 /docs/parity/porting-checklist.md
 *.swp
@@ -35,3 +36,6 @@ crates/lt-node/*.tgz
 # maturin / Python build output
 crates/lt-py/target/
 /target/wheels/
+
+# regenerable benchmark artifacts (raw logs are archived in attic/notes/benchmarks-2026-09)
+scripts/bench/results/
