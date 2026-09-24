@@ -12,6 +12,7 @@
 use std::sync::Arc;
 
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
+use lt_pattern::Synthesizer;
 
 pub mod context;
 pub mod priorities;
@@ -23,6 +24,11 @@ pub struct NorwegianPipeline {
     /// Tagger over the generated `no/dictionaries/no_pos.dict` Morfologik
     /// dictionary (`tools/no-dict/build-no-tagger.py`, Ordbøkene data).
     pub tagger: Arc<lt_tagger::NorwegianTagger>,
+    /// The derived Norwegian synthesizer dictionary (`no_synth.dict`,
+    /// infrastructure for `<match postag>` synthesis, plan item B2).
+    pub synthesizer: Arc<lt_tagger::NorwegianSynthesizer>,
+    /// The same synthesizer through the pattern engine's trait.
+    pub synth_adapter: Arc<NorwegianSynthesizerAdapter>,
     /// `XmlRuleDisambiguator` over `no/disambiguation.xml` (+ global rules)
     /// when the file exists, empty otherwise.
     pub disambiguator: lt_disambig::XmlDisambiguator,
@@ -37,6 +43,46 @@ pub struct NorwegianPipeline {
 impl NorwegianPipeline {
     pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
         self.disambiguator.apply(sentence);
+    }
+}
+
+/// Adapter exposing the Norwegian synthesizer through the pattern engine's
+/// [`Synthesizer`] trait, plus the tagger for the `checksSpelling` check.
+pub struct NorwegianSynthesizerAdapter {
+    pub synth: Arc<lt_tagger::NorwegianSynthesizer>,
+    pub tagger: Arc<lt_tagger::NorwegianTagger>,
+}
+
+impl NorwegianSynthesizerAdapter {
+    pub fn inner(&self) -> &lt_tagger::NorwegianSynthesizer {
+        &self.synth
+    }
+}
+
+impl Synthesizer for NorwegianSynthesizerAdapter {
+    fn synthesize(
+        &self,
+        token: &AnalyzedToken,
+        pos_tag: &str,
+        pos_tag_regexp: bool,
+    ) -> Vec<String> {
+        self.synth.synthesize(token, pos_tag, pos_tag_regexp)
+    }
+
+    fn synthesize_plain(&self, token: &AnalyzedToken, pos_tag: &str) -> Vec<String> {
+        self.synth.synthesize_plain(token, pos_tag)
+    }
+
+    fn target_pos_tag(&self, pos_tags: &[String], fallback: &str) -> String {
+        self.synth.target_pos_tag(pos_tags, fallback)
+    }
+
+    fn is_known_word(&self, word: &str) -> bool {
+        let tagged = self.tagger.tag(std::slice::from_ref(&word.to_string()));
+        tagged
+            .first()
+            .and_then(|tr| tr.readings.first())
+            .is_some_and(|r| r.stem.is_some() || r.pos_tag.is_some())
     }
 }
 

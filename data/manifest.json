@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 1023,
+  "file_count": 1027,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -7258,12 +7258,13 @@
     },
     {
       "path": "no/README.md",
-      "sha256": "104c21f0192ba6b5712e18f2f1d2cd34a9edd01f9acd62d965915ce0932375d7",
-      "size": 12878,
+      "sha256": "ace1e69464226cbfb2a198062b7d11fddb300e91f30815b6eba715ad04386a84",
+      "size": 17066,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE"
+        "license_source": "LICENSE",
+        "note": "Norwegian Bokm\u00e5l data documentation (B2: synth + disambiguation sections)"
       }
     },
     {
@@ -7332,6 +7333,65 @@
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/no-dict/build-no-tagger.py (Ordb\u00f8kene lemma_expanded.json -> word-lemma-tag triples -> lt_morfologik.py pos)",
         "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); see data/no/README.md"
+      }
+    },
+    {
+      "path": "no/dictionaries/no_synth.dict",
+      "sha256": "4c36d76110bff82e7265d66162c463cadaad5f9e2c1df612f6292e0cd92c4337",
+      "size": 404860,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/morfologik/lt_morfologik.py synth (no_pos.dict export, inverted to lemma|tag keys)",
+        "note": "Norwegian Bokm\u00e5l synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys, the danish_synth pattern; tags are the M1 tagset tags (no gender-bearing noun tags); see data/no/README.md",
+        "generated_from": [
+          "no/dictionaries/no_pos.dict",
+          "no/dictionaries/no_pos.info"
+        ]
+      }
+    },
+    {
+      "path": "no/dictionaries/no_synth.info",
+      "sha256": "247cde681035c92c1f9b650835e457264364ec8447183edd335d9d5f5c0965bd",
+      "size": 100,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/morfologik/lt_morfologik.py synth (no_pos.dict export, inverted to lemma|tag keys)",
+        "note": "Norwegian Bokm\u00e5l synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys, the danish_synth pattern; tags are the M1 tagset tags (no gender-bearing noun tags); see data/no/README.md",
+        "generated_from": [
+          "no/dictionaries/no_pos.dict",
+          "no/dictionaries/no_pos.info"
+        ]
+      }
+    },
+    {
+      "path": "no/dictionaries/no_synth_tags.txt",
+      "sha256": "f29f932aa2431e16211bd9cac72c55a72ccce6c45e20d3e0b101510f1c633d4c",
+      "size": 176,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/morfologik/lt_morfologik.py synth (no_pos.dict export, inverted to lemma|tag keys)",
+        "note": "Norwegian Bokm\u00e5l synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys, the danish_synth pattern; tags are the M1 tagset tags (no gender-bearing noun tags); see data/no/README.md",
+        "generated_from": [
+          "no/dictionaries/no_pos.dict",
+          "no/dictionaries/no_pos.info"
+        ]
+      }
+    },
+    {
+      "path": "no/disambiguation.xml",
+      "sha256": "09389a980c0110f004ab72e47e3631f492520643673a8a0c262e2ec369b8cb41",
+      "size": 7400,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Norwegian Bokm\u00e5l disambiguation rulegroups (B2, M4 style); hand-authored (no legacy Java module), see data/no/README.md"
       }
     },
     {
@@ -7404,12 +7464,13 @@
     },
     {
       "path": "no/rules/grammar.xml",
-      "sha256": "71d048ac83062b06b6d67a6495cad77079d72a927e80fe3f6589e17f6a016c90",
-      "size": 32782,
+      "sha256": "70fd279bd31c3704c53f1a3501384c0d51e1cab23b6bb7e6c15bb24864367eaa",
+      "size": 37142,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE"
+        "license_source": "LICENSE",
+        "note": "Norwegian Bokm\u00e5l XML rules incl. the B2 POS-based agreement rules (postag + <match postag> synthesis over no_synth.dict); hand-authored (no legacy Java module), see data/no/README.md"
       }
     },
     {

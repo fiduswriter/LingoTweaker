@@ -6657,8 +6657,15 @@ impl Pipeline {
         enabled_rules: &[String],
         _variant: Option<&str>,
     ) -> Result<Self> {
-        let f = Self::hand_authored_foundations(data_dir, Lang::No, "no_two", enabled_rules)?;
+        let mut f = Self::hand_authored_foundations(data_dir, Lang::No, "no_two", enabled_rules)?;
         let tagger = Arc::new(lt_tagger::NorwegianTagger::load(data_dir.path())?);
+        let synth = Arc::new(lt_tagger::NorwegianSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::no::NorwegianSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        f.disambiguator
+            .set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
         let spelling = Arc::new(crate::no::spelling::NorwegianSpellingRule::load(
             data_dir.path(),
         )?);
@@ -6678,6 +6685,8 @@ impl Pipeline {
         let gender_overrides = crate::no::context::load_gender_overrides(data_dir.path())?;
         let norwegian = Arc::new(crate::no::NorwegianPipeline {
             tagger,
+            synthesizer: synth,
+            synth_adapter,
             disambiguator: f.disambiguator,
             spelling,
             repetition,
@@ -15843,6 +15852,9 @@ impl Pipeline {
         }
         if let Some(swedish) = &self.sv {
             return Some(swedish.synth_adapter.as_ref());
+        }
+        if let Some(norwegian) = &self.norwegian {
+            return Some(norwegian.synth_adapter.as_ref());
         }
         if let Some(crh) = &self.crimean_tatar {
             return Some(crh.synth_adapter.as_ref());

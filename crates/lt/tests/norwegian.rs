@@ -60,7 +60,7 @@ fn hits(engine: &Engine, text: &str, rule_id: &str) -> bool {
     match_ids(engine, text).iter().any(|id| id == rule_id)
 }
 
-/// Stage-3 wiring state: 25 active XML rules (32 loaded, 7 default-off),
+/// Stage-3 wiring state: 29 active XML rules (36 loaded, 7 default-off),
 /// no unmapped filter, no compile failure.
 #[test]
 fn norwegian_engine_state() {
@@ -68,7 +68,7 @@ fn norwegian_engine_state() {
     let Some(engine) = engine() else {
         return;
     };
-    assert_eq!(engine.active_rule_count(), 25);
+    assert_eq!(engine.active_rule_count(), 29);
     assert!(engine.compile_failures().is_empty());
     let skipped = engine.skipped_counts();
     assert_eq!(skipped.filters, 0);
@@ -125,6 +125,15 @@ fn norwegian_rules_fire() {
         ("Han vasket hans bil.", "NB_SIN_HANS"),
         ("Hun lånte hennes sykkel.", "NB_SIN_HANS"),
         ("Han så ham selv.", "NB_SEG_REFLEX"),
+        ("Han har mange bil.", "NB_QUANT_PLU"),
+        ("Flere gang har jeg sagt det.", "NB_QUANT_PLU"),
+        ("Vi så begge side av saken.", "NB_QUANT_PLU"),
+        ("Disse bilen er ny.", "NB_DISSE_PLU"),
+        ("Disse jente leser mye.", "NB_DISSE_PLU"),
+        ("Dette bilen står der.", "NB_DEM_COMMON"),
+        ("Dette jenta ler.", "NB_DEM_COMMON"),
+        ("Denne huset er gammelt.", "NB_DEM_NEUTER"),
+        ("Denne barnet sover.", "NB_DEM_NEUTER"),
     ];
     for (text, rule_id) in cases {
         assert!(
@@ -211,6 +220,14 @@ fn norwegian_correct_sentences() {
         "Hun så seg selv.",
         "Jeg så ham selv.",
         "Det er hans bil.",
+        "Han har mange biler.",
+        "Flere ganger har jeg sagt det.",
+        "Begge deler er bra.",
+        "Samtlige deltagere møtte opp.",
+        "Disse jentene leser mye.",
+        "Denne boken er god.",
+        "Dette huset er gammelt.",
+        "Dette året har vært vanskelig.",
     ] {
         let ids = match_ids(&engine, text);
         assert!(ids.is_empty(), "unexpected matches for {text:?}: {ids:?}");
@@ -404,5 +421,184 @@ fn norwegian_speller_suggestions_diacritics() {
     assert_eq!(
         spelling[0].suggestions.first().map(|s| s.value.as_str()),
         Some("Setning")
+    );
+}
+
+/// The hand-authored disambiguation rulegroups (plan item B2,
+/// `data/no/disambiguation.xml`) filter the homograph readings they target.
+/// Each case: the ambiguous token carries both readings before
+/// disambiguation and only the expected class afterwards.
+#[test]
+fn norwegian_disambiguation_rulegroups() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        return;
+    };
+    let tags = |raw: bool, text: &str, token: &str| -> Vec<String> {
+        let sentences = if raw {
+            engine.analyze_raw(text)
+        } else {
+            engine.analyze(text)
+        };
+        let tok = sentences
+            .iter()
+            .flat_map(|s| s.tokens.iter())
+            .find(|t| t.surface() == token)
+            .unwrap_or_else(|| panic!("token {token:?} not found in {text:?}"));
+        let mut tags: Vec<String> = tok
+            .readings
+            .iter()
+            .filter_map(|r| r.pos_tag.clone())
+            .filter(|t| !matches!(t.as_str(), "SENT_START" | "SENT_END"))
+            .collect();
+        tags.sort();
+        tags.dedup();
+        tags
+    };
+    let tags_after = |text: &str, token: &str| tags(false, text, token);
+    let tags_raw = |text: &str, token: &str| tags(true, text, token);
+    // det-pron: "det huset" -> determiner; "Det snør" / "De kommer" -> pronoun.
+    let raw = tags_raw("I det huset bor en familie.", "det");
+    assert!(
+        raw.iter().any(|t| t == "det") && raw.iter().any(|t| t == "pron"),
+        "expected a det/pron homograph: {raw:?}"
+    );
+    let after = tags_after("I det huset bor en familie.", "det");
+    assert!(
+        after.iter().all(|t| t == "det"),
+        "det+sub must keep only det: {after:?}"
+    );
+    let after = tags_after("Det snør i dag.", "Det");
+    assert!(
+        after.iter().all(|t| t == "pron"),
+        "det+ver must keep only pron: {after:?}"
+    );
+    let after = tags_after("De kommer snart.", "De");
+    assert!(
+        after.iter().all(|t| t == "pron"),
+        "de+ver must keep only pron: {after:?}"
+    );
+    // pron-ver-sub: "Han spiller." -> verb (the -er noun readings are
+    // filtered); "En spiller" (no pronoun) stays untouched.
+    let raw = tags_raw("Han spiller fotball.", "spiller");
+    assert!(
+        raw.iter().any(|t| t.starts_with("ver:")) && raw.iter().any(|t| t.starts_with("sub:")),
+        "expected a ver+sub homograph: {raw:?}"
+    );
+    let after = tags_after("Han spiller fotball.", "spiller");
+    assert!(
+        after.iter().all(|t| t.starts_with("ver:")),
+        "pron+ver&sub must keep only ver: {after:?}"
+    );
+    let after = tags_after("En spiller løper fort.", "spiller");
+    assert!(
+        after.iter().any(|t| t.starts_with("sub:")),
+        "det+ver&sub must stay untouched: {after:?}"
+    );
+    // aa-infm-ver-sub: "begynte å renne" -> the verb survives.
+    let after = tags_after("Vannet begynte å renne ut av kjelleren.", "renne");
+    assert!(
+        after.iter().all(|t| t.starts_with("ver:")),
+        "å+ver&sub must keep only ver: {after:?}"
+    );
+    let after = tags_after("En renne leder vannet bort.", "renne");
+    assert!(
+        after.iter().any(|t| t.starts_with("sub:")),
+        "det+ver&sub noun must keep sub: {after:?}"
+    );
+    // prep-ver-sub: "i løpet av dagen" -> the substantive survives.
+    let after = tags_after("I løpet av dagen regnet det.", "løpet");
+    assert!(
+        after.iter().all(|t| t.starts_with("sub:")),
+        "prep+ver&sub must keep only sub: {after:?}"
+    );
+    // det-adj-sub: "den voksne eleven" -> adjective; "den voksne" ->
+    // nominalized substantive.
+    let raw = tags_raw("Den voksne eleven leser mye.", "voksne");
+    assert!(
+        raw.iter().any(|t| t.starts_with("adj:")) && raw.iter().any(|t| t.starts_with("sub:")),
+        "expected an adj+sub homograph: {raw:?}"
+    );
+    let after = tags_after("Den voksne eleven leser mye.", "voksne");
+    assert!(
+        after.iter().all(|t| t.starts_with("adj:")),
+        "det+adj&sub+sub must keep only adj: {after:?}"
+    );
+    let after = tags_after("Den voksne sover lenge.", "voksne");
+    assert!(
+        after.iter().all(|t| t.starts_with("sub:")),
+        "det+adj&sub must keep only sub: {after:?}"
+    );
+}
+
+/// The derived Norwegian synthesizer dictionary (plan item B2,
+/// infrastructure over `no_synth.dict`): `lemma|tag` lookup returns the
+/// inflected forms of `no_pos.dict` and postag-regexp synthesis expands over
+/// `no_synth_tags.txt`. The tags are the M1 tagset tags (no gender-bearing
+/// noun tags).
+#[test]
+fn norwegian_synthesizer() {
+    let _guard = engine_guard();
+    let Some(data) = data_dir() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let synth = lt_tagger::NorwegianSynthesizer::from_data(data.path()).expect("synth");
+    let plain = |lemma: &str, tag: &str| {
+        synth.synthesize(
+            &lt::AnalyzedToken::new("", Some(lemma.to_string()), Some(tag.to_string())),
+            tag,
+            false,
+        )
+    };
+    assert_eq!(plain("bil", "sub:ube:sin"), ["bil"]);
+    assert_eq!(plain("bil", "sub:ube:plu"), ["biler"]);
+    assert_eq!(plain("bil", "sub:bes:plu"), ["bilene"]);
+    // unknown lemma|tag keys synthesize nothing
+    assert!(plain("ikkeetord", "sub:ube:sin").is_empty());
+    // `postag_regexp` synthesis walks the tag list (`sub:.*:plu`)
+    let forms = synth.synthesize(
+        &lt::AnalyzedToken::new("", Some("bil".to_string()), Some("sub:.*:plu".to_string())),
+        "sub:.*:plu",
+        true,
+    );
+    assert_eq!(forms, ["bilene", "biler"]);
+}
+
+/// The POS-based agreement rules (plan item B2) suggest the synthesized
+/// `<match postag>` forms from the derived synthesizer dictionary.
+#[test]
+fn norwegian_synth_rule_suggestions() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        return;
+    };
+    let correction = |text: &str, rule_id: &str| -> String {
+        engine
+            .check(text)
+            .unwrap()
+            .matches
+            .into_iter()
+            .find(|m| m.rule_id == rule_id)
+            .unwrap_or_else(|| panic!("{rule_id} did not match {text:?}"))
+            .suggestions
+            .first()
+            .map(|s| s.value.clone())
+            .unwrap_or_default()
+    };
+    // `<match no="2" postag="sub:ube:plu"/>`: the plural of the tagger lemma.
+    assert_eq!(correction("Han har mange bil.", "NB_QUANT_PLU"), "biler");
+    // `<match no="2" postag="sub:bes:plu"/>`: the definite plural.
+    assert_eq!(correction("Disse bilen er ny.", "NB_DISSE_PLU"), "bilene");
+    // `<match no="1" regexp_match/regexp_replace>`: the other demonstrative,
+    // with the sentence-initial capitalization preserved.
+    assert_eq!(
+        correction("Dette bilen står der.", "NB_DEM_COMMON"),
+        "Denne"
+    );
+    assert_eq!(correction("dette jenta ler.", "NB_DEM_COMMON"), "denne");
+    assert_eq!(
+        correction("Denne huset er gammelt.", "NB_DEM_NEUTER"),
+        "Dette"
     );
 }

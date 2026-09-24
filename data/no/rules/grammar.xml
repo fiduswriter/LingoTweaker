@@ -8,8 +8,12 @@
   in new-languages/norwegian-bokmal/proposed-rules.md.
 
   A POS tagger is available since the Ordbøkene dictionary build (see
-  data/no/words/tagset.txt), but the rules below are surface rules: they do
-  not use postag/inflected matching (only the SENT_START built-in tag).
+  data/no/words/tagset.txt): most rules below are surface rules (only the
+  SENT_START built-in tag), but the agreement rules (NB_QUANT_PLU,
+  NB_DISSE_PLU, NB_DEM_COMMON, NB_DEM_NEUTER) read the tagger postags and
+  synthesize their suggestions with <match postag> over the derived
+  no_synth.dict (plan item B2), with the disambiguation layer
+  (data/no/disambiguation.xml) cleaning the readings first.
   Rule ids are stable and must never be renumbered.
 -->
 <rules lang="no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -263,6 +267,79 @@
             <short>samsvarsbøyning</short>
             <example correction="store">Vi har <marker>stor</marker> biler.</example>
             <example>Vi har store biler.</example>
+        </rule>
+
+        <!-- POS-based rules (plan item B2): they read the Ordbøkene tagger
+             readings (data/no/words/tagset.txt) and synthesize the corrected
+             form with <match postag> over the derived no_synth.dict. The
+             disambiguation layer (data/no/disambiguation.xml) cleans the
+             readings before matching. -->
+        <rule id="NB_QUANT_PLU" name="flertallsord + entallssubstantiv">
+            <pattern>
+                <token regexp="yes">[Mm]ange|[Ff]lere|[Bb]egge|[Ss]amtlige</token>
+                <marker>
+                    <token postag_regexp="yes" postag="sub:.*:sin"><exception postag_regexp="yes" postag="sub:.*:plu"/></token>
+                </marker>
+            </pattern>
+            <message>Etter «mange/flere/begge/samtlige» står substantivet i flertall.</message>
+            <suggestion><match no="2" postag="sub:ube:plu"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="biler">Han har <marker>mange bil</marker>.</example>
+            <example correction="ganger">Flere <marker>gang</marker> har jeg sagt det.</example>
+            <example correction="sider">Vi så begge <marker>side</marker> av saken.</example>
+            <example>Han har mange biler.</example>
+            <example>Flere ganger har jeg sagt det.</example>
+            <example>Begge deler er bra.</example>
+            <example>Samtlige deltagere møtte opp.</example>
+        </rule>
+
+        <rule id="NB_DISSE_PLU" name="disse + entallssubstantiv">
+            <pattern>
+                <token regexp="yes">[Dd]isse</token>
+                <marker>
+                    <token postag_regexp="yes" postag="sub:.*:sin"><exception postag_regexp="yes" postag="sub:.*:plu"/></token>
+                </marker>
+            </pattern>
+            <message>Etter «disse» står substantivet i bestemt flertall: «disse bilene».</message>
+            <suggestion><match no="2" postag="sub:bes:plu"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="bilene">Disse <marker>bilen</marker> er ny.</example>
+            <example correction="jentene">Disse <marker>jente</marker> leser mye.</example>
+            <example>Disse bilene er nye.</example>
+            <example>Disse jentene leser mye.</example>
+        </rule>
+
+        <rule id="NB_DEM_COMMON" name="dette + hankjønn/hunkjønn-substantiv">
+            <pattern>
+                <token regexp="yes">[Dd]ette</token>
+                <marker>
+                    <token postag="sub:bes:sin" regexp="yes">[A-Za-zæøåÆØÅ]+(?:en|a)</token>
+                </marker>
+            </pattern>
+            <message>Hankjønn/hunkjønn-substantiv tar «denne»: «denne bilen».</message>
+            <suggestion><match no="1" regexp_match="^(.)ette$" regexp_replace="${1}enne"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="Denne">Dette <marker>bilen</marker> står der.</example>
+            <example correction="Denne">Dette <marker>jenta</marker> ler.</example>
+            <example>Denne bilen står der.</example>
+            <example>Dette huset er gammelt.</example>
+            <example>Dette er min bil.</example>
+        </rule>
+
+        <rule id="NB_DEM_NEUTER" name="denne + intetkjønn-substantiv">
+            <pattern>
+                <token regexp="yes">[Dd]enne</token>
+                <marker>
+                    <token postag="sub:bes:sin" regexp="yes">[A-Za-zæøåÆØÅ]+et</token>
+                </marker>
+            </pattern>
+            <message>Intetkjønns-substantiv tar «dette»: «dette huset».</message>
+            <suggestion><match no="1" regexp_match="^(.)enne$" regexp_replace="${1}ette"/></suggestion>
+            <short>samsvarsbøyning</short>
+            <example correction="Dette">Denne <marker>huset</marker> er gammelt.</example>
+            <example correction="Dette">Denne <marker>barnet</marker> sover.</example>
+            <example>Dette huset er gammelt.</example>
+            <example>Denne boken er god.</example>
         </rule>
 
         <rule id="NB_VIRKE_SOM" name="virke/høres/late + som at">

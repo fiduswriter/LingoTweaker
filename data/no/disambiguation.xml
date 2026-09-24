@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Norwegian Bokmål (no) disambiguation rules for LingoTweaker.
+
+  Hand-authored (the legacy engine never had a Norwegian module): tag-namespace
+  filters over the Ordbøkene tagger readings (data/no/words/tagset.txt), the
+  same shape as the owner-authored Danish rulegroups (M4,
+  data/da/disambiguation.xml): <and> intersections of the readings a token
+  carries, then <disambig action="filter"/>. Kept few and high-precision;
+  rule ids are stable and must never be renumbered.
+-->
+<rules lang="no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- After den/det/de, a following substantive makes the determiner reading
+       survive ("det huset"); a following finite/infinitive verb makes the
+       pronoun reading survive ("Det snør.", "De kommer."). Participle
+       readings (ver:kor) on the next token do not trigger either direction:
+       definite -et nouns ("huset", "bygget") carry a ver:kor reading of the
+       related verb, and "det + noun" is the determiner there. -->
+  <rulegroup id="det-pron" name="det|pron-homograf + sub/ver">
+    <rule>
+      <pattern>
+        <marker>
+          <token regexp="yes">den|det|de</token>
+        </marker>
+        <token postag_regexp="yes" postag="sub:.*"><exception postag_regexp="yes" postag="ver:(inf|præ|dat|imp|lan)"/></token>
+      </pattern>
+      <disambig action="filter" postag="det"/>
+      <example type="ambiguous" inputform="det[det/det,det/pron]" outputform="det[det/det]">I <marker>det</marker> huset bor en familie.</example>
+      <example type="untouched">Det snør i dag.</example>
+      <example type="untouched">Det er bra.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <marker>
+          <token regexp="yes">den|det|de</token>
+        </marker>
+        <token postag_regexp="yes" postag="ver:(inf|præ|dat|imp|lan)"/>
+      </pattern>
+      <disambig action="filter" postag="pron"/>
+      <example type="ambiguous" inputform="det[det/det,det/pron]" outputform="det[det/pron]"><marker>Det</marker> snør i dag.</example>
+      <example type="ambiguous" inputform="de[de/det,de/prep,de/pron]" outputform="de[de/pron]"><marker>De</marker> kommer snart.</example>
+      <example type="untouched">I det huset bor en familie.</example>
+    </rule>
+  </rulegroup>
+
+  <!-- After a personal pronoun, a verb/substantive homograph is the verb
+       ("Han spiller."; the nominalized readings of "jeg"/"hun" and the -er
+       noun readings of the -er verb forms are filtered). The word list is
+       the personal pronouns: "en"/"et" are det/pron homographs whose article
+       reading is the usual one before a noun. -->
+  <rulegroup id="pron-ver-sub" name="pron+ver&amp;sub→ver">
+    <rule>
+      <pattern>
+        <token regexp="yes">[Jj]eg|[Dd]u|[Hh]an|[Hh]un|[Hh]en|[Hh]am|[Hh]enne|[Vv]i|[Dd]ere|[Dd]e|[Dd]em|[Dd]et|[Dd]en</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="ver:.*"/>
+      <example type="ambiguous" inputform="spiller[spille/ver:inf,spiller/sub:ube:sin]" outputform="spiller[spille/ver:inf]">Han <marker>spiller</marker> fotball.</example>
+      <example type="untouched">Han er en spiller.</example>
+      <example type="untouched">En spiller løper fort.</example>
+    </rule>
+  </rulegroup>
+
+  <!-- After the infinitive marker "å", a verb/substantive homograph is the
+       verb ("begynte å renne"). The bare word "å" is matched (the Ordbøkene
+       data tags it skon/int/sub, there is no infm class in the tagger data). -->
+  <rulegroup id="aa-infm-ver-sub" name="å+ver&amp;sub→ver">
+    <rule>
+      <pattern>
+        <token>å</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="ver:.*"/>
+      <example type="ambiguous" inputform="renne[renne/sub:ube:sin,renne/ver:inf]" outputform="renne[renne/ver:inf]">Vannet begynte å <marker>renne</marker> ut av kjelleren.</example>
+      <example type="untouched">En renne leder vannet bort.</example>
+      <example type="untouched">Vannet renner ut av kjelleren.</example>
+    </rule>
+  </rulegroup>
+
+  <!-- After a preposition, a verb/substantive homograph is the substantive
+       ("i løpet av dagen": Norwegian prepositions never take a bare
+       infinitive). -->
+  <rulegroup id="prep-ver-sub" name="prep+ver&amp;sub→sub">
+    <rule>
+      <pattern>
+        <token postag="prep"/>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="sub:.*"/>
+      <example type="ambiguous" inputform="løpet[løp/sub:bes:sin,løpe/ver:kor]" outputform="løpet[løp/sub:bes:sin]">I <marker>løpet</marker> av dagen regnet det.</example>
+      <example type="untouched">Han fikk barnet til å le.</example>
+      <example type="untouched">Jeg løper hver morgen.</example>
+    </rule>
+  </rulegroup>
+
+  <!-- After a determiner, a token that carries both adjective and substantive
+       readings is the adjective of the following substantive ("den voksne
+       eleven"); without a following substantive it is the nominalized
+       adjective ("den voksne"). -->
+  <rulegroup id="det-adj-sub" name="det+adj&amp;sub→adj; det+adj&amp;sub→sub">
+    <rule>
+      <pattern>
+        <token regexp="yes">en|et|ei|den|det|de|denne|dette|disse|alle|noen|ingen|hver|begge|min|mitt|mine|din|ditt|dine|sin|sitt|sine|vår|vårt|våre|hans|hennes|deres</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="adj:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+        <token postag_regexp="yes" postag="sub:.*"/>
+      </pattern>
+      <disambig action="filter" postag="adj:.*"/>
+      <example type="ambiguous" inputform="voksne[voksen/adj:pos,voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]" outputform="voksne[voksen/adj:pos]">Den <marker>voksne</marker> eleven leser mye.</example>
+      <example type="untouched">Den voksne sover lenge.</example>
+      <example type="untouched">Voksne må passe på barna.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <token regexp="yes">en|et|ei|den|det|de|denne|dette|disse|alle|noen|ingen|hver|begge|min|mitt|mine|din|ditt|dine|sin|sitt|sine|vår|vårt|våre|hans|hennes|deres</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="adj:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+        <token><exception postag_regexp="yes" postag="sub:.*"/></token>
+      </pattern>
+      <disambig action="filter" postag="sub:.*"/>
+      <example type="ambiguous" inputform="voksne[voksen/adj:pos,voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]" outputform="voksne[voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]">Den <marker>voksne</marker> sover lenge.</example>
+      <example type="untouched">Den voksne eleven leser mye.</example>
+    </rule>
+  </rulegroup>
+</rules>
