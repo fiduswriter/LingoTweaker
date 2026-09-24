@@ -1785,14 +1785,15 @@
     },
     {
       "path": "da/dictionaries/danish.dict",
-      "sha256": "91da2e7b2d83f6f2647e374a16fb6b39864c88a07cce9add21bbe58a23853079",
-      "size": 597834,
+      "sha256": "03f48d252b61a6c9fd1073d03ac21f1882047d44affba8ffbeb2c6428599ad26",
+      "size": 953232,
       "source": {
-        "kind": "upstream",
+        "kind": "upstream-derived",
         "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/danish.dict",
         "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
         "license_verified": true,
-        "license_source": "upstream da/README.txt"
+        "license_source": "upstream da/README.txt; Stavekontrolden 2.9.137 da_DK.aff/README headers (GPL 2.0/LGPL 2.1/MPL 1.1 tri-license)",
+        "note": "Refreshed (M4) from the current Stavekontrolden release 2.9.137 (2023-09-05): word-lemma-tag triples rebuilt from the da_DK.aff paradigm rules (+MORPH markers) over the accepted words of the Stavekontrolden database dump (words.csv/wordclass.csv, stavekontrolden.dk/dictionaries/da_DK/tables, downloaded 2026-09-24), irregular and closed-class readings carried over from the 2015 dict; compiled with tools/morfologik pos on the unchanged danish.info. Owner-approved (M4); docs/differences.md #18."
       }
     },
     {
@@ -1809,8 +1810,8 @@
     },
     {
       "path": "da/dictionaries/danish_synth.dict",
-      "sha256": "c6e24d3cae41de1ac25f0bc250a6e27e0a9ea6f16422fdb02282cd802cf98b5a",
-      "size": 389559,
+      "sha256": "8e5f90f5d24c683efd8874671099a63fb1d76a54d0efedf5b14e226c00624a48",
+      "size": 900293,
       "source": {
         "kind": "generated",
         "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
@@ -1851,13 +1852,14 @@
     },
     {
       "path": "da/disambiguation.xml",
-      "sha256": "494c536270a6b3d584e436a4fca9631d8d24315b112b80fb80b8142f4159c919",
-      "size": 15290,
+      "sha256": "e1fb6130ab5fbc81046b19631336f5b6c2aec7f78c27e132418d3a55b91ed682",
+      "size": 23247,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/resource/da/disambiguation.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
-        "license_verified": false
+        "license_verified": false,
+        "note": "Owner-added disambiguation rulegroups (M4): 5 hand-authored rulegroups appended to the 4 ported upstream rulegroups (det-adj-sub, at-ver-sub, ver-sub-ver, pron-sub-obj, gen-sub), same shape (Stavekontrolden tag-namespace postag filters + <disamb action=\"filter\"/>), each with ambiguous/untouched examples; Rust-only behaviour, no upstream equivalent; docs/differences.md #18"
       }
     },
     {
@@ -11687,5 +11689,5 @@
       }
     }
   ],
-  "generated_by": "tools/lt-sync/lt_sync.py add-local"
+  "generated_by": "tools/lt-sync/lt_sync.py add-local (M4 danish.dict refresh, in-place hash update)"
 }

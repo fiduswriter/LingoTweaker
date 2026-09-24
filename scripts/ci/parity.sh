@@ -190,11 +190,29 @@ elif [ "$LANG_ARG" = "es" ]; then
   # contains their 11 incorrect examples, which Java does not report.
   EXTRA+=(--expect-only-rust=AGREEMENT_DEMONSTRATIVE_VERB=11)
 elif [ "$LANG_ARG" = "da" ]; then
-  # documented deliberate divergence (docs/differences.md #14): the
-  # owner-added DANISH_TYPOS word-list rule (Danish Wikipedia "Almindelige
-  # stavefejl"), which Java has no equivalent of. The 284-line corpus happens
-  # to contain none of its wrong forms, so the exact pin is 0.
+  # documented deliberate divergences:
+  # (docs/differences.md #14) the owner-added DANISH_TYPOS word-list rule
+  # (Danish Wikipedia "Almindelige stavefejl"), which Java has no equivalent
+  # of. The 284-line corpus happens to contain none of its wrong forms, so
+  # the exact pin is 0.
   EXTRA+=(--expect-only-rust=DANISH_TYPOS=0)
+  # (docs/differences.md #18, M4 danish.dict refresh from Stavekontrolden
+  # 2.9.137) the tagger dictionary now carries the current upstream readings,
+  # which Java's stale 2015 dict lacks. Two corpus lines change:
+  # - line 12 "Nu er min min hals meget træt.": 'min' now carries the
+  #   pron:sin:nom reading (current Stavekontrolden data; absent from Java's
+  #   dict), so Ordgentagelse matches at the first repeated token instead of
+  #   the second — same span (6-13), same suggestion. Rust more correct
+  #   (intentional: current upstream data).
+  # - line 147 "Det onder jeg hende.": 'det' now carries the pron:sin:nom
+  #   reading (current data; Java's dict has 'det' as article only), so the
+  #   pron-before variant of the unde rulegroup matches instead of the
+  #   onder-pron-pron variant — same from/to (4-9), same 'onder'→'under'
+  #   correction. Rust more correct (intentional: current upstream data).
+  EXTRA+=(--expect-only-java=Ordgentagelse=1)
+  EXTRA+=(--expect-only-rust=Ordgentagelse=1)
+  EXTRA+=(--expect-only-java=unde=1)
+  EXTRA+=(--expect-only-rust=unde=1)
 elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)

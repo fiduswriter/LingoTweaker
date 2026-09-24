@@ -120,7 +120,14 @@ date-filter rules either).
   of its wrong forms, so the gate pins it at the exact count
   `--expect-only-rust=DANISH_TYPOS=0`. The owner-added DanNet-derived
   confusable-word rulegroups (`docs/differences.md` #15) fire on none of the
-  corpus lines either, so the gate needs no further allowance.
+  corpus lines either, so the gate needs no further allowance. The M4
+  tagger-dictionary refresh (Stavekontrolden 2.9.137, `docs/differences.md`
+  #18) moves the tagger data onto the current upstream release; the golden is
+  NOT regenerated (owner policy), the two resulting corpus lines are pinned
+  exactly as `--expect-only-java=Ordgentagelse=1 --expect-only-rust=Ordgentagelse=1
+  --expect-only-java=unde=1 --expect-only-rust=unde=1` (same corrections, the
+  Rust side reads the current data), and the five owner-added disambiguation
+  rulegroups of #18 change no corpus line.
   sv is exactly 0 only-Java / 0 only-Rust / 0 field diffs (D-218/D-219,
   resolved by the suggestion-engine port): the suggestion lists match the
   legacy engine byte-for-byte; the XML rules,

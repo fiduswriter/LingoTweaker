@@ -70,7 +70,12 @@ Java possessive-quantifier regex semantics); da is at 0/0/0 (#10, resolved by th
 suggestion-engine and dotted-abbreviation ports, plus the owner-added
 `DANISH_TYPOS` Wikipedia typo-list rule (#14) pinned at an exact-count only-Rust
 allowance of 0 corpus matches and 16 owner-added DanNet-derived
-confusable-word rulegroups (#15) that the corpus does not trigger); sv is at 0/0/0 (#11,
+confusable-word rulegroups (#15) that the corpus does not trigger; the M4
+refresh moved the tagger dict to the current Stavekontrolden 2.9.137 data and
+added five owner-authored disambiguation rulegroups (#18) — the dict refresh
+changes 2 corpus lines (same corrections, current-upstream readings the stale
+Java dict lacks) pinned exactly as `Ordgentagelse`/`unde` 1+1 only-Java/
+only-Rust, the new rulegroups change none); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port, plus the owner-added
 SALDO-derived confusable-word and coherency pairs (#16) and the owner-added
 default-off `VECKODAG_DATUM` `<filter>` rules — the sv module's first filter

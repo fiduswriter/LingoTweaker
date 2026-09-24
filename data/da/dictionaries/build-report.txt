@@ -1,0 +1,54 @@
+Danish tagger dictionary refresh (M4) — Stavekontrolden 2.9.137
+================================================================
+Source: Stavekontrolden da_DK 2.9.137 (2023-09-05, Foreningen for frit
+tilgængelige sprogværktøjer, http://www.stavekontrolden.dk) — the same
+project the upstream Java dict was built from (upstream da/README.txt,
+2015 snapshot). Downloaded 2026-09-24:
+
+  https://stavekontrolden.dk/dictionaries/da_DK/da_DK-2.9.137.aff
+  https://stavekontrolden.dk/dictionaries/da_DK/da_DK-2.9.137.dic
+  https://stavekontrolden.dk/dictionaries/da_DK/tables/  (database dump:
+  words.csv, wordclass.csv, wordclass_to_affixclass.csv, affixrule.csv,
+  morphdescr.csv, wordstatus.csv)
+
+License: GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (stated in the 2.9.137
+da_DK.aff and README_da_DK.txt headers and upstream da/README.txt).
+
+Method (same shape as upstream: word-lemma-tag triples from the
+Stavekontrolden morph files, compiled with tools/morfologik):
+
+  1. accepted words (wordstatus 2/3/4) from the database dump;
+     POS + gender from wordclass.csv (numerals -> sub:ube:sin:utr:nom like
+     the 2015 dict; the tagset has no numeral class)
+  2. inflected forms expanded from the da_DK.aff paradigm rules (FLAG num,
+     1847 rules carrying +MORPH markers), tags translated to the tagger
+     namespace (sub:<ube|bes>:<sin|plu>:<utr|neu>:<nom|gen>,
+     adj:...:<pos|kom|sup>, ver:<inf|præ|dat|imp|kor|lan>:<akt|pas>);
+     substantive determination/number from the affix shape (the 2.9.137
+     aff has swapped PLUR_BEK/PLUR_UBEK assignments in some letter-split
+     rules), genitive -s (affixclass 10) keeps the unmarked determination
+  3. irregular forms (være/er/var/været, strong verbs, torso compounds) and
+     closed-class readings (ham/de as pronouns) that the current database
+     encodes without per-form morphology carried over from the vendored
+     2015 dict, merged per (form, tag)
+  4. 8 junk rows with empty tags dropped
+
+  python3 tools/morfologik/lt_morfologik.py pos -i danish.txt \
+    --info danish.info -o danish.dict
+  python3 tools/morfologik/lt_morfologik.py export -i danish.dict \
+    --info danish.info -o danish-export.txt
+  python3 tools/morfologik/lt_morfologik.py synth -i danish-export.txt \
+    --info danish_synth.info -o danish_synth.dict   # danish_synth_tags.txt
+
+Words used: 156,215; word-lemma-tag triples: 971,509 (775,915 forms over
+153,086 lemmas). Triples per POS: sub 577,313; adj 203,695; pro 96,804;
+ver 90,967; int 1,254; adv 1,228; pra 86; kon 67; pron 58; ono 32; art 5.
+Tag agreement with the 2015 dict on shared (lemma, form) pairs: 99.0%;
+5,667 2015-only forms (mostly hyphenated/abbreviation compounds the
+current project encodes differently).
+
+Golden impact (284-line corpus, no golden regeneration per M4 policy):
+2 corpus lines change, each an only-Java/only-Rust pair of the same
+correction (line 12 Ordgentagelse marker position, line 147 unde rule
+variant) — pinned exactly in scripts/ci/parity.sh da; see
+docs/differences.md #18.

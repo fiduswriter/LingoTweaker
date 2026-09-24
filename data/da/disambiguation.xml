@@ -252,7 +252,7 @@ See disambiguation.xsd for syntax.
             <token postag_regexp="yes" postag="pron:.*"/>
             <token postag_regexp="yes" postag="sub:.*"><exception negate_pos="yes" postag_regexp="yes" postag="pron:.*|sub:.*"/></token>
           </and>
-        </marker>  
+        </marker>
         <token postag_regexp="yes" postag="ver:.*"/>
         <token><exception postag_regexp="yes" postag="ver:.*"/></token>
       </pattern>
@@ -261,6 +261,174 @@ See disambiguation.xsd for syntax.
       <example type="untouched">Du kan gøre det.</example>
       <example type="untouched">Dette er urørt!</example>
       <example type="untouched">Jeg skal fisker i havet</example> <!-- "Jeg" skal udskiftes med "En" når "en" er tagget -->
-    </rule> 
+    </rule>
+  </rulegroup>
+  <!-- Owner-added rulegroups (M4, hand-authored; Rust-only behaviour, no upstream
+       equivalent). Same shape as the four ported rulegroups above: Stavekontrolden
+       tag-namespace postag filters (<and> intersections of the readings a token
+       carries) with <disambig action="filter"/>. docs/differences.md #18. -->
+  <rulegroup id="det-adj-sub" name="det+adj+sub→adj; det+adj&sub→sub">
+    <!-- After a determiner, a token that carries both adjective and substantive
+         readings is the adjective of the following substantive ("den blinde
+         hund"); without a following substantive it is the nominalized
+         adjective ("den blinde"). -->
+    <rule>
+      <pattern>
+        <token regexp="yes">en|et|den|det|de|nogle|noget|alle|ingen</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="adj:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+        <token postag_regexp="yes" postag="sub:.*"/>
+      </pattern>
+      <disambig action="filter" postag="adj:.*"/>
+      <example type="ambiguous" inputform="blinde[blinde/adj:bes:plu:utr:pos,blinde/sub:ube:sin:utr:nom]" outputform="blinde[blinde/adj:bes:plu:utr:pos]">Den <marker>blinde</marker> hund bjæffer.</example>
+      <example type="untouched">Hunden løb hurtigt.</example>
+      <example type="untouched">En hund kan være alle størrelser.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <token regexp="yes">en|et|den|det|de|nogle|noget|alle|ingen</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="adj:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+        <token><exception postag_regexp="yes" postag="sub:.*"/></token>
+      </pattern>
+      <disambig action="filter" postag="sub:.*"/>
+      <example type="ambiguous" inputform="blinde[blinde/adj:bes:plu:utr:pos,blinde/sub:ube:sin:utr:nom]" outputform="blinde[blinde/sub:ube:sin:utr:nom]">Den <marker>blinde</marker> er gammel.</example>
+      <example type="untouched">Hunden løb hurtigt.</example>
+      <example type="untouched">En blind kan ikke se.</example>
+    </rule>
+  </rulegroup>
+  <rulegroup id="at-ver-sub" name="at+ver&sub→ver">
+    <!-- After the infinitive marker "at", a token that carries both verb and
+         substantive readings is the infinitive ("at spise"). -->
+    <rule>
+      <pattern>
+        <token>at</token>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="ver:.*"/>
+      <example type="ambiguous" inputform="spise[spise/ver:inf:akt,spise/sub:ube:sin:utr:nom]" outputform="spise[spise/ver:inf:akt]">Det er svært at <marker>spise</marker> nu.</example>
+      <example type="untouched">Han ved godt, at spisen er god.</example>
+      <example type="untouched">Vi skal fiske.</example>
+    </rule>
+  </rulegroup>
+  <rulegroup id="ver-sub-ver" name="ver+ver&sub→ver">
+    <!-- A verb preceded by another verb is the main-verb reading of a
+         verb/substantive homograph ("Skal legen begynde?"). -->
+    <rule>
+      <pattern>
+        <token postag_regexp="yes" postag="ver:.*"/>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="ver:.*"/>
+      <example type="ambiguous" inputform="legen[lege/ver:inf:akt,legen/sub:bes:sin:utr:nom]" outputform="legen[lege/ver:inf:akt]">Skal <marker>legen</marker> begynde?</example>
+      <example type="untouched">En skal er hård.</example>
+      <example type="untouched">En hund kan være alle størrelser.</example>
+    </rule>
+  </rulegroup>
+  <rulegroup id="pron-sub-obj" name="pra/pron+pron&sub→pron">
+    <!-- After a preposition, a token that carries both pronoun and substantive
+         readings is the pronoun ("Kom med det straks"); a pronoun/substantive
+         homograph followed by a verb is the pronoun subject ("Det handler om
+         mig."). -->
+    <rule>
+      <pattern>
+        <token postag="pra"/>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="pron:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="pron:.*"/>
+      <example type="ambiguous" inputform="det[det/pron:sin:nom,det/sub:ube:sin:neu:nom]" outputform="det[det/pron:sin:nom]">Kom med <marker>det</marker> straks.</example>
+      <example type="untouched">Han gik til byen.</example>
+      <example type="untouched">Hunden løb hurtigt.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="pron:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+        <token postag_regexp="yes" postag="ver:.*"/>
+      </pattern>
+      <disambig action="filter" postag="pron:.*"/>
+      <example type="ambiguous" inputform="Det[det/pron:sin:nom,det/sub:ube:sin:neu:nom]" outputform="Det[det/pron:sin:nom]"><marker>Det</marker> handler om mig.</example>
+      <example type="untouched">Du kan gøre det.</example>
+      <example type="untouched">Hunden løb hurtigt.</example>
+    </rule>
+  </rulegroup>
+  <rulegroup id="gen-sub" name="sub:gen/pro+homograf→sub/pron/adj">
+    <!-- After a genitive substantive or a proper name, a verb/substantive
+         homograph is the substantive ("Hundens skal er hård."); a
+         pronoun/substantive homograph is the pronoun ("Peters jeg er stort.");
+         an adjective/substantive homograph before a substantive is the
+         adjective ("Peters blinde hund bjæffer."). -->
+    <rule>
+      <pattern>
+        <token postag_regexp="yes" postag="sub:.*:gen|pro:.*"/>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="adj:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+        <token postag_regexp="yes" postag="sub:.*"/>
+      </pattern>
+      <disambig action="filter" postag="adj:.*"/>
+      <example type="ambiguous" inputform="blinde[blinde/adj:bes:plu:utr:pos,blinde/sub:ube:sin:utr:nom]" outputform="blinde[blinde/adj:bes:plu:utr:pos]">Peters <marker>blinde</marker> hund bjæffer.</example>
+      <example type="untouched">Hundens poter er små.</example>
+      <example type="untouched">Peters hund er blin.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <token postag_regexp="yes" postag="sub:.*:gen|pro:.*"/>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="pron:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="pron:.*"/>
+      <example type="ambiguous" inputform="jeg[jeg/pron:sin:nom,jeg/sub:ube:sin:neu:nom]" outputform="jeg[jeg/pron:sin:nom]">Peters <marker>jeg</marker> er stort.</example>
+      <example type="untouched">Hundens poter er små.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <token postag_regexp="yes" postag="sub:.*:gen|pro:.*"/>
+        <marker>
+          <and>
+            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="sub:.*"/>
+          </and>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="sub:.*"/>
+      <example type="ambiguous" inputform="skal[skal/sub:ube:sin:utr:nom,skulle/ver:præ:akt]" outputform="skal[skal/sub:ube:sin:utr:nom]">Hundens <marker>skal</marker> er hård.</example>
+      <example type="untouched">Vi skal fiske.</example>
+      <example type="untouched">Hundens skal skal fiske i havet.</example>
+    </rule>
   </rulegroup>
 </rules>

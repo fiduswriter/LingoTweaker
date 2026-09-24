@@ -543,6 +543,112 @@ fn danish_tagger() {
     assert!(tagged > 0, "no tagged readings: {readings:?}");
 }
 
+/// The owner-added disambiguation rulegroups (M4, docs/differences.md #18)
+/// filter the homograph readings they target. Each case: the ambiguous token
+/// carries both readings before disambiguation and only the expected class
+/// afterwards.
+#[test]
+fn danish_disambiguation_rulegroups() {
+    let _guard = engine_guard();
+    let Some(da) = engine() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let tags_after = |text: &str, token: &str| -> Vec<String> {
+        let sentences = da.analyze(text);
+        let tok = sentences
+            .iter()
+            .flat_map(|s| s.tokens.iter())
+            .find(|t| t.surface() == token)
+            .unwrap_or_else(|| panic!("token {token:?} not found in {text:?}"));
+        let mut tags: Vec<String> = tok
+            .readings
+            .iter()
+            .filter_map(|r| r.pos_tag.clone())
+            .filter(|t| !matches!(t.as_str(), "SENT_START" | "SENT_END"))
+            .collect();
+        tags.sort();
+        tags.dedup();
+        tags
+    };
+    // same, on the raw (pre-disambiguation) readings
+    let tags_raw = |text: &str, token: &str| -> Vec<String> {
+        let sentences = da.analyze_raw(text);
+        let tok = sentences
+            .iter()
+            .flat_map(|s| s.tokens.iter())
+            .find(|t| t.surface() == token)
+            .unwrap_or_else(|| panic!("token {token:?} not found in {text:?}"));
+        let mut tags: Vec<String> = tok
+            .readings
+            .iter()
+            .filter_map(|r| r.pos_tag.clone())
+            .filter(|t| !matches!(t.as_str(), "SENT_START" | "SENT_END"))
+            .collect();
+        tags.sort();
+        tags.dedup();
+        tags
+    };
+    // det-adj-sub: "Den blinde hund" -> the adjective survives, the noun
+    // reading is filtered; "Den blinde" (no noun) -> the noun reading
+    // (nominalized adjective) survives. Raw readings carry both classes.
+    let raw = tags_raw("Den blinde hund bjæffer.", "blinde");
+    assert!(
+        raw.iter().any(|t| t.starts_with("adj:")) && raw.iter().any(|t| t.starts_with("sub:")),
+        "expected an adj+sub homograph: {raw:?}"
+    );
+    let after = tags_after("Den blinde hund bjæffer.", "blinde");
+    assert!(
+        after.iter().all(|t| t.starts_with("adj:")),
+        "det+adj+sub must keep only adj: {after:?}"
+    );
+    let after = tags_after("Den blinde er gammel.", "blinde");
+    assert!(
+        after.iter().all(|t| t.starts_with("sub:")),
+        "det+adj&sub must keep only sub: {after:?}"
+    );
+    // at-ver-sub: "at spise" -> the infinitive survives.
+    let after = tags_after("Det er svært at spise nu.", "spise");
+    assert!(
+        after.iter().all(|t| t.starts_with("ver:")),
+        "at+ver&sub must keep only ver: {after:?}"
+    );
+    // ver-sub-ver: "Skal legen begynde?" -> "legen" is the infinitive.
+    let after = tags_after("Skal legen begynde?", "legen");
+    assert!(
+        after.iter().all(|t| t.starts_with("ver:")),
+        "ver+ver&sub must keep only ver: {after:?}"
+    );
+    // pron-sub-obj: "med det" -> pronoun; "Det handler om mig." -> pronoun.
+    let after = tags_after("Kom med det straks.", "det");
+    assert!(
+        after.iter().all(|t| t.starts_with("pron:")),
+        "pra+pron&sub must keep only pron: {after:?}"
+    );
+    let after = tags_after("Det handler om mig.", "Det");
+    assert!(
+        after.iter().all(|t| t.starts_with("pron:")),
+        "pron&sub+ver must keep only pron: {after:?}"
+    );
+    // gen-sub: "Hundens skal er hård." -> substantive; "Peters jeg er stort."
+    // -> pronoun; "Peters blinde hund" -> adjective.
+    let after = tags_after("Hundens skal er hård.", "skal");
+    assert!(
+        after.iter().all(|t| t.starts_with("sub:")),
+        "sub:gen+ver&sub must keep only sub: {after:?}"
+    );
+    let after = tags_after("Peters jeg er stort.", "jeg");
+    assert!(
+        after.iter().all(|t| t.starts_with("pron:")),
+        "sub:gen+pron&sub must keep only pron: {after:?}"
+    );
+    let after = tags_after("Peters blinde hund bjæffer.", "blinde");
+    assert!(
+        after.iter().all(|t| t.starts_with("adj:")),
+        "sub:gen+adj&sub+sub must keep only adj: {after:?}"
+    );
+}
+
 /// The derived Danish synthesizer dictionary (plan item M2, infrastructure
 /// until a rule uses `<match postag>` synthesis): `lemma|tag` lookup returns
 /// the inflected forms of `danish.dict` and postag-regexp synthesis expands

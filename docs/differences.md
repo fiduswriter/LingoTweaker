@@ -645,3 +645,110 @@ Pinned by `crates/lt/tests/swedish.rs::swedish_date_check` (4 firing + 4
 correct-sentence cases over both rules, today pinned to 2026-09-21 like the
 gate); `data/manifest.json` records the modified `sv/rules/grammar.xml`
 sha256/size and the provenance.
+
+## 18. Danish tagger dictionary refresh (Stavekontrolden 2.9.137) + owner-added disambiguation rulegroups
+
+**Verdict: intentional — Rust more correct** (current upstream data; the Java
+golden was captured with Java's stale 2015 dict). Owner-approved M4 policy:
+exact pins, no golden regeneration.
+
+`data/da/dictionaries/danish.dict` was rebuilt from the *current* Stavekontrolden
+release, **2.9.137** (2023-09-05, Foreningen for frit tilgængelige
+sprogværktøjer, http://www.stavekontrolden.dk): the same project the upstream
+Java dict was taken from (upstream `da/README.txt`, 2015), whose source
+snapshots are published at `stavekontrolden.dk/dictionaries/da_DK/`
+(`da_DK-2.9.137.oxt/.aff/.dic`) and, with full morphology, as a database dump
+at `stavekontrolden.dk/dictionaries/da_DK/tables/` (`words.csv`,
+`wordclass.csv`, `wordclass_to_affixclass.csv`, …, downloaded 2026-09-24).
+License verified: the 2.9.137 `da_DK.aff`/`README_da_DK.txt` headers state the
+same GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license as the vendored 2015 files
+(upstream `da/README.txt`), so no new license path.
+
+Build (same shape as upstream: word-lemma-tag triples from the Stavekontrolden
+morph data, compiled with `tools/morfologik pos` on the unchanged
+`danish.info`):
+
+- accepted words (`wordstatus` 2/3/4, 156,215 lemmas) from `words.csv`, POS and
+  gender from `wordclass.csv` (sub/adj/ver/pron/pro/adv/kon/pra/int/ono; numerals
+  follow the 2015 dict and are tagged as uter nouns — the tagset has no numeral
+  class);
+- inflected forms expanded from the current `da_DK.aff` paradigm rules
+  (`FLAG num`, 1,847 rules carrying `+MORPH` markers), translated to the
+  tagger namespace: `sub:<ube|bes>:<sin|plu>:<utr|neu>:<nom|gen>`,
+  `adj:...:<pos|kom|sup>` (the 2015 'stor' paradigm: lemma → `ube:sin:utr:pos`,
+  `-t` → `ube:sin:neu:pos`, `-e` → the six `ube:plu`/`bes:*` readings,
+  komparativ/superlativ → the eight combinations), `ver:<inf|præ|dat|imp|kor|lan>:<akt|pas>`;
+- irregular forms (`være/er/var/været`, strong verbs, torso compounds) and
+  closed-class readings (`ham`, `de` as pronouns) that the current database
+  encodes without per-form morphology are carried over from the vendored 2015
+  dict (merged per (form, tag), so forms keep all their readings). Tag-set
+  agreement with the 2015 dict on shared (lemma, form) pairs: 99.0% (91,521
+  new entries over 803k forms; the 5,667 lost forms are almost exclusively
+  hyphenated/abbreviation compounds whose inflection the current project
+  encodes differently).
+
+`danish_synth.dict`/`danish_synth_tags.txt` were regenerated from the new
+dict exactly like commit dd4977e (`tools/morfologik export` → `tools/morfologik
+synth`, inverted to `lemma|tag` keys); the danish synthesizer test expectations
+(`plain("stor","adj:ube:sin:neu:pos")` = `["stort"]` etc.) still hold.
+`data/manifest.json` records the new sha256/size and the Stavekontrolden
+version/refresh note.
+
+Golden impact of the dict refresh (284-line corpus, policy: no golden
+regeneration): **2 corpus lines change**, each an only-Java/only-Rust pair of
+the *same* correction where the Rust side now sees a reading the current
+Stavekontrolden data provides and Java's stale dict lacks:
+
+1. line 12 "Nu er min min hals meget træt." — `min` gains `pron:sin:nom`
+   (wc 22 in the current database), so `Ordgentagelse` marks the repeat from
+   the first instead of the second `min`; same span (6-13), same suggestion.
+2. line 147 "Det onder jeg hende." — `det` gains `pron:sin:nom` (Java's dict
+   has `det` as article only), so the pron-before variant of the `unde`
+   rulegroup fires instead of the `onder`+pron+pron variant; same from/to
+   (4-9), same `onder`→`under` correction.
+
+Both are pinned exactly in `scripts/ci/parity.sh da`:
+`--expect-only-java=Ordgentagelse=1 --expect-only-rust=Ordgentagelse=1
+--expect-only-java=unde=1 --expect-only-rust=unde=1` (plus the existing
+`DANISH_TYPOS=0`).
+
+### 18a. Owner-added disambiguation rulegroups (Rust-only, hand-authored)
+
+`data/da/disambiguation.xml` grows from the 4 ported rulegroups by 5
+hand-authored ones in the same shape (Stavekontrolden tag-namespace
+`postag_regexp` filters + `<disamb action="filter"/>`, each rulegroup with
+ambiguous/untouched examples). Upstream has no equivalent; the golden corpus
+contains none of their ambiguity classes, so the da gate is unaffected (the
+2+2 pins above come solely from the dict refresh):
+
+- `det-adj-sub`: after a determiner (`en|et|den|det|de|nogle|noget|alle|ingen`),
+  an adjective/substantive homograph is the adjective when a substantive
+  follows ("den blinde hund") and the nominalized substantive otherwise
+  ("den blinde");
+- `at-ver-sub`: after the infinitive marker `at`, a verb/substantive homograph
+  is the infinitive ("at spise");
+- `ver-sub-ver`: a verb/substantive homograph preceded by a verb is the main
+  verb ("skal legen begynde");
+- `pron-sub-obj`: after a preposition, a pronoun/substantive homograph is the
+  pronoun ("med det"); a pronoun/substantive homograph followed by a verb is
+  the pronoun subject ("det handler om mig");
+- `gen-sub`: after a genitive substantive or proper name, a verb/substantive
+  homograph is the substantive ("hundens skal er hård"), a
+  pronoun/substantive homograph is the pronoun ("Peters jeg er stort") and an
+  adjective/substantive homograph before a substantive is the adjective
+  ("Peters blinde hund bjæffer" — this rule precedes the ver&sub rule because
+  `blinde`-type tokens carry all three classes).
+
+One engine subtlety the upstream shape relies on: exceptions inside `<and>`
+members are applied to the *base* token (LT `isAndExceptionGroupMatched`), so
+upstream's `negate_pos` member exceptions implement "carries both readings and
+nothing else". The owner-added groups use bare `<and>` members instead —
+"carries both readings" — because the refreshed dictionary produces triple
+homographs (`blinde` = adj+sub+ver) that the nothing-else variant would never
+match.
+
+Pinned by `crates/lt/tests/danish.rs::danish_disambiguation_rulegroups` (each
+group's example sentence, raw readings carry both classes, disambiguated
+readings carry only the expected class); `danish_engine_state` stays 93 (the
+disambiguation rulegroups are not grammar rules). Reproduce: `cargo test -p lt
+--test danish` and `scripts/ci/parity.sh da` → PARITY OK.
