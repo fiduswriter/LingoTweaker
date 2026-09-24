@@ -62,15 +62,15 @@ fn hits(engine: &Engine, text: &str, rule_id: &str) -> bool {
     match_ids(engine, text).iter().any(|id| id == rule_id)
 }
 
-/// Stage-1 wiring state: 16 active XML rules (17 loaded, `NN_OG_A_VERB` is
-/// default-off), no unmapped filter, no compile failure.
+/// Stage-1 wiring state: 20 active XML rules (24 loaded, 4 default-off),
+/// no unmapped filter, no compile failure.
 #[test]
 fn nynorsk_engine_state() {
     let _guard = engine_guard();
     let Some(engine) = engine() else {
         return;
     };
-    assert_eq!(engine.active_rule_count(), 16);
+    assert_eq!(engine.active_rule_count(), 20);
     assert!(engine.compile_failures().is_empty());
     let skipped = engine.skipped_counts();
     assert_eq!(skipped.filters, 0);
@@ -104,6 +104,11 @@ fn nynorsk_rules_fire() {
         ),
         ("Han er NRK medarbeidar.", "NN_ABBREV_HYPHEN"),
         ("Viss du kjem blir eg glad.", "NN_COMMA_FRONTED_SUB"),
+        // Språkrådet-guided rules added 2026-09-23
+        ("Eg kjem og.", "NN_AKSENT_OG"),
+        ("Dem kjem i dag.", "NN_DEI_DEM_SUBJ"),
+        ("Gi boka til dei som treng henne.", "NN_DEI_DEM_OBJ"),
+        ("Ho sa «Ja,» til meg.", "NN_COMMA_QUOTES"),
         // Bokmål interference (list rule)
         ("jeg ikke går hjem.", "NN_BOKMAAL_FORMS"),
         ("Jeg veit ikkje.", "NN_BOKMAAL_FORMS"),
@@ -225,6 +230,16 @@ fn nynorsk_correct_sentences() {
         "Vi har få bilar.",
         "Viss du kjem, blir eg glad.",
         "Viss du vil, kan du kome.",
+        "Eg kjem òg.",
+        "Han òg ville vere med.",
+        "«Eg kjem i morgon», sa han.",
+        "Ho sa «nei» til forslaget.",
+        "Dei kjem i dag.",
+        "Gi boka til dem som treng henne.",
+        "Da eg var liten, budde me i Oslo.",
+        "Når eg er i Oslo, vitjar eg ofte museet.",
+        "Vi kjøpte brød, kaker og bollar.",
+        "Eg veit at han kjem og eg blir glad.",
         "Vi feirar 50-årsdag.",
         "Han er NRK-medarbeidar.",
         "TV er gøy.",
@@ -252,7 +267,7 @@ fn nynorsk_correct_sentences() {
     }
 }
 
-/// Default-off og/å rule after control verbs.
+/// Default-off rules only fire when enabled explicitly.
 #[test]
 fn nynorsk_default_off_rules() {
     let _guard = engine_guard();
@@ -260,11 +275,40 @@ fn nynorsk_default_off_rules() {
         return;
     };
     assert!(!hits(&engine, "Ho må lære og lesa.", "NN_OG_A_VERB"));
-    let Some(enabled) = engine_with_rules(&["NN_OG_A_VERB"]) else {
+    // Språkrådet-guided rules added 2026-09-23: da/når and the two comma
+    // rules are off by default (surface patterns carry residual
+    // false-positive risk).
+    assert!(!hits(
+        &engine,
+        "Når eg var liten, budde me i Oslo.",
+        "NN_DA_NAR"
+    ));
+    assert!(!hits(&engine, "Eg går og du står.", "NN_COMMA_SIDEORDNING"));
+    assert!(!hits(
+        &engine,
+        "Vi kjøpte brød, kaker, og bollar.",
+        "NN_COMMA_OPPRAMSING"
+    ));
+    let Some(enabled) = engine_with_rules(&[
+        "NN_OG_A_VERB",
+        "NN_DA_NAR",
+        "NN_COMMA_SIDEORDNING",
+        "NN_COMMA_OPPRAMSING",
+    ]) else {
         return;
     };
     assert!(hits(&enabled, "Ho må lære og lesa.", "NN_OG_A_VERB"));
-    assert!(!hits(&enabled, "Ho må lære å lesa.", "NN_OG_A_VERB"));
+    assert!(hits(
+        &enabled,
+        "Når eg var liten, budde me i Oslo.",
+        "NN_DA_NAR"
+    ));
+    assert!(hits(&enabled, "Eg går og du står.", "NN_COMMA_SIDEORDNING"));
+    assert!(hits(
+        &enabled,
+        "Vi kjøpte brød, kaker, og bollar.",
+        "NN_COMMA_OPPRAMSING"
+    ));
 }
 
 /// The generated/vendored Hunspell dictionary: valid Nynorsk is accepted,

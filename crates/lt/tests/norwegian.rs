@@ -60,15 +60,15 @@ fn hits(engine: &Engine, text: &str, rule_id: &str) -> bool {
     match_ids(engine, text).iter().any(|id| id == rule_id)
 }
 
-/// Stage-3 wiring state: 24 active XML rules, no unmapped filter, no compile
-/// failure.
+/// Stage-3 wiring state: 25 active XML rules (32 loaded, 7 default-off),
+/// no unmapped filter, no compile failure.
 #[test]
 fn norwegian_engine_state() {
     let _guard = engine_guard();
     let Some(engine) = engine() else {
         return;
     };
-    assert_eq!(engine.active_rule_count(), 24);
+    assert_eq!(engine.active_rule_count(), 25);
     assert!(engine.compile_failures().is_empty());
     let skipped = engine.skipped_counts();
     assert_eq!(skipped.filters, 0);
@@ -115,6 +115,7 @@ fn norwegian_rules_fire() {
         ("Det er lite biler i byen.", "NB_LITE_FA"),
         ("Hvem bok leser du?", "NB_HVEM_HVILKEN"),
         ("Hvis du kommer blir jeg glad.", "NB_COMMA_FRONTED_SUB"),
+        ("Han sa «Ja,» til meg.", "NB_COMMA_QUOTES"),
         ("I fjor, solgte de huset.", "NB_COMMA_PP_VERB"),
         ("Han han kommer.", "NB_WORD_REPETITION"),
         ("Et jente er her.", "NB_EN_ET_GENDER"),
@@ -193,6 +194,8 @@ fn norwegian_correct_sentences() {
         "Det er få biler i byen.",
         "Hvilken bok leser du?",
         "Hvis du kommer, blir jeg glad.",
+        "«Jeg kommer i morgen», sa han.",
+        "Han sa «nei» til forslaget.",
         "I fjor solgte de huset.",
         "Om sommeren bader vi.",
         "Ja ja, jeg kommer.",
@@ -228,8 +231,34 @@ fn norwegian_default_off_rules() {
         "NB_DA_NAR"
     ));
     assert!(!hits(&engine, "Du har sett den?", "NB_QUESTION_INVERSION"));
-    let Some(enabled) = engine_with_rules(&["NB_OG_A_VERB", "NB_DA_NAR", "NB_QUESTION_INVERSION"])
-    else {
+    // Språkrådet-guided punctuation rules added 2026-09-23: three comma rules
+    // and the dash/quote typography rules are off by default (surface
+    // patterns carry residual false-positive risk).
+    assert!(!hits(
+        &engine,
+        "Jeg går og du står.",
+        "NB_COMMA_SIDEORDNING"
+    ));
+    assert!(!hits(
+        &engine,
+        "Vi kjøpte brød, kaker, og boller.",
+        "NB_COMMA_OPPRAMSING"
+    ));
+    assert!(!hits(&engine, "Kapitlene 2-10 er korte.", "NB_DASH_RANGE"));
+    assert!(!hits(
+        &engine,
+        "Han sa \"nei\" til forslaget.",
+        "NB_STRAIGHT_QUOTES"
+    ));
+    let Some(enabled) = engine_with_rules(&[
+        "NB_OG_A_VERB",
+        "NB_DA_NAR",
+        "NB_QUESTION_INVERSION",
+        "NB_COMMA_SIDEORDNING",
+        "NB_COMMA_OPPRAMSING",
+        "NB_DASH_RANGE",
+        "NB_STRAIGHT_QUOTES",
+    ]) else {
         return;
     };
     assert!(hits(&enabled, "Hun må lære og lese.", "NB_OG_A_VERB"));
@@ -239,6 +268,22 @@ fn norwegian_default_off_rules() {
         "NB_DA_NAR"
     ));
     assert!(hits(&enabled, "Du har sett den?", "NB_QUESTION_INVERSION"));
+    assert!(hits(
+        &enabled,
+        "Jeg går og du står.",
+        "NB_COMMA_SIDEORDNING"
+    ));
+    assert!(hits(
+        &enabled,
+        "Vi kjøpte brød, kaker, og boller.",
+        "NB_COMMA_OPPRAMSING"
+    ));
+    assert!(hits(&enabled, "Kapitlene 2-10 er korte.", "NB_DASH_RANGE"));
+    assert!(hits(
+        &enabled,
+        "Han sa \"nei\" til forslaget.",
+        "NB_STRAIGHT_QUOTES"
+    ));
 }
 
 /// Default-off lexicon-driven split-compound check.

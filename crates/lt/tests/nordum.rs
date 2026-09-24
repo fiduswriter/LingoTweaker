@@ -61,7 +61,7 @@ fn hits(engine: &Engine, text: &str, rule_id: &str) -> bool {
     match_ids(engine, text).iter().any(|id| id == rule_id)
 }
 
-/// Stage-3 wiring state: 22 active XML rules, no unmapped filter, no compile
+/// Stage-3 wiring state: 27 active XML rules, no unmapped filter, no compile
 /// failure.
 #[test]
 fn nordum_engine_state() {
@@ -69,7 +69,7 @@ fn nordum_engine_state() {
     let Some(engine) = engine() else {
         return;
     };
-    assert_eq!(engine.active_rule_count(), 22);
+    assert_eq!(engine.active_rule_count(), 27);
     assert!(engine.compile_failures().is_empty());
     let skipped = engine.skipped_counts();
     assert_eq!(skipped.filters, 0);
@@ -100,6 +100,12 @@ fn nordum_rules_fire() {
         ("Jei ikke arbeider.", "NDM_NEG_MAIN"),
         ("Jei vet att hun arbeider ikke.", "NDM_NEG_SUB"),
         ("Nå jei arbeider.", "NDM_V2"),
+        // spec §6/§7 transcription rules added 2026-09-23
+        ("I dag jei arbeider jemme.", "NDM_V2_DATE"),
+        ("Hvis du kommer blir jei glad.", "NDM_COMMA_FRONTED_SUB"),
+        ("Vi har den stor bilen.", "NDM_DEF_ADJ"),
+        ("Jei har en bilen.", "NDM_ART_DEF"),
+        ("Vi feirer 50årsdag.", "NDM_HYPHEN_NUMBERS_JOINED"),
         ("Vi har ett stor hus.", "NDM_ADJ_NEUTER"),
         ("på Mandag", "NDM_CAPITALIZATION"),
         ("Vi har stor bilar.", "NDM_ADJ_PLURAL"),
@@ -167,6 +173,16 @@ fn nordum_correct_sentences() {
         "Jei arbeider ikke.",
         "Jei vet att hun ikke arbeider.",
         "I dag arbeider jei jemme.",
+        "I dag må du gå.",
+        "Hvis du kommer, blir jei glad.",
+        "Vi har den store bilen.",
+        "den vesle bilen",
+        "den blå bilen",
+        "Jei har en bil.",
+        "Jei har bilen.",
+        "Det er en orden i saken.",
+        "Jei har ett våpen.",
+        "Vi feirer 50-årsdag.",
         "Vi har ett stort hus.",
         "Jei snakker norsk.",
         "forskell",

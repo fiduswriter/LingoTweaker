@@ -436,6 +436,135 @@
             <example correction="Hvis du kommer, blir jeg glad">Hvis du kommer blir jeg glad.</example>
             <example>Hvis du kommer, blir jeg glad.</example>
         </rule>
+
+        <!-- Språkrådet, Hermeteikn: «Komma skal setjast utanfor» hermeteikna
+             (regelen blei endra i 2004; før det stod komma inne).
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/tegn/hermeteikn/
+             Retrieved 2026-09-23. -->
+        <rule id="NB_COMMA_QUOTES" name="komma inne i hermeteikn">
+            <pattern>
+                <token regexp="yes">\p{L}+</token>
+                <marker>
+                    <token>,</token>
+                    <token>»</token>
+                </marker>
+            </pattern>
+            <message>Komma skal stå utenfor hermeteikna: «Jeg kommer i morgen», sa han.</message>
+            <suggestion>»,</suggestion>
+            <short>hermeteikn</short>
+            <example correction="»,">Han sa «Ja,» til meg.</example>
+            <example>«Jeg kommer i morgen», sa han.</example>
+            <example>Han sa «nei» til forslaget.</example>
+        </rule>
+
+        <!-- Språkrådet, kommaregler: «Det skal stå komma mellom sidestilte
+             helsetninger som er bundet sammen med og, eller, for».
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/kommaregler/
+             Retrieved 2026-09-23. Risky with surface patterns (subordinate
+             clauses joined by og without repeated conjunction must NOT get a
+             comma), so the rule is off by default. -->
+        <rule id="NB_COMMA_SIDEORDNING" name="komma mellom sidestilte helsetninger" default="off">
+            <pattern>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|er|har</token>
+                <marker>
+                    <token regexp="yes">og|eller|for</token>
+                </marker>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|er|har</token>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">at|fordi|hvis|om|når|da|mens|siden|dersom|ettersom</token>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|er|har</token>
+                <token regexp="yes">og|eller|for</token>
+            </antipattern>
+            <message>Komma mellom sidestilte helsetninger: «Vi kan gå tur, eller vi kan sitte inne og drikke kakao».</message>
+            <suggestion>, <match no="3"/></suggestion>
+            <short>komma</short>
+            <example correction=", eller">Han dro eller han ble hjemme.</example>
+            <example correction=", for">Jeg blir hjemme for det er sent.</example>
+            <example>Han dro, eller han ble hjemme.</example>
+            <example>Jeg blir hjemme, for det er sent.</example>
+            <example>Jeg vet at han kommer og jeg blir glad.</example>
+        </rule>
+
+        <!-- Språkrådet, kommaregler (oppramsing): «det skal ikke stå komma
+             foran og eller eller» i oppramsing.
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/kommaregler/
+             Retrieved 2026-09-23. Flertallsformer på -r kan likne finite verb,
+             så regelen er slått av som standard. -->
+        <rule id="NB_COMMA_OPPRAMSING" name="komma foran og/eller i oppramsing" default="off">
+            <pattern>
+                <token regexp="yes">\p{L}+</token>
+                <marker>
+                    <token>,</token>
+                    <token regexp="yes">og|eller</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">og|eller</token>
+                <token regexp="yes">jeg|du|han|hun|vi|dere|de|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|er|har</token>
+            </antipattern>
+            <antipattern>
+                <token regexp="yes">og|eller</token>
+                <token regexp="yes">hvis|om|når|mens|da|fordi|siden|dersom|som|at|men</token>
+            </antipattern>
+            <antipattern>
+                <token regexp="yes">og|eller</token>
+                <token regexp="yes">\p{L}+</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|er|har</token>
+            </antipattern>
+            <message>I oppramsing skal det ikke stå komma foran «og»/«eller»: «brød, kaker og boller».</message>
+            <suggestion> <match no="3"/></suggestion>
+            <short>komma</short>
+            <example correction=" og">Vi kjøpte brød, kaker, og boller.</example>
+            <example>Vi kjøpte brød, kaker og boller.</example>
+            <example>Alle eksamenskandidatene må møte kl. 9, og ingen hjelpemidler er tillatt.</example>
+        </rule>
+
+        <!-- Språkrådet, Tankestrek: streken angir tallområder og svarer til
+             «fra … til» («kapitlene 2–10»); bindestrek og tankestrek må ikke
+             blandes sammen.
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/tegn/tankestrek/
+             Retrieved 2026-09-23. Ryddes bare der bindestreken står mellom to
+             siffer og ikke er en del av en lengre tallrekke, så regelen er av
+             som standard. -->
+        <rule id="NB_DASH_RANGE" name="bindestrek i tallområde → tankestrek" default="off">
+            <pattern>
+                <marker>
+                    <token regexp="yes">^\d+-\d+$</token>
+                </marker>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">\d+</token>
+                <token>-</token>
+                <token regexp="yes">\d+</token>
+                <token>-</token>
+            </antipattern>
+            <message>Tallområder skrives med tankestrek uten å blande med bindestrek: «kapitlene 2–10».</message>
+            <suggestion><match no="1" regexp_match="^(\d+)-(\d+)$" regexp_replace="$1–$2"/></suggestion>
+            <short>bindestrek/tankestrek</short>
+            <example correction="–">Kapitlene 2-10 er korte.</example>
+            <example>Kapitlene 2–10 er korte.</example>
+            <example>Les kapitlene 2-10 og 14-15.</example>
+        </rule>
+
+        <!-- Språkrådet, Hermeteikn: «Vinkelspissane skal vende utover i norsk»,
+             og doble vinkelhermeteikn (« … ») er standard i bøker og aviser.
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/tegn/hermeteikn/
+             Retrieved 2026-09-23. Konvertering av rette anførselstegn kan støye
+             i programkode o.l., så regelen er av som standard. -->
+        <rule id="NB_STRAIGHT_QUOTES" name="rette anførselstegn → «»" default="off">
+            <regexp>"([^"]+)"</regexp>
+            <message>Standard norske hermeteikn er «…», og vinkelspissene skal vende utover.</message>
+            <suggestion>«<match no="1"/>»</suggestion>
+            <short>hermeteikn</short>
+            <example correction="«nei»">Han sa "nei" til forslaget.</example>
+            <example>Han sa «nei» til forslaget.</example>
+        </rule>
     </category>
 
     <category id="TYPOS" name="Mulig skrivefeil"/>

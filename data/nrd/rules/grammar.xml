@@ -326,6 +326,108 @@
             <example correction="Vad gør du?">Vad du gør?</example>
             <example>Vad gør du?</example>
         </rule>
+
+        <!-- NORDUM_LANGUAGE_SPECIFICATION.md §6.1.1: «V2 with adverbial:
+             Adverbial + Verb + Subject» («I dag arbeider jei jemme»).
+             Retrieved 2026-09-23. -->
+        <rule id="NDM_V2_DATE" name="V2 inversion after a fronted time adverbial">
+            <pattern>
+                <token>i</token>
+                <token regexp="yes">dag|morgon|morgen|går|fjor|år|kveld|natt|helg|sommar|sommer|vinter|haust|vår</token>
+                <marker>
+                    <token regexp="yes">jei|du|han|hun|vi|ni|de|jeg|jag|eg</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa|gør|arbeider</token>
+                </marker>
+            </pattern>
+            <message>After a fronted time adverbial the finite verb comes before the subject (V2): «I dag arbeider jei jemme».</message>
+            <suggestion><match no="4"/> <match no="3"/></suggestion>
+            <short>Word order</short>
+            <example correction="arbeider jei">I dag <marker>jei arbeider</marker> jemme.</example>
+            <example>I dag arbeider jei jemme.</example>
+            <example>I dag må du gå.</example>
+        </rule>
+
+        <!-- NORDUM_LANGUAGE_SPECIFICATION.md §6.1.2 (subordinate clause first);
+             comma placement follows the Scandinavian norm (Språkrådet,
+             kommaregler: «Komma etter leddsetning som står først i en
+             helsetning»), mirroring data/no and data/nn:
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/kommaregler/
+             Retrieved 2026-09-23. -->
+        <rule id="NDM_COMMA_FRONTED_SUB" name="comma after a fronted subordinate clause">
+            <pattern>
+                <marker>
+                    <token regexp="yes">hvis|om|når|fordi|sidan|mens|dersom|ettersom</token>
+                    <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                    <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kom|gikk|så|satt|lå|sto|var|hadde|ble|fikk|tok|ga|sa</token>
+                    <token regexp="yes">jei|du|han|hun|vi|ni|de|det|den|jeg|jag|eg</token>
+                </marker>
+            </pattern>
+            <message>When a subordinate clause comes first, a comma is set after it: «Hvis du kommer, blir jei glad».</message>
+            <suggestion><match no="1"/> <match no="2"/> <match no="3"/>, <match no="4"/> <match no="5"/></suggestion>
+            <short>Comma</short>
+            <example correction="Hvis du kommer, blir jei glad">Hvis du kommer blir jei glad.</example>
+            <example>Hvis du kommer, blir jei glad.</example>
+        </rule>
+
+        <!-- NORDUM_LANGUAGE_SPECIFICATION.md §6.3: «den store bilen» — the
+             free-standing article takes the definite adjective form on «-e»,
+             mirroring data/no and data/nn. Retrieved 2026-09-23. -->
+        <rule id="NDM_DEF_ADJ" name="definite adjective -e">
+            <pattern>
+                <token regexp="yes">den|det|de</token>
+                <marker>
+                    <token regexp="yes">[a-zæøåäö]{2,}(?&lt;!e)(?&lt;!t)<exception>blå</exception><exception>grå</exception><exception>rosa</exception></token>
+                </marker>
+                <token regexp="yes">\p{L}+(?:en|et|ene)</token>
+            </pattern>
+            <message>After «den/det/de» the adjective takes the definite form on «-e»: «den store bilen».</message>
+            <suggestion><match no="2" regexp_match="^(.+)$" regexp_replace="$1e"/></suggestion>
+            <short>Agreement</short>
+            <example correction="store">Vi har den <marker>stor</marker> bilen.</example>
+            <example correction="nye">Vi så det <marker>ny</marker> huset.</example>
+            <example>Vi har den store bilen.</example>
+            <example>den vesle bilen</example>
+        </rule>
+
+        <!-- NORDUM_LANGUAGE_SPECIFICATION.md §6.3 (article system): either
+             «en bil» (indefinite) or «bilen» (definite suffix), never both.
+             Retrieved 2026-09-23. Indefinite nouns that genuinely end in «-en»
+             are excepted; neuter «-et» forms are not covered (past participles
+             like «et ordnet» make them too ambiguous). -->
+        <rule id="NDM_ART_DEF" name="indefinite article + definite form">
+            <pattern>
+                <token regexp="yes">en|ett</token>
+                <marker>
+                    <token regexp="yes">\p{L}+(?:en|arna)<exception>orden</exception><exception>våpen</exception><exception>egen</exception><exception>morgen</exception><exception>aften</exception></token>
+                </marker>
+            </pattern>
+            <message>The noun is either indefinite or definite: «en bil» or «bilen», not both.</message>
+            <suggestion><match no="2"/></suggestion>
+            <short>Article</short>
+            <example correction="bilen">Jei har en <marker>bilen</marker>.</example>
+            <example>Jei har en bil.</example>
+            <example>Jei har bilen.</example>
+            <example>Det er en orden i saken.</example>
+        </rule>
+
+        <!-- Språkrådet, Bindestrek: «der førsteleddet er et siffer … skal ordet
+             skrives med bindestrek» («50-årsdag»); Nordum inherits the
+             Scandinavian figure-compound norm (spec §3.3.3 compounds).
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/tegn/bindestrek/
+             Retrieved 2026-09-23. Mirrors NB_/NN_HYPHEN_NUMBERS_JOINED. -->
+        <rule id="NDM_HYPHEN_NUMBERS_JOINED" name="figure + compound without hyphen">
+            <pattern>
+                <marker>
+                    <token regexp="yes">\d+(?:års|dags|timers|minutters|meters|kilos|kroners|prosent|graders|siders|ukers|måneders|årig)\p{L}*</token>
+                </marker>
+            </pattern>
+            <message>A figure and the following compound are joined with a hyphen: «50-årsdag».</message>
+            <suggestion><match no="1" regexp_match="^(\d+)(.+)$" regexp_replace="$1-$2"/></suggestion>
+            <short>Hyphen</short>
+            <example correction="50-årsdag">Vi feirer <marker>50årsdag</marker>.</example>
+            <example>Vi feirer 50-årsdag.</example>
+        </rule>
     </category>
 
     <category id="TYPOS" name="Possible Typo"/>

@@ -297,6 +297,172 @@
             <example>Ho må lære å lesa.</example>
             <example>Ho likar å lære og lesa.</example>
         </rule>
+
+        <!-- Språkrådet, Aksentteikn: «Vi kan bruke grav aksent for å skilje
+             adverbet òg (= også) frå konjunksjonen og».
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/tegn/aksentteikn/
+             Retrieved 2026-09-23. -->
+        <rule id="NN_AKSENT_OG" name="og som adverb ved setningsslutt → òg">
+            <pattern>
+                <marker>
+                    <token>og</token>
+                </marker>
+                <token regexp="yes">[.,!?;:]</token>
+            </pattern>
+            <message>Adverbet «òg» (= også) har grav aksent for å skiljast frå konjunksjonen «og»: «Han òg ville vere med».</message>
+            <suggestion>òg</suggestion>
+            <short>og/òg</short>
+            <example correction="òg">Eg kjem <marker>og</marker>.</example>
+            <example>Eg kjem òg.</example>
+            <example>Han òg ville vere med.</example>
+        </rule>
+
+        <!-- Språkrådet, «Da» eller «når»: «Da» brukes om enkeltstående
+             hendelser i fortid og sammenhengende perioder i fortid; «når» i alt
+             annet («Den gong da, kvar gong når»).
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/da-eller-nar/
+             Retrieved 2026-09-23. Flertallslesinger gjør overflatedeteksjonen
+             usikker, så regelen er av som standard (jf. NB_DA_NAR). -->
+        <rule id="NN_DA_NAR" name="da/når i fortid" default="off">
+            <pattern>
+                <marker>
+                    <token>når</token>
+                </marker>
+                <token regexp="yes">eg|du|han|ho|vi|me|de|dykk|dei|det</token>
+                <token regexp="yes">var|hadde|kom|gjekk|vart|fekk|tok|sa|byrja|slutta|budde</token>
+            </pattern>
+            <message>Om éi enkeltståande hending i fortida bruker ein «da», ikkje «når»: «Da eg var liten …».</message>
+            <suggestion>da</suggestion>
+            <short>da/når</short>
+            <example correction="Da">Når eg var liten, budde me i Oslo.</example>
+            <example>Da eg var liten, budde me i Oslo.</example>
+            <example>Når eg er i Oslo, vitjar eg ofte museet.</example>
+        </rule>
+
+        <!-- Språkrådet, «De» eller «dem»: «Som regel bruker vi de som subjekt
+             i setningen og dem som objekt»; nynorskparallellen er dei/dem.
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/de-eller-dem/
+             Retrieved 2026-09-23. -->
+        <rule id="NN_DEI_DEM_SUBJ" name="dem som subjekt → dei">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>dem</token>
+                </marker>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kjem|kom|gjekk|så|sat|låg|stod|var|hadde|vart|fekk|tok|sa|er|har</token>
+            </pattern>
+            <message>Som subjekt skriv ein «dei», ikkje «dem».</message>
+            <suggestion>dei</suggestion>
+            <short>dei/dem</short>
+            <example correction="dei">Dem kjem i dag.</example>
+            <example>Dei kjem i dag.</example>
+        </rule>
+
+        <!-- Språkrådet, «De» eller «dem»: «Vi anbefaler … å bruke dem som
+             objekt og styring»; nynorskparallellen er dei/dem.
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/de-eller-dem/
+             Retrieved 2026-09-23. Kun «dei som/der/her» er dekkt: «dei» framfor
+             substantiv er demonstrativ («med dei bøkene») og skal ikkje flaggast. -->
+        <rule id="NN_DEI_DEM_OBJ" name="dei som objekt (tilrådd dem)">
+            <pattern>
+                <token regexp="yes">til|med|på|hos|etter|rundt|mot|uten|mellom|ved|av|frå|gjennom|over|under|bak|foran|innom|blant</token>
+                <marker>
+                    <token>dei</token>
+                </marker>
+                <token regexp="yes">som|der|her</token>
+            </pattern>
+            <message>Som objekt anbefalast «dem» på nynorsk.</message>
+            <suggestion>dem</suggestion>
+            <short>dei/dem</short>
+            <example correction="dem">Gi boka til dei som treng henne.</example>
+            <example>Gi boka til dem som treng henne.</example>
+        </rule>
+
+        <!-- Språkrådet, Hermeteikn: «Komma skal setjast utanfor» hermeteikna
+             (regelen blei endra i 2004; før det stod komma inne).
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/tegn/hermeteikn/
+             Retrieved 2026-09-23. -->
+        <rule id="NN_COMMA_QUOTES" name="komma inne i hermeteikn">
+            <pattern>
+                <token regexp="yes">\p{L}+</token>
+                <marker>
+                    <token>,</token>
+                    <token>»</token>
+                </marker>
+            </pattern>
+            <message>Komma skal stå utanfor hermeteikna: «Eg kjem i morgon», sa han.</message>
+            <suggestion>»,</suggestion>
+            <short>hermeteikn</short>
+            <example correction="»,">Ho sa «Ja,» til meg.</example>
+            <example>«Eg kjem i morgon», sa han.</example>
+            <example>Ho sa «nei» til forslaget.</example>
+        </rule>
+
+        <!-- Språkrådet, kommaregler: «Det skal stå komma mellom sidestilte
+             helsetninger som er bundet sammen med og, eller, for».
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/kommaregler/
+             Retrieved 2026-09-23. Risky with surface patterns (leddsetningar
+             bundne med og utan gjentatt subjunksjon skal ikkje ha komma), so
+             the rule is off by default. -->
+        <rule id="NN_COMMA_SIDEORDNING" name="komma mellom sidestilte setningar" default="off">
+            <pattern>
+                <token regexp="yes">eg|du|han|ho|vi|me|de|dykk|dei|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kjem|kom|gjekk|så|sat|låg|stod|var|hadde|vart|fekk|tok|sa|er|har</token>
+                <marker>
+                    <token regexp="yes">og|eller|for</token>
+                </marker>
+                <token regexp="yes">eg|du|han|ho|vi|me|de|dykk|dei|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kjem|kom|gjekk|så|sat|låg|stod|var|hadde|vart|fekk|tok|sa|er|har</token>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">at|fordi|om|når|viss|medan|sidan|dersom|ettersom</token>
+                <token regexp="yes">eg|du|han|ho|vi|me|de|dykk|dei|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kjem|kom|gjekk|så|sat|låg|stod|var|hadde|vart|fekk|tok|sa|er|har</token>
+                <token regexp="yes">og|eller|for</token>
+            </antipattern>
+            <message>Komma mellom sidestilte setningar: «Vi kan gå tur, eller me kan sitje inne».</message>
+            <suggestion>, <match no="3"/></suggestion>
+            <short>komma</short>
+            <example correction=", eller">Vi kan gå tur eller me kan sitje inne.</example>
+            <example>Vi kan gå tur, eller me kan sitje inne.</example>
+            <example>Eg veit at han kjem og eg blir glad.</example>
+        </rule>
+
+        <!-- Språkrådet, kommaregler (oppramsing): «det skal ikkje stå komma
+             foran og eller eller» i oppramsing.
+             https://sprakradet.no/godt-og-korrekt-sprak/rettskriving-og-grammatikk/kommaregler/
+             Retrieved 2026-09-23. Flertallsformer på -r kan likne finite verb,
+             så regelen er slått av som standard. -->
+        <rule id="NN_COMMA_OPPRAMSING" name="komma foran og/eller i oppramsing" default="off">
+            <pattern>
+                <token regexp="yes">\p{L}+</token>
+                <marker>
+                    <token>,</token>
+                    <token regexp="yes">og|eller</token>
+                </marker>
+                <token regexp="yes">\p{L}+</token>
+            </pattern>
+            <antipattern>
+                <token regexp="yes">og|eller</token>
+                <token regexp="yes">eg|du|han|ho|vi|me|de|dykk|dei|det</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kjem|kom|gjekk|så|sat|låg|stod|var|hadde|vart|fekk|tok|sa|er|har</token>
+            </antipattern>
+            <antipattern>
+                <token regexp="yes">og|eller</token>
+                <token regexp="yes">viss|om|når|medan|da|fordi|sidan|dersom|som|at|men</token>
+            </antipattern>
+            <antipattern>
+                <token regexp="yes">og|eller</token>
+                <token regexp="yes">\p{L}+</token>
+                <token regexp="yes">\p{L}{2,}r|ville|kunne|skulle|måtte|burde|kan|vil|skal|må|bør|får|kjem|kom|gjekk|så|sat|låg|stod|var|hadde|vart|fekk|tok|sa|er|har</token>
+            </antipattern>
+            <message>I oppramsing skal det ikkje stå komma foran «og»/«eller»: «brød, kaker og bollar».</message>
+            <suggestion> <match no="3"/></suggestion>
+            <short>komma</short>
+            <example correction=" og">Vi kjøpte brød, kaker, og bollar.</example>
+            <example>Vi kjøpte brød, kaker og bollar.</example>
+            <example>Alle må møte kl. 9, og ingen hjelpemiddel er tillate.</example>
+        </rule>
     </category>
 
     <category id="TYPOS" name="Mogeleg skrivefeil"/>
