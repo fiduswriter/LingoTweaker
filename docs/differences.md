@@ -502,3 +502,159 @@ scripts/ci/parity.sh uk
 # allowed only-Rust: 1/1 UK_ADJ_NOUN_INFLECTION_AGREEMENT
 # field diffs: 0
 ```
+
+
+## 13. Japanese (`ja`): segmentation-engine substitution (resolved)
+
+Japanese was ported on the `lindera-cjk-spike` branch with a **different
+segmenter** than Java: Java uses `net.java.sen` (Sen Viterbi) over the
+lucene-gosen IPADIC 2.6.1 artifact, Rust uses Lindera 6 over a compiled
+meCab-IPADIC 2.7.0 dictionary. The tagger is the same in both: the segmenter's
+`surface/POS/basicForm` triple is split into an `AnalyzedToken`. There is no
+disambiguator, chunker, synthesizer or speller, and `Japanese.getRelevantRules`
+contributes only `DoublePunctuationRule` and `MultipleWhitespaceRule`.
+
+### 13a. Example coverage — 737/737 (resolved)
+
+The rules were authored against net.java.sen's token boundaries, so an initial
+run fired on 690 of the 735 grammar.xml examples. All misses were fixed by
+**realigning the affected pattern tokens to Lindera's boundaries** (language-local
+edits, no engine change): merged tokens are matched as one (`曖`+`味` →
+`曖味`, `忘`+`備` → `忘備`, `さ`+`せる` → `させる`, `来`+`れる` → `来れる`,
+`ストリート`+`キング` → `ストリートキング`, …) and split tokens are matched as
+several (`三寸` → `三`+`寸`, `未解決` → `未`+`解決`, `だらけ` → `だら`+`け`,
+`キリスト教` → `キリスト`+`教`, …). The suggestion strings and rule ids are
+unchanged.
+
+Three rules have a second spelling that Lindera tokenizes into a **different
+number of tokens**, so one pattern cannot cover both and they were split into
+alternatives (`<or>` where both spellings have the same token count, a
+`<rulegroup>` with one sub-rule per spelling where they differ):
+
+| rule | variant A | variant B | form |
+|---|---|---|---|
+| `MATIDOUSII` | 待ちどう**しい** (しᐧい) | 待ちどう**しく** (しく) | `<rulegroup>` (2 sub-rules) |
+| `ZURAI` | 読み**ずらい** (ずらᐧい) | 読み**ずらく** (ずᐧらく) | `<or>` at both positions |
+| `KURERU` | **来れる** (one token) | **これる** (こᐧれる) | `<rulegroup>` (2 sub-rules) |
+
+This adds one sub-rule + one example for each of the two rulegroups, so the
+grammar now loads **737 rule definitions / 737 examples** (the rule *ids*
+`MATIDOUSII`/`KURERU` are unchanged; the added variants carry sub-ids `2`).
+Probes on all 737 examples fire 737/737 with 0 false positives, and the
+corrected forms of every variant do not fire:
+
+```sh
+cargo test -p lt --test japanese -- --nocapture   # "error 737 (hit 737, miss 0)"
+```
+
+### 13b. Whitespace tokens and localized built-in strings
+
+net.java.sen (and Lindera) drop whitespace from the token stream. The Rust
+analyzer re-inserts whitespace **per character** (locating each surface in the
+source text) so byte offsets stay exact; Java loses the spaces. Consequently
+`MultipleWhitespaceRule` can fire in Rust on Japanese text with repeated spaces
+where Java has no whitespace tokens to match:
+
+```
+テスト  です。
+Rust: WHITESPACE_RULE
+Java: (none)
+```
+
+Verdict: **intentional: Rust more correct** (the offsets are exact and the rule
+sees the real token stream). The localized Japanese built-in strings
+(`whitespace_repetition`) are not wired, so the base English messages are used
+for `WHITESPACE_RULE` and `DOUBLE_PUNCTUATION`; this affects wording only, not
+match sets.
+
+## 14. Chinese (`zh`): segmentation-engine substitution (partial coverage)
+
+Chinese was ported on the `lindera-cjk-spike` branch with a **different
+segmenter/tagger** than Java: Java uses HanLP's portable (mini) dictionary via
+`ChineseWordTokenizer`/`ChineseTagger`; Rust uses Lindera 6's jieba dictionary
+(`data/zh/dictionary`). The tagger reads the POS from the jieba detail field and
+leaves the lemma null, like `ChineseTagger` (`new AnalyzedToken(word, pos,
+null)`). There is no disambiguator, chunker, synthesizer or speller, and
+`Chinese.getRelevantRules` contributes only `DoublePunctuationRule` and
+`MultipleWhitespaceRule` (localized with the `MessagesBundle_zh` strings).
+
+Sentence splitting does **not** use SRX: Java's `ChineseSentenceTokenizer`
+wraps HanLP's `SentencesUtil.toSentenceList(text)` (shortest units, so it also
+breaks at `，,;；` and spaces). The Rust analyzer ports that scan
+(`crates/lt/src/zh.rs::split_sentences`).
+
+### 14a. Per-rule triage (2026-09-24) — 1781/1789 error examples (99.6%), held-out 2
+
+Because the Java `zh` checker is itself poor and the segmenter substitution makes
+many HanLP-authored patterns unusable, the rules were **triaged one by one**
+rather than realigned wholesale. The triage set was the 277 sub-rules where Java
+fires but Rust does not (the `zh_diag.json` MISS rows), plus the top-level
+`SHI_ADHECTIVE_ERROR#1` and the 18 sub-rules already parked as disabled.
+
+| | before triage | after triage |
+|---|---|---|
+| error examples firing | 1533 / 1825 (84.0%) | **1781 / 1789 (99.6%)** |
+| miss | 292 | 8 |
+| false positives on `correct` examples | 18 | 18 |
+| held-out Wikipedia prose matches (4,616 sentences) | 5 | **2** |
+
+**Decisions.** Triage set of 291 sub-rules: **MODIFY 254, REMOVE 37** (18 already
+parked + 19 newly found), **NEW 0, NO_CHANGE 0**. Eight further upstream-straggler
+rules found during the pass were also handled (4 MODIFY, 4 REMOVE); totals over
+all touched rules are **MODIFY 258 / REMOVE 41**. Unreliable rules are **deleted
+from `grammar.xml`** rather than left disabled (no historical dead weight): the 41
+removed rules were 40 rulegroup sub-rules + 1 top-level rule, and the 3
+rulegroups left empty were removed too, so the grammar is now **1,822 rule
+definitions** (was 1,863). The full per-rule table is in the local (untracked)
+attic note `notes/chinese-port-findings.md`.
+
+**MODIFY** is a re-alignment to jieba's **word tokens**, not a semantic rewrite:
+the erroneous form is matched as the whole jieba token window that covers it,
+including the minimum adjacent context tokens, e.g.
+
+- `[雄][材]` → `<token>雄材大略</token>` (the wrong idiom is one jieba token);
+- `再接再 [利|历|励|力]` → `<token>再接再励</token>`;
+- `[应][接][不][遐|瑕]` → `<token>应接</token><token>不</token><token regexp="yes">遐|瑕</token>` (`应接` is one token);
+- `[大][放][獗][词]` → `<token>大放</token><token>獗</token><token>词</token>`.
+
+Whole-word misspellings are rare in correct prose, so this keeps precision; the
+suggestion message is rewritten to the corrected whole span.
+
+**REMOVE** covers the classes that cannot be made correct without HanLP (deleted from the grammar):
+
+| class | examples | why |
+|---|---|---|
+| error form embedded in a valid word | `CHAN1_SHEN2#1` (`渗水` is a real word), `FAN3_FAN4#5` (`收入` is tagged `v`, so the noun guard breaks) | the pre/post context is chopped by jieba and matching the whole token would flag legitimate text |
+| POS/syntax-dependent rules | `wb4#1`–`wb4#4` (`的/地/得`), `wa2#4`, `wa3#1`, `wb2#1/#2/#4/#6/#8/#9`, `BU#1`, `JI_YI#1`, `YU7_YU8#11`, `LING_JIN#3` | jieba has no comparable POS/syntactic confidence; these reliably false-alarm |
+| classifier (量词) rules | `wa5#1/#4/#5/#6/#8/#9/#13/#14/#17/#18/#19/#20/#23/#24/#34` | jieba gives no noun-class information; several had measurable false positives in the oracle |
+| broken upstream / wrong direction | `SHI_ADHECTIVE_ERROR#1` (3 held-out FPs), `s32#5` (`防止余震` is correct), `s32#15`, `LUO1_LUO2#2` (upstream prefers the rarer `啰哩啰唆` over the standard `啰里啰唆`) | Java's own rule is wrong; re-enabling would hurt precision |
+
+The 8 residual misses are **duplicate rules** whose error example is already
+caught under a different rule id (`BEI1_BEI2#2` vs `BINGXINGBUBEI#1`,
+`LI3_LI4#3` vs `LI13_LI14#1`, `SHEN5_SHEN6#3` vs `SHENG3_SHENG4#1`,
+`CHENG5_CHENG6#1` vs `XIANGFUXIANGCHENG#1`, `LIN5_LIN6#1` vs
+`FENGMAOLINJIAO#1`, `MIAO3_MIAO4#2` vs `PIAO3_PIAO4#1`,
+`TA1_TA2_TA3#5` vs `SIXINTADI#1`, `XIUYANSHENGYI#1` vs `XIU3_XIU4#1`), so they
+are not coverage gaps. The 18 remaining `correct`-example false positives are
+pre-existing, active non-typo rules (`wb1`, `wa5#21/#25/#26/#40`, `wa2#1`,
+`wb2#5/#12`, `s2#2`, `s5#1/#3`, `ZH3#1`) that are out of this triage set and do
+not fire on the held-out corpus.
+
+The two remaining held-out matches are both real: `MAN5_MAN6#1` (`漫骂` →
+`谩骂`) and `wb2#10` (`来自于` redundancy, `来自`). Both are deliberately kept.
+
+Reproduce:
+
+```sh
+cargo test -p lt --test chinese -- --nocapture   # "error 1789 (hit 1781, miss 8)"
+./target/debug/lt-cli check --lang zh --data-dir data --file <heldout> --lines | grep -c '^M'  # 2
+```
+
+
+### 14b. `ChineseConfusionProbabilityRule` not ported
+
+Upstream's `zh` module also ships `ChineseConfusionProbabilityRule`
+(`getRelevantLanguageModelRules`), which needs an n-gram language model
+(`resource/zh/common_words.txt`, `confusion_sets.txt`). It is only active when
+a language model is configured, is not shipped with the data packs and is not
+ported.

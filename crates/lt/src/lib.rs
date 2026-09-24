@@ -53,6 +53,7 @@ mod hidden_chars;
 mod hunspell_spelling;
 mod is;
 mod it;
+mod ja;
 mod km;
 mod long_sentence;
 mod lt;
@@ -94,6 +95,7 @@ mod word_repeat;
 mod word_repetition;
 mod wordutil;
 mod wrong_word_in_context;
+mod zh;
 pub use pipeline::{analyze_sentence, CompiledRule, Pipeline, SkippedCounts};
 
 /// Test/probe helper exposing the German speller without the engine.
@@ -510,6 +512,18 @@ impl EngineBuilder {
                 self.variant.as_deref(),
             )?,
             Lang::Gn => Pipeline::new_guarani(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Ja => Pipeline::new_japanese(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
+            Lang::Zh => Pipeline::new_chinese(
                 &data_dir,
                 self.today,
                 &self.options.enabled_rules,

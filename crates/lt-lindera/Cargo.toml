@@ -1,0 +1,16 @@
+[package]
+name = "lt-lindera"
+description = "Experimental Lindera-backed CJK segmentation (spike branch)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+readme.workspace = true
+publish = false
+
+[dependencies]
+# `lindera-dictionary` is replaced by the patched copy in `vendor/` through the
+# workspace `[patch.crates-io]` entry, so dictionary reads go through
+# `lt_data::fs` and work from an in-memory data pack.
+lindera = { version = "6.0.0", default-features = false }
+lt-data = { workspace = true }

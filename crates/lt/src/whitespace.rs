@@ -376,3 +376,25 @@ pub fn check_ta(sentences: &[AnalyzedSentence]) -> Vec<Match> {
         ("TYPOGRAPHY", "அச்சுக்கலை"),
     )
 }
+
+/// `MultipleWhitespaceRule` with the Japanese `MessagesBundle_ja` strings
+/// (`desc_whitespacerepetition` / `whitespace_repetition` / `category_typography`).
+pub fn check_ja(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "空白の繰り返し (悪いフォーマット)",
+        "可能性のある誤字: 空白を繰り返した",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}
+
+/// `MultipleWhitespaceRule` with the Chinese `MessagesBundle_zh` strings
+/// (`desc_whitespacerepetition` / `whitespace_repetition` / `category_typography`).
+pub fn check_zh(sentences: &[AnalyzedSentence]) -> Vec<Match> {
+    check_with(
+        sentences,
+        "空格重复(错误的格式)",
+        "可能的输入错误：你重复了一个空格",
+        ("TYPOGRAPHY", "Typography"),
+    )
+}

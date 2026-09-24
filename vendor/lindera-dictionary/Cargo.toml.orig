@@ -1,0 +1,69 @@
+[package]
+name = "lindera-dictionary"
+version = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+description = "A morphological dictionary library."
+documentation = "https://docs.rs/lindera-dictionary"
+homepage = { workspace = true }
+repository = { workspace = true }
+readme = "README.md"
+keywords = ["morphological", "analysis", "dictionary", "library"]
+categories = { workspace = true }
+license = { workspace = true }
+
+[features]
+build_rs = ["dep:flate2", "dep:md5", "dep:rand", "dep:tar", "dep:ureq"]
+mmap = ["dep:memmap2"]
+# Experimental: instrument connection-matrix accesses to profile per-context-id
+# access frequency over a corpus (used to build a corpus-frequency remap). Off by
+# default; adds a counter to the `cost()` hot path only when enabled.
+ctxfreq = []
+default = ["mmap"]
+
+[dependencies]
+anyhow = { workspace = true }
+byteorder = { workspace = true }
+csv = { workspace = true }
+crawdad = { workspace = true }
+daachorse = { workspace = true }
+encoding_rs = "0.8.35"
+encoding_rs_io = "0.1.7"
+flate2 = { version = "1.1.9", optional = true }
+glob = "0.3.4"
+log = { workspace = true }
+md5 = { version = "0.8.1", optional = true }
+memchr = "2.8.3"
+memmap2 = { version = "0.9.11", optional = true }
+once_cell = { workspace = true }
+rand = { version = "0.10.2", default-features = false, optional = true }
+rkyv = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+strum = { workspace = true }
+strum_macros = { workspace = true }
+tar = { version = "0.4.46", optional = true }
+thiserror = "2.0.19"
+# The dictionary download needs nothing more than a blocking HTTPS GET. `ureq`
+# provides that without an async runtime; the `rustls` feature selects the `ring`
+# provider, keeping `aws-lc-sys` (whose C build dominates the compile time of
+# every crate that embeds a dictionary) out of the graph.
+ureq = { version = "3.3.0", default-features = false, features = [
+    "rustls",
+], optional = true }
+
+# rayon does not support wasm32-unknown-unknown (no OS threads); the connection
+# cost matrix parser falls back to a sequential path there.
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+rayon = "1.12.0"
+
+[dev-dependencies]
+criterion = { version = "0.8.2", default-features = false, features = [
+    "html_reports",
+] }
+rand = { version = "0.10.2", default-features = false }
+tempfile = "3.27.0"
+
+[[bench]]
+name = "bench_build"
+harness = false

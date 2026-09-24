@@ -47,6 +47,58 @@ fn checks_guarani_from_memory_pack() {
     assert!(matches > 0, "English text must trigger the Guaraní speller");
 }
 
+/// The generated Lindera dictionary must be read through `lt_data::fs` from a
+/// pack (this is the wasm path).
+#[test]
+fn checks_japanese_from_memory_pack() {
+    let Some(data_dir) = repo_data_dir() else {
+        eprintln!("skipping: no vendored data directory found");
+        return;
+    };
+    if !data_dir.join("ja/dictionary").is_dir() {
+        eprintln!("skipping: data/ja/dictionary not generated");
+        return;
+    }
+    let pack = pack_for("ja").expect("pack ja");
+    let data = lt::DataDir::from_pack(&pack).expect("pack parses");
+    let engine = lt::Engine::builder(lt::Lang::Ja)
+        .expect("builder")
+        .data_dir(data)
+        .build()
+        .expect("engine builds from pack");
+    let result = engine.check("名詞お見る").expect("check runs");
+    assert!(
+        result.matches.iter().any(|m| m.rule_id == "O"),
+        "rule O must fire with the dictionary read from the pack"
+    );
+}
+
+/// The generated Chinese jieba dictionary must also be read through
+/// `lt_data::fs` from a pack.
+#[test]
+fn checks_chinese_from_memory_pack() {
+    let Some(data_dir) = repo_data_dir() else {
+        eprintln!("skipping: no vendored data directory found");
+        return;
+    };
+    if !data_dir.join("zh/dictionary").is_dir() {
+        eprintln!("skipping: data/zh/dictionary not generated");
+        return;
+    }
+    let pack = pack_for("zh").expect("pack zh");
+    let data = lt::DataDir::from_pack(&pack).expect("pack parses");
+    let engine = lt::Engine::builder(lt::Lang::Zh)
+        .expect("builder")
+        .data_dir(data)
+        .build()
+        .expect("engine builds from pack");
+    let result = engine.check("这婴儿哭声弘亮").expect("check runs");
+    assert!(
+        result.matches.iter().any(|m| m.rule_id == "ZH8"),
+        "rule ZH8 must fire with the dictionary read from the pack"
+    );
+}
+
 #[test]
 fn mount_read_semantics() {
     let pack = lt_data::pack::write(&[

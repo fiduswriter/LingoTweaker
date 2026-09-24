@@ -17,6 +17,7 @@ lt-spell = { workspace = true }
 lt-chunk = { workspace = true }
 lt-disambig = { workspace = true }
 lt-data = { workspace = true }
+lt-lindera = { workspace = true }
 lt-pattern = { workspace = true }
 regex = { workspace = true }
 aho-corasick = { workspace = true }

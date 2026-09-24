@@ -39,3 +39,6 @@ crates/lt-py/target/
 
 # regenerable benchmark artifacts (raw logs are archived in attic/notes/benchmarks-2026-09)
 scripts/bench/results/
+
+# Generated Lindera-compiled dictionaries (see tools/lindera/)
+data/*/dictionary/

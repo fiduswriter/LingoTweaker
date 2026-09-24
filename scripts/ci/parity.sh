@@ -4,16 +4,16 @@
 # once with Docker; CI needs none). See docs/parity/golden/README.md.
 #
 # Languages without a usable Java oracle (no, nrd, gn; lt has a broken
-# upstream module) get a tests-only gate: the
+# upstream module; ja/zh have no golden) get a tests-only gate: the
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|ja|zh|no|nrd|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|ja|zh|de-x-simple|no|nrd|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 # The parity-matrix gate name may differ from the engine language code (the
 # Simple German variant is gated as `de-x-simple` but checked as its
@@ -24,7 +24,7 @@ CHECK_LANG="$LANG_ARG"
 # no pinned golden to diff, so assert the integration test passes and that
 # `lt-cli inventory` loads the language rules (> 0 rules).
 case "$LANG_ARG" in
-no | nrd | gn | lt)
+no | nrd | gn | lt | ja | zh)
   case "$LANG_ARG" in
   no) TEST_SUITE=norwegian ;;
   nrd) TEST_SUITE=nordum ;;
@@ -35,6 +35,11 @@ no | nrd | gn | lt)
   # third-party ispell-lt dictionary under the unchanged rule id and runs the
   # XML + generic rules; there is no Java baseline, so the gate is tests-only.
   lt) TEST_SUITE=lithuanian ;;
+  # `ja`/`zh` use the Lindera segmenter; the Java module has no golden corpus
+  # (and `zh` upstream segments with HanLP's mini dictionary), so the gate is
+  # tests-only.
+  ja) TEST_SUITE=japanese ;;
+  zh) TEST_SUITE=chinese ;;
   esac
   LT_CLI=""
   for candidate in "$RS_ROOT/target/release/lt-cli" "$RS_ROOT/target/debug/lt-cli"; do
@@ -44,6 +49,12 @@ no | nrd | gn | lt)
     fi
   done
   [ -n "$LT_CLI" ] || { echo "build first: cargo build -p lt-cli" >&2; exit 2; }
+  # the CJK dictionaries are generated (gitignored); make sure they exist
+  if [ -z "${LT_SKIP_DICT_BUILD:-}" ]; then
+    case "$LANG_ARG" in
+    ja | zh) python3 "$RS_ROOT/tools/lindera/build-dict.py" "$LANG_ARG" ;;
+    esac
+  fi
   echo "== tests-only gate (no Java oracle for this language): cargo test -p lt --test $TEST_SUITE"
   cargo test -p lt --test "$TEST_SUITE"
   echo "== tests-only gate (no Java oracle for this language): lt-cli inventory --lang $LANG_ARG"

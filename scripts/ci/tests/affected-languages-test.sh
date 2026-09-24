@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de-x-simple","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","no","nrd","gn"]'
+ALL='["en","de-x-simple","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","ja","zh","no","nrd","gn"]'
 fails=0
 
 check() {
@@ -118,6 +118,14 @@ check "ml golden" '["ml"]' docs/parity/golden/ml-full.java.tsv
 check "ta integration test" '["ta"]' crates/lt/tests/tamil.rs
 check "ta oracle" '["ta"]' scripts/oracle/ta/check-diff-ta.sh
 check "ta golden" '["ta"]' docs/parity/golden/ta-full.java.tsv
+
+# CJK (tests-only parity gate; the Lindera dictionary is generated, not tracked)
+check "ja data" '["ja"]' data/ja/rules/grammar.xml
+check "ja module entry file" '["ja"]' crates/lt/src/ja.rs
+check "ja integration test" '["ja"]' crates/lt/tests/japanese.rs
+check "zh data" '["zh"]' data/zh/rules/grammar.xml
+check "zh module entry file" '["zh"]' crates/lt/src/zh.rs
+check "zh integration test" '["zh"]' crates/lt/tests/chinese.rs
 
 # hand-authored languages (tests-only parity gate): local layout plus the
 # no/nrd/gn module entry files and the Nordum dictionary generator

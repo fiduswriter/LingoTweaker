@@ -53,6 +53,8 @@ impl AppState {
             ("no", None),
             ("nrd", None),
             ("gn", None),
+            ("ja-JP", None),
+            ("zh-CN", None),
         ] {
             let Some(lang) = Lang::from_long_code(long_code) else {
                 continue;

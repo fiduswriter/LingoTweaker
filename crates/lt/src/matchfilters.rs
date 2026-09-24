@@ -278,6 +278,12 @@ fn priority(m: &Match, lang: Lang, variant: Option<&str>) -> i32 {
         // Tamil also overrides neither `getPriorityForId` nor
         // `getDefaultRulePriorityForStyle` and has no `priority` attributes.
         Lang::Ta => 0,
+        // Japanese also overrides neither `getPriorityForId` nor
+        // `getDefaultRulePriorityForStyle` and has no `priority` attributes.
+        Lang::Ja => 0,
+        // Chinese also overrides neither `getPriorityForId` nor
+        // `getDefaultRulePriorityForStyle` and has no `priority` attributes.
+        Lang::Zh => 0,
         _ => crate::en::priorities::rule_priority(&m.rule_id, &m.category_id, &m.issue_type, 0),
     }
 }

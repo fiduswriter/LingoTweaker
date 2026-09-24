@@ -210,6 +210,10 @@ pub struct Pipeline {
     pub malayalam: Option<Arc<crate::ml::MalayalamPipeline>>,
     /// Tamil pipeline parts (`None` for the other languages)
     pub tamil: Option<Arc<crate::ta::TamilPipeline>>,
+    /// Japanese pipeline parts (`None` for the other languages)
+    pub japanese: Option<Arc<crate::ja::JapanesePipeline>>,
+    /// Chinese pipeline parts (`None` for the other languages)
+    pub chinese: Option<Arc<crate::zh::ChinesePipeline>>,
     /// Java `JLanguageTool.cleanOverlappingMatches` (default true)
     pub clean_overlapping_matches: bool,
 }
@@ -1435,6 +1439,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -1701,6 +1707,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -1818,6 +1826,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2033,6 +2043,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2256,6 +2268,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2399,6 +2413,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2661,6 +2677,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -2883,6 +2901,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3222,6 +3242,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3385,6 +3407,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3534,6 +3558,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3707,6 +3733,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3858,6 +3886,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -3981,6 +4011,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4139,6 +4171,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4227,6 +4261,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4400,6 +4436,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4485,6 +4523,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4607,6 +4647,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4715,6 +4757,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4837,6 +4881,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -4947,6 +4993,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5058,6 +5106,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5179,6 +5229,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5289,6 +5341,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5452,6 +5506,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5654,6 +5710,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5812,6 +5870,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -5961,6 +6021,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6040,6 +6102,8 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6132,6 +6196,8 @@ impl Pipeline {
             khmer: Some(khmer),
             malayalam: None,
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6222,6 +6288,8 @@ impl Pipeline {
             khmer: None,
             malayalam: Some(malayalam),
             tamil: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6300,6 +6368,175 @@ impl Pipeline {
             khmer: None,
             malayalam: None,
             tamil: Some(tamil),
+            japanese: None,
+            chinese: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Japanese (`ja`) engine. `Japanese` is a plain `Language`: Lindera
+    /// segmentation over `data/ja/dictionary` supplies surface/POS/lemma, and
+    /// the XML rules plus `DoublePunctuation`/`MultipleWhitespace` are the only
+    /// rules (no disambiguator, chunker, synthesizer or speller).
+    pub fn new_japanese(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Ja, "ja", enabled_rules)?;
+        let dict_dir = data_dir.path().join("ja/dictionary");
+        let segmenter = Arc::new(
+            lt_lindera::CjkSegmenter::from_dict_dir(&dict_dir)
+                .map_err(|e| CoreError::Data(format!("ja/dictionary: {e}")))?,
+        );
+        let japanese = Arc::new(crate::ja::JapanesePipeline { segmenter });
+        Ok(Self {
+            lang: Lang::Ja,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            german_simple: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: None,
+            malayalam: None,
+            tamil: None,
+            chinese: None,
+            japanese: Some(japanese),
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Chinese (`zh`) engine. `Chinese` is a plain `Language`: Lindera jieba
+    /// segmentation over `data/zh/dictionary` supplies surface/POS, and the
+    /// XML rules plus `DoublePunctuation`/`MultipleWhitespace` are the only
+    /// rules (no disambiguator, chunker, synthesizer or speller). Sentence
+    /// splitting ports HanLP `SentencesUtil` (no SRX).
+    pub fn new_chinese(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Zh, "zh", enabled_rules)?;
+        let dict_dir = data_dir.path().join("zh/dictionary");
+        let segmenter = Arc::new(
+            lt_lindera::CjkSegmenter::from_dict_dir(&dict_dir)
+                .map_err(|e| CoreError::Data(format!("zh/dictionary: {e}")))?,
+        );
+        let chinese = Arc::new(crate::zh::ChinesePipeline { segmenter });
+        Ok(Self {
+            lang: Lang::Zh,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace: Vec::new(),
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            german_simple: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            da: None,
+            sv: None,
+            norwegian: None,
+            nordum: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: None,
+            malayalam: None,
+            tamil: None,
+            japanese: None,
+            chinese: Some(chinese),
             clean_overlapping_matches: true,
         })
     }
@@ -6450,6 +6687,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6545,6 +6784,8 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
     }
@@ -6644,8 +6885,20 @@ impl Pipeline {
             tamil: None,
             da: None,
             sv: None,
+            japanese: None,
+            chinese: None,
             clean_overlapping_matches: true,
         })
+    }
+
+    /// Sentence spans: SRX for most languages, the HanLP `SentencesUtil` port
+    /// for Chinese (Java's `ChineseSentenceTokenizer` does not use SRX).
+    fn sentence_spans(&self, text: &str) -> Vec<(usize, usize)> {
+        if self.chinese.is_some() {
+            crate::zh::split_sentences(text)
+        } else {
+            self.srx.split(text)
+        }
     }
 
     /// Analyze `text` into sentences with the token readings of the pipeline.
@@ -6654,7 +6907,7 @@ impl Pipeline {
     /// (`lt-cli analyze`).
     pub fn analyze(&self, text: &str, disambiguate: bool) -> Vec<AnalyzedSentence> {
         let mut out = Vec::new();
-        for (start, end) in self.srx.split(text) {
+        for (start, end) in self.sentence_spans(text) {
             let sentence_text = &text[start..end];
             let mut analyzed = if self.persian.is_some() {
                 crate::fa::analyze_persian_sentence(sentence_text)
@@ -6664,6 +6917,10 @@ impl Pipeline {
                 crate::ml::analyze_malayalam_sentence(malayalam, sentence_text)
             } else if let Some(tamil) = &self.tamil {
                 crate::ta::analyze_tamil_sentence(tamil, sentence_text)
+            } else if let Some(japanese) = &self.japanese {
+                crate::ja::analyze_japanese_sentence(japanese, sentence_text)
+            } else if let Some(chinese) = &self.chinese {
+                crate::zh::analyze_chinese_sentence(chinese, sentence_text)
             } else if self.norwegian.is_some() || self.nordum.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
@@ -6952,7 +7209,7 @@ impl Pipeline {
             .map(|s| s.as_str())
             .collect();
 
-        let spans = self.srx.split(text);
+        let spans = self.sentence_spans(text);
         // `seen`/`repeating` are applied in sentence order; the sequential
         // path is the single-pass loop (hot path for `--lines`), long texts
         // use the two-pass fan-out. Both produce identical results.
@@ -9109,6 +9366,40 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check(&analyzed_sentences));
             }
         }
+        // Japanese text-level rules (`Japanese.getRelevantRules`):
+        // `MultipleWhitespaceRule` with the `MessagesBundle_ja` strings.
+        if self.lang == crate::Lang::Ja
+            && builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            )
+        {
+            text_level_matches.extend(crate::whitespace::check_ja(&analyzed_sentences));
+        }
+        // Chinese text-level rules (`Chinese.getRelevantRules`):
+        // `MultipleWhitespaceRule` with the `MessagesBundle_zh` strings.
+        if self.lang == crate::Lang::Zh
+            && builtin_active(
+                crate::whitespace::RULE_ID,
+                "TYPOGRAPHY",
+                true,
+                false,
+                options,
+                &enabled_rules,
+                &disabled_rules,
+                &disabled_categories,
+                &enabled_categories,
+            )
+        {
+            text_level_matches.extend(crate::whitespace::check_zh(&analyzed_sentences));
+        }
         // Tamil text-level rules (`Tamil.getRelevantRules`): MultipleWhitespace
         // (3), LongSentence (4, picky, 50 words) and SentenceWhitespace (5),
         // all with the `MessagesBundle_ta` strings.
@@ -10072,6 +10363,10 @@ impl Pipeline {
             crate::ml::analyze_malayalam_sentence(malayalam, &text[start..end])
         } else if let Some(tamil) = &self.tamil {
             crate::ta::analyze_tamil_sentence(tamil, &text[start..end])
+        } else if let Some(japanese) = &self.japanese {
+            crate::ja::analyze_japanese_sentence(japanese, &text[start..end])
+        } else if let Some(chinese) = &self.chinese {
+            crate::zh::analyze_chinese_sentence(chinese, &text[start..end])
         } else if self.norwegian.is_some() || self.nordum.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
@@ -10479,6 +10774,47 @@ impl Pipeline {
                 sentence_text,
                 start,
             ));
+            matches.extend(crate::double_punctuation::check_sentence(
+                &analyzed.tokens,
+                start,
+            ));
+        }
+        // Japanese sentence-level built-ins (`Japanese.getRelevantRules`):
+        // `DoublePunctuationRule`. The localized Japanese strings are not yet
+        // wired, so the base English messages are used.
+        if self.lang == crate::Lang::Ja
+            && builtin_active(
+                "DOUBLE_PUNCTUATION",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                enabled_rules,
+                disabled_rules,
+                disabled_categories,
+                enabled_categories,
+            )
+        {
+            matches.extend(crate::double_punctuation::check_sentence(
+                &analyzed.tokens,
+                start,
+            ));
+        }
+        // Chinese sentence-level built-ins (`Chinese.getRelevantRules`):
+        // `DoublePunctuationRule`.
+        if self.lang == crate::Lang::Zh
+            && builtin_active(
+                "DOUBLE_PUNCTUATION",
+                "PUNCTUATION",
+                true,
+                false,
+                options,
+                enabled_rules,
+                disabled_rules,
+                disabled_categories,
+                enabled_categories,
+            )
+        {
             matches.extend(crate::double_punctuation::check_sentence(
                 &analyzed.tokens,
                 start,

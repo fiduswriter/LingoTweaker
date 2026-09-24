@@ -1,0 +1,19 @@
+#[cfg(feature = "build_rs")]
+pub mod assets;
+pub mod builder;
+pub mod dictionary;
+pub mod error;
+pub mod loader;
+mod macros;
+pub mod mode;
+pub mod nbest;
+pub mod util;
+pub mod viterbi;
+
+pub type LinderaResult<T> = Result<T, crate::error::LinderaError>;
+
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
+pub fn get_version() -> &'static str {
+    VERSION
+}

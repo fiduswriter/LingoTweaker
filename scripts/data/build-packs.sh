@@ -59,6 +59,17 @@ else
   pack_data="$root/${CARGO_TARGET_DIR:-target}/release/pack_data"
 fi
 
+# Generated CJK dictionaries are gitignored; generate any that are missing so a
+# pack never silently ships without its tokenizer data. Set LT_SKIP_DICT_BUILD=1
+# to skip (offline / already generated).
+if [ -z "${LT_SKIP_DICT_BUILD:-}" ]; then
+  for lang in $langs; do
+    case "$lang" in
+      ja|zh) python3 "$root/tools/lindera/build-dict.py" "$lang" ;;
+    esac
+  done
+fi
+
 rm -rf "$out_dir"
 mkdir -p "$out_dir"
 # zstd sidecars are optional: without the CLI, only gzip is produced and the

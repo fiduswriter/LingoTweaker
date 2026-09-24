@@ -101,10 +101,16 @@ pub enum Lang {
     Nrd,
     /// Paraguayan Guaraní (`gn`; `gug` accepted as an alias).
     Gn,
+    /// Japanese (`ja`; default variant `ja-JP`). Segmentation/tagging go
+    /// through the patched Lindera dictionary (`data/ja/dictionary`).
+    Ja,
+    /// Chinese (`zh`; default variant `zh-CN`). Segmentation/tagging go
+    /// through the patched Lindera dictionary (`data/zh/dictionary`).
+    Zh,
 }
 
 impl Lang {
-    pub const ALL: [Lang; 35] = [
+    pub const ALL: [Lang; 37] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -140,6 +146,8 @@ impl Lang {
         Lang::No,
         Lang::Nrd,
         Lang::Gn,
+        Lang::Ja,
+        Lang::Zh,
     ];
 
     /// Parse a legacy long code such as `en-US`, `de-DE`, `es`, `fr`.
@@ -182,6 +190,8 @@ impl Lang {
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
             "gn" | "gug" => Some(Lang::Gn),
+            "ja" => Some(Lang::Ja),
+            "zh" | "zh-cn" | "zh-tw" => Some(Lang::Zh),
             _ => None,
         }
     }
@@ -223,6 +233,8 @@ impl Lang {
             Lang::No => "no",
             Lang::Nrd => "nrd",
             Lang::Gn => "gn",
+            Lang::Ja => "ja",
+            Lang::Zh => "zh",
         }
     }
 
@@ -403,6 +415,16 @@ impl Lang {
                 code: "gn",
                 long_code: "gn",
                 name: "Guaraní",
+            },
+            Lang::Ja => Language {
+                code: "ja",
+                long_code: "ja-JP",
+                name: "Japanese",
+            },
+            Lang::Zh => Language {
+                code: "zh",
+                long_code: "zh-CN",
+                name: "Chinese",
             },
         }
     }

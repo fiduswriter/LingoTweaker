@@ -124,6 +124,12 @@ const MALAYALAM = {
 const TAMIL = {
   sample: "ஏன் உன் விழிகள் என்னைப் பார்ப்பது இல்லை?",
 };
+const JAPANESE = {
+  sample: "名詞お見る。これは簡単なテストです。",
+};
+const CHINESE = {
+  sample: "这是一个测试。我已经消毁了所有文件。",
+};
 
 export const LANGUAGES = [
   { code: "en-US", pack: "en", label: "English (US)", ...ENGLISH },
@@ -163,6 +169,8 @@ export const LANGUAGES = [
   { code: "km-KH", pack: "km", label: "ខ្មែរ", ...KHMER },
   { code: "ml-IN", pack: "ml", label: "മലയാളം", ...MALAYALAM },
   { code: "ta-IN", pack: "ta", label: "தமிழ்", ...TAMIL },
+  { code: "ja-JP", pack: "ja", label: "日本語", ...JAPANESE },
+  { code: "zh-CN", pack: "zh", label: "中文", ...CHINESE },
   { code: "no", pack: "no", label: "Norsk bokmål", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", ...NORDUM },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", ...GUARANI },
