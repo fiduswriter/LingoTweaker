@@ -7523,8 +7523,8 @@
     },
     {
       "path": "nrd/dictionaries/build-report.txt",
-      "sha256": "55e467ad4a27469c276eb1159ce37f48259524baf7a969b0427a80ac142b40d8",
-      "size": 840,
+      "sha256": "9dcc92b5359c99b5f675af4b21c17b409afeac6e46f38abb1885225b18c82907",
+      "size": 1020,
       "source": {
         "kind": "generated",
         "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
@@ -7532,8 +7532,8 @@
     },
     {
       "path": "nrd/dictionaries/nrd.dict",
-      "sha256": "ddeb9a2fa2c7ab596237231225d07b755034b36efcefb3361fbb7c2151bdea05",
-      "size": 141814,
+      "sha256": "f0b9192d845d110bf3a65db8ef1618a4bee2e3a0e0f5667f33c4dd7ebf596b4a",
+      "size": 182556,
       "source": {
         "kind": "generated",
         "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
@@ -11689,5 +11689,5 @@
       }
     }
   ],
-  "generated_by": "tools/lt-sync/lt_sync.py add-local (M4 danish.dict refresh, in-place hash update)"
+  "generated_by": "tools/lt-sync/lt_sync.py add-local"
 }

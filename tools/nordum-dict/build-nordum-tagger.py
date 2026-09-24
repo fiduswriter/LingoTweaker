@@ -22,6 +22,19 @@ confidence criteria:
   different part of speech in the authoritative lexicon;
 - the conversion must be conservative (simple lowercase letter words only).
 
+Converted **verbs** are admitted as lemmas, never as source-tense forms
+(spec §4.2): the lemma is normalized to the spec infinitive ``-e`` (Swedish
+``anfalla`` → ``anfalle``, ``bakka`` → ``bakke``; vowel-final stems take
+``-e`` after the vowel like the authoritative ``bo → boe`` entries) and the
+full §4.2 paradigm is regenerated with the same ``verb_forms`` generator the
+authoritative entries use (present ``-er``, past formal ``-ede`` plus the
+accepted informal ``-a``, supine/participle ``-et``, present participle
+``-ende``, stem imperative). A source-tense form may therefore only survive
+under a non-verb tag when it genuinely is one (e.g. ``bakkar`` stays the
+plural of the noun; ``arbeidar`` the plural of the noun ``arbeide``), and a
+surface form never carries a verb tag whose ending violates §4.2 unless it
+is an irregular from the authoritative lexicon (``ha → har``).
+
 The authoritative Nordum entries always win: they are never gated.
 
 This conservative selection keeps the dictionary small and precise; recall is
@@ -186,6 +199,33 @@ CONVERSION_BLOCKLIST = frozenset(
 )
 
 
+def dict_regression_check() -> int:
+    """The built tagger dictionary must obey the spec §4.2 verb endings: no
+    ``-ar`` present except the irregular ``har`` and no ``-a`` infinitive
+    except the irregular ``ha`` (the converted-Swedish-inflection bug class
+    must never return silently)."""
+    dict_path = REPO_ROOT / "data/nrd/dictionaries/nrd.dict"
+    if not dict_path.exists():
+        print("dict regression check skipped: data/nrd/dictionaries/nrd.dict "
+              "is not built")
+        return 0
+    triples = read_export(decompile(dict_path))
+    inf_a = sorted({surface for surface, _lemma, tag in triples
+                    if tag == "ver:inf" and surface.endswith("a")})
+    prae_ar = sorted({surface for surface, _lemma, tag in triples
+                      if tag == "ver:præ" and surface.endswith("ar")})
+    failures = 0
+    if inf_a != ["ha"]:
+        failures += 1
+        print(f"FAIL dict regression: ver:inf -a forms beyond the irregular "
+              f"'ha': {inf_a[:10]}")
+    if prae_ar != ["har"]:
+        failures += 1
+        print(f"FAIL dict regression: ver:præ -ar forms beyond the irregular "
+              f"'har': {prae_ar[:10]}")
+    return failures
+
+
 def self_test() -> int:
     failures = 0
     # Danish conversion applies the orthographic rules to form and lemma.
@@ -262,6 +302,35 @@ def self_test() -> int:
             {"arbeider": {("arbeide", "ver"), ("arbeide", "sub")}}):
         failures += 1
         print("FAIL agreeing authoritative reading must be kept")
+    # Spec §4.2.3: converted verb lemmas normalize to the -e infinitive
+    # (vowel-final stems take -e after the vowel, like bo -> boe).
+    for source, expected in (("anfalla", "anfalle"), ("bakka", "bakke"),
+                             ("arbeide", "arbeide"), ("bo", "boe"),
+                             ("arbeid", None)):
+        actual = nc.nordum_infinitive(source)
+        if actual != expected:
+            failures += 1
+            print(f"FAIL infinitive normalization {source}: {actual}")
+    # Spec §4.2: converted verbs are admitted as lemmas — the full paradigm
+    # is regenerated (present -er, imperative stem, informal -a past), the
+    # source-language tense forms never keep Nordum verb tags.
+    paradigm = {form: tag for form, _lemma, tag in verb_tag_triples("bakka", set())}
+    expected_paradigm = {
+        "bakke": "ver:inf", "bakker": "ver:præ", "bakkede": "ver:dat",
+        "bakka": "ver:dat", "bakket": "ver:kor", "bakkende": "ver:lan",
+        "bakk": "ver:imp",
+    }
+    if paradigm != expected_paradigm:
+        failures += 1
+        print(f"FAIL verb paradigm regeneration: {paradigm}")
+    # The irregulars (spec §4.2.1) are authoritative-only: a converted
+    # reading with their lemma contributes nothing.
+    if verb_tag_triples("ha", {"ha"}) or verb_tag_triples("gå", {"gå"}):
+        failures += 1
+        print("FAIL authoritative verb lemmas must not be regenerated")
+    # The built dictionary obeys the §4.2 endings (permanent regression
+    # check; runs only when the dictionary is built).
+    failures += dict_regression_check()
     COGNATE_SETS = old_sets
     if failures:
         print(f"{failures} self-test failure(s)")
@@ -308,6 +377,30 @@ def authoritative_conflict(
         return False
     pos = tag.split(":")[0]
     return (lemma, pos) not in known
+
+
+def verb_paradigm_triples(infinitive: str) -> list[tuple[str, str, str]]:
+    """The spec §4.2 paradigm of one converted verb lemma: the same
+    ``verb_forms`` generator the authoritative entries use, tagged with the
+    verb role tags (present ``-er``, past formal ``-ede``, informal ``-a``,
+    supine ``-et``, present participle ``-ende``, stem imperative)."""
+    forms, _counts = nc.verb_forms({"infinitive": infinitive})
+    return [(form, infinitive, VERB_ROLES_TO_TAGS[role])
+            for role, form in forms.items()]
+
+
+def verb_tag_triples(lemma: str, verb_lemmas: set[str]) -> list[tuple[str, str, str]]:
+    """The verb-tag triples a converted verb reading contributes: the spec
+    §4.2 paradigm of the normalized infinitive, or ``[]`` when the reading
+    contributes nothing — the lemma is an irregular/authoritative verb
+    (``ha``/``være``/``gå``, spec §4.2.1; the authoritative lexicon already
+    carries its paradigm) or has no derivable spec infinitive (§4.2.3)."""
+    if lemma in verb_lemmas:
+        return []
+    infinitive = nc.nordum_infinitive(lemma)
+    if infinitive is None or infinitive in verb_lemmas:
+        return []
+    return verb_paradigm_triples(infinitive)
 
 
 def map_source_tag(tag: str) -> str:
@@ -487,7 +580,12 @@ def main() -> int:
     # gated: the word list is the definition of Nordum (spec §5).
     triples: set[tuple[str, str, str]] = set()
     form_readings: dict[str, set[tuple[str, str]]] = {}
+    # The authoritative verb lemmas (headwords + infinitives, spec §4.2.1):
+    # converted verb readings with these lemmas contribute nothing — the
+    # authoritative paradigm (including the irregulars ha/være/gå) is in.
+    verb_lemmas: set[str] = set()
     stats: Counter[str] = Counter()
+    verb_infinitives_generated: set[str] = set()
     for entry in entries:
         pos = entry.get("pos")
         headword = entry["nordum"]
@@ -514,6 +612,10 @@ def main() -> int:
                 triples.add((form, headword, f"{base_tag}:{gender}:nom"))
                 stats["nordum_noun_forms"] += 1
         elif pos == "verb":
+            verb_lemmas.add(headword)
+            infinitive = (entry.get("inflections") or {}).get("infinitive")
+            if infinitive:
+                verb_lemmas.add(infinitive)
             triples.add((headword, headword, "ver:inf"))
             stats["nordum_verb"] += 1
             forms, _counts = nc.verb_forms(entry.get("inflections") or {})
@@ -579,6 +681,32 @@ def main() -> int:
         else:
             kept = 0
             for _form, lemma, tag in converted:
+                if tag.startswith("ver:"):
+                    # spec §4.2: the converted verb is admitted as a lemma
+                    # and its paradigm is regenerated; the source-language
+                    # tense form itself never carries a Nordum verb tag.
+                    stats["converted_verb_forms_dropped"] += 1
+                    generated = verb_tag_triples(lemma, verb_lemmas)
+                    if not generated:
+                        if lemma in verb_lemmas or nc.nordum_infinitive(
+                                lemma) in verb_lemmas:
+                            stats["dropped_verb_authoritative_lemma"] += 1
+                        else:
+                            stats["dropped_verb_no_infinitive"] += 1
+                        continue
+                    for verb_form, v_lemma, v_tag in generated:
+                        if authoritative_conflict(
+                                verb_form, v_lemma, v_tag, form_readings):
+                            stats["dropped_authoritative_conflict"] += 1
+                            continue
+                        if (verb_form, v_lemma, v_tag) not in triples:
+                            stats["converted_verb_paradigm_forms"] += 1
+                        triples.add((verb_form, v_lemma, v_tag))
+                    if v_lemma not in verb_infinitives_generated:
+                        verb_infinitives_generated.add(v_lemma)
+                        stats["converted_verb_paradigms"] += 1
+                    kept += 1
+                    continue
                 if authoritative_conflict(form, lemma, tag, form_readings):
                     stats["dropped_authoritative_conflict"] += 1
                     continue

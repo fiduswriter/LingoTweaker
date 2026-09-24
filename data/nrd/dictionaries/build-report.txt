@@ -1,13 +1,18 @@
 Nordum tagger dictionary build
 authoritative entries (dictionary.json): 443
-tagger triples written: 174773
+tagger triples written: 70434
 confidence criteria: cognate gate >= 2 of 3 source spellers, cross-source agreement, authoritative lexicon wins
-  converted_kept: 173147
-  da_converting: 439037
-  da_source_triples: 516644
-  dropped_authoritative_conflict: 1368
-  dropped_cognate_gate: 64420
-  dropped_cross_source_conflict: 6830
+  converted_kept: 45797
+  converted_verb_forms_dropped: 8123
+  converted_verb_paradigm_forms: 30991
+  converted_verb_paradigms: 4444
+  da_converting: 810988
+  da_source_triples: 966817
+  dropped_authoritative_conflict: 415
+  dropped_cognate_gate: 776643
+  dropped_cross_source_conflict: 3544
+  dropped_verb_authoritative_lemma: 140
+  dropped_verb_no_infinitive: 24
   gate_words_da: 130478
   gate_words_nb: 693086
   gate_words_sv: 137414

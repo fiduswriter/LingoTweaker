@@ -186,6 +186,31 @@ def verb_stem(infinitive: str) -> str:
     return infinitive
 
 
+VOWELS = "aeiouyæøåäö"
+
+
+def nordum_infinitive(lemma: str) -> str | None:
+    """The spec §4.2.3 infinitive of a converted source-language verb lemma:
+    all regular Nordum infinitives end in ``-e``.
+
+    ``-a`` infinitives (the Swedish pattern) become ``-e`` (``anfalla`` →
+    ``anfalle``, ``bakka`` → ``bakke``); other vowel-final stems take ``-e``
+    after the vowel, exactly like the authoritative ``bo → boe`` /
+    ``få → fåe`` / ``stå → ståe`` entries; consonant-final lemmas have no
+    derivable spec infinitive (``None``: the conservative conversion drops
+    them). Irregular verbs (``ha``/``være``/``gå``, spec §4.2.1) are covered
+    by the authoritative lexicon and never reach this function — callers
+    must check the authoritative verb lemmas first.
+    """
+    if not lemma:
+        return None
+    if lemma.endswith("a"):
+        return lemma[:-1] + "e"
+    if lemma[-1] in VOWELS:
+        return lemma if lemma.endswith("e") else lemma + "e"
+    return None
+
+
 def verb_forms(inflections: dict) -> tuple[dict[str, str], dict[str, int]]:
     """The complete verb paradigm (spec §4.2). The authoritative
     ``inflections`` from ``dictionary.json`` (including the irregular verbs
