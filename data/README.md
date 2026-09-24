@@ -25,7 +25,7 @@ listed file against `manifest.json` in its test suite.
 | `en/models/` | OpenNLP model containers (token/pos/chunk) |
 
 Languages currently vendored: `ca`, `de`, `el`, `en`, `es`, `fr`, `gl`, `gn`,
-`it`, `nl`, `no`, `nrd`, `pl`, `pt`, `ro`, `sk`, `sl`.
+`it`, `nl`, `nn`, `no`, `nrd`, `pl`, `pt`, `ro`, `sk`, `sl`.
 
 ## Released data artifacts
 

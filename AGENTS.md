@@ -46,7 +46,7 @@ Offline corpus gate (CI, no Docker):
 ```sh
 cargo build --release -p lt-cli
 scripts/ci/parity.sh en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|crh|be|ru|uk|sr|ar|fa|km|ml|ta|de-x-simple   # Java-golden languages
-scripts/ci/parity.sh no|nrd|gn|lt              # tests-only gate
+scripts/ci/parity.sh no|nrd|nn|gn|lt              # tests-only gate
 ```
 
 Diffs the full per-language corpus against the pinned Java `CheckDump` goldens
@@ -71,7 +71,7 @@ suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
 (#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/0 (#15, resolved: the morfologik speller `getFrequency` now
 reproduces Java's signed-byte frequency arithmetic, so the
-frequency-weighted `MORFOLOGIK_RULE_TL` suggestions order identically); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 0/0/0 (#19, resolved); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
+frequency-weighted `MORFOLOGIK_RULE_TL` suggestions order identically); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 0/0/0 (#19, resolved); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd`, `nn` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
 runs the same tests-only gate because its legacy module references an

@@ -99,12 +99,14 @@ pub enum Lang {
     /// Nordum, the constructed pan-Scandinavian written language
     /// (<https://www.nordum.org>; `nrd` is not an assigned ISO 639-3 code).
     Nrd,
+    /// Norwegian Nynorsk (ISO 639-1 `nn`; `nno` accepted as an alias).
+    Nn,
     /// Paraguayan Guaraní (`gn`; `gug` accepted as an alias).
     Gn,
 }
 
 impl Lang {
-    pub const ALL: [Lang; 35] = [
+    pub const ALL: [Lang; 36] = [
         Lang::En,
         Lang::De,
         Lang::Es,
@@ -139,6 +141,7 @@ impl Lang {
         Lang::Ta,
         Lang::No,
         Lang::Nrd,
+        Lang::Nn,
         Lang::Gn,
     ];
 
@@ -181,6 +184,7 @@ impl Lang {
             "ta" => Some(Lang::Ta),
             "no" | "nb" => Some(Lang::No),
             "nrd" => Some(Lang::Nrd),
+            "nn" | "nno" => Some(Lang::Nn),
             "gn" | "gug" => Some(Lang::Gn),
             _ => None,
         }
@@ -222,6 +226,7 @@ impl Lang {
             Lang::Ta => "ta",
             Lang::No => "no",
             Lang::Nrd => "nrd",
+            Lang::Nn => "nn",
             Lang::Gn => "gn",
         }
     }
@@ -398,6 +403,11 @@ impl Lang {
                 code: "nrd",
                 long_code: "nrd",
                 name: "Nordum",
+            },
+            Lang::Nn => Language {
+                code: "nn",
+                long_code: "nn",
+                name: "Norwegian (Nynorsk)",
             },
             Lang::Gn => Language {
                 code: "gn",

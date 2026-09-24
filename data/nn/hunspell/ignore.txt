@@ -1,0 +1,2 @@
+# Nynorsk (nn) — words the speller must accept although they are not in
+# nn_NO.dic (proper nouns, domain terms, hand-authored additions).

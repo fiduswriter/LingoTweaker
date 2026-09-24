@@ -45,6 +45,7 @@ enum LangArg {
     Ta,
     No,
     Nrd,
+    Nn,
     Gn,
 }
 
@@ -85,6 +86,7 @@ impl From<LangArg> for Lang {
             LangArg::Ta => Lang::Ta,
             LangArg::No => Lang::No,
             LangArg::Nrd => Lang::Nrd,
+            LangArg::Nn => Lang::Nn,
             LangArg::Gn => Lang::Gn,
         }
     }

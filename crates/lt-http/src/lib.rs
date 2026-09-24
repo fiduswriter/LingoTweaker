@@ -52,6 +52,7 @@ impl AppState {
             ("pt-BR", Some("pt-BR")),
             ("no", None),
             ("nrd", None),
+            ("nn", None),
             ("gn", None),
         ] {
             let Some(lang) = Lang::from_long_code(long_code) else {
@@ -591,7 +592,7 @@ mod tests {
         let (status, value) = send(router, "GET", "/v2/languages", "").await;
         assert_eq!(status, StatusCode::OK);
         let arr = value.as_array().unwrap();
-        assert_eq!(arr.len(), 35);
+        assert_eq!(arr.len(), 36);
         assert_eq!(arr[0]["longCode"], "en-US");
         assert!(arr.iter().any(|l| l["longCode"] == "it"));
         assert!(arr.iter().any(|l| l["longCode"] == "pt"));
@@ -618,6 +619,7 @@ mod tests {
         assert!(arr.iter().any(|l| l["longCode"] == "sr-RS"));
         assert!(arr.iter().any(|l| l["longCode"] == "no"));
         assert!(arr.iter().any(|l| l["longCode"] == "nrd"));
+        assert!(arr.iter().any(|l| l["longCode"] == "nn"));
         assert!(arr.iter().any(|l| l["longCode"] == "gn"));
         assert!(arr.iter().any(|l| l["longCode"] == "ar"));
         assert!(arr.iter().any(|l| l["longCode"] == "fa-IR"));

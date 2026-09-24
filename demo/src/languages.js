@@ -41,6 +41,11 @@ const NORDUM = {
     "Det er ein bra dag. Eg backa bilen. Eg har en datamaskin. " +
     "Mellom huset og skogen arbetar halvtreds personer. Norsk og Dansk er bra språk.",
 };
+const NYNORSK = {
+  sample:
+    "Eg veit at han kjem ikkje i dag. Jeg har også ein bil. " +
+    "Han snakker om det i kirken. Dette er min bilen.",
+};
 const GUARANI = {
   sample:
     "Guarani ñe'ẽ ha'e peteĩ ñe'ẽ porã. Che sy oguata tape pukúpe ha aga oñe'ẽ. " +
@@ -165,6 +170,7 @@ export const LANGUAGES = [
   { code: "ta-IN", pack: "ta", label: "தமிழ்", ...TAMIL },
   { code: "no", pack: "no", label: "Norsk bokmål", ...NORWEGIAN },
   { code: "nrd", pack: "nrd", label: "Nordum", ...NORDUM },
+  { code: "nn", pack: "nn", label: "Norsk nynorsk", ...NYNORSK },
   { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", ...GUARANI },
 ];
 

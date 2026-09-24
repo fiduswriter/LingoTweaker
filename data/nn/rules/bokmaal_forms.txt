@@ -1,0 +1,73 @@
+# Nynorsk (nn) — Bokmål-forms in Nynorsk text (NN_BOKMAAL_FORMS).
+#
+# Only unambiguous Bokmål forms: every wrong form is rejected by the vendored
+# Nynorsk dictionary (data/nn/hunspell/nn_NO.dic) and every suggestion is
+# accepted by it. Words valid in both written standards (hun, også, dra,
+# være, ble, derfor, ... — all accepted by nn_NO.dic) must NOT be listed;
+# the tools/nn-dict/ scripts derive and check the pairs:
+#   python3 tools/nn-dict/derive_bokmaal_forms.py --nb data/no/hunspell/nb_NO.dic --nn data/nn/hunspell/nn_NO.dic
+#   python3 tools/nn-dict/check_pairs.py data/nn/rules/bokmaal_forms.txt
+jeg=eg
+ikke=ikkje
+noen=nokon|nokre
+noe=noko
+hver=kvar
+hvert=kvart
+hvilken=kva
+hvilket=kva
+hvilke=kva
+hvordan=korleis
+hva=kva
+hvem=kven
+hvorfor=kvifor
+hvor=kor
+dere=dykk
+deres=dykkar|deira
+hennes=hennar
+selv=sjølv
+sammen=saman
+samme=same
+mer=meir
+flere=fleire
+hjem=heim
+hjemme=heime
+siden=sidan
+fremover=framover
+fremdeles=framleis
+fremtid=framtid
+annerledes=annleis
+egentlig=eigentleg
+overhode=overhovud
+syv=sju
+tyve=tjue
+penger=pengar
+snakker=snakkar
+bedre=betre
+elsker=elskar
+holder=held
+holdt=heldt
+sier=seier
+spørre=spørje
+fortelle=fortelje
+forteller=fortel
+lykkes=lykkast
+kommet=kome
+muligheten=moglegheita
+muligheter=moglegheiter
+mennesker=menneske
+øyeblikk=augeblikk
+øyeblikket=augeblikket
+gutter=gutar
+gutene=gutane
+dager=dagar
+dagene=dagane
+kveldene=kveldane
+morgen=morgon
+morgenen=morgonen
+sommer=sommar
+sommeren=sommaren
+høsten=hausten
+kirken=kyrkja
+mandag=måndag
+tirsdag=tysdag
+lørdag=laurdag
