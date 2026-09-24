@@ -220,15 +220,19 @@ echo "== twine upload (only files not already on PyPI)"
 # Upload one file at a time, skip anything already on the index (so unchanged
 # languages are never re-uploaded), and back off-and-retry transient failures
 # (PyPI's new-project limit and burst uploads return HTTP 429) so the step is
-# resumable.
+# resumable. A package that exhausts its retries does NOT abort the run: the
+# loop continues with the next package and failed ones are retried in later
+# passes, because the new-project limit is account-wide and a package that
+# already got through does not consume it again.
 upload_one() {
   f="$1"
   attempt=1
-  while [ "$attempt" -le 6 ]; do
+  while [ "$attempt" -le 8 ]; do
     if "$VENV/bin/twine" upload --skip-existing --disable-progress-bar "$f"; then
       return 0
     fi
-    delay=$((attempt * 20))
+    delay=$((attempt * 60))
+    [ "$delay" -gt 300 ] && delay=300
     echo "== upload failed for $(basename "$f") (attempt $attempt); retrying in ${delay}s" >&2
     sleep "$delay"
     attempt=$((attempt + 1))
@@ -253,6 +257,7 @@ file_ver() {
 
 uploaded=0
 skipped=0
+failed_files=""
 for f in "$out"/dist/*.whl "$out"/dist/*.tar.gz; do
   [ -e "$f" ] || continue
   name="$(basename "$f")"
@@ -264,8 +269,44 @@ for f in "$out"/dist/*.whl "$out"/dist/*.tar.gz; do
     continue
   fi
   echo "== upload $pkg $ver ($name)"
-  upload_one "$f"
-  uploaded=$((uploaded + 1))
+  if upload_one "$f"; then
+    uploaded=$((uploaded + 1))
+  else
+    failed_files="$failed_files $f"
+  fi
   sleep 3
 done
+
+# Up to 3 passes over whatever failed: each pass re-checks the PyPI index
+# first (an earlier attempt may have published it after all) and waits
+# between passes so the account-wide new-project rate limit can recover.
+pass=1
+while [ -n "$failed_files" ] && [ "$pass" -le 3 ]; do
+  echo "== retry pass $pass over failed uploads (waiting 120s first)"
+  sleep 120
+  remaining=""
+  for f in $failed_files; do
+    name="$(basename "$f")"
+    pkg="$(file_pkg "$name")"
+    if on_pypi "$pkg" "$name"; then
+      skipped=$((skipped + 1))
+      echo "== up to date: $name"
+      continue
+    fi
+    if upload_one "$f"; then
+      uploaded=$((uploaded + 1))
+      sleep 3
+    else
+      remaining="$remaining $f"
+    fi
+  done
+  failed_files="$remaining"
+  pass=$((pass + 1))
+done
+
 echo "== PyPI data publish complete ($uploaded uploaded, $skipped already present)"
+if [ -n "$failed_files" ]; then
+  echo "== FAILED uploads (re-run this workflow to resume):" >&2
+  for f in $failed_files; do echo "  $(basename "$f")" >&2; done
+  exit 1
+fi
