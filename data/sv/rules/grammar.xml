@@ -437,6 +437,40 @@ Exempelvis "ta självmord" vilket antingen heter:
       <message>Man ångrar inte "på" något utan man ångrar något. Skriv därför inte "\1 \2 \3" utan skriv <suggestion>\1 \3</suggestion>.</message>
       <example correction="ångrade att">Hon <marker>ångrade på att</marker> hon suttit ensam hemma den fredagen.</example>
     </rule>
+    <!-- Owner-added (docs/differences.md #17): weekday/date agreement,
+         the Swedish localization of AbstractDateCheckFilter (the filter
+         class keeps the upstream-compatible Java name; upstream sv has no
+         filter classes yet). -->
+    <rulegroup id="VECKODAG_DATUM" name="Veckodag och datum hör ihop">
+      <!-- \1 = veckodag, \2 = "den"/"det", \3 = dag i månaden, \4 = månad,
+           \5 = år. Filtret jämför veckodagen med veckodagen i datumet
+           ("\3 \4" resp. "\3 \4 \5"). Owner-added, docs/differences.md #17. -->
+      <rule default="off" id="VECKODAG_DATUM_MED_AR" name="Veckodag + datum med år">
+        <pattern case_sensitive="no">
+          <token regexp="yes">måndags?|tisdags?|onsdags?|torsdags?|fredags?|lördags?|söndags?</token>
+          <token regexp="yes">den|de[t]?</token>
+          <token regexp="yes">\d\d?</token>
+          <token regexp="yes">januaris?|februaris?|mars'?|aprils?|majs?|junis?|julis?|augustis?|septembers?|oktobers?|novembers?|decembers?</token>
+          <token regexp="yes">[12]\d\d\d</token>
+        </pattern>
+        <filter class="org.languagetool.rules.sv.DateCheckFilter" args="month:\4 day:\3 year:\5 weekDay:\1"/>
+        <message>Datumet «\2 \3 \4 \5» är inte en {day} utan en {realDay}.</message>
+        <example correction="">Koncerten är <marker>onsdag den 5 mars 2014</marker>.</example>
+        <example>Koncerten är onsdag den 5 mars 2025.</example>
+      </rule>
+      <rule default="off" id="VECKODAG_DATUM_UTAN_AR" name="Veckodag + datum utan år">
+        <pattern case_sensitive="no">
+          <token regexp="yes">måndags?|tisdags?|onsdags?|torsdags?|fredags?|lördags?|söndags?</token>
+          <token regexp="yes">den|de[t]?</token>
+          <token regexp="yes">\d\d?</token>
+          <token regexp="yes">januaris?|februaris?|mars'?|aprils?|majs?|junis?|julis?|augustis?|septembers?|oktobers?|novembers?|decembers?</token>
+        </pattern>
+        <filter class="org.languagetool.rules.sv.DateCheckFilter" args="month:\4 day:\3 weekDay:\1"/>
+        <message>Datumet «\2 \3 \4» är inte en {day} utan en {realDay}.</message>
+        <example correction="">Koncerten är <marker>onsdag den 5 mars</marker>.</example>
+        <example>Koncerten är onsdag den 5 mars 2025.</example>
+      </rule>
+    </rulegroup>
   </category>
   <category id="SSK_8" name="Stor eller liten bokstav">
     <rule id="VECKODAGARS_NAMN" name="Veckodagars namn">

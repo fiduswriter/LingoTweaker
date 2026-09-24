@@ -69,7 +69,9 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
 
 /// Stage state: active XML rule count (35; 29 original + 6 rules mined from
 /// SALDO for the "Ord som ofta förväxlas" category, see
-/// `swedish_saldo_confusables`), no XML-referenced filters and
+/// `swedish_saldo_confusables`; the 2 `VECKODAG_DATUM` rules are
+/// default="off", see `swedish_date_check`), no unmapped XML-referenced
+/// filter classes (`DateCheckFilter` is registered) and
 /// `compile_failures()` = 0.
 #[test]
 fn swedish_engine_state() {
@@ -248,6 +250,90 @@ fn swedish_saldo_confusables() {
             .matches
             .iter()
             .filter(|m| rules.contains(&m.rule_id.as_str()))
+            .collect();
+        assert!(matches.is_empty(), "{text}: {matches:?}");
+    }
+}
+
+/// The default-off `VECKODAG_DATUM` rulegroup (`grammar.xml`, owner-added,
+/// docs/differences.md #17): the first `<filter>` rules of the Swedish
+/// module. `org.languagetool.rules.sv.DateCheckFilter` (a hand-written
+/// localization of `AbstractDateCheckFilter`) rejects matches where the
+/// weekday agrees with the date and rewrites the message with the real day.
+/// The engine pins "today" like the Java probe harness (no year argument →
+/// the current year).
+#[test]
+fn swedish_date_check() {
+    let _guard = engine_guard();
+    let data = data_dir().expect("vendored data");
+    let rules = ["VECKODAG_DATUM_MED_AR", "VECKODAG_DATUM_UTAN_AR"];
+    let builder = || {
+        let options = EngineOptions {
+            enabled_rules: rules.iter().map(|s| s.to_string()).collect(),
+            enabled_only: true,
+            ..Default::default()
+        };
+        Engine::builder(Lang::Sv)
+            .ok()?
+            .data_dir(data.clone())
+            .options(options)
+            .today(2026, 9, 21)
+            .build()
+            .ok()
+    };
+    let Some(sv) = builder() else {
+        eprintln!("skipping: engine unavailable");
+        return;
+    };
+    // (wrong sentence, expected (rule, sub_id), message)
+    let cases: &[(&str, &str, &str)] = &[
+        (
+            "tisdag den 2 maj 2025",
+            "VECKODAG_DATUM_MED_AR",
+            "Datumet «den 2 maj 2025» är inte en tisdag utan en fredag.",
+        ),
+        (
+            "tisdag det 2 maj 2025",
+            "VECKODAG_DATUM_MED_AR",
+            "Datumet «det 2 maj 2025» är inte en tisdag utan en fredag.",
+        ),
+        (
+            "tisdag den 5 januari 2026",
+            "VECKODAG_DATUM_MED_AR",
+            "Datumet «den 5 januari 2026» är inte en tisdag utan en måndag.",
+        ),
+        (
+            "tisdag den 2 maj",
+            "VECKODAG_DATUM_UTAN_AR",
+            "Datumet «den 2 maj» är inte en tisdag utan en lördag.",
+        ),
+    ];
+    for (text, rule, message) in cases {
+        let matches: Vec<lt::Match> = sv
+            .check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == *rule)
+            .collect();
+        assert_eq!(matches.len(), 1, "{rule}: {text}");
+        assert_eq!(&matches[0].message, message, "{text}");
+    }
+    // correct weekday/date pairs: the with-year rule never fires. The
+    // no-year rule reads the pinned "today" year and may still fire on a
+    // dated phrase (Java behaves identically), so only MED_AR is asserted.
+    let corrections = [
+        "fredag den 2 maj 2025",
+        "onsdag den 5 mars 2014",
+        "onsdag den 5 mars 2025",
+        "lördag den 1 augusti 2026",
+    ];
+    for text in corrections {
+        let result = sv.check(text).expect("check");
+        let matches: Vec<&lt::Match> = result
+            .matches
+            .iter()
+            .filter(|m| m.rule_id == "VECKODAG_DATUM_MED_AR")
             .collect();
         assert!(matches.is_empty(), "{text}: {matches:?}");
     }

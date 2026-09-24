@@ -127,7 +127,12 @@ date-filter rules either).
   `SwedishTagger`/`SwedishSynthesizer`, hybrid disambiguator, `SV_COMPOUNDS`
   and `SV_WORD_COHERENCY` are at parity. The owner-added SALDO-derived
   confusable-word rules and coherency pairs (`docs/differences.md` #16) fire
-  on none of the 45 corpus lines, so the gate needs no allowance.
+  on none of the 45 corpus lines, so the gate needs no allowance; the same
+  holds for the owner-added default-off `VECKODAG_DATUM` `<filter>` rules —
+  the sv module's first filter class
+  `org.languagetool.rules.sv.DateCheckFilter` (`docs/differences.md` #17),
+  whose `today` is pinned to the sv capture date like the other date
+  filters.
   is is exactly 0/0/0 (D-228; Icelandic has no tagger/synthesizer/
   disambiguator, `HunspellNoSuggestionRule` emits no suggestions and
   `compile_failures()` is empty).

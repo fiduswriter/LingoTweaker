@@ -10764,14 +10764,14 @@
     },
     {
       "path": "sv/rules/grammar.xml",
-      "sha256": "8ce482c5e3adadc0807f023e42e55db374db0acfc44f078e1c2e838ae109ab68",
-      "size": 24878,
+      "sha256": "49af969afcbf70709452433de70c776ebf919d657905c6aabfd6e75fa943508b",
+      "size": 27213,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false,
-        "note": "Owner-added CAT4 confusable-word rules (6 rules: svara/sv\u00e4ra, brygga/bygga, anta/inta), candidate pairs mined from SALDO (Spr\u00e5kbanken, CC BY 4.0, https://spraakbanken.gu.se/eng/resource/saldo) and hand-curated; no SALDO data vendored; see docs/differences.md #16"
+        "note": "Owner-added CAT4 confusable-word rules (6 rules: svara/sv\u00e4ra, brygga/bygga, anta/inta), candidate pairs mined from SALDO (Spr\u00e5kbanken, CC BY 4.0, https://spraakbanken.gu.se/eng/resource/saldo) and hand-curated; no SALDO data vendored; see docs/differences.md #16. Owner-added default-off CAT7 VECKODAG_DATUM rulegroup (2 rules) over the first <filter> classes of the sv module (DateCheckFilter, a Swedish localization of upstream's AbstractDateCheckFilter, hand-written from the LGPL upstream base class); see docs/differences.md #17"
       }
     },
     {

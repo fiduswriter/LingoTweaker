@@ -11,6 +11,7 @@ use std::sync::Arc;
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 use lt_pattern::Synthesizer;
 
+pub mod filters;
 pub mod spelling;
 
 /// `SwedishHybridDisambiguator`: `XmlRuleDisambiguator` then the

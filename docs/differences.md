@@ -583,3 +583,65 @@ Pinned by `crates/lt/tests/swedish.rs::swedish_saldo_confusables` (7 firing +
 `swedish_word_coherency_saldo` (4 firing + 4 correct cases);
 `data/manifest.json` records the modified `sv/rules/grammar.xml` /
 `sv/rules/coherency.txt` sha256/size and the SALDO provenance.
+
+## 17. Swedish `VECKODAG_DATUM`: the first `<filter>` rules of the `sv` module (owner-added)
+
+Like #8/#14/#15/#16, an **added rule** batch (intentional, owner-approved,
+D-310: Rust more correct — it reports real weekday/date contradictions the
+legacy `sv` module does not check at all). Two `default="off"` rules in a new
+CAT7 ("Kontamination") rulegroup `VECKODAG_DATUM` of
+`data/sv/rules/grammar.xml`: `VECKODAG_DATUM_MED_AR` (weekday + "den"/"det" +
+day + month + year) and `VECKODAG_DATUM_UTAN_AR` (without year). This is the
+first use of `<filter>` in the Swedish rule data — the module's first filter
+class, `org.languagetool.rules.sv.DateCheckFilter` (the class name string
+keeps the XML upstream-compatible, like `org.languagetool.rules.eo/pl/ru/.../
+DateCheckFilter`), implemented in Rust (`crates/lt/src/sv/filters.rs`,
+registered in `Pipeline::new_swedish` before the XML landed — an unmapped
+filter class is a skipped rule) as a hand-written Swedish localization of
+upstream's LGPL `AbstractDateCheckFilter` (weekday prefix maps
+mån=2…sön=1 `Calendar` order, Swedish month prefixes jan…dec; the day
+argument may carry the written article "den"/"det", which the filter strips).
+On disagreement the filter accepts the match and rewrites `{day}` (claimed
+day) / `{realDay}` (weekday of the date) in the message, exactly like the
+Esperanto/Polish/Russian localizations; missing-year matches resolve to the
+pinned "today" year (`PARITY_TODAY` for the gate, `EngineBuilder::today` for
+tests).
+
+Semantics were cross-validated against the pinned Java checkout
+(7bd1f99b849b) by temporarily dropping an equivalent Java
+`org.languagetool.rules.sv.DateCheckFilter` (subclass of
+`AbstractDateCheckFilter`) plus the same XML into the pinned `sv` module and
+running the `scripts/oracle/sv` probe infrastructure in Docker: match
+sets, offsets and messages are identical on the whole probe matrix
+(`tisdag den 2 maj 2025` → fredag, `tisdag det 2 maj 2025`, `tisdag den 5
+januari 2026` → måndag, the no-year variants, and the correct pairs
+`fredag den 2 maj 2025` / `onsdag den 5 mars 2014` / `lördag den 1 augusti
+2026` stay clean for the with-year rule). The Java side was restored to
+pristine afterwards; no Java artifacts are vendored.
+
+Both rules are `default="off"`: with a year the with-year rule is exact, but
+the no-year rule interprets the date against the current year, so any dated
+phrase from a different year is flagged at random (Java's own
+`AbstractDateCheckFilter` users accept this for default-on rules; for an
+owner-added rule default-off is the conservative choice). The 45-line golden
+corpus contains no weekday+date phrase, so the sv gate stays at 0 only-Java /
+0 only-Rust / 0 field diffs with **no allowances** (the rules are off at the
+default level and the corpus would not trigger them regardless); the
+engine-state pin in `crates/lt/tests/swedish.rs::swedish_engine_state`
+stays 35 (off-by-default rules are not active), with
+`skipped_counts().filters = 0` now proving the filter class is registered.
+
+Reproduce:
+
+```sh
+cargo run -p lt-cli -- check -l sv --enable-only --enable-rule VECKODAG_DATUM_MED_AR \
+  --today 2026-09-21 --json "tisdag den 2 maj 2025"   # fires, "… inte en tisdag utan en fredag."
+cargo run -p lt-cli -- check -l sv --enable-only --enable-rule VECKODAG_DATUM_MED_AR \
+  --today 2026-09-21 --json "fredag den 2 maj 2025"   # stays clean
+scripts/ci/parity.sh sv    # PARITY OK, no allowances
+```
+
+Pinned by `crates/lt/tests/swedish.rs::swedish_date_check` (4 firing + 4
+correct-sentence cases over both rules, today pinned to 2026-09-21 like the
+gate); `data/manifest.json` records the modified `sv/rules/grammar.xml`
+sha256/size and the provenance.

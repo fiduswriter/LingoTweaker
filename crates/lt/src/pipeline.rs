@@ -4351,8 +4351,9 @@ impl Pipeline {
             .map_err(|e| lt_core::CoreError::Parse("unification".into(), e))?;
         mark("grammar");
 
-        // Swedish references no `<filter>` classes from its rule XML.
-        let filters = lt_pattern::FilterRegistry::builder().build();
+        // XML-referenced filter classes: `DateCheckFilter`
+        // (`VECKODAG_DATUM`; owner-added rule, see docs/differences.md #17).
+        let filters = crate::sv::filters::swedish_filter_registry(today.unwrap_or_else(Ymd::today));
         let (compiled_rules, skipped, compile_failures) =
             compile_rules(&grammar, &filters, enabled_rules);
         mark("rules");
