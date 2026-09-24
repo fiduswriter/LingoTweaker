@@ -55,16 +55,23 @@ runs the affected languages per push/PR (all gated languages when shared code
 changed, no language job for docs-only changes). de/es/it/nl/ca/ro/sk/sl/el must
 be 0 only-Java / 0 only-Rust / 0 field diffs; en allows exactly the one documented
 `ADVERB_VERB_ADVERB_REPETITION` field diff, fr the documented divergences
-#3/#4/#5, pt #6 and gl the documented `HUNSPELL_RULE` = 2 suggestion field
-diffs (#7: same match set; the native hunspell suggestion engine including
-the n-gram fallback is ported, the residue is the upstream wall-clock timer
-boundary); pl the documented known fidelity gaps
-#9 (4 only-Java / 5 only-Rust / 0 field diffs, the `<unify negate="yes">`
-agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
-the PCON_VERB participle rule); da is at 0/0/0 (#10, resolved by the
+#3/#4/#5 and pt #6; gl is at 0/0/0 (the former `HUNSPELL_RULE` = 2 suggestion
+field diffs #7, resolved by the deterministic work-budget emulation of the
+native hunspell suggestion timers: work is counted in affix-entry trials —
+MAP-generated candidates weighted at a quarter, their measured per-check
+trial cost being ~8x lower — with the per-pass `WORK_SUGGESTION` budget
+checked at upstream's clock-check positions, so the two Galician words now
+cut exactly where the pinned run's wall clocks did); pl is at 0/0/0 (the
+former known fidelity gaps #9, resolved by the
+`<unify>` engine fixes: negated/unified `<unify>` matching incl. per-token
+reading sets for `max`-run elements, antipattern matching with the unifier and
+marker spans, the `<match no="N">lemma</match>` disambiguation filter and the
+Java possessive-quantifier regex semantics); da is at 0/0/0 (#10, resolved by the
 suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
-(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/5 (#15, docs/differences.md #10 suggestion ordering); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #12); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
+(#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/0 (#15, resolved: the morfologik speller `getFrequency` now
+reproduces Java's signed-byte frequency arithmetic, so the
+frequency-weighted `MORFOLOGIK_RULE_TL` suggestions order identically); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #12); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
 runs the same tests-only gate because its legacy module references an

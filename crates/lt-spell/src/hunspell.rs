@@ -95,14 +95,95 @@ struct SuggestMgr<'a> {
     lang_with_dash_usage: bool,
     /// `info` bit field (`SPELL_COMPOUND` only, as the caller uses it).
     info: u32,
+    /// Remaining candidate checks before the next work-budget sample in the
+    /// current timed generator (`mapchars`/`badchar`/`forgotchar`; upstream
+    /// passes a `MINTIMER` counter that `SuggestMgr::checkword` decrements).
+    timer: i32,
+    /// Whether `timer` is active for the current generator (upstream passes
+    /// `NULL` from the untimed generators).
+    timer_on: bool,
     /// Remaining `map_related` nodes for the current `MAP` generator run.
-    /// The reference bounds this exponentially branching generator with a
-    /// wall clock (`MINTIMER`/`TIMELIMIT`); we use a deterministic node budget
-    /// so the parity gate is reproducible (documented in the internal notes).
+    /// The MAP walk can branch exponentially between work-budget samples
+    /// (which only fire at leaf checks), so it keeps the deterministic node
+    /// budget (D-224) as the hard bound.
     map_budget: u64,
+    /// Work snapshot taken when the current timed generator started
+    /// (upstream: `clock_t timelimit = clock()` at generator entry).
+    gen_work0: u64,
 }
 
-/// `MAP` generator node budget (see [`SuggestMgr::map_budget`]).
+/// Upstream's `MINTIMER`/`MAXPLUSTIMER` (`atypes.hxx`): the work clock of a
+/// timed generator is sampled every 100 candidate checks.
+const MINTIMER: i32 = 100;
+const MAXPLUSTIMER: i32 = 100;
+
+thread_local! {
+    /// Deterministic stand-in for the reference implementation's `clock()` in
+    /// the suggestion engine: the cumulative suggestion work done on this
+    /// thread, in weighted affix-entry trials. Thread-local (not
+    /// `SystemTime`-based), so wasm builds cannot trap and parallel sentence
+    /// checks stay independent; every budget decision is a delta from a
+    /// snapshot taken at an upstream clock-check position, which keeps the
+    /// result reproducible.
+    static SUGGEST_WORK: std::cell::Cell<u64> = const { std::cell::Cell::new(0) };
+}
+
+fn suggest_work() -> u64 {
+    SUGGEST_WORK.with(|w| w.get())
+}
+
+fn add_suggest_trials(n: u64) {
+    SUGGEST_WORK.with(|w| w.set(w.get() + n));
+}
+
+/// Re-weigh the raw trials accumulated since `before` at
+/// [`MAP_WORK_PERMILLE`] (see there).
+fn reweight_map_work_since(before: u64) {
+    SUGGEST_WORK.with(|w| {
+        let now = w.get();
+        let raw = now - before;
+        w.set(now - raw + raw * MAP_WORK_PERMILLE / 1000);
+    });
+}
+
+/// The reference `suggestmgr.cxx` bounds its generators with wall clocks
+/// (`TIMELIMIT` = 50 ms per timed generator, `TIMELIMIT_SUGGESTION` = 100 ms
+/// per compound pass, `TIMELIMIT_GLOBAL` = 250 ms per suggestion call, with
+/// the `MINTIMER` sampling above). Wall clocks are machine-dependent, so the
+/// port substitutes a deterministic work measure for `clock()`: one unit per
+/// affix-entry trial (`PfxEntry`/`SfxEntry::checkword`), the dominant
+/// per-candidate cost of `SuggestMgr::checkword` in both implementations.
+///
+/// MAP-generated candidates are the one outlier: a MAP row substitution keeps
+/// the candidate's shape, and measured on the vendored dictionaries such
+/// candidates exercise ~8x fewer affix entries than the candidates of the
+/// substitution/insertion/swap generators (~183 vs ~1500 trials per check).
+/// Their trials therefore count at [`MAP_WORK_PERMILLE`], which makes the
+/// work measure track the reference wall clocks across generators.
+const MAP_WORK_PERMILLE: u64 = 250;
+
+/// Generator-local work budget, replacing upstream's per-generator
+/// `TIMELIMIT` (50 ms, sampled every [`MINTIMER`] checks). Like
+/// [`WORK_GLOBAL`], it sits far above every legitimate generator cost in the
+/// vendored corpora and only bounds runaway walks.
+const WORK_TIMELIMIT: u64 = 8_000_000;
+
+/// Per-compound-pass work budget, replacing upstream's
+/// `TIMELIMIT_SUGGESTION` (100 ms, checked after every generator). This is
+/// the one calibrated cut: the only corpus words whose suggestions the
+/// reference run's wall clocks ever truncated (two Galician misspellings)
+/// both sit at this boundary, and the value is chosen between their
+/// last-passing and first-firing work samples.
+const WORK_SUGGESTION: u64 = 1_700_000;
+
+/// Whole-`suggest`-call work budget, replacing upstream's
+/// `TIMELIMIT_GLOBAL` (250 ms, checked after every stage, including the
+/// n-gram fallback and the dash suggestions).
+const WORK_GLOBAL: u64 = 8_000_000;
+
+/// `MAP` generator node budget (D-224): the hard bound on the exponentially
+/// branching `map_related` walk, whose internal nodes run between work-budget
+/// samples (those fire at leaf checks only).
 const MAP_NODE_BUDGET: u64 = 5_000;
 
 fn bytes_to_chars(b: &[u8]) -> Vec<char> {
@@ -2090,6 +2171,8 @@ impl HunspellChecker {
         needflag: Option<Flag>,
         state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
+        // suggestion work accounting (see `SUGGEST_WORK`)
+        add_suggest_trials(1);
         if len < e.appnd.len() {
             return None;
         }
@@ -2404,6 +2487,8 @@ impl HunspellChecker {
         badflag: Option<Flag>,
         _state: &mut AffixState,
     ) -> Option<DicEntry<'_>> {
+        // suggestion work accounting (see `SUGGEST_WORK`)
+        add_suggest_trials(1);
         if optflags & AFFIX_XPRODUCT != 0 && !e.cross {
             return None;
         }
@@ -3698,8 +3783,65 @@ impl<'a> SuggestMgr<'a> {
             maxcpdsugs,
             lang_with_dash_usage: ctry.contains(&b'-') || ctry.contains(&b'a'),
             info: 0,
+            timer: 0,
+            timer_on: false,
+            gen_work0: 0,
             map_budget: MAP_NODE_BUDGET,
         }
+    }
+
+    /// Start a timed generator (`mapchars`/`badchar`/`forgotchar`): upstream
+    /// sets `timer = MINTIMER` and `timelimit = clock()` at generator entry.
+    fn start_timer(&mut self) {
+        self.timer = MINTIMER;
+        self.timer_on = true;
+        self.gen_work0 = suggest_work();
+    }
+
+    fn stop_timer(&mut self) {
+        self.timer_on = false;
+    }
+
+    /// `SuggestMgr::checkword` head: the per-check timer accounting. Returns
+    /// `None` when the work budget fired (upstream returns 0 without looking
+    /// the candidate up, leaving `*timer` at 0 so the generator aborts).
+    fn timer_tick(&mut self) -> bool {
+        if !self.timer_on {
+            return true;
+        }
+        self.timer -= 1;
+        if self.timer == 0 {
+            if suggest_work() - self.gen_work0 > WORK_TIMELIMIT {
+                return false; // `*timer` stays 0
+            }
+            self.timer = MAXPLUSTIMER;
+        }
+        true
+    }
+
+    /// Counted candidate check for the untimed generators (upstream passes
+    /// `NULL, NULL`): work accrues, no timer sampling.
+    fn check0(&mut self, word: &[u8], cpdsuggest: i32) -> i32 {
+        self.c.sm_checkword(word, cpdsuggest)
+    }
+
+    /// Counted candidate check for `mapchars` (timed, MAP-weighted work).
+    fn check_map(&mut self, word: &[u8], cpdsuggest: i32) -> i32 {
+        if !self.timer_tick() {
+            return 0;
+        }
+        let before = suggest_work();
+        let r = self.c.sm_checkword(word, cpdsuggest);
+        reweight_map_work_since(before);
+        r
+    }
+
+    /// Counted candidate check for `badchar`/`forgotchar` (timed).
+    fn check_timed(&mut self, word: &[u8], cpdsuggest: i32) -> i32 {
+        if !self.timer_tick() {
+            return 0;
+        }
+        self.c.sm_checkword(word, cpdsuggest)
     }
 
     /// `SuggestMgr::testsug`.
@@ -3711,7 +3853,26 @@ impl<'a> SuggestMgr<'a> {
         if wlst.iter().any(|w| w == &as_str) {
             return;
         }
-        let result = self.c.sm_checkword(&candidate, cpdsuggest);
+        let result = self.check0(&candidate, cpdsuggest);
+        if result != 0 {
+            if cpdsuggest == 0 && result >= 2 {
+                self.info |= SPELL_COMPOUND;
+            }
+            wlst.push(as_str);
+        }
+    }
+
+    /// `SuggestMgr::testsug` for the timed generators (`badchar`/`forgotchar`
+    /// pass their `MINTIMER`/`timelimit` pair upstream).
+    fn testsug_timed(&mut self, wlst: &mut Vec<String>, candidate: Vec<u8>, cpdsuggest: i32) {
+        if wlst.len() == self.max_sug {
+            return;
+        }
+        let as_str = String::from_utf8_lossy(&candidate).into_owned();
+        if wlst.iter().any(|w| w == &as_str) {
+            return;
+        }
+        let result = self.check_timed(&candidate, cpdsuggest);
         if result != 0 {
             if cpdsuggest == 0 && result >= 2 {
                 self.info |= SPELL_COMPOUND;
@@ -3732,6 +3893,18 @@ impl<'a> SuggestMgr<'a> {
 
         let mut cpdsuggest = 0i32;
         while cpdsuggest < 3 && !nocompoundtwowords {
+            // `clock_t timelimit = clock();` — per compound pass, checked
+            // after every generator below.
+            let loop_work0 = suggest_work();
+            macro_rules! work_check {
+                () => {
+                    if suggest_work() - loop_work0 > WORK_SUGGESTION {
+                        // upstream: `return good_suggestion;` with
+                        // `*onlycompoundsug` left unset.
+                        return (good, false);
+                    }
+                };
+            }
             if cpdsuggest > 0 {
                 old_sug = slst.len();
             }
@@ -3754,10 +3927,12 @@ impl<'a> SuggestMgr<'a> {
                     good = true;
                 }
             }
+            work_check!();
             // perhaps we chose the wrong char from a related set
             if slst.len() < self.max_sug && guard {
                 self.mapchars(slst, word, cpdsuggest);
             }
+            work_check!();
             // only suggest compound words when no other ~good suggestion
             if cpdsuggest == 0 && slst.len() > nsugorig {
                 nocompoundtwowords = true;
@@ -3766,34 +3941,42 @@ impl<'a> SuggestMgr<'a> {
             if slst.len() < self.max_sug && guard {
                 self.swapchar(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we swap the order of non adjacent chars by mistake
             if slst.len() < self.max_sug && guard {
                 self.longswapchar(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we just hit the wrong key in place of a good char
             if slst.len() < self.max_sug && guard {
                 self.badcharkey(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we add a char that should not be there
             if slst.len() < self.max_sug && guard {
                 self.extrachar(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we forget a char
             if slst.len() < self.max_sug && guard {
                 self.forgotchar(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we move a char
             if slst.len() < self.max_sug && guard {
                 self.movechar(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we just hit the wrong key in place of a good char
             if slst.len() < self.max_sug && guard {
                 self.badchar(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // did we double two characters
             if slst.len() < self.max_sug && guard {
                 self.doubletwochars(slst, &word_utf, cpdsuggest);
             }
+            work_check!();
             // two words ran together
             if cpdsuggest == 0
                 || (!self.nosplitsugs
@@ -3801,6 +3984,7 @@ impl<'a> SuggestMgr<'a> {
             {
                 good = self.twowords(slst, word, cpdsuggest, good);
             }
+            work_check!();
             if cpdsuggest == 1 && (slst.len() > old_sug || (self.info & SPELL_COMPOUND) != 0) {
                 nocompoundtwowords = true;
             }
@@ -3877,8 +4061,10 @@ impl<'a> SuggestMgr<'a> {
         let c = self.c;
         let maptable: &'a [Vec<Vec<u8>>] = &c.aff.map_table;
         let mut candidate = Vec::new();
+        self.start_timer();
         self.map_budget = MAP_NODE_BUDGET;
         self.map_related(maptable, word, &mut candidate, 0, wlst, cpdsuggest, 0);
+        self.stop_timer();
     }
 
     #[allow(clippy::too_many_arguments)]
@@ -3895,14 +4081,18 @@ impl<'a> SuggestMgr<'a> {
         if word.len() == wn {
             let as_str = String::from_utf8_lossy(candidate).into_owned();
             if !wlst.iter().any(|w| w == &as_str)
-                && self.c.sm_checkword(candidate, cpdsuggest) != 0
+                && self.check_map(candidate, cpdsuggest) != 0
                 && wlst.len() < self.max_sug
             {
                 wlst.push(as_str);
             }
             return;
         }
-        if depth > 16384 || self.map_budget == 0 {
+        if depth > 16384 {
+            self.timer = 0;
+            return;
+        }
+        if self.map_budget == 0 {
             return;
         }
         self.map_budget -= 1;
@@ -3925,6 +4115,9 @@ impl<'a> SuggestMgr<'a> {
                             cpdsuggest,
                             depth + 1,
                         );
+                        if self.timer == 0 {
+                            return;
+                        }
                     }
                 }
             }
@@ -4044,16 +4237,21 @@ impl<'a> SuggestMgr<'a> {
     fn forgotchar(&mut self, wlst: &mut Vec<String>, word: &[char], cpdsuggest: i32) {
         let mut candidate = word.to_vec();
         let ctry: Vec<char> = bytes_to_chars(self.ctry);
-        for &k in &ctry {
+        self.start_timer();
+        'outer: for &k in &ctry {
             let mut i = 0usize;
             while i <= candidate.len() {
                 let index = candidate.len() - i;
                 candidate.insert(index, k);
-                self.testsug(wlst, chars_to_bytes(&candidate), cpdsuggest);
+                self.testsug_timed(wlst, chars_to_bytes(&candidate), cpdsuggest);
                 candidate.remove(index);
+                if self.timer == 0 {
+                    break 'outer;
+                }
                 i += 1;
             }
         }
+        self.stop_timer();
     }
 
     /// `SuggestMgr::movechar_utf` (a char was moved).
@@ -4092,17 +4290,22 @@ impl<'a> SuggestMgr<'a> {
     fn badchar(&mut self, wlst: &mut Vec<String>, word: &[char], cpdsuggest: i32) {
         let mut candidate = word.to_vec();
         let ctry: Vec<char> = bytes_to_chars(self.ctry);
-        for &ch in &ctry {
+        self.start_timer();
+        'outer: for &ch in &ctry {
             for i in (0..candidate.len()).rev() {
                 let tmpc = candidate[i];
                 if ch == tmpc {
                     continue;
                 }
                 candidate[i] = ch;
-                self.testsug(wlst, chars_to_bytes(&candidate), cpdsuggest);
+                self.testsug_timed(wlst, chars_to_bytes(&candidate), cpdsuggest);
                 candidate[i] = tmpc;
+                if self.timer == 0 {
+                    break 'outer;
+                }
             }
         }
+        self.stop_timer();
     }
 
     /// `SuggestMgr::doubletwochars_utf` (vacation -> vacacation).
@@ -4479,6 +4682,16 @@ impl<'a> SuggestMgr<'a> {
             return (slst, false, abbv, captype);
         }
         let mut capwords = false;
+        // `clock_t timelimit = clock();` — one budget per suggestion call,
+        // checked after every stage below (upstream `TIMELIMIT_GLOBAL`).
+        let call_work0 = suggest_work();
+        macro_rules! global_work_check {
+            () => {
+                if suggest_work() - call_work0 > WORK_GLOBAL {
+                    return (slst, capwords, abbv, captype);
+                }
+            };
+        }
 
         // check capitalized form for FORCEUCASE
         if captype == Captype::NoCap && self.c.aff.forceucase.is_some() {
@@ -4497,12 +4710,14 @@ impl<'a> SuggestMgr<'a> {
                 let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&scw));
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
                 if abbv > 0 {
                     let mut wsp = scw.clone();
                     wsp.push(b'.');
                     let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
                     good |= g;
                     onlycmpdsug |= o;
+                    global_work_check!();
                 }
             }
             Captype::InitCap => {
@@ -4510,10 +4725,12 @@ impl<'a> SuggestMgr<'a> {
                 let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&scw));
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
                 let wsp = lowercase_bytes(&scw);
                 let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
             }
             Captype::HuhInitCap | Captype::HuhCap => {
                 if captype == Captype::HuhInitCap {
@@ -4522,6 +4739,7 @@ impl<'a> SuggestMgr<'a> {
                 let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&scw));
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
                 // something.The -> something. The
                 if let Some(dot_pos) = find_byte(&scw, b'.') {
                     let postdot = &scw[dot_pos + 1..];
@@ -4537,6 +4755,7 @@ impl<'a> SuggestMgr<'a> {
                     let (g, o) = self.suggest(&mut slst, &wsp);
                     good |= g;
                     onlycmpdsug |= o;
+                    global_work_check!();
                 }
                 let wsp = lowercase_bytes(&scw);
                 if self.c.spell(&String::from_utf8_lossy(&wsp)) {
@@ -4546,6 +4765,7 @@ impl<'a> SuggestMgr<'a> {
                 let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
                 if captype == Captype::HuhInitCap {
                     let wspi = mkinitcap_str(&String::from_utf8_lossy(&wsp));
                     if self.c.spell(&wspi) {
@@ -4554,6 +4774,7 @@ impl<'a> SuggestMgr<'a> {
                     let (g, o) = self.suggest(&mut slst, &wspi);
                     good |= g;
                     onlycmpdsug |= o;
+                    global_work_check!();
                 }
                 // aNew -> "a New" (instead of "a new")
                 let wl = scw.len();
@@ -4577,6 +4798,7 @@ impl<'a> SuggestMgr<'a> {
                 let (g, o) = self.suggest(&mut slst, &String::from_utf8_lossy(&wsp));
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
                 if self.c.aff.keep_case.is_some() && self.c.spell(&String::from_utf8_lossy(&wsp)) {
                     insert_sug(&mut slst, wsp.clone());
                 }
@@ -4584,6 +4806,7 @@ impl<'a> SuggestMgr<'a> {
                 let (g, o) = self.suggest(&mut slst, &wspi);
                 good |= g;
                 onlycmpdsug |= o;
+                global_work_check!();
                 for j in slst.iter_mut() {
                     *j = mkallcap_str(j);
                     if self.c.aff.checksharps {
@@ -4598,25 +4821,30 @@ impl<'a> SuggestMgr<'a> {
             match captype {
                 Captype::NoCap => {
                     self.ngsuggest(&mut slst, &String::from_utf8_lossy(&scw), Captype::NoCap);
+                    global_work_check!();
                 }
                 Captype::HuhInitCap => {
                     capwords = true;
                     let wsp = lowercase_bytes(&scw);
                     self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::HuhCap);
+                    global_work_check!();
                 }
                 Captype::HuhCap => {
                     let wsp = lowercase_bytes(&scw);
                     self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::HuhCap);
+                    global_work_check!();
                 }
                 Captype::InitCap => {
                     capwords = true;
                     let wsp = lowercase_bytes(&scw);
                     self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::InitCap);
+                    global_work_check!();
                 }
                 Captype::AllCap => {
                     let wsp = lowercase_bytes(&scw);
                     let oldns = slst.len();
                     self.ngsuggest(&mut slst, &String::from_utf8_lossy(&wsp), Captype::AllCap);
+                    global_work_check!();
                     for j in slst.iter_mut().skip(oldns) {
                         *j = mkallcap_str(j);
                     }
@@ -4637,6 +4865,7 @@ impl<'a> SuggestMgr<'a> {
                 let chunk = &scw[prev_pos..dash_pos];
                 if chunk != word.as_bytes() && !self.c.spell(&String::from_utf8_lossy(chunk)) {
                     let nlst = self.suggest_rec(&String::from_utf8_lossy(chunk), stack);
+                    global_work_check!();
                     for j in nlst.iter().rev() {
                         let mut wspace = scw[..prev_pos].to_vec();
                         wspace.extend_from_slice(j.as_bytes());
@@ -5019,7 +5248,7 @@ mod tests {
     /// (the same version the Java engine binds); the only hunspell additions
     /// not reproduced here are the n-gram fallback ones (`cat` itself for the
     /// correctly-spelled `cat`), which is deliberately unported.
-    fn suggest_test_checker() -> HunspellChecker {
+    pub(crate) fn suggest_test_checker() -> HunspellChecker {
         let aff = "SET UTF-8\nTRY abcdefghijklmnopqrstuvwxyz\nREP 1\nREP ph f\nNOSPLITSUGS\n";
         let dic = "7\ncat\ncar\ncart\ncut\nfish\nphone\nplanet\n";
         HunspellChecker::from_strs(aff, dic).unwrap()
@@ -5078,6 +5307,142 @@ mod tests {
         let c = HunspellChecker::from_strs(aff, dic).unwrap();
         // the abbreviation's trailing dot is re-appended to every candidate.
         assert_eq!(c.suggest("cta."), vec!["cat."]);
+    }
+}
+
+/// Tests for the deterministic work-budget emulation of the reference
+/// implementation's suggestion-engine wall clocks (see `SUGGEST_WORK` and the
+/// `WORK_*` constants).
+#[cfg(test)]
+mod suggest_work_tests {
+    use super::tests::suggest_test_checker;
+    use super::*;
+
+    /// MAP-generated candidates weigh their affix-entry trials at
+    /// `MAP_WORK_PERMILLE` (they exercise far fewer affix entries than the
+    /// substitution/insertion/swap candidates).
+    #[test]
+    fn map_work_reweighting() {
+        SUGGEST_WORK.with(|w| w.set(0));
+        add_suggest_trials(1000);
+        let before = suggest_work();
+        add_suggest_trials(40);
+        reweight_map_work_since(before);
+        assert_eq!(suggest_work() - before, 10);
+    }
+
+    /// The per-generator timer (upstream's `MINTIMER`/`TIMELIMIT` pair)
+    /// samples the work budget every `MINTIMER` candidate checks: once the
+    /// budget is exceeded the candidate is rejected without a dictionary
+    /// lookup and `timer` stays 0, which aborts the generator (`if (!timer)
+    /// return` upstream); below the budget the timer resets to
+    /// `MAXPLUSTIMER` and the check proceeds.
+    #[test]
+    fn generator_timer_fires_and_bails() {
+        let c = suggest_test_checker();
+        let mut sm = SuggestMgr::new(&c);
+        sm.start_timer();
+        sm.timer = 1;
+        // pretend the generator already burned its whole budget
+        add_suggest_trials(WORK_TIMELIMIT + 100);
+        sm.gen_work0 = suggest_work() - (WORK_TIMELIMIT + 1);
+        // `cat` is a dictionary word, but the fired budget rejects it.
+        assert_eq!(sm.check_timed(b"cat", 0), 0);
+        assert_eq!(sm.timer, 0);
+
+        let mut sm = SuggestMgr::new(&c);
+        sm.start_timer();
+        sm.timer = 1;
+        sm.gen_work0 = suggest_work();
+        assert_ne!(sm.check_timed(b"cat", 0), 0);
+        assert_eq!(sm.timer, MAXPLUSTIMER);
+        sm.stop_timer();
+    }
+
+    /// Untimed generators (upstream passes `NULL, NULL`) accrue work but
+    /// never sample the budget.
+    #[test]
+    fn untimed_checks_do_not_sample() {
+        let c = suggest_test_checker();
+        let mut sm = SuggestMgr::new(&c);
+        sm.timer = 1;
+        sm.timer_on = true;
+        add_suggest_trials(WORK_TIMELIMIT + 100);
+        sm.gen_work0 = suggest_work() - (WORK_TIMELIMIT + 1);
+        assert_ne!(sm.check0(b"cat", 0), 0);
+        assert_eq!(sm.timer, 1);
+    }
+
+    /// `map_related` under a fired budget: the leaf check is rejected and the
+    /// whole MAP walk unwinds instead of enumerating the remaining
+    /// candidates; with the budget intact the walk finds both MAP variants.
+    #[test]
+    fn map_walk_aborts_on_fired_budget() {
+        let aff = "SET UTF-8\nMAP 1\nMAP ab\n";
+        let dic = "2\naa\nbb\n";
+        let c = HunspellChecker::from_strs(aff, dic).unwrap();
+        let mut sm = SuggestMgr::new(&c);
+        sm.start_timer();
+        // fire on the very first leaf check (the toy walk has too few
+        // candidates to reach a `MINTIMER` multiple on its own)
+        sm.timer = 1;
+        add_suggest_trials(WORK_TIMELIMIT + 100);
+        sm.gen_work0 = suggest_work() - (WORK_TIMELIMIT + 1);
+        let mut wlst: Vec<String> = Vec::new();
+        let mut candidate = Vec::new();
+        sm.map_related(&c.aff.map_table, b"ab", &mut candidate, 0, &mut wlst, 0, 0);
+        assert!(wlst.is_empty());
+        assert_eq!(sm.timer, 0);
+
+        let mut sm = SuggestMgr::new(&c);
+        sm.start_timer();
+        let mut wlst: Vec<String> = Vec::new();
+        let mut candidate = Vec::new();
+        sm.map_related(&c.aff.map_table, b"ab", &mut candidate, 0, &mut wlst, 0, 0);
+        assert_eq!(wlst.len(), 2);
+        sm.stop_timer();
+    }
+
+    /// Suggestion work accrues across calls (a miss against a dictionary
+    /// with affix entries exercises `SfxEntry::checkword`), and results never
+    /// depend on the accumulated counter (every budget decision is a delta
+    /// from a per-call snapshot).
+    #[test]
+    fn work_accrues_and_calls_stay_deterministic() {
+        let aff = "SET UTF-8\nTRY abcdefghij\nSFX A N 1\nSFX A y i .\n";
+        let dic = "2\ncati\nbig\n";
+        let c = HunspellChecker::from_strs(aff, dic).unwrap();
+        SUGGEST_WORK.with(|w| w.set(0));
+        let first = c.suggest("csti");
+        assert!(suggest_work() > 0);
+        let after_first = suggest_work();
+        let second = c.suggest("csti");
+        assert!(suggest_work() > after_first);
+        assert_eq!(first, second);
+    }
+
+    /// The calibrated `WORK_SUGGESTION` cut against the real Galician
+    /// dictionary: the two words whose suggestion lists the reference
+    /// engine's wall-clock timers truncated.
+    /// `percatamos` loses its `badchar` suggestion (`percútamos`) and its
+    /// n-gram stage runs from an empty list (`percutamos` is then the first
+    /// n-gram guess, and the `oldns + MAXNGRAMSUGS` cap drops the fourth
+    /// guess); `monoméricas` keeps its `forgotchar` suggestion and loses the
+    /// n-gram stage (the fired pass budget returns with
+    /// `onlycompoundsug = false`).
+    #[test]
+    fn suggest_work_budget_galician_timer_cuts() {
+        let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/gl/hunspell");
+        if !dir.exists() {
+            eprintln!("skipping: no vendored data found");
+            return;
+        }
+        let c = HunspellChecker::load(&dir.join("gl_ES.aff"), &dir.join("gl_ES.dic")).unwrap();
+        assert_eq!(
+            c.suggest("percatamos"),
+            vec!["percutamos", "percutiramos", "peraltamos", "percorramos"]
+        );
+        assert_eq!(c.suggest("monoméricas"), vec!["monométricas"]);
     }
 }
 

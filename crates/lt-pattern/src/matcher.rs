@@ -282,12 +282,72 @@ fn compile_regex_uncached(
     } else {
         s.push_str(&pattern);
     }
+    // Java possessive quantifiers (`a++`, `a*+`, `a?+`, `a{1,2}+`) are parsed
+    // by the Rust `regex` crate as a *repetition of the quantified group*
+    // (`a{1,2}+` ≙ `(?:a{1,2})+`), which matches strictly more than Java's
+    // no-backtracking semantics (pl SUBST_ADJ_UNIFY's abbreviation exception
+    // `\p{Lu}{1,2}+[i]*\p{Lu}` wrongly consumed `OKARA`). fancy-regex
+    // implements possessive quantifiers with Java's semantics, so route such
+    // patterns straight to it instead of letting the `regex` crate succeed
+    // with the wrong meaning.
+    if has_possessive_quantifier(&s) {
+        return FancyRegex::new(&s)
+            .map(TextRegex::Fancy)
+            .map_err(|e| e.to_string());
+    }
     match regex::Regex::new(&s) {
         Ok(re) => Ok(TextRegex::Fast(re)),
         Err(_) => FancyRegex::new(&s)
             .map(TextRegex::Fancy)
             .map_err(|e| e.to_string()),
     }
+}
+
+/// Does the pattern use a Java possessive quantifier (`X?+`, `X*+`, `X++`,
+/// `X{n,m}+`)? Scans outside escapes and character classes; the `{...}` form
+/// only counts when the braces hold a plain quantifier spec.
+fn has_possessive_quantifier(pattern: &str) -> bool {
+    let bytes: Vec<char> = pattern.chars().collect();
+    let mut in_class = false;
+    let mut i = 0usize;
+    while i < bytes.len() {
+        let c = bytes[i];
+        match c {
+            '\\' => {
+                i += 2;
+                continue;
+            }
+            '[' if !in_class => in_class = true,
+            ']' if in_class => in_class = false,
+            '+' if i > 0 && !in_class => {
+                let prev = bytes[i - 1];
+                if matches!(prev, '?' | '*' | '+') {
+                    return true;
+                }
+                if prev == '}' {
+                    // walk back over a `\d+(,\d*)?` / `,\d+` quantifier spec
+                    let mut j = i - 2;
+                    let mut saw_digit = false;
+                    while j > 0 && bytes[j].is_ascii_digit() {
+                        saw_digit = true;
+                        j -= 1;
+                    }
+                    if j > 0 && bytes[j] == ',' && saw_digit {
+                        j -= 1;
+                        while j > 0 && bytes[j].is_ascii_digit() {
+                            j -= 1;
+                        }
+                    }
+                    if j < i - 2 && bytes[j] == '{' && saw_digit {
+                        return true;
+                    }
+                }
+            }
+            _ => {}
+        }
+        i += 1;
+    }
+    false
 }
 
 /// Java regex patterns spell astral code points as two adjacent `\uXXXX`
@@ -2272,11 +2332,12 @@ pub fn anchor_starts(
 }
 
 /// Values collected for one pattern element that takes part in unification
-/// (`Readings`: readings that matched, `Neutral`: the whole token).
+/// (`Readings`: one entry per consumed token with the readings that matched;
+/// `Neutral`: the real indices of the neutral tokens).
 #[derive(Clone)]
 enum UnifyEntry {
-    Readings(Vec<AnalyzedToken>),
-    Neutral(usize),
+    Readings(Vec<Vec<AnalyzedToken>>),
+    Neutral(Vec<usize>),
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -2540,7 +2601,15 @@ fn try_from<T: Deref<Target = AnalyzedTokenReadings>>(
         starts.push(Some(cand));
         let mut entries = entries;
         entries.push(if unify_active {
-            unify_entry(token, &tokens[idx], idx)
+            if idx > cand {
+                // Java feeds every token of a `maxOccurrence` run through
+                // `testAllReadings`, so each run token contributes its own
+                // reading set to `toUnify` / `neutralReadings` (tested by the
+                // unifier as separate sequence positions).
+                unify_entry_run(token, &tokens[cand..=idx], cand)
+            } else {
+                unify_entry(token, &tokens[idx], idx)
+            }
         } else {
             None
         });
@@ -2649,7 +2718,7 @@ fn unify_entry(
     idx: usize,
 ) -> Option<UnifyEntry> {
     if token.unification_neutral {
-        return Some(UnifyEntry::Neutral(idx));
+        return Some(UnifyEntry::Neutral(vec![idx]));
     }
     let untagged = tr
         .readings
@@ -2664,8 +2733,39 @@ fn unify_entry(
     if readings.is_empty() {
         None
     } else {
-        Some(UnifyEntry::Readings(readings))
+        Some(UnifyEntry::Readings(vec![readings]))
     }
+}
+
+/// Same for an element that consumed a run of tokens (`maxOccurrence > 1`):
+/// one reading set per token, in run order. `start` is the real index of
+/// `trs[0]`.
+fn unify_entry_run<T: Deref<Target = AnalyzedTokenReadings>>(
+    token: &CompiledToken,
+    trs: &[T],
+    start: usize,
+) -> Option<UnifyEntry> {
+    if token.unification_neutral {
+        return Some(UnifyEntry::Neutral((start..start + trs.len()).collect()));
+    }
+    let mut sets = Vec::with_capacity(trs.len());
+    for tr in trs {
+        let untagged = tr
+            .readings
+            .iter()
+            .all(|r| has_no_pos_tag(r.pos_tag.as_deref()));
+        let readings: Vec<AnalyzedToken> = tr
+            .readings
+            .iter()
+            .filter(|r| reading_matches(token, r, untagged))
+            .cloned()
+            .collect();
+        if readings.is_empty() {
+            return None;
+        }
+        sets.push(readings);
+    }
+    Some(UnifyEntry::Readings(sets))
 }
 
 /// LT `AbstractPatternRulePerformer.testUnification`: feed the collected
@@ -2681,27 +2781,37 @@ fn run_unification<T: Deref<Target = AnalyzedTokenReadings>>(
     let mut unified: Option<Vec<Vec<AnalyzedToken>>> = None;
     for (i, token) in pattern.tokens.iter().enumerate() {
         match entries.get(i).and_then(|e| e.as_ref()) {
-            Some(UnifyEntry::Neutral(tok_idx)) => {
-                unifier.add_neutral_element(&tokens[*tok_idx].readings);
+            Some(UnifyEntry::Neutral(tok_idxs)) => {
+                for tok_idx in tok_idxs {
+                    unifier.add_neutral_element(&tokens[*tok_idx].readings);
+                }
                 continue;
             }
-            Some(UnifyEntry::Readings(readings)) => {
+            Some(UnifyEntry::Readings(reading_sets)) => {
                 let Some(features) = token.unification.as_ref() else {
                     continue;
                 };
-                let mut any_matched = false;
-                for (ri, reading) in readings.iter().enumerate() {
-                    any_matched |= unifier.is_unified(reading, features, ri + 1 == readings.len());
-                }
-                if token.uni_negated && any_matched {
-                    return None;
-                }
-                if token.last_in_unification {
-                    if !any_matched && !token.uni_negated {
+                // Java iterates the per-token reading sets of this element
+                // (`toUnify.get(patternToken)`): the negation test runs per
+                // set, and `lastInUnification` closes the unification only
+                // after the last set.
+                let last_set = reading_sets.len().saturating_sub(1);
+                for (si, readings) in reading_sets.iter().enumerate() {
+                    let mut any_matched = false;
+                    for (ri, reading) in readings.iter().enumerate() {
+                        any_matched |=
+                            unifier.is_unified(reading, features, ri + 1 == readings.len());
+                    }
+                    if token.uni_negated && any_matched {
                         return None;
                     }
-                    unified = unifier.get_unified_tokens();
-                    unifier.reset();
+                    if token.last_in_unification && si == last_set {
+                        if !any_matched && !token.uni_negated {
+                            return None;
+                        }
+                        unified = unifier.get_unified_tokens();
+                        unifier.reset();
+                    }
                 }
             }
             None => {}

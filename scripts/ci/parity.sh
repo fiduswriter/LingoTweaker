@@ -181,33 +181,20 @@ elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)
 elif [ "$LANG_ARG" = "gl" ]; then
-  # documented speller divergence (docs/differences.md #7): the match set is
-  # identical; the native hunspell suggestion engine (generators + n-gram
-  # fallback) is ported, leaving a small wall-clock-boundary residue
-  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=2)
+  # at exact parity since the deterministic work-budget emulation of the
+  # native hunspell wall-clock timers (former docs/differences.md #7); the
+  # match set was already identical, and the two suggestion-list diffs are
+  # gone with the `WORK_SUGGESTION` cut; no allowances
+  :
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
-elif [ "$LANG_ARG" = "tl" ]; then
-  # documented suggestion-order divergence (docs/differences.md #10): the
-  # match and suggestion *sets* are identical; the frequency-included
-  # tl_PH Morfologik dictionary orders the frequency-weighted candidates
-  # differently for `nag`.
-  EXTRA+=(--expect-field-diffs=MORFOLOGIK_RULE_TL=5)
 elif [ "$LANG_ARG" = "pl" ]; then
-  # documented known fidelity gaps (docs/differences.md #9): the
-  # <unify negate="yes"> agreement rules, the ZDANIA_ZLOZONE comp:comma
-  # disambiguation context and the PCON_VERB participle rule
-  EXTRA+=(--expect-only-java=ADJ_SUBST_ADJ_UNIFY=1)
-  EXTRA+=(--expect-only-java=SUBST_ADJ_UNIFY=1)
-  EXTRA+=(--expect-only-java=PCON_VERB=1)
-  EXTRA+=(--expect-only-java=ZDANIA_ZLOZONE=1)
-  EXTRA+=(--expect-only-rust=ADJ_SUBST_ADJ_UNIFY=1)
-  EXTRA+=(--expect-only-rust=NIEZGODNO_PRZYPADKW_PRZYMIOTNIKA_I_RZECZOWNIKA_RODZAJU_ESKIEGO=2)
-  EXTRA+=(--expect-only-rust=NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA=1)
-  EXTRA+=(--expect-only-rust=ZDANIA_ZLOZONE=1)
+  # at exact parity since the <unify> engine fixes (former docs/differences.md
+  # #9); no allowances
+  :
 elif [ "$LANG_ARG" = "uk" ]; then
   # documented known fidelity gaps (docs/differences.md #12): the prep+`не`+
   # noun case-government gap, an overlap tie-break for a proper-name list and
