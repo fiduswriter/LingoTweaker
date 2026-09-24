@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 1020,
+  "file_count": 1023,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -1805,6 +1805,48 @@
         "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
         "license_verified": true,
         "license_source": "upstream da/README.txt"
+      }
+    },
+    {
+      "path": "da/dictionaries/danish_synth.dict",
+      "sha256": "c6e24d3cae41de1ac25f0bc250a6e27e0a9ea6f16422fdb02282cd802cf98b5a",
+      "size": 389559,
+      "source": {
+        "kind": "generated",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
+        "license_source": "upstream da/README.txt (derived from danish.dict, Stavekontrolden, GPL-2.0/LGPL-2.1/MPL-1.1 tri-license)",
+        "generator": "tools/morfologik/lt_morfologik.py synth (danish.dict export, inverted to lemma|tag keys)",
+        "generated_from": [
+          "da/dictionaries/danish.dict"
+        ]
+      }
+    },
+    {
+      "path": "da/dictionaries/danish_synth.info",
+      "sha256": "247cde681035c92c1f9b650835e457264364ec8447183edd335d9d5f5c0965bd",
+      "size": 100,
+      "source": {
+        "kind": "generated",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
+        "license_source": "upstream da/README.txt (derived from danish.dict, Stavekontrolden, GPL-2.0/LGPL-2.1/MPL-1.1 tri-license)",
+        "generator": "tools/morfologik/lt_morfologik.py synth (danish.dict export, inverted to lemma|tag keys)",
+        "generated_from": [
+          "da/dictionaries/danish.dict"
+        ]
+      }
+    },
+    {
+      "path": "da/dictionaries/danish_synth_tags.txt",
+      "sha256": "47ad87b582003ab4a80ff6ecb5fa9ba62d83c9242d3f3309c1509c5afd7ff1cf",
+      "size": 1039,
+      "source": {
+        "kind": "generated",
+        "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 tri-license (Danish tagger data based on Stavekontrolden; upstream da/README.txt states the tri-license)",
+        "license_source": "upstream da/README.txt (derived from danish.dict, Stavekontrolden, GPL-2.0/LGPL-2.1/MPL-1.1 tri-license)",
+        "generator": "tools/morfologik/lt_morfologik.py synth (danish.dict export, inverted to lemma|tag keys)",
+        "generated_from": [
+          "da/dictionaries/danish.dict"
+        ]
       }
     },
     {

@@ -19,6 +19,7 @@ pub mod charset;
 pub mod crimean_tatar;
 pub mod crimean_tatar_synth;
 pub mod danish;
+pub mod danish_synth;
 pub mod dutch;
 pub mod dutch_synth;
 pub mod english;
@@ -73,6 +74,7 @@ pub use charset::Charset;
 pub use crimean_tatar::CrimeanTatarTagger;
 pub use crimean_tatar_synth::CrimeanTatarSynthesizer;
 pub use danish::DanishTagger;
+pub use danish_synth::DanishSynthesizer;
 pub use dutch::{CompoundPartsProvider, DutchTagger};
 pub use dutch_synth::DutchSynthesizer;
 pub use english::{

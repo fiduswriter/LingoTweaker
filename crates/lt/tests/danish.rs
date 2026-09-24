@@ -542,3 +542,43 @@ fn danish_tagger() {
     let tagged = readings.iter().filter(|r| r.pos_tag.is_some()).count();
     assert!(tagged > 0, "no tagged readings: {readings:?}");
 }
+
+/// The derived Danish synthesizer dictionary (plan item M2, infrastructure
+/// until a rule uses `<match postag>` synthesis): `lemma|tag` lookup returns
+/// the inflected forms of `danish.dict` and postag-regexp synthesis expands
+/// over `danish_synth_tags.txt`.
+#[test]
+fn danish_synthesizer() {
+    let Some(data) = data_dir() else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let synth = lt_tagger::DanishSynthesizer::from_data(data.path()).expect("synth");
+    let plain = |lemma: &str, tag: &str| {
+        synth.synthesize(
+            &lt::AnalyzedToken::new("", Some(lemma.to_string()), Some(tag.to_string())),
+            tag,
+            false,
+        )
+    };
+    assert_eq!(plain("hus", "sub:ube:sin:neu:nom"), ["hus"]);
+    assert_eq!(plain("hus", "sub:bes:sin:neu:nom"), ["huset"]);
+    assert_eq!(plain("stor", "adj:ube:sin:neu:pos"), ["stort"]);
+    assert_eq!(plain("være", "ver:præ:akt"), ["er"]);
+    // Unknown lemma|tag keys synthesize nothing.
+    assert!(plain("ikkeetord", "sub:ube:sin:utr:nom").is_empty());
+    // `postag_regexp` synthesis walks the tag list (`sub:.*:plu:.*`).
+    let forms = synth.synthesize(
+        &lt::AnalyzedToken::new(
+            "",
+            Some("slidbane".to_string()),
+            Some("sub:.*:plu:.*".to_string()),
+        ),
+        "sub:.*:plu:.*",
+        true,
+    );
+    assert_eq!(
+        forms,
+        ["slidbanernes", "slidbanerne", "slidbaners", "slidbaner",]
+    );
+}

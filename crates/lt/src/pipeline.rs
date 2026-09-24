@@ -4194,18 +4194,27 @@ impl Pipeline {
         })
     }
     /// Danish (`da`) engine: the `DanishTagger` (`BaseTagger` over
-    /// `danish.dict` + the manual word lists), the `da_two` SRX, the plain
-    /// `XmlRuleDisambiguator` (`da/disambiguation.xml` + global rules) and the
-    /// hunspell `HunspellRule` speller. `Danish.getRelevantRules` adds no Java
-    /// rule classes beyond the generic core built-ins.
+    /// `danish.dict` + the manual word lists), the derived Danish synthesizer
+    /// dictionary (`danish_synth.dict`, infrastructure for `<match postag>`
+    /// synthesis), the `da_two` SRX, the plain `XmlRuleDisambiguator`
+    /// (`da/disambiguation.xml` + global rules) and the hunspell
+    /// `HunspellRule` speller. `Danish.getRelevantRules` adds no Java rule
+    /// classes beyond the generic core built-ins.
     pub fn new_danish(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,
         enabled_rules: &[String],
         _variant: Option<&str>,
     ) -> Result<Self> {
-        let f = Self::hand_authored_foundations(data_dir, Lang::Da, "da_two", enabled_rules)?;
+        let mut f = Self::hand_authored_foundations(data_dir, Lang::Da, "da_two", enabled_rules)?;
         let tagger = Arc::new(lt_tagger::DanishTagger::load(data_dir.path())?);
+        let synth = Arc::new(lt_tagger::DanishSynthesizer::from_data(data_dir.path())?);
+        let synth_adapter = Arc::new(crate::da::DanishSynthesizerAdapter {
+            synth: Arc::clone(&synth),
+            tagger: Arc::clone(&tagger),
+        });
+        f.disambiguator
+            .set_synthesizer(Arc::clone(&synth_adapter) as Arc<dyn pm::Synthesizer>);
         let spelling = match crate::da::spelling::DanishSpellingRule::load(data_dir.path()) {
             Ok(rule) => Some(Arc::new(rule)),
             Err(err) => {
@@ -4219,6 +4228,8 @@ impl Pipeline {
         let simple_replace = crate::da::rules::danish_instances(data_dir.path())?;
         let danish = Arc::new(crate::da::DanishPipeline {
             tagger,
+            synthesizer: synth,
+            synth_adapter,
             disambiguator: f.disambiguator,
             spelling,
         });

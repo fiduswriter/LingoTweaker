@@ -1,12 +1,15 @@
 //! Danish pipeline parts: the `DanishTagger`, the plain `XmlRuleDisambiguator`
-//! order and the hunspell speller. `Danish.getRelevantRules` has no Java rule
-//! classes (only the generic built-ins), so stage 3 adds nothing beyond the
-//! speller, the built-in wiring in the engine and the owner-approved
-//! `DANISH_TYPOS` word-list rule (`rules.rs`, Rust-only).
+//! order, the Danish synthesizer dictionary and the hunspell speller.
+//! `Danish.getRelevantRules` has no Java rule classes (only the generic
+//! built-ins) and Java's `Danish` has no synthesizer, so the synthesizer is
+//! infrastructure for `<match postag>` synthesis (plan item M2): a plain
+//! `BaseSynthesizer` over the derived `danish_synth.dict`, wired like the
+//! Swedish one.
 
 use std::sync::Arc;
 
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
+use lt_pattern::Synthesizer;
 
 pub mod rules;
 pub mod spelling;
@@ -15,6 +18,9 @@ pub mod spelling;
 /// (XML rules + `core/disambiguation-global.xml`); Danish has no chunker.
 pub struct DanishPipeline {
     pub tagger: Arc<lt_tagger::DanishTagger>,
+    pub synthesizer: Arc<lt_tagger::DanishSynthesizer>,
+    /// The same synthesizer through the pattern engine's trait.
+    pub synth_adapter: Arc<DanishSynthesizerAdapter>,
     pub disambiguator: lt_disambig::XmlDisambiguator,
     /// `HunspellRule` (`HUNSPELL_RULE`, rule 4). `None` only when the vendored
     /// `da_DK` dictionary cannot be read.
@@ -24,6 +30,46 @@ pub struct DanishPipeline {
 impl DanishPipeline {
     pub fn disambiguate(&self, sentence: &mut AnalyzedSentence) {
         self.disambiguator.apply(sentence);
+    }
+}
+
+/// Adapter exposing the Danish synthesizer through the pattern engine's
+/// [`Synthesizer`] trait, plus the tagger for the `checksSpelling` check.
+pub struct DanishSynthesizerAdapter {
+    pub synth: Arc<lt_tagger::DanishSynthesizer>,
+    pub tagger: Arc<lt_tagger::DanishTagger>,
+}
+
+impl DanishSynthesizerAdapter {
+    pub fn inner(&self) -> &lt_tagger::DanishSynthesizer {
+        &self.synth
+    }
+}
+
+impl Synthesizer for DanishSynthesizerAdapter {
+    fn synthesize(
+        &self,
+        token: &AnalyzedToken,
+        pos_tag: &str,
+        pos_tag_regexp: bool,
+    ) -> Vec<String> {
+        self.synth.synthesize(token, pos_tag, pos_tag_regexp)
+    }
+
+    fn synthesize_plain(&self, token: &AnalyzedToken, pos_tag: &str) -> Vec<String> {
+        self.synth.synthesize_plain(token, pos_tag)
+    }
+
+    fn target_pos_tag(&self, pos_tags: &[String], fallback: &str) -> String {
+        self.synth.target_pos_tag(pos_tags, fallback)
+    }
+
+    fn is_known_word(&self, word: &str) -> bool {
+        let tagged = self.tagger.tag(std::slice::from_ref(&word.to_string()));
+        tagged
+            .first()
+            .and_then(|tr| tr.readings.first())
+            .is_some_and(|r| r.stem.is_some() || r.pos_tag.is_some())
     }
 }
 
