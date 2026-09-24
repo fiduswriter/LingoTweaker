@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 1013,
+  "file_count": 1020,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -7182,13 +7182,12 @@
     },
     {
       "path": "nn/rules/grammar.xml",
-      "sha256": "7de3fdc80ea8d9c0cae97eebf57506b720d6cae70abce6bd87a04ad2460fa566",
-      "size": 17116,
+      "sha256": "0b7356b186e6c3aba04f5447105d10a9c0931fd38271bce71b1951aa7fd34ac9",
+      "size": 26744,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+        "license_source": "LICENSE"
       }
     },
     {
@@ -7215,13 +7214,24 @@
     },
     {
       "path": "no/README.md",
-      "sha256": "ee6b80b29db8cd949553fa034263c5d231b7e1a4ebfc9688d6ddda2a64aa4c53",
-      "size": 10120,
+      "sha256": "104c21f0192ba6b5712e18f2f1d2cd34a9edd01f9acd62d965915ce0932375d7",
+      "size": 12878,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored language data (LingoTweaker new-languages program)"
+        "license_source": "LICENSE"
+      }
+    },
+    {
+      "path": "no/dictionaries/build-report.txt",
+      "sha256": "4b001015271def3e4470b07aac0c91c32d7d8b13d7db135a414221b64358ff04",
+      "size": 1019,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/no-dict/build-no-tagger.py (Ordb\u00f8kene lemma_expanded.json -> word-lemma-tag triples -> lt_morfologik.py pos)",
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); see data/no/README.md"
       }
     },
     {
@@ -7242,6 +7252,42 @@
         "kind": "generated",
         "generator": "org.carrot2:morfologik-tools:2.2.0 morfologik.tools.DictCompile",
         "note": "One-off build from data/no/hunspell/nb_NO.dic (word+word rows, CFSA2); see data/no/README.md"
+      }
+    },
+    {
+      "path": "no/dictionaries/no_pos.dict",
+      "sha256": "a3d7ed0748aa52b5bc363fc0762e90bfba73bf1497ae54397dcc5b8f4afd8192",
+      "size": 488819,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/no-dict/build-no-tagger.py (Ordb\u00f8kene lemma_expanded.json -> word-lemma-tag triples -> lt_morfologik.py pos)",
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); see data/no/README.md"
+      }
+    },
+    {
+      "path": "no/dictionaries/no_pos.info",
+      "sha256": "d1460b5ab55f5b412929cb0c846c985838dbb01528fa60cb170444cd971bb90f",
+      "size": 69,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/no-dict/build-no-tagger.py (Ordb\u00f8kene lemma_expanded.json -> word-lemma-tag triples -> lt_morfologik.py pos)",
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); see data/no/README.md"
+      }
+    },
+    {
+      "path": "no/dictionaries/no_pos.txt",
+      "sha256": "548bf0f576e5ea821a15595e2c85c779d7a6d32ee3ab7ee13a3cd1fb65bdf792",
+      "size": 14677471,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/no-dict/build-no-tagger.py (Ordb\u00f8kene lemma_expanded.json -> word-lemma-tag triples -> lt_morfologik.py pos)",
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); see data/no/README.md"
       }
     },
     {
@@ -7314,13 +7360,12 @@
     },
     {
       "path": "no/rules/grammar.xml",
-      "sha256": "cf4772b348b4313b30f3841c527d90bde02a79e1df12af6e43210ee53aa3c754",
-      "size": 24927,
+      "sha256": "71d048ac83062b06b6d67a6495cad77079d72a927e80fe3f6589e17f6a016c90",
+      "size": 32782,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored language data (LingoTweaker new-languages program)"
+        "license_source": "LICENSE"
       }
     },
     {
@@ -7379,6 +7424,16 @@
       }
     },
     {
+      "path": "no/words/added.txt",
+      "sha256": "4ea64a9bc2a50fcf50f432b802d86c6ca96674c746e7ceaa260b53ed80559035",
+      "size": 264,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE"
+      }
+    },
+    {
       "path": "no/words/gender_overrides.txt",
       "sha256": "429c0d46604f5a6e6087c099cf560b9e1550a295f9459ad6dd4353d2be05f5e6",
       "size": 861,
@@ -7387,6 +7442,28 @@
         "license": "LGPL-2.1-or-later",
         "license_source": "LICENSE",
         "note": "Language data provenance and maintainer documentation"
+      }
+    },
+    {
+      "path": "no/words/removed.txt",
+      "sha256": "daf6c81ddbf491b723d34b77869e73052e56d372898a281fb537340c2c9c57f1",
+      "size": 224,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE"
+      }
+    },
+    {
+      "path": "no/words/tagset.txt",
+      "sha256": "72815715c7c54de8f26fa3a9d1b8e923f7ec4833c967409141950149268d353f",
+      "size": 4012,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
+        "generator": "tools/no-dict/build-no-tagger.py (Ordb\u00f8kene lemma_expanded.json -> word-lemma-tag triples -> lt_morfologik.py pos)",
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); see data/no/README.md"
       }
     },
     {
@@ -7511,13 +7588,12 @@
     },
     {
       "path": "nrd/rules/grammar.xml",
-      "sha256": "302192fe4a0aee745f6d5327e3874070dc1fa0dbbe63ec9a14668da5283caca3",
-      "size": 17518,
+      "sha256": "51767bacea25588f5bd8aa70017c6ee8bcc6b14cc368431f33d08b0ff3999493",
+      "size": 24122,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored language data (LingoTweaker new-languages program)"
+        "license_source": "LICENSE"
       }
     },
     {

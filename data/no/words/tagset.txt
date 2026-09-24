@@ -1,0 +1,98 @@
+# Bokmål tagset (data/no/words/tagset.txt)
+
+This is the description of the tags used by the Norwegian (Bokmål) tagger.
+
+---
+The Bokmål tagger dictionary (data/no/dictionaries/no_pos.dict) is generated
+by tools/no-dict/build-no-tagger.py from the Ordbøkene open data
+(Bokmålsordboka; Ordbanken / Nasjonalbiblioteket + Språkbanken, University of
+Bergen library):
+
+  https://ord.uib.no/bm/fil/lemma_expanded.json   (lemmas + inflected forms)
+  https://ord.uib.no/bm/fil/inflection_tags.json (grammatical categories per form slot)
+  https://ord.uib.no/bm/fil/word_class.json      (word classes)
+
+License: CC BY 4.0 (Ordbanken/Ordbøkene), the same source as the vendored
+hunspell/nb_NO.dic. The download is cached under /tmp; only the generated
+dictionary products are vendored into data/.
+
+The tagset follows the Stavekontrolden style of the Danish and Nordum taggers
+(data/da/words/tagset.txt, data/nrd/words/tagset.txt): 3-letter part-of-speech
+codes with colon-separated feature suffixes. The features are derived from
+what Ordbøkene exposes in its inflection tables:
+
+- nouns (substantiv): number (sin/plu) x definiteness (ube/bes). Gender is
+  deliberately NOT encoded: Ordbøkene frequently lists both the masculine
+  (-en) and feminine (-a) definite form for one lemma (jenta/jenten), so a
+  per-reading gender would be unreliable. The definite FORM itself carries
+  the gender signal (bilen vs huset), which is what the built-in
+  NB_EN_ET_GENDER heuristic uses.
+- verbs (verbum): tense/mood of the tagged form (inf, præ, dat, imp, kor,
+  lan). The Ordbøkene verb templates include periphrastic passive forms
+  (bøyes med "bli"/"vert" and s-passive); only the simple finite, infinitive,
+  imperative, participle and present-participle slots are tagged (the
+  <PerfPart> slot itself is tagged ver:kor; its adjectival uses are already
+  covered by the adjective readings of the same form where applicable).
+- adjectives (adjektiv): pos (positive), kom (comparative), sup (superlative).
+- the remaining word classes have no features.
+
+The engine tags words by returning one string per reading, for example:
+
+ linjer	linje	sub:ube:plu
+ linjene	linje	sub:bes:plu
+ løper	løpe	ver:præ
+ løpt	løpe	ver:kor
+
+Rules match with postag regular expressions, e.g. all verbs:
+
+ <token postag_regexp="yes" postag="ver:.*" />
+
+or plural nouns:
+
+ <token postag_regexp="yes" postag="sub:.*:plu" />
+
+Part-of-speech tags (Ordbøkene word class -> tag; word_class.json terms):
+
+sub	NOUN	substantiv (noun); features:
+	ube/bes (ubestemt/bestemt: indefinite/definite),
+	sin/plu (singularis/pluralis: singular/plural)
+	templates (inflection_tags.json): Sing/Ind, Sing/Def, Plur/Ind, Plur/Def
+ver	VERB	verb; features:
+	inf (infinitiv), præ (presens), dat (preteritum),
+	imp (imperativ), kor (perfektum partisipp), lan (presens partisipp)
+adj	ADJ	adjektiv; features:
+	pos (positiv), kom (komparativ), sup (superlativ)
+pron	PRON	pronomen (no features)
+det	DET	determinativ (incl. DET_Q tallord); features pos/kom/sup for
+	the adjectival determiners (DET_adj: annen/annet/andre ...)
+num	DET_Q	tallord (tagged det, see above)
+adv	ADV	adverb (incl. ADV_adj comparative forms: gjerne/heller/helst)
+prep	ADP	preposisjon
+kon	CCONJ	konjunksjon (sideordnende)
+skon	SCONJ	subjunksjon (underordnende)
+int	INTJ	interjeksjon
+pro	PROPN	egennavn
+infm	INFM	infinitivsmerke (å)
+
+Not tagged (no rule-relevant readings; kept out of the tagger dictionary):
+ABBR (forkorting), SYM (symbol), EXPR (uttrykk, multi-word), PFX/SFX/COMPPFX/
+VSTEM (prefix/suffix/compound stems), UNKN.
+
+The uninflected word classes (pron, prep, kon, skon, int, infm and the
+uninflected DET_simple) are tagged with the bare POS code (no features).
+
+Feature values:
+
+ube	ubestemt	indefinite
+bes	bestemt	definite
+sin	singularis	singular
+plu	pluralis	plural
+inf	infinitiv
+præ	præsens
+dat	præteritum
+imp	imperativ
+kor	perfektum partisipp (supine/-t/-tt form)
+lan	præsens partisipp (-ende)
+pos	positiv	1st degree
+kom	komparativ	2nd degree
+sup	superlativ	3rd degree

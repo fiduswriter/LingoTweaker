@@ -7,7 +7,9 @@
   Språkrådet guidance (https://sprakradet.no) and the owner-approved rule list
   in new-languages/norwegian-bokmal/proposed-rules.md.
 
-  No tagger is available: rules must not use postag/inflected matching.
+  A POS tagger is available since the Ordbøkene dictionary build (see
+  data/no/words/tagset.txt), but the rules below are surface rules: they do
+  not use postag/inflected matching (only the SENT_START built-in tag).
   Rule ids are stable and must never be renumbered.
 -->
 <rules lang="no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

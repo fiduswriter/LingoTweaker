@@ -6636,8 +6636,9 @@ impl Pipeline {
     }
 
     /// Norwegian Bokmål (`no`) engine. Hand-authored language: XML rules,
-    /// Hunspell speller and word-list rules; no legacy Java module
-    /// exists (LT ships only a spell-check-only dynamic language).
+    /// the Ordbøkene-derived POS tagger (`no_pos.dict`), the Hunspell
+    /// speller and word-list rules; no legacy Java module exists (LT ships
+    /// only a spell-check-only dynamic language).
     pub fn new_norwegian(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,
@@ -6645,6 +6646,7 @@ impl Pipeline {
         _variant: Option<&str>,
     ) -> Result<Self> {
         let f = Self::hand_authored_foundations(data_dir, Lang::No, "no_two", enabled_rules)?;
+        let tagger = Arc::new(lt_tagger::NorwegianTagger::load(data_dir.path())?);
         let spelling = Arc::new(crate::no::spelling::NorwegianSpellingRule::load(
             data_dir.path(),
         )?);
@@ -6663,6 +6665,7 @@ impl Pipeline {
         )?;
         let gender_overrides = crate::no::context::load_gender_overrides(data_dir.path())?;
         let norwegian = Arc::new(crate::no::NorwegianPipeline {
+            tagger,
             disambiguator: f.disambiguator,
             spelling,
             repetition,
@@ -7068,7 +7071,9 @@ impl Pipeline {
                 crate::zh::analyze_chinese_sentence(chinese, sentence_text)
             } else if let Some(nordum) = &self.nordum {
                 crate::nrd::analyze_nordum_sentence(nordum, sentence_text)
-            } else if self.norwegian.is_some() || self.nynorsk.is_some() {
+            } else if let Some(norwegian) = &self.norwegian {
+                crate::no::analyze_norwegian_sentence(norwegian, sentence_text)
+            } else if self.nynorsk.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
                 crate::gn::analyze_guarani_sentence(sentence_text)
@@ -10516,7 +10521,9 @@ impl Pipeline {
             crate::zh::analyze_chinese_sentence(chinese, &text[start..end])
         } else if let Some(nordum) = &self.nordum {
             crate::nrd::analyze_nordum_sentence(nordum, &text[start..end])
-        } else if self.norwegian.is_some() || self.nynorsk.is_some() {
+        } else if let Some(norwegian) = &self.norwegian {
+            crate::no::analyze_norwegian_sentence(norwegian, &text[start..end])
+        } else if self.nynorsk.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
             crate::gn::analyze_guarani_sentence(&text[start..end])

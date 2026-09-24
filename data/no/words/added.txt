@@ -1,0 +1,4 @@
+# A part-of-speech dictionary that's used additionally to the binary dictionary (no_pos.dict).
+# This does not add words to the spell checker, see hunspell/ignore.txt for that.
+# File Encoding: UTF-8
+# Format: three tab-separated fields: fullform baseform postags
