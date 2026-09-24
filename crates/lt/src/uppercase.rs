@@ -412,6 +412,16 @@ fn check_with_exception(
             match_token_pos = 3;
             third_token = Some(tokens[3].surface().to_string());
         }
+        // `UkrainianUppercaseSentenceStartRule.isException`: a list, e.g.
+        // а) б) в). Java's override returns from the whole rule, so the
+        // remaining sentences of the check are skipped as well.
+        if match_token_pos == 1
+            && match_token_pos < tokens.len() - 1
+            && cyrillic_list.is_some_and(|re| re.is_match(tokens[match_token_pos].surface()))
+            && tokens[match_token_pos + 1].surface() == ")"
+        {
+            return rule_matches;
+        }
         let check_token = third_token
             .clone()
             .or_else(|| second_token.clone())
@@ -441,10 +451,7 @@ fn check_with_exception(
 
         // allows enumeration with lowercase letters: a), iv., etc.
         if match_token_pos + 1 < tokens.len()
-            && (NUMERALS_EN.is_match(tokens[match_token_pos].surface())
-                || match_token_pos == 1
-                    && cyrillic_list
-                        .is_some_and(|re| re.is_match(tokens[match_token_pos].surface())))
+            && NUMERALS_EN.is_match(tokens[match_token_pos].surface())
             && matches!(tokens[match_token_pos + 1].surface(), "." | ")")
         {
             prevent_error = true;

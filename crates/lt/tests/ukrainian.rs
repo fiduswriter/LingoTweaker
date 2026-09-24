@@ -763,3 +763,53 @@ fn ukrainian_prep_noun_agreement() {
         );
     }
 }
+
+/// `TokenAgreementPrepNounRule` keeps its prep state across skip-type
+/// exception steps (as in the Java reference), so an intervening `part`
+/// token such as the `не` in `незважаючи не це` does not abort the check.
+#[test]
+fn ukrainian_prep_noun_skips_intervening_particle() {
+    let _guard = engine_guard();
+
+    let text = "незважаючи не це";
+    let matches = one(text, "UK_PREP_NOUN_INFLECTION_AGREEMENT");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (14, 16));
+    assert_eq!(
+        matches[0].message,
+        "Прийменник «незважаючи» вимагає іншого відмінка: , а знайдено: називний, знахідний"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["це".to_string()]);
+}
+
+/// `UkrainianUppercaseSentenceStartRule` flags a lowercase sentence start
+/// after an abbreviation dot: its list exception requires `)` after the
+/// lowercase letter (like Java's override), while `.` only feeds the
+/// `NUMERALS_EN` numeric-enumeration check, which does not match Cyrillic.
+/// A letter followed by `)` is a genuine list marker and stays exempt.
+#[test]
+fn ukrainian_uppercase_start_after_abbreviation_dot() {
+    let _guard = engine_guard();
+
+    let text = "т. 2 ч. 1";
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 1));
+    assert_eq!(suggestions(&matches[0]), vec!["Т".to_string()]);
+    assert!(one("а) наступне.", "UPPERCASE_SENTENCE_START").is_empty());
+}
+
+/// The adj-noun agreement rule exempts a plural adjective followed by a
+/// coordinated proper-name list (the `forwardConjFind` branch of Java's
+/// exception helper), so only the lowercase sentence start is reported.
+#[test]
+fn ukrainian_adj_noun_coordinated_names_exception() {
+    let _guard = engine_guard();
+
+    let text = "молодші Олександр Ірванець, Оксана Луцишина";
+    assert!(one(text, "UK_ADJ_NOUN_INFLECTION_AGREEMENT").is_empty());
+    let matches = one(text, "UPPERCASE_SENTENCE_START");
+    assert_eq!(matches.len(), 1);
+    assert_utf16(text, &matches[0], (0, 7));
+    assert_eq!(suggestions(&matches[0]), vec!["Молодші".to_string()]);
+}

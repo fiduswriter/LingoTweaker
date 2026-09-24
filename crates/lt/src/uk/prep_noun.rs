@@ -287,6 +287,9 @@ impl TokenAgreementPrepNounRule {
                     continue;
                 }
                 Type::Skip => {
+                    // Java's `case skip: i += exception.skip; continue;`
+                    // keeps the prep state (only `exception` clears it).
+                    state_opt = Some(state);
                     i += ex.skip + 1;
                     continue;
                 }
@@ -382,6 +385,9 @@ impl TokenAgreementPrepNounRule {
                         continue;
                     }
                     Type::Skip => {
+                        // Java's `case skip: i += exception.skip; continue;`
+                        // keeps the prep state (only `exception` clears it).
+                        state_opt = Some(state);
                         i += ex.skip + 1;
                         continue;
                     }
@@ -394,6 +400,9 @@ impl TokenAgreementPrepNounRule {
                         continue;
                     }
                     Type::Skip => {
+                        // Java's `case skip: i += exception.skip; continue;`
+                        // keeps the prep state (only `exception` clears it).
+                        state_opt = Some(state);
                         i += ex.skip + 1;
                         continue;
                     }
@@ -408,6 +417,9 @@ impl TokenAgreementPrepNounRule {
                         continue;
                     }
                     Type::Skip => {
+                        // Java's `case skip: i += exception.skip; continue;`
+                        // keeps the prep state (only `exception` clears it).
+                        state_opt = Some(state);
                         i += ex.skip + 1;
                         continue;
                     }

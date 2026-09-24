@@ -806,6 +806,14 @@ fn is_exception(
     {
         return true;
     }
+    // моїх маму й сестер
+    if noun_pos < n - 2
+        && has(adj_at, "adj:p:.*")
+        && forward_conj_find(tokens, noun_pos + 1, 2)
+        && has_overlap_ignore_gender(master, slave, Some("p"), None)
+    {
+        return true;
+    }
     if noun_pos < n - 1
         && lemma(noun_at, &["пара"])
         && has(adj_at, "adj.*:p:.*")
@@ -1182,6 +1190,54 @@ fn reverse_conj_adv_find(tokens: &[&AnalyzedTokenReadings], pos: usize, depth: u
             return false;
         }
         i -= 1;
+    }
+    false
+}
+
+/// `TokenAgreementAdjNounExceptionHelper.checkTextInSent`.
+fn check_text_in_sent(tokens: &[&AnalyzedTokenReadings], pos: usize, text: &str) -> bool {
+    for (k, word) in text.split(' ').enumerate() {
+        if pos + k >= tokens.len() || !tokens[pos + k].surface().eq_ignore_ascii_case(word) {
+            return false;
+        }
+    }
+    true
+}
+
+/// `TokenAgreementAdjNounExceptionHelper.forwardConjFind`.
+fn forward_conj_find(tokens: &[&AnalyzedTokenReadings], pos: usize, depth: usize) -> bool {
+    let n = tokens.len();
+    for i in pos..n {
+        if i > pos + depth {
+            break;
+        }
+        let tr = tokens[i];
+        if CONJ_FOR_PLURAL_WITH_COMMA.contains(&tok_lower(tr).as_str()) {
+            // check 2nd part of plural
+            if i + 3 < n
+                && check_text_in_sent(tokens, i + 1, "а також")
+                && has(tokens[i + 3], "(noun|adj|num|adv(?!p)).*")
+            {
+                return true;
+            }
+            if i == n - 1
+                || (!has(tokens[i + 1], "(noun|adj|num|adv(?!p)).*")
+                    && !lt_tagger::uk_helpers::is_capitalized(tokens[i + 1].surface())
+                    && !Regex::new(r#"^["«“„]$"#)
+                        .unwrap()
+                        .is_match(tokens[i + 1].surface())
+                        .unwrap_or(false))
+            {
+                return false;
+            }
+            return true;
+        }
+        // for unknown last names: згадувані Костянтин Скоркін та Олена Заславська
+        if !has(tr, "(noun|adj|prep|adv(?!p)|number:latin).*")
+            && !lt_tagger::uk_helpers::is_capitalized(tr.surface())
+        {
+            return false;
+        }
     }
     false
 }

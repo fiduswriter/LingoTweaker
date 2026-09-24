@@ -181,10 +181,9 @@ elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)
 elif [ "$LANG_ARG" = "gl" ]; then
-  # at exact parity since the deterministic work-budget emulation of the
-  # native hunspell wall-clock timers (former docs/differences.md #7); the
-  # match set was already identical, and the two suggestion-list diffs are
-  # gone with the `WORK_SUGGESTION` cut; no allowances
+  # at exact parity: the deterministic work-budget emulation of the native
+  # hunspell wall-clock timers reproduces the pinned Java suggestion lists;
+  # no allowances
   :
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
@@ -192,16 +191,16 @@ elif [ "$LANG_ARG" = "fr" ]; then
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
 elif [ "$LANG_ARG" = "pl" ]; then
-  # at exact parity since the <unify> engine fixes (former docs/differences.md
-  # #9); no allowances
+  # at exact parity: the <unify> engine (unified antipattern matching,
+  # per-token max-run reading sets, lemma-selector filters) and the regex
+  # translation match Java; no allowances
   :
 elif [ "$LANG_ARG" = "uk" ]; then
-  # documented known fidelity gaps (docs/differences.md #12): the prep+`не`+
-  # noun case-government gap, an overlap tie-break for a proper-name list and
-  # the abbreviation sentence segmentation (`т. 2 ч. 1`).
-  EXTRA+=(--expect-only-java=UK_PREP_NOUN_INFLECTION_AGREEMENT=1)
-  EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
-  EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
+  # at exact parity: the prep-noun rule keeps its state across skip steps,
+  # the uppercase-start list exception requires `)` and the adj-noun
+  # exception helper covers coordinated proper names, as in Java; no
+  # allowances
+  :
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

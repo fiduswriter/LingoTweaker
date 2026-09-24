@@ -149,13 +149,11 @@ date-filter rules either).
   handling, `RussianWordTokenizer`, hybrid disambiguator, `RussianChunker`,
   both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules
   and `compile_failures()` is empty).
-  uk is 3 only-Java / 1 only-Rust / 0 field diffs, the documented known
-  fidelity gaps of `docs/differences.md` #12 (a prep+`не`+noun
-  case-government gap, the `т. 2 ч. 1` abbreviation sentence segmentation and
-  one plural-adjective/proper-name overlap tie-break; the XML disambiguation
-  forward-scan cascade is fixed), pinned exactly with
-  `--expect-only-java`/`--expect-only-rust` in
-  `scripts/ci/parity.sh` (D-273…D-281).
+  uk is exactly 0/0/0 (D-273…D-281): the prep-noun rule keeps its prep state
+  across skip-type exceptions like Java, the Ukrainian
+  `UppercaseSentenceStartRule` list exception requires `)` after the lowercase
+  letter like Java's override, and the adj-noun exception helper's
+  `forwardConjFind` branch covers coordinated proper-name lists.
   sr is exactly 0/0/0 (D-288): the pinned `sr` module is excluded from the LT
   reactor and does not compile against any released core (D-285), so the
   golden is captured from a forward-ported in-container copy

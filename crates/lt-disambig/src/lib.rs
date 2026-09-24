@@ -1484,8 +1484,8 @@ mod pl_unify_test {
             .collect()
     }
 
-    /// Former docs/differences.md #9, `Zwycięzcy tych par awansują do I
-    /// rundy.`: `unify_adj_subst`'s antipattern is a `<unify>` over
+    /// `Zwycięzcy tych par awansują do I rundy.`: `unify_adj_subst`'s
+    /// antipattern is a `<unify>` over
     /// subst+adj and must be tested with the unifier (subst `Zwycięzcy`
     /// does not case-agree with adj `tych`), so the rule applies and reduces
     /// `par` to the plural genitive reading (and `tych` to genitive).
@@ -1519,8 +1519,8 @@ mod pl_unify_test {
         );
     }
 
-    /// Former docs/differences.md #9, `Rada Języka Polskiego.`:
-    /// `subst_not_unified`'s antipattern marks only its second (adj) token,
+    /// `Rada Języka Polskiego.`: `subst_not_unified`'s antipattern marks only
+    /// its second (adj) token,
     /// so Java's overlap test sees the marker span (`Polskiego`), not the
     /// whole match — the rule fires and filters `Rada` to its subst reading.
     #[test]
@@ -1542,7 +1542,7 @@ mod pl_unify_test {
         );
     }
 
-    /// Former docs/differences.md #9: `<disambig action="filter"><match
+    /// `<disambig action="filter"><match
     /// no="1">mieć</match></disambig>` (Java `Match.setLemmaString` +
     /// `MatchState.filterReadings`) keeps only the readings whose lemma
     /// equals the selector (`MAJA_MAIC`).

@@ -4958,7 +4958,7 @@ impl Pipeline {
     /// adds the speller plus the generic built-ins (including
     /// `GenericUnpairedBracketsRule`). Upstream ships no `lt_LT` dictionary, so
     /// the owner asked us to vendor one ourselves; `lt` therefore stays on the
-    /// tests-only gate (see `crate::lt`, `docs/differences.md` #12).
+    /// tests-only gate.
     pub fn new_lithuanian(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,

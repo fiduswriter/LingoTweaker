@@ -71,16 +71,19 @@ suggestion-engine and dotted-abbreviation ports); sv is at 0/0/0 (#11,
 resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
 (#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/0 (#15, resolved: the morfologik speller `getFrequency` now
 reproduces Java's signed-byte frequency arithmetic, so the
-frequency-weighted `MORFOLOGIK_RULE_TL` suggestions order identically); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 3/1/0 (#19, docs/differences.md #12); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
+frequency-weighted `MORFOLOGIK_RULE_TL` suggestions order identically); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 0/0/0 (#19, resolved); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd` and `gn` are hand-authored
 languages with no legacy Java module, so they run the same matrix with a
 tests-only gate (integration test + `lt-cli inventory`, no Java oracle); `lt`
 runs the same tests-only gate because its legacy module references an
 unshipped `lt_LT.dict` and throws on every check, so the Rust engine vendors a
 third-party ispell-lt dictionary under the unchanged `MORFOLOGIK_RULE_LT_LT`
-id (docs/differences.md #11). `uk` is at 3 only-Java / 1 only-Rust / 0 field
-diffs (#12: a prep+`не`+noun case-government gap, abbreviation sentence
-segmentation and one plural-adjective/proper-name overlap tie-break; the XML
-disambiguation forward-scan cascade is fixed). `ar` is at 0 only-Java / 0 only-Rust / 0 field diffs (#21; resolved: the
+id (docs/differences.md #11). `uk` is at 0 only-Java / 0 only-Rust / 0 field
+diffs (#19, resolved: the prep-noun rule keeps its prep state across skip-type
+exceptions like Java, so an intervening `part` token does not abort the check;
+the Ukrainian `UppercaseSentenceStartRule` list exception requires `)` after
+the lowercase letter, matching Java's override; and the adj-noun exception
+helper's `forwardConjFind` branch (plural adjective + proper-name/conjunction
+list, e.g. `молодші Олександр Ірванець, Оксана Луцишина`) is ported). `ar` is at 0 only-Java / 0 only-Rust / 0 field diffs (#21; resolved: the
 `ArabicNumbersWords` number engine (with `ArabicNumberPhraseFilter`), the
 `AR_INFLECTED_ONE_WORD` / `AR_VERB_TRANSITIVE_IINDIRECT` rule classes and the
 speller wrong-split range logic are ported). `fa` is at 0 only-Java / 0 only-Rust / 0 field diffs (#22; resolved: the
