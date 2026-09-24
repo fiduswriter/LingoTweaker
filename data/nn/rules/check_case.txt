@@ -1,0 +1,43 @@
+# Nynorsk (nn) — correct lowercase forms (NN_CAPITALIZATION,
+# AbstractCheckCaseRule): the file lists the standard forms; other casings
+# (except sentence start) are flagged.
+nynorsk
+bokmål
+norsk
+tysk
+engelsk
+fransk
+spansk
+svensk
+dansk
+italiensk
+russisk
+kinesisk
+japansk
+arabisk
+nederlandsk
+portugisisk
+polsk
+islandsk
+finsk
+gresk
+latin
+januar
+februar
+mars
+april
+mai
+juni
+juli
+august
+september
+oktober
+november
+desember
+måndag
+tysdag
+onsdag
+torsdag
+fredag
+laurdag
+sundag

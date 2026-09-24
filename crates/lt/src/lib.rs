@@ -62,6 +62,7 @@ mod ml;
 mod morfologik_spelling;
 mod multitoken;
 mod nl;
+mod nn;
 mod no;
 mod nrd;
 mod paragraph;
@@ -511,6 +512,12 @@ impl EngineBuilder {
                 &self.options.enabled_rules,
                 self.variant.as_deref(),
             )?,
+            Lang::Nn => Pipeline::new_nynorsk(
+                &data_dir,
+                self.today,
+                &self.options.enabled_rules,
+                self.variant.as_deref(),
+            )?,
             Lang::Gn => Pipeline::new_guarani(
                 &data_dir,
                 self.today,
@@ -656,6 +663,9 @@ impl Engine {
         }
         if let Some(nordum) = &self.pipeline.nordum {
             return nordum.disambiguator.rules_len();
+        }
+        if let Some(nynorsk) = &self.pipeline.nynorsk {
+            return nynorsk.disambiguator.rules_len();
         }
         if let Some(guarani) = &self.pipeline.guarani {
             return guarani.disambiguator.rules_len();

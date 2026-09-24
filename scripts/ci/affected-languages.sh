@@ -7,9 +7,10 @@
 #
 #   language-local -> that one language
 #     crates/lt/src/<cc>/**       language module (dir)
-#     crates/lt/src/<cc>.rs       module entry file (no/nrd/gn only; for the
-#                                 Java-oracle languages the entry file beside
-#                                 the module stays conservatively shared)
+#     crates/lt/src/<cc>.rs       module entry file (no/nrd/nn/gn only; for
+#                                 the Java-oracle languages the entry file
+#                                 beside the module stays conservatively
+#                                 shared)
 #     crates/lt/tests/<test>.rs   per-language integration test (see table)
 #     data/<cc>/**                vendored language data
 #     scripts/oracle/<cc>/**      per-language Java probes/oracles
@@ -79,6 +80,7 @@ ja japanese crates/lt/src/ja*.rs
 zh chinese crates/lt/src/zh*.rs
 no norwegian crates/lt/src/no*.rs
 nrd nordum crates/lt/src/nrd*.rs tools/nordum-dict/*
+nn nynorsk crates/lt/src/nn*.rs tools/nn-dict/*
 gn guarani crates/lt/src/gn*.rs
 "
 

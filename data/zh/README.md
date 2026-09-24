@@ -6,7 +6,7 @@
 (`languagetool-language-modules/zh/src/main/resources/org/languagetool/rules/zh/grammar.xml`,
 LGPL-2.1-or-later). The upstream file had 1,863 rule definitions (634 top-level
 rules + 345 rulegroups) and 3,730 examples; a per-rule triage removed 41 rules
-that could not work with the jieba tagger (see `docs/differences.md` §14), so
+that could not work with the jieba tagger (see `docs/differences.md` §13), so
 the file now has 1,822 rule definitions.
 
 The upstream module also ships `resource/zh/common_words.txt` and

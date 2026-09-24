@@ -678,6 +678,14 @@ impl Speller {
     }
 
     /// `Speller.getFrequency`: frequency code of the first stored annotation.
+    ///
+    /// Java subtracts the range base from a *signed* `byte`
+    /// (`array[remaining - 1] - 'A'`), so annotation bytes >= 0x80 yield
+    /// negative "frequencies" (e.g. the tl_PH entries `ang+\xd3\xbf`,
+    /// `ng+\xdb\xbc`, `na+\xd5\xa0` give -130/-133/-161). Those negative
+    /// codes are exactly what feeds the composite candidate weight in
+    /// [`Self::candidate`] (no clamping on either side), so the signedness
+    /// must be reproduced, not normalized.
     pub fn get_frequency(&self, word: &str) -> i32 {
         if !self.meta.frequency_included {
             return 0;
@@ -697,7 +705,8 @@ impl Speller {
             .source
             .first_final_last_label(self.source.end_node(sep))
         {
-            Some(last) => (last as i32) - (FIRST_RANGE_CODE as i32),
+            // Java `byte` is signed: `array[remaining - 1] - 'A'`.
+            Some(last) => (last as i8 as i32) - (FIRST_RANGE_CODE as i32),
             None => 0,
         }
     }
@@ -858,7 +867,9 @@ impl Speller {
     }
 
     fn candidate(&self, word: String, distance: i32) -> CandidateData {
-        let freq = self.get_frequency(&word).max(0);
+        // Java's CandidateData constructor uses getFrequency verbatim (which
+        // is negative for high-bit annotation bytes); no clamping.
+        let freq = self.get_frequency(&word);
         CandidateData {
             word,
             orig_distance: distance,
@@ -1635,7 +1646,54 @@ pub fn uppercase_first_char(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use lt_data::PathExt as _;
     use lt_tagger::DictionaryInfo;
+
+    use std::path::Path;
+
+    /// Java's `Speller.getFrequency` subtracts the range base from a signed
+    /// `byte`, so the tl_PH entries with high-bit annotations
+    /// (`ang+\xd3\xbf`, `ng+\xdb\xbc`, `na+\xd5\xa0`) get *negative*
+    /// frequencies and therefore large composite weights (probed against
+    /// morfologik-speller 2.2.0 with the pinned dictionary). Reading the byte
+    /// unsigned used to rank `ang`/`ng`/`na` first instead of last for the
+    /// misspelling `nag` (docs/differences.md #10, resolved).
+    #[test]
+    fn tl_frequency_annotations_are_read_as_signed_bytes() {
+        let dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/tl/hunspell");
+        if !dir.lt_exists() {
+            eprintln!("skipping: no vendored data");
+            return;
+        }
+        let speller =
+            Speller::from_dict_file(&dir.join("tl_PH.dict"), &dir.join("tl_PH.info"), 2).unwrap();
+        assert_eq!(speller.get_frequency("ang"), -130);
+        assert_eq!(speller.get_frequency("ng"), -133);
+        assert_eq!(speller.get_frequency("na"), -161);
+        // single-byte ASCII annotations are unaffected
+        assert_eq!(speller.get_frequency("nang"), 55);
+        assert_eq!(speller.get_frequency("nga"), 19);
+        // not in the dictionary
+        assert_eq!(speller.get_frequency("nag"), 0);
+
+        let candidates = speller.find_similar_word_candidates("nag");
+        let position = |word: &str| {
+            candidates
+                .iter()
+                .position(|c| c.word == word)
+                .unwrap_or_else(|| panic!("{word} not among candidates"))
+        };
+        let weight = |word: &str| candidates[position(word)].distance;
+        // `1 * 26 + 26 - (-130) - 1` = 181: behind the ASCII-coded words
+        assert_eq!(weight("ang"), 181);
+        assert_eq!(weight("ng"), 184);
+        assert_eq!(weight("na"), 212);
+        for word in [
+            "nang", "nga", "pag", "mag", "wag", "bag", "Naga", "Pag", "nagi",
+        ] {
+            assert!(position(word) < position("ang"), "{word} before ang");
+        }
+    }
 
     /// `DictionaryAttribute.SUPPORT_RUN_ON_WORDS` is spelled
     /// `fsa.dict.speller.runon-words` (no hyphen between `run` and `on`);

@@ -184,6 +184,6 @@ fn japanese_example_coverage() {
     }
     assert!(err > 700, "expected the 735 error examples");
     // All 45 initial misses were fixed by realigning the affected patterns to
-    // Lindera's token boundaries (see docs/differences.md §13).
+    // Lindera's token boundaries (see docs/differences.md §12).
     assert_eq!(hit, err, "example coverage regressed: {hit}/{err}");
 }

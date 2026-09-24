@@ -3,31 +3,32 @@
 # against the pinned Java CheckDump golden in docs/parity/golden (captured
 # once with Docker; CI needs none). See docs/parity/golden/README.md.
 #
-# Languages without a usable Java oracle (no, nrd, gn; lt has a broken
+# Languages without a usable Java oracle (no, nrd, nn, gn; lt has a broken
 # upstream module; ja/zh have no golden) get a tests-only gate: the
 # per-language integration test plus an `lt-cli inventory` rule-count sanity
 # check. No Docker, no Java, no golden.
 #
-# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|ja|zh|no|nrd|gn>
+# Usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|ja|zh|no|nrd|nn|gn>
 #   the Java-oracle languages require target/release/lt-cli; the tests-only
 #   languages use target/release/lt-cli or target/debug/lt-cli
 set -euo pipefail
 
-LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|ja|zh|de-x-simple|no|nrd|gn>}"
+LANG_ARG="${1:?usage: scripts/ci/parity.sh <en|de|es|fr|it|pt|nl|ca|gl|ro|pl|sk|sl|el|da|sv|is|eo|ast|br|tl|lt|crh|be|ru|uk|sr|ar|fa|km|ml|ta|ja|zh|de-x-simple|no|nrd|nn|gn>}"
 RS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 # The parity-matrix gate name may differ from the engine language code (the
 # Simple German variant is gated as `de-x-simple` but checked as its
 # BCP-47 private-use long code, D-309).
 CHECK_LANG="$LANG_ARG"
 
-# Tests-only gate for languages without a Java oracle (no/nrd/gn): there is
+# Tests-only gate for languages without a Java oracle (no/nrd/nn/gn): there is
 # no pinned golden to diff, so assert the integration test passes and that
 # `lt-cli inventory` loads the language rules (> 0 rules).
 case "$LANG_ARG" in
-no | nrd | gn | lt | ja | zh)
+no | nrd | nn | gn | lt | ja | zh)
   case "$LANG_ARG" in
   no) TEST_SUITE=norwegian ;;
   nrd) TEST_SUITE=nordum ;;
+  nn) TEST_SUITE=nynorsk ;;
   gn) TEST_SUITE=guarani ;;
   # `lt` has a legacy module but it is unusable: the referenced
   # `lt/hunspell/lt_LT.dict` is not shipped upstream, so the legacy engine
@@ -192,40 +193,26 @@ elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)
 elif [ "$LANG_ARG" = "gl" ]; then
-  # documented speller divergence (docs/differences.md #7): the match set is
-  # identical; the native hunspell suggestion engine (generators + n-gram
-  # fallback) is ported, leaving a small wall-clock-boundary residue
-  EXTRA+=(--expect-field-diffs=HUNSPELL_RULE=2)
+  # at exact parity: the deterministic work-budget emulation of the native
+  # hunspell wall-clock timers reproduces the pinned Java suggestion lists;
+  # no allowances
+  :
 elif [ "$LANG_ARG" = "fr" ]; then
   # documented deliberate divergences (docs/differences.md #3, #4, #5)
   EXTRA+=(--expect-only-java=FRENCH_WORD_REPEAT_RULE=7)
   EXTRA+=(--expect-only-java=SUJET_AUXILIAIRE=1)
   EXTRA+=(--expect-field-diffs=AGREEMENT_PARTICULAR=1)
-elif [ "$LANG_ARG" = "tl" ]; then
-  # documented suggestion-order divergence (docs/differences.md #10): the
-  # match and suggestion *sets* are identical; the frequency-included
-  # tl_PH Morfologik dictionary orders the frequency-weighted candidates
-  # differently for `nag`.
-  EXTRA+=(--expect-field-diffs=MORFOLOGIK_RULE_TL=5)
 elif [ "$LANG_ARG" = "pl" ]; then
-  # documented known fidelity gaps (docs/differences.md #9): the
-  # <unify negate="yes"> agreement rules, the ZDANIA_ZLOZONE comp:comma
-  # disambiguation context and the PCON_VERB participle rule
-  EXTRA+=(--expect-only-java=ADJ_SUBST_ADJ_UNIFY=1)
-  EXTRA+=(--expect-only-java=SUBST_ADJ_UNIFY=1)
-  EXTRA+=(--expect-only-java=PCON_VERB=1)
-  EXTRA+=(--expect-only-java=ZDANIA_ZLOZONE=1)
-  EXTRA+=(--expect-only-rust=ADJ_SUBST_ADJ_UNIFY=1)
-  EXTRA+=(--expect-only-rust=NIEZGODNO_PRZYPADKW_PRZYMIOTNIKA_I_RZECZOWNIKA_RODZAJU_ESKIEGO=2)
-  EXTRA+=(--expect-only-rust=NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA=1)
-  EXTRA+=(--expect-only-rust=ZDANIA_ZLOZONE=1)
+  # at exact parity: the <unify> engine (unified antipattern matching,
+  # per-token max-run reading sets, lemma-selector filters) and the regex
+  # translation match Java; no allowances
+  :
 elif [ "$LANG_ARG" = "uk" ]; then
-  # documented known fidelity gaps (docs/differences.md #12): the prep+`не`+
-  # noun case-government gap, an overlap tie-break for a proper-name list and
-  # the abbreviation sentence segmentation (`т. 2 ч. 1`).
-  EXTRA+=(--expect-only-java=UK_PREP_NOUN_INFLECTION_AGREEMENT=1)
-  EXTRA+=(--expect-only-java=UPPERCASE_SENTENCE_START=2)
-  EXTRA+=(--expect-only-rust=UK_ADJ_NOUN_INFLECTION_AGREEMENT=1)
+  # at exact parity: the prep-noun rule keeps its state across skip steps,
+  # the uppercase-start list exception requires `)` and the adj-noun
+  # exception helper covers coordinated proper names, as in Java; no
+  # allowances
+  :
 fi
 
 python3 "$RS_ROOT/scripts/oracle/compare-checks.py" "$JAVA" "$RUST" 0 \

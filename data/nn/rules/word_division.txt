@@ -1,0 +1,7 @@
+# Nynorsk (nn) — one word vs two words (NN_WORD_DIVISION).
+# Wrong forms must be rejected by nn_NO.dic; suggestions accepted (verified
+# with tools/nn-dict/check_pairs.py).
+imorgen=i morgon
+etterhvert=etter kvart
+pågrunn av=på grunn av
+tiltross for=til tross for

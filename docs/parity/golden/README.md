@@ -82,11 +82,11 @@ date-filter rules either).
   the documented deliberate divergences `FRENCH_WORD_REPEAT_RULE` = 7
   only-Java (#3), `SUJET_AUXILIAIRE` = 1 only-Java (#4) and
   `AGREEMENT_PARTICULAR` = 1 field diff (#5); pt has exactly the documented
-  `PODER_SER_POSSIVEL` = 1 field diff (#6). gl has 0 only-Java / 0 only-Rust
-  and exactly the documented `HUNSPELL_RULE` = 2 field diffs (#7: the match
-  set is identical; the native hunspell suggestion engine including the
-  n-gram fallback is ported, the residue is the upstream wall-clock timer
-  boundary). es has 0
+  `PODER_SER_POSSIVEL` = 1 field diff (#6). gl is exactly 0/0/0 (#7 resolved:
+  the former `HUNSPELL_RULE` = 2 field diffs came from the upstream
+  wall-clock timers in the native hunspell suggestion engine, which the port
+  now emulates with a deterministic work budget checked at the same
+  positions). es has 0
   only-Java / 0 field diffs and exactly the documented
   `AGREEMENT_DEMONSTRATIVE_VERB` = 11 only-Rust matches (#8: the 11 incorrect
   examples of the hand-authored demonstrative-verb rule, which Java does not
@@ -98,12 +98,14 @@ date-filter rules either).
   runs the affected languages, not a static list (all ten on shared
   changes, one language on language-local changes, none for docs-only
   changes; P6.3/D-134). nl is exactly 0/0/0 (D-133); ca is exactly 0/0/0
-  (D-188…D-190); gl is 0/0/2 (D-192…D-198 + D-224, reduced by the suggestion port); ro is exactly 0/0/0 (D-199);
-  pl is 4 only-Java / 5 only-Rust / 0 field diffs,   the documented known
-  fidelity gaps of `docs/differences.md` #9 (the `<unify negate="yes">`
+  (D-188…D-190); gl is exactly 0/0/0 (the former 0/0/2 #7 is resolved by the
+  deterministic work-budget emulation of the hunspell suggestion timers,
+  alongside the kept D-224 MAP node budget); ro is exactly 0/0/0 (D-199);
+  pl is exactly 0/0/0 (the former known
+  fidelity gaps of `docs/differences.md` #9 — the `<unify negate="yes">`
   agreement rules, the ZDANIA_ZLOZONE comp:comma disambiguation context and
-  the PCON_VERB participle rule), pinned exactly with
-  `--expect-only-java`/`--expect-only-rust` in `scripts/ci/parity.sh`.
+  the PCON_VERB participle rule — are resolved by the `<unify>` engine fixes;
+  no allowances).
   sk is exactly 0/0/0 (D-212); the sk input excludes the parallel/unreferenced
   `grammar-nezaradene.xml` (not loaded by `Slovak.getRuleFileNames`).
   sl is exactly 0/0/0 (D-213; Slovenian has no tagger/synthesizer/
@@ -133,10 +135,12 @@ date-filter rules either).
   two shared gaps the corpus surfaced are fixed: `<match no="0"
   regexp_match=... regexp_replace=...>` token references in patterns and the
   multi-word `IGNORE_SPELLING` anti-patterns from the spelling word lists).
-  tl is 0 only-Java / 0 only-Rust / exactly the documented
-  `MORFOLOGIK_RULE_TL` = 5 suggestion-order field diffs (docs/differences.md
-  #10; the frequency-included `tl_PH` dictionary orders the weighted
-  candidates differently, the match and suggestion sets are identical).
+  tl is exactly 0/0/0: the former `MORFOLOGIK_RULE_TL` = 5 suggestion-order
+  field diffs are resolved (Java's `Speller.getFrequency` subtracts the range
+  base from a *signed* byte, so the high-bit tl_PH frequency annotations of
+  `ang`/`ng`/`na` sort last for the misspelling `nag`; the morfologik speller
+  port now reads the byte signed too, the match and suggestion sets were
+  identical before).
   crh is exactly 0/0/0: the former `COMPLEX_NUMBER_DEFIS_MISSING` only-Java
   match is resolved (Java's `UNICODE_CASE` folds
   `ı`/`İ` into `[A-Za-z]`; `lt_pattern` now adds them to case-insensitive
@@ -145,13 +149,11 @@ date-filter rules either).
   handling, `RussianWordTokenizer`, hybrid disambiguator, `RussianChunker`,
   both Morfologik spellers, the six XML filter classes, the `RU_*` Java rules
   and `compile_failures()` is empty).
-  uk is 3 only-Java / 1 only-Rust / 0 field diffs, the documented known
-  fidelity gaps of `docs/differences.md` #12 (a prep+`не`+noun
-  case-government gap, the `т. 2 ч. 1` abbreviation sentence segmentation and
-  one plural-adjective/proper-name overlap tie-break; the XML disambiguation
-  forward-scan cascade is fixed), pinned exactly with
-  `--expect-only-java`/`--expect-only-rust` in
-  `scripts/ci/parity.sh` (D-273…D-281).
+  uk is exactly 0/0/0 (D-273…D-281): the prep-noun rule keeps its prep state
+  across skip-type exceptions like Java, the Ukrainian
+  `UppercaseSentenceStartRule` list exception requires `)` after the lowercase
+  letter like Java's override, and the adj-noun exception helper's
+  `forwardConjFind` branch covers coordinated proper-name lists.
   sr is exactly 0/0/0 (D-288): the pinned `sr` module is excluded from the LT
   reactor and does not compile against any released core (D-285), so the
   golden is captured from a forward-ported in-container copy

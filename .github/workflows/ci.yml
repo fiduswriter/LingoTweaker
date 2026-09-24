@@ -138,7 +138,7 @@ jobs:
   # must be 0 only-Java / 0 only-Rust / 0 field diffs; en carries exactly the
   # one documented deliberate field diff; fr carries the documented
   # divergences #3/#4/#5 and pt #6 (validated exactly by
-  # --expect-only-java/--expect-field-diffs). no/nrd/gn have no Java oracle
+  # --expect-only-java/--expect-field-diffs). no/nrd/nn/gn have no Java oracle
   # and run the parity.sh tests-only gate (integration test + inventory).
   # The matrix is the affected language set (P6.3/D-134), not a static list.
   parity:

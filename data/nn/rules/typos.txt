@@ -1,0 +1,4 @@
+# Nynorsk (nn) — common misspellings (NN_TYPOS). Wrong forms rejected by
+# nn_NO.dic, suggestions accepted (verified with tools/nn-dict/check_pairs.py).
+abbonnement=abonnement
+addresse=adresse

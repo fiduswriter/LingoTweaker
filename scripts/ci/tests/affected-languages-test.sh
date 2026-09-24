@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/affected-languages.sh"
-ALL='["en","de-x-simple","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","ja","zh","no","nrd","gn"]'
+ALL='["en","de-x-simple","de","es","fr","it","pt","nl","ca","gl","ro","pl","sk","sl","el","da","sv","is","eo","ast","br","tl","lt","crh","be","ru","uk","sr","ar","fa","km","ml","ta","ja","zh","no","nrd","nn","gn"]'
 fails=0
 
 check() {
@@ -136,6 +136,11 @@ check "nrd module" '["nrd"]' crates/lt/src/nrd/rules.rs
 check "nrd module entry file" '["nrd"]' crates/lt/src/nrd.rs
 check "nrd integration test" '["nrd"]' crates/lt/tests/nordum.rs
 check "nordum dictionary generator" '["nrd"]' tools/nordum-dict/build-nordum-dict.py
+check "nn data" '["nn"]' data/nn/rules/grammar.xml
+check "nn module" '["nn"]' crates/lt/src/nn/rules.rs
+check "nn module entry file" '["nn"]' crates/lt/src/nn.rs
+check "nn integration test" '["nn"]' crates/lt/tests/nynorsk.rs
+check "nn dictionary tools" '["nn"]' tools/nn-dict/derive_bokmaal_forms.py
 check "gn data" '["gn"]' data/gn/rules/grammar.xml
 check "gn module entry file" '["gn"]' crates/lt/src/gn.rs
 check "gn integration test" '["gn"]' crates/lt/tests/guarani.rs

@@ -118,7 +118,7 @@ fn chinese_example_coverage() {
         "false positives on correct examples regressed: {fp}"
     );
     // Lindera's jieba segmentation/tagging differs from HanLP's. The 2026-09-24
-    // per-rule triage (docs/differences.md §14) realigned the surviving typo
+    // per-rule triage (docs/differences.md §13) realigned the surviving typo
     // rules to whole jieba tokens and disabled the unreliable
     // segmentation/POS/classifier rules. The residue is 8 duplicate rules whose
     // error example is already caught under another rule id.

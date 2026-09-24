@@ -341,6 +341,9 @@ pub struct DisambigMatchFilter {
     pub postag_replace: Option<String>,
     pub regexp_match: Option<String>,
     pub regexp_replace: Option<String>,
+    /// text content of `<match no="N">lemma</match>` (Java
+    /// `Match.setLemmaString`: the static-lemma selector)
+    pub lemma: Option<String>,
 }
 
 /// A `<disambig action="...">` element of a disambiguation rule.
@@ -1128,6 +1131,9 @@ struct Loader {
     /// (Java `XMLRuleHandler.inMatch` / `setLemmaString`)
     in_match: bool,
     match_buf: String,
+    /// `<match>` inside `<disambig>`: the captured text is the static-lemma
+    /// selector of the disambiguation filter
+    in_disambig_match: bool,
     /// inside `<phrases>`
     in_phrases: bool,
     /// id of the `<phrase>` currently being defined
@@ -1197,6 +1203,7 @@ impl Loader {
             group_antipatterns: Vec::new(),
             in_match: false,
             match_buf: String::new(),
+            in_disambig_match: false,
             in_phrases: false,
             phrase_id: None,
             phrase_map: std::collections::HashMap::new(),
@@ -1224,7 +1231,7 @@ impl Loader {
                                 .as_ref()
                                 .is_some_and(|p| p.current_disambig.is_some())
                             {
-                                loader.on_disambig_match_empty(&e);
+                                loader.on_disambig_match_empty(&e, true);
                             } else {
                                 loader.on_match_element(&e, true);
                             }
@@ -1857,7 +1864,7 @@ impl Loader {
                     .as_ref()
                     .is_some_and(|p| p.current_disambig.is_some())
                 {
-                    self.on_disambig_match_empty(e);
+                    self.on_disambig_match_empty(e, false);
                 } else {
                     self.on_match_element(e, false);
                 }
@@ -1991,8 +1998,15 @@ impl Loader {
 
     /// `<match no="..." postag="..." postag_regexp="yes"/>` inside a
     /// `<disambig>` element (Java `DisambiguationRuleHandler` `posSelector`):
-    /// the action keeps only the readings selected by the match.
-    fn on_disambig_match_empty(&mut self, e: &quick_xml::events::BytesStart<'_>) {
+    /// the action keeps only the readings selected by the match. A non-empty
+    /// text content (`<match no="1">lemma</match>`) selects by lemma
+    /// (`Match.setLemmaString`); the captured text arrives through
+    /// `on_text` while `in_disambig_match` is set.
+    fn on_disambig_match_empty(
+        &mut self,
+        e: &quick_xml::events::BytesStart<'_>,
+        self_closing: bool,
+    ) {
         let mut filter = DisambigMatchFilter::default();
         for attr in e.attributes().flatten() {
             match attr.key.as_ref() {
@@ -2004,10 +2018,20 @@ impl Loader {
                 _ => {}
             }
         }
-        if let Some(p) = self.pending.as_mut() {
+        let has_filter = if let Some(p) = self.pending.as_mut() {
             if let Some(d) = p.current_disambig.as_mut() {
                 d.filter_match = Some(filter);
+                true
+            } else {
+                false
             }
+        } else {
+            false
+        };
+        if has_filter && !self_closing {
+            self.in_match = true;
+            self.match_buf.clear();
+            self.in_disambig_match = true;
         }
     }
 
@@ -2202,7 +2226,24 @@ impl Loader {
         let name = String::from_utf8_lossy(name).into_owned();
         self.path.pop();
         match name.as_str() {
-            "match" => self.finish_match_element(),
+            "match" => {
+                if self.in_disambig_match {
+                    // Java `case MATCH` (inDisambiguation):
+                    // `posSelector.setLemmaString(match.toString())`
+                    self.in_disambig_match = false;
+                    self.in_match = false;
+                    let lemma = std::mem::take(&mut self.match_buf);
+                    if let Some(p) = self.pending.as_mut() {
+                        if let Some(d) = p.current_disambig.as_mut() {
+                            if let Some(filter) = d.filter_match.as_mut() {
+                                filter.lemma = Some(lemma.trim().to_string());
+                            }
+                        }
+                    }
+                    return Ok(());
+                }
+                self.finish_match_element()
+            }
             "example" => {
                 if self.antipattern_depth > 0 {
                     return Ok(());

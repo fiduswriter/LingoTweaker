@@ -221,7 +221,12 @@ impl XmlDisambiguator {
         let applications: Vec<Application> = if raw.is_empty() {
             Vec::new()
         } else {
-            let anti_ranges = AntipatternRanges::build(rule, &view_refs, self.synth.as_deref());
+            let anti_ranges = AntipatternRanges::build(
+                rule,
+                &view_refs,
+                self.synth.as_deref(),
+                Some(&self.unify_config),
+            );
             raw.into_iter()
                 .filter(|(_, m)| !anti_ranges.overlaps(m.start_tok(), m.end_tok()))
                 .filter(|(_, m)| {
@@ -381,6 +386,7 @@ impl XmlDisambiguator {
                                         rule,
                                         &view_refs,
                                         self.synth.as_deref(),
+                                        Some(&self.unify_config),
                                     )
                                 })
                                 .overlaps(s, e);
@@ -453,8 +459,12 @@ impl XmlDisambiguator {
                 if raw.is_empty() {
                     Vec::new()
                 } else {
-                    let anti_ranges =
-                        AntipatternRanges::build(rule, &view_refs, self.synth.as_deref());
+                    let anti_ranges = AntipatternRanges::build(
+                        rule,
+                        &view_refs,
+                        self.synth.as_deref(),
+                        Some(&self.unify_config),
+                    );
                     raw.into_iter()
                         .filter(|(_, m)| !anti_ranges.overlaps(m.start_tok(), m.end_tok()))
                         .filter(|(_, m)| {
@@ -557,11 +567,27 @@ impl AntipatternRanges {
         rule: &CompiledDisambigRule,
         tokens: &[&lt_core::AnalyzedTokenReadings],
         synth: Option<&dyn pm::Synthesizer>,
+        unify: Option<&lt_pattern::EquivalenceConfig>,
     ) -> Self {
         let mut ranges = Vec::new();
         for anti in &rule.antipatterns {
-            for m in pm::find_matches_with_synth(anti, &[], &[], tokens, None, None, synth) {
-                ranges.push((m.start_tok(), m.end_tok()));
+            // Java `keepByDisambig` matches antipatterns with
+            // `PatternRuleMatcher(antiPattern, false, disambiguationUnifier)`:
+            // `<unify>` blocks inside antipatterns are tested with the
+            // (disambiguation) equivalence config, so an antipattern whose
+            // unification fails must not match.
+            for m in pm::find_matches_with_synth(anti, &[], &[], tokens, None, unify, synth) {
+                // `createRuleMatch` derives the match span from the marker
+                // tokens when the antipattern has one (pl
+                // `subst_not_unified`'s antipattern marks only its second
+                // element, so Java's overlap test sees the marked token, not
+                // the whole match).
+                let range = if anti.marker_start.is_some() {
+                    marker_targets(anti, &m.positions).map(|(from, count)| (from, from + count - 1))
+                } else {
+                    None
+                };
+                ranges.push(range.unwrap_or((m.start_tok(), m.end_tok())));
             }
         }
         Self { ranges }
@@ -912,6 +938,16 @@ fn apply_action(
             }
         }
         "filter" => {
+            // Java `case FILTER` with a `<match>` element falls through to
+            // the match-element branch (same selection as REPLACE)
+            if let Some(filter) = &action.filter_match {
+                if let Some(idx) = at(t.from_view) {
+                    apply_match_filter(&mut sentence.tokens[idx], filter);
+                    restore_sent_end(&mut sentence.tokens[idx]);
+                    sentence.detach_pre_disambig(idx);
+                }
+                return;
+            }
             if let Some(pos) = &action.postag {
                 if let Some(re) = cached_postag_regex(pos) {
                     if let Some(idx) = at(t.from_view) {
@@ -1066,6 +1102,34 @@ fn apply_action(
 /// `getNewToken` falls back to one reading per original with the literal
 /// selector POSTag.
 fn apply_match_filter(tr: &mut AnalyzedTokenReadings, filter: &DisambigMatchFilter) {
+    // Java `MatchState.filterReadings` with a static lemma
+    // (`<match no="N">lemma</match>`, `Match.setLemmaString`): `leaveReading`
+    // keeps only the readings whose lemma equals the selector (and whose
+    // postag equals a non-null selector postag), falling back to a single
+    // untagged reading when nothing matches.
+    if let Some(lemma) = &filter.lemma {
+        let surface = tr
+            .readings
+            .first()
+            .map(|r| r.token.clone())
+            .unwrap_or_default();
+        let mut kept: Vec<AnalyzedToken> = Vec::new();
+        for r in &tr.readings {
+            let mut found = r.stem.as_deref() == Some(lemma.as_str());
+            if let Some(p) = &filter.postag {
+                found &= r.pos_tag.as_deref() == Some(p.as_str());
+            }
+            if found {
+                kept.push(r.clone());
+            }
+        }
+        if kept.is_empty() {
+            kept.push(AnalyzedToken::new(surface, None, None));
+        }
+        tr.readings = kept;
+        tr.is_tagged = tr.readings.iter().any(|r| r.pos_tag.is_some());
+        return;
+    }
     let surface = tr
         .readings
         .first()
@@ -1347,5 +1411,154 @@ mod fr_filterall_test {
         d.apply(&mut s);
         assert_eq!(s.tokens[3].surface(), "nul");
         assert_eq!(tags(&s.tokens[3]), vec!["(P\\+)?D.*|K", "(P\\+)?D.*|K"]);
+    }
+}
+
+#[cfg(test)]
+mod pl_unify_test {
+    use super::XmlDisambiguator;
+    use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
+    use lt_data::PathExt as _;
+    use std::path::Path;
+
+    fn tr(readings: &[(&str, &str, &str)]) -> AnalyzedTokenReadings {
+        AnalyzedTokenReadings {
+            readings: readings
+                .iter()
+                .map(|(w, l, t)| {
+                    AnalyzedToken::new(w.to_string(), Some(l.to_string()), Some(t.to_string()))
+                })
+                .collect(),
+            chunk_tags: Vec::new(),
+            whitespace_before: true,
+            start_pos: 0,
+            raw_byte_len: 0,
+            is_whitespace: false,
+            is_sentence_start: false,
+            is_sentence_end: false,
+            is_paragraph_end: false,
+            is_tagged: true,
+            is_immunized: false,
+            is_ignore_spelling: false,
+            has_typographic_apostrophe: false,
+            is_pos_tag_unknown: false,
+        }
+    }
+
+    fn sentence(tokens: Vec<AnalyzedTokenReadings>) -> AnalyzedSentence {
+        AnalyzedSentence {
+            text: String::new(),
+            offset: 0,
+            tokens,
+            pre_disambig_tokens: Vec::new(),
+            pre_disambig_detached: Vec::new(),
+        }
+    }
+
+    fn load_pl() -> XmlDisambiguator {
+        let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/pl/disambiguation.xml");
+        assert!(path.lt_exists(), "vendored pl data");
+        XmlDisambiguator::load(&path).unwrap()
+    }
+
+    /// Apply every compiled rule with the given id (`apply_rule_index`).
+    fn apply_id(d: &XmlDisambiguator, id: &str, s: &mut AnalyzedSentence) {
+        for i in 0..d.rules.len() {
+            if d.rules[i].id == id {
+                d.apply_rule_index(i, s);
+            }
+        }
+    }
+
+    fn lemmas(tr: &AnalyzedTokenReadings) -> Vec<String> {
+        tr.readings
+            .iter()
+            .map(|r| r.stem.clone().unwrap_or_default())
+            .collect()
+    }
+
+    fn tags_of(tr: &AnalyzedTokenReadings) -> Vec<String> {
+        tr.readings
+            .iter()
+            .map(|r| r.pos_tag.clone().unwrap_or_default())
+            .collect()
+    }
+
+    /// `Zwycięzcy tych par awansują do I rundy.`: `unify_adj_subst`'s
+    /// antipattern is a `<unify>` over
+    /// subst+adj and must be tested with the unifier (subst `Zwycięzcy`
+    /// does not case-agree with adj `tych`), so the rule applies and reduces
+    /// `par` to the plural genitive reading (and `tych` to genitive).
+    #[test]
+    fn unify_adj_subst_antipattern_needs_unification() {
+        let d = load_pl();
+        let mut s = sentence(vec![
+            tr(&[
+                ("Zwycięzcy", "zwycięzca", "subst:pl:nom:m1"),
+                ("Zwycięzcy", "zwycięzca", "subst:sg:gen:m1"),
+            ]),
+            tr(&[
+                ("tych", "ten", "adj:pl:acc:m1.p1:pos"),
+                ("tych", "ten", "adj:pl:gen:m1.m2.m3.f.n1.n2.p1.p2.p3:pos"),
+            ]),
+            tr(&[
+                ("par", "par", "subst:sg:acc:m3"),
+                ("par", "para", "subst:pl:gen:f"),
+            ]),
+        ]);
+        apply_id(&d, "unify_adj_subst", &mut s);
+        assert_eq!(
+            tags_of(&s.tokens[2]),
+            vec!["subst:pl:gen:f"],
+            "`par` unified"
+        );
+        assert_eq!(
+            tags_of(&s.tokens[1]),
+            vec!["adj:pl:gen:m1.m2.m3.f.n1.n2.p1.p2.p3:pos"],
+            "`tych` unified"
+        );
+    }
+
+    /// `Rada Języka Polskiego.`: `subst_not_unified`'s antipattern marks only
+    /// its second (adj) token,
+    /// so Java's overlap test sees the marker span (`Polskiego`), not the
+    /// whole match — the rule fires and filters `Rada` to its subst reading.
+    #[test]
+    fn subst_not_unified_overlap_uses_marker_span() {
+        let d = load_pl();
+        let mut s = sentence(vec![
+            tr(&[
+                ("Rada", "rada", "subst:sg:nom:f"),
+                ("Rada", "rad", "adj:sg:nom:f:pos"),
+            ]),
+            tr(&[("Języka", "język", "subst:sg:gen:m3")]),
+            tr(&[("Polskiego", "polski", "adj:sg:gen:m1.m2.m3.n1.n2:pos")]),
+        ]);
+        apply_id(&d, "subst_not_unified", &mut s);
+        assert_eq!(
+            lemmas(&s.tokens[0]),
+            vec!["rada"],
+            "the adj reading of `Rada` must be filtered away"
+        );
+    }
+
+    /// `<disambig action="filter"><match
+    /// no="1">mieć</match></disambig>` (Java `Match.setLemmaString` +
+    /// `MatchState.filterReadings`) keeps only the readings whose lemma
+    /// equals the selector (`MAJA_MAIC`).
+    #[test]
+    fn filter_with_lemma_selector_keeps_selected_lemma() {
+        let d = load_pl();
+        let mut s = sentence(vec![tr(&[
+            ("mają", "maić", "verb:fin:pl:ter:imperf:refl.nonrefl"),
+            ("mają", "maja", "subst:sg:inst:f"),
+            ("mają", "mieć", "verb:fin:pl:ter:imperf:refl.nonrefl"),
+        ])]);
+        apply_id(&d, "MAJA_MAIC", &mut s);
+        assert_eq!(lemmas(&s.tokens[0]), vec!["mieć"]);
+        assert_eq!(
+            tags_of(&s.tokens[0]),
+            vec!["verb:fin:pl:ter:imperf:refl.nonrefl"]
+        );
     }
 }

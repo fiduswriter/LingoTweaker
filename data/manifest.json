@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 992,
+  "file_count": 1002,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -7070,6 +7070,118 @@
       }
     },
     {
+      "path": "nn/README.md",
+      "sha256": "c195338b286b9bf3b5776c78938c32ef2721fec570f2a5a4dfcf670d265d8175",
+      "size": 6184,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/hunspell/ignore.txt",
+      "sha256": "d26e67c4ac09020b17d2ed8386f309996e9be16da89cb10504c9595f789b2294",
+      "size": 141,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/hunspell/nn_NO.aff",
+      "sha256": "454f0bf09e6581ca8e153c245a6136bec15e954f752d930ad32fedeb012ce5de",
+      "size": 13616,
+      "source": {
+        "kind": "vendor",
+        "license": "GPL-2.0",
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/no/README_NO.txt",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/no",
+        "note": "spell-norwegian affixes, recoded to UTF-8 upstream; vendored unmodified"
+      }
+    },
+    {
+      "path": "nn/hunspell/nn_NO.dic",
+      "sha256": "9173f6b9e943cea8e3a2097b7c1cd67e09a0839cb85dfaad9114d7fc2c313c81",
+      "size": 6467674,
+      "source": {
+        "kind": "vendor",
+        "license": "CC BY 4.0",
+        "license_source": "https://github.com/LibreOffice/dictionaries/blob/master/no/README_NO.txt",
+        "url": "https://github.com/LibreOffice/dictionaries/tree/master/no",
+        "note": "Nynorsk Hunspell dictionary data (Ordbanken full forms + nyordslister; CLARIN PUB+BY attribution)"
+      }
+    },
+    {
+      "path": "nn/hunspell/repetition_exceptions.txt",
+      "sha256": "f704a3826a395f5439b472d914abda2fbb30df606ad68e40bdf8fb41c3f68cca",
+      "size": 102,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/rules/bokmaal_forms.txt",
+      "sha256": "4d12ac860dabb9836a51637bbcbc22ff6b2ec131ffae80931709168e2bdb843d",
+      "size": 1532,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/rules/check_case.txt",
+      "sha256": "910da9df86a509fdcf01d484e67bf42a87b44c7c5654bc3ce62416a743e4e6c8",
+      "size": 474,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/rules/grammar.xml",
+      "sha256": "7de3fdc80ea8d9c0cae97eebf57506b720d6cae70abce6bd87a04ad2460fa566",
+      "size": 17116,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/rules/typos.txt",
+      "sha256": "8c3f70700ca18d6e99fa1d12c6f9bfacde1d3b3a9d838e2ef6694a139664b5b4",
+      "size": 195,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
+      "path": "nn/rules/word_division.txt",
+      "sha256": "0b00de3ade7de30ba4782039bd1e79d9d0a0ee5841d19fd4680e2fa970b32255",
+      "size": 267,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+      }
+    },
+    {
       "path": "no/README.md",
       "sha256": "ee6b80b29db8cd949553fa034263c5d231b7e1a4ebfc9688d6ddda2a64aa4c53",
       "size": 10120,
@@ -11362,5 +11474,5 @@
       }
     }
   ],
-  "generated_by": "tools/lt-sync/lt_sync.py import"
+  "generated_by": "tools/lt-sync/lt_sync.py add-local"
 }

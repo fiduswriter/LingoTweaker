@@ -207,55 +207,6 @@ Reproduce:
 `scripts/oracle/pt/probe-rule.sh pt-PT "Vou estudar enquanto possa ser possível." PODER_SER_POSSIVEL`.
 This is the only remaining Portuguese corpus field diff.
 
-## 7. `HUNSPELL_RULE` (Galician) suggestion timer boundary (2 corpus field diffs)
-
-**Verdict: residue to fix** (a known limitation, not a correctness judgement;
-the match set is identical and the residue is upstream's machine-timing
-cutoff). Unlike the other entries this is a **known limitation, not a correctness
-judgement**: the Galician match set is identical to the legacy engine
-(0 only-Java / 0 only-Rust over the 717-example corpus). The native hunspell
-suggestion engine (`suggestmgr.cxx`, hunspell 1.7.2) is ported into
-`crates/lt-spell` (`HunspellChecker::suggest`): the capitalization, `REP`,
-`MAP`, adjacent/long swap, add/remove/move char, double-two-chars and
-two-word generators and their iteration order, the compound-aware candidate
-`checkword`, the `TRY`/`KEY` tables (with hunspell's QWERTY `KEY` default),
-the `Hunspell::suggest` wrapper (case restoration, `SUGSWITHDOTS`, keepcase
-filtering, dedup, dash suggestions) **and the n-gram fallback
-(`ngsuggest`: dictionary hash-walk order, `expand_rootword`, n-gram/LCS
-scoring, `MAXNGRAMSUGS`/`ONLYMAXDIFF`/`MAXDIFF`)** all reproduce the legacy
-engine.
-
-Two field diffs remain, both at upstream's wall-clock
-`TIMELIMIT_SUGGESTION`/`TIMELIMIT_GLOBAL` boundary: the legacy engine bails
-out of the generator loop (and therefore skips the n-gram stage) when a
-generator exceeds 100 ms / the whole suggestion exceeds 250 ms. That cutoff
-is machine-timing-dependent upstream, so it cannot be reproduced
-byte-for-byte; the in-tree port bounds the only exponentially branching
-generator (`MAP`) with a deterministic node budget instead (D-224). A
-deterministic stand-in (bail out whenever the `MAP` budget is exhausted) was
-tried and made the corpus worse (6 vs 2 diffs), so it was reverted. The
-residue:
-
-- line 624, `percatamos`: the legacy run hit the generator limit and stopped
-  at `percutamos|percutiramos|peraltamos|percorramos`; the port keeps
-  `percútamos` and appends the n-gram `permutamos`.
-- line 672, `monoméricas`: the legacy run hit the 100 ms generator limit and
-  skipped n-gram; the port appends `cronométricas|monométricos|…`.
-
-The former third diff (`Maria`, line 288) was a stale golden entry: the
-pinned Java build now returns the same list as hunspell 1.7.2, and the
-golden was regenerated with `scripts/ci/update-golden.sh gl` (one line).
-
-Reproduce (pinned Java build):
-
-```sh
-scripts/oracle/gl/probe-speller.sh percatamos monoméricas
-```
-
-Pinned exactly as `--expect-field-diffs=HUNSPELL_RULE=2` in
-`scripts/ci/parity.sh`. A deterministic emulation of the upstream wall-clock
-cutoff would remove the allowance.
-
 ## 8. `AGREEMENT_DEMONSTRATIVE_VERB` (Spanish, hand-authored rule)
 
 This is the first entry that is an **added rule**, not a different rendering
@@ -317,78 +268,6 @@ cargo run -p lt-cli -- check -l es --json "Estos es un problema."
 cargo run -p lt-cli -- check -l es --json "Este son un problema."
 ```
 
-## 9. Polish known fidelity gaps (agreement unification, ZDANIA_ZLOZONE, PCON_VERB)
-
-**Verdict: residue to fix** — engine-fidelity gaps where Java is the reference
-(the Rust matcher is incomplete, not deliberately different).
-
-The Polish corpus (`docs/parity/golden/pl-full.txt`, 6,438 examples) is at
-**4 only-Java / 5 only-Rust / 0 field diffs**. All remaining differences are
-engine-fidelity gaps (not deliberate design choices) and are pinned exactly in
-`scripts/ci/parity.sh`; the `pl` golden is captured at `PARITY_TODAY=2026-09-20`.
-
-- **`<unify negate="yes">` agreement rules** (`ADJ_SUBST_ADJ_UNIFY`,
-  `SUBST_ADJ_UNIFY`, `NIEZGODNO_PRZYPADKW_PRZYMIOTNIKA_I_RZECZOWNIKA_RODZAJU_ESKIEGO`,
-  `NIEZGODNOSC_LICZBY_PODMIOTU_I_ORZECZENIA`): the Rust matcher does not yet
-  reproduce Java's three-token negative-unification outcome, so these rules
-  can miss (`ADJ_SUBST_ADJ_UNIFY` / `SUBST_ADJ_UNIFY`, 1 only-Java each) or
-  over-fire (`ADJ_SUBST_ADJ_UNIFY`, `NIEZGODNO…`, `NIEZGODNOSC…`, 1–2
-  only-Rust each). Reproduce:
-
-  ```sh
-  scripts/oracle/pl/probe-rule.sh "Beztlenowe bakterie magnetotaktyczna mają funkcję wykrywania tlenu." ADJ_SUBST_ADJ_UNIFY
-  scripts/oracle/pl/probe-rule.sh "Szampon to RENE FURTERER OKARA przedłużający o 80% trwałość koloru włosów farbowanych." SUBST_ADJ_UNIFY
-  ```
-
-- **`ZDANIA_ZLOZONE` and the `comp:comma` disambiguation context** (1 only-Rust,
-  1 only-Java): Java's disambiguator adds `comp:comma` to a conjunction such as
-  `i`/`jak` in some clause contexts and drops it in others; the Rust tagger
-  differs in a few sentences, so the rule can over-fire
-  (`…gdyż jestem stary i nerwy moje są chore.`) or miss
-  (`Czy słyszałeś jak mój syn gra na skrzypcach?`). Reproduce:
-
-  ```sh
-  scripts/oracle/pl/probe-rule.sh "Muszę tam czekać śmierci, gdyż jestem stary i nerwy moje są chore." ZDANIA_ZLOZONE
-  scripts/oracle/pl/probe-rule.sh "Czy słyszałeś jak mój syn gra na skrzypcach?" ZDANIA_ZLOZONE
-  ```
-
-- **`PCON_VERB`** (1 only-Java): the participle-without-finite-verb rule does
-  not match `Widząc to jedna szpetna starucha...` in the Rust engine. Reproduce:
-
-  ```sh
-  scripts/oracle/pl/probe-rule.sh "Widząc to jedna szpetna starucha..." PCON_VERB
-  ```
-
-## 10. Tagalog (`tl`) `MORFOLOGIK_RULE_TL` suggestion ordering (5 corpus field diffs)
-
-**Verdict: residue to fix** — the match and suggestion *sets* are identical;
-only the frequency-weighted ordering differs, and Java is the reference.
-
-The Tagalog speller dictionary (`tl/hunspell/tl_PH.dict`) is the only vendored
-Morfologik dictionary with `fsa.dict.frequency-included=true`, so its
-suggestion weights use the morfologik
-`distance * FREQ_RANGES + FREQ_RANGES - frequency - 1` composite. The Rust
-speller returns the **same suggestion set and the same match set** as the
-legacy engine, but orders the frequency-weighted candidates differently for
-the misspelling `nag` (5 corpus lines):
-
-```
-Java: nang|nga|pag|mag|wag|bag|Naga|Pag|nagi|ang|ng|na
-Rust: ang|ng|na|nang|nga|pag|mag|wag|bag|Naga|Pag|nagi
-```
-
-The difference is the frequency code read for the high-frequency function
-words `ang`/`ng`/`na` (the Rust `Speller::get_frequency` picks the first
-stored annotation's last byte; the legacy engine's frequency lookup orders
-them differently). The corpus gate pins this exactly with
-`--expect-field-diffs=MORFOLOGIK_RULE_TL=5`; no only-Java/only-Rust matches.
-
-Reproduce (pinned Java build):
-
-```sh
-scripts/oracle/tl/probe-rule.sh "Sa DLSU rin ako nag-aral." MORFOLOGIK_RULE_TL
-```
-
 ## 11. Lithuanian (`lt`): vendored third-party dictionary, no Java baseline
 
 **Verdict: intentional** — the legacy module is broken (it throws on every
@@ -425,86 +304,7 @@ Reproduce (pinned Java build, per-rule probe):
 ```sh
 scripts/oracle/lt/probe-rule.sh "Jaroslavas pajuto kad jo draugas yra Mantas." BRAK_PRZECINKA_ZE
 ```
-
-## 12. Ukrainian (`uk`) remaining corpus residue (3 only-Java / 1 only-Rust / 0 field diffs)
-
-The Ukrainian port is at **3 only-Java / 1 only-Rust / 0 field diffs** on the
-4,437-line corpus (Java 4,613 vs Rust 4,611 matches). The three remaining
-divergences are pinned exactly in `scripts/ci/parity.sh` and are documented
-here with a pinned-Java reproduction. They are engine-fidelity gaps (a rule
-abort, sentence segmentation and an overlap tie-break), not rule-data
-differences.
-
-### 12a. `TokenAgreementPrepNounRule`: preposition + `не` + noun — 1 only-Java
-
-Java flags `UK_PREP_NOUN_INFLECTION_AGREEMENT` when a `part` token (`не`)
-stands between the preposition `незважаючи` and the nominative `це`; the Rust
-rule aborts on the intervening particle:
-
-```
-і незважаючи не це.
-Java: UK_PREP_NOUN_INFLECTION_AGREEMENT 16-18
-Rust: (none)
-```
-
-Reproduce:
-
-```sh
-scripts/oracle/uk/probe-rule.sh "незважаючи не це" UK_PREP_NOUN_INFLECTION_AGREEMENT
-```
-
-### 12b. Abbreviation sentence segmentation — 1 only-Java
-
-`т. 2 ч. 1` is one sentence in Java (the abbreviation dot does not end the
-sentence), so `UkrainianUppercaseSentenceStartRule` reports the lowercase
-start (0-1). The Rust engine splits sentences with the shared SRX before
-tokenization and segments after `т.`, so no rule sees a lowercase sentence
-start:
-
-```
-т. 2 ч. 1
-Java: UPPERCASE_SENTENCE_START 0-1
-Rust: (none)
-```
-
-Reproduce:
-
-```sh
-scripts/oracle/uk/probe-rule.sh "т. 2 ч. 1" UPPERCASE_SENTENCE_START
-```
-
-### 12c. Plural adjective + proper-name list — 1 only-Java / 1 only-Rust
-
-For `молодші Олександр Ірванець, Оксана Луцишина` Java reports the lowercase
-sentence start and does **not** report `UK_ADJ_NOUN_INFLECTION_AGREEMENT`; the
-Rust engine reports the agreement rule (0-17) instead (the exception helper
-branch Java uses here is not ported). Same span, so the overlap filter keeps a
-different rule on each side:
-
-```
-молодші Олександр Ірванець, Оксана Луцишина
-Java: UPPERCASE_SENTENCE_START 0-7
-Rust: UK_ADJ_NOUN_INFLECTION_AGREEMENT 0-17
-```
-
-Reproduce:
-
-```sh
-scripts/oracle/uk/probe-rule.sh "молодші Олександр Ірванець, Оксана Луцишина" UK_ADJ_NOUN_INFLECTION_AGREEMENT UPPERCASE_SENTENCE_START
-```
-
-The gate allowance:
-
-```sh
-scripts/ci/parity.sh uk
-# allowed only-Java: 1/1 UK_PREP_NOUN_INFLECTION_AGREEMENT
-# allowed only-Java: 2/2 UPPERCASE_SENTENCE_START
-# allowed only-Rust: 1/1 UK_ADJ_NOUN_INFLECTION_AGREEMENT
-# field diffs: 0
-```
-
-
-## 13. Japanese (`ja`): segmentation-engine substitution (resolved)
+## 12. Japanese (`ja`): segmentation-engine substitution (resolved)
 
 Japanese was ported on the `lindera-cjk-spike` branch with a **different
 segmenter** than Java: Java uses `net.java.sen` (Sen Viterbi) over the
@@ -514,7 +314,7 @@ meCab-IPADIC 2.7.0 dictionary. The tagger is the same in both: the segmenter's
 disambiguator, chunker, synthesizer or speller, and `Japanese.getRelevantRules`
 contributes only `DoublePunctuationRule` and `MultipleWhitespaceRule`.
 
-### 13a. Example coverage — 737/737 (resolved)
+### 12a. Example coverage — 737/737 (resolved)
 
 The rules were authored against net.java.sen's token boundaries, so an initial
 run fired on 690 of the 735 grammar.xml examples. All misses were fixed by
@@ -547,7 +347,7 @@ corrected forms of every variant do not fire:
 cargo test -p lt --test japanese -- --nocapture   # "error 737 (hit 737, miss 0)"
 ```
 
-### 13b. Whitespace tokens and localized built-in strings
+### 12b. Whitespace tokens and localized built-in strings
 
 net.java.sen (and Lindera) drop whitespace from the token stream. The Rust
 analyzer re-inserts whitespace **per character** (locating each surface in the
@@ -567,7 +367,7 @@ sees the real token stream). The localized Japanese built-in strings
 for `WHITESPACE_RULE` and `DOUBLE_PUNCTUATION`; this affects wording only, not
 match sets.
 
-## 14. Chinese (`zh`): segmentation-engine substitution (partial coverage)
+## 13. Chinese (`zh`): segmentation-engine substitution (triage)
 
 Chinese was ported on the `lindera-cjk-spike` branch with a **different
 segmenter/tagger** than Java: Java uses HanLP's portable (mini) dictionary via
@@ -583,7 +383,7 @@ wraps HanLP's `SentencesUtil.toSentenceList(text)` (shortest units, so it also
 breaks at `，,;；` and spaces). The Rust analyzer ports that scan
 (`crates/lt/src/zh.rs::split_sentences`).
 
-### 14a. Per-rule triage (2026-09-24) — 1781/1789 error examples (99.6%), held-out 2
+### 13a. Per-rule triage (2026-09-24) — 1781/1789 error examples (99.6%), held-out 2
 
 Because the Java `zh` checker is itself poor and the segmenter substitution makes
 many HanLP-authored patterns unusable, the rules were **triaged one by one**
@@ -651,7 +451,7 @@ cargo test -p lt --test chinese -- --nocapture   # "error 1789 (hit 1781, miss 8
 ```
 
 
-### 14b. `ChineseConfusionProbabilityRule` not ported
+### 13b. `ChineseConfusionProbabilityRule` not ported
 
 Upstream's `zh` module also ships `ChineseConfusionProbabilityRule`
 (`getRelevantLanguageModelRules`), which needs an n-gram language model

@@ -3,7 +3,7 @@
 //! The legacy module keeps the id `MORFOLOGIK_RULE_LT_LT` and points at
 //! `/lt/hunspell/lt_LT.dict`, but no such dictionary is shipped in the pinned
 //! checkout or in any pinned Maven artifact, so the legacy engine throws on
-//! every check (`docs/differences.md` #12). By owner request we vendor a
+//! every check. By owner request we vendor a
 //! third-party ispell-lt dictionary instead (`data/lt/hunspell/`, BSD-3-Clause)
 //! and run the rule with the legacy id over it. The dictionary ships as a
 //! Hunspell `.aff`/`.dic` pair, so the ported native Hunspell speller is the

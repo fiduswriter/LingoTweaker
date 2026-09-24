@@ -190,6 +190,8 @@ pub struct Pipeline {
     pub norwegian: Option<Arc<crate::no::NorwegianPipeline>>,
     /// Nordum pipeline parts (`None` for the other languages)
     pub nordum: Option<Arc<crate::nrd::NordumPipeline>>,
+    /// Nynorsk pipeline parts (`None` for the other languages)
+    pub nynorsk: Option<Arc<crate::nn::NynorskPipeline>>,
     /// Guaraní pipeline parts (`None` for the other languages)
     pub guarani: Option<Arc<crate::gn::GuaraniPipeline>>,
     /// Belarusian pipeline parts (`None` for the other languages)
@@ -1427,6 +1429,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -1695,6 +1698,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -1814,6 +1818,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -2031,6 +2036,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -2256,6 +2262,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -2401,6 +2408,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -2665,6 +2673,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -2889,6 +2898,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -3230,6 +3240,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -3395,6 +3406,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -3546,6 +3558,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -3721,6 +3734,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -3874,6 +3888,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -3999,6 +4014,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4159,6 +4175,7 @@ impl Pipeline {
             greek: Some(greek),
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4251,6 +4268,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4426,6 +4444,7 @@ impl Pipeline {
             sv: Some(swedish),
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4513,6 +4532,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4637,6 +4657,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4747,6 +4768,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4871,6 +4893,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -4983,6 +5006,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -5006,7 +5030,7 @@ impl Pipeline {
     /// adds the speller plus the generic built-ins (including
     /// `GenericUnpairedBracketsRule`). Upstream ships no `lt_LT` dictionary, so
     /// the owner asked us to vendor one ourselves; `lt` therefore stays on the
-    /// tests-only gate (see `crate::lt`, `docs/differences.md` #12).
+    /// tests-only gate.
     pub fn new_lithuanian(
         data_dir: &lt_data::DataDir,
         _today: Option<Ymd>,
@@ -5096,6 +5120,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -5219,6 +5244,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -5331,6 +5357,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: Some(belarusian),
             russian: None,
@@ -5496,6 +5523,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: Some(russian),
@@ -5700,6 +5728,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -5860,6 +5889,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6011,6 +6041,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6092,6 +6123,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6186,6 +6218,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6278,6 +6311,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6358,6 +6392,7 @@ impl Pipeline {
             sv: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6675,6 +6710,7 @@ impl Pipeline {
             greek: None,
             norwegian: Some(norwegian),
             nordum: None,
+            nynorsk: None,
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6772,6 +6808,104 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: Some(nordum),
+            nynorsk: None,
+            guarani: None,
+            belarusian: None,
+            russian: None,
+            ukrainian: None,
+            serbian: None,
+            arabic: None,
+            persian: None,
+            khmer: None,
+            malayalam: None,
+            tamil: None,
+            da: None,
+            sv: None,
+            clean_overlapping_matches: true,
+        })
+    }
+
+    /// Norwegian Nynorsk (`nn`) engine. Hand-authored language: XML rules,
+    /// the vendored `nn_NO` Hunspell speller and word-list rules; no legacy
+    /// Java module exists (upstream ships only a spell-check-only dynamic
+    /// language for Norwegian).
+    pub fn new_nynorsk(
+        data_dir: &lt_data::DataDir,
+        _today: Option<Ymd>,
+        enabled_rules: &[String],
+        _variant: Option<&str>,
+    ) -> Result<Self> {
+        let f = Self::hand_authored_foundations(data_dir, Lang::Nn, "nn_two", enabled_rules)?;
+        let spelling = Arc::new(crate::nn::spelling::NynorskSpellingRule::load(
+            data_dir.path(),
+        )?);
+        let simple_replace = crate::nn::rules::nynorsk_instances(data_dir.path())?;
+        let repetition = crate::word_repetition::WordRepetitionRule::load(
+            data_dir.path(),
+            crate::word_repetition::WordRepetitionConfig {
+                rule_id: "NN_WORD_REPETITION",
+                description: "Ordet er repetert",
+                message: "Mogeleg skrivefeil: same ordet er repetert.",
+                short_message: "Repetisjon",
+                category_id: "MISC",
+                category_name: "Ymse",
+                lang_dir: "nn",
+            },
+        )?;
+        let nynorsk = Arc::new(crate::nn::NynorskPipeline {
+            disambiguator: f.disambiguator,
+            spelling,
+            repetition,
+        });
+        Ok(Self {
+            lang: Lang::Nn,
+            unify_config: f.unify_config,
+            srx: f.srx,
+            tagger: None,
+            grammar: f.grammar,
+            compiled_rules: f.compiled_rules,
+            skipped_counts: f.skipped,
+            compile_failures: f.compile_failures,
+            global_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            multiword_chunker: lt_disambig::MultiWordChunker::load_empty(false, false),
+            disambiguator: lt_disambig::XmlDisambiguator::empty()?,
+            english_chunker: None,
+            spelling: None,
+            avs_an: None,
+            compound: None,
+            contractions: None,
+            wrong_word_in_context: None,
+            dash: None,
+            synthesizer: None,
+            simple_replace,
+            word_coherency: None,
+            specific_case: None,
+            readability: Vec::new(),
+            repeated_words: None,
+            german: None,
+            german_simple: None,
+            spanish: None,
+            french: None,
+            italian: None,
+            portuguese: None,
+            dutch: None,
+            catalan: None,
+            galician: None,
+            romanian: None,
+            polish: None,
+            slovak: None,
+            slovenian: None,
+            icelandic: None,
+            esperanto: None,
+            asturian: None,
+            breton: None,
+            tagalog: None,
+            lithuanian: None,
+            crimean_tatar: None,
+            greek: None,
+            norwegian: None,
+            nordum: None,
+            nynorsk: Some(nynorsk),
             guarani: None,
             belarusian: None,
             russian: None,
@@ -6873,6 +7007,7 @@ impl Pipeline {
             greek: None,
             norwegian: None,
             nordum: None,
+            nynorsk: None,
             guarani: Some(guarani),
             belarusian: None,
             russian: None,
@@ -6921,7 +7056,7 @@ impl Pipeline {
                 crate::ja::analyze_japanese_sentence(japanese, sentence_text)
             } else if let Some(chinese) = &self.chinese {
                 crate::zh::analyze_chinese_sentence(chinese, sentence_text)
-            } else if self.norwegian.is_some() || self.nordum.is_some() {
+            } else if self.norwegian.is_some() || self.nordum.is_some() || self.nynorsk.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
                 crate::gn::analyze_guarani_sentence(sentence_text)
@@ -10367,7 +10502,7 @@ impl Pipeline {
             crate::ja::analyze_japanese_sentence(japanese, &text[start..end])
         } else if let Some(chinese) = &self.chinese {
             crate::zh::analyze_chinese_sentence(chinese, &text[start..end])
-        } else if self.norwegian.is_some() || self.nordum.is_some() {
+        } else if self.norwegian.is_some() || self.nordum.is_some() || self.nynorsk.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
             crate::gn::analyze_guarani_sentence(&text[start..end])
@@ -14825,6 +14960,40 @@ impl Pipeline {
                 &mut seen,
             );
         }
+        if let Some(nynorsk) = &self.nynorsk {
+            append_active(
+                &mut matches,
+                builtin_active(
+                    nynorsk.repetition.rule_id(),
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                nynorsk.repetition.check_sentence(&analyzed.tokens, start),
+                &mut seen,
+            );
+            append_active(
+                &mut matches,
+                builtin_active(
+                    crate::nn::spelling::RULE_ID,
+                    "TYPOS",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                nynorsk.spelling.check_sentence(&analyzed.tokens, start),
+                &mut seen,
+            );
+        }
         if let Some(guarani) = &self.guarani {
             append_active(
                 &mut matches,
@@ -15808,6 +15977,10 @@ impl Pipeline {
         }
         if let Some(nordum) = &self.nordum {
             nordum.disambiguate(sentence);
+            return;
+        }
+        if let Some(nynorsk) = &self.nynorsk {
+            nynorsk.disambiguate(sentence);
             return;
         }
         if let Some(guarani) = &self.guarani {
