@@ -33,6 +33,7 @@ lt-spell = { path = "../lt-spell", version = "0.1.1" }
 lt-chunk = { path = "../lt-chunk", version = "0.1.1" }
 lt-disambig = { path = "../lt-disambig", version = "0.1.1" }
 lt-data = { path = "../lt-data", version = "0.1.1" }
+lt-lindera = { path = "../lt-lindera", version = "0.1.1" }
 lt-pattern = { path = "../lt-pattern", version = "0.1.1" }
 regex = "1"
 fancy-regex = "0.14"
