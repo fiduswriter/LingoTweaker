@@ -54,7 +54,11 @@ def wheel_files(data_dir: Path, lang: str) -> list[Path]:
     for sub in (*SHARED, lang):
         base = data_dir / sub
         if base.is_dir():
-            files.extend(p for p in base.rglob("*") if p.is_file())
+            files.extend(
+                p
+                for p in base.rglob("*")
+                if p.is_file() and "dictionary" not in p.relative_to(base).parts
+            )
     return sorted(files)
 
 

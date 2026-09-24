@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 1002,
+  "file_count": 1006,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -5782,6 +5782,28 @@
       }
     },
     {
+      "path": "ja/README.md",
+      "sha256": "799e7a68e0a7e54932a6efe16a24f03cb8def6b05c291ee7eb6255b313e62f9a",
+      "size": 1470,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Japanese (ja) data notes; segmentation via patched Lindera IPADIC (generated dictionary, not in manifest)"
+      }
+    },
+    {
+      "path": "ja/rules/grammar.xml",
+      "sha256": "cda300bc51131e1cfe86e9c44a8db69a7ffe2dab93891dad94f6aad2b58264c6",
+      "size": 262172,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/ja/src/main/resources/org/languagetool/rules/ja/grammar.xml",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
       "path": "km/dictionaries/khmer.dict",
       "sha256": "ef475bef9a9ac23e0f3842e6f316f8b69f86001b7be069959e290c2eac37553b",
       "size": 269276,
@@ -11469,6 +11491,28 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/uk/src/main/resources/org/languagetool/resource/uk/removed_custom.txt",
+        "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
+        "license_verified": false
+      }
+    },
+    {
+      "path": "zh/README.md",
+      "sha256": "7c59593205bde7535d626deb411a26e14faff68a6e1c9ae34006ffa3c021ef09",
+      "size": 1785,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LICENSE",
+        "note": "Chinese (zh) data notes; segmentation via patched Lindera jieba (generated dictionary, not in manifest)"
+      }
+    },
+    {
+      "path": "zh/rules/grammar.xml",
+      "sha256": "9c345c5532ef80af0f71ecfb314b6543b5911dab0de32e7d649773f32ffd69e2",
+      "size": 862051,
+      "source": {
+        "kind": "upstream",
+        "upstream_path": "languagetool-language-modules/zh/src/main/resources/org/languagetool/rules/zh/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false
       }

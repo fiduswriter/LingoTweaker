@@ -20,6 +20,15 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DIST="${DIST_DIR:-$ROOT/target/data-dist}"
 
+# Generated CJK dictionaries are gitignored; generate any that are missing so
+# the data artifacts include their tokenizer data. Set LT_SKIP_DICT_BUILD=1 to
+# skip (offline / already generated).
+if [ -z "${LT_SKIP_DICT_BUILD:-}" ]; then
+  for _l in ja zh; do
+    [ -d "$ROOT/data/$_l/rules" ] && python3 "$ROOT/tools/lindera/build-dict.py" "$_l"
+  done
+fi
+
 PACKS_ONLY=0
 NATIVE_ONLY=0
 case "${1:-}" in

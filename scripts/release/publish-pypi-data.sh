@@ -22,6 +22,15 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DIST="${DIST_DIR:-$ROOT/target/data-dist}"
+
+# Generated CJK dictionaries are gitignored; generate any that are missing so
+# the data artifacts include their tokenizer data. Set LT_SKIP_DICT_BUILD=1 to
+# skip (offline / already generated).
+if [ -z "${LT_SKIP_DICT_BUILD:-}" ]; then
+  for _l in ja zh; do
+    [ -d "$ROOT/data/$_l/rules" ] && python3 "$ROOT/tools/lindera/build-dict.py" "$_l"
+  done
+fi
 PYTHON="${PYTHON:-python3}"
 VENV="${DATA_RELEASE_VENV:-/tmp/lingotweaker-data-venv}"
 BUILD_ONLY=0
