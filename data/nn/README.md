@@ -63,8 +63,11 @@ apply here verbatim).
 
 The most Nynorsk-specific check: it flags common **Bokmål-only forms** in
 Nynorsk text and suggests the Nynorsk equivalent (`jeg→eg`, `ikke→ikkje`,
-`hvordan→korleis`, `gutter→gutar`, …). It is a curated list rule, derived
-offline from the two speller dictionaries:
+`hvordan→korleis`, `gutter→gutar`, …). It is a curated list of ~730
+high-frequency, unambiguous pairs, grouped into sections (pronouns and
+question words, hjem-/hver-/hvit-/syk-/efter- families, time words, `-ende`
+→ `-ande` participles, `-het` → `-heit` nouns, everyday words). Candidates
+come from two machine-checked sources and are then hand-picked:
 
 ```sh
 # candidates: accepted by nb_NO.dic, rejected by nn_NO.dic
@@ -75,12 +78,26 @@ python3 tools/nn-dict/derive_bokmaal_forms.py \
 python3 tools/nn-dict/check_pairs.py data/nn/rules/bokmaal_forms.txt
 ```
 
+The second candidate source is the Apertium **nno-nob** bilingual dictionary
+(<https://github.com/apertium/apertium-nno-nob>, GPL-2.0;
+`apertium-nno-nob.nno-nob.dix`, ~297k entries of which ~4.6k are differing
+single-word pairs). Only differing single-word pairs whose Bokmål side is
+accepted by `nb_NO.dic` and rejected by `nn_NO.dic`, with a Nynorsk side
+accepted by `nn_NO.dic`, were considered (~2k after filtering); the final
+pairs are hand-picked from that shortlist plus diff/transform candidates —
+the file is an original curated work, not a vendored or verbatim-copied
+derivation (attribution in the file header and
+`THIRD_PARTY_NOTICES.md`). A corpus top-50k frequency list (OpenSubtitles)
+ranked the shortlist so curation could favour everyday words; loose
+dictionary synonyms and rare/specialist terms were dropped.
+
 Known limitations (all deliberate, false positives on valid Nynorsk are
 worse than misses):
 
 - **Only unambiguous forms are listed.** Many Bokmål-looking words are valid
   Nynorsk variants accepted by `nn_NO.dic` (`også`, `hun`, `dra`, `være`,
-  `ble`, `derfor`, `verden`, `arbeider`, `biler`, …) and must not be flagged.
+  `ble`, `derfor`, `verden`, `arbeider`, `biler`, `mulig`, `vanskelig`,
+  `lykkelig`, …) and must not be flagged.
 - **The rule is token-exact**: inflected Bokmål forms that are not in the
   list are only caught by the speller (`NN_SPELLER` flags them as unknown
   words), not with a targeted Nynorsk suggestion.

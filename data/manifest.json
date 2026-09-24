@@ -7159,13 +7159,13 @@
     },
     {
       "path": "nn/rules/bokmaal_forms.txt",
-      "sha256": "4d12ac860dabb9836a51637bbcbc22ff6b2ec131ffae80931709168e2bdb843d",
-      "size": 1532,
+      "sha256": "cd0532e8414b57258c82c4597d019b7d5a91b9267bbb1ebad4952d684ca87f71",
+      "size": 16416,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
         "license_source": "LICENSE",
-        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program)"
+        "note": "Hand-authored Nynorsk language data (LingoTweaker new-languages program); candidate pairs machine-derived from the Apertium nno-nob bilingual dictionary (GPL-2.0, https://github.com/apertium/apertium-nno-nob) and the nb_NO.dic/nn_NO.dic speller diff with anchored orthographic transforms, then hand-picked; every pair dictionary-verified against nn_NO.dic"
       }
     },
     {
