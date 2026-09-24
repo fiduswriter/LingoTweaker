@@ -69,8 +69,11 @@ marker spans, the `<match no="N">lemma</match>` disambiguation filter and the
 Java possessive-quantifier regex semantics); da is at 0/0/0 (#10, resolved by the
 suggestion-engine and dotted-abbreviation ports, plus the owner-added
 `DANISH_TYPOS` Wikipedia typo-list rule (#14) pinned at an exact-count only-Rust
-allowance of 0 corpus matches); sv is at 0/0/0 (#11,
-resolved by the suggestion-engine port); is is at 0/0/0 (#12); eo is at 0/0/0
+allowance of 0 corpus matches and 16 owner-added DanNet-derived
+confusable-word rulegroups (#15) that the corpus does not trigger); sv is at 0/0/0 (#11,
+resolved by the suggestion-engine port, plus the owner-added
+SALDO-derived confusable-word and coherency pairs (#16) that the corpus does
+not trigger); is is at 0/0/0 (#12); eo is at 0/0/0
 (#10, resolved by the wrong-split and `twowords` ports); ast is at 0/0/0 (#13); br is at 0/0/0 (#14); tl is at 0/0/0 (#15, resolved: the morfologik speller `getFrequency` now
 reproduces Java's signed-byte frequency arithmetic, so the
 frequency-weighted `MORFOLOGIK_RULE_TL` suggestions order identically); crh is at 0/0/0 (#16, resolved: Java's `UNICODE_CASE` folds `ı`/`İ` into the ASCII `i`/`I` class and `lt_pattern` now adds them); be is at 0/0/0 (#17); ru is at 0/0/0 (#18); uk is at 0/0/0 (#19, resolved); sr is at 0/0/0 (#20; the golden is captured from a forward-ported in-container copy of the reactor-excluded `sr` module, `scripts/oracle/sr/check-diff-sr.sh`, D-285/D-287/D-288). `no`, `nrd`, `nn` and `gn` are hand-authored

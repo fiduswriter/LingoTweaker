@@ -67,7 +67,9 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
     m.suggestions.iter().map(|s| s.value.clone()).collect()
 }
 
-/// Stage state: active XML rule count, no XML-referenced filters and
+/// Stage state: active XML rule count (35; 29 original + 6 rules mined from
+/// SALDO for the "Ord som ofta förväxlas" category, see
+/// `swedish_saldo_confusables`), no XML-referenced filters and
 /// `compile_failures()` = 0.
 #[test]
 fn swedish_engine_state() {
@@ -76,7 +78,7 @@ fn swedish_engine_state() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    assert_eq!(sv.active_rule_count(), 29);
+    assert_eq!(sv.active_rule_count(), 35);
     assert_eq!(sv.skipped_counts().filters, 0);
     assert!(
         sv.compile_failures().is_empty(),
@@ -113,6 +115,142 @@ fn swedish_word_coherency() {
         "Använd endast en av stavningsvarianterna 'fasett' och 'facett' i en och samma text."
     );
     assert_eq!(suggestions(&matches[0]), vec!["facett"]);
+}
+
+/// New coherency pairs mined from SALDO (CC BY 4.0) spelling-variant sister
+/// terms (owner-added entries in `coherency.txt`): mixing the two variants
+/// flags the second occurrence, single-variant text stays clean.
+#[test]
+fn swedish_word_coherency_saldo() {
+    let _guard = engine_guard();
+    for (text, from, to, range) in [
+        (
+            "Vi tog spagetti och spaghetti till middag.",
+            "spaghetti",
+            "spagetti",
+            (20, 29),
+        ),
+        (
+            "Han låssas och låtsas alltid.",
+            "låtsas",
+            "låssas",
+            (15, 21),
+        ),
+        ("Ett café och ett kafé öppnade.", "kafé", "café", (17, 21)),
+        ("Jag prova och pröva på det.", "pröva", "prova", (14, 19)),
+    ] {
+        let matches = one(text, "SV_WORD_COHERENCY");
+        assert_eq!(matches.len(), 1, "{text}");
+        assert_eq!(
+            matches[0].message,
+            format!(
+                "Använd endast en av stavningsvarianterna '{from}' och '{to}' i en och samma text."
+            )
+        );
+        assert_eq!(suggestions(&matches[0]), vec![to], "{text}");
+        assert_utf16(text, &matches[0], range);
+    }
+    // single-variant sentences: no coherency match
+    for text in [
+        "Vi tog spaghetti till middag.",
+        "Han låtsas att han sover.",
+        "Ett kafé öppnade.",
+        "Jag pröva på det.",
+    ] {
+        assert!(one(text, "SV_WORD_COHERENCY").is_empty(), "{text}");
+    }
+}
+
+/// Confusable-word rules mined from SALDO (CC BY 4.0) and hand-curated into
+/// CAT4 "Ord som ofta förväxlas" (owner-added, no Java equivalent): each wrong
+/// sentence fires exactly its rule with the expected suggestion(s), each
+/// corrected sentence stays clean.
+#[test]
+fn swedish_saldo_confusables() {
+    let _guard = engine_guard();
+    let rules = [
+        "sväraVSsvara",
+        "svärarVSsvarar",
+        "bryggaVSbygga_öl",
+        "bryggaVSbygga_hus",
+        "antaVSinta_att",
+        "intaVSanta_mat",
+    ];
+    let Some(sv) = engine_with_rules(&rules) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    // (wrong sentence, rule, sub_id, suggestions)
+    let cases: &[(&str, &str, &str, &[&str])] = &[
+        (
+            "Han svärde nej tack till kaffet.",
+            "sväraVSsvara",
+            "1",
+            &["svarade"],
+        ),
+        (
+            "Han svärar alltid ärligt på prov.",
+            "svärarVSsvarar",
+            "1",
+            &["svarar"],
+        ),
+        (
+            "Han bygger kaffe varje morgon.",
+            "bryggaVSbygga_öl",
+            "1",
+            &["brygger"],
+        ),
+        (
+            "De brygger ett nytt hus.",
+            "bryggaVSbygga_hus",
+            "1",
+            &["bygger"],
+        ),
+        (
+            "Jag intar att han kommer i kväll.",
+            "antaVSinta_att",
+            "1",
+            &["antar"],
+        ),
+        (
+            "Jag intade att det var så.",
+            "antaVSinta_att",
+            "1",
+            &["antar", "antade"],
+        ),
+        ("Patienten antar mat.", "intaVSanta_mat", "1", &["intar"]),
+    ];
+    for (text, rule, sub, sugg) in cases {
+        let matches: Vec<lt::Match> = sv
+            .check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == *rule)
+            .collect();
+        assert_eq!(matches.len(), 1, "{rule}: {text}");
+        assert_eq!(matches[0].sub_id.as_deref(), Some(*sub), "{text}");
+        assert_eq!(suggestions(&matches[0]), sugg.to_vec(), "{text}");
+    }
+    // corrected sentences: none of the new rules fire
+    let corrections = [
+        "Han svarade nej tack till kaffet.",
+        "Han svarar alltid ärligt på prov.",
+        "Han brygger kaffe varje morgon.",
+        "De bygger ett nytt hus.",
+        "Jag antar att han kommer i kväll.",
+        "Jag antade att det var så.",
+        "Patienten intar mat.",
+    ];
+    for text in corrections {
+        let result = sv.check(text).expect("check");
+        let matches: Vec<&lt::Match> = result
+            .matches
+            .iter()
+            .filter(|m| rules.contains(&m.rule_id.as_str()))
+            .collect();
+        assert!(matches.is_empty(), "{text}: {matches:?}");
+    }
 }
 
 /// `CommaWhitespaceRule` (1), Java probe.

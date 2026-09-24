@@ -68,7 +68,9 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
     m.suggestions.iter().map(|s| s.value.clone()).collect()
 }
 
-/// Stage state: active XML rule count (69; the DANISH_TYPOS list rule rides
+/// Stage state: active XML rule count (93; 69 original + 23 rulegroups mined
+/// from DanNet for the confusable-word categories, see
+/// `danish_dannet_confusables`; the DANISH_TYPOS list rule rides
 /// `simple_replace` and is not counted), no XML-referenced filters and
 /// `compile_failures()` = 0 (Danish has no language-specific Java rules).
 #[test]
@@ -78,7 +80,7 @@ fn danish_engine_state() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    assert_eq!(da.active_rule_count(), 69);
+    assert_eq!(da.active_rule_count(), 93);
     assert_eq!(da.skipped_counts().filters, 0);
     assert!(
         da.compile_failures().is_empty(),
@@ -280,6 +282,217 @@ fn danish_typos_wikipedia() {
     // correct Danish: no DANISH_TYPOS match
     let text = "Jeg lånte bogen på biblioteket i går.";
     assert!(one(text, "DANISH_TYPOS").is_empty());
+}
+
+/// Confusable-word rulegroups mined from DanNet (the Danish wordnet, CC BY-SA
+/// 4.0) and hand-curated into CAT2/CAT3 of `grammar.xml` (owner-added, no Java
+/// equivalent): each wrong sentence fires exactly its rulegroup with the
+/// expected suggestion(s), each corrected sentence stays clean.
+#[test]
+fn danish_dannet_confusables() {
+    let _guard = engine_guard();
+    let rules = [
+        "ligge_lægge",
+        "lede_lide",
+        "hælde_hævde",
+        "vælte_vælge",
+        "byde_bøde",
+        "held_helt",
+        "låse_løse",
+        "brygge_bygge",
+        "folk_flok",
+        "højde_højre",
+        "leve_lave",
+        "lade_lave",
+        "sælge_vælge",
+        "stille_spille",
+        "række_trække",
+        "strikke_strække",
+    ];
+    let Some(da) = engine_with_rules(&rules) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    // (wrong sentence, rulegroup, sub_id, suggestions)
+    let cases: &[(&str, &str, &str, &[&str])] = &[
+        (
+            "Lig mærke til, hvad han siger.",
+            "ligge_lægge",
+            "1",
+            &["Læg"],
+        ),
+        (
+            "Han brød sig ikke om at lede under det.",
+            "lede_lide",
+            "1",
+            &["lide"],
+        ),
+        (
+            "Politiet lide efter den forsvundne dreng.",
+            "lede_lide",
+            "2",
+            &["lede"],
+        ),
+        (
+            "Hun hælder at det ikke er hendes skyld.",
+            "hælde_hævde",
+            "1",
+            &["hævde", "hævder"],
+        ),
+        (
+            "Han hævder vand i glasset.",
+            "hælde_hævde",
+            "2",
+            &["hælde", "hælder"],
+        ),
+        (
+            "Du skal ikke vælte mellem dem.",
+            "vælte_vælge",
+            "1",
+            &["vælge"],
+        ),
+        (
+            "Staklen vælger omkuld.",
+            "vælte_vælge",
+            "2",
+            &["vælte", "vælter"],
+        ),
+        (
+            "Han fik en byde for at køre for stærkt.",
+            "byde_bøde",
+            "1",
+            &["bøde"],
+        ),
+        (
+            "Han bøder på den gamle vase.",
+            "byde_bøde",
+            "2",
+            &["byde", "byder"],
+        ),
+        (
+            "Jeg ønsker dig helt og lykke.",
+            "held_helt",
+            "1",
+            &["held og lykke"],
+        ),
+        ("Han kunne ikke låse opgaven.", "låse_løse", "1", &["løse"]),
+        (
+            "Hun glemte at løse døren, da hun gik ud.",
+            "låse_løse",
+            "2",
+            &["låse"],
+        ),
+        (
+            "Han bygger kaffe hver morgen.",
+            "brygge_bygge",
+            "1",
+            &["brygge", "brygger"],
+        ),
+        (
+            "De brygger et nyt hus.",
+            "brygge_bygge",
+            "2",
+            &["bygge", "bygger"],
+        ),
+        (
+            "Der kom en folk løbende ad gaden.",
+            "folk_flok",
+            "1",
+            &["flok"],
+        ),
+        ("Gå til højde ved krydset.", "højde_højre", "1", &["højre"]),
+        (
+            "Hun lever aftensmad til familien.",
+            "leve_lave",
+            "1",
+            &["lave", "laver"],
+        ),
+        ("Lave være med at røre ved det!", "lade_lave", "1", &["Lad"]),
+        (
+            "Jeg laver være med at blande mig.",
+            "lade_lave",
+            "2",
+            &["lader"],
+        ),
+        (
+            "Hun kunne ikke sælge mellem de to hunde.",
+            "sælge_vælge",
+            "1",
+            &["vælge"],
+        ),
+        (
+            "Han stiller fodbold hver lørdag.",
+            "stille_spille",
+            "1",
+            &["spille", "spiller"],
+        ),
+        (
+            "Han spiller mange spørgsmål til politikerne.",
+            "stille_spille",
+            "2",
+            &["stille", "stiller"],
+        ),
+        (
+            "Tandlægen skal række tanden ud.",
+            "række_trække",
+            "1",
+            &["trække"],
+        ),
+        (
+            "Hun strækker en trøje til sin søn.",
+            "strikke_strække",
+            "1",
+            &["strikke", "strikker"],
+        ),
+    ];
+    for (text, rule, sub, sugg) in cases {
+        let matches: Vec<lt::Match> = da
+            .check(text)
+            .expect("check")
+            .matches
+            .into_iter()
+            .filter(|m| m.rule_id == *rule)
+            .collect();
+        assert_eq!(matches.len(), 1, "{rule}: {text}");
+        assert_eq!(matches[0].sub_id.as_deref(), Some(*sub), "{text}");
+        assert_eq!(suggestions(&matches[0]), sugg.to_vec(), "{text}");
+    }
+    // corrected sentences: none of the new rulegroups fire
+    let corrections = [
+        "Læg mærke til, hvad han siger.",
+        "Han brød sig ikke om at lide under det.",
+        "Politiet leder efter den forsvundne dreng.",
+        "Hun hævder at det ikke er hendes skyld.",
+        "Han hælder vand i glasset.",
+        "Du skal vælge mellem dem.",
+        "Staklen vælter omkuld.",
+        "Han fik en bøde for at køre for stærkt.",
+        "Han byder på den gamle vase.",
+        "Jeg ønsker dig held og lykke.",
+        "Han kunne ikke løse opgaven.",
+        "Hun glemte at låse døren, da hun gik ud.",
+        "Han brygger kaffe hver morgen.",
+        "De bygger et nyt hus.",
+        "Der kom en flok løbende ad gaden.",
+        "Gå til højre ved krydset.",
+        "Hun laver aftensmad til familien.",
+        "Lad være med at røre ved det!",
+        "Jeg lader være med at blande mig.",
+        "Hun kunne ikke vælge mellem de to hunde.",
+        "Han spiller fodbold hver lørdag.",
+        "Han stiller mange spørgsmål til politikerne.",
+        "Tandlægen skal trække tanden ud.",
+        "Hun strikker en trøje til sin søn.",
+    ];
+    for text in corrections {
+        let result = da.check(text).expect("check");
+        let matches: Vec<&lt::Match> = result
+            .matches
+            .iter()
+            .filter(|m| rules.contains(&m.rule_id.as_str()))
+            .collect();
+        assert!(matches.is_empty(), "{text}: {matches:?}");
+    }
 }
 
 /// Long paragraph with real Danish orthography. Java probe

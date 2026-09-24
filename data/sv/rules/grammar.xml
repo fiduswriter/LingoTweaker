@@ -218,7 +218,74 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
   </category>
   
   <category id="CAT4" name="Ord som ofta förväxlas">
-    <rule id="mottoVSmatto" name="Motto vs. måtto">
+    <!-- Förväxlingspar ur SALDO (Språkbanken, CC BY 4.0,
+         https://spraakbanken.gu.se/eng/resource/saldo): termer som delar
+         primärsense (nära synonymer) med en bokstavs skillnad, handkuraterade. -->
+    <rule id="sväraVSsvara" name="Svärde &gt; svarade">
+      <pattern>
+        <marker>
+          <token regexp="yes">[Ss]värde</token>
+        </marker>
+      </pattern>
+      <message>"Svära" böjs svär–svor–svurit och betyder att avge en ed eller förbanna; "svara" böjs svarar–svarade och betyder att ge ett svar. Menade du <suggestion>svarade</suggestion>?</message>
+      <example correction="svarade">Han <marker>svärde</marker> nej tack till kaffet.</example>
+      <example>Han svarade nej tack till kaffet.</example>
+    </rule>
+    <rule id="svärarVSsvarar" name="Svärar &gt; svarar">
+      <pattern>
+        <marker>
+          <token regexp="yes">[Ss]värar</token>
+        </marker>
+      </pattern>
+      <message>"Svära" böjs svär–svor–svurit och betyder att avge en ed eller förbanna; "svara" böjs svarar–svarade och betyder att ge ett svar. Menade du <suggestion>svarar</suggestion>?</message>
+      <example correction="svarar">Han <marker>svärar</marker> alltid ärligt på prov.</example>
+      <example>Han svarar alltid ärligt på prov.</example>
+    </rule>
+    <rule id="bryggaVSbygga_öl" name="Bygger öl &gt; brygger öl">
+      <pattern case_sensitive="no">
+        <marker>
+          <token skip="2" regexp="yes">by(gger|gga)</token>
+        </marker>
+        <token regexp="yes">öl|öllet|kaffe|kaffen|vinen|glögg(en)?|mjöd</token>
+      </pattern>
+      <message>Man <suggestion>brygger</suggestion> kaffe och öl och bygger ett hus. Menade du: <suggestion><match no="1" regexp_match="(?i)by(gger|gga)" regexp_replace="bry$1"/></suggestion>?</message>
+      <example correction="brygger">Han <marker>bygger</marker> kaffe varje morgon.</example>
+      <example>Han brygger kaffe varje morgon.</example>
+    </rule>
+    <rule id="bryggaVSbygga_hus" name="Brygga hus &gt; bygga hus">
+      <pattern case_sensitive="no">
+        <marker>
+          <token skip="2" regexp="yes">bry(gger|gga)</token>
+        </marker>
+        <token regexp="yes">hus|huset|ett hus|vägen|stallet|bro</token>
+      </pattern>
+      <message>Man <suggestion>bygger</suggestion> ett hus och brygger kaffe och öl. Menade du: <suggestion><match no="1" regexp_match="(?i)bry(gger|gga)" regexp_replace="by$1"/></suggestion>?</message>
+      <example correction="bygger">De <marker>brygger</marker> ett nytt hus.</example>
+      <example>De bygger ett nytt hus.</example>
+    </rule>
+    <rule id="antaVSinta_att" name="Inta att &gt; anta att">
+      <pattern case_sensitive="no">
+        <marker>
+          <token regexp="yes">in(ta(r|de)?)</token>
+        </marker>
+        <token>att</token>
+      </pattern>
+      <message>Man <suggestion>antar</suggestion> något (gissar) och intar något (äter, dricker). Menade du: <suggestion><match no="1" regexp_match="(?i)in(ta(r|de)?)" regexp_replace="an$1"/></suggestion>?</message>
+      <example correction="anta">Jag <marker>inta</marker> att han kommer i kväll.</example>
+      <example>Jag antar att han kommer i kväll.</example>
+    </rule>
+    <rule id="intaVSanta_mat" name="Anta mat &gt; inta mat">
+      <pattern case_sensitive="no">
+        <marker>
+          <token regexp="yes">an(ta(r|de)?)</token>
+        </marker>
+        <token regexp="yes">mat|narkotika|läkemedel|öl</token>
+      </pattern>
+      <message>Man <suggestion>intar</suggestion> mat och antar något (gissar). Menade du: <suggestion><match no="1" regexp_match="(?i)an(ta(r|de)?)" regexp_replace="in$1"/></suggestion>?</message>
+      <example correction="intar">Patienten <marker>antar</marker> inte mat.</example>
+      <example>Patienten intar inte mat.</example>
+    </rule>
+  <rule id="mottoVSmatto" name="Motto vs. måtto">
       <pattern>
         <token>i</token>
         <token regexp="yes">möjligaste|så</token>

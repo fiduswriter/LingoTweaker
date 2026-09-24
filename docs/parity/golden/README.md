@@ -118,12 +118,16 @@ date-filter rules either).
   parity. The added owner rule `DANISH_TYPOS` (`docs/differences.md` #14, the
   Danish Wikipedia typo list) is Rust-only; the 284-line corpus contains none
   of its wrong forms, so the gate pins it at the exact count
-  `--expect-only-rust=DANISH_TYPOS=0`.
+  `--expect-only-rust=DANISH_TYPOS=0`. The owner-added DanNet-derived
+  confusable-word rulegroups (`docs/differences.md` #15) fire on none of the
+  corpus lines either, so the gate needs no further allowance.
   sv is exactly 0 only-Java / 0 only-Rust / 0 field diffs (D-218/D-219,
   resolved by the suggestion-engine port): the suggestion lists match the
   legacy engine byte-for-byte; the XML rules,
   `SwedishTagger`/`SwedishSynthesizer`, hybrid disambiguator, `SV_COMPOUNDS`
-  and `SV_WORD_COHERENCY` are at parity.
+  and `SV_WORD_COHERENCY` are at parity. The owner-added SALDO-derived
+  confusable-word rules and coherency pairs (`docs/differences.md` #16) fire
+  on none of the 45 corpus lines, so the gate needs no allowance.
   is is exactly 0/0/0 (D-228; Icelandic has no tagger/synthesizer/
   disambiguator, `HunspellNoSuggestionRule` emits no suggestions and
   `compile_failures()` is empty).

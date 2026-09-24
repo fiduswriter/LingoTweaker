@@ -680,10 +680,318 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         <example>Besøgelsestiderne kendte jeg ikke.</example>
       </rule>
     </rulegroup>
+    <!-- Ordforvekslingspar udledt af DanNet (Det Danske WordNet, CC BY-SA 4.0,
+         https://wordnet.dk/dannet): synonymer/semantisk beslægtede ordpar med
+         en bogstavs forskel, håndkurateret. -->
+    <!-- ligge_lægge: kun i den sikre kontekst "læg mærke til" -->
+    <rulegroup id="ligge_lægge" name="lig→læg (læg mærke)">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)lig</token>
+          </marker>
+          <token regexp="yes">[Mm]ærke</token>
+        </pattern>
+        <message>Imperativ af "at lægge" staves "læg": <suggestion>læg</suggestion> mærke til. ("Lig" er imperativ af "at ligge" eller noget, der bindes sammen.)</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="Læg"><marker>Lig</marker> mærke til, hvad han siger.</example>
+        <example>Læg mærke til, hvad han siger.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="lede_lide" name="lede↔lide">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)le(de|der)</token>
+          </marker>
+          <token>under</token>
+        </pattern>
+        <message>Man kan <suggestion>lide</suggestion> under noget (have det svært) og lede efter noget (søge). Mente du: <suggestion><match no="1" regexp_match="(?iu)le(de|der)" regexp_replace="li$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="lide">Han brød sig ikke om at <marker>lede</marker> under det.</example>
+        <example>Han led meget under det.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)li(de|der)</token>
+          </marker>
+          <token>efter</token>
+        </pattern>
+        <message>Man kan <suggestion>lede</suggestion> efter noget (søge) og lide under noget (have det svært). Mente du: <suggestion><match no="1" regexp_match="(?iu)li(de|der)" regexp_replace="le$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="lede">Politiet <marker>lide</marker> efter den forsvundne dreng.</example>
+        <example>Politiet leder efter den forsvundne dreng.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="hælde_hævde" name="hælde↔hævde">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)hæl(de|der)</token>
+          </marker>
+          <token>at</token>
+        </pattern>
+        <message>Man kan <suggestion>hævde</suggestion> noget (påstå) og hælde noget (fx vand) ud. Mente du: <suggestion><match no="1" regexp_match="(?iu)hæl(de|der)" regexp_replace="hæv$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="hævder">Hun <marker>hælder</marker> at det ikke er hendes skyld.</example>
+        <example>Hun hævder at det ikke er hendes skyld.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)hæv(de|der)</token>
+          </marker>
+          <token regexp="yes">vand|mælk|vin|øl|saft|suppen?|væsken?|ud|i</token>
+        </pattern>
+        <message>Man kan <suggestion>hælde</suggestion> noget ud (hælde vand i et glas) og hævde noget (påstå). Mente du: <suggestion><match no="1" regexp_match="(?iu)hæv(de|der)" regexp_replace="hæl$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="hælder">Han <marker>hævder</marker> vand i glasset.</example>
+        <example>Han hælder vand i glasset.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="vælte_vælge" name="vælte↔vælge">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)vælte(r)?</token>
+          </marker>
+          <token regexp="yes">mellem|imellem</token>
+        </pattern>
+        <message>Man kan <suggestion>vælge</suggestion> mellem ting (vælge den bedste) og vælte noget (få det til at falde). Mente du: <suggestion><match no="1" regexp_match="(?iu)vælte(r)?" regexp_replace="vælge$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="vælge">Du skal ikke <marker>vælte</marker> mellem dem.</example>
+        <example>Du skal vælge mellem dem.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)vælge(r)?</token>
+          </marker>
+          <token>omkuld</token>
+        </pattern>
+        <message>Man kan <suggestion>vælte</suggestion> omkuld (falde) og vælge mellem ting. Mente du: <suggestion><match no="1" regexp_match="(?iu)vælge(r)?" regexp_replace="vælte$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="vælter">Staklen <marker>vælger</marker> omkuld.</example>
+        <example>Staklen vælter omkuld.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="byde_bøde" name="byde↔bøde">
+      <rule>
+        <pattern>
+          <token regexp="yes">[Ee]n</token>
+          <marker>
+            <token>byde</token>
+          </marker>
+        </pattern>
+        <message>En <suggestion>bøde</suggestion> er en pengebøde; "byde" er et verbum (byde noget frem).</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="bøde">Han fik en <marker>byde</marker> for at køre for stærkt.</example>
+        <example>Han fik en bøde for at køre for stærkt.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)bø(de|der)</token>
+          </marker>
+          <token>på</token>
+        </pattern>
+        <message>Man kan <suggestion>byde</suggestion> på noget (fx ved en auktion) og få en bøde (en pengebøde). Mente du: <suggestion><match no="1" regexp_match="(?iu)bø(de|der)" regexp_replace="by$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="byder">Han <marker>bøder</marker> på den gamle vase.</example>
+        <example>Han byder på den gamle vase.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="held_helt" name="held↔helt">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">[Hh]elt</token>
+          </marker>
+          <token>og</token>
+          <token>lykke</token>
+        </pattern>
+        <message>Udtrykket hedder <suggestion>held og lykke</suggestion>; "helt" er enten en helt (person) eller "helt" (fuldstændig).</message>
+        <short>Mulige ordforveksling - stumt d</short>
+        <example correction="held og lykke">Jeg ønsker dig <marker>helt og lykke</marker>.</example>
+        <example>Jeg ønsker dig held og lykke.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="låse_løse" name="låse↔løse">
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="1" regexp="yes">(?iu)lå(se|ser|sen)</token>
+          </marker>
+          <token regexp="yes">opgave(n)?|opgaver(ne)?|problem(et)?|problemer(ne)?|gåde(n)?|gåder(ne)?|mysterie(t)?|quiz(z?en)?</token>
+        </pattern>
+        <message>Man kan <suggestion>løse</suggestion> en opgave (finde svaret) og låse en dør (låse op). Mente du: <suggestion><match no="1" regexp_match="(?iu)lå(se|ser|sen)" regexp_replace="lø$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="løse">Han kunne ikke <marker>låse</marker> opgaven.</example>
+        <example>Han kunne ikke løse opgaven.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="1" regexp="yes">(?iu)lø(se|ser|sen)</token>
+          </marker>
+          <token regexp="yes">dør(en)?|dørene|låge(n)?|lågen|lås(en)?</token>
+        </pattern>
+        <message>Man kan <suggestion>låse</suggestion> en dør (låse op) og løse en opgave (finde svaret). Mente du: <suggestion><match no="1" regexp_match="(?iu)lø(se|ser|sen)" regexp_replace="lå$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="låse">Hun glemte at <marker>løse</marker> døren, da hun gik ud.</example>
+        <example>Hun glemte at låse døren, da hun gik ud.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="brygge_bygge" name="brygge↔bygge">
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="2" regexp="yes">(?iu)by(gge|gger)</token>
+          </marker>
+          <token regexp="yes">øl|øllet|kaffe|kaffen|vin|vinen|mjød|gløgg(en)?|the</token>
+        </pattern>
+        <message>Man kan <suggestion>brygge</suggestion> kaffe og øl og bygge et hus. Mente du: <suggestion><match no="1" regexp_match="(?iu)by(gge|gger)" regexp_replace="bry$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="brygger">Han <marker>bygger</marker> kaffe hver morgen.</example>
+        <example>Han brygger kaffe hver morgen.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="2" regexp="yes">(?iu)bry(gge|gger)</token>
+          </marker>
+          <token regexp="yes">hus(et)?|skuret|garaget|tilbygning(en)?|bro(en)?|vej(en)?</token>
+        </pattern>
+        <message>Man kan <suggestion>bygge</suggestion> et hus og brygge kaffe og øl. Mente du: <suggestion><match no="1" regexp_match="(?iu)bry(gge|gger)" regexp_replace="by$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="bygger">De <marker>brygger</marker> et nyt hus.</example>
+        <example>De bygger et nyt hus.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="folk_flok" name="folk↔flok">
+      <rule>
+        <pattern>
+          <token regexp="yes">[Ee]n</token>
+          <marker>
+            <token>folk</token>
+          </marker>
+        </pattern>
+        <message>En <suggestion>flok</suggestion> er en forsamling (en flok mennesker); "folk" er flertal (flere folk).</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="flok">Der kom en <marker>folk</marker> løbende ad gaden.</example>
+        <example>Der kom en flok løbende ad gaden.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="højde_højre" name="højde→højre">
+      <rule>
+        <pattern>
+          <token regexp="yes">[Tt]il</token>
+          <marker>
+            <token>højde</token>
+          </marker>
+        </pattern>
+        <message>Retningen er <suggestion>højre</suggestion> (til højre); en højde er, hvor højt noget er.</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="højre">Gå til <marker>højde</marker> ved krydset.</example>
+        <example>Gå til højre ved krydset.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="leve_lave" name="leve→lave">
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="1" regexp="yes">(?iu)le(ve|ver)</token>
+          </marker>
+          <token regexp="yes">mad(en)?|frokost(en)?|aftensmad(en)?|morgenmad(en)?|middag(en)?|suppe(n)?|kaffe(n)?|te(n)?|kage(n)?|plan(en)?</token>
+        </pattern>
+        <message>Man kan <suggestion>lave</suggestion> mad og leve (være i live). Mente du: <suggestion><match no="1" regexp_match="(?iu)le(ve|ver)" regexp_replace="la$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="laver">Hun <marker>lever</marker> aftensmad til familien.</example>
+        <example>Hun laver aftensmad til familien.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="lade_lave" name="lade↔lave">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">[Ll]ave</token>
+          </marker>
+          <token>være</token>
+        </pattern>
+        <message>"Lad være" betyder, at man ikke gør noget; "lave" betyder, at man fremstiller noget. Mente du: <suggestion><match no="1" regexp_match="(?iu)lave" regexp_replace="lad"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="Lad"><marker>Lave</marker> være med at røre ved det!</example>
+        <example>Lad være med at røre ved det!</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">[Ll]aver</token>
+          </marker>
+          <token>være</token>
+        </pattern>
+        <message>"Lader være" betyder, at man ikke gør noget; "laver" betyder, at man fremstiller noget. Mente du: <suggestion><match no="1" regexp_match="(?iu)laver" regexp_replace="lader"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="lader">Jeg <marker>laver</marker> være med at blande mig.</example>
+        <example>Jeg lader være med at blande mig.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="sælge_vælge" name="sælge→vælge">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)sæl(ge|ger)</token>
+          </marker>
+          <token>mellem</token>
+        </pattern>
+        <message>Man kan <suggestion>vælge</suggestion> mellem ting (træffe et valg) og sælge noget (afhende). Mente du: <suggestion><match no="1" regexp_match="(?iu)sæl(ge|ger)" regexp_replace="væl$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="vælge">Hun kunne ikke <marker>sælge</marker> mellem de to hunde.</example>
+        <example>Hun kunne ikke vælge mellem de to hunde.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="stille_spille" name="stille↔spille">
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="1" regexp="yes">(?iu)stil(l)(er|e)</token>
+          </marker>
+          <token regexp="yes">fodbold|håndbold|basketball|volleyball|tennis|golf|ishockey|skak|poker|bridge|kort|klaver|guitar|trommer|fiolin|trompet|teater|rolle(n)?</token>
+        </pattern>
+        <message>Man kan <suggestion>spille</suggestion> fodbold og et instrument og stille et spørgsmål. Mente du: <suggestion><match no="1" regexp_match="(?iu)stil(l)(er|e)" regexp_replace="spil$1$2"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="spiller">Han <marker>stiller</marker> fodbold hver lørdag.</example>
+        <example>Han spiller fodbold hver lørdag.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="1" regexp="yes">(?iu)spil(l)(er|e)</token>
+          </marker>
+          <token regexp="yes">krav(et)?|kravene|spørgsmål(et)?|spørgsmålene</token>
+        </pattern>
+        <message>Man kan <suggestion>stille</suggestion> krav og spørgsmål og spille et spil. Mente du: <suggestion><match no="1" regexp_match="(?iu)spil(l)(er|e)" regexp_replace="stil$1$2"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="stiller">Han <marker>spiller</marker> mange spørgsmål til politikerne.</example>
+        <example>Han stiller mange spørgsmål til politikerne.</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="række_trække" name="række→trække">
+      <rule>
+        <pattern>
+          <marker>
+            <token regexp="yes">(?iu)rækk(e|er)</token>
+          </marker>
+          <token regexp="yes">tanden?|tænder(ne)?</token>
+        </pattern>
+        <message>Man kan <suggestion>trække</suggestion> en tand (fjerne den) og række en hånd (give den). Mente du: <suggestion><match no="1" regexp_match="(?iu)rækk(e|er)" regexp_replace="trækk$1"/></suggestion>?</message>
+        <short>Mulige ordforveksling</short>
+        <example correction="trække">Tandlægen skal <marker>række</marker> tanden ud.</example>
+        <example>Tandlægen skal trække tanden ud.</example>
+      </rule>
+    </rulegroup>
   </category>
-  <!-- ====================================================================== -->
-  <!-- Mulig ordforveksling med sjældent ord - Possible word confusion with rare words -->
-  <!-- ====================================================================== -->
   <category id="CAT3" name="Mulige ordforveksling med sjældent ord">
     <rule id="egenavn_egennavn" name="egenavn→egennavn">
       <pattern>
@@ -837,7 +1145,22 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
       <example correction="vartegn">Tårnet var et <marker>varetegn</marker> for byen.</example>
       <example>Det er et vartegn for egnen.</example>
     </rule>
-    
+    <!-- strikke_strække: sjældne ord, udledt af DanNet (CC BY-SA 4.0) -->
+    <rulegroup id="strikke_strække" name="strække→strikke">
+      <rule>
+        <pattern>
+          <marker>
+            <token skip="1" regexp="yes">(?iu)stræk(k)(er|e)</token>
+          </marker>
+          <token regexp="yes">trøje(n|r)?|trøjer(ne)?|sok(ken|ker)?|sokker(ne)?|garn(et)?|hue(n)?|sweater(en)?</token>
+        </pattern>
+        <message>Man kan <suggestion>strikke</suggestion> en trøje (fremstille den på pinde) og strække sig (gøre sig lang). Mente du: <suggestion><match no="1" regexp_match="(?iu)stræk(k)(er|e)" regexp_replace="strik$1$2"/></suggestion>?</message>
+        <short>Mulige ordforveksling - sjældent ord</short>
+        <example correction="strikker">Hun <marker>strækker</marker> en trøje til sin søn.</example>
+        <example>Hun strikker en trøje til sin søn.</example>
+      </rule>
+    </rulegroup>
+
   </category>
   
   <!-- ====================================================================== -->

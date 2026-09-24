@@ -1878,13 +1878,14 @@
     },
     {
       "path": "da/rules/grammar.xml",
-      "sha256": "68486ea98f079653f2b7f5d5fc721b4cb62330e987c1bef0e48cec47cafeec87",
-      "size": 65888,
+      "sha256": "629f26a292b47886533bfb301b0d7c1765504e9e090862a8410acdf8d764eb79",
+      "size": 82492,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/da/src/main/resources/org/languagetool/rules/da/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
-        "license_verified": false
+        "license_verified": false,
+        "note": "Owner-added confusable-word rulegroups (16 groups / 23 rules) appended to the upstream CAT2/CAT3 categories, candidate pairs mined from DanNet (the Danish wordnet, CC BY-SA 4.0, https://wordnet.dk/dannet) and hand-curated; no wordnet data vendored; see docs/differences.md #15"
       }
     },
     {
@@ -7102,8 +7103,8 @@
     },
     {
       "path": "nn/README.md",
-      "sha256": "c195338b286b9bf3b5776c78938c32ef2721fec570f2a5a4dfcf670d265d8175",
-      "size": 6184,
+      "sha256": "acfff37a83ced2858b51398f77cf920fb34f4d395c9824bf5c8f80b6cd2ea4a7",
+      "size": 7293,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
@@ -10633,24 +10634,26 @@
     },
     {
       "path": "sv/rules/coherency.txt",
-      "sha256": "353fc956707900d098fa54bc01ea7a4c01226e777c3d7a926779d7d285200813",
-      "size": 333,
+      "sha256": "a6dbbb38787197e14afa1bc6e9b0c0673601290126c2fed8d645019d079e256e",
+      "size": 393,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/coherency.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
-        "license_verified": false
+        "license_verified": false,
+        "note": "Owner-added spelling-variant pairs (spagetti/spaghetti, l\u00e5ssas/l\u00e5tsas, caf\u00e9/kaf\u00e9, prova/pr\u00f6va) mined from SALDO (Spr\u00e5kbanken, CC BY 4.0) sister terms; see docs/differences.md #16"
       }
     },
     {
       "path": "sv/rules/grammar.xml",
-      "sha256": "04fa77b1a166a5536c5ac1bad5762a15ce4a456597214aa2232156f6a7cc3f8f",
-      "size": 21012,
+      "sha256": "8ce482c5e3adadc0807f023e42e55db374db0acfc44f078e1c2e838ae109ab68",
+      "size": 24878,
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
-        "license_verified": false
+        "license_verified": false,
+        "note": "Owner-added CAT4 confusable-word rules (6 rules: svara/sv\u00e4ra, brygga/bygga, anta/inta), candidate pairs mined from SALDO (Spr\u00e5kbanken, CC BY 4.0, https://spraakbanken.gu.se/eng/resource/saldo) and hand-curated; no SALDO data vendored; see docs/differences.md #16"
       }
     },
     {

@@ -494,3 +494,92 @@ cargo run -p lt-cli -- check -l da --json "Det er et biblotek."    # DANISH_TYPO
 The behavior is pinned by `crates/lt/tests/danish.rs::danish_typos_wikipedia`
 (firing match + correct-sentence pin); the corpus-level 0-count is pinned by
 `scripts/ci/parity.sh da`.
+
+## 15. Danish confusable-word rulegroups from DanNet (owner-added)
+
+Like #8/#14, an **added rule** batch (intentional, owner-approved, D-310:
+Rust more correct — it reports real word confusions Java's deprecated `da`
+module does not check). 16 `<rulegroup>`s (23 rules) were appended to the
+`Mulige ordforveksling` categories CAT2 (15 groups / 22 rules) and CAT3
+(`strikke_strække`, 1 rule) of `data/da/rules/grammar.xml`, following the
+existing `bor_bord`/`leje_lege` contextual pattern: each rule fires only in a
+disambiguating context (e.g. `lede` + `under` → `lide under`, `en` + `byde` →
+`en bøde`, `helt og lykke` → `held og lykke`), so the correction is
+unambiguous. Rulegroups: `ligge_lægge`, `lede_lide`, `hælde_hævde`,
+`vælte_vælge`, `byde_bøde`, `held_helt`, `låse_løse`, `brygge_bygge`,
+`folk_flok`, `højde_højre`, `leve_lave`, `lade_lave`, `sælge_vælge`,
+`stille_spille`, `række_trække`, `strikke_strække`.
+
+Candidate pairs were mined programmatically from **DanNet** — the Danish
+wordnet (v2026-09-21 CSV release, CC BY-SA 4.0, license verified on the
+release; https://wordnet.dk/dannet) — by combining semantic relation edges
+(synonyms sharing a synset, hypernym-linked synsets) with a one-feature
+orthographic difference and POS agreement, validated against the vendored
+`da_DK` dictionary. No DanNet data is vendored: every rule is hand-written
+(from-scratch, including all example sentences) with the provenance recorded
+in XML comments and the manifest note; DanNet is a candidate-generation source
+only, like the Apertium dictionaries in the nn batches.
+
+The 284-line golden corpus contains none of the contextual patterns, so the
+da gate stays at 0 only-Java / 0 only-Rust / 0 field diffs with no new
+allowance (the existing `DANISH_TYPOS=0` pin is unchanged). The XML rule count
+pin in `crates/lt/tests/danish.rs::danish_engine_state` moves 69 → 93.
+
+Reproduce:
+
+```sh
+cargo run -p lt-cli -- check -l da --json "Politiet lide efter den forsvundne dreng."  # lede_lide fires, suggestion "lede"
+scripts/ci/parity.sh da    # PARITY OK, no allowances beyond DANISH_TYPOS=0
+```
+
+The pairs (both directions where safe) are pinned by
+`crates/lt/tests/danish.rs::danish_dannet_confusables` (24 firing + 24
+correct-sentence cases over all 16 rulegroups); `data/manifest.json` records
+the modified `da/rules/grammar.xml` sha256/size and the DanNet provenance.
+
+## 16. Swedish confusable-word rules and coherency pairs from SALDO (owner-added)
+
+Like #8, an **added rule** batch (intentional, owner-approved, D-310: Rust
+more correct — upstream `sv` has no word-confusion rules beyond the single
+`mottoVSmatto` rule and a 9-entry coherency list). Two mechanisms, each used
+for what it exists for:
+
+- **CAT4 "Ord som ofta förväxlas"** (different-word confusables), 6 new rules
+  in `data/sv/rules/grammar.xml`: `sväraVSsvara`/`svärarVSsvarar` (the
+  impossible inflections `svärde`/`svärar` → `svarade`/`svarar`),
+  `bryggaVSbygga_öl`/`bryggaVSbygga_hus` (contextual, both directions),
+  `antaVSinta_att` and `intaVSanta_mat` (contextual, both directions).
+- **`data/sv/rules/coherency.txt`** (spelling variants of the same word, the
+  existing `WordCoherencyRule` mechanism over tagger lemmas): 4 new variant
+  pairs `spagetti;spaghetti`, `låssas;låtsas`, `café;kafé`, `prova;pröva`,
+  all genuine same-lexeme spelling variants attested in SAOL.
+
+Candidate pairs were mined programmatically from **SALDO** (Språkbanken,
+131,020 entries, CC BY 4.0, license verified on the resource page;
+https://spraakbanken.gu.se/eng/resource/saldo) — sister terms sharing a
+primary sense relation with a one-feature orthographic difference and POS
+agreement, validated against the vendored `sv_SE` dictionary. No SALDO data is
+vendored: every rule and coherency pair is hand-curated with the provenance
+recorded in XML comments and manifest notes (candidate-generation source
+only). Rejected candidates: personal names, function-word pairs (grammar, not
+word confusion), compounds, and the many regional variants (`ned/ner`,
+`mer/mera`, `tillbaka/tillbaks`, `här/där`) where flagging mixed use would be
+noisy — `sv` upsteram deliberately keeps those out.
+
+The 45-line golden corpus contains none of the wrong forms or mixed-variant
+patterns, so the sv gate stays at 0/0/0 with no allowances. The XML rule count
+pin in `crates/lt/tests/swedish.rs::swedish_engine_state` moves 29 → 35.
+
+Reproduce:
+
+```sh
+cargo run -p lt-cli -- check -l sv --json "Han svärde nej tack till kaffet."  # sväraVSsvara fires, suggestion "svarade"
+cargo run -p lt-cli -- check -l sv --json "Vi tog spagetti och spaghetti till middag."  # SV_WORD_COHERENCY fires
+scripts/ci/parity.sh sv    # PARITY OK, no allowances
+```
+
+Pinned by `crates/lt/tests/swedish.rs::swedish_saldo_confusables` (7 firing +
+7 correct-sentence cases over all 6 rules) and
+`swedish_word_coherency_saldo` (4 firing + 4 correct cases);
+`data/manifest.json` records the modified `sv/rules/grammar.xml` /
+`sv/rules/coherency.txt` sha256/size and the SALDO provenance.
