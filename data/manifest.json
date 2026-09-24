@@ -7512,13 +7512,12 @@
     },
     {
       "path": "nrd/README.md",
-      "sha256": "afa82a8caed201a70ab2c3fa845beb25e3aa888d36568db5ea05491e7808d3ea",
-      "size": 7951,
+      "sha256": "fce3a75d9dffbac5a24ca1ec0fc068486690fd9a9e85a4768bb1f806ec60d511",
+      "size": 9103,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Language data provenance and maintainer documentation"
+        "license_source": "LICENSE"
       }
     },
     {
@@ -7550,11 +7549,11 @@
     },
     {
       "path": "nrd/hunspell/build-report.txt",
-      "sha256": "26d2578c512a9cbc26f6a36cafbe860b11177723cc7b167ab4b1f84b82204081",
-      "size": 395,
+      "sha256": "6e18b9c7ca4d93f6e77b02877faff5a52b53671be943099aef8477b6a5f942f5",
+      "size": 1405,
       "source": {
         "kind": "generated",
-        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md \u00a73/\u00a74)"
+        "generator": "tools/nordum-dict/build-nordum-dict.py"
       }
     },
     {
@@ -7570,11 +7569,11 @@
     },
     {
       "path": "nrd/hunspell/nrd.dic",
-      "sha256": "d930aaac772797b163b20a3d7771519928dd174908cc58c13de405d75c89145f",
-      "size": 14838175,
+      "sha256": "a29237c233952ca3919ba9fc97be6bc8325a6374fd44d9abdb810ddf8c18c735",
+      "size": 20919552,
       "source": {
         "kind": "generated",
-        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md \u00a73/\u00a74)"
+        "generator": "tools/nordum-dict/build-nordum-dict.py"
       }
     },
     {
@@ -7583,7 +7582,7 @@
       "size": 14421,
       "source": {
         "kind": "generated",
-        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md \u00a73/\u00a74)"
+        "generator": "tools/nordum-dict/build-nordum-dict.py"
       }
     },
     {

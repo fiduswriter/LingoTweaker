@@ -101,30 +101,11 @@ DA_TAG_MAP = {
     "ono": "int",
 }
 
-# Swedish (SUC) -> Nordum
-SV_TAG_MAP = {
-    "AB": "adv",
-    "PP": "prep",
-    "KN": "kon",
-    "IN": "int",
-    "PB": "det",
-    "HD": "det",
-    "PS": "det",
-    "PN": "pron",
-    "PM": "pro",
-}
-
-# Danish sub-features Nordum keeps. Noun tags keep number+gender; the
-# definite/indefinite feature of the source is preserved for nouns only when
-# it survives the conversion (bes/ube stay, spec §4.3.2 keeps both).
-PRON_TAG_MAP = {
-    "pron:sin:nom": "pron:sin:nom",
-    "pron:sin:akk": "pron:sin:akk",
-    "pron:sin:gen": "pron:sin:gen",
-    "pron:plu:nom": "pron:plu:nom",
-    "pron:plu:akk": "pron:plu:akk",
-    "pron:plu:gen": "pron:plu:gen",
-}
+# The source-tag mapping (Swedish SUC / Danish pronoun sub-features) is
+# shared with the speller dictionary build (one implementation,
+# nordum_convert.py).
+SV_TAG_MAP = nc.SV_TAG_MAP
+PRON_TAG_MAP = nc.PRON_TAG_MAP
 
 VERB_ROLES_TO_TAGS = {
     "infinitive": "ver:inf",
@@ -404,83 +385,9 @@ def verb_tag_triples(lemma: str, verb_lemmas: set[str]) -> list[tuple[str, str, 
 
 
 def map_source_tag(tag: str) -> str:
-    """Map one source tag to the Nordum tagset; '' = drop (not reliable).
-
-    Danish `sub`/`adj` tags carry definiteness, number, gender and case;
-    Nordum keeps definiteness, number and the simplified gender and drops
-    case. Danish `ver` keeps voice=active only. Swedish SUC tags are mapped
-    feature-wise.
-    """
-    if tag in ("adv", "pra", "kon", "int", "art", "ono"):
-        return {"adv": "adv", "pra": "prep", "kon": "kon", "int": "int",
-                "art": "det", "ono": "int"}[tag]
-    if tag.startswith("pron"):
-        return PRON_TAG_MAP.get(tag, "")
-    if tag.startswith("sub:"):
-        parts = tag.split(":")
-        definiteness = parts[1] if len(parts) > 1 else ""
-        number = parts[2] if len(parts) > 2 else ""
-        gender = parts[3] if len(parts) > 3 else ""
-        if definiteness not in ("ube", "bes") or number not in ("sin", "plu"):
-            return ""
-        nordum_gender = {"utr": "com", "neu": "neu"}.get(gender, "")
-        if not nordum_gender:
-            return ""
-        return f"sub:{definiteness}:{number}:{nordum_gender}:nom"
-    if tag.startswith("adj:"):
-        parts = tag.split(":")
-        # Danish: adj:<definiteness>:<number>:<gender>:<grade>;
-        # bare 4-part tags (adj:<grade>) also occur.
-        grade = parts[4] if len(parts) > 4 else parts[3]
-        if grade not in ("pos", "kom", "sup"):
-            return ""
-        return f"adj:{grade}"
-    if tag.startswith("ver:"):
-        parts = tag.split(":")
-        tense = parts[1] if len(parts) > 1 else ""
-        voice = parts[2] if len(parts) > 2 else "akt"
-        tense_map = {"inf": "ver:inf", "præ": "ver:præ", "dat": "ver:dat",
-                     "imp": "ver:imp", "kor": "ver:kor", "lan": "ver:lan"}
-        if voice != "akt":
-            return ""
-        return tense_map.get(tense, "")
-    # Swedish
-    if tag in SV_TAG_MAP:
-        return SV_TAG_MAP[tag]
-    if tag.startswith("NN:"):
-        parts = tag.split(":")
-        # NN:OF:SIN:NOM:UTR / NN:BF:PLU:GEN:NEU / NN:BF:SIN:MNOM:UTR ...
-        state, number = parts[1], parts[2]
-        case = parts[3]
-        gender = parts[4] if len(parts) > 4 else ""
-        if state not in ("OF", "BF") or number not in ("SIN", "PLU") or case not in ("NOM", "GEN"):
-            return ""
-        nordum_gender = {"UTR": "com", "NEU": "neu"}.get(gender, "")
-        if not nordum_gender:
-            return ""
-        definiteness = "ube" if state == "OF" else "bes"
-        nordum_case = "nom" if case == "NOM" else "gen"
-        return f"sub:{definiteness}:{'sin' if number == 'SIN' else 'plu'}:{nordum_gender}:{nordum_case}"
-    if tag.startswith("JJ:"):
-        # JJ:PU (predicative/attributive positive), JJ:K (comparative),
-        # JJ:S (superlative)
-        form = tag.split(":")[1]
-        if form in ("P", "PU", "PN", "BF"):
-            return "adj:pos"
-        if form == "K":
-            return "adj:kom"
-        if form == "S":
-            return "adj:sup"
-        return ""
-    if tag.startswith("VB:"):
-        parts = tag.split(":")
-        tense = parts[1]
-        voice = parts[2] if len(parts) > 2 else "AKT"
-        if voice == "PF":
-            return ""
-        return {"INF": "ver:inf", "PRS": "ver:præ", "PRT": "ver:dat",
-                "IMP": "ver:imp", "SUP": "ver:kor"}.get(tense, "")
-    return ""
+    """Alias of the shared source-tag mapping (nordum_convert.py) — the
+    tagger and the speller dictionary build use one implementation."""
+    return nc.map_source_tag(tag)
 
 
 def decompile(dict_path: Path, cache_dir: Path | None = None) -> Path:

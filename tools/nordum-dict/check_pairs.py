@@ -92,6 +92,10 @@ def main() -> int:
     parser.add_argument("--nordum-dictionary", type=Path, required=True)
     parser.add_argument("--additions", type=Path, default=Path(DEFAULT_ADDITIONS))
     parser.add_argument("--sources", type=Path, nargs="*", default=list(DEFAULT_SOURCES))
+    parser.add_argument("--da-export", type=Path,
+                        default=nc.REPO_ROOT / "data/da/dictionaries/danish.dict")
+    parser.add_argument("--sv-export", type=Path,
+                        default=nc.REPO_ROOT / "data/sv/dictionaries/swedish.dict")
     args = parser.parse_args()
 
     # The recommended (primary-spelling) lexicon: dictionary.json headwords,
@@ -111,14 +115,19 @@ def main() -> int:
             recommended.add(nc.primary_vowels(form))
 
     # The speller accepts the recommended core (all spellings) plus the
-    # converted source words.
+    # strict converted source set — the same inventory build-nordum-dict.py
+    # generates (one implementation; spec-violating inflected forms of
+    # converted source words are not speller data since the owner's
+    # strictness decision).
     speller: set[str] = set()
     for word in recommended:
         speller.update(accepted_spellings(word))
-    for source in args.sources:
-        source_path = Path(source)
-        for word in nc.read_dic(source_path):
-            speller.update(nc.variants(word))
+    strict = nc.build_strict_source_forms(
+        [Path(source) for source in args.sources], args.da_export,
+        args.sv_export, nc.load_dictionary(args.nordum_dictionary),
+        sorted(set(nc.read_word_file(args.nordum_wordlist))
+               | set(nc.read_word_file(args.additions))))
+    speller.update(strict["accepted"])
 
     bad = 0
     checked = 0

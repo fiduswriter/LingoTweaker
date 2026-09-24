@@ -174,7 +174,7 @@ fn nordum_correct_sentences() {
         "Jei vet att hun ikke arbeider.",
         "I dag arbeider jei jemme.",
         "I dag må du gå.",
-        "Hvis du kommer, blir jei glad.",
+        "Hvis du kommer, blier jei glad.",
         "Vi har den store bilen.",
         "den vesle bilen",
         "den blå bilen",
@@ -198,7 +198,7 @@ fn nordum_correct_sentences() {
         "Arbeider du?",
         "España",
         "Det er en bra dag. Jei bakka bilen. Jei har en computer. \
-         Mellem huset og skogen arbeider femti personer. Norsk og dansk er bra språk.",
+         Mellem huset og skogen arbeider femti personar. Norsk og dansk er bra språk.",
         "nordum",
         "Ja ja, jei kommer.",
         "barnhage",
