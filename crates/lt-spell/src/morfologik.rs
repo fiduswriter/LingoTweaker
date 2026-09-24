@@ -679,12 +679,13 @@ impl Speller {
 
     /// `Speller.getFrequency`: frequency code of the first stored annotation.
     ///
-    /// Java subtracts the range base from a *signed* `byte` (`array[remaining
-    /// - 1] - 'A'`), so annotation bytes >= 0x80 yield negative "frequencies"
-    /// (e.g. the tl_PH entries `ang+\xd3\xbf`, `ng+\xdb\xbc`, `na+\xd5\xa0`
-    /// give -130/-133/-161). Those negative codes are exactly what feeds the
-    /// composite candidate weight in [`Self::candidate`] (no clamping on
-    /// either side), so the signedness must be reproduced, not normalized.
+    /// Java subtracts the range base from a *signed* `byte`
+    /// (`array[remaining - 1] - 'A'`), so annotation bytes >= 0x80 yield
+    /// negative "frequencies" (e.g. the tl_PH entries `ang+\xd3\xbf`,
+    /// `ng+\xdb\xbc`, `na+\xd5\xa0` give -130/-133/-161). Those negative
+    /// codes are exactly what feeds the composite candidate weight in
+    /// [`Self::candidate`] (no clamping on either side), so the signedness
+    /// must be reproduced, not normalized.
     pub fn get_frequency(&self, word: &str) -> i32 {
         if !self.meta.frequency_included {
             return 0;

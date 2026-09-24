@@ -90,7 +90,10 @@ fn matches_for(xml: &str, tokens: &[AnalyzedTokenReadings]) -> usize {
 fn possessive_quantifier_does_not_overmatch() {
     let okara = tr(&[("OKARA", "okara", "subst:sg:nom:f")]);
     let plain = r#"<pattern><token postag="(?:depr|ger|subst):.*" postag_regexp="yes"/></pattern><message>m</message>"#;
-    assert_eq!(matches_for(&rule_xml(plain), &[okara.clone()]), 1);
+    assert_eq!(
+        matches_for(&rule_xml(plain), std::slice::from_ref(&okara)),
+        1
+    );
 
     let with_exception = r#"<pattern><token postag="(?:depr|ger|subst):.*" postag_regexp="yes"><exception regexp="yes">\p{Lu}{1,2}+[i]*\p{Lu}</exception></token></pattern><message>m</message>"#;
     assert_eq!(
