@@ -11,11 +11,12 @@ Nordum word list, producing:
 - ``nrd_core.dic``  — the authoritative core (+ accepted alternatives), used
                       as the suggestion candidate list.
 
-The morphological endings (noun plurals, verb tenses) are *not* rewritten by
-the source-language transformations: the sources do not carry reliable POS
-information, and blind re-suffixing produces wrong forms (e.g. Swedish
-``flicka`` must not become ``flicke``). Morphology stays with the Nordum word
-list; source-language morphology is normalized by rules.
+The authoritative Nordum word list carries POS information
+(``dictionary.json``), so its noun/verb/adjective paradigms are generated per
+spec §4 (see ``nordum_convert``) and added to both dictionaries; the
+converted source-language words stay morphology-free (the sources do not
+carry reliable POS information, and blind re-suffixing produces wrong forms,
+e.g. Swedish ``flicka`` must not become ``flicke``).
 
 Usage:
   python3 build-nordum-dict.py \
@@ -26,175 +27,192 @@ Usage:
       --out data/nrd/hunspell/nrd.dic \
       --out-core data/nrd/hunspell/nrd_core.dic \
       --report data/nrd/hunspell/build-report.txt
+
+  python3 build-nordum-dict.py --self-test
 """
 
 from __future__ import annotations
 
 import argparse
-import json
-import re
+import sys
 from pathlib import Path
 
-# Spec §3.5: `hv-` question words drop the silent `h`.
-QUESTION_WORDS = {
-    "hva",
-    "hvad",
-    "hvor",
-    "hvem",
-    "hvilken",
-    "hvilket",
-    "hvilke",
-    "hvordan",
-    "hvorfor",
-    "hvornår",
-    "hvorhen",
-    "hvorvidt",
-}
+sys.path.insert(0, str(Path(__file__).parent))
 
-# Owner decision: the mandatory `ks` → `x` rule (spec §3.3.2 rule 2) applies
-# to number words too, like any other word: `seks` → `sex`, `seksten` →
-# `sexten`, `sekstende` → `sextende`. `data/nrd/rules/source_forms.txt` offers
-# the normalized form as a suggestion for writers.
+import nordum_convert as nc
 
-# Words with internal capitals or non-letter characters are kept verbatim (the
-# case-preserving transformation only handles simple words).
-SIMPLE_WORD = re.compile(r"^[A-ZÆØÅÄÖÉ][a-zæøåäöéü'’-]*$|^[a-zæøåäöéü'’-]+$")
-ALLOWED = re.compile(r"^[A-Za-zÆØÅæøåÄÖäöÉéÜü'’-]+$")
-
-
-def read_dic(path: Path) -> list[str]:
-    """Words of a Hunspell `.dic` (skip the count line, strip flags)."""
-    words: list[str] = []
-    try:
-        text = path.read_text(encoding="utf-8", errors="replace")
-    except OSError:
-        return words
-    for line in text.splitlines()[1:]:
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        word = line.split("\t")[0].split("/")[0].strip()
-        if word:
-            words.append(word)
-    return words
+# Spec §3.3.2 / §3.6 / §4 examples the converter and the morphology generator
+# must reproduce.
+SELF_TEST_CASES: list[tuple[str, str]] = [
+    # §3.3.2 rules 1-7 + §3.6 diphthongs
+    ("tack", "takk"),
+    ("backa", "bakka"),
+    ("fiks", "fix"),
+    ("maks", "max"),
+    ("boks", "box"),
+    ("centrum", "sentrum"),
+    ("cirkel", "sirkel"),
+    ("philosophi", "filosofi"),
+    ("forskjell", "forskell"),
+    ("skjære", "skære"),
+    ("kald", "kall"),
+    ("fuld", "full"),
+    ("hvad", "vad"),
+    # `hv`-drop only; the `var`/`varför` lexical selections are rule data.
+    ("hvor", "vor"),
+    ("hvorfor", "vorfor"),
+    ("vejr", "veir"),
+    ("nej", "nei"),
+    ("maj", "mei"),
+    ("høj", "høi"),
+    ("høy", "høi"),
+    # The silent-d resolution (mad → mat) is lexical-selection rule data.
+    ("hvilken", "vilken"),
+    ("computer", "komputer"),  # c-rule applies: `komputer` variant
+    ("jentarna", "jentarna"),
+]
 
 
-def apply_c_rule(word: str) -> str:
-    """Spec §3.3.2 rule 3: established `c` → `s` before e/i/y, else `k`.
-
-    Words containing the `ch` digraph are left alone (the rule targets the
-    established Scandinavian `c`; fresh loanwords keep their spelling).
-    """
-    if "ch" in word:
-        return word
-    out = []
-    for i, ch in enumerate(word):
-        if ch != "c":
-            out.append(ch)
-            continue
-        following = word[i + 1] if i + 1 < len(word) else ""
-        if following in "eiy":
-            out.append("s")
-        else:
-            out.append("k")
-    return "".join(out)
-
-
-def apply_mandatory(word: str) -> str:
-    """The mandatory Nordum orthography rules (spec §3.3.2)."""
-    # Rule 1: ck → kk
-    word = re.sub(r"ck", "kk", word, flags=re.IGNORECASE)
-    # Rule 2: /ks/ → x (applies to number words too, owner decision)
-    word = re.sub(r"ks", "x", word, flags=re.IGNORECASE)
-    # Rule 4: ph → f
-    word = re.sub(r"ph", "f", word, flags=re.IGNORECASE)
-    # Rule 5: skj → sk
-    word = re.sub(r"skj", "sk", word, flags=re.IGNORECASE)
-    # Rule 6: ld → ll
-    word = re.sub(r"ld", "ll", word, flags=re.IGNORECASE)
-    # Rule 7: hv- question words → v-
-    if word.lower() in QUESTION_WORDS and word[:1].lower() == "h":
-        word = word[1:]
-    # Rule 3: c → s/k
-    return apply_c_rule(word)
-
-
-def normalize_diphthongs(word: str) -> str:
-    """Spec §3.6: ej/aj → ei, øj/øy → øi (normalized forms recommended)."""
-    word = word.replace("ej", "ei").replace("aj", "ei")
-    return word.replace("øj", "øi").replace("øy", "øi")
-
-
-def primary_vowels(word: str) -> str:
-    """Spec §3.1/§7.1: primary system uses æ/ø (ä/ö are accepted variants)."""
-    return word.replace("ä", "æ").replace("ö", "ø").replace("Ä", "Æ").replace("Ö", "Ø")
-
-
-def secondary_vowels(word: str) -> str:
-    """The accepted Swedish/German vowel alternative of a primary form."""
-    return word.replace("æ", "ä").replace("ø", "ö").replace("Æ", "Ä").replace("Ø", "Ö")
-
-
-def variants(word: str) -> set[str]:
-    """All accepted spellings derived from one source-language word."""
-    if not ALLOWED.match(word) or len(word) > 40:
-        return set()
-    if not SIMPLE_WORD.match(word):
-        return {word}
-    out: set[str] = set()
-    mandatory = apply_mandatory(word)
-    normalized = normalize_diphthongs(mandatory)
-    out.add(primary_vowels(normalized))
-    # §7.3: the preserved (Danish) patterns stay accepted.
-    out.add(primary_vowels(mandatory))
-    # §7.1: both vowel systems are valid.
-    for form in list(out):
-        out.add(secondary_vowels(form))
-    return out
+def self_test() -> int:
+    failures = 0
+    for source, expected in SELF_TEST_CASES:
+        if expected not in nc.variants(source):
+            failures += 1
+            print(f"FAIL {source!r}: {expected!r} not in {sorted(nc.variants(source))}")
+    # `ch` words keep their spelling (spec §3.3.2 rule 3 note).
+    if "chocolate" not in nc.variants("chocolate"):
+        failures += 1
+        print("FAIL chocolate must be kept unchanged")
+    # Verb paradigm (§4.2): the systematic -er/-ede/-a/-et/-ende/stem forms.
+    forms, counts = nc.verb_forms({"infinitive": "arbeide"})
+    expected = {
+        "infinitive": "arbeide",
+        "present": "arbeider",
+        "past": "arbeidede",
+        "supine": "arbeidet",
+        "presentParticiple": "arbeidende",
+        "imperative": "arbeid",
+        "pastInformal": "arbeida",
+    }
+    if forms != expected:
+        failures += 1
+        print(f"FAIL verb paradigm: {forms}")
+    if counts.get("pastInformal:generated") != 1:
+        failures += 1
+        print(f"FAIL verb counts: {counts}")
+    # Provided inflections win over the systematic fallbacks (irregulars).
+    forms, _ = nc.verb_forms(
+        {"infinitive": "gå", "present": "går", "past": "gikk", "supine": "gått",
+         "pastParticiple": "gått"}
+    )
+    if forms.get("present") != "går" or forms.get("past") != "gikk":
+        failures += 1
+        print(f"FAIL irregular verb: {forms}")
+    if "presentParticiple" not in forms:
+        failures += 1
+        print(f"FAIL irregular verb participle: {forms}")
+    # No stem, no guesses (§4.2.3).
+    if nc.verb_forms({}) != ({}, {}):
+        failures += 1
+        print("FAIL empty verb inflections must generate nothing")
+    # Noun paradigm (§4.3).
+    noun, _ = nc.noun_forms(
+        {"singular": {"indefinite": "jente", "definite": "jenten"},
+         "plural": {"indefinite": "jentar", "definite": "jentarna"}}, "common")
+    if noun != {"singularDefinite": "jenten", "pluralIndefinite": "jentar",
+                "pluralDefinite": "jentarna"}:
+        failures += 1
+        print(f"FAIL noun paradigm: {noun}")
+    fallback, counts = nc.noun_forms({}, "common")
+    if fallback != {"singularDefinite": "en", "pluralIndefinite": "ar",
+                    "pluralDefinite": "arna"}:
+        failures += 1
+        print(f"FAIL noun fallback: {fallback}")
+    if counts.get("pluralDefinite:generated") != 1:
+        failures += 1
+        print(f"FAIL noun fallback counts: {counts}")
+    # Adjective paradigm (§4.4): neuter -t, comparative -ere.
+    adj, _ = nc.adjective_forms({}, "stor")
+    if adj["positiveNeuter"] != "stort" or adj["positivePlural"] != "store":
+        failures += 1
+        print(f"FAIL adjective fallback: {adj}")
+    adj, _ = nc.adjective_forms(
+        {"comparative": "godere", "superlative": "godest",
+         "positive": {"common": "god", "neuter": "godt", "plural": "gode",
+                      "definite": "gode"}}, "god")
+    if adj["comparative"] != "godere" or adj["superlative"] != "godest":
+        failures += 1
+        print(f"FAIL adjective inflections: {adj}")
+    if failures:
+        print(f"{failures} self-test failure(s)")
+        return 1
+    print("self-test ok")
+    return 0
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--nordum-wordlist", type=Path, required=True)
+    parser.add_argument("--nordum-wordlist", type=Path)
     parser.add_argument("--nordum-dictionary", type=Path)
     parser.add_argument("--additions", type=Path)
     parser.add_argument("--sources", type=Path, nargs="*", default=[])
-    parser.add_argument("--out", type=Path, required=True)
-    parser.add_argument("--out-core", type=Path, required=True)
+    parser.add_argument("--out", type=Path)
+    parser.add_argument("--out-core", type=Path)
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
 
+    if args.self_test:
+        return self_test()
+    if not (args.nordum_wordlist and args.out and args.out_core):
+        parser.error("--nordum-wordlist, --out and --out-core are required")
+
     core: set[str] = set()
-    for line in args.nordum_wordlist.read_text(encoding="utf-8").splitlines():
-        line = line.split("#")[0]
-        for word in line.split():
-            core.add(word)
+    for word in nc.read_word_file(args.nordum_wordlist):
+        core.add(word)
+    entries: list[dict] = []
     if args.nordum_dictionary and args.nordum_dictionary.exists():
-        entries = json.loads(args.nordum_dictionary.read_text(encoding="utf-8"))["entries"]
-        for entry in entries.values():
+        entries = nc.load_dictionary(args.nordum_dictionary)
+        for entry in entries:
             if entry.get("alternativeOf"):
                 core.add(entry["nordum"])
     additions = 0
     if args.additions and args.additions.exists():
-        for line in args.additions.read_text(encoding="utf-8").splitlines():
-            line = line.split("#")[0]
-            for word in line.split():
-                core.add(word)
-                additions += 1
+        for word in nc.read_word_file(args.additions):
+            core.add(word)
+            additions += 1
 
     dictionary: set[str] = set(core)
+    # N1: the authoritative paradigms (spec §4) enter both dictionaries as
+    # full forms — the only morphology source with a reliable POS.
+    generated = 0
+    verb_entries = noun_entries = adj_entries = 0
+    generated = 0
+    for entry in entries:
+        forms, _counts = nc.entry_forms(entry)
+        if entry["pos"] == "verb":
+            verb_entries += 1
+        elif entry["pos"] == "noun":
+            noun_entries += 1
+        elif entry["pos"] == "adjective":
+            adj_entries += 1
+        for form in forms.values():
+            variants = nc.lexicon_variants(form)
+            dictionary.update(variants)
+            core.update(variants)
+            generated += len(variants)
     source_words = 0
     for source in args.sources:
-        for word in read_dic(source):
+        for word in nc.read_dic(source):
             source_words += 1
-            dictionary.update(variants(word))
+            dictionary.update(nc.variants(word))
 
     # Core: both vowel systems plus accepted source alternations (diphthongs).
     core_variants: set[str] = set()
     for word in core:
-        core_variants.add(primary_vowels(word))
-        core_variants.add(secondary_vowels(primary_vowels(word)))
-        core_variants.add(primary_vowels(normalize_diphthongs(word)))
+        core_variants.add(nc.primary_vowels(word))
+        core_variants.add(nc.secondary_vowels(nc.primary_vowels(word)))
+        core_variants.add(nc.primary_vowels(nc.normalize_diphthongs(word)))
     dictionary.update(core_variants)
 
     core_sorted = sorted(core_variants)
@@ -212,6 +230,11 @@ def main() -> int:
             "Nordum dictionary build\n"
             f"core words (wordlist + alternatives + additions): {len(core)} "
             f"(+{additions} additions)\n"
+            "generated inflected forms (spec §4, dictionary.json paradigms):\n"
+            f"  verb entries: {verb_entries}\n"
+            f"  noun entries: {noun_entries}\n"
+            f"  adjective entries: {adj_entries}\n"
+            f"  generated form variants added: {generated}\n"
             f"source words read: {source_words}\n"
             f"core variants written: {len(core_sorted)}\n"
             f"dictionary entries written: {len(all_sorted)}\n"

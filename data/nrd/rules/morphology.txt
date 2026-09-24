@@ -19,7 +19,6 @@ biler=bilar
 hunder=hundar
 katter=kattar
 dager=dagar
-epler=eplar
 # Definite singular follows the general -en ending (spec §4.3.2)
 flikkan=flikken
 jentene=jentarna
@@ -31,3 +30,11 @@ har arbeida=har arbeidet
 gåer=går
 værer=er
 haer=har
+# Norwegian plural-definite -ene normalizes to the Nordum -arna suffix
+# (spec §4.3.2, §9.1)
+bilene=bilarna
+barnene=barnarna
+dagene=dagarna
+hundene=hundarna
+skolene=skolarna
+tiderne=tidarna

@@ -56,7 +56,7 @@ min mitt mina din ditt dina hans hennas dens dets vår vårt våra deras
 hver hin ingen noen noe alle hverandre
 
 # Function words
-og eller men fordi at om hvis når da mens siden dersom
+og eller men fordi att om hvis når da mens siden dersom
 ikke ja nei kanskje ganske mye veldig
 her der jemme hemma hjemme ute inne oppe nede
 i på fra med om av for ved over under mot før siden uten innen
@@ -67,3 +67,6 @@ computer internet email software website app smartphone browser password
 check chocolate social media basketball cool game gamer streamer stream
 chat chatten memes e-sport turnering weekenden
 schokolade doppelgänger zeitgeist mosquito patio baguette sjokolade
+# Spec §9.2/§4.6.2 paradigm and example words
+katt kattar kattarna skakk selv vaske vasker gjør gjør vet heter språk
+barnhage arbeiddag tunnskiva España Nederland Hellas Italia Praha Bruxelles

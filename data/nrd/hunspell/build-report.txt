@@ -1,6 +1,11 @@
 Nordum dictionary build
-core words (wordlist + alternatives + additions): 1658 (+298 additions)
-source words read: 1039559
-core variants written: 1827
-dictionary entries written: 1148803
+core words (wordlist + alternatives + additions): 1937 (+319 additions)
+generated inflected forms (spec §4, dictionary.json paradigms):
+  verb entries: 105
+  noun entries: 149
+  adjective entries: 63
+  generated form variants added: 1960
+source words read: 1019162
+core variants written: 1963
+dictionary entries written: 1151945
 sources: nb_NO.dic, da_DK.dic, sv_SE.dic

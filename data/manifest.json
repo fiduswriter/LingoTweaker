@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 1006,
+  "file_count": 1012,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -5392,7 +5392,7 @@
         "kind": "vendor",
         "license": "GFDL-1.2-or-later",
         "url": "https://github.com/LibreOffice/dictionaries/tree/master/gug",
-        "note": "Paraguayan Guaran\u00ed Hunspell dictionary"
+        "note": "Paraguayan Guaraní Hunspell dictionary"
       }
     },
     {
@@ -5403,7 +5403,7 @@
         "kind": "vendor",
         "license": "GFDL-1.2-or-later",
         "url": "https://github.com/LibreOffice/dictionaries/tree/master/gug",
-        "note": "Paraguayan Guaran\u00ed Hunspell dictionary"
+        "note": "Paraguayan Guaraní Hunspell dictionary"
       }
     },
     {
@@ -5501,7 +5501,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/is_IS.aff",
-        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license": "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
         "license_verified": true,
         "license_source": "upstream is/hunspell/license.txt"
       }
@@ -5513,7 +5513,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/is_IS.dic",
-        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license": "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
         "license_verified": false,
         "license_source": "upstream is/hunspell/license.txt"
       }
@@ -5525,7 +5525,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/license.txt",
-        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license": "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
         "license_verified": true,
         "license_source": "upstream is/hunspell/license.txt"
       }
@@ -7264,9 +7264,9 @@
       "source": {
         "kind": "vendor",
         "license": "CC BY 4.0",
-        "license_source": "CLARIN PUB+BY, Spr\u00e5kr\u00e5det/NB (LibreOffice dictionaries no/README)",
+        "license_source": "CLARIN PUB+BY, Språkrådet/NB (LibreOffice dictionaries no/README)",
         "url": "https://github.com/LibreOffice/dictionaries/tree/master/no",
-        "note": "Norwegian Bokm\u00e5l Hunspell dictionary data"
+        "note": "Norwegian Bokmål Hunspell dictionary data"
       }
     },
     {
@@ -7391,15 +7391,39 @@
       }
     },
     {
-      "path": "nrd/hunspell/build-report.txt",
-      "sha256": "040da4980f723ba8f2f3975b18089ad96be0af8a3a325f77ad5c26c8b6bec505",
-      "size": 228,
+      "path": "nrd/dictionaries/build-report.txt",
+      "sha256": "55e467ad4a27469c276eb1159ce37f48259524baf7a969b0427a80ac142b40d8",
+      "size": 840,
       "source": {
         "kind": "generated",
-        "license": "Derived: Nordum word list CC BY 4.0 OR LGPL-2.1-or-later; nb_NO data CC BY 4.0; da_DK GPL-2.0/LGPL-2.1/MPL-1.1; sv_SE LGPL-3.0",
-        "license_source": "data/nrd/README.md",
-        "generator": "tools/nordum-dict/build-nordum-dict.py",
-        "note": "Nordum speller dictionary; regenerate with the generator script"
+        "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
+      }
+    },
+    {
+      "path": "nrd/dictionaries/nrd.dict",
+      "sha256": "ddeb9a2fa2c7ab596237231225d07b755034b36efcefb3361fbb7c2151bdea05",
+      "size": 141814,
+      "source": {
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
+      }
+    },
+    {
+      "path": "nrd/dictionaries/nrd.info",
+      "sha256": "071a8bf597879b08bc114e873ce1cbc241f8023e0cf1f0454e46fcfdef0ac000",
+      "size": 99,
+      "source": {
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
+      }
+    },
+    {
+      "path": "nrd/hunspell/build-report.txt",
+      "sha256": "26d2578c512a9cbc26f6a36cafbe860b11177723cc7b167ab4b1f84b82204081",
+      "size": 395,
+      "source": {
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
@@ -7415,26 +7439,20 @@
     },
     {
       "path": "nrd/hunspell/nrd.dic",
-      "sha256": "b5da4954725bf22a2ddfcaa99cfdff64d02090d5feaf177f6c5458a13e51e2f1",
-      "size": 14699445,
+      "sha256": "d930aaac772797b163b20a3d7771519928dd174908cc58c13de405d75c89145f",
+      "size": 14838175,
       "source": {
         "kind": "generated",
-        "license": "Derived: Nordum word list CC BY 4.0 OR LGPL-2.1-or-later; nb_NO data CC BY 4.0; da_DK GPL-2.0/LGPL-2.1/MPL-1.1; sv_SE LGPL-3.0",
-        "license_source": "data/nrd/README.md",
-        "generator": "tools/nordum-dict/build-nordum-dict.py",
-        "note": "Nordum speller dictionary; regenerate with the generator script"
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
       "path": "nrd/hunspell/nrd_core.dic",
-      "sha256": "7459aa1597f59f7b32c239500aca2dcbfecc4c5603e0375d2b1dcdbcbefe67dc",
-      "size": 13481,
+      "sha256": "325736052059465089a178f843cb525316cd2101f08b85c5b268eefc277c150f",
+      "size": 14421,
       "source": {
         "kind": "generated",
-        "license": "Derived: Nordum word list CC BY 4.0 OR LGPL-2.1-or-later; nb_NO data CC BY 4.0; da_DK GPL-2.0/LGPL-2.1/MPL-1.1; sv_SE LGPL-3.0",
-        "license_source": "data/nrd/README.md",
-        "generator": "tools/nordum-dict/build-nordum-dict.py",
-        "note": "Nordum speller dictionary; regenerate with the generator script"
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
@@ -7505,13 +7523,11 @@
     },
     {
       "path": "nrd/rules/morphology.txt",
-      "sha256": "294ff7125db25d99adf8953887c2b0ab0312e48718af0a3d5a41a0641cf9bc7a",
-      "size": 722,
+      "sha256": "1ed045bd5f6d210a03846a6b90a6f815610812491d449295ed849e9785152c89",
+      "size": 902,
       "source": {
-        "kind": "hand-authored",
-        "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored language data (LingoTweaker new-languages program)"
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
@@ -7538,24 +7554,47 @@
     },
     {
       "path": "nrd/rules/source_forms.txt",
-      "sha256": "9ec0e6f02fa9f191f77d1cea52b1a8b0d63e5805a571b3486306cb5c7cb84cdc",
-      "size": 955,
+      "sha256": "fb5c69b5cf5997e6b1cae7264366b02c06ecf93440b8be544c0ea67d7dd79a57",
+      "size": 1290,
       "source": {
-        "kind": "hand-authored",
-        "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored language data (LingoTweaker new-languages program)"
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
+      }
+    },
+    {
+      "path": "nrd/words/added.txt",
+      "sha256": "b79ae7b2c87a76f8155e775820b8fe765b5ca1600b47a04a5ff08335eea07c6e",
+      "size": 257,
+      "source": {
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
       }
     },
     {
       "path": "nrd/words/core_additions.txt",
-      "sha256": "397d9bfa43da87c9ea1c2a7f006ea22c72f7bc031f0d9e8418466e132c9cefa4",
-      "size": 2491,
+      "sha256": "1692c39c48236595b04a587a667aa0b7b15a45be1a770f46d09c2d8696d3d00f",
+      "size": 2691,
       "source": {
-        "kind": "hand-authored",
-        "license": "LGPL-2.1-or-later",
-        "license_source": "LICENSE",
-        "note": "Hand-authored language data (LingoTweaker new-languages program)"
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
+      }
+    },
+    {
+      "path": "nrd/words/removed.txt",
+      "sha256": "b840a31465a40eaf6401e4262db9d9980cd81246e7ef23357cbc54bb6e8da31c",
+      "size": 223,
+      "source": {
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
+      }
+    },
+    {
+      "path": "nrd/words/tagset.txt",
+      "sha256": "696a65b9568157be53cc99be2ad0c30a8c719b722da38f612ea54362fc414821",
+      "size": 2672,
+      "source": {
+        "kind": "generated",
+        "generator": "tools/nordum-dict/build-nordum-tagger.py (from da/sv tagger dicts + Nordum wordlist per NORDUM_LANGUAGE_SPECIFICATION.md)"
       }
     },
     {
@@ -7565,7 +7604,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish.dict",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7577,7 +7616,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish.info",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7589,7 +7628,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_synth.dict",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7601,7 +7640,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_synth.info",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7613,7 +7652,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_tags.txt",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -10063,7 +10102,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/README_sl_SI.txt",
-        "license": "LGPL / GPL dual license (Amebis/Erjavec/Ko\u0161ir/Peterlin Slovenian spelling dictionary; sl/hunspell/README_sl_SI.txt)",
+        "license": "LGPL / GPL dual license (Amebis/Erjavec/Košir/Peterlin Slovenian spelling dictionary; sl/hunspell/README_sl_SI.txt)",
         "license_verified": true,
         "license_source": "upstream sl/hunspell/README_sl_SI.txt"
       }
@@ -10143,7 +10182,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/added.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10155,7 +10194,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/ignored.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10167,7 +10206,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/removed.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10179,7 +10218,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian.dict",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10191,7 +10230,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian.info",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10203,7 +10242,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian_synth.dict",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10215,7 +10254,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian_synth.info",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10227,7 +10266,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/spelling.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10239,7 +10278,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/serbian_synth_tags.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }

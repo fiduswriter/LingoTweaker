@@ -52,3 +52,13 @@ sig=sei
 dere=ni|er
 hennes=hennas
 deres=deras
+# Spec §9 differences for native writers (machine-verified additions)
+# §9.2 Danish writers: double consonants at word end (katt, skakk)
+kat=katt
+skak=skakk
+# §9.2/§9.1: the conjunction is written «att» (double t) in Nordum
+at=att
+# §9.3 Swedish writers: English loanword preference (spec §2.2, §9.3)
+dator=computer
+kul=cool
+

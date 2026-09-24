@@ -1,0 +1,29 @@
+Nordum tagger dictionary build
+authoritative entries (dictionary.json): 443
+tagger triples written: 174773
+confidence criteria: cognate gate >= 2 of 3 source spellers, cross-source agreement, authoritative lexicon wins
+  converted_kept: 173147
+  da_converting: 439037
+  da_source_triples: 516644
+  dropped_authoritative_conflict: 1368
+  dropped_cognate_gate: 64420
+  dropped_cross_source_conflict: 6830
+  gate_words_da: 130478
+  gate_words_nb: 693086
+  gate_words_sv: 137414
+  nordum_adj: 63
+  nordum_adj_forms: 315
+  nordum_adverb: 41
+  nordum_conjunction: 8
+  nordum_interjection: 4
+  nordum_noun: 149
+  nordum_noun_forms: 447
+  nordum_numeral: 19
+  nordum_preposition: 19
+  nordum_pronoun: 24
+  nordum_verb: 103
+  nordum_verb_forms: 612
+  skipped_multiword: 11
+  skipped_pos_phrase: 2
+  sv_converting: 263367
+  sv_source_triples: 295476

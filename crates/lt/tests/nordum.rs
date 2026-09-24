@@ -283,3 +283,36 @@ fn nordum_number_words_and_mye_variants() {
         .iter()
         .any(|s| s.value.eq_ignore_ascii_case("sex")));
 }
+
+/// The generated Nordum tagger dictionary (`tools/nordum-dict/
+/// build-nordum-tagger.py`) tags the core lexicon with the Nordum tagset:
+/// nouns, verbs and adjectives get their part-of-speech readings, unknown
+/// words stay untagged, and a sentence-final token gains `SENT_END`.
+#[test]
+fn nordum_tagger_tags_core_lexicon() {
+    let _guard = engine_guard();
+    if data_dir().is_none() {
+        return;
+    }
+    let tagger = lt_tagger::NrdTagger::load(
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../data")
+            .as_path(),
+    )
+    .expect("nrd tagger loads");
+
+    // bakka: converted Danish/Norwegian adjective/verb core word.
+    let bakka = tagger.tag_word("bakka");
+    assert!(
+        bakka.iter().any(|t| t.pos_tag.is_some()),
+        "bakka should carry a POS reading, got {bakka:?}"
+    );
+
+    // An unknown word gets the untagged fallback reading.
+    let unknown = tagger.tag_word("qwartzl");
+    assert!(unknown.iter().all(|t| t.pos_tag.is_none()));
+
+    // Sentence tokens are tagged through the same dictionary.
+    let tagged = tagger.tag(&["Han".to_string(), "bakka".to_string()]);
+    assert_eq!(tagged.len(), 2);
+}

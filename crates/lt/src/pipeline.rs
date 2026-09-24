@@ -6741,6 +6741,7 @@ impl Pipeline {
         _variant: Option<&str>,
     ) -> Result<Self> {
         let f = Self::hand_authored_foundations(data_dir, Lang::Nrd, "nrd_two", enabled_rules)?;
+        let tagger = Arc::new(lt_tagger::NrdTagger::load(data_dir.path())?);
         let spelling = Arc::new(crate::nrd::spelling::NordumSpellingRule::load(
             data_dir.path(),
         )?);
@@ -6758,6 +6759,7 @@ impl Pipeline {
             },
         )?;
         let nordum = Arc::new(crate::nrd::NordumPipeline {
+            tagger,
             disambiguator: f.disambiguator,
             spelling,
             repetition,
@@ -7060,7 +7062,9 @@ impl Pipeline {
                 crate::ja::analyze_japanese_sentence(japanese, sentence_text)
             } else if let Some(chinese) = &self.chinese {
                 crate::zh::analyze_chinese_sentence(chinese, sentence_text)
-            } else if self.norwegian.is_some() || self.nordum.is_some() || self.nynorsk.is_some() {
+            } else if let Some(nordum) = &self.nordum {
+                crate::nrd::analyze_nordum_sentence(nordum, sentence_text)
+            } else if self.norwegian.is_some() || self.nynorsk.is_some() {
                 surface_sentence(sentence_text)
             } else if self.guarani.is_some() {
                 crate::gn::analyze_guarani_sentence(sentence_text)
@@ -10506,7 +10510,9 @@ impl Pipeline {
             crate::ja::analyze_japanese_sentence(japanese, &text[start..end])
         } else if let Some(chinese) = &self.chinese {
             crate::zh::analyze_chinese_sentence(chinese, &text[start..end])
-        } else if self.norwegian.is_some() || self.nordum.is_some() || self.nynorsk.is_some() {
+        } else if let Some(nordum) = &self.nordum {
+            crate::nrd::analyze_nordum_sentence(nordum, &text[start..end])
+        } else if self.norwegian.is_some() || self.nynorsk.is_some() {
             surface_sentence(&text[start..end])
         } else if self.guarani.is_some() {
             crate::gn::analyze_guarani_sentence(&text[start..end])
