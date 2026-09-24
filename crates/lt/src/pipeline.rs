@@ -4213,6 +4213,10 @@ impl Pipeline {
                 None
             }
         };
+        // Owner-approved addition: no Java rule classes exist for Danish, so
+        // the word-list typos are reported by Rust only (docs/differences.md
+        // #14, pinned via `--expect-only-rust=DANISH_TYPOS=...`).
+        let simple_replace = crate::da::rules::danish_instances(data_dir.path())?;
         let danish = Arc::new(crate::da::DanishPipeline {
             tagger,
             disambiguator: f.disambiguator,
@@ -4238,7 +4242,7 @@ impl Pipeline {
             wrong_word_in_context: None,
             dash: None,
             synthesizer: None,
-            simple_replace: Vec::new(),
+            simple_replace,
             word_coherency: None,
             specific_case: None,
             readability: Vec::new(),

@@ -189,6 +189,12 @@ elif [ "$LANG_ARG" = "es" ]; then
   # hand-authored demonstrative-verb rules in es/rules/local.xml. The corpus
   # contains their 11 incorrect examples, which Java does not report.
   EXTRA+=(--expect-only-rust=AGREEMENT_DEMONSTRATIVE_VERB=11)
+elif [ "$LANG_ARG" = "da" ]; then
+  # documented deliberate divergence (docs/differences.md #14): the
+  # owner-added DANISH_TYPOS word-list rule (Danish Wikipedia "Almindelige
+  # stavefejl"), which Java has no equivalent of. The 284-line corpus happens
+  # to contain none of its wrong forms, so the exact pin is 0.
+  EXTRA+=(--expect-only-rust=DANISH_TYPOS=0)
 elif [ "$LANG_ARG" = "pt" ]; then
   # documented deliberate divergence (docs/differences.md #6)
   EXTRA+=(--expect-field-diffs=PODER_SER_POSSIVEL=1)

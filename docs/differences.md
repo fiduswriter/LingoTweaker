@@ -458,3 +458,39 @@ Upstream's `zh` module also ships `ChineseConfusionProbabilityRule`
 (`resource/zh/common_words.txt`, `confusion_sets.txt`). It is only active when
 a language model is configured, is not shipped with the data packs and is not
 ported.
+
+## 14. `DANISH_TYPOS` (Danish, added Wikipedia typo-list rule)
+
+Like #8, this is an **added rule** (intentional, owner-approved, D-310: Rust
+more correct — it reports real misspellings Java does not check at all).
+`Danish.getRelevantRules` ships no rule classes beyond the generic built-ins,
+and the upstream `da` module has no simple-replace list, so the Rust engine adds
+`DANISH_TYPOS` (`crates/lt/src/da/rules.rs`): a `SimpleReplaceRule` over the
+592 wrong→right pairs imported from the Danish Wikipedia article
+["Almindelige stavefejl"](https://da.wikipedia.org/wiki/Wikipedia:Almindelige_stavefejl)
+(`data/da/rules/typos_wikipedia.txt`, CC BY-SA 4.0, retrieved 2026-09-24,
+manifest kind `hand-authored`). Import followed the proven Norwegian Bokmål
+precedent (`data/no/rules/typos_wikipedia.txt`): wiki markup stripped, the
+article's own `:`-commented-out entries ignored, word-choice entries dropped,
+right-side forms verified against `data/da/hunspell/da_DK.dic` and the
+`*`-active wrong forms deduplicated against the existing XML rules
+(`ombord` already has a rule).
+
+Java reports none of these matches (it has no such rule), so the da gate runs
+with the exact-count allowance `--expect-only-rust=DANISH_TYPOS=0` in
+`scripts/ci/parity.sh` (the 284-line golden corpus happens to contain none of
+the wrong forms, so the pin is 0; 0 only-Java / 0 only-Rust beyond the pin /
+0 field diffs). `PARITY_TODAY=2026-09-21` (the golden capture date) is
+unchanged.
+
+Reproduce the Rust side:
+
+```sh
+cargo run -p lt-cli -- check -l da --enable-only --enable-rule DANISH_TYPOS \
+  --lines --today 2026-09-21 --file docs/parity/golden/da-full.txt | grep -c '^M'   # 0
+cargo run -p lt-cli -- check -l da --json "Det er et biblotek."    # DANISH_TYPOS fires, suggestion "bibliotek"
+```
+
+The behavior is pinned by `crates/lt/tests/danish.rs::danish_typos_wikipedia`
+(firing match + correct-sentence pin); the corpus-level 0-count is pinned by
+`scripts/ci/parity.sh da`.

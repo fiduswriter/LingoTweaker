@@ -115,7 +115,10 @@ date-filter rules either).
   da is exactly 0/0/0 (D-215/D-216 + D-224): the native hunspell suggestion
   engine including the n-gram fallback and the dotted-abbreviation
   suppression are ported; the XML rules, tagger and disambiguator are at
-  parity.
+  parity. The added owner rule `DANISH_TYPOS` (`docs/differences.md` #14, the
+  Danish Wikipedia typo list) is Rust-only; the 284-line corpus contains none
+  of its wrong forms, so the gate pins it at the exact count
+  `--expect-only-rust=DANISH_TYPOS=0`.
   sv is exactly 0 only-Java / 0 only-Rust / 0 field diffs (D-218/D-219,
   resolved by the suggestion-engine port): the suggestion lists match the
   legacy engine byte-for-byte; the XML rules,

@@ -68,7 +68,8 @@ fn suggestions(m: &lt::Match) -> Vec<String> {
     m.suggestions.iter().map(|s| s.value.clone()).collect()
 }
 
-/// Stage state: active XML rule count, no XML-referenced filters and
+/// Stage state: active XML rule count (69; the DANISH_TYPOS list rule rides
+/// `simple_replace` and is not counted), no XML-referenced filters and
 /// `compile_failures()` = 0 (Danish has no language-specific Java rules).
 #[test]
 fn danish_engine_state() {
@@ -256,6 +257,29 @@ fn danish_dotted_abbreviations() {
         "Før Kristus forkortes <suggestion>f.kr.</suggestion>"
     );
     assert_eq!(suggestions(&matches[0]), vec!["f.kr."]);
+}
+
+/// `DANISH_TYPOS` (owner-added, Rust-only; no Java rule classes exist for
+/// Danish): a typo from `data/da/rules/typos_wikipedia.txt` flags with the
+/// suggestion, and correct Danish stays clean.
+#[test]
+fn danish_typos_wikipedia() {
+    let _guard = engine_guard();
+
+    let text = "Det er et biblotek.";
+    let matches = one(text, "DANISH_TYPOS");
+    assert_eq!(matches.len(), 1, "{matches:?}");
+    assert_eq!(matches[0].sub_id.as_deref(), None);
+    assert_utf16(text, &matches[0], (10, 18));
+    assert_eq!(
+        matches[0].message,
+        "'biblotek' er en almindelig stavefejl. Mente du <suggestion>bibliotek</suggestion>?"
+    );
+    assert_eq!(suggestions(&matches[0]), vec!["bibliotek"]);
+
+    // correct Danish: no DANISH_TYPOS match
+    let text = "Jeg lånte bogen på biblioteket i går.";
+    assert!(one(text, "DANISH_TYPOS").is_empty());
 }
 
 /// Long paragraph with real Danish orthography. Java probe

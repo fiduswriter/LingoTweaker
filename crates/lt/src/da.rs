@@ -1,12 +1,14 @@
 //! Danish pipeline parts: the `DanishTagger`, the plain `XmlRuleDisambiguator`
 //! order and the hunspell speller. `Danish.getRelevantRules` has no Java rule
 //! classes (only the generic built-ins), so stage 3 adds nothing beyond the
-//! speller and the built-in wiring in the engine.
+//! speller, the built-in wiring in the engine and the owner-approved
+//! `DANISH_TYPOS` word-list rule (`rules.rs`, Rust-only).
 
 use std::sync::Arc;
 
 use lt_core::{AnalyzedSentence, AnalyzedToken, AnalyzedTokenReadings};
 
+pub mod rules;
 pub mod spelling;
 
 /// `Danish.createDefaultDisambiguator` is a plain `XmlRuleDisambiguator`
