@@ -1,12 +1,11 @@
 [package]
 name = "lt-lindera"
-description = "Experimental Lindera-backed CJK segmentation (spike branch)"
+description = "Lindera-backed CJK (Japanese/Chinese) segmentation for LingoTweaker"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
 readme.workspace = true
-publish = false
 
 [dependencies]
 # `lindera-dictionary` is replaced by the patched copy in `vendor/` through the

@@ -23,7 +23,7 @@ else
   CARGO_BIN=(cargo +1.98.1)
 fi
 
-ORDER=(lt-core lt-data lt-tokenize lt-tagger lt-pattern lt-disambig lt-spell lt-chunk)
+ORDER=(lt-core lt-data lt-lindera lt-tokenize lt-tagger lt-pattern lt-disambig lt-spell lt-chunk)
 
 for c in "${ORDER[@]}"; do
   echo "== publish $c"
