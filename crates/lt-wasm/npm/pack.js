@@ -36,9 +36,10 @@ export async function decompressPack(bytes) {
 /**
  * Fetch and inflate the pack for `lang` (`en`, `de`, `gn`, …).
  *
- * Node.js prefers the locally installed `lingotweaker-data` package; browsers
- * (and any environment without it) fall back to the release assets for this
- * package version. Pass `baseUrl` to use different data — the Pages demo
+ * Node.js prefers the locally installed `lingotweaker-data-<lang>` data
+ * packages; browsers (and any environment without them) fall back to the
+ * release assets for this package version. Pass `baseUrl` to use different
+ * data — the Pages demo
  * (`https://fiduswriter.github.io/LingoTweaker`) or a local directory.
  */
 export async function fetchPack(lang, options = {}) {
@@ -58,7 +59,8 @@ export async function fetchPack(lang, options = {}) {
 }
 
 /**
- * Read and inflate a pack from the installed `lingotweaker-data` package.
+ * Read and inflate a pack from the locally installed data packages (the
+ * code-only `lingotweaker-data` loader resolving `lingotweaker-data-<lang>`).
  * Returns `null` outside Node.js, or when the package/language is missing.
  */
 export async function localPack(lang) {

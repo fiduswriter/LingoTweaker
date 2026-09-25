@@ -101,8 +101,10 @@ pip install lingotweaker==0.1.0a1             # Python (module name `lt_py`)
 pip install lingotweaker-data-en              # Python runtime data (per language)
 npm install lingotweaker@next                 # Node.js
 npm install lingotweaker-wasm@next            # Browser/Node WebAssembly
-# `lingotweaker` and `lingotweaker-wasm` depend on `lingotweaker-data`, which
-# ships every language pack.
+npm install lingotweaker-data-en              # Node.js runtime data (per language)
+# `lingotweaker` and `lingotweaker-wasm` depend on the code-only
+# `lingotweaker-data` loader; the packs ship in per-language
+# `lingotweaker-data-<lang>` packages.
 ```
 
 `lt` on crates.io is an unrelated third-party crate; the engine is published as
@@ -115,8 +117,9 @@ for every release:
 
 - Python: `pip install lingotweaker-data-<lang>`; `lt_py` finds it
   automatically for a matching language.
-- Node.js: the `lingotweaker-data` dependency exposes `packPath("<lang>")`,
-  which the native and wasm engines both read (a `.pack.gz` file).
+- Node.js: `npm install lingotweaker-data-<lang>`; the `lingotweaker-data`
+  loader dependency exposes `packPath("<lang>")`, which the native and wasm
+  engines both read (a `.pack.gz` file).
 - Rust/other: `LT_DATA_DIR` accepts either a data directory or a single
   `.pack`/`.pack.gz` file. Per-language packs and extractable native archives
   are attached to each [GitHub Release](https://github.com/fiduswriter/LingoTweaker/releases);

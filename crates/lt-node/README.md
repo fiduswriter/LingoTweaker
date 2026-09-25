@@ -2,8 +2,15 @@
 
 Node.js bindings for the LingoTweaker proofreading engine (Rust core, napi-rs).
 
-This package ships a native addon (code only) and depends on `lingotweaker-data`,
-which carries one gzipped pack per language. Point the engine at a pack:
+This package ships a native addon (code only) and depends on the code-only
+`lingotweaker-data` loader. The packs ship in one small package per language
+(`lingotweaker-data-<lang>`, mirroring the per-language PyPI data
+distributions) — install the languages you need, then point the engine at a
+pack:
+
+```sh
+npm install lingotweaker lingotweaker-data-en
+```
 
 ```js
 const { Engine } = require("lingotweaker");

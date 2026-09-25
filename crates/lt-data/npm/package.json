@@ -1,7 +1,7 @@
 {
   "name": "lingotweaker-data",
   "version": "0.2.0",
-  "description": "Runtime language data packs for the LingoTweaker proofreading engine",
+  "description": "Loader for the LingoTweaker proofreading engine's runtime data packs (the packs ship in per-language lingotweaker-data-<lang> packages)",
   "license": "LGPL-2.1-or-later",
   "repository": {
     "type": "git",
@@ -24,12 +24,10 @@
       "import": "./index.mjs",
       "require": "./index.js"
     },
-    "./packs/*": "./packs/*",
     "./manifest.json": "./manifest.json",
     "./package.json": "./package.json"
   },
   "files": [
-    "packs",
     "manifest.json",
     "index.js",
     "index.mjs",

@@ -15,7 +15,7 @@ Manual equivalents (what `.github/workflows/release.yml` runs):
 ```sh
 scripts/release/publish-crates.sh              # crates.io, dependency order + facade
 scripts/release/publish-pypi.sh [--build-only] # maturin wheel+sdist, smoke, twine
-scripts/release/publish-npm-data.sh [--build-only]  # npm lingotweaker-data (all packs)
+scripts/release/publish-npm-data.sh [--build-only]  # npm lingotweaker-data loader + lingotweaker-data-<lang> per language
 scripts/release/publish-npm.sh  [--build-only] # napi build, smoke, npm (dist-tag from version)
 scripts/release/publish-wasm.sh [--build-only] # wasm-pack web+nodejs, smoke, npm (dist-tag from version)
 scripts/release/publish-pypi-data.sh [--build-only]  # PyPI lingotweaker-data-<lang> (data/pypi-versions.json)
@@ -31,16 +31,21 @@ one build (`scripts/release/build-data.sh`, which reuses
 
 | Artifact | Registry / host | Consumer |
 |----------|-----------------|----------|
-| `packs/<lang>.pack.gz` | GitHub Release + npm `lingotweaker-data` | wasm `LtEngine`, native Node `dataDir` |
+| `packs/<lang>.pack.gz` | GitHub Release + npm `lingotweaker-data-<lang>` | wasm `LtEngine`, native Node `dataDir` |
 | `data/<lang>.tar.gz` | GitHub Release | native `LT_DATA_DIR` (extract) |
 | `lingotweaker-data-<lang>` | PyPI | `lt_py` (auto-discovered) |
 | `manifest.json` | GitHub Release | sizes + sha256 per artifact |
 
 `publish-data.sh` creates the tag's release if needed and uploads the assets;
-`publish-npm-data.sh` stages the packs into the `lingotweaker-data` package;
+`publish-npm-data.sh` publishes the code-only `lingotweaker-data` loader plus
+one `lingotweaker-data-<lang>` package per language (npm's registry rejects a
+single multi-language tarball with E413 Payload Too Large, so npm mirrors the
+per-language PyPI model; `packPath(lang)` in the loader resolves the pack from
+the installed per-language package);
 `publish-pypi-data.sh` builds one `py3-none-any` wheel per language (each well
 under PyPI's 100 MB/file limit). `lingotweaker` and `lingotweaker-wasm` declare
-`lingotweaker-data` as a dependency.
+the loader `lingotweaker-data` as a dependency; the per-language packages are
+installed by the user.
 
 ### PyPI data packages are versioned per language
 
@@ -86,7 +91,9 @@ Notes:
 - `publish-pypi-data.sh` needs a `PYPI_API_TOKEN` secret (or `TWINE_PASSWORD`);
   without it the workflow builds the wheels and skips the upload.
 - Data packages must be published before the npm engine packages, since the
-  latter depend on `lingotweaker-data` (the workflow orders the jobs).
+  latter depend on the `lingotweaker-data` loader (the workflow orders the
+  jobs). The per-language npm packages carry no dependency edges, but the
+  loader's `packPath` only resolves what is installed.
 
 Secrets used by the workflow (set in the GitHub repo):
 
@@ -95,8 +102,13 @@ Secrets used by the workflow (set in the GitHub repo):
 | `CARGO_REGISTRY_TOKEN` | crates.io | `cargo login` token |
 | `PYPI_API_TOKEN` | PyPI | publishes the per-language data packages and the `lingotweaker` wheel; without it they are only built |
 
-npm publishes the three packages through **trusted publishing (OIDC)**, so no
-npm secret is stored. Configure it once per package on npmjs.com (Settings ->
-Trusted Publisher: organization/user `fiduswriter`, repository `LingoTweaker`,
-workflow `release.yml`). The publish jobs set `id-token: write` and use Node 24
-(npm >= 11.5.1, required for trusted publishing).
+npm publishes through **trusted publishing (OIDC)**, so no npm secret is
+stored. Configure it once per package on npmjs.com (Settings -> Trusted
+Publisher: organization/user `fiduswriter`, repository `LingoTweaker`,
+workflow `release.yml`) — that includes every per-language name
+(`lingotweaker-data-da`, …) before its first publish. The publish jobs set
+`id-token: write` and use Node 24 (npm >= 11.5.1, required for trusted
+publishing). The npm data packages are versioned with the engine (the base
+loader and every `lingotweaker-data-<lang>` get the release version, and
+`npm view <name>@<version>` skips what is already on the registry), unlike the
+PyPI data packages, which version independently in `data/pypi-versions.json`.

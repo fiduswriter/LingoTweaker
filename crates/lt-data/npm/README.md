@@ -1,19 +1,23 @@
 # LingoTweaker data
 
-Runtime language data for the LingoTweaker proofreading engine, as one gzipped
-data pack per language (`packs/<lang>.pack.gz`). Both engine packages depend on
-this package:
+Runtime data for the LingoTweaker proofreading engine. This package is the
+**code-only loader**: the actual language packs ship in one small package per
+language (`lingotweaker-data-<lang>`, mirroring the per-language PyPI data
+distributions), so npm never has to carry a single multi-language tarball.
+Install the loader plus the languages you need:
 
-- `lingotweaker` (Node.js native addon) reads the pack file directly via
-  `dataDir`;
-- `lingotweaker-wasm` (browser/Node WebAssembly) reads or fetches the pack and
-  passes the bytes to `LtEngine`.
+```sh
+npm install lingotweaker-data lingotweaker-data-en
+```
 
 ```js
 const data = require("lingotweaker-data");
 const { Engine } = require("lingotweaker");
 
 const engine = new Engine("en-US", { dataDir: data.packPath("en") });
+for (const match of engine.check("I can heard you.").matches) {
+  console.log(match.rule_id, match.suggestions);
+}
 ```
 
 ```js
@@ -26,13 +30,22 @@ const pack = readFileSync(packPath("en"));
 const engine = new LtEngine("en-US", pack, JSON.stringify({ today: new Date().toISOString() }));
 ```
 
-- `packPath(lang)` — absolute path of a language pack
-- `languages()` — the base codes shipped here
-- `dataManifest()` — version, upstream commit and per-language `bytes`/`sha256`
+- `packPath(lang)` — absolute path of a language pack, resolved from the
+  installed `lingotweaker-data-<lang>` package (which must be installed
+  separately; resolution starts next to this package and falls back to the
+  process working directory for pnpm/workspace layouts)
+- `languages()` — the base codes with a published pack
+- `dataManifest()` — version, upstream commit and per-language `bytes`/`sha256`;
+  the `file` paths are relative to the per-language package
 
 The packs are the same artifacts attached to each GitHub Release
 (`packs/<lang>.pack.gz`) and used by the browser demo, so all channels serve
-identical data. This package ships data only, no code.
+identical data.
+
+Note for layouts where package resolution cannot reach the per-language
+packages from inside this one (strict pnpm), declare
+`lingotweaker-data-<lang>` as a dependency of the consuming package so the
+package manager links it.
 
 Vendored rule data, dictionaries and models keep their upstream licenses; see
 `THIRD_PARTY_NOTICES.md` in the repository.

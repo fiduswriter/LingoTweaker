@@ -55,23 +55,24 @@ passed in and pinned for the engine's date filters.
 
 ## Data
 
-The package ships **code only** and depends on `lingotweaker-data`, which
-carries one gzipped pack per language. In Node.js the data helper resolves that
-package locally; in the browser (or without it) it falls back to the per-release
-GitHub Release assets:
+The package ships **code only** and depends on the code-only
+`lingotweaker-data` loader; the packs ship in one small package per language
+(`lingotweaker-data-<lang>`). In Node.js the data helper resolves installed
+`lingotweaker-data-<lang>` packages locally; in the browser (or without them)
+it falls back to the per-release GitHub Release assets:
 
 ```js
 import { fetchPack, packUrl, manifestUrl } from "lingotweaker-wasm/pack";
 
-await fetchPack("en");                  // local lingotweaker-data in Node, else release assets
+await fetchPack("en");                  // installed lingotweaker-data-en in Node, else release assets
 await fetchPack("gn", { baseUrl: "https://fiduswriter.github.io/LingoTweaker" });
 packUrl("de");                           // build a URL yourself
 ```
 
 `baseUrl` points at a directory that contains `packs/<lang>.pack.gz` and
 `manifest.json`. All languages are attached to every release; `manifest.json`
-lists file sizes and sha256 hashes. `lingotweaker-data` is also served from any
-npm CDN (`https://cdn.jsdelivr.net/npm/lingotweaker-data/packs/<lang>.pack.gz`),
+lists file sizes and sha256 hashes. Each pack is also served from any npm CDN
+(`https://cdn.jsdelivr.net/npm/lingotweaker-data-<lang>/packs/<lang>.pack.gz`),
 and you can host the packs yourself.
 
 LingoTweaker is an independent project and includes a port of the legacy

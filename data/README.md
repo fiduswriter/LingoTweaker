@@ -34,7 +34,7 @@ Every release publishes the runtime data from this directory, built by
 
 | Artifact | Consumer |
 |----------|----------|
-| `packs/<lang>.pack.gz` (GitHub Release asset, npm `lingotweaker-data`) | wasm (`LtEngine`) and native Node (`dataDir`) |
+| `packs/<lang>.pack.gz` (GitHub Release asset, npm `lingotweaker-data-<lang>`) | wasm (`LtEngine`) and native Node (`dataDir`) |
 | `data/<lang>.tar.gz` (GitHub Release asset) | native `LT_DATA_DIR` (extract into a directory) |
 | `lingotweaker-data-<lang>` (PyPI) | `lt_py` (auto-discovered) |
 | `manifest.json` (release asset) | versions, sizes and sha256 per artifact |

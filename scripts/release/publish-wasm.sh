@@ -3,8 +3,9 @@
 # smoke-test the Node build and publish the `lingotweaker-wasm` npm package
 # under a dist-tag: stable versions go to `latest`, prereleases to `next`.
 #
-# Data is not bundled: the package depends on `lingotweaker-data`, and
-# `lingotweaker-wasm/pack` resolves that package locally in Node or fetches the
+# Data is not bundled: the package depends on the code-only `lingotweaker-data`
+# loader, and `lingotweaker-wasm/pack` resolves the installed
+# `lingotweaker-data-<lang>` packages locally in Node or fetches the
 # per-release GitHub Release assets everywhere else.
 #
 # Auth: `npm login` for the `johanneswilm` account. With 2FA set NPM_OTP

@@ -166,7 +166,7 @@ node tools/wasm/smoke.mjs /tmp/lt-gn.pack     # engine built from the pack
 tools/wasm/build-demo.sh                      # minimal browser demo (www/pkg + packs)
 scripts/data/build-packs.sh data /tmp/packs   # gzipped packs + sha256 manifest
 scripts/release/publish-wasm.sh --build-only  # lingotweaker-wasm npm package (web+nodejs)
-scripts/release/publish-npm-data.sh --build-only  # lingotweaker-data npm package
+scripts/release/publish-npm-data.sh --build-only  # lingotweaker-data npm packages (loader + per-language)
 demo/scripts/build-packs.sh                   # full demo: packs + rule inventories
 demo/scripts/build.sh                         # full demo bundle into demo/dist
 ```
@@ -197,12 +197,14 @@ be published (the crates.io name is taken); `lt-cli`/`lt-http`/`lt-py`/`lt-node`
 `lt-wasm` set `publish = false`.
 
 Runtime data ships separately from the engine packages (they stay code-only):
-one npm package `lingotweaker-data` (all language packs; a dependency of both
-`lingotweaker` and `lingotweaker-wasm`), one PyPI distribution
-`lingotweaker-data-<lang>` per language (auto-discovered by `lt_py`), and
-per-language `packs/*.pack.gz` + `data/*.tar.gz` + `manifest.json` assets on
-each GitHub Release. Package readmes must say that engine packages ship code
-only and how to get the data (`LT_DATA_DIR` accepts a directory or a pack file).
+npm `lingotweaker-data` (a code-only loader; `packPath(lang)` resolves the pack
+from an installed per-language `lingotweaker-data-<lang>` package, mirroring
+the PyPI model), one PyPI distribution `lingotweaker-data-<lang>` per language
+(auto-discovered by `lt_py`), and per-language `packs/*.pack.gz` +
+`data/*.tar.gz` + `manifest.json` assets on each GitHub Release. Package
+readmes must say that engine packages ship code only and how to get the data
+(`LT_DATA_DIR` accepts a directory or a pack file). The npm loader's smoke
+test is `scripts/ci/tests/npm-data-loader-test.sh`.
 
 ## Conventions
 
