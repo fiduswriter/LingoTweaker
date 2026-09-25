@@ -1,6 +1,6 @@
 {
   "upstream_commit": "7bd1f99b849b1de66845113010b3c9261c3f37e0",
-  "file_count": 1027,
+  "file_count": 1028,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -10672,15 +10672,25 @@
       }
     },
     {
-      "path": "sv/dictionaries/swedish.dict",
-      "sha256": "7a26484d623531fd74c7de6e1b3a0bf53636f496f15514ac60638db70c24f973",
-      "size": 304053,
+      "path": "sv/README.md",
+      "sha256": "743dcc89979809ff4c9dcc58a01eecfd6c5b08923674d15ee9b30b200e0da774",
+      "size": 5874,
       "source": {
-        "kind": "upstream",
-        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish.dict",
-        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
-        "license_verified": true,
-        "license_source": "upstream sv/README.txt"
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "note": "Swedish data documentation (SALDO source and tag mapping, B1 lexicon swap)"
+      }
+    },
+    {
+      "path": "sv/dictionaries/swedish.dict",
+      "sha256": "0f17aa3b63f92ffea5454fef4cf7b189c398419f564295b1975c7dee4feead2e",
+      "size": 639028,
+      "source": {
+        "kind": "generated",
+        "license": "CC BY 4.0 (Spr\u00e5kbanken SALDO)",
+        "url": "https://svn.spraakbanken.gu.se/sb-arkiv/pub/lexikon/saldom.xml",
+        "generator": "tools/sv-dict/build-sv-tagger.py (SALDO saldom.xml -> SUC-style word-lemma-tag triples -> tools/morfologik/lt_morfologik.py pos/synth)",
+        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Spr\u00e5kbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
       }
     },
     {
@@ -10697,14 +10707,14 @@
     },
     {
       "path": "sv/dictionaries/swedish_synth.dict",
-      "sha256": "e99f3a00bf770073667373ef1ff5b8988bf891b96d1dfaa77de78a0476022a63",
-      "size": 270499,
+      "sha256": "f2e261beef502f85ccfefaa8efe4012f6e7c758d3b31af1bcdb63a144fc54b7b",
+      "size": 556233,
       "source": {
-        "kind": "upstream",
-        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish_synth.dict",
-        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
-        "license_verified": true,
-        "license_source": "upstream sv/README.txt"
+        "kind": "generated",
+        "license": "CC BY 4.0 (Spr\u00e5kbanken SALDO)",
+        "url": "https://svn.spraakbanken.gu.se/sb-arkiv/pub/lexikon/saldom.xml",
+        "generator": "tools/sv-dict/build-sv-tagger.py (SALDO saldom.xml -> SUC-style word-lemma-tag triples -> tools/morfologik/lt_morfologik.py pos/synth)",
+        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Spr\u00e5kbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
       }
     },
     {
@@ -10721,14 +10731,14 @@
     },
     {
       "path": "sv/dictionaries/swedish_synth_tags.txt",
-      "sha256": "9a5ff8604475f61fe2ccace3d994ef634ac02c36cbbd2cab3b2d49e39fce8471",
-      "size": 859,
+      "sha256": "7b4ff46e33b40024e6769b11e2e63471bfe88816263a6f62a71f764b9e60185b",
+      "size": 659,
       "source": {
-        "kind": "upstream",
-        "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/swedish_synth.dict_tags.txt",
-        "license": "LGPL-2.1-or-later (Swedish POS/synthesis dictionaries based on DSSO; upstream sv/README.txt states LGPL-2.1-or-later)",
-        "license_verified": true,
-        "license_source": "upstream sv/README.txt"
+        "kind": "generated",
+        "license": "CC BY 4.0 (Spr\u00e5kbanken SALDO)",
+        "url": "https://svn.spraakbanken.gu.se/sb-arkiv/pub/lexikon/saldom.xml",
+        "generator": "tools/sv-dict/build-sv-tagger.py (SALDO saldom.xml -> SUC-style word-lemma-tag triples -> tools/morfologik/lt_morfologik.py pos/synth)",
+        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Spr\u00e5kbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
       }
     },
     {

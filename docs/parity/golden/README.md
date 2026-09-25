@@ -132,7 +132,15 @@ date-filter rules either).
   resolved by the suggestion-engine port): the suggestion lists match the
   legacy engine byte-for-byte; the XML rules,
   `SwedishTagger`/`SwedishSynthesizer`, hybrid disambiguator, `SV_COMPOUNDS`
-  and `SV_WORD_COHERENCY` are at parity. The owner-added SALDO-derived
+  and `SV_WORD_COHERENCY` are at parity. The B1 lexicon swap rebuilt both
+  dictionaries from the Språkbanken SALDO morphological lexicon (CC BY 4.0;
+  `data/sv/README.md`) onto the unchanged SUC-style tagset — the golden is
+  NOT regenerated and stays at 0/0/0 with no allowance: the one corpus line
+  the DSSO dict could match that SALDO lacks as a plain verb lemma
+  (`urladdad`, a fused participle of the multi-word verb `ladda ur`) is
+  carried by the converter's fused-variant handling, and the adjective/
+  participle genitive readings SALDO adds are dropped to keep the synth
+  suggestion lists identical. The owner-added SALDO-derived
   confusable-word rules and coherency pairs (`docs/differences.md` #16) fire
   on none of the 45 corpus lines, so the gate needs no allowance; the same
   holds for the owner-added default-off `VECKODAG_DATUM` `<filter>` rules —
