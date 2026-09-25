@@ -16,7 +16,7 @@ exclude = ["crates/lingotweaker", "vendor/lindera-dictionary"]
 lindera-dictionary = { path = "vendor/lindera-dictionary" }
 
 [workspace.package]
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 license = "LGPL-2.1-or-later"
 repository = "https://github.com/fiduswriter/LingoTweaker"
@@ -30,19 +30,19 @@ rust-version = "1.88"
 # non-publishable crates (`lt`, `lt-cli`, `lt-http`, `lt-py`, `lt-node`,
 # `lt-wasm`) set `publish = false` in their own manifests; `lt` cannot be
 # published because the crates.io name `lt` belongs to a third party.
-lt = { path = "crates/lt", version = "0.1.1" }
-lt-core = { path = "crates/lt-core", version = "0.1.1" }
-lt-tokenize = { path = "crates/lt-tokenize", version = "0.1.1" }
-lt-tagger = { path = "crates/lt-tagger", version = "0.1.1" }
-lt-disambig = { path = "crates/lt-disambig", version = "0.1.1" }
-lt-pattern = { path = "crates/lt-pattern", version = "0.1.1" }
-lt-spell = { path = "crates/lt-spell", version = "0.1.1" }
-lt-chunk = { path = "crates/lt-chunk", version = "0.1.1" }
-lt-data = { path = "crates/lt-data", version = "0.1.1" }
-lt-lindera = { path = "crates/lt-lindera", version = "0.1.1" }
-lt-http = { path = "crates/lt-http", version = "0.1.1" }
-lt-py = { path = "crates/lt-py", version = "0.1.1" }
-lt-node = { path = "crates/lt-node", version = "0.1.1" }
+lt = { path = "crates/lt", version = "0.2.0" }
+lt-core = { path = "crates/lt-core", version = "0.2.0" }
+lt-tokenize = { path = "crates/lt-tokenize", version = "0.2.0" }
+lt-tagger = { path = "crates/lt-tagger", version = "0.2.0" }
+lt-disambig = { path = "crates/lt-disambig", version = "0.2.0" }
+lt-pattern = { path = "crates/lt-pattern", version = "0.2.0" }
+lt-spell = { path = "crates/lt-spell", version = "0.2.0" }
+lt-chunk = { path = "crates/lt-chunk", version = "0.2.0" }
+lt-data = { path = "crates/lt-data", version = "0.2.0" }
+lt-lindera = { path = "crates/lt-lindera", version = "0.2.0" }
+lt-http = { path = "crates/lt-http", version = "0.2.0" }
+lt-py = { path = "crates/lt-py", version = "0.2.0" }
+lt-node = { path = "crates/lt-node", version = "0.2.0" }
 serde = { version = "1", features = ["derive"] }
 serde_urlencoded = "0.7"
 sha2 = "0.10"
