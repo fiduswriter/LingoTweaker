@@ -27,10 +27,26 @@ ORDER=(lt-core lt-data lt-lindera lt-tokenize lt-tagger lt-pattern lt-disambig l
 
 for c in "${ORDER[@]}"; do
   echo "== publish $c"
-  "${CARGO_BIN[@]}" publish -p "$c" "$@" || exit $?
+  if ! out="$("${CARGO_BIN[@]}" publish -p "$c" "$@" 2>&1)"; then
+    # A re-run hits "already exists" for every crate published before; that is
+    # not a failure -- keep going (this is what makes the script resumable).
+    if grep -q "already exists" <<<"$out"; then
+      echo "== $c already published; skipping"
+    else
+      printf '%s\n' "$out" >&2
+      exit 1
+    fi
+  fi
 done
 
 echo "== publish lingotweaker (facade)"
-(cd "$ROOT/crates/lingotweaker" && "${CARGO_BIN[@]}" publish "$@")
+if ! out="$(cd "$ROOT/crates/lingotweaker" && "${CARGO_BIN[@]}" publish "$@" 2>&1)"; then
+  if grep -q "already exists" <<<"$out"; then
+    echo "== lingotweaker already published; skipping"
+  else
+    printf '%s\n' "$out" >&2
+    exit 1
+  fi
+fi
 
 echo "== crates.io publish complete"
