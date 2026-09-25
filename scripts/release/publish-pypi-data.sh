@@ -2,8 +2,7 @@
 # Build and upload one PyPI data package per language:
 #
 #   lingotweaker-data-<lang>   (pure Python, py3-none-any)
-#     lingotweaker_data_<lang>/data/   manifest.json, core/**, messages/**,
-#                                      <lang>/**   (the native data tree)
+#     lingotweaker_data_<lang>/data/   core/**, messages/**, <lang>/**
 #     lingotweaker_data_<lang>.data_dir() -> absolute path
 #
 # The per-file PyPI limit is 100 MB; every language tree is well below that
@@ -119,7 +118,9 @@ for lang in $langs; do
   lang_pyver="$(pep440_version "$lang")"
   echo "== source $pkg ($lang_pyver)"
   mkdir -p "$src/$mod/data"
-  cp "$ROOT/data/manifest.json" "$src/$mod/data/"
+  # manifest.json stays out of the wheels: it is repo-side metadata (lt-data
+  # integrity test) with no runtime consumer, and shipping it would couple
+  # every language's content to every other language's data changes.
   cp -r "$ROOT/data/core" "$ROOT/data/messages" "$src/$mod/data/"
   cp -r "$ROOT/data/$lang" "$src/$mod/data/"
   cat >"$src/$mod/__init__.py" <<EOF

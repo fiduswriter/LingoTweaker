@@ -46,11 +46,15 @@ def data_languages(data_dir: Path) -> list[str]:
 
 
 def wheel_files(data_dir: Path, lang: str) -> list[Path]:
-    """The files `publish-pypi-data.sh` copies into the `<lang>` wheel."""
+    """The files `publish-pypi-data.sh` copies into the `<lang>` wheel.
+
+    `manifest.json` is deliberately excluded: it is repo-side metadata (the
+    lt-data integrity test) that no runtime consumer reads, and — because it
+    lists every language's files — including it here would change every
+    language's hash whenever any single language's data changes, defeating
+    the per-language versioning.
+    """
     files: list[Path] = []
-    manifest = data_dir / "manifest.json"
-    if manifest.is_file():
-        files.append(manifest)
     for sub in (*SHARED, lang):
         base = data_dir / sub
         if base.is_dir():
