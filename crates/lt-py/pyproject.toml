@@ -7,7 +7,7 @@ name = "lingotweaker"
 description = "Proofreading engine for many languages: Rust core with Python bindings"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "LGPL-2.1-or-later" }
+license = "LGPL-2.1-or-later"
 keywords = ["proofreading", "grammar", "spellcheck", "nlp", "language"]
 dynamic = ["version"]
 classifiers = [

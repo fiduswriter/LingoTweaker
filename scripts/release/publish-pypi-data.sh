@@ -169,7 +169,7 @@ License (packaging code): LGPL-2.1-or-later.
 EOF
   cat >"$src/pyproject.toml" <<EOF
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -178,7 +178,7 @@ version = "$lang_pyver"
 description = "LingoTweaker runtime data for language '$lang'"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "LGPL-2.1-or-later" }
+license = "LGPL-2.1-or-later"
 keywords = ["proofreading", "grammar", "spellcheck", "nlp", "language", "data"]
 classifiers = [
   "Programming Language :: Python :: 3",
