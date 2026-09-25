@@ -33,7 +33,22 @@ what Ordbøkene exposes in its inflection tables:
   imperative, participle and present-participle slots are tagged (the
   <PerfPart> slot itself is tagged ver:kor; its adjectival uses are already
   covered by the adjective readings of the same form where applicable).
-- adjectives (adjektiv): pos (positive), kom (comparative), sup (superlative).
+  The s-passive slots (Inf+Pass "løpes", Pres+Pass "løpes"; and the whole
+  VERB_sPass paradigms) carry their tense with NO separate passive marker:
+  "løpes" carries both ver:inf (infinitiv passiv) and ver:præ (presens
+  passiv) readings. Danish (data/da/words/tagset.txt) distinguishes
+  ver:<tense>:pas, but here the distinction would buy no rule expressiveness
+  (every verb filter matches the flat `ver:.*` namespace or a tense
+  enumeration that the passive readings legitimately belong to), while the
+  flat tags keep the genuine tense ambiguity of the s-forms visible to the
+  disambiguator. Revisit only if a rule ever needs to exclude passives.
+- adjectives (adjektiv): pos (positive), kom (comparative), sup (superlative),
+  with pos:BF (bestemt form) for the Ordbøkene Pos+Def+Sing and Pos+Plur
+  slots — the "-e" forms ("den store bilen", "store biler") — which the
+  templates distinguish from the positive indefinite masc/fem (lemma) and
+  neuter ("fint") slots. The neuter form is NOT separately tagged (the
+  NB_NEUTER_T rule is a surface rule; a neuter feature can be added when a
+  rule needs it).
 - the remaining word classes have no features.
 
 The engine tags words by returning one string per reading, for example:
@@ -63,8 +78,9 @@ ver	VERB	verb; features:
 adj	ADJ	adjektiv; features:
 	pos (positiv), kom (komparativ), sup (superlativ)
 pron	PRON	pronomen (no features)
-det	DET	determinativ (incl. DET_Q tallord); features pos/kom/sup for
-	the adjectival determiners (DET_adj: annen/annet/andre ...)
+det	DET	determinativ (incl. DET_Q tallord); the adjectival determiners
+	(DET_adj: annen/annet/andre ...) carry the plain det reading on every
+	form (the template's form/gender slots are not encoded)
 num	DET_Q	tallord (tagged det, see above)
 adv	ADV	adverb (incl. ADV_adj comparative forms: gjerne/heller/helst)
 prep	ADP	preposisjon
@@ -94,5 +110,6 @@ imp	imperativ
 kor	perfektum partisipp (supine/-t/-tt form)
 lan	præsens partisipp (-ende)
 pos	positiv	1st degree
+pos:BF	positiv bestemt form	1st degree, definite singular/plural (-e form)
 kom	komparativ	2nd degree
 sup	superlativ	3rd degree

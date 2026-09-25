@@ -13,17 +13,22 @@
 
   <!-- After den/det/de, a following substantive makes the determiner reading
        survive ("det huset"); a following finite/infinitive verb makes the
-       pronoun reading survive ("Det snør.", "De kommer."). Participle
-       readings (ver:kor) on the next token do not trigger either direction:
-       definite -et nouns ("huset", "bygget") carry a ver:kor reading of the
-       related verb, and "det + noun" is the determiner there. -->
+       pronoun reading survive ("Det snør.", "De kommer."). Preterite/supine
+       verb readings (ver:dat/ver:kor) on the next token do not trigger
+       either direction: the -et/-a noun homographs ("huset", "bygget") carry
+       preterite readings of the related -e verbs (huse, bygge) and stand in
+       the "det + noun + finite verb" (V2) pattern, while a present-tense
+       homograph after det ("De kommer snart.") is the verb. The pre-fix
+       tagger build mis-tagged exactly these preterite readings ver:kor and
+       the present readings ver:inf, so the tense split below restores the
+       original behaviour against the corrected tags. -->
   <rulegroup id="det-pron" name="det|pron-homograf + sub/ver">
     <rule>
       <pattern>
         <marker>
           <token regexp="yes">den|det|de</token>
         </marker>
-        <token postag_regexp="yes" postag="sub:.*"><exception postag_regexp="yes" postag="ver:(inf|præ|dat|imp|lan)"/></token>
+        <token postag_regexp="yes" postag="sub:.*"><exception postag_regexp="yes" postag="ver:(inf|præ|imp|lan)"/></token>
       </pattern>
       <disambig action="filter" postag="det"/>
       <example type="ambiguous" inputform="det[det/det,det/pron]" outputform="det[det/det]">I <marker>det</marker> huset bor en familie.</example>
@@ -35,7 +40,7 @@
         <marker>
           <token regexp="yes">den|det|de</token>
         </marker>
-        <token postag_regexp="yes" postag="ver:(inf|præ|dat|imp|lan)"/>
+        <token postag_regexp="yes" postag="ver:(inf|præ|imp|lan)"/>
       </pattern>
       <disambig action="filter" postag="pron"/>
       <example type="ambiguous" inputform="det[det/det,det/pron]" outputform="det[det/pron]"><marker>Det</marker> snør i dag.</example>
@@ -61,7 +66,7 @@
         </marker>
       </pattern>
       <disambig action="filter" postag="ver:.*"/>
-      <example type="ambiguous" inputform="spiller[spille/ver:inf,spiller/sub:ube:sin]" outputform="spiller[spille/ver:inf]">Han <marker>spiller</marker> fotball.</example>
+      <example type="ambiguous" inputform="spiller[spille/ver:præ,spiller/sub:ube:sin]" outputform="spiller[spille/ver:præ]">Han <marker>spiller</marker> fotball.</example>
       <example type="untouched">Han er en spiller.</example>
       <example type="untouched">En spiller løper fort.</example>
     </rule>
@@ -126,7 +131,7 @@
         <token postag_regexp="yes" postag="sub:.*"/>
       </pattern>
       <disambig action="filter" postag="adj:.*"/>
-      <example type="ambiguous" inputform="voksne[voksen/adj:pos,voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]" outputform="voksne[voksen/adj:pos]">Den <marker>voksne</marker> eleven leser mye.</example>
+      <example type="ambiguous" inputform="voksne[voksen/adj:pos:BF,voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]" outputform="voksne[voksen/adj:pos:BF]">Den <marker>voksne</marker> eleven leser mye.</example>
       <example type="untouched">Den voksne sover lenge.</example>
       <example type="untouched">Voksne må passe på barna.</example>
     </rule>
@@ -142,7 +147,7 @@
         <token><exception postag_regexp="yes" postag="sub:.*"/></token>
       </pattern>
       <disambig action="filter" postag="sub:.*"/>
-      <example type="ambiguous" inputform="voksne[voksen/adj:pos,voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]" outputform="voksne[voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]">Den <marker>voksne</marker> sover lenge.</example>
+      <example type="ambiguous" inputform="voksne[voksen/adj:pos:BF,voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]" outputform="voksne[voksen/sub:bes:sin,voksen/sub:bes:plu,voksen/sub:ube:plu]">Den <marker>voksne</marker> sover lenge.</example>
       <example type="untouched">Den voksne eleven leser mye.</example>
     </rule>
   </rulegroup>

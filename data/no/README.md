@@ -33,7 +33,7 @@ is generated from the Ordbøkene open data. Regeneration:
 ```sh
 # bulk source (cached under /tmp; only the products below go into data/)
 curl -sL -o /tmp/ordbok-cache/bm_lemma_expanded.json https://ord.uib.no/bm/fil/lemma_expanded.json
-# 1) word-lemma-tag triples (446k; `--self-test` runs the unit tests)
+# 1) word-lemma-tag triples (445k; `--self-test` runs the unit tests)
 python3 tools/no-dict/build-no-tagger.py \
     --lemma-expanded /tmp/ordbok-cache/bm_lemma_expanded.json \
     --out data/no/dictionaries/no_pos.txt \
@@ -53,11 +53,32 @@ python3 tools/lt-sync/lt_sync.py add-local generated \
     --url "https://ord.uib.no/bm/fil/lemma_expanded.json"
 ```
 
+The slot→tag mapping (fixed 2026-09-25: the export drops each template's
+LEADING lemma slot, so the exported list starts at the template's second
+slot — the first build shifted every verb slot one position, tagging
+presens `ver:inf`, preteritum `ver:kor`, the presens partisipp `ver:imp`):
+
+| template slot (after the dropped lemma slot) | tag |
+|---|---|
+| Inf | `ver:inf` |
+| Pres | `ver:præ` |
+| Inf+Pass ("løpes") | `ver:inf` |
+| Pres+Pass ("løpes") | `ver:præ` |
+| Past | `ver:dat` |
+| `<PerfPart>` + Adj+`<PerfPart>` (neuter/masc-fem/fem/def/plur) | `ver:kor` |
+| Adj+`<PresPart>` ("-ende") | `ver:lan` |
+| Imp | `ver:imp` |
+| ADJ: Pos+Def+Sing and Pos+Plur ("-e") | `adj:pos:BF` |
+| ADJ: Pos masc/fem (lemma) + Pos+Neuter | `adj:pos` |
+| ADJ: Cmp / Sup | `adj:kom` / `adj:sup` |
+
 The tagset (`words/tagset.txt`) follows the da/nrd Stavekontrolden style:
 `sub:<bes|ube>:<sin|plu>` (no gender — Ordbøkene lists both masculine and
 feminine definite variants for many lemmas, so the gender signal stays with
-the form), `ver:<inf|præ|dat|imp|kor|lan>`, `adj:<pos|kom|sup>` and bare POS
-codes for the uninflected classes. Rules can match
+the form), `ver:<inf|præ|dat|imp|kor|lan>` (the s-passive slots carry their
+tense with no passive marker), `adj:<pos|pos:BF|kom|sup>` (BF = the
+bestemt-form/-e slots: definite singular + plural) and bare POS codes for
+the uninflected classes. Rules can match
 `<token postag_regexp="yes" postag="ver:.*"/>` etc. from `rules/grammar.xml`;
 `words/added.txt`/`removed.txt` are the `ManualTagger` complements.
 
@@ -96,9 +117,11 @@ python3 tools/lt-sync/lt_sync.py add-local generated \
 Users of `<match postag>`: the B2 agreement rules `NB_QUANT_PLU`,
 `NB_DISSE_PLU` (number agreement after plural quantifiers/determiners,
 suggestions synthesized with `<match postag>`), `NB_DEM_COMMON` and
-`NB_DEM_NEUTER` (demonstrative + noun gender). Adjective forms share one
-flat `adj:<pos|kom|sup>` tag in the M1 tagset, so adjective inflection cannot
-be selected by tag — noun (sub) and verb (ver) synthesis is exact.
+`NB_DEM_NEUTER` (demonstrative + noun gender). Adjective synthesis is exact
+for `adj:kom`/`adj:sup` and the bestemt-form reading `adj:pos:BF`; the plain
+`adj:pos` tag does not select a single form (it covers the indefinite
+masculine/feminine and neuter positive), so adjective-agreement rules should
+match `adj:pos:BF` or synthesize with regexp_match/regexp_replace instead.
 
 ## Disambiguation (B2)
 
@@ -123,7 +146,7 @@ rules see — `norwegian_correct_sentences` is the false-positive guard.
 
 ## Modifying this language
 
-The POS tagger covers the Ordbøkene vocabulary (~78k lemmas, 446k triples),
+The POS tagger covers the Ordbøkene vocabulary (~78k lemmas, 445k triples),
 but the existing rules still work on the surface token stream and must not
 change behavior from tagging (the parity/tests-only gate pins this). New POS
 rules may match on the tags above; keep them guarded against

@@ -24,7 +24,9 @@ of an accepted word class becomes a `form<TAB>lemma<TAB>tag` triple; nouns
 are tagged sub:<def><number> (gender is not encoded — Ordbøkene lists both
 masculine and feminine definite variants for many lemmas, so the gender
 signal stays with the FORM, which is what the built-in heuristics use), verbs
-ver:<tense>, adjectives adj:<grade>; uninflected classes carry the bare POS
+ver:<tense> (the s-passive slots carry their tense with no passive marker),
+adjectives adj:<grade> with adj:pos:BF for the bestemt-form/-e slots
+(definite singular + plural); uninflected classes carry the bare POS
 code. Excluded classes (ABBR, SYM, EXPR, PFX/SFX/COMPPFX/VSTEM, UNKN) have no
 rule-relevant readings.
 
@@ -85,11 +87,14 @@ EXCLUDED_WC = frozenset(
 # the article template is dropped and reconstructed from the entry word).
 # Nouns (NOUN_regular, NOUN_reg_fem): Sing/Ind exported empty.
 NOUN_SLOTS = ["ube:sin", "bes:sin", "ube:plu", "bes:plu"]
-# Verbs (VERB_regular): Inf exported empty; the <PerfPart> slots (the bare
-# participle and its adjectival uses) all carry ver:kor; the s-passive
-# suffix slots (Inf+Pass/Pres+Pass) carry the active tense reading.
+# Verbs (VERB_regular): the article template has 16 slots [Inf(lemma), Inf,
+# Pres, Inf+Pass, Pres+Pass, Past, <PerfPart>, Adj+<PerfPart> x5, PresPart,
+# Imp x3]; the leading lemma Inf slot is dropped, so the 15 exported slots
+# start at the SECOND Inf slot (empty in every current export). The
+# s-passive slots (Inf+Pass/Pres+Pass) carry their tense with no separate
+# passive marker (flat ver:<tense>, see tagset.txt).
 VERB_SLOTS = [
-    "inf",  # Inf (lemma, exported empty)
+    "inf",  # Inf (second Inf slot; exported, empty in every current entry)
     "præ",  # Pres
     "inf",  # Inf+Pass (-es)
     "præ",  # Pres+Pass (-es)
@@ -105,14 +110,19 @@ VERB_SLOTS = [
     "imp",  # Imp (second variant)
     "imp",  # Imp (third variant)
 ]
-# s-passive verbs (VERB_sPass): the Inf slot is dropped (lemma).
+# The dropped leading lemma slot of the verb template (the infinitive),
+# reconstructed from the entry word — NOT part of the exported list.
+VERB_LEMMA_SLOT = "inf"
+# s-passive verbs (VERB_sPass): the Inf+<SPass> slot is dropped (lemma).
 VERB_SPASS_SLOTS = ["præ", "dat", "kor", "imp"]
 # Adjectives (ADJ_regular): positive masc/fem slot (the lemma) dropped.
-ADJ_SLOTS = ["pos", "pos", "pos", "kom", "sup", "sup"]
+# The Def+Sing and Plur slots are the "bestemt form" (-e) reading; the
+# positive masc/fem (lemma) and neuter slots stay the plain adj:pos.
+ADJ_SLOTS = ["pos:BF", "pos:BF", "pos", "kom", "sup", "sup"]
 # The three masc/fem-mismatched adjectives export the feminine paradigm
 # order instead: [Pos+Fem, Pos+Neuter, Pos+Def, Pos+Plur, Cmp, Sup+Ind,
 # Sup+Def].
-ADJ_MF_SLOTS = ["pos", "pos", "pos", "pos", "kom", "sup", "sup"]
+ADJ_MF_SLOTS = ["pos", "pos", "pos:BF", "pos:BF", "kom", "sup", "sup"]
 # Adjectival adverbs (ADV_adj: gjerne/heller/helst): positive slot dropped.
 ADV_ADJ_SLOTS = ["kom", "sup"]
 
@@ -156,11 +166,11 @@ def self_test() -> int:
         },
         f"noun gap fill: {triples}",
     )
-    # Verbs: the export drops the leading Inf slot (the lemma); slots are
-    # [Inf, Pres, Inf+Pass, Pres+Pass, Past, PerfPart, Adj<PerfPart> x5,
-    #  PresPart, Imp, Imp, Imp].
-    verb = ["løper", "løpes", "løpes", "løp", "løpt", "løpt", "løpt", "løpt", "løpt", "løpt",
-            "løpende", "løp", "", "", ""]
+    # Verbs: the export drops the leading lemma Inf slot; the 15 exported
+    # slots are [Inf, Pres, Inf+Pass, Pres+Pass, Past, PerfPart,
+    #  Adj<PerfPart> x5, PresPart, Imp, Imp, Imp].
+    verb = ["", "løper", "løpes", "løpes", "løp", "løpt", "løpt", "løpt", "", "løpte", "løpte",
+            "løpende", "løp", "", ""]
     triples = verb_triples("løpe", [verb])
     tags = sorted({t for _f, _l, t in triples})
     check(
@@ -172,6 +182,8 @@ def self_test() -> int:
     check(("løpe", "løpe", "ver:inf") in triples, "verb infinitive reconstruction")
     check(("løpes", "løpe", "ver:inf") in triples, "verb s-passive infinitive")
     check(("løpes", "løpe", "ver:præ") in triples, "verb s-passive present")
+    check(("løp", "løpe", "ver:dat") in triples, "verb preterite slot")
+    check(("løpende", "løpe", "ver:lan") in triples, "verb present participle slot")
     check(("løp", "løpe", "ver:imp") in triples, "verb imperative slot")
     # The exported empty Inf slot is reconstructed; an inflected slot that
     # equals the lemma does not lose its own reading.
@@ -189,13 +201,14 @@ def self_test() -> int:
         f"s-passive triples: {triples}",
     )
     # Adjectives: the export drops the leading Pos slot (the lemma); slots
-    # are [Pos+Plur, Pos+Def, Pos+Neuter, Cmp, Sup, Sup+Def].
+    # are [Pos+Plur, Pos+Def, Pos+Neuter, Cmp, Sup, Sup+Def]. The Def/Plur
+    # slots are the bestemt form (-e) reading.
     triples = adj_triples("fin", [["fine", "fine", "fint", "finere", "finest", "fineste"]])
     check(
         set(triples)
         == {
             ("fin", "fin", "adj:pos"),
-            ("fine", "fin", "adj:pos"),
+            ("fine", "fin", "adj:pos:BF"),
             ("fint", "fin", "adj:pos"),
             ("finere", "fin", "adj:kom"),
             ("finest", "fin", "adj:sup"),
@@ -215,8 +228,8 @@ def self_test() -> int:
             ("knøttliten", "knøttliten", "adj:pos"),
             ("knøttlita", "knøttliten", "adj:pos"),
             ("knøttsmått", "knøttliten", "adj:pos"),
-            ("knøttlille", "knøttliten", "adj:pos"),
-            ("knøttsmå", "knøttliten", "adj:pos"),
+            ("knøttlille", "knøttliten", "adj:pos:BF"),
+            ("knøttsmå", "knøttliten", "adj:pos:BF"),
         },
         f"m/f adjective triples: {triples}",
     )
@@ -265,8 +278,10 @@ def noun_triples(word: str, form_lists: list[list[str]]) -> list[tuple[str, str,
 
 
 def verb_triples(word: str, form_lists: list[list[str]]) -> list[tuple[str, str, str]]:
-    """Verb triples: slot 0 (Inf) reconstructed from the lemma when empty."""
-    return _slot_map("ver", VERB_SLOTS[1:], form_lists, word, VERB_SLOTS[0])
+    """Verb triples: the 15 exported slots start at the template's second
+    Inf slot; the dropped leading lemma Inf slot is reconstructed from the
+    word."""
+    return _slot_map("ver", VERB_SLOTS, form_lists, word, VERB_LEMMA_SLOT)
 
 
 def verb_spass_triples(
