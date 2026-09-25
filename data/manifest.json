@@ -7258,24 +7258,25 @@
     },
     {
       "path": "no/README.md",
-      "sha256": "b5d5014d98c0e0c0c75e2ed7e21162ad520b19691fb6f2846dcb974f7e7dfb92",
-      "size": 18147,
+      "sha256": "ec9826071b2d71fe36dbd88046375cf07de29f50199710263153d0007dfc24e7",
+      "size": 19259,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "note": "Norwegian Bokm\u00e5l data documentation; 2026-09-25: slot-mapping fix note (ver:pr\u00e6/dat/lan, adj:pos:BF)"
+        "license_source": "LICENSE",
+        "note": "Norwegian Bokm\u00e5l data module documentation (tagger/synthesizer builds, rule kinds, disambiguation layer)"
       }
     },
     {
       "path": "no/dictionaries/build-report.txt",
-      "sha256": "382b76cddc86667ea13b04c7bdb044a5744b78bc02a5f6f3dce49c0ed42bac1c",
+      "sha256": "84f9d61ffe50e9453d7b9b251edc0a94172d97ee10f196249d328ae12060d56b",
       "size": 1019,
       "source": {
         "kind": "generated",
         "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF; see data/no/README.md"
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
@@ -7300,14 +7301,14 @@
     },
     {
       "path": "no/dictionaries/no_pos.dict",
-      "sha256": "6a93de736c7e84ed4fb67a2ee15cb8e4953fa706f0a851b93b407f32b0bb957b",
-      "size": 490594,
+      "sha256": "2da705708854cca7a4863c37fa70d35c8fb33db8947a7dce93a177b548718576",
+      "size": 491235,
       "source": {
         "kind": "generated",
         "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF; see data/no/README.md"
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
@@ -7324,20 +7325,20 @@
     },
     {
       "path": "no/dictionaries/no_pos.txt",
-      "sha256": "e27afb87bd603ea974b6bd261c2f8e43b93d26c5158ea3cde83a22571302da30",
-      "size": 14717499,
+      "sha256": "10c564640462600298b25661555a63629af5e406025bd14de7ac7c87c4f7a945",
+      "size": 15112397,
       "source": {
         "kind": "generated",
         "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF; see data/no/README.md"
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
       "path": "no/dictionaries/no_synth.dict",
-      "sha256": "e071639ffb8819f15ecffc0a3002daca6d111bdcc7e4b7b8f07ec9ba51706dd3",
-      "size": 405012,
+      "sha256": "f31554c0430811fda1ac31530210451488957a0fe7d538728e95389ddcff96f3",
+      "size": 405350,
       "source": {
         "kind": "generated",
         "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
@@ -7368,8 +7369,8 @@
     },
     {
       "path": "no/dictionaries/no_synth_tags.txt",
-      "sha256": "664c9b81e4fcb5651c1f42d81c7b3f7ed2272efbb56a03a0f62d2fb12476a625",
-      "size": 187,
+      "sha256": "92304e2e5720c601e5f175581a8aff16bffc65936fb7a462b774d11327f0e14d",
+      "size": 199,
       "source": {
         "kind": "generated",
         "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
@@ -7384,12 +7385,12 @@
     },
     {
       "path": "no/disambiguation.xml",
-      "sha256": "b98feb610bdad4bdfa54733dd623099f8b96bb298b684cef55b969699a40e9e2",
-      "size": 7771,
+      "sha256": "59b81c36cfdc15ce5e6b29490a230d531c81ff91d9abb1de6cc926473563b044",
+      "size": 8165,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "note": "Norwegian Bokm\u00e5l disambiguation rulegroups (B2, M4 style); hand-authored (no legacy Java module); 2026-09-25: det-pron tense split re-verified against the corrected verb tags; see data/no/README.md"
+        "note": "Norwegian Bokm\u00e5l disambiguation rulegroups (B2, M4 style); hand-authored (no legacy Java module); 2026-09-25: det-pron tense split re-verified against the corrected verb tags, pron-ver-sub leaves adj homographs (rask/ny/norsk) to det-adj-sub; see data/no/README.md"
       }
     },
     {
@@ -7462,13 +7463,13 @@
     },
     {
       "path": "no/rules/grammar.xml",
-      "sha256": "70fd279bd31c3704c53f1a3501384c0d51e1cab23b6bb7e6c15bb24864367eaa",
-      "size": 37142,
+      "sha256": "685a90fad598c3947f646a103166f61f422268d9e4214c974fd66866204e31b2",
+      "size": 39371,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
         "license_source": "LICENSE",
-        "note": "Norwegian Bokm\u00e5l XML rules incl. the B2 POS-based agreement rules (postag + <match postag> synthesis over no_synth.dict); hand-authored (no legacy Java module), see data/no/README.md"
+        "note": "Norwegian Bokm\u00e5l XML rules incl. the POS-based agreement rules (adjective NB_DEF_ADJ/NB_NEUTER_T/NB_PLURAL_ADJ and the B2 noun rules; postag + <match postag> synthesis over no_synth.dict); hand-authored (no legacy Java module), see data/no/README.md"
       }
     },
     {
@@ -7559,14 +7560,14 @@
     },
     {
       "path": "no/words/tagset.txt",
-      "sha256": "b2245cc661152670c37781e8891803e6b3552db5c7ce7b1abdff90a3ffd02d94",
-      "size": 5203,
+      "sha256": "ec662ecfe05ba0355e22a094fc212beaf23a3e8bddb6e05b6b0a7d68d4105197",
+      "size": 5697,
       "source": {
         "kind": "generated",
         "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF; see data/no/README.md"
+        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {

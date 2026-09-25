@@ -1,9 +1,9 @@
 Norwegian (Bokmål) POS tagger dictionary build
 source: Ordbøkene lemma_expanded.json (https://ord.uib.no/bm/fil/lemma_expanded.json), CC BY 4.0 (Ordbanken/Ordbøkene)
 Ordbøkene lemma entries: 107162
-tagger triples written: 445005
+tagger triples written: 456445
 triples per tag:
-  adj: 40657
+  adj: 52097
   adv: 847
   det: 114
   int: 207
@@ -36,7 +36,7 @@ triples per tag:
   skipped_wc_EXPR: 9021
   skipped_wc_PFX: 209
   skipped_wc_SYM: 225
-  tag_adj: 40829
+  tag_adj: 52309
   tag_adv: 850
   tag_det: 145
   tag_int: 207

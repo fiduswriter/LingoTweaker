@@ -53,14 +53,18 @@
        ("Han spiller."; the nominalized readings of "jeg"/"hun" and the -er
        noun readings of the -er verb forms are filtered). The word list is
        the personal pronouns: "en"/"et" are det/pron homographs whose article
-       reading is the usual one before a noun. -->
+       reading is the usual one before a noun. A homograph that also carries
+       an adjective reading (rask, ny, norsk — adj + imperative "rask!"/
+       "ny!" of the homograph verbs) is left to the det-adj-sub rulegroup:
+       stripping the adjective would break the agreement rules after
+       "den/det" ("den ny bilen"). -->
   <rulegroup id="pron-ver-sub" name="pron+ver&amp;sub→ver">
     <rule>
       <pattern>
         <token regexp="yes">[Jj]eg|[Dd]u|[Hh]an|[Hh]un|[Hh]en|[Hh]am|[Hh]enne|[Vv]i|[Dd]ere|[Dd]e|[Dd]em|[Dd]et|[Dd]en</token>
         <marker>
           <and>
-            <token postag_regexp="yes" postag="ver:.*"/>
+            <token postag_regexp="yes" postag="ver:.*"><exception postag_regexp="yes" postag="adj:.*"/></token>
             <token postag_regexp="yes" postag="sub:.*"/>
           </and>
         </marker>
@@ -69,6 +73,7 @@
       <example type="ambiguous" inputform="spiller[spille/ver:præ,spiller/sub:ube:sin]" outputform="spiller[spille/ver:præ]">Han <marker>spiller</marker> fotball.</example>
       <example type="untouched">Han er en spiller.</example>
       <example type="untouched">En spiller løper fort.</example>
+      <example type="untouched">den ny bilen</example>
     </rule>
   </rulegroup>
 

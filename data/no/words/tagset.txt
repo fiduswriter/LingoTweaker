@@ -44,11 +44,16 @@ what Ordbøkene exposes in its inflection tables:
   disambiguator. Revisit only if a rule ever needs to exclude passives.
 - adjectives (adjektiv): pos (positive), kom (comparative), sup (superlative),
   with pos:BF (bestemt form) for the Ordbøkene Pos+Def+Sing and Pos+Plur
-  slots — the "-e" forms ("den store bilen", "store biler") — which the
-  templates distinguish from the positive indefinite masc/fem (lemma) and
-  neuter ("fint") slots. The neuter form is NOT separately tagged (the
-  NB_NEUTER_T rule is a surface rule; a neuter feature can be added when a
-  rule needs it).
+  slots — the "-e" forms ("den store bilen", "store biler") — and pos:neu
+  for the Pos+Neuter slot ("fint"), which the templates distinguish from
+  the positive indefinite masc/fem (lemma) slot. Surfaces whose neuter
+  equals the bare form (fornøyd, moderne, the invariant glad/lite/såkalt
+  class) carry BOTH the adj:pos and the adj:pos:neu reading, and lemmas
+  with no distinct neuter slot double the bare form as adj:pos:neu, so the
+  NB_NEUTER_T agreement rule can tell the forms apart. Defective lemmas
+  with no bestemt-form slot (indre/øvre/verre) lose the bare adj:pos
+  reading (the -e agreement rules must not flag what has no corrected
+  form to suggest).
 - the remaining word classes have no features.
 
 The engine tags words by returning one string per reading, for example:
@@ -111,5 +116,6 @@ kor	perfektum partisipp (supine/-t/-tt form)
 lan	præsens partisipp (-ende)
 pos	positiv	1st degree
 pos:BF	positiv bestemt form	1st degree, definite singular/plural (-e form)
+pos:neu	positiv intetkjønn	1st degree, neuter ("fint"; the bare form doubles as the neuter when Ordbøkene lists no distinct slot)
 kom	komparativ	2nd degree
 sup	superlativ	3rd degree

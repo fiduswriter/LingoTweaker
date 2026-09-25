@@ -9,10 +9,12 @@
 
   A POS tagger is available since the Ordbøkene dictionary build (see
   data/no/words/tagset.txt): most rules below are surface rules (only the
-  SENT_START built-in tag), but the agreement rules (NB_QUANT_PLU,
-  NB_DISSE_PLU, NB_DEM_COMMON, NB_DEM_NEUTER) read the tagger postags and
-  synthesize their suggestions with <match postag> over the derived
-  no_synth.dict (plan item B2), with the disambiguation layer
+  SENT_START built-in tag), but the agreement rules (NB_DEF_ADJ,
+  NB_NEUTER_T, NB_PLURAL_ADJ, NB_QUANT_PLU, NB_DISSE_PLU, NB_DEM_COMMON,
+  NB_DEM_NEUTER) read the tagger postags and synthesize their suggestions
+  with <match postag> over the derived no_synth.dict (plan item B2, with
+  the adjective rules reading the adj:pos:BF/adj:pos:neu slots added in the
+  M1 slot-mapping follow-up), with the disambiguation layer
   (data/no/disambiguation.xml) cleaning the readings first.
   Rule ids are stable and must never be renumbered.
 -->
@@ -221,52 +223,93 @@
             <example>Dette er min bil.</example>
         </rule>
 
+        <!-- POS-driven (Ordbøkene tagset): a bare positive adjective
+             (adj:pos, no adj:pos:BF reading — surfaces whose bare form
+             equals the -e form like blå/moderne carry both and stay silent;
+             a verb reading like the perfektum partisipp "kjørt" keeps
+             "De har kjørt biler" clean) between a determiner and a
+             definite/plural noun takes the bestemt form. The correction is
+             synthesized over no_synth.dict (adj:pos:BF), not hardcoded. -->
         <rule id="NB_DEF_ADJ" name="adjektivets bestemte form">
             <pattern>
-                <token regexp="yes">den|det|de</token>
+                <token regexp="yes">den|det|de|denne|dette|disse|alle|noen|ingen|hver|begge|min|mitt|mine|din|ditt|dine|sin|sitt|sine|vår|vårt|våre|hans|hennes|deres</token>
                 <marker>
-                    <token regexp="yes">[a-zæøå]{2,}(?&lt;!e)</token>
+                    <token postag="adj:pos"><exception postag="adj:pos:BF"/><exception postag_regexp="yes" postag="ver:.*"/></token>
                 </marker>
-                <token regexp="yes">\p{L}+(?:en|et|ene)</token>
+                <!-- definite OR plural: the features sit at different tag
+                     positions (sub:bes:SIN ends in :sin), so a single
+                     (bes|plu) alternation can never match the definite
+                     singular -->
+                <token postag_regexp="yes" postag="sub:bes:.+|sub:.+:plu"/>
             </pattern>
-            <message>Etter «den/det/de» står adjektivet i bestemt form på «-e»: «den store bilen».</message>
-            <suggestion><match no="2" regexp_match="^(.+)$" regexp_replace="$1e"/></suggestion>
+            <message>Etter et determinativ (den/det/denne/disse o.l.) står adjektivet i bestemt form på «-e»: «den store bilen».</message>
+            <suggestion><match no="2" postag="adj:pos:BF"/></suggestion>
             <short>samsvarsbøyning</short>
             <example correction="store">Dette er den <marker>stor</marker> bilen.</example>
-            <example correction="store">Vi så det <marker>ny</marker> huset.</example>
+            <example correction="nye">Vi så det <marker>ny</marker> huset.</example>
+            <example correction="store">Denne <marker>stor</marker> bilen står der.</example>
             <example>Dette er den store bilen.</example>
             <example>den lille bilen</example>
         </rule>
 
+        <!-- POS-driven: the tagset now distinguishes the Ordbøkene Pos+Neuter
+             slot (adj:pos:neu), so the rule fires only when the surface is
+             the bare positive and NOT already a valid neuter form: adjectives
+             whose neuter equals the bare form (fornøyd, kjørt, moderne,
+             praktisk) carry the adj:pos:neu reading and stay silent, and the
+             -tt/-t doubling (blå → blått) comes straight from the
+             dictionary. -->
         <rule id="NB_NEUTER_T" name="intetkjønn: adjektiv på -t">
             <pattern>
                 <token regexp="yes">et|ett</token>
                 <marker>
-                    <token regexp="yes">[a-zæøå]{2,}(?&lt;!e)(?&lt;!t)<exception>liten</exception></token>
+                    <token postag="adj:pos"><exception postag="adj:pos:neu"/></token>
                 </marker>
-                <token regexp="yes">hus|barn|bord|brev|språk|år|ord|land|vann|øl|brød|kjøkken|bad|rom|vindu|eple|tre|dyr|fjell|hav|hjerte|hode|bilde|spørsmål|svar|problem|system|program|punkt|kapittel|dokument|prosjekt|møte|arbeid|forhold|eksempel|nummer|minutt|sekund|døgn|menneske|øye|øre|bein|hår|stykke|par|glass|fat|kort|spill|lag|tog|fly|skip|mot|kort|brett</token>
+                <token postag_regexp="yes" postag="sub:.*:sin"/>
             </pattern>
             <message>Intetkjønnsadjektivet får «-t» i entall: «et stort hus».</message>
-            <suggestion><match no="2" regexp_match="^(.+)$" regexp_replace="$1t"/></suggestion>
+            <suggestion><match no="2" postag="adj:pos:neu"/></suggestion>
             <short>samsvarsbøyning</short>
             <example correction="stort">Vi bor i et <marker>stor</marker> hus.</example>
-            <example correction="praktiskt">et <marker>praktisk</marker> språk</example>
+            <example correction="gammelt">De kjøpte et <marker>gammel</marker> hus.</example>
             <example>Vi bor i et stort hus.</example>
+            <example>et moderne hus</example>
             <example>et lite hus</example>
         </rule>
 
+        <!-- POS-driven: the bare positive before a plural noun takes «-e»; the
+             det-initial contexts are left to NB_DEF_ADJ (antipattern), and
+             the perfektum partisipp reading (ver:kor on "kjørt") keeps
+             "De har kjørt biler" clean. -->
         <rule id="NB_PLURAL_ADJ" name="adjektiv i flertall">
             <pattern>
                 <marker>
-                    <token regexp="yes">[a-zæøå]{2,}(?&lt;!e)<exception>få</exception><exception>små</exception><exception>grå</exception><exception>blå</exception><exception>rå</exception></token>
+                    <token postag="adj:pos"><exception postag="adj:pos:BF"/><exception postag_regexp="yes" postag="ver:.*"/></token>
                 </marker>
-                <token regexp="yes">biler|jenter|gutter|bøker|bilder|problemer|dager|byer|veier|epler|hunder|katter|skoler|jobber|steder|møter|eksempler|muligheter|utfordringer|resultater|prosjekter|systemer|programmer|dokumenter|kapitler|punkter|planter|blomster|trær|innsjøer|elver|strender|husene|barna|bilene|jentene|guttene|ordene|bildene|problemene|dagene|møtene|mulighetene|utfordringene|resultatene</token>
+                <token postag_regexp="yes" postag="sub:.*:plu"/>
             </pattern>
+            <antipattern>
+                <token regexp="yes">den|det|de|denne|dette|disse|alle|noen|ingen|hver|begge|min|mitt|mine|din|ditt|dine|sin|sitt|sine|vår|vårt|våre|hans|hennes|deres</token>
+                <token postag="adj:pos"/>
+                <token postag_regexp="yes" postag="sub:.*:plu"/>
+            </antipattern>
+            <!-- «et gammelt hus»: the tagger gives many neuter nouns
+                 (hus, barn) a plural reading as well, so without this guard
+                 the plural rule would win the overlapping match against
+                 NB_NEUTER_T (NB_PLURAL_ADJ sits later and would fire
+                 first). -->
+            <antipattern>
+                <token regexp="yes">[Ee]t|ett</token>
+                <token postag="adj:pos"/>
+                <token postag_regexp="yes" postag="sub:.*:sin"/>
+            </antipattern>
             <message>Adjektivet får «-e» i flertall: «store biler».</message>
-            <suggestion><match no="1" regexp_match="^(.+)$" regexp_replace="$1e"/></suggestion>
+            <suggestion><match no="1" postag="adj:pos:BF"/></suggestion>
             <short>samsvarsbøyning</short>
             <example correction="store">Vi har <marker>stor</marker> biler.</example>
+            <example correction="gamle">Flere <marker>gammel</marker> biler står der.</example>
             <example>Vi har store biler.</example>
+            <example>Vi har få biler.</example>
         </rule>
 
         <!-- POS-based rules (plan item B2): they read the Ordbøkene tagger

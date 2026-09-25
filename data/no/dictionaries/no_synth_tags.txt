@@ -1,6 +1,7 @@
 adj:kom
 adj:pos
 adj:pos:BF
+adj:pos:neu
 adj:sup
 adv
 adv:kom

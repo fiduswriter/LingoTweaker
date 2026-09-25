@@ -96,8 +96,15 @@ fn norwegian_rules_fire() {
         ("I dag jeg arbeider hjemme.", "NB_V2_DATE"),
         ("Dette er min bilen.", "NB_POSS_DEF"),
         ("Dette er den stor bilen.", "NB_DEF_ADJ"),
+        ("Denne stor bilen står der.", "NB_DEF_ADJ"),
+        ("De gammel bilene står der.", "NB_DEF_ADJ"),
+        ("Han har den ny bilen.", "NB_DEF_ADJ"),
         ("Vi bor i et stor hus.", "NB_NEUTER_T"),
+        ("De kjøpte et gammel hus.", "NB_NEUTER_T"),
+        ("Et gammel hus står der.", "NB_NEUTER_T"),
         ("Vi har stor biler.", "NB_PLURAL_ADJ"),
+        ("Flere gammel biler står der.", "NB_PLURAL_ADJ"),
+        ("Han har mange gammel biler.", "NB_PLURAL_ADJ"),
         ("Det virker som at han mener det.", "NB_VIRKE_SOM"),
         ("desverre, jeg er her", "NB_TYPOS"),
         ("Jeg har et abbonnement.", "NB_TYPOS"),
@@ -191,6 +198,28 @@ fn norwegian_correct_sentences() {
         "Dette er den store bilen.",
         "Vi bor i et stort hus.",
         "Vi har store biler.",
+        // adjective agreement false-positive classes: the neuter/BF
+        // arbitration must keep the invariant and verb-homograph
+        // adjectives silent (adj:pos:neu doubles the bare form; adj:pos:BF
+        // surfaces are already correct; ver:kor readings outrank)
+        "Vi bor i et gammelt hus.",
+        "Et gammelt hus står der.",
+        "Vi bor i et moderne hus.",
+        "Vi har et fornøyd barn.",
+        "Hun har en fornøyd kunde.",
+        "De har kjørt biler.",
+        "Det var et glad barn.",
+        "De indre organene er sårbare.",
+        "Hun har et eget rom.",
+        "Den blå bilen.",
+        "De grå steinene.",
+        "Et såkalt problem ble løst.",
+        "Det er et reservert bord.",
+        "Jeg snakker det norske språket.",
+        "De gamle bilene står der.",
+        "Han har mange gamle biler.",
+        "Mitt gamle hus ligger i gaten.",
+        "Alle gamle biler blir solgt.",
         "Han lot meg gå.",
         "Det virker som om han mener det.",
         "Vi feirer 50-årsdag.",
@@ -479,7 +508,10 @@ fn norwegian_disambiguation_rulegroups() {
         "de+ver must keep only pron: {after:?}"
     );
     // pron-ver-sub: "Han spiller." -> verb (the -er noun readings are
-    // filtered); "En spiller" (no pronoun) stays untouched.
+    // filtered); "En spiller" (no pronoun) stays untouched. An adj-homograph
+    // (rask/ny/norsk carry an imperative verb reading as well) is left to
+    // det-adj-sub: stripping the adjective would break NB_DEF_ADJ after
+    // "den" ("den ny bilen").
     let raw = tags_raw("Han spiller fotball.", "spiller");
     assert!(
         raw.iter().any(|t| t.starts_with("ver:")) && raw.iter().any(|t| t.starts_with("sub:")),
@@ -493,7 +525,17 @@ fn norwegian_disambiguation_rulegroups() {
     let after = tags_after("En spiller løper fort.", "spiller");
     assert!(
         after.iter().any(|t| t.starts_with("sub:")),
-        "det+ver&sub must stay untouched: {after:?}"
+        "det+ver&sub noun must stay untouched: {after:?}"
+    );
+    let after = tags_after("Han kjøpte den ny bilen.", "ny");
+    assert!(
+        after.iter().any(|t| t.starts_with("adj:")),
+        "pron+ver&sub must leave adj homographs alone: {after:?}"
+    );
+    let after = tags_after("Den rask bilen står der.", "rask");
+    assert!(
+        after.iter().any(|t| t.starts_with("adj:")),
+        "pron+ver&sub must leave adj homographs alone: {after:?}"
     );
     // aa-infm-ver-sub: "begynte å renne" -> the verb survives.
     let after = tags_after("Vannet begynte å renne ut av kjelleren.", "renne");
@@ -600,5 +642,27 @@ fn norwegian_synth_rule_suggestions() {
     assert_eq!(
         correction("Denne huset er gammelt.", "NB_DEM_NEUTER"),
         "Dette"
+    );
+    // the adjective agreement rules synthesize over adj:pos:BF /
+    // adj:pos:neu (never hardcoded), including the blå-class BF spellings
+    // and the -tt doubling straight from the dictionary.
+    assert_eq!(
+        correction("Dette er den stor bilen.", "NB_DEF_ADJ"),
+        "store"
+    );
+    assert_eq!(correction("Han har den ny bilen.", "NB_DEF_ADJ"), "nye");
+    assert_eq!(
+        correction("De gammel bilene står der.", "NB_DEF_ADJ"),
+        "gamle"
+    );
+    assert_eq!(correction("Vi bor i et stor hus.", "NB_NEUTER_T"), "stort");
+    assert_eq!(
+        correction("De kjøpte et gammel hus.", "NB_NEUTER_T"),
+        "gammelt"
+    );
+    assert_eq!(correction("Vi har stor biler.", "NB_PLURAL_ADJ"), "store");
+    assert_eq!(
+        correction("Flere gammel biler står der.", "NB_PLURAL_ADJ"),
+        "gamle"
     );
 }

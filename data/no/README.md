@@ -33,7 +33,7 @@ is generated from the Ordbøkene open data. Regeneration:
 ```sh
 # bulk source (cached under /tmp; only the products below go into data/)
 curl -sL -o /tmp/ordbok-cache/bm_lemma_expanded.json https://ord.uib.no/bm/fil/lemma_expanded.json
-# 1) word-lemma-tag triples (445k; `--self-test` runs the unit tests)
+# 1) word-lemma-tag triples (456k; `--self-test` runs the unit tests)
 python3 tools/no-dict/build-no-tagger.py \
     --lemma-expanded /tmp/ordbok-cache/bm_lemma_expanded.json \
     --out data/no/dictionaries/no_pos.txt \
@@ -56,7 +56,8 @@ python3 tools/lt-sync/lt_sync.py add-local generated \
 The slot→tag mapping (fixed 2026-09-25: the export drops each template's
 LEADING lemma slot, so the exported list starts at the template's second
 slot — the first build shifted every verb slot one position, tagging
-presens `ver:inf`, preteritum `ver:kor`, the presens partisipp `ver:imp`):
+presens `ver:inf`, preteritum `ver:kor`, the presens partisipp `ver:imp`;
+the adjective slots carry `adj:pos:neu` since the same follow-up):
 
 | template slot (after the dropped lemma slot) | tag |
 |---|---|
@@ -69,16 +70,25 @@ presens `ver:inf`, preteritum `ver:kor`, the presens partisipp `ver:imp`):
 | Adj+`<PresPart>` ("-ende") | `ver:lan` |
 | Imp | `ver:imp` |
 | ADJ: Pos+Def+Sing and Pos+Plur ("-e") | `adj:pos:BF` |
-| ADJ: Pos masc/fem (lemma) + Pos+Neuter | `adj:pos` |
+| ADJ: Pos masc/fem (lemma) | `adj:pos` |
+| ADJ: Pos+Neuter | `adj:pos:neu` |
 | ADJ: Cmp / Sup | `adj:kom` / `adj:sup` |
+
+Adjective arbitration (`adj_arbitrate` in the build script, run over the
+collected triples): a lemma with no distinct neuter slot (fornøyd, the past
+participles) doubles its bare form as `adj:pos:neu`, and uninflected
+adjectives serve every positive slot, so the neuter-agreement rule stays
+silent whenever the surface IS a valid neuter form; a defective lemma with
+no bestemt-form slot (indre/øvre/verre) loses its `adj:pos` reading, so the
+-e agreement rules never flag a form they could not correct.
 
 The tagset (`words/tagset.txt`) follows the da/nrd Stavekontrolden style:
 `sub:<bes|ube>:<sin|plu>` (no gender — Ordbøkene lists both masculine and
 feminine definite variants for many lemmas, so the gender signal stays with
 the form), `ver:<inf|præ|dat|imp|kor|lan>` (the s-passive slots carry their
-tense with no passive marker), `adj:<pos|pos:BF|kom|sup>` (BF = the
-bestemt-form/-e slots: definite singular + plural) and bare POS codes for
-the uninflected classes. Rules can match
+tense with no passive marker), `adj:<pos|pos:BF|pos:neu|kom|sup>` (BF = the
+bestemt-form/-e slots: definite singular + plural; neu = the neuter
+positive) and bare POS codes for the uninflected classes. Rules can match
 `<token postag_regexp="yes" postag="ver:.*"/>` etc. from `rules/grammar.xml`;
 `words/added.txt`/`removed.txt` are the `ManualTagger` complements.
 
@@ -114,14 +124,19 @@ python3 tools/lt-sync/lt_sync.py add-local generated \
     --generated-from no/dictionaries/no_pos.dict no/dictionaries/no_pos.info
 ```
 
-Users of `<match postag>`: the B2 agreement rules `NB_QUANT_PLU`,
-`NB_DISSE_PLU` (number agreement after plural quantifiers/determiners,
-suggestions synthesized with `<match postag>`), `NB_DEM_COMMON` and
-`NB_DEM_NEUTER` (demonstrative + noun gender). Adjective synthesis is exact
-for `adj:kom`/`adj:sup` and the bestemt-form reading `adj:pos:BF`; the plain
-`adj:pos` tag does not select a single form (it covers the indefinite
-masculine/feminine and neuter positive), so adjective-agreement rules should
-match `adj:pos:BF` or synthesize with regexp_match/regexp_replace instead.
+Users of `<match postag>`: the adjective-agreement rules `NB_DEF_ADJ`
+(determiner + bare positive + definite/plural substantive → `adj:pos:BF`),
+`NB_PLURAL_ADJ` (bare positive + plural substantive → `adj:pos:BF`), and
+`NB_NEUTER_T` ("et" + bare positive without a neuter reading →
+`adj:pos:neu`), plus the B2 noun rules `NB_QUANT_PLU`/`NB_DISSE_PLU`
+(number agreement after plural quantifiers/determiners) and
+`NB_DEM_COMMON`/`NB_DEM_NEUTER` (demonstrative + noun gender). The
+adjective tags select single lemma forms exactly (`adj:pos:BF` may return
+two accepted spellings for the blå/grå class); the plain `adj:pos` tag is
+the bare positive ("gammel") and matches only as an element condition,
+never as a `<match>` suggestion tag in the agreement rules. The pron-ver-sub
+disambiguation rulegroup leaves adjective-homographs (rask/ny/norsk) to
+det-adj-sub so the adjective reading survives into NB_DEF_ADJ.
 
 ## Disambiguation (B2)
 
@@ -132,7 +147,7 @@ hand-authored rulegroups of tag-namespace filters over the tagger readings:
 | rulegroup | purpose |
 |---|---|
 | `det-pron` | den/det/de + following substantive → determiner; + following finite/infinitive verb → pronoun (participle readings on the next token — ver:kor on "huset"/"bygget" — trigger neither) |
-| `pron-ver-sub` | personal pronoun + verb/substantive homograph → verb ("Han spiller.") |
+| `pron-ver-sub` | personal pronoun + verb/substantive homograph → verb ("Han spiller."); homographs that also carry an adjective reading (rask/ny/norsk) are left untouched so det-adj-sub can keep the adjective for the agreement rules |
 | `aa-infm-ver-sub` | å + verb/substantive homograph → verb ("begynte å renne"; the Ordbøkene data has no infm class, so the word "å" is matched) |
 | `prep-ver-sub` | preposition + verb/substantive homograph → substantive ("i løpet av dagen") |
 | `det-adj-sub` | determiner + adjective/substantive homograph + substantive → adjective ("den voksne eleven"); otherwise → nominalized substantive ("den voksne") |
@@ -146,7 +161,7 @@ rules see — `norwegian_correct_sentences` is the false-positive guard.
 
 ## Modifying this language
 
-The POS tagger covers the Ordbøkene vocabulary (~78k lemmas, 445k triples),
+The POS tagger covers the Ordbøkene vocabulary (~78k lemmas, 456k triples),
 but the existing rules still work on the surface token stream and must not
 change behavior from tagging (the parity/tests-only gate pins this). New POS
 rules may match on the tags above; keep them guarded against

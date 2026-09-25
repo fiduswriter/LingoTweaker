@@ -117,12 +117,15 @@ VERB_LEMMA_SLOT = "inf"
 VERB_SPASS_SLOTS = ["præ", "dat", "kor", "imp"]
 # Adjectives (ADJ_regular): positive masc/fem slot (the lemma) dropped.
 # The Def+Sing and Plur slots are the "bestemt form" (-e) reading; the
-# positive masc/fem (lemma) and neuter slots stay the plain adj:pos.
-ADJ_SLOTS = ["pos:BF", "pos:BF", "pos", "kom", "sup", "sup"]
+# positive masc/fem (lemma) stays the plain adj:pos and the neuter slot
+# carries its own adj:pos:neu tag (the tagset doc reserves the neuter
+# feature "when a rule needs it": the NB_NEUTER_T agreement rule must know
+# whether the surface is already a valid neuter form).
+ADJ_SLOTS = ["pos:BF", "pos:BF", "pos:neu", "kom", "sup", "sup"]
 # The three masc/fem-mismatched adjectives export the feminine paradigm
 # order instead: [Pos+Fem, Pos+Neuter, Pos+Def, Pos+Plur, Cmp, Sup+Ind,
 # Sup+Def].
-ADJ_MF_SLOTS = ["pos", "pos", "pos:BF", "pos:BF", "kom", "sup", "sup"]
+ADJ_MF_SLOTS = ["pos", "pos:neu", "pos:BF", "pos:BF", "kom", "sup", "sup"]
 # Adjectival adverbs (ADV_adj: gjerne/heller/helst): positive slot dropped.
 ADV_ADJ_SLOTS = ["kom", "sup"]
 
@@ -202,14 +205,15 @@ def self_test() -> int:
     )
     # Adjectives: the export drops the leading Pos slot (the lemma); slots
     # are [Pos+Plur, Pos+Def, Pos+Neuter, Cmp, Sup, Sup+Def]. The Def/Plur
-    # slots are the bestemt form (-e) reading.
+    # slots are the bestemt form (-e) reading; the neuter slot is
+    # adj:pos:neu.
     triples = adj_triples("fin", [["fine", "fine", "fint", "finere", "finest", "fineste"]])
     check(
         set(triples)
         == {
             ("fin", "fin", "adj:pos"),
             ("fine", "fin", "adj:pos:BF"),
-            ("fint", "fin", "adj:pos"),
+            ("fint", "fin", "adj:pos:neu"),
             ("finere", "fin", "adj:kom"),
             ("finest", "fin", "adj:sup"),
             ("fineste", "fin", "adj:sup"),
@@ -227,11 +231,51 @@ def self_test() -> int:
         == {
             ("knøttliten", "knøttliten", "adj:pos"),
             ("knøttlita", "knøttliten", "adj:pos"),
-            ("knøttsmått", "knøttliten", "adj:pos"),
+            ("knøttsmått", "knøttliten", "adj:pos:neu"),
             ("knøttlille", "knøttliten", "adj:pos:BF"),
             ("knøttsmå", "knøttliten", "adj:pos:BF"),
         },
         f"m/f adjective triples: {triples}",
+    )
+    # Adjective arbitrations: a lemma with no bestemt-form slot (the
+    # defective indre/øvre/verre class) loses its adj:pos reading — the
+    # -e agreement rule must not flag what has no corrected form to
+    # suggest; a lemma with no distinct neuter form (fornøyd, past
+    # participles) doubles the bare form as the neuter.
+    triples = {
+        ("glad", "glad", "adj:pos"),
+        ("glad", "glad", "sub:ube:sin"),
+        ("fint", "fin", "adj:pos:neu"),
+        ("stort", "fin", "adj:pos:neu"),
+    }
+    adj_arbitrate(triples)
+    check(
+        triples
+        == {
+            ("glad", "glad", "adj:pos:neu"),
+            ("glad", "glad", "sub:ube:sin"),
+            ("fint", "fin", "adj:pos:neu"),
+            ("stort", "fin", "adj:pos:neu"),
+        },
+        f"neuter arbitration: {triples}",
+    )
+    triples = {
+        ("indre", "indre", "adj:pos"),
+        ("indre", "indre", "adj:pos:neu"),
+        ("stor", "stor", "adj:pos"),
+        ("stort", "stor", "adj:pos:neu"),
+        ("store", "stor", "adj:pos:BF"),
+    }
+    adj_arbitrate(triples)
+    check(
+        triples
+        == {
+            ("indre", "indre", "adj:pos:neu"),
+            ("stor", "stor", "adj:pos"),
+            ("stort", "stor", "adj:pos:neu"),
+            ("store", "stor", "adj:pos:BF"),
+        },
+        f"defective-adjective arbitration: {triples}",
     )
     # Simple-word filter: internal hyphens stay, digits/apostrophes go.
     if not simple_word("e-post") or simple_word("50-årsdag") or simple_word("Occam's"):
@@ -303,6 +347,34 @@ def adj_mf_triples(word: str, form_lists: list[list[str]]) -> list[tuple[str, st
     return _slot_map("adj", ADJ_MF_SLOTS, form_lists, word, "pos")
 
 
+def adj_arbitrate(triples: set[tuple[str, str, str]]) -> None:
+    """Dictionary-level adjective arbitrations over the collected triples,
+    in place:
+
+    - a lemma that carries adj:pos but has no adj:pos:neu form (Ordbøkene
+      lists no distinct Pos+Neuter slot: glad, fornøyd, the past
+      participles) doubles the bare form as the neuter — tagged
+      adj:pos:neu, so the neuter-agreement rule stays silent on it;
+    - a lemma that carries adj:pos but has no adj:pos:BF form (the
+      defective adjectives indre/øvre/verre, whose positive does not
+      agree) loses its adj:pos reading: the -e agreement rule must not
+      flag what has no corrected form to suggest.
+    """
+    bf_lemmas = {lemma for _f, lemma, t in triples if t == "adj:pos:BF"}
+    # No bestemt-form slot (glad-defectives, indre/øvre/verre): the positive
+    # does not agree, so the -e agreement rule must not flag it; the bare
+    # form doubles as the neuter.
+    for triple in [t for t in triples if t[2] == "adj:pos" and t[1] not in bf_lemmas]:
+        triples.remove(triple)
+        triples.add((triple[1], triple[1], "adj:pos:neu"))
+    # A lemma with readings but no adj:pos:neu form (fornøyd, the past
+    # participles, the masc/fem-mismatched without a neuter slot) doubles
+    # the bare form as the neuter.
+    neu_lemmas = {lemma for _f, lemma, t in triples if t == "adj:pos:neu"}
+    for lemma in sorted({l for _f, l, t in triples if t == "adj:pos"} - neu_lemmas):
+        triples.add((lemma, lemma, "adj:pos:neu"))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -366,7 +438,10 @@ def main() -> int:
                         stats["tag_ver"] += 1
         elif wc == "ADJ":
             if not inflected:
+                # uninflected adjectives: the bare form serves every slot
                 triples.add((word, word, "adj:pos"))
+                triples.add((word, word, "adj:pos:BF"))
+                triples.add((word, word, "adj:pos:neu"))
                 stats["tag_adj"] += 1
                 stats["adjs_uninflected"] += 1
             elif swc == "ADJ_masc/fem_fem":
@@ -401,6 +476,8 @@ def main() -> int:
             # infm, PROPN): the bare POS reading.
             triples.add((word, word, tag))
             stats[f"tag_{tag}"] += 1
+
+    adj_arbitrate(triples)
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     lines = [f"{form}\t{lemma}\t{t}" for (form, lemma, t) in sorted(triples)]
