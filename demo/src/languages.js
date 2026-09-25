@@ -136,54 +136,69 @@ const CHINESE = {
   sample: "这是一个测试。我已经消毁了所有文件。",
 };
 
+// Picker order: alphabetical by displayed label with the groups sorted by
+// their main entry's label (localeCompare/ICU collation, so endonyms sort
+// naturally and non-Latin scripts follow the Latin ones: Greek, Cyrillic,
+// Arabic, Indic, Khmer, then CJK). Each language's variants directly follow
+// its main entry (en-GB after en-US, pt-BR after pt-PT, and the "Leichte
+// Sprache" variant last within the German group); the three separate
+// Norwegian-area packs sit together in label order ("Nordum" < "Norsk
+// bokmål" < "Norsk nynorsk"). The default selection does NOT depend on this
+// order: DEFAULT_LANGUAGE (English US) below decides what the picker shows
+// first.
 export const LANGUAGES = [
-  { code: "en-US", pack: "en", label: "English (US)", ...ENGLISH },
-  { code: "en-GB", pack: "en", label: "English (UK)", variant: "en-GB", ...ENGLISH },
+  { code: "ast-ES", pack: "ast", label: "Asturianu", ...ASTURIAN },
+  { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", ...GUARANI },
+  { code: "br-FR", pack: "br", label: "Brezhoneg", ...BRETON },
+  { code: "ca-ES", pack: "ca", label: "Català", ...CATALAN },
+  { code: "da", pack: "da", label: "Dansk", ...DANISH },
   { code: "de-DE", pack: "de", label: "Deutsch (DE)", ...GERMAN },
   { code: "de-AT", pack: "de", label: "Deutsch (AT)", variant: "de-AT", ...GERMAN },
   { code: "de-CH", pack: "de", label: "Deutsch (CH)", variant: "de-CH", ...GERMAN },
   { code: "de-DE-x-simple-language", pack: "de", label: "Leichte Sprache", variant: "de-DE-x-simple-language", ...SIMPLE_GERMAN },
+  { code: "en-US", pack: "en", label: "English (US)", ...ENGLISH },
+  { code: "en-GB", pack: "en", label: "English (UK)", variant: "en-GB", ...ENGLISH },
   { code: "es-ES", pack: "es", label: "Español", ...SPANISH },
+  { code: "eo", pack: "eo", label: "Esperanto", ...ESPERANTO },
   { code: "fr", pack: "fr", label: "Français", ...FRENCH },
+  { code: "gl", pack: "gl", label: "Galego", ...GALICIAN },
+  { code: "is-IS", pack: "is", label: "Íslenska", ...ICELANDIC },
   { code: "it-IT", pack: "it", label: "Italiano", ...ITALIAN },
+  { code: "lt-LT", pack: "lt", label: "Lietuvių", ...LITHUANIAN },
+  { code: "nl-NL", pack: "nl", label: "Nederlands", ...DUTCH },
+  { code: "nrd", pack: "nrd", label: "Nordum", ...NORDUM },
+  { code: "no", pack: "no", label: "Norsk bokmål", ...NORWEGIAN },
+  { code: "nn", pack: "nn", label: "Norsk nynorsk", ...NYNORSK },
+  { code: "pl", pack: "pl", label: "Polski", ...POLISH },
   { code: "pt-PT", pack: "pt", label: "Português (PT)", ...PORTUGUESE },
   { code: "pt-BR", pack: "pt", label: "Português (BR)", variant: "pt-BR", ...PORTUGUESE },
-  { code: "nl-NL", pack: "nl", label: "Nederlands", ...DUTCH },
-  { code: "ca-ES", pack: "ca", label: "Català", ...CATALAN },
-  { code: "gl", pack: "gl", label: "Galego", ...GALICIAN },
+  { code: "crh-UA", pack: "crh", label: "Qırımtatar tili", ...CRIMEAN_TATAR },
   { code: "ro", pack: "ro", label: "Română", ...ROMANIAN },
-  { code: "pl", pack: "pl", label: "Polski", ...POLISH },
   { code: "sk", pack: "sk", label: "Slovenčina", ...SLOVAK },
   { code: "sl", pack: "sl", label: "Slovenščina", ...SLOVENIAN },
-  { code: "el", pack: "el", label: "Ελληνικά", ...GREEK },
-  { code: "da", pack: "da", label: "Dansk", ...DANISH },
   { code: "sv", pack: "sv", label: "Svenska", ...SWEDISH },
-  { code: "is-IS", pack: "is", label: "Íslenska", ...ICELANDIC },
-  { code: "eo", pack: "eo", label: "Esperanto", ...ESPERANTO },
-  { code: "ast-ES", pack: "ast", label: "Asturianu", ...ASTURIAN },
-  { code: "br-FR", pack: "br", label: "Brezhoneg", ...BRETON },
   { code: "tl-PH", pack: "tl", label: "Tagalog", ...TAGALOG },
-  { code: "lt-LT", pack: "lt", label: "Lietuvių", ...LITHUANIAN },
-  { code: "crh-UA", pack: "crh", label: "Qırımtatar tili", ...CRIMEAN_TATAR },
+  { code: "el", pack: "el", label: "Ελληνικά", ...GREEK },
   { code: "be-BY", pack: "be", label: "Беларуская", ...BELARUSIAN },
   { code: "ru-RU", pack: "ru", label: "Русский", ...RUSSIAN },
-  { code: "uk-UA", pack: "uk", label: "Українська", ...UKRAINIAN },
   { code: "sr-RS", pack: "sr", label: "Српски", ...SERBIAN },
+  { code: "uk-UA", pack: "uk", label: "Українська", ...UKRAINIAN },
   { code: "ar", pack: "ar", label: "العربية", ...ARABIC },
   { code: "fa-IR", pack: "fa", label: "فارسی", ...PERSIAN },
-  { code: "km-KH", pack: "km", label: "ខ្មែរ", ...KHMER },
-  { code: "ml-IN", pack: "ml", label: "മലയാളം", ...MALAYALAM },
   { code: "ta-IN", pack: "ta", label: "தமிழ்", ...TAMIL },
-  { code: "ja-JP", pack: "ja", label: "日本語", ...JAPANESE },
+  { code: "ml-IN", pack: "ml", label: "മലയാളം", ...MALAYALAM },
+  { code: "km-KH", pack: "km", label: "ខ្មែរ", ...KHMER },
   { code: "zh-CN", pack: "zh", label: "中文", ...CHINESE },
-  { code: "no", pack: "no", label: "Norsk bokmål", ...NORWEGIAN },
-  { code: "nrd", pack: "nrd", label: "Nordum", ...NORDUM },
-  { code: "nn", pack: "nn", label: "Norsk nynorsk", ...NYNORSK },
-  { code: "gn-ES", pack: "gn", label: "Avañe'ẽ", ...GUARANI },
+  { code: "ja-JP", pack: "ja", label: "日本語", ...JAPANESE },
 ];
 
 export const DEFAULT_LANGUAGE = "en-US";
 
 export function findLanguage(code) {
-  return LANGUAGES.find((language) => language.code === code) ?? LANGUAGES[0];
+  // Unknown codes fall back to the default entry (English US), never to
+  // array position: the alphabetically first entry is not the default.
+  return (
+    LANGUAGES.find((language) => language.code === code) ??
+    LANGUAGES.find((language) => language.code === DEFAULT_LANGUAGE)
+  );
 }

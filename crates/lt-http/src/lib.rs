@@ -122,7 +122,15 @@ pub async fn serve(addr: &str, state: AppState) -> std::io::Result<()> {
 }
 
 async fn languages() -> Json<Value> {
-    let langs: Vec<Value> = Lang::ALL
+    // Alphabetical by English display name (plain byte-wise `str` ordering:
+    // deterministic, locale-independent) instead of `Lang::ALL`'s
+    // engine-default order. This keeps "Norwegian (Nynorsk)" directly after
+    // "Norwegian (Bokmål)" and places "Nordum" before both. `Lang::ALL`
+    // itself keeps its order (default-variant semantics); only this
+    // presentation is sorted.
+    let mut sorted: Vec<Lang> = Lang::ALL.to_vec();
+    sorted.sort_by(|a, b| a.info().name.cmp(b.info().name));
+    let langs: Vec<Value> = sorted
         .iter()
         .map(|l| {
             json!({
@@ -595,7 +603,22 @@ mod tests {
         assert_eq!(status, StatusCode::OK);
         let arr = value.as_array().unwrap();
         assert_eq!(arr.len(), 38);
-        assert_eq!(arr[0]["longCode"], "en-US");
+        // languages are listed alphabetically by display name, not in
+        // `Lang::ALL` order (English (US) remains the `/check` default via
+        // the `en`/`auto` fallback, but is no longer listed first)
+        let names: Vec<&str> = arr.iter().map(|l| l["name"].as_str().unwrap()).collect();
+        let mut sorted_names = names.clone();
+        sorted_names.sort_unstable();
+        assert_eq!(names, sorted_names);
+        assert_eq!(names[0], "Arabic");
+        // the Norwegian-area entries stay adjacent, Bokmål before Nynorsk
+        let nynorsk = names
+            .iter()
+            .position(|n| *n == "Norwegian (Nynorsk)")
+            .unwrap();
+        assert_eq!(names[nynorsk - 1], "Norwegian (Bokmål)");
+        assert_eq!(names[nynorsk - 2], "Nordum");
+        assert!(arr.iter().any(|l| l["longCode"] == "en-US"));
         assert!(arr.iter().any(|l| l["longCode"] == "it"));
         assert!(arr.iter().any(|l| l["longCode"] == "pt"));
         assert!(arr.iter().any(|l| l["longCode"] == "nl"));
