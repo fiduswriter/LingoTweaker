@@ -100,7 +100,7 @@ L	58	Aquele restaurante tem as melhores comidas da cidade.
 L	59	Confira aqui as melhores pousadas em Ourolândia.
 M	59	MORFOLOGIK_RULE_PT_PT		37	47	UnknownWord	Possível erro ortográfico	Rolanda|Orlanda
 L	60	A equação de estado de van der Waals foi uma das primeiras a obter melhores resultados que a lei dos gases ideais.
-M	60	MORFOLOGIK_RULE_PT_PT		31	36	UnknownWord	Possível erro ortográfico	Salas|Graus|Manaus|Alas|Maus|Naus|Balas|Falas|Malas|Capuz|Paus|Tabus|Valas|Watts|Saraus|Tatus|Galas|Palas|Gabus|Talas|Aduz|Cajus|Calas|Ralas|Caála|Apus|Asus|Baas|Janus|Mails|SEALs|Seals|Vaduz|Valls|Chapuz|Gals|Halls|Raais|Raas|Rails|Wads|Wasps|Haas|PaaS|SaaS
+M	60	MORFOLOGIK_RULE_PT_PT		31	36	UnknownWord	Possível erro ortográfico	Salas|Graus|Manaus|Alas|Maus|Naus|Balas|Falas|Malas|Capuz|Paus|Tabus|Valas|Watts|Saraus|Tatus|Galas|Palas|Gabus|Talas|Aduz|Cajus|Calas|Ralas|Caála|Apus|Asus|Baas|Janus|Mails|SEALs|Seals|Vaduz|Valls|Chapuz|Gals|Halls|Raais|Raas|Rails|Wads|Wasps|Haas|PaaS|SaaS|Wacks
 L	61	Os trabalhos de J. Carlos apareceriam nas melhores revistas de sua época.
 M	61	POSSESSIVE_WITHOUT_ARTICLE	2	60	66	Other	Será que quis dizer:	da sua
 L	62	Ver ao vivo deve ser super borbulhante nos melhores sentidos.
@@ -506,7 +506,7 @@ L	307	Durante a dinastia Ming (no início do século XV) havia a Cidade Proibida
 L	308	A própria Jane escreveu a carta.
 L	309	A maioria das grandes descobertos científicas são nada menos que a descoberta do ób…
 M	309	GENERAL_GENDER_AGREEMENT_ERRORS	10	10	33	Other	Possível erro de concordância.	dos grandes descobertos|das grandes descobertas
-M	309	MORFOLOGIK_RULE_PT_PT		81	83	UnknownWord	Possível erro ortográfico	o|os|ou|sob|Bob|ovo|GB|MB|OK|oh|OC|job|ove|Mob|OBS|OE|Oz|Rob|TB|bob|fob|iv|kB|lob|nov|ok|ova|v|xv|ó|FB
+M	309	MORFOLOGIK_RULE_PT_PT		81	83	UnknownWord	Possível erro ortográfico	obi|o|os|ou|sob|Bob|ovo|GB|MB|OK|oh|OC|job|ove|Mob|OBS|OE|Oz|Rob|TB|bob|fob|iv|kB|lob|nov|ok|ova|v|xv|ó|FB|obis
 L	310	Foi feito pelas trabalhadores do parque.
 M	310	GENERAL_GENDER_AGREEMENT_ERRORS	10	10	29	Other	Possível erro de concordância.	pelos trabalhadores|pelas trabalhadeiras|pelas trabalhadoras
 L	311	…ouvir os partidos nelas representados e o …
@@ -926,7 +926,7 @@ L	588	A blastulação ocorre depois da clivagem ter dado origem a 128 células.
 M	588	MORFOLOGIK_RULE_PT_PT		2	13	UnknownWord	Possível erro ortográfico	musculação|blástula|bajulação|postulação|blasfemação|blástulas|lastração
 M	588	CONTRAÇÃO_DO_DE_O_INFINITIVO_PT_PT	1	21	30	Other	Antes do sujeito de uma construção de infinitivo, a preposição "de" não deve contrair-se com o artigo.	depois de a
 L	589	António Gonçalves Dias nasceu em 10 de agosto de 1823, no sítio Boa Vista, em terras de Jatobá (a 14 léguas de Caxias).
-M	589	MORFOLOGIK_RULE_PT_PT		88	94	UnknownWord	Possível erro ortográfico	Nativa|Jato|Jacob|Jeová|Jatos|Cativa|Datava|Matava|Batota|Dativa|Jacobina|Jantava|Patola|Átona|Matola|Atava|Atola|Janota|Altova|Jacobi|Java|Sadova|Tatoeba|Aboba|Amova|Ativa|Atomba|Atona|Batona|Catava|Chatona|Datona|Gatona|Jantona|Latona|Latosa|Matona|Matosa|Natona|Patona|Ratava|Ratona
+M	589	MORFOLOGIK_RULE_PT_PT		88	94	UnknownWord	Possível erro ortográfico	Nativa|Jato|Jacob|Jeová|Jatos|Cativa|Datava|Matava|Batota|Dativa|Jacobina|Jantava|Patola|Átona|Matola|Atava|Atola|Janota|Altova|Jacobi|Java|Sadova|Tatoeba|Aboba|Amova|Ativa|Atomba|Atona|Batona|Catava|Chatona|Datona|Gatona|Jantona|Latona|Latosa|Matona|Matosa|Natona|Patona|Ratava|Ratona|Jakob
 L	590	Estou de férias e regresso de sábado a oito.
 L	591	Estou de férias e regresso de segunda-feira a oito.
 L	592	Apresente-me a seus pais quando se sentir preparada.
@@ -2550,8 +2550,8 @@ M	1655	MORFOLOGIK_RULE_PT_PT		45	55	UnknownWord	Possível erro ortográfico	Finl
 L	1656	Sua estreia no oeste foi na Ópera de Nice com A Rainha de Espadas em 1989.
 M	1656	POSSESSIVE_WITHOUT_ARTICLE	1	0	3	Other	Será que quis dizer:	A sua
 L	1657	O único lugar onde Kellan Kyle sempre se sentiu em casa foi no centro de um palco.
-M	1657	MORFOLOGIK_RULE_PT_PT		19	25	UnknownWord	Possível erro ortográfico	Kelly|Allan|Keller|Kelvin|Kevlar|Hellen|Keyla|Bella|Bellas|Ellen|Kauan|Élan
-M	1657	MORFOLOGIK_RULE_PT_PT		26	30	UnknownWord	Possível erro ortográfico	File|Kilt|Pile|Niue|Gilé|Kyu|Pilé
+M	1657	MORFOLOGIK_RULE_PT_PT		19	25	UnknownWord	Possível erro ortográfico	Kelly|Allan|Keller|Kelvin|Kevlar|Hellen|Keyla|Bella|Bellas|Ellen|Kauan|Élan|Kudan
+M	1657	MORFOLOGIK_RULE_PT_PT		26	30	UnknownWord	Possível erro ortográfico	File|Kilt|Pile|Niue|Gilé|Kyu|Pilé|Kime|Kyus
 L	1658	Minha primeira escolha vai ser alguém que eu sei que vai ser confortável fora no deserto.
 M	1658	POSSESSIVE_WITHOUT_ARTICLE	1	0	5	Other	Será que quis dizer:	A minha
 L	1659	"Aonde vocês gostariam de ir nas férias?" "À Rússia."
@@ -2696,7 +2696,7 @@ L	1747	Anarcocapitalismo, Multinacionais e Contratos
 L	1748	Sendo liberal, é natural que tenha lido, entre outros, Adam Smith, Bastiat, Böhm-Bawerk, Schumpeter, Mises, Hayek, Friedman, Sowell. No entanto, também li Saint-Simon, Proudhon, Bakunin, Marx, Lassale, Lénin, Trotsky, Gramsci e Nikolai Berdyaev que, em 1923,…
 M	1748	SER_NC_QUE_VERBO_VINFINITIVO	1	25	34	Hint	Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.	ter
 M	1748	MORFOLOGIK_RULE_PT_PT		76	80	UnknownWord	Possível erro ortográfico	Bom|Boom|Bohr|Ohm
-M	1748	MORFOLOGIK_RULE_PT_PT		81	87	UnknownWord	Possível erro ortográfico	Bater|Baker|Bayer|Batera|Baterá
+M	1748	MORFOLOGIK_RULE_PT_PT		81	87	UnknownWord	Possível erro ortográfico	Bater|Baker|Bayer|Batera|Baterá|Bowers
 M	1748	MORFOLOGIK_RULE_PT_PT		101	106	UnknownWord	Possível erro ortográfico	Meses|Moisés|Miss|Misses|Gizé|Mixes|Dizes|Mines|Gizes|Mies|Mimes|Mires|Bises|Cises|Misse|Pises|Sises|Vises|Mi ses
 M	1748	MORFOLOGIK_RULE_PT_PT		193	200	UnknownWord	Possível erro ortográfico	Vassalo|Nassau|László|Passau|Massapé|Vassala|Lassa|Lasse|Assalte|Assole|Avassale|Casale|Lasque|Assape|Assaque|Lassa-a|Lassa-lhe|Lassa-me|Lassa-o|Lassa-se|Lassa-te|Lassada|Lassado|Lassai|Lassais|Lassam|Lassar|Lassara|Lassarei|Lassarem|Lassares|Lassará|Lassas|Lassasse|Lassaste|Lassava|Lassou|Lassá-la|Lassá-lo|Massaje|Nasale|La sauce
 M	1748	MORFOLOGIK_RULE_PT_PT		202	207	UnknownWord	Possível erro ortográfico	Lenha|Lenine|Lenho|Lénio|Lenhe|Léonin
@@ -2764,11 +2764,11 @@ M	1776	SI_UNITS_CASE	1	5	7	Other	Unidades do Sistema Internacional iguais ou inf
 L	1777	..estado no ano de 2010, foi de 4,68 habitantes por Km², sendo a vigésima quarta maior do Brasil e a quin…
 M	1777	DOUBLE_PUNCTUATION		0	2	Other	Dois pontos consecutivos	.|…
 M	1777	SI_UNITS_CASE	1	52	54	Other	Unidades do Sistema Internacional iguais ou inferiores a "quilo" são escritas com minúsculas.	km
-M	1777	MORFOLOGIK_RULE_PT_PT		101	105	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz
+M	1777	MORFOLOGIK_RULE_PT_PT		101	105	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz|Quinn
 L	1778	..estado no ano de 2010, foi de 4,68 habitantes por Km^2, sendo a vigésima quarta maior do Brasil e a quin…
 M	1778	DOUBLE_PUNCTUATION		0	2	Other	Dois pontos consecutivos	.|…
 M	1778	SI_UNITS_CASE	1	52	56	Other	Unidades do Sistema Internacional iguais ou inferiores a "quilo" são escritas com minúsculas.	km^2
-M	1778	MORFOLOGIK_RULE_PT_PT		102	106	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz
+M	1778	MORFOLOGIK_RULE_PT_PT		102	106	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz|Quinn
 L	1779	120 KW de potência
 M	1779	SI_UNITS_CASE	1	4	6	Other	Unidades do Sistema Internacional iguais ou inferiores a "quilo" são escritas com minúsculas.	kW
 L	1780	Estimaram-se forças de 30 tJ por m².
@@ -3160,7 +3160,7 @@ L	1977	Foi por o Miguel, depois de muito tempo, compreender o que se passa que d
 M	1977	CONFUSION_POR_PÔR_V2	1	4	7	Other	Possível confusão de termos.	pôr
 L	1978	Houve mais vitórias por as simulações terem sido executadas mais vezes.
 L	1979	Por as DDR efetuarem duas operações por ciclo, surgiram os módulos CL2.5 que indicam um meio termo.
-M	1979	MORFOLOGIK_RULE_PT_PT		67	72	UnknownWord	Possível erro ortográfico	CLUBE|CLIMA|CLARO|CLARA|CLÃ|CLARK|CLERO|CLONE|CLORO|CLÃS|CLAVE|CLAMA|CLAVA|CLIO|CLUJ|CLICA|CLEO|CLÉO|CLIVA|CLONA|CLOE|CLOÉ|CLAME|CLAMO|CLIVO|CLIX|CLOUD|CLÉIA|CLEAR|CLICO|CLIP|CLIPS|CLIVE|CLONO|CLUB|CLUBS|CO2E|RCP2.6|RCP4.5|RCP8.5
+M	1979	MORFOLOGIK_RULE_PT_PT		67	72	UnknownWord	Possível erro ortográfico	CLUBE|CLIMA|CLARO|CLARA|CLÃ|CLARK|CLERO|CLONE|CLORO|CLÃS|CLAVE|CLAMA|CLAVA|CLIO|CLUJ|CLICA|CLEO|CLÉO|CLIVA|CLONA|CLOE|CLOÉ|CLAME|CLAMO|CLIVO|CLIX|CLOUD|CLÉIA|CLEAR|CLICO|CLIP|CLIPS|CLIVE|CLONO|CLUB|CLUBS|CLAY|CO2E|RCP2.6|RCP4.5|RCP8.5
 M	1979	PT_COMPOUNDS_POST_REFORM_MEIO_TERMO		88	98	Other	Esta palavra é hifenizada.	meio-termo
 L	1980	a a.
 M	1980	CONTRACOES_OBRIGATORIAS	1	0	3	Other	Será que quis dizer <suggestion>à</suggestion>?	à
@@ -4011,7 +4011,7 @@ M	2394	INTERROGATIVES_PUNTUATION	3	22	23	Other	Se é uma interrogação, deve te
 L	2395	Ele disse: “O jardim é bonito”
 L	2396	A antropologia do “trabalho”
 L	2397	Onko — É café “sem cafeína”
-M	2397	MORFOLOGIK_RULE_PT_PT		0	4	UnknownWord	Possível erro ortográfico	No|Não|Ano|Onde|Longo|Ponto|Oito|Ouro|Dono|Indo|Onda|Óleo|ONU|Conto|Olho|Onze|Sonho|Ohio|Anjo|Nono|Nó|Optou|Osso|Ovo|Sono|Ódio|ONG|Otto|Anão|Onça|Pondo|OK|ONGs|Oslo|Andou|Mono|Oco|Olhou|Ópio|Enzo|Oro|Uno|Gongo|Mondo|Odiou|Oiro|Ousou|Ronco|Tonto|Unto|Ócio|Ando|Gonzo|Nónio|Olmo|Ouço|Ónus|Ponho|Tono|Tonou|Dondo|Anho|Jónio|Obrou|Opo|Opto|Ornou|Ouso|Untou|Zonzo|Anuo|Honro|Monto|Opio|Rondo|Sonso|Congo|KO|Kongo|Oio|Oney|Osho|Oto|Aónio|Cónio|Gónio|Iónio|Linko|Monco|Obro|Oiço|Ok|Oleou|Onero|Opiou|Orlo|Orlou|Orno|Orço|Orçou|Ougo|Ougou|Ourou|Ovão|Sondo|Sonão|Unho|Unhou|Unjo|Éneo|Énio|Ónix|Óveo|Bono|Oxxo
+M	2397	MORFOLOGIK_RULE_PT_PT		0	4	UnknownWord	Possível erro ortográfico	No|Não|Ano|Onde|Longo|Ponto|Oito|Ouro|Dono|Indo|Onda|Óleo|ONU|Conto|Olho|Onze|Sonho|Ohio|Anjo|Nono|Nó|Optou|Osso|Ovo|Sono|Ódio|ONG|Otto|Anão|Onça|Pondo|OK|ONGs|Oslo|Andou|Mono|Oco|Olhou|Ópio|Enzo|Oro|Uno|Gongo|Mondo|Odiou|Oiro|Ousou|Ronco|Tonto|Unto|Ócio|Ando|Gonzo|Nónio|Olmo|Ouço|Ónus|Ponho|Tono|Tonou|Dondo|Anho|Jónio|Obrou|Opo|Opto|Ornou|Ouso|Untou|Zonzo|Anuo|Honro|Monto|Opio|Rondo|Sonso|Congo|KO|Kongo|Oio|Oney|Osho|Oto|Aónio|Cónio|Gónio|Iónio|Linko|Monco|Obro|Oiço|Ok|Oleou|Onero|Opiou|Orlo|Orlou|Orno|Orço|Orçou|Ougo|Ougou|Ourou|Ovão|Sondo|Sonão|Unho|Unhou|Unjo|Éneo|Énio|Ónix|Óveo|Bono|Oxxo|Yuko
 L	2398	Que belo dia.
 M	2398	INTERJECTIONS_PUNTUATION	1	12	13	Other	Se é uma exclamação, deve terminar com <suggestion>!</suggestion>, caso contrário, as orações devem ser separadas por vírgulas. Se for um prolongamento de ideias, utilize as reticências.	!|...|,
 L	2399	Que bom que você veio.
@@ -4039,7 +4039,7 @@ M	2410	INTERJECTIONS_PUNTUATION	5	4	9	Other	Quando não estão acompanhadas de v
 L	2411	Que coisa horrível.
 M	2411	INTERJECTIONS_PUNTUATION	1	18	19	Other	Se é uma exclamação, deve terminar com <suggestion>!</suggestion>, caso contrário, as orações devem ser separadas por vírgulas. Se for um prolongamento de ideias, utilize as reticências.	!|...|,
 L	2412	Oi tudo bem?.
-M	2412	MORFOLOGIK_RULE_PT_PT		0	2	UnknownWord	Possível erro ortográfico	O|Foi|Os|Ou|Si|Aí|Boi|Mi|COI|Roy|Ai|Ti|OK|QI|Boy|Ei|Li|Oh|OC|Dói|Rói|Mói|Moí|AI|BI|Di|II|NI|OE|Oio|Oz|ROI|Sy|TI|VI|XI|Doí|I|Ii|Ok|Oty|Pi|Ri|Roí|Ui|Vi|Xi|Ó|O i
+M	2412	MORFOLOGIK_RULE_PT_PT		0	2	UnknownWord	Possível erro ortográfico	O|Foi|Os|Ou|Si|Aí|Boi|Mi|COI|Roy|Ai|Ti|OK|QI|Boy|Ei|Li|Oh|OC|Dói|Rói|Mói|Moí|AI|BI|Di|II|NI|OE|Oio|Oz|ROI|Sy|TI|VI|XI|Doí|I|Ii|Ok|Oty|Pi|Ri|Roí|Ui|Vi|Xi|Ó|O i|Obi
 L	2413	Apre dizes tu.
 L	2414	Agradecido, mas não rendido.
 L	2415	Ano de Nosso Senhor Jesus Cristo
@@ -8229,7 +8229,7 @@ L	4549	Ela se magoa com muita facilidade.
 L	4550	Inicialmente, amigo de Basil, ele o negligencia pela beleza de Dorian.
 M	4550	MORFOLOGIK_RULE_PT_PT		23	28	UnknownWord	Possível erro ortográfico	BASIC|Basal|Baniu|Brasil|Baliu|Baril|Basial|Bazou
 M	4550	VERBO_HIFENIZADOR_VERBOS_2	5	30	47	Other	Forma hifenizada. Será que quis dizer:	ele negligencia-o
-M	4550	MORFOLOGIK_RULE_PT_PT		63	69	UnknownWord	Possível erro ortográfico	Doutrina|Brian|Daria|Domina|Dorsal|Jordan|Morgan|Ryan|Dariam|Diria|Dormia|Adrian|Bryan|Dora|Doris|Dormiam|Dórica|Dóricas|Dórico|Diriam|Doaria|Dourar|Poria|Corina|Mirian|Dorido|Doura|Doía|Doariam|Doira|Doirar|Doiras|Doíam|Poriam|Debian|Dorah|Dóris|Morin|Córion|Darias|Dirias|Doarias|Doeria|Doeriam|Doerias|Doirai|Doiram|Dorida|Doridas|Dormias|Dorsão|Dourai|Dourais|Douram|Douras|Doías|Dólman|Dómina|Dónia|Dónias|Porias|Tórião|Douban|Mobian
+M	4550	MORFOLOGIK_RULE_PT_PT		63	69	UnknownWord	Possível erro ortográfico	Doutrina|Brian|Daria|Domina|Dorsal|Jordan|Morgan|Ryan|Dariam|Diria|Dormia|Adrian|Bryan|Dora|Doris|Dormiam|Dórica|Dóricas|Dórico|Diriam|Doaria|Dourar|Poria|Corina|Mirian|Dorido|Doura|Doía|Doariam|Doira|Doirar|Doiras|Doíam|Poriam|Debian|Dorah|Dóris|Morin|Córion|Darias|Dirias|Doarias|Doeria|Doeriam|Doerias|Doirai|Doiram|Dorida|Doridas|Dormias|Dorsão|Dourai|Dourais|Douram|Douras|Doías|Dólman|Dómina|Dónia|Dónias|Porias|Tórião|Dobias|Douban|Mobian|Norman
 L	4551	Quem gloria a si mesmo cheira mal.
 M	4551	PT_REDUNDANCY_REPLACE_SI_MESMO		14	22	Other	"si mesmo" é um pleonasmo. É preferível dizer <suggestion>si</suggestion>	si
 L	4552	Garantia varia consoante as peças substituídas.
@@ -8515,7 +8515,7 @@ M	4687	MISPELLED_NAMES	33	0	11	Other	Escreva <suggestion>Donna Summer</suggestio
 L	4688	Donna Summers
 M	4688	MISPELLED_NAMES	33	0	13	Other	Escreva <suggestion>Donna Summer</suggestion> se se refere à cantora americana.	Donna Summer
 L	4689	J’aime beaucoup Megadeath
-M	4689	MORFOLOGIK_RULE_PT_PT		2	6	UnknownWord	Possível erro ortográfico	anime|Jaime|vime|ame|arme|lime|mime|rime|amime|adi-me|agi-me|dai-me|ia-me|ri-me|vai-me|vi-me|ai me
+M	4689	MORFOLOGIK_RULE_PT_PT		2	6	UnknownWord	Possível erro ortográfico	anime|Jaime|vime|ame|arme|lime|mime|rime|amime|adi-me|agi-me|dai-me|ia-me|ri-me|vai-me|vi-me|ai me|hajime|kime
 M	4689	MORFOLOGIK_RULE_PT_PT		7	15	UnknownWord	Possível erro ortográfico	realçou
 M	4689	MISPELLED_NAMES	34	16	25	Other	Escreva <suggestion>Megadeth</suggestion> se se refere ao grupo metal americano.	Megadeth
 L	4690	Areosmith
@@ -8657,7 +8657,6 @@ M	4756	MISPELLED_NAMES	93	0	13	Other	Escreva <suggestion>Bram Moolenaar</suggest
 L	4757	Henri Pointcaré
 M	4757	MISPELLED_NAMES	94	6	15	Other	Escreva <suggestion>Poincaré</suggestion> se se refere ao matemático francês.	Poincaré
 L	4758	Raymond Pointcaré
-M	4758	MORFOLOGIK_RULE_PT_PT		0	7	UnknownWord	Possível erro ortográfico	Raimundo|Ramón|Ramon|Aemond|Vaemond|Raiona|Raivona|Ramona|Rimona|Rayman|Redmond
 M	4758	MISPELLED_NAMES	95	8	17	Other	Escreva <suggestion>Poincaré</suggestion> se se refere ao presidente da República.	Poincaré
 L	4759	Charles de Gaule
 M	4759	MISPELLED_NAMES	96	11	16	Other	Escreva <suggestion>Gaulle</suggestion> se se refere ao presidente da República.	Gaulle
@@ -9360,11 +9359,11 @@ L	5142	45,54 ″ E
 L	5143	..estado no ano de 2010, foi de 4,68 habitantes por km2, sendo a vigésima quarta maior do Brasil e a quin…
 M	5143	DOUBLE_PUNCTUATION		0	2	Other	Dois pontos consecutivos	.|…
 M	5143	SI_UNITS_EXPONENT	1	52	55	Other	Os expoentes devem estar em sobrescrito.	km²
-M	5143	MORFOLOGIK_RULE_PT_PT		101	105	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz
+M	5143	MORFOLOGIK_RULE_PT_PT		101	105	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz|Quinn
 L	5144	..estado no ano de 2010, foi de 4,68 habitantes por km^2, sendo a vigésima quarta maior do Brasil e a quin…
 M	5144	DOUBLE_PUNCTUATION		0	2	Other	Dois pontos consecutivos	.|…
 M	5144	SI_UNITS_EXPONENT	1	52	56	Other	Os expoentes devem estar em sobrescrito.	km²
-M	5144	MORFOLOGIK_RULE_PT_PT		102	106	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz
+M	5144	MORFOLOGIK_RULE_PT_PT		102	106	UnknownWord	Possível erro ortográfico	quis|quina|quine|Quid|Quim|quino|quiz|Quinn
 L	5145	g = 9,8 m.s⁻2
 M	5145	UPPERCASE_SENTENCE_START		0	1	Other	Esta frase não começa com maiúscula.	G
 M	5145	SI_UNITS_EXPONENT	1	10	13	Other	Os expoentes devem estar em sobrescrito.	s⁻²
@@ -9571,7 +9570,7 @@ L	5241	a=2·x²+5
 M	5241	UPPERCASE_SENTENCE_START		0	1	Other	Esta frase não começa com maiúscula.	A
 L	5242	4,5×2,5=11,25
 L	5243	Number 1Z1141X30370035113
-M	5243	MORFOLOGIK_RULE_PT_PT		0	6	UnknownWord	Possível erro ortográfico	Número|Nuvem|Oliver|Numero|Cléber|Cleber|Numera|Zumbir|Camber|Amber|Numeá|Sumbe|Uber|Lamber|Numere|Núvea|Núveo|Súber|Zumbe|Zumbem|Zumbes|Tumblr
+M	5243	MORFOLOGIK_RULE_PT_PT		0	6	UnknownWord	Possível erro ortográfico	Número|Nuvem|Oliver|Numero|Cléber|Cleber|Numera|Zumbir|Camber|Amber|Numeá|Sumbe|Uber|Lamber|Numere|Núvea|Núveo|Súber|Zumbe|Zumbem|Zumbes|Dember|Tumblr
 M	5243	MORFOLOGIK_RULE_PT_PT		7	25	UnknownWord	Possível erro ortográfico	
 L	5244	m = 75,5 +- 0,1 g
 M	5244	UPPERCASE_SENTENCE_START		0	1	Other	Esta frase não começa com maiúscula.	M
@@ -9811,7 +9810,7 @@ L	5386	Windows (R)
 M	5386	R_SYMBOL	1	8	11	Other	Pretende dizer: <suggestion>®</suggestion>?	®
 L	5387	Estes são Richard Burr (D) e Kay Hagan (R).
 M	5387	MORFOLOGIK_RULE_PT_PT		18	22	UnknownWord	Possível erro ortográfico	Burro|Burra
-M	5387	MORFOLOGIK_RULE_PT_PT		29	32	UnknownWord	Possível erro ortográfico	Pai|Vai|Sai|Cai|Gay|Ai|Dai|Kali|Khan|Mai|Okay
+M	5387	MORFOLOGIK_RULE_PT_PT		29	32	UnknownWord	Possível erro ortográfico	Pai|Vai|Sai|Cai|Gay|Ai|Dai|Kali|Khan|Mai|Okay|Kiai
 L	5388	Copyright (C) Joanna Bator, 2012
 M	5388	COPYRIGHT	1	10	13	Other	Esta anotação não é padronizada, utilize antes o símbolo: <suggestion>©</suggestion>	©
 M	5388	MORFOLOGIK_RULE_PT_PT		21	26	UnknownWord	Possível erro ortográfico	Ator|Fator|Bater|Batom|Bato|Bâton
@@ -10035,11 +10034,11 @@ L	5515	<= maxDate
 M	5515	ARROWS	2	0	2	Other	Pretende utilizar uma seta?	≤|←|⇽|⇇|⇐|⇦|⇚
 M	5515	MORFOLOGIK_RULE_PT_PT		3	10	UnknownWord	Possível erro ortográfico	mandate|machada-te|manda-te
 L	5516	== day
-M	5516	MORFOLOGIK_RULE_PT_PT		3	6	UnknownWord	Possível erro ortográfico	dai|da|das|pai|dar|dá|vai|daí|sai|cai|dão|dali|dei|gay|ai|dói|dás|dais|adi|Dan|Di|dah|doai|mai|DAW|dpi
+M	5516	MORFOLOGIK_RULE_PT_PT		3	6	UnknownWord	Possível erro ortográfico	dai|da|das|pai|dar|dá|vai|daí|sai|cai|dão|dali|dei|gay|ai|dói|dás|dais|adi|Dan|Di|dah|doai|mai|DAW|dan|dpi
 L	5517	University of the Arts London
 M	5517	MORFOLOGIK_RULE_PT_PT		14	17	UnknownWord	Possível erro ortográfico	lhe|te|tê|THB|toe|Theo|Théo|Tsé|VHE|tee
 M	5517	MORFOLOGIK_RULE_PT_PT		18	22	UnknownWord	Possível erro ortográfico	Arts.|Arte|Artes|Ares|Aros|Karts|Aras|ARNs|ARS|Artsy
-M	5517	MORFOLOGIK_RULE_PT_PT		23	29	UnknownWord	Possível erro ortográfico	Longo|Longos|Gordon|Lendo|Pondo|Lindo|Lodo|Lindos|Condor|Mondo|Lodos|Rondou|Dondo|Sondou|Rondo|Condoa|Condoí|Gónion|Lendona|Lindona|Lonona|Mondou|Ondona|Sondo|Sondona|Lennon
+M	5517	MORFOLOGIK_RULE_PT_PT		23	29	UnknownWord	Possível erro ortográfico	Longo|Longos|Gordon|Lendo|Pondo|Lindo|Lodo|Lindos|Condor|Mondo|Lodos|Rondou|Dondo|Sondou|Rondo|Condoa|Condoí|Gónion|Lendona|Lindona|Lonona|Mondou|Ondona|Sondo|Sondona|Laudon|Lennon|Yondan
 L	5518	Montse Saez | Administración | Web master: FA? | Administración |
 M	5518	MORFOLOGIK_RULE_PT_PT		0	6	UnknownWord	Possível erro ortográfico	Monte|Montes|Monta-se
 M	5518	MORFOLOGIK_RULE_PT_PT		14	28	UnknownWord	Possível erro ortográfico	Administração
@@ -10098,11 +10097,11 @@ L	5543	<= maxDate
 M	5543	ARROWS	2	0	2	Other	Pretende utilizar uma seta?	≤|←|⇽|⇇|⇐|⇦|⇚
 M	5543	MORFOLOGIK_RULE_PT_PT		3	10	UnknownWord	Possível erro ortográfico	mandate|machada-te|manda-te
 L	5544	== day
-M	5544	MORFOLOGIK_RULE_PT_PT		3	6	UnknownWord	Possível erro ortográfico	dai|da|das|pai|dar|dá|vai|daí|sai|cai|dão|dali|dei|gay|ai|dói|dás|dais|adi|Dan|Di|dah|doai|mai|DAW|dpi
+M	5544	MORFOLOGIK_RULE_PT_PT		3	6	UnknownWord	Possível erro ortográfico	dai|da|das|pai|dar|dá|vai|daí|sai|cai|dão|dali|dei|gay|ai|dói|dás|dais|adi|Dan|Di|dah|doai|mai|DAW|dan|dpi
 L	5545	University of the Arts London
 M	5545	MORFOLOGIK_RULE_PT_PT		14	17	UnknownWord	Possível erro ortográfico	lhe|te|tê|THB|toe|Theo|Théo|Tsé|VHE|tee
 M	5545	MORFOLOGIK_RULE_PT_PT		18	22	UnknownWord	Possível erro ortográfico	Arts.|Arte|Artes|Ares|Aros|Karts|Aras|ARNs|ARS|Artsy
-M	5545	MORFOLOGIK_RULE_PT_PT		23	29	UnknownWord	Possível erro ortográfico	Longo|Longos|Gordon|Lendo|Pondo|Lindo|Lodo|Lindos|Condor|Mondo|Lodos|Rondou|Dondo|Sondou|Rondo|Condoa|Condoí|Gónion|Lendona|Lindona|Lonona|Mondou|Ondona|Sondo|Sondona|Lennon
+M	5545	MORFOLOGIK_RULE_PT_PT		23	29	UnknownWord	Possível erro ortográfico	Longo|Longos|Gordon|Lendo|Pondo|Lindo|Lodo|Lindos|Condor|Mondo|Lodos|Rondou|Dondo|Sondou|Rondo|Condoa|Condoí|Gónion|Lendona|Lindona|Lonona|Mondou|Ondona|Sondo|Sondona|Laudon|Lennon|Yondan
 L	5546	Montse Saez | Administración | Web master: FA? | Administración |
 M	5546	MORFOLOGIK_RULE_PT_PT		0	6	UnknownWord	Possível erro ortográfico	Monte|Montes|Monta-se
 M	5546	MORFOLOGIK_RULE_PT_PT		14	28	UnknownWord	Possível erro ortográfico	Administração
@@ -10179,7 +10178,6 @@ M	5573	MORFOLOGIK_RULE_PT_PT		66	72	UnknownWord	Possível erro ortográfico	Piei
 M	5573	MORFOLOGIK_RULE_PT_PT		73	78	UnknownWord	Possível erro ortográfico	Dinis|Ténis|Pénis|Denisa|Senis|Deis|Danis|Denise|Cénis|Delis
 L	5574	MICHAEL JORDAN
 L	5575	Michael Jodan.
-M	5575	PT_MULTITOKEN_SPELLING_TWO	2	0	13	Other	Possível erro ortográfico.	Michael Jordan
 L	5576	Garcia Marquez.
 M	5576	PT_MULTITOKEN_SPELLING_TWO	2	0	14	Other	Possível erro ortográfico.	García Márquez
 L	5577	Stephen Hawkins
@@ -10200,7 +10198,7 @@ L	5584	La Noche
 L	5585	El crack.
 M	5585	PT_BARBARISMS_REPLACE_CRACK		3	8	Other	"crack" é um estrangeirismo. É preferível dizer <suggestion>craque</suggestion>.	craque
 L	5586	Gran khan mongòlic.
-M	5586	MORFOLOGIK_RULE_PT_PT		5	9	UnknownWord	Possível erro ortográfico	Khan|Kahn|há|San|chão|van|Jean|Juan|chá|Ivan|OTAN|Ryan|Joan|Kant|Shaw|Shawn|chat|Zhang|chás|fan|hão|jan|chã|hã|kVA|kcal|lha|íman|Fran|hás|yuan|Jhon|flan|lhas|Chang|Chen|Dan|EAN|Ethan|IBAN|ICAN|Ian|Kauan|Kazan|Ken|Kia|PAN|VHA|Van|Wuhan|Yan|jean|kina|kuna|kyat|nham|élan|4chan|chau|scan
+M	5586	MORFOLOGIK_RULE_PT_PT		5	9	UnknownWord	Possível erro ortográfico	Khan|Kahn|há|San|chão|van|Jean|Juan|chá|Ivan|OTAN|Ryan|Joan|Kant|Shaw|Shawn|chat|Zhang|chás|fan|hão|jan|chã|hã|kVA|kcal|lha|íman|Fran|hás|yuan|Jhon|flan|lhas|Chang|Chen|Dan|EAN|Ethan|IBAN|ICAN|Ian|Kauan|Kazan|Ken|Kia|PAN|VHA|Van|Wuhan|Yan|jean|kina|kuna|kyat|nham|élan|4chan|chau|dan|kiai|kihon|kohai|kudan|scan
 M	5586	MORFOLOGIK_RULE_PT_PT		10	18	UnknownWord	Possível erro ortográfico	mongólica|mongólico|Mongólia
 L	5587	Que sais-je ?
 M	5587	SPACE_BEFORE_PUNCTUATION2	1	9	13	Other	Remova o espaço antes deste sinal de pontuação.	je?
@@ -10719,7 +10717,7 @@ L	5860	O homossexualismo é comum.
 L	5861	O assexualismo é comum.
 M	5861	MORFOLOGIK_RULE_PT_PT		2	14	UnknownWord	Possível erro ortográfico	as sexualismo
 L	5862	Ele sempre dá uma de joão-sem-braço.
-M	5862	MORFOLOGIK_RULE_PT_PT		21	25	UnknownWord	Possível erro ortográfico	João|jogo|jogou|grão|golo|Joan|gozou|gozo|godo|goa|gomo|gorou|goto|joio|jogão|gobo|goro|goal|goas|golão|gomão|gotão|gozão|joião|jotão|como|ao|não|são|já|novo|todo|jogos|logo|modo|pouco|José|ação|boa|fogo|mão|povo|solo|tão|Japão|John|boas|chão|dono|gado|gelo|grau|gás|joga|jogar|tomou|topo|vão|Jean|Juan|coro|cão|dão|foco|foto|gato|gerou|gosto|irão|noção|pão|pólo|tocou|voto|Joana|Joe|coco|couro|gay|globo|golfo|golos|grãos|jato|jogado|jogam|leão|lobo|morou|moto|nono|ovo|pouso|poço|robô|roubo|sono|voar|voo|Douro|Joel|Jon|Jonas|anão|bolo|colo|copo|doado|foro|galo|giro|gota|gotas|grafo|iodo|louco|moço|notou|peão|polo|porão|quão|roubou|roxo|soco|soro|touro|voa|votou|FAO|Jordão|Souto|Togo|boato|bobo|boro|couto|doar|dolo|domo|focou|fogão|godos|gola|goma|gordo|goza|gozam|gozar|jaz|jugo|juro|jurou|lodo|louro|mono|mouro|moção|oco|pião|posou|poupou|pousou|poção|rolo|soa|soar|somou|sótão|tomo|voam|zoo|ão|Lopo|NOAA|Noah|Romão|Sião|bojo|boto|deão|doa|dojo|doo|dotou|gap|girou|golf|gomos|gorro|grado|grato|guano|guiou|guião|hão|ião|jan|loco|nodo|nojo|oro|pomo|poro|rodo|rodou|soam|toa|tolo|too|voado|Corão|Jörg|bolão|botou|colou|fofo|fotão|galão|gamão|gomas|gongo|gozado|ioiô|job|jobs|joule|judo|mofo|rogo|rolou|toco|toro|vovó|vovô|Bouro|Ródão|coado|coto|doam|dodó|douto|gago|gaio|gal|gamo|gear|gibão|gnomo|goda|golas|gole|gonzo|gore|goze|gozos|goês|gray|jorro|lotou|loção|rojão|roto|rouco|topou|bolou|doas|dopo|gabou|gajo|gora|jota|louvo|louvou|moa|moas|moo|moro|mourão|rogou|roupão|soado|somo|soo|tono|tonou|bosão|coar|corou|cotão|coutou|covo|covão|coxão|domou|gelou|gizou|godas|gorado|gorar|gordão|grano|jogas|jola|jónio|loto|noto|opo|podo|poupo|socou|suão|tojo|zoar|arão|coam|coas|cotou|doso|dourou|gatão|geado|gemo|gero|goram|gouda|gravo|guapo|guio|locou|mouco|movo|podou|podão|poso|roa|roam|rolão|roo|roçou|sovou|toas|torou|tourão|voas|vogou|zoa|zoado|zoam|AOA|Adão|Fouto|Goa|Irão|Jose|Juno|Lobo|Mao|Morão|Mourão|NOWO|Oio|Oto|Polo|Soyo|São|Tao|Yao|asão|azão|boio|boiou|boião|bojou|bojão|borão|botão|bouço|bouçou|bóio|ciào|cião|coa|coa-o|coai|coajo|coaxo|cocou|cocão|cocó|codão|coio|colão|comão|coo|copão|coso|courão|coutão|cozo|coço|coçou|côa|dião|doa-o|doai|dobo|dobou|dojão|dolão|dopou|dosou|doto|dou-o|douro|duão|ecão|egozão|egão|elão|enjoão|fião|focão|fofão|foio|forão|gabo|gadão|gafo|gag|gajão|galou|gamou|gano|geai|geamo|geio|gelão|gemou|geá|geámo|gizo|globão|gluão|goais|gobos|godé|goelo|goji|golfão|golãos|gome|gomãos|gong|gongão|gonzão|gora-o|gorai|goras|gorrão|gostão|gotos|gotãos|goudas|goulag|goza-o|gozai|gozas|gozãos|gramo|guaro|gásão|gónio|homo|iodou|iodão|jazo|jean|joga-o|jogai|jogãos|joia|joias|joios|joiãos|jolas|jotas|jotãos|judão|jugão|jurão|jónião|lobão|locão|lodão|logou|loio|lotão|lourou|loução|moa-o|moam|mofou|mofão|nodão|novão|ovão|pojo|pojou|pomão|popó|poucão|pousão|povão|rao|rião|roa-o|roas|roaz|rodão|rogão|romão|rotou|roço|soa-o|soai|soas|sobão|socão|sonão|sorão|sou-o|souto|soutão|sovo|toa-o|toado|toai|toam|toar|tocão|todão|togo|togou|tojão|tolão|tomão|topão|torão|touco|toucou|usão|voa-o|voai|vogo|votão|zoa-o|zoai|zoas|Bono|J-Ax|J.Lo|JOSM|Totò|tao
+M	5862	MORFOLOGIK_RULE_PT_PT		21	25	UnknownWord	Possível erro ortográfico	João|jogo|jogou|grão|golo|Joan|gozou|gozo|godo|goa|gomo|gorou|goto|joio|jogão|gobo|goro|goal|goas|golão|gomão|gotão|gozão|joião|jotão|como|ao|não|são|já|novo|todo|jogos|logo|modo|pouco|José|ação|boa|fogo|mão|povo|solo|tão|Japão|John|boas|chão|dono|gado|gelo|grau|gás|joga|jogar|tomou|topo|vão|Jean|Juan|coro|cão|dão|foco|foto|gato|gerou|gosto|irão|noção|pão|pólo|tocou|voto|Joana|Joe|coco|couro|gay|globo|golfo|golos|grãos|jato|jogado|jogam|leão|lobo|morou|moto|nono|ovo|pouso|poço|robô|roubo|sono|voar|voo|Douro|Joel|Jon|Jonas|anão|bolo|colo|copo|doado|foro|galo|giro|gota|gotas|grafo|iodo|louco|moço|notou|peão|polo|porão|quão|roubou|roxo|soco|soro|touro|voa|votou|FAO|Jordão|Souto|Togo|boato|bobo|boro|couto|doar|dolo|domo|focou|fogão|godos|gola|goma|gordo|goza|gozam|gozar|jaz|jugo|juro|jurou|lodo|louro|mono|mouro|moção|oco|pião|posou|poupou|pousou|poção|rolo|soa|soar|somou|sótão|tomo|voam|zoo|ão|Lopo|NOAA|Noah|Romão|Sião|bojo|boto|deão|doa|dojo|doo|dotou|gap|girou|golf|gomos|gorro|grado|grato|guano|guiou|guião|hão|ião|jan|loco|nodo|nojo|oro|pomo|poro|rodo|rodou|soam|toa|tolo|too|voado|Corão|Jörg|bolão|botou|colou|fofo|fotão|galão|gamão|gomas|gongo|gozado|ioiô|job|jobs|joule|judo|mofo|rogo|rolou|toco|toro|vovó|vovô|Bouro|Ródão|coado|coto|doam|dodó|douto|gago|gaio|gal|gamo|gear|gibão|gnomo|goda|golas|gole|gonzo|gore|goze|gozos|goês|gray|jorro|lotou|loção|rojão|roto|rouco|topou|bolou|doas|dopo|gabou|gajo|gora|jota|louvo|louvou|moa|moas|moo|moro|mourão|rogou|roupão|soado|somo|soo|tono|tonou|bosão|coar|corou|cotão|coutou|covo|covão|coxão|domou|gelou|gizou|godas|gorado|gorar|gordão|grano|jogas|jola|jónio|loto|noto|opo|podo|poupo|socou|suão|tojo|zoar|arão|coam|coas|cotou|doso|dourou|gatão|geado|gemo|gero|goram|gouda|gravo|guapo|guio|locou|mouco|movo|podou|podão|poso|roa|roam|rolão|roo|roçou|sovou|toas|torou|tourão|voas|vogou|zoa|zoado|zoam|AOA|Adão|Fouto|Goa|Irão|Jose|Juno|Lobo|Mao|Morão|Mourão|NOWO|Oio|Oto|Polo|Soyo|São|Tao|Yao|asão|azão|boio|boiou|boião|bojou|bojão|borão|botão|bouço|bouçou|bóio|ciào|cião|coa|coa-o|coai|coajo|coaxo|cocou|cocão|cocó|codão|coio|colão|comão|coo|copão|coso|courão|coutão|cozo|coço|coçou|côa|dião|doa-o|doai|dobo|dobou|dojão|dolão|dopou|dosou|doto|dou-o|douro|duão|ecão|egozão|egão|elão|enjoão|fião|focão|fofão|foio|forão|gabo|gadão|gafo|gag|gajão|galou|gamou|gano|geai|geamo|geio|gelão|gemou|geá|geámo|gizo|globão|gluão|goais|gobos|godé|goelo|goji|golfão|golãos|gome|gomãos|gong|gongão|gonzão|gora-o|gorai|goras|gorrão|gostão|gotos|gotãos|goudas|goulag|goza-o|gozai|gozas|gozãos|gramo|guaro|gásão|gónio|homo|iodou|iodão|jazo|jean|joga-o|jogai|jogãos|joia|joias|joios|joiãos|jolas|jotas|jotãos|judão|jugão|jurão|jónião|lobão|locão|lodão|logou|loio|lotão|lourou|loução|moa-o|moam|mofou|mofão|nodão|novão|ovão|pojo|pojou|pomão|popó|poucão|pousão|povão|rao|rião|roa-o|roas|roaz|rodão|rogão|romão|rotou|roço|soa-o|soai|soas|sobão|socão|sonão|sorão|sou-o|souto|soutão|sovo|toa-o|toado|toai|toam|toar|tocão|todão|togo|togou|tojão|tolão|tomão|topão|torão|touco|toucou|usão|voa-o|voai|vogo|votão|zoa-o|zoai|zoas|Bono|J-Ax|J.Lo|JOSM|Jock|Totò|jodan|tao
 L	5863	Ele é mulato.
 L	5864	Eles são mulatos.
 L	5865	Ela é mulata.
@@ -10783,9 +10781,9 @@ L	5905	Vão aos EUA
 L	5906	Cerca de 500 km a oeste de Dakar, Senegal
 M	5906	MORFOLOGIK_RULE_PT_PT		27	32	UnknownWord	Possível erro ortográfico	Datar|Dacar|Danar
 L	5907	A ilha de Honshū, Japão.
-M	5907	MORFOLOGIK_RULE_PT_PT		10	16	UnknownWord	Possível erro ortográfico	Honrou
+M	5907	MORFOLOGIK_RULE_PT_PT		10	16	UnknownWord	Possível erro ortográfico	Honrou|Kenshu|Unshu|Wanshu|Haishu|Hanshi|Senshu
 L	5908	A ilha de Honshū (Japão).
-M	5908	MORFOLOGIK_RULE_PT_PT		10	16	UnknownWord	Possível erro ortográfico	Honrou
+M	5908	MORFOLOGIK_RULE_PT_PT		10	16	UnknownWord	Possível erro ortográfico	Honrou|Kenshu|Unshu|Wanshu|Haishu|Hanshi|Senshu
 L	5909	A China é um país emergente.
 L	5910	Vou a Porto Rico.
 L	5911	Vou ao Faro.
@@ -11823,7 +11821,7 @@ L	6501	um bocado.
 M	6501	UPPERCASE_SENTENCE_START		0	2	Other	Esta frase não começa com maiúscula.	Um
 L	6502	vapt vupt.
 M	6502	MORFOLOGIK_RULE_PT_PT		0	4	UnknownWord	Possível erro ortográfico	Baht
-M	6502	MORFOLOGIK_RULE_PT_PT		5	9	UnknownWord	Possível erro ortográfico	bit|blog|tupi|bula|busto|beat|bugs|ups|vulto|UGT|VPN|bug|bus|volt|MPT|bufo|buxo|lupa|UDT|bip|buda|bufa|bule|bum|GPT|UPC|buço|bué|bufe|supo|Alt|PT|UP|baht|bipe|bips|blue|bort|bot|buli|bulo|buss|bués|cup|cups|flat|out|pupa|upa|Kutt|PPT|UPS|Vue
+M	6502	MORFOLOGIK_RULE_PT_PT		5	9	UnknownWord	Possível erro ortográfico	bit|blog|tupi|bula|busto|beat|bugs|ups|vulto|UGT|VPN|bug|bus|volt|MPT|bufo|buxo|lupa|UDT|bip|buda|bufa|bule|bum|GPT|UPC|buço|bué|bufe|supo|Alt|PT|UP|baht|bipe|bips|blue|bort|bot|buli|bulo|buss|bués|cup|cups|flat|out|pupa|upa|Kutt|PPT|UPS|Vue|budo
 L	6503	vira e mexe.
 M	6503	UPPERCASE_SENTENCE_START		0	4	Other	Esta frase não começa com maiúscula.	Vira
 L	6504	a nem-nem
@@ -12067,7 +12065,7 @@ L	6634	Isto praticamente como antes do início da guerra.
 L	6635	Nunca se mente tanto como antes das eleições, durante a guerra e depois da caça.
 L	6636	Enfoques e desfoques no estudo da interação mediada por computador.
 L	6637	Aparece referenciada em documentos escritos desde o ano 911, então nos limites do bispado de Dume.
-M	6637	MORFOLOGIK_RULE_PT_PT		93	97	UnknownWord	Possível erro ortográfico	Duma|Cume|Dum|Lume|Dure|Gume|Fume|Dome|Rume|Dame|Duke|Duce|Deu-me|Dou-me|Dá-me|Dê-me|Dum e
+M	6637	MORFOLOGIK_RULE_PT_PT		93	97	UnknownWord	Possível erro ortográfico	Duma|Cume|Dum|Lume|Dure|Gume|Fume|Dome|Rume|Dame|Duke|Duce|Deu-me|Dou-me|Dá-me|Dê-me|Dum e|Dube
 L	6638	Mordomos-mores do Reino de Portugal.
 L	6639	Tu vê aquela notícia.
 M	6639	VERBO_GENERAL_VERB_AGREEMENT_ERRORS_PT	1	0	5	Other	Possível erro de concordância verbal.	Tu vês
@@ -12849,7 +12847,7 @@ L	7112	Na Grécia e na Itália há grande número de cidades.
 L	7113	Reuniu-se grande número de pessoas.
 L	7114	Por exemplo, um grande número de covas do período Jomon médio (2 800 – 1 900 AC) foi encontrado em Nishida.
 M	7114	PT_WORDINESS_REPLACE_UM_GRANDE_NÚMERO_DE		13	32	Other	"um grande número de" é uma expressão prolixa. É preferível dizer <suggestion>inúmeros</suggestion>, <suggestion>inúmeras</suggestion>, <suggestion>muitos</suggestion> ou <suggestion>muitas</suggestion>.	inúmeros|inúmeras|muitos|muitas
-M	7114	MORFOLOGIK_RULE_PT_PT		50	55	UnknownWord	Possível erro ortográfico	Como|Jogo|Jogos|João|John|Jogou|Tomou|Jon|Simon|Somos|Joan|Ramón|Cólon|Domo|Fomos|Somou|Tomo|Ramon|Gomos|Mórmon|Pomo|Tomos|Gomo|Pomos|Jhon|Gnómon|Joio|Somo|Domou|Jeon|Jimin|Comona|Coupon|Gomona|Homo|Homos|Jogona|Joios|Romona|Somona|Tomona|Common|JSON
+M	7114	MORFOLOGIK_RULE_PT_PT		50	55	UnknownWord	Possível erro ortográfico	Como|Jogo|Jogos|João|John|Jogou|Tomou|Jon|Simon|Somos|Joan|Ramón|Cólon|Domo|Fomos|Somou|Tomo|Ramon|Gomos|Mórmon|Pomo|Tomos|Gomo|Pomos|Jhon|Gnómon|Joio|Somo|Domou|Jeon|Jimin|Comona|Coupon|Gomona|Homo|Homos|Jogona|Joios|Romona|Somona|Tomona|Common|JSON|Jion|Jodan
 L	7115	É uma área marcada por concentrar um grande número de bares e casas de shows.
 M	7115	PT_WORDINESS_REPLACE_UM_GRANDE_NÚMERO_DE		34	53	Other	"um grande número de" é uma expressão prolixa. É preferível dizer <suggestion>inúmeros</suggestion>, <suggestion>inúmeras</suggestion>, <suggestion>muitos</suggestion> ou <suggestion>muitas</suggestion>.	inúmeros|inúmeras|muitos|muitas
 L	7116	Kounopetra é bem equipada para receber um grande número de turistas.
@@ -13537,7 +13535,7 @@ L	7545	Para o acompanharem na árdua tarefa de sepultar o seu filho Larry, morto
 L	7546	ABERTO o testamento do âncora do noticiário ABC NEWS, PETER JENNINGS, morto em agosto de 2005.
 M	7546	MORFOLOGIK_RULE_PT_PT		60	68	UnknownWord	Possível erro ortográfico	JENKINS
 L	7547	Patton também descendia de Hugh Mercer, morto na Batalha de Princeton na Guerra da Independência.
-M	7547	MORFOLOGIK_RULE_PT_PT		0	6	UnknownWord	Possível erro ortográfico	Pastor|Pátio|Pacto|Parto|Patrono|Pato|Pátios|Anton|Watson|Partos|Pasto|Pastos|Patos|Pactos|Patroa|Patrona|Dayton|Pautou|Tattoo|Atto|Patino|Dalton|Mattos|Python|WattzOn|Bâton|Pastona|Pastou|Pastó|Pastós|Pathos|Patona|Patão|Patãos|Pauto|Pautona|Patreon|Patty
+M	7547	MORFOLOGIK_RULE_PT_PT		0	6	UnknownWord	Possível erro ortográfico	Pastor|Pátio|Pacto|Parto|Patrono|Pato|Pátios|Anton|Watson|Partos|Pasto|Pastos|Patos|Pactos|Patroa|Patrona|Dayton|Pautou|Tattoo|Atto|Patino|Dalton|Mattos|Python|WattzOn|Bâton|Pastona|Pastou|Pastó|Pastós|Pathos|Patona|Patão|Patãos|Pauto|Pautona|Patreon|Patty|Saxton
 M	7547	MORFOLOGIK_RULE_PT_PT		27	31	UnknownWord	Possível erro ortográfico	Hugo
 M	7547	MORFOLOGIK_RULE_PT_PT		32	38	UnknownWord	Possível erro ortográfico	Mercê|Merecer|Mercar|Mercês
 L	7548	Suely Kanayama, a "Chica", morta em fins de 1974 num confronto com militares.
@@ -15080,7 +15078,7 @@ L	8453	As equipes fazem 82 jogos na temporada regular, enfrentando duas vezes os
 M	8453	EQUIPES	1	3	10	Other	Grafia do Brasil. Substitua por <suggestion>equipas</suggestion>.	equipas
 L	8454	Durante os dezoito anos seguintes, o Milan disputou apenas duas vezes a Copa dos Campeões.
 L	8455	Formidável explorador, além das quedas de Vitória, atravessou duas vezes o deserto do Kalahari.
-M	8455	MORFOLOGIK_RULE_PT_PT		86	94	UnknownWord	Possível erro ortográfico	Salazar|Falhar|Paladar|Calgary|Calhar|Malharia|Falhara|Talhar|Alagar|Falharia|Malabar|Malhar|Falhará|Alagará|Ralhar|Alagai|Alagara|Alagarei|Alagaria|Alapai|Alapar|Alapara|Alaparei|Alaparia|Alapará|Calhai|Calhara|Calharei|Calharia|Calhará|Chalaçai|Chalaçar|Chalaçara|Chalaçarei|Chalaçaria|Chalaçará|Falhai|Falharei|Faulhai|Gauchai|Malhai|Malhara|Malharei|Malhará|Malpari|Palhar|Ralhai|Ralhara|Ralharei|Ralharia|Ralhará|Talhai|Talhara|Talharei|Talharia|Talhará|Xalavar|Kawasaki|Mata Hari
+M	8455	MORFOLOGIK_RULE_PT_PT		86	94	UnknownWord	Possível erro ortográfico	Salazar|Falhar|Paladar|Calgary|Calhar|Malharia|Falhara|Talhar|Alagar|Falharia|Malabar|Malhar|Falhará|Alagará|Ralhar|Alagai|Alagara|Alagarei|Alagaria|Alapai|Alapar|Alapara|Alaparei|Alaparia|Alapará|Calhai|Calhara|Calharei|Calharia|Calhará|Chalaçai|Chalaçar|Chalaçara|Chalaçarei|Chalaçaria|Chalaçará|Falhai|Falharei|Faulhai|Gauchai|Malhai|Malhara|Malharei|Malhará|Malpari|Palhar|Ralhai|Ralhara|Ralharei|Ralharia|Ralhará|Talhai|Talhara|Talharei|Talharia|Talhará|Xalavar|Kawasaki|Mata Hari|Waza-ari
 L	8456	Este valor de 7,8 % é igual a duas vezes o desvio padrão (2sigma) da distribuição dos resultados.
 M	8456	PERCENT_WITHOUT_SPACE	1	14	19	Other	Escreva a percentagem sem espaços (estilo padrão).	7,8%
 M	8456	SIMPLIFICAR_SER_IGUAL_IGUALAR	1	20	29	Hint	Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.	iguala
@@ -15175,9 +15173,8 @@ M	8515	A_NÍVEL_ADJC_NCC_ADVÉRBIO	1	7	27	Hint	Para conferir mais clareza ao seu
 L	8516	É útil a nível civil e militar.
 M	8516	A_NÍVEL_ADJC_NCC_ADVÉRBIO	2	7	30	Hint	Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.	civil e militarmente
 L	8517	É útil a nível civil, policial e militar.
-M	8517	A_NÍVEL_ADJC_NCC_ADVÉRBIO	3	7	40	Hint	Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.	civil, policial e militarmente|civil, policial e militar
+M	8517	A_NÍVEL_ADJC_NCC_ADVÉRBIO	3	7	40	Hint	Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.	civil, policial e militarmente
 L	8518	A nível nacional de reciclagem
-M	8518	A_NÍVEL_ADJC_NCC_ADVÉRBIO	1	0	16	Hint	Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.	Nacionalmente
 L	8519	Foi-lhe dada demasiada importância até que surgiu uma nova teoria.
 L	8520	Foi-lhe dada demasiada importância até que surgira uma nova teoria.
 L	8521	Foi-lhes dada demasiada importância até que surgiram novas teorias.

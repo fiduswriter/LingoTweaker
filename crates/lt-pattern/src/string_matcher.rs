@@ -152,6 +152,11 @@ impl<'a> RegexpParser<'a> {
         }
     }
 
+    /// Max width of a single character-range (e.g. "a-z" has width 25) that we'll still
+    /// enumerate into a literal set instead of giving up and falling back to full regex
+    /// matching (`StringMatcher.MAX_CHAR_RANGE_WIDTH`).
+    const MAX_CHAR_RANGE_WIDTH: i32 = 64;
+
     fn square_bracket_group(&mut self) -> Result<Values, ()> {
         self.pos += 1; // '['
         let start = self.pos;
@@ -172,7 +177,9 @@ impl<'a> RegexpParser<'a> {
                 self.pos += 1;
                 let invalid = match last {
                     None => true,
-                    Some(last) => next == '\\' || (next as i32 - last as i32) > 10,
+                    Some(last) => {
+                        next == '\\' || (next as i32 - last as i32) > Self::MAX_CHAR_RANGE_WIDTH
+                    }
                 };
                 if invalid {
                     options = None;
@@ -204,6 +211,13 @@ impl<'a> RegexpParser<'a> {
                 if let Some(options) = options.as_mut() {
                     options.push(simple);
                 }
+            }
+            // Guard against several small ranges/chars adding up to something large
+            if options
+                .as_ref()
+                .is_some_and(|o| o.len() > Self::MAX_CHAR_RANGE_WIDTH as usize)
+            {
+                options = None;
             }
         }
         let Some(options) = options else {
@@ -262,5 +276,23 @@ mod tests {
         assert_eq!(possible_values("[abc]x").unwrap().len(), 3);
         assert!(possible_values("a.*b").is_none());
         assert!(possible_values("ab+").is_none());
+    }
+
+    #[test]
+    fn enumerates_char_ranges_up_to_width_64() {
+        // A 26-letter range like [a-z] is now enumerated (cheap set/binary-search
+        // matcher) instead of falling back to full regex matching; see
+        // StringMatcher.MAX_CHAR_RANGE_WIDTH.
+        let expected: Vec<String> = (b'a'..=b'z').map(|c| (c as char).to_string()).collect();
+        assert_eq!(possible_values("[a-z]").unwrap(), expected);
+        let expected: Vec<String> = (b'a'..=b'z').map(|c| format!("a{}", c as char)).collect();
+        assert_eq!(possible_values("a[a-z]").unwrap(), expected);
+        // A range wider than MAX_CHAR_RANGE_WIDTH (64) still isn't enumerated.
+        assert!(possible_values("[ -~]").is_none()); // space (0x20) to tilde (0x7e), width 94 > 64
+                                                     // Quantifiers are a separate mechanism from the character-range cap: even a
+                                                     // small, enumerable class stays unenumerable once it's repeated, since the
+                                                     // resulting set would be unbounded.
+        assert!(possible_values("[a-z]+").is_none());
+        assert!(possible_values("[a-z]*").is_none());
     }
 }

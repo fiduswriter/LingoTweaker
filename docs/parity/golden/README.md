@@ -2,7 +2,9 @@
 
 Pinned Java `CheckDump` output for the full per-language example corpora,
 committed so CI can verify parity without Docker. The Java side is captured
-from the pinned checkout (`7bd1f99b849b`, `maven:3.9-eclipse-temurin-21`)
+from the pinned checkout (`7bd1f99b849b`, `maven:3.9-eclipse-temurin-21`;
+re-captured from `62232853586` for en/de/fr/pt/ca on 2026-09-27 after the
+upstream sync)
 with the same scripts as the interactive oracles; `scripts/ci/parity.sh`
 re-runs the Rust side and diffs against the golden.
 

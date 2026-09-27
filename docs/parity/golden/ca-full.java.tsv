@@ -5697,11 +5697,11 @@ M	3432	CONFUSIO_PASSAT_INFINITIU	1	13	18	Other	¿Volíeu dir <suggestion>bullir<
 L	3433	Tot el que fem està relacionat.
 L	3434	El que va fer contribuí a la grandesa de l'Església.
 L	3435	Les persones es poden concentrà on vulguin.
-M	3435	CONFUSIO_PASSAT_INFINITIU	2	22	31	Other	¿Volíeu dir <suggestion>concentrar</suggestion>? O bé reviseu la puntuació.	concentrar
+M	3435	CONFUSIO_PASSAT_INFINITIU	3	22	31	Other	¿Volíeu dir <suggestion>concentrar</suggestion>? O bé reviseu la puntuació.	concentrar
 L	3436	Esperaven partí avui.
-M	3436	CONFUSIO_PASSAT_INFINITIU	2	10	15	Other	¿Volíeu dir <suggestion>partir</suggestion>? O bé reviseu la puntuació.	partir
+M	3436	CONFUSIO_PASSAT_INFINITIU	3	10	15	Other	¿Volíeu dir <suggestion>partir</suggestion>? O bé reviseu la puntuació.	partir
 L	3437	M'agrada practica esport.
-M	3437	CONFUSIO_PASSAT_INFINITIU	2	9	17	Other	¿Volíeu dir <suggestion>practicar</suggestion>? O bé reviseu la puntuació.	practicar
+M	3437	CONFUSIO_PASSAT_INFINITIU	3	9	17	Other	¿Volíeu dir <suggestion>practicar</suggestion>? O bé reviseu la puntuació.	practicar
 L	3438	poder cal una major col·laboració del públic
 M	3438	UPPERCASE_SENTENCE_START		0	5	Other	Aquesta frase no comença amb majúscula.	Poder
 M	3438	UN_MAJOR_IMPACTE	6	10	33	Hint	Podeu usar una altra expressió per a fer més natural la frase.	una col·laboració més elevada|una col·laboració més gran|més col·laboració
@@ -5718,27 +5718,27 @@ L	3444	Que segueixi en el poder és vergonyós.
 L	3445	Aquest espai de presentar deures ha estat substituit per la xarxa social Edmodo.
 M	3445	MORFOLOGIK_RULE_CA_ES		42	52	UnknownWord	Possible error ortogràfic.	substituït
 L	3446	Si les vols clica!
-M	3446	CONFUSIO_PASSAT_INFINITIU	2	12	17	Other	¿Volíeu dir <suggestion>clicar</suggestion>? O bé reviseu la puntuació.	clicar
+M	3446	CONFUSIO_PASSAT_INFINITIU	3	12	17	Other	¿Volíeu dir <suggestion>clicar</suggestion>? O bé reviseu la puntuació.	clicar
 L	3447	Tot el que desitgem està relacionat.
 L	3448	Ens va deixar fa gairebé tres anys.
 L	3449	Malauradament ens va deixar fa uns anys.
 L	3450	Que no la va deixar fa mesos?
 L	3451	Pot entra quan vulgui.
-M	3451	CONFUSIO_PASSAT_INFINITIU	3	4	9	Other	¿Volíeu dir <suggestion>entrar</suggestion>?	entrar
+M	3451	CONFUSIO_PASSAT_INFINITIU	4	4	9	Other	¿Volíeu dir <suggestion>entrar</suggestion>?	entrar
 L	3452	Deu compartí la idea amb altres.
 M	3452	DEU	11	0	3	Other	¿Volíeu dir <suggestion>Déu</suggestion> (ésser suprem)?	Déu
-M	3452	CONFUSIO_PASSAT_INFINITIU	3	4	12	Other	¿Volíeu dir <suggestion>compartir</suggestion>?	compartir
+M	3452	CONFUSIO_PASSAT_INFINITIU	4	4	12	Other	¿Volíeu dir <suggestion>compartir</suggestion>?	compartir
 L	3453	Deu ser massa.
 L	3454	M'he d'afanyar, el meu vol surt en una hora.
 L	3455	Aquest divendres l'Associació Pots celebra la seva primera gala.
 L	3456	Als deu va decidir deixar de fer-ho.
 L	3457	Deixa de publica en el diari Avui.
-M	3457	CONFUSIO_PASSAT_INFINITIU	4	9	16	Other	¿Volíeu dir <suggestion>publicar</suggestion>?	publicar
+M	3457	CONFUSIO_PASSAT_INFINITIU	5	9	16	Other	¿Volíeu dir <suggestion>publicar</suggestion>?	publicar
 L	3458	Ha de partí de seguida.
-M	3458	CONFUSIO_PASSAT_INFINITIU	4	6	11	Other	¿Volíeu dir <suggestion>partir</suggestion>?	partir
+M	3458	CONFUSIO_PASSAT_INFINITIU	5	6	11	Other	¿Volíeu dir <suggestion>partir</suggestion>?	partir
 L	3459	va deixar de practica esport fa temps.
 M	3459	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	Va
-M	3459	CONFUSIO_PASSAT_INFINITIU	4	13	21	Other	¿Volíeu dir <suggestion>practicar</suggestion>?	practicar
+M	3459	CONFUSIO_PASSAT_INFINITIU	5	13	21	Other	¿Volíeu dir <suggestion>practicar</suggestion>?	practicar
 L	3460	Ara l'estic provat.
 M	3460	CA_SIMPLE_REPLACE_MULTIWORDS_ESTIC_PROVAT		12	18	Other	Possible confusió.	provant
 L	3461	L'anava fet a estones.
@@ -10984,6 +10984,7 @@ M	6497	CONFUSIONS_PRONOMS_FEBLES	5	0	2	Other	¿Volíeu dir <suggestion>els</sugg
 M	6497	EXIGEIX_VERBS_CENTRAL	24	3	9	Hint	Aquest verb no es correspon amb la varietat en ús.	tracti|tracta
 M	6497	CONCORDANCES_DET_ADJ	1	15	26	Other	Error de concordança.	de la mateixa|del mateix|de les mateixes|dels mateixos
 L	6498	La guerra retòrica entra ambdós països
+M	6498	ENTRA_ENTRE	1	19	24	Other	¿Volíeu dir <suggestion>entre</suggestion> (preposició)? "Entra" és una forma del verb 'entrar'.	entre
 L	6499	Però què se'n cregut.
 M	6499	SEN_SHAN	1	9	13	Other	¿Volíeu dir <suggestion>s'han</suggestion> (del verb 'haver')?	s'han
 L	6500	Les enquestes poden estan esbiaixades.
@@ -13304,30 +13305,30 @@ L	7732	És important que ho sigui, com més aviat millor.
 L	7733	Encara que no ho sigui, és benvingut.
 L	7734	Ho sigui o no, el que és clar és que va suposar un abans i un després.
 L	7735	Hi a més.
-M	7735	HI_I	1	0	4	Other	¿Volíeu dir <suggestion>hi ha</suggestion> (del v. 'haver-hi') o <suggestion>i a</suggestion> (conjunció 'i')?	Hi ha|I a
+M	7735	HI_I	2	0	4	Other	¿Volíeu dir <suggestion>hi ha</suggestion> (del v. 'haver-hi') o <suggestion>i a</suggestion> (conjunció 'i')?	Hi ha|I a
 L	7736	Tot hi ser valent, no gosà entrar-hi.
-M	7736	HI_I	7	4	6	Other	¿Volíeu dir <suggestion>tot i</suggestion>?	i
+M	7736	HI_I	8	4	6	Other	¿Volíeu dir <suggestion>tot i</suggestion>?	i
 L	7737	Tot hi que era valent, no gosà entrar-hi.
 M	7737	FINS_I_TOT	4	4	6	Other	¿Volíeu dir <suggestion>tot i que</suggestion>?	i
 L	7738	Vull anar al parc hi fer això.
-M	7738	HI_I	2	18	20	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
+M	7738	HI_I	3	18	20	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
 L	7739	Vull anar al parc hi a la vegada fer això.
-M	7739	HI_I	2	18	20	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
+M	7739	HI_I	3	18	20	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
 L	7740	Tot hi conduïa.
 L	7741	Tot hi anava
 L	7742	Déu n'hi do
 L	7743	És bo hi ho saps.
-M	7743	CA_SIMPLE_REPLACE_MULTIWORDS_HI_HO		6	11	Other	Combinació incorrecta de pronoms febles.	ho|hi
+M	7743	HI_I	1	6	11	Other	Combinació incorrecta de pronoms febles.	i ho|ho|hi
 L	7744	És bo hi els hi porta.
-M	7744	HI_I	3	6	8	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
+M	7744	HI_I	4	6	8	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
 L	7745	Són bons hi n'hi ha molts.
-M	7745	HI_I	3	9	11	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
+M	7745	HI_I	4	9	11	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
 L	7746	És bo hi es va fer popular.
-M	7746	HI_I	4	6	8	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
+M	7746	HI_I	5	6	8	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
 L	7747	Hi creieu-nos: és així.
-M	7747	HI_I	5	0	2	Other	Cal fer servir la conjunció <suggestion>i</suggestion> en comptes del pronom feble "hi".	I
+M	7747	HI_I	6	0	2	Other	Cal fer servir la conjunció <suggestion>i</suggestion> en comptes del pronom feble "hi".	I
 L	7748	M'estranya, tot-hi ser habitual.
-M	7748	HI_I	6	12	18	Other	¿Volíeu dir <suggestion>tot i</suggestion>?	tot i
+M	7748	HI_I	7	12	18	Other	¿Volíeu dir <suggestion>tot i</suggestion>?	tot i
 L	7749	M'estranya, tot hi havent l'avís.
 M	7749	TOT_I_GERUNDI	1	12	25	Other	Construcció incorrecta. Useu el gerundi per a indicar simultaneïtat o "tot i + infinitiu" si és una expressió concessiva.	tot i haver|tot havent|havent
 L	7750	S'hi en l'actualitat passa això, és per algun motiu.
@@ -15846,7 +15847,7 @@ M	9225	UPPERCASE_SENTENCE_START		0	5	Other	Aquesta frase no comença amb majúsc
 L	9226	Tex inèdit de Joan Maragall.
 M	9226	TEX_TEXT	1	0	3	Other	¿Volíeu dir <suggestion>Text</suggestion>?	Text
 L	9227	El sistema tipogràfic TeX.
-M	9227	MORFOLOGIK_RULE_CA_ES		22	25	UnknownWord	Possible error ortogràfic.	Tex|Tax|Té|Tan|Tal|Te|Teu|Text|Ex|Taxa|Ter|Ta|Tel|Taxi|Tem|Tac|Tap|Teix|Ten|Tes|Sex|Tai|Fax|Tam|Lax|Tar|Tat|Tec|Tet|Sax|Tas|Tau|Texà|Tix|Texs|Atax|BTEX|Bex|Dax|Gex|Hex|Max|Pax|Rex|TEA|TEF|TEP|TFX|THX|Tah|Taix|Tak|Tay|Ted|Tei|Teo|Tox|Tux|Tao|Tatx|Taxe|Taxo|Taxà|Taxí|Taxó|Vex|DEX|TMX|De|La|A|El|En|Les|Per|Del|És|Al|Es|Ha|Més|Va|Fa|Ja|Tot|Cap|Em|Fer|Ser|Seu|Bé|Des|Fet|Han|He|Pel|Se|Tant|Van|Ben|Cal|Cas|Et|Hem|Mai|Meu|Res|Tres|Fan|Las|Me|Mes|Pas|Sé|Tu|Vam|Veu|Deu|Has|Mal|Mar|Sap|Tema|Teva|Ve|Web|TV|Baix|Cel|Déu|Fem|Heu|Mas|Pa|Pau|Raó|Rei|Tard|Tens|Val|Cat|Cau|Fe|Feu|Nen|Neu|Pes|Peu|Sa|Sal|Set|Teus|Tren|Tret|Vas|Pep|Ah|Ai|Bar|Be|Ca|Car|Eh|Fas|Fes|Ma|Peix|Sexe|Tele|To|Tram|Veí|Ei|Fam|Gat|Gel|Mel|Na|Nas|Nau|Neix|Net|Pèl|Rep|San|Sec|Tall|Teua|Tic|Toc|Treu|Ver|Ves|Atac|Atès|Au|Bel|Far|Gas|Ix|Pal|Pam|Ram|Rau|Sac|Ses|Tapa|Tast|Temo|Tesi|Tio|Tus|Vau|Ven|Vet|Am|Bat|Bes|Cec|Dar|Dec|Eix|Ep|Eta|Eu|Marx|Mat|Maó|Par|Rac|Ras|Re|Rec|Taca|Tals|Taxes|Tela|Tenc|Terç|Tia|Tió|Tom|Top|Trec|Zel|Tena|aC|As|Bec|Beu|Ce|Deix|Gai|Gen|Jan|Leo|Mac|Mag|Man|Mer|Naix|Nat|Nexe|Nét|Pe|Pet|Rai|Ran|Rap|Rar|Tabú|Teló|Test|Texts|Tip|Tir|Ton|Tos|Tou|Trau|Traç|Tro|Tub|Vel|Xai|Elx|LEC|Sau|TGV|TVC|Atén|Av|Cep|Das|Feix|Fen|Fix|Fox|Met|Pen|Peó|Ral|Reg|Rés|Saxo|Sem|Sexo|Taló|Tata|Taxis|Tebi|Teca|Tedi|Tim|Xat|Xef|Zen|Texas|Aix|Bac|Bas|Dat|Dau|Fai|Faç|Gal|Ge|Ges|Hac|Jaç|Men|Nan|Pag|Pap|Rat|Rem|Ret|Sed|Tacó|Tanc|Teta|Tuc|Tuf|Txec|Xe|Xec|Bau|IEC|Txad|Veo|Baf|Bah|Ban|Box|Ces|Dea|Dem|Fat|Fel|Gag|Get|Jau|Jeu|Led|Matx|Mix|Rel|Saó|Sexy|T'és|Tala|Taps|Tara|Taüt|Tell|Tems|Ties|Tor|Tur|Xal|Xeix|Ça|Seix|Teià|Atea|Ateu|Bai|Bei|Gec|Gep|Ham|Jac|Jet|Lar|Laxa|Lev|Lux|Mec|Mem|Nap|Neó|Pec|Rea|Reu|Seg|Sexi|Tacs|Tais|Talc|Tale|Talp|Tana|Tany|Tato|Thai|Tit|Trac|Tsar|Var|Xap|Úter|Baó|Meix|Bad|Beix|Cai|Cav|Dao|Dux|Iac|Iter|Jec|Làtex|Mau|Oix|Paf|Paó|Ren|Reïx|T'ix|Taba|Tapi|Taxar|Taxat|Teia|Teixó|Uix|Véu|Xa|Zas|Èter|Ítem|Hal|Sas|Tars|Telm|Ceg|Dam|Lat|Lx|Mèu|Sext|Sèu|Taco|Tape|Tapo|Tavà|Temi|Tern|Ters|Tixa|Tol|Tri|Tut|Vag|Barx|Cox|Gau|Gem|STEI|Gab|Hec|Ien|Lai|Laxe|Lek|Mam|Neg|Rad|T'am|Tali|Taní|Tapà|Tats|Teixí|Tels|Tov|Trag|Traí|Tèlex|Tòrax|Tòs|'En|-El|-Em|-En|-Te|1a|1es|2a|2es|3a|3es|4a|4es|5a|5es|5è|6a|6es|6ter|6è|7a|7es|7è|8a|8es|8è|9a|9es|9è|ACX|ADX|AEA|AEB|AEC|AED|AEE|AEG|AEJ|AEK|AEM|AEO|AES|AET|AEV|AFX|AMX|APX|ASX|AVX|Ajax|Atar|Atrax|Ax|BEA|BEH|BEP|BMX|BTE|BTX|Bab|Bak|Bam|Bay|Bea|Bee|Bek|Ber|Beux|Bey|Beç|CCX|CDX|CDex|CE|CEE|CEF|CEJ|CEK|CEO|CEU|CHX|CIX|CMX|CTE|Caix|Can|Caux|Cea|Ceyx|Coëx|Crax|Crex|DMX|Dac|Dag|Dai|Daix|Dal|Dan|Dee|Dej|Den|Deq|Der|Deó|Dix|EEG|EEI|EEM|EI|Eek|Eo|Er|Etah|Evax|FEF|FEN|FEP|FTX|Fau|Faux|Fay|Feux|Fey|Féy|GEO|GRX|Gao|Gap|Garx|Gay|Gea|Geb|Ger|Geu|Gée|HEC|Hao|Haxe|Heh|IEA|IED|IEE|IES|IEV|IX|Ian|Ibex|Ita|Itet|JEF|Jal|Jam|Jaux|Jay|Jem|Jen|Jeux|Jexi|Kai|Kas|Kaş|Ken|Kes|Kexi|Klax|Kêb|LEF|LER|LIX|LX|LXX|Laax|Lae|Laix|Lao|Lay|Laz|Lea|Lee|Lei|Lel|Let|Lexy|Ley|LyX|MDX|MEJ|MEO|MEV|MMX|MSX|MTX|Mab|Mad|Mao|Maux|May|Meux|Mew|Mexy|Mey|Mée|NEC|NEE|NSX|Nar|Nay|NeXT|Ned|Nek|Ner|Nes|New|Next|Ney|Nix|Nox|OEA|OEB|OEC|OED|OEF|OEK|OEP|OES|OET|OLX|OPX|OREX|Oak|Odax|Onex|Ontex|PAX|PBX|PEF|PEN|PEV|PTX|Paa|Pac|Pan|Paí|Pey|Pox|Ptah|QNX|Qaa|Ra|Rab|Raix|Ray|Red|Reux|Riex|Rix|SER|SSX|STEM|Saix|Sam|Saw|Saxa|Say|Seb|Seux|Sfax|Stan|Star|Stay|Step|Styx|TAC|TAE|TB|TBO|TBP|TBR|TC|TCA|TCE|TCM|TCO|TDA|TDK|TDP|TDR|TDT|TEDH|TEPP|TF1|TFF|TFG|TFI|TFM|TG4|TGA|TGC|TGF|TGR|THC|THQ|TIC|TIJ|TIN|TIR|TLB|TLC|TLL|TMA|TMB|TMC|TMH|TMS|TN|TNA|TNC|TNH|TNN|TNS|TNT|TPA|TPI|TPL|TPN|TPP|TPR|TPS|TPV|TRC|TRD|TRF|TRS|TS|TSI|TSJ|TSR|TTF|TTG|TTL|TTP|TV3|TV4|TV5|TVA|TVE|TVG|TVM|TVXQ|TWh|Taal|Tabo|Taci|Tafi|Taft|Taga|Taha|Tain|Taio|Taixà|Taixé|Taiz|Taià|Tajo|Tajà|Tako|Talk|Tank|Tano|Tarn|Tarí|Tasi|Tate|Taus|Taza|Taís|Taïf|Taús|Tcl|TdR|Tebe|Tedax|Tees|Tefé|Teka|Telč|Temù|Teor|Tere|Tess|Tesà|Tete|Teti|Texel|Thaix|Thal|Thar|Theix|Thel|Theux|Tian|Tiel|Tis|Tiu|Tjan|Toad|Toau|Tob|Torx|Toy|Toès|Toén|Treix|Treux|Trey|Tsu|Tuam|Tui|Tuk|Tuy|Tuz|Tver|Twix|Tyr|Tías|UE|UEC|UEM|UEP|UER|UTE|UX|Uta|Utah|Uteix|VTEC|Vaux|Vav|Vaxi|Vaxy|Vay|Vaz|Vea|Vez|Vitex|Vix|Vox|War|Wei|X|XIX|XX|XXX|Xan|XeTeX|Xen|Yam|Yan|Yao|Yap|Yes|ZER|Zap|Zaz|Zea|Zeb|Zed|Zee|Zef|Zyx|Ag|Ata|Ates|Até|Axó|Bav|Bef|Cab|Cag|Catx|Caç|D'ex|Da|Dei|Dta|Dte|E|Ec|Ef|Etes|Etè|Exó|Eó|Fad|Faix|Faxs|Fé|Gam|Gaó|Geo|Hab|Hau|Hes|Hexà|Hexè|Iai|Jab|Jai|Jas|Kan|Kaó|Kea|Ket|L'ex|Lac|Lanx|Laxi|Laxo|Laxà|Laxí|Leu|Manx|Map|Maç|Màx|Nad|Nep|Nev|Oeix|Oïx|Paix|Païx|Peg|Perx|Peà|Pix|Pta|Ptal|Ptes|Ratx|Ref|Retax|Retx|Saxó|Sen|Sexa|Sexà|Sexí|Sta|Séc|T'|T'al|Tabí|Tacà|Talo|Talà|Talí|Tama|Tams|Tang|Taos|Tapí|Tare|Tari|Taro|Tarà|Tasc|Tatxa|Tatxe|Tatxi|Tatxo|Tatxà|Tatxí|Tatxó|Tatà|Tatú|Taul|Tauó|Tave|Taxal|Taxam|Taxau|Taxem|Taxen|Taxeu|Taxin|Taxol|Taxàs|Taxés|Taül|Tebà|Teci|Tecs|Tegà|Teid|Tejú|Teli|Telo|Telà|Telí|Temé|Temí|Tera|Teri|Terr|Tesa|Tese|Teso|Tesí|Tets|Teul|Tib|Tiet|Til|Tin|Tiv|Tixi|Toix|Trav|Traïx|Trem|Trep|Tud|Tul|Tup|Típex|Tòt|Uah|Uau|Uei|Uè|Vac|Ved|Vexa|Vexe|Vexi|Vexo|Vexà|Vexí|Wau|Xac|Xaf|Xam|Xas|Xau|Xaí|Xaï|Xel|Xes|Xeu|Àiax|Àlex|Étel|Àpex|Àtac|Òbex|Ōta|Amex|CES|EXE|EXR|GEXF|LTE|LaTeX|Plex|SEM|SEO|T-Rex|TAP|TCP|TCS|TEAF|TEPT|TIF|TLD|TLS|TPU|TUI|TXT|Temu|XTEC|ZTE|Tmux
+M	9227	MORFOLOGIK_RULE_CA_ES		22	25	UnknownWord	Possible error ortogràfic.	Tex|Tax|Té|Tan|Tal|Te|Teu|Text|Ex|Taxa|Ter|Ta|Tel|Taxi|Tem|Tac|Tap|Teix|Ten|Tes|Sex|Tai|Fax|Tam|Lax|Tar|Tat|Tec|Tet|Sax|Tas|Tau|Texà|Tix|Texs|Atax|BTEX|Bex|Dax|Gex|Hex|Max|Pax|Rex|TEA|TEF|TEP|TFX|THX|Tah|Taix|Tak|Tay|Ted|Tei|Teo|Tox|Tux|Tao|Tatx|Taxe|Taxo|Taxà|Taxí|Taxó|Vex|DEX|TMX|De|La|A|El|En|Les|Per|Del|És|Al|Es|Ha|Més|Va|Fa|Ja|Tot|Cap|Em|Fer|Ser|Seu|Bé|Des|Fet|Han|He|Pel|Se|Tant|Van|Ben|Cal|Cas|Et|Hem|Mai|Meu|Res|Tres|Fan|Las|Me|Mes|Pas|Sé|Tu|Vam|Veu|Deu|Has|Mal|Mar|Sap|Tema|Teva|Ve|Web|TV|Baix|Cel|Déu|Fem|Heu|Mas|Pa|Pau|Raó|Rei|Tard|Tens|Val|Cat|Cau|Fe|Feu|Nen|Neu|Pes|Peu|Sa|Sal|Set|Teus|Tren|Tret|Vas|Pep|Ah|Ai|Bar|Be|Ca|Car|Eh|Fas|Fes|Ma|Peix|Sexe|Tele|To|Tram|Veí|Ei|Fam|Gat|Gel|Mel|Na|Nas|Nau|Neix|Net|Pèl|Rep|San|Sec|Tall|Teua|Tic|Toc|Treu|Ver|Ves|Atac|Atès|Au|Bel|Far|Gas|Ix|Pal|Pam|Ram|Rau|Sac|Ses|Tapa|Tast|Temo|Tesi|Tio|Tus|Vau|Ven|Vet|Am|Bat|Bes|Cec|Dar|Dec|Eix|Ep|Eta|Eu|Marx|Mat|Maó|Par|Rac|Ras|Re|Rec|Taca|Tals|Taxes|Tela|Tenc|Terç|Tia|Tió|Tom|Top|Trec|Zel|Tena|aC|As|Bec|Beu|Ce|Deix|Gai|Gen|Jan|Leo|Mac|Mag|Man|Mer|Naix|Nat|Nexe|Nét|Pe|Pet|Rai|Ran|Rap|Rar|Tabú|Teló|Test|Texts|Tip|Tir|Ton|Tos|Tou|Trau|Traç|Tro|Tub|Vel|Xai|Elx|LEC|Sau|TGV|TVC|Atén|Av|Cep|Das|Feix|Fen|Fix|Fox|Met|Pen|Peó|Ral|Reg|Rés|Saxo|Sem|Sexo|Taló|Tata|Taxis|Tebi|Teca|Tedi|Tim|Xat|Xef|Zen|Texas|Aix|Bac|Bas|Dat|Dau|Fai|Faç|Gal|Ge|Ges|Hac|Jaç|Men|Nan|Pag|Pap|Rat|Rem|Ret|Sed|Tacó|Tanc|Teta|Tuc|Tuf|Txec|Xe|Xec|Bau|IEC|Txad|Veo|Baf|Bah|Ban|Box|Ces|Dea|Dem|Fat|Fel|Gag|Get|Jau|Jeu|Led|Matx|Mix|Rel|Saó|Sexy|T'és|Tala|Taps|Tara|Taüt|Tell|Tems|Ties|Tor|Tur|Xal|Xeix|Ça|Seix|Teià|Atea|Ateu|Bai|Bei|Gec|Gep|Ham|Jac|Jet|Lar|Laxa|Lev|Lux|Mec|Mem|Nap|Neó|Pec|Rea|Reu|Seg|Sexi|Tacs|Tais|Talc|Tale|Talp|Tana|Tany|Tato|Thai|Tit|Trac|Tsar|Var|Xap|Úter|Baó|Meix|Bad|Beix|Cai|Cav|Dao|Dux|Iac|Iter|Jec|Làtex|Mau|Oix|Paf|Paó|Ren|Reïx|T'ix|Taba|Tapi|Taxar|Taxat|Teia|Teixó|Uix|Véu|Xa|Zas|Èter|Ítem|Hal|Sas|Tars|Telm|Ceg|Dam|Lat|Lx|Mèu|Sext|Sèu|Taco|Tape|Tapo|Tavà|Temi|Tern|Ters|Tixa|Tol|Tri|Tut|Vag|Barx|Cox|Gau|Gem|STEI|Gab|Hec|Ien|Lai|Laxe|Lek|Mam|Neg|Rad|T'am|Tali|Taní|Tapà|Tats|Teixí|Tels|Tov|Trag|Traí|Tèlex|Tòrax|Tòs|'En|-El|-Em|-En|-Te|1a|1es|2a|2es|3a|3es|4a|4es|5a|5es|5è|6a|6es|6ter|6è|7a|7es|7è|8a|8es|8è|9a|9es|9è|ACX|ADX|AEA|AEB|AEC|AED|AEE|AEG|AEJ|AEK|AEM|AEO|AES|AET|AEV|AFX|AMX|APX|ASX|AVX|Ajax|Atar|Atrax|Ax|BEA|BEH|BEP|BMX|BTE|BTX|Bab|Bak|Bam|Bay|Bea|Bee|Bek|Ber|Beux|Bey|Beç|CCX|CDX|CDex|CE|CEE|CEF|CEJ|CEK|CEO|CEU|CHX|CIX|CMX|CTE|Caix|Can|Caux|Cea|Ceyx|Coëx|Crax|Crex|DMX|Dac|Dag|Dai|Daix|Dal|Dan|Dee|Dej|Den|Deq|Der|Deó|Dix|EEG|EEI|EEM|EI|Eek|Eo|Er|Etah|Evax|FEF|FEN|FEP|FTX|Fau|Faux|Fay|Feux|Fey|Féy|GEO|GRX|Gao|Gap|Garx|Gay|Gea|Geb|Ger|Geu|Gée|HEC|Hao|Haxe|Heh|IEA|IED|IEE|IES|IEV|IX|Ian|Ibex|Ita|Itet|JEF|Jal|Jam|Jaux|Jay|Jem|Jen|Jeux|Jexi|Kai|Kas|Kaş|Ken|Kes|Kexi|Klax|Kêb|LEF|LER|LIX|LX|LXX|Laax|Lae|Laix|Lao|Lay|Laz|Lea|Lee|Lei|Lel|Let|Lexy|Ley|LyX|MDX|MEJ|MEO|MEV|MMX|MSX|MTX|Mab|Mad|Mao|Maux|May|Meux|Mew|Mexy|Mey|Mée|NEC|NEE|NSX|Nar|Nay|NeXT|Ned|Nek|Ner|Nes|New|Next|Ney|Nix|Nox|OEA|OEB|OEC|OED|OEF|OEK|OEP|OES|OET|OLX|OPX|OREX|Oak|Odax|Onex|Ontex|PAX|PBX|PEF|PEN|PEV|PTX|Paa|Pac|Pan|Paí|Pey|Pox|Ptah|QNX|Qaa|Ra|Rab|Raix|Ray|Red|Reux|Riex|Rix|SER|SSX|STEM|Saix|Sam|Saw|Saxa|Say|Seb|Seux|Sfax|Stan|Star|Stay|Step|Styx|TAC|TAE|TB|TBO|TBP|TBR|TC|TCA|TCE|TCM|TCO|TDA|TDK|TDP|TDR|TDT|TEDH|TEPP|TF1|TFF|TFG|TFI|TFM|TG4|TGA|TGC|TGF|TGR|THC|THQ|TIC|TIJ|TIN|TIR|TLB|TLC|TLL|TMA|TMB|TMC|TMH|TMS|TN|TNA|TNC|TNH|TNN|TNS|TNT|TPA|TPI|TPL|TPN|TPP|TPR|TPS|TPV|TRC|TRD|TRF|TRS|TS|TSI|TSJ|TSR|TTF|TTG|TTL|TTP|TV3|TV4|TV5|TVA|TVE|TVG|TVM|TVXQ|TWh|Taal|Tabo|Taci|Tafi|Taft|Taga|Taha|Tain|Taio|Taixà|Taixé|Taiz|Taià|Tajo|Tajà|Tako|Talk|Tank|Tano|Tarn|Tarí|Tasi|Tate|Taus|Taza|Taís|Taïf|Taús|Tcl|TdR|Tebe|Tedax|Tees|Tefé|Teka|Telč|Temù|Teor|Tere|Tess|Tesà|Tete|Teti|Texel|Thaix|Thal|Thar|Theix|Thel|Theux|Tian|Tiel|Tis|Tiu|Tjan|Toad|Toau|Tob|Torx|Toy|Toès|Toén|Treix|Treux|Trey|Tsu|Tuam|Tui|Tuk|Tuy|Tuz|Tver|Twix|Tyr|Tías|UE|UEC|UEM|UEP|UER|UTE|UX|Uta|Utah|Uteix|VTEC|Vaux|Vav|Vaxi|Vaxy|Vay|Vaz|Vea|Vez|Vitex|Vix|Vox|War|Wei|X|XIX|XX|XXX|Xan|XeTeX|Xen|Yam|Yan|Yao|Yap|Yes|ZER|Zap|Zaz|Zea|Zeb|Zed|Zee|Zef|Zyx|Ag|Ata|Ates|Até|Axó|Bav|Bef|Cab|Cag|Catx|Caç|D'ex|Da|Dei|Dta|Dte|E|Ec|Ef|Etes|Etè|Exó|Eó|Fad|Faix|Faxs|Fé|Gam|Gaó|Geo|Hab|Hau|Hes|Hexà|Hexè|Iai|Jab|Jai|Jas|Kan|Kaó|Kea|Ket|L'ex|Lac|Lanx|Laxi|Laxo|Laxà|Laxí|Leu|Manx|Map|Maç|Màx|Nad|Nep|Nev|Oeix|Oïx|Paix|Païx|Peg|Perx|Peà|Pix|Pta|Ptal|Ptes|Ratx|Ref|Retax|Retx|Saxó|Sen|Sexa|Sexà|Sexí|Sta|Séc|T'|T'al|Tabí|Tacà|Talo|Talà|Talí|Tama|Tams|Tang|Taos|Tapí|Tare|Tari|Taro|Tarà|Tasc|Tatxa|Tatxe|Tatxi|Tatxo|Tatxà|Tatxí|Tatxó|Tatà|Tatú|Taul|Tauó|Tave|Taxal|Taxam|Taxau|Taxem|Taxen|Taxeu|Taxin|Taxol|Taxàs|Taxés|Taül|Tebà|Teci|Tecs|Tegà|Teid|Tejú|Teli|Telo|Telà|Telí|Temé|Temí|Tera|Teri|Terr|Tesa|Tese|Teso|Tesí|Tets|Teul|Tib|Tiet|Til|Tin|Tiv|Tixi|Toix|Trav|Traïx|Trem|Trep|Tud|Tul|Tup|Típex|Tòt|Uah|Uau|Uei|Uè|Vac|Ved|Vexa|Vexe|Vexi|Vexo|Vexà|Vexí|Wau|Xac|Xaf|Xam|Xas|Xau|Xaí|Xaï|Xel|Xes|Xeu|Àiax|Àlex|Étel|Àpex|Àtac|Òbex|Ōta|Amex|CES|EXE|EXR|GEXF|LTE|LaTeX|Plex|SEC|SEM|SEO|T-Rex|TAP|TCP|TCS|TEAF|TEPT|TIF|TLD|TLS|TPU|TUI|TXT|Temu|XTEC|ZTE|Tmux
 L	9228	Se n'anà cap cot.
 M	9228	CAP_COT	1	9	16	Other	¿Volíeu dir <suggestion>capcot</suggestion>?	capcot
 L	9229	amb el cap cot
@@ -17851,7 +17852,7 @@ M	10342	HA_HA	3	8	13	Other	¿Volíeu dir <suggestion>hi han</suggestion>?	hi
 L	10343	No queda em queda res.
 M	10343	VERB_PRONOM_VERB	1	3	9	Other	Repetició probablement incorrecta.	
 L	10344	No l'esmenta l'esmenta mai.
-M	10344	PHRASE_REPETITION	2	3	22	Other	Frase duplicada.	l'esmenta
+M	10344	CATALAN_PHRASE_REPEAT_RULE		3	22	Other	Repetició de paraules (p. ex. «mà mà»)	l'esmenta
 L	10345	Es va aprovar per general unanimitat general.
 M	10345	REPETITION_ADJ_N_ADJ	1	18	44	Other	Possible error: paraula repetida.	unanimitat general|general unanimitat
 L	10346	Projectes R+D+I
@@ -17891,7 +17892,7 @@ L	10364	No obstant això, això no era així.
 M	10364	AIXO_AIXO	2	0	15	Other	Eviteu la repetició de "això" fent servir una altra expressió.	Tanmateix|Així i tot
 L	10365	Malgrat això, o precisament per això.
 L	10366	Benvinguts a casa a casa meva.
-M	10366	PHRASE_REPETITION	1	11	19	Other	Frase duplicada.	a
+M	10366	CATALAN_PHRASE_REPEAT_RULE		11	19	Other	Repetició de paraules (p. ex. «mà mà»)	a
 L	10367	Ho poso com a com a exemple.
 M	10367	A_COM_A	1	8	17	Other	¿Volíeu dir <suggestion>com a</suggestion>?	com
 L	10368	No volia res més que mirar i mirar i mirar.
@@ -17908,7 +17909,7 @@ L	10377	No n'hi havia ni massa ni massa pocs
 L	10378	Podia tractar qualsevol persona de tu a tu a qualsevol nivell.
 L	10379	Eren xifres molt -molt- modestes.
 L	10380	És l'americà l'americà.
-M	10380	PHRASE_REPETITION	2	3	22	Other	Frase duplicada.	l'americà
+M	10380	CATALAN_PHRASE_REPEAT_RULE		3	22	Other	Repetició de paraules (p. ex. «mà mà»)	l'americà
 L	10381	No volia res més que mirar i mirar i mirar.
 L	10382	A més a més, ho va fer a poc a poc.
 L	10383	A diferència dels dels ocells.
@@ -18825,7 +18826,7 @@ M	10879	CA_MULTITOKEN_SPELLING_TWO	1	4	17	Other	Possible error d'ortografia.	Hom
 L	10880	Jonny deep els els va dur.
 M	10880	CA_MULTITOKEN_SPELLING_TWO	1	0	10	Other	Possible error d'ortografia.	Johnny Depp
 L	10881	Un black friday
-M	10881	CA_MULTITOKEN_SPELLING_TWO	1	3	15	Other	Possible error d'ortografia.	Black Friday
+M	10881	CA_CHECKCASE_BLACK_FRIDAY		3	15	Other	Majúscules i minúscules recomanades. Alguns llibres d'estil poden suggerir solucions diferents en alguns casos.	Black Friday
 L	10882	La Comédie Française és el teatre nacional francès.
 M	10882	CA_MULTITOKEN_SPELLING_TWO	1	3	20	Other	Possible error d'ortografia.	Comédie-Française
 L	10883	La Comédie Français és el teatre nacional francès.
@@ -18880,7 +18881,7 @@ M	10904	CA_MULTITOKEN_SPELLING_TWO	2	3	8	Other	Possible error d'ortografia.	Nesb
 L	10905	Harvard university
 M	10905	CA_MULTITOKEN_SPELLING_TWO	2	8	18	Other	Possible error d'ortografia.	University
 L	10906	Black friday
-M	10906	CA_MULTITOKEN_SPELLING_TWO	2	6	12	Other	Possible error d'ortografia.	Friday
+M	10906	CA_CHECKCASE_BLACK_FRIDAY		6	12	Other	Majúscules i minúscules recomanades. Alguns llibres d'estil poden suggerir solucions diferents en alguns casos.	Friday
 L	10907	La Noche
 L	10908	El crack.
 M	10908	CA_SIMPLE_REPLACE_ANGLICISM_CRACK		3	8	Other	Podeu usar la grafia adaptada d'aquest anglicisme.	crac
@@ -20286,7 +20287,7 @@ M	11718	MORFOLOGIK_RULE_CA_ES		17	21	UnknownWord	Possible error ortogràfic.	Lun
 L	11719	Am. Fish. Soc. Spec. Pub
 M	11719	AM_AMB	1	0	2	Other	¿Volíeu dir <suggestion>amb</suggestion>?	Amb
 M	11719	MORFOLOGIK_RULE_CA_ES		4	8	UnknownWord	Possible error ortogràfic.	Fix
-M	11719	MORFOLOGIK_RULE_CA_ES		15	19	UnknownWord	Possible error ortogràfic.	Sec|Sac|Suec|Opac|Pec|Pac|Spa|SpaCy|Space|Spay|Spes|Spas|Séc|2Pac
+M	11719	MORFOLOGIK_RULE_CA_ES		15	19	UnknownWord	Possible error ortogràfic.	Sec|Sac|Suec|Opac|Pec|Pac|Spa|SpaCy|Space|Spay|Spes|Spas|Séc|2Pac|SEC
 L	11720	Aquest soc jo.
 L	11721	L'has molt
 L	11722	Hi ha molta gana
@@ -21490,14 +21491,14 @@ L	12462	Deu et faci bo!
 M	12462	DEU	10	0	3	Other	¿Volíeu dir <suggestion>Déu</suggestion> (ésser suprem)?	Déu
 L	12463	Deu parla per mitjà dels seus profetes.
 M	12463	DEU	11	0	3	Other	¿Volíeu dir <suggestion>Déu</suggestion> (ésser suprem)?	Déu
-M	12463	CONFUSIO_PASSAT_INFINITIU	3	4	9	Other	¿Volíeu dir <suggestion>parlar</suggestion>?	parlar
+M	12463	CONFUSIO_PASSAT_INFINITIU	4	4	9	Other	¿Volíeu dir <suggestion>parlar</suggestion>?	parlar
 L	12464	Deu, a qui venero el dia del Senyor.
 M	12464	DEU	12	0	3	Other	¿Volíeu dir <suggestion>Déu</suggestion> (ésser suprem)?	Déu
 L	12465	Deu que em salva.
 M	12465	DEU	13	0	3	Other	¿Volíeu dir <suggestion>Déu</suggestion> (ésser suprem)?	Déu
 L	12466	Ací tot deu pensa el mateix.
 M	12466	DEU	14	8	11	Other	Amb el sentit de 'tothom', cal escriure <suggestion>tot déu</suggestion>.	déu
-M	12466	CONFUSIO_PASSAT_INFINITIU	2	12	17	Other	¿Volíeu dir <suggestion>pensar</suggestion>? O bé reviseu la puntuació.	pensar
+M	12466	CONFUSIO_PASSAT_INFINITIU	3	12	17	Other	¿Volíeu dir <suggestion>pensar</suggestion>? O bé reviseu la puntuació.	pensar
 L	12467	Tot deu ser igual que abans.
 L	12468	Deu i el dimoni no poden ser una unitat.
 M	12468	DEU	15	0	3	Other	¿Volíeu dir <suggestion>Déu</suggestion> (ésser suprem)?	Déu
@@ -21840,7 +21841,6 @@ M	12664	UPPERCASE_SENTENCE_START		0	7	Other	Aquesta frase no comença amb majús
 L	12665	I fa cosa d'un mes.
 L	12666	Quant guanya al mes?
 L	12667	Quant estalviar al mes?
-M	12667	QUANT_QUAN	1	0	5	Other	¿Volíeu dir <suggestion>quan</suggestion> (moment en el temps) en comptes de "quant" (quantitat)?	Quan
 L	12668	Cal demanar permís un mes i mig abans.
 L	12669	en el mateix mes de 2018.
 M	12669	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	En
@@ -22817,7 +22817,7 @@ M	13238	PRONOMS_FEBLES_SOLTS2	21	5	10	Other	Apostrofació incorrecta.	-te'l
 L	13239	Menja-t'els.
 M	13239	PRONOMS_FEBLES_SOLTS2	21	5	11	Other	Apostrofació incorrecta.	-te'ls
 L	13240	No hi fet res.
-M	13240	HI_I	2	3	5	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
+M	13240	HI_I	3	3	5	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	i
 L	13241	No hi a temps.
 M	13241	PRONOMS_FEBLES_SOLTS2	23	6	7	Other	¿Volíeu dir <suggestion>hi ha</suggestion>?	ha
 L	13242	No hi avia temps.
@@ -22937,7 +22937,7 @@ M	13301	PRONOMS_FEBLES_SOLTS2	53	5	7	Other	Si és del verb 'haver', s'escriu amb
 L	13302	Avisa-ns.
 M	13302	PRONOMS_FEBLES_SOLTS2	54	0	8	Other	Aquest pronom feble s'uneix al verb amb un apòstrof.	Avisa'ns
 L	13303	Ahir l'hi ho vaig dir tot.
-M	13303	CA_SIMPLE_REPLACE_MULTIWORDS_HI_HO		7	12	Other	Combinació incorrecta de pronoms febles.	ho|hi
+M	13303	PRONOMS_FEBLES_SOLTS2	55	5	9	Other	Combinació incorrecta de pronoms febles.	li
 L	13304	Ens mans nostres està.
 M	13304	ENS_EN	2	0	3	Other	¿Volíeu dir <suggestion>en</suggestion>?	En
 L	13305	Volem pujar a n'aquesta muntanya.
@@ -23151,9 +23151,9 @@ M	13436	PRONOMS_FEBLES_SOLTS2	48	5	14	Other	Possible error ortogràfic. S'espera
 L	13437	Ens el porten.
 L	13438	Per exemple, comprar-ne es pronuncia.
 L	13439	Hi el porten.
-M	13439	HI_I	3	0	2	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	I
+M	13439	HI_I	4	0	2	Other	Probablement cal usar la conjunció <suggestion>i</suggestion> i no el pronom "hi".	I
 L	13440	Hi ho hem de fer.
-M	13440	CA_SIMPLE_REPLACE_MULTIWORDS_HI_HO		0	5	Other	Combinació incorrecta de pronoms febles.	Ho|Hi
+M	13440	HI_I	1	0	5	Other	Combinació incorrecta de pronoms febles.	I ho|Ho|Hi
 L	13441	L'hi porten.
 L	13442	arribar-hi ho farà tot més fàcil
 M	13442	UPPERCASE_SENTENCE_START		0	7	Other	Aquesta frase no comença amb majúscula.	Arribar
@@ -23535,7 +23535,7 @@ M	13673	PRONOMS_FEBLES_LIS	4	6	13	Other	Forma de pronom feble incorrecta.	dir-lo
 L	13674	Digueu lis que no és així.
 M	13674	PRONOMS_FEBLES_LIS	5	0	10	Other	Forma de pronom feble incorrecta.	Digueu-los
 L	13675	Volia comunica lis que no és així.
-M	13675	CONFUSIO_PASSAT_INFINITIU	2	6	14	Other	¿Volíeu dir <suggestion>comunicar</suggestion>? O bé reviseu la puntuació.	comunicar
+M	13675	CONFUSIO_PASSAT_INFINITIU	3	6	14	Other	¿Volíeu dir <suggestion>comunicar</suggestion>? O bé reviseu la puntuació.	comunicar
 L	13676	Li's trucaré.
 M	13676	PRONOMS_FEBLES_LIS2	1	0	4	Other	Forma de pronom feble incorrecta.	Els
 L	13677	Els trucaré.
@@ -24904,7 +24904,7 @@ M	14532	CONCORDANCES_DET_NOM	8	4	20	Other	Error de concordança.	aquestes inicia
 M	14532	MORFOLOGIK_RULE_CA_ES		26	29	UnknownWord	Possible error ortogràfic.	ODI|ODA|BDJ|CDJ|DJ|ODB|ODC|ODG|ODL|ODM|ODS|ODT|ODU|ODÍ|ODÓ|PDJ|O DJ
 M	14532	MORFOLOGIK_RULE_CA_ES		30	33	UnknownWord	Possible error ortogràfic.	OT|OL|BTL|FTL|LTL|OCL|ODL|OML|ONL|OPL|OSL|OTG|OTN|OTP|OTT|OTZ|OTI|OTS|OTÓ|PTL|RTL|TTL|ORL|ŌTA
 L	14533	—«R.A.B.» –va dir pep en veu baixa.
-M	14533	MORFOLOGIK_RULE_CA_ES		18	21	UnknownWord	Possible error ortogràfic.	Pep|pap|per|cap|pel|pas|PP|sap|pa|pau|pes|peu|papa|pop|pèl|rep|pal|pam|ep|par|pe|pepa|pet|rap|cep|pen|peó|tap|pag|papà|pip|papi|gep|nap|pec|xap|paf|paó|palp|pape|BEP|FEP|Gap|OEP|OPEP|P2P|PBP|PCP|PDP|PEF|PEN|PEV|PFP|PHP|PKP|PMP|PNP|PPP|PRP|PSP|PTP|PVP|PXP|Paa|Pac|Pan|Pax|Peep|Pepe|Peps|Pey|TEP|UEP|Yap|Zap|map|nep|papo|paps|papu|papí|papú|paí|peg|peà|PGP|de|la|a|el|en|les|del|és|al|es|ha|més|va|fa|ja|però|em|fer|ser|seu|bé|des|fet|han|he|pot|se|té|van|ben|cal|cas|et|hem|mai|meu|part|país|pels|poc|por|res|tan|cop|fan|las|me|mes|sé|tal|vam|veu|deu|has|mal|mar|paper|para|pare|ple|puc|te|teu|ve|web|Pere|camp|cel|déu|fem|heu|mas|pell|pena|pla|prop|raó|rei|val|PSC|cat|cau|fe|feu|nen|neu|parc|peus|plat|preu|sa|sal|saps|set|vas|ah|ai|bar|be|ca|caps|car|cup|eh|fas|fes|ma|mapa|peix|peça|veí|capa|ei|fam|gat|gel|mel|na|nas|nau|net|paga|pati|perd|pi|pit|plau|pol|pou|prat|pren|pres|pur|san|sec|ver|ves|apa|au|bel|drap|ex|far|gas|pals|petó|pic|pro|pues|ram|rau|sac|ses|tapa|ter|vau|ven|vet|PD|PIB|PS|PSM|Paul|Perú|am|bat|bes|cec|dar|dec|eu|mat|maó|paio|peli|pera|plan|pèls|rac|ras|re|rec|serp|ta|tel|top|zel|àpat|aC|as|bec|beu|ce|ceps|gai|gen|jan|leo|mac|mag|man|mer|nat|nét|pair|pala|pams|pans|pany|paro|pega|pela|pesa|pets|pipa|pon|pos|pub|rai|ran|rar|tem|tip|vel|xai|LEC|PC|Sau|av|capó|das|fen|met|pago|pana|papal|papes|pari|pego|pens|peti|peto|pia|pies|piu|plec|prec|pus|ral|reg|rés|sem|tac|ten|tes|up|xapa|xat|xef|xip|xop|zen|CP|Calp|Casp|PNB|bac|bas|dat|dau|fai|faç|gal|ge|ges|hac|jaç|men|nan|naps|nyap|paté|patí|pelo|penó|pesi|peso|peta|pin|plaç|pler|plet|pom|popa|pops|prem|put|rat|rem|reps|ret|sed|sex|tai|xe|xec|IEC|SIP|Veo|baf|bah|ban|ces|dea|dem|fat|fax|fel|gag|get|jau|jeu|led|opac|pagà|papir|paus|peca|pese|pipí|polp|pse|rel|saó|tam|taps|xal|ça|IP|Pier|api|bai|bei|capo|clap|gec|ham|hop|jac|jet|lar|lax|lev|mec|mem|neó|paia|palpa|papis|parl|paït|pete|pipi|poal|pum|rea|reu|seg|talp|tar|tat|tec|tet|var|vip|Alp|Baó|Sax|bad|cai|capi|cav|crep|dao|iac|jec|jeep|mau|palpo|pampa|papat|papàs|pars|pepes|pua|puf|pupa|rapa|ren|tapi|tas|tau|véu|xa|zas|DOP|Papua|Príap|Sas|ceg|dam|gepa|lapó|lat|mèu|naip|oper|paer|papus|parà|past|peco|pegà|pene|pesc|plepa|poa|pod|poem|rape|raps|sapa|sèu|tape|tapo|tex|vag|GP|Gau|Gem|apar|gab|hec|ien|lai|lek|mam|neg|opes|paor|papen|parí|pelà|peno|pers|peüc|pipe|pope|rad|tapà|tax|upa|xapo|xapó|'en|-el|-em|-en|1a|1es|2a|2es|3a|3es|4a|4es|5a|5es|5è|6a|6es|6è|7a|7es|7è|8a|8es|8è|9a|9es|9è|AAP|ABP|ACP|AEA|AEB|AEC|AED|AEE|AEG|AEJ|AEK|AEM|AEO|AEPV|AES|AET|AEV|AHP|AIP|ANP|AQP|ATP|AVP|AWP|AXP|Alep|Ape|Asp|BBP|BDP|BEA|BEH|BFP|BJP|BKP|BLP|BPP|BQP|BRP|BSP|BTP|BUP|BVP|BWP|Bab|Bak|Bam|Bay|Bea|Bee|Bek|Belp|Ber|Bex|Bey|CBP|CCP|CDP|CE|CEE|CEF|CEIP|CEJ|CEK|CEO|CEU|CFP|CGP|CHP|CIP|CJP|CLP|CNP|CPE|CTP|CUP|Can|Cea|DBP|DDP|DMP|DRP|DSP|DTP|DZP|Dac|Dag|Dai|Dal|Dax|Dee|Dej|Den|Deq|Der|EAP|ECP|EEG|EEI|EEM|EI|EPA|EPH|EPI|EPL|EPM|EPO|EPR|ESP|Eek|Eo|Epe|Epes|Epeu|Epi|Eps|Er|Eup|FBP|FCP|FDP|FEF|FEN|FKP|FMP|FNP|FP|FPP|FRP|FTP|FVP|Fau|Fay|Fey|Féy|GDP|GEO|GIP|GMP|GPP|GSP|GVP|Gao|Gay|Gea|Geb|Ger|Gerp|Geu|Gex|GxP|Gée|H5P|HEC|HPP|HRP|Hao|Heh|Hex|I2P|ICP|IEA|IED|IEE|IES|IEV|ILP|IPP|ITP|Ian|JEF|JPEG|Jal|Jam|Japó|Jay|Jem|Jen|KJP|KOP|Kai|Kapi|Kapo|Kas|Kaş|Kemp|Ken|Kepa|Kes|Kêb|LBP|LDP|LEF|LER|LGP|LKP|LLP|LMP|LP|LPE|LPP|LRP|LVP|Lae|Lao|Lapa|Lay|Laz|Lea|Lee|Lei|Lel|Lepe|Let|Ley|Lup|MBP|MCP|MDP|MEJ|MEO|MEV|MFP|MHP|MIP|MNP|MPE|MSP|MTP|MVP|Mab|Mad|Maip|Mao|Max|May|Mew|Mey|Mpal|Mée|NBP|NCP|NEC|NEE|NLP|NNP|NPE|NPP|NRP|NSP|NWP|Nar|Narp|Nay|Nek|Nepi|Ner|Nes|New|Ney|OAP|OBP|OCP|OEA|OEB|OEC|OED|OEF|OEK|OES|OET|OGP|ONP|OPAP|OTP|OUP|Oak|Olp|Opel|Opp|P3|P4|P5|PAC|PAE|PAH|PAJ|PAQ|PAU|PAX|PBA|PBB|PBC|PBD|PBG|PBI|PBJ|PBK|PBL|PBM|PBO|PBS|PBX|PBZ|PCB|PCC|PCD|PCE|PCG|PCH|PCI|PCJ|PCL|PCO|PCPV|PCR|PCS|PCT|PCU|PCW|PDA|PDC|PDF|PDG|PDI|PDJ|PDL|PDR|PDS|PDT|PEPLI|PER1|PER2|PER3|PFA|PFCP|PFD|PFF|PFG|PFI|PFK|PFL|PFN|PFR|PFS|PFT|PGA|PGC|PGD|PGE|PGF|PGH|PGK|PGL|PGN|PGO|PGS|PHA|PHB|PHC|PHL|PHM|PHT|PID|PIE|PII|PJD|PKC|PKD|PKI|PKK|PKN|PKR|PKS|PKU|PLB|PLC|PLD|PLF|PLH|PLJ|PLK|PLM|PLN|PLO|PLR|PLS|PLV|PMA|PMC|PME|PMF|PMH|PMJ|PMK|PML|PMM|PMN|PMO|PMQ|PMR|PMT|PMU|PMW|PNC|PND|PNE|PNF|PNH|PNI|PNM|PNPV|PNR|PNS|PNT|PNU|PNY|PNZ|POG|PPA|PPC|PPD|PPE|PPF|PPG|PPH|PPI|PPJ|PPK|PPL|PPN|PPO|PPR|PPS|PPU|PRB|PRC|PRF|PRG|PRH|PRI|PRJ|PRK|PRL|PRM|PRN|PRQ|PRR|PRS|PRV|PSA|PSB|PSF|PSG|PSH|PSI|PSJ|PSK|PSL|PSO|PSPV|PSS|PTB|PTC|PTD|PTF|PTJ|PTK|PTL|PTM|PTO|PTT|PTU|PTX|PVA|PVC|PVD|PVF|PVG|PVH|PVI|PVL|PVS|PVT|PVV|PWC|PWM|PWN|PWS|PXE|PXM|PZC|PZI|Pabu|Pabó|Pace|Paco|Pacs|Pacé|Pada|Paea|Page|Pagu|Paha|Pain|Paju|Pajó|Paka|Paks|Pale|Palu|Palù|Pama|Pampe|Pang|Pano|Papey|Pappo|Papun|Parr|Pará|Patu|Pava|Pawl|Pazy|Paçà|Peak|Peck|Pecq|Peer|Pegu|Peio|Pelt|Penn|Pepet|Pepin|Pepió|Pepsi|Perk|Perl|Perm|Pest|Peyo|Peyu|Pfam|Picap|Piea|Piet|Pig|Pimp|Pià|Play|Pleš|Po|Poel|Popap|Pox|Pran|Pray|Prey|Prez|Ptah|Pulp|PyPy|Pys|Páez|Péas|Pécs|Pécy|Pévy|Pézy|Pías|QIP|Qaa|RCP|RIP|RMP|RNP|RP|RTP|Ra|Rab|Ray|Red|Rex|S&P|S2P|SAP|SCP|SEPA|SEPI|SEPU|SER|SGP|SNP|SRP|STP|Sam|Sapé|Sapó|Sarp|Saw|Say|Seb|Snap|Soap|Spay|Spes|Step|TBP|TDP|TEA|TEF|TEPP|TPP|TTP|Tah|Tak|Tay|Ted|Tei|Teo|UCP|UDP|UE|UEC|UEM|UER|UMP|UNP|UTP|VNP|Vav|Vay|Vaz|Vea|Vez|War|WebP|Wei|Xan|Xen|Yam|Yan|Yao|Yes|ZER|ZPP|Zaz|Zea|Zeb|Zed|Zee|Zef|Zepa|ag|anap|apag|apam|apan|apeg|apel|app|apt|apèn|arp|bamp|bau|bav|bef|beç|bop|cab|cag|cape|capt|capà|capç|capí|carp|caç|cóp|da|dan|dei|dept|deó|dop|e|ec|ef|eó|fad|flap|fé|gam|gasp|gaó|geo|geps|gesp|grap|hab|hal|hau|hes|iPad|iai|jab|jai|jas|jaup|jup|kan|kaó|kea|ket|kip|lac|leu|llep|mape|mapi|mapo|mapà|mapí|mapó|maç|nad|napa|nape|napi|napo|napà|napí|ned|neps|nev|opa|open|pF|pH|paca|pack|pact|pafs|pafí|paix|pali|pall|palm|palo|palop|palpe|palpi|palps|palpà|palpí|paló|pamé|papam|papar|papau|papem|papeu|papin|papió|paput|papés|papús|pasc|paut|pavó|païa|païm|païu|païx|paül|peal|pecs|pecà|pedi|peia|pele|pelf|pelí|penc|peni|penj|peny|penà|pení|peon|peple|pern|perx|perí|pesà|pesí|petj|petà|petí|peçó|pg|piaf|pial|pian|pipo|pipà|pipó|pir|pisp|pix|pió|pl|plac|plaf|plag|plapa|pleg|pn|poam|poar|poat|poau|poe|poen|poes|poet|poeu|pof|poo|popi|popo|popà|popí|poà|poés|poí|poï|ppm|pral|prea|pree|preg|prei|preo|preà|preí|preï|preó|pru|psi|pst|pta|ptal|ptes|puat|pui|pupí|puó|pàg|pça|pèon|rapi|rapo|rapt|rapà|rapè|rapí|rasp|ref|repap|rept|salp|sen|sip|sop|spa|spas|séc|tao|tapí|trep|tup|uah|uau|uei|upes|urp|uè|vac|ved|vex|wasp|wau|xac|xaf|xam|xape|xapi|xaps|xapà|xapí|xarp|xas|xau|xaí|xaï|xel|xes|xeu|xup|àlep|àpex|òpal|Žíp|2Pac|BP|CES|DEX|ERP|HP|MPEG|NXP|P&G|PAI|PECL|PETA|PNG|PPT|PS2|PS3|PS4|PS5|PSD|PSN|PaaS|Pelé|Plex|PwC|PyPI|REPL|SEM|SEO|SEPC|TAP|TCP|TEPT|UPnP|Yelp|ZIP
+M	14533	MORFOLOGIK_RULE_CA_ES		18	21	UnknownWord	Possible error ortogràfic.	Pep|pap|per|cap|pel|pas|PP|sap|pa|pau|pes|peu|papa|pop|pèl|rep|pal|pam|ep|par|pe|pepa|pet|rap|cep|pen|peó|tap|pag|papà|pip|papi|gep|nap|pec|xap|paf|paó|palp|pape|BEP|FEP|Gap|OEP|OPEP|P2P|PBP|PCP|PDP|PEF|PEN|PEV|PFP|PHP|PKP|PMP|PNP|PPP|PRP|PSP|PTP|PVP|PXP|Paa|Pac|Pan|Pax|Peep|Pepe|Peps|Pey|TEP|UEP|Yap|Zap|map|nep|papo|paps|papu|papí|papú|paí|peg|peà|PGP|de|la|a|el|en|les|del|és|al|es|ha|més|va|fa|ja|però|em|fer|ser|seu|bé|des|fet|han|he|pot|se|té|van|ben|cal|cas|et|hem|mai|meu|part|país|pels|poc|por|res|tan|cop|fan|las|me|mes|sé|tal|vam|veu|deu|has|mal|mar|paper|para|pare|ple|puc|te|teu|ve|web|Pere|camp|cel|déu|fem|heu|mas|pell|pena|pla|prop|raó|rei|val|PSC|cat|cau|fe|feu|nen|neu|parc|peus|plat|preu|sa|sal|saps|set|vas|ah|ai|bar|be|ca|caps|car|cup|eh|fas|fes|ma|mapa|peix|peça|veí|capa|ei|fam|gat|gel|mel|na|nas|nau|net|paga|pati|perd|pi|pit|plau|pol|pou|prat|pren|pres|pur|san|sec|ver|ves|apa|au|bel|drap|ex|far|gas|pals|petó|pic|pro|pues|ram|rau|sac|ses|tapa|ter|vau|ven|vet|PD|PIB|PS|PSM|Paul|Perú|am|bat|bes|cec|dar|dec|eu|mat|maó|paio|peli|pera|plan|pèls|rac|ras|re|rec|serp|ta|tel|top|zel|àpat|aC|as|bec|beu|ce|ceps|gai|gen|jan|leo|mac|mag|man|mer|nat|nét|pair|pala|pams|pans|pany|paro|pega|pela|pesa|pets|pipa|pon|pos|pub|rai|ran|rar|tem|tip|vel|xai|LEC|PC|Sau|av|capó|das|fen|met|pago|pana|papal|papes|pari|pego|pens|peti|peto|pia|pies|piu|plec|prec|pus|ral|reg|rés|sem|tac|ten|tes|up|xapa|xat|xef|xip|xop|zen|CP|Calp|Casp|PNB|bac|bas|dat|dau|fai|faç|gal|ge|ges|hac|jaç|men|nan|naps|nyap|paté|patí|pelo|penó|pesi|peso|peta|pin|plaç|pler|plet|pom|popa|pops|prem|put|rat|rem|reps|ret|sed|sex|tai|xe|xec|IEC|SIP|Veo|baf|bah|ban|ces|dea|dem|fat|fax|fel|gag|get|jau|jeu|led|opac|pagà|papir|paus|peca|pese|pipí|polp|pse|rel|saó|tam|taps|xal|ça|IP|Pier|api|bai|bei|capo|clap|gec|ham|hop|jac|jet|lar|lax|lev|mec|mem|neó|paia|palpa|papis|parl|paït|pete|pipi|poal|pum|rea|reu|seg|talp|tar|tat|tec|tet|var|vip|Alp|Baó|Sax|bad|cai|capi|cav|crep|dao|iac|jec|jeep|mau|palpo|pampa|papat|papàs|pars|pepes|pua|puf|pupa|rapa|ren|tapi|tas|tau|véu|xa|zas|DOP|Papua|Príap|Sas|ceg|dam|gepa|lapó|lat|mèu|naip|oper|paer|papus|parà|past|peco|pegà|pene|pesc|plepa|poa|pod|poem|rape|raps|sapa|sèu|tape|tapo|tex|vag|GP|Gau|Gem|apar|gab|hec|ien|lai|lek|mam|neg|opes|paor|papen|parí|pelà|peno|pers|peüc|pipe|pope|rad|tapà|tax|upa|xapo|xapó|'en|-el|-em|-en|1a|1es|2a|2es|3a|3es|4a|4es|5a|5es|5è|6a|6es|6è|7a|7es|7è|8a|8es|8è|9a|9es|9è|AAP|ABP|ACP|AEA|AEB|AEC|AED|AEE|AEG|AEJ|AEK|AEM|AEO|AEPV|AES|AET|AEV|AHP|AIP|ANP|AQP|ATP|AVP|AWP|AXP|Alep|Ape|Asp|BBP|BDP|BEA|BEH|BFP|BJP|BKP|BLP|BPP|BQP|BRP|BSP|BTP|BUP|BVP|BWP|Bab|Bak|Bam|Bay|Bea|Bee|Bek|Belp|Ber|Bex|Bey|CBP|CCP|CDP|CE|CEE|CEF|CEIP|CEJ|CEK|CEO|CEU|CFP|CGP|CHP|CIP|CJP|CLP|CNP|CPE|CTP|CUP|Can|Cea|DBP|DDP|DMP|DRP|DSP|DTP|DZP|Dac|Dag|Dai|Dal|Dax|Dee|Dej|Den|Deq|Der|EAP|ECP|EEG|EEI|EEM|EI|EPA|EPH|EPI|EPL|EPM|EPO|EPR|ESP|Eek|Eo|Epe|Epes|Epeu|Epi|Eps|Er|Eup|FBP|FCP|FDP|FEF|FEN|FKP|FMP|FNP|FP|FPP|FRP|FTP|FVP|Fau|Fay|Fey|Féy|GDP|GEO|GIP|GMP|GPP|GSP|GVP|Gao|Gay|Gea|Geb|Ger|Gerp|Geu|Gex|GxP|Gée|H5P|HEC|HPP|HRP|Hao|Heh|Hex|I2P|ICP|IEA|IED|IEE|IES|IEV|ILP|IPP|ITP|Ian|JEF|JPEG|Jal|Jam|Japó|Jay|Jem|Jen|KJP|KOP|Kai|Kapi|Kapo|Kas|Kaş|Kemp|Ken|Kepa|Kes|Kêb|LBP|LDP|LEF|LER|LGP|LKP|LLP|LMP|LP|LPE|LPP|LRP|LVP|Lae|Lao|Lapa|Lay|Laz|Lea|Lee|Lei|Lel|Lepe|Let|Ley|Lup|MBP|MCP|MDP|MEJ|MEO|MEV|MFP|MHP|MIP|MNP|MPE|MSP|MTP|MVP|Mab|Mad|Maip|Mao|Max|May|Mew|Mey|Mpal|Mée|NBP|NCP|NEC|NEE|NLP|NNP|NPE|NPP|NRP|NSP|NWP|Nar|Narp|Nay|Nek|Nepi|Ner|Nes|New|Ney|OAP|OBP|OCP|OEA|OEB|OEC|OED|OEF|OEK|OES|OET|OGP|ONP|OPAP|OTP|OUP|Oak|Olp|Opel|Opp|P3|P4|P5|PAC|PAE|PAH|PAJ|PAQ|PAU|PAX|PBA|PBB|PBC|PBD|PBG|PBI|PBJ|PBK|PBL|PBM|PBO|PBS|PBX|PBZ|PCB|PCC|PCD|PCE|PCG|PCH|PCI|PCJ|PCL|PCO|PCPV|PCR|PCS|PCT|PCU|PCW|PDA|PDC|PDF|PDG|PDI|PDJ|PDL|PDR|PDS|PDT|PEPLI|PER1|PER2|PER3|PFA|PFCP|PFD|PFF|PFG|PFI|PFK|PFL|PFN|PFR|PFS|PFT|PGA|PGC|PGD|PGE|PGF|PGH|PGK|PGL|PGN|PGO|PGS|PHA|PHB|PHC|PHL|PHM|PHT|PID|PIE|PII|PJD|PKC|PKD|PKI|PKK|PKN|PKR|PKS|PKU|PLB|PLC|PLD|PLF|PLH|PLJ|PLK|PLM|PLN|PLO|PLR|PLS|PLV|PMA|PMC|PME|PMF|PMH|PMJ|PMK|PML|PMM|PMN|PMO|PMQ|PMR|PMT|PMU|PMW|PNC|PND|PNE|PNF|PNH|PNI|PNM|PNPV|PNR|PNS|PNT|PNU|PNY|PNZ|POG|PPA|PPC|PPD|PPE|PPF|PPG|PPH|PPI|PPJ|PPK|PPL|PPN|PPO|PPR|PPS|PPU|PRB|PRC|PRF|PRG|PRH|PRI|PRJ|PRK|PRL|PRM|PRN|PRQ|PRR|PRS|PRV|PSA|PSB|PSF|PSG|PSH|PSI|PSJ|PSK|PSL|PSO|PSPV|PSS|PTB|PTC|PTD|PTF|PTJ|PTK|PTL|PTM|PTO|PTT|PTU|PTX|PVA|PVC|PVD|PVF|PVG|PVH|PVI|PVL|PVS|PVT|PVV|PWC|PWM|PWN|PWS|PXE|PXM|PZC|PZI|Pabu|Pabó|Pace|Paco|Pacs|Pacé|Pada|Paea|Page|Pagu|Paha|Pain|Paju|Pajó|Paka|Paks|Pale|Palu|Palù|Pama|Pampe|Pang|Pano|Papey|Pappo|Papun|Parr|Pará|Patu|Pava|Pawl|Pazy|Paçà|Peak|Peck|Pecq|Peer|Pegu|Peio|Pelt|Penn|Pepet|Pepin|Pepió|Pepsi|Perk|Perl|Perm|Pest|Peyo|Peyu|Pfam|Picap|Piea|Piet|Pig|Pimp|Pià|Play|Pleš|Po|Poel|Popap|Pox|Pran|Pray|Prey|Prez|Ptah|Pulp|PyPy|Pys|Páez|Péas|Pécs|Pécy|Pévy|Pézy|Pías|QIP|Qaa|RCP|RIP|RMP|RNP|RP|RTP|Ra|Rab|Ray|Red|Rex|S&P|S2P|SAP|SCP|SEPA|SEPI|SEPU|SER|SGP|SNP|SRP|STP|Sam|Sapé|Sapó|Sarp|Saw|Say|Seb|Snap|Soap|Spay|Spes|Step|TBP|TDP|TEA|TEF|TEPP|TPP|TTP|Tah|Tak|Tay|Ted|Tei|Teo|UCP|UDP|UE|UEC|UEM|UER|UMP|UNP|UTP|VNP|Vav|Vay|Vaz|Vea|Vez|War|WebP|Wei|Xan|Xen|Yam|Yan|Yao|Yes|ZER|ZPP|Zaz|Zea|Zeb|Zed|Zee|Zef|Zepa|ag|anap|apag|apam|apan|apeg|apel|app|apt|apèn|arp|bamp|bau|bav|bef|beç|bop|cab|cag|cape|capt|capà|capç|capí|carp|caç|cóp|da|dan|dei|dept|deó|dop|e|ec|ef|eó|fad|flap|fé|gam|gasp|gaó|geo|geps|gesp|grap|hab|hal|hau|hes|iPad|iai|jab|jai|jas|jaup|jup|kan|kaó|kea|ket|kip|lac|leu|llep|mape|mapi|mapo|mapà|mapí|mapó|maç|nad|napa|nape|napi|napo|napà|napí|ned|neps|nev|opa|open|pF|pH|paca|pack|pact|pafs|pafí|paix|pali|pall|palm|palo|palop|palpe|palpi|palps|palpà|palpí|paló|pamé|papam|papar|papau|papem|papeu|papin|papió|paput|papés|papús|pasc|paut|pavó|païa|païm|païu|païx|paül|peal|pecs|pecà|pedi|peia|pele|pelf|pelí|penc|peni|penj|peny|penà|pení|peon|peple|pern|perx|perí|pesà|pesí|petj|petà|petí|peçó|pg|piaf|pial|pian|pipo|pipà|pipó|pir|pisp|pix|pió|pl|plac|plaf|plag|plapa|pleg|pn|poam|poar|poat|poau|poe|poen|poes|poet|poeu|pof|poo|popi|popo|popà|popí|poà|poés|poí|poï|ppm|pral|prea|pree|preg|prei|preo|preà|preí|preï|preó|pru|psi|pst|pta|ptal|ptes|puat|pui|pupí|puó|pàg|pça|pèon|rapi|rapo|rapt|rapà|rapè|rapí|rasp|ref|repap|rept|salp|sen|sip|sop|spa|spas|séc|tao|tapí|trep|tup|uah|uau|uei|upes|urp|uè|vac|ved|vex|wasp|wau|xac|xaf|xam|xape|xapi|xaps|xapà|xapí|xarp|xas|xau|xaí|xaï|xel|xes|xeu|xup|àlep|àpex|òpal|Žíp|2Pac|BP|CES|DEX|ERP|HP|MPEG|NXP|P&G|PAI|PECL|PETA|PNG|PPT|PS2|PS3|PS4|PS5|PSD|PSN|PaaS|Pelé|Plex|PwC|PyPI|REPL|SEC|SEM|SEO|SEPC|TAP|TCP|TEPT|UPnP|Yelp|ZIP
 L	14534	Comarques com El Comtat.
 M	14534	EL_COMTAT	1	14	16	Other	L'article dels topònims s'escriu amb minúscula.	el
 L	14535	El Comtat.
@@ -25098,12 +25098,12 @@ M	14652	GENERALITAT	1	5	16	Other	Com a nom d'una institució, s'escriu en majús
 L	14653	Qui ha de presidir a generalitat?
 M	14653	GENERALITAT	2	21	32	Other	Com a nom d'una institució, s'escriu en majúscula.	Generalitat
 L	14654	A la Península ibèrica.
-M	14654	PENINSULA_IBERICA	1	5	22	Other	Ús incorrecte de majúscules i minúscules.	península Ibèrica
+M	14654	CA_CHECKCASE_PENÍNSULA_IBÈRICA		5	22	Other	Majúscules i minúscules recomanades. Alguns llibres d'estil poden suggerir solucions diferents en alguns casos.	península Ibèrica
 L	14655	A la península Itàlica
 L	14656	A la Península ibèrica.
-M	14656	PENINSULA_IBERICA	1	5	22	Other	Ús incorrecte de majúscules i minúscules.	península Ibèrica
+M	14656	CA_CHECKCASE_PENÍNSULA_IBÈRICA		5	22	Other	Majúscules i minúscules recomanades. Alguns llibres d'estil poden suggerir solucions diferents en alguns casos.	península Ibèrica
 L	14657	A la Península Ibèrica.
-M	14657	PENINSULA_IBERICA	2	5	14	Other	Ús incorrecte de majúscules i minúscules.	península
+M	14657	CA_CHECKCASE_PENÍNSULA_IBÈRICA		5	14	Other	Majúscules i minúscules recomanades. Alguns llibres d'estil poden suggerir solucions diferents en alguns casos.	península
 L	14658	A la península Itàlica
 L	14659	A un Nord-Amèrica.
 M	14659	NORD_AMERICA	1	5	17	Other	Useu <suggestion>nord-americà</suggestion> com a gentilici o <suggestion>Nord-amèrica</suggestion> com a nom de lloc.	nord-americà|Nord-amèrica
@@ -43073,13 +43073,13 @@ L	24678	en teniu prou amb queixar
 M	24678	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	En
 M	24678	VERBS_PRONOMINALS	4	18	25	Other	Aquest verb és pronominal. Probablement hi falta un pronom.	queixar-se
 L	24679	en podem queixar
-M	24679	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	En
+M	24679	VERBS_PRONOMINALS	4	0	2	Other	Aquest verb és pronominal. Probablement hi falta un pronom.	ens en
 L	24680	et queixa
 M	24680	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	Et
 L	24681	em va queixant
 M	24681	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	Em
 L	24682	li va queixar
-M	24682	UPPERCASE_SENTENCE_START		0	2	Other	Aquesta frase no comença amb majúscula.	Li
+M	24682	VERBS_PRONOMINALS	4	0	2	Other	Aquest verb és pronominal. Probablement hi falta un pronom.	se li
 L	24683	hem d'emportar-t'hi
 M	24683	UPPERCASE_SENTENCE_START		0	3	Other	Aquesta frase no comença amb majúscula.	Hem
 L	24684	heu de poder-te queixar

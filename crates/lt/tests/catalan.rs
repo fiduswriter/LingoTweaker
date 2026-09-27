@@ -73,11 +73,14 @@ fn engine_with_rules_today(
         .ok()
 }
 
-/// Stage-3h state: all Catalan stages are wired — 9,347 active XML rules
-/// for ca-ES, 9,379 for ca-ES-valencia and 9,359 for ca-ES-balear, 1,996
+/// Stage-3h state: all Catalan stages are wired — 9,351 active XML rules
+/// for ca-ES, 9,383 for ca-ES-valencia and 9,363 for ca-ES-balear, 1,999
 /// disambiguation rules, and `compile_failures()` = 0 / 0 / 0. The
 /// stage-3 XML-referenced filter classes are all mapped (see
-/// `ca-rule-port.md` for the documented triage stubs).
+/// `ca-rule-port.md` for the documented triage stubs). Counts updated for
+/// the upstream baseline 62232853586 sync (2026-09-27): +4 XML rules
+/// (grammar.xml rework incl. the new phrase-repetition rules) and +3
+/// disambiguation rules (the `gens` rulegroup split).
 #[test]
 fn catalan_engine_state_stage3h() {
     let _guard = engine_guard();
@@ -85,8 +88,8 @@ fn catalan_engine_state_stage3h() {
         eprintln!("skipping: no vendored data");
         return;
     };
-    assert_eq!(ca.active_rule_count(), 9347);
-    assert_eq!(ca.disambig_rule_count(), 1996);
+    assert_eq!(ca.active_rule_count(), 9351);
+    assert_eq!(ca.disambig_rule_count(), 1999);
     assert_eq!(ca.skipped_counts().filters, 0);
     assert!(
         ca.compile_failures().is_empty(),
@@ -100,8 +103,8 @@ fn catalan_engine_state_stage3h() {
     };
     // the valencia variant additionally compiles the 8
     // `getDefaultEnabledRulesForVariant` rulegroups (D-154)
-    assert_eq!(valencia.active_rule_count(), 9379);
-    assert_eq!(valencia.disambig_rule_count(), 1996);
+    assert_eq!(valencia.active_rule_count(), 9383);
+    assert_eq!(valencia.disambig_rule_count(), 1999);
     assert!(valencia.compile_failures().is_empty());
 
     let Some(balear) = engine_variant("ca-ES-balear") else {
@@ -109,7 +112,7 @@ fn catalan_engine_state_stage3h() {
         return;
     };
     // + `EXIGEIX_VERBS_BALEARS` (D-154)
-    assert_eq!(balear.active_rule_count(), 9359);
+    assert_eq!(balear.active_rule_count(), 9363);
     assert!(balear.compile_failures().is_empty());
 }
 
@@ -2361,4 +2364,110 @@ fn catalan_tornar_girar_reflexiu_propagation() {
     assert_eq!((m.range.start, m.range.end), (12, 18));
     let values: Vec<&str> = m.suggestions.iter().map(|s| s.value.as_str()).collect();
     assert_eq!(values, vec!["girar"]);
+}
+
+/// `CatalanPhraseRepeatRule` (port of `CatalanPhraseRepeatRuleTest.testRule`,
+/// 2026-09-27): phrase repetitions of two or three words are flagged with the
+/// repeated phrase as the suggestion; the XML `PHRASE_REPETITION`
+/// antipatterns/exceptions are mirrored by the `ignore` overrides.
+#[test]
+fn catalan_phrase_repeat_rule_matches_java() {
+    let _guard = engine_guard();
+    let Some(engine) = engine_with_rules("ca-ES", &["CATALAN_PHRASE_REPEAT_RULE"]) else {
+        eprintln!("skipping: no vendored data");
+        return;
+    };
+    let correct = [
+        "sobretot, que dubta, que dubta constantment",
+        "no deixava de tenir febre i més febre i més febre",
+        "una vegada i una altra i una altra i una altra. ",
+        "trobava aquest títol o aquest o aquest altre,",
+        " Que sí, que sí, que ho heu llegit bé.",
+        "—Molt bé, molt bé, tampoc cal que et posis així ",
+        "però la mort –la Mort–,",
+        "Que…, que…, ja hi ha les entrades?",
+        "Que et penses que parlant descobrirem res de res de per què som aquí?",
+        "Què es podia esperar d'un… d'un…?",
+        "Imperfet de subjuntiu [é] [é] [í]",
+        "Soc molt vella molt vella, però que encara hi soc.",
+        "No volia res més que mirar i mirar i mirar.",
+        "A més a més, ho va fer a poc a poc.",
+        "A diferència dels dels ocells.",
+        "Puja pas a pas a les ruïnes",
+        "No cal posar 'a' a tot arreu.",
+        "estava malalt de bo de bo",
+        "Ve ací de tant en tant en lloc d'anar allà",
+        "Sigui qui sigui qui vingui.",
+        "D'hereu a hereu a través de generacions.",
+        "De dos en dos en l'arbre.",
+        "No n'hi havia ni massa ni massa pocs",
+        "Podia tractar qualsevol persona de tu a tu a qualsevol nivell.",
+        "Eren xifres molt -molt- modestes.",
+        "Revisa milions de milions de dades en pocs segons.",
+        " © © © © ©",
+        " © © © © © © © ©",
+        "p=(16+16+1+1)",
+        "p=(16 + + 16 + +)",
+        "16 15 15 16 15 15",
+        "16 15 16 15 16 15",
+        "~~~~",
+        "~~~~~~~~",
+        "l'honestedat d’alguns ˗alguns˗ humans.",
+        "Mader | Andorra | Andorra La Vella ",
+        "==== Arc de Zou ====",
+        "============",
+        "=r=r[s[i]]||{}",
+        "Serveis que ofereix el CRAI > Préstec > Préstec, reserves",
+        "total de folis: 166 (III + III + I+ 156 + III) ff.",
+        "📚📚📚📚📚📚📚📚📚📚",
+    ];
+    for sentence in correct {
+        let result = engine.check(sentence).unwrap();
+        assert!(
+            result
+                .matches
+                .iter()
+                .all(|m| m.rule_id != "CATALAN_PHRASE_REPEAT_RULE"),
+            "unexpected phrase-repeat match in {sentence:?}: {:?}",
+            result
+                .matches
+                .iter()
+                .filter(|m| m.rule_id == "CATALAN_PHRASE_REPEAT_RULE")
+                .collect::<Vec<_>>()
+        );
+    }
+    // Engine-level values (probed with `scripts/oracle/ca/probe-rule.sh
+    // ca-ES <sentence> CATALAN_PHRASE_REPEAT_RULE`, 2026-09-27; the probe
+    // prints UTF-16 offsets, converted to the engine's UTF-8 bytes in the
+    // non-ASCII rows). The Java unit test asserts the raw rule matches; the
+    // engine additionally applies Catalan's `RuleMatch.trimMatchEnds`, which
+    // shortens the span and the suggestions by the common leading/trailing
+    // tokens, so the pinned values differ from the upstream test's
+    // expectations.
+    let incorrect: &[(&str, usize, usize, &str)] = &[
+        ("Benvinguts a casa a casa meva.", 11, 19, "a"),
+        ("Benvinguts a la a la casa.", 11, 17, "a"),
+        ("Benvinguts a casa meva a casa meva.", 13, 29, "casa"),
+        ("Ho poso com a com a exemple", 8, 17, "com"),
+        // Java 3..22 / 3..36 (UTF-16)
+        ("És l'americà l'americà.", 4, 25, "l'americà"),
+        (
+            "És d'aconseguir-los d'aconseguir-los així",
+            4,
+            37,
+            "d'aconseguir-los",
+        ),
+        // Java 3..18 (UTF-16) = 19 bytes
+        ("La casa és la casa és verda", 3, 19, "casa"),
+    ];
+    for (sentence, start, end, suggestion) in incorrect {
+        let result = engine.check(sentence).unwrap();
+        let m = result
+            .matches
+            .iter()
+            .find(|m| m.rule_id == "CATALAN_PHRASE_REPEAT_RULE")
+            .unwrap_or_else(|| panic!("no CATALAN_PHRASE_REPEAT_RULE match in {sentence:?}"));
+        assert_eq!((m.range.start, m.range.end), (*start, *end), "{sentence:?}");
+        assert_eq!(m.suggestions[0].value, *suggestion, "{sentence:?}");
+    }
 }

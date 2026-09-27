@@ -14746,6 +14746,23 @@ impl Pipeline {
                     crate::ca::rules::word_repeat_sentence(&analyzed.tokens, start),
                     &mut seen,
                 );
+                // `CatalanPhraseRepeatRule` (2-3-word phrase repetition)
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::ca::rules::PHRASE_REPEAT_ID,
+                        "MISC",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    crate::ca::rules::phrase_repeat_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
                 // `PronomFebleDuplicateRule` (20)
                 append_active(
                     &mut matches,

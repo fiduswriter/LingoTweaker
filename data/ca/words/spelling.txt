@@ -105,6 +105,7 @@ Gnossienne
 Gnossiennes
 Gratacós
 Griezmann
+Gènesi
 H1N1
 HDMI
 HTA
@@ -115,6 +116,7 @@ Henze
 Hiparc
 Humperdinck
 Huysmans
+IAG
 ICAM
 ICAN
 ICC
@@ -161,6 +163,7 @@ Miguel
 Mildenhall
 Minnie
 Modi
+Musikene
 Nakamoto
 Nauru
 Niebuhr
@@ -199,6 +202,7 @@ Rostec
 Russafa
 Russiagate
 Rússies
+SEC
 SEO
 SEPC
 SIAD
@@ -288,6 +292,10 @@ anglocèntric
 anglocèntrica
 anglocèntrics
 anglocèntriques
+angloegipci
+angloegipcis
+angloegípcia
+angloegípcies
 anotador
 anotadora
 anotadores
@@ -295,6 +303,7 @@ anotadors
 antiaccidents
 antibarions
 antibarió
+antibots
 antibúnquer
 anticentre
 anticentres
@@ -338,6 +347,8 @@ aproximantitzacions
 aproximantització
 aquanauta
 aquanautes
+arabopersa
+araboperses
 artistoide
 artistoides
 atomista
@@ -1023,6 +1034,8 @@ cronotip
 cronotips
 cros
 crosos
+crucigramista
+crucigramistes
 cuagrossa
 cuagrosses
 cuagrossos
@@ -3732,6 +3745,9 @@ set
 sets
 setze
 setzes
+showwoman
+showwomans
+showwomen
 si
 sil·labific
 sil·labifica
@@ -3984,6 +4000,10 @@ triples
 tupins
 tupí
 tupís
+turboalimentada
+turboalimentades
+turboalimentat
+turboalimentats
 turbocapitalista
 turbocapitalistes
 turboglobalitzacions

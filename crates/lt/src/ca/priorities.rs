@@ -129,6 +129,7 @@ fn table_priority(id: &str) -> i32 {
         "EXIGEIX_ACCENTUACIO_VALENCIANA" => -120,
         // "APOSTROFACIO_MOT_DESCONEGUT" => -120, // commented out in the legacy engine
         "PHRASE_REPETITION" => -150,
+        "CATALAN_PHRASE_REPEAT_RULE" => -150,
         "SUBSTANTIUS_JUNTS" => -150,
         "REPETITION_ADJ_N_ADJ" => -155,
         "FALTA_ELEMENT_ENTRE_VERBS" => -200,

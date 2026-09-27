@@ -117559,7 +117559,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <antipattern>
                     <token regexp="yes">[a-z].*</token>
                     <token spacebefore="no">(</token>
-                    <token postag="UNKNOWN" regexp="yes">[a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?</token>
+                    <token postag="UNKNOWN" regexp="yes">[a-z]+</token>
                     <token>)</token>
                 </antipattern>
                 <antipattern>
@@ -132278,7 +132278,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <pattern>
                     <marker>
                         <token>c'
-                            <exception scope="previous" postag=" R pers suj 3 . s" postag_regexp="yes"/></token>
+                            <exception scope="previous" postag="R pers suj 3 . s" postag_regexp="yes"/></token>
                         <token postag="V.*" postag_regexp="yes"/>
                     </marker>
                     <token inflected="yes">que</token>

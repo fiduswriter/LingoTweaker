@@ -128,6 +128,300 @@ pub fn word_repeat_sentence(
 }
 
 // ---------------------------------------------------------------------------
+// `PhraseRepeatRule` (core) + `CatalanPhraseRepeatRule`
+// ---------------------------------------------------------------------------
+
+pub const PHRASE_REPEAT_ID: &str = "CATALAN_PHRASE_REPEAT_RULE";
+
+/// Longest phrase length checked first, so a 3-word repetition isn't reported
+/// twice as a shorter 2-word repetition (`PhraseRepeatRule` constants).
+const MAX_PHRASE_LENGTH: usize = 3;
+const MIN_PHRASE_LENGTH: usize = 2;
+
+/// `CatalanPhraseRepeatRule.UNITATS_TEMPS` (from `ca/entities.ent`
+/// `unitats_temps`).
+const UNITATS_TEMPS: [&str; 23] = [
+    "segon",
+    "minut",
+    "hora",
+    "horeta",
+    "dia",
+    "jorn",
+    "jornada",
+    "setmana",
+    "quinzena",
+    "mes",
+    "trimestre",
+    "quadrimestre",
+    "semestre",
+    "any",
+    "lustre",
+    "dècada",
+    "decenni",
+    "segle",
+    "mil·lenni",
+    "mil·lenari",
+    "minutet",
+    "segonet",
+    "anyet",
+];
+
+/// `CatalanPhraseRepeatRule.POSTAG_EXCEPTIONS`.
+const POSTAG_EXCEPTIONS: [&str; 11] = [
+    "_emoji_",
+    "_PUNCT",
+    "_PUNCT_CONT",
+    "allow_repetition",
+    "_allow_repeat",
+    "LOC_ADJ",
+    "LOC_ADV",
+    "LOC_CONJ",
+    "LOC_PREP",
+    "SENT_START",
+    "UNKNOWN",
+];
+
+/// `CatalanPhraseRepeatRule.CONJUNCIONS_I_O`.
+const CONJUNCIONS_I_O: [&str; 2] = ["i", "o"];
+
+/// Fixed 2-, 3- and 4-token antipatterns from the XML rule (as literal surface
+/// sequences).
+const LITERAL_ANTIPATTERNS: [&[&str]; 7] = [
+    &["casa", "a", "casa", "a"],
+    &["boca", "a", "boca", "a"],
+    &["braç", "a", "braç", "a"],
+    &["gen", "a", "gen", "a"],
+    &["de", "tu", "a", "tu"],
+    &["milions", "de"],
+    &["res", "de", "res", "de"],
+];
+
+/// `PhraseRepeatRule.phraseRepeatedAt`: the `phraseLength` tokens starting at
+/// `position` are immediately repeated (case-insensitively) and contain at
+/// least one actual word.
+fn phrase_repeated_at(
+    tokens: &[&lt_core::AnalyzedTokenReadings],
+    position: usize,
+    phrase_length: usize,
+) -> bool {
+    let mut saw_word = false;
+    for j in 0..phrase_length {
+        let first = tokens[position + j];
+        let second = tokens[position + phrase_length + j];
+        if first.is_immunized || second.is_immunized {
+            return false;
+        }
+        if !crate::wordutil::eq_ignore_case(first.surface(), second.surface()) {
+            return false;
+        }
+        if crate::wordutil::is_word(first.surface()) {
+            saw_word = true;
+        }
+    }
+    saw_word
+}
+
+/// `PhraseRepeatRule.phraseToString`.
+fn phrase_to_string(
+    tokens: &[&lt_core::AnalyzedTokenReadings],
+    position: usize,
+    phrase_length: usize,
+) -> String {
+    let mut sb = String::new();
+    for j in 0..phrase_length {
+        if j > 0 && tokens[position + j].whitespace_before {
+            sb.push(' ');
+        }
+        sb.push_str(tokens[position + j].surface());
+    }
+    sb
+}
+
+/// `CatalanPhraseRepeatRule.ignore` (antipatterns + pattern exceptions).
+fn catalan_phrase_repeat_ignore(
+    tokens: &[&lt_core::AnalyzedTokenReadings],
+    position: usize,
+    phrase_length: usize,
+) -> bool {
+    phrase_length == 2 && matches_antipattern(tokens, position, position + phrase_length)
+        || violates_pattern_exceptions(tokens, position, phrase_length)
+}
+
+/// `CatalanPhraseRepeatRule.violatesPatternExceptions`: word1 must not be
+/// punctuation/"i" nor SENT_START/allow_repetition/UNKNOWN/_PUNCT/_PUNCT_CONT/
+/// _emoji_; word2 must additionally not be a LOC_ADV/LOC_ADJ/LOC_PREP/LOC_CONJ
+/// locution; word3/word4 (the repeated pair) must not be such a locution
+/// either.
+fn violates_pattern_exceptions(
+    tokens: &[&lt_core::AnalyzedTokenReadings],
+    position: usize,
+    phrase_length: usize,
+) -> bool {
+    for i in position..position + phrase_length {
+        let first_token = tokens[i];
+        let second_token = tokens[i + phrase_length];
+        let token_str = first_token.surface().to_lowercase();
+        if first_token.is_pos_tag_unknown {
+            return true;
+        }
+        if CONJUNCIONS_I_O.contains(&token_str.as_str())
+            || is_punct_symbol_or_apostrophe(&token_str)
+        {
+            return true;
+        }
+        for postag_exception in POSTAG_EXCEPTIONS {
+            if first_token.has_pos_tag(postag_exception)
+                || second_token.has_pos_tag(postag_exception)
+            {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// `StringTools.isPunctuationOrSymbol` (`[\p{P}\p{S}']`, exactly one char).
+fn is_punct_symbol_or_apostrophe(s: &str) -> bool {
+    static RE: std::sync::LazyLock<regex::Regex> =
+        std::sync::LazyLock::new(|| regex::Regex::new(r"^[\p{P}\p{S}']$").unwrap());
+    RE.is_match(s)
+}
+
+/// `CatalanPhraseRepeatRule.matchesAntipattern`: fixed idioms ("boca a boca a",
+/// "milions de", ...), the "ni massa poc(s)" and "de tu a tu" contexts, the
+/// `&unitats_temps;` + "a" + repeat + "a" construction (e.g. "dia a dia a"),
+/// and quotation marks immediately wrapping a single token. Antipatterns block
+/// the rule wherever they overlap the current 2-word-phrase match.
+fn matches_antipattern(
+    tokens: &[&lt_core::AnalyzedTokenReadings],
+    match_start: usize,
+    match_end: usize,
+) -> bool {
+    let window_start = match_start.saturating_sub(3).max(1);
+    let window_end = (tokens.len() - 1).min(match_end + 3);
+
+    for antipattern in LITERAL_ANTIPATTERNS {
+        let mut j = window_start;
+        while j + antipattern.len() <= window_end + 1 {
+            if sequence_matches(tokens, j, antipattern)
+                && overlaps(j, j + antipattern.len() - 1, match_start, match_end)
+            {
+                return true;
+            }
+            j += 1;
+        }
+    }
+    let mut j = window_start;
+    while j + 3 <= window_end {
+        // <token regexp="yes">&unitats_temps;</token> <token>a</token>
+        // <match no="0"/> <token>a</token>
+        if UNITATS_TEMPS.contains(&tokens[j].surface().to_lowercase().as_str())
+            && crate::wordutil::eq_ignore_case(tokens[j + 1].surface(), "a")
+            && crate::wordutil::eq_ignore_case(tokens[j].surface(), tokens[j + 2].surface())
+            && crate::wordutil::eq_ignore_case(tokens[j + 3].surface(), "a")
+            && overlaps(j, j + 3, match_start, match_end)
+        {
+            return true;
+        }
+        j += 1;
+    }
+    let mut j = window_start;
+    while j + 2 <= window_end {
+        // <token>ni</token> <token>massa</token> <token inflected="yes">poc</token>
+        if crate::wordutil::eq_ignore_case(tokens[j].surface(), "ni")
+            && crate::wordutil::eq_ignore_case(tokens[j + 1].surface(), "massa")
+            && tokens[j + 2].has_lemma("poc")
+            && overlaps(j, j + 2, match_start, match_end)
+        {
+            return true;
+        }
+        // <token postag="_QM_OPEN"/> <token spacebefore="no"/>
+        // <token postag="_QM_CLOSE" spacebefore="no"/>
+        if tokens[j].has_pos_tag("_QM_OPEN")
+            && tokens[j + 2].has_pos_tag("_QM_CLOSE")
+            && overlaps(j, j + 2, match_start, match_end)
+        {
+            return true;
+        }
+        j += 1;
+    }
+    false
+}
+
+/// `CatalanPhraseRepeatRule.sequenceMatches`.
+fn sequence_matches(
+    tokens: &[&lt_core::AnalyzedTokenReadings],
+    start: usize,
+    words: &[&str],
+) -> bool {
+    for (k, word) in words.iter().enumerate() {
+        if !crate::wordutil::eq_ignore_case(tokens[start + k].surface(), word) {
+            return false;
+        }
+    }
+    true
+}
+
+/// `CatalanPhraseRepeatRule.overlaps`.
+fn overlaps(a_start: usize, a_end: usize, b_start: usize, b_end: usize) -> bool {
+    a_start <= b_end && b_start <= a_end
+}
+
+/// `CatalanPhraseRepeatRule.match` (the base `PhraseRepeatRule` scan over the
+/// tokens without whitespace, starting at token 1 after SENT_START).
+pub fn phrase_repeat_sentence(
+    tokens: &[lt_core::AnalyzedTokenReadings],
+    sentence_offset: usize,
+) -> Vec<Match> {
+    let view: Vec<&lt_core::AnalyzedTokenReadings> = tokens
+        .iter()
+        .filter(|t| !t.is_whitespace || t.is_sentence_start || t.is_sentence_end)
+        .collect();
+    let mut rule_matches = Vec::new();
+    let mut i = 1;
+    while i < view.len() {
+        let mut matched_length = 0;
+        // Check longer phrases first so we don't report a 3-word repetition as
+        // a 2-word one
+        for phrase_length in (MIN_PHRASE_LENGTH..=MAX_PHRASE_LENGTH).rev() {
+            if i + 2 * phrase_length <= view.len()
+                && phrase_repeated_at(&view, i, phrase_length)
+                && !catalan_phrase_repeat_ignore(&view, i, phrase_length)
+            {
+                matched_length = phrase_length;
+                break;
+            }
+        }
+        if matched_length > 0 {
+            let first_start = view[i].start_pos;
+            let second_end = view[i + 2 * matched_length - 1].end_pos();
+            let phrase = phrase_to_string(&view, i, matched_length);
+            rule_matches.push(
+                Match::new(
+                    PHRASE_REPEAT_ID,
+                    Option::<String>::None,
+                    "Repetició de paraules (p. ex. «mà mà»)",
+                    Some("Repetició de paraules".to_string()),
+                    TextRange::new(sentence_offset + first_start, sentence_offset + second_end),
+                    vec![lt_core::Suggestion {
+                        value: phrase,
+                        short_description: None,
+                    }],
+                    "MISC",
+                    "Miscel·lània",
+                )
+                .with_metadata("Repetició de paraules", "duplication", 1),
+            );
+            // Skip past the whole repeated span to avoid overlapping matches
+            i += 2 * matched_length;
+        } else {
+            i += 1;
+        }
+    }
+    rule_matches
+}
+
+// ---------------------------------------------------------------------------
 // `CatalanWordRepeatBeginningRule` (23)
 // ---------------------------------------------------------------------------
 

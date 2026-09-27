@@ -75,23 +75,32 @@ GOLDEN="$RS_ROOT/docs/parity/golden"
 # date filters are pinned to the (per-language) golden capture date
 # (golden/README.md)
 TODAY="${PARITY_TODAY:-2026-09-18}"
+# en/de and the other re-captured goldens below were re-captured together on
+# 2026-09-27 after the upstream sync to 62232853586 (StringMatcher enumeration
+# cap + ca/pt/fr/de/en rule data); the date filters must match the capture date.
+if [ "$LANG_ARG" = "en" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-27"
+fi
+if [ "$LANG_ARG" = "de" ] && [ -z "${PARITY_TODAY:-}" ]; then
+  TODAY="2026-09-27"
+fi
 if [ "$LANG_ARG" = "es" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-20"
 fi
 if [ "$LANG_ARG" = "fr" ] && [ -z "${PARITY_TODAY:-}" ]; then
-  TODAY="2026-09-19"
+  TODAY="2026-09-27"
 fi
 if [ "$LANG_ARG" = "it" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-19"
 fi
 if [ "$LANG_ARG" = "pt" ] && [ -z "${PARITY_TODAY:-}" ]; then
-  TODAY="2026-09-20"
+  TODAY="2026-09-27"
 fi
 if [ "$LANG_ARG" = "nl" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-19"
 fi
 if [ "$LANG_ARG" = "ca" ] && [ -z "${PARITY_TODAY:-}" ]; then
-  TODAY="2026-09-20"
+  TODAY="2026-09-27"
 fi
 if [ "$LANG_ARG" = "gl" ] && [ -z "${PARITY_TODAY:-}" ]; then
   TODAY="2026-09-20"
