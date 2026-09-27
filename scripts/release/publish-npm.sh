@@ -58,6 +58,14 @@ args=(--tag "$TAG")
 if [ -n "${NPM_OTP:-}" ]; then
   args+=(--otp "$NPM_OTP")
 fi
+# Re-runs of a moved tag hit "You cannot publish over the previously published
+# versions"; a version that is already on the registry is a skip, not a failure.
+pkg_name="$(node -p "require('./package.json').name")"
+pkg_version="$(node -p "require('./package.json').version")"
+if npm view "$pkg_name@$pkg_version" version >/dev/null 2>&1; then
+  echo "== $pkg_name@$pkg_version is already on npm; nothing to publish"
+  exit 0
+fi
 echo "== npm publish (dist-tag: $TAG)"
 npm publish "${args[@]}" "$@"
 echo "== npm publish complete"

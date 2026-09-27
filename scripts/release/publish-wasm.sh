@@ -57,6 +57,13 @@ args=(--tag "$TAG")
 if [ -n "${NPM_OTP:-}" ]; then
   args+=(--otp "$NPM_OTP")
 fi
+# Re-runs of a moved tag hit "You cannot publish over the previously published
+# versions"; a version that is already on the registry is a skip, not a failure.
+pkg_version="$(node -p "require('$STAGE/package.json').version")"
+if npm view "lingotweaker-wasm@$pkg_version" version >/dev/null 2>&1; then
+  echo "== lingotweaker-wasm@$pkg_version is already on npm; nothing to publish"
+  exit 0
+fi
 echo "== npm publish lingotweaker-wasm (dist-tag: $TAG)"
 npm publish "$STAGE" "${args[@]}" "$@"
 echo "== lingotweaker-wasm publish complete"
