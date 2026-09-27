@@ -200,7 +200,12 @@ unknown-to-the-dictionary readings.
    is wired the same way. `HunspellSpellingRule::is_known()` is exposed through
    `NorwegianSpellingRule::is_known()` for rules that need dictionary lookups,
    and `infer_singular_gender()` (definite-form heuristic, no POS dictionary)
-   is shared by the gender-article rule and `NB_SIN_HANS`.
+   is shared by the gender-article rule and `NB_SIN_HANS`. `NB_EN_ET_GENDER`
+   layers the tagger readings on top of that heuristic: an `adj:*`-tagged
+   token between the article and the noun is never taken for the noun (the
+   "et lite hus" false-positive class), and a distinct `adj:pos:neu` form
+   (no bare `adj:pos`) confirms the neuter gender when the definite-form
+   heuristic is inconclusive.
 
 ### Overlap priorities
 
@@ -231,7 +236,10 @@ Give a new rule a non-zero priority there if it must beat the speller
 - `NB_EN_ET_GENDER` / `NB_SIN_HANS` infer the gender from the *speller's*
   definite forms (`jenten` vs `jentet`); the curated
   `words/gender_overrides.txt` (`noun c`/`noun n`) resolves ambiguous nouns
-  (e.g. `bil`, because `bilet` is an unrelated word). Add overrides there
+  (e.g. `bil`, because `bilet` is an unrelated word). `NB_EN_ET_GENDER`
+  additionally walks past `adj:*`-tagged adjectives before it infers (the
+  intervening adjective is not the noun) and lets a distinct `adj:pos:neu`
+  form confirm the neuter. Add overrides there
   instead of new heuristics; add a word to `ignore.txt` when the dictionary
   lacks a valid form.
 - Compound splitting is a curated hot list (`split_compounds.txt`); the

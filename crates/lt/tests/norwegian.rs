@@ -239,6 +239,13 @@ fn norwegian_correct_sentences() {
         "Ja ja, jeg kommer.",
         "En jente er her.",
         "Jeg ser et hus.",
+        // NB_EN_ET_GENDER adjective-intervention guards: an adjective between
+        // the article and the noun must not be taken for the noun
+        // ("et lite hus" was the false-positive class of the pre-POS
+        // heuristic).
+        "Et lite hus står der.",
+        "Det er et lite problem.",
+        "Han har en gammel bil.",
         "Jeg spiser et eple.",
         "Jeg ser et bord.",
         "En bil står der.",
@@ -260,6 +267,67 @@ fn norwegian_correct_sentences() {
     ] {
         let ids = match_ids(&engine, text);
         assert!(ids.is_empty(), "unexpected matches for {text:?}: {ids:?}");
+    }
+}
+
+/// `NB_EN_ET_GENDER`: the article must match the noun's gender. The genuine
+/// errors fire on the article token with the gender suggestion — also when an
+/// adjective intervenes, which the tagger readings disambiguate (the
+/// pre-POS heuristic took the adjective for the noun and misfired on
+/// "et lite hus"-type phrases). The adjective-intervening correct phrases
+/// must stay clean.
+#[test]
+fn norwegian_en_et_gender() {
+    let _guard = engine_guard();
+    let Some(engine) = engine() else {
+        return;
+    };
+    // (text, article byte range, suggestion)
+    let cases: &[(&str, (usize, usize), &str)] = &[
+        ("Et jente er her.", (0, 2), "en"),
+        ("Jeg ser en hus.", (8, 10), "et"),
+        ("Et bil står der.", (0, 2), "en"),
+        ("En bord er der.", (0, 2), "et"),
+        // the intervening adjective no longer masks the noun's gender
+        ("en liten hus.", (0, 2), "et"),
+        ("En stort hus står der.", (0, 2), "et"),
+        ("en moderne hus.", (0, 2), "et"),
+    ];
+    for (text, (start, end), suggestion) in cases {
+        let m = engine
+            .check(text)
+            .unwrap()
+            .matches
+            .into_iter()
+            .find(|m| m.rule_id == "NB_EN_ET_GENDER")
+            .unwrap_or_else(|| panic!("NB_EN_ET_GENDER did not match {text:?}"));
+        assert_eq!(m.range.start, *start, "range start for {text:?}");
+        assert_eq!(m.range.end, *end, "range end for {text:?}");
+        assert_eq!(
+            m.suggestions.first().map(|s| s.value.as_str()),
+            Some(*suggestion),
+            "suggestion for {text:?}"
+        );
+    }
+    for text in [
+        "Et lite hus står der.",
+        "Vi kjøpte et lite hus.",
+        "Et lite eple ligger på bordet.",
+        "Et lite bord.",
+        "Det er et lite problem.",
+        "Han har en liten hybel.",
+        "En liten jente leser mye.",
+        "Han har en gammel bil.",
+        "Hun kjøpte et stort skjerf.",
+        "Vi bor i et moderne hus.",
+        "Vi har et fornøyd barn.",
+        "Et såkalt problem ble løst.",
+    ] {
+        assert!(
+            !hits(&engine, text, "NB_EN_ET_GENDER"),
+            "unexpected NB_EN_ET_GENDER for {text:?}: {:?}",
+            match_ids(&engine, text)
+        );
     }
 }
 

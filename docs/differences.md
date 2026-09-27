@@ -459,6 +459,10 @@ Upstream's `zh` module also ships `ChineseConfusionProbabilityRule`
 a language model is configured, is not shipped with the data packs and is not
 ported.
 
+**Verdict: intentional — not ported** (2026-09-27: it needs
+an n-gram language model that is not shipped with the data packs and is
+inactive by default, the original code does not hold real information).
+
 ## 14. `DANISH_TYPOS` (Danish, added Wikipedia typo-list rule)
 
 Like #8, this is an **added rule** (intentional, owner-approved, D-310: Rust

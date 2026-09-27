@@ -348,8 +348,17 @@ pub const GENDER_RULE_ID: &str = "NB_EN_ET_GENDER";
 
 /// `NB_EN_ET_GENDER`: the indefinite article must match the noun's gender.
 /// The gender is inferred from the speller dictionary's definite forms
-/// (`jenten` vs `jentet`), so no POS dictionary is needed; the rule only
-/// fires when exactly one of the two definite forms is known.
+/// (`jenten` vs `jentet`); the rule only fires when exactly one of the two
+/// definite forms is known. The tagger readings (data/no/words/tagset.txt)
+/// refine the speller heuristic: an adjective (`adj:*` reading) between the
+/// article and the noun is never taken for the noun — the check walks past
+/// the adjective run to the noun, which removes the "et lite hus" class of
+/// false positives (an adjective's own speller inference used to masquerade
+/// as a common-gender noun). An adjective whose neuter form is distinct
+/// (`adj:pos:neu` without the bare `adj:pos` — stort/gammelt/lite, unlike
+/// the invariant moderne/fornøyd class that carries both readings)
+/// additionally confirms the neuter gender of the noun when the
+/// definite-form heuristic alone is inconclusive.
 pub fn check_en_et_gender(
     tokens: &[AnalyzedTokenReadings],
     sentence_offset: usize,
@@ -366,11 +375,30 @@ pub fn check_en_et_gender(
         if article != "en" && article != "et" {
             continue;
         }
-        let lower = view[i + 1].surface().to_lowercase();
+        // Walk past the intervening adjectives to the noun; a distinctly
+        // neuter adjective form (adj:pos:neu, no bare adj:pos) confirms the
+        // neuter gender for the case the speller cannot decide.
+        let mut noun_idx = i + 1;
+        let mut neuter_confirmed = false;
+        while let Some(token) = view.get(noun_idx) {
+            if !token.has_pos_tag_starting_with("adj:") {
+                break;
+            }
+            if token.has_pos_tag("adj:pos:neu") && !token.has_pos_tag("adj:pos") {
+                neuter_confirmed = true;
+            }
+            noun_idx += 1;
+        }
+        let Some(noun) = view.get(noun_idx) else {
+            continue;
+        };
+        let lower = noun.surface().to_lowercase();
         if lower.chars().count() < 3 || !lower.chars().all(char::is_alphabetic) {
             continue;
         }
-        let Some(gender) = infer_singular_gender(is_known, overrides, &lower) else {
+        let gender = infer_singular_gender(is_known, overrides, &lower)
+            .or_else(|| neuter_confirmed.then_some(NounGender::Neuter));
+        let Some(gender) = gender else {
             continue;
         };
         let suggestion = match (article.as_str(), gender) {
