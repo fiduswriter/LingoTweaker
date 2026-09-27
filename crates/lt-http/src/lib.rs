@@ -4,12 +4,19 @@
 //! Appendix A): UTF-16 code-unit offsets, `ContextTools`-style context
 //! windows (±40 characters), sentence, rule/category metadata, and the
 //! `software`/`warnings`/`language` sections.
+//!
+//! Browser clients such as the official LanguageTool extension hold no host
+//! permissions for the server, so every request runs as a CORS-mode `fetch`
+//! and fails unless the response carries `Access-Control-Allow-Origin`
+//! (LT `ServerTools.setAllowOrigin`, `--allow-origin`). The preflight
+//! handler mirrors `ApiV2.handlePreflight`.
 
-use std::collections::{BTreeMap, HashMap};
+use std::collections::BTreeMap;
 use std::sync::Arc;
 
-use axum::extract::{Query, State};
-use axum::http::StatusCode;
+use axum::extract::{Query, Request, State};
+use axum::http::{header, HeaderValue, Method, StatusCode};
+use axum::middleware::{self, Next};
 use axum::response::{IntoResponse, Json, Response};
 use axum::routing::{get, post};
 use axum::Router;
@@ -29,9 +36,16 @@ pub const SOFTWARE_NAME: &str = "LingoTweaker";
 pub struct AppState {
     pub version: String,
     pub build_date: String,
-    /// one engine per resolved long code (variant selects the spelling
-    /// dictionary); plain `en` is resolved to `en-US` like the LT server
-    engines: HashMap<String, Arc<Engine>>,
+    /// `Access-Control-Allow-Origin` sent on every response. `Some("*")` by
+    /// default so browser clients such as the LanguageTool extension can
+    /// reach a server on localhost; `None` sends no CORS header (the Java
+    /// server's behaviour without `--allow-origin`).
+    pub allow_origin: Option<String>,
+    /// One engine per resolved long code (variant selects the spelling
+    /// dictionary). Kept in declaration order: language resolution prefers
+    /// the earlier variant, so plain `pt` resolves to `pt-PT`, `de` to
+    /// `de-DE`, `en` to `en-US`.
+    engines: Vec<(String, Arc<Engine>)>,
 }
 
 impl AppState {
@@ -39,8 +53,12 @@ impl AppState {
     /// LT server: `en` and `en-US` share the American spelling rule;
     /// `en-GB` uses the British one. German is served as `de-DE` (default),
     /// `de-AT` and `de-CH`.
-    pub fn new(version: impl Into<String>, build_date: impl Into<String>) -> Result<Self, String> {
-        let mut engines = HashMap::new();
+    pub fn new(
+        version: impl Into<String>,
+        build_date: impl Into<String>,
+        allow_origin: Option<String>,
+    ) -> Result<Self, String> {
+        let mut engines = Vec::new();
         for (long_code, variant) in [
             ("en-US", Some("en-US")),
             ("en-GB", Some("en-GB")),
@@ -68,7 +86,7 @@ impl AppState {
                 None => builder,
             };
             if let Ok(engine) = builder.build() {
-                engines.insert(long_code.to_string(), Arc::new(engine));
+                engines.push((long_code.to_string(), Arc::new(engine)));
             }
         }
         if engines.is_empty() {
@@ -77,17 +95,39 @@ impl AppState {
         Ok(Self {
             version: version.into(),
             build_date: build_date.into(),
+            allow_origin,
             engines,
         })
     }
 
     /// State without engines (validation-only endpoints still work).
-    pub fn without_engines(version: impl Into<String>, build_date: impl Into<String>) -> Self {
+    pub fn without_engines(
+        version: impl Into<String>,
+        build_date: impl Into<String>,
+        allow_origin: Option<String>,
+    ) -> Self {
         Self {
             version: version.into(),
             build_date: build_date.into(),
-            engines: HashMap::new(),
+            allow_origin,
+            engines: Vec::new(),
         }
+    }
+
+    /// Resolve a requested language code to an engine entry, LT-style: codes
+    /// are case-insensitive (the browser extension sends `en-us`, `de-de`)
+    /// and a code without variant falls back to the first listed variant of
+    /// that language (`de` → `de-DE`, like `Languages.getLanguageForLanguageCode`
+    /// plus the server's default-variant fallback).
+    pub fn resolve_engine(&self, language: &str) -> Option<&(String, Arc<Engine>)> {
+        let lower = language.to_ascii_lowercase();
+        self.engines.iter().find(|(key, _)| {
+            let key_lower = key.to_ascii_lowercase();
+            key_lower == lower
+                || key_lower
+                    .strip_prefix(&lower)
+                    .is_some_and(|rest| rest.starts_with('-'))
+        })
     }
 }
 
@@ -112,13 +152,50 @@ pub fn router(state: Arc<AppState>) -> Router {
         .route("/v3/words", post(words_not_implemented))
         .route("/v3/words/add", post(words_not_implemented))
         .route("/v3/words/delete", post(words_not_implemented))
-        .with_state(state)
+        .with_state(state.clone())
+        .layer(middleware::from_fn_with_state(state, cors_middleware))
 }
 
 /// Run the server on `addr` (e.g. `0.0.0.0:8081`).
 pub async fn serve(addr: &str, state: AppState) -> std::io::Result<()> {
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, router(Arc::new(state))).await
+}
+
+/// Attach the CORS headers browser clients need and answer OPTIONS
+/// preflights (`ApiV2.handlePreflight`: 204, `Access-Control-Allow-Methods`,
+/// and an echo of the requested headers).
+async fn cors_middleware(
+    State(state): State<Arc<AppState>>,
+    request: Request,
+    next: Next,
+) -> Response {
+    let preflight = request.method() == Method::OPTIONS;
+    let requested_headers = request
+        .headers()
+        .get(header::ACCESS_CONTROL_REQUEST_HEADERS)
+        .cloned();
+    let mut response = if preflight {
+        StatusCode::NO_CONTENT.into_response()
+    } else {
+        next.run(request).await
+    };
+    if let Some(origin) = &state.allow_origin {
+        let headers = response.headers_mut();
+        if let Ok(value) = HeaderValue::from_str(origin) {
+            headers.insert(header::ACCESS_CONTROL_ALLOW_ORIGIN, value);
+        }
+        if preflight {
+            headers.insert(
+                header::ACCESS_CONTROL_ALLOW_METHODS,
+                HeaderValue::from_static("GET, POST, OPTIONS"),
+            );
+            if let Some(requested) = requested_headers {
+                headers.insert(header::ACCESS_CONTROL_ALLOW_HEADERS, requested);
+            }
+        }
+    }
+    response
 }
 
 async fn languages() -> Json<Value> {
@@ -185,33 +262,52 @@ fn split_csv(value: &Option<String>) -> Vec<String> {
         .unwrap_or_default()
 }
 
-/// Build the flat text from the `data` parameter's annotation JSON (LT
-/// `ApiV2.getAnnotatedTextFromJson`): `{"text": ...}` parts concatenate,
-/// `{"markup": ..., "interpretAs": ...}` contributes the interpreted text.
-fn text_from_annotations(json: &str) -> Result<String, String> {
+/// Build the flat text from the `data` parameter, mirroring `ApiV2`: either
+/// a top-level `"text"` string with optional `metaData` (`{"text": ...}` —
+/// the shape the LanguageTool browser extension sends for every check) or
+/// the annotation JSON (`ApiV2.getAnnotatedTextFromJson`): `{"text": ...}`
+/// parts concatenate, `{"markup": ..., "interpretAs": ...}` contributes the
+/// interpreted text.
+fn text_from_data(json: &str) -> Result<String, String> {
     let value: Value =
         serde_json::from_str(json).map_err(|e| format!("'data' is not valid JSON: {e}"))?;
-    let Some(annotation) = value.get("annotation").and_then(|a| a.as_array()) else {
-        return Err("Error parsing annotation JSON: Missing 'annotation' element".to_string());
-    };
-    let mut text = String::new();
-    for part in annotation {
-        if let Some(t) = part.get("text").and_then(|v| v.as_str()) {
-            text.push_str(t);
-        } else if let Some(markup) = part.get("markup").and_then(|v| v.as_str()) {
-            if let Some(interpret) = part.get("interpretAs").and_then(|v| v.as_str()) {
-                text.push_str(interpret);
-            } else {
-                let _ = markup;
+    let text = value.get("text");
+    let annotation = value.get("annotation");
+    match (text, annotation) {
+        (Some(_), Some(_)) => Err(
+            "'data' key in JSON requires either 'text' or 'annotation' key, not both".to_string(),
+        ),
+        (Some(t), None) => Ok(match t {
+            Value::String(s) => s.clone(),
+            other => other.to_string(),
+        }),
+        (None, Some(annotation)) => {
+            let Some(annotation) = annotation.as_array() else {
+                return Err(
+                    "Error parsing annotation JSON: 'annotation' must be a list".to_string()
+                );
+            };
+            let mut text = String::new();
+            for part in annotation {
+                if let Some(t) = part.get("text").and_then(|v| v.as_str()) {
+                    text.push_str(t);
+                } else if let Some(markup) = part.get("markup").and_then(|v| v.as_str()) {
+                    if let Some(interpret) = part.get("interpretAs").and_then(|v| v.as_str()) {
+                        text.push_str(interpret);
+                    } else {
+                        let _ = markup;
+                    }
+                } else {
+                    return Err(
+                        "Error parsing annotation JSON: Elements need to be of type 'text' or 'markup'"
+                            .to_string(),
+                    );
+                }
             }
-        } else {
-            return Err(
-                "Error parsing annotation JSON: Elements need to be of type 'text' or 'markup'"
-                    .to_string(),
-            );
+            Ok(text)
         }
+        (None, None) => Err("'data' key in JSON requires 'text' or 'annotation' key".to_string()),
     }
-    Ok(text)
 }
 
 async fn check_v2(
@@ -274,7 +370,7 @@ async fn check_impl(
     }
     let text = match (&params.text, &params.data) {
         (Some(t), _) => t.clone(),
-        (None, Some(d)) => match text_from_annotations(d) {
+        (None, Some(d)) => match text_from_data(d) {
             Ok(t) => t,
             Err(e) => return error_response(StatusCode::BAD_REQUEST, &e),
         },
@@ -289,9 +385,15 @@ async fn check_impl(
 
     let auto = language == "auto";
     // LT server: a language without variant falls back to its default
-    // variant (`en` → `en-US`)
-    let long_code = if auto || language == "en" {
-        "en-US".to_string()
+    // variant (`en` → `en-US`, `de` → `de-DE`), and codes are matched
+    // case-insensitively (the browser extension sends `en-us`). `auto` has
+    // no real detection in v1: it uses the first `preferredVariants` entry
+    // with an engine, else `en-US`.
+    let long_code = if auto {
+        split_csv(&params.preferred_variants)
+            .iter()
+            .find_map(|variant| state.resolve_engine(variant).map(|(key, _)| key.clone()))
+            .unwrap_or_else(|| "en-US".to_string())
     } else {
         language.to_string()
     };
@@ -301,7 +403,10 @@ async fn check_impl(
             &format!("{long_code} is not a language code known to LingoTweaker."),
         );
     };
-    let Some(engine) = state.engines.get(&long_code) else {
+    let Some((long_code, engine)) = state
+        .resolve_engine(&long_code)
+        .map(|(key, engine)| (key.clone(), Arc::clone(engine)))
+    else {
         return error_response(
             StatusCode::NOT_IMPLEMENTED,
             &format!("The language {long_code} is not supported by this LingoTweaker build yet."),
@@ -565,9 +670,13 @@ mod tests {
 
     fn state() -> Arc<AppState> {
         std::sync::Arc::clone(SHARED_STATE.get_or_init(|| {
-            match AppState::new("0.1.0", "unknown") {
+            match AppState::new("0.1.0", "unknown", Some("*".into())) {
                 Ok(s) => Arc::new(s),
-                Err(_) => Arc::new(AppState::without_engines("0.1.0", "unknown")),
+                Err(_) => Arc::new(AppState::without_engines(
+                    "0.1.0",
+                    "unknown",
+                    Some("*".into()),
+                )),
             }
         }))
     }
@@ -577,14 +686,30 @@ mod tests {
     }
 
     async fn send(router: Router, method: &str, uri: &str, body: &str) -> (StatusCode, Value) {
-        let req = Request::builder()
+        let (status, value, _) = send_with_headers(router, method, uri, body, &[]).await;
+        (status, value)
+    }
+
+    async fn send_with_headers(
+        router: Router,
+        method: &str,
+        uri: &str,
+        body: &str,
+        headers: &[(&str, &str)],
+    ) -> (StatusCode, Value, axum::http::HeaderMap) {
+        let mut builder = Request::builder()
             .method(method)
             .uri(uri)
-            .header("content-type", "application/x-www-form-urlencoded")
-            .body(Body::from(body.to_string()))
+            .header("content-type", "application/x-www-form-urlencoded");
+        for (name, value) in headers {
+            builder = builder.header(*name, *value);
+        }
+        let resp = router
+            .oneshot(builder.body(Body::from(body.to_string())).unwrap())
+            .await
             .unwrap();
-        let resp = router.oneshot(req).await.unwrap();
         let status = resp.status();
+        let response_headers = resp.headers().clone();
         let bytes = axum::body::to_bytes(resp.into_body(), usize::MAX)
             .await
             .unwrap();
@@ -593,7 +718,7 @@ mod tests {
         } else {
             serde_json::from_slice(&bytes).unwrap_or(Value::Null)
         };
-        (status, value)
+        (status, value, response_headers)
     }
 
     #[tokio::test]
@@ -826,5 +951,190 @@ mod tests {
         let router = router(state());
         let (status, _) = send(router, "POST", "/v2/words", "username=u&apikey=k").await;
         assert_eq!(status, StatusCode::NOT_IMPLEMENTED);
+    }
+
+    /// The LanguageTool browser extension sends every check as
+    /// `data={"text": ...}` (never plain `text=`) with lowercase language
+    /// codes and extra parameters like `mode`/`textSessionId`.
+    #[tokio::test]
+    async fn check_accepts_extension_request_shape() {
+        let s = state();
+        let router = router(s.clone());
+        let body = serde_urlencoded::to_string([
+            ("data", r#"{"text":"This is a testt sentence."}"#),
+            ("textSessionId", "instance-1"),
+            ("language", "en-us"),
+            ("mode", "textLevelOnly"),
+            ("disabledRules", "WHITESPACE_RULE"),
+            ("preferredLanguages", "en-us,en-gb"),
+            ("level", "picky"),
+        ])
+        .unwrap();
+        let (status, value) =
+            send(router, "POST", "/v2/check?c=1&instanceId=instance-1", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        assert_eq!(value["language"]["code"], "en-US");
+        if !has_engines(&s) {
+            return;
+        }
+        let ids: Vec<&str> = value["matches"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|m| m["rule"]["id"].as_str().unwrap())
+            .collect();
+        assert!(
+            ids.iter()
+                .any(|i| i.contains("SPELL") || i.contains("TYPOS") || i.contains("MORFOLOGIK")),
+            "expected a spelling rule on 'testt', got {ids:?}"
+        );
+    }
+
+    #[tokio::test]
+    async fn data_rejects_text_and_annotation_together() {
+        let router = router(state());
+        let data = r#"{"text":"hi","annotation":[{"text":"hi"}]}"#;
+        let body = format!(
+            "{}&language=en-US",
+            serde_urlencoded::to_string([("data", data)]).unwrap()
+        );
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert_eq!(
+            value["error"]["message"],
+            "'data' key in JSON requires either 'text' or 'annotation' key, not both"
+        );
+    }
+
+    #[tokio::test]
+    async fn data_requires_text_or_annotation() {
+        let router = router(state());
+        let (status, value) = send(
+            router,
+            "POST",
+            "/v2/check",
+            "data=%7B%7D&language=en-US", // `{}`
+        )
+        .await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert_eq!(
+            value["error"]["message"],
+            "'data' key in JSON requires 'text' or 'annotation' key"
+        );
+    }
+
+    /// The extension holds no host permissions, so its `fetch`es fail unless
+    /// responses carry `Access-Control-Allow-Origin` and OPTIONS preflights
+    /// are answered.
+    #[tokio::test]
+    async fn cors_headers_and_preflight() {
+        let router_languages = router(state());
+        let (status, _, headers) = send_with_headers(
+            router_languages,
+            "GET",
+            "/v2/languages",
+            "",
+            &[(
+                "origin",
+                "moz-extension://62b5d4ad-6f57-4e42-951b-d6b5e6cf9e55",
+            )],
+        )
+        .await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(headers["access-control-allow-origin"], "*");
+
+        let router_preflight = router(state());
+        let (status, _, headers) = send_with_headers(
+            router_preflight,
+            "OPTIONS",
+            "/v2/check",
+            "",
+            &[
+                (
+                    "origin",
+                    "moz-extension://62b5d4ad-6f57-4e42-951b-d6b5e6cf9e55",
+                ),
+                ("access-control-request-method", "POST"),
+                ("access-control-request-headers", "content-type"),
+            ],
+        )
+        .await;
+        assert_eq!(status, StatusCode::NO_CONTENT);
+        assert_eq!(headers["access-control-allow-origin"], "*");
+        assert_eq!(
+            headers["access-control-allow-methods"],
+            "GET, POST, OPTIONS"
+        );
+        assert_eq!(headers["access-control-allow-headers"], "content-type");
+    }
+
+    #[tokio::test]
+    async fn language_codes_are_case_insensitive_with_variant_fallback() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        for (requested, expected) in [
+            ("en-us", "en-US"),
+            ("en", "en-US"),
+            ("de", "de-DE"),
+            ("de-de", "de-DE"),
+            ("DE-AT", "de-AT"),
+            ("pt", "pt-PT"),
+            ("pt-pt", "pt-PT"),
+        ] {
+            let router = router(s.clone());
+            let body =
+                serde_urlencoded::to_string([("text", "test"), ("language", requested)]).unwrap();
+            let (status, value) = send(router, "POST", "/v2/check", &body).await;
+            assert_eq!(status, StatusCode::OK, "language {requested}");
+            assert_eq!(value["language"]["code"], expected, "language {requested}");
+        }
+    }
+
+    /// `language=auto` has no real detection in v1; it honours
+    /// `preferredVariants` like the LT server's auto mode.
+    #[tokio::test]
+    async fn auto_uses_preferred_variants() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        let router_preferred = router(s.clone());
+        let body = serde_urlencoded::to_string([
+            ("text", "test"),
+            ("language", "auto"),
+            ("preferredVariants", "xx-XX,de-DE,en-US"),
+        ])
+        .unwrap();
+        let (status, value) = send(router_preferred, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["language"]["code"], "de-DE");
+
+        // without usable preferred variants the default stays en-US
+        let router_default = router(s);
+        let body = serde_urlencoded::to_string([("text", "test"), ("language", "auto")]).unwrap();
+        let (status, value) = send(router_default, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["language"]["code"], "en-US");
+    }
+
+    #[tokio::test]
+    async fn allow_origin_none_disables_cors_headers() {
+        let state = Arc::new(AppState::without_engines("0.1.0", "unknown", None));
+        let router = router(state);
+        let (status, _, headers) = send_with_headers(
+            router,
+            "GET",
+            "/v2/languages",
+            "",
+            &[(
+                "origin",
+                "moz-extension://62b5d4ad-6f57-4e42-951b-d6b5e6cf9e55",
+            )],
+        )
+        .await;
+        assert_eq!(status, StatusCode::OK);
+        assert!(headers.get("access-control-allow-origin").is_none());
     }
 }

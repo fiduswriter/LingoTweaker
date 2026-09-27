@@ -179,6 +179,12 @@ enum Command {
     Serve {
         #[arg(long, default_value = "0.0.0.0:8081")]
         addr: String,
+        /// Access-Control-Allow-Origin to send on every response ('*' lets
+        /// browser clients such as the LanguageTool extension connect; pass
+        /// an empty string to send no CORS header, like the LT server
+        /// without --allow-origin)
+        #[arg(long, default_value = "*")]
+        allow_origin: String,
     },
     /// Run the example corpus against the engine and report per-rule hits
     /// (primary parity gate, plan §9.1).
@@ -236,7 +242,7 @@ fn main() -> Result<()> {
         } => cmd_analyze(&cli, *lang, *raw, text.clone(), file.clone()),
         Command::Examples { lang, out } => cmd_examples(&cli, lang, out.clone()),
         Command::Inventory { lang, rules, json } => cmd_inventory(&cli, lang, *rules, *json),
-        Command::Serve { addr } => cmd_serve(addr.clone()),
+        Command::Serve { addr, allow_origin } => cmd_serve(addr.clone(), allow_origin.clone()),
         Command::Smoke {
             lang,
             corpus,
@@ -668,14 +674,24 @@ fn cmd_inventory(cli: &Cli, lang_code: &str, list_rules: bool, as_json: bool) ->
     Ok(())
 }
 
-fn cmd_serve(addr: String) -> Result<()> {
-    let state = match lt_http::AppState::new(env!("CARGO_PKG_VERSION"), "unknown") {
-        Ok(s) => s,
-        Err(e) => {
-            eprintln!("warning: {e}; serving validation-only endpoints");
-            lt_http::AppState::without_engines(env!("CARGO_PKG_VERSION"), "unknown")
-        }
+fn cmd_serve(addr: String, allow_origin: String) -> Result<()> {
+    let allow_origin = if allow_origin.is_empty() {
+        None
+    } else {
+        Some(allow_origin)
     };
+    let state =
+        match lt_http::AppState::new(env!("CARGO_PKG_VERSION"), "unknown", allow_origin.clone()) {
+            Ok(s) => s,
+            Err(e) => {
+                eprintln!("warning: {e}; serving validation-only endpoints");
+                lt_http::AppState::without_engines(
+                    env!("CARGO_PKG_VERSION"),
+                    "unknown",
+                    allow_origin,
+                )
+            }
+        };
     let runtime = tokio::runtime::Runtime::new()?;
     runtime.block_on(async move {
         println!("listening on http://{addr}");
