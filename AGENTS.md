@@ -180,31 +180,106 @@ native engine too.
 
 ## Releasing
 
-One prerelease version is shared by crates.io, PyPI and npm:
+One version is shared by crates.io, PyPI and npm — stable (`0.2.2`) or
+prerelease (`0.1.0-alpha.N`):
 
 ```sh
-scripts/release/set-version.sh 0.1.0-alpha.2
-git commit -am "release: 0.1.0-alpha.2"
-git tag v0.1.0-alpha.2 && git push origin main v0.1.0-alpha.2
+scripts/release/set-version.sh 0.2.3     # bumps Cargo workspace + facade, npm package.jsons, lt-wasm pack.js
+cargo check --workspace                  # sanity-check the version bump
+git commit -am "release: 0.2.3"
+git tag v0.2.3 && git push origin main v0.2.3
 ```
 
-`.github/workflows/release.yml` runs on `v*` tags and calls
-`scripts/release/*.sh` (kept separate from `ci.yml`; it does not touch the
-`parity` or `test` jobs). The publishable crates.io set is the `lt-*` libraries
-plus the `lingotweaker` facade (`crates/lingotweaker`, its own workspace, shares
-the engine source through a symlink and keeps `[lib] name = "lt"`). `lt` cannot
-be published (the crates.io name is taken); `lt-cli`/`lt-http`/`lt-py`/`lt-node`/
-`lt-wasm` set `publish = false`.
+The tag must match the workspace version: `release.yml`'s `version` job fails
+the whole run otherwise. The PyPI/PEP 440 version (`0.1.0-alpha.N` ->
+`0.1.0aN`) is derived from the Cargo version by maturin; nothing to bump by
+hand. `scripts/release/set-version.sh` is the only version bump step; never
+edit version strings manually.
 
-Runtime data ships separately from the engine packages (they stay code-only):
-npm `lingotweaker-data` (a code-only loader; `packPath(lang)` resolves the pack
-from an installed per-language `lingotweaker-data-<lang>` package, mirroring
-the PyPI model), one PyPI distribution `lingotweaker-data-<lang>` per language
-(auto-discovered by `lt_py`), and per-language `packs/*.pack.gz` +
-`data/*.tar.gz` + `manifest.json` assets on each GitHub Release. Package
+Pushing a `v*` tag triggers `.github/workflows/release.yml` (kept separate
+from `ci.yml`; it does not touch the `parity` or `test` jobs). The jobs:
+
+- `version` — validates tag against `Cargo.toml`, derives the PEP 440 version.
+- `data` — builds the per-language data assets and attaches them to the
+  GitHub Release (`scripts/release/publish-data.sh <tag>`).
+- `npm-data` — publishes the code-only `lingotweaker-data` npm loader plus one
+  `lingotweaker-data-<lang>` package per language
+  (`scripts/release/publish-npm-data.sh`); must land before the npm engine
+  packages, which depend on the loader.
+- `crates` — publishes the crates.io set in dependency order, then verifies
+  the published facade builds from a scratch project
+  (`scripts/release/publish-crates.sh` + `verify-crates.sh`).
+- `pypi` — builds the `lingotweaker` wheel + sdist with maturin, smoke-tests
+  it, uploads with `skip-existing`.
+- `npm`, `wasm` — the Node addon and the wasm package; both smoke-test before
+  publishing and pick the dist-tag from the version (stable -> `latest`,
+  prerelease -> `next`).
+
+Every job is gated to `github.server_url == 'https://github.com'`: Forgejo
+reads the same workflow file, but secrets, OIDC trusted publishing and GitHub
+Release assets exist only on GitHub, so a tag pushed there neither publishes
+nor fails.
+
+Secrets: `CARGO_REGISTRY_TOKEN` (crates.io) and `PYPI_API_TOKEN` (the
+`lingotweaker` wheel and the per-language PyPI data packages). npm publishes
+via OIDC trusted publishing (configured per package on npmjs.com: owner
+`fiduswriter`, repo `LingoTweaker`, workflow `release.yml`), so no npm token.
+
+### crates.io
+
+The publishable set is the `lt-*` libraries plus the `lingotweaker` facade
+(`crates/lingotweaker`, its own workspace, shares the engine source through a
+symlink and keeps `[lib] name = "lt"`). `lt` cannot be published (the
+crates.io name is taken); `lt-cli`/`lt-http`/`lt-py`/`lt-node`/`lt-wasm` set
+`publish = false`.
+
+`publish-crates.sh` publishes in dependency order (`lt-core`, `lt-data`,
+`lt-lindera`, `lt-tokenize`, `lt-tagger`, `lt-pattern`, `lt-disambig`,
+`lt-spell`, `lt-chunk`), then the facade, and is resumable: on a re-run,
+already-published crates come back as "already exists" and the loop continues.
+
+Two known transient failures, both fixed by re-running — never move or
+re-push the tag:
+
+- **crates.io sparse-index propagation.** A crate published moments earlier
+  may not resolve for the next crate in the chain: "failed to select a version
+  for the requirement `lt-core = "^X.Y.Z"`". Wait a minute, then re-run the
+  failed job (`gh run rerun <run-id> --failed`, or the "Re-run failed jobs"
+  button). The script skips the crates already up and continues where it
+  stopped.
+- **New-crate rate limit (HTTP 429).** crates.io names a retry time in the
+  response; re-run the script after it.
+
+After the crates job goes green, `verify-crates.sh <version>` proves the
+published facade `cargo add`s and builds from crates.io.
+
+### Runtime data
+
+Engine packages ship code only; runtime data is published per language: the
+npm `lingotweaker-data` loader + `lingotweaker-data-<lang>` packages
+(`packPath(lang)` resolves the pack from the installed per-language package,
+mirroring the PyPI model), one PyPI distribution `lingotweaker-data-<lang>`
+per language (auto-discovered by `lt_py`), and per-language `packs/*.pack.gz`
++ `data/*.tar.gz` + `manifest.json` assets on each GitHub Release. Package
 readmes must say that engine packages ship code only and how to get the data
 (`LT_DATA_DIR` accepts a directory or a pack file). The npm loader's smoke
 test is `scripts/ci/tests/npm-data-loader-test.sh`.
+
+The npm data packages are versioned with the engine (published by the
+`npm-data` job). The PyPI data packages are versioned **per language** in
+`data/pypi-versions.json` and are deliberately not part of the tag-driven
+release — republishing identical wheels on every engine release would re-trip
+PyPI's new-project rate limit. After changing `data/`, bump only the changed
+languages and publish manually:
+
+```sh
+scripts/release/update-pypi-data-versions.py   # patch-bump changed languages
+git commit -am "data: bump PyPI data versions"
+# then run the `publish-pypi-data` workflow (workflow_dispatch), or:
+scripts/release/publish-pypi-data.sh           # idempotent: skips files already on PyPI
+```
+
+Full detail lives in `scripts/release/README.md`.
 
 ## Conventions
 
