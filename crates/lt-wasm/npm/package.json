@@ -1,6 +1,6 @@
 {
   "name": "lingotweaker-wasm",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "LingoTweaker proofreading engine compiled to WebAssembly (browser and Node)",
   "license": "LGPL-2.1-or-later",
   "repository": {
@@ -22,7 +22,7 @@
   "module": "./web/lt_wasm.js",
   "types": "./web/lt_wasm.d.ts",
   "dependencies": {
-    "lingotweaker-data": "0.2.2"
+    "lingotweaker-data": "0.2.3"
   },
   "exports": {
     ".": {
