@@ -1,13 +1,10 @@
 // Type definitions for the data-pack helpers in pack.js.
 
-/** Default base URL of the per-release GitHub Release data assets. */
-export const DEFAULT_DATA_BASE_URL: string
+/** The URL of the data manifest (`{ <lang>: { file, bytes, sha256 } }`) under `baseUrl`. */
+export function manifestUrl(baseUrl: string): string
 
-/** The URL of the release data manifest (`{ <lang>: { file, bytes, sha256 } }`). */
-export function manifestUrl(baseUrl?: string): string
-
-/** The URL of the gzipped pack for `lang`. */
-export function packUrl(lang: string, baseUrl?: string): string
+/** The URL of the gzipped pack for `lang` under `baseUrl`. */
+export function packUrl(lang: string, baseUrl: string): string
 
 /** Inflate a gzipped pack (browser `DecompressionStream`, else Node `zlib`). */
 export function decompressPack(
@@ -15,12 +12,14 @@ export function decompressPack(
 ): Promise<Uint8Array>
 
 /**
- * Fetch and inflate the pack for `lang` (`en`, `de`, `gn`, …).
+ * Load and inflate the pack for `lang` (`en`, `de`, `gn`, …).
  *
- * Node.js prefers the locally installed `lingotweaker-data-<lang>` data
- * packages; browsers (and any environment without them) fall back to the
- * release assets for this package version. Pass `baseUrl` to use different
- * data.
+ * Without `options.baseUrl` this resolves the pack from the locally
+ * installed `lingotweaker-data-<lang>` npm packages (Node.js only). In a
+ * browser you must pass `baseUrl` pointing at a directory you serve with the
+ * same layout as the `lingotweaker-data-<lang>` packages (a `packs/`
+ * subdirectory containing `<lang>.pack.gz`); same-origin is the usual choice,
+ * since browsers block cross-origin fetches.
  */
 export function fetchPack(
     lang: string,

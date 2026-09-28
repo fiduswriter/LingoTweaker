@@ -1,24 +1,26 @@
 // Data helpers for the `lingotweaker-wasm` package.
 //
 // The engine itself is loaded from an in-memory data pack
-// (`LtEngine(lang, pack, optionsJson)`); this module fetches those packs from
-// the per-release GitHub Release assets and inflates the gzip wrapper.
+// (`LtEngine(lang, pack, optionsJson)`); this module obtains those packs —
+// either from the locally installed `lingotweaker-data-<lang>` npm packages
+// (Node.js) or fetched from a `baseUrl` your server serves them from
+// (browsers). Packs are gzip-compressed and inflated after loading.
 //
 //   import { fetchPack } from "lingotweaker-wasm/pack";
-//   const pack = await fetchPack("en");
+//   const pack = await fetchPack("en", { baseUrl: "/static/lingotweaker-packs" });
 //   const engine = new LtEngine("en-US", pack, JSON.stringify({ today: new Date().toISOString() }));
+//
+// There is intentionally no built-in CDN default: pack files must be served
+// from the same origin as the page (or any CORS-enabled server you pass as
+// `baseUrl`), because browsers refuse cross-origin fetches otherwise.
 
-// Updated by scripts/release/set-version.sh together with the package version.
-export const DEFAULT_DATA_BASE_URL =
-  "https://github.com/fiduswriter/LingoTweaker/releases/download/v0.2.2";
-
-/** The URL of the release data manifest (`{ <lang>: { file, bytes, sha256 } }`). */
-export function manifestUrl(baseUrl = DEFAULT_DATA_BASE_URL) {
+/** The URL of the data manifest (`{ <lang>: { file, bytes, sha256 } }`) under `baseUrl`. */
+export function manifestUrl(baseUrl) {
   return `${baseUrl}/manifest.json`;
 }
 
-/** The URL of the gzipped pack for `lang`. */
-export function packUrl(lang, baseUrl = DEFAULT_DATA_BASE_URL) {
+/** The URL of the gzipped pack for `lang` under `baseUrl`. */
+export function packUrl(lang, baseUrl) {
   return `${baseUrl}/packs/${lang}.pack.gz`;
 }
 
@@ -34,21 +36,25 @@ export async function decompressPack(bytes) {
 }
 
 /**
- * Fetch and inflate the pack for `lang` (`en`, `de`, `gn`, …).
+ * Load and inflate the pack for `lang` (`en`, `de`, `gn`, …).
  *
- * Node.js prefers the locally installed `lingotweaker-data-<lang>` data
- * packages; browsers (and any environment without them) fall back to the
- * release assets for this package version. Pass `baseUrl` to use different
- * data — the Pages demo
- * (`https://fiduswriter.github.io/LingoTweaker`) or a local directory.
+ * Without `options.baseUrl` this resolves the pack from the locally
+ * installed `lingotweaker-data-<lang>` npm packages (Node.js only). In a
+ * browser you must pass `baseUrl` pointing at a directory you serve with the
+ * same layout as the `lingotweaker-data-<lang>` packages (a `packs/`
+ * subdirectory containing `<lang>.pack.gz`); same-origin is the usual choice,
+ * since browsers block cross-origin fetches.
  */
 export async function fetchPack(lang, options = {}) {
-  const { fetch: fetchImpl = fetch } = options;
-  let { baseUrl } = options;
+  const { fetch: fetchImpl = fetch, baseUrl } = options;
   if (!baseUrl) {
     const local = await localPack(lang);
     if (local) return local;
-    baseUrl = DEFAULT_DATA_BASE_URL;
+    throw new Error(
+      `lingotweaker-wasm: no locally installed lingotweaker-data-${lang} package; ` +
+        `serve the packs/ directory of the lingotweaker-data-${lang} npm package from your ` +
+        `server and pass its URL as the fetchPack baseUrl option`
+    );
   }
   const url = packUrl(lang, baseUrl);
   const response = await fetchImpl(url);

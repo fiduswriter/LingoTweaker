@@ -10,13 +10,19 @@ npm install lingotweaker-wasm@next
 
 ## Browser
 
+The engine's language data packs must be served from your own server —
+browsers block cross-origin fetches, so the data helper has no built-in CDN
+default. Install the `lingotweaker-data-<lang>` npm packages for the languages
+you want, copy their `packs/` directory into your static assets, and pass its
+URL as `baseUrl`:
+
 ```js
 import init, { LtEngine } from "lingotweaker-wasm";
 import { fetchPack } from "lingotweaker-wasm/pack";
 
 await init();
 
-const pack = await fetchPack("en"); // release asset for this package version
+const pack = await fetchPack("en", { baseUrl: "/static/lingotweaker-packs" });
 const engine = new LtEngine(
   "en-US",
   pack,
@@ -56,24 +62,28 @@ passed in and pinned for the engine's date filters.
 ## Data
 
 The package ships **code only** and depends on the code-only
-`lingotweaker-data` loader; the packs ship in one small package per language
+`lingotweaker-data` loader; the packs ship in one package per language
 (`lingotweaker-data-<lang>`). In Node.js the data helper resolves installed
-`lingotweaker-data-<lang>` packages locally; in the browser (or without them)
-it falls back to the per-release GitHub Release assets:
+`lingotweaker-data-<lang>` packages automatically. In the browser you serve
+the packs yourself (see above) and pass the directory URL as `baseUrl`:
 
 ```js
 import { fetchPack, packUrl, manifestUrl } from "lingotweaker-wasm/pack";
 
-await fetchPack("en");                  // installed lingotweaker-data-en in Node, else release assets
-await fetchPack("gn", { baseUrl: "https://fiduswriter.github.io/LingoTweaker" });
-packUrl("de");                           // build a URL yourself
+await fetchPack("en"); // installed lingotweaker-data-en (Node.js)
+await fetchPack("gn", { baseUrl: "/static/lingotweaker-packs" }); // browser: your own server
+packUrl("de", "/static/lingotweaker-packs"); // build a URL yourself
 ```
 
-`baseUrl` points at a directory that contains `packs/<lang>.pack.gz` and
-`manifest.json`. All languages are attached to every release; `manifest.json`
-lists file sizes and sha256 hashes. Each pack is also served from any npm CDN
-(`https://cdn.jsdelivr.net/npm/lingotweaker-data-<lang>/packs/<lang>.pack.gz`),
-and you can host the packs yourself.
+`baseUrl` points at a directory with the same layout as the
+`lingotweaker-data-<lang>` packages: a `packs/` subdirectory containing
+`<lang>.pack.gz` plus a `manifest.json` listing file sizes and sha256 hashes.
+Same-origin is the usual choice; any CORS-enabled static server works. Packs
+are downloaded individually per language, on demand.
+
+LingoTweaker is an independent project and includes a port of the legacy
+LanguageTool proofreading engine and its rule data. Upstream references and
+licenses are kept; see `THIRD_PARTY_NOTICES.md` in the repository.
 
 LingoTweaker is an independent project and includes a port of the legacy
 LanguageTool proofreading engine and its rule data. Upstream references and
