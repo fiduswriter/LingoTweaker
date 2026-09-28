@@ -28,6 +28,12 @@ mkdir -p "$STAGE/web" "$STAGE/node"
 wasm-pack build "$ROOT/crates/lt-wasm" --target web --out-dir "$STAGE/web"
 wasm-pack build "$ROOT/crates/lt-wasm" --target nodejs --out-dir "$STAGE/node"
 
+# wasm-pack writes a ".gitignore" containing "*" into each output dir. npm
+# honors .gitignore files inside packed directories even when the package.json
+# "files" whitelist includes them, which silently drops web/ and node/ from
+# the published tarball (broken 0.2.1 release).
+rm -f "$STAGE/web/.gitignore" "$STAGE/node/.gitignore"
+
 # Scope the module system per subdirectory: the root package is ESM while the
 # Node build is CommonJS.
 printf '{"type":"module"}\n' >"$STAGE/web/package.json"
@@ -35,6 +41,7 @@ printf '{"type":"commonjs"}\n' >"$STAGE/node/package.json"
 cp "$ROOT/crates/lt-wasm/npm/package.json" "$STAGE/package.json"
 cp "$ROOT/crates/lt-wasm/npm/README.md" "$STAGE/README.md"
 cp "$ROOT/crates/lt-wasm/npm/pack.js" "$STAGE/pack.js"
+cp "$ROOT/crates/lt-wasm/npm/pack.d.ts" "$STAGE/pack.d.ts"
 
 echo "== node smoke test"
 cargo run --release -p lt-data --bin pack_data --manifest-path "$ROOT/Cargo.toml" \

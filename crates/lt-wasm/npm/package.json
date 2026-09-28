@@ -41,6 +41,7 @@
       "default": "./node/lt_wasm.js"
     },
     "./pack": {
+      "types": "./pack.d.ts",
       "default": "./pack.js"
     },
     "./package.json": "./package.json"
@@ -49,6 +50,7 @@
     "web",
     "node",
     "pack.js",
+    "pack.d.ts",
     "README.md"
   ],
   "engines": {
