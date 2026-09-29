@@ -32,9 +32,17 @@ one build (`scripts/release/build-data.sh`, which reuses
 | Artifact | Registry / host | Consumer |
 |----------|-----------------|----------|
 | `packs/<lang>.pack.gz` | GitHub Release + npm `lingotweaker-data-<lang>` | wasm `LtEngine`, native Node `dataDir` |
+| `packs/nl-light.pack.gz` | GitHub Release + npm `lingotweaker-data-nl-light` | the size-optimized Dutch variant (opt-in; see `docs/differences.md`) |
 | `data/<lang>.tar.gz` | GitHub Release | native `LT_DATA_DIR` (extract) |
 | `lingotweaker-data-<lang>` | PyPI | `lt_py` (auto-discovered) |
+| `lingotweaker-data-nl-light` | PyPI | `lt_py` (opt-in: `data_dir()`/`LT_DATA_DIR`; the Dutch base code `nl` auto-discovers the full package) |
 | `manifest.json` | GitHub Release | sizes + sha256 per artifact |
+
+Dutch is the one language with two packs: `nl` (full; the fold described in
+`AGENTS.md` makes it ~1 MB smaller with identical behavior) and `nl-light`
+(frequency-pruned dictionaries, roughly half the size, reduced rare-word
+coverage; parity result in `docs/differences.md`). Both are built by
+`build-packs.sh` whenever `nl` is packed (`NL_VARIANTS=0` skips them).
 
 `publish-data.sh` creates the tag's release if needed and uploads the assets;
 `publish-npm-data.sh` publishes the code-only `lingotweaker-data` loader plus
@@ -68,6 +76,12 @@ and patch-bumps any language whose hash changed (a language seen for the first
 time starts at `data/pypi-version`). `--check` exits non-zero when anything
 changed, for CI. `publish-pypi-data.sh` builds every wheel at its own version
 and asks PyPI before uploading, so unchanged languages are never re-sent.
+
+`nl-light` is a virtual entry: not a `data/` directory, its hash covers the
+exact Dutch inputs of `scripts/data/nl_pack_transform.py` plus the Dutch
+message bundles, and `publish-pypi-data.sh` builds its wheel from the
+transformed tree (module `lingotweaker_data_nl_light`, distribution
+`lingotweaker-data-nl-light`).
 
 They are deliberately **not** part of the tag-driven release: publishing on
 every engine release would re-upload identical wheels and re-trip PyPI's
@@ -106,7 +120,8 @@ npm publishes through **trusted publishing (OIDC)**, so no npm secret is
 stored. Configure it once per package on npmjs.com (Settings -> Trusted
 Publisher: organization/user `fiduswriter`, repository `LingoTweaker`,
 workflow `release.yml`) — that includes every per-language name
-(`lingotweaker-data-da`, …) before its first publish. The publish jobs set
+(`lingotweaker-data-da`, …, and `lingotweaker-data-nl-light` alongside
+`lingotweaker-data-nl`) before its first publish. The publish jobs set
 `id-token: write` and use Node 24 (npm >= 11.5.1, required for trusted
 publishing). The npm data packages are versioned with the engine (the base
 loader and every `lingotweaker-data-<lang>` get the release version, and

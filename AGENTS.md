@@ -156,6 +156,28 @@ cargo run -p lt-cli -- examples --lang en --out docs/parity/corpora/en-examples.
 cargo run -p lt-cli -- inventory --lang en
 ```
 
+Dutch pack variants (`scripts/data/nl_pack_transform.py`; used by
+`build-packs.sh`, `publish-pypi-data.sh`):
+
+```sh
+# fold: bake added/removed manual readings into the compiled dictionaries
+# (behavior-identical: nl parity 0/0/0; ~1.5 MB smaller pack)
+python3 scripts/data/nl_pack_transform.py fold data /tmp/nl-fold
+# light: fold + frequency-pruned dictionaries for the ~half-size nl-light
+# pack (parity result recorded in docs/differences.md)
+python3 scripts/data/nl_pack_transform.py light data /tmp/nl-light --min-freq B
+# prove the recompile path reproduces the vendored .dict files byte-for-byte
+python3 scripts/data/nl_pack_transform.py roundtrip data /tmp/nl-roundtrip
+```
+
+Both variants ship in the release artifacts: `nl.pack.gz` is always the
+folded full pack, `nl-light.pack.gz` is the pruned variant, and npm gets a
+`lingotweaker-data-nl-light` package next to `lingotweaker-data-nl`. The
+recompiles are pure-Python and slow (~15 min cold), so the transform caches
+its artifacts by content hash in `target/nl-variant-cache`; `NL_VARIANTS=0`
+skips the variants (the demo build sets it) and `NL_LIGHT_MIN_FREQ` sets the
+speller frequency floor (default `B`).
+
 ## Wasm
 
 ```sh
@@ -264,6 +286,15 @@ per language (auto-discovered by `lt_py`), and per-language `packs/*.pack.gz`
 readmes must say that engine packages ship code only and how to get the data
 (`LT_DATA_DIR` accepts a directory or a pack file). The npm loader's smoke
 test is `scripts/ci/tests/npm-data-loader-test.sh`.
+
+Dutch ships two packs in every channel: the full `nl` pack (folded, still
+parity-exact vs Java) and the size-optimized `nl-light` pack — npm
+`lingotweaker-data-nl-light`, PyPI `lingotweaker-data-nl-light` (module
+`lingotweaker_data_nl_light`, **not** auto-discovered: `lt_py` resolves Dutch
+to the full package; the light variant is opt-in via `data_dir()`/
+`LT_DATA_DIR`) and `packs/nl-light.pack.gz` on the Release. Both npm package
+names must exist in the npm Trusted Publisher (OIDC) config before the first
+`npm-data` publish, like every other per-language name.
 
 The npm data packages are versioned with the engine (published by the
 `npm-data` job). The PyPI data packages are versioned **per language** in

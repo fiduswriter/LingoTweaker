@@ -93,6 +93,10 @@
       "hash": "sha256:c5d0b08138c0b038ee3d407867fe77368342996add71b9630c26a6aeaa883d3f",
       "version": "0.1.5"
     },
+    "nl-light": {
+      "hash": "sha256:44f3f4ff6d9d56e72d8b5d609a53bc314200013e09e7ed8ee043a6c168a34968",
+      "version": "0.1.1"
+    },
     "nn": {
       "hash": "sha256:6c885053ba318a0f6d9ee0d8bd782fe22b6a79574c3daec7a47e3cd402d5c30e",
       "version": "0.1.4"

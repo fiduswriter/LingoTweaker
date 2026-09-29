@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -79,6 +80,42 @@ def hash_language(data_dir: Path, lang: str) -> str:
     return "sha256:" + digest.hexdigest()
 
 
+# `nl-light` is not a `data/` directory: it is generated from the Dutch data
+# by scripts/data/nl_pack_transform.py. Hash the exact inputs that determine
+# the generated tree (the same files the transform's own cache key uses) so
+# this stays cheap enough for CI `--check`.
+NL_LIGHT_INPUTS = (
+    "dictionaries/dutch.dict",
+    "dictionaries/dutch.info",
+    "dictionaries/dutch_synth.dict",
+    "dictionaries/dutch_synth.info",
+    "spelling/nl_NL.dict",
+    "spelling/prohibit.txt",
+    "words/added.txt",
+    "words/removed.txt",
+    "words/added_custom.txt",
+    "words/removed_custom.txt",
+)
+
+
+def hash_nl_light(data_dir: Path) -> str:
+    digest = hashlib.sha256()
+    digest.update(b"nl-light\0")
+    digest.update(os.environ.get("NL_LIGHT_MIN_FREQ", "B").encode())
+    script = ROOT / "scripts" / "data" / "nl_pack_transform.py"
+    digest.update(script.read_bytes())
+    inputs = [data_dir / "messages" / name for name in ("MessagesBundle.properties", "MessagesBundle_nl.properties")]
+    inputs += [data_dir / "nl" / rel for rel in NL_LIGHT_INPUTS]
+    for path in inputs:
+        digest.update(path.relative_to(data_dir).as_posix().encode())
+        digest.update(b"\0")
+        with path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1 << 20), b""):
+                digest.update(chunk)
+        digest.update(b"\0")
+    return "sha256:" + digest.hexdigest()
+
+
 def bump(version: str) -> str:
     """Increment the last numeric component (`0.1.1` -> `0.1.2`)."""
     parts = version.split(".")
@@ -118,7 +155,7 @@ def main() -> int:
         registry = json.loads(args.registry.read_text())
     languages_state: dict = registry.setdefault("languages", {})
 
-    langs = sorted(set(args.lang) if args.lang else data_languages(args.data))
+    langs = sorted(set(args.lang) if args.lang else (*data_languages(args.data), "nl-light"))
     if not langs:
         print("no languages found", file=sys.stderr)
         return 1
@@ -127,7 +164,7 @@ def main() -> int:
     changed: list[tuple[str, str, str]] = []
     unchanged: list[str] = []
     for lang in langs:
-        digest = hash_language(args.data, lang)
+        digest = hash_nl_light(args.data) if lang == "nl-light" else hash_language(args.data, lang)
         entry = languages_state.get(lang)
         if entry is None:
             languages_state[lang] = {"version": seed, "hash": digest}

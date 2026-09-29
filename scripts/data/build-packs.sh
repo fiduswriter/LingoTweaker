@@ -23,6 +23,15 @@
 # `<lang>.pack.gz` is always built unchanged (release artifacts depend on
 # it); the manifest lists the split parts under `extra`.
 #
+# Dutch pack variants: when `nl` is among the packed languages, the folded
+# `nl` pack (the added/removed manual readings applied at dictionary-build
+# time instead of runtime, saving ~1 MB) and a size-optimized `nl-light`
+# pack (frequency-pruned dictionaries, roughly half the size; its parity
+# result is recorded in docs/differences.md) are built alongside. Both are
+# content-cacheable (target/nl-variant-cache); set NL_VARIANTS=0 to skip
+# (the demo build does, for build time). NL_LIGHT_MIN_FREQ sets the
+# speller frequency floor (default B).
+#
 # Used by the GitHub Pages demo (demo/scripts/build-packs.sh) and the release
 # data artifacts (scripts/release/build-data.sh), so both serve byte-identical
 # packs.
@@ -137,6 +146,38 @@ if [ -n "${SPLIT_PACKS:-}" ]; then
     rm -f "$out_dir/$lang.base.pack"
   done
 fi
+
+# Dutch variants: rebuild `nl.pack` from the folded tree (removals baked into
+# the compiled dictionaries, removed*.txt dropped) and add the pruned
+# `nl-light` pack. Manifest entries are filename-derived, so nl-light is
+# picked up by the glob below automatically.
+case " $langs " in
+*" nl "*)
+if [ "${NL_VARIANTS:-1}" != "0" ]; then
+  target_dir="$root/${CARGO_TARGET_DIR:-target}"
+  mkdir -p "$target_dir/tmp"
+  variant_tmp="$(mktemp -d "$target_dir/tmp/nl-variants.XXXXXX")"
+  cache_dir="$target_dir/nl-variant-cache"
+  pack_variant() { # <mode> <tree-lang-dir-name> <out-stem> [extra args...]
+    local mode="$1" name="$2" stem="$3"
+    shift 3
+    python3 "$root/scripts/data/nl_pack_transform.py" "$mode" "$data_dir" \
+      "$variant_tmp/$name" --cache "$cache_dir" "$@"
+    # the tree's language directory stays `nl`; only the pack name differs
+    "$pack_data" "$variant_tmp/$name" nl "$out_dir/$stem.pack"
+    gzip -9 -n -f -k "$out_dir/$stem.pack"
+    if [ -n "$HAVE_ZSTD" ]; then
+      zstd -q -19 -f --no-progress "$out_dir/$stem.pack"
+    fi
+    rm -f "$out_dir/$stem.pack"
+  }
+  # fold first so `nl.pack` below is the folded full pack
+  pack_variant fold nl nl
+  pack_variant light nl-light nl-light --min-freq "${NL_LIGHT_MIN_FREQ:-B}"
+  rm -rf "$variant_tmp"
+fi
+;;
+esac
 
 python3 - "$out_dir" <<'PY'
 import hashlib

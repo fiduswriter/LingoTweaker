@@ -67,7 +67,16 @@ if [ "$PACKS_ONLY" = 0 ]; then
     mkdir -p "$stage"
     cp "$ROOT/data/manifest.json" "$stage/"
     cp -r "$ROOT/data/core" "$ROOT/data/messages" "$stage/"
-    cp -r "$ROOT/data/$lang" "$stage/"
+    if [ "$lang" = "nl" ] && [ "${NL_VARIANTS:-1}" != "0" ]; then
+      # the nl pack ships the folded dictionaries (removals baked in); the
+      # native archive ships the same tree so both forms stay identical
+      python3 "$ROOT/scripts/data/nl_pack_transform.py" fold "$ROOT/data" \
+        "$DIST/stage-nl-fold" --cache "$ROOT/target/nl-variant-cache"
+      cp -r "$DIST/stage-nl-fold/nl" "$stage/"
+      rm -rf "$DIST/stage-nl-fold"
+    else
+      cp -r "$ROOT/data/$lang" "$stage/"
+    fi
     tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner \
       -czf "$DIST/data/$lang.tar.gz" -C "$stage" .
   done

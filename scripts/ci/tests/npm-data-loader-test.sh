@@ -23,10 +23,11 @@ check() { # <exit-code> <name>
 
 # Stage the loader (crates/lt-data/npm) into <base>/lingotweaker-data and fake
 # `lingotweaker-data-<lang>` packages for <langs...> under <langdir>. The
-# loader manifest always lists both `da` and `sv` (the real manifest.json is
-# produced by scripts/release/build-data.sh at staging time and lists every
-# published language), while only <langs...> get an installed package — so a
-# listed language without its package exercises the install-hint error path.
+# loader manifest always lists `da`, `sv` and `nl-light` (a hyphenated key, the
+# Dutch variant pack; the real manifest.json is produced by
+# scripts/release/build-data.sh at staging time and lists every published
+# language), while only <langs...> get an installed package — so a listed
+# language without its package exercises the install-hint error path.
 stage_tree() {
   base="$1"
   langdir="$2"
@@ -52,7 +53,7 @@ m = {
     "upstream_commit": "test",
     "languages": {
         lang: {"pack": {"file": f"packs/{lang}.pack.gz", "bytes": 5, "sha256": lang}}
-        for lang in ("da", "sv")
+        for lang in ("da", "sv", "nl-light")
     },
 }
 open(dst, "w").write(json.dumps(m, indent=2) + "\n")
@@ -108,12 +109,12 @@ EOF
 # 1. Flat layout: per-language packages are siblings of the loader, as in npm's
 #    default node_modules. CJS and ESM entries.
 tmp1="$(mktemp -d)"
-stage_tree "$tmp1/node_modules" "$tmp1/node_modules" da sv
+stage_tree "$tmp1/node_modules" "$tmp1/node_modules" da sv nl-light
 {
   printf '%s\n' 'const loader = require("lingotweaker-data");'
   assert_body
 } >"$tmp1/test.cjs"
-if (cd "$tmp1" && PACK_LANGS="da,sv" EXPECT_LANGS="da,sv" node test.cjs); then
+if (cd "$tmp1" && PACK_LANGS="da,sv,nl-light" EXPECT_LANGS="da,nl-light,sv" node test.cjs); then
   check 0 "flat layout: CJS entry resolves sibling packages"
 else
   check 1 "flat layout: CJS entry resolves sibling packages"
@@ -124,7 +125,7 @@ fi
   printf '%s\n' "const loader = await import(\"$tmp1/node_modules/lingotweaker-data/index.mjs\");"
   assert_body
 } >"$tmp1/test.mjs"
-if (cd "$tmp1" && PACK_LANGS="da,sv" EXPECT_LANGS="da,sv" node test.mjs); then
+if (cd "$tmp1" && PACK_LANGS="da,sv,nl-light" EXPECT_LANGS="da,nl-light,sv" node test.mjs); then
   check 0 "flat layout: ESM entry resolves sibling packages"
 else
   check 1 "flat layout: ESM entry resolves sibling packages"
@@ -142,7 +143,7 @@ ln -s "$tmp2/store/node_modules/lingotweaker-data" \
   printf '%s\n' 'const loader = require("lingotweaker-data");'
   assert_body
 } >"$tmp2/project/test.cjs"
-if (cd "$tmp2/project" && PACK_LANGS="da" EXPECT_LANGS="da,sv" EXPECT_MISSING="sv" node test.cjs); then
+if (cd "$tmp2/project" && PACK_LANGS="da" EXPECT_LANGS="da,nl-light,sv" EXPECT_MISSING="sv" node test.cjs); then
   check 0 "non-sibling layout: cwd fallback resolves, missing package errors"
 else
   check 1 "non-sibling layout: cwd fallback resolves, missing package errors"

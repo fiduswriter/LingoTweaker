@@ -756,3 +756,64 @@ group's example sentence, raw readings carry both classes, disambiguated
 readings carry only the expected class); `danish_engine_state` stays 93 (the
 disambiguation rulegroups are not grammar rules). Reproduce: `cargo test -p lt
 --test danish` and `scripts/ci/parity.sh da` → PARITY OK.
+
+
+## 19. Dutch `nl-light`: the size-optimized Dutch pack (intentional divergence)
+
+**Verdict: intentional — a separate, opt-in data variant**, not a fidelity
+gap: the full `nl` pack stays at 0 only-Java / 0 only-Rust / 0 field diffs
+(now with the added/removed fold baked into the compiled dictionaries, which
+is itself behavior-identical, proven below). `nl-light` ships alongside it
+(GitHub Release `packs/nl-light.pack.gz`, npm `lingotweaker-data-nl-light`,
+PyPI `lingotweaker-data-nl-light`) for installs where download size matters
+more than rare-word coverage.
+
+**The fold (both packs).** Dutch applies `added.txt`/`removed.txt` manual
+readings at runtime (`CombiningTagger`): 106k `(word, lemma, tag)` triples in
+`removed.txt` filter the dictionary readings, and 17.6k `added.txt` readings
+are prepended. `scripts/data/nl_pack_transform.py fold` bakes the removals
+into the recompiled `dutch.dict`/`dutch_synth.dict` and ships
+`added.txt' = added − removed` (6 triples are in both lists and net to absent
+at runtime, so they must not survive in `added.txt` either). The recompile
+path is proven byte-identical to the vendored Java-built dictionaries
+(`nl_pack_transform.py roundtrip` on all three Dutch dicts), and the nl
+corpus gate on the folded tree is 0/0/0 — engine behavior is unchanged
+(`ManualTagger`/`ManualSynthesizer` skip the now-missing `removed*.txt`;
+surviving readings keep their order). Saves ~1.5 MB gzipped.
+
+**The pruning (`nl-light` only).** The Dutch packs are dominated by three
+~5.5M-entry full-form dictionaries (speller, tagger, synthesizer — 91% of the
+pack, see the research notes in the git history). `nl-light` keeps a speller
+word when its frequency class is ≥ `B` (`fsa.dict.frequency-included`, i.e.
+the word occurs in the frequency wordlist at all) or when it is "rescued":
+a runtime-added reading, a prohibited word, or a compound-acceptor exception;
+accent/case-folded variants of both sets are kept too. The tagger and
+synthesizer are trimmed to the same keep-set. That keeps 1,778,744 speller
+entries (32%), 1,750,799 tagger triples (32%) and 1,750,799 synth triples —
+the pack drops from 36.5 MB gz / 31.0 MB zst (folded full pack) to
+18.9 MB gz / 16.3 MB zst (−48%).
+
+Measured on the 7,264-example nl corpus against the pinned Java golden
+(`--today 2026-09-19`): **6 only-Java / 15 only-Rust / 196 field diffs** out
+of 4,223 matches, all traced to the pruning:
+
+- 193 field diffs are `MORFOLOGIK_RULE_NL_NL` suggestion-list shortenings:
+  the rarest suggestions (e.g. `AOW-onderhandelingen`, `Stoffeer`) are gone
+  from the pruned speller, so suggestion lists drop tail entries; the
+  top-ranked suggestions are unaffected. 10 of these matches lost all
+  suggestions but still flag the error.
+- 12 only-Rust `MORFOLOGIK_RULE_NL_NL` matches: rare words the pruned dict
+  rejects that Java's dict accepts and the compound acceptor does not
+  recover. 0 only-Java `MORFOLOGIK_RULE_NL_NL`: lite never misses a Java
+  spelling flag on this corpus.
+- the remaining handful (`IETS_KLEINS`, `GEURIGS_GURIGS`, `SIPPERS_ZIPPERS`,
+  `FIERDERS_VIERDERS`, `FOUTE_WOORDGROEPEN`, `DE_LELIJKS`,
+  `ERG_LANG_WOORD`, one `SEMI` message) are confusable-pair and word-list
+  rules whose trigger words or suggestions were pruned; several are the
+  rules' own corpus examples built around rare words.
+
+Reproduce: build the trees with
+`python3 scripts/data/nl_pack_transform.py fold|light data <out>` and diff
+`lt-cli check -l nl --lines --today 2026-09-19 --file docs/parity/golden/nl-full.txt --data-dir <out>`
+against `docs/parity/golden/nl-full.java.tsv` with
+`scripts/oracle/compare-checks.py`.

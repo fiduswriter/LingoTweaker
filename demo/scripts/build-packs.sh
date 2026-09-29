@@ -23,7 +23,11 @@ out="demo/public/packs"
 rules_out="demo/public/rules"
 
 cargo build --release -p lt-cli
-scripts/data/build-packs.sh data "$out" $langs
+# NL_VARIANTS=0 skips the Dutch fold/nl-light variant builds: the demo serves
+# the full nl pack only, and the fold's dictionary recompiles would add ~15
+# min to the Pages build for no demo benefit (the variants stay available in
+# the release artifacts).
+NL_VARIANTS=0 scripts/data/build-packs.sh data "$out" $langs
 
 rm -rf "$rules_out"
 mkdir -p "$rules_out"

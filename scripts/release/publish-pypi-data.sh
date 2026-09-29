@@ -122,7 +122,14 @@ for lang in $langs; do
   # integrity test) with no runtime consumer, and shipping it would couple
   # every language's content to every other language's data changes.
   cp -r "$ROOT/data/core" "$ROOT/data/messages" "$src/$mod/data/"
-  cp -r "$ROOT/data/$lang" "$src/$mod/data/"
+  if [ "$lang" = "nl" ] && [ "${NL_VARIANTS:-1}" != "0" ]; then
+    # the nl pack ships the folded dictionaries; the wheel matches it
+    python3 "$ROOT/scripts/data/nl_pack_transform.py" fold "$ROOT/data" \
+      "$out/nl-fold-tree" --cache "$ROOT/target/nl-variant-cache"
+    cp -r "$out/nl-fold-tree/nl" "$src/$mod/data/"
+  else
+    cp -r "$ROOT/data/$lang" "$src/$mod/data/"
+  fi
   cat >"$src/$mod/__init__.py" <<EOF
 """Runtime data for the LingoTweaker engine, language \`$lang\`.
 
@@ -199,6 +206,105 @@ EOF
   "$VENV/bin/python" -m build --no-isolation --outdir "$out/dist" "$src" >/dev/null
   if [ "$KEEP_SOURCES" = 0 ]; then rm -rf "$src"; fi
 done
+
+# The size-optimized Dutch variant: a transformed tree (manual-reading fold +
+# frequency-pruned dictionaries, scripts/data/nl_pack_transform.py) shipped as
+# `lingotweaker-data-nl-light` with the importable module
+# `lingotweaker_data_nl_light`. lt_py auto-discovery resolves the Dutch base
+# code `nl` to the FULL package (`lingotweaker_data_nl`), so the light variant
+# is opt-in via `data_dir()`/`LT_DATA_DIR`.
+nl_light_tree="$DIST/nl-light-tree"
+python3 "$ROOT/scripts/data/nl_pack_transform.py" light "$ROOT/data" "$nl_light_tree" \
+  --cache "$ROOT/target/nl-variant-cache" --min-freq "${NL_LIGHT_MIN_FREQ:-B}"
+
+pkg="lingotweaker-data-nl-light"
+mod="lingotweaker_data_nl_light"
+src="$out/$pkg"
+lang_pyver="$(pep440_version nl-light)"
+echo "== source $pkg ($lang_pyver)"
+mkdir -p "$src/$mod/data"
+cp -r "$nl_light_tree/core" "$nl_light_tree/nl" "$ROOT/data/messages" "$src/$mod/data/"
+cat >"$src/$mod/__init__.py" <<'EOF'
+"""Runtime data for the LingoTweaker engine: the size-optimized Dutch variant.
+
+`data_dir()` returns the absolute path of the data directory; pass it to the
+binding (`lt_py.Engine("nl", data_dir=...)`) or set `LT_DATA_DIR`. This
+variant is NOT auto-discovered: `lt_py` resolves Dutch to the full
+`lingotweaker_data_nl` package; install this package when the smaller
+download matters more than full rare-word coverage.
+"""
+
+from pathlib import Path
+
+DATA_DIR = Path(__file__).resolve().parent / "data"
+
+
+def data_dir() -> str:
+    """Absolute path of the data directory."""
+    return str(DATA_DIR)
+
+
+__all__ = ["DATA_DIR", "data_dir"]
+EOF
+cat >"$src/MANIFEST.in" <<EOF
+recursive-include $mod/data *
+EOF
+cat >"$src/README.md" <<'EOF'
+# LingoTweaker data (nl-light)
+
+Size-optimized variant of the Dutch (`nl`) runtime data for the LingoTweaker
+proofreading engine: roughly half the download of the full `nl` package, with
+reduced dictionary coverage of rare words (see `docs/differences.md` in the
+repository for the exact pruning rule and its parity result).
+
+This variant is **not** auto-discovered: `lt_py` resolves Dutch to the full
+`lingotweaker-data-nl` package. Use this package explicitly:
+
+```python
+import lt_py
+from lingotweaker_data_nl_light import data_dir
+
+engine = lt_py.Engine("nl", data_dir=data_dir())
+```
+
+or set `LT_DATA_DIR` to `data_dir()`.
+
+Vendored rule data and dictionaries keep their upstream licenses; see
+`THIRD_PARTY_NOTICES.md` in the repository.
+
+License (packaging code): LGPL-2.1-or-later.
+EOF
+cat >"$src/pyproject.toml" <<EOF
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "$pkg"
+version = "$lang_pyver"
+description = "LingoTweaker runtime data for language 'nl' (size-optimized nl-light variant)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "LGPL-2.1-or-later"
+keywords = ["proofreading", "grammar", "spellcheck", "nlp", "language", "data"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Text Processing :: Linguistic",
+]
+
+[project.urls]
+Homepage = "https://fiduswriter.github.io/LingoTweaker/"
+Repository = "https://github.com/fiduswriter/LingoTweaker"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["$mod*"]
+EOF
+
+"$VENV/bin/python" -m build --no-isolation --outdir "$out/dist" "$src" >/dev/null
+if [ "$KEEP_SOURCES" = 0 ]; then rm -rf "$src"; fi
 
 echo "== built $(ls "$out/dist" | wc -l) files"
 ls -lh "$out/dist" | tail -n +2
