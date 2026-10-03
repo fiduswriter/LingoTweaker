@@ -38,9 +38,11 @@ delegates to `LanguageIdentifier`, and `TextChecker.java:381` shows `source` is 
 `"ngram"`. fastText is a LanguageTool Premium feature. So matching OSS behaviour means an
 n-gram style method — which fastText is (char/word n-grams + linear classifier).
 
-**Our current state** (`lt-http/src/lib.rs:437-473`) returns a stub: `confidence: 1.0`,
-`source: null`, empty sentence ranges, and `language=auto` (`:386-405`) does no detection —
-it takes the first `preferredVariants` entry with an engine, else `en-US`.
+**Our state as of the HTTP wiring** (`lt-http/src/detect.rs`,
+`lt-http/src/lib.rs`): `language=auto` runs the layers above, `detectedLanguage`
+carries a real confidence, and `sentenceRanges`/`extendedSentenceRanges` are
+populated. `source` is `"ngram"` on v2 and `"fasttext"` on v3 — see §4. v2 has no
+new route; `POST /v3/detect` is the native surface.
 
 ## 2. Measured benchmark
 
@@ -250,12 +252,38 @@ The wasm build comes from a **pinned engine commit** (`scripts/build-wasm.sh`
 
 - `language=auto` performs real detection, honouring `preferredVariants` as LT's tie-break.
 - `detectedLanguage` gets a real `confidence`.
-- `source`: LT emits `"ngram"`. fastText *is* an n-gram method, so `"ngram"` is defensible and
-  keeps clients working. Recommend `"ngram"` on v2 and `"fasttext"` on v3 (honest, and the
-  only place the difference is visible). Open question.
+- `source`: **decided — `"ngram"` on v2, `"fasttext"` on v3.** `"ngram"` is the
+  literal string an OSS server emits (`DefaultLanguageIdentifier.java:258`, via
+  `TextChecker.java:1033`), the field is a free-form diagnostic that LT itself
+  composes (`"ngram+commonwords"`, `"ngram+fallback"`, `"ngram+prefLang(...)"`)
+  and that no client branches on — `RemoteLanguageTool` reads only `code` and
+  `name` — and fastText *is* an n-gram method (hashed character n-grams, linear
+  classifier), so the string is true as well as compatible. A Nordum answer comes
+  from a word list rather than from n-gram statistics, so it reports `"lexicon"`
+  on both surfaces rather than borrow the n-gram name. `/v3/detect` has no
+  compatibility duty and names the implementation outright.
 - `sentenceRanges` / `extendedSentenceRanges` populated, the latter with
   `detectedLanguages: [{language, rate}]` — a real fidelity gain over the current stubs.
+  `sentenceRanges` is filled on every check (it costs no detection; LT sends it
+  for single-language checks too) and trimmed of surrounding whitespace, as
+  `SentenceRange.getRangesFromSentences` does. `extendedSentenceRanges` is filled
+  only on the `language=auto` path: filling it needs one prediction per sentence,
+  and an explicit language must not run detection. Rates are rounded to two
+  decimals, as `DefaultLanguageIdentifier.java:335` rounds them.
 - **No new v2 routes.** LT has no `/detect`; adding one breaks drop-in compatibility.
+- Two divergences, both forced by this build rather than chosen:
+  1. **An explicit `language=` runs no detection at all**, where LT detects anyway
+     and reports the answer under `detectedLanguage` (`V2TextChecker.getLanguage`
+     always calls `detectLanguageOfString`). Here that costs a model parse and a
+     prediction on every request for an answer the caller has already given.
+     `detectedLanguage` then keeps its old shape: the language checked, at
+     `confidence: 1.0` with a null `source` — the null being LT's own value for
+     "no detector produced an answer".
+  2. **A detection this build cannot check falls back instead of failing.**
+     `AppState::new` builds engines for 14 of the 38 languages, so Swedish text
+     detects as `sv` and is then checked as the fallback (`preferredVariants`,
+     else `en-US`) rather than answering 501. `detectedLanguage` still reports
+     `sv`, which is the part a client can act on.
 
 **v3 — free to extend:**
 
@@ -375,7 +403,7 @@ source. This is needed under Option A and harmless under Option B.
 
 ## 8. Open questions
 
-1. **`source` on v2**: `"ngram"` for LT compatibility, or `"fasttext"` for honesty?
+1. ~~**`source` on v2**~~ — **decided:** `"ngram"` on v2, `"fasttext"` on v3 (see §4).
 2. **Thresholds** — 40 chars / 0.60 / 1.5× are proposals; calibrate on a corpus built from the
    `<example>` sentences already in `data/*/rules/grammar.xml` (authentic, per-language, and
    already in the repo). Five languages (`ca`, `es`, `pt`, `sr`, `uk`) have no such text — their

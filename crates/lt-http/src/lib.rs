@@ -5,6 +5,15 @@
 //! windows (±40 characters), sentence, rule/category metadata, and the
 //! `software`/`warnings`/`language` sections.
 //!
+//! Language detection is real on both surfaces but shaped differently. v2 has no
+//! detection endpoint — LT has none either, it happens inside `POST /v2/check`
+//! when `language=auto` — so detection there is reported through
+//! `detectedLanguage`, `sentenceRanges` and `extendedSentenceRanges` exactly as
+//! `RuleMatchesAsJsonSerializer.java:164-264` does, and no v2 route is added.
+//! `/v3/detect` is the native surface: the decision, the ranking behind it and
+//! an honest `null` when the gates abstain. See [`detect`] for the layers and
+//! for what `source` reports on each.
+//!
 //! Browser clients such as the official LanguageTool extension hold no host
 //! permissions for the server, so every request runs as a CORS-mode `fetch`
 //! and fails unless the response carries `Access-Control-Allow-Origin`
@@ -24,13 +33,32 @@ use serde::Deserialize;
 use serde_json::{json, Value};
 
 use lt::Engine;
-use lt_core::{Lang, Match};
+use lt_core::detect::Gates;
+use lt_core::{Lang, Match, TextRange};
+
+pub mod detect;
 
 pub const API_VERSION: i32 = 1;
 pub const MAX_TEXT_LENGTH: u32 = 60_000;
 /// LT `TextChecker.CONTEXT_SIZE`
 pub const CONTEXT_SIZE: i32 = 40;
 pub const SOFTWARE_NAME: &str = "LingoTweaker";
+
+/// Language `language=auto` falls back to when detection abstains.
+///
+/// LT `TextChecker.detectLanguageOfString` is called with `fallbackLanguage =
+/// null` and turns that into `parseLanguage("en")` (`TextChecker.java:1004`),
+/// which is `en-US` in this build — the first variant listed, as everywhere else.
+const AUTO_FALLBACK: &str = "en-US";
+
+/// Sentences reported in `extendedSentenceRanges`.
+///
+/// `sentenceRanges` is complete at any size, but every extended range costs one
+/// prediction and `MAX_TEXT_LENGTH` is 60,000 characters, which a caller can
+/// fill with 20,000 two-character sentences. 500 covers any real document
+/// (~10,000 words); past that the extended ranges stop rather than letting one
+/// request spend seconds in the detector.
+const MAX_EXTENDED_SENTENCE_RANGES: usize = 500;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -152,6 +180,7 @@ pub fn router(state: Arc<AppState>) -> Router {
         .route("/v3/words", post(words_not_implemented))
         .route("/v3/words/add", post(words_not_implemented))
         .route("/v3/words/delete", post(words_not_implemented))
+        .route("/v3/detect", post(detect_language))
         .with_state(state.clone())
         .layer(middleware::from_fn_with_state(state, cors_middleware))
 }
@@ -384,16 +413,51 @@ async fn check_impl(
     }
 
     let auto = language == "auto";
-    // LT server: a language without variant falls back to its default
-    // variant (`en` → `en-US`, `de` → `de-DE`), and codes are matched
-    // case-insensitively (the browser extension sends `en-us`). `auto` has
-    // no real detection in v1: it uses the first `preferredVariants` entry
-    // with an engine, else `en-US`.
+    let preferred_variants = split_csv(&params.preferred_variants);
+    // Detection runs only for `language=auto`. LT also detects for an explicit
+    // language — `V2TextChecker.getLanguage` always calls
+    // `detectLanguageOfString` and reports the answer under `detectedLanguage`
+    // while checking with the language that was asked for — but throws it away
+    // here: it costs a model parse and a prediction on every request, and the
+    // caller has already said which language it wants.
+    let outcome = auto.then(|| detect::language_of(&text, None, &Gates::default()));
+    let detected = outcome.as_ref().and_then(|outcome| outcome.detected);
+
+    // The language the check itself runs in. LT
+    // `TextChecker.detectLanguageOfString` (`:1002-1031`): detection decides it,
+    // `preferredVariants` then only selects the *variant* of that language (it
+    // is not a candidate list — that is `preferredLanguages`), and an abstention
+    // falls back to `en`.
     let long_code = if auto {
-        split_csv(&params.preferred_variants)
+        for variant in &preferred_variants {
+            if !variant.contains('-') {
+                return error_response(
+                    StatusCode::BAD_REQUEST,
+                    &format!(
+                        "Invalid format for 'preferredVariants', expected a dash as in 'en-GB': '{variant}'"
+                    ),
+                );
+            }
+        }
+        let requested = variant_for(
+            &preferred_variants,
+            detected.map_or(Lang::En, |hit| hit.language),
+        );
+        if state.resolve_engine(&requested).is_some() {
+            requested
+        } else if let Some(fallback) = preferred_variants
             .iter()
             .find_map(|variant| state.resolve_engine(variant).map(|(key, _)| key.clone()))
-            .unwrap_or_else(|| "en-US".to_string())
+        {
+            // This build builds engines for a subset of the languages the
+            // identifier can return, so a detection it cannot check falls back
+            // instead of failing the whole request; `detectedLanguage` still
+            // reports what detection decided, which is the part a client can act
+            // on.
+            fallback
+        } else {
+            AUTO_FALLBACK.to_string()
+        }
     } else {
         language.to_string()
     };
@@ -441,12 +505,7 @@ async fn check_impl(
         .collect();
 
     let name = lang.info().name;
-    let detected = json!({
-        "name": name,
-        "code": long_code,
-        "confidence": 1.0,
-        "source": serde_json::Value::Null,
-    });
+    let detected_json = detected_language_json(&long_code, lang, outcome.as_ref());
 
     let response = json!({
         "software": {
@@ -463,13 +522,211 @@ async fn check_impl(
         "language": {
             "name": name,
             "code": long_code,
-            "detectedLanguage": detected,
+            "detectedLanguage": detected_json,
         },
         "matches": matches,
-        "sentenceRanges": [],
-        "extendedSentenceRanges": [],
+        "sentenceRanges": sentence_ranges(&text, &result, utf8_offsets),
+        "extendedSentenceRanges": extended_sentence_ranges(&text, &result, outcome.is_some(), utf8_offsets),
     });
     (StatusCode::OK, Json(response)).into_response()
+}
+
+/// LT `V2TextChecker.getLanguage` (`:116-125`) + `TextChecker.detectLanguageOfString`
+/// (`:1014-1031`): a `preferredVariants` entry upgrades the detected language
+/// when its base code matches.
+///
+/// The Java loop does not break, so the *last* matching entry wins. When
+/// nothing matches the detected language the language keeps its default variant
+/// — LT's `getDefaultLanguageVariant()`, which for every language here is what
+/// `Lang::info().long_code` already carries.
+fn variant_for(preferred_variants: &[String], lang: Lang) -> String {
+    let base = lang.base_code();
+    preferred_variants
+        .iter()
+        .rfind(|variant| {
+            variant
+                .split('-')
+                .next()
+                .is_some_and(|code| code.eq_ignore_ascii_case(base))
+        })
+        .cloned()
+        .unwrap_or_else(|| lang.info().long_code.to_string())
+}
+
+/// The `language.detectedLanguage` object.
+///
+/// With no detection — every explicit `language=` — this is the language that
+/// was checked, reported with `confidence: 1.0` and a null `source`. The null is
+/// LT's own value for "no detector produced an answer"
+/// (`TextChecker.java:1033`), and it is what keeps this response distinguishable
+/// from a real one.
+///
+/// With detection, the answer and its real confidence. An abstention reports the
+/// fallback language at confidence `0.0` with a null source, which is what LT
+/// emits in the same situation (`DetectedLanguage(lang, lang, 0f, null)`):
+/// saying "nothing cleared the gates" beats a confident-looking 1.0 for a
+/// language nobody identified.
+fn detected_language_json(
+    checked_code: &str,
+    checked: Lang,
+    outcome: Option<&detect::Outcome>,
+) -> Value {
+    let Some(outcome) = outcome else {
+        return json!({
+            "name": checked.info().name,
+            "code": checked_code,
+            "confidence": 1.0,
+            "source": Value::Null,
+        });
+    };
+    // The language detection settled on, or `en` when the gates abstained.
+    let base = outcome.detected.map_or(Lang::En, |hit| hit.language);
+    let (confidence, source) = match outcome.detected {
+        Some(hit) => (hit.confidence, Some(detect::v2_source(hit.source))),
+        // An abstention reports the fallback language at confidence `0.0` with a
+        // null source, which is what LT emits in the same situation
+        // (`DetectedLanguage(lang, lang, 0f, null)`): saying "nothing cleared
+        // the gates" beats a confident-looking 1.0 for a language nobody
+        // identified.
+        None => (0.0, None),
+    };
+    // `code` follows the convention the rest of the v2 response uses: the long
+    // code with its variant, not the base code. When the checked language *is*
+    // the detected one, that is the engine's code, so a `preferredVariants`
+    // upgrade is visible in both places at once.
+    let code = if base == checked {
+        checked_code.to_string()
+    } else {
+        base.info().long_code.to_string()
+    };
+    json!({
+        "name": base.info().name,
+        "code": code,
+        "confidence": confidence,
+        "source": source,
+    })
+}
+
+/// LT `RuleMatchesAsJsonSerializer.writeSentenceRanges` (`:230-241`): the
+/// sentence positions as `[from, to]` pairs, in this surface's offset
+/// convention — UTF-16 code units on v2, UTF-8 bytes on v3.
+fn sentence_ranges(text: &str, result: &lt_core::CheckResult, utf8_offsets: bool) -> Vec<Value> {
+    result
+        .sentences
+        .iter()
+        .map(|sentence| {
+            let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
+            json!([from, to])
+        })
+        .collect()
+}
+
+/// LT `RuleMatchesAsJsonSerializer.writeExtendedSentenceRanges` (`:243-264`):
+/// each sentence with the languages detected for it.
+///
+/// LT only fills this in multilingual mode, where it is where the per-sentence
+/// languages come from; this build has no multilingual mode, so it is filled
+/// from the detector on the `language=auto` path — the one that has already run
+/// it — and left empty otherwise, which is what LT emits for a single-language
+/// check. Each entry costs one prediction, so the list is capped.
+fn extended_sentence_ranges(
+    text: &str,
+    result: &lt_core::CheckResult,
+    detected: bool,
+    utf8_offsets: bool,
+) -> Vec<Value> {
+    if !detected {
+        return Vec::new();
+    }
+    result
+        .sentences
+        .iter()
+        .take(MAX_EXTENDED_SENTENCE_RANGES)
+        .map(|sentence| {
+            let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
+            let languages: Vec<Value> =
+                detect::language_of(&sentence.text, None, &Gates::default())
+                    .candidates
+                    .iter()
+                    .map(|candidate| {
+                        json!({
+                            // LT uses the short code here
+                            // (`ExtendedSentenceRange`), not the long code.
+                            "language": candidate.lang.base_code(),
+                            // LT rounds the rate to two decimals
+                            // (`DefaultLanguageIdentifier:335`).
+                            "rate": (candidate.confidence * 100.0).round() / 100.0,
+                        })
+                    })
+                    .collect();
+            json!({
+                "from": from,
+                "to": to,
+                "detectedLanguages": languages,
+            })
+        })
+        .collect()
+}
+
+/// A sentence's span in this surface's offset convention: UTF-16 code units on
+/// v2 (`lt::to_utf16_range`, as for every other v2 offset), UTF-8 bytes on v3.
+///
+/// Leading and trailing whitespace is trimmed, as LT does
+/// (`SentenceRange.getRangesFromSentences:58-62`): the engine's sentence spans
+/// include the whitespace that follows a sentence, and a range a client
+/// highlights should not end in it.
+fn sentence_span(text: &str, range: TextRange, utf8_offsets: bool) -> (usize, usize) {
+    let slice = &text[range.start..range.end];
+    let start = range.start + slice.len() - slice.trim_start().len();
+    let end = start + slice.trim().len();
+    if utf8_offsets {
+        (start, end)
+    } else {
+        (
+            lt::to_utf16_offset(text, start),
+            lt::to_utf16_offset(text, end),
+        )
+    }
+}
+
+/// `POST /v3/detect` — the native detection surface.
+///
+/// LT has no detection endpoint, so v2 must not grow one
+/// (`ApiV2.handleRequest` dispatches a fixed list and an unknown path is a 404).
+/// Here the decision, the ranking behind it and the honest `null` can be asked
+/// for directly, without checking anything.
+///
+/// `text=<string>  [&restrict=sv,en,de]` — the response shape is the plan's §4:
+/// `{"detected": {language, confidence, source}, "candidates": [...],
+/// "resolved": …}`.
+async fn detect_language(body: String) -> Response {
+    let params: DetectParams = serde_urlencoded::from_str(&body).unwrap_or_default();
+    let Some(text) = params.text else {
+        return error_response(StatusCode::BAD_REQUEST, "Missing required parameter: text");
+    };
+    if text.chars().count() > MAX_TEXT_LENGTH as usize {
+        return error_response(
+            StatusCode::BAD_REQUEST,
+            &format!("Text too long: limit is {MAX_TEXT_LENGTH} characters"),
+        );
+    }
+    // `restrict` narrows the candidates to the languages the caller has data
+    // for. Present but naming nothing we ship narrows to nothing, which answers
+    // `null` rather than quietly detecting everything — see `language_of`.
+    let restrict = params
+        .restrict
+        .as_deref()
+        .filter(|value| !value.trim().is_empty())
+        .map(|value| detect::parse_restrict(Some(value)));
+    let outcome = detect::language_of(&text, restrict.as_deref(), &Gates::default());
+    (StatusCode::OK, Json(detect::report_json(&outcome))).into_response()
+}
+
+#[derive(Debug, Default, Deserialize)]
+struct DetectParams {
+    text: Option<String>,
+    /// `sv,en,de`: only consider languages the caller has data for.
+    restrict: Option<String>,
 }
 
 /// LT `ContextTools.getContext`: a ±`CONTEXT_SIZE` character (UTF-16) window
@@ -1092,14 +1349,20 @@ mod tests {
         }
     }
 
-    /// `language=auto` has no real detection in v1; it honours
-    /// `preferredVariants` like the LT server's auto mode.
+    /// `language=auto` runs real detection; `preferredVariants` then selects
+    /// the *variant* of the detected language (LT
+    /// `TextChecker.detectLanguageOfString`), and is the tie-break when the
+    /// gates abstain on `en`.
     #[tokio::test]
     async fn auto_uses_preferred_variants() {
         let s = state();
         if !has_engines(&s) {
             return;
         }
+        // "test" is four characters, so the length gate abstains and the answer
+        // falls back to `en` — as in Java, where `preferredVariants` cannot
+        // make the detector prefer a language, only pick its variant. The last
+        // matching entry wins, because the Java loop does not break.
         let router_preferred = router(s.clone());
         let body = serde_urlencoded::to_string([
             ("text", "test"),
@@ -1109,14 +1372,393 @@ mod tests {
         .unwrap();
         let (status, value) = send(router_preferred, "POST", "/v2/check", &body).await;
         assert_eq!(status, StatusCode::OK);
-        assert_eq!(value["language"]["code"], "de-DE");
+        assert_eq!(value["language"]["code"], "en-US");
 
         // without usable preferred variants the default stays en-US
-        let router_default = router(s);
+        let router_default = router(s.clone());
         let body = serde_urlencoded::to_string([("text", "test"), ("language", "auto")]).unwrap();
         let (status, value) = send(router_default, "POST", "/v2/check", &body).await;
         assert_eq!(status, StatusCode::OK);
         assert_eq!(value["language"]["code"], "en-US");
+
+        // A detected language is upgraded to the variant the caller asked for.
+        let router_variant = router(s);
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Ich komme nicht nach Hause, weil es schon dunkel geworden ist.",
+            ),
+            ("language", "auto"),
+            ("preferredVariants", "de-CH"),
+        ])
+        .unwrap();
+        let (status, value) = send(router_variant, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["language"]["code"], "de-CH");
+        assert_eq!(value["language"]["detectedLanguage"]["code"], "de-CH");
+    }
+
+    /// LT `TextChecker.java:1017`: every `preferredVariants` entry must name a
+    /// variant, not a bare language.
+    #[tokio::test]
+    async fn auto_rejects_a_preferred_variant_without_a_dash() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([
+            ("text", "Hej."),
+            ("language", "auto"),
+            ("preferredVariants", "de"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert!(
+            value["error"]["message"]
+                .as_str()
+                .is_some_and(|message| message.contains("expected a dash")),
+            "message: {}",
+            value["error"]["message"]
+        );
+    }
+
+    /// The whole point of the change: `language=auto` identifies the language
+    /// instead of guessing, and says so honestly in `detectedLanguage`.
+    #[tokio::test]
+    async fn auto_detects_the_language_of_the_text() {
+        let s = state();
+        let router = router(s);
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("language", "auto"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        let detected = &value["language"]["detectedLanguage"];
+        assert_eq!(detected["name"], "Swedish");
+        // the same code convention as the rest of the response: the long code
+        // from `/v2/languages`, not the base code
+        assert_eq!(detected["code"], "sv");
+        let confidence = detected["confidence"].as_f64().expect("a confidence");
+        assert!(
+            (0.0..1.0).contains(&confidence),
+            "a real confidence, not a stub: {confidence}"
+        );
+        assert!(
+            confidence >= 0.9,
+            "clear Swedish should be well above the gate: {confidence}"
+        );
+        // LT's own label for a statistical detector (`DefaultLanguageIdentifier`)
+        assert_eq!(detected["source"], "ngram");
+    }
+
+    /// Nordum has no label in the statistical model, so the exclusive-word
+    /// lexicon decides it — and v2 says which layer answered.
+    #[tokio::test]
+    async fn auto_detects_nordum_from_the_lexicon() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jei vet at det er viktig å lære språket i dag, og det går bra.",
+            ),
+            ("language", "auto"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        let detected = &value["language"]["detectedLanguage"];
+        assert_eq!(detected["code"], "nrd");
+        assert_eq!(detected["name"], "Nordum");
+        assert_eq!(detected["source"], "lexicon");
+        assert_eq!(value["language"]["code"], "nrd");
+    }
+
+    /// Short text is not enough evidence. The response says so instead of
+    /// claiming a certain answer for a language nobody identified.
+    #[tokio::test]
+    async fn auto_abstains_on_short_text_and_says_so() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        let router = router(s);
+        let body = serde_urlencoded::to_string([("text", "Hej."), ("language", "auto")]).unwrap();
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        let detected = &value["language"]["detectedLanguage"];
+        assert_eq!(detected["confidence"], 0.0);
+        assert_eq!(detected["source"], Value::Null);
+        // the fallback, which is what LT does too (`parseLanguage("en")`)
+        assert_eq!(value["language"]["code"], "en-US");
+        assert_eq!(detected["code"], "en-US");
+    }
+
+    /// An explicit language must not be second-guessed: no detection, so
+    /// `detectedLanguage` keeps the "this is what was asked for" shape with a
+    /// null `source`, exactly as before.
+    #[tokio::test]
+    async fn explicit_language_bypasses_detection() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        let router = router(s);
+        // Swedish text checked as German: detection would say `sv`, and saying
+        // so would be a behaviour change on the path that must not detect.
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("language", "de-DE"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        let detected = &value["language"]["detectedLanguage"];
+        assert_eq!(value["language"]["code"], "de-DE");
+        assert_eq!(detected["code"], "de-DE");
+        assert_eq!(detected["name"], "German (Germany)");
+        assert_eq!(detected["confidence"], 1.0);
+        assert_eq!(detected["source"], Value::Null);
+    }
+
+    /// `sentenceRanges` (`RuleMatchesAsJsonSerializer:230-241`) and
+    /// `extendedSentenceRanges` (`:243-264`) were always empty arrays; both are
+    /// filled now, in the offset convention of each surface.
+    #[tokio::test]
+    async fn sentence_ranges_are_populated_in_utf16_on_v2() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        let router = router(s);
+        // the emoji is 4 UTF-8 bytes but 2 UTF-16 code units
+        let body = serde_urlencoded::to_string([
+            ("text", "This is a testt. 😀 And a second sentence."),
+            ("language", "en-US"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        let ranges: Vec<(u64, u64)> = value["sentenceRanges"]
+            .as_array()
+            .expect("sentenceRanges is an array")
+            .iter()
+            .map(|range| {
+                let pair = range.as_array().expect("a [from, to] pair");
+                (
+                    pair[0].as_u64().expect("from"),
+                    pair[1].as_u64().expect("to"),
+                )
+            })
+            .collect();
+        assert_eq!(ranges.len(), 2, "ranges: {ranges:?}");
+        // LT trims the whitespace out of the range, so the two ranges skip the
+        // space at 16: 16 units of "This is a testt.", then the rest.
+        assert_eq!(ranges[0], (0, 16));
+        assert_eq!(ranges[1].0, 17);
+        assert_eq!(
+            ranges[1].1,
+            17 + "😀 And a second sentence.".encode_utf16().count() as u64
+        );
+    }
+
+    #[tokio::test]
+    async fn extended_sentence_ranges_report_per_sentence_languages() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        let router_auto = router(s.clone());
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("language", "auto"),
+        ])
+        .unwrap();
+        let (status, value) = send(router_auto, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        let extended = value["extendedSentenceRanges"]
+            .as_array()
+            .expect("an array");
+        assert_eq!(extended.len(), 1, "ranges: {extended:?}");
+        let range = &extended[0];
+        assert_eq!(range["from"], 0);
+        assert_eq!(
+            range["to"],
+            "Jag arbetar inte i dag, men jag kommer hem efter jobbet."
+                .chars()
+                .count() as u64
+        );
+        let languages = range["detectedLanguages"]
+            .as_array()
+            .expect("an array of {language, rate}");
+        let best = &languages[0];
+        // LT uses short codes here (`ExtendedSentenceRange`), not long codes
+        assert_eq!(best["language"], "sv");
+        let rate = best["rate"].as_f64().expect("a rate");
+        assert!(rate > 0.0 && rate <= 1.0, "rate: {rate}");
+
+        // an explicit language does not detect, so there is nothing to report
+        let router_explicit = router(s);
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("language", "en-US"),
+        ])
+        .unwrap();
+        let (status, value) = send(router_explicit, "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["extendedSentenceRanges"].as_array().unwrap().len(), 0);
+    }
+
+    /// `/v3/check` reports UTF-8 byte offsets, so the sentence ranges differ
+    /// from v2's for the same text.
+    #[tokio::test]
+    async fn sentence_ranges_on_v3_are_utf8_bytes() {
+        let s = state();
+        if !has_engines(&s) {
+            return;
+        }
+        let router = router(s);
+        let body = serde_urlencoded::to_string([
+            ("text", "This is a testt. 😀 And a second sentence."),
+            ("language", "en-US"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v3/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        let ranges = value["sentenceRanges"].as_array().unwrap();
+        assert_eq!(ranges[0][0], 0);
+        assert_eq!(ranges[0][1], 16);
+        assert_eq!(ranges[1][0], 17);
+        // the emoji is 4 UTF-8 bytes here and 2 UTF-16 code units on v2
+        assert_eq!(ranges[1][1], 17 + "😀 And a second sentence.".len() as u64);
+    }
+
+    /// `POST /v3/detect` — the decision, the ranking behind it, and an honest
+    /// `null` when nothing clears the gates.
+    #[tokio::test]
+    async fn v3_detect_returns_the_decision_and_the_ranking() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([(
+            "text",
+            "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+        )])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v3/detect", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        assert_eq!(value["resolved"], "sv");
+        assert_eq!(value["detected"]["language"], "sv");
+        assert_eq!(value["detected"]["source"], "fasttext");
+        let confidence = value["detected"]["confidence"].as_f64().unwrap();
+        assert!((0.0..1.0).contains(&confidence), "confidence: {confidence}");
+        let candidates = value["candidates"].as_array().unwrap();
+        assert!(!candidates.is_empty());
+        assert_eq!(candidates[0]["language"], "sv");
+        assert_eq!(candidates[0]["source"], "fasttext");
+        assert!(candidates.iter().all(|c| c["confidence"].is_number()));
+    }
+
+    #[tokio::test]
+    async fn v3_detect_abstains_on_short_text() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([("text", "Hej.")]).unwrap();
+        let (status, value) = send(router, "POST", "/v3/detect", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["resolved"], Value::Null);
+        assert_eq!(value["detected"], Value::Null);
+        // the ranking survives an abstention, so a UI can still offer it
+        assert!(!value["candidates"].as_array().unwrap().is_empty());
+    }
+
+    /// `&restrict=` narrows detection to the languages the caller has data for.
+    #[tokio::test]
+    async fn v3_detect_honours_restrict() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("restrict", "en,de"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v3/detect", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        // Swedish is no longer on the table, so nothing clears the gates
+        assert_eq!(value["resolved"], Value::Null);
+        assert_eq!(value["detected"], Value::Null);
+        let languages: Vec<&str> = value["candidates"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|c| c["language"].as_str().unwrap())
+            .collect();
+        assert!(!languages.contains(&"sv"), "candidates: {languages:?}");
+        assert!(
+            languages.iter().all(|l| *l == "en" || *l == "de"),
+            "{languages:?}"
+        );
+    }
+
+    /// A `restrict` naming nothing this build ships narrows to nothing and
+    /// answers `null`, rather than quietly detecting everything.
+    #[tokio::test]
+    async fn v3_detect_restrict_to_unknown_codes_answers_nothing() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("restrict", "xx,yy-ZZ"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v3/detect", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["resolved"], Value::Null);
+        assert!(value["candidates"].as_array().unwrap().is_empty());
+    }
+
+    #[tokio::test]
+    async fn v3_detect_requires_text_and_bounds_its_length() {
+        let (status, value) = send(router(state()), "POST", "/v3/detect", "language=sv").await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert_eq!(
+            value["error"]["message"],
+            "Missing required parameter: text"
+        );
+
+        let router = router(state());
+        let long = "a".repeat(MAX_TEXT_LENGTH as usize + 1);
+        let body = serde_urlencoded::to_string([("text", long.as_str())]).unwrap();
+        let (status, value) = send(router, "POST", "/v3/detect", &body).await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert!(
+            value["error"]["message"]
+                .as_str()
+                .is_some_and(|message| message.contains("Text too long")),
+            "message: {}",
+            value["error"]["message"]
+        );
+    }
+
+    /// LT has no detection endpoint, so v2 must not grow one: `ApiV2` answers an
+    /// unknown path with a 404 and a drop-in client relies on that.
+    #[tokio::test]
+    async fn v2_has_no_detect_route() {
+        let router = router(state());
+        let (status, _) = send(router, "POST", "/v2/detect", "text=Hej.").await;
+        assert_eq!(status, StatusCode::NOT_FOUND);
     }
 
     #[tokio::test]

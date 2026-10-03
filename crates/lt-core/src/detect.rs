@@ -250,7 +250,16 @@ pub fn detect(
     model: Option<&dyn Model>,
     gates: &Gates,
 ) -> Option<Detection> {
-    let ranked = candidates(text, lexicon, model);
+    cleared_candidates(&candidates(text, lexicon, model), text, gates)
+}
+
+/// The leading candidate of an existing ranking, if it clears the gates.
+///
+/// Split out from [`detect`] for callers that already hold a ranking — a
+/// server that reports the candidates alongside the decision, or restricts them
+/// first, must not pay for a second prediction or keep a second copy of the
+/// gate rules.
+pub fn cleared_candidates(ranked: &[Candidate], text: &str, gates: &Gates) -> Option<Detection> {
     let best = ranked.first()?;
 
     // A lexicon hit is decided by words that occur in no other language we ship,
@@ -403,6 +412,46 @@ mod tests {
     fn no_model_and_no_markers_yields_nothing() {
         let text = "Jag arbetar inte i dag, men jag kommer hem efter jobbet.";
         assert_eq!(detect(text, &Lexicon::new(), None, &Gates::default()), None);
+    }
+
+    #[test]
+    fn cleared_candidates_gates_an_existing_ranking() {
+        // The same gate rules `detect` applies, over a ranking the caller built
+        // itself (a server restricts and re-rates candidates before deciding).
+        let ranking = [
+            Candidate {
+                lang: Lang::Sv,
+                confidence: 0.93,
+                source: Source::Model,
+            },
+            Candidate {
+                lang: Lang::Da,
+                confidence: 0.04,
+                source: Source::Model,
+            },
+        ];
+        let long = "Jag arbetar inte i dag, men jag kommer hem efter jobbet.";
+        assert_eq!(
+            cleared_candidates(&ranking, long, &Gates::default()).map(|d| d.language),
+            Some(Lang::Sv)
+        );
+        // too short for the model path, whatever the ranking says
+        assert_eq!(
+            cleared_candidates(&ranking, "Jag.", &Gates::default()),
+            None
+        );
+        // and a lexicon ranking still needs no length
+        let lexicon_ranking = [Candidate {
+            lang: Lang::Nrd,
+            confidence: LEXICON_CONFIDENCE,
+            source: Source::Lexicon,
+        }];
+        assert_eq!(
+            cleared_candidates(&lexicon_ranking, "Jei.", &Gates::default()).map(|d| d.language),
+            Some(Lang::Nrd)
+        );
+        // an empty ranking abstains
+        assert_eq!(cleared_candidates(&[], long, &Gates::default()), None);
     }
 
     #[test]
