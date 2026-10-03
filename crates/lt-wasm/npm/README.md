@@ -59,6 +59,47 @@ Or, from an ES module: `import { LtEngine } from "lingotweaker-wasm/node"`.
 `today` is required in practice: WebAssembly has no clock, so the date is
 passed in and pinned for the engine's date filters.
 
+## Language detection
+
+`detect_json` is a free function, not an `LtEngine` method: choosing the
+language is what picks the engine, so you ask before any engine exists. It
+needs no data pack — the identifier model and the Nordum marker list are
+embedded in the wasm binary.
+
+```js
+import init, { detect_json, LtEngine } from "lingotweaker-wasm";
+
+await init();
+
+const { resolved, detected, candidates } = JSON.parse(
+  detect_json("Jag arbetar inte i dag, men jag kommer hem efter jobbet."),
+);
+// resolved: "sv"  detected: {language: "sv", confidence: 0.99, source: "model"}
+// candidates: the five best-scoring languages, best first
+
+const engine = new LtEngine(
+  resolved ?? "en-US",
+  pack,
+  JSON.stringify({ today: new Date().toISOString() }),
+);
+```
+
+`resolved` is `null` when there is not enough evidence to answer — that is a
+normal outcome, not an error, and the caller keeps the language it already had.
+`detected.source` says which layer decided: `"lexicon"` for a word no other
+language we ship contains (this is how Nordum is detected), `"model"` for the
+statistical model.
+
+Detection is deliberately conservative on short fragments, which is what an
+editor sees. The optional second argument overrides the thresholds:
+
+```js
+detect_json(text, JSON.stringify({ minChars: 40, minConfidence: 0.3, minMargin: 2 }));
+```
+
+Each field defaults to the engine default, so `{}` is the same call as no
+argument.
+
 ## Data
 
 The package ships **code only** and depends on the code-only

@@ -226,10 +226,20 @@ Below the threshold the caller keeps the site/default language — today's behav
 a free function (not an `LtEngine` method — choosing the language is what picks the engine):
 
 ```rust
-/// `[{ "language": "sv", "confidence": 0.93, "source": "fasttext" }, …]`
+/// `{"resolved":"sv","detected":{"language":"sv","confidence":0.93,"source":"model"},
+///   "candidates":[{"language":"sv","confidence":0.93,"source":"model"}, …]}`
 #[wasm_bindgen]
-pub fn detect_json(text: &str) -> Result<String, JsError>
+pub fn detect_json(text: &str, gates: Option<String>) -> Result<String, JsError>
 ```
+
+`resolved` is `null` on an abstention, which is a normal outcome; `candidates` carries the whole
+ranking so a UI can offer it without treating it as a decision. `source` is `lexicon` or `model`
+here — the HTTP layer maps it to LT's `ngram` in §4.
+
+The Nordum marker list and the identifier model are embedded with `include_str!`/`include_bytes!`,
+like the wasm asset story elsewhere: the browser build fetches nothing to detect. The optional
+`gates` argument takes `{"minChars":…,"minConfidence":…,"minMargin":…}` and defaults per field to
+`Gates::default()`.
 
 The wasm build comes from a **pinned engine commit** (`scripts/build-wasm.sh`
 `ENGINE_COMMIT`), so the engine must be released before the extension can consume it.

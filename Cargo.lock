@@ -1168,6 +1168,7 @@ dependencies = [
  "console_error_panic_hook",
  "js-sys",
  "lt",
+ "lt-core",
  "serde",
  "serde_json",
  "wasm-bindgen",

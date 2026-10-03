@@ -16,8 +16,21 @@
 //! (`SystemTime::now()` traps), so the browser date is passed in and pinned
 //! for the date filters.
 //!
+//! Language detection is a free function rather than an engine method, because
+//! choosing the language is what picks the engine:
+//!
+//! ```js
+//! import init, { LtEngine, detect_json } from "./pkg/lt_wasm.js";
+//! await init();
+//! const resolved = JSON.parse(detect_json(text)).resolved; // "sv", or null
+//! const engine = resolved ? new LtEngine(resolved, pack, options) : fallback;
+//! ```
+//!
 //! Build with `wasm-pack build crates/lt-wasm --target web` (or `--target
 //! nodejs` for the Node smoke test).
+
+mod detect;
+pub use detect::detect_json;
 
 use serde::Deserialize;
 use wasm_bindgen::prelude::*;
