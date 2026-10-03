@@ -40,6 +40,7 @@ mod da;
 mod dash;
 mod dates;
 mod de;
+pub mod detect_model;
 mod double_punctuation;
 mod el;
 mod en;

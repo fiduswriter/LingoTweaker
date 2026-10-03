@@ -288,10 +288,21 @@ nothing could explain its origin.
 is the worst failure (0.99 confidence for "Swedish"), leaving the four discriminator cases
 known-wrong. D ships known-wrong answers for five of our own languages.
 
-## 7. Model licensing — deferred to a release gate
+## 7. Model licensing — resolved
 
-Owner decision (2026-10-03): **prototype first, decide before release.** The architecture is
-identical under either option, so this gates the release, not the implementation.
+Owner decision (2026-10-03): **CC BY-SA 3.0 is accepted.** The model is vendored at
+`crates/lt/assets/lid.176.ftz` with provenance in `crates/lt/assets/README.md`. Not a new
+posture: `data/manifest.json` already records 14 CC-BY-SA-4.0 and ~54 GPL files, and the engine
+is `LGPL-2.1-or-later`.
+
+Two consequences from the earlier discussion are settled rather than open:
+
+- A derived (fine-tuned) model may be published under the same terms.
+- **Order of work: discriminator first, fine-tuning second** — build the confusable-cluster
+  discriminator, then try fine-tuning and keep it only if it measures better or smaller.
+
+Wikipedia CC-BY-SA 3.0 is also accepted as training data for the five languages still missing
+from the corpus.
 
 ### What CC-BY-SA 3.0 actually obliges
 

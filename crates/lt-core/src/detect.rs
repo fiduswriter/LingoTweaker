@@ -33,8 +33,22 @@ pub const LEXICON_CONFIDENCE: f32 = 0.95;
 
 /// Thresholds below which detection abstains rather than guessing.
 ///
-/// Defaults are proposals calibrated against
-/// `tests/fixtures/detection_corpus.json`; see `docs/language-detection-plan.md`.
+/// Calibrated against the bundled model over 12,559 fixture sentences
+/// (`crates/lt/tests/detect_model.rs` sweeps this). The length gate dominates:
+/// lowering `min_confidence` from 0.60 to 0.30 moves coverage by under 4
+/// points, while `min_chars` moves it by tens.
+///
+/// | `min_chars` | coverage | precision |
+/// |---|---|---|
+/// | 0 | 80.0 % | 94.1 % |
+/// | **20** | **53.5 %** | **96.1 %** |
+/// | 40 | 17.5 % | 97.8 % |
+/// | 80 | 2.5 % | 98.1 % |
+///
+/// 40 was the original guess and is too high: it abstains on 82 % of real
+/// sentences, which makes detection nearly inert. Precision is preferred over
+/// coverage because a wrong answer silently checks text against the wrong rules,
+/// while an abstention leaves the user on the language they already had.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Gates {
     /// Minimum non-whitespace characters before any answer is given.
@@ -48,7 +62,7 @@ pub struct Gates {
 impl Default for Gates {
     fn default() -> Self {
         Gates {
-            min_chars: 40,
+            min_chars: 20,
             min_confidence: 0.60,
             min_margin: 1.5,
         }

@@ -24,6 +24,10 @@ aho-corasick = { workspace = true }
 fancy-regex = { workspace = true }
 rustc-hash = { workspace = true }
 unicode-normalization = { workspace = true }
+# Language identification. Not exposed from `lt-core`, which is published to
+# crates.io; the `Model` trait lives there and this is the implementation.
+fasttext-pure-rs = { workspace = true }
 
 [dev-dependencies]
+serde = { workspace = true }
 serde_json = { workspace = true }

@@ -154,7 +154,9 @@ fn the_length_gate_applies_to_the_model_path_only() {
 #[test]
 fn gate_defaults_are_unchanged() {
     let gates = Gates::default();
-    assert_eq!(gates.min_chars, 40);
+    // 20 rather than the original guess of 40: measured against the bundled
+    // model, 40 abstains on 82% of fixture sentences. See `Gates`' docs.
+    assert_eq!(gates.min_chars, 20);
     assert_eq!(gates.min_confidence, 0.60);
     assert_eq!(gates.min_margin, 1.5);
 }

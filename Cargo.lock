@@ -534,6 +534,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "fasttext-pure-rs"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7eec6d842b339de477c0824b9cdac9ca7bc8900fe23646e5a67226286c9fd9f7"
+dependencies = [
+ "thiserror",
+]
+
+[[package]]
 name = "flate2"
 version = "1.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -979,6 +988,7 @@ version = "0.2.4"
 dependencies = [
  "aho-corasick",
  "fancy-regex",
+ "fasttext-pure-rs",
  "lt-chunk",
  "lt-core",
  "lt-data",
@@ -990,6 +1000,7 @@ dependencies = [
  "lt-tokenize",
  "regex",
  "rustc-hash",
+ "serde",
  "serde_json",
  "unicode-normalization",
 ]
