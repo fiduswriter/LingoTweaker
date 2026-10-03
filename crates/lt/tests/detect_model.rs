@@ -91,7 +91,8 @@ fn reports_accuracy_per_language() {
             out.correct as f64 / seen as f64
         };
         lines.push(format!(
-            "  {code:5} {rate:5.1}%  ({:>3} correct, {:>3} abstained, {:>3} wrong)",
+            "  {code:5} {:5.1}%  ({:>3} correct, {:>3} abstained, {:>3} wrong)",
+            rate * 100.0,
             out.correct,
             out.abstained,
             out.wrong.len()

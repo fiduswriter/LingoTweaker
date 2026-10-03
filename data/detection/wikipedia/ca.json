@@ -1,0 +1,209 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://ca.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 16,
+   "title": "Cussy-en-Morvan",
+   "url": "https://ca.wikipedia.org/wiki/Cussy-en-Morvan"
+  },
+  {
+   "sentences": 6,
+   "title": "Circuit d'AVUS",
+   "url": "https://ca.wikipedia.org/wiki/Circuit_d%27AVUS"
+  },
+  {
+   "sentences": 4,
+   "title": "Ampleforth",
+   "url": "https://ca.wikipedia.org/wiki/Ampleforth"
+  },
+  {
+   "sentences": 18,
+   "title": "Errors i residus",
+   "url": "https://ca.wikipedia.org/wiki/Errors_i_residus"
+  },
+  {
+   "sentences": 12,
+   "title": "Parafarmàcia",
+   "url": "https://ca.wikipedia.org/wiki/Parafarm%C3%A0cia"
+  },
+  {
+   "sentences": 1,
+   "title": "Pita de Rossel",
+   "url": "https://ca.wikipedia.org/wiki/Pita_de_Rossel"
+  },
+  {
+   "sentences": 1,
+   "title": "Kàmenka (Tula)",
+   "url": "https://ca.wikipedia.org/wiki/K%C3%A0menka_%28Tula%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Autocinema",
+   "url": "https://ca.wikipedia.org/wiki/Autocinema"
+  },
+  {
+   "sentences": 12,
+   "title": "Bassou",
+   "url": "https://ca.wikipedia.org/wiki/Bassou"
+  },
+  {
+   "sentences": 1,
+   "title": "Pèira",
+   "url": "https://ca.wikipedia.org/wiki/P%C3%A8ira"
+  },
+  {
+   "sentences": 25,
+   "title": "Res a declarar",
+   "url": "https://ca.wikipedia.org/wiki/Res_a_declarar"
+  },
+  {
+   "sentences": 8,
+   "title": "Óscar Sielva i Moreno",
+   "url": "https://ca.wikipedia.org/wiki/%C3%93scar_Sielva_i_Moreno"
+  },
+  {
+   "sentences": 7,
+   "title": "FLNC-Canal Històric",
+   "url": "https://ca.wikipedia.org/wiki/FLNC-Canal_Hist%C3%B2ric"
+  },
+  {
+   "sentences": 25,
+   "title": "Batalla del riu Vorskla",
+   "url": "https://ca.wikipedia.org/wiki/Batalla_del_riu_Vorskla"
+  },
+  {
+   "sentences": 7,
+   "title": "Ellora",
+   "url": "https://ca.wikipedia.org/wiki/Ellora"
+  },
+  {
+   "sentences": 7,
+   "title": "Ash Tyler",
+   "url": "https://ca.wikipedia.org/wiki/Ash_Tyler"
+  },
+  {
+   "sentences": 5,
+   "title": "Resolució 2014 del Consell de Seguretat de les Nacions Unides",
+   "url": "https://ca.wikipedia.org/wiki/Resoluci%C3%B3_2014_del_Consell_de_Seguretat_de_les_Nacions_Unides"
+  },
+  {
+   "sentences": 18,
+   "title": "XXV Mostra de Cinema Llatinoamericà de Catalunya",
+   "url": "https://ca.wikipedia.org/wiki/XXV_Mostra_de_Cinema_Llatinoameric%C3%A0_de_Catalunya"
+  },
+  {
+   "sentences": 25,
+   "title": "Johann André",
+   "url": "https://ca.wikipedia.org/wiki/Johann_Andr%C3%A9"
+  },
+  {
+   "sentences": 9,
+   "title": "Elisabeth Larena",
+   "url": "https://ca.wikipedia.org/wiki/Elisabeth_Larena"
+  },
+  {
+   "sentences": 5,
+   "title": "Junzi imperialis",
+   "url": "https://ca.wikipedia.org/wiki/Junzi_imperialis"
+  },
+  {
+   "sentences": 2,
+   "title": "Alife",
+   "url": "https://ca.wikipedia.org/wiki/Alife"
+  },
+  {
+   "sentences": 4,
+   "title": "Tempo (diari)",
+   "url": "https://ca.wikipedia.org/wiki/Tempo_%28diari%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Joaquim Ballester Rigla",
+   "url": "https://ca.wikipedia.org/wiki/Joaquim_Ballester_Rigla"
+  },
+  {
+   "sentences": 25,
+   "title": "Festes de Sant Sebastià de Palma",
+   "url": "https://ca.wikipedia.org/wiki/Festes_de_Sant_Sebasti%C3%A0_de_Palma"
+  },
+  {
+   "sentences": 3,
+   "title": "Primera cascada del Nil",
+   "url": "https://ca.wikipedia.org/wiki/Primera_cascada_del_Nil"
+  },
+  {
+   "sentences": 25,
+   "title": "Dret internacional privat",
+   "url": "https://ca.wikipedia.org/wiki/Dret_internacional_privat"
+  },
+  {
+   "sentences": 13,
+   "title": "El Malah",
+   "url": "https://ca.wikipedia.org/wiki/El_Malah"
+  },
+  {
+   "sentences": 25,
+   "title": "Llista de Medalles President Macià",
+   "url": "https://ca.wikipedia.org/wiki/Llista_de_Medalles_President_Maci%C3%A0"
+  },
+  {
+   "sentences": 4,
+   "title": "Angelo Peruzzi",
+   "url": "https://ca.wikipedia.org/wiki/Angelo_Peruzzi"
+  },
+  {
+   "sentences": 5,
+   "title": "Diagramma punctatum",
+   "url": "https://ca.wikipedia.org/wiki/Diagramma_punctatum"
+  },
+  {
+   "sentences": 17,
+   "title": "International Lesbian, Gay, Bisexual, Trans and Intersex Association",
+   "url": "https://ca.wikipedia.org/wiki/International_Lesbian%2C_Gay%2C_Bisexual%2C_Trans_and_Intersex_Association"
+  },
+  {
+   "sentences": 4,
+   "title": "Casa Escaleta II",
+   "url": "https://ca.wikipedia.org/wiki/Casa_Escaleta_II"
+  },
+  {
+   "sentences": 8,
+   "title": "Casa pairal (Claret)",
+   "url": "https://ca.wikipedia.org/wiki/Casa_pairal_%28Claret%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Ca Canyisser",
+   "url": "https://ca.wikipedia.org/wiki/Ca_Canyisser"
+  },
+  {
+   "sentences": 17,
+   "title": "Batalla de Tébar",
+   "url": "https://ca.wikipedia.org/wiki/Batalla_de_T%C3%A9bar"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "ca",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "retrieved": "2026-10-03",
+ "sentence_count": 400,
+ "wikipedia": "https://ca.wikipedia.org/"
+}

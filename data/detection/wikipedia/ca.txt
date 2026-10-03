@@ -1,0 +1,400 @@
+Cussy-en-Morvan és un municipi francès, situat al departament de Saona i Loira i a la regió de Borgonya - Franc Comtat.
+El 2007 la població de fet de Cussy-en-Morvan era de 460 persones.
+Hi havia 228 famílies, de les quals 84 eren unipersonals (52 homes vivint sols i 32 dones vivint soles), 88 parelles sense fills, 48 parelles amb fills i 8 famílies monoparentals amb fills.
+La població ha evolucionat segons el següent gràfic:
+El 2007 hi havia 476 habitatges, 227 eren l'habitatge principal de la família, 228 eren segones residències i 21 estaven desocupats. 460 eren cases i 14 eren apartaments.
+A 109 habitatges hi havia un automòbil i a 92 n'hi havia dos o més.
+La piràmide de població per edats i sexe el 2009 era:
+El 2007 la població en edat de treballar era de 274 persones, 173 eren actives i 101 eren inactives.
+De les 173 persones actives 143 estaven ocupades (84 homes i 59 dones) i 30 estaven aturades (18 homes i 12 dones).
+De les 101 persones inactives 50 estaven jubilades, 12 estaven estudiant i 39 estaven classificades com a «altres inactius».
+El 2009 a Cussy-en-Morvan hi havia 212 unitats fiscals que integraven 425 persones, la mediana anual d'ingressos fiscals per persona era de 15.268 €.
+Dels 8 establiments de servei als particulars que hi havia el 2009, 1 era una oficina de correu, 3 paletes, 1 guixaire pintor, 1 electricista, 1 perruqueria i 1 agència immobiliària.
+L'únic establiment comercial que hi havia el 2009 era una botiga de menys de 120 m².
+L'any 2000 a Cussy-en-Morvan hi havia 19 explotacions agrícoles que ocupaven un total de 1.068 hectàrees.
+El 2009 hi havia una escola elemental integrada dins d'un grup escolar amb els municipis propers formant una escola dispersa.
+El següent diagrama mostra les poblacions més properes.
+El Circuit d'AVUS és un circuit automobilístic situat al sud-oest de Berlín, Alemanya.
+AVUS són les inicials del seu nom en alemany Automobil-Verkehrs- und Übungs-Straße, i és el nom pel que és conegut popularment.
+El circuit va ser construït l'any 1907, i va ser usat principalment com a circuit de proves dels vehicles de la indústria alemanya de l'automòbil.
+A causa de la 2a Guerra Mundial el circuit va ser escurçat per la construcció del Mur de Berlín.
+A la temporada 1959 de la Fórmula 1 s'hi va disputar l'únic Gran Premi de la seva història, el Gran Premi d'Alemanya del 1959 guanyat pel pilot Tony Brooks, però a causa de l'accident mortal de Jean Behra es va veure que era perillós continuar disputant-hi curses de la F1.
+A partir de llavors s'hi van disputar curses de menor importància fins a l'any 1998.
+Ampleforth és un poble i parròquia civil al districte de Ryedale a North Yorkshire, Anglaterra, 42km al nord de York.
+El poble està situat a la vora del Parc Nacional North York Moors.
+La parròquia tenia 883 habitants segons el cens de 2001, que va augmentar a 1.345 en el cens de 2011, i inclou la Universitat d'Ampleforth.
+El nom Ampleforth significa el ford on l'agrella creix.
+En estadística i optimització, els errors i els residus són dues mesures estretament relacionades i fàcilment confoses de la desviació d'un valor observat d'un element d'una mostra estadística del seu "valor veritable" (no necessàriament observable).
+L'error d'una observació és la desviació del valor observat respecte al valor real d'una quantitat d'interès (per exemple, una mitjana de població).
+El residu és la diferència entre el valor observat i el valor estimat de la quantitat d'interès (per exemple, una mitjana mostral).
+La distinció és més important en l'anàlisi de regressió, on els conceptes de vegades s'anomenen errors de regressió i residus de regressió i on porten al concepte de residus estudiats.
+En econometria, els "errors" també s'anomenen pertorbacions.
+Suposem que hi ha una sèrie d'observacions d'una distribució univariada i volem estimar la mitjana d'aquesta distribució (l'anomenat model de localització).
+En aquest cas, els errors són les desviacions de les observacions respecte a la mitjana de la població, mentre que els residus són les desviacions de les observacions respecte a la mitjana mostral.
+Un error estadístic (o pertorbació) és la quantitat en què una observació difereix del seu valor esperat, basant-se aquest últim en tota la població de la qual s'ha escollit aleatòriament la unitat estadística.
+Per exemple, si l'alçada mitjana d'una població d'homes de 21 anys és d'1,75 metres i un home escollit a l'atzar fa 1,80 metres, llavors l'"error" és de 0,05 metres; si l'home escollit a l'atzar fa 1,70 metres d'alçada, llavors l'"error" és -0,05 metres.
+El valor esperat, essent la mitjana de tota la població, sol ser inobservable i, per tant, tampoc no es pot observar l'error estadístic.
+Una desviació residual (o desviació d'ajust), d'altra banda, és una estimació observable de l'error estadístic no observable.
+Considereu l'exemple anterior amb l'alçada dels homes i suposem que tenim una mostra aleatòria de n persones.
+La mitjana mostral podria servir com a bon estimador de la mitjana de la població .
+La diferència entre l'alçada de cada home de la mostra i la mitjana de la població no observable és un error estadístic, mentre que
+La diferència entre l'alçada de cada home de la mostra i la mitjana de la mostra observable és un residu.
+Cal tenir en compte que, a causa de la definició de la mitjana mostral, la suma dels residus d'una mostra aleatòria és necessàriament zero i, per tant, els residus no són necessàriament independents.
+Els errors estadístics, en canvi, són independents, i la seva suma dins de la mostra aleatòria gairebé segur que no és zero.
+Es poden estandarditzar els errors estadístics (especialment d'una distribució normal) en una puntuació z (o "puntuació estàndard"), i estandarditzar els residus en una estadística t, o més generalment els residus estudiats.
+Parafarmàcia és un terme que es refereix al conjunt de tots els productes per a tenir cura del cos i els de la higiene que es poden vendre sense recepta.
+També fa referència al mateix establiment on es venen els productes de parafarmàcia.
+La venda d'aquests productes no només es restringeix als farmacèutics i pot ser proposada per qualsevol mitjà o en una gran superfície comercial.
+De fet, la parafarmàcia no es considera una activitat mèdica i, per tant, no requereix cap grau d'estudis particular.
+No obstant això, la majoria de les empreses que fabriquen productes per a la cura personal requereixen la presència d'un farmacèutic en l'espai al detall.
+Les vendes autoritzades a les parafarmàcies són les següents :
+Productes i accessoris per a la higiene personal.
+No obstant això, també hi ha prohibicions de la venda en parafarmàcies, com són:
+Les plantes medicinals que estiguin incloses en la farmacopea.
+Els apòsits que s'ajusten a la farmacopea.
+Medicaments al·lopàtics o homeopàtics que formin part de la farmàcia
+Reial Decret 1591/2009, de 16 d'octubre, pel qual es regulen els productes sanitaris a Espanya
+La pita de Rossel (Erythropitta meeki) és una espècie d'ocell de la família dels pítids (Pittidae) que habita els boscos de l'illa de Rossel, a l'Arxipèlag de Louisiade.
+Kàmenka — Каменка (rus) — és un poble a l'óblast de Tula, a Rússia, segons el cens del 2010 tenia 139 habitants.
+La pantalla pot ser tan simple com un mur pintat de blanc o tan complexa com una estructura d'acer de complicat acabat.
+Alguns autocinemes han afegit zones de jocs per a nens entre la pantalla i la primera fila de cotxes.
+Uns altres fins i tot van anar més lluny afegint carreteres en miniatura, carrusels i camps de minigolf.
+Patis de ciment per a hamaques estan disponibles, igual que seients a l'interior a l'àrea del bar.
+Com que el visionat de pel·lícules a l'autocinema se solen fer a l'aire lliure, normalment són projectades durant les tardes o les nits quan està suficientment fosc per veure la pantalla adequadament.
+Originàriament, el so de les pel·lícules provenia d'altaveus col·locats a la pantalla.
+Més tard, d'un altaveu individual penjant de la finestra de cada cotxe, el qual podia endollar-se a la font original amb un cable.
+Aquest sistema va ser suplantat per un mètode de transmissió més econòmic i menys propens als danys.
+Aquest va ser la radiodifusió d'AM o FM, el qual sintonitza el so a través d'una ràdio de cotxe.
+Aquest mètode també permet que l'audiència senti el so de la pel·lícula en estèreo i reproduït en sistemes d'alta fidelitat dels mateixos cotxes en lloc de mitjançant un altaveu amb so monoaural.
+El 1915, una època en la qual els automòbils encara eren una luxosa novetat, es va inaugurar a Nou Mèxic el "Theatre de Guadeloupe", un cinema a l'aire lliure que tenia disponibilitat per 40 vehicles i va operar durant un any.
+Caver va obtenir un permís per projectar pel·lícules al centre de la ciutat de Comanxes, Texas.
+Els espectadors estacionaven els cotxes molt a prop dels altres per presenciar la projecció de pel·lícules mudes des dels seus vehicles.
+Tot i la popularitat del cinema a l'aire lliure durant la dècada dels 20, es van realitzar poques experimentacions amb drive-ins a causa de qüestions de logística.
+Hollingshead va dur a terme proves de cinema a l'aire lliure a Camden, Nova Jersey.
+Després de clavar una pantalla a uns arbres del seu pati, va col·locar un projector Kodak de 1928 al capó del seu cotxe i va posar una ràdio darrere de la pantalla, amb la qual va anar provant diferents nivells de so amb les seves finestres de cotxe cap avall i cap amunt.
+Una sèrie de blocs sota els vehicles li van permetre determinar la grandària i l'espaiament de rampes perquè, des de tots els automòbils, es pogués tenir una visió clara de la pantalla.
+Hollingshead va postular per una patent (la patent 1909537) el 6 d'agost de 1932, obtenint-la, finalment, el 16 de maig de 1933.
+El 6 de 1933, es va inaugurar a Camden el primer autocinema de la història, amb un cartell amb lletres gegantes, el qual indicava: "Tota la família és benvinguda, sense importar com siguin de sorollosos els nens".
+A l'estrena van acudir al voltant de 600 espectadors als quals se li cobrava 25 cèntims per persona i 25 cèntims per vehicle.
+Si es volia veure la pel·lícula sense portar cotxe, s'havia de pagar 1 dòlar.
+Va ser una solució per a moltes famílies nombroses que no podien comprar les entrades per al cinema, convertint-se, a més a més, en un punt d'atracció per a les joves parelles.
+A la 'Lover's Lane' (l'última fila), els enamorats se submergien en les seves passions, amb la pantalla al fons.
+Tenia una capacitat per 400 vehicles i una pantalla de 120 metres quadrats.
+La primera pel·lícula que es va projectar va ser “Wives Beware”, una comèdia protagonitzada per Adolphe Menjou i dirigida per Fred Niblo.
+Bassou és un municipi francès, situat al departament del Yonne i a la regió de Borgonya - Franc Comtat.
+El 2007 la població de fet de Bassou era de 761 persones.
+Hi havia 316 famílies, de les quals 108 eren unipersonals (52 homes vivint sols i 56 dones vivint soles), 84 parelles sense fills, 104 parelles amb fills i 20 famílies monoparentals amb fills.
+El 2007 hi havia 405 habitatges, 334 eren l'habitatge principal de la família, 26 eren segones residències i 45 estaven desocupats. 355 eren cases i 50 eren apartaments.
+A 142 habitatges hi havia un automòbil i a 160 n'hi havia dos o més.
+El 2007 la població en edat de treballar era de 507 persones, 397 eren actives i 110 eren inactives.
+De les 397 persones actives 372 estaven ocupades (215 homes i 157 dones) i 25 estaven aturades (8 homes i 17 dones).
+De les 110 persones inactives 45 estaven jubilades, 35 estaven estudiant i 30 estaven classificades com a «altres inactius».
+El 2009 a Bassou hi havia 336 unitats fiscals que integraven 791 persones, la mediana anual d'ingressos fiscals per persona era de 18.600 €.
+Dels 9 establiments de servei als particulars que hi havia el 2009, 1 era una oficina de correu, 1 una oficina bancària, 1 paleta, 1 guixaire pintor, 2 fusteries i 3 lampisteries.
+Dels 2 establiments comercials que hi havia el 2009, 1 era una botiga de més de 120 m² i 1 una botiga de menys de 120 m².
+L'any 2000 a Bassou hi havia 3 explotacions agrícoles.
+Pèira (en francès Peyre) és un municipi francès situat al departament de les Landes i a la regió de la Nova Aquitània.
+Res a declarar (títol original en francès: Rien à déclarer) és una pel·lícula francobelga de comèdia de 2010, escrita i dirigida per Dany Boon.
+Boon també interpreta un dels protagonistes, juntament amb Benoît Poelvoorde; el repartiment també compta amb Karin Viard, François Damiens, Bouli Lanners i Olivier Gourmet.
+Aquesta pel·lícula ha estat doblada al català.
+La cinta tracta temes com la xenofòbia i com la visió que la Unió Europea té d'Europa a la pràctica pot ser perjudicial per a l'economia local a les regions frontereres.
+Ruben Vandervoorde (Benoît Poelvoorde), agent de duanes belga, s'assabenta que el seu lloc de treball i els dels seus companys desapareixeran de manera imminent quan s'elimini el control de la frontera entre França i Bèlgica l'1 de gener del 1993 a causa de la Unió Duanera de la Unió Europea.
+Set anys més tard, els funcionaris del lloc fronterer situat a la localitat de Courquain (França) / Koorkin (Bèlgica) es veuen obligats a treballar en equip formant una brigada mixta.
+Com els negocis de la frontera han anat tancant han de treballar al No Man's Land, el restaurant que regenten Irène (Karin Viard) i Jacques (François Damiens) Janus i on els agents de duanes d'ambdós països solen fer els seus àpats.
+Però la francofòbia de Vandervoorde, que li ve del pare i intenta inculcar al seu fill, és un impediment.
+L'agent francès Mathias Ducatel (Dany Boon) enemic declarat de Vandervoorde, està secretament enamorat de Louise, la germana d'aquest; li demana que s'hi casi, però intenta per tots els mitjans ocultar-ho a en Ruben.
+Ruben i Mathias deixen finalment de banda les seves antigues picabaralles i uneixen esforços per pentinar les carreteres rurals frontereres amb una frontera mòbil, un vehicle especial de les duanes internacionals: un Renault 4L a punt d'anar al desballestament.
+Duval (Laurent Gamelon) també s'ha d'adaptar a la lliure circulació.
+Després d'intentar diverses vegades fer passar les seves mercaderies per la frontera, fins i tot utilitzant una ambulància, recorrerà a Jacques desesperat per evitar que els agents de duanes que li segueixen el rastre interceptin les seves càrregues.
+La pel·lícula és una coproducció entre França i Bèlgica de les productores Pathé i Les Productions du Ch'timi amb TF1 Films Productions i Scope Pictures, amb Jérôme Seydoux com a productor.
+Va comptar amb un pressupost de 23,5 milions d'euros, 6 milions dels quals per part de TF1 Films Productions, i que inclouen precompres de Canal+ i CinéCinéma, així com el subsidi de Wallimage i prop d'1,5 milions en màrqueting invertits per Pathé.
+Per a la seva estrena, se'n van fer 975 còpies.
+El primer dia de càsting va tenir lloc al centre cultural de Chimay el 22 de gener de 2010.
+Van presentar-s'hi 2.000 persones per intentar aconseguir una plaça com a extra, i el sou era de 30 euros al dia.
+Els extres havien d'anar-hi amb roba de la dècada del 1980 i del 1990.
+Per primera vegada al cinema, la pel·lícula va gaudir d'una roda de premsa uns dies abans de l'inici del rodatge, a causa de la gran expectació del públic.
+El guió el va elaborar Dany Boon i va comptar amb la col·laboració de la seva dona Yaël, acreditada de vegades com a col·laboradora artística.
+En una altra ocasió, Boon va declarar que el guió estava inspirat tant en la seva joventut com en la història d'amor dels seus pares.
+Rememorant els seus dies d'adolescent, quan duia els cabells llargs i la carpeta de dibuixos amb insígnies de The Cure, l'actor va explicar que era aturat i escorcollat pels agents de duanes cada vegada que la creuava; i allà, va afegir, es trobava «en una autèntica terra de ningú.
+La part del rebuig i del racisme hi és evocada: «El meu pare era cabilenc i la meva mare francesa», i quan ella es va quedar embarassada va ser rebutjada per part de la seva família.
+A la pel·lícula, Dany Boon es diu Mathias Ducatel; Ducatel és en realitat el cognom de la seva mare.
+Per preparar la seva pel·lícula, Boon va recercar en els arxius de l'època i també va entrevistar-se amb diversos antics duaners que encara eren funcionaris l'any 1993, quan els seus càrrecs van desaparèixer.
+Óscar Sielva i Moreno (Olot, 6 d'agost de 1991) és un futbolista català que juga com a centrecampista a la SD Huesca.
+Degut a la seva vàlua professional, va ser cridat a les files del primer equip del RCD Espanyol en la pretemporada 2008-2009.
+El seu primer partit oficial va ser a la primera jornada de lliga del mateix any, contra el Reial Valladolid.
+Sielva va sortir al terreny de joc quan mancaven 9 minuts pel final del partit al substituir Iván de la Peña.
+Ha estat lesionat de la clavícula després d'una entrada per darrere quan disputava la classificació de l'europeu amb la selecció sub-19, i s'haurà d'estar un mes de baixa pel que fa a la lesió.
+Sielva va ser titular i un jugador que va jugar un rol vital en el triomf de la selecció espanyola sub-17 que va guanyar el Campionat d'Europa sub-17 de 2008, a Turquia.
+Óscar Sielva i Moreno a La Preferente (castellà)
+Óscar Sielva i Moreno, Fitxa a Soccerway
+FLNC-Canal Històric fou un moviment polític nacionalista cors, que va emprendre el camí de la lluita armada clandestina.
+Fou fundat el 1990-1991 per elements radicals del FLNC.
+El seu aliat polític és A Cuncolta Naziunalista.
+Els anys 1990 foren força violents degut a la lluita fratricida que mantingueren amb el FLNC-Canal Habitual.
+El 1998, la radicalització d'A Cuncolta Naziunalista en A Cuncolta Independentista, provocà l'escissió de François Santoni qui creà Presenza Naziunale.
+Santoni fou alhora el fundador del grup armat Armata Corsa que aparegué el 1999.
+EL FLNC-Canal Històric anuncià el 23 de desembre de 1999 una fusió amb el FLNC del 5 de maig, Fronte Ribellu i el grup Clandestinu per tal de refundar el FLNC i declarar una treva.
+La batalla del riu Vorskla (en rus: Битва на реке Ворскле; en lituà Vorsklos mūšis; en polonès: Bitwa nad Worsklą) va ser una gran batalla medieval de l'Europa Oriental.
+Va tenir lloc el 12 d'agost de 1399, entre els exèrcits tàrtars d'Edigu i Temür Qutlugh, i els exèrcis del Gran Duc de Lituània Vytautas el Gran i de Toktamix, essent aquests últims els que van sortir derrotats del camp de batalla.
+A finals de la dècada de 1380, les relacions entre Toktamix, kan de l'Horda d'Or, i el seu antic senyor, Timur, estaven en tensió.
+El 1395, després de ser derrota a la Guerra de Toktamix contra Timur, Toktamix va ser destronat pels partidaris del kan Temür Qutlugh i de l'emir Edigu, amb el suport per part de Timur.
+Toktamix va escapar al Gran Ducat de Lituània, on va demanar ajuda a Vytautas per a recuperar el domini sobre l'Horda a canvi de la sobirania sobre les terres rutenes en poder de l'Horda, situació que entrava en les ambicions i propòsits del gran duc.
+Un yarlik que ha arribat als nostres dies demostra que Toktamix havia demanat ajuda als polonèso-lituans anteriorment el 1393.
+Vytautas va reunir un gran exèrcit que incloïa lituans, rutens, rusos, polonesos, moldaus i valaquians.
+Per aconseguir el suport dels Cavallers Teutònics, Vytautas va firmar amb ells el Tractat de Salines, pel qual els lliurava Samogitia.
+El gendre de Vytautas, Basili I de Moscou, formalment un vassall tàrtar, no es va unir a la coalició.
+Aquestes tropes van organitzar tres expedicions en territoris tàrtars, el 1397, el 1398 i el 1399.
+La primera expedició va arribar al mar Negre i Crimea.
+Vytautas va capturar diversos milers de captius sense molta oposició.
+La meitat d'aquests captius es van assentar prop de Trakai on se'ls va concedir privilegis perquè poguessin continuar practicant la seva fe.
+Avui en dia, sobreviuen diverses comunitats de descendents d'aquests captius com són els tàrtars de Lipka o els karaïms de Crimea.
+El 1398, l'exèrcit de Vytautas es va desplaçar des del riu Dnièper i va atacar el nord de Crimea, arribant, a l'est, al riu Don.
+Amb la intenció d'enfortir la seva posició, Vytautas va construir un castell a la desembocadura del Dnièper.
+Inspirat pels seus èxits, Vytautas va declarar una "Creuada contra els tàrtars", que el maig de 1399 va rebre la benedicció del papa Bonifaci IX.
+La benedicció papal per a la croada va ser un important èxit polític, en un país convertit al cristianisme el 1387, i que havia estat objectiu en el seu moment d'una croada santa.
+La campanya va ser organitzada des de Kíev.
+L'exèrcit de Vinautas es va desplaçar al llarg del riu Dnièper.
+El 5 d'agost, el seu exèrcit es va trobar amb les forces tàrtars al riu Vorskla on nord de Poltava (gairebé a la mateixa localització que la batalla de Poltava de 1709).
+Al trobar-se els dos exèrcits, Temür Qutlugh va demanar un alto el foc de tres dies per a permetre que els dos bàndols preparessin les seves forces.
+Era un truc per a permetre que els reforços d'Edigu arribessin.
+Vytautas va planejar construir un carro fortificat, per tal de parar als genets a la càrrega, i després poder-los destruir amb canons i artilleria.
+L'exèrcit de Vytautas estava ben equipat, però comptava amb menys tropes.
+Ellora (en marathi: वेरूळ Ellorā) és una localitat de l'Índia, antigament coneguda com a Elapurā, a 30 km de la ciutat d'Aurangabad (Maharashtra).
+Ellora és cèlebre per la seva arquitectura, amb monestirs i temples budistes (grup A: grutes 1 a 12, que daten vers l'any 500 a aproximadament el 650), hinduistes (grup B: grutes 13 a 31, establertes entre els segles vii i viii) i jaines (grup C: construïdes entre els segles viii i xi).
+Aquestes estructures han estat excavades en un precipici de Charanandri, i el seu nombre total és de 34, de les quals 12 són budistes, 17 hinduistes i 5 jainistes.
+La coexistència d'aquestes edificacions demostra un cert grau de tolerància interreligiosa a l'Índia.
+Les grutes budistes són les estructures més antigues i consisteixen principalment en vihāres i monestirs, alguns d'aquests són veritables santuaris exornats per una imatge de Buda.
+En aquest conjunt, la joia del lloc és el temple de Kailasantatha (725-755): un edifici, completament excavat en la roca.
+El 1983, Ellora va ser declarat Patrimoni Mundial de la Humanitat per la UNESCO.
+El tinent Ash Tyler () és un personatge fictici de la sèrie Star Trek: Discovery interpretat per l'actor Shazad Latif.
+El 2256 quan servia a la nau USS Yeager va ser capturat pels klingon a la batalla de les estrelles binaries, fet presoner i torturat per L'Rell.
+És rescatat pel capità Gabriel Lorca quan també és capturat pels klingon i tancat a la mateixa cel·la.
+Un cop rescatats, el capità el va nomenar Cap de seguretat de la nau USS Discovery.
+Un cop a la Discovery, Ash inicia una relació romàntica amb Michael Burnham.
+Durant el seu captiveri, el klingon Voq va ser transformat en Ash adoptant la seva personalitat, memòries i capacitats i aspecte físic per infiltrar-se com a agent encobert klingon a la Federació.
+Aquesta transformació va ser duta a terme per L'Rell.
+També va demanar un augment del suport humanitari de la comunitat internacional, i va demanar que es posés fi a la violència al Iemen enmig d'una revolta vinculada a la Primavera Àrab, i el potencial de creixement d'Al-Qaeda a la Península Aràbiga.
+La resolució també va demanar al Secretari General que els informés sobre l'aplicació d'aquesta resolució tant dins dels "primers 30 dies ... i cada 60 dies posteriors".
+També va demanar una investigació independent sobre l'esdeveniment que va provocar a la violència.
+Saleh va donar la benvinguda a la resolució; al mateix temps, les forces de seguretat iemenites van matar un manifestant.
+Llista de resolucions del Consell de Seguretat de les Nacions Unides 2001 a la 2100 (2011 - 2013)
+La XXV Mostra de Cinema Llatinoamericà de Catalunya va tenir lloc a Lleida entre el 6 i el 13 de juny de 2019.
+El cartell fou dissenyat per Andrea-Mersey de Castro Piñol.
+En total es van projectar 81 produccions de 20 països (12 llatinoamericans) amb 13 produccions inèdites a l'estat espanyol, 5 estrenes europees i 2 òperes primes.
+A la secció oficial hi participaren 32 pel·lícules: 12 llargmetratges i 12 curtmetratges (projectats al CaixaForum Lleida) i 8 documentals (projectats a la Universitat de Lleida).
+També es van fer sessions a la Mariola i als Cinemes Funàtic i s'oferirà una jornada protagonitzada per un festival convidat, aquest cop el Festival Internacional de Cinema Gai i Lèsbic de Barcelona (FICGLB).
+Alhora es va crear una nova secció no competitiva, Terror Llatí, i es faran dues maratons de curtmetratges.
+La inauguració va tenir lloc al teatre de La Llotja de Lleida.
+Es va atorgar el premi d'Honor a l'actriu Lola Dueñas i el director de fotografia José Luis Alcaine, el Premi Jordi Dauder a Josep Maria Pou, el Premi Ángel Fernández-Santos, a la plataforma de vídeo Filmin, i el Premi Talent Llatinoamericà a l'historietista Horacio Altuna.
+El tamaño de las cosas de Carlos Felipe Montoya
+Siete cabezas (2017) de Jaime Osorio Márquez
+Morto Não Fala (2018) de Dennison Ramalho
+Abrakadabra (2018) de Luciano Onetti i Nicolás Onetti
+O Clube dos Canibais (2018) de Guto Parente
+El jurat oficial de llargmetratges era format pel director Carles Torras, la periodista mexicana Adela Mac Swiney i el periodista Javier Tolentino.
+Els premis atorgats en aquesta edició foren:
+Inauguració de la 25a Mostra de Cinema Llatinoamericà de Catalunya, fotografies a segre.com
+Comienza 25 Mostra Cinema Llatinoamericà de Catalunya, Hora América, rtve.es
+25a Mostra de Cinema Llatinoamericà de Catalunya - Screenbox Funatic a YouTube
+Johann André (Offenbach am Main, 28 de març de 1741 – 18 de juny de 1799) fou un músic, compositor i editor musical alemany.
+En 1774, coo patriarca d'una família hugonota, André fundà una de les primeres editorials de música independents d'una llibreria, en Offenbach am Main.
+Entre sus amics més propers en Offenbach estigueren Goethe, en l'època del seu compromis con Anna Elisabeth Schönemann, i està retratat en el llibre 17 de l'autobiografía de Goethe Dichtung und Wahrheit amb un fons d'Offenbach am Main, (1775).
+En 1777, André fou nomenat director musical en el Teatre Alemany a Berlín, sense haver abandonat Offenbach am Main.
+Va compondre al voltant de 30 òperes, balades i cançons.
+El seu fill, Johann Anton André (1775–1842), seguí els seus passos en la composició i teoría musical.
+Després d'haver-se fet càrrec del negoci de publicació musical del seu pare en 1799, Johann Anton André adquirí el llegat musical de Mozart a Constanze Mozart en Viena.
+Desenvolupà el negoci de l'editorial de música i introduí la litografía per a imprimir notes.
+Musikhaus André, i el Musikverlag Johann André, amb el seu ampli arxiu musical, existeix encara avui en el centre d'Offenbach.
+Herzog Michael oder Die Nachtigall (Berlín, 1775)
+Der Barbier von Sevilien oder Die unnütze Vorsicht (Berlín 1776)
+Die Bezauberten oder Peter und Hannchen (Berlín, 1777)
+Der Fürst im höchsten Glanze (Berlín, 1777)
+Der Alchymist oder Der Liebesteufel (Berlín, 1778)
+Alter schützt vor Thorheit nicht (Mannheim, 1779)
+Die Friedensfeyer oder Die unvermuthete Wiederkunft (Berlín, 1779)
+Friedrichs glorreichster Sieg (Berlín, 1779)
+Kurze Thorheit ist die beste (Berlín, 1780)
+Das wüthende Heer oder Das Mädchen im Thurme (Berlín, 1780)
+Heinrich der Erhabene aus dem Stamme der Brennen (Berlín, 1780)
+Belmont und Constanze oder Die Entführung aus dem Serail (Berlín, 1781)
+Eins wird doch helfen oder Die Werbung aus Liebe (Berlín, 1782)
+Der Liebhaber als Automat oder Die redende Maschine (Berlín, 1782)
+Der Bräutigam in der Klemme (Frankfurt, 1796)
+«Bibliografia relacionada amb Johann André» (en alemany).
+Elisabeth Larena (Bilbao, 22 de febrer de 1986) és una actriu espanyola.
+Elisabeth va estudiar interpretació en Bilbao i des de llavors ha participat en diverses ficcions televisives.
+El seu primer paper en televisió li va venir de la mà de Telemadrid a la sèrie 2 de mayo, la libertad de una nación, on interpreta a Casilda, una modista.
+Posteriorment ha participat episòdicament a sèries com Homicidios, Hospital Central o Carlos, rey emperador, però és especialment recordada pel seu paper de Luchi a Cuéntame cómo pasó, a la que va interpretar durant 15 episodis.
+Al cinema ha participat a Lost Girls & Love Hotels, basada en la novel·la del mateix nom i a No mataràs, de David Victori, on interpreta a Laura, la germana del protagonista, Dani (Mario Casas).
+El 8 d'abril del 2021 es va confirmar el seu ingrés a la sèrie Servir y proteger en el paper de Chloe.
+Quien lo probó lo sabe (2008) - d'Eduardo Navarro, com Lola.
+Los desterrados de la calle Montera (2009) - de Mario Bolaños, com Ana.
+Chevrolet (Anunci per EUA, Canadà i Mèxic).
+Junzi imperialis és una espècie extinta de primat de la família dels gibons (Hylobatidae) que visqué a l'Àsia oriental com a mínim fins fa 2.300 anys.
+L'holotip en fou trobat a la Xina, dins la tomba de Xia Ji, mare del rei Zhuangxiang de Qin.
+Se suposa que era un animal de companyia de la dama enterrada, que també posseïa grues, lleopards, linxs i un os del Tibet.
+El nom genèric Junzi es refereix al fet que, en l'antiga Xina, els gibons eren animals de companyia dels junzi, homes exemplars i erudits, mentre que el nom específic imperialis significa ‘imperial’, en referència al context del seu descobriment.
+A Concise Dictionary of Paleontology (en anglès). 2a edició.
+Alife és una antiga i petita vila de la Terra di Lavoro del Regne de Nàpols.
+Antigament va pertànyer als Samnites que la convertiren en República.
+Tempo va ser una revista setmanal il·lustrada fundada el 1970 a Maputo, Àfrica Oriental Portuguesa, en l'actual Moçambic.
+La revista va actuar com la veu de l'oposició a les pràctiques i del govern colonial portuguès a la colònia.
+It was Mozambique's first full color magazine.
+Tempo va ser fundada pel fotoperiodista Ricardo Rangel i uns altres quatre periodistes moçambiquesos.
+Joaquim Ballester Rigla (Badalona, 19 d'octubre de 1936) és un exjugador de bàsquet català.
+Va debutar en el primer equip del Joventut de Badalona la temporada 1953-54, i tota la seva carrera ha estat lligada a la Penya, club del que fou jugador del primer equip durant dotze temporades ininterrompudes, fins a la 1964-65.
+Al llarg de la seva estada al club verd-i-negre guanyà dos Campionats de Catalunya (1954, 1957) i dues Copes d'Espanya (1955, 1958), sent un dels jugadors de la primera lliga espanyola que es va celebrar.
+També fou internacional amb la selecció espanyola.
+Les festes de Sant Sebastià són les festes patronals de la ciutat de Palma, i tenen lloc la setmana de Sant Sebastià, el 20 de gener.
+Els actes centrals tenen lloc el dia de la revetla, la nit del 19 al 20, amb un gran fogueró i diverses torrades i concerts, organitzats per l'Ajuntament de Palma.
+Els darrers anys destaquen també, però, els diversos actes organitzats per altres entitats, com Orgull Llonguet, les confraries de l'Obreria de Sant Sebastià i els concerts de Sant Kanut.
+En qualsevol cas, els foguerons, molt típics del temps de Sant Antoni (17 de gener) a tota Mallorca, són un element omnipresent a la festa.
+El programa de festes oficial de l'Ajuntament comprèn tota una sèrie d'activitats al llarg de tot el mes, del moment en què acaben les festes de Nadal, després dels Reis, fins ben entrat el febrer.
+No obstant això, els esdeveniments més festius i significatius de Sant Sebastià tenen lloc els dies adjacents al 20 de gener, el dia de Sant Sebastià, que és festiu a Palma.
+D'altra banda, d'ençà de 2013 se celebren tota una sèrie d'actes festius organitzats per entitats independents de l'Ajuntament, que han pres una gran popularitat.
+El 2025 s'afegiren els cavallets del Bar Mònaco, restaurats ad hoc.
+La revetla de Sant Sebastià, dia 19, comença amb la proposta de l'Obreria de Sant Sebastià, que coordina totes les confraries (73 el 2025).
+De matí es produeix el txupinazo al bar Can Vinagre, una paròdia de les Festes de Sant Fermí de Pamplona on els membres de les confraries porten un mocador groc (en comptes de vermell) i exhibeixen els seus estendards burlescs i parodien les relíquies de Sant Sebastià.
+A continuació, cada confraria celebra el seu dinar i, l'horabaixa, es troben a la plaça de Sant Francesc, on es produeix l'Encontrada de les confraries.
+Allà se celebra l'anomenat ritual santsebastianer, on cada confraria col·loca el seu mocador en una rèplica humorística del braç incorrupte de Sant Sebastià, que simbòlicament confereix al sant la força per derrotar la pesta.
+Una vegada és fosc, comencen els actes de l'Ajuntament.
+A la Plaça Major té lloc l'encesa del fogueró seguida del correfoc, on participa un element propi del bestiari popular, el Drac de na Còca, a més de batucada i ball de gegants.
+A l'hora de sopar, quan ja hi ha caliu, hi ha torrada popular i, a continuació, els concerts, generalment amb grups de cert caixet.
+Històricament, l'Ajuntament ha optat bé per concentrar tots els concerts en una mateixa nit per diferents escenaris, o bé programar qualque grup més cotitzat el cap de setmana adjacent.
+Els concerts de la revetla de Sant Sebastià també són un espai pels circuits alternatius en la festa, i habitualment hi ha actuacions organitzades per entitats al marge de l'Ajuntament.
+Destaca particularment la celebració dita de Sant Kanut, nascuda el 1996, pausada el 2017 i renascuda el 2019 sota el nom de Sent sa Bèstia, actualment reanomenada Ses Sant Kanuteres.
+Es tracta d'un espai per la música alternativa, de punk i hardcore fins a reggae i música electrònica, amb diversos escenaris per les places de la Gerreria, el Socors i la Calatrava, on diversos col·lectius llibertaris s'encarreguen d'organitzar un cartell d'un gènere musical.
+Per la seva banda, Orgull Llonguet celebra una revetla amb un pregó, una xaranga i un passacarrer amb escenari mòbil que recorre els carrers més amples del centre.
+El dia de Sant Sebastià les celebracions són menys destacades.
+D'ençà de 1982, l'Ajuntament celebra una diada ciclista, en la qual la gent realitza un recorregut que comença a Cort i acaba a Son Moix, on es fa un sorteig de bicicletes.
+Orgull Llonguet, per la seva banda, organitza un «vermut ressacós».
+També és tradicional de realitzar l'acte de lliurament dels Premis Ciutat de Palma, a més d'una missa a la Catedral.
+Els orígens de Sant Sebastià com a patró de Palma es remunten el 1523, quan, una vegada sufocada la Germania, una epidèmia de pesta assolà la ciutat.
+La primera cascada del Nil era la cascada situada més septentrional de les que forma el riu Nil al llarg del seu recorregut.
+Des del seu naixement, l'anomenada primera cascada és la darrera que es troba en direcció a la desembocadura a la mar Mediterrània, i se situava en l'actual territori d'Egipte, prop d'on avui hi ha la presa d'Assuan (Aswan).
+A la rodalia de la primera cascada, es trobava Elefantina, i el temple de Files.
+El dret internacional privat (sovint abreujat DIP o DIPr) és el sector de l'ordenament jurídic de cada estat que regula l'específica problemàtica de les relacions entre subjectes privats en què hi apareix un element d'estrangeria o internacionalitat.
+L'objecte del dret internacional privat són les relacions privades internacionals (també conegudes com a relacions transfrontereres o relacions de tràfic jurídic extern).
+En funció de l'element d'estrangeria present en una relació, hom pot observar l'existència de:
+Relacions amb element d'estrangeria de caràcter personal: es tracta de relacions jurídiques en què hi intervé una persona de nacionalitat estrangera, o que simplement té el seu domicili o residència habitual en un altre estat.
+Relacions amb element d'estrangeria de caràcter real: l'objecte de la relació jurídica es troba a l'estranger.
+Relacions amb element d'estrangeria de caràcter formal: les formalitats per a la conclusió d'un negoci o acte jurídic es realitzen a l'estranger.
+Diversos sectors integren el dret internacional privat:
+Sector de la competència judicial internacional: determina quan els tribunals d'un país són competents per a conèixer d'un determinat litigi en què hi ha un element d'estrangeria.
+Sector del dret aplicable: un cop afirmada la competència judicial internacional dels tribunals d'un estat, és necessari determinar quin ordenament jurídic han d'aplicar aquests per a resoldre una situació privada internacional.
+Sector del reconeixement i l'execució de les sentències estrangeres: fixa els efectes que dins de cada estat poden desplegar els actes i les decisions estrangeres relatives a situacions privades internacionals.
+Als països llatins, hom tendeix a incloure dins el DIP el dret de la nacionalitat i el dret d'estrangeria.
+Altres països, però, no segueixen pas aquesta opció, en considerar que, stricto sensu, l'objecte d'aquestes disciplines no són les relacions entre subjectes privats amb element d'estrangeria sinó la relació entre un subjecte privat i un estat.
+Hi ha estats, coneguts com a estats plurilegislatius, amb ordenaments jurídics formats per una pluralitat de sistemes jurídics.
+En aquests estats es donen situacions jurídiques que afecten els particulars i respecte de les quals cal concretar quin dret és aplicable, d'entre tots els vigents dins l'estat, a la situació jurídica privada i quin jutge és competent per a conèixer del cas.
+És el que es coneix com a dret interlocal o interregional, que resol el problema que planteja l'existència de relacions privades que presenten vincles amb diverses legislacions coexistents dins un mateix estat.
+Sobre si el dret interregional és o no un sector més del Dret internacional privat o bé es tracta d'una disciplina autònoma dues posicions són possibles:
+Aquesta opció és la seguida als Estats Units d'Amèrica a conseqüència de la importància dels conflictes entre lleis dels diferents estats de la Unió.
+El dret internacional privat nasqué al segle xiii a les repúbliques del nord d'Itàlia.
+Cadascuna d'aquestes repúbliques disposava d'un dret propi, conegut com a statuta.
+El comerç entre diverses repúbliques portà a plantejar-se per primera vegada la qüestió de quin dret havia d'aplicar-se per a resoldre litigis en què els ciutadans d'una república eren atrets davant els tribunals d'una altra.
+Fins aquell moment, l'aplicació dels diferents ordenaments estava basada en el principi de territorialitat, en virtut del qual els tribunals de cada república només aplicaven llur legislació.
+A mitjan segle xii, Francesco Accursio, un jurista de Bolonya, es planteja per primer cop si els statuta d'una república s'han d'aplicar als ciutadans estrangers.
+Accursio, basant-se en el dret romà, defensa que les lleis d'una república no han de ser aplicades als estrangers.
+Un altre jurista de l'època, Aldrico, proposà que en aquests casos s'apliqués la llei que aportés un millor resultat.
+Amb l'obra d'aquest dos autors neix el dret internacional privat, iniciant-se una llarga època de l'evolució del dret internacional privat que es perllongarà fins al segle xix i que es coneix com l'època estatutària.
+El Malah (àrab: المالح, al-Mālaḥ; antigament anomenada Rio Salado) és una ciutat del nord oest d'Algèria, a la província d'Aïn Témouchent, situada a 11 km d'Aïn Témouchent, a 58 km d'Orà, a 60 km de Sidi Bel Abbès i a 80 km de Tilimsen.
+La meitat de la població té menys de 25 anys.
+La taxa d'atur hi és molt important i la majoria de la gent treballen en les ciutats limítrofes (Aïn Témouchent, Orà etc.),
+Regió anteriorment vitícola, manté el seu aspecte agrícola, amb clima mediterrani suau, pluviometria superior a 450 mm per any, sòl d'origen volcànic i zona turística a la part muntanyosa del municipi: Dhar El Menjel, Aïcha Touila i la vall d'Oued El-Malah.
+A la part dels massissos hi ha pedreres de grava i de marbre.
+La seva explotació posa en perill l'equilibri geogràfic i ecològic de la regió.
+La ciutat és travessada pel riu El Malah, ‘Salat’.
+El nom prové del seu riu salat, Oued El-Malah, que es nodreix de les muntanyes de Tessala i arriba a la Mediterrània per la platja de Terga o platja d'Oued El-Malah.
+La regió inicialment era nomenada Flumen Salsum, en època romana.
+Després va anomenar-se Ghazouiya, després de la batalla entre turcs i espanyols de l'any 1518, en què va morir Oruç Reis.
+Durant tot el període colonial se la va anomenar Río Salado, nom donat pels colons espanyols que s'hi van establir des de 1857.
+El 1962 va passar a anomenar-se oficialment El-Malah.
+La presència humana hi és molt antiga, com mostra «l'home de Rio salado» que vivia en aquesta regió fa 50.000 anys, en les grutes de la muntanya Sidi Kacem.
+La llista de persones premiades amb la Medalla al treball President Macià s'inicia l'any 1938, durant la guerra, i segueix a partir de la reinstauració del premi, l'any 1981.
+Petronella Ladrón de Guevara, organitzadora la Primera Brigada de Superproducció del Taller del Sindicat del Vestit, Abric i Similars, UGT.
+Obdúlia Imbert, pel seu magnífic comportament i la seva abnegació en el treball.
+Adelina Canyelles, obrera del Parc Base núm. 1 d'indústries de Guerra, com a premi per la seva abnegació i sacrifici.
+Jacint Fuster i Martí, Marià Barajas i Arroyo, inscrits al Treball Voluntari, com a recompensa a llur actuació exemplar.
+Ferran Fort i Amorós, obrer en funcions de sots-director de l'empresa Francesc Badia, E.C.
+(lliurat el 1982) Joan Balaciart i Albiol, Polió Buxó i Izaguirre, Joan Cuadras i Brunet, Antoni Cumella i Pau, Climent Estaún i Cebollero, Geroni Guillén i Peña, Arnau Izard i Llonch, Josep Obis i Gascon, Josep Maria Vélez i Cantarell, Jacint Fuster i Martí, a títol pòstum.
+Ramon Biadiu i Cuadrench, Josep Maria Cucurella i Xicola, Albert González i Nicolau (Gasset), Emili Massallé i Guarné, Josep Maria Turró i Corominas.
+Josep Capeta i Aulet, Josep Domènech i Mas, Josefina Pardo i Cruells, Josep Federico i Julià, Pere Lloret i Rosiñol, Enric Martínez i Serrano, Josep Noguer i Suñol, Josep Radresa i Albert, Marcel Tabah i Papo
+Francesc Andrevi i Pujol, Josep Botet i Sangra, Àngel Calafell i Pijoan, Felicitat Duce i Ripollès, Ferran Figuerola i Lafuente, Assumpta Martínez i Verdú, Frederic Sanfeliu i Nogués, José Trobo Remacha, Albert Vallespinos i Andrés, Francesc Villà i Monsó.
+Ministral i Macià, Francesc Morte i Maria, Josep Oliveras i García, Josep Panisello i Chavarría, Ramon Roca i Sala, Agustí Roig i Aixendrí, Ángel Rozas i Serrano, Mary Santpere i Hernáez, Enric Servat i Mola.
+Joaquim Aguiló i Nolla, Sebastià Álvarez i Vila, Anna Bofill Levi, Gma.
+Trabal i Tallada, Daniel Triquell i Muntañola, Miquel Vendrell i Fonoll, Joan Vidal i Gironella, Ramon Vilaró i Sandiumenge, Martí Xena i Casas
+Jaume Aguadé i Sordé, Eduard Andreu i Casas, Santiago Bernaus i Español, Jaume Bonet i Presegué, Francesc Calvo i Cervantes, Joan de Déu Cañigueral i Colls, Ramon Canyellas i Torrent, José M.
+Carrasco Castro, Francesc Cordón i Surroca, Joan Deulofeu i Hortal, Elvira Farràs i Muntó, Miquel Folguera i Bosch, Francesc Giménez i Borja, Joaquim Jordà i Martí, Félix Lasa i Vidaurreta, Antoni Llovera i Malla, José M.
+Luque Gómez, Enric Mañosas i Barrera, Isidre March i Mora, Pere Marés i Ibáñez, Manuel Massó i Martínez, Pere Mata i Fuentes, Lluís M.
+Ignasi Aragó i Mitjans, Josep Armengol i Gall, Josep Maria Aromir i Quiñones, Ignasi Bonnin i Valls, Carmelo M.
+Antonio Albà i Romeu, Montserrat Argerich i Boixader, Pere J.
+Balsells Jofre, Montserrat Baró Sans, Manuel Baselga Monte, Lluís Bohigas i Vidal, Daniel Cabedo i Puy, Pilar Canadell i Barbi, Gerardo Candales i Villadoniga, Roser Capdevila i Valls, Enric Cerqueda i Gispert, Joan M.
+Josep Argelaguet i Abadal, Benet Armengol i Obradors, Àngel Balsells i Ventura, Montserrat Camps i Marsal, Josep M.
+Esquerda i Roset, Joan Ferrari i Albert, Carme Pilar Fort i Camí, Núria Fossas i Gil, Francesc Francés i Orfila, Anna Maria Hermoso i Garro, Marcel·lí Molins i Herrero, Anna Maria Palé i Llavina, Mercé Pàniker i Alemany, Josep Lluís Rovira i Escubós, Javier Sánchez del Campo, Remei Sipi i Mayo
+Narciso Amigó de Bonet i Sans, Ignacio Estévez i Rodríguez, Manuel García Escobar, Rosa Maria Fabián i Martínez, Antoni Fitó i Morató, Rosa Oriol i Porta, Manel Vila i Roura, Manel Faus i Pujol, Ramon Aymerich i Santandreu, Fulgenci Cerón i Palau, Teresa Ferré i Porres
+Jaume Armengol i Calvet, Enric Barceló i Durán, Jordi Bonet Armengol, Xavier Crespán Echegoyen, Manuel Gallardo Méndez, Salvador Alapont i Masats, Alexandre Juanola i Ribera, Joan Llurba i Vicens, Roser Trepat i Minguell, Rafel Domènech i Jordà, Teresa Fortuny i Solà, Agustí Castells Casanova
+El 2017 no es concediren les medalles i plaques President Macià.
+Maria Giralt i Castells i Rosa Mendoza González.
+Angelo Peruzzi (Blera, Província de Viterbo, Itàlia, 16 de febrer de 1970) és un exfutbolista italià que ocupava la posició de porter.
+Va ser internacional absolut per la selecció italiana de futbol en 31 ocasions, amb la qual es va proclamar campió del món l'any 2006.
+La seva època més prolífica la va passar a la Juventus FC i el seu últim equip va ser l'SS Lazio.
+1 Copa Intercontinental: 1996 (Juventus)
+Diagramma punctatum és una espècie de peix pertanyent a la família dels hemúlids.
+Pot arribar a fer 33,5 cm de llargària màxima.
+És un peix marí, bentopelàgic i de clima tropical.
+Es troba al Japó, Indonèsia, les costes septentrionals i orientals de Nova Guinea, Nova Caledònia i altres indrets del Pacífic occidental.
+Latin-Chinese dictionary of fishes names.
+L'associació va crear-se el 1978 a Coventry (Regne Unit) i des del 2001 té la seu a Brussel·les.
+El 2011 tenia més de 800 associacions afiliades en 110 països.
+Té membres efectius, que són organitzacions nacionals o regionals actiues en l'activisme LGTB i té membres associats, que són entitats no-LGBT que sostenen els objectius de l'ILGA.
+El 2007, la Generalitat de Catalunya va ser el primer estat regional que va esdevenir-ne membre associat.
+Fins aleshores, les màximes entitats associades foren ciutats majors com Rotterdam, Venècia i Amsterdam.
+Té sis seccions regionals: Àfrica, Anzapi (Austràlia, Nova Zelanda i Illes pacífiques), Àsia, Europa, Lac (Amèrica llatina i el Carib) i Amèrica del Nord.
+La secció Europa té la seu a la mateixa adreça de la internacional i està acreditada a prop de la Unió Europea i subvencionada per la Comissió.
+El 1993, la ILGA aconsegueix un estatus consultiu com a ONG al Consell Econòmic i Social de l'ONU.
+A partir d'aleshores, diverses organitzacions, la majoria religioses, manifesten públicament el seu rebuig.
+Tant els delegats dels EUA com del Regne Unit van manifestar que, a l'hora d'anar a votar, desconeixien la participació d'associacions de l'activisme pedòfil a la ILGA.
+Al novembre del 1993, el comitè executiu de la ILGA va sol·licitar a aquests grups la renúncia voluntària.
+No només no hi va renunciar cap d'ells, sinó que la NAMBLA va publicar aquell mateix mes un comunicat de premsa on reafirmava la seva condició de membre de la ILGA.
+A la fi dels anys noranta, la revolució sexual s'havia desfet del seu passat pedòfil.
+El Consell Econòmic i Social (ECOSOC) de l'ONU va refusar el gener 2006 d'atorgar l'estatut d'ONG consultiu a l'ILGA amb 10 contra 5 veus.
+Va observar-se una coalició estranya d'estats homofòbics com Zimbàbue i Sudan, junts amb els Estats Units d'Amèrica i Cuba.
+L'11 de desembre del mateix any, el consell va atorgar l'estatut d'ONG consultiu a ILGA-Europa amb 23 veus pro, 17 contra i 10 abstencions.
+Intergrup del Parlament Europeu en Drets LGBTI
+Casa Escaleta II és una obra de Maials (Segrià) inclosa a l'Inventari del Patrimoni Arquitectònic de Catalunya.
+Casa entre mitgeres de planta baixa, dos pisos i golfa, de grans dimensions, de la mateixa època i composició que el núm. 19 del carrer la Vall.
+Les llindes de les finestres centrals del primer pis són esculpides en relleu de motius florals i geomètrics.
+Actualment la casa està dividida en dues propietats.
+La Casa pairal és una obra de Tremp (Pallars Jussà) protegida com a Bé Cultural d'Interès Local.
+La Casa Pairal es troba en el petit nucli abandonat de Claret amb la façana principal que comunica amb la Plaça Major.
+Originàriament fou construïda entre mitgeres però degut a modificacions posteriors presenta una disposició a quatre vents i tres nivells d'alçat, planta baixa i dos pisos.
+El pis superior és de factura contemporània.
+Edifici fet de pedra i en algunes de les seves parts, arrebossat.
+El portal d'accés, de mig punt i adovellat, està situat a la façana que comunica amb la Plaça Major.
+En aquesta mateixa façana destaquen altres elements com la finestra balconera situada sobre el portal, amb dues mènsules decorades amb rosetes encerclades en relleu sota la volada de pedra i un pedrís corregut al llarg de la façana.
+La resta de la construcció es caracteritza per presentar els paraments de pedra vista.
+Ca Canyisser és un edifici cantoner a la vila de Garcia.
+De planta rectangular que consta de planta baixa, pis i golfes i coberta a tres vessants.
+A l'extrem del frontis hi ha el portal, d'arc de mig punt adovellat amb una flor de quatre pètals gravada a la clau, que incorpora l'any 1763.
+La resta d'obertures són d'arc pla arrebossat i es troben disposades aleatòriament per la façana.
+El finestral de sobre el portal té sortida a un balcó que incorpora una sanefa ceràmica a la base.
+A la façana lateral, oberta cap al jardí, s'hi ha afegit una terrassa sostinguda per pilars.
+L'acabat exterior és de restes d'arrebossat de morter de calç, sota el qual s'observa el paredat comú a la planta baixa, el maó als pisos superiors i els carreus escairats a les cantonades.
+La batalla de Tébar fou una batalla lluitada per Berenguer Ramon II i Rodrigo Díaz de Vivar, aliats de la Taifa de Lleida i la Taifa de Saragossa, que lluitaven pel control de la part superior de Xarq al-Àndalus.
+Berenguer Ramon II va dirigir el 1082 una expedició contra els sarraïns de la Taifa de Saragossa, que ajudats per Rodrigo Díaz de Vivar atacaren la Taifa de Lleida, aliada del comtat de Barcelona, en la qual Berenguer Ramon fou fet presoner durant la Batalla d'Almenar.
+La invasió almoràvit i la derrota d'Alfons VI de Castella a la batalla de Sagrajas el 1086 va propiciar que al Cid se li encarregués la defensa de la zona llevantina del regne de Castella.
+Entre 1087 i 1089, va fer tributaris als monarques musulmans de la Taifa d'Albarrasí i la Taifa d'Alpont i el 1087 va impedir que la ciutat de València, governada pel rei Yahya Al-Qadir, aliat dels castellans, caigués en mans d'al-Múndhir Imad-ad-Dawla i del comte de Barcelona.
+També va demanar el suport de Sanç Ramires, Ermengol IV d'Urgell i fins i tot del seu oncle Ahmed II Ibn Yusuf al-Mustain de Saragossa, però només el comte de Barcelona va acceptar aliar-se amb el rei de Lleida.
+Al-Mustain II de Saragossa va avisar el Cid de la coalició que s'havia reunit per presentar batalla l'estiu del 1090.
+Sabedor de la seva inferioritat numèrica Rodrigo Díaz de Vivar va triar l'entrada de la vall d'una zona de bosc muntanyós, la pineda de Tévar, a uns quinze quilòmetres al nord de Morella i deu al sud de Mont-roig de Tastavins.
+L'exèrcit enemic marxava al comandament de Berenguer Ramon II, qui va decidir que un contingent dels seus cavallers pugés durant la nit la muntanya als peus acampava la host del Cid per atacar per sorpresa la seva rereguarda.
+El Cid va fer que una part dels seus homes actuessin com si escapessin desorientats d'algun perill i es deixessin prendre pels barcelonins, per tal d'informar erròniament dels seus plans, i una part de l'exèrcit barceloní va seguir l'esquer, fragmentant en tres grups les tropes barcelonines.
+Els homes disgregats del gruix de les tropes de Berenguer van ser sorpreses per contingents saragossans a les ordres de Rodrigo.
+El centre de l'exèrcit del Fratricida va ser desbaratat en la primera escomesa, tot i que el Cid va caure del seu cavall resultant ferit.
+Finalment la mainades del Campeador va aconseguir una decisiva victòria, capturant cinc mil enemics, entre els quals hi havia el mateix comte de Barcelona i els principals nobles del seguici, com Guerau Alemany de Cervelló, Bernat de Claramunt i Ramon Mir de Ribes.
+El botí obtingut va ser molt important: vaixelles d'or i plata, vestits de teixits preciosos, cavalls de combat i de càrrega, mules i gran quantitat d'armes de guerra, entre elles l'espasa Colada que van presentar al Cid, convalescent a la tenda de campanya.
+Pocs dies més tard, Rodrigo Díaz de Vivar va negociar l'alliberament dels aristòcrates catalans a canvi de quantiosos rescats que va ascendir a vuitanta mil marcs d'or.
+Entre els capturats es trobava Bernat de Claramunt.
+El Cid va acabar acceptant un tractat de pau amb Berenguer Ramon II a canvi de les pàries que la Taifa de Lleida pagava pel protectorat barceloní sobre la Taifa de Dénia, de manera que el castellà es convertia en el seu nou protector.
+Alliberat dels compromisos amb la Taifa de Lleida, Berenguer Ramon, ajudat pels genovesos i Sanç Ramires atacà i ocupà la ciutat de Tortosa el 1092.

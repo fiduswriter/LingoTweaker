@@ -12,6 +12,13 @@ Two artefacts, both derived (never hand-edited) so they stay reproducible:
    ones. Both are useful: real user text contains mistakes, but a detector
    should not be tuned only on them.
 
+   Five languages (`ca`, `es`, `pt`, `sr`, `uk`) contribute nothing that way —
+   the first three fail to parse and the last two ship no examples — so they
+   fall back to `data/detection/wikipedia/<lang>.txt`, authentic Wikipedia prose
+   fetched by `tools/detection/fetch_wikipedia.py`. The cache is consulted only
+   when the grammar file yields nothing, so the other 33 languages are unaffected
+   and a language counts as having data only if *both* sources are empty of it.
+
 2. `data/nrd/detection/markers.txt` — the Nordum-only lexicon, computed as
    `nrd_core.dic` minus the Bokmal, Nynorsk, Danish and Swedish Hunspell
    word lists. Nordum is absent from every off-the-shelf language identifier, and
@@ -23,7 +30,8 @@ Run from the repository root:
     python3 tools/detection/generate.py
 
 The Markdown/HTML/XHTML files under `data/*/` are ignored; only
-`rules/grammar.xml` is read.
+`rules/grammar.xml` and the Wikipedia cache are read. Nothing here touches the
+network — `tools/detection/fetch_wikipedia.py` is the step that fills the cache.
 """
 
 from __future__ import annotations
@@ -41,6 +49,12 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 DATA_DIR = REPO_ROOT / "data"
 CORPUS_OUT = REPO_ROOT / "crates" / "lt-core" / "tests" / "fixtures" / "detection_corpus.json"
 MARKERS_OUT = DATA_DIR / "nrd" / "detection" / "markers.txt"
+
+# Fallback source for the languages no grammar file can supply: authentic
+# Wikipedia sentences, one per line, fetched and committed by
+# `tools/detection/fetch_wikipedia.py`. The `<lang>.json` provenance sidecars and
+# the README sit beside the `.txt` files and are not corpus input.
+WIKIPEDIA_DIR = DATA_DIR / "detection" / "wikipedia"
 
 # XML only predefines these five; the grammar files also contain HTML entities
 # such as `&nbsp;` inside example text, which makes ElementTree abort the whole
@@ -231,9 +245,38 @@ def extract_examples(path: pathlib.Path) -> tuple[list[str], list[str], bool]:
     return valid, erroneous, True
 
 
-def collect_corpus(cap: int) -> tuple[dict[str, dict[str, list[str]]], dict[str, str]]:
+def read_wikipedia_cache(lang: str, cap: int) -> list[str]:
+    """Sentences for one language from the vendored Wikipedia cache.
+
+    One sentence per line. The fetch tool has already de-duplicated and filtered
+    them, so this only re-applies the cap and drops blank lines; re-splitting or
+    re-filtering here would make the cache depend on this script's judgement
+    rather than the fetch tool's, and the two would drift.
+    """
+    path = WIKIPEDIA_DIR / f"{lang}.txt"
+    if not path.is_file():
+        return []
+    sentences: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        sentence = line.strip()
+        if sentence:
+            sentences.append(sentence)
+        if len(sentences) >= cap:
+            break
+    return sentences
+
+
+def collect_corpus(cap: int) -> tuple[dict[str, dict[str, list[str]]], dict[str, str], dict[str, str]]:
+    """The per-language corpus, why a language is empty, and where its data came from.
+
+    Two passes. First the grammar files, which cover 33 of the 38 languages. Then
+    the Wikipedia cache, which is consulted *only* for a language the first pass
+    left empty — the grammar examples are the curated, rule-attributed material
+    the rest of the corpus is built from, so they win wherever they exist.
+    """
     buckets: dict[str, dict[str, list[str]]] = defaultdict(lambda: {"valid": [], "with_errors": []})
     failures: dict[str, str] = {}
+    sources: dict[str, str] = {}
     for grammar in sorted(DATA_DIR.glob("*/rules/grammar.xml")):
         lang = grammar.parent.parent.name
         valid, erroneous, parsed = extract_examples(grammar)
@@ -242,7 +285,7 @@ def collect_corpus(cap: int) -> tuple[dict[str, dict[str, list[str]]], dict[str,
             # fixture rather than showing up as a language that mysteriously has
             # no data. Three grammars (`ca`, `es`, `pt`) declare very large
             # external entity values that ElementTree cannot round-trip through
-            # substitution; they are sourced from the web instead.
+            # substitution; they fall back to the Wikipedia cache below.
             failures[lang] = "grammar.xml could not be parsed"
         elif not valid and not erroneous:
             failures[lang] = "grammar.xml ships no <example> text"
@@ -256,7 +299,29 @@ def collect_corpus(cap: int) -> tuple[dict[str, dict[str, list[str]]], dict[str,
                 if sentence not in seen:
                     seen.add(sentence)
                     buckets[lang][key].append(sentence)
-    return dict(sorted(buckets.items())), failures
+        if buckets[lang]["valid"] or buckets[lang]["with_errors"]:
+            sources[lang] = "grammar.xml"
+
+    # Fallback pass. Iterating the cache rather than the grammar glob means a
+    # language with no grammar file at all is still picked up.
+    if WIKIPEDIA_DIR.is_dir():
+        for cache in sorted(WIKIPEDIA_DIR.glob("*.txt")):
+            lang = cache.stem
+            if buckets[lang]["valid"] or buckets[lang]["with_errors"]:
+                continue  # the grammar file already supplied this language
+            sentences = read_wikipedia_cache(lang, cap)
+            if not sentences:
+                reason = failures.get(lang, "no Wikipedia cache sentences")
+                failures[lang] = f"{reason}, and no Wikipedia cache sentences either"
+                continue
+            # Wikipedia prose is correct text by construction: there is no
+            # "erroneous form" in an article someone else edited, so all of it
+            # belongs in the plain bucket.
+            buckets[lang]["valid"].extend(sentences)
+            sources[lang] = "data/detection/wikipedia cache"
+            failures.pop(lang, None)
+
+    return dict(sorted(buckets.items())), failures, sources
 
 
 def collect_corpus_words(corpus: dict[str, dict[str, list[str]]]) -> set[str]:
@@ -290,7 +355,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    corpus, failures = collect_corpus(args.cap)
+    corpus, failures, sources = collect_corpus(args.cap)
     total = sum(len(b["valid"]) + len(b["with_errors"]) for b in corpus.values())
     empty = [lang for lang, buckets in corpus.items() if not buckets["valid"] and not buckets["with_errors"]]
     corpus_json = json.dumps(corpus, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
@@ -317,11 +382,17 @@ def main() -> int:
 
     print(f"corpus   {CORPUS_OUT.relative_to(REPO_ROOT)}")
     print(f"         {len(corpus)} languages, {total} sentences (cap {args.cap}/bucket)")
+    fallback = sorted(lang for lang, source in sources.items() if source != "grammar.xml")
+    if fallback:
+        # The grammar file is the better source — curated and rule-attributed — so
+        # this is worth saying out loud: it marks the languages whose corpus is
+        # scraped prose rather than grammar examples.
+        print(f"         from the Wikipedia cache: {', '.join(fallback)}")
     if empty:
-        # Not a failure: some modules simply ship no `<example>` text. Worth
-        # saying out loud, because those languages cannot be calibrated and
-        # will be relying on the statistical model alone.
-        print(f"         no examples for: {', '.join(empty)}")
+        # Only a language with no grammar examples *and* no cache sentences is
+        # really uncalibrated; such a language will rely on the statistical model
+        # alone.
+        print(f"         no data for: {', '.join(empty)}")
         for lang in empty:
             reason = failures.get(lang, "grammar.xml ships no <example> text")
             print(f"           {lang}: {reason}")

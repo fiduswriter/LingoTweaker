@@ -1,0 +1,249 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://es.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 3,
+   "title": "Argemiro Bohórquez",
+   "url": "https://es.wikipedia.org/wiki/Argemiro_Boh%C3%B3rquez"
+  },
+  {
+   "sentences": 25,
+   "title": "Francisco de Lugo y Dávila",
+   "url": "https://es.wikipedia.org/wiki/Francisco_de_Lugo_y_D%C3%A1vila"
+  },
+  {
+   "sentences": 1,
+   "title": "Diplotremia",
+   "url": "https://es.wikipedia.org/wiki/Diplotremia"
+  },
+  {
+   "sentences": 10,
+   "title": "Cardiff Bay Opera House",
+   "url": "https://es.wikipedia.org/wiki/Cardiff_Bay_Opera_House"
+  },
+  {
+   "sentences": 8,
+   "title": "Calle de Ramón Ortiz de Zárate",
+   "url": "https://es.wikipedia.org/wiki/Calle_de_Ram%C3%B3n_Ortiz_de_Z%C3%A1rate"
+  },
+  {
+   "sentences": 13,
+   "title": "Philippeson Juste",
+   "url": "https://es.wikipedia.org/wiki/Philippeson_Juste"
+  },
+  {
+   "sentences": 1,
+   "title": "Atheta annapurnicola",
+   "url": "https://es.wikipedia.org/wiki/Atheta_annapurnicola"
+  },
+  {
+   "sentences": 4,
+   "title": "Koko (película)",
+   "url": "https://es.wikipedia.org/wiki/Koko_%28pel%C3%ADcula%29"
+  },
+  {
+   "sentences": 13,
+   "title": "José Sanjenís Perdomo",
+   "url": "https://es.wikipedia.org/wiki/Jos%C3%A9_Sanjen%C3%ADs_Perdomo"
+  },
+  {
+   "sentences": 7,
+   "title": "Hans Thomsen",
+   "url": "https://es.wikipedia.org/wiki/Hans_Thomsen"
+  },
+  {
+   "sentences": 3,
+   "title": "Albert Marque",
+   "url": "https://es.wikipedia.org/wiki/Albert_Marque"
+  },
+  {
+   "sentences": 3,
+   "title": "Beidha",
+   "url": "https://es.wikipedia.org/wiki/Beidha"
+  },
+  {
+   "sentences": 2,
+   "title": "Mamoudou Elimane Hanne",
+   "url": "https://es.wikipedia.org/wiki/Mamoudou_Elimane_Hanne"
+  },
+  {
+   "sentences": 17,
+   "title": "Curtiss C-1 Canada",
+   "url": "https://es.wikipedia.org/wiki/Curtiss_C-1_Canada"
+  },
+  {
+   "sentences": 1,
+   "title": "Monomma nigritum",
+   "url": "https://es.wikipedia.org/wiki/Monomma_nigritum"
+  },
+  {
+   "sentences": 2,
+   "title": "Torredenagó",
+   "url": "https://es.wikipedia.org/wiki/Torredenag%C3%B3"
+  },
+  {
+   "sentences": 9,
+   "title": "Brotality (banda)",
+   "url": "https://es.wikipedia.org/wiki/Brotality_%28banda%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Bora-Bora (Polinesia Francesa)",
+   "url": "https://es.wikipedia.org/wiki/Bora-Bora_%28Polinesia_Francesa%29"
+  },
+  {
+   "sentences": 12,
+   "title": "Beaucarnea stricta",
+   "url": "https://es.wikipedia.org/wiki/Beaucarnea_stricta"
+  },
+  {
+   "sentences": 1,
+   "title": "Eugen Laubacher",
+   "url": "https://es.wikipedia.org/wiki/Eugen_Laubacher"
+  },
+  {
+   "sentences": 15,
+   "title": "San Carlos Mirador",
+   "url": "https://es.wikipedia.org/wiki/San_Carlos_Mirador"
+  },
+  {
+   "sentences": 25,
+   "title": "Diócesis de Séez",
+   "url": "https://es.wikipedia.org/wiki/Di%C3%B3cesis_de_S%C3%A9ez"
+  },
+  {
+   "sentences": 1,
+   "title": "Brynjulf Brandsson",
+   "url": "https://es.wikipedia.org/wiki/Brynjulf_Brandsson"
+  },
+  {
+   "sentences": 16,
+   "title": "Jack Campbell",
+   "url": "https://es.wikipedia.org/wiki/Jack_Campbell"
+  },
+  {
+   "sentences": 25,
+   "title": "Federación Catalana de Tenis",
+   "url": "https://es.wikipedia.org/wiki/Federaci%C3%B3n_Catalana_de_Tenis"
+  },
+  {
+   "sentences": 25,
+   "title": "Adhesión de Polonia en la Unión Europea",
+   "url": "https://es.wikipedia.org/wiki/Adhesi%C3%B3n_de_Polonia_en_la_Uni%C3%B3n_Europea"
+  },
+  {
+   "sentences": 10,
+   "title": "Sports+",
+   "url": "https://es.wikipedia.org/wiki/Sports%2B"
+  },
+  {
+   "sentences": 10,
+   "title": "Ompok miostoma",
+   "url": "https://es.wikipedia.org/wiki/Ompok_miostoma"
+  },
+  {
+   "sentences": 5,
+   "title": "Faro de Torre del Mar",
+   "url": "https://es.wikipedia.org/wiki/Faro_de_Torre_del_Mar"
+  },
+  {
+   "sentences": 4,
+   "title": "Paul Chamberlin",
+   "url": "https://es.wikipedia.org/wiki/Paul_Chamberlin"
+  },
+  {
+   "sentences": 6,
+   "title": "Chou Feng Liang",
+   "url": "https://es.wikipedia.org/wiki/Chou_Feng_Liang"
+  },
+  {
+   "sentences": 5,
+   "title": "Brisighella",
+   "url": "https://es.wikipedia.org/wiki/Brisighella"
+  },
+  {
+   "sentences": 7,
+   "title": "Herakleia",
+   "url": "https://es.wikipedia.org/wiki/Herakleia"
+  },
+  {
+   "sentences": 4,
+   "title": "Wayne Tinkle",
+   "url": "https://es.wikipedia.org/wiki/Wayne_Tinkle"
+  },
+  {
+   "sentences": 2,
+   "title": "Machel Cedenio",
+   "url": "https://es.wikipedia.org/wiki/Machel_Cedenio"
+  },
+  {
+   "sentences": 19,
+   "title": "LarrainVial",
+   "url": "https://es.wikipedia.org/wiki/LarrainVial"
+  },
+  {
+   "sentences": 25,
+   "title": "Galo de Arbona",
+   "url": "https://es.wikipedia.org/wiki/Galo_de_Arbona"
+  },
+  {
+   "sentences": 6,
+   "title": "Herradura Dorada",
+   "url": "https://es.wikipedia.org/wiki/Herradura_Dorada"
+  },
+  {
+   "sentences": 16,
+   "title": "Elecciones municipales de Moyobamba de 2006",
+   "url": "https://es.wikipedia.org/wiki/Elecciones_municipales_de_Moyobamba_de_2006"
+  },
+  {
+   "sentences": 1,
+   "title": "Nina Krankemann",
+   "url": "https://es.wikipedia.org/wiki/Nina_Krankemann"
+  },
+  {
+   "sentences": 2,
+   "title": "Lucas Martínez Lara",
+   "url": "https://es.wikipedia.org/wiki/Lucas_Mart%C3%ADnez_Lara"
+  },
+  {
+   "sentences": 25,
+   "title": "Albania otomana",
+   "url": "https://es.wikipedia.org/wiki/Albania_otomana"
+  },
+  {
+   "sentences": 7,
+   "title": "Campeonato de ajedrez de Noruega",
+   "url": "https://es.wikipedia.org/wiki/Campeonato_de_ajedrez_de_Noruega"
+  },
+  {
+   "sentences": 2,
+   "title": "Conferencia Pugwash",
+   "url": "https://es.wikipedia.org/wiki/Conferencia_Pugwash"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "es",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "retrieved": "2026-10-03",
+ "sentence_count": 400,
+ "wikipedia": "https://es.wikipedia.org/"
+}

@@ -1,0 +1,249 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://uk.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 1,
+   "title": "Новоукраїнка (Черкаський район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9D%D0%BE%D0%B2%D0%BE%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%BA%D0%B0_%28%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Рамення (Дєдовицький район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A0%D0%B0%D0%BC%D0%B5%D0%BD%D0%BD%D1%8F_%28%D0%94%D1%94%D0%B4%D0%BE%D0%B2%D0%B8%D1%86%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 4,
+   "title": "ARF1",
+   "url": "https://uk.wikipedia.org/wiki/ARF1"
+  },
+  {
+   "sentences": 10,
+   "title": "Староміська сільська рада",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A1%D1%82%D0%B0%D1%80%D0%BE%D0%BC%D1%96%D1%81%D1%8C%D0%BA%D0%B0_%D1%81%D1%96%D0%BB%D1%8C%D1%81%D1%8C%D0%BA%D0%B0_%D1%80%D0%B0%D0%B4%D0%B0"
+  },
+  {
+   "sentences": 9,
+   "title": "Who You Selling For",
+   "url": "https://uk.wikipedia.org/wiki/Who_You_Selling_For"
+  },
+  {
+   "sentences": 2,
+   "title": "Новий Двур (Ґрудзьондзький повіт)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9D%D0%BE%D0%B2%D0%B8%D0%B9_%D0%94%D0%B2%D1%83%D1%80_%28%D2%90%D1%80%D1%83%D0%B4%D0%B7%D1%8C%D0%BE%D0%BD%D0%B4%D0%B7%D1%8C%D0%BA%D0%B8%D0%B9_%D0%BF%D0%BE%D0%B2%D1%96%D1%82%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Мінеєво",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9C%D1%96%D0%BD%D0%B5%D1%94%D0%B2%D0%BE"
+  },
+  {
+   "sentences": 4,
+   "title": "Макарово (Ненецький автономний округ)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D0%B0%D1%80%D0%BE%D0%B2%D0%BE_%28%D0%9D%D0%B5%D0%BD%D0%B5%D1%86%D1%8C%D0%BA%D0%B8%D0%B9_%D0%B0%D0%B2%D1%82%D0%BE%D0%BD%D0%BE%D0%BC%D0%BD%D0%B8%D0%B9_%D0%BE%D0%BA%D1%80%D1%83%D0%B3%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Ян ван дер Гейден",
+   "url": "https://uk.wikipedia.org/wiki/%D0%AF%D0%BD_%D0%B2%D0%B0%D0%BD_%D0%B4%D0%B5%D1%80_%D0%93%D0%B5%D0%B9%D0%B4%D0%B5%D0%BD"
+  },
+  {
+   "sentences": 25,
+   "title": "Свидовець (Ніжинський район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A1%D0%B2%D0%B8%D0%B4%D0%BE%D0%B2%D0%B5%D1%86%D1%8C_%28%D0%9D%D1%96%D0%B6%D0%B8%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Безповоротна фінансова допомога",
+   "url": "https://uk.wikipedia.org/wiki/%D0%91%D0%B5%D0%B7%D0%BF%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%82%D0%BD%D0%B0_%D1%84%D1%96%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0_%D0%B4%D0%BE%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B0"
+  },
+  {
+   "sentences": 3,
+   "title": "Dubai Tennis Championships 2009, жінки, одиночний розряд",
+   "url": "https://uk.wikipedia.org/wiki/Dubai_Tennis_Championships_2009%2C_%D0%B6%D1%96%D0%BD%D0%BA%D0%B8%2C_%D0%BE%D0%B4%D0%B8%D0%BD%D0%BE%D1%87%D0%BD%D0%B8%D0%B9_%D1%80%D0%BE%D0%B7%D1%80%D1%8F%D0%B4"
+  },
+  {
+   "sentences": 6,
+   "title": "NGC 3963",
+   "url": "https://uk.wikipedia.org/wiki/NGC_3963"
+  },
+  {
+   "sentences": 25,
+   "title": "Ланьо Михайло Іванович",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9B%D0%B0%D0%BD%D1%8C%D0%BE_%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%BE_%D0%86%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"
+  },
+  {
+   "sentences": 2,
+   "title": "Чемпіонат Польщі з хокею 1933",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BC%D0%BF%D1%96%D0%BE%D0%BD%D0%B0%D1%82_%D0%9F%D0%BE%D0%BB%D1%8C%D1%89%D1%96_%D0%B7_%D1%85%D0%BE%D0%BA%D0%B5%D1%8E_1933"
+  },
+  {
+   "sentences": 15,
+   "title": "Червоний Марс",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A7%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B8%D0%B9_%D0%9C%D0%B0%D1%80%D1%81"
+  },
+  {
+   "sentences": 1,
+   "title": "Археологічні пам'ятки Волинської області",
+   "url": "https://uk.wikipedia.org/wiki/%D0%90%D1%80%D1%85%D0%B5%D0%BE%D0%BB%D0%BE%D0%B3%D1%96%D1%87%D0%BD%D1%96_%D0%BF%D0%B0%D0%BC%27%D1%8F%D1%82%D0%BA%D0%B8_%D0%92%D0%BE%D0%BB%D0%B8%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%96"
+  },
+  {
+   "sentences": 1,
+   "title": "Нижній Стан (Тунгокоченський район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9D%D0%B8%D0%B6%D0%BD%D1%96%D0%B9_%D0%A1%D1%82%D0%B0%D0%BD_%28%D0%A2%D1%83%D0%BD%D0%B3%D0%BE%D0%BA%D0%BE%D1%87%D0%B5%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Погляди Арістотеля на жінок",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B3%D0%BB%D1%8F%D0%B4%D0%B8_%D0%90%D1%80%D1%96%D1%81%D1%82%D0%BE%D1%82%D0%B5%D0%BB%D1%8F_%D0%BD%D0%B0_%D0%B6%D1%96%D0%BD%D0%BE%D0%BA"
+  },
+  {
+   "sentences": 7,
+   "title": "Мостиська-Держкордон",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D1%82%D0%B8%D1%81%D1%8C%D0%BA%D0%B0-%D0%94%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D1%80%D0%B4%D0%BE%D0%BD"
+  },
+  {
+   "sentences": 15,
+   "title": "USS Ronald Reagan (CVN-76)",
+   "url": "https://uk.wikipedia.org/wiki/USS_Ronald_Reagan_%28CVN-76%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Дональд Джонсон",
+   "url": "https://uk.wikipedia.org/wiki/%D0%94%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%B4_%D0%94%D0%B6%D0%BE%D0%BD%D1%81%D0%BE%D0%BD"
+  },
+  {
+   "sentences": 7,
+   "title": "Переляк",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BB%D1%8F%D0%BA"
+  },
+  {
+   "sentences": 13,
+   "title": "Педуель",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9F%D0%B5%D0%B4%D1%83%D0%B5%D0%BB%D1%8C"
+  },
+  {
+   "sentences": 2,
+   "title": "FEM1C",
+   "url": "https://uk.wikipedia.org/wiki/FEM1C"
+  },
+  {
+   "sentences": 2,
+   "title": "Літорал-Осідентал-Мараньєнсі (мікрорегіон)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9B%D1%96%D1%82%D0%BE%D1%80%D0%B0%D0%BB-%D0%9E%D1%81%D1%96%D0%B4%D0%B5%D0%BD%D1%82%D0%B0%D0%BB-%D0%9C%D0%B0%D1%80%D0%B0%D0%BD%D1%8C%D1%94%D0%BD%D1%81%D1%96_%28%D0%BC%D1%96%D0%BA%D1%80%D0%BE%D1%80%D0%B5%D0%B3%D1%96%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Прогрес (Конотопський район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B5%D1%81_%28%D0%9A%D0%BE%D0%BD%D0%BE%D1%82%D0%BE%D0%BF%D1%81%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Сен-Бартелемі-де-Бюсьєр",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A1%D0%B5%D0%BD-%D0%91%D0%B0%D1%80%D1%82%D0%B5%D0%BB%D0%B5%D0%BC%D1%96-%D0%B4%D0%B5-%D0%91%D1%8E%D1%81%D1%8C%D1%94%D1%80"
+  },
+  {
+   "sentences": 2,
+   "title": "Повіт Кіта-Саку",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B2%D1%96%D1%82_%D0%9A%D1%96%D1%82%D0%B0-%D0%A1%D0%B0%D0%BA%D1%83"
+  },
+  {
+   "sentences": 3,
+   "title": "Килцешть",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9A%D0%B8%D0%BB%D1%86%D0%B5%D1%88%D1%82%D1%8C"
+  },
+  {
+   "sentences": 4,
+   "title": "Козя-Воля",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B7%D1%8F-%D0%92%D0%BE%D0%BB%D1%8F"
+  },
+  {
+   "sentences": 21,
+   "title": "Аршавін Андрій Сергійович",
+   "url": "https://uk.wikipedia.org/wiki/%D0%90%D1%80%D1%88%D0%B0%D0%B2%D1%96%D0%BD_%D0%90%D0%BD%D0%B4%D1%80%D1%96%D0%B9_%D0%A1%D0%B5%D1%80%D0%B3%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87"
+  },
+  {
+   "sentences": 25,
+   "title": "Єшу Стиліт",
+   "url": "https://uk.wikipedia.org/wiki/%D0%84%D1%88%D1%83_%D0%A1%D1%82%D0%B8%D0%BB%D1%96%D1%82"
+  },
+  {
+   "sentences": 4,
+   "title": "Киз-Кулле-Бурун",
+   "url": "https://uk.wikipedia.org/wiki/%D0%9A%D0%B8%D0%B7-%D0%9A%D1%83%D0%BB%D0%BB%D0%B5-%D0%91%D1%83%D1%80%D1%83%D0%BD"
+  },
+  {
+   "sentences": 25,
+   "title": "Зейкан Юлія Петрівна",
+   "url": "https://uk.wikipedia.org/wiki/%D0%97%D0%B5%D0%B9%D0%BA%D0%B0%D0%BD_%D0%AE%D0%BB%D1%96%D1%8F_%D0%9F%D0%B5%D1%82%D1%80%D1%96%D0%B2%D0%BD%D0%B0"
+  },
+  {
+   "sentences": 17,
+   "title": "Ян Вацлав Воржішек",
+   "url": "https://uk.wikipedia.org/wiki/%D0%AF%D0%BD_%D0%92%D0%B0%D1%86%D0%BB%D0%B0%D0%B2_%D0%92%D0%BE%D1%80%D0%B6%D1%96%D1%88%D0%B5%D0%BA"
+  },
+  {
+   "sentences": 5,
+   "title": "Ягідка (Червенський район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%AF%D0%B3%D1%96%D0%B4%D0%BA%D0%B0_%28%D0%A7%D0%B5%D1%80%D0%B2%D0%B5%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Байтук (селище)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%91%D0%B0%D0%B9%D1%82%D1%83%D0%BA_%28%D1%81%D0%B5%D0%BB%D0%B8%D1%89%D0%B5%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Ігумен",
+   "url": "https://uk.wikipedia.org/wiki/%D0%86%D0%B3%D1%83%D0%BC%D0%B5%D0%BD"
+  },
+  {
+   "sentences": 3,
+   "title": "Араменго",
+   "url": "https://uk.wikipedia.org/wiki/%D0%90%D1%80%D0%B0%D0%BC%D0%B5%D0%BD%D0%B3%D0%BE"
+  },
+  {
+   "sentences": 2,
+   "title": "Руч'ї (Лузький район)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A0%D1%83%D1%87%27%D1%97_%28%D0%9B%D1%83%D0%B7%D1%8C%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD%29"
+  },
+  {
+   "sentences": 20,
+   "title": "Ерта Паскаль Труійо",
+   "url": "https://uk.wikipedia.org/wiki/%D0%95%D1%80%D1%82%D0%B0_%D0%9F%D0%B0%D1%81%D0%BA%D0%B0%D0%BB%D1%8C_%D0%A2%D1%80%D1%83%D1%96%D0%B9%D0%BE"
+  },
+  {
+   "sentences": 8,
+   "title": "Розпатланий горобець (мультфільм)",
+   "url": "https://uk.wikipedia.org/wiki/%D0%A0%D0%BE%D0%B7%D0%BF%D0%B0%D1%82%D0%BB%D0%B0%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B1%D0%B5%D1%86%D1%8C_%28%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D1%84%D1%96%D0%BB%D1%8C%D0%BC%29"
+  },
+  {
+   "sentences": 18,
+   "title": "Вінтов Роман Васильович",
+   "url": "https://uk.wikipedia.org/wiki/%D0%92%D1%96%D0%BD%D1%82%D0%BE%D0%B2_%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD_%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%BE%D0%B2%D0%B8%D1%87"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "uk",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "retrieved": "2026-10-03",
+ "sentence_count": 400,
+ "wikipedia": "https://uk.wikipedia.org/"
+}

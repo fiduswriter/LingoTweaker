@@ -1,0 +1,269 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://pt.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 6,
+   "title": "USS Adams (DM-27)",
+   "url": "https://pt.wikipedia.org/wiki/USS_Adams_%28DM-27%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Afrithelphusa gerhildae",
+   "url": "https://pt.wikipedia.org/wiki/Afrithelphusa_gerhildae"
+  },
+  {
+   "sentences": 3,
+   "title": "Loredana Dinu",
+   "url": "https://pt.wikipedia.org/wiki/Loredana_Dinu"
+  },
+  {
+   "sentences": 2,
+   "title": "Elisabeth Pinedo",
+   "url": "https://pt.wikipedia.org/wiki/Elisabeth_Pinedo"
+  },
+  {
+   "sentences": 2,
+   "title": "Maché",
+   "url": "https://pt.wikipedia.org/wiki/Mach%C3%A9"
+  },
+  {
+   "sentences": 13,
+   "title": "ScienceDirect",
+   "url": "https://pt.wikipedia.org/wiki/ScienceDirect"
+  },
+  {
+   "sentences": 18,
+   "title": "Alberto Braune",
+   "url": "https://pt.wikipedia.org/wiki/Alberto_Braune"
+  },
+  {
+   "sentences": 4,
+   "title": "Jens Maier",
+   "url": "https://pt.wikipedia.org/wiki/Jens_Maier"
+  },
+  {
+   "sentences": 6,
+   "title": "8.ª etapa da Volta a Espanha de 2022",
+   "url": "https://pt.wikipedia.org/wiki/8.%C2%AA_etapa_da_Volta_a_Espanha_de_2022"
+  },
+  {
+   "sentences": 12,
+   "title": "José Joaquim Gomes de Castro, 1.º Conde de Castro",
+   "url": "https://pt.wikipedia.org/wiki/Jos%C3%A9_Joaquim_Gomes_de_Castro%2C_1.%C2%BA_Conde_de_Castro"
+  },
+  {
+   "sentences": 5,
+   "title": "Henrique Rebelo",
+   "url": "https://pt.wikipedia.org/wiki/Henrique_Rebelo"
+  },
+  {
+   "sentences": 2,
+   "title": "Bergasillas Bajera",
+   "url": "https://pt.wikipedia.org/wiki/Bergasillas_Bajera"
+  },
+  {
+   "sentences": 2,
+   "title": "Neuvelle-lès-Cromary",
+   "url": "https://pt.wikipedia.org/wiki/Neuvelle-l%C3%A8s-Cromary"
+  },
+  {
+   "sentences": 20,
+   "title": "Seattle Men's Chorus",
+   "url": "https://pt.wikipedia.org/wiki/Seattle_Men%27s_Chorus"
+  },
+  {
+   "sentences": 4,
+   "title": "Carta Deontológica do Serviço Público de Portugal",
+   "url": "https://pt.wikipedia.org/wiki/Carta_Deontol%C3%B3gica_do_Servi%C3%A7o_P%C3%BAblico_de_Portugal"
+  },
+  {
+   "sentences": 1,
+   "title": "Xenocompsa semipolita",
+   "url": "https://pt.wikipedia.org/wiki/Xenocompsa_semipolita"
+  },
+  {
+   "sentences": 2,
+   "title": "Elson Hooi",
+   "url": "https://pt.wikipedia.org/wiki/Elson_Hooi"
+  },
+  {
+   "sentences": 16,
+   "title": "Martin Frecht",
+   "url": "https://pt.wikipedia.org/wiki/Martin_Frecht"
+  },
+  {
+   "sentences": 25,
+   "title": "Axioma",
+   "url": "https://pt.wikipedia.org/wiki/Axioma"
+  },
+  {
+   "sentences": 22,
+   "title": "George Jung",
+   "url": "https://pt.wikipedia.org/wiki/George_Jung"
+  },
+  {
+   "sentences": 23,
+   "title": "Quiz",
+   "url": "https://pt.wikipedia.org/wiki/Quiz"
+  },
+  {
+   "sentences": 6,
+   "title": "Barragem da Vigia",
+   "url": "https://pt.wikipedia.org/wiki/Barragem_da_Vigia"
+  },
+  {
+   "sentences": 6,
+   "title": "Federação de Trabalhadores da Região Espanhola",
+   "url": "https://pt.wikipedia.org/wiki/Federa%C3%A7%C3%A3o_de_Trabalhadores_da_Regi%C3%A3o_Espanhola"
+  },
+  {
+   "sentences": 5,
+   "title": "Empty Sky",
+   "url": "https://pt.wikipedia.org/wiki/Empty_Sky"
+  },
+  {
+   "sentences": 2,
+   "title": "La Saulsotte",
+   "url": "https://pt.wikipedia.org/wiki/La_Saulsotte"
+  },
+  {
+   "sentences": 5,
+   "title": "Faculdade Batista de Minas Gerais",
+   "url": "https://pt.wikipedia.org/wiki/Faculdade_Batista_de_Minas_Gerais"
+  },
+  {
+   "sentences": 3,
+   "title": "Metaliticídeos",
+   "url": "https://pt.wikipedia.org/wiki/Metalitic%C3%ADdeos"
+  },
+  {
+   "sentences": 25,
+   "title": "Sandra Pesavento",
+   "url": "https://pt.wikipedia.org/wiki/Sandra_Pesavento"
+  },
+  {
+   "sentences": 13,
+   "title": "Microconsole",
+   "url": "https://pt.wikipedia.org/wiki/Microconsole"
+  },
+  {
+   "sentences": 2,
+   "title": "Kaneko",
+   "url": "https://pt.wikipedia.org/wiki/Kaneko"
+  },
+  {
+   "sentences": 6,
+   "title": "Géza (grão-príncipe)",
+   "url": "https://pt.wikipedia.org/wiki/G%C3%A9za_%28gr%C3%A3o-pr%C3%ADncipe%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Novo Laredo",
+   "url": "https://pt.wikipedia.org/wiki/Novo_Laredo"
+  },
+  {
+   "sentences": 10,
+   "title": "Gida Eiriksdatter",
+   "url": "https://pt.wikipedia.org/wiki/Gida_Eiriksdatter"
+  },
+  {
+   "sentences": 4,
+   "title": "Ryan Brathwaite",
+   "url": "https://pt.wikipedia.org/wiki/Ryan_Brathwaite"
+  },
+  {
+   "sentences": 8,
+   "title": "Africada bilabial surda",
+   "url": "https://pt.wikipedia.org/wiki/Africada_bilabial_surda"
+  },
+  {
+   "sentences": 13,
+   "title": "Interact Club",
+   "url": "https://pt.wikipedia.org/wiki/Interact_Club"
+  },
+  {
+   "sentences": 2,
+   "title": "Patrick du Chau",
+   "url": "https://pt.wikipedia.org/wiki/Patrick_du_Chau"
+  },
+  {
+   "sentences": 6,
+   "title": "Estação Loyola",
+   "url": "https://pt.wikipedia.org/wiki/Esta%C3%A7%C3%A3o_Loyola"
+  },
+  {
+   "sentences": 1,
+   "title": "Deutzia",
+   "url": "https://pt.wikipedia.org/wiki/Deutzia"
+  },
+  {
+   "sentences": 25,
+   "title": "Eleições em 2008",
+   "url": "https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%B5es_em_2008"
+  },
+  {
+   "sentences": 5,
+   "title": "Édouard Wattelier",
+   "url": "https://pt.wikipedia.org/wiki/%C3%89douard_Wattelier"
+  },
+  {
+   "sentences": 3,
+   "title": "Kazimierz Kubala",
+   "url": "https://pt.wikipedia.org/wiki/Kazimierz_Kubala"
+  },
+  {
+   "sentences": 4,
+   "title": "Bandeira de Olinda",
+   "url": "https://pt.wikipedia.org/wiki/Bandeira_de_Olinda"
+  },
+  {
+   "sentences": 2,
+   "title": "(33709) 1999 LK10",
+   "url": "https://pt.wikipedia.org/wiki/%2833709%29_1999_LK10"
+  },
+  {
+   "sentences": 24,
+   "title": "Gastón Etlis",
+   "url": "https://pt.wikipedia.org/wiki/Gast%C3%B3n_Etlis"
+  },
+  {
+   "sentences": 1,
+   "title": "Neuendorf",
+   "url": "https://pt.wikipedia.org/wiki/Neuendorf"
+  },
+  {
+   "sentences": 2,
+   "title": "Artéria carótida",
+   "url": "https://pt.wikipedia.org/wiki/Art%C3%A9ria_car%C3%B3tida"
+  },
+  {
+   "sentences": 24,
+   "title": "Titan Quest: Immortal Throne",
+   "url": "https://pt.wikipedia.org/wiki/Titan_Quest%3A_Immortal_Throne"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "pt",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "retrieved": "2026-10-03",
+ "sentence_count": 400,
+ "wikipedia": "https://pt.wikipedia.org/"
+}

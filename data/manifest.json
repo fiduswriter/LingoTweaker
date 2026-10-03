@@ -1,6 +1,6 @@
 {
   "upstream_commit": "622328535865050c077ccb64cabb5fad77038bc4",
-  "file_count": 1028,
+  "file_count": 1039,
   "files": [
     {
       "path": "ar/dictionaries/arabic.dict",
@@ -2873,6 +2873,167 @@
       }
     },
     {
+      "path": "detection/wikipedia/README.md",
+      "sha256": "bf38c9e6adb10ded9477e987ffc10c312eea467cccff38326e4f7a0e84919253",
+      "size": 1602,
+      "source": {
+        "kind": "hand-authored",
+        "license": "LGPL-2.1-or-later",
+        "license_source": "LingoTweaker project LICENSE",
+        "note": "Provenance and regeneration instructions for the vendored Wikipedia sentence cache"
+      }
+    },
+    {
+      "path": "detection/wikipedia/ca.json",
+      "sha256": "6498644ac698b921b0919f79799c080a1a6e69112f4f43d73a9ad2789fb7bd62",
+      "size": 5412,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://ca.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 36 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/ca.txt",
+      "sha256": "f7b187e00b05787daa926a7fccd2b637fc15407e44418c64e1c04509845dc432",
+      "size": 54252,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://ca.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 36 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/es.json",
+      "sha256": "28f32ac28f600e59f8d835b8a1a4c46cb8edf80317ad801853978fd40ee2acac",
+      "size": 6330,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://es.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 44 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/es.txt",
+      "sha256": "f1309df86a04c2f8f2dd0815e44639f933b02fc6b107d95aa726b9201b1f9658",
+      "size": 51199,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://es.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 44 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/pt.json",
+      "sha256": "70a58ae48f2f2296c57eaf052c1dd17ed1cc771dc3bb4759816b8e7ec392f70f",
+      "size": 6812,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://pt.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 48 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/pt.txt",
+      "sha256": "bf8ddb2f01c78f5e175bc2ddb2b0eb8898fd308c6f829aeb87c98ef15478b212",
+      "size": 48219,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://pt.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 48 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/sr.json",
+      "sha256": "04785607adbd9c9c5bc7ca28f4a10cbed764a40fa4c1b430575e5be3e2cc630b",
+      "size": 13009,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://sr.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 58 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/sr.txt",
+      "sha256": "1e1dc2d84eafaa9679f27fcbcaf45ac590fefb5be271a85cbd198427c27c492a",
+      "size": 63662,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://sr.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 58 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/uk.json",
+      "sha256": "66f32c0336e66adeab485c650a12dfcf67eb0dcb480ec622abf9e90cbc3bd0ed",
+      "size": 10992,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://uk.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 44 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
+      "path": "detection/wikipedia/uk.txt",
+      "sha256": "5bb592bdfd757ebec60434ce51b4b588287131496e0a366062d06c21169eb161",
+      "size": 75862,
+      "source": {
+        "kind": "vendor",
+        "license": "CC-BY-SA-3.0 (Wikipedia article text) - owner approved",
+        "license_verified": true,
+        "license_source": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+        "url": "https://uk.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+        "generator": "tools/detection/fetch_wikipedia.py (MediaWiki API random-article extracts, namespace 0, explaintext)",
+        "note": "400 sentences from 44 random articles, retrieved 2026-10-03; per-article provenance in data/detection/wikipedia/",
+        "retrieved": "2026-10-03"
+      }
+    },
+    {
       "path": "el/dictionaries/greek.dict",
       "sha256": "09fac984008db630169eb37cca71c99d085857e722e209cf4b91cf94a9476ce0",
       "size": 239,
@@ -5446,7 +5607,7 @@
         "kind": "vendor",
         "license": "GFDL-1.2-or-later",
         "url": "https://github.com/LibreOffice/dictionaries/tree/master/gug",
-        "note": "Paraguayan Guaran\u00ed Hunspell dictionary"
+        "note": "Paraguayan Guaraní Hunspell dictionary"
       }
     },
     {
@@ -5457,7 +5618,7 @@
         "kind": "vendor",
         "license": "GFDL-1.2-or-later",
         "url": "https://github.com/LibreOffice/dictionaries/tree/master/gug",
-        "note": "Paraguayan Guaran\u00ed Hunspell dictionary"
+        "note": "Paraguayan Guaraní Hunspell dictionary"
       }
     },
     {
@@ -5555,7 +5716,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/is_IS.aff",
-        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license": "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
         "license_verified": true,
         "license_source": "upstream is/hunspell/license.txt"
       }
@@ -5567,7 +5728,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/is_IS.dic",
-        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license": "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
         "license_verified": false,
         "license_source": "upstream is/hunspell/license.txt"
       }
@@ -5579,7 +5740,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/is/src/main/resources/org/languagetool/resource/is/hunspell/license.txt",
-        "license": "Public domain (Or\u00f0ab\u00f3k H\u00e1sk\u00f3lans / Reiknistofnun H\u00e1sk\u00f3la \u00cdslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
+        "license": "Public domain (Orðabók Háskólans / Reiknistofnun Háskóla Íslands wordlist) OR CC-BY-SA-3.0 (Icelandic Wiktionary-derived words); is/hunspell/license.txt",
         "license_verified": true,
         "license_source": "upstream is/hunspell/license.txt"
       }
@@ -7264,7 +7425,7 @@
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
         "license_source": "LICENSE",
-        "note": "Norwegian Bokm\u00e5l data module documentation (tagger/synthesizer builds, rule kinds, disambiguation layer)"
+        "note": "Norwegian Bokmål data module documentation (tagger/synthesizer builds, rule kinds, disambiguation layer)"
       }
     },
     {
@@ -7273,10 +7434,10 @@
       "size": 1019,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
-        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
+        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordbøkene lemma_expanded.json)",
+        "note": "Norwegian Bokmål POS tagger dictionary from the Ordbøkene open data (Bokmålsordboka); 2026-09-25 slot-mapping fix: presens ver:præ, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
@@ -7305,10 +7466,10 @@
       "size": 491235,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
-        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
+        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordbøkene lemma_expanded.json)",
+        "note": "Norwegian Bokmål POS tagger dictionary from the Ordbøkene open data (Bokmålsordboka); 2026-09-25 slot-mapping fix: presens ver:præ, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
@@ -7317,10 +7478,10 @@
       "size": 69,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
-        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF; see data/no/README.md"
+        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordbøkene lemma_expanded.json)",
+        "note": "Norwegian Bokmål POS tagger dictionary from the Ordbøkene open data (Bokmålsordboka); 2026-09-25 slot-mapping fix: presens ver:præ, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF; see data/no/README.md"
       }
     },
     {
@@ -7329,10 +7490,10 @@
       "size": 15112397,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
-        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
+        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordbøkene lemma_expanded.json)",
+        "note": "Norwegian Bokmål POS tagger dictionary from the Ordbøkene open data (Bokmålsordboka); 2026-09-25 slot-mapping fix: presens ver:præ, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
@@ -7341,10 +7502,10 @@
       "size": 405350,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/morfologik/lt_morfologik.py synth (no_pos.dict export, inverted to lemma|tag keys; the danish_synth pattern)",
-        "note": "Norwegian Bokm\u00e5l synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys; regenerated with the 2026-09-25 slot-mapping fix",
+        "note": "Norwegian Bokmål synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys; regenerated with the 2026-09-25 slot-mapping fix",
         "generated_from": [
           "no/dictionaries/no_pos.dict",
           "no/dictionaries/no_pos.info"
@@ -7357,10 +7518,10 @@
       "size": 69,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/morfologik/lt_morfologik.py synth (no_pos.dict export, inverted to lemma|tag keys; the danish_synth pattern)",
-        "note": "Norwegian Bokm\u00e5l synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys; regenerated with the 2026-09-25 slot-mapping fix",
+        "note": "Norwegian Bokmål synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys; regenerated with the 2026-09-25 slot-mapping fix",
         "generated_from": [
           "no/dictionaries/no_pos.dict",
           "no/dictionaries/no_pos.info"
@@ -7373,10 +7534,10 @@
       "size": 199,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
         "generator": "tools/morfologik/lt_morfologik.py synth (no_pos.dict export, inverted to lemma|tag keys; the danish_synth pattern)",
-        "note": "Norwegian Bokm\u00e5l synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys; regenerated with the 2026-09-25 slot-mapping fix",
+        "note": "Norwegian Bokmål synthesizer dictionary (plan item B2): no_pos.dict inverted to lemma|tag keys; regenerated with the 2026-09-25 slot-mapping fix",
         "generated_from": [
           "no/dictionaries/no_pos.dict",
           "no/dictionaries/no_pos.info"
@@ -7390,7 +7551,7 @@
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
-        "note": "Norwegian Bokm\u00e5l disambiguation rulegroups (B2, M4 style); hand-authored (no legacy Java module); 2026-09-25: det-pron tense split re-verified against the corrected verb tags, pron-ver-sub leaves adj homographs (rask/ny/norsk) to det-adj-sub; see data/no/README.md"
+        "note": "Norwegian Bokmål disambiguation rulegroups (B2, M4 style); hand-authored (no legacy Java module); 2026-09-25: det-pron tense split re-verified against the corrected verb tags, pron-ver-sub leaves adj homographs (rask/ny/norsk) to det-adj-sub; see data/no/README.md"
       }
     },
     {
@@ -7423,9 +7584,9 @@
       "source": {
         "kind": "vendor",
         "license": "CC BY 4.0",
-        "license_source": "CLARIN PUB+BY, Spr\u00e5kr\u00e5det/NB (LibreOffice dictionaries no/README)",
+        "license_source": "CLARIN PUB+BY, Språkrådet/NB (LibreOffice dictionaries no/README)",
         "url": "https://github.com/LibreOffice/dictionaries/tree/master/no",
-        "note": "Norwegian Bokm\u00e5l Hunspell dictionary data"
+        "note": "Norwegian Bokmål Hunspell dictionary data"
       }
     },
     {
@@ -7469,7 +7630,7 @@
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
         "license_source": "LICENSE",
-        "note": "Norwegian Bokm\u00e5l XML rules incl. the POS-based agreement rules (adjective NB_DEF_ADJ/NB_NEUTER_T/NB_PLURAL_ADJ and the B2 noun rules; postag + <match postag> synthesis over no_synth.dict); hand-authored (no legacy Java module), see data/no/README.md"
+        "note": "Norwegian Bokmål XML rules incl. the POS-based agreement rules (adjective NB_DEF_ADJ/NB_NEUTER_T/NB_PLURAL_ADJ and the B2 noun rules; postag + <match postag> synthesis over no_synth.dict); hand-authored (no legacy Java module), see data/no/README.md"
       }
     },
     {
@@ -7564,10 +7725,10 @@
       "size": 5697,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Ordbanken/Ordb\u00f8kene)",
+        "license": "CC BY 4.0 (Ordbanken/Ordbøkene)",
         "url": "https://ord.uib.no/bm/fil/lemma_expanded.json",
-        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordb\u00f8kene lemma_expanded.json)",
-        "note": "Norwegian Bokm\u00e5l POS tagger dictionary from the Ordb\u00f8kene open data (Bokm\u00e5lsordboka); 2026-09-25 slot-mapping fix: presens ver:pr\u00e6, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
+        "generator": "tools/no-dict/build-no-tagger.py + tools/morfologik/lt_morfologik.py pos (Ordbøkene lemma_expanded.json)",
+        "note": "Norwegian Bokmål POS tagger dictionary from the Ordbøkene open data (Bokmålsordboka); 2026-09-25 slot-mapping fix: presens ver:præ, preteritum ver:dat, presens partisipp ver:lan, adj pos:BF/pos:neu; see data/no/README.md"
       }
     },
     {
@@ -7716,7 +7877,7 @@
       "size": 902,
       "source": {
         "kind": "generated",
-        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md \u00a73/\u00a74)"
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
@@ -7747,7 +7908,7 @@
       "size": 1290,
       "source": {
         "kind": "generated",
-        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md \u00a73/\u00a74)"
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
@@ -7765,7 +7926,7 @@
       "size": 2691,
       "source": {
         "kind": "generated",
-        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md \u00a73/\u00a74)"
+        "generator": "tools/nordum-dict/build-nordum-dict.py (Nordum wordlist + nb/da/sv hunspell dics, spec NORDUM_LANGUAGE_SPECIFICATION.md §3/§4)"
       }
     },
     {
@@ -7793,7 +7954,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish.dict",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7805,7 +7966,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish.info",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7817,7 +7978,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_synth.dict",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7829,7 +7990,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_synth.info",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -7841,7 +8002,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/pl/src/main/resources/org/languagetool/resource/pl/polish_tags.txt",
-        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Mi\u0142kowski, redistribution permitted with the notice)",
+        "license": "BSD-2-Clause-style (PoliMorf 2.0 Polish POS/synthesis dictionaries; upstream pl/README.txt copyright Marcin Miłkowski, redistribution permitted with the notice)",
         "license_verified": true,
         "license_source": "upstream pl/README.txt (LICENCE section)"
       }
@@ -10291,7 +10452,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sl/src/main/resources/org/languagetool/resource/sl/hunspell/README_sl_SI.txt",
-        "license": "LGPL / GPL dual license (Amebis/Erjavec/Ko\u0161ir/Peterlin Slovenian spelling dictionary; sl/hunspell/README_sl_SI.txt)",
+        "license": "LGPL / GPL dual license (Amebis/Erjavec/Košir/Peterlin Slovenian spelling dictionary; sl/hunspell/README_sl_SI.txt)",
         "license_verified": true,
         "license_source": "upstream sl/hunspell/README_sl_SI.txt"
       }
@@ -10371,7 +10532,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/added.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10383,7 +10544,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/ignored.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10395,7 +10556,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/removed.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10407,7 +10568,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian.dict",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10419,7 +10580,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian.info",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10431,7 +10592,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian_synth.dict",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10443,7 +10604,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/serbian_synth.info",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10455,7 +10616,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/ekavian/spelling.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10467,7 +10628,7 @@
       "source": {
         "kind": "upstream",
         "upstream_path": "languagetool-language-modules/sr/src/main/resources/org/languagetool/resource/sr/dictionary/serbian_synth_tags.txt",
-        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 \u0438\u043b\u0438 \u043a\u0430\u0441\u043d\u0438\u0458\u0435\" \u2014 the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
+        "license": "LGPL-2.1-or-later (Serbian ekavian POS/synthesis/spelling Morfologik dictionaries generated from the Serbian corpus; upstream sr/README.md states \"LGPL 2.1 или касније\" — the hunspell conversion serbian_hunspell.dict is separately tri-licensed LGPL-2.1+/MPL-1.1+/GPL-2+ or CC-BY-SA-3.0, dictionary/ekavian/README_hunspell.txt, and is not vendored)",
         "license_verified": false,
         "license_source": "upstream sr/README.md; sr/dictionary/README_dictionary.txt; sr/dictionary/ekavian/README_hunspell.txt"
       }
@@ -10686,10 +10847,10 @@
       "size": 639028,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Spr\u00e5kbanken SALDO)",
+        "license": "CC BY 4.0 (Språkbanken SALDO)",
         "url": "https://svn.spraakbanken.gu.se/sb-arkiv/pub/lexikon/saldom.xml",
         "generator": "tools/sv-dict/build-sv-tagger.py (SALDO saldom.xml -> SUC-style word-lemma-tag triples -> tools/morfologik/lt_morfologik.py pos/synth)",
-        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Spr\u00e5kbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
+        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Språkbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
       }
     },
     {
@@ -10710,10 +10871,10 @@
       "size": 556233,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Spr\u00e5kbanken SALDO)",
+        "license": "CC BY 4.0 (Språkbanken SALDO)",
         "url": "https://svn.spraakbanken.gu.se/sb-arkiv/pub/lexikon/saldom.xml",
         "generator": "tools/sv-dict/build-sv-tagger.py (SALDO saldom.xml -> SUC-style word-lemma-tag triples -> tools/morfologik/lt_morfologik.py pos/synth)",
-        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Spr\u00e5kbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
+        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Språkbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
       }
     },
     {
@@ -10734,10 +10895,10 @@
       "size": 659,
       "source": {
         "kind": "generated",
-        "license": "CC BY 4.0 (Spr\u00e5kbanken SALDO)",
+        "license": "CC BY 4.0 (Språkbanken SALDO)",
         "url": "https://svn.spraakbanken.gu.se/sb-arkiv/pub/lexikon/saldom.xml",
         "generator": "tools/sv-dict/build-sv-tagger.py (SALDO saldom.xml -> SUC-style word-lemma-tag triples -> tools/morfologik/lt_morfologik.py pos/synth)",
-        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Spr\u00e5kbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
+        "note": "Replaced (B1) the DSSO-derived upstream swedish dictionaries (LGPL-2.1-or-later, upstream languagetool-language-modules/sv/src/main/resources/org/languagetool/resource/sv/) with the Språkbanken SALDO morphological lexicon (saldom.xml, CC BY 4.0, 128,036 entries; official distribution https://sprakbanken.se/en/resources/saldo). Owner-approved divergence: sv is Java-golden gated and the 45-line corpus stays 0/0/0. See data/sv/README.md"
       }
     },
     {
@@ -10830,7 +10991,7 @@
         "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/coherency.txt",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false,
-        "note": "Owner-added spelling-variant pairs (spagetti/spaghetti, l\u00e5ssas/l\u00e5tsas, caf\u00e9/kaf\u00e9, prova/pr\u00f6va) mined from SALDO (Spr\u00e5kbanken, CC BY 4.0) sister terms; see docs/differences.md #16"
+        "note": "Owner-added spelling-variant pairs (spagetti/spaghetti, låssas/låtsas, café/kafé, prova/pröva) mined from SALDO (Språkbanken, CC BY 4.0) sister terms; see docs/differences.md #16"
       }
     },
     {
@@ -10842,7 +11003,7 @@
         "upstream_path": "languagetool-language-modules/sv/src/main/resources/org/languagetool/rules/sv/grammar.xml",
         "license": "LGPL-2.1-or-later (LanguageTool resource; per-file license varies, see licenses/README.md and THIRD_PARTY_NOTICES.md)",
         "license_verified": false,
-        "note": "Owner-added CAT4 confusable-word rules (6 rules: svara/sv\u00e4ra, brygga/bygga, anta/inta), candidate pairs mined from SALDO (Spr\u00e5kbanken, CC BY 4.0, https://spraakbanken.gu.se/eng/resource/saldo) and hand-curated; no SALDO data vendored; see docs/differences.md #16. Owner-added default-off CAT7 VECKODAG_DATUM rulegroup (2 rules) over the first <filter> classes of the sv module (DateCheckFilter, a Swedish localization of upstream's AbstractDateCheckFilter, hand-written from the LGPL upstream base class); see docs/differences.md #17"
+        "note": "Owner-added CAT4 confusable-word rules (6 rules: svara/svära, brygga/bygga, anta/inta), candidate pairs mined from SALDO (Språkbanken, CC BY 4.0, https://spraakbanken.gu.se/eng/resource/saldo) and hand-curated; no SALDO data vendored; see docs/differences.md #16. Owner-added default-off CAT7 VECKODAG_DATUM rulegroup (2 rules) over the first <filter> classes of the sv module (DateCheckFilter, a Swedish localization of upstream's AbstractDateCheckFilter, hand-written from the LGPL upstream base class); see docs/differences.md #17"
       }
     },
     {
@@ -11758,5 +11919,5 @@
       }
     }
   ],
-  "generated_by": "tools/lt-sync/lt_sync.py add-local"
+  "generated_by": "tools/lt-sync/lt_sync.py add-local; tools/detection/fetch_wikipedia.py"
 }

@@ -1,0 +1,319 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://sr.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 12,
+   "title": "Најбољи рагби есеј године",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9D%D0%B0%D1%98%D0%B1%D0%BE%D1%99%D0%B8_%D1%80%D0%B0%D0%B3%D0%B1%D0%B8_%D0%B5%D1%81%D0%B5%D1%98_%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B5"
+  },
+  {
+   "sentences": 25,
+   "title": "Религија у Маурицијусу",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BB%D0%B8%D0%B3%D0%B8%D1%98%D0%B0_%D1%83_%D0%9C%D0%B0%D1%83%D1%80%D0%B8%D1%86%D0%B8%D1%98%D1%83%D1%81%D1%83"
+  },
+  {
+   "sentences": 16,
+   "title": "Čaša za vino",
+   "url": "https://sr.wikipedia.org/wiki/%C4%8Ca%C5%A1a_za_vino"
+  },
+  {
+   "sentences": 3,
+   "title": "Шон Ла (покрајина)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A8%D0%BE%D0%BD_%D0%9B%D0%B0_%28%D0%BF%D0%BE%D0%BA%D1%80%D0%B0%D1%98%D0%B8%D0%BD%D0%B0%29"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 6336",
+   "url": "https://sr.wikipedia.org/wiki/NGC_6336"
+  },
+  {
+   "sentences": 13,
+   "title": "Пољанице (Љиг)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9F%D0%BE%D1%99%D0%B0%D0%BD%D0%B8%D1%86%D0%B5_%28%D0%89%D0%B8%D0%B3%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Анже (Кршко)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%90%D0%BD%D0%B6%D0%B5_%28%D0%9A%D1%80%D1%88%D0%BA%D0%BE%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Пуенте Маркес (Тевизинго)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9F%D1%83%D0%B5%D0%BD%D1%82%D0%B5_%D0%9C%D0%B0%D1%80%D0%BA%D0%B5%D1%81_%28%D0%A2%D0%B5%D0%B2%D0%B8%D0%B7%D0%B8%D0%BD%D0%B3%D0%BE%29"
+  },
+  {
+   "sentences": 23,
+   "title": "Квалификације за Светско првенство у фудбалу за жене",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%B2%D0%B0%D0%BB%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%98%D0%B5_%D0%B7%D0%B0_%D0%A1%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%BE_%D0%BF%D1%80%D0%B2%D0%B5%D0%BD%D1%81%D1%82%D0%B2%D0%BE_%D1%83_%D1%84%D1%83%D0%B4%D0%B1%D0%B0%D0%BB%D1%83_%D0%B7%D0%B0_%D0%B6%D0%B5%D0%BD%D0%B5"
+  },
+  {
+   "sentences": 4,
+   "title": "Куп Милан Цига Васојевић 2020.",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D1%83%D0%BF_%D0%9C%D0%B8%D0%BB%D0%B0%D0%BD_%D0%A6%D0%B8%D0%B3%D0%B0_%D0%92%D0%B0%D1%81%D0%BE%D1%98%D0%B5%D0%B2%D0%B8%D1%9B_2020."
+  },
+  {
+   "sentences": 5,
+   "title": "Липник (Источни Стари Град)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BF%D0%BD%D0%B8%D0%BA_%28%D0%98%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8_%D0%A1%D1%82%D0%B0%D1%80%D0%B8_%D0%93%D1%80%D0%B0%D0%B4%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Ел Ромерал, Антонио Перез Медина (Парас)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%95%D0%BB_%D0%A0%D0%BE%D0%BC%D0%B5%D1%80%D0%B0%D0%BB%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE_%D0%9F%D0%B5%D1%80%D0%B5%D0%B7_%D0%9C%D0%B5%D0%B4%D0%B8%D0%BD%D0%B0_%28%D0%9F%D0%B0%D1%80%D0%B0%D1%81%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Козминци",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B7%D0%BC%D0%B8%D0%BD%D1%86%D0%B8"
+  },
+  {
+   "sentences": 1,
+   "title": "Општина Ливези (Бакау)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9E%D0%BF%D1%88%D1%82%D0%B8%D0%BD%D0%B0_%D0%9B%D0%B8%D0%B2%D0%B5%D0%B7%D0%B8_%28%D0%91%D0%B0%D0%BA%D0%B0%D1%83%29"
+  },
+  {
+   "sentences": 2,
+   "title": "IC 4671",
+   "url": "https://sr.wikipedia.org/wiki/IC_4671"
+  },
+  {
+   "sentences": 2,
+   "title": "Ла Тома де Агва (Коазинтла)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9B%D0%B0_%D0%A2%D0%BE%D0%BC%D0%B0_%D0%B4%D0%B5_%D0%90%D0%B3%D0%B2%D0%B0_%28%D0%9A%D0%BE%D0%B0%D0%B7%D0%B8%D0%BD%D1%82%D0%BB%D0%B0%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Амерички кокер шпанијел",
+   "url": "https://sr.wikipedia.org/wiki/%D0%90%D0%BC%D0%B5%D1%80%D0%B8%D1%87%D0%BA%D0%B8_%D0%BA%D0%BE%D0%BA%D0%B5%D1%80_%D1%88%D0%BF%D0%B0%D0%BD%D0%B8%D1%98%D0%B5%D0%BB"
+  },
+  {
+   "sentences": 20,
+   "title": "Јован Маркоски",
+   "url": "https://sr.wikipedia.org/wiki/%D0%88%D0%BE%D0%B2%D0%B0%D0%BD_%D0%9C%D0%B0%D1%80%D0%BA%D0%BE%D1%81%D0%BA%D0%B8"
+  },
+  {
+   "sentences": 1,
+   "title": "Округ Чарлс Микс (Јужна Дакота)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9E%D0%BA%D1%80%D1%83%D0%B3_%D0%A7%D0%B0%D1%80%D0%BB%D1%81_%D0%9C%D0%B8%D0%BA%D1%81_%28%D0%88%D1%83%D0%B6%D0%BD%D0%B0_%D0%94%D0%B0%D0%BA%D0%BE%D1%82%D0%B0%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Плотин",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9F%D0%BB%D0%BE%D1%82%D0%B8%D0%BD"
+  },
+  {
+   "sentences": 4,
+   "title": "5-Metiltetrahidrofolat:korinoid/gvožđe-sumpor protein Co-metiltransferaza",
+   "url": "https://sr.wikipedia.org/wiki/5-Metiltetrahidrofolat%3Akorinoid/gvo%C5%BE%C4%91e-sumpor_protein_Co-metiltransferaza"
+  },
+  {
+   "sentences": 5,
+   "title": "Џо Лок",
+   "url": "https://sr.wikipedia.org/wiki/%D0%8F%D0%BE_%D0%9B%D0%BE%D0%BA"
+  },
+  {
+   "sentences": 2,
+   "title": "Лагуна Нуева",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B3%D1%83%D0%BD%D0%B0_%D0%9D%D1%83%D0%B5%D0%B2%D0%B0"
+  },
+  {
+   "sentences": 6,
+   "title": "Калуга",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%B0%D0%BB%D1%83%D0%B3%D0%B0"
+  },
+  {
+   "sentences": 1,
+   "title": "Ел Потреро (Викторија)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%95%D0%BB_%D0%9F%D0%BE%D1%82%D1%80%D0%B5%D1%80%D0%BE_%28%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%98%D0%B0%29"
+  },
+  {
+   "sentences": 3,
+   "title": "MRTG",
+   "url": "https://sr.wikipedia.org/wiki/MRTG"
+  },
+  {
+   "sentences": 25,
+   "title": "Sintetička biologija",
+   "url": "https://sr.wikipedia.org/wiki/Sinteti%C4%8Dka_biologija"
+  },
+  {
+   "sentences": 4,
+   "title": "Почешће",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9F%D0%BE%D1%87%D0%B5%D1%88%D1%9B%D0%B5"
+  },
+  {
+   "sentences": 3,
+   "title": "Старк (Флорида)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A1%D1%82%D0%B0%D1%80%D0%BA_%28%D0%A4%D0%BB%D0%BE%D1%80%D0%B8%D0%B4%D0%B0%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Исандлуана",
+   "url": "https://sr.wikipedia.org/wiki/%D0%98%D1%81%D0%B0%D0%BD%D0%B4%D0%BB%D1%83%D0%B0%D0%BD%D0%B0"
+  },
+  {
+   "sentences": 2,
+   "title": "Буку (Јаломица)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%91%D1%83%D0%BA%D1%83_%28%D0%88%D0%B0%D0%BB%D0%BE%D0%BC%D0%B8%D1%86%D0%B0%29"
+  },
+  {
+   "sentences": 10,
+   "title": "Конкакафов златни куп 2003.",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD%D0%BA%D0%B0%D0%BA%D0%B0%D1%84%D0%BE%D0%B2_%D0%B7%D0%BB%D0%B0%D1%82%D0%BD%D0%B8_%D0%BA%D1%83%D0%BF_2003."
+  },
+  {
+   "sentences": 2,
+   "title": "Соверато Марина (Катанцаро)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A1%D0%BE%D0%B2%D0%B5%D1%80%D0%B0%D1%82%D0%BE_%D0%9C%D0%B0%D1%80%D0%B8%D0%BD%D0%B0_%28%D0%9A%D0%B0%D1%82%D0%B0%D0%BD%D1%86%D0%B0%D1%80%D0%BE%29"
+  },
+  {
+   "sentences": 10,
+   "title": "Споменик природе Термоминерални извор у селу Вуча",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BE%D0%BC%D0%B5%D0%BD%D0%B8%D0%BA_%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D0%B5_%D0%A2%D0%B5%D1%80%D0%BC%D0%BE%D0%BC%D0%B8%D0%BD%D0%B5%D1%80%D0%B0%D0%BB%D0%BD%D0%B8_%D0%B8%D0%B7%D0%B2%D0%BE%D1%80_%D1%83_%D1%81%D0%B5%D0%BB%D1%83_%D0%92%D1%83%D1%87%D0%B0"
+  },
+  {
+   "sentences": 6,
+   "title": "Actrix Actrix DS",
+   "url": "https://sr.wikipedia.org/wiki/Actrix_Actrix_DS"
+  },
+  {
+   "sentences": 2,
+   "title": "Капрета (Терни)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%B0%D0%BF%D1%80%D0%B5%D1%82%D0%B0_%28%D0%A2%D0%B5%D1%80%D0%BD%D0%B8%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Пријеради",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D1%98%D0%B5%D1%80%D0%B0%D0%B4%D0%B8"
+  },
+  {
+   "sentences": 4,
+   "title": "Mus callewaerti",
+   "url": "https://sr.wikipedia.org/wiki/Mus_callewaerti"
+  },
+  {
+   "sentences": 2,
+   "title": "Гривићи",
+   "url": "https://sr.wikipedia.org/wiki/%D0%93%D1%80%D0%B8%D0%B2%D0%B8%D1%9B%D0%B8"
+  },
+  {
+   "sentences": 7,
+   "title": "Кутјево",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D1%83%D1%82%D1%98%D0%B5%D0%B2%D0%BE"
+  },
+  {
+   "sentences": 1,
+   "title": "UGT1A6",
+   "url": "https://sr.wikipedia.org/wiki/UGT1A6"
+  },
+  {
+   "sentences": 25,
+   "title": "Кампомелични синдром",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%B0%D0%BC%D0%BF%D0%BE%D0%BC%D0%B5%D0%BB%D0%B8%D1%87%D0%BD%D0%B8_%D1%81%D0%B8%D0%BD%D0%B4%D1%80%D0%BE%D0%BC"
+  },
+  {
+   "sentences": 2,
+   "title": "Монте Скијави (Виченца)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9C%D0%BE%D0%BD%D1%82%D0%B5_%D0%A1%D0%BA%D0%B8%D1%98%D0%B0%D0%B2%D0%B8_%28%D0%92%D0%B8%D1%87%D0%B5%D0%BD%D1%86%D0%B0%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Округ Ждјар на Сазави",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9E%D0%BA%D1%80%D1%83%D0%B3_%D0%96%D0%B4%D1%98%D0%B0%D1%80_%D0%BD%D0%B0_%D0%A1%D0%B0%D0%B7%D0%B0%D0%B2%D0%B8"
+  },
+  {
+   "sentences": 1,
+   "title": "Габијана (Маса-Карара)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%93%D0%B0%D0%B1%D0%B8%D1%98%D0%B0%D0%BD%D0%B0_%28%D0%9C%D0%B0%D1%81%D0%B0-%D0%9A%D0%B0%D1%80%D0%B0%D1%80%D0%B0%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Териса (Њујорк)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A2%D0%B5%D1%80%D0%B8%D1%81%D0%B0_%28%D0%8A%D1%83%D1%98%D0%BE%D1%80%D0%BA%29"
+  },
+  {
+   "sentences": 25,
+   "title": "1773",
+   "url": "https://sr.wikipedia.org/wiki/1773"
+  },
+  {
+   "sentences": 2,
+   "title": "Ремингтон (Вирџинија)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BC%D0%B8%D0%BD%D0%B3%D1%82%D0%BE%D0%BD_%28%D0%92%D0%B8%D1%80%D1%9F%D0%B8%D0%BD%D0%B8%D1%98%D0%B0%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Изложба „Простор” (1983)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%98%D0%B7%D0%BB%D0%BE%D0%B6%D0%B1%D0%B0_%E2%80%9E%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80%E2%80%9D_%281983%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Гвадо Пичоне (Фрозиноне)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%93%D0%B2%D0%B0%D0%B4%D0%BE_%D0%9F%D0%B8%D1%87%D0%BE%D0%BD%D0%B5_%28%D0%A4%D1%80%D0%BE%D0%B7%D0%B8%D0%BD%D0%BE%D0%BD%D0%B5%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Астрална пројекција (вишезначна одредница)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%90%D1%81%D1%82%D1%80%D0%B0%D0%BB%D0%BD%D0%B0_%D0%BF%D1%80%D0%BE%D1%98%D0%B5%D0%BA%D1%86%D0%B8%D1%98%D0%B0_%28%D0%B2%D0%B8%D1%88%D0%B5%D0%B7%D0%BD%D0%B0%D1%87%D0%BD%D0%B0_%D0%BE%D0%B4%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D1%86%D0%B0%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Незенте (Верона)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9D%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B5_%28%D0%92%D0%B5%D1%80%D0%BE%D0%BD%D0%B0%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Калеми",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9A%D0%B0%D0%BB%D0%B5%D0%BC%D0%B8"
+  },
+  {
+   "sentences": 1,
+   "title": "Ранчо де Глорија (Аутлан де Наваро)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A0%D0%B0%D0%BD%D1%87%D0%BE_%D0%B4%D0%B5_%D0%93%D0%BB%D0%BE%D1%80%D0%B8%D1%98%D0%B0_%28%D0%90%D1%83%D1%82%D0%BB%D0%B0%D0%BD_%D0%B4%D0%B5_%D0%9D%D0%B0%D0%B2%D0%B0%D1%80%D0%BE%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Дреновце",
+   "url": "https://sr.wikipedia.org/wiki/%D0%94%D1%80%D0%B5%D0%BD%D0%BE%D0%B2%D1%86%D0%B5"
+  },
+  {
+   "sentences": 2,
+   "title": "Ремус Опреану (Констанца)",
+   "url": "https://sr.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BC%D1%83%D1%81_%D0%9E%D0%BF%D1%80%D0%B5%D0%B0%D0%BD%D1%83_%28%D0%9A%D0%BE%D0%BD%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B0%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Отвил Бокаж",
+   "url": "https://sr.wikipedia.org/wiki/%D0%9E%D1%82%D0%B2%D0%B8%D0%BB_%D0%91%D0%BE%D0%BA%D0%B0%D0%B6"
+  },
+  {
+   "sentences": 20,
+   "title": "Bethesda Softworks",
+   "url": "https://sr.wikipedia.org/wiki/Bethesda_Softworks"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "sr",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "retrieved": "2026-10-03",
+ "sentence_count": 400,
+ "wikipedia": "https://sr.wikipedia.org/"
+}

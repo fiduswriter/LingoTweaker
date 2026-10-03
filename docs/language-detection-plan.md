@@ -368,14 +368,18 @@ source. This is needed under Option A and harmless under Option B.
 1. **`source` on v2**: `"ngram"` for LT compatibility, or `"fasttext"` for honesty?
 2. **Thresholds** — 40 chars / 0.60 / 1.5× are proposals; calibrate on a corpus built from the
    `<example>` sentences already in `data/*/rules/grammar.xml` (authentic, per-language, and
-   already in the repo).
+   already in the repo). Five languages (`ca`, `es`, `pt`, `sr`, `uk`) have no such text — their
+   grammars do not parse or ship no examples — and come from the vendored Wikipedia sentences in
+   `data/detection/wikipedia/` instead (`tools/detection/fetch_wikipedia.py`), so they are
+   scraped prose rather than curated rule examples and their rates are not directly comparable
+   with the other 33.
 3. **Should the lexicon also cover `gl` and `gn`?** fastText gets them right but at ~0.55.
 4. **Lexicon size budget** — the full 734 Nordum words is ~10 kB raw; acceptable, but confirm.
 
 ## 9. Suggested order
 
-1. Build the calibration/validation corpus from `data/*/rules/grammar.xml` examples, held out
-   from any training.
+1. Build the calibration/validation corpus from `data/*/rules/grammar.xml` examples (with the
+   Wikipedia fallback for the five languages that ship none), held out from any training.
 2. Derive and commit the Nordum marker set as a **generated** artefact (script in
    `LingoTweaker/tools/`), not hand-edited.
 3. `lt_core::detect` with the lexicon + primary model + gates; unit tests per language.
