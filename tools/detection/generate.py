@@ -59,16 +59,40 @@ _ENTITY_DECL_RE = re.compile(r'<!ENTITY\s+([A-Za-z][A-Za-z0-9_.-]*)\s+"(.*?)"\s*
 # leaving the rare ones complete.
 DEFAULT_CAP = 400
 
-# Languages whose Hunspell word lists Nordum is distinguished against. These
-# are the three source languages plus Nynorsk: Nordum sits between them, and a
-# marker that also occurs in any of them cannot identify Nordum.
-NORDUM_CONTRAST = {
-    "no": DATA_DIR / "no" / "hunspell" / "nb_NO.dic",
-    "nn": DATA_DIR / "nn" / "hunspell" / "nn_NO.dic",
-    "da": DATA_DIR / "da" / "hunspell" / "da_DK.dic",
-    "sv": DATA_DIR / "sv" / "hunspell" / "sv_SE.dic",
-}
+# Nordum's authoritative word list. The much larger `nrd.dic` beside it is the
+# *derived* spell-checking dictionary (it folds in the source-language word
+# lists), so using it as the Nordum side would leave nothing to subtract.
 NORDUM_CORE = DATA_DIR / "nrd" / "hunspell" / "nrd_core.dic"
+
+# Languages Nordum is contrasted against, and why each group is here.
+#
+# `no`, `nn`, `da`, `sv` — the three source languages plus Nynorsk. These are the
+# real confusions: fastText answers `da`/`no`/`sv` for Nordum with high
+# confidence, so a word shared with any of them identifies nothing.
+#
+# `de`, `gl` — not confusable, but they share Nordum's *international* vocabulary.
+# A Nordum-only list still contains loanwords and endonyms that are equally
+# valid elsewhere: `chocolate` is a perfectly good Nordum word that is also
+# German, and `España` is the endonym Galician uses too. Without these two,
+# both become markers and the lexicon claims languages it cannot distinguish.
+#
+# Deliberately *not* every vendored dictionary. Lithuanian independently has
+# `jei` ("if"), so excluding against it would discard the single most
+# distinctive Nordum word to guard against a confusion that cannot arise —
+# nothing ever asks the detector to separate Nordum from Lithuanian.
+NORDUM_CONTRAST = ("no", "nn", "da", "sv", "de", "gl")
+
+
+def contrast_dictionaries() -> list[tuple[str, pathlib.Path]]:
+    """The vendored Hunspell dictionaries Nordum must be distinguished from."""
+    found = []
+    for language in NORDUM_CONTRAST:
+        paths = sorted((DATA_DIR / language / "hunspell").glob("*.dic"))
+        if not paths:
+            print(f"warning: no dictionary vendored for {language}", file=sys.stderr)
+            continue
+        found.extend((language, path) for path in paths)
+    return found
 
 
 def read_hunspell(path: pathlib.Path) -> set[str]:
@@ -90,16 +114,25 @@ def read_hunspell(path: pathlib.Path) -> set[str]:
     return words
 
 
-def derive_nordum_markers() -> list[str]:
+def derive_nordum_markers(corpus_words: set[str] | None = None) -> list[str]:
+    """Nordum words usable as identification markers.
+
+    Two filters, in order:
+
+    1. Subtract every word in the contrast dictionaries above.
+    2. Subtract any word that actually occurs in the example sentences of another
+       shipped language. The dictionaries are the primary filter, but they cover
+       only part of what we ship, so this catches short function words that
+       collide (`dre` in Breton, for instance).
+    """
     core = read_hunspell(NORDUM_CORE)
     contrast: set[str] = set()
-    for lang, path in sorted(NORDUM_CONTRAST.items()):
-        if not path.exists():
-            print(f"warning: missing {lang} dictionary at {path}", file=sys.stderr)
-            continue
+    for _lang, path in contrast_dictionaries():
         contrast |= read_hunspell(path)
-    markers = sorted(core - contrast)
-    return markers
+    markers = core - contrast
+    if corpus_words:
+        markers -= corpus_words
+    return sorted(markers)
 
 
 def inline_external_entities(raw: str, grammar: pathlib.Path) -> str:
@@ -226,6 +259,22 @@ def collect_corpus(cap: int) -> tuple[dict[str, dict[str, list[str]]], dict[str,
     return dict(sorted(buckets.items())), failures
 
 
+def collect_corpus_words(corpus: dict[str, dict[str, list[str]]]) -> set[str]:
+    """Every word appearing in another language's example sentences.
+
+    Presence is evidence that a word is not distinctive; absence is not
+    evidence that it is, so this only ever removes markers.
+    """
+    words: set[str] = set()
+    for lang, buckets in corpus.items():
+        if lang == "nrd":
+            continue
+        for sentence in buckets["valid"] + buckets["with_errors"]:
+            for token in re.findall(r"[^\W\d_]+", sentence, flags=re.UNICODE):
+                words.add(token.lower())
+    return words
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -246,7 +295,7 @@ def main() -> int:
     empty = [lang for lang, buckets in corpus.items() if not buckets["valid"] and not buckets["with_errors"]]
     corpus_json = json.dumps(corpus, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
 
-    markers = derive_nordum_markers()
+    markers = derive_nordum_markers(collect_corpus_words(corpus))
     markers_text = "\n".join(markers) + "\n"
 
     if args.check:

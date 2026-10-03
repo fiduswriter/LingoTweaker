@@ -55,14 +55,11 @@ brugende
 bruget
 brukede
 butikkarna
-chocolate
 computerarna
 dagarna
 delarna
 doppelgänger
 doppelgænger
-dre
-drede
 drende
 drepede
 drer
@@ -91,7 +88,6 @@ døede
 døer
 dørarna
 elvarna
-españa
 exempelar
 exempelarna
 exempelet
@@ -105,9 +101,7 @@ farvarna
 fattigest
 fattigt
 filmarna
-finda
 findede
-findet
 fiskarna
 fjellar
 fjellarna
@@ -160,13 +154,10 @@ følede
 følgede
 gadar
 gadarna
-gaden
 gammele
 gammelere
 gammelest
 giede
-gier
-giet
 givede
 gjör
 glassar
@@ -192,7 +183,6 @@ gullar
 gullarna
 gulvar
 gulvarna
-göre
 görede
 görende
 görer
@@ -206,7 +196,6 @@ hennas
 hestarna
 himmelar
 himmelarna
-historiar
 historiarna
 hjelpede
 hjelpet
@@ -230,11 +219,9 @@ höere
 höest
 höi
 höit
-hör
 höre
 hörede
 hörende
-hörer
 höret
 höy
 höyt
@@ -352,7 +339,6 @@ lärer
 läret
 lärt
 lärte
-läse
 läsende
 läser
 läste
@@ -367,14 +353,12 @@ löpet
 løpede
 mannarna
 matarna
-memes
 metalar
 metalarna
 metalet
 morarna
 morgenar
 morgenarna
-mosquito
 muligere
 muligest
 muligt
@@ -428,7 +412,6 @@ pengerarna
 pengeren
 personarna
 phonarna
-phone
 pijar
 pijarna
 pije
@@ -439,7 +422,6 @@ problemar
 problemarna
 produktar
 produktarna
-programar
 programarna
 programet
 pröv
@@ -479,7 +461,6 @@ sandere
 sandest
 sandt
 sangarna
-schokolade
 se_på
 se_påa
 se_påe
@@ -499,7 +480,6 @@ sinnarna
 sirkelar
 sirkelarna
 sittede
-sk
 skende
 skittenere
 skittenest
@@ -629,7 +609,6 @@ tomere
 tomest
 trar
 trarna
-tret
 tristt
 troede
 träkk
@@ -640,7 +619,6 @@ träkkende
 träkker
 träkket
 trät
-träte
 trätere
 trätest
 trätt

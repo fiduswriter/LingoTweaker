@@ -6,6 +6,7 @@
 
 use serde::{Deserialize, Serialize};
 
+pub mod detect;
 pub mod regex_util;
 
 /// A half-open range `[start, end)` in UTF-8 bytes.
