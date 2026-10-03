@@ -65,7 +65,11 @@ fn reports_accuracy_per_language() {
             Some(lang) => lang,
             None => continue,
         };
-        let mut out = Outcome { correct: 0, abstained: 0, wrong: Vec::new() };
+        let mut out = Outcome {
+            correct: 0,
+            abstained: 0,
+            wrong: Vec::new(),
+        };
         for sentence in buckets.valid.iter().chain(buckets.with_errors.iter()) {
             total += 1;
             match detect::detect(sentence, &lex, Some(model), &gates) {
@@ -81,9 +85,17 @@ fn reports_accuracy_per_language() {
             }
         }
         let seen = out.correct + out.abstained + out.wrong.len();
-        let rate = if seen == 0 { 0.0 } else { out.correct as f64 / seen as f64 };
-        lines.push(format!("  {code:5} {rate:5.1}%  ({:>3} correct, {:>3} abstained, {:>3} wrong)",
-            out.correct, out.abstained, out.wrong.len()));
+        let rate = if seen == 0 {
+            0.0
+        } else {
+            out.correct as f64 / seen as f64
+        };
+        lines.push(format!(
+            "  {code:5} {rate:5.1}%  ({:>3} correct, {:>3} abstained, {:>3} wrong)",
+            out.correct,
+            out.abstained,
+            out.wrong.len()
+        ));
         if code == "nrd" {
             nrd = Some(out);
         } else if seen > 0 {
@@ -92,15 +104,27 @@ fn reports_accuracy_per_language() {
     }
 
     lines.sort_by_key(|l| l.to_string());
-    println!("per-language accuracy (valid + error-bearing sentences):\n{}", lines.join("\n"));
+    println!(
+        "per-language accuracy (valid + error-bearing sentences):\n{}",
+        lines.join("\n")
+    );
 
     let rate = total_correct as f64 / total as f64;
-    println!("\noverall: {}/{} correct ({:.1}%), {} abstained ({:.1}%)",
-        total_correct, total, rate * 100.0, total_abstained, total_abstained as f64 / total as f64 * 100.0);
+    println!(
+        "\noverall: {}/{} correct ({:.1}%), {} abstained ({:.1}%)",
+        total_correct,
+        total,
+        rate * 100.0,
+        total_abstained,
+        total_abstained as f64 / total as f64 * 100.0
+    );
 
     weak.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
-    let worst: Vec<String> = weak.iter().take(8)
-        .map(|(c, r)| format!("{c} {:.0}%", r * 100.0)).collect();
+    let worst: Vec<String> = weak
+        .iter()
+        .take(8)
+        .map(|(c, r)| format!("{c} {:.0}%", r * 100.0))
+        .collect();
     println!("weakest: {}", worst.join(", "));
 
     // Nordum must be decided by the lexicon: no statistical model knows the
@@ -120,12 +144,18 @@ fn reports_accuracy_per_language() {
     // point is pinned in `lt_core::detect`'s own test.
     for min_chars in [0usize, 20, 40, 60, 80] {
         for min_confidence in [0.60f32, 0.45, 0.30] {
-            let gates = Gates { min_chars, min_confidence, ..Gates::default() };
+            let gates = Gates {
+                min_chars,
+                min_confidence,
+                ..Gates::default()
+            };
             let mut correct = 0usize;
             let mut abstained = 0usize;
             let mut wrong = 0usize;
             for (code, buckets) in &corpus {
-                let Some(expected) = Lang::from_long_code(code) else { continue };
+                let Some(expected) = Lang::from_long_code(code) else {
+                    continue;
+                };
                 for sentence in buckets.valid.iter().chain(buckets.with_errors.iter()) {
                     match detect::detect(sentence, &lex, Some(model), &gates) {
                         Some(got) if got.language == expected => correct += 1,
