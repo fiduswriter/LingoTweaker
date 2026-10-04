@@ -688,7 +688,16 @@ def build_strict_source_forms(
 
     converted_verb_paradigms: dict[str, set[str]] = {}
     for _cs, readings in converted_readings.items():
-        for cl, tag in readings:
+        # Sorted, and it has to be: `readings` is a set of (lemma, tag) pairs, so
+        # its iteration order changes with Python's per-process string hash seed.
+        # The loops below are first-wins — `noun_lemmas[cl] = gender` and
+        # `if ve not in converted_verb_paradigms` — so an unsorted set made the
+        # *content* of the dictionary depend on PYTHONHASHSEED: two runs on
+        # identical inputs disagreed on which gender a lemma got, and therefore
+        # on the neuter definite alternation (`abdomenet` vs `abdomenen`). Sorting
+        # fixes reproducibility; it does not decide which reading is
+        # linguistically right, which is a separate judgement.
+        for cl, tag in sorted(readings):
             prefix = tag.split(":")[0]
             if prefix == "ver":
                 if cl in auth_verb_lemmas:
@@ -729,7 +738,10 @@ def build_strict_source_forms(
     classified_keep: dict[str, bool] = {}
     for cs, readings in converted_readings.items():
         keep = False
-        for cl, tag in readings:
+        # Sorted for the same reason as the paradigm loop above; here the
+        # decisions are OR-ed so order matters less, but the loop reads
+        # `noun_lemmas`, whose contents the first loop filled in order.
+        for cl, tag in sorted(readings):
             prefix = tag.split(":")[0]
             if prefix == "ver":
                 ve = nordum_infinitive(cl)
