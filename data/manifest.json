@@ -7770,7 +7770,7 @@
     },
     {
       "path": "nrd/hunspell/build-report.txt",
-      "sha256": "6e18b9c7ca4d93f6e77b02877faff5a52b53671be943099aef8477b6a5f942f5",
+      "sha256": "3cc6ae39cf7fb55770f28eef05f717029a5e68ca61bc496cbeda5f426318cde1",
       "size": 1405,
       "source": {
         "kind": "generated",
@@ -7779,8 +7779,8 @@
     },
     {
       "path": "nrd/hunspell/ignore.txt",
-      "sha256": "729aa26361602664a18d45211dc940f0be8e58114e1d37a15cda26388d189d9b",
-      "size": 197,
+      "sha256": "4c83b48c79909c29bd4d26e3f09168829bb91f87383f23ae8503def1bf11bc41",
+      "size": 767,
       "source": {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
@@ -7790,8 +7790,8 @@
     },
     {
       "path": "nrd/hunspell/nrd.dic",
-      "sha256": "a29237c233952ca3919ba9fc97be6bc8325a6374fd44d9abdb810ddf8c18c735",
-      "size": 20919552,
+      "sha256": "3e6c462b1964d6948440deafe01b2646bc75724983f91f34a48ea9aff57f4a83",
+      "size": 25199172,
       "source": {
         "kind": "generated",
         "generator": "tools/nordum-dict/build-nordum-dict.py"
@@ -7799,8 +7799,8 @@
     },
     {
       "path": "nrd/hunspell/nrd_core.dic",
-      "sha256": "325736052059465089a178f843cb525316cd2101f08b85c5b268eefc277c150f",
-      "size": 14421,
+      "sha256": "1ebe72c017e0aab82992a2ff727d3436ae39a105c0f5d4c522abc7c6e3aec83d",
+      "size": 14431,
       "source": {
         "kind": "generated",
         "generator": "tools/nordum-dict/build-nordum-dict.py"

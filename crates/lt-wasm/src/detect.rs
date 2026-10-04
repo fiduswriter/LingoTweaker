@@ -49,6 +49,7 @@ struct WasmGates {
     min_chars: usize,
     min_confidence: f32,
     min_margin: f32,
+    non_latin_weight: usize,
 }
 
 impl Default for WasmGates {
@@ -58,6 +59,7 @@ impl Default for WasmGates {
             min_chars: gates.min_chars,
             min_confidence: gates.min_confidence,
             min_margin: gates.min_margin,
+            non_latin_weight: gates.non_latin_weight,
         }
     }
 }
@@ -68,6 +70,7 @@ impl From<WasmGates> for Gates {
             min_chars: gates.min_chars,
             min_confidence: gates.min_confidence,
             min_margin: gates.min_margin,
+            non_latin_weight: gates.non_latin_weight,
         }
     }
 }
@@ -88,6 +91,7 @@ impl Scored {
             source: match source {
                 Source::Lexicon => "lexicon",
                 Source::Model => "model",
+                Source::Discriminator => "discriminator",
             },
         }
     }
@@ -130,12 +134,13 @@ pub fn detect_json(text: &str, gates: Option<String>) -> Result<String, JsError>
     };
     let lexicon = lexicon();
     let model = lt::detect_model::bundled();
+    let refiner = lt::detect_refiner::bundled();
     // Two passes over the model, one per `lt_core::detect` entry point, so the
     // ranking and the decision come from the same implementation of the gates
     // rather than from a second copy of the gate logic here. A prediction costs
     // tens of microseconds, which is not worth a memoizing wrapper.
-    let candidates = detect::candidates(text, lexicon, model);
-    let detected = detect::detect(text, lexicon, model, &gates);
+    let candidates = detect::candidates(text, lexicon, model, refiner, &gates);
+    let detected = detect::detect(text, lexicon, model, refiner, &gates);
     let report = DetectionReport {
         resolved: detected.map(|hit| hit.language.base_code()),
         detected: detected.map(|hit| Scored::new(hit.language, hit.confidence, hit.source)),

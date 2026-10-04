@@ -1,0 +1,1755 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://it.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 9,
+   "title": "HD 57608",
+   "url": "https://it.wikipedia.org/wiki/HD_57608"
+  },
+  {
+   "sentences": 11,
+   "title": "Mirsad Baljić",
+   "url": "https://it.wikipedia.org/wiki/Mirsad_Balji%C4%87"
+  },
+  {
+   "sentences": 25,
+   "title": "Ehrhartoideae",
+   "url": "https://it.wikipedia.org/wiki/Ehrhartoideae"
+  },
+  {
+   "sentences": 22,
+   "title": "Osservatorio di Parigi",
+   "url": "https://it.wikipedia.org/wiki/Osservatorio_di_Parigi"
+  },
+  {
+   "sentences": 1,
+   "title": "Distretto di Hani",
+   "url": "https://it.wikipedia.org/wiki/Distretto_di_Hani"
+  },
+  {
+   "sentences": 4,
+   "title": "Carsten Lichtlein",
+   "url": "https://it.wikipedia.org/wiki/Carsten_Lichtlein"
+  },
+  {
+   "sentences": 15,
+   "title": "L'era glaciale - I racconti di Scrat",
+   "url": "https://it.wikipedia.org/wiki/L%27era_glaciale_-_I_racconti_di_Scrat"
+  },
+  {
+   "sentences": 5,
+   "title": "Georges-Ambroise Davy",
+   "url": "https://it.wikipedia.org/wiki/Georges-Ambroise_Davy"
+  },
+  {
+   "sentences": 4,
+   "title": "U.S. Marshals",
+   "url": "https://it.wikipedia.org/wiki/U.S._Marshals"
+  },
+  {
+   "sentences": 5,
+   "title": "Anton Ervandovič Kočinjan",
+   "url": "https://it.wikipedia.org/wiki/Anton_Ervandovi%C4%8D_Ko%C4%8Dinjan"
+  },
+  {
+   "sentences": 8,
+   "title": "Kane (fantasy)",
+   "url": "https://it.wikipedia.org/wiki/Kane_%28fantasy%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Concerto per pianoforte e orchestra n. 19 (Mozart)",
+   "url": "https://it.wikipedia.org/wiki/Concerto_per_pianoforte_e_orchestra_n._19_%28Mozart%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Ramblewood (New Jersey)",
+   "url": "https://it.wikipedia.org/wiki/Ramblewood_%28New_Jersey%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Laghi (comune)",
+   "url": "https://it.wikipedia.org/wiki/Laghi_%28comune%29"
+  },
+  {
+   "sentences": 10,
+   "title": "Torneo Benefico Lombardo 1944-1945",
+   "url": "https://it.wikipedia.org/wiki/Torneo_Benefico_Lombardo_1944-1945"
+  },
+  {
+   "sentences": 6,
+   "title": "Dollman (film)",
+   "url": "https://it.wikipedia.org/wiki/Dollman_%28film%29"
+  },
+  {
+   "sentences": 19,
+   "title": "Özcan Melkemichel",
+   "url": "https://it.wikipedia.org/wiki/%C3%96zcan_Melkemichel"
+  },
+  {
+   "sentences": 17,
+   "title": "Courier (disambigua)",
+   "url": "https://it.wikipedia.org/wiki/Courier_%28disambigua%29"
+  },
+  {
+   "sentences": 16,
+   "title": "Il richiamo della foresta (film 1972)",
+   "url": "https://it.wikipedia.org/wiki/Il_richiamo_della_foresta_%28film_1972%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Lenvatinib",
+   "url": "https://it.wikipedia.org/wiki/Lenvatinib"
+  },
+  {
+   "sentences": 3,
+   "title": "Los Angeles Clippers 2020-2021",
+   "url": "https://it.wikipedia.org/wiki/Los_Angeles_Clippers_2020-2021"
+  },
+  {
+   "sentences": 12,
+   "title": "Calico",
+   "url": "https://it.wikipedia.org/wiki/Calico"
+  },
+  {
+   "sentences": 19,
+   "title": "Mink DeVille",
+   "url": "https://it.wikipedia.org/wiki/Mink_DeVille"
+  },
+  {
+   "sentences": 25,
+   "title": "Victoria Embankment",
+   "url": "https://it.wikipedia.org/wiki/Victoria_Embankment"
+  },
+  {
+   "sentences": 19,
+   "title": "Assemblea nazionale (Bulgaria)",
+   "url": "https://it.wikipedia.org/wiki/Assemblea_nazionale_%28Bulgaria%29"
+  },
+  {
+   "sentences": 18,
+   "title": "Cassonetto",
+   "url": "https://it.wikipedia.org/wiki/Cassonetto"
+  },
+  {
+   "sentences": 5,
+   "title": "Alisson Castro",
+   "url": "https://it.wikipedia.org/wiki/Alisson_Castro"
+  },
+  {
+   "sentences": 25,
+   "title": "Independent Spirit Award per la miglior attrice protagonista",
+   "url": "https://it.wikipedia.org/wiki/Independent_Spirit_Award_per_la_miglior_attrice_protagonista"
+  },
+  {
+   "sentences": 25,
+   "title": "Personaggi di The Legend of Zelda",
+   "url": "https://it.wikipedia.org/wiki/Personaggi_di_The_Legend_of_Zelda"
+  },
+  {
+   "sentences": 16,
+   "title": "Morlacchi",
+   "url": "https://it.wikipedia.org/wiki/Morlacchi"
+  },
+  {
+   "sentences": 1,
+   "title": "N'Dlondougou",
+   "url": "https://it.wikipedia.org/wiki/N%27Dlondougou"
+  },
+  {
+   "sentences": 1,
+   "title": "Futboll Klub Partizani 2006-2007",
+   "url": "https://it.wikipedia.org/wiki/Futboll_Klub_Partizani_2006-2007"
+  },
+  {
+   "sentences": 25,
+   "title": "Storia del Football Club Pro Vercelli 1892",
+   "url": "https://it.wikipedia.org/wiki/Storia_del_Football_Club_Pro_Vercelli_1892"
+  },
+  {
+   "sentences": 4,
+   "title": "Thea Gamper",
+   "url": "https://it.wikipedia.org/wiki/Thea_Gamper"
+  },
+  {
+   "sentences": 3,
+   "title": "Unt",
+   "url": "https://it.wikipedia.org/wiki/Unt"
+  },
+  {
+   "sentences": 25,
+   "title": "Love Hina",
+   "url": "https://it.wikipedia.org/wiki/Love_Hina"
+  },
+  {
+   "sentences": 1,
+   "title": "Episodi di Special Branch (quarta stagione)",
+   "url": "https://it.wikipedia.org/wiki/Episodi_di_Special_Branch_%28quarta_stagione%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Poltrona Tugendhat",
+   "url": "https://it.wikipedia.org/wiki/Poltrona_Tugendhat"
+  },
+  {
+   "sentences": 25,
+   "title": "Mike Allred",
+   "url": "https://it.wikipedia.org/wiki/Mike_Allred"
+  },
+  {
+   "sentences": 12,
+   "title": "Barry Fry",
+   "url": "https://it.wikipedia.org/wiki/Barry_Fry"
+  },
+  {
+   "sentences": 8,
+   "title": "Anders Bergström",
+   "url": "https://it.wikipedia.org/wiki/Anders_Bergstr%C3%B6m"
+  },
+  {
+   "sentences": 9,
+   "title": "Eccellenza Piemonte-Valle d'Aosta 1999-2000",
+   "url": "https://it.wikipedia.org/wiki/Eccellenza_Piemonte-Valle_d%27Aosta_1999-2000"
+  },
+  {
+   "sentences": 14,
+   "title": "BredaMenarinibus Monocar 230",
+   "url": "https://it.wikipedia.org/wiki/BredaMenarinibus_Monocar_230"
+  },
+  {
+   "sentences": 25,
+   "title": "Steep",
+   "url": "https://it.wikipedia.org/wiki/Steep"
+  },
+  {
+   "sentences": 5,
+   "title": "Fußball-Club Bayern München 1963-1964",
+   "url": "https://it.wikipedia.org/wiki/Fu%C3%9Fball-Club_Bayern_M%C3%BCnchen_1963-1964"
+  },
+  {
+   "sentences": 10,
+   "title": "Bakari Hendrix",
+   "url": "https://it.wikipedia.org/wiki/Bakari_Hendrix"
+  },
+  {
+   "sentences": 3,
+   "title": "Campionato europeo femminile under 19 di pallavolo 1973",
+   "url": "https://it.wikipedia.org/wiki/Campionato_europeo_femminile_under_19_di_pallavolo_1973"
+  },
+  {
+   "sentences": 1,
+   "title": "Bourcia",
+   "url": "https://it.wikipedia.org/wiki/Bourcia"
+  },
+  {
+   "sentences": 4,
+   "title": "L'uomo dall'ombrello bianco",
+   "url": "https://it.wikipedia.org/wiki/L%27uomo_dall%27ombrello_bianco"
+  },
+  {
+   "sentences": 12,
+   "title": "Karl Theodor Joseph von Gemmingen",
+   "url": "https://it.wikipedia.org/wiki/Karl_Theodor_Joseph_von_Gemmingen"
+  },
+  {
+   "sentences": 17,
+   "title": "In vacanza da una vita",
+   "url": "https://it.wikipedia.org/wiki/In_vacanza_da_una_vita"
+  },
+  {
+   "sentences": 25,
+   "title": "Terremoto del Kashmir del 2005",
+   "url": "https://it.wikipedia.org/wiki/Terremoto_del_Kashmir_del_2005"
+  },
+  {
+   "sentences": 25,
+   "title": "Storia del vino",
+   "url": "https://it.wikipedia.org/wiki/Storia_del_vino"
+  },
+  {
+   "sentences": 25,
+   "title": "Anthony Edwards (cestista)",
+   "url": "https://it.wikipedia.org/wiki/Anthony_Edwards_%28cestista%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Piano Seldon",
+   "url": "https://it.wikipedia.org/wiki/Piano_Seldon"
+  },
+  {
+   "sentences": 2,
+   "title": "Merdja Sidi Abed",
+   "url": "https://it.wikipedia.org/wiki/Merdja_Sidi_Abed"
+  },
+  {
+   "sentences": 7,
+   "title": "Kamala Pujari",
+   "url": "https://it.wikipedia.org/wiki/Kamala_Pujari"
+  },
+  {
+   "sentences": 8,
+   "title": "Transience",
+   "url": "https://it.wikipedia.org/wiki/Transience"
+  },
+  {
+   "sentences": 1,
+   "title": "Distretto di Krasnogvardejskoe (Crimea)",
+   "url": "https://it.wikipedia.org/wiki/Distretto_di_Krasnogvardejskoe_%28Crimea%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Gens Gavia",
+   "url": "https://it.wikipedia.org/wiki/Gens_Gavia"
+  },
+  {
+   "sentences": 2,
+   "title": "Episodi di Mr. Bean",
+   "url": "https://it.wikipedia.org/wiki/Episodi_di_Mr._Bean"
+  },
+  {
+   "sentences": 25,
+   "title": "Sergej Druz'jak",
+   "url": "https://it.wikipedia.org/wiki/Sergej_Druz%27jak"
+  },
+  {
+   "sentences": 19,
+   "title": "Los Amaya",
+   "url": "https://it.wikipedia.org/wiki/Los_Amaya"
+  },
+  {
+   "sentences": 25,
+   "title": "Frankie Carle",
+   "url": "https://it.wikipedia.org/wiki/Frankie_Carle"
+  },
+  {
+   "sentences": 11,
+   "title": "Carola Frediani",
+   "url": "https://it.wikipedia.org/wiki/Carola_Frediani"
+  },
+  {
+   "sentences": 7,
+   "title": "Coppa d'Asia (calcio a 5)",
+   "url": "https://it.wikipedia.org/wiki/Coppa_d%27Asia_%28calcio_a_5%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Howard Wendell",
+   "url": "https://it.wikipedia.org/wiki/Howard_Wendell"
+  },
+  {
+   "sentences": 10,
+   "title": "Chiesa del Corpus Domini (Gragnano)",
+   "url": "https://it.wikipedia.org/wiki/Chiesa_del_Corpus_Domini_%28Gragnano%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Demolition derby",
+   "url": "https://it.wikipedia.org/wiki/Demolition_derby"
+  },
+  {
+   "sentences": 25,
+   "title": "Golden (Jung Kook)",
+   "url": "https://it.wikipedia.org/wiki/Golden_%28Jung_Kook%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Giovanni Apocauco",
+   "url": "https://it.wikipedia.org/wiki/Giovanni_Apocauco"
+  },
+  {
+   "sentences": 25,
+   "title": "Biagioni",
+   "url": "https://it.wikipedia.org/wiki/Biagioni"
+  },
+  {
+   "sentences": 6,
+   "title": "Monte di Venere (disambigua)",
+   "url": "https://it.wikipedia.org/wiki/Monte_di_Venere_%28disambigua%29"
+  },
+  {
+   "sentences": 17,
+   "title": "Massimo Carboni",
+   "url": "https://it.wikipedia.org/wiki/Massimo_Carboni"
+  },
+  {
+   "sentences": 18,
+   "title": "Lenore",
+   "url": "https://it.wikipedia.org/wiki/Lenore"
+  },
+  {
+   "sentences": 11,
+   "title": "Mostra internazionale del Nuovo Cinema di Pesaro",
+   "url": "https://it.wikipedia.org/wiki/Mostra_internazionale_del_Nuovo_Cinema_di_Pesaro"
+  },
+  {
+   "sentences": 5,
+   "title": "Coppa Italia Serie C 1986-1987",
+   "url": "https://it.wikipedia.org/wiki/Coppa_Italia_Serie_C_1986-1987"
+  },
+  {
+   "sentences": 11,
+   "title": "Cannibal (brano musicale Kesha)",
+   "url": "https://it.wikipedia.org/wiki/Cannibal_%28brano_musicale_Kesha%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Nyers",
+   "url": "https://it.wikipedia.org/wiki/Nyers"
+  },
+  {
+   "sentences": 25,
+   "title": "Michele Alberto Carrara",
+   "url": "https://it.wikipedia.org/wiki/Michele_Alberto_Carrara"
+  },
+  {
+   "sentences": 8,
+   "title": "Mochovaja (affluente della Pura)",
+   "url": "https://it.wikipedia.org/wiki/Mochovaja_%28affluente_della_Pura%29"
+  },
+  {
+   "sentences": 18,
+   "title": "Laugavegur",
+   "url": "https://it.wikipedia.org/wiki/Laugavegur"
+  },
+  {
+   "sentences": 7,
+   "title": "Orin Upshaw",
+   "url": "https://it.wikipedia.org/wiki/Orin_Upshaw"
+  },
+  {
+   "sentences": 25,
+   "title": "Filippo II di Hanau-Lichtenberg",
+   "url": "https://it.wikipedia.org/wiki/Filippo_II_di_Hanau-Lichtenberg"
+  },
+  {
+   "sentences": 3,
+   "title": "The Lost Ones (album)",
+   "url": "https://it.wikipedia.org/wiki/The_Lost_Ones_%28album%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Andrea Comoretto",
+   "url": "https://it.wikipedia.org/wiki/Andrea_Comoretto"
+  },
+  {
+   "sentences": 3,
+   "title": "Seminary",
+   "url": "https://it.wikipedia.org/wiki/Seminary"
+  },
+  {
+   "sentences": 11,
+   "title": "Contea di Sanders",
+   "url": "https://it.wikipedia.org/wiki/Contea_di_Sanders"
+  },
+  {
+   "sentences": 25,
+   "title": "Eremo di Sant'Alberto di Butrio",
+   "url": "https://it.wikipedia.org/wiki/Eremo_di_Sant%27Alberto_di_Butrio"
+  },
+  {
+   "sentences": 25,
+   "title": "Laura Rangoni",
+   "url": "https://it.wikipedia.org/wiki/Laura_Rangoni"
+  },
+  {
+   "sentences": 25,
+   "title": "Anger Management (mixtape)",
+   "url": "https://it.wikipedia.org/wiki/Anger_Management_%28mixtape%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Chaunax",
+   "url": "https://it.wikipedia.org/wiki/Chaunax"
+  },
+  {
+   "sentences": 9,
+   "title": "Rijnwaarden",
+   "url": "https://it.wikipedia.org/wiki/Rijnwaarden"
+  },
+  {
+   "sentences": 1,
+   "title": "Tičarica",
+   "url": "https://it.wikipedia.org/wiki/Ti%C4%8Darica"
+  },
+  {
+   "sentences": 4,
+   "title": "Capinzal",
+   "url": "https://it.wikipedia.org/wiki/Capinzal"
+  },
+  {
+   "sentences": 25,
+   "title": "Keith Langford",
+   "url": "https://it.wikipedia.org/wiki/Keith_Langford"
+  },
+  {
+   "sentences": 10,
+   "title": "Palazzo Miramare",
+   "url": "https://it.wikipedia.org/wiki/Palazzo_Miramare"
+  },
+  {
+   "sentences": 25,
+   "title": "Embassy Pictures",
+   "url": "https://it.wikipedia.org/wiki/Embassy_Pictures"
+  },
+  {
+   "sentences": 4,
+   "title": "Irina Chipakina",
+   "url": "https://it.wikipedia.org/wiki/Irina_Chipakina"
+  },
+  {
+   "sentences": 8,
+   "title": "André Steiner",
+   "url": "https://it.wikipedia.org/wiki/Andr%C3%A9_Steiner"
+  },
+  {
+   "sentences": 7,
+   "title": "Niels Petersen (sollevatore)",
+   "url": "https://it.wikipedia.org/wiki/Niels_Petersen_%28sollevatore%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Google Public Data Explorer",
+   "url": "https://it.wikipedia.org/wiki/Google_Public_Data_Explorer"
+  },
+  {
+   "sentences": 1,
+   "title": "Shimibanga",
+   "url": "https://it.wikipedia.org/wiki/Shimibanga"
+  },
+  {
+   "sentences": 7,
+   "title": "Scissione societaria",
+   "url": "https://it.wikipedia.org/wiki/Scissione_societaria"
+  },
+  {
+   "sentences": 16,
+   "title": "Rudolf Hrušínský",
+   "url": "https://it.wikipedia.org/wiki/Rudolf_Hru%C5%A1%C3%ADnsk%C3%BD"
+  },
+  {
+   "sentences": 25,
+   "title": "Viola Dana",
+   "url": "https://it.wikipedia.org/wiki/Viola_Dana"
+  },
+  {
+   "sentences": 2,
+   "title": "Cantone di Muisne",
+   "url": "https://it.wikipedia.org/wiki/Cantone_di_Muisne"
+  },
+  {
+   "sentences": 16,
+   "title": "Casba",
+   "url": "https://it.wikipedia.org/wiki/Casba"
+  },
+  {
+   "sentences": 9,
+   "title": "Divizia A 1959-1960",
+   "url": "https://it.wikipedia.org/wiki/Divizia_A_1959-1960"
+  },
+  {
+   "sentences": 23,
+   "title": "Un frammento d'impero",
+   "url": "https://it.wikipedia.org/wiki/Un_frammento_d%27impero"
+  },
+  {
+   "sentences": 2,
+   "title": "Anatololacerta anatolica",
+   "url": "https://it.wikipedia.org/wiki/Anatololacerta_anatolica"
+  },
+  {
+   "sentences": 25,
+   "title": "Abbazia di Sant'Angelo de Frigillo",
+   "url": "https://it.wikipedia.org/wiki/Abbazia_di_Sant%27Angelo_de_Frigillo"
+  },
+  {
+   "sentences": 1,
+   "title": "Peq",
+   "url": "https://it.wikipedia.org/wiki/Peq"
+  },
+  {
+   "sentences": 25,
+   "title": "Josef Foerster",
+   "url": "https://it.wikipedia.org/wiki/Josef_Foerster"
+  },
+  {
+   "sentences": 12,
+   "title": "Shea",
+   "url": "https://it.wikipedia.org/wiki/Shea"
+  },
+  {
+   "sentences": 19,
+   "title": "Hexinlusaurus multidens",
+   "url": "https://it.wikipedia.org/wiki/Hexinlusaurus_multidens"
+  },
+  {
+   "sentences": 4,
+   "title": "Villa da vendere (film 1943)",
+   "url": "https://it.wikipedia.org/wiki/Villa_da_vendere_%28film_1943%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Rhizophora",
+   "url": "https://it.wikipedia.org/wiki/Rhizophora"
+  },
+  {
+   "sentences": 6,
+   "title": "166229 Palanga",
+   "url": "https://it.wikipedia.org/wiki/166229_Palanga"
+  },
+  {
+   "sentences": 17,
+   "title": "Valentin Prades",
+   "url": "https://it.wikipedia.org/wiki/Valentin_Prades"
+  },
+  {
+   "sentences": 25,
+   "title": "The Great Ace Attorney 2: Resolve",
+   "url": "https://it.wikipedia.org/wiki/The_Great_Ace_Attorney_2%3A_Resolve"
+  },
+  {
+   "sentences": 15,
+   "title": "Stord IL",
+   "url": "https://it.wikipedia.org/wiki/Stord_IL"
+  },
+  {
+   "sentences": 2,
+   "title": "Hafjell",
+   "url": "https://it.wikipedia.org/wiki/Hafjell"
+  },
+  {
+   "sentences": 25,
+   "title": "Mildred Cable",
+   "url": "https://it.wikipedia.org/wiki/Mildred_Cable"
+  },
+  {
+   "sentences": 5,
+   "title": "Demetrio Tripepi",
+   "url": "https://it.wikipedia.org/wiki/Demetrio_Tripepi"
+  },
+  {
+   "sentences": 7,
+   "title": "Mor ve Ötesi",
+   "url": "https://it.wikipedia.org/wiki/Mor_ve_%C3%96tesi"
+  },
+  {
+   "sentences": 12,
+   "title": "Metallo bianco",
+   "url": "https://it.wikipedia.org/wiki/Metallo_bianco"
+  },
+  {
+   "sentences": 6,
+   "title": "Kang Yun-mi",
+   "url": "https://it.wikipedia.org/wiki/Kang_Yun-mi"
+  },
+  {
+   "sentences": 5,
+   "title": "805997 Wolszczan",
+   "url": "https://it.wikipedia.org/wiki/805997_Wolszczan"
+  },
+  {
+   "sentences": 8,
+   "title": "Aleh Achrėm",
+   "url": "https://it.wikipedia.org/wiki/Aleh_Achr%C4%97m"
+  },
+  {
+   "sentences": 11,
+   "title": "Arenigobius",
+   "url": "https://it.wikipedia.org/wiki/Arenigobius"
+  },
+  {
+   "sentences": 21,
+   "title": "The Escape (film 2017)",
+   "url": "https://it.wikipedia.org/wiki/The_Escape_%28film_2017%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Forze speciali italiane",
+   "url": "https://it.wikipedia.org/wiki/Forze_speciali_italiane"
+  },
+  {
+   "sentences": 7,
+   "title": "Elezioni parlamentari in Bangladesh del 2018",
+   "url": "https://it.wikipedia.org/wiki/Elezioni_parlamentari_in_Bangladesh_del_2018"
+  },
+  {
+   "sentences": 6,
+   "title": "Cotechino delle Grazie di Curtatone",
+   "url": "https://it.wikipedia.org/wiki/Cotechino_delle_Grazie_di_Curtatone"
+  },
+  {
+   "sentences": 1,
+   "title": "Cuvergnon",
+   "url": "https://it.wikipedia.org/wiki/Cuvergnon"
+  },
+  {
+   "sentences": 8,
+   "title": "Parigi-Roubaix 1988",
+   "url": "https://it.wikipedia.org/wiki/Parigi-Roubaix_1988"
+  },
+  {
+   "sentences": 2,
+   "title": "Clondalkin",
+   "url": "https://it.wikipedia.org/wiki/Clondalkin"
+  },
+  {
+   "sentences": 3,
+   "title": "Oenite",
+   "url": "https://it.wikipedia.org/wiki/Oenite"
+  },
+  {
+   "sentences": 17,
+   "title": "Pannello solare ibrido",
+   "url": "https://it.wikipedia.org/wiki/Pannello_solare_ibrido"
+  },
+  {
+   "sentences": 11,
+   "title": "Cosetta Campana",
+   "url": "https://it.wikipedia.org/wiki/Cosetta_Campana"
+  },
+  {
+   "sentences": 2,
+   "title": "Tagikistan ai Giochi della XXVI Olimpiade",
+   "url": "https://it.wikipedia.org/wiki/Tagikistan_ai_Giochi_della_XXVI_Olimpiade"
+  },
+  {
+   "sentences": 20,
+   "title": "Jan Křtitel Boháč",
+   "url": "https://it.wikipedia.org/wiki/Jan_K%C5%99titel_Boh%C3%A1%C4%8D"
+  },
+  {
+   "sentences": 5,
+   "title": "Taufkirchen",
+   "url": "https://it.wikipedia.org/wiki/Taufkirchen"
+  },
+  {
+   "sentences": 25,
+   "title": "Sandro Iovino",
+   "url": "https://it.wikipedia.org/wiki/Sandro_Iovino"
+  },
+  {
+   "sentences": 25,
+   "title": "Propaganda in Unione Sovietica",
+   "url": "https://it.wikipedia.org/wiki/Propaganda_in_Unione_Sovietica"
+  },
+  {
+   "sentences": 5,
+   "title": "Reale (singolo)",
+   "url": "https://it.wikipedia.org/wiki/Reale_%28singolo%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Anselmo Marzato",
+   "url": "https://it.wikipedia.org/wiki/Anselmo_Marzato"
+  },
+  {
+   "sentences": 14,
+   "title": "Hakuhō Shō",
+   "url": "https://it.wikipedia.org/wiki/Hakuh%C5%8D_Sh%C5%8D"
+  },
+  {
+   "sentences": 14,
+   "title": "Little Eva",
+   "url": "https://it.wikipedia.org/wiki/Little_Eva"
+  },
+  {
+   "sentences": 18,
+   "title": "Samantha Jones (cantante)",
+   "url": "https://it.wikipedia.org/wiki/Samantha_Jones_%28cantante%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Ryiem Forde",
+   "url": "https://it.wikipedia.org/wiki/Ryiem_Forde"
+  },
+  {
+   "sentences": 2,
+   "title": "Marysville (Ohio)",
+   "url": "https://it.wikipedia.org/wiki/Marysville_%28Ohio%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Bandiera dei Trentatré Orientali",
+   "url": "https://it.wikipedia.org/wiki/Bandiera_dei_Trentatr%C3%A9_Orientali"
+  },
+  {
+   "sentences": 5,
+   "title": "Belsh",
+   "url": "https://it.wikipedia.org/wiki/Belsh"
+  },
+  {
+   "sentences": 9,
+   "title": "Luka Lipošinović",
+   "url": "https://it.wikipedia.org/wiki/Luka_Lipo%C5%A1inovi%C4%87"
+  },
+  {
+   "sentences": 12,
+   "title": "Jang Bahadur Rana",
+   "url": "https://it.wikipedia.org/wiki/Jang_Bahadur_Rana"
+  },
+  {
+   "sentences": 9,
+   "title": "Vita da Clan",
+   "url": "https://it.wikipedia.org/wiki/Vita_da_Clan"
+  },
+  {
+   "sentences": 1,
+   "title": "Repaix",
+   "url": "https://it.wikipedia.org/wiki/Repaix"
+  },
+  {
+   "sentences": 25,
+   "title": "Orchestre des Champs-Élysées",
+   "url": "https://it.wikipedia.org/wiki/Orchestre_des_Champs-%C3%89lys%C3%A9es"
+  },
+  {
+   "sentences": 3,
+   "title": "Società Sportiva \"Armando Casalini\" 1938-1939",
+   "url": "https://it.wikipedia.org/wiki/Societ%C3%A0_Sportiva_%22Armando_Casalini%22_1938-1939"
+  },
+  {
+   "sentences": 25,
+   "title": "Italo-algerini",
+   "url": "https://it.wikipedia.org/wiki/Italo-algerini"
+  },
+  {
+   "sentences": 9,
+   "title": "Cecami",
+   "url": "https://it.wikipedia.org/wiki/Cecami"
+  },
+  {
+   "sentences": 2,
+   "title": "Cratere Vili",
+   "url": "https://it.wikipedia.org/wiki/Cratere_Vili"
+  },
+  {
+   "sentences": 5,
+   "title": "24503 Kero",
+   "url": "https://it.wikipedia.org/wiki/24503_Kero"
+  },
+  {
+   "sentences": 9,
+   "title": "Modello idrologico",
+   "url": "https://it.wikipedia.org/wiki/Modello_idrologico"
+  },
+  {
+   "sentences": 7,
+   "title": "Gunnar Åström",
+   "url": "https://it.wikipedia.org/wiki/Gunnar_%C3%85str%C3%B6m"
+  },
+  {
+   "sentences": 3,
+   "title": "Coppa UEFA 2003-2004 (calcio a 5)",
+   "url": "https://it.wikipedia.org/wiki/Coppa_UEFA_2003-2004_%28calcio_a_5%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Chiesa di Santa Maria della Scala (Messina)",
+   "url": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Scala_%28Messina%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Ebony Ridge",
+   "url": "https://it.wikipedia.org/wiki/Ebony_Ridge"
+  },
+  {
+   "sentences": 9,
+   "title": "Daniele Mattioli",
+   "url": "https://it.wikipedia.org/wiki/Daniele_Mattioli"
+  },
+  {
+   "sentences": 15,
+   "title": "Le Grand-Saconnex",
+   "url": "https://it.wikipedia.org/wiki/Le_Grand-Saconnex"
+  },
+  {
+   "sentences": 2,
+   "title": "Kambini",
+   "url": "https://it.wikipedia.org/wiki/Kambini"
+  },
+  {
+   "sentences": 25,
+   "title": "Colpo di stato in Lituania del 1919",
+   "url": "https://it.wikipedia.org/wiki/Colpo_di_stato_in_Lituania_del_1919"
+  },
+  {
+   "sentences": 1,
+   "title": "Sci alpino alla XXVI Universiade invernale",
+   "url": "https://it.wikipedia.org/wiki/Sci_alpino_alla_XXVI_Universiade_invernale"
+  },
+  {
+   "sentences": 13,
+   "title": "NGC 279",
+   "url": "https://it.wikipedia.org/wiki/NGC_279"
+  },
+  {
+   "sentences": 25,
+   "title": "O Lucky Man!",
+   "url": "https://it.wikipedia.org/wiki/O_Lucky_Man%21"
+  },
+  {
+   "sentences": 25,
+   "title": "Moshe Lion",
+   "url": "https://it.wikipedia.org/wiki/Moshe_Lion"
+  },
+  {
+   "sentences": 7,
+   "title": "UDF 423",
+   "url": "https://it.wikipedia.org/wiki/UDF_423"
+  },
+  {
+   "sentences": 15,
+   "title": "C'mon (Low)",
+   "url": "https://it.wikipedia.org/wiki/C%27mon_%28Low%29"
+  },
+  {
+   "sentences": 4,
+   "title": "John Hazen",
+   "url": "https://it.wikipedia.org/wiki/John_Hazen"
+  },
+  {
+   "sentences": 25,
+   "title": "Convento dei Cappuccini (Siracusa)",
+   "url": "https://it.wikipedia.org/wiki/Convento_dei_Cappuccini_%28Siracusa%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Chiesa di Santa Maria della Neve (Ariano nel Polesine)",
+   "url": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Neve_%28Ariano_nel_Polesine%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Edward Akufo-Addo",
+   "url": "https://it.wikipedia.org/wiki/Edward_Akufo-Addo"
+  },
+  {
+   "sentences": 2,
+   "title": "Discussioni",
+   "url": "https://it.wikipedia.org/wiki/Discussioni"
+  },
+  {
+   "sentences": 25,
+   "title": "José María Zárraga",
+   "url": "https://it.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Z%C3%A1rraga"
+  },
+  {
+   "sentences": 7,
+   "title": "Gruppo Sobretta-Gavia",
+   "url": "https://it.wikipedia.org/wiki/Gruppo_Sobretta-Gavia"
+  },
+  {
+   "sentences": 9,
+   "title": "Alan Warner",
+   "url": "https://it.wikipedia.org/wiki/Alan_Warner"
+  },
+  {
+   "sentences": 25,
+   "title": "La caduta di Troia (film 1911)",
+   "url": "https://it.wikipedia.org/wiki/La_caduta_di_Troia_%28film_1911%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Campionato africano femminile under 18 di pallavolo",
+   "url": "https://it.wikipedia.org/wiki/Campionato_africano_femminile_under_18_di_pallavolo"
+  },
+  {
+   "sentences": 7,
+   "title": "Comunità montana del Friuli Occidentale",
+   "url": "https://it.wikipedia.org/wiki/Comunit%C3%A0_montana_del_Friuli_Occidentale"
+  },
+  {
+   "sentences": 7,
+   "title": "Bruno Kastner",
+   "url": "https://it.wikipedia.org/wiki/Bruno_Kastner"
+  },
+  {
+   "sentences": 25,
+   "title": "Pietraperzia",
+   "url": "https://it.wikipedia.org/wiki/Pietraperzia"
+  },
+  {
+   "sentences": 3,
+   "title": "Cucina cilena",
+   "url": "https://it.wikipedia.org/wiki/Cucina_cilena"
+  },
+  {
+   "sentences": 9,
+   "title": "Steve Thomas (cestista)",
+   "url": "https://it.wikipedia.org/wiki/Steve_Thomas_%28cestista%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Staranzano",
+   "url": "https://it.wikipedia.org/wiki/Staranzano"
+  },
+  {
+   "sentences": 25,
+   "title": "Filtrazione",
+   "url": "https://it.wikipedia.org/wiki/Filtrazione"
+  },
+  {
+   "sentences": 6,
+   "title": "Arne Riberg",
+   "url": "https://it.wikipedia.org/wiki/Arne_Riberg"
+  },
+  {
+   "sentences": 6,
+   "title": "Ilisaine Karen David",
+   "url": "https://it.wikipedia.org/wiki/Ilisaine_Karen_David"
+  },
+  {
+   "sentences": 25,
+   "title": "Dani Ceballos",
+   "url": "https://it.wikipedia.org/wiki/Dani_Ceballos"
+  },
+  {
+   "sentences": 25,
+   "title": "Sessualità taoista",
+   "url": "https://it.wikipedia.org/wiki/Sessualit%C3%A0_taoista"
+  },
+  {
+   "sentences": 25,
+   "title": "Canton Soletta",
+   "url": "https://it.wikipedia.org/wiki/Canton_Soletta"
+  },
+  {
+   "sentences": 9,
+   "title": "Ehemaliges Haus Zellweger",
+   "url": "https://it.wikipedia.org/wiki/Ehemaliges_Haus_Zellweger"
+  },
+  {
+   "sentences": 4,
+   "title": "Stazione di Byeollae",
+   "url": "https://it.wikipedia.org/wiki/Stazione_di_Byeollae"
+  },
+  {
+   "sentences": 7,
+   "title": "Pushpa Lal Shrestha",
+   "url": "https://it.wikipedia.org/wiki/Pushpa_Lal_Shrestha"
+  },
+  {
+   "sentences": 5,
+   "title": "Metodo paranoico-critico",
+   "url": "https://it.wikipedia.org/wiki/Metodo_paranoico-critico"
+  },
+  {
+   "sentences": 16,
+   "title": "Claudius Schraudolph il Vecchio",
+   "url": "https://it.wikipedia.org/wiki/Claudius_Schraudolph_il_Vecchio"
+  },
+  {
+   "sentences": 15,
+   "title": "Gaglioli",
+   "url": "https://it.wikipedia.org/wiki/Gaglioli"
+  },
+  {
+   "sentences": 8,
+   "title": "Marco Meyerhöfer",
+   "url": "https://it.wikipedia.org/wiki/Marco_Meyerh%C3%B6fer"
+  },
+  {
+   "sentences": 2,
+   "title": "The Great Deceiver",
+   "url": "https://it.wikipedia.org/wiki/The_Great_Deceiver"
+  },
+  {
+   "sentences": 25,
+   "title": "Giampiero Boniperti",
+   "url": "https://it.wikipedia.org/wiki/Giampiero_Boniperti"
+  },
+  {
+   "sentences": 9,
+   "title": "Astounded",
+   "url": "https://it.wikipedia.org/wiki/Astounded"
+  },
+  {
+   "sentences": 13,
+   "title": "Mus bufo",
+   "url": "https://it.wikipedia.org/wiki/Mus_bufo"
+  },
+  {
+   "sentences": 15,
+   "title": "I Met You When I Was 18 (The Playlist)",
+   "url": "https://it.wikipedia.org/wiki/I_Met_You_When_I_Was_18_%28The_Playlist%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Elegia di Madonna Fiammetta",
+   "url": "https://it.wikipedia.org/wiki/Elegia_di_Madonna_Fiammetta"
+  },
+  {
+   "sentences": 3,
+   "title": "Westborough",
+   "url": "https://it.wikipedia.org/wiki/Westborough"
+  },
+  {
+   "sentences": 17,
+   "title": "Occithrissops willsoni",
+   "url": "https://it.wikipedia.org/wiki/Occithrissops_willsoni"
+  },
+  {
+   "sentences": 8,
+   "title": "The Broken Vase",
+   "url": "https://it.wikipedia.org/wiki/The_Broken_Vase"
+  },
+  {
+   "sentences": 25,
+   "title": "Personaggi di It",
+   "url": "https://it.wikipedia.org/wiki/Personaggi_di_It"
+  },
+  {
+   "sentences": 9,
+   "title": "Comandante generale",
+   "url": "https://it.wikipedia.org/wiki/Comandante_generale"
+  },
+  {
+   "sentences": 21,
+   "title": "Angelo Quintavalle",
+   "url": "https://it.wikipedia.org/wiki/Angelo_Quintavalle"
+  },
+  {
+   "sentences": 2,
+   "title": "Mohamed Zulficar",
+   "url": "https://it.wikipedia.org/wiki/Mohamed_Zulficar"
+  },
+  {
+   "sentences": 5,
+   "title": "Associazione Calcio Trento 1921 2025-2026",
+   "url": "https://it.wikipedia.org/wiki/Associazione_Calcio_Trento_1921_2025-2026"
+  },
+  {
+   "sentences": 4,
+   "title": "Beach Volleyball Ground",
+   "url": "https://it.wikipedia.org/wiki/Beach_Volleyball_Ground"
+  },
+  {
+   "sentences": 8,
+   "title": "Who Stole Pa's Purse?",
+   "url": "https://it.wikipedia.org/wiki/Who_Stole_Pa%27s_Purse%3F"
+  },
+  {
+   "sentences": 4,
+   "title": "Antonio Sala (calciatore)",
+   "url": "https://it.wikipedia.org/wiki/Antonio_Sala_%28calciatore%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Gustave Joseph Waffelaert",
+   "url": "https://it.wikipedia.org/wiki/Gustave_Joseph_Waffelaert"
+  },
+  {
+   "sentences": 3,
+   "title": "Estoril Open 2024 - Qualificazioni singolare",
+   "url": "https://it.wikipedia.org/wiki/Estoril_Open_2024_-_Qualificazioni_singolare"
+  },
+  {
+   "sentences": 15,
+   "title": "Ekrem Akurgal",
+   "url": "https://it.wikipedia.org/wiki/Ekrem_Akurgal"
+  },
+  {
+   "sentences": 25,
+   "title": "Asterix e il falcetto d'oro",
+   "url": "https://it.wikipedia.org/wiki/Asterix_e_il_falcetto_d%27oro"
+  },
+  {
+   "sentences": 1,
+   "title": "Distretto di Huarocondo",
+   "url": "https://it.wikipedia.org/wiki/Distretto_di_Huarocondo"
+  },
+  {
+   "sentences": 8,
+   "title": "Atletica leggera ai Giochi della IX Olimpiade - Salto con l'asta",
+   "url": "https://it.wikipedia.org/wiki/Atletica_leggera_ai_Giochi_della_IX_Olimpiade_-_Salto_con_l%27asta"
+  },
+  {
+   "sentences": 5,
+   "title": "Taliparamba",
+   "url": "https://it.wikipedia.org/wiki/Taliparamba"
+  },
+  {
+   "sentences": 2,
+   "title": "Griñón",
+   "url": "https://it.wikipedia.org/wiki/Gri%C3%B1%C3%B3n"
+  },
+  {
+   "sentences": 11,
+   "title": "Guido da Landriano",
+   "url": "https://it.wikipedia.org/wiki/Guido_da_Landriano"
+  },
+  {
+   "sentences": 6,
+   "title": "Smart Card Open Monet+ 2011",
+   "url": "https://it.wikipedia.org/wiki/Smart_Card_Open_Monet%2B_2011"
+  },
+  {
+   "sentences": 25,
+   "title": "Stage Beauty",
+   "url": "https://it.wikipedia.org/wiki/Stage_Beauty"
+  },
+  {
+   "sentences": 13,
+   "title": "Nicolae Rădescu",
+   "url": "https://it.wikipedia.org/wiki/Nicolae_R%C4%83descu"
+  },
+  {
+   "sentences": 7,
+   "title": "Comune di Žužemberk",
+   "url": "https://it.wikipedia.org/wiki/Comune_di_%C5%BDu%C5%BEemberk"
+  },
+  {
+   "sentences": 11,
+   "title": "Ciro Caruso",
+   "url": "https://it.wikipedia.org/wiki/Ciro_Caruso"
+  },
+  {
+   "sentences": 3,
+   "title": "The Riot",
+   "url": "https://it.wikipedia.org/wiki/The_Riot"
+  },
+  {
+   "sentences": 18,
+   "title": "Vlado Šćepanović",
+   "url": "https://it.wikipedia.org/wiki/Vlado_%C5%A0%C4%87epanovi%C4%87"
+  },
+  {
+   "sentences": 1,
+   "title": "Dynín",
+   "url": "https://it.wikipedia.org/wiki/Dyn%C3%ADn"
+  },
+  {
+   "sentences": 25,
+   "title": "Opera multimediale",
+   "url": "https://it.wikipedia.org/wiki/Opera_multimediale"
+  },
+  {
+   "sentences": 7,
+   "title": "Università delle risorse naturali e delle scienze della vita di Vienna",
+   "url": "https://it.wikipedia.org/wiki/Universit%C3%A0_delle_risorse_naturali_e_delle_scienze_della_vita_di_Vienna"
+  },
+  {
+   "sentences": 8,
+   "title": "Elezioni regionali in Estremadura del 2007",
+   "url": "https://it.wikipedia.org/wiki/Elezioni_regionali_in_Estremadura_del_2007"
+  },
+  {
+   "sentences": 17,
+   "title": "Swift - Il giustiziere",
+   "url": "https://it.wikipedia.org/wiki/Swift_-_Il_giustiziere"
+  },
+  {
+   "sentences": 2,
+   "title": "Hamburger Sport-Verein 1973-1974",
+   "url": "https://it.wikipedia.org/wiki/Hamburger_Sport-Verein_1973-1974"
+  },
+  {
+   "sentences": 7,
+   "title": "Campionati europei di sollevamento pesi 1980",
+   "url": "https://it.wikipedia.org/wiki/Campionati_europei_di_sollevamento_pesi_1980"
+  },
+  {
+   "sentences": 21,
+   "title": "Feinglosite",
+   "url": "https://it.wikipedia.org/wiki/Feinglosite"
+  },
+  {
+   "sentences": 2,
+   "title": "Die Feuerzangenbowle",
+   "url": "https://it.wikipedia.org/wiki/Die_Feuerzangenbowle"
+  },
+  {
+   "sentences": 12,
+   "title": "I Giacobini (miniserie televisiva)",
+   "url": "https://it.wikipedia.org/wiki/I_Giacobini_%28miniserie_televisiva%29"
+  },
+  {
+   "sentences": 18,
+   "title": "Nouadhibou",
+   "url": "https://it.wikipedia.org/wiki/Nouadhibou"
+  },
+  {
+   "sentences": 2,
+   "title": "Wallander",
+   "url": "https://it.wikipedia.org/wiki/Wallander"
+  },
+  {
+   "sentences": 5,
+   "title": "16406 Oszkiewicz",
+   "url": "https://it.wikipedia.org/wiki/16406_Oszkiewicz"
+  },
+  {
+   "sentences": 2,
+   "title": "581",
+   "url": "https://it.wikipedia.org/wiki/581"
+  },
+  {
+   "sentences": 2,
+   "title": "Teramo Calcio 2007-2008",
+   "url": "https://it.wikipedia.org/wiki/Teramo_Calcio_2007-2008"
+  },
+  {
+   "sentences": 25,
+   "title": "Marie Besnard",
+   "url": "https://it.wikipedia.org/wiki/Marie_Besnard"
+  },
+  {
+   "sentences": 5,
+   "title": "Ciclododecano",
+   "url": "https://it.wikipedia.org/wiki/Ciclododecano"
+  },
+  {
+   "sentences": 25,
+   "title": "Eastern Professional Soccer League",
+   "url": "https://it.wikipedia.org/wiki/Eastern_Professional_Soccer_League"
+  },
+  {
+   "sentences": 2,
+   "title": "Top Teams Cup 2005-2006",
+   "url": "https://it.wikipedia.org/wiki/Top_Teams_Cup_2005-2006"
+  },
+  {
+   "sentences": 24,
+   "title": "Esteban Solari",
+   "url": "https://it.wikipedia.org/wiki/Esteban_Solari"
+  },
+  {
+   "sentences": 16,
+   "title": "Juan Sebastián Torales",
+   "url": "https://it.wikipedia.org/wiki/Juan_Sebasti%C3%A1n_Torales"
+  },
+  {
+   "sentences": 4,
+   "title": "Raboso (torrente)",
+   "url": "https://it.wikipedia.org/wiki/Raboso_%28torrente%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Episodi di Malcolm (terza stagione)",
+   "url": "https://it.wikipedia.org/wiki/Episodi_di_Malcolm_%28terza_stagione%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Costante di Avogadro",
+   "url": "https://it.wikipedia.org/wiki/Costante_di_Avogadro"
+  },
+  {
+   "sentences": 25,
+   "title": "Basilicanova",
+   "url": "https://it.wikipedia.org/wiki/Basilicanova"
+  },
+  {
+   "sentences": 1,
+   "title": "UFC Heavyweight Championship",
+   "url": "https://it.wikipedia.org/wiki/UFC_Heavyweight_Championship"
+  },
+  {
+   "sentences": 25,
+   "title": "Eoneu meotjin nal",
+   "url": "https://it.wikipedia.org/wiki/Eoneu_meotjin_nal"
+  },
+  {
+   "sentences": 14,
+   "title": "Sottocapo aiutante",
+   "url": "https://it.wikipedia.org/wiki/Sottocapo_aiutante"
+  },
+  {
+   "sentences": 25,
+   "title": "Spettacolo della Restaurazione",
+   "url": "https://it.wikipedia.org/wiki/Spettacolo_della_Restaurazione"
+  },
+  {
+   "sentences": 8,
+   "title": "The Invaders",
+   "url": "https://it.wikipedia.org/wiki/The_Invaders"
+  },
+  {
+   "sentences": 25,
+   "title": "Rosetana Calcio",
+   "url": "https://it.wikipedia.org/wiki/Rosetana_Calcio"
+  },
+  {
+   "sentences": 9,
+   "title": "Montecito Heights",
+   "url": "https://it.wikipedia.org/wiki/Montecito_Heights"
+  },
+  {
+   "sentences": 10,
+   "title": "Palazzo San Domenico (Barletta)",
+   "url": "https://it.wikipedia.org/wiki/Palazzo_San_Domenico_%28Barletta%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Centrale nucleare del Garigliano",
+   "url": "https://it.wikipedia.org/wiki/Centrale_nucleare_del_Garigliano"
+  },
+  {
+   "sentences": 12,
+   "title": "Trevor Cooney",
+   "url": "https://it.wikipedia.org/wiki/Trevor_Cooney"
+  },
+  {
+   "sentences": 12,
+   "title": "Fosse",
+   "url": "https://it.wikipedia.org/wiki/Fosse"
+  },
+  {
+   "sentences": 25,
+   "title": "Paolo Costella",
+   "url": "https://it.wikipedia.org/wiki/Paolo_Costella"
+  },
+  {
+   "sentences": 10,
+   "title": "Property Wars",
+   "url": "https://it.wikipedia.org/wiki/Property_Wars"
+  },
+  {
+   "sentences": 25,
+   "title": "Vincenzo Palumbo (calciatore)",
+   "url": "https://it.wikipedia.org/wiki/Vincenzo_Palumbo_%28calciatore%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Katra (Gonda)",
+   "url": "https://it.wikipedia.org/wiki/Katra_%28Gonda%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Pirofilia",
+   "url": "https://it.wikipedia.org/wiki/Pirofilia"
+  },
+  {
+   "sentences": 2,
+   "title": "Qaraqaya",
+   "url": "https://it.wikipedia.org/wiki/Qaraqaya"
+  },
+  {
+   "sentences": 16,
+   "title": "Motive",
+   "url": "https://it.wikipedia.org/wiki/Motive"
+  },
+  {
+   "sentences": 8,
+   "title": "Orchestra dell'Arena di Verona",
+   "url": "https://it.wikipedia.org/wiki/Orchestra_dell%27Arena_di_Verona"
+  },
+  {
+   "sentences": 5,
+   "title": "Variante di conio",
+   "url": "https://it.wikipedia.org/wiki/Variante_di_conio"
+  },
+  {
+   "sentences": 12,
+   "title": "Per Morten Haugen",
+   "url": "https://it.wikipedia.org/wiki/Per_Morten_Haugen"
+  },
+  {
+   "sentences": 7,
+   "title": "Børge Josefsen",
+   "url": "https://it.wikipedia.org/wiki/B%C3%B8rge_Josefsen"
+  },
+  {
+   "sentences": 25,
+   "title": "Jens Janse",
+   "url": "https://it.wikipedia.org/wiki/Jens_Janse"
+  },
+  {
+   "sentences": 5,
+   "title": "2626 Belnika",
+   "url": "https://it.wikipedia.org/wiki/2626_Belnika"
+  },
+  {
+   "sentences": 7,
+   "title": "WTA New Jersey 1974",
+   "url": "https://it.wikipedia.org/wiki/WTA_New_Jersey_1974"
+  },
+  {
+   "sentences": 17,
+   "title": "Markus Wheaton",
+   "url": "https://it.wikipedia.org/wiki/Markus_Wheaton"
+  },
+  {
+   "sentences": 9,
+   "title": "Terry Norris (attore)",
+   "url": "https://it.wikipedia.org/wiki/Terry_Norris_%28attore%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Deutsche Presse-Agentur",
+   "url": "https://it.wikipedia.org/wiki/Deutsche_Presse-Agentur"
+  },
+  {
+   "sentences": 9,
+   "title": "Gamo (azienda)",
+   "url": "https://it.wikipedia.org/wiki/Gamo_%28azienda%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Maffeis",
+   "url": "https://it.wikipedia.org/wiki/Maffeis"
+  },
+  {
+   "sentences": 2,
+   "title": "Indianapolis Tennis Championships 1990 - Doppio",
+   "url": "https://it.wikipedia.org/wiki/Indianapolis_Tennis_Championships_1990_-_Doppio"
+  },
+  {
+   "sentences": 25,
+   "title": "Foresta di cristallo",
+   "url": "https://it.wikipedia.org/wiki/Foresta_di_cristallo"
+  },
+  {
+   "sentences": 2,
+   "title": "Campionati balcanici di sci alpinismo 2026",
+   "url": "https://it.wikipedia.org/wiki/Campionati_balcanici_di_sci_alpinismo_2026"
+  },
+  {
+   "sentences": 6,
+   "title": "Genesis Smith",
+   "url": "https://it.wikipedia.org/wiki/Genesis_Smith"
+  },
+  {
+   "sentences": 6,
+   "title": "Euroleague Basketball 2012-2013 - Regular season",
+   "url": "https://it.wikipedia.org/wiki/Euroleague_Basketball_2012-2013_-_Regular_season"
+  },
+  {
+   "sentences": 10,
+   "title": "Anne Stokes",
+   "url": "https://it.wikipedia.org/wiki/Anne_Stokes"
+  },
+  {
+   "sentences": 2,
+   "title": "Nova Lacerda",
+   "url": "https://it.wikipedia.org/wiki/Nova_Lacerda"
+  },
+  {
+   "sentences": 1,
+   "title": "Cajuru",
+   "url": "https://it.wikipedia.org/wiki/Cajuru"
+  },
+  {
+   "sentences": 3,
+   "title": "ST6",
+   "url": "https://it.wikipedia.org/wiki/ST6"
+  },
+  {
+   "sentences": 3,
+   "title": "Colonna del Congresso",
+   "url": "https://it.wikipedia.org/wiki/Colonna_del_Congresso"
+  },
+  {
+   "sentences": 19,
+   "title": "Sergiu Buș",
+   "url": "https://it.wikipedia.org/wiki/Sergiu_Bu%C8%99"
+  },
+  {
+   "sentences": 14,
+   "title": "Castello d'Abbadia",
+   "url": "https://it.wikipedia.org/wiki/Castello_d%27Abbadia"
+  },
+  {
+   "sentences": 2,
+   "title": "Sportgemeinschaft 09 Wattenscheid 1997-1998",
+   "url": "https://it.wikipedia.org/wiki/Sportgemeinschaft_09_Wattenscheid_1997-1998"
+  },
+  {
+   "sentences": 1,
+   "title": "Contea di Wangcang",
+   "url": "https://it.wikipedia.org/wiki/Contea_di_Wangcang"
+  },
+  {
+   "sentences": 2,
+   "title": "Rüttimann",
+   "url": "https://it.wikipedia.org/wiki/R%C3%BCttimann"
+  },
+  {
+   "sentences": 25,
+   "title": "Arturo, duca di Connaught e Strathearn",
+   "url": "https://it.wikipedia.org/wiki/Arturo%2C_duca_di_Connaught_e_Strathearn"
+  },
+  {
+   "sentences": 1,
+   "title": "Nkx",
+   "url": "https://it.wikipedia.org/wiki/Nkx"
+  },
+  {
+   "sentences": 3,
+   "title": "Monte Brentoni",
+   "url": "https://it.wikipedia.org/wiki/Monte_Brentoni"
+  },
+  {
+   "sentences": 2,
+   "title": "Dodo (Tanzania)",
+   "url": "https://it.wikipedia.org/wiki/Dodo_%28Tanzania%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Xabier Davalillo",
+   "url": "https://it.wikipedia.org/wiki/Xabier_Davalillo"
+  },
+  {
+   "sentences": 10,
+   "title": "I cigni di Leonardo",
+   "url": "https://it.wikipedia.org/wiki/I_cigni_di_Leonardo"
+  },
+  {
+   "sentences": 10,
+   "title": "De Leo",
+   "url": "https://it.wikipedia.org/wiki/De_Leo"
+  },
+  {
+   "sentences": 4,
+   "title": "Rba",
+   "url": "https://it.wikipedia.org/wiki/Rba"
+  },
+  {
+   "sentences": 19,
+   "title": "Impresa comune Shift2Rail",
+   "url": "https://it.wikipedia.org/wiki/Impresa_comune_Shift2Rail"
+  },
+  {
+   "sentences": 13,
+   "title": "Arcade (Arcade)",
+   "url": "https://it.wikipedia.org/wiki/Arcade_%28Arcade%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Capoliveri",
+   "url": "https://it.wikipedia.org/wiki/Capoliveri"
+  },
+  {
+   "sentences": 6,
+   "title": "Epsilon Piscium",
+   "url": "https://it.wikipedia.org/wiki/Epsilon_Piscium"
+  },
+  {
+   "sentences": 4,
+   "title": "Campionati europei di ginnastica a squadre",
+   "url": "https://it.wikipedia.org/wiki/Campionati_europei_di_ginnastica_a_squadre"
+  },
+  {
+   "sentences": 20,
+   "title": "Heather Ann Davis",
+   "url": "https://it.wikipedia.org/wiki/Heather_Ann_Davis"
+  },
+  {
+   "sentences": 8,
+   "title": "Ho paura di tutto",
+   "url": "https://it.wikipedia.org/wiki/Ho_paura_di_tutto"
+  },
+  {
+   "sentences": 3,
+   "title": "Longchamps-sur-Aire",
+   "url": "https://it.wikipedia.org/wiki/Longchamps-sur-Aire"
+  },
+  {
+   "sentences": 25,
+   "title": "Volo Allegheny Airlines 736",
+   "url": "https://it.wikipedia.org/wiki/Volo_Allegheny_Airlines_736"
+  },
+  {
+   "sentences": 5,
+   "title": "Open Bogotá 2023 - Singolare",
+   "url": "https://it.wikipedia.org/wiki/Open_Bogot%C3%A1_2023_-_Singolare"
+  },
+  {
+   "sentences": 3,
+   "title": "Sci alpino ai XIII Giochi olimpici invernali - Slalom speciale maschile",
+   "url": "https://it.wikipedia.org/wiki/Sci_alpino_ai_XIII_Giochi_olimpici_invernali_-_Slalom_speciale_maschile"
+  },
+  {
+   "sentences": 5,
+   "title": "If You Believe",
+   "url": "https://it.wikipedia.org/wiki/If_You_Believe"
+  },
+  {
+   "sentences": 2,
+   "title": "Dancourt",
+   "url": "https://it.wikipedia.org/wiki/Dancourt"
+  },
+  {
+   "sentences": 6,
+   "title": "Carlo Albini",
+   "url": "https://it.wikipedia.org/wiki/Carlo_Albini"
+  },
+  {
+   "sentences": 17,
+   "title": "Dion Phaneuf",
+   "url": "https://it.wikipedia.org/wiki/Dion_Phaneuf"
+  },
+  {
+   "sentences": 1,
+   "title": "Pattinaggio di velocità alla XXXI Universiade invernale",
+   "url": "https://it.wikipedia.org/wiki/Pattinaggio_di_velocit%C3%A0_alla_XXXI_Universiade_invernale"
+  },
+  {
+   "sentences": 21,
+   "title": "Ford Ikon",
+   "url": "https://it.wikipedia.org/wiki/Ford_Ikon"
+  },
+  {
+   "sentences": 18,
+   "title": "A Prato",
+   "url": "https://it.wikipedia.org/wiki/A_Prato"
+  },
+  {
+   "sentences": 25,
+   "title": "Palazzo Arcivescovile (Firenze)",
+   "url": "https://it.wikipedia.org/wiki/Palazzo_Arcivescovile_%28Firenze%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Asa (re)",
+   "url": "https://it.wikipedia.org/wiki/Asa_%28re%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Grand-Couronne",
+   "url": "https://it.wikipedia.org/wiki/Grand-Couronne"
+  },
+  {
+   "sentences": 1,
+   "title": "Paudy",
+   "url": "https://it.wikipedia.org/wiki/Paudy"
+  },
+  {
+   "sentences": 4,
+   "title": "Pietramala",
+   "url": "https://it.wikipedia.org/wiki/Pietramala"
+  },
+  {
+   "sentences": 1,
+   "title": "Progressione del record olimpico dei 1500 metri piani maschili",
+   "url": "https://it.wikipedia.org/wiki/Progressione_del_record_olimpico_dei_1500_metri_piani_maschili"
+  },
+  {
+   "sentences": 23,
+   "title": "Irma Kolassi",
+   "url": "https://it.wikipedia.org/wiki/Irma_Kolassi"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "it",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 4000,
+ "wikipedia": "https://it.wikipedia.org/"
+}

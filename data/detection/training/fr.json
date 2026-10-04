@@ -1,0 +1,1655 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://fr.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 25,
+   "title": "Isaura (série télévisée, 1976)",
+   "url": "https://fr.wikipedia.org/wiki/Isaura_%28s%C3%A9rie_t%C3%A9l%C3%A9vis%C3%A9e%2C_1976%29"
+  },
+  {
+   "sentences": 17,
+   "title": "HD-4",
+   "url": "https://fr.wikipedia.org/wiki/HD-4"
+  },
+  {
+   "sentences": 15,
+   "title": "Anduril XL-AUV",
+   "url": "https://fr.wikipedia.org/wiki/Anduril_XL-AUV"
+  },
+  {
+   "sentences": 25,
+   "title": "Accident ferroviaire de Saint-Mandé",
+   "url": "https://fr.wikipedia.org/wiki/Accident_ferroviaire_de_Saint-Mand%C3%A9"
+  },
+  {
+   "sentences": 5,
+   "title": "(24616) 1978 VC9",
+   "url": "https://fr.wikipedia.org/wiki/%2824616%29_1978_VC9"
+  },
+  {
+   "sentences": 9,
+   "title": "Arbre vivant",
+   "url": "https://fr.wikipedia.org/wiki/Arbre_vivant"
+  },
+  {
+   "sentences": 6,
+   "title": "Jenna Lamia",
+   "url": "https://fr.wikipedia.org/wiki/Jenna_Lamia"
+  },
+  {
+   "sentences": 25,
+   "title": "Coup de poing direct du bras avant",
+   "url": "https://fr.wikipedia.org/wiki/Coup_de_poing_direct_du_bras_avant"
+  },
+  {
+   "sentences": 25,
+   "title": "Khanat kirghize",
+   "url": "https://fr.wikipedia.org/wiki/Khanat_kirghize"
+  },
+  {
+   "sentences": 3,
+   "title": "Référendums de 2021 dans le Maine",
+   "url": "https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendums_de_2021_dans_le_Maine"
+  },
+  {
+   "sentences": 6,
+   "title": "Prydz",
+   "url": "https://fr.wikipedia.org/wiki/Prydz"
+  },
+  {
+   "sentences": 25,
+   "title": "Satisfactory",
+   "url": "https://fr.wikipedia.org/wiki/Satisfactory"
+  },
+  {
+   "sentences": 19,
+   "title": "Scipione Ugoni",
+   "url": "https://fr.wikipedia.org/wiki/Scipione_Ugoni"
+  },
+  {
+   "sentences": 25,
+   "title": "Katy Moffatt",
+   "url": "https://fr.wikipedia.org/wiki/Katy_Moffatt"
+  },
+  {
+   "sentences": 9,
+   "title": "GT World Challenge Europe Endurance Cup 2021",
+   "url": "https://fr.wikipedia.org/wiki/GT_World_Challenge_Europe_Endurance_Cup_2021"
+  },
+  {
+   "sentences": 14,
+   "title": "Ibrahim Bek",
+   "url": "https://fr.wikipedia.org/wiki/Ibrahim_Bek"
+  },
+  {
+   "sentences": 6,
+   "title": "Analogue",
+   "url": "https://fr.wikipedia.org/wiki/Analogue"
+  },
+  {
+   "sentences": 10,
+   "title": "Vohu Manah",
+   "url": "https://fr.wikipedia.org/wiki/Vohu_Manah"
+  },
+  {
+   "sentences": 9,
+   "title": "Championnat d'Angleterre de football de deuxième division 1911-1912",
+   "url": "https://fr.wikipedia.org/wiki/Championnat_d%27Angleterre_de_football_de_deuxi%C3%A8me_division_1911-1912"
+  },
+  {
+   "sentences": 4,
+   "title": "I Am What I Am",
+   "url": "https://fr.wikipedia.org/wiki/I_Am_What_I_Am"
+  },
+  {
+   "sentences": 12,
+   "title": "George Varsimashvili",
+   "url": "https://fr.wikipedia.org/wiki/George_Varsimashvili"
+  },
+  {
+   "sentences": 25,
+   "title": "Fred (football, 1983)",
+   "url": "https://fr.wikipedia.org/wiki/Fred_%28football%2C_1983%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Île Marceau",
+   "url": "https://fr.wikipedia.org/wiki/%C3%8Ele_Marceau"
+  },
+  {
+   "sentences": 25,
+   "title": "Bonne Conduite",
+   "url": "https://fr.wikipedia.org/wiki/Bonne_Conduite"
+  },
+  {
+   "sentences": 11,
+   "title": "Concerto da camera (Honegger)",
+   "url": "https://fr.wikipedia.org/wiki/Concerto_da_camera_%28Honegger%29"
+  },
+  {
+   "sentences": 18,
+   "title": "The Woman's Era",
+   "url": "https://fr.wikipedia.org/wiki/The_Woman%27s_Era"
+  },
+  {
+   "sentences": 12,
+   "title": "Lidoire (court-métrage)",
+   "url": "https://fr.wikipedia.org/wiki/Lidoire_%28court-m%C3%A9trage%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Charles Dunne",
+   "url": "https://fr.wikipedia.org/wiki/Charles_Dunne"
+  },
+  {
+   "sentences": 10,
+   "title": "Salmchâteau",
+   "url": "https://fr.wikipedia.org/wiki/Salmch%C3%A2teau"
+  },
+  {
+   "sentences": 3,
+   "title": "District de Kani",
+   "url": "https://fr.wikipedia.org/wiki/District_de_Kani"
+  },
+  {
+   "sentences": 5,
+   "title": "Aloo pie",
+   "url": "https://fr.wikipedia.org/wiki/Aloo_pie"
+  },
+  {
+   "sentences": 24,
+   "title": "Championnats du monde de cyclisme sur piste 2013",
+   "url": "https://fr.wikipedia.org/wiki/Championnats_du_monde_de_cyclisme_sur_piste_2013"
+  },
+  {
+   "sentences": 25,
+   "title": "Comparaison entre le jaïnisme et l'hindouisme",
+   "url": "https://fr.wikipedia.org/wiki/Comparaison_entre_le_ja%C3%AFnisme_et_l%27hindouisme"
+  },
+  {
+   "sentences": 19,
+   "title": "DJ Bilik",
+   "url": "https://fr.wikipedia.org/wiki/DJ_Bilik"
+  },
+  {
+   "sentences": 18,
+   "title": "Speicherstadt",
+   "url": "https://fr.wikipedia.org/wiki/Speicherstadt"
+  },
+  {
+   "sentences": 25,
+   "title": "Shuntarō Fujita",
+   "url": "https://fr.wikipedia.org/wiki/Shuntar%C5%8D_Fujita"
+  },
+  {
+   "sentences": 11,
+   "title": "PEL",
+   "url": "https://fr.wikipedia.org/wiki/PEL"
+  },
+  {
+   "sentences": 7,
+   "title": "Hakudei-yaki",
+   "url": "https://fr.wikipedia.org/wiki/Hakudei-yaki"
+  },
+  {
+   "sentences": 25,
+   "title": "Abing",
+   "url": "https://fr.wikipedia.org/wiki/Abing"
+  },
+  {
+   "sentences": 15,
+   "title": "Al-Istiqsa",
+   "url": "https://fr.wikipedia.org/wiki/Al-Istiqsa"
+  },
+  {
+   "sentences": 12,
+   "title": "David Kalisch",
+   "url": "https://fr.wikipedia.org/wiki/David_Kalisch"
+  },
+  {
+   "sentences": 4,
+   "title": "EKF",
+   "url": "https://fr.wikipedia.org/wiki/EKF"
+  },
+  {
+   "sentences": 14,
+   "title": "École nationale d'ingénieurs de Monastir",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89cole_nationale_d%27ing%C3%A9nieurs_de_Monastir"
+  },
+  {
+   "sentences": 11,
+   "title": "1552 en santé et médecine",
+   "url": "https://fr.wikipedia.org/wiki/1552_en_sant%C3%A9_et_m%C3%A9decine"
+  },
+  {
+   "sentences": 2,
+   "title": "Villamayor de los Montes",
+   "url": "https://fr.wikipedia.org/wiki/Villamayor_de_los_Montes"
+  },
+  {
+   "sentences": 6,
+   "title": "Accumulateur sodium-soufre",
+   "url": "https://fr.wikipedia.org/wiki/Accumulateur_sodium-soufre"
+  },
+  {
+   "sentences": 11,
+   "title": "Begonia racemiflora",
+   "url": "https://fr.wikipedia.org/wiki/Begonia_racemiflora"
+  },
+  {
+   "sentences": 5,
+   "title": "Nomvula",
+   "url": "https://fr.wikipedia.org/wiki/Nomvula"
+  },
+  {
+   "sentences": 17,
+   "title": "Nikos Salingaros",
+   "url": "https://fr.wikipedia.org/wiki/Nikos_Salingaros"
+  },
+  {
+   "sentences": 2,
+   "title": "Casuarina pauper",
+   "url": "https://fr.wikipedia.org/wiki/Casuarina_pauper"
+  },
+  {
+   "sentences": 16,
+   "title": "Renon",
+   "url": "https://fr.wikipedia.org/wiki/Renon"
+  },
+  {
+   "sentences": 9,
+   "title": "Trahern",
+   "url": "https://fr.wikipedia.org/wiki/Trahern"
+  },
+  {
+   "sentences": 25,
+   "title": "Jack Valenti",
+   "url": "https://fr.wikipedia.org/wiki/Jack_Valenti"
+  },
+  {
+   "sentences": 11,
+   "title": "Jacques Dicker",
+   "url": "https://fr.wikipedia.org/wiki/Jacques_Dicker"
+  },
+  {
+   "sentences": 11,
+   "title": "NGC 5309",
+   "url": "https://fr.wikipedia.org/wiki/NGC_5309"
+  },
+  {
+   "sentences": 2,
+   "title": "Ntumi",
+   "url": "https://fr.wikipedia.org/wiki/Ntumi"
+  },
+  {
+   "sentences": 25,
+   "title": "Rimbez-et-Baudiets",
+   "url": "https://fr.wikipedia.org/wiki/Rimbez-et-Baudiets"
+  },
+  {
+   "sentences": 3,
+   "title": "Dyoulevo",
+   "url": "https://fr.wikipedia.org/wiki/Dyoulevo"
+  },
+  {
+   "sentences": 3,
+   "title": "Kaundinya",
+   "url": "https://fr.wikipedia.org/wiki/Kaundinya"
+  },
+  {
+   "sentences": 25,
+   "title": "Raimond Castaing",
+   "url": "https://fr.wikipedia.org/wiki/Raimond_Castaing"
+  },
+  {
+   "sentences": 25,
+   "title": "Phare intérieur du brise-lames sud de Duluth",
+   "url": "https://fr.wikipedia.org/wiki/Phare_int%C3%A9rieur_du_brise-lames_sud_de_Duluth"
+  },
+  {
+   "sentences": 6,
+   "title": "Chat sur un fauteuil",
+   "url": "https://fr.wikipedia.org/wiki/Chat_sur_un_fauteuil"
+  },
+  {
+   "sentences": 7,
+   "title": "Keifer Sykes",
+   "url": "https://fr.wikipedia.org/wiki/Keifer_Sykes"
+  },
+  {
+   "sentences": 7,
+   "title": "Paser",
+   "url": "https://fr.wikipedia.org/wiki/Paser"
+  },
+  {
+   "sentences": 14,
+   "title": "Keijo",
+   "url": "https://fr.wikipedia.org/wiki/Keijo"
+  },
+  {
+   "sentences": 8,
+   "title": "Slavianski boulvar (métro de Moscou)",
+   "url": "https://fr.wikipedia.org/wiki/Slavianski_boulvar_%28m%C3%A9tro_de_Moscou%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Cathy Lee Crosby",
+   "url": "https://fr.wikipedia.org/wiki/Cathy_Lee_Crosby"
+  },
+  {
+   "sentences": 4,
+   "title": "Karl Duill",
+   "url": "https://fr.wikipedia.org/wiki/Karl_Duill"
+  },
+  {
+   "sentences": 20,
+   "title": "Phalanta phalantha",
+   "url": "https://fr.wikipedia.org/wiki/Phalanta_phalantha"
+  },
+  {
+   "sentences": 14,
+   "title": "Métrodore de Chio",
+   "url": "https://fr.wikipedia.org/wiki/M%C3%A9trodore_de_Chio"
+  },
+  {
+   "sentences": 25,
+   "title": "1979 en photographie",
+   "url": "https://fr.wikipedia.org/wiki/1979_en_photographie"
+  },
+  {
+   "sentences": 16,
+   "title": "Taougrat Oult Aïssa",
+   "url": "https://fr.wikipedia.org/wiki/Taougrat_Oult_A%C3%AFssa"
+  },
+  {
+   "sentences": 25,
+   "title": "Sara Plummer Lemmon",
+   "url": "https://fr.wikipedia.org/wiki/Sara_Plummer_Lemmon"
+  },
+  {
+   "sentences": 10,
+   "title": "Josip Weber",
+   "url": "https://fr.wikipedia.org/wiki/Josip_Weber"
+  },
+  {
+   "sentences": 7,
+   "title": "Halenia pauana",
+   "url": "https://fr.wikipedia.org/wiki/Halenia_pauana"
+  },
+  {
+   "sentences": 25,
+   "title": "Vayelekh",
+   "url": "https://fr.wikipedia.org/wiki/Vayelekh"
+  },
+  {
+   "sentences": 8,
+   "title": "8e étape du Tour d'Italie 2025",
+   "url": "https://fr.wikipedia.org/wiki/8e_%C3%A9tape_du_Tour_d%27Italie_2025"
+  },
+  {
+   "sentences": 3,
+   "title": "British Academy Film Award de la meilleure contribution au cinéma britannique",
+   "url": "https://fr.wikipedia.org/wiki/British_Academy_Film_Award_de_la_meilleure_contribution_au_cin%C3%A9ma_britannique"
+  },
+  {
+   "sentences": 3,
+   "title": "John Vrancken",
+   "url": "https://fr.wikipedia.org/wiki/John_Vrancken"
+  },
+  {
+   "sentences": 24,
+   "title": "L'Âge de glace 2 (jeu vidéo)",
+   "url": "https://fr.wikipedia.org/wiki/L%27%C3%82ge_de_glace_2_%28jeu_vid%C3%A9o%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Svarteskjera",
+   "url": "https://fr.wikipedia.org/wiki/Svarteskjera"
+  },
+  {
+   "sentences": 25,
+   "title": "Juhel Bérenger de Rennes",
+   "url": "https://fr.wikipedia.org/wiki/Juhel_B%C3%A9renger_de_Rennes"
+  },
+  {
+   "sentences": 8,
+   "title": "Mezen",
+   "url": "https://fr.wikipedia.org/wiki/Mezen"
+  },
+  {
+   "sentences": 3,
+   "title": "Quay (Oklahoma)",
+   "url": "https://fr.wikipedia.org/wiki/Quay_%28Oklahoma%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Enrique José O'Donnell",
+   "url": "https://fr.wikipedia.org/wiki/Enrique_Jos%C3%A9_O%27Donnell"
+  },
+  {
+   "sentences": 10,
+   "title": "Steve Marr",
+   "url": "https://fr.wikipedia.org/wiki/Steve_Marr"
+  },
+  {
+   "sentences": 9,
+   "title": "Troublemaker",
+   "url": "https://fr.wikipedia.org/wiki/Troublemaker"
+  },
+  {
+   "sentences": 22,
+   "title": "Willie Phiri",
+   "url": "https://fr.wikipedia.org/wiki/Willie_Phiri"
+  },
+  {
+   "sentences": 14,
+   "title": "Médaille du 70e anniversaire des forces armées soviétiques",
+   "url": "https://fr.wikipedia.org/wiki/M%C3%A9daille_du_70e_anniversaire_des_forces_arm%C3%A9es_sovi%C3%A9tiques"
+  },
+  {
+   "sentences": 25,
+   "title": "The Five(ish) Doctors Reboot",
+   "url": "https://fr.wikipedia.org/wiki/The_Five%28ish%29_Doctors_Reboot"
+  },
+  {
+   "sentences": 6,
+   "title": "Whiterock",
+   "url": "https://fr.wikipedia.org/wiki/Whiterock"
+  },
+  {
+   "sentences": 6,
+   "title": "Alain II (évêque de Rennes)",
+   "url": "https://fr.wikipedia.org/wiki/Alain_II_%28%C3%A9v%C3%AAque_de_Rennes%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Dougoumato II",
+   "url": "https://fr.wikipedia.org/wiki/Dougoumato_II"
+  },
+  {
+   "sentences": 4,
+   "title": "Maymouna bint al-Harith",
+   "url": "https://fr.wikipedia.org/wiki/Maymouna_bint_al-Harith"
+  },
+  {
+   "sentences": 25,
+   "title": "Grand Prix automobile de Monaco 2025",
+   "url": "https://fr.wikipedia.org/wiki/Grand_Prix_automobile_de_Monaco_2025"
+  },
+  {
+   "sentences": 16,
+   "title": "22 mai 1984",
+   "url": "https://fr.wikipedia.org/wiki/22_mai_1984"
+  },
+  {
+   "sentences": 23,
+   "title": "Carouge austral",
+   "url": "https://fr.wikipedia.org/wiki/Carouge_austral"
+  },
+  {
+   "sentences": 3,
+   "title": "DP World Tour 2026",
+   "url": "https://fr.wikipedia.org/wiki/DP_World_Tour_2026"
+  },
+  {
+   "sentences": 25,
+   "title": "GL Noble Denton",
+   "url": "https://fr.wikipedia.org/wiki/GL_Noble_Denton"
+  },
+  {
+   "sentences": 2,
+   "title": "Anjos (métro de Lisbonne)",
+   "url": "https://fr.wikipedia.org/wiki/Anjos_%28m%C3%A9tro_de_Lisbonne%29"
+  },
+  {
+   "sentences": 14,
+   "title": "Chérie, passe-moi tes microbes !",
+   "url": "https://fr.wikipedia.org/wiki/Ch%C3%A9rie%2C_passe-moi_tes_microbes_%21"
+  },
+  {
+   "sentences": 8,
+   "title": "Cirrocumulus",
+   "url": "https://fr.wikipedia.org/wiki/Cirrocumulus"
+  },
+  {
+   "sentences": 1,
+   "title": "Pueblo Nuevo (Venezuela)",
+   "url": "https://fr.wikipedia.org/wiki/Pueblo_Nuevo_%28Venezuela%29"
+  },
+  {
+   "sentences": 17,
+   "title": "Belgique au Concours Eurovision de la chanson 2002",
+   "url": "https://fr.wikipedia.org/wiki/Belgique_au_Concours_Eurovision_de_la_chanson_2002"
+  },
+  {
+   "sentences": 7,
+   "title": "Koshin",
+   "url": "https://fr.wikipedia.org/wiki/Koshin"
+  },
+  {
+   "sentences": 21,
+   "title": "Circle Chart",
+   "url": "https://fr.wikipedia.org/wiki/Circle_Chart"
+  },
+  {
+   "sentences": 23,
+   "title": "Abbaye d'Ealing",
+   "url": "https://fr.wikipedia.org/wiki/Abbaye_d%27Ealing"
+  },
+  {
+   "sentences": 5,
+   "title": "L'Anse Township (Michigan)",
+   "url": "https://fr.wikipedia.org/wiki/L%27Anse_Township_%28Michigan%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Séparation des Beatles",
+   "url": "https://fr.wikipedia.org/wiki/S%C3%A9paration_des_Beatles"
+  },
+  {
+   "sentences": 11,
+   "title": "Comté de Berrigan",
+   "url": "https://fr.wikipedia.org/wiki/Comt%C3%A9_de_Berrigan"
+  },
+  {
+   "sentences": 19,
+   "title": "Élections législatives ouzbèkes de 2019-2020",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89lections_l%C3%A9gislatives_ouzb%C3%A8kes_de_2019-2020"
+  },
+  {
+   "sentences": 22,
+   "title": "Splash (physique)",
+   "url": "https://fr.wikipedia.org/wiki/Splash_%28physique%29"
+  },
+  {
+   "sentences": 16,
+   "title": "Château de Hohenwerfen",
+   "url": "https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Hohenwerfen"
+  },
+  {
+   "sentences": 25,
+   "title": "The Kid Laroi",
+   "url": "https://fr.wikipedia.org/wiki/The_Kid_Laroi"
+  },
+  {
+   "sentences": 2,
+   "title": "Whitney (Nebraska)",
+   "url": "https://fr.wikipedia.org/wiki/Whitney_%28Nebraska%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Différent de",
+   "url": "https://fr.wikipedia.org/wiki/Diff%C3%A9rent_de"
+  },
+  {
+   "sentences": 3,
+   "title": "Lennoxtown",
+   "url": "https://fr.wikipedia.org/wiki/Lennoxtown"
+  },
+  {
+   "sentences": 18,
+   "title": "Classe World",
+   "url": "https://fr.wikipedia.org/wiki/Classe_World"
+  },
+  {
+   "sentences": 1,
+   "title": "Bojanów (gmina)",
+   "url": "https://fr.wikipedia.org/wiki/Bojan%C3%B3w_%28gmina%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Jean Bonnot de Cormaillon",
+   "url": "https://fr.wikipedia.org/wiki/Jean_Bonnot_de_Cormaillon"
+  },
+  {
+   "sentences": 4,
+   "title": "Ann Mundy",
+   "url": "https://fr.wikipedia.org/wiki/Ann_Mundy"
+  },
+  {
+   "sentences": 20,
+   "title": "Tour de l'Horloge (Vichy)",
+   "url": "https://fr.wikipedia.org/wiki/Tour_de_l%27Horloge_%28Vichy%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Santa Anita (métro de Mexico)",
+   "url": "https://fr.wikipedia.org/wiki/Santa_Anita_%28m%C3%A9tro_de_Mexico%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Anolis altae",
+   "url": "https://fr.wikipedia.org/wiki/Anolis_altae"
+  },
+  {
+   "sentences": 4,
+   "title": "Psiadia montana",
+   "url": "https://fr.wikipedia.org/wiki/Psiadia_montana"
+  },
+  {
+   "sentences": 13,
+   "title": "À nous la marine",
+   "url": "https://fr.wikipedia.org/wiki/%C3%80_nous_la_marine"
+  },
+  {
+   "sentences": 25,
+   "title": "Duisans",
+   "url": "https://fr.wikipedia.org/wiki/Duisans"
+  },
+  {
+   "sentences": 7,
+   "title": "Joséphine Le Tutour",
+   "url": "https://fr.wikipedia.org/wiki/Jos%C3%A9phine_Le_Tutour"
+  },
+  {
+   "sentences": 13,
+   "title": "Kings of Nuthin",
+   "url": "https://fr.wikipedia.org/wiki/Kings_of_Nuthin"
+  },
+  {
+   "sentences": 2,
+   "title": "Siège de Lavaur",
+   "url": "https://fr.wikipedia.org/wiki/Si%C3%A8ge_de_Lavaur"
+  },
+  {
+   "sentences": 2,
+   "title": "Autotest",
+   "url": "https://fr.wikipedia.org/wiki/Autotest"
+  },
+  {
+   "sentences": 5,
+   "title": "Rue du Huit-Mai-1945",
+   "url": "https://fr.wikipedia.org/wiki/Rue_du_Huit-Mai-1945"
+  },
+  {
+   "sentences": 11,
+   "title": "Robin Lee",
+   "url": "https://fr.wikipedia.org/wiki/Robin_Lee"
+  },
+  {
+   "sentences": 21,
+   "title": "Colin élégant",
+   "url": "https://fr.wikipedia.org/wiki/Colin_%C3%A9l%C3%A9gant"
+  },
+  {
+   "sentences": 25,
+   "title": "1831 en arts plastiques",
+   "url": "https://fr.wikipedia.org/wiki/1831_en_arts_plastiques"
+  },
+  {
+   "sentences": 11,
+   "title": "Ballo",
+   "url": "https://fr.wikipedia.org/wiki/Ballo"
+  },
+  {
+   "sentences": 5,
+   "title": "Bulgarie démocratique",
+   "url": "https://fr.wikipedia.org/wiki/Bulgarie_d%C3%A9mocratique"
+  },
+  {
+   "sentences": 9,
+   "title": "Puits de Blomet",
+   "url": "https://fr.wikipedia.org/wiki/Puits_de_Blomet"
+  },
+  {
+   "sentences": 24,
+   "title": "Jay Gottlieb",
+   "url": "https://fr.wikipedia.org/wiki/Jay_Gottlieb"
+  },
+  {
+   "sentences": 10,
+   "title": "Tour du Pays basque 2006",
+   "url": "https://fr.wikipedia.org/wiki/Tour_du_Pays_basque_2006"
+  },
+  {
+   "sentences": 17,
+   "title": "Sérénade au bourreau",
+   "url": "https://fr.wikipedia.org/wiki/S%C3%A9r%C3%A9nade_au_bourreau"
+  },
+  {
+   "sentences": 25,
+   "title": "Céline Bonnier",
+   "url": "https://fr.wikipedia.org/wiki/C%C3%A9line_Bonnier"
+  },
+  {
+   "sentences": 25,
+   "title": "Championnat d'Espagne de football de deuxième division 2022-2023",
+   "url": "https://fr.wikipedia.org/wiki/Championnat_d%27Espagne_de_football_de_deuxi%C3%A8me_division_2022-2023"
+  },
+  {
+   "sentences": 3,
+   "title": "L'Abbé ne fait pas le Moine",
+   "url": "https://fr.wikipedia.org/wiki/L%27Abb%C3%A9_ne_fait_pas_le_Moine"
+  },
+  {
+   "sentences": 25,
+   "title": "René Perrot",
+   "url": "https://fr.wikipedia.org/wiki/Ren%C3%A9_Perrot"
+  },
+  {
+   "sentences": 20,
+   "title": "Georges Valero",
+   "url": "https://fr.wikipedia.org/wiki/Georges_Valero"
+  },
+  {
+   "sentences": 16,
+   "title": "Chirurgie fin de siècle",
+   "url": "https://fr.wikipedia.org/wiki/Chirurgie_fin_de_si%C3%A8cle"
+  },
+  {
+   "sentences": 5,
+   "title": "Col de la Scoffera",
+   "url": "https://fr.wikipedia.org/wiki/Col_de_la_Scoffera"
+  },
+  {
+   "sentences": 25,
+   "title": "Vauclaix",
+   "url": "https://fr.wikipedia.org/wiki/Vauclaix"
+  },
+  {
+   "sentences": 6,
+   "title": "Källgren",
+   "url": "https://fr.wikipedia.org/wiki/K%C3%A4llgren"
+  },
+  {
+   "sentences": 12,
+   "title": "Herminia Ibarra",
+   "url": "https://fr.wikipedia.org/wiki/Herminia_Ibarra"
+  },
+  {
+   "sentences": 3,
+   "title": "Herbes salées",
+   "url": "https://fr.wikipedia.org/wiki/Herbes_sal%C3%A9es"
+  },
+  {
+   "sentences": 5,
+   "title": "Centaurée à feuilles simples",
+   "url": "https://fr.wikipedia.org/wiki/Centaur%C3%A9e_%C3%A0_feuilles_simples"
+  },
+  {
+   "sentences": 25,
+   "title": "Voiture Wegmann",
+   "url": "https://fr.wikipedia.org/wiki/Voiture_Wegmann"
+  },
+  {
+   "sentences": 16,
+   "title": "Mellow Yellow (album)",
+   "url": "https://fr.wikipedia.org/wiki/Mellow_Yellow_%28album%29"
+  },
+  {
+   "sentences": 23,
+   "title": "Charles Adolphe Bonnegrace",
+   "url": "https://fr.wikipedia.org/wiki/Charles_Adolphe_Bonnegrace"
+  },
+  {
+   "sentences": 3,
+   "title": "Odechów (Łódź)",
+   "url": "https://fr.wikipedia.org/wiki/Odech%C3%B3w_%28%C5%81%C3%B3d%C5%BA%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Maison Ribar",
+   "url": "https://fr.wikipedia.org/wiki/Maison_Ribar"
+  },
+  {
+   "sentences": 5,
+   "title": "NCSM Huron (DDG 281)",
+   "url": "https://fr.wikipedia.org/wiki/NCSM_Huron_%28DDG_281%29"
+  },
+  {
+   "sentences": 24,
+   "title": "Hildegarde Naughton",
+   "url": "https://fr.wikipedia.org/wiki/Hildegarde_Naughton"
+  },
+  {
+   "sentences": 25,
+   "title": "Musique guinéenne",
+   "url": "https://fr.wikipedia.org/wiki/Musique_guin%C3%A9enne"
+  },
+  {
+   "sentences": 12,
+   "title": "Moissac (homonymie)",
+   "url": "https://fr.wikipedia.org/wiki/Moissac_%28homonymie%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Karketu Dili Futebol Clube",
+   "url": "https://fr.wikipedia.org/wiki/Karketu_Dili_Futebol_Clube"
+  },
+  {
+   "sentences": 14,
+   "title": "Niquitaia convexa",
+   "url": "https://fr.wikipedia.org/wiki/Niquitaia_convexa"
+  },
+  {
+   "sentences": 5,
+   "title": "Lagynochthonius medog",
+   "url": "https://fr.wikipedia.org/wiki/Lagynochthonius_medog"
+  },
+  {
+   "sentences": 4,
+   "title": "Patera de Payne-Gaposchkin",
+   "url": "https://fr.wikipedia.org/wiki/Patera_de_Payne-Gaposchkin"
+  },
+  {
+   "sentences": 10,
+   "title": "Guillaume Galletier",
+   "url": "https://fr.wikipedia.org/wiki/Guillaume_Galletier"
+  },
+  {
+   "sentences": 2,
+   "title": "Regina Maris",
+   "url": "https://fr.wikipedia.org/wiki/Regina_Maris"
+  },
+  {
+   "sentences": 25,
+   "title": "Hôtel Richer de Belleval",
+   "url": "https://fr.wikipedia.org/wiki/H%C3%B4tel_Richer_de_Belleval"
+  },
+  {
+   "sentences": 8,
+   "title": "Football Club Nordsjælland (féminines)",
+   "url": "https://fr.wikipedia.org/wiki/Football_Club_Nordsj%C3%A6lland_%28f%C3%A9minines%29"
+  },
+  {
+   "sentences": 14,
+   "title": "Norman Buchan",
+   "url": "https://fr.wikipedia.org/wiki/Norman_Buchan"
+  },
+  {
+   "sentences": 12,
+   "title": "NGC 3360",
+   "url": "https://fr.wikipedia.org/wiki/NGC_3360"
+  },
+  {
+   "sentences": 4,
+   "title": "Tierra de Campos",
+   "url": "https://fr.wikipedia.org/wiki/Tierra_de_Campos"
+  },
+  {
+   "sentences": 8,
+   "title": "The Swordmates",
+   "url": "https://fr.wikipedia.org/wiki/The_Swordmates"
+  },
+  {
+   "sentences": 3,
+   "title": "Avançon",
+   "url": "https://fr.wikipedia.org/wiki/Avan%C3%A7on"
+  },
+  {
+   "sentences": 11,
+   "title": "Eguchi (pièce de théâtre)",
+   "url": "https://fr.wikipedia.org/wiki/Eguchi_%28pi%C3%A8ce_de_th%C3%A9%C3%A2tre%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Brian Baker",
+   "url": "https://fr.wikipedia.org/wiki/Brian_Baker"
+  },
+  {
+   "sentences": 7,
+   "title": "Pandémie de Covid-19 en Slovénie",
+   "url": "https://fr.wikipedia.org/wiki/Pand%C3%A9mie_de_Covid-19_en_Slov%C3%A9nie"
+  },
+  {
+   "sentences": 3,
+   "title": "Bo Johansson",
+   "url": "https://fr.wikipedia.org/wiki/Bo_Johansson"
+  },
+  {
+   "sentences": 14,
+   "title": "Irina Bliznova",
+   "url": "https://fr.wikipedia.org/wiki/Irina_Bliznova"
+  },
+  {
+   "sentences": 1,
+   "title": "Balloch",
+   "url": "https://fr.wikipedia.org/wiki/Balloch"
+  },
+  {
+   "sentences": 2,
+   "title": "Schmitshausen",
+   "url": "https://fr.wikipedia.org/wiki/Schmitshausen"
+  },
+  {
+   "sentences": 7,
+   "title": "Amilaps mayana",
+   "url": "https://fr.wikipedia.org/wiki/Amilaps_mayana"
+  },
+  {
+   "sentences": 8,
+   "title": "Pimoa yajiangensis",
+   "url": "https://fr.wikipedia.org/wiki/Pimoa_yajiangensis"
+  },
+  {
+   "sentences": 12,
+   "title": "Ali Sabri",
+   "url": "https://fr.wikipedia.org/wiki/Ali_Sabri"
+  },
+  {
+   "sentences": 25,
+   "title": "Gand-Wevelgem féminin 2018",
+   "url": "https://fr.wikipedia.org/wiki/Gand-Wevelgem_f%C3%A9minin_2018"
+  },
+  {
+   "sentences": 6,
+   "title": "Mélitée sicilienne",
+   "url": "https://fr.wikipedia.org/wiki/M%C3%A9lit%C3%A9e_sicilienne"
+  },
+  {
+   "sentences": 2,
+   "title": "Vincent Barrière",
+   "url": "https://fr.wikipedia.org/wiki/Vincent_Barri%C3%A8re"
+  },
+  {
+   "sentences": 15,
+   "title": "Saccopharynx lavenbergi",
+   "url": "https://fr.wikipedia.org/wiki/Saccopharynx_lavenbergi"
+  },
+  {
+   "sentences": 4,
+   "title": "Armée populaire de libération du peuple tamoul",
+   "url": "https://fr.wikipedia.org/wiki/Arm%C3%A9e_populaire_de_lib%C3%A9ration_du_peuple_tamoul"
+  },
+  {
+   "sentences": 25,
+   "title": "Jean-Pierre Cagnat",
+   "url": "https://fr.wikipedia.org/wiki/Jean-Pierre_Cagnat"
+  },
+  {
+   "sentences": 25,
+   "title": "Giuseppe Rossi",
+   "url": "https://fr.wikipedia.org/wiki/Giuseppe_Rossi"
+  },
+  {
+   "sentences": 9,
+   "title": "Riama laevis",
+   "url": "https://fr.wikipedia.org/wiki/Riama_laevis"
+  },
+  {
+   "sentences": 25,
+   "title": "Cachen",
+   "url": "https://fr.wikipedia.org/wiki/Cachen"
+  },
+  {
+   "sentences": 14,
+   "title": "Oscar Otoka",
+   "url": "https://fr.wikipedia.org/wiki/Oscar_Otoka"
+  },
+  {
+   "sentences": 22,
+   "title": "Andrey Solomennikov",
+   "url": "https://fr.wikipedia.org/wiki/Andrey_Solomennikov"
+  },
+  {
+   "sentences": 25,
+   "title": "Louise-Anastasie Serment",
+   "url": "https://fr.wikipedia.org/wiki/Louise-Anastasie_Serment"
+  },
+  {
+   "sentences": 23,
+   "title": "Toichi Suzuki",
+   "url": "https://fr.wikipedia.org/wiki/Toichi_Suzuki"
+  },
+  {
+   "sentences": 8,
+   "title": "Eomamenchisaurus",
+   "url": "https://fr.wikipedia.org/wiki/Eomamenchisaurus"
+  },
+  {
+   "sentences": 2,
+   "title": "District de Yuhua (Shijiazhuang)",
+   "url": "https://fr.wikipedia.org/wiki/District_de_Yuhua_%28Shijiazhuang%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Aghavannagh",
+   "url": "https://fr.wikipedia.org/wiki/Aghavannagh"
+  },
+  {
+   "sentences": 4,
+   "title": "Myrolioubivka (oblast de Kherson)",
+   "url": "https://fr.wikipedia.org/wiki/Myrolioubivka_%28oblast_de_Kherson%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Necil Kazım Akses",
+   "url": "https://fr.wikipedia.org/wiki/Necil_Kaz%C4%B1m_Akses"
+  },
+  {
+   "sentences": 4,
+   "title": "Tryzoub",
+   "url": "https://fr.wikipedia.org/wiki/Tryzoub"
+  },
+  {
+   "sentences": 4,
+   "title": "(18675) Amiamini",
+   "url": "https://fr.wikipedia.org/wiki/%2818675%29_Amiamini"
+  },
+  {
+   "sentences": 21,
+   "title": "'Mamphono Khaketla",
+   "url": "https://fr.wikipedia.org/wiki/%27Mamphono_Khaketla"
+  },
+  {
+   "sentences": 2,
+   "title": "Akinwande",
+   "url": "https://fr.wikipedia.org/wiki/Akinwande"
+  },
+  {
+   "sentences": 14,
+   "title": "Fred Fono",
+   "url": "https://fr.wikipedia.org/wiki/Fred_Fono"
+  },
+  {
+   "sentences": 25,
+   "title": "Munir El Haddadi",
+   "url": "https://fr.wikipedia.org/wiki/Munir_El_Haddadi"
+  },
+  {
+   "sentences": 25,
+   "title": "Perte de conteneurs en mer",
+   "url": "https://fr.wikipedia.org/wiki/Perte_de_conteneurs_en_mer"
+  },
+  {
+   "sentences": 3,
+   "title": "Zonguldak Kömürspor",
+   "url": "https://fr.wikipedia.org/wiki/Zonguldak_K%C3%B6m%C3%BCrspor"
+  },
+  {
+   "sentences": 25,
+   "title": "Mise au tombeau (icône)",
+   "url": "https://fr.wikipedia.org/wiki/Mise_au_tombeau_%28ic%C3%B4ne%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Springfield Township (comté de Clark, Ohio)",
+   "url": "https://fr.wikipedia.org/wiki/Springfield_Township_%28comt%C3%A9_de_Clark%2C_Ohio%29"
+  },
+  {
+   "sentences": 4,
+   "title": "GNL",
+   "url": "https://fr.wikipedia.org/wiki/GNL"
+  },
+  {
+   "sentences": 25,
+   "title": "Intérieurs hollandais",
+   "url": "https://fr.wikipedia.org/wiki/Int%C3%A9rieurs_hollandais"
+  },
+  {
+   "sentences": 11,
+   "title": "1967 en Norvège",
+   "url": "https://fr.wikipedia.org/wiki/1967_en_Norv%C3%A8ge"
+  },
+  {
+   "sentences": 25,
+   "title": "Rapport Dinah",
+   "url": "https://fr.wikipedia.org/wiki/Rapport_Dinah"
+  },
+  {
+   "sentences": 10,
+   "title": "Ayumi",
+   "url": "https://fr.wikipedia.org/wiki/Ayumi"
+  },
+  {
+   "sentences": 3,
+   "title": "Éclipse solaire du 15 février 2018",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89clipse_solaire_du_15_f%C3%A9vrier_2018"
+  },
+  {
+   "sentences": 24,
+   "title": "Christian Martin Hudtwalcker",
+   "url": "https://fr.wikipedia.org/wiki/Christian_Martin_Hudtwalcker"
+  },
+  {
+   "sentences": 4,
+   "title": "Résolution 438 du Conseil de sécurité des Nations unies",
+   "url": "https://fr.wikipedia.org/wiki/R%C3%A9solution_438_du_Conseil_de_s%C3%A9curit%C3%A9_des_Nations_unies"
+  },
+  {
+   "sentences": 5,
+   "title": "Sindhudesh",
+   "url": "https://fr.wikipedia.org/wiki/Sindhudesh"
+  },
+  {
+   "sentences": 2,
+   "title": "Jugada",
+   "url": "https://fr.wikipedia.org/wiki/Jugada"
+  },
+  {
+   "sentences": 7,
+   "title": "Col de la Quieu",
+   "url": "https://fr.wikipedia.org/wiki/Col_de_la_Quieu"
+  },
+  {
+   "sentences": 4,
+   "title": "Lajos Kiss",
+   "url": "https://fr.wikipedia.org/wiki/Lajos_Kiss"
+  },
+  {
+   "sentences": 24,
+   "title": "Emmanuel Tjibaou",
+   "url": "https://fr.wikipedia.org/wiki/Emmanuel_Tjibaou"
+  },
+  {
+   "sentences": 6,
+   "title": "Zonzon",
+   "url": "https://fr.wikipedia.org/wiki/Zonzon"
+  },
+  {
+   "sentences": 20,
+   "title": "Politique étrangère de la république démocratique du Congo",
+   "url": "https://fr.wikipedia.org/wiki/Politique_%C3%A9trang%C3%A8re_de_la_r%C3%A9publique_d%C3%A9mocratique_du_Congo"
+  },
+  {
+   "sentences": 25,
+   "title": "Autoroute A18 (Italie)",
+   "url": "https://fr.wikipedia.org/wiki/Autoroute_A18_%28Italie%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Fallout (groupe)",
+   "url": "https://fr.wikipedia.org/wiki/Fallout_%28groupe%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Armée de la conquête",
+   "url": "https://fr.wikipedia.org/wiki/Arm%C3%A9e_de_la_conqu%C3%AAte"
+  },
+  {
+   "sentences": 25,
+   "title": "Shira Tarrant",
+   "url": "https://fr.wikipedia.org/wiki/Shira_Tarrant"
+  },
+  {
+   "sentences": 3,
+   "title": "Championnat d'Amérique du Sud féminin de volley-ball des moins de 20 ans 1988",
+   "url": "https://fr.wikipedia.org/wiki/Championnat_d%27Am%C3%A9rique_du_Sud_f%C3%A9minin_de_volley-ball_des_moins_de_20_ans_1988"
+  },
+  {
+   "sentences": 18,
+   "title": "Albert du Bois",
+   "url": "https://fr.wikipedia.org/wiki/Albert_du_Bois"
+  },
+  {
+   "sentences": 3,
+   "title": "William Hiltner",
+   "url": "https://fr.wikipedia.org/wiki/William_Hiltner"
+  },
+  {
+   "sentences": 25,
+   "title": "Jang Su-jeong",
+   "url": "https://fr.wikipedia.org/wiki/Jang_Su-jeong"
+  },
+  {
+   "sentences": 3,
+   "title": "Richtmyer",
+   "url": "https://fr.wikipedia.org/wiki/Richtmyer"
+  },
+  {
+   "sentences": 11,
+   "title": "NGC 871",
+   "url": "https://fr.wikipedia.org/wiki/NGC_871"
+  },
+  {
+   "sentences": 7,
+   "title": "Recensement de République de Nouvelle-Grenade de 1851",
+   "url": "https://fr.wikipedia.org/wiki/Recensement_de_R%C3%A9publique_de_Nouvelle-Grenade_de_1851"
+  },
+  {
+   "sentences": 4,
+   "title": "Élections fédérales canadiennes de 2021 en Ontario",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89lections_f%C3%A9d%C3%A9rales_canadiennes_de_2021_en_Ontario"
+  },
+  {
+   "sentences": 3,
+   "title": "Chynów",
+   "url": "https://fr.wikipedia.org/wiki/Chyn%C3%B3w"
+  },
+  {
+   "sentences": 9,
+   "title": "Centre de recherche et de développement Bisan",
+   "url": "https://fr.wikipedia.org/wiki/Centre_de_recherche_et_de_d%C3%A9veloppement_Bisan"
+  },
+  {
+   "sentences": 2,
+   "title": "Fidel Pagés",
+   "url": "https://fr.wikipedia.org/wiki/Fidel_Pag%C3%A9s"
+  },
+  {
+   "sentences": 2,
+   "title": "Felmersham",
+   "url": "https://fr.wikipedia.org/wiki/Felmersham"
+  },
+  {
+   "sentences": 4,
+   "title": "Takashi Yamamoto (natation)",
+   "url": "https://fr.wikipedia.org/wiki/Takashi_Yamamoto_%28natation%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Église Saint-Martin de Saint-Martin-d'Ary",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89glise_Saint-Martin_de_Saint-Martin-d%27Ary"
+  },
+  {
+   "sentences": 8,
+   "title": "Kunzel",
+   "url": "https://fr.wikipedia.org/wiki/Kunzel"
+  },
+  {
+   "sentences": 25,
+   "title": "W. G. Snuffy Walden",
+   "url": "https://fr.wikipedia.org/wiki/W._G._Snuffy_Walden"
+  },
+  {
+   "sentences": 25,
+   "title": "Laura Hope Crews",
+   "url": "https://fr.wikipedia.org/wiki/Laura_Hope_Crews"
+  },
+  {
+   "sentences": 3,
+   "title": "Lustadt",
+   "url": "https://fr.wikipedia.org/wiki/Lustadt"
+  },
+  {
+   "sentences": 8,
+   "title": "Acharávi",
+   "url": "https://fr.wikipedia.org/wiki/Achar%C3%A1vi"
+  },
+  {
+   "sentences": 4,
+   "title": "Puy Fillu",
+   "url": "https://fr.wikipedia.org/wiki/Puy_Fillu"
+  },
+  {
+   "sentences": 8,
+   "title": "Filippo",
+   "url": "https://fr.wikipedia.org/wiki/Filippo"
+  },
+  {
+   "sentences": 13,
+   "title": "VAP 1",
+   "url": "https://fr.wikipedia.org/wiki/VAP_1"
+  },
+  {
+   "sentences": 17,
+   "title": "Présence internationale temporaire à Hébron",
+   "url": "https://fr.wikipedia.org/wiki/Pr%C3%A9sence_internationale_temporaire_%C3%A0_H%C3%A9bron"
+  },
+  {
+   "sentences": 10,
+   "title": "Métro de Nouvel Athos",
+   "url": "https://fr.wikipedia.org/wiki/M%C3%A9tro_de_Nouvel_Athos"
+  },
+  {
+   "sentences": 4,
+   "title": "Berlinale 2011",
+   "url": "https://fr.wikipedia.org/wiki/Berlinale_2011"
+  },
+  {
+   "sentences": 7,
+   "title": "Citizens Park (métro d'Incheon)",
+   "url": "https://fr.wikipedia.org/wiki/Citizens_Park_%28m%C3%A9tro_d%27Incheon%29"
+  },
+  {
+   "sentences": 21,
+   "title": "Sarcophage de Larthia Seianti",
+   "url": "https://fr.wikipedia.org/wiki/Sarcophage_de_Larthia_Seianti"
+  },
+  {
+   "sentences": 3,
+   "title": "Patrick Côté",
+   "url": "https://fr.wikipedia.org/wiki/Patrick_C%C3%B4t%C3%A9"
+  },
+  {
+   "sentences": 11,
+   "title": "Albert Emil Kirchner",
+   "url": "https://fr.wikipedia.org/wiki/Albert_Emil_Kirchner"
+  },
+  {
+   "sentences": 25,
+   "title": "Jean Stobée",
+   "url": "https://fr.wikipedia.org/wiki/Jean_Stob%C3%A9e"
+  },
+  {
+   "sentences": 4,
+   "title": "Twin Lakes District",
+   "url": "https://fr.wikipedia.org/wiki/Twin_Lakes_District"
+  },
+  {
+   "sentences": 25,
+   "title": "Épidémie de choléra en Haïti",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89pid%C3%A9mie_de_chol%C3%A9ra_en_Ha%C3%AFti"
+  },
+  {
+   "sentences": 25,
+   "title": "Joe Hill (film)",
+   "url": "https://fr.wikipedia.org/wiki/Joe_Hill_%28film%29"
+  },
+  {
+   "sentences": 5,
+   "title": "President Enterprise Corporation Tower",
+   "url": "https://fr.wikipedia.org/wiki/President_Enterprise_Corporation_Tower"
+  },
+  {
+   "sentences": 25,
+   "title": "Collégiale Saint-Philippe-et-Saint-Jacques d'Altötting",
+   "url": "https://fr.wikipedia.org/wiki/Coll%C3%A9giale_Saint-Philippe-et-Saint-Jacques_d%27Alt%C3%B6tting"
+  },
+  {
+   "sentences": 20,
+   "title": "Thomas Sidney Cooper",
+   "url": "https://fr.wikipedia.org/wiki/Thomas_Sidney_Cooper"
+  },
+  {
+   "sentences": 14,
+   "title": "Tournoi de tennis de Mérida (WTA 2026)",
+   "url": "https://fr.wikipedia.org/wiki/Tournoi_de_tennis_de_M%C3%A9rida_%28WTA_2026%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Tsoghamarg",
+   "url": "https://fr.wikipedia.org/wiki/Tsoghamarg"
+  },
+  {
+   "sentences": 6,
+   "title": "2e brigade",
+   "url": "https://fr.wikipedia.org/wiki/2e_brigade"
+  },
+  {
+   "sentences": 19,
+   "title": "Bruch",
+   "url": "https://fr.wikipedia.org/wiki/Bruch"
+  },
+  {
+   "sentences": 4,
+   "title": "Lancashire (constructeur aéronautique)",
+   "url": "https://fr.wikipedia.org/wiki/Lancashire_%28constructeur_a%C3%A9ronautique%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Gregorio García de la Cuesta",
+   "url": "https://fr.wikipedia.org/wiki/Gregorio_Garc%C3%ADa_de_la_Cuesta"
+  },
+  {
+   "sentences": 7,
+   "title": "Seeing Nellie Home",
+   "url": "https://fr.wikipedia.org/wiki/Seeing_Nellie_Home"
+  },
+  {
+   "sentences": 3,
+   "title": "IJM",
+   "url": "https://fr.wikipedia.org/wiki/IJM"
+  },
+  {
+   "sentences": 9,
+   "title": "Championnat de Suède féminin de football 2024",
+   "url": "https://fr.wikipedia.org/wiki/Championnat_de_Su%C3%A8de_f%C3%A9minin_de_football_2024"
+  },
+  {
+   "sentences": 7,
+   "title": "Veronica nummularia",
+   "url": "https://fr.wikipedia.org/wiki/Veronica_nummularia"
+  },
+  {
+   "sentences": 23,
+   "title": "Johann Melchior Molter",
+   "url": "https://fr.wikipedia.org/wiki/Johann_Melchior_Molter"
+  },
+  {
+   "sentences": 6,
+   "title": "Miagrammopes unipus",
+   "url": "https://fr.wikipedia.org/wiki/Miagrammopes_unipus"
+  },
+  {
+   "sentences": 25,
+   "title": "Luc Vanrell",
+   "url": "https://fr.wikipedia.org/wiki/Luc_Vanrell"
+  },
+  {
+   "sentences": 7,
+   "title": "Prix Ferrières",
+   "url": "https://fr.wikipedia.org/wiki/Prix_Ferri%C3%A8res"
+  },
+  {
+   "sentences": 14,
+   "title": "Treptacantha abies-marina",
+   "url": "https://fr.wikipedia.org/wiki/Treptacantha_abies-marina"
+  },
+  {
+   "sentences": 2,
+   "title": "Championnat du monde de roller in line hockey FIRS 2002",
+   "url": "https://fr.wikipedia.org/wiki/Championnat_du_monde_de_roller_in_line_hockey_FIRS_2002"
+  },
+  {
+   "sentences": 6,
+   "title": "Amoure",
+   "url": "https://fr.wikipedia.org/wiki/Amoure"
+  },
+  {
+   "sentences": 25,
+   "title": "Distillerie Saint-James",
+   "url": "https://fr.wikipedia.org/wiki/Distillerie_Saint-James"
+  },
+  {
+   "sentences": 25,
+   "title": "Roman Herzog",
+   "url": "https://fr.wikipedia.org/wiki/Roman_Herzog"
+  },
+  {
+   "sentences": 14,
+   "title": "Université nationale Chung Cheng",
+   "url": "https://fr.wikipedia.org/wiki/Universit%C3%A9_nationale_Chung_Cheng"
+  },
+  {
+   "sentences": 15,
+   "title": "Triade de Beck (cardiologie)",
+   "url": "https://fr.wikipedia.org/wiki/Triade_de_Beck_%28cardiologie%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Baalrog",
+   "url": "https://fr.wikipedia.org/wiki/Baalrog"
+  },
+  {
+   "sentences": 12,
+   "title": "Tournoi de tennis de Doha (WTA 2025)",
+   "url": "https://fr.wikipedia.org/wiki/Tournoi_de_tennis_de_Doha_%28WTA_2025%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Wouter Raskin",
+   "url": "https://fr.wikipedia.org/wiki/Wouter_Raskin"
+  },
+  {
+   "sentences": 25,
+   "title": "Francesco Tamagno",
+   "url": "https://fr.wikipedia.org/wiki/Francesco_Tamagno"
+  },
+  {
+   "sentences": 3,
+   "title": "São Mamede (cépage)",
+   "url": "https://fr.wikipedia.org/wiki/S%C3%A3o_Mamede_%28c%C3%A9page%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Guillaume Kosmicki",
+   "url": "https://fr.wikipedia.org/wiki/Guillaume_Kosmicki"
+  },
+  {
+   "sentences": 5,
+   "title": "Tournoi de tennis de Sardaigne",
+   "url": "https://fr.wikipedia.org/wiki/Tournoi_de_tennis_de_Sardaigne"
+  },
+  {
+   "sentences": 25,
+   "title": "Charles Enderlin",
+   "url": "https://fr.wikipedia.org/wiki/Charles_Enderlin"
+  },
+  {
+   "sentences": 13,
+   "title": "Rue de Bretagne (Laval)",
+   "url": "https://fr.wikipedia.org/wiki/Rue_de_Bretagne_%28Laval%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Pella (Iowa)",
+   "url": "https://fr.wikipedia.org/wiki/Pella_%28Iowa%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Świerczyna",
+   "url": "https://fr.wikipedia.org/wiki/%C5%9Awierczyna"
+  },
+  {
+   "sentences": 1,
+   "title": "Garnavillo Township",
+   "url": "https://fr.wikipedia.org/wiki/Garnavillo_Township"
+  },
+  {
+   "sentences": 5,
+   "title": "Prieuré de Vernoil-le-Fourrier",
+   "url": "https://fr.wikipedia.org/wiki/Prieur%C3%A9_de_Vernoil-le-Fourrier"
+  },
+  {
+   "sentences": 25,
+   "title": "Darren Styles",
+   "url": "https://fr.wikipedia.org/wiki/Darren_Styles"
+  },
+  {
+   "sentences": 25,
+   "title": "Alliance du 14-Mars",
+   "url": "https://fr.wikipedia.org/wiki/Alliance_du_14-Mars"
+  },
+  {
+   "sentences": 3,
+   "title": "Table des caractères Unicode (108000-108FFF)",
+   "url": "https://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode_%28108000-108FFF%29"
+  },
+  {
+   "sentences": 22,
+   "title": "Lucas Høgsberg",
+   "url": "https://fr.wikipedia.org/wiki/Lucas_H%C3%B8gsberg"
+  },
+  {
+   "sentences": 8,
+   "title": "Tangara à gorge orangée",
+   "url": "https://fr.wikipedia.org/wiki/Tangara_%C3%A0_gorge_orang%C3%A9e"
+  },
+  {
+   "sentences": 2,
+   "title": "Zaks",
+   "url": "https://fr.wikipedia.org/wiki/Zaks"
+  },
+  {
+   "sentences": 2,
+   "title": "Gymnastique aux Jeux olympiques d'été de 1928",
+   "url": "https://fr.wikipedia.org/wiki/Gymnastique_aux_Jeux_olympiques_d%27%C3%A9t%C3%A9_de_1928"
+  },
+  {
+   "sentences": 25,
+   "title": "Billy Rioux",
+   "url": "https://fr.wikipedia.org/wiki/Billy_Rioux"
+  },
+  {
+   "sentences": 25,
+   "title": "La Main noire (France)",
+   "url": "https://fr.wikipedia.org/wiki/La_Main_noire_%28France%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Décès en août 1993",
+   "url": "https://fr.wikipedia.org/wiki/D%C3%A9c%C3%A8s_en_ao%C3%BBt_1993"
+  },
+  {
+   "sentences": 12,
+   "title": "Takako Shigematsu",
+   "url": "https://fr.wikipedia.org/wiki/Takako_Shigematsu"
+  },
+  {
+   "sentences": 3,
+   "title": "AJG",
+   "url": "https://fr.wikipedia.org/wiki/AJG"
+  },
+  {
+   "sentences": 16,
+   "title": "Al Bernard",
+   "url": "https://fr.wikipedia.org/wiki/Al_Bernard"
+  },
+  {
+   "sentences": 10,
+   "title": "Hikmet Babaoghlou",
+   "url": "https://fr.wikipedia.org/wiki/Hikmet_Babaoghlou"
+  },
+  {
+   "sentences": 6,
+   "title": "Législature d'État du Michigan",
+   "url": "https://fr.wikipedia.org/wiki/L%C3%A9gislature_d%27%C3%89tat_du_Michigan"
+  },
+  {
+   "sentences": 7,
+   "title": "Pierre Dupont",
+   "url": "https://fr.wikipedia.org/wiki/Pierre_Dupont"
+  },
+  {
+   "sentences": 3,
+   "title": "(19482) Harperlee",
+   "url": "https://fr.wikipedia.org/wiki/%2819482%29_Harperlee"
+  },
+  {
+   "sentences": 2,
+   "title": "Thomas Pöge",
+   "url": "https://fr.wikipedia.org/wiki/Thomas_P%C3%B6ge"
+  },
+  {
+   "sentences": 3,
+   "title": "Seidou",
+   "url": "https://fr.wikipedia.org/wiki/Seidou"
+  },
+  {
+   "sentences": 6,
+   "title": "Urs Salzmann",
+   "url": "https://fr.wikipedia.org/wiki/Urs_Salzmann"
+  },
+  {
+   "sentences": 25,
+   "title": "The Waxwings",
+   "url": "https://fr.wikipedia.org/wiki/The_Waxwings"
+  },
+  {
+   "sentences": 8,
+   "title": "Arrowsmith (roman)",
+   "url": "https://fr.wikipedia.org/wiki/Arrowsmith_%28roman%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Gaz de combat de la Première Guerre mondiale",
+   "url": "https://fr.wikipedia.org/wiki/Gaz_de_combat_de_la_Premi%C3%A8re_Guerre_mondiale"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "fr",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 4000,
+ "wikipedia": "https://fr.wikipedia.org/"
+}

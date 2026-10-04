@@ -85,7 +85,7 @@ fn nordum_is_identified_by_lexicon_alone() {
         .valid
         .iter()
         .chain(nrd.with_errors.iter())
-        .filter(|sentence| detect::detect(sentence, &lex, None, &gates).is_some())
+        .filter(|sentence| detect::detect(sentence, &lex, None, None, &gates).is_some())
         .count();
     let rate = hits as f32 / checked as f32;
     assert!(
@@ -108,7 +108,7 @@ fn nordum_markers_do_not_fire_on_other_languages() {
         }
         for sentence in buckets.valid.iter().chain(buckets.with_errors.iter()) {
             checked += 1;
-            if let Some(hit) = detect::detect(sentence, &lex, None, &gates) {
+            if let Some(hit) = detect::detect(sentence, &lex, None, None, &gates) {
                 false_positives.push((lang.clone(), sentence.clone()));
                 let _ = hit;
             }
@@ -135,7 +135,7 @@ fn the_length_gate_applies_to_the_model_path_only() {
     // decides it anyway.
     assert!(short.chars().filter(|c| !c.is_whitespace()).count() < gates.min_chars);
     assert_eq!(
-        detect::detect(short, &nordum_lexicon(), None, &gates).map(|d| d.language),
+        detect::detect(short, &nordum_lexicon(), None, None, &gates).map(|d| d.language),
         Some(Lang::Nrd)
     );
 
@@ -144,7 +144,7 @@ fn the_length_gate_applies_to_the_model_path_only() {
         answers: HashMap::new(),
     };
     assert_eq!(
-        detect::detect(short, &Lexicon::new(), Some(&model), &gates),
+        detect::detect(short, &Lexicon::new(), Some(&model), None, &gates),
         None
     );
 }
@@ -170,7 +170,7 @@ fn model_answers_are_gated_not_taken_at_face_value() {
     let lex = Lexicon::new();
     let gates = Gates::default();
     assert_eq!(
-        detect::detect("Jag kommer.", &lex, Some(&model), &gates),
+        detect::detect("Jag kommer.", &lex, Some(&model), None, &gates),
         None
     );
 }

@@ -57,6 +57,30 @@ MANIFEST_JSON = DATA_DIR / "manifest.json"
 # native speakers, one sentence per unit.
 DEFAULT_LANGUAGES = ("ca", "es", "pt", "sr", "uk")
 
+# Two caches, one per purpose, because they have incompatible contracts and must
+# not be able to perturb each other:
+#
+#   wikipedia/  the calibration cache. `generate.py` reads the first `cap`
+#               sentences of a language whose grammar file yields nothing, so its
+#               contents *are* the detection fixture for those languages. Size is
+#               tied to `generate.py`'s cap and the file is append-only in
+#               practice: changing it changes measured detection accuracy.
+#   training/   the discriminator's training corpus (`train_discriminator.py`).
+#               Much larger, split into train/held-out, and never read by
+#               `generate.py` — the fixture must stay independent of it.
+#
+# `tr` is in the discriminator's label set but is not a language we ship: it is
+# there as a negative class, because lid.176 answers `tr` for Turkic text the
+# gates then accept, which is how `crh` gets misclaimed.
+DEFAULT_TRAINING_LANGUAGES = (
+    "es", "ast", "ca", "gl", "pt", "fr", "it", "ro", "da", "sv", "no", "nn", "is", "tr", "crh",
+)
+
+# Ten times the calibration cache. A 15-way character-n-gram classifier needs
+# enough text per language to learn the orthography rather than the topics; 400
+# sentences teaches it the articles it drew.
+DEFAULT_TRAINING_COUNT = 4000
+
 # Wikimedia asks for a descriptive User-Agent that identifies the tool and gives a
 # way to get in touch. An anonymous or generic agent is a fair-use problem, not a
 # technical one.
@@ -436,6 +460,59 @@ and the manifest's sha256 values.
 """
 
 
+def training_readme_text(languages: list[str], retrieved: str) -> str:
+    """Attribution and regeneration instructions for the training corpus.
+
+    Kept deliberately distinct from the calibration README above: the two caches
+    have different contracts, and `generate.py` reads only `../wikipedia`.
+    """
+    listed = "\n".join(f"- [`{lang}.txt`]({lang}.txt) — `{lang}.wikipedia.org`" for lang in languages)
+    return f"""# Wikipedia discriminator training corpus
+
+Authentic sentences used to train the confusable-set discriminator, the third
+detection layer that is consulted only when the primary model's answer falls
+inside the confusable set. The languages are the confusable set plus `tr`, which
+is a negative class rather than a language we ship.
+
+This is **not** the calibration corpus. `../wikipedia` feeds
+`crates/lt-core/tests/fixtures/detection_corpus.json`, which is what the detector
+is *measured* on, so nothing here may ever be read by `generate.py`: a sentence
+that trains the discriminator and also calibrates it would make every reported
+accuracy meaningless. `train_discriminator.py` enforces that by dropping any
+sentence that appears in the fixture, and by holding out a fixed tenth of each
+file for validation.
+
+## Licence
+
+Wikipedia article text is licensed **CC BY-SA 3.0** ([Wikimedia Terms of
+Use](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use)); the owner
+approved vendoring it for this project. This file and the per-file record in
+`data/manifest.json` (`license`, `license_verified`, `license_source`, exact API
+`url`, `sha256`) are that attribution.
+
+## Files
+
+{listed}
+
+One sentence per line, de-duplicated, 40–300 characters. `<lang>.json` beside each
+file records the exact API request, the articles the sentences came from and when
+they were fetched. Retrieved {retrieved}.
+
+## Regenerating
+
+```sh
+python3 tools/detection/fetch_wikipedia.py --purpose training
+python3 tools/detection/train_discriminator.py            # train + validate
+python3 tools/detection/train_discriminator.py --evaluate # re-score a model
+```
+
+The fetch needs network access. Re-fetching changes the sentences and therefore
+the trained model, so the committed model must be retrained and re-validated with
+it; `train_discriminator.py` prints the manifest's sha256 values it trained
+against for exactly that reason.
+"""
+
+
 def sha256_file(path: pathlib.Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -501,16 +578,26 @@ def update_manifest(entries: dict[str, dict]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Fetch Wikipedia sentences for detection calibration")
     parser.add_argument(
+        "--purpose",
+        choices=("calibration", "training"),
+        default="calibration",
+        help="calibration: the cache generate.py falls back to for the languages whose "
+        "grammar file yields nothing (data/detection/wikipedia). training: the "
+        "discriminator's corpus, split into train/held-out by train_discriminator.py "
+        "and never read by generate.py (data/detection/training). Default calibration.",
+    )
+    parser.add_argument(
         "--lang",
         action="append",
         metavar="CODE",
-        help=f"Wikipedia language code; repeatable (default: {' '.join(DEFAULT_LANGUAGES)})",
+        help="Wikipedia language code; repeatable (default: the purpose's own set)",
     )
     parser.add_argument(
         "--count",
         type=int,
-        default=DEFAULT_COUNT,
-        help=f"sentences per language (default {DEFAULT_COUNT}, generate.py's cap)",
+        default=None,
+        help="sentences per language (default: 400 for calibration, which is "
+        f"generate.py's cap, and {DEFAULT_TRAINING_COUNT} for training)",
     )
     parser.add_argument(
         "--per-article",
@@ -538,15 +625,20 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    languages = [code.strip().lower() for code in (args.lang or DEFAULT_LANGUAGES)]
+    calibration = args.purpose == "calibration"
+    out_dir = DATA_DIR / "detection" / ("wikipedia" if calibration else "training")
+    default_languages = DEFAULT_LANGUAGES if calibration else DEFAULT_TRAINING_LANGUAGES
+    count = args.count if args.count is not None else (DEFAULT_COUNT if calibration else DEFAULT_TRAINING_COUNT)
+
+    languages = [code.strip().lower() for code in (args.lang or default_languages)]
     if args.dry_run:
-        print(f"dry run: {len(languages)} language(s), {args.count} sentences each")
+        print(f"dry run: {args.purpose}, {len(languages)} language(s), {count} sentences each")
         for lang in languages:
             print(f"  {lang}: {build_url(lang)}")
         return 0
 
     retrieved = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     fetched: dict[str, list[str]] = {}
     manifest_entries: dict[str, dict] = {}
@@ -557,11 +649,11 @@ def main() -> int:
         print(f"fetching {lang} from {lang}.wikipedia.org …", file=sys.stderr, flush=True)
         try:
             sentences, articles = fetch_language(
-                lang, args.count, args.per_article, args.max_per_opening, args.max_requests
+                lang, count, args.per_article, args.max_per_opening, args.max_requests
             )
         except FetchError as error:
-            # One language failing is a warning, not a crash: the other four
-            # languages are independent, and a partial cache still helps.
+            # One language failing is a warning, not a crash: the languages are
+            # independent, and a partial corpus still helps.
             print(f"warning: {lang}: {error}", file=sys.stderr)
             failures.append(lang)
             continue
@@ -570,13 +662,14 @@ def main() -> int:
             failures.append(lang)
             continue
 
-        cache_path = CACHE_DIR / f"{lang}.txt"
+        cache_path = out_dir / f"{lang}.txt"
         cache_path.write_text("\n".join(sentences) + "\n", encoding="utf-8")
-        provenance_path = CACHE_DIR / f"{lang}.json"
+        provenance_path = out_dir / f"{lang}.json"
         provenance_path.write_text(
             json.dumps(
                 {
                     "language": lang,
+                    "purpose": args.purpose,
                     "wikipedia": f"https://{lang}.wikipedia.org/",
                     "api_url": url,
                     "api_params": api_params(),
@@ -600,10 +693,10 @@ def main() -> int:
             encoding="utf-8",
         )
         fetched[lang] = sentences
-        manifest_entries[f"detection/wikipedia/{lang}.txt"] = manifest_source(
+        manifest_entries[f"detection/{out_dir.name}/{lang}.txt"] = manifest_source(
             url, retrieved, len(sentences), len(articles)
         )
-        manifest_entries[f"detection/wikipedia/{lang}.json"] = manifest_source(
+        manifest_entries[f"detection/{out_dir.name}/{lang}.json"] = manifest_source(
             url, retrieved, len(sentences), len(articles)
         )
         print(f"  {lang}: {len(sentences)} sentences from {len(articles)} articles", file=sys.stderr)
@@ -617,20 +710,38 @@ def main() -> int:
         )
         return 2
 
-    readme_path = CACHE_DIR / "README.md"
-    readme_path.write_text(readme_text(sorted(fetched), retrieved), encoding="utf-8")
-    manifest_entries["detection/wikipedia/README.md"] = {
+    # The README lists what this run fetched, so a run over a subset of the
+    # languages would drop the others from it. Both caches are only ever written
+    # by a full run over their own default set; --lang is for recovery, and the
+    # omission it can cause is worth a warning rather than a silent gap.
+    listed_languages = sorted(fetched)
+    missing = [lang for lang in default_languages if lang not in fetched]
+    readme_path = out_dir / "README.md"
+    readme_path.write_text(
+        readme_text(listed_languages, retrieved) if calibration
+        else training_readme_text(listed_languages, retrieved),
+        encoding="utf-8",
+    )
+    manifest_entries[f"detection/{out_dir.name}/README.md"] = {
         "kind": "hand-authored",
         "license": "LGPL-2.1-or-later",
         "license_source": "LingoTweaker project LICENSE",
-        "note": "Provenance and regeneration instructions for the vendored Wikipedia "
-        "sentence cache",
+        "note": (
+            "Provenance and regeneration instructions for the vendored Wikipedia "
+            + ("calibration cache" if calibration else "discriminator training corpus")
+        ),
     }
     update_manifest(manifest_entries)
 
     total = sum(len(sentences) for sentences in fetched.values())
-    print(f"wrote {total} sentences for {len(fetched)} language(s) to {CACHE_DIR}")
+    print(f"wrote {total} sentences for {len(fetched)} language(s) to {out_dir}")
     print("manifest: data/manifest.json updated")
+    if missing:
+        print(
+            f"warning: README lists only the languages fetched; missing from this "
+            f"run and therefore from it: {', '.join(missing)}",
+            file=sys.stderr,
+        )
     if failures:
         print(
             f"warning: {len(failures)} language(s) produced nothing: {', '.join(failures)}",

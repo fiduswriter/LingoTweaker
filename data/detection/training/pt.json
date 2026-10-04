@@ -1,0 +1,2005 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://pt.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 20,
+   "title": "Rondell Sheridan",
+   "url": "https://pt.wikipedia.org/wiki/Rondell_Sheridan"
+  },
+  {
+   "sentences": 7,
+   "title": "Manuel da Cunha Simas",
+   "url": "https://pt.wikipedia.org/wiki/Manuel_da_Cunha_Simas"
+  },
+  {
+   "sentences": 4,
+   "title": "Juca Rosa",
+   "url": "https://pt.wikipedia.org/wiki/Juca_Rosa"
+  },
+  {
+   "sentences": 5,
+   "title": "A Ilha Misteriosa",
+   "url": "https://pt.wikipedia.org/wiki/A_Ilha_Misteriosa"
+  },
+  {
+   "sentences": 2,
+   "title": "Doratogonus septentrionalis",
+   "url": "https://pt.wikipedia.org/wiki/Doratogonus_septentrionalis"
+  },
+  {
+   "sentences": 12,
+   "title": "Mestre Otávio Travassos",
+   "url": "https://pt.wikipedia.org/wiki/Mestre_Ot%C3%A1vio_Travassos"
+  },
+  {
+   "sentences": 18,
+   "title": "Faculdade Dom Bosco de Filosofia, Ciências e Letras",
+   "url": "https://pt.wikipedia.org/wiki/Faculdade_Dom_Bosco_de_Filosofia%2C_Ci%C3%AAncias_e_Letras"
+  },
+  {
+   "sentences": 8,
+   "title": "Sobrado à Praça Anchieta, n. 18",
+   "url": "https://pt.wikipedia.org/wiki/Sobrado_%C3%A0_Pra%C3%A7a_Anchieta%2C_n._18"
+  },
+  {
+   "sentences": 25,
+   "title": "Brokenhearted (canção de Brandy)",
+   "url": "https://pt.wikipedia.org/wiki/Brokenhearted_%28can%C3%A7%C3%A3o_de_Brandy%29"
+  },
+  {
+   "sentences": 5,
+   "title": "José de Freitas Ribeiro",
+   "url": "https://pt.wikipedia.org/wiki/Jos%C3%A9_de_Freitas_Ribeiro"
+  },
+  {
+   "sentences": 11,
+   "title": "Geert Stuyver",
+   "url": "https://pt.wikipedia.org/wiki/Geert_Stuyver"
+  },
+  {
+   "sentences": 25,
+   "title": "Avraham Melnikov",
+   "url": "https://pt.wikipedia.org/wiki/Avraham_Melnikov"
+  },
+  {
+   "sentences": 4,
+   "title": "Senegalia subsessilis",
+   "url": "https://pt.wikipedia.org/wiki/Senegalia_subsessilis"
+  },
+  {
+   "sentences": 14,
+   "title": "Duane Williams",
+   "url": "https://pt.wikipedia.org/wiki/Duane_Williams"
+  },
+  {
+   "sentences": 2,
+   "title": "Brus",
+   "url": "https://pt.wikipedia.org/wiki/Brus"
+  },
+  {
+   "sentences": 1,
+   "title": "Lutas nos Jogos Olímpicos de Verão de 1928",
+   "url": "https://pt.wikipedia.org/wiki/Lutas_nos_Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_1928"
+  },
+  {
+   "sentences": 4,
+   "title": "West Seneca",
+   "url": "https://pt.wikipedia.org/wiki/West_Seneca"
+  },
+  {
+   "sentences": 25,
+   "title": "Locutor de eventos",
+   "url": "https://pt.wikipedia.org/wiki/Locutor_de_eventos"
+  },
+  {
+   "sentences": 22,
+   "title": "Francisco José II de Liechtenstein",
+   "url": "https://pt.wikipedia.org/wiki/Francisco_Jos%C3%A9_II_de_Liechtenstein"
+  },
+  {
+   "sentences": 25,
+   "title": "Rádio RB2",
+   "url": "https://pt.wikipedia.org/wiki/R%C3%A1dio_RB2"
+  },
+  {
+   "sentences": 25,
+   "title": "Mikhail Ippolitov-Ivanov",
+   "url": "https://pt.wikipedia.org/wiki/Mikhail_Ippolitov-Ivanov"
+  },
+  {
+   "sentences": 4,
+   "title": "Acacia implexa",
+   "url": "https://pt.wikipedia.org/wiki/Acacia_implexa"
+  },
+  {
+   "sentences": 15,
+   "title": "1071",
+   "url": "https://pt.wikipedia.org/wiki/1071"
+  },
+  {
+   "sentences": 7,
+   "title": "Takashi Tezuka",
+   "url": "https://pt.wikipedia.org/wiki/Takashi_Tezuka"
+  },
+  {
+   "sentences": 4,
+   "title": "Muhammad Hassan do Brunei",
+   "url": "https://pt.wikipedia.org/wiki/Muhammad_Hassan_do_Brunei"
+  },
+  {
+   "sentences": 1,
+   "title": "Vladimir Tatarchuk",
+   "url": "https://pt.wikipedia.org/wiki/Vladimir_Tatarchuk"
+  },
+  {
+   "sentences": 1,
+   "title": "Dínamo do Kwanza Sul",
+   "url": "https://pt.wikipedia.org/wiki/D%C3%ADnamo_do_Kwanza_Sul"
+  },
+  {
+   "sentences": 3,
+   "title": "Lutilodix imitratrix",
+   "url": "https://pt.wikipedia.org/wiki/Lutilodix_imitratrix"
+  },
+  {
+   "sentences": 7,
+   "title": "Pelourinho de Avô",
+   "url": "https://pt.wikipedia.org/wiki/Pelourinho_de_Av%C3%B4"
+  },
+  {
+   "sentences": 24,
+   "title": "Nefercauor",
+   "url": "https://pt.wikipedia.org/wiki/Nefercauor"
+  },
+  {
+   "sentences": 25,
+   "title": "Cujávia-Pomerânia",
+   "url": "https://pt.wikipedia.org/wiki/Cuj%C3%A1via-Pomer%C3%A2nia"
+  },
+  {
+   "sentences": 2,
+   "title": "Stathmopoda",
+   "url": "https://pt.wikipedia.org/wiki/Stathmopoda"
+  },
+  {
+   "sentences": 25,
+   "title": "Pepi, Luci, Bom y otras chicas del montón",
+   "url": "https://pt.wikipedia.org/wiki/Pepi%2C_Luci%2C_Bom_y_otras_chicas_del_mont%C3%B3n"
+  },
+  {
+   "sentences": 25,
+   "title": "Domingos Rebelo",
+   "url": "https://pt.wikipedia.org/wiki/Domingos_Rebelo"
+  },
+  {
+   "sentences": 2,
+   "title": "Golești (Vâlcea)",
+   "url": "https://pt.wikipedia.org/wiki/Gole%C8%99ti_%28V%C3%A2lcea%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Arturo Escobar",
+   "url": "https://pt.wikipedia.org/wiki/Arturo_Escobar"
+  },
+  {
+   "sentences": 2,
+   "title": "Gornje Leviće",
+   "url": "https://pt.wikipedia.org/wiki/Gornje_Levi%C4%87e"
+  },
+  {
+   "sentences": 25,
+   "title": "Lista de cientistas loucos da ficção",
+   "url": "https://pt.wikipedia.org/wiki/Lista_de_cientistas_loucos_da_fic%C3%A7%C3%A3o"
+  },
+  {
+   "sentences": 6,
+   "title": "Nelson (Geórgia)",
+   "url": "https://pt.wikipedia.org/wiki/Nelson_%28Ge%C3%B3rgia%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Cephalotes persimplex",
+   "url": "https://pt.wikipedia.org/wiki/Cephalotes_persimplex"
+  },
+  {
+   "sentences": 4,
+   "title": "Juan Guerra (distrito)",
+   "url": "https://pt.wikipedia.org/wiki/Juan_Guerra_%28distrito%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Pedro de Orléans e Bragança",
+   "url": "https://pt.wikipedia.org/wiki/Pedro_de_Orl%C3%A9ans_e_Bragan%C3%A7a"
+  },
+  {
+   "sentences": 25,
+   "title": "Madredeus",
+   "url": "https://pt.wikipedia.org/wiki/Madredeus"
+  },
+  {
+   "sentences": 2,
+   "title": "Žalica",
+   "url": "https://pt.wikipedia.org/wiki/%C5%BDalica"
+  },
+  {
+   "sentences": 3,
+   "title": "Hypsolebias radiseriatus",
+   "url": "https://pt.wikipedia.org/wiki/Hypsolebias_radiseriatus"
+  },
+  {
+   "sentences": 2,
+   "title": "Molina (Curicó)",
+   "url": "https://pt.wikipedia.org/wiki/Molina_%28Curic%C3%B3%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Leucaena pulverulenta",
+   "url": "https://pt.wikipedia.org/wiki/Leucaena_pulverulenta"
+  },
+  {
+   "sentences": 13,
+   "title": "LocoCycle",
+   "url": "https://pt.wikipedia.org/wiki/LocoCycle"
+  },
+  {
+   "sentences": 2,
+   "title": "Josef Stürmann",
+   "url": "https://pt.wikipedia.org/wiki/Josef_St%C3%BCrmann"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 3570",
+   "url": "https://pt.wikipedia.org/wiki/NGC_3570"
+  },
+  {
+   "sentences": 4,
+   "title": "Jogando em Casa",
+   "url": "https://pt.wikipedia.org/wiki/Jogando_em_Casa"
+  },
+  {
+   "sentences": 25,
+   "title": "Caso Manchinha",
+   "url": "https://pt.wikipedia.org/wiki/Caso_Manchinha"
+  },
+  {
+   "sentences": 1,
+   "title": "Paddy Driscoll",
+   "url": "https://pt.wikipedia.org/wiki/Paddy_Driscoll"
+  },
+  {
+   "sentences": 10,
+   "title": "Tênis de mesa nos Jogos Olímpicos de Verão de 2020 - Individual masculino",
+   "url": "https://pt.wikipedia.org/wiki/T%C3%AAnis_de_mesa_nos_Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_2020_-_Individual_masculino"
+  },
+  {
+   "sentences": 2,
+   "title": "Monique Sullivan",
+   "url": "https://pt.wikipedia.org/wiki/Monique_Sullivan"
+  },
+  {
+   "sentences": 5,
+   "title": "29 a.C.",
+   "url": "https://pt.wikipedia.org/wiki/29_a.C."
+  },
+  {
+   "sentences": 23,
+   "title": "Lucas Severino",
+   "url": "https://pt.wikipedia.org/wiki/Lucas_Severino"
+  },
+  {
+   "sentences": 1,
+   "title": "Crenicichla lenticulata",
+   "url": "https://pt.wikipedia.org/wiki/Crenicichla_lenticulata"
+  },
+  {
+   "sentences": 6,
+   "title": "Range Rider",
+   "url": "https://pt.wikipedia.org/wiki/Range_Rider"
+  },
+  {
+   "sentences": 5,
+   "title": "Região de Keihin",
+   "url": "https://pt.wikipedia.org/wiki/Regi%C3%A3o_de_Keihin"
+  },
+  {
+   "sentences": 19,
+   "title": "Ruslan Khomtchak",
+   "url": "https://pt.wikipedia.org/wiki/Ruslan_Khomtchak"
+  },
+  {
+   "sentences": 6,
+   "title": "2004 VK78",
+   "url": "https://pt.wikipedia.org/wiki/2004_VK78"
+  },
+  {
+   "sentences": 7,
+   "title": "Mezzo",
+   "url": "https://pt.wikipedia.org/wiki/Mezzo"
+  },
+  {
+   "sentences": 25,
+   "title": "Arquibaldo Douglas",
+   "url": "https://pt.wikipedia.org/wiki/Arquibaldo_Douglas"
+  },
+  {
+   "sentences": 18,
+   "title": "Libertinagem (livro)",
+   "url": "https://pt.wikipedia.org/wiki/Libertinagem_%28livro%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Temoac",
+   "url": "https://pt.wikipedia.org/wiki/Temoac"
+  },
+  {
+   "sentences": 1,
+   "title": "Eleições autárquicas portuguesas de 1979 no distrito de Viseu",
+   "url": "https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%B5es_aut%C3%A1rquicas_portuguesas_de_1979_no_distrito_de_Viseu"
+  },
+  {
+   "sentences": 6,
+   "title": "Praia fluvial de Folgosa",
+   "url": "https://pt.wikipedia.org/wiki/Praia_fluvial_de_Folgosa"
+  },
+  {
+   "sentences": 1,
+   "title": "Castex (Ariège)",
+   "url": "https://pt.wikipedia.org/wiki/Castex_%28Ari%C3%A8ge%29"
+  },
+  {
+   "sentences": 3,
+   "title": "The Harrow (Londres)",
+   "url": "https://pt.wikipedia.org/wiki/The_Harrow_%28Londres%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Estação Fazenda da Juta",
+   "url": "https://pt.wikipedia.org/wiki/Esta%C3%A7%C3%A3o_Fazenda_da_Juta"
+  },
+  {
+   "sentences": 16,
+   "title": "Néstor Ortigoza",
+   "url": "https://pt.wikipedia.org/wiki/N%C3%A9stor_Ortigoza"
+  },
+  {
+   "sentences": 16,
+   "title": "Der Pleier",
+   "url": "https://pt.wikipedia.org/wiki/Der_Pleier"
+  },
+  {
+   "sentences": 24,
+   "title": "Aliança 90/Os Verdes",
+   "url": "https://pt.wikipedia.org/wiki/Alian%C3%A7a_90/Os_Verdes"
+  },
+  {
+   "sentences": 2,
+   "title": "133",
+   "url": "https://pt.wikipedia.org/wiki/133"
+  },
+  {
+   "sentences": 3,
+   "title": "Zahna",
+   "url": "https://pt.wikipedia.org/wiki/Zahna"
+  },
+  {
+   "sentences": 5,
+   "title": "Avaliação ansiosa",
+   "url": "https://pt.wikipedia.org/wiki/Avalia%C3%A7%C3%A3o_ansiosa"
+  },
+  {
+   "sentences": 1,
+   "title": "Indopiptadenia",
+   "url": "https://pt.wikipedia.org/wiki/Indopiptadenia"
+  },
+  {
+   "sentences": 25,
+   "title": "Repórter X",
+   "url": "https://pt.wikipedia.org/wiki/Rep%C3%B3rter_X"
+  },
+  {
+   "sentences": 8,
+   "title": "Thorndale (Texas)",
+   "url": "https://pt.wikipedia.org/wiki/Thorndale_%28Texas%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Castelo de Saint-Laurent-les-Tours",
+   "url": "https://pt.wikipedia.org/wiki/Castelo_de_Saint-Laurent-les-Tours"
+  },
+  {
+   "sentences": 5,
+   "title": "Saint-Gaudens",
+   "url": "https://pt.wikipedia.org/wiki/Saint-Gaudens"
+  },
+  {
+   "sentences": 9,
+   "title": "Nicholas Winton: The Power of Good",
+   "url": "https://pt.wikipedia.org/wiki/Nicholas_Winton%3A_The_Power_of_Good"
+  },
+  {
+   "sentences": 25,
+   "title": "Grande Cometa de 1901",
+   "url": "https://pt.wikipedia.org/wiki/Grande_Cometa_de_1901"
+  },
+  {
+   "sentences": 5,
+   "title": "Mastacembelus flavidus",
+   "url": "https://pt.wikipedia.org/wiki/Mastacembelus_flavidus"
+  },
+  {
+   "sentences": 1,
+   "title": "Newport (Ilha de Wight)",
+   "url": "https://pt.wikipedia.org/wiki/Newport_%28Ilha_de_Wight%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Kree",
+   "url": "https://pt.wikipedia.org/wiki/Kree"
+  },
+  {
+   "sentences": 8,
+   "title": "Ceraptila",
+   "url": "https://pt.wikipedia.org/wiki/Ceraptila"
+  },
+  {
+   "sentences": 2,
+   "title": "U.S. Route 42",
+   "url": "https://pt.wikipedia.org/wiki/U.S._Route_42"
+  },
+  {
+   "sentences": 2,
+   "title": "Eyetech",
+   "url": "https://pt.wikipedia.org/wiki/Eyetech"
+  },
+  {
+   "sentences": 18,
+   "title": "Célia Posser",
+   "url": "https://pt.wikipedia.org/wiki/C%C3%A9lia_Posser"
+  },
+  {
+   "sentences": 11,
+   "title": "Batalha de Spicheren",
+   "url": "https://pt.wikipedia.org/wiki/Batalha_de_Spicheren"
+  },
+  {
+   "sentences": 1,
+   "title": "Remo nos Jogos Olímpicos de Verão da Juventude de 2010 - Skiff simples masculino",
+   "url": "https://pt.wikipedia.org/wiki/Remo_nos_Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_da_Juventude_de_2010_-_Skiff_simples_masculino"
+  },
+  {
+   "sentences": 3,
+   "title": "Prêmio Globo de Melhores do Ano de melhor jornalista",
+   "url": "https://pt.wikipedia.org/wiki/Pr%C3%AAmio_Globo_de_Melhores_do_Ano_de_melhor_jornalista"
+  },
+  {
+   "sentences": 25,
+   "title": "Escola Estadual Professor Gasparino Batista da Silva",
+   "url": "https://pt.wikipedia.org/wiki/Escola_Estadual_Professor_Gasparino_Batista_da_Silva"
+  },
+  {
+   "sentences": 3,
+   "title": "Xie Huilin",
+   "url": "https://pt.wikipedia.org/wiki/Xie_Huilin"
+  },
+  {
+   "sentences": 4,
+   "title": "Brian Kennedy",
+   "url": "https://pt.wikipedia.org/wiki/Brian_Kennedy"
+  },
+  {
+   "sentences": 1,
+   "title": "Proteína A plasmática associada à gravidez",
+   "url": "https://pt.wikipedia.org/wiki/Prote%C3%ADna_A_plasm%C3%A1tica_associada_%C3%A0_gravidez"
+  },
+  {
+   "sentences": 25,
+   "title": "Sistema Nacional de Bibliotecas Públicas",
+   "url": "https://pt.wikipedia.org/wiki/Sistema_Nacional_de_Bibliotecas_P%C3%BAblicas"
+  },
+  {
+   "sentences": 7,
+   "title": "Orangeville (Ohio)",
+   "url": "https://pt.wikipedia.org/wiki/Orangeville_%28Ohio%29"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 6145",
+   "url": "https://pt.wikipedia.org/wiki/NGC_6145"
+  },
+  {
+   "sentences": 2,
+   "title": "(35451) 1998 CW4",
+   "url": "https://pt.wikipedia.org/wiki/%2835451%29_1998_CW4"
+  },
+  {
+   "sentences": 8,
+   "title": "As Aventuras de Tanguy e Laverdure",
+   "url": "https://pt.wikipedia.org/wiki/As_Aventuras_de_Tanguy_e_Laverdure"
+  },
+  {
+   "sentences": 2,
+   "title": "(36283) 2000 DV3",
+   "url": "https://pt.wikipedia.org/wiki/%2836283%29_2000_DV3"
+  },
+  {
+   "sentences": 1,
+   "title": "Sibiu (distrito)",
+   "url": "https://pt.wikipedia.org/wiki/Sibiu_%28distrito%29"
+  },
+  {
+   "sentences": 1,
+   "title": "USS LST-943",
+   "url": "https://pt.wikipedia.org/wiki/USS_LST-943"
+  },
+  {
+   "sentences": 13,
+   "title": "Sechellophryne pipilodryas",
+   "url": "https://pt.wikipedia.org/wiki/Sechellophryne_pipilodryas"
+  },
+  {
+   "sentences": 11,
+   "title": "Óscar Figueroa",
+   "url": "https://pt.wikipedia.org/wiki/%C3%93scar_Figueroa"
+  },
+  {
+   "sentences": 2,
+   "title": "Dar Chioukh",
+   "url": "https://pt.wikipedia.org/wiki/Dar_Chioukh"
+  },
+  {
+   "sentences": 25,
+   "title": "Making Movies",
+   "url": "https://pt.wikipedia.org/wiki/Making_Movies"
+  },
+  {
+   "sentences": 7,
+   "title": "Biblioteca Virtual de Enfermagem",
+   "url": "https://pt.wikipedia.org/wiki/Biblioteca_Virtual_de_Enfermagem"
+  },
+  {
+   "sentences": 25,
+   "title": "Zatanna",
+   "url": "https://pt.wikipedia.org/wiki/Zatanna"
+  },
+  {
+   "sentences": 25,
+   "title": "Isospin fraco",
+   "url": "https://pt.wikipedia.org/wiki/Isospin_fraco"
+  },
+  {
+   "sentences": 15,
+   "title": "Ruben Penninga",
+   "url": "https://pt.wikipedia.org/wiki/Ruben_Penninga"
+  },
+  {
+   "sentences": 3,
+   "title": "ATP de Båstad de 2013 - Duplas",
+   "url": "https://pt.wikipedia.org/wiki/ATP_de_B%C3%A5stad_de_2013_-_Duplas"
+  },
+  {
+   "sentences": 4,
+   "title": "Felice Gimondi",
+   "url": "https://pt.wikipedia.org/wiki/Felice_Gimondi"
+  },
+  {
+   "sentences": 25,
+   "title": "Autobiografia de um Iogue",
+   "url": "https://pt.wikipedia.org/wiki/Autobiografia_de_um_Iogue"
+  },
+  {
+   "sentences": 16,
+   "title": "Divisão racial do trabalho de cuidados",
+   "url": "https://pt.wikipedia.org/wiki/Divis%C3%A3o_racial_do_trabalho_de_cuidados"
+  },
+  {
+   "sentences": 3,
+   "title": "Eta1 Coronae Australis",
+   "url": "https://pt.wikipedia.org/wiki/Eta1_Coronae_Australis"
+  },
+  {
+   "sentences": 22,
+   "title": "Justin Wilson",
+   "url": "https://pt.wikipedia.org/wiki/Justin_Wilson"
+  },
+  {
+   "sentences": 15,
+   "title": "Nota Fiscal Paulista",
+   "url": "https://pt.wikipedia.org/wiki/Nota_Fiscal_Paulista"
+  },
+  {
+   "sentences": 25,
+   "title": "Apascentar de Louvor",
+   "url": "https://pt.wikipedia.org/wiki/Apascentar_de_Louvor"
+  },
+  {
+   "sentences": 25,
+   "title": "Entre Lençóis",
+   "url": "https://pt.wikipedia.org/wiki/Entre_Len%C3%A7%C3%B3is"
+  },
+  {
+   "sentences": 25,
+   "title": "Afet İnan",
+   "url": "https://pt.wikipedia.org/wiki/Afet_%C4%B0nan"
+  },
+  {
+   "sentences": 25,
+   "title": "Myasishchev DB-108",
+   "url": "https://pt.wikipedia.org/wiki/Myasishchev_DB-108"
+  },
+  {
+   "sentences": 25,
+   "title": "Go, Dog. Go! (série de televisão)",
+   "url": "https://pt.wikipedia.org/wiki/Go%2C_Dog._Go%21_%28s%C3%A9rie_de_televis%C3%A3o%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Sandstone (Minnesota)",
+   "url": "https://pt.wikipedia.org/wiki/Sandstone_%28Minnesota%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Darko Kovačević",
+   "url": "https://pt.wikipedia.org/wiki/Darko_Kova%C4%8Devi%C4%87"
+  },
+  {
+   "sentences": 3,
+   "title": "Campeonato Mundial de Esgrima de 1974",
+   "url": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Esgrima_de_1974"
+  },
+  {
+   "sentences": 2,
+   "title": "(31908) 2000 GP46",
+   "url": "https://pt.wikipedia.org/wiki/%2831908%29_2000_GP46"
+  },
+  {
+   "sentences": 3,
+   "title": "Estação Venezuela",
+   "url": "https://pt.wikipedia.org/wiki/Esta%C3%A7%C3%A3o_Venezuela"
+  },
+  {
+   "sentences": 25,
+   "title": "Confrontos entre São Paulo e Vasco da Gama no futebol",
+   "url": "https://pt.wikipedia.org/wiki/Confrontos_entre_S%C3%A3o_Paulo_e_Vasco_da_Gama_no_futebol"
+  },
+  {
+   "sentences": 1,
+   "title": "The Accusing Finger",
+   "url": "https://pt.wikipedia.org/wiki/The_Accusing_Finger"
+  },
+  {
+   "sentences": 25,
+   "title": "Henrique Oswald",
+   "url": "https://pt.wikipedia.org/wiki/Henrique_Oswald"
+  },
+  {
+   "sentences": 2,
+   "title": "Piesarthrini",
+   "url": "https://pt.wikipedia.org/wiki/Piesarthrini"
+  },
+  {
+   "sentences": 20,
+   "title": "João Targino de Araújo",
+   "url": "https://pt.wikipedia.org/wiki/Jo%C3%A3o_Targino_de_Ara%C3%BAjo"
+  },
+  {
+   "sentences": 6,
+   "title": "Olímpio Adolfo de Sousa Pitanga",
+   "url": "https://pt.wikipedia.org/wiki/Ol%C3%ADmpio_Adolfo_de_Sousa_Pitanga"
+  },
+  {
+   "sentences": 19,
+   "title": "Joan Sodré",
+   "url": "https://pt.wikipedia.org/wiki/Joan_Sodr%C3%A9"
+  },
+  {
+   "sentences": 10,
+   "title": "Ainda Existem Crianças na Vila Kennedy",
+   "url": "https://pt.wikipedia.org/wiki/Ainda_Existem_Crian%C3%A7as_na_Vila_Kennedy"
+  },
+  {
+   "sentences": 2,
+   "title": "Otopharynx walteri",
+   "url": "https://pt.wikipedia.org/wiki/Otopharynx_walteri"
+  },
+  {
+   "sentences": 2,
+   "title": "Heimreise 2011",
+   "url": "https://pt.wikipedia.org/wiki/Heimreise_2011"
+  },
+  {
+   "sentences": 7,
+   "title": "Sōran Bushi",
+   "url": "https://pt.wikipedia.org/wiki/S%C5%8Dran_Bushi"
+  },
+  {
+   "sentences": 16,
+   "title": "Larri Passos",
+   "url": "https://pt.wikipedia.org/wiki/Larri_Passos"
+  },
+  {
+   "sentences": 24,
+   "title": "Grande Arquiteto do Universo",
+   "url": "https://pt.wikipedia.org/wiki/Grande_Arquiteto_do_Universo"
+  },
+  {
+   "sentences": 1,
+   "title": "Pristomyrmex levigatus",
+   "url": "https://pt.wikipedia.org/wiki/Pristomyrmex_levigatus"
+  },
+  {
+   "sentences": 25,
+   "title": "Grande Revolta Polonesa (1806)",
+   "url": "https://pt.wikipedia.org/wiki/Grande_Revolta_Polonesa_%281806%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Autômato de árvore infinita",
+   "url": "https://pt.wikipedia.org/wiki/Aut%C3%B4mato_de_%C3%A1rvore_infinita"
+  },
+  {
+   "sentences": 19,
+   "title": "Álvaro Santos Pereira",
+   "url": "https://pt.wikipedia.org/wiki/%C3%81lvaro_Santos_Pereira"
+  },
+  {
+   "sentences": 25,
+   "title": "Demografia do Suriname",
+   "url": "https://pt.wikipedia.org/wiki/Demografia_do_Suriname"
+  },
+  {
+   "sentences": 7,
+   "title": "Bélgica nos Jogos Olímpicos",
+   "url": "https://pt.wikipedia.org/wiki/B%C3%A9lgica_nos_Jogos_Ol%C3%ADmpicos"
+  },
+  {
+   "sentences": 9,
+   "title": "Coccidoxenoides perminutus",
+   "url": "https://pt.wikipedia.org/wiki/Coccidoxenoides_perminutus"
+  },
+  {
+   "sentences": 2,
+   "title": "Turridae",
+   "url": "https://pt.wikipedia.org/wiki/Turridae"
+  },
+  {
+   "sentences": 15,
+   "title": "Aeroclube de Campinas",
+   "url": "https://pt.wikipedia.org/wiki/Aeroclube_de_Campinas"
+  },
+  {
+   "sentences": 25,
+   "title": "Teoria algorítmica da informação",
+   "url": "https://pt.wikipedia.org/wiki/Teoria_algor%C3%ADtmica_da_informa%C3%A7%C3%A3o"
+  },
+  {
+   "sentences": 4,
+   "title": "IC34",
+   "url": "https://pt.wikipedia.org/wiki/IC34"
+  },
+  {
+   "sentences": 2,
+   "title": "Dolná Breznica",
+   "url": "https://pt.wikipedia.org/wiki/Doln%C3%A1_Breznica"
+  },
+  {
+   "sentences": 9,
+   "title": "Albert–Daly Field",
+   "url": "https://pt.wikipedia.org/wiki/Albert%E2%80%93Daly_Field"
+  },
+  {
+   "sentences": 2,
+   "title": "Cotovia-de-obbia",
+   "url": "https://pt.wikipedia.org/wiki/Cotovia-de-obbia"
+  },
+  {
+   "sentences": 2,
+   "title": "Dan Janvey",
+   "url": "https://pt.wikipedia.org/wiki/Dan_Janvey"
+  },
+  {
+   "sentences": 16,
+   "title": "Quiaios",
+   "url": "https://pt.wikipedia.org/wiki/Quiaios"
+  },
+  {
+   "sentences": 25,
+   "title": "Conspiração dos eleitores falsos de Donald Trump",
+   "url": "https://pt.wikipedia.org/wiki/Conspira%C3%A7%C3%A3o_dos_eleitores_falsos_de_Donald_Trump"
+  },
+  {
+   "sentences": 6,
+   "title": "Pedro de Almada Pereira",
+   "url": "https://pt.wikipedia.org/wiki/Pedro_de_Almada_Pereira"
+  },
+  {
+   "sentences": 1,
+   "title": "Grande Prêmio de Aragão de 2018 (MotoGP)",
+   "url": "https://pt.wikipedia.org/wiki/Grande_Pr%C3%AAmio_de_Arag%C3%A3o_de_2018_%28MotoGP%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Akagi (mangá)",
+   "url": "https://pt.wikipedia.org/wiki/Akagi_%28mang%C3%A1%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Cleistes revoluta",
+   "url": "https://pt.wikipedia.org/wiki/Cleistes_revoluta"
+  },
+  {
+   "sentences": 4,
+   "title": "Museu Internacional de Manga de Quioto",
+   "url": "https://pt.wikipedia.org/wiki/Museu_Internacional_de_Manga_de_Quioto"
+  },
+  {
+   "sentences": 1,
+   "title": "Chiyonofuji Mitsugu",
+   "url": "https://pt.wikipedia.org/wiki/Chiyonofuji_Mitsugu"
+  },
+  {
+   "sentences": 2,
+   "title": "Revista feminina",
+   "url": "https://pt.wikipedia.org/wiki/Revista_feminina"
+  },
+  {
+   "sentences": 3,
+   "title": "Chaloneriaceae",
+   "url": "https://pt.wikipedia.org/wiki/Chaloneriaceae"
+  },
+  {
+   "sentences": 7,
+   "title": "Charles Rebozo",
+   "url": "https://pt.wikipedia.org/wiki/Charles_Rebozo"
+  },
+  {
+   "sentences": 4,
+   "title": "Lista de satélites Kosmos (2251–2500)",
+   "url": "https://pt.wikipedia.org/wiki/Lista_de_sat%C3%A9lites_Kosmos_%282251%E2%80%932500%29"
+  },
+  {
+   "sentences": 7,
+   "title": "JVC HR-3300",
+   "url": "https://pt.wikipedia.org/wiki/JVC_HR-3300"
+  },
+  {
+   "sentences": 2,
+   "title": "Ölbő",
+   "url": "https://pt.wikipedia.org/wiki/%C3%96lb%C5%91"
+  },
+  {
+   "sentences": 25,
+   "title": "Nada É Tão Novo, Nada É Tão Velho",
+   "url": "https://pt.wikipedia.org/wiki/Nada_%C3%89_T%C3%A3o_Novo%2C_Nada_%C3%89_T%C3%A3o_Velho"
+  },
+  {
+   "sentences": 2,
+   "title": "Cormery",
+   "url": "https://pt.wikipedia.org/wiki/Cormery"
+  },
+  {
+   "sentences": 1,
+   "title": "Galve de Sorbe",
+   "url": "https://pt.wikipedia.org/wiki/Galve_de_Sorbe"
+  },
+  {
+   "sentences": 2,
+   "title": "Netocracia",
+   "url": "https://pt.wikipedia.org/wiki/Netocracia"
+  },
+  {
+   "sentences": 2,
+   "title": "Lista do patrimônio histórico em Pernambuco",
+   "url": "https://pt.wikipedia.org/wiki/Lista_do_patrim%C3%B4nio_hist%C3%B3rico_em_Pernambuco"
+  },
+  {
+   "sentences": 2,
+   "title": "Fejervarya modestus",
+   "url": "https://pt.wikipedia.org/wiki/Fejervarya_modestus"
+  },
+  {
+   "sentences": 18,
+   "title": "U-263",
+   "url": "https://pt.wikipedia.org/wiki/U-263"
+  },
+  {
+   "sentences": 7,
+   "title": "Songs for Polarbears",
+   "url": "https://pt.wikipedia.org/wiki/Songs_for_Polarbears"
+  },
+  {
+   "sentences": 2,
+   "title": "Sofia Matos",
+   "url": "https://pt.wikipedia.org/wiki/Sofia_Matos"
+  },
+  {
+   "sentences": 4,
+   "title": "Floyd Dunn",
+   "url": "https://pt.wikipedia.org/wiki/Floyd_Dunn"
+  },
+  {
+   "sentences": 2,
+   "title": "Condor (ópera)",
+   "url": "https://pt.wikipedia.org/wiki/Condor_%28%C3%B3pera%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Ceratobasidium ochroleucum",
+   "url": "https://pt.wikipedia.org/wiki/Ceratobasidium_ochroleucum"
+  },
+  {
+   "sentences": 2,
+   "title": "Thordr Kolbeinsson",
+   "url": "https://pt.wikipedia.org/wiki/Thordr_Kolbeinsson"
+  },
+  {
+   "sentences": 7,
+   "title": "Visconde de Vilar de Allen",
+   "url": "https://pt.wikipedia.org/wiki/Visconde_de_Vilar_de_Allen"
+  },
+  {
+   "sentences": 3,
+   "title": "WCW Cruiserweight Tag Team Championship",
+   "url": "https://pt.wikipedia.org/wiki/WCW_Cruiserweight_Tag_Team_Championship"
+  },
+  {
+   "sentences": 3,
+   "title": "Bundesautobahn 995",
+   "url": "https://pt.wikipedia.org/wiki/Bundesautobahn_995"
+  },
+  {
+   "sentences": 2,
+   "title": "Agrilus sylvestris",
+   "url": "https://pt.wikipedia.org/wiki/Agrilus_sylvestris"
+  },
+  {
+   "sentences": 1,
+   "title": "Francesco Caputo",
+   "url": "https://pt.wikipedia.org/wiki/Francesco_Caputo"
+  },
+  {
+   "sentences": 8,
+   "title": "Sintagma (desambiguação)",
+   "url": "https://pt.wikipedia.org/wiki/Sintagma_%28desambigua%C3%A7%C3%A3o%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Yuta Watanabe (badminton)",
+   "url": "https://pt.wikipedia.org/wiki/Yuta_Watanabe_%28badminton%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Johnny Damon",
+   "url": "https://pt.wikipedia.org/wiki/Johnny_Damon"
+  },
+  {
+   "sentences": 11,
+   "title": "Arquidiocese de Cashel e Emly",
+   "url": "https://pt.wikipedia.org/wiki/Arquidiocese_de_Cashel_e_Emly"
+  },
+  {
+   "sentences": 2,
+   "title": "Eliminatórias para o Campeonato Africano das Nações de 2025 – Grupo B",
+   "url": "https://pt.wikipedia.org/wiki/Eliminat%C3%B3rias_para_o_Campeonato_Africano_das_Na%C3%A7%C3%B5es_de_2025_%E2%80%93_Grupo_B"
+  },
+  {
+   "sentences": 14,
+   "title": "Benfica",
+   "url": "https://pt.wikipedia.org/wiki/Benfica"
+  },
+  {
+   "sentences": 25,
+   "title": "Mary Simon",
+   "url": "https://pt.wikipedia.org/wiki/Mary_Simon"
+  },
+  {
+   "sentences": 3,
+   "title": "Engraulicypris sardella",
+   "url": "https://pt.wikipedia.org/wiki/Engraulicypris_sardella"
+  },
+  {
+   "sentences": 25,
+   "title": "Anticristo",
+   "url": "https://pt.wikipedia.org/wiki/Anticristo"
+  },
+  {
+   "sentences": 25,
+   "title": "Voo USAir 427",
+   "url": "https://pt.wikipedia.org/wiki/Voo_USAir_427"
+  },
+  {
+   "sentences": 25,
+   "title": "João Teotónio Pereira",
+   "url": "https://pt.wikipedia.org/wiki/Jo%C3%A3o_Teot%C3%B3nio_Pereira"
+  },
+  {
+   "sentences": 23,
+   "title": "Voo transatlântico",
+   "url": "https://pt.wikipedia.org/wiki/Voo_transatl%C3%A2ntico"
+  },
+  {
+   "sentences": 25,
+   "title": "William Guybon Atherstone",
+   "url": "https://pt.wikipedia.org/wiki/William_Guybon_Atherstone"
+  },
+  {
+   "sentences": 5,
+   "title": "Supercopa Francesa de Voleibol Masculino de 2015",
+   "url": "https://pt.wikipedia.org/wiki/Supercopa_Francesa_de_Voleibol_Masculino_de_2015"
+  },
+  {
+   "sentences": 17,
+   "title": "Asokavadana",
+   "url": "https://pt.wikipedia.org/wiki/Asokavadana"
+  },
+  {
+   "sentences": 25,
+   "title": "Christine Lambrecht",
+   "url": "https://pt.wikipedia.org/wiki/Christine_Lambrecht"
+  },
+  {
+   "sentences": 2,
+   "title": "Coordenação do cuidado",
+   "url": "https://pt.wikipedia.org/wiki/Coordena%C3%A7%C3%A3o_do_cuidado"
+  },
+  {
+   "sentences": 7,
+   "title": "Carro conceptual",
+   "url": "https://pt.wikipedia.org/wiki/Carro_conceptual"
+  },
+  {
+   "sentences": 25,
+   "title": "21 de setembro",
+   "url": "https://pt.wikipedia.org/wiki/21_de_setembro"
+  },
+  {
+   "sentences": 3,
+   "title": "Campelo (Figueiró dos Vinhos)",
+   "url": "https://pt.wikipedia.org/wiki/Campelo_%28Figueir%C3%B3_dos_Vinhos%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Trimebutina",
+   "url": "https://pt.wikipedia.org/wiki/Trimebutina"
+  },
+  {
+   "sentences": 1,
+   "title": "Sandrinha e a Garotada vol. 6",
+   "url": "https://pt.wikipedia.org/wiki/Sandrinha_e_a_Garotada_vol._6"
+  },
+  {
+   "sentences": 22,
+   "title": "World Poker Tour (5.ª temporada)",
+   "url": "https://pt.wikipedia.org/wiki/World_Poker_Tour_%285.%C2%AA_temporada%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Schwing Stetter",
+   "url": "https://pt.wikipedia.org/wiki/Schwing_Stetter"
+  },
+  {
+   "sentences": 25,
+   "title": "Ator",
+   "url": "https://pt.wikipedia.org/wiki/Ator"
+  },
+  {
+   "sentences": 25,
+   "title": "Visita de Estado aos Estados Unidos",
+   "url": "https://pt.wikipedia.org/wiki/Visita_de_Estado_aos_Estados_Unidos"
+  },
+  {
+   "sentences": 1,
+   "title": "Lista de selos de Portugal Colónias - Angra",
+   "url": "https://pt.wikipedia.org/wiki/Lista_de_selos_de_Portugal_Col%C3%B3nias_-_Angra"
+  },
+  {
+   "sentences": 25,
+   "title": "Cruz Diablo",
+   "url": "https://pt.wikipedia.org/wiki/Cruz_Diablo"
+  },
+  {
+   "sentences": 7,
+   "title": "Circuito Internacional de Okayama",
+   "url": "https://pt.wikipedia.org/wiki/Circuito_Internacional_de_Okayama"
+  },
+  {
+   "sentences": 4,
+   "title": "Zumbi dos Palmares (Manaus)",
+   "url": "https://pt.wikipedia.org/wiki/Zumbi_dos_Palmares_%28Manaus%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Discografia de Jefferson Starship",
+   "url": "https://pt.wikipedia.org/wiki/Discografia_de_Jefferson_Starship"
+  },
+  {
+   "sentences": 3,
+   "title": "Tom Boyd",
+   "url": "https://pt.wikipedia.org/wiki/Tom_Boyd"
+  },
+  {
+   "sentences": 14,
+   "title": "Dead to Rights (séries)",
+   "url": "https://pt.wikipedia.org/wiki/Dead_to_Rights_%28s%C3%A9ries%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Jedi",
+   "url": "https://pt.wikipedia.org/wiki/Jedi"
+  },
+  {
+   "sentences": 18,
+   "title": "Smyrnium olusatrum",
+   "url": "https://pt.wikipedia.org/wiki/Smyrnium_olusatrum"
+  },
+  {
+   "sentences": 25,
+   "title": "Virgem (título)",
+   "url": "https://pt.wikipedia.org/wiki/Virgem_%28t%C3%ADtulo%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Lever",
+   "url": "https://pt.wikipedia.org/wiki/Lever"
+  },
+  {
+   "sentences": 1,
+   "title": "Xirivella",
+   "url": "https://pt.wikipedia.org/wiki/Xirivella"
+  },
+  {
+   "sentences": 1,
+   "title": "Eleições parlamentares europeias de 1989 no distrito de Santarém",
+   "url": "https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%B5es_parlamentares_europeias_de_1989_no_distrito_de_Santar%C3%A9m"
+  },
+  {
+   "sentences": 2,
+   "title": "Misgurnus fossilis",
+   "url": "https://pt.wikipedia.org/wiki/Misgurnus_fossilis"
+  },
+  {
+   "sentences": 2,
+   "title": "Pristimantis bounides",
+   "url": "https://pt.wikipedia.org/wiki/Pristimantis_bounides"
+  },
+  {
+   "sentences": 25,
+   "title": "Cristãos curdos",
+   "url": "https://pt.wikipedia.org/wiki/Crist%C3%A3os_curdos"
+  },
+  {
+   "sentences": 1,
+   "title": "USS LST-271",
+   "url": "https://pt.wikipedia.org/wiki/USS_LST-271"
+  },
+  {
+   "sentences": 1,
+   "title": "Phrynobatrachus bullans",
+   "url": "https://pt.wikipedia.org/wiki/Phrynobatrachus_bullans"
+  },
+  {
+   "sentences": 14,
+   "title": "Sociedade Esportiva Platinense",
+   "url": "https://pt.wikipedia.org/wiki/Sociedade_Esportiva_Platinense"
+  },
+  {
+   "sentences": 25,
+   "title": "Bela Bajaria",
+   "url": "https://pt.wikipedia.org/wiki/Bela_Bajaria"
+  },
+  {
+   "sentences": 25,
+   "title": "Kleiton Lima",
+   "url": "https://pt.wikipedia.org/wiki/Kleiton_Lima"
+  },
+  {
+   "sentences": 6,
+   "title": "Rio Perené",
+   "url": "https://pt.wikipedia.org/wiki/Rio_Peren%C3%A9"
+  },
+  {
+   "sentences": 4,
+   "title": "Marble (Minnesota)",
+   "url": "https://pt.wikipedia.org/wiki/Marble_%28Minnesota%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Adriana (filme)",
+   "url": "https://pt.wikipedia.org/wiki/Adriana_%28filme%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Seleção dos Estados Unidos de Basquetebol Feminino",
+   "url": "https://pt.wikipedia.org/wiki/Sele%C3%A7%C3%A3o_dos_Estados_Unidos_de_Basquetebol_Feminino"
+  },
+  {
+   "sentences": 12,
+   "title": "Gifted",
+   "url": "https://pt.wikipedia.org/wiki/Gifted"
+  },
+  {
+   "sentences": 3,
+   "title": "Agapeta hamana",
+   "url": "https://pt.wikipedia.org/wiki/Agapeta_hamana"
+  },
+  {
+   "sentences": 2,
+   "title": "Acacia adenogonia",
+   "url": "https://pt.wikipedia.org/wiki/Acacia_adenogonia"
+  },
+  {
+   "sentences": 25,
+   "title": "Kim Hwal-lan",
+   "url": "https://pt.wikipedia.org/wiki/Kim_Hwal-lan"
+  },
+  {
+   "sentences": 7,
+   "title": "Eleições autárquicas de 2025 em Odivelas",
+   "url": "https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%B5es_aut%C3%A1rquicas_de_2025_em_Odivelas"
+  },
+  {
+   "sentences": 5,
+   "title": "DNA Films",
+   "url": "https://pt.wikipedia.org/wiki/DNA_Films"
+  },
+  {
+   "sentences": 8,
+   "title": "Santa Maria Addolorata all'Esquilino",
+   "url": "https://pt.wikipedia.org/wiki/Santa_Maria_Addolorata_all%27Esquilino"
+  },
+  {
+   "sentences": 5,
+   "title": "Coleophora perissa",
+   "url": "https://pt.wikipedia.org/wiki/Coleophora_perissa"
+  },
+  {
+   "sentences": 2,
+   "title": "Perservação do pensamento",
+   "url": "https://pt.wikipedia.org/wiki/Perserva%C3%A7%C3%A3o_do_pensamento"
+  },
+  {
+   "sentences": 2,
+   "title": "Fire Down Below (1997)",
+   "url": "https://pt.wikipedia.org/wiki/Fire_Down_Below_%281997%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Condado de Madison (Mississippi)",
+   "url": "https://pt.wikipedia.org/wiki/Condado_de_Madison_%28Mississippi%29"
+  },
+  {
+   "sentences": 5,
+   "title": "José Pardo y Barreda",
+   "url": "https://pt.wikipedia.org/wiki/Jos%C3%A9_Pardo_y_Barreda"
+  },
+  {
+   "sentences": 25,
+   "title": "The ReVe Festival: Finale",
+   "url": "https://pt.wikipedia.org/wiki/The_ReVe_Festival%3A_Finale"
+  },
+  {
+   "sentences": 19,
+   "title": "We'll Never Have Paris",
+   "url": "https://pt.wikipedia.org/wiki/We%27ll_Never_Have_Paris"
+  },
+  {
+   "sentences": 3,
+   "title": "Onthophagus atronitidus",
+   "url": "https://pt.wikipedia.org/wiki/Onthophagus_atronitidus"
+  },
+  {
+   "sentences": 5,
+   "title": "Província Livre de Guayaquil",
+   "url": "https://pt.wikipedia.org/wiki/Prov%C3%ADncia_Livre_de_Guayaquil"
+  },
+  {
+   "sentences": 4,
+   "title": "Childhood's End",
+   "url": "https://pt.wikipedia.org/wiki/Childhood%27s_End"
+  },
+  {
+   "sentences": 4,
+   "title": "Siphoneugena",
+   "url": "https://pt.wikipedia.org/wiki/Siphoneugena"
+  },
+  {
+   "sentences": 11,
+   "title": "Vitriol",
+   "url": "https://pt.wikipedia.org/wiki/Vitriol"
+  },
+  {
+   "sentences": 25,
+   "title": "Plano Manstein",
+   "url": "https://pt.wikipedia.org/wiki/Plano_Manstein"
+  },
+  {
+   "sentences": 25,
+   "title": "Chichén Itzá",
+   "url": "https://pt.wikipedia.org/wiki/Chich%C3%A9n_Itz%C3%A1"
+  },
+  {
+   "sentences": 2,
+   "title": "Município de Sveti Nikole",
+   "url": "https://pt.wikipedia.org/wiki/Munic%C3%ADpio_de_Sveti_Nikole"
+  },
+  {
+   "sentences": 4,
+   "title": "Plasmodium ovale",
+   "url": "https://pt.wikipedia.org/wiki/Plasmodium_ovale"
+  },
+  {
+   "sentences": 3,
+   "title": "San Ferdinando di Puglia",
+   "url": "https://pt.wikipedia.org/wiki/San_Ferdinando_di_Puglia"
+  },
+  {
+   "sentences": 25,
+   "title": "Língua cebuana",
+   "url": "https://pt.wikipedia.org/wiki/L%C3%ADngua_cebuana"
+  },
+  {
+   "sentences": 25,
+   "title": "Lǎo hú li",
+   "url": "https://pt.wikipedia.org/wiki/L%C7%8Eo_h%C3%BA_li"
+  },
+  {
+   "sentences": 1,
+   "title": "Wilfrido Vargas",
+   "url": "https://pt.wikipedia.org/wiki/Wilfrido_Vargas"
+  },
+  {
+   "sentences": 6,
+   "title": "Área de Proteção Ambiental do Buriti do Meio",
+   "url": "https://pt.wikipedia.org/wiki/%C3%81rea_de_Prote%C3%A7%C3%A3o_Ambiental_do_Buriti_do_Meio"
+  },
+  {
+   "sentences": 1,
+   "title": "Calacuccia",
+   "url": "https://pt.wikipedia.org/wiki/Calacuccia"
+  },
+  {
+   "sentences": 7,
+   "title": "Paulo Mussalém",
+   "url": "https://pt.wikipedia.org/wiki/Paulo_Mussal%C3%A9m"
+  },
+  {
+   "sentences": 10,
+   "title": "Aslambek Aslakhanov",
+   "url": "https://pt.wikipedia.org/wiki/Aslambek_Aslakhanov"
+  },
+  {
+   "sentences": 8,
+   "title": "Igreja de Nossa Senhora da Graça (Sagres)",
+   "url": "https://pt.wikipedia.org/wiki/Igreja_de_Nossa_Senhora_da_Gra%C3%A7a_%28Sagres%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Ugo Fantozzi",
+   "url": "https://pt.wikipedia.org/wiki/Ugo_Fantozzi"
+  },
+  {
+   "sentences": 1,
+   "title": "Campeonato Pan-Americano de Ginástica de 2001",
+   "url": "https://pt.wikipedia.org/wiki/Campeonato_Pan-Americano_de_Gin%C3%A1stica_de_2001"
+  },
+  {
+   "sentences": 1,
+   "title": "Swallenia",
+   "url": "https://pt.wikipedia.org/wiki/Swallenia"
+  },
+  {
+   "sentences": 1,
+   "title": "Cavunga",
+   "url": "https://pt.wikipedia.org/wiki/Cavunga"
+  },
+  {
+   "sentences": 6,
+   "title": "Minestrone",
+   "url": "https://pt.wikipedia.org/wiki/Minestrone"
+  },
+  {
+   "sentences": 2,
+   "title": "Underwood-Petersville (Alabama)",
+   "url": "https://pt.wikipedia.org/wiki/Underwood-Petersville_%28Alabama%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Volta à Romandia de 1964",
+   "url": "https://pt.wikipedia.org/wiki/Volta_%C3%A0_Romandia_de_1964"
+  },
+  {
+   "sentences": 8,
+   "title": "Next Friday (trilha sonora)",
+   "url": "https://pt.wikipedia.org/wiki/Next_Friday_%28trilha_sonora%29"
+  },
+  {
+   "sentences": 12,
+   "title": "Bernice Madigan",
+   "url": "https://pt.wikipedia.org/wiki/Bernice_Madigan"
+  },
+  {
+   "sentences": 2,
+   "title": "Allex",
+   "url": "https://pt.wikipedia.org/wiki/Allex"
+  },
+  {
+   "sentences": 1,
+   "title": "Zaberfeld",
+   "url": "https://pt.wikipedia.org/wiki/Zaberfeld"
+  },
+  {
+   "sentences": 9,
+   "title": "Mike Todorovich",
+   "url": "https://pt.wikipedia.org/wiki/Mike_Todorovich"
+  },
+  {
+   "sentences": 6,
+   "title": "Winchester Mystery House",
+   "url": "https://pt.wikipedia.org/wiki/Winchester_Mystery_House"
+  },
+  {
+   "sentences": 1,
+   "title": "Funes (Colômbia)",
+   "url": "https://pt.wikipedia.org/wiki/Funes_%28Col%C3%B4mbia%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Liberdade, 222",
+   "url": "https://pt.wikipedia.org/wiki/Liberdade%2C_222"
+  },
+  {
+   "sentences": 3,
+   "title": "Meridiano 19 W",
+   "url": "https://pt.wikipedia.org/wiki/Meridiano_19_W"
+  },
+  {
+   "sentences": 9,
+   "title": "Nick Bruno e Troy Quane",
+   "url": "https://pt.wikipedia.org/wiki/Nick_Bruno_e_Troy_Quane"
+  },
+  {
+   "sentences": 25,
+   "title": ".41 Long Colt",
+   "url": "https://pt.wikipedia.org/wiki/.41_Long_Colt"
+  },
+  {
+   "sentences": 9,
+   "title": "Bermondsey (Metropolitano de Londres)",
+   "url": "https://pt.wikipedia.org/wiki/Bermondsey_%28Metropolitano_de_Londres%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Seleção Iraquiana de Futebol",
+   "url": "https://pt.wikipedia.org/wiki/Sele%C3%A7%C3%A3o_Iraquiana_de_Futebol"
+  },
+  {
+   "sentences": 2,
+   "title": "Lynchius oblitus",
+   "url": "https://pt.wikipedia.org/wiki/Lynchius_oblitus"
+  },
+  {
+   "sentences": 3,
+   "title": "WITS Academy",
+   "url": "https://pt.wikipedia.org/wiki/WITS_Academy"
+  },
+  {
+   "sentences": 7,
+   "title": "Rolim de Moura",
+   "url": "https://pt.wikipedia.org/wiki/Rolim_de_Moura"
+  },
+  {
+   "sentences": 2,
+   "title": "Onthophagus schunckei",
+   "url": "https://pt.wikipedia.org/wiki/Onthophagus_schunckei"
+  },
+  {
+   "sentences": 25,
+   "title": "Porfirina",
+   "url": "https://pt.wikipedia.org/wiki/Porfirina"
+  },
+  {
+   "sentences": 25,
+   "title": "Gwen Lister",
+   "url": "https://pt.wikipedia.org/wiki/Gwen_Lister"
+  },
+  {
+   "sentences": 2,
+   "title": "Zheng Pengfei",
+   "url": "https://pt.wikipedia.org/wiki/Zheng_Pengfei"
+  },
+  {
+   "sentences": 25,
+   "title": "Balzi Rossi",
+   "url": "https://pt.wikipedia.org/wiki/Balzi_Rossi"
+  },
+  {
+   "sentences": 1,
+   "title": "Xenohyla",
+   "url": "https://pt.wikipedia.org/wiki/Xenohyla"
+  },
+  {
+   "sentences": 4,
+   "title": "Sigma Sound Studios",
+   "url": "https://pt.wikipedia.org/wiki/Sigma_Sound_Studios"
+  },
+  {
+   "sentences": 19,
+   "title": "Stalking Gia",
+   "url": "https://pt.wikipedia.org/wiki/Stalking_Gia"
+  },
+  {
+   "sentences": 1,
+   "title": "Větrný Jeníkov",
+   "url": "https://pt.wikipedia.org/wiki/V%C4%9Btrn%C3%BD_Jen%C3%ADkov"
+  },
+  {
+   "sentences": 25,
+   "title": "Rolo de desminagem",
+   "url": "https://pt.wikipedia.org/wiki/Rolo_de_desminagem"
+  },
+  {
+   "sentences": 8,
+   "title": "Factotum",
+   "url": "https://pt.wikipedia.org/wiki/Factotum"
+  },
+  {
+   "sentences": 10,
+   "title": "Time Pieces: The Best of Eric Clapton",
+   "url": "https://pt.wikipedia.org/wiki/Time_Pieces%3A_The_Best_of_Eric_Clapton"
+  },
+  {
+   "sentences": 3,
+   "title": "Automeris angulatus",
+   "url": "https://pt.wikipedia.org/wiki/Automeris_angulatus"
+  },
+  {
+   "sentences": 25,
+   "title": "Mehdi Mujahid",
+   "url": "https://pt.wikipedia.org/wiki/Mehdi_Mujahid"
+  },
+  {
+   "sentences": 3,
+   "title": "Colias johanseni",
+   "url": "https://pt.wikipedia.org/wiki/Colias_johanseni"
+  },
+  {
+   "sentences": 15,
+   "title": "Campeonato Timorense de Futebol de 2020-21",
+   "url": "https://pt.wikipedia.org/wiki/Campeonato_Timorense_de_Futebol_de_2020-21"
+  },
+  {
+   "sentences": 3,
+   "title": "Langast",
+   "url": "https://pt.wikipedia.org/wiki/Langast"
+  },
+  {
+   "sentences": 8,
+   "title": "Constantino Ducas (general)",
+   "url": "https://pt.wikipedia.org/wiki/Constantino_Ducas_%28general%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Chamaesphecia",
+   "url": "https://pt.wikipedia.org/wiki/Chamaesphecia"
+  },
+  {
+   "sentences": 4,
+   "title": "Formato transparente",
+   "url": "https://pt.wikipedia.org/wiki/Formato_transparente"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 2895",
+   "url": "https://pt.wikipedia.org/wiki/NGC_2895"
+  },
+  {
+   "sentences": 3,
+   "title": "Eslováquia nos Jogos Olímpicos de Inverno de 2010",
+   "url": "https://pt.wikipedia.org/wiki/Eslov%C3%A1quia_nos_Jogos_Ol%C3%ADmpicos_de_Inverno_de_2010"
+  },
+  {
+   "sentences": 14,
+   "title": "NNDB",
+   "url": "https://pt.wikipedia.org/wiki/NNDB"
+  },
+  {
+   "sentences": 23,
+   "title": "Herodiano (conde)",
+   "url": "https://pt.wikipedia.org/wiki/Herodiano_%28conde%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Daniel Marano",
+   "url": "https://pt.wikipedia.org/wiki/Daniel_Marano"
+  },
+  {
+   "sentences": 25,
+   "title": "Educação 4.0",
+   "url": "https://pt.wikipedia.org/wiki/Educa%C3%A7%C3%A3o_4.0"
+  },
+  {
+   "sentences": 12,
+   "title": "Rã-da-floresta",
+   "url": "https://pt.wikipedia.org/wiki/R%C3%A3-da-floresta"
+  },
+  {
+   "sentences": 5,
+   "title": "Lasse Rempe",
+   "url": "https://pt.wikipedia.org/wiki/Lasse_Rempe"
+  },
+  {
+   "sentences": 25,
+   "title": "Anette Trettebergstuen",
+   "url": "https://pt.wikipedia.org/wiki/Anette_Trettebergstuen"
+  },
+  {
+   "sentences": 6,
+   "title": "Jackson Galaxy",
+   "url": "https://pt.wikipedia.org/wiki/Jackson_Galaxy"
+  },
+  {
+   "sentences": 4,
+   "title": "1860 na ciência",
+   "url": "https://pt.wikipedia.org/wiki/1860_na_ci%C3%AAncia"
+  },
+  {
+   "sentences": 25,
+   "title": "Flórida",
+   "url": "https://pt.wikipedia.org/wiki/Fl%C3%B3rida"
+  },
+  {
+   "sentences": 1,
+   "title": "Pasewalk",
+   "url": "https://pt.wikipedia.org/wiki/Pasewalk"
+  },
+  {
+   "sentences": 5,
+   "title": "Quircuque",
+   "url": "https://pt.wikipedia.org/wiki/Quircuque"
+  },
+  {
+   "sentences": 25,
+   "title": "René Rast",
+   "url": "https://pt.wikipedia.org/wiki/Ren%C3%A9_Rast"
+  },
+  {
+   "sentences": 25,
+   "title": "Honda Tadakatsu",
+   "url": "https://pt.wikipedia.org/wiki/Honda_Tadakatsu"
+  },
+  {
+   "sentences": 25,
+   "title": "King (jogo de cartas)",
+   "url": "https://pt.wikipedia.org/wiki/King_%28jogo_de_cartas%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Câu lạc bộ bóng đá Đông Á Thanh Hóa",
+   "url": "https://pt.wikipedia.org/wiki/C%C3%A2u_l%E1%BA%A1c_b%E1%BB%99_b%C3%B3ng_%C4%91%C3%A1_%C4%90%C3%B4ng_%C3%81_Thanh_H%C3%B3a"
+  },
+  {
+   "sentences": 25,
+   "title": "Rey de Reyes (2026)",
+   "url": "https://pt.wikipedia.org/wiki/Rey_de_Reyes_%282026%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Zork",
+   "url": "https://pt.wikipedia.org/wiki/Zork"
+  },
+  {
+   "sentences": 7,
+   "title": "89 a.C.",
+   "url": "https://pt.wikipedia.org/wiki/89_a.C."
+  },
+  {
+   "sentences": 11,
+   "title": "Toby Hemingway",
+   "url": "https://pt.wikipedia.org/wiki/Toby_Hemingway"
+  },
+  {
+   "sentences": 9,
+   "title": "Hospital Português da Bahia",
+   "url": "https://pt.wikipedia.org/wiki/Hospital_Portugu%C3%AAs_da_Bahia"
+  },
+  {
+   "sentences": 6,
+   "title": "Steeles Avenue",
+   "url": "https://pt.wikipedia.org/wiki/Steeles_Avenue"
+  },
+  {
+   "sentences": 5,
+   "title": "Aloe pachydactylos",
+   "url": "https://pt.wikipedia.org/wiki/Aloe_pachydactylos"
+  },
+  {
+   "sentences": 25,
+   "title": "Lúcio Cornélio Balbo Maior",
+   "url": "https://pt.wikipedia.org/wiki/L%C3%BAcio_Corn%C3%A9lio_Balbo_Maior"
+  },
+  {
+   "sentences": 1,
+   "title": "Dreata",
+   "url": "https://pt.wikipedia.org/wiki/Dreata"
+  },
+  {
+   "sentences": 1,
+   "title": "Bugny",
+   "url": "https://pt.wikipedia.org/wiki/Bugny"
+  },
+  {
+   "sentences": 4,
+   "title": "Campeonato Sul-Americano de Atletismo Sub-20 de 2024",
+   "url": "https://pt.wikipedia.org/wiki/Campeonato_Sul-Americano_de_Atletismo_Sub-20_de_2024"
+  },
+  {
+   "sentences": 1,
+   "title": "Vrbno nad Lesy",
+   "url": "https://pt.wikipedia.org/wiki/Vrbno_nad_Lesy"
+  },
+  {
+   "sentences": 18,
+   "title": "Enrique Santos Discépolo",
+   "url": "https://pt.wikipedia.org/wiki/Enrique_Santos_Disc%C3%A9polo"
+  },
+  {
+   "sentences": 25,
+   "title": "Pedro Geromel",
+   "url": "https://pt.wikipedia.org/wiki/Pedro_Geromel"
+  },
+  {
+   "sentences": 1,
+   "title": "Petite-Rosselle",
+   "url": "https://pt.wikipedia.org/wiki/Petite-Rosselle"
+  },
+  {
+   "sentences": 25,
+   "title": "Anticorpos amplamente neutralizantes do HIV-1",
+   "url": "https://pt.wikipedia.org/wiki/Anticorpos_amplamente_neutralizantes_do_HIV-1"
+  },
+  {
+   "sentences": 2,
+   "title": "Bahamas nos Jogos Paralímpicos de Verão de 1988",
+   "url": "https://pt.wikipedia.org/wiki/Bahamas_nos_Jogos_Paral%C3%ADmpicos_de_Ver%C3%A3o_de_1988"
+  },
+  {
+   "sentences": 2,
+   "title": "Martin (Eslováquia)",
+   "url": "https://pt.wikipedia.org/wiki/Martin_%28Eslov%C3%A1quia%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Henry Hallett",
+   "url": "https://pt.wikipedia.org/wiki/Henry_Hallett"
+  },
+  {
+   "sentences": 25,
+   "title": "São Lourenço do Oeste",
+   "url": "https://pt.wikipedia.org/wiki/S%C3%A3o_Louren%C3%A7o_do_Oeste"
+  },
+  {
+   "sentences": 25,
+   "title": "Frota F do Metropolitano de São Paulo",
+   "url": "https://pt.wikipedia.org/wiki/Frota_F_do_Metropolitano_de_S%C3%A3o_Paulo"
+  },
+  {
+   "sentences": 14,
+   "title": "Glee: The 3D Concert Movie",
+   "url": "https://pt.wikipedia.org/wiki/Glee%3A_The_3D_Concert_Movie"
+  },
+  {
+   "sentences": 6,
+   "title": "ARA Santísima Trinidad (D-2)",
+   "url": "https://pt.wikipedia.org/wiki/ARA_Sant%C3%ADsima_Trinidad_%28D-2%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Stephan Rauschert",
+   "url": "https://pt.wikipedia.org/wiki/Stephan_Rauschert"
+  },
+  {
+   "sentences": 3,
+   "title": "UFC 121",
+   "url": "https://pt.wikipedia.org/wiki/UFC_121"
+  },
+  {
+   "sentences": 16,
+   "title": "Reigada",
+   "url": "https://pt.wikipedia.org/wiki/Reigada"
+  },
+  {
+   "sentences": 5,
+   "title": "Dom João I (1828)",
+   "url": "https://pt.wikipedia.org/wiki/Dom_Jo%C3%A3o_I_%281828%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Adán Godoy",
+   "url": "https://pt.wikipedia.org/wiki/Ad%C3%A1n_Godoy"
+  },
+  {
+   "sentences": 3,
+   "title": "Miguel Ángel Hurtado",
+   "url": "https://pt.wikipedia.org/wiki/Miguel_%C3%81ngel_Hurtado"
+  },
+  {
+   "sentences": 1,
+   "title": "Petrosimonia",
+   "url": "https://pt.wikipedia.org/wiki/Petrosimonia"
+  },
+  {
+   "sentences": 25,
+   "title": "Juliet Bravo",
+   "url": "https://pt.wikipedia.org/wiki/Juliet_Bravo"
+  },
+  {
+   "sentences": 13,
+   "title": "Eleições estaduais no Acre em 1986",
+   "url": "https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%B5es_estaduais_no_Acre_em_1986"
+  },
+  {
+   "sentences": 22,
+   "title": "Luiza Monteiro",
+   "url": "https://pt.wikipedia.org/wiki/Luiza_Monteiro"
+  },
+  {
+   "sentences": 5,
+   "title": "Comuna de Radziechowy-Wiepr",
+   "url": "https://pt.wikipedia.org/wiki/Comuna_de_Radziechowy-Wiepr"
+  },
+  {
+   "sentences": 25,
+   "title": "Furacão Florence",
+   "url": "https://pt.wikipedia.org/wiki/Furac%C3%A3o_Florence"
+  },
+  {
+   "sentences": 2,
+   "title": "Andale (Kansas)",
+   "url": "https://pt.wikipedia.org/wiki/Andale_%28Kansas%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Als",
+   "url": "https://pt.wikipedia.org/wiki/Als"
+  },
+  {
+   "sentences": 8,
+   "title": "Junk (álbum)",
+   "url": "https://pt.wikipedia.org/wiki/Junk_%28%C3%A1lbum%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Jan Commelijn",
+   "url": "https://pt.wikipedia.org/wiki/Jan_Commelijn"
+  },
+  {
+   "sentences": 13,
+   "title": "Capela-ardente",
+   "url": "https://pt.wikipedia.org/wiki/Capela-ardente"
+  },
+  {
+   "sentences": 7,
+   "title": "Rokosz",
+   "url": "https://pt.wikipedia.org/wiki/Rokosz"
+  },
+  {
+   "sentences": 7,
+   "title": "B'z The Best \"Pleasure\"",
+   "url": "https://pt.wikipedia.org/wiki/B%27z_The_Best_%22Pleasure%22"
+  },
+  {
+   "sentences": 4,
+   "title": "Gustine (Califórnia)",
+   "url": "https://pt.wikipedia.org/wiki/Gustine_%28Calif%C3%B3rnia%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Humberto Martins (magistrado)",
+   "url": "https://pt.wikipedia.org/wiki/Humberto_Martins_%28magistrado%29"
+  },
+  {
+   "sentences": 18,
+   "title": "Campeonato NORCECA de Voleibol Masculino de 2026",
+   "url": "https://pt.wikipedia.org/wiki/Campeonato_NORCECA_de_Voleibol_Masculino_de_2026"
+  },
+  {
+   "sentences": 10,
+   "title": "Fábia (esposa de Caio Licínio Estolão)",
+   "url": "https://pt.wikipedia.org/wiki/F%C3%A1bia_%28esposa_de_Caio_Lic%C3%ADnio_Estol%C3%A3o%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Grau Delisle",
+   "url": "https://pt.wikipedia.org/wiki/Grau_Delisle"
+  },
+  {
+   "sentences": 5,
+   "title": "Elachista encumeadae",
+   "url": "https://pt.wikipedia.org/wiki/Elachista_encumeadae"
+  },
+  {
+   "sentences": 2,
+   "title": "Meigs",
+   "url": "https://pt.wikipedia.org/wiki/Meigs"
+  },
+  {
+   "sentences": 17,
+   "title": "Jazmin Grace Grimaldi",
+   "url": "https://pt.wikipedia.org/wiki/Jazmin_Grace_Grimaldi"
+  },
+  {
+   "sentences": 1,
+   "title": "Pierrefitte-en-Auge",
+   "url": "https://pt.wikipedia.org/wiki/Pierrefitte-en-Auge"
+  },
+  {
+   "sentences": 5,
+   "title": "Classe LDM 200",
+   "url": "https://pt.wikipedia.org/wiki/Classe_LDM_200"
+  },
+  {
+   "sentences": 2,
+   "title": "Romance Proibido",
+   "url": "https://pt.wikipedia.org/wiki/Romance_Proibido"
+  },
+  {
+   "sentences": 3,
+   "title": "Jesper Christiansen",
+   "url": "https://pt.wikipedia.org/wiki/Jesper_Christiansen"
+  },
+  {
+   "sentences": 11,
+   "title": "Anton Friedrich Justus Thibaut",
+   "url": "https://pt.wikipedia.org/wiki/Anton_Friedrich_Justus_Thibaut"
+  },
+  {
+   "sentences": 8,
+   "title": "Sinfonia n.º 3 (Tchaikovski)",
+   "url": "https://pt.wikipedia.org/wiki/Sinfonia_n.%C2%BA_3_%28Tchaikovski%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Viehhofen",
+   "url": "https://pt.wikipedia.org/wiki/Viehhofen"
+  },
+  {
+   "sentences": 1,
+   "title": "Paa shini",
+   "url": "https://pt.wikipedia.org/wiki/Paa_shini"
+  },
+  {
+   "sentences": 10,
+   "title": "João da Silva Guimarães",
+   "url": "https://pt.wikipedia.org/wiki/Jo%C3%A3o_da_Silva_Guimar%C3%A3es"
+  },
+  {
+   "sentences": 25,
+   "title": "Golpe de Estado na Tunísia em 1987",
+   "url": "https://pt.wikipedia.org/wiki/Golpe_de_Estado_na_Tun%C3%ADsia_em_1987"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "pt",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 3971,
+ "wikipedia": "https://pt.wikipedia.org/"
+}

@@ -1,0 +1,1905 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://es.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 10,
+   "title": "5-cloro-1-penteno",
+   "url": "https://es.wikipedia.org/wiki/5-cloro-1-penteno"
+  },
+  {
+   "sentences": 8,
+   "title": "Ecuación de sexto grado",
+   "url": "https://es.wikipedia.org/wiki/Ecuaci%C3%B3n_de_sexto_grado"
+  },
+  {
+   "sentences": 22,
+   "title": "Ley anticorrupción de Brasil",
+   "url": "https://es.wikipedia.org/wiki/Ley_anticorrupci%C3%B3n_de_Brasil"
+  },
+  {
+   "sentences": 11,
+   "title": "André de Coutances",
+   "url": "https://es.wikipedia.org/wiki/Andr%C3%A9_de_Coutances"
+  },
+  {
+   "sentences": 25,
+   "title": "Universidad Tecnológica de Santiago",
+   "url": "https://es.wikipedia.org/wiki/Universidad_Tecnol%C3%B3gica_de_Santiago"
+  },
+  {
+   "sentences": 6,
+   "title": "Clon del Humvee (China)",
+   "url": "https://es.wikipedia.org/wiki/Clon_del_Humvee_%28China%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Paca Jiliberto",
+   "url": "https://es.wikipedia.org/wiki/Paca_Jiliberto"
+  },
+  {
+   "sentences": 9,
+   "title": "Diogeneion",
+   "url": "https://es.wikipedia.org/wiki/Diogeneion"
+  },
+  {
+   "sentences": 5,
+   "title": "Parque nacional de Zakouma",
+   "url": "https://es.wikipedia.org/wiki/Parque_nacional_de_Zakouma"
+  },
+  {
+   "sentences": 22,
+   "title": "Rompe hogares",
+   "url": "https://es.wikipedia.org/wiki/Rompe_hogares"
+  },
+  {
+   "sentences": 24,
+   "title": "Hotel 1898",
+   "url": "https://es.wikipedia.org/wiki/Hotel_1898"
+  },
+  {
+   "sentences": 3,
+   "title": "Generación Ni-Ni (programa de televisión)",
+   "url": "https://es.wikipedia.org/wiki/Generaci%C3%B3n_Ni-Ni_%28programa_de_televisi%C3%B3n%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Isotrias stramentana",
+   "url": "https://es.wikipedia.org/wiki/Isotrias_stramentana"
+  },
+  {
+   "sentences": 20,
+   "title": "París-Estambul sin regreso",
+   "url": "https://es.wikipedia.org/wiki/Par%C3%ADs-Estambul_sin_regreso"
+  },
+  {
+   "sentences": 3,
+   "title": "Bad Schwalbach",
+   "url": "https://es.wikipedia.org/wiki/Bad_Schwalbach"
+  },
+  {
+   "sentences": 3,
+   "title": "Psilopogon pyrolophus",
+   "url": "https://es.wikipedia.org/wiki/Psilopogon_pyrolophus"
+  },
+  {
+   "sentences": 3,
+   "title": "Wangpicheon",
+   "url": "https://es.wikipedia.org/wiki/Wangpicheon"
+  },
+  {
+   "sentences": 3,
+   "title": "Río Reur",
+   "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Reur"
+  },
+  {
+   "sentences": 9,
+   "title": "Heartbeat (canción de Justs)",
+   "url": "https://es.wikipedia.org/wiki/Heartbeat_%28canci%C3%B3n_de_Justs%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Santa Cruz da Esperança",
+   "url": "https://es.wikipedia.org/wiki/Santa_Cruz_da_Esperan%C3%A7a"
+  },
+  {
+   "sentences": 1,
+   "title": "InstaDeep",
+   "url": "https://es.wikipedia.org/wiki/InstaDeep"
+  },
+  {
+   "sentences": 2,
+   "title": "Hierba maestra",
+   "url": "https://es.wikipedia.org/wiki/Hierba_maestra"
+  },
+  {
+   "sentences": 5,
+   "title": "Iglesia de Valjala",
+   "url": "https://es.wikipedia.org/wiki/Iglesia_de_Valjala"
+  },
+  {
+   "sentences": 7,
+   "title": "Gypsy Train",
+   "url": "https://es.wikipedia.org/wiki/Gypsy_Train"
+  },
+  {
+   "sentences": 25,
+   "title": "Alejandro Jodorowsky",
+   "url": "https://es.wikipedia.org/wiki/Alejandro_Jodorowsky"
+  },
+  {
+   "sentences": 2,
+   "title": "Presentación oral (desambiguación)",
+   "url": "https://es.wikipedia.org/wiki/Presentaci%C3%B3n_oral_%28desambiguaci%C3%B3n%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Medgyesegyháza",
+   "url": "https://es.wikipedia.org/wiki/Medgyesegyh%C3%A1za"
+  },
+  {
+   "sentences": 25,
+   "title": "Patricia Teherán",
+   "url": "https://es.wikipedia.org/wiki/Patricia_Teher%C3%A1n"
+  },
+  {
+   "sentences": 6,
+   "title": "MC Dricka",
+   "url": "https://es.wikipedia.org/wiki/MC_Dricka"
+  },
+  {
+   "sentences": 2,
+   "title": "Marlys Domínguez",
+   "url": "https://es.wikipedia.org/wiki/Marlys_Dom%C3%ADnguez"
+  },
+  {
+   "sentences": 10,
+   "title": "Sarape",
+   "url": "https://es.wikipedia.org/wiki/Sarape"
+  },
+  {
+   "sentences": 3,
+   "title": "Sabha",
+   "url": "https://es.wikipedia.org/wiki/Sabha"
+  },
+  {
+   "sentences": 3,
+   "title": "Birectoendothyra",
+   "url": "https://es.wikipedia.org/wiki/Birectoendothyra"
+  },
+  {
+   "sentences": 16,
+   "title": "Pedro Cifuentes",
+   "url": "https://es.wikipedia.org/wiki/Pedro_Cifuentes"
+  },
+  {
+   "sentences": 2,
+   "title": "Maurizio Lupi",
+   "url": "https://es.wikipedia.org/wiki/Maurizio_Lupi"
+  },
+  {
+   "sentences": 2,
+   "title": "LibRaw",
+   "url": "https://es.wikipedia.org/wiki/LibRaw"
+  },
+  {
+   "sentences": 14,
+   "title": "Carlo Lodoli",
+   "url": "https://es.wikipedia.org/wiki/Carlo_Lodoli"
+  },
+  {
+   "sentences": 6,
+   "title": "Estación de El Caleyo",
+   "url": "https://es.wikipedia.org/wiki/Estaci%C3%B3n_de_El_Caleyo"
+  },
+  {
+   "sentences": 9,
+   "title": "Beltrán Urenda",
+   "url": "https://es.wikipedia.org/wiki/Beltr%C3%A1n_Urenda"
+  },
+  {
+   "sentences": 3,
+   "title": "Biure de Gaià",
+   "url": "https://es.wikipedia.org/wiki/Biure_de_Gai%C3%A0"
+  },
+  {
+   "sentences": 2,
+   "title": "Isla Verde (Malvinas)",
+   "url": "https://es.wikipedia.org/wiki/Isla_Verde_%28Malvinas%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Michael Flood",
+   "url": "https://es.wikipedia.org/wiki/Michael_Flood"
+  },
+  {
+   "sentences": 2,
+   "title": "Maximiliano Calzada",
+   "url": "https://es.wikipedia.org/wiki/Maximiliano_Calzada"
+  },
+  {
+   "sentences": 25,
+   "title": "Luz Jiménez (actriz)",
+   "url": "https://es.wikipedia.org/wiki/Luz_Jim%C3%A9nez_%28actriz%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Las Cabezadas (Guadalajara)",
+   "url": "https://es.wikipedia.org/wiki/Las_Cabezadas_%28Guadalajara%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Qutb al-Dîn Hasan",
+   "url": "https://es.wikipedia.org/wiki/Qutb_al-D%C3%AEn_Hasan"
+  },
+  {
+   "sentences": 5,
+   "title": "Radio Colonia",
+   "url": "https://es.wikipedia.org/wiki/Radio_Colonia"
+  },
+  {
+   "sentences": 4,
+   "title": "Municipio de Lafayette (condado de Medina)",
+   "url": "https://es.wikipedia.org/wiki/Municipio_de_Lafayette_%28condado_de_Medina%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Francisco Cabeza López",
+   "url": "https://es.wikipedia.org/wiki/Francisco_Cabeza_L%C3%B3pez"
+  },
+  {
+   "sentences": 18,
+   "title": "Copa de la Liga de Inglaterra 2018-19",
+   "url": "https://es.wikipedia.org/wiki/Copa_de_la_Liga_de_Inglaterra_2018-19"
+  },
+  {
+   "sentences": 1,
+   "title": "Epitherium",
+   "url": "https://es.wikipedia.org/wiki/Epitherium"
+  },
+  {
+   "sentences": 4,
+   "title": "Ho Chi Minh City Police FC",
+   "url": "https://es.wikipedia.org/wiki/Ho_Chi_Minh_City_Police_FC"
+  },
+  {
+   "sentences": 18,
+   "title": "Lamprocapnos",
+   "url": "https://es.wikipedia.org/wiki/Lamprocapnos"
+  },
+  {
+   "sentences": 1,
+   "title": "Cantón de Bastelica",
+   "url": "https://es.wikipedia.org/wiki/Cant%C3%B3n_de_Bastelica"
+  },
+  {
+   "sentences": 4,
+   "title": "Rozkvit",
+   "url": "https://es.wikipedia.org/wiki/Rozkvit"
+  },
+  {
+   "sentences": 2,
+   "title": "Instituto Brasileño de Opinión Pública y Estadística",
+   "url": "https://es.wikipedia.org/wiki/Instituto_Brasile%C3%B1o_de_Opini%C3%B3n_P%C3%BAblica_y_Estad%C3%ADstica"
+  },
+  {
+   "sentences": 25,
+   "title": "Astronesthes",
+   "url": "https://es.wikipedia.org/wiki/Astronesthes"
+  },
+  {
+   "sentences": 13,
+   "title": "Distrito de Berna",
+   "url": "https://es.wikipedia.org/wiki/Distrito_de_Berna"
+  },
+  {
+   "sentences": 3,
+   "title": "Neustadt am Rennsteig",
+   "url": "https://es.wikipedia.org/wiki/Neustadt_am_Rennsteig"
+  },
+  {
+   "sentences": 7,
+   "title": "Águila de Saladino",
+   "url": "https://es.wikipedia.org/wiki/%C3%81guila_de_Saladino"
+  },
+  {
+   "sentences": 25,
+   "title": "Real Love",
+   "url": "https://es.wikipedia.org/wiki/Real_Love"
+  },
+  {
+   "sentences": 1,
+   "title": "São Francisco Xavier (Portugal)",
+   "url": "https://es.wikipedia.org/wiki/S%C3%A3o_Francisco_Xavier_%28Portugal%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Arctostaphylos hooveri",
+   "url": "https://es.wikipedia.org/wiki/Arctostaphylos_hooveri"
+  },
+  {
+   "sentences": 7,
+   "title": "Prisma de cubierta",
+   "url": "https://es.wikipedia.org/wiki/Prisma_de_cubierta"
+  },
+  {
+   "sentences": 21,
+   "title": "Vilho Siivola",
+   "url": "https://es.wikipedia.org/wiki/Vilho_Siivola"
+  },
+  {
+   "sentences": 25,
+   "title": "Hermandad del Resucitado (Jerez)",
+   "url": "https://es.wikipedia.org/wiki/Hermandad_del_Resucitado_%28Jerez%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Coustaussa",
+   "url": "https://es.wikipedia.org/wiki/Coustaussa"
+  },
+  {
+   "sentences": 25,
+   "title": "Farida Benlyazid",
+   "url": "https://es.wikipedia.org/wiki/Farida_Benlyazid"
+  },
+  {
+   "sentences": 16,
+   "title": "Leira",
+   "url": "https://es.wikipedia.org/wiki/Leira"
+  },
+  {
+   "sentences": 5,
+   "title": "Adenium socotranum",
+   "url": "https://es.wikipedia.org/wiki/Adenium_socotranum"
+  },
+  {
+   "sentences": 1,
+   "title": "Ferenc Seres",
+   "url": "https://es.wikipedia.org/wiki/Ferenc_Seres"
+  },
+  {
+   "sentences": 2,
+   "title": "Mokolo",
+   "url": "https://es.wikipedia.org/wiki/Mokolo"
+  },
+  {
+   "sentences": 6,
+   "title": "Torneo de Reserva 2009-10",
+   "url": "https://es.wikipedia.org/wiki/Torneo_de_Reserva_2009-10"
+  },
+  {
+   "sentences": 6,
+   "title": "Scott Padgett",
+   "url": "https://es.wikipedia.org/wiki/Scott_Padgett"
+  },
+  {
+   "sentences": 22,
+   "title": "Chroicocephalus hartlaubii",
+   "url": "https://es.wikipedia.org/wiki/Chroicocephalus_hartlaubii"
+  },
+  {
+   "sentences": 3,
+   "title": "Jane Maas",
+   "url": "https://es.wikipedia.org/wiki/Jane_Maas"
+  },
+  {
+   "sentences": 6,
+   "title": "Bufotes zamdaensis",
+   "url": "https://es.wikipedia.org/wiki/Bufotes_zamdaensis"
+  },
+  {
+   "sentences": 12,
+   "title": "Cal Poly Mustangs",
+   "url": "https://es.wikipedia.org/wiki/Cal_Poly_Mustangs"
+  },
+  {
+   "sentences": 1,
+   "title": "Iivo Niskanen",
+   "url": "https://es.wikipedia.org/wiki/Iivo_Niskanen"
+  },
+  {
+   "sentences": 2,
+   "title": "Veaceslav Iordan",
+   "url": "https://es.wikipedia.org/wiki/Veaceslav_Iordan"
+  },
+  {
+   "sentences": 4,
+   "title": "Hohenlohe-Jagstberg",
+   "url": "https://es.wikipedia.org/wiki/Hohenlohe-Jagstberg"
+  },
+  {
+   "sentences": 25,
+   "title": "Grupos de Acción Revolucionaria Internacionalista",
+   "url": "https://es.wikipedia.org/wiki/Grupos_de_Acci%C3%B3n_Revolucionaria_Internacionalista"
+  },
+  {
+   "sentences": 1,
+   "title": "Esclavolles-Lurey",
+   "url": "https://es.wikipedia.org/wiki/Esclavolles-Lurey"
+  },
+  {
+   "sentences": 1,
+   "title": "Luc-la-Primaube",
+   "url": "https://es.wikipedia.org/wiki/Luc-la-Primaube"
+  },
+  {
+   "sentences": 11,
+   "title": "Perla Cristal",
+   "url": "https://es.wikipedia.org/wiki/Perla_Cristal"
+  },
+  {
+   "sentences": 3,
+   "title": "Evelyn MacGuire",
+   "url": "https://es.wikipedia.org/wiki/Evelyn_MacGuire"
+  },
+  {
+   "sentences": 12,
+   "title": "Buen doctor",
+   "url": "https://es.wikipedia.org/wiki/Buen_doctor"
+  },
+  {
+   "sentences": 25,
+   "title": "Villanueva del Río Segura",
+   "url": "https://es.wikipedia.org/wiki/Villanueva_del_R%C3%ADo_Segura"
+  },
+  {
+   "sentences": 13,
+   "title": "Petrikivka",
+   "url": "https://es.wikipedia.org/wiki/Petrikivka"
+  },
+  {
+   "sentences": 1,
+   "title": "Alexéi Yermoláyev",
+   "url": "https://es.wikipedia.org/wiki/Alex%C3%A9i_Yermol%C3%A1yev"
+  },
+  {
+   "sentences": 9,
+   "title": "Howard Beach (Queens)",
+   "url": "https://es.wikipedia.org/wiki/Howard_Beach_%28Queens%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Velasco Broca",
+   "url": "https://es.wikipedia.org/wiki/Velasco_Broca"
+  },
+  {
+   "sentences": 25,
+   "title": "Cami Donneys",
+   "url": "https://es.wikipedia.org/wiki/Cami_Donneys"
+  },
+  {
+   "sentences": 8,
+   "title": "Jurassic Express",
+   "url": "https://es.wikipedia.org/wiki/Jurassic_Express"
+  },
+  {
+   "sentences": 1,
+   "title": "Israel Quijandría",
+   "url": "https://es.wikipedia.org/wiki/Israel_Quijandr%C3%ADa"
+  },
+  {
+   "sentences": 8,
+   "title": "Night School",
+   "url": "https://es.wikipedia.org/wiki/Night_School"
+  },
+  {
+   "sentences": 5,
+   "title": "Provincia Presidente Perón",
+   "url": "https://es.wikipedia.org/wiki/Provincia_Presidente_Per%C3%B3n"
+  },
+  {
+   "sentences": 8,
+   "title": "Lenguas bora",
+   "url": "https://es.wikipedia.org/wiki/Lenguas_bora"
+  },
+  {
+   "sentences": 12,
+   "title": "Points of Authority",
+   "url": "https://es.wikipedia.org/wiki/Points_of_Authority"
+  },
+  {
+   "sentences": 25,
+   "title": "Sean Parker",
+   "url": "https://es.wikipedia.org/wiki/Sean_Parker"
+  },
+  {
+   "sentences": 14,
+   "title": "Copa Polla Gol 1979",
+   "url": "https://es.wikipedia.org/wiki/Copa_Polla_Gol_1979"
+  },
+  {
+   "sentences": 1,
+   "title": "Albert Riotton",
+   "url": "https://es.wikipedia.org/wiki/Albert_Riotton"
+  },
+  {
+   "sentences": 2,
+   "title": "Provincia marítima de Algeciras",
+   "url": "https://es.wikipedia.org/wiki/Provincia_mar%C3%ADtima_de_Algeciras"
+  },
+  {
+   "sentences": 14,
+   "title": "Fritz Noether",
+   "url": "https://es.wikipedia.org/wiki/Fritz_Noether"
+  },
+  {
+   "sentences": 6,
+   "title": "Damián Musto",
+   "url": "https://es.wikipedia.org/wiki/Dami%C3%A1n_Musto"
+  },
+  {
+   "sentences": 1,
+   "title": "Bolbella punctigera",
+   "url": "https://es.wikipedia.org/wiki/Bolbella_punctigera"
+  },
+  {
+   "sentences": 1,
+   "title": "Vassogne",
+   "url": "https://es.wikipedia.org/wiki/Vassogne"
+  },
+  {
+   "sentences": 1,
+   "title": "Péaule",
+   "url": "https://es.wikipedia.org/wiki/P%C3%A9aule"
+  },
+  {
+   "sentences": 12,
+   "title": "Pachycephalosauridae",
+   "url": "https://es.wikipedia.org/wiki/Pachycephalosauridae"
+  },
+  {
+   "sentences": 3,
+   "title": "Departamento del Cesar (Magdalena)",
+   "url": "https://es.wikipedia.org/wiki/Departamento_del_Cesar_%28Magdalena%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Copa Mundial de Béisbol Sub-18 de 2021",
+   "url": "https://es.wikipedia.org/wiki/Copa_Mundial_de_B%C3%A9isbol_Sub-18_de_2021"
+  },
+  {
+   "sentences": 4,
+   "title": "Valencia Football Club",
+   "url": "https://es.wikipedia.org/wiki/Valencia_Football_Club"
+  },
+  {
+   "sentences": 3,
+   "title": "(52) Europa",
+   "url": "https://es.wikipedia.org/wiki/%2852%29_Europa"
+  },
+  {
+   "sentences": 12,
+   "title": "Shape of You",
+   "url": "https://es.wikipedia.org/wiki/Shape_of_You"
+  },
+  {
+   "sentences": 12,
+   "title": "Susan D. Knapp",
+   "url": "https://es.wikipedia.org/wiki/Susan_D._Knapp"
+  },
+  {
+   "sentences": 4,
+   "title": "Fuentelsaz",
+   "url": "https://es.wikipedia.org/wiki/Fuentelsaz"
+  },
+  {
+   "sentences": 15,
+   "title": "Molino de la Hoz",
+   "url": "https://es.wikipedia.org/wiki/Molino_de_la_Hoz"
+  },
+  {
+   "sentences": 3,
+   "title": "Maurice Büla",
+   "url": "https://es.wikipedia.org/wiki/Maurice_B%C3%BCla"
+  },
+  {
+   "sentences": 17,
+   "title": "Barburiña (pera)",
+   "url": "https://es.wikipedia.org/wiki/Barburi%C3%B1a_%28pera%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Cantón de Corrèze",
+   "url": "https://es.wikipedia.org/wiki/Cant%C3%B3n_de_Corr%C3%A8ze"
+  },
+  {
+   "sentences": 4,
+   "title": "Marquesado de Tovar",
+   "url": "https://es.wikipedia.org/wiki/Marquesado_de_Tovar"
+  },
+  {
+   "sentences": 1,
+   "title": "Tereza Valentová",
+   "url": "https://es.wikipedia.org/wiki/Tereza_Valentov%C3%A1"
+  },
+  {
+   "sentences": 1,
+   "title": "Kate Colby",
+   "url": "https://es.wikipedia.org/wiki/Kate_Colby"
+  },
+  {
+   "sentences": 3,
+   "title": "Annals of Family Medicine",
+   "url": "https://es.wikipedia.org/wiki/Annals_of_Family_Medicine"
+  },
+  {
+   "sentences": 5,
+   "title": "Lengua okodia",
+   "url": "https://es.wikipedia.org/wiki/Lengua_okodia"
+  },
+  {
+   "sentences": 3,
+   "title": "Jaureguiberry (desambiguación)",
+   "url": "https://es.wikipedia.org/wiki/Jaureguiberry_%28desambiguaci%C3%B3n%29"
+  },
+  {
+   "sentences": 16,
+   "title": "La triple T",
+   "url": "https://es.wikipedia.org/wiki/La_triple_T"
+  },
+  {
+   "sentences": 8,
+   "title": "El bus de la vida",
+   "url": "https://es.wikipedia.org/wiki/El_bus_de_la_vida"
+  },
+  {
+   "sentences": 1,
+   "title": "Princ od Vranje",
+   "url": "https://es.wikipedia.org/wiki/Princ_od_Vranje"
+  },
+  {
+   "sentences": 3,
+   "title": "Superliga de Nueva Caledonia 2023",
+   "url": "https://es.wikipedia.org/wiki/Superliga_de_Nueva_Caledonia_2023"
+  },
+  {
+   "sentences": 10,
+   "title": "Transform",
+   "url": "https://es.wikipedia.org/wiki/Transform"
+  },
+  {
+   "sentences": 25,
+   "title": "Echinopsis bruchii",
+   "url": "https://es.wikipedia.org/wiki/Echinopsis_bruchii"
+  },
+  {
+   "sentences": 2,
+   "title": "José María Sobejano López",
+   "url": "https://es.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Sobejano_L%C3%B3pez"
+  },
+  {
+   "sentences": 7,
+   "title": "Nacho Castro",
+   "url": "https://es.wikipedia.org/wiki/Nacho_Castro"
+  },
+  {
+   "sentences": 4,
+   "title": "FC Dnepr Mogilev",
+   "url": "https://es.wikipedia.org/wiki/FC_Dnepr_Mogilev"
+  },
+  {
+   "sentences": 13,
+   "title": "Lutjanus goldiei",
+   "url": "https://es.wikipedia.org/wiki/Lutjanus_goldiei"
+  },
+  {
+   "sentences": 21,
+   "title": "Jason Becker",
+   "url": "https://es.wikipedia.org/wiki/Jason_Becker"
+  },
+  {
+   "sentences": 19,
+   "title": "Entremés famoso sobre da pesca do río Miño",
+   "url": "https://es.wikipedia.org/wiki/Entrem%C3%A9s_famoso_sobre_da_pesca_do_r%C3%ADo_Mi%C3%B1o"
+  },
+  {
+   "sentences": 4,
+   "title": "Hotel Bristol (Gibraltar)",
+   "url": "https://es.wikipedia.org/wiki/Hotel_Bristol_%28Gibraltar%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Soings-en-Sologne",
+   "url": "https://es.wikipedia.org/wiki/Soings-en-Sologne"
+  },
+  {
+   "sentences": 1,
+   "title": "Pyrota dakotana",
+   "url": "https://es.wikipedia.org/wiki/Pyrota_dakotana"
+  },
+  {
+   "sentences": 25,
+   "title": "Virus del mosaico del lirio",
+   "url": "https://es.wikipedia.org/wiki/Virus_del_mosaico_del_lirio"
+  },
+  {
+   "sentences": 5,
+   "title": "Relaciones Ecuador-Malasia",
+   "url": "https://es.wikipedia.org/wiki/Relaciones_Ecuador-Malasia"
+  },
+  {
+   "sentences": 2,
+   "title": "Microrregión de Cametá",
+   "url": "https://es.wikipedia.org/wiki/Microrregi%C3%B3n_de_Camet%C3%A1"
+  },
+  {
+   "sentences": 5,
+   "title": "Alakanuk",
+   "url": "https://es.wikipedia.org/wiki/Alakanuk"
+  },
+  {
+   "sentences": 25,
+   "title": "John George Lambton, primer conde de Durham",
+   "url": "https://es.wikipedia.org/wiki/John_George_Lambton%2C_primer_conde_de_Durham"
+  },
+  {
+   "sentences": 5,
+   "title": "Kalil ElMedkhar",
+   "url": "https://es.wikipedia.org/wiki/Kalil_ElMedkhar"
+  },
+  {
+   "sentences": 10,
+   "title": "Club Baloncesto Plasencia",
+   "url": "https://es.wikipedia.org/wiki/Club_Baloncesto_Plasencia"
+  },
+  {
+   "sentences": 3,
+   "title": "Kalatur",
+   "url": "https://es.wikipedia.org/wiki/Kalatur"
+  },
+  {
+   "sentences": 1,
+   "title": "Betaucourt",
+   "url": "https://es.wikipedia.org/wiki/Betaucourt"
+  },
+  {
+   "sentences": 6,
+   "title": "Horácio Lafer",
+   "url": "https://es.wikipedia.org/wiki/Hor%C3%A1cio_Lafer"
+  },
+  {
+   "sentences": 2,
+   "title": "Baranove",
+   "url": "https://es.wikipedia.org/wiki/Baranove"
+  },
+  {
+   "sentences": 20,
+   "title": "For a Better Day",
+   "url": "https://es.wikipedia.org/wiki/For_a_Better_Day"
+  },
+  {
+   "sentences": 4,
+   "title": "Maximilian Göppel",
+   "url": "https://es.wikipedia.org/wiki/Maximilian_G%C3%B6ppel"
+  },
+  {
+   "sentences": 14,
+   "title": "Franco Gentile",
+   "url": "https://es.wikipedia.org/wiki/Franco_Gentile"
+  },
+  {
+   "sentences": 5,
+   "title": "Antropogenia",
+   "url": "https://es.wikipedia.org/wiki/Antropogenia"
+  },
+  {
+   "sentences": 8,
+   "title": "Esther Jungreis",
+   "url": "https://es.wikipedia.org/wiki/Esther_Jungreis"
+  },
+  {
+   "sentences": 1,
+   "title": "Shin Hyun-joon",
+   "url": "https://es.wikipedia.org/wiki/Shin_Hyun-joon"
+  },
+  {
+   "sentences": 25,
+   "title": "Jocotán",
+   "url": "https://es.wikipedia.org/wiki/Jocot%C3%A1n"
+  },
+  {
+   "sentences": 19,
+   "title": "Hipálage",
+   "url": "https://es.wikipedia.org/wiki/Hip%C3%A1lage"
+  },
+  {
+   "sentences": 4,
+   "title": "Jeffrey Payeras",
+   "url": "https://es.wikipedia.org/wiki/Jeffrey_Payeras"
+  },
+  {
+   "sentences": 25,
+   "title": "Martin J. S. Rudwick",
+   "url": "https://es.wikipedia.org/wiki/Martin_J._S._Rudwick"
+  },
+  {
+   "sentences": 2,
+   "title": "Stari Trojany",
+   "url": "https://es.wikipedia.org/wiki/Stari_Trojany"
+  },
+  {
+   "sentences": 15,
+   "title": "Eugenia Cauduro",
+   "url": "https://es.wikipedia.org/wiki/Eugenia_Cauduro"
+  },
+  {
+   "sentences": 5,
+   "title": "Condado de Lafayette (Misuri)",
+   "url": "https://es.wikipedia.org/wiki/Condado_de_Lafayette_%28Misuri%29"
+  },
+  {
+   "sentences": 10,
+   "title": "Ecce Homo de Borja",
+   "url": "https://es.wikipedia.org/wiki/Ecce_Homo_de_Borja"
+  },
+  {
+   "sentences": 4,
+   "title": "Municipio de Argyle",
+   "url": "https://es.wikipedia.org/wiki/Municipio_de_Argyle"
+  },
+  {
+   "sentences": 1,
+   "title": "Idiosoma formosum",
+   "url": "https://es.wikipedia.org/wiki/Idiosoma_formosum"
+  },
+  {
+   "sentences": 5,
+   "title": "Meri Arabidze",
+   "url": "https://es.wikipedia.org/wiki/Meri_Arabidze"
+  },
+  {
+   "sentences": 25,
+   "title": "Música modal",
+   "url": "https://es.wikipedia.org/wiki/M%C3%BAsica_modal"
+  },
+  {
+   "sentences": 25,
+   "title": "Nozomi Sasaki",
+   "url": "https://es.wikipedia.org/wiki/Nozomi_Sasaki"
+  },
+  {
+   "sentences": 3,
+   "title": "Henry Solís",
+   "url": "https://es.wikipedia.org/wiki/Henry_Sol%C3%ADs"
+  },
+  {
+   "sentences": 7,
+   "title": "Víctor Manuel Mora",
+   "url": "https://es.wikipedia.org/wiki/V%C3%ADctor_Manuel_Mora"
+  },
+  {
+   "sentences": 17,
+   "title": "O'Higgins (comuna)",
+   "url": "https://es.wikipedia.org/wiki/O%27Higgins_%28comuna%29"
+  },
+  {
+   "sentences": 11,
+   "title": "David Jenkins (bibliotecario)",
+   "url": "https://es.wikipedia.org/wiki/David_Jenkins_%28bibliotecario%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Xinzo",
+   "url": "https://es.wikipedia.org/wiki/Xinzo"
+  },
+  {
+   "sentences": 25,
+   "title": "Muerte de Rasputín",
+   "url": "https://es.wikipedia.org/wiki/Muerte_de_Rasput%C3%ADn"
+  },
+  {
+   "sentences": 18,
+   "title": "Jindabyne (película de 2006)",
+   "url": "https://es.wikipedia.org/wiki/Jindabyne_%28pel%C3%ADcula_de_2006%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Municipio de Wayne (condado de Buchanan)",
+   "url": "https://es.wikipedia.org/wiki/Municipio_de_Wayne_%28condado_de_Buchanan%29"
+  },
+  {
+   "sentences": 1,
+   "title": "La Loma (Durango)",
+   "url": "https://es.wikipedia.org/wiki/La_Loma_%28Durango%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Romāns Vainšteins",
+   "url": "https://es.wikipedia.org/wiki/Rom%C4%81ns_Vain%C5%A1teins"
+  },
+  {
+   "sentences": 2,
+   "title": "Parque República del Ecuador",
+   "url": "https://es.wikipedia.org/wiki/Parque_Rep%C3%BAblica_del_Ecuador"
+  },
+  {
+   "sentences": 16,
+   "title": "Tympanum",
+   "url": "https://es.wikipedia.org/wiki/Tympanum"
+  },
+  {
+   "sentences": 16,
+   "title": "Furioso (caballo de carreras japonés)",
+   "url": "https://es.wikipedia.org/wiki/Furioso_%28caballo_de_carreras_japon%C3%A9s%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Puente Stolma",
+   "url": "https://es.wikipedia.org/wiki/Puente_Stolma"
+  },
+  {
+   "sentences": 8,
+   "title": "Gema López de Joaqui",
+   "url": "https://es.wikipedia.org/wiki/Gema_L%C3%B3pez_de_Joaqui"
+  },
+  {
+   "sentences": 13,
+   "title": "Lettres provinciales",
+   "url": "https://es.wikipedia.org/wiki/Lettres_provinciales"
+  },
+  {
+   "sentences": 4,
+   "title": "Eukélade (satélite)",
+   "url": "https://es.wikipedia.org/wiki/Euk%C3%A9lade_%28sat%C3%A9lite%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Historia de los judíos de Keruán",
+   "url": "https://es.wikipedia.org/wiki/Historia_de_los_jud%C3%ADos_de_Keru%C3%A1n"
+  },
+  {
+   "sentences": 18,
+   "title": "Republiqueta de Vallegrande",
+   "url": "https://es.wikipedia.org/wiki/Republiqueta_de_Vallegrande"
+  },
+  {
+   "sentences": 11,
+   "title": "Tordoya",
+   "url": "https://es.wikipedia.org/wiki/Tordoya"
+  },
+  {
+   "sentences": 6,
+   "title": "Hocine Gacemi",
+   "url": "https://es.wikipedia.org/wiki/Hocine_Gacemi"
+  },
+  {
+   "sentences": 11,
+   "title": "189",
+   "url": "https://es.wikipedia.org/wiki/189"
+  },
+  {
+   "sentences": 15,
+   "title": "Hacienda La Glorieta",
+   "url": "https://es.wikipedia.org/wiki/Hacienda_La_Glorieta"
+  },
+  {
+   "sentences": 1,
+   "title": "N'Ketia Seedo",
+   "url": "https://es.wikipedia.org/wiki/N%27Ketia_Seedo"
+  },
+  {
+   "sentences": 5,
+   "title": "Historia del vestuario",
+   "url": "https://es.wikipedia.org/wiki/Historia_del_vestuario"
+  },
+  {
+   "sentences": 7,
+   "title": "Néstor Tomás Vélez Betancourt",
+   "url": "https://es.wikipedia.org/wiki/N%C3%A9stor_Tom%C3%A1s_V%C3%A9lez_Betancourt"
+  },
+  {
+   "sentences": 25,
+   "title": "Universidad Pedagógica Nacional (México)",
+   "url": "https://es.wikipedia.org/wiki/Universidad_Pedag%C3%B3gica_Nacional_%28M%C3%A9xico%29"
+  },
+  {
+   "sentences": 8,
+   "title": "THC",
+   "url": "https://es.wikipedia.org/wiki/THC"
+  },
+  {
+   "sentences": 6,
+   "title": "Stovall (Carolina del Norte)",
+   "url": "https://es.wikipedia.org/wiki/Stovall_%28Carolina_del_Norte%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Nikolái Semiónovich Tíjonov",
+   "url": "https://es.wikipedia.org/wiki/Nikol%C3%A1i_Semi%C3%B3novich_T%C3%ADjonov"
+  },
+  {
+   "sentences": 10,
+   "title": "Curtiss Model K",
+   "url": "https://es.wikipedia.org/wiki/Curtiss_Model_K"
+  },
+  {
+   "sentences": 1,
+   "title": "Galerumaea",
+   "url": "https://es.wikipedia.org/wiki/Galerumaea"
+  },
+  {
+   "sentences": 3,
+   "title": "Interprovincial Championship 1947-48",
+   "url": "https://es.wikipedia.org/wiki/Interprovincial_Championship_1947-48"
+  },
+  {
+   "sentences": 3,
+   "title": "Fuerte de San Antonio Abad",
+   "url": "https://es.wikipedia.org/wiki/Fuerte_de_San_Antonio_Abad"
+  },
+  {
+   "sentences": 6,
+   "title": "Korea Music Copyright Association",
+   "url": "https://es.wikipedia.org/wiki/Korea_Music_Copyright_Association"
+  },
+  {
+   "sentences": 25,
+   "title": "Franco Simone",
+   "url": "https://es.wikipedia.org/wiki/Franco_Simone"
+  },
+  {
+   "sentences": 8,
+   "title": "Principado de Trinidad",
+   "url": "https://es.wikipedia.org/wiki/Principado_de_Trinidad"
+  },
+  {
+   "sentences": 22,
+   "title": "BMW en Top Race",
+   "url": "https://es.wikipedia.org/wiki/BMW_en_Top_Race"
+  },
+  {
+   "sentences": 1,
+   "title": "Patrice Lhôtellier",
+   "url": "https://es.wikipedia.org/wiki/Patrice_Lh%C3%B4tellier"
+  },
+  {
+   "sentences": 9,
+   "title": "Aldo Barbuy",
+   "url": "https://es.wikipedia.org/wiki/Aldo_Barbuy"
+  },
+  {
+   "sentences": 25,
+   "title": "Caciquismo (España)",
+   "url": "https://es.wikipedia.org/wiki/Caciquismo_%28Espa%C3%B1a%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Fulgencio R. Moreno",
+   "url": "https://es.wikipedia.org/wiki/Fulgencio_R._Moreno"
+  },
+  {
+   "sentences": 8,
+   "title": "RMVB",
+   "url": "https://es.wikipedia.org/wiki/RMVB"
+  },
+  {
+   "sentences": 3,
+   "title": "Iñaki Gómez",
+   "url": "https://es.wikipedia.org/wiki/I%C3%B1aki_G%C3%B3mez"
+  },
+  {
+   "sentences": 2,
+   "title": "Tiroteo de Cetiña de 2022",
+   "url": "https://es.wikipedia.org/wiki/Tiroteo_de_Ceti%C3%B1a_de_2022"
+  },
+  {
+   "sentences": 25,
+   "title": "Los Bravos",
+   "url": "https://es.wikipedia.org/wiki/Los_Bravos"
+  },
+  {
+   "sentences": 9,
+   "title": "Herodianos",
+   "url": "https://es.wikipedia.org/wiki/Herodianos"
+  },
+  {
+   "sentences": 6,
+   "title": "Roger de Flor (ópera)",
+   "url": "https://es.wikipedia.org/wiki/Roger_de_Flor_%28%C3%B3pera%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Sila (desambiguación)",
+   "url": "https://es.wikipedia.org/wiki/Sila_%28desambiguaci%C3%B3n%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Respuesta a impulso",
+   "url": "https://es.wikipedia.org/wiki/Respuesta_a_impulso"
+  },
+  {
+   "sentences": 1,
+   "title": ".mn",
+   "url": "https://es.wikipedia.org/wiki/.mn"
+  },
+  {
+   "sentences": 2,
+   "title": "Lily Owsley",
+   "url": "https://es.wikipedia.org/wiki/Lily_Owsley"
+  },
+  {
+   "sentences": 1,
+   "title": "Neomordellistena palpalis",
+   "url": "https://es.wikipedia.org/wiki/Neomordellistena_palpalis"
+  },
+  {
+   "sentences": 1,
+   "title": "Senon",
+   "url": "https://es.wikipedia.org/wiki/Senon"
+  },
+  {
+   "sentences": 1,
+   "title": "Plesiadapis",
+   "url": "https://es.wikipedia.org/wiki/Plesiadapis"
+  },
+  {
+   "sentences": 12,
+   "title": "Paulie Pennino",
+   "url": "https://es.wikipedia.org/wiki/Paulie_Pennino"
+  },
+  {
+   "sentences": 18,
+   "title": "Edificio número 8 de White Castle",
+   "url": "https://es.wikipedia.org/wiki/Edificio_n%C3%BAmero_8_de_White_Castle"
+  },
+  {
+   "sentences": 25,
+   "title": "Colegio Vizcaya",
+   "url": "https://es.wikipedia.org/wiki/Colegio_Vizcaya"
+  },
+  {
+   "sentences": 9,
+   "title": "Betty Osceola",
+   "url": "https://es.wikipedia.org/wiki/Betty_Osceola"
+  },
+  {
+   "sentences": 1,
+   "title": "Corlay",
+   "url": "https://es.wikipedia.org/wiki/Corlay"
+  },
+  {
+   "sentences": 2,
+   "title": "Paco Vázquez",
+   "url": "https://es.wikipedia.org/wiki/Paco_V%C3%A1zquez"
+  },
+  {
+   "sentences": 2,
+   "title": "Martin Vaïsse",
+   "url": "https://es.wikipedia.org/wiki/Martin_Va%C3%AFsse"
+  },
+  {
+   "sentences": 1,
+   "title": "Havelock (Nuevo Brunswick)",
+   "url": "https://es.wikipedia.org/wiki/Havelock_%28Nuevo_Brunswick%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Adenanthos forrestii",
+   "url": "https://es.wikipedia.org/wiki/Adenanthos_forrestii"
+  },
+  {
+   "sentences": 3,
+   "title": "Municipio de Traverse",
+   "url": "https://es.wikipedia.org/wiki/Municipio_de_Traverse"
+  },
+  {
+   "sentences": 11,
+   "title": "Constantino de Rodas",
+   "url": "https://es.wikipedia.org/wiki/Constantino_de_Rodas"
+  },
+  {
+   "sentences": 25,
+   "title": "El juego del calamar: El desafío",
+   "url": "https://es.wikipedia.org/wiki/El_juego_del_calamar%3A_El_desaf%C3%ADo"
+  },
+  {
+   "sentences": 14,
+   "title": "Kōdai Asaka",
+   "url": "https://es.wikipedia.org/wiki/K%C5%8Ddai_Asaka"
+  },
+  {
+   "sentences": 11,
+   "title": "Piensa en Democracia",
+   "url": "https://es.wikipedia.org/wiki/Piensa_en_Democracia"
+  },
+  {
+   "sentences": 12,
+   "title": "Ocine",
+   "url": "https://es.wikipedia.org/wiki/Ocine"
+  },
+  {
+   "sentences": 3,
+   "title": "Confitería Torres",
+   "url": "https://es.wikipedia.org/wiki/Confiter%C3%ADa_Torres"
+  },
+  {
+   "sentences": 1,
+   "title": "Bactrocera toxopeusi",
+   "url": "https://es.wikipedia.org/wiki/Bactrocera_toxopeusi"
+  },
+  {
+   "sentences": 7,
+   "title": "Ignacio Bezos Sánchez",
+   "url": "https://es.wikipedia.org/wiki/Ignacio_Bezos_S%C3%A1nchez"
+  },
+  {
+   "sentences": 25,
+   "title": "Sandra Bernhard",
+   "url": "https://es.wikipedia.org/wiki/Sandra_Bernhard"
+  },
+  {
+   "sentences": 8,
+   "title": "El corral (película de 2017)",
+   "url": "https://es.wikipedia.org/wiki/El_corral_%28pel%C3%ADcula_de_2017%29"
+  },
+  {
+   "sentences": 16,
+   "title": "Sonya Scarlet",
+   "url": "https://es.wikipedia.org/wiki/Sonya_Scarlet"
+  },
+  {
+   "sentences": 3,
+   "title": "Thermodesulfatator",
+   "url": "https://es.wikipedia.org/wiki/Thermodesulfatator"
+  },
+  {
+   "sentences": 25,
+   "title": "Regalismo en España",
+   "url": "https://es.wikipedia.org/wiki/Regalismo_en_Espa%C3%B1a"
+  },
+  {
+   "sentences": 25,
+   "title": "Huracán Mitch",
+   "url": "https://es.wikipedia.org/wiki/Hurac%C3%A1n_Mitch"
+  },
+  {
+   "sentences": 4,
+   "title": "Nesotriccus maranonicus",
+   "url": "https://es.wikipedia.org/wiki/Nesotriccus_maranonicus"
+  },
+  {
+   "sentences": 3,
+   "title": "Ticinellinae",
+   "url": "https://es.wikipedia.org/wiki/Ticinellinae"
+  },
+  {
+   "sentences": 13,
+   "title": "Aurelio Granada Escudeiro",
+   "url": "https://es.wikipedia.org/wiki/Aurelio_Granada_Escudeiro"
+  },
+  {
+   "sentences": 4,
+   "title": "Sociedad de Antropología de París",
+   "url": "https://es.wikipedia.org/wiki/Sociedad_de_Antropolog%C3%ADa_de_Par%C3%ADs"
+  },
+  {
+   "sentences": 25,
+   "title": "Grupo Escombros",
+   "url": "https://es.wikipedia.org/wiki/Grupo_Escombros"
+  },
+  {
+   "sentences": 4,
+   "title": "UY Volantis",
+   "url": "https://es.wikipedia.org/wiki/UY_Volantis"
+  },
+  {
+   "sentences": 3,
+   "title": "Finlandia en los Juegos Olímpicos de Lake Placid 1932",
+   "url": "https://es.wikipedia.org/wiki/Finlandia_en_los_Juegos_Ol%C3%ADmpicos_de_Lake_Placid_1932"
+  },
+  {
+   "sentences": 25,
+   "title": "John Bowring",
+   "url": "https://es.wikipedia.org/wiki/John_Bowring"
+  },
+  {
+   "sentences": 25,
+   "title": "Ailuropoda melanoleuca",
+   "url": "https://es.wikipedia.org/wiki/Ailuropoda_melanoleuca"
+  },
+  {
+   "sentences": 4,
+   "title": "Calle soledad",
+   "url": "https://es.wikipedia.org/wiki/Calle_soledad"
+  },
+  {
+   "sentences": 1,
+   "title": "Kepler-1057b",
+   "url": "https://es.wikipedia.org/wiki/Kepler-1057b"
+  },
+  {
+   "sentences": 25,
+   "title": "Zona fronteriza",
+   "url": "https://es.wikipedia.org/wiki/Zona_fronteriza"
+  },
+  {
+   "sentences": 25,
+   "title": "Marsha Haefner",
+   "url": "https://es.wikipedia.org/wiki/Marsha_Haefner"
+  },
+  {
+   "sentences": 6,
+   "title": "Siempre en el mejor momento",
+   "url": "https://es.wikipedia.org/wiki/Siempre_en_el_mejor_momento"
+  },
+  {
+   "sentences": 1,
+   "title": "Megaleruca nigripes",
+   "url": "https://es.wikipedia.org/wiki/Megaleruca_nigripes"
+  },
+  {
+   "sentences": 12,
+   "title": "FXX (Canadá)",
+   "url": "https://es.wikipedia.org/wiki/FXX_%28Canad%C3%A1%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Corredor Netzarim",
+   "url": "https://es.wikipedia.org/wiki/Corredor_Netzarim"
+  },
+  {
+   "sentences": 16,
+   "title": "Marilyn Houlberg",
+   "url": "https://es.wikipedia.org/wiki/Marilyn_Houlberg"
+  },
+  {
+   "sentences": 3,
+   "title": "Catê",
+   "url": "https://es.wikipedia.org/wiki/Cat%C3%AA"
+  },
+  {
+   "sentences": 1,
+   "title": "Anastrepha bahiensis",
+   "url": "https://es.wikipedia.org/wiki/Anastrepha_bahiensis"
+  },
+  {
+   "sentences": 6,
+   "title": "Jan Sobilo",
+   "url": "https://es.wikipedia.org/wiki/Jan_Sobilo"
+  },
+  {
+   "sentences": 5,
+   "title": "Oligoplites refulgens",
+   "url": "https://es.wikipedia.org/wiki/Oligoplites_refulgens"
+  },
+  {
+   "sentences": 12,
+   "title": "William Willard Ashe",
+   "url": "https://es.wikipedia.org/wiki/William_Willard_Ashe"
+  },
+  {
+   "sentences": 25,
+   "title": "Kaisersteinbruch",
+   "url": "https://es.wikipedia.org/wiki/Kaisersteinbruch"
+  },
+  {
+   "sentences": 25,
+   "title": "María Alzira Lemos",
+   "url": "https://es.wikipedia.org/wiki/Mar%C3%ADa_Alzira_Lemos"
+  },
+  {
+   "sentences": 1,
+   "title": "Saint-Vite",
+   "url": "https://es.wikipedia.org/wiki/Saint-Vite"
+  },
+  {
+   "sentences": 5,
+   "title": "Dipturus olseni",
+   "url": "https://es.wikipedia.org/wiki/Dipturus_olseni"
+  },
+  {
+   "sentences": 25,
+   "title": "Beatriz de Bobadilla (señora de La Gomera)",
+   "url": "https://es.wikipedia.org/wiki/Beatriz_de_Bobadilla_%28se%C3%B1ora_de_La_Gomera%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Pallidochromis tokolosh",
+   "url": "https://es.wikipedia.org/wiki/Pallidochromis_tokolosh"
+  },
+  {
+   "sentences": 10,
+   "title": "Identidad de Proizvolov",
+   "url": "https://es.wikipedia.org/wiki/Identidad_de_Proizvolov"
+  },
+  {
+   "sentences": 25,
+   "title": "Shirabyōshi",
+   "url": "https://es.wikipedia.org/wiki/Shiraby%C5%8Dshi"
+  },
+  {
+   "sentences": 1,
+   "title": "Partizak",
+   "url": "https://es.wikipedia.org/wiki/Partizak"
+  },
+  {
+   "sentences": 9,
+   "title": "Accidente del Hawker 850 de Sky Lounge Services",
+   "url": "https://es.wikipedia.org/wiki/Accidente_del_Hawker_850_de_Sky_Lounge_Services"
+  },
+  {
+   "sentences": 8,
+   "title": "Huayuri",
+   "url": "https://es.wikipedia.org/wiki/Huayuri"
+  },
+  {
+   "sentences": 3,
+   "title": "Elecciones federales de México de 2009 en Baja California",
+   "url": "https://es.wikipedia.org/wiki/Elecciones_federales_de_M%C3%A9xico_de_2009_en_Baja_California"
+  },
+  {
+   "sentences": 6,
+   "title": "Deporte base",
+   "url": "https://es.wikipedia.org/wiki/Deporte_base"
+  },
+  {
+   "sentences": 3,
+   "title": "Sheboygan Falls (Wisconsin)",
+   "url": "https://es.wikipedia.org/wiki/Sheboygan_Falls_%28Wisconsin%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Riahuelas",
+   "url": "https://es.wikipedia.org/wiki/Riahuelas"
+  },
+  {
+   "sentences": 1,
+   "title": "Hieracium cinereips",
+   "url": "https://es.wikipedia.org/wiki/Hieracium_cinereips"
+  },
+  {
+   "sentences": 1,
+   "title": "Apeadero de Diogal",
+   "url": "https://es.wikipedia.org/wiki/Apeadero_de_Diogal"
+  },
+  {
+   "sentences": 3,
+   "title": "Campeonato Argentino de Básquet 1928",
+   "url": "https://es.wikipedia.org/wiki/Campeonato_Argentino_de_B%C3%A1squet_1928"
+  },
+  {
+   "sentences": 25,
+   "title": "Facultad de Trabajo Social (Universidad Complutense de Madrid)",
+   "url": "https://es.wikipedia.org/wiki/Facultad_de_Trabajo_Social_%28Universidad_Complutense_de_Madrid%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Alivio para Refugiados Ateos",
+   "url": "https://es.wikipedia.org/wiki/Alivio_para_Refugiados_Ateos"
+  },
+  {
+   "sentences": 24,
+   "title": "Os Trapalhões e o Rei do Futebol",
+   "url": "https://es.wikipedia.org/wiki/Os_Trapalh%C3%B5es_e_o_Rei_do_Futebol"
+  },
+  {
+   "sentences": 13,
+   "title": "Jorge Rodríguez-Novelo",
+   "url": "https://es.wikipedia.org/wiki/Jorge_Rodr%C3%ADguez-Novelo"
+  },
+  {
+   "sentences": 3,
+   "title": "São Matias (Beja)",
+   "url": "https://es.wikipedia.org/wiki/S%C3%A3o_Matias_%28Beja%29"
+  },
+  {
+   "sentences": 16,
+   "title": "Hidrodemolición",
+   "url": "https://es.wikipedia.org/wiki/Hidrodemolici%C3%B3n"
+  },
+  {
+   "sentences": 17,
+   "title": "Iglesia de Abelia",
+   "url": "https://es.wikipedia.org/wiki/Iglesia_de_Abelia"
+  },
+  {
+   "sentences": 8,
+   "title": "Víctor Cock Arango",
+   "url": "https://es.wikipedia.org/wiki/V%C3%ADctor_Cock_Arango"
+  },
+  {
+   "sentences": 24,
+   "title": "HMS Cambridge (1695)",
+   "url": "https://es.wikipedia.org/wiki/HMS_Cambridge_%281695%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Topos V",
+   "url": "https://es.wikipedia.org/wiki/Topos_V"
+  },
+  {
+   "sentences": 25,
+   "title": "Marco Aurelio Odio",
+   "url": "https://es.wikipedia.org/wiki/Marco_Aurelio_Odio"
+  },
+  {
+   "sentences": 3,
+   "title": "Inter (tecla)",
+   "url": "https://es.wikipedia.org/wiki/Inter_%28tecla%29"
+  },
+  {
+   "sentences": 13,
+   "title": "Live World Tour",
+   "url": "https://es.wikipedia.org/wiki/Live_World_Tour"
+  },
+  {
+   "sentences": 2,
+   "title": "Vicodin",
+   "url": "https://es.wikipedia.org/wiki/Vicodin"
+  },
+  {
+   "sentences": 25,
+   "title": "Feliz domingo",
+   "url": "https://es.wikipedia.org/wiki/Feliz_domingo"
+  },
+  {
+   "sentences": 1,
+   "title": "Peri (Põlva)",
+   "url": "https://es.wikipedia.org/wiki/Peri_%28P%C3%B5lva%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Línea 1 (Santa Rosa)",
+   "url": "https://es.wikipedia.org/wiki/L%C3%ADnea_1_%28Santa_Rosa%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Imperio Tuʻi Tonga",
+   "url": "https://es.wikipedia.org/wiki/Imperio_Tu%CA%BBi_Tonga"
+  },
+  {
+   "sentences": 3,
+   "title": "American Women quarters",
+   "url": "https://es.wikipedia.org/wiki/American_Women_quarters"
+  },
+  {
+   "sentences": 25,
+   "title": "Eutropio (historiador)",
+   "url": "https://es.wikipedia.org/wiki/Eutropio_%28historiador%29"
+  },
+  {
+   "sentences": 1,
+   "title": "F-1 Trillion Tour",
+   "url": "https://es.wikipedia.org/wiki/F-1_Trillion_Tour"
+  },
+  {
+   "sentences": 7,
+   "title": "Historia del uniforme del Club Social y de Deportes Concepción",
+   "url": "https://es.wikipedia.org/wiki/Historia_del_uniforme_del_Club_Social_y_de_Deportes_Concepci%C3%B3n"
+  },
+  {
+   "sentences": 6,
+   "title": "Estación de Castellbell y Vilar-Monistrol",
+   "url": "https://es.wikipedia.org/wiki/Estaci%C3%B3n_de_Castellbell_y_Vilar-Monistrol"
+  },
+  {
+   "sentences": 20,
+   "title": "Cristóbal de Rojas (arquitecto)",
+   "url": "https://es.wikipedia.org/wiki/Crist%C3%B3bal_de_Rojas_%28arquitecto%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Yvoire",
+   "url": "https://es.wikipedia.org/wiki/Yvoire"
+  },
+  {
+   "sentences": 4,
+   "title": "Tetradymia",
+   "url": "https://es.wikipedia.org/wiki/Tetradymia"
+  },
+  {
+   "sentences": 18,
+   "title": "Heptranchias perlo",
+   "url": "https://es.wikipedia.org/wiki/Heptranchias_perlo"
+  },
+  {
+   "sentences": 4,
+   "title": "Norwalk (Connecticut)",
+   "url": "https://es.wikipedia.org/wiki/Norwalk_%28Connecticut%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Nasidio",
+   "url": "https://es.wikipedia.org/wiki/Nasidio"
+  },
+  {
+   "sentences": 10,
+   "title": "(5365) Fievez",
+   "url": "https://es.wikipedia.org/wiki/%285365%29_Fievez"
+  },
+  {
+   "sentences": 1,
+   "title": "Onthophagus lebasi",
+   "url": "https://es.wikipedia.org/wiki/Onthophagus_lebasi"
+  },
+  {
+   "sentences": 13,
+   "title": "MV Dara",
+   "url": "https://es.wikipedia.org/wiki/MV_Dara"
+  },
+  {
+   "sentences": 2,
+   "title": "Celaenorrhinus aegiochus",
+   "url": "https://es.wikipedia.org/wiki/Celaenorrhinus_aegiochus"
+  },
+  {
+   "sentences": 1,
+   "title": "Olga Záitseva",
+   "url": "https://es.wikipedia.org/wiki/Olga_Z%C3%A1itseva"
+  },
+  {
+   "sentences": 5,
+   "title": "Asia Rugby Women's Championship",
+   "url": "https://es.wikipedia.org/wiki/Asia_Rugby_Women%27s_Championship"
+  },
+  {
+   "sentences": 9,
+   "title": "Challenger de Tallahassee 2013",
+   "url": "https://es.wikipedia.org/wiki/Challenger_de_Tallahassee_2013"
+  },
+  {
+   "sentences": 1,
+   "title": "Protestas en Panamá de 2022",
+   "url": "https://es.wikipedia.org/wiki/Protestas_en_Panam%C3%A1_de_2022"
+  },
+  {
+   "sentences": 25,
+   "title": "Torneo Clausura 2025 (México)",
+   "url": "https://es.wikipedia.org/wiki/Torneo_Clausura_2025_%28M%C3%A9xico%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Rodovia Renê Benedito Silva",
+   "url": "https://es.wikipedia.org/wiki/Rodovia_Ren%C3%AA_Benedito_Silva"
+  },
+  {
+   "sentences": 4,
+   "title": "El valle de los avasallados",
+   "url": "https://es.wikipedia.org/wiki/El_valle_de_los_avasallados"
+  },
+  {
+   "sentences": 17,
+   "title": "Autonomía",
+   "url": "https://es.wikipedia.org/wiki/Autonom%C3%ADa"
+  },
+  {
+   "sentences": 6,
+   "title": "Isla Mon Louis",
+   "url": "https://es.wikipedia.org/wiki/Isla_Mon_Louis"
+  },
+  {
+   "sentences": 6,
+   "title": "Larvivora",
+   "url": "https://es.wikipedia.org/wiki/Larvivora"
+  },
+  {
+   "sentences": 25,
+   "title": "Viognier",
+   "url": "https://es.wikipedia.org/wiki/Viognier"
+  },
+  {
+   "sentences": 2,
+   "title": "Formación Portezuelo",
+   "url": "https://es.wikipedia.org/wiki/Formaci%C3%B3n_Portezuelo"
+  },
+  {
+   "sentences": 18,
+   "title": "Mitú (telenovela)",
+   "url": "https://es.wikipedia.org/wiki/Mit%C3%BA_%28telenovela%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Yingaresca echinoderma",
+   "url": "https://es.wikipedia.org/wiki/Yingaresca_echinoderma"
+  },
+  {
+   "sentences": 7,
+   "title": "Itsu no Manika Shōjo wa",
+   "url": "https://es.wikipedia.org/wiki/Itsu_no_Manika_Sh%C5%8Djo_wa"
+  },
+  {
+   "sentences": 4,
+   "title": "Neodesha",
+   "url": "https://es.wikipedia.org/wiki/Neodesha"
+  },
+  {
+   "sentences": 25,
+   "title": "Jesús Sepúlveda (poeta)",
+   "url": "https://es.wikipedia.org/wiki/Jes%C3%BAs_Sep%C3%BAlveda_%28poeta%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Namibesia pallida",
+   "url": "https://es.wikipedia.org/wiki/Namibesia_pallida"
+  },
+  {
+   "sentences": 10,
+   "title": "Tijuana in Blue",
+   "url": "https://es.wikipedia.org/wiki/Tijuana_in_Blue"
+  },
+  {
+   "sentences": 25,
+   "title": "Rafael Antúnez",
+   "url": "https://es.wikipedia.org/wiki/Rafael_Ant%C3%BAnez"
+  },
+  {
+   "sentences": 25,
+   "title": "Víctor Elías (actor)",
+   "url": "https://es.wikipedia.org/wiki/V%C3%ADctor_El%C3%ADas_%28actor%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Chrysiptera caeruleolineata",
+   "url": "https://es.wikipedia.org/wiki/Chrysiptera_caeruleolineata"
+  },
+  {
+   "sentences": 1,
+   "title": "Insalde",
+   "url": "https://es.wikipedia.org/wiki/Insalde"
+  },
+  {
+   "sentences": 1,
+   "title": "Kedre",
+   "url": "https://es.wikipedia.org/wiki/Kedre"
+  },
+  {
+   "sentences": 13,
+   "title": "Coronavirus humano OC43",
+   "url": "https://es.wikipedia.org/wiki/Coronavirus_humano_OC43"
+  },
+  {
+   "sentences": 9,
+   "title": "Estandarte imperial incaico",
+   "url": "https://es.wikipedia.org/wiki/Estandarte_imperial_incaico"
+  },
+  {
+   "sentences": 16,
+   "title": "El examen de maridos",
+   "url": "https://es.wikipedia.org/wiki/El_examen_de_maridos"
+  },
+  {
+   "sentences": 16,
+   "title": "Ministerio de Relaciones Exteriores (Bolivia)",
+   "url": "https://es.wikipedia.org/wiki/Ministerio_de_Relaciones_Exteriores_%28Bolivia%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Metasynaptops violaceus",
+   "url": "https://es.wikipedia.org/wiki/Metasynaptops_violaceus"
+  },
+  {
+   "sentences": 25,
+   "title": "Kadambini Ganguly",
+   "url": "https://es.wikipedia.org/wiki/Kadambini_Ganguly"
+  },
+  {
+   "sentences": 24,
+   "title": "Festival de la Canción de Eurovisión 1964",
+   "url": "https://es.wikipedia.org/wiki/Festival_de_la_Canci%C3%B3n_de_Eurovisi%C3%B3n_1964"
+  },
+  {
+   "sentences": 6,
+   "title": "Santervás de la Sierra",
+   "url": "https://es.wikipedia.org/wiki/Santerv%C3%A1s_de_la_Sierra"
+  },
+  {
+   "sentences": 1,
+   "title": "Cachirla común",
+   "url": "https://es.wikipedia.org/wiki/Cachirla_com%C3%BAn"
+  },
+  {
+   "sentences": 6,
+   "title": "Gunaika Chetviortaya",
+   "url": "https://es.wikipedia.org/wiki/Gunaika_Chetviortaya"
+  },
+  {
+   "sentences": 25,
+   "title": "Russian Doll",
+   "url": "https://es.wikipedia.org/wiki/Russian_Doll"
+  },
+  {
+   "sentences": 3,
+   "title": "Lasserre (Ariège)",
+   "url": "https://es.wikipedia.org/wiki/Lasserre_%28Ari%C3%A8ge%29"
+  },
+  {
+   "sentences": 25,
+   "title": "George Frederick Watts",
+   "url": "https://es.wikipedia.org/wiki/George_Frederick_Watts"
+  },
+  {
+   "sentences": 5,
+   "title": "Lintneria geminus",
+   "url": "https://es.wikipedia.org/wiki/Lintneria_geminus"
+  },
+  {
+   "sentences": 4,
+   "title": "MXD4",
+   "url": "https://es.wikipedia.org/wiki/MXD4"
+  },
+  {
+   "sentences": 13,
+   "title": "Chambord Liqueur Royale de France",
+   "url": "https://es.wikipedia.org/wiki/Chambord_Liqueur_Royale_de_France"
+  },
+  {
+   "sentences": 3,
+   "title": "Randolph (Wisconsin)",
+   "url": "https://es.wikipedia.org/wiki/Randolph_%28Wisconsin%29"
+  },
+  {
+   "sentences": 25,
+   "title": "La traviata",
+   "url": "https://es.wikipedia.org/wiki/La_traviata"
+  },
+  {
+   "sentences": 1,
+   "title": "Las Torres (Salamanca)",
+   "url": "https://es.wikipedia.org/wiki/Las_Torres_%28Salamanca%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Challenger de Mendoza 2016 (individual masculino)",
+   "url": "https://es.wikipedia.org/wiki/Challenger_de_Mendoza_2016_%28individual_masculino%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Carriacou y Pequeña Martinica (circunscripción electoral)",
+   "url": "https://es.wikipedia.org/wiki/Carriacou_y_Peque%C3%B1a_Martinica_%28circunscripci%C3%B3n_electoral%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Point of View (canción)",
+   "url": "https://es.wikipedia.org/wiki/Point_of_View_%28canci%C3%B3n%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Chunian",
+   "url": "https://es.wikipedia.org/wiki/Chunian"
+  },
+  {
+   "sentences": 13,
+   "title": "Elías Smith",
+   "url": "https://es.wikipedia.org/wiki/El%C3%ADas_Smith"
+  },
+  {
+   "sentences": 7,
+   "title": "Rachovia pyropunctata",
+   "url": "https://es.wikipedia.org/wiki/Rachovia_pyropunctata"
+  },
+  {
+   "sentences": 4,
+   "title": "Reserva ecológica Ciudad Universitaria",
+   "url": "https://es.wikipedia.org/wiki/Reserva_ecol%C3%B3gica_Ciudad_Universitaria"
+  },
+  {
+   "sentences": 15,
+   "title": "Regionalliga Nordost",
+   "url": "https://es.wikipedia.org/wiki/Regionalliga_Nordost"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "es",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 3589,
+ "wikipedia": "https://es.wikipedia.org/"
+}

@@ -1,0 +1,2020 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://sv.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 3,
+   "title": "Chorisoneura translucida",
+   "url": "https://sv.wikipedia.org/wiki/Chorisoneura_translucida"
+  },
+  {
+   "sentences": 2,
+   "title": "Megachile exaltata",
+   "url": "https://sv.wikipedia.org/wiki/Megachile_exaltata"
+  },
+  {
+   "sentences": 2,
+   "title": "Agrypon yanshanense",
+   "url": "https://sv.wikipedia.org/wiki/Agrypon_yanshanense"
+  },
+  {
+   "sentences": 3,
+   "title": "João Almeida",
+   "url": "https://sv.wikipedia.org/wiki/Jo%C3%A3o_Almeida"
+  },
+  {
+   "sentences": 2,
+   "title": "Stegidotea carinata",
+   "url": "https://sv.wikipedia.org/wiki/Stegidotea_carinata"
+  },
+  {
+   "sentences": 2,
+   "title": "Mallochia bimaculata",
+   "url": "https://sv.wikipedia.org/wiki/Mallochia_bimaculata"
+  },
+  {
+   "sentences": 2,
+   "title": "Helicopis madeirensis",
+   "url": "https://sv.wikipedia.org/wiki/Helicopis_madeirensis"
+  },
+  {
+   "sentences": 6,
+   "title": "Polocote de Arriba",
+   "url": "https://sv.wikipedia.org/wiki/Polocote_de_Arriba"
+  },
+  {
+   "sentences": 1,
+   "title": "Pulau Pandan",
+   "url": "https://sv.wikipedia.org/wiki/Pulau_Pandan"
+  },
+  {
+   "sentences": 7,
+   "title": "Fredrik Gelhaar",
+   "url": "https://sv.wikipedia.org/wiki/Fredrik_Gelhaar"
+  },
+  {
+   "sentences": 2,
+   "title": "Arctia caliginosa",
+   "url": "https://sv.wikipedia.org/wiki/Arctia_caliginosa"
+  },
+  {
+   "sentences": 3,
+   "title": "Niphadophylax hemicycla",
+   "url": "https://sv.wikipedia.org/wiki/Niphadophylax_hemicycla"
+  },
+  {
+   "sentences": 8,
+   "title": "Carl von Ewald (militär)",
+   "url": "https://sv.wikipedia.org/wiki/Carl_von_Ewald_%28milit%C3%A4r%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Mass Effect-serien",
+   "url": "https://sv.wikipedia.org/wiki/Mass_Effect-serien"
+  },
+  {
+   "sentences": 8,
+   "title": "Parbildning",
+   "url": "https://sv.wikipedia.org/wiki/Parbildning"
+  },
+  {
+   "sentences": 25,
+   "title": "Lista över varelser i Godzillafilmerna",
+   "url": "https://sv.wikipedia.org/wiki/Lista_%C3%B6ver_varelser_i_Godzillafilmerna"
+  },
+  {
+   "sentences": 5,
+   "title": "El Humo, Guerrero",
+   "url": "https://sv.wikipedia.org/wiki/El_Humo%2C_Guerrero"
+  },
+  {
+   "sentences": 19,
+   "title": "Operation Endsweep",
+   "url": "https://sv.wikipedia.org/wiki/Operation_Endsweep"
+  },
+  {
+   "sentences": 2,
+   "title": "Pietro Gamba",
+   "url": "https://sv.wikipedia.org/wiki/Pietro_Gamba"
+  },
+  {
+   "sentences": 13,
+   "title": "En tur på sjön",
+   "url": "https://sv.wikipedia.org/wiki/En_tur_p%C3%A5_sj%C3%B6n"
+  },
+  {
+   "sentences": 11,
+   "title": "The Ashes",
+   "url": "https://sv.wikipedia.org/wiki/The_Ashes"
+  },
+  {
+   "sentences": 2,
+   "title": "Anisodes magnidiscata",
+   "url": "https://sv.wikipedia.org/wiki/Anisodes_magnidiscata"
+  },
+  {
+   "sentences": 2,
+   "title": "Rhizidiocystis ananasi",
+   "url": "https://sv.wikipedia.org/wiki/Rhizidiocystis_ananasi"
+  },
+  {
+   "sentences": 3,
+   "title": "Acacia inceana",
+   "url": "https://sv.wikipedia.org/wiki/Acacia_inceana"
+  },
+  {
+   "sentences": 6,
+   "title": "San Nicolás, Santa Bárbara",
+   "url": "https://sv.wikipedia.org/wiki/San_Nicol%C3%A1s%2C_Santa_B%C3%A1rbara"
+  },
+  {
+   "sentences": 3,
+   "title": "Pennatula aculeata",
+   "url": "https://sv.wikipedia.org/wiki/Pennatula_aculeata"
+  },
+  {
+   "sentences": 3,
+   "title": "Tetramorium electrum",
+   "url": "https://sv.wikipedia.org/wiki/Tetramorium_electrum"
+  },
+  {
+   "sentences": 2,
+   "title": "Cyclophora denticulata",
+   "url": "https://sv.wikipedia.org/wiki/Cyclophora_denticulata"
+  },
+  {
+   "sentences": 2,
+   "title": "Hoplophoropyga unicolor",
+   "url": "https://sv.wikipedia.org/wiki/Hoplophoropyga_unicolor"
+  },
+  {
+   "sentences": 6,
+   "title": "Þórutindur",
+   "url": "https://sv.wikipedia.org/wiki/%C3%9E%C3%B3rutindur"
+  },
+  {
+   "sentences": 3,
+   "title": "Panorpa stotzneri",
+   "url": "https://sv.wikipedia.org/wiki/Panorpa_stotzneri"
+  },
+  {
+   "sentences": 2,
+   "title": "Cyperus prolixus",
+   "url": "https://sv.wikipedia.org/wiki/Cyperus_prolixus"
+  },
+  {
+   "sentences": 25,
+   "title": "Breviks socken",
+   "url": "https://sv.wikipedia.org/wiki/Breviks_socken"
+  },
+  {
+   "sentences": 3,
+   "title": "Longzhouping (köpinghuvudort i Kina, Hubei Sheng, lat 30,50, long 111,16)",
+   "url": "https://sv.wikipedia.org/wiki/Longzhouping_%28k%C3%B6pinghuvudort_i_Kina%2C_Hubei_Sheng%2C_lat_30%2C50%2C_long_111%2C16%29"
+  },
+  {
+   "sentences": 13,
+   "title": "Katarzyna Wasick",
+   "url": "https://sv.wikipedia.org/wiki/Katarzyna_Wasick"
+  },
+  {
+   "sentences": 9,
+   "title": "W-CDMA",
+   "url": "https://sv.wikipedia.org/wiki/W-CDMA"
+  },
+  {
+   "sentences": 2,
+   "title": "Henotesia ankova",
+   "url": "https://sv.wikipedia.org/wiki/Henotesia_ankova"
+  },
+  {
+   "sentences": 14,
+   "title": "Barbudaskogssångare",
+   "url": "https://sv.wikipedia.org/wiki/Barbudaskogss%C3%A5ngare"
+  },
+  {
+   "sentences": 24,
+   "title": "Orange Bowl",
+   "url": "https://sv.wikipedia.org/wiki/Orange_Bowl"
+  },
+  {
+   "sentences": 6,
+   "title": "Riverleigh",
+   "url": "https://sv.wikipedia.org/wiki/Riverleigh"
+  },
+  {
+   "sentences": 2,
+   "title": "Dapsilanthus spathaceus",
+   "url": "https://sv.wikipedia.org/wiki/Dapsilanthus_spathaceus"
+  },
+  {
+   "sentences": 2,
+   "title": "Phyllonorycter restrictella",
+   "url": "https://sv.wikipedia.org/wiki/Phyllonorycter_restrictella"
+  },
+  {
+   "sentences": 4,
+   "title": "Karstsabelvinge",
+   "url": "https://sv.wikipedia.org/wiki/Karstsabelvinge"
+  },
+  {
+   "sentences": 25,
+   "title": "Japanska namn",
+   "url": "https://sv.wikipedia.org/wiki/Japanska_namn"
+  },
+  {
+   "sentences": 2,
+   "title": "Arenga distincta",
+   "url": "https://sv.wikipedia.org/wiki/Arenga_distincta"
+  },
+  {
+   "sentences": 8,
+   "title": "Changshan (sockenhuvudort i Kina, Zhejiang Sheng, lat 29,02, long 119,55)",
+   "url": "https://sv.wikipedia.org/wiki/Changshan_%28sockenhuvudort_i_Kina%2C_Zhejiang_Sheng%2C_lat_29%2C02%2C_long_119%2C55%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Impatiens manongarivensis",
+   "url": "https://sv.wikipedia.org/wiki/Impatiens_manongarivensis"
+  },
+  {
+   "sentences": 3,
+   "title": "Zygomyia calvusa",
+   "url": "https://sv.wikipedia.org/wiki/Zygomyia_calvusa"
+  },
+  {
+   "sentences": 4,
+   "title": "St. Thomas, Wales",
+   "url": "https://sv.wikipedia.org/wiki/St._Thomas%2C_Wales"
+  },
+  {
+   "sentences": 2,
+   "title": "Syntrichia serripungens",
+   "url": "https://sv.wikipedia.org/wiki/Syntrichia_serripungens"
+  },
+  {
+   "sentences": 3,
+   "title": "Chamaecrista bucherae",
+   "url": "https://sv.wikipedia.org/wiki/Chamaecrista_bucherae"
+  },
+  {
+   "sentences": 11,
+   "title": "Russell (mansnamn)",
+   "url": "https://sv.wikipedia.org/wiki/Russell_%28mansnamn%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Mellantjärnen (Hjulsjö socken, Västmanland)",
+   "url": "https://sv.wikipedia.org/wiki/Mellantj%C3%A4rnen_%28Hjulsj%C3%B6_socken%2C_V%C3%A4stmanland%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Trachymene deflexa",
+   "url": "https://sv.wikipedia.org/wiki/Trachymene_deflexa"
+  },
+  {
+   "sentences": 4,
+   "title": "Till kärleken",
+   "url": "https://sv.wikipedia.org/wiki/Till_k%C3%A4rleken"
+  },
+  {
+   "sentences": 2,
+   "title": "Coumatta",
+   "url": "https://sv.wikipedia.org/wiki/Coumatta"
+  },
+  {
+   "sentences": 3,
+   "title": "Chanson réaliste",
+   "url": "https://sv.wikipedia.org/wiki/Chanson_r%C3%A9aliste"
+  },
+  {
+   "sentences": 2,
+   "title": "Anthurium bragae",
+   "url": "https://sv.wikipedia.org/wiki/Anthurium_bragae"
+  },
+  {
+   "sentences": 2,
+   "title": "Choleva cisteloides",
+   "url": "https://sv.wikipedia.org/wiki/Choleva_cisteloides"
+  },
+  {
+   "sentences": 2,
+   "title": "Alaj (distrikt)",
+   "url": "https://sv.wikipedia.org/wiki/Alaj_%28distrikt%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Bengt Ernryd",
+   "url": "https://sv.wikipedia.org/wiki/Bengt_Ernryd"
+  },
+  {
+   "sentences": 3,
+   "title": "Dysidea janiae",
+   "url": "https://sv.wikipedia.org/wiki/Dysidea_janiae"
+  },
+  {
+   "sentences": 2,
+   "title": "Paralimnophila cooloola",
+   "url": "https://sv.wikipedia.org/wiki/Paralimnophila_cooloola"
+  },
+  {
+   "sentences": 25,
+   "title": "Hovgården, Vadstena kommun",
+   "url": "https://sv.wikipedia.org/wiki/Hovg%C3%A5rden%2C_Vadstena_kommun"
+  },
+  {
+   "sentences": 2,
+   "title": "Egira leucomelas",
+   "url": "https://sv.wikipedia.org/wiki/Egira_leucomelas"
+  },
+  {
+   "sentences": 3,
+   "title": "4288 Tokyotech",
+   "url": "https://sv.wikipedia.org/wiki/4288_Tokyotech"
+  },
+  {
+   "sentences": 9,
+   "title": "Republiken Koreas provisoriska regering",
+   "url": "https://sv.wikipedia.org/wiki/Republiken_Koreas_provisoriska_regering"
+  },
+  {
+   "sentences": 5,
+   "title": "Norberg-Karbennings församling",
+   "url": "https://sv.wikipedia.org/wiki/Norberg-Karbennings_f%C3%B6rsamling"
+  },
+  {
+   "sentences": 2,
+   "title": "Eulimnichus epistemus",
+   "url": "https://sv.wikipedia.org/wiki/Eulimnichus_epistemus"
+  },
+  {
+   "sentences": 4,
+   "title": "Tørring gymnasium",
+   "url": "https://sv.wikipedia.org/wiki/T%C3%B8rring_gymnasium"
+  },
+  {
+   "sentences": 3,
+   "title": "Kabupaten Kepulauan Selayar",
+   "url": "https://sv.wikipedia.org/wiki/Kabupaten_Kepulauan_Selayar"
+  },
+  {
+   "sentences": 2,
+   "title": "Somatina obscuriciliata",
+   "url": "https://sv.wikipedia.org/wiki/Somatina_obscuriciliata"
+  },
+  {
+   "sentences": 11,
+   "title": "Narendra Modi",
+   "url": "https://sv.wikipedia.org/wiki/Narendra_Modi"
+  },
+  {
+   "sentences": 4,
+   "title": "Youhao",
+   "url": "https://sv.wikipedia.org/wiki/Youhao"
+  },
+  {
+   "sentences": 10,
+   "title": "Norra Virestadsjön",
+   "url": "https://sv.wikipedia.org/wiki/Norra_Virestadsj%C3%B6n"
+  },
+  {
+   "sentences": 2,
+   "title": "Onosma graecum",
+   "url": "https://sv.wikipedia.org/wiki/Onosma_graecum"
+  },
+  {
+   "sentences": 8,
+   "title": "Erna Möller",
+   "url": "https://sv.wikipedia.org/wiki/Erna_M%C3%B6ller"
+  },
+  {
+   "sentences": 2,
+   "title": "Sorocephalus tenuifolius",
+   "url": "https://sv.wikipedia.org/wiki/Sorocephalus_tenuifolius"
+  },
+  {
+   "sentences": 1,
+   "title": "Stentjärnen (Arvidsjaurs socken, Lappland, 730083-167607)",
+   "url": "https://sv.wikipedia.org/wiki/Stentj%C3%A4rnen_%28Arvidsjaurs_socken%2C_Lappland%2C_730083-167607%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Eurychoria oenoptila",
+   "url": "https://sv.wikipedia.org/wiki/Eurychoria_oenoptila"
+  },
+  {
+   "sentences": 2,
+   "title": "Chevrolet Monza",
+   "url": "https://sv.wikipedia.org/wiki/Chevrolet_Monza"
+  },
+  {
+   "sentences": 2,
+   "title": "Desa Tagogapu",
+   "url": "https://sv.wikipedia.org/wiki/Desa_Tagogapu"
+  },
+  {
+   "sentences": 2,
+   "title": "En svensk klassiker (album)",
+   "url": "https://sv.wikipedia.org/wiki/En_svensk_klassiker_%28album%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Rönsjärv",
+   "url": "https://sv.wikipedia.org/wiki/R%C3%B6nsj%C3%A4rv"
+  },
+  {
+   "sentences": 2,
+   "title": "Ctenoneura luma",
+   "url": "https://sv.wikipedia.org/wiki/Ctenoneura_luma"
+  },
+  {
+   "sentences": 2,
+   "title": "Euplectrus flavigaster",
+   "url": "https://sv.wikipedia.org/wiki/Euplectrus_flavigaster"
+  },
+  {
+   "sentences": 2,
+   "title": "Nothogenes citrocrana",
+   "url": "https://sv.wikipedia.org/wiki/Nothogenes_citrocrana"
+  },
+  {
+   "sentences": 13,
+   "title": "Harjumaa",
+   "url": "https://sv.wikipedia.org/wiki/Harjumaa"
+  },
+  {
+   "sentences": 4,
+   "title": "3183 Franzkaiser",
+   "url": "https://sv.wikipedia.org/wiki/3183_Franzkaiser"
+  },
+  {
+   "sentences": 7,
+   "title": "Kungariket Powys",
+   "url": "https://sv.wikipedia.org/wiki/Kungariket_Powys"
+  },
+  {
+   "sentences": 2,
+   "title": "Justicia huambensis",
+   "url": "https://sv.wikipedia.org/wiki/Justicia_huambensis"
+  },
+  {
+   "sentences": 2,
+   "title": "Eurytoma profunda",
+   "url": "https://sv.wikipedia.org/wiki/Eurytoma_profunda"
+  },
+  {
+   "sentences": 2,
+   "title": "Pimpla pyramis",
+   "url": "https://sv.wikipedia.org/wiki/Pimpla_pyramis"
+  },
+  {
+   "sentences": 1,
+   "title": "Olap",
+   "url": "https://sv.wikipedia.org/wiki/Olap"
+  },
+  {
+   "sentences": 12,
+   "title": "Albert Skeel",
+   "url": "https://sv.wikipedia.org/wiki/Albert_Skeel"
+  },
+  {
+   "sentences": 2,
+   "title": "Rhinarion legrosi",
+   "url": "https://sv.wikipedia.org/wiki/Rhinarion_legrosi"
+  },
+  {
+   "sentences": 2,
+   "title": "Serjania hispida",
+   "url": "https://sv.wikipedia.org/wiki/Serjania_hispida"
+  },
+  {
+   "sentences": 2,
+   "title": "Cardiopteris moluccana",
+   "url": "https://sv.wikipedia.org/wiki/Cardiopteris_moluccana"
+  },
+  {
+   "sentences": 5,
+   "title": "Donald Hall",
+   "url": "https://sv.wikipedia.org/wiki/Donald_Hall"
+  },
+  {
+   "sentences": 2,
+   "title": "Eriophorum fellowsii",
+   "url": "https://sv.wikipedia.org/wiki/Eriophorum_fellowsii"
+  },
+  {
+   "sentences": 3,
+   "title": "Stock Gaylard",
+   "url": "https://sv.wikipedia.org/wiki/Stock_Gaylard"
+  },
+  {
+   "sentences": 2,
+   "title": "Apodytes brachystylis",
+   "url": "https://sv.wikipedia.org/wiki/Apodytes_brachystylis"
+  },
+  {
+   "sentences": 10,
+   "title": "Saab 9-4X",
+   "url": "https://sv.wikipedia.org/wiki/Saab_9-4X"
+  },
+  {
+   "sentences": 2,
+   "title": "Oceanides oribasus",
+   "url": "https://sv.wikipedia.org/wiki/Oceanides_oribasus"
+  },
+  {
+   "sentences": 3,
+   "title": "Blaby District",
+   "url": "https://sv.wikipedia.org/wiki/Blaby_District"
+  },
+  {
+   "sentences": 2,
+   "title": "Desa Bayungcerik",
+   "url": "https://sv.wikipedia.org/wiki/Desa_Bayungcerik"
+  },
+  {
+   "sentences": 6,
+   "title": "Sprintvärldsmästerskapen i kanotsport 2018",
+   "url": "https://sv.wikipedia.org/wiki/Sprintv%C3%A4rldsm%C3%A4sterskapen_i_kanotsport_2018"
+  },
+  {
+   "sentences": 10,
+   "title": "Svenska Karateförbundet",
+   "url": "https://sv.wikipedia.org/wiki/Svenska_Karatef%C3%B6rbundet"
+  },
+  {
+   "sentences": 5,
+   "title": "Henric Gustaf Wrangel",
+   "url": "https://sv.wikipedia.org/wiki/Henric_Gustaf_Wrangel"
+  },
+  {
+   "sentences": 9,
+   "title": "Janus Jahn",
+   "url": "https://sv.wikipedia.org/wiki/Janus_Jahn"
+  },
+  {
+   "sentences": 3,
+   "title": "Onthophagus rakovici",
+   "url": "https://sv.wikipedia.org/wiki/Onthophagus_rakovici"
+  },
+  {
+   "sentences": 13,
+   "title": "Santa Maria del Rosario a Monte Mario",
+   "url": "https://sv.wikipedia.org/wiki/Santa_Maria_del_Rosario_a_Monte_Mario"
+  },
+  {
+   "sentences": 2,
+   "title": "Ascocentrum rubescens",
+   "url": "https://sv.wikipedia.org/wiki/Ascocentrum_rubescens"
+  },
+  {
+   "sentences": 2,
+   "title": "Desa Purwodadi (administrativ by i Indonesien, Jawa Tengah, lat -7,61, long 109,42)",
+   "url": "https://sv.wikipedia.org/wiki/Desa_Purwodadi_%28administrativ_by_i_Indonesien%2C_Jawa_Tengah%2C_lat_-7%2C61%2C_long_109%2C42%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Thlaspi hastulatum",
+   "url": "https://sv.wikipedia.org/wiki/Thlaspi_hastulatum"
+  },
+  {
+   "sentences": 1,
+   "title": "Sundtjärnarna (Jokkmokks socken, Lappland, 735964-169447)",
+   "url": "https://sv.wikipedia.org/wiki/Sundtj%C3%A4rnarna_%28Jokkmokks_socken%2C_Lappland%2C_735964-169447%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Bonnetia liesneri",
+   "url": "https://sv.wikipedia.org/wiki/Bonnetia_liesneri"
+  },
+  {
+   "sentences": 2,
+   "title": "Sapromyza plantaris",
+   "url": "https://sv.wikipedia.org/wiki/Sapromyza_plantaris"
+  },
+  {
+   "sentences": 2,
+   "title": "Culicoides nudipalpis",
+   "url": "https://sv.wikipedia.org/wiki/Culicoides_nudipalpis"
+  },
+  {
+   "sentences": 2,
+   "title": "Dysoxylum dumosum",
+   "url": "https://sv.wikipedia.org/wiki/Dysoxylum_dumosum"
+  },
+  {
+   "sentences": 2,
+   "title": "Neoalosterna",
+   "url": "https://sv.wikipedia.org/wiki/Neoalosterna"
+  },
+  {
+   "sentences": 2,
+   "title": "Desa Ciherang (administrativ by i Indonesien, Jawa Barat, lat -6,86, long 107,87)",
+   "url": "https://sv.wikipedia.org/wiki/Desa_Ciherang_%28administrativ_by_i_Indonesien%2C_Jawa_Barat%2C_lat_-6%2C86%2C_long_107%2C87%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Yang Kaihui",
+   "url": "https://sv.wikipedia.org/wiki/Yang_Kaihui"
+  },
+  {
+   "sentences": 3,
+   "title": "Derrick Peak",
+   "url": "https://sv.wikipedia.org/wiki/Derrick_Peak"
+  },
+  {
+   "sentences": 23,
+   "title": "Björn Englund",
+   "url": "https://sv.wikipedia.org/wiki/Bj%C3%B6rn_Englund"
+  },
+  {
+   "sentences": 6,
+   "title": "Bāgha Purāna",
+   "url": "https://sv.wikipedia.org/wiki/B%C4%81gha_Pur%C4%81na"
+  },
+  {
+   "sentences": 3,
+   "title": "Mpande kaSenzangakhona",
+   "url": "https://sv.wikipedia.org/wiki/Mpande_kaSenzangakhona"
+  },
+  {
+   "sentences": 2,
+   "title": "Chaetonerius apicalis",
+   "url": "https://sv.wikipedia.org/wiki/Chaetonerius_apicalis"
+  },
+  {
+   "sentences": 2,
+   "title": "Triumfetta sericata",
+   "url": "https://sv.wikipedia.org/wiki/Triumfetta_sericata"
+  },
+  {
+   "sentences": 4,
+   "title": "Ynglingen",
+   "url": "https://sv.wikipedia.org/wiki/Ynglingen"
+  },
+  {
+   "sentences": 3,
+   "title": "Rosa primula",
+   "url": "https://sv.wikipedia.org/wiki/Rosa_primula"
+  },
+  {
+   "sentences": 5,
+   "title": "Nils Ludvig Söderholm",
+   "url": "https://sv.wikipedia.org/wiki/Nils_Ludvig_S%C3%B6derholm"
+  },
+  {
+   "sentences": 2,
+   "title": "Deudorix amatius",
+   "url": "https://sv.wikipedia.org/wiki/Deudorix_amatius"
+  },
+  {
+   "sentences": 2,
+   "title": "Mitochytridium",
+   "url": "https://sv.wikipedia.org/wiki/Mitochytridium"
+  },
+  {
+   "sentences": 2,
+   "title": "Idriz Batha",
+   "url": "https://sv.wikipedia.org/wiki/Idriz_Batha"
+  },
+  {
+   "sentences": 4,
+   "title": "Predrag Mijatović",
+   "url": "https://sv.wikipedia.org/wiki/Predrag_Mijatovi%C4%87"
+  },
+  {
+   "sentences": 2,
+   "title": "Charaxes alberici",
+   "url": "https://sv.wikipedia.org/wiki/Charaxes_alberici"
+  },
+  {
+   "sentences": 5,
+   "title": "Mercedes-Benz R170",
+   "url": "https://sv.wikipedia.org/wiki/Mercedes-Benz_R170"
+  },
+  {
+   "sentences": 25,
+   "title": "Gdańsk",
+   "url": "https://sv.wikipedia.org/wiki/Gda%C5%84sk"
+  },
+  {
+   "sentences": 7,
+   "title": "Carlo Derkert",
+   "url": "https://sv.wikipedia.org/wiki/Carlo_Derkert"
+  },
+  {
+   "sentences": 6,
+   "title": "Bengt Glemdal",
+   "url": "https://sv.wikipedia.org/wiki/Bengt_Glemdal"
+  },
+  {
+   "sentences": 21,
+   "title": "Tila Nguyen",
+   "url": "https://sv.wikipedia.org/wiki/Tila_Nguyen"
+  },
+  {
+   "sentences": 2,
+   "title": "Philiris gloriosa",
+   "url": "https://sv.wikipedia.org/wiki/Philiris_gloriosa"
+  },
+  {
+   "sentences": 1,
+   "title": "Interoppia",
+   "url": "https://sv.wikipedia.org/wiki/Interoppia"
+  },
+  {
+   "sentences": 1,
+   "title": "Canova, New Mexico",
+   "url": "https://sv.wikipedia.org/wiki/Canova%2C_New_Mexico"
+  },
+  {
+   "sentences": 6,
+   "title": "Niko Kapanen",
+   "url": "https://sv.wikipedia.org/wiki/Niko_Kapanen"
+  },
+  {
+   "sentences": 5,
+   "title": "John Eliot (meteorolog)",
+   "url": "https://sv.wikipedia.org/wiki/John_Eliot_%28meteorolog%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Physochlaina macrocalyx",
+   "url": "https://sv.wikipedia.org/wiki/Physochlaina_macrocalyx"
+  },
+  {
+   "sentences": 2,
+   "title": "Ficus dugandii",
+   "url": "https://sv.wikipedia.org/wiki/Ficus_dugandii"
+  },
+  {
+   "sentences": 22,
+   "title": "Vårdagjämningen",
+   "url": "https://sv.wikipedia.org/wiki/V%C3%A5rdagj%C3%A4mningen"
+  },
+  {
+   "sentences": 2,
+   "title": "Gonayiv (arrondissement)",
+   "url": "https://sv.wikipedia.org/wiki/Gonayiv_%28arrondissement%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Huey P. Newton",
+   "url": "https://sv.wikipedia.org/wiki/Huey_P._Newton"
+  },
+  {
+   "sentences": 25,
+   "title": "Toftvägens radhusområde",
+   "url": "https://sv.wikipedia.org/wiki/Toftv%C3%A4gens_radhusomr%C3%A5de"
+  },
+  {
+   "sentences": 6,
+   "title": "Chimalacatla",
+   "url": "https://sv.wikipedia.org/wiki/Chimalacatla"
+  },
+  {
+   "sentences": 7,
+   "title": "Derramadero de Juárez",
+   "url": "https://sv.wikipedia.org/wiki/Derramadero_de_Ju%C3%A1rez"
+  },
+  {
+   "sentences": 2,
+   "title": "George Hilaro Barlow",
+   "url": "https://sv.wikipedia.org/wiki/George_Hilaro_Barlow"
+  },
+  {
+   "sentences": 3,
+   "title": "Freedmen's Bureau",
+   "url": "https://sv.wikipedia.org/wiki/Freedmen%27s_Bureau"
+  },
+  {
+   "sentences": 2,
+   "title": "Phyllachora domingensis",
+   "url": "https://sv.wikipedia.org/wiki/Phyllachora_domingensis"
+  },
+  {
+   "sentences": 2,
+   "title": "Octosporella radulae",
+   "url": "https://sv.wikipedia.org/wiki/Octosporella_radulae"
+  },
+  {
+   "sentences": 3,
+   "title": "Coronilla juncea",
+   "url": "https://sv.wikipedia.org/wiki/Coronilla_juncea"
+  },
+  {
+   "sentences": 2,
+   "title": "Laonice quadridentata",
+   "url": "https://sv.wikipedia.org/wiki/Laonice_quadridentata"
+  },
+  {
+   "sentences": 2,
+   "title": "Mimothelais fruhstorferi",
+   "url": "https://sv.wikipedia.org/wiki/Mimothelais_fruhstorferi"
+  },
+  {
+   "sentences": 8,
+   "title": "Salo svenska skola",
+   "url": "https://sv.wikipedia.org/wiki/Salo_svenska_skola"
+  },
+  {
+   "sentences": 2,
+   "title": "Andreaskyrkan, Luleå",
+   "url": "https://sv.wikipedia.org/wiki/Andreaskyrkan%2C_Lule%C3%A5"
+  },
+  {
+   "sentences": 5,
+   "title": "Strongyloididae",
+   "url": "https://sv.wikipedia.org/wiki/Strongyloididae"
+  },
+  {
+   "sentences": 2,
+   "title": "Sindang-dong, Seoul",
+   "url": "https://sv.wikipedia.org/wiki/Sindang-dong%2C_Seoul"
+  },
+  {
+   "sentences": 2,
+   "title": "Cryptanura veraepacis",
+   "url": "https://sv.wikipedia.org/wiki/Cryptanura_veraepacis"
+  },
+  {
+   "sentences": 2,
+   "title": "Berinsfield",
+   "url": "https://sv.wikipedia.org/wiki/Berinsfield"
+  },
+  {
+   "sentences": 2,
+   "title": "Cometes apicalis",
+   "url": "https://sv.wikipedia.org/wiki/Cometes_apicalis"
+  },
+  {
+   "sentences": 2,
+   "title": "Dapha valeusalis",
+   "url": "https://sv.wikipedia.org/wiki/Dapha_valeusalis"
+  },
+  {
+   "sentences": 2,
+   "title": "Chlorops lenis",
+   "url": "https://sv.wikipedia.org/wiki/Chlorops_lenis"
+  },
+  {
+   "sentences": 3,
+   "title": "Xilu, Guangdong",
+   "url": "https://sv.wikipedia.org/wiki/Xilu%2C_Guangdong"
+  },
+  {
+   "sentences": 4,
+   "title": "Drosophila lamottei",
+   "url": "https://sv.wikipedia.org/wiki/Drosophila_lamottei"
+  },
+  {
+   "sentences": 2,
+   "title": "Loxocera fulviventris",
+   "url": "https://sv.wikipedia.org/wiki/Loxocera_fulviventris"
+  },
+  {
+   "sentences": 2,
+   "title": "Exochus krellus",
+   "url": "https://sv.wikipedia.org/wiki/Exochus_krellus"
+  },
+  {
+   "sentences": 3,
+   "title": "Hugel (DJ)",
+   "url": "https://sv.wikipedia.org/wiki/Hugel_%28DJ%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Vararia ambigua",
+   "url": "https://sv.wikipedia.org/wiki/Vararia_ambigua"
+  },
+  {
+   "sentences": 2,
+   "title": "Nyctus crinitus",
+   "url": "https://sv.wikipedia.org/wiki/Nyctus_crinitus"
+  },
+  {
+   "sentences": 2,
+   "title": "Festuca taurica",
+   "url": "https://sv.wikipedia.org/wiki/Festuca_taurica"
+  },
+  {
+   "sentences": 2,
+   "title": "Protosuberites geracei",
+   "url": "https://sv.wikipedia.org/wiki/Protosuberites_geracei"
+  },
+  {
+   "sentences": 2,
+   "title": "Thuris depressus",
+   "url": "https://sv.wikipedia.org/wiki/Thuris_depressus"
+  },
+  {
+   "sentences": 3,
+   "title": "Xanthoparmelia remnantia",
+   "url": "https://sv.wikipedia.org/wiki/Xanthoparmelia_remnantia"
+  },
+  {
+   "sentences": 17,
+   "title": "Kraków-Balices flygplats",
+   "url": "https://sv.wikipedia.org/wiki/Krak%C3%B3w-Balices_flygplats"
+  },
+  {
+   "sentences": 2,
+   "title": "Byttneria jaculifolia",
+   "url": "https://sv.wikipedia.org/wiki/Byttneria_jaculifolia"
+  },
+  {
+   "sentences": 2,
+   "title": "Hibbertia comptonii",
+   "url": "https://sv.wikipedia.org/wiki/Hibbertia_comptonii"
+  },
+  {
+   "sentences": 15,
+   "title": "Simon i Backabo",
+   "url": "https://sv.wikipedia.org/wiki/Simon_i_Backabo"
+  },
+  {
+   "sentences": 2,
+   "title": "Ptereleotris brachyptera",
+   "url": "https://sv.wikipedia.org/wiki/Ptereleotris_brachyptera"
+  },
+  {
+   "sentences": 3,
+   "title": "Köpenhamns befästning",
+   "url": "https://sv.wikipedia.org/wiki/K%C3%B6penhamns_bef%C3%A4stning"
+  },
+  {
+   "sentences": 2,
+   "title": "Rosopaella nigra",
+   "url": "https://sv.wikipedia.org/wiki/Rosopaella_nigra"
+  },
+  {
+   "sentences": 2,
+   "title": "Protoribates diani",
+   "url": "https://sv.wikipedia.org/wiki/Protoribates_diani"
+  },
+  {
+   "sentences": 2,
+   "title": "Phiale modestissima",
+   "url": "https://sv.wikipedia.org/wiki/Phiale_modestissima"
+  },
+  {
+   "sentences": 3,
+   "title": "Sarry, Yonne",
+   "url": "https://sv.wikipedia.org/wiki/Sarry%2C_Yonne"
+  },
+  {
+   "sentences": 2,
+   "title": "Neocrassana punctiger",
+   "url": "https://sv.wikipedia.org/wiki/Neocrassana_punctiger"
+  },
+  {
+   "sentences": 2,
+   "title": "Sonerila plagiocardia",
+   "url": "https://sv.wikipedia.org/wiki/Sonerila_plagiocardia"
+  },
+  {
+   "sentences": 2,
+   "title": "Evita blandaria",
+   "url": "https://sv.wikipedia.org/wiki/Evita_blandaria"
+  },
+  {
+   "sentences": 2,
+   "title": "Jänissaari (ö i Finland, Lappland, Rovaniemi)",
+   "url": "https://sv.wikipedia.org/wiki/J%C3%A4nissaari_%28%C3%B6_i_Finland%2C_Lappland%2C_Rovaniemi%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Dolichotetranychus macer",
+   "url": "https://sv.wikipedia.org/wiki/Dolichotetranychus_macer"
+  },
+  {
+   "sentences": 2,
+   "title": "Leucocroton pallidus",
+   "url": "https://sv.wikipedia.org/wiki/Leucocroton_pallidus"
+  },
+  {
+   "sentences": 3,
+   "title": "Spöktjärn",
+   "url": "https://sv.wikipedia.org/wiki/Sp%C3%B6ktj%C3%A4rn"
+  },
+  {
+   "sentences": 2,
+   "title": "Roncus veles",
+   "url": "https://sv.wikipedia.org/wiki/Roncus_veles"
+  },
+  {
+   "sentences": 2,
+   "title": "Lahdensuunsaari",
+   "url": "https://sv.wikipedia.org/wiki/Lahdensuunsaari"
+  },
+  {
+   "sentences": 4,
+   "title": "Sclerocactus mesae-verdae",
+   "url": "https://sv.wikipedia.org/wiki/Sclerocactus_mesae-verdae"
+  },
+  {
+   "sentences": 2,
+   "title": "Teleutaea corniculata",
+   "url": "https://sv.wikipedia.org/wiki/Teleutaea_corniculata"
+  },
+  {
+   "sentences": 2,
+   "title": "Synthecium alternans",
+   "url": "https://sv.wikipedia.org/wiki/Synthecium_alternans"
+  },
+  {
+   "sentences": 2,
+   "title": "Catenicellopsis delicatula",
+   "url": "https://sv.wikipedia.org/wiki/Catenicellopsis_delicatula"
+  },
+  {
+   "sentences": 17,
+   "title": "Fältslag",
+   "url": "https://sv.wikipedia.org/wiki/F%C3%A4ltslag"
+  },
+  {
+   "sentences": 3,
+   "title": "Aldebaran Rock",
+   "url": "https://sv.wikipedia.org/wiki/Aldebaran_Rock"
+  },
+  {
+   "sentences": 3,
+   "title": "Chaetogonopteron shettyi",
+   "url": "https://sv.wikipedia.org/wiki/Chaetogonopteron_shettyi"
+  },
+  {
+   "sentences": 7,
+   "title": "Acoustic Shards",
+   "url": "https://sv.wikipedia.org/wiki/Acoustic_Shards"
+  },
+  {
+   "sentences": 2,
+   "title": "Eugenia chepensis",
+   "url": "https://sv.wikipedia.org/wiki/Eugenia_chepensis"
+  },
+  {
+   "sentences": 2,
+   "title": "Paraneopsylla tiflovi",
+   "url": "https://sv.wikipedia.org/wiki/Paraneopsylla_tiflovi"
+  },
+  {
+   "sentences": 9,
+   "title": "The Fireballs",
+   "url": "https://sv.wikipedia.org/wiki/The_Fireballs"
+  },
+  {
+   "sentences": 2,
+   "title": "Ouratea occultinervis",
+   "url": "https://sv.wikipedia.org/wiki/Ouratea_occultinervis"
+  },
+  {
+   "sentences": 4,
+   "title": "Ursula Agricola",
+   "url": "https://sv.wikipedia.org/wiki/Ursula_Agricola"
+  },
+  {
+   "sentences": 12,
+   "title": "Vittorio Gassman",
+   "url": "https://sv.wikipedia.org/wiki/Vittorio_Gassman"
+  },
+  {
+   "sentences": 2,
+   "title": "Penicillium lignorum",
+   "url": "https://sv.wikipedia.org/wiki/Penicillium_lignorum"
+  },
+  {
+   "sentences": 6,
+   "title": "La Nueva Unión, El Mante",
+   "url": "https://sv.wikipedia.org/wiki/La_Nueva_Uni%C3%B3n%2C_El_Mante"
+  },
+  {
+   "sentences": 2,
+   "title": "Oncocnemis asema",
+   "url": "https://sv.wikipedia.org/wiki/Oncocnemis_asema"
+  },
+  {
+   "sentences": 1,
+   "title": "Periline",
+   "url": "https://sv.wikipedia.org/wiki/Periline"
+  },
+  {
+   "sentences": 3,
+   "title": "Ctenotus agrestis",
+   "url": "https://sv.wikipedia.org/wiki/Ctenotus_agrestis"
+  },
+  {
+   "sentences": 23,
+   "title": "Darius Vassell",
+   "url": "https://sv.wikipedia.org/wiki/Darius_Vassell"
+  },
+  {
+   "sentences": 2,
+   "title": "Xenopsylla moucheti",
+   "url": "https://sv.wikipedia.org/wiki/Xenopsylla_moucheti"
+  },
+  {
+   "sentences": 5,
+   "title": "Frankhyttan",
+   "url": "https://sv.wikipedia.org/wiki/Frankhyttan"
+  },
+  {
+   "sentences": 2,
+   "title": "Cyrtorchis erythraeae",
+   "url": "https://sv.wikipedia.org/wiki/Cyrtorchis_erythraeae"
+  },
+  {
+   "sentences": 10,
+   "title": "Nissa källa",
+   "url": "https://sv.wikipedia.org/wiki/Nissa_k%C3%A4lla"
+  },
+  {
+   "sentences": 2,
+   "title": "Pseuderesia catharina",
+   "url": "https://sv.wikipedia.org/wiki/Pseuderesia_catharina"
+  },
+  {
+   "sentences": 1,
+   "title": "Xin'an Jiang",
+   "url": "https://sv.wikipedia.org/wiki/Xin%27an_Jiang"
+  },
+  {
+   "sentences": 2,
+   "title": "Torymus biarticulatus",
+   "url": "https://sv.wikipedia.org/wiki/Torymus_biarticulatus"
+  },
+  {
+   "sentences": 9,
+   "title": "Uzbekistan FU01 och FU02",
+   "url": "https://sv.wikipedia.org/wiki/Uzbekistan_FU01_och_FU02"
+  },
+  {
+   "sentences": 5,
+   "title": "Indio Rico",
+   "url": "https://sv.wikipedia.org/wiki/Indio_Rico"
+  },
+  {
+   "sentences": 3,
+   "title": "Terres",
+   "url": "https://sv.wikipedia.org/wiki/Terres"
+  },
+  {
+   "sentences": 2,
+   "title": "Naphrys pulex",
+   "url": "https://sv.wikipedia.org/wiki/Naphrys_pulex"
+  },
+  {
+   "sentences": 1,
+   "title": "Morropón (provins)",
+   "url": "https://sv.wikipedia.org/wiki/Morrop%C3%B3n_%28provins%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Ewa Villages, Hawaii",
+   "url": "https://sv.wikipedia.org/wiki/Ewa_Villages%2C_Hawaii"
+  },
+  {
+   "sentences": 2,
+   "title": "Euphorbia setosa",
+   "url": "https://sv.wikipedia.org/wiki/Euphorbia_setosa"
+  },
+  {
+   "sentences": 17,
+   "title": "Tysklands förenade lag i olympiska sommarspelen 1960",
+   "url": "https://sv.wikipedia.org/wiki/Tysklands_f%C3%B6renade_lag_i_olympiska_sommarspelen_1960"
+  },
+  {
+   "sentences": 2,
+   "title": "Piper xanthostachyum",
+   "url": "https://sv.wikipedia.org/wiki/Piper_xanthostachyum"
+  },
+  {
+   "sentences": 4,
+   "title": "Isthmohyla lancasteri",
+   "url": "https://sv.wikipedia.org/wiki/Isthmohyla_lancasteri"
+  },
+  {
+   "sentences": 7,
+   "title": "Tierra Caliente Tepantepec",
+   "url": "https://sv.wikipedia.org/wiki/Tierra_Caliente_Tepantepec"
+  },
+  {
+   "sentences": 3,
+   "title": "Zeugomantispa",
+   "url": "https://sv.wikipedia.org/wiki/Zeugomantispa"
+  },
+  {
+   "sentences": 5,
+   "title": "Conrad Roure",
+   "url": "https://sv.wikipedia.org/wiki/Conrad_Roure"
+  },
+  {
+   "sentences": 2,
+   "title": "Elymnias malelas",
+   "url": "https://sv.wikipedia.org/wiki/Elymnias_malelas"
+  },
+  {
+   "sentences": 2,
+   "title": "Ophyiulus collaris",
+   "url": "https://sv.wikipedia.org/wiki/Ophyiulus_collaris"
+  },
+  {
+   "sentences": 6,
+   "title": "Thomas Randolph",
+   "url": "https://sv.wikipedia.org/wiki/Thomas_Randolph"
+  },
+  {
+   "sentences": 11,
+   "title": "Roger Pratt (filmfotograf)",
+   "url": "https://sv.wikipedia.org/wiki/Roger_Pratt_%28filmfotograf%29"
+  },
+  {
+   "sentences": 25,
+   "title": "U Don't Know Me (Like U Used To)",
+   "url": "https://sv.wikipedia.org/wiki/U_Don%27t_Know_Me_%28Like_U_Used_To%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Guiragök",
+   "url": "https://sv.wikipedia.org/wiki/Guirag%C3%B6k"
+  },
+  {
+   "sentences": 2,
+   "title": "Suvisaari (ö i Norra Savolax)",
+   "url": "https://sv.wikipedia.org/wiki/Suvisaari_%28%C3%B6_i_Norra_Savolax%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Toxorhina infuscula",
+   "url": "https://sv.wikipedia.org/wiki/Toxorhina_infuscula"
+  },
+  {
+   "sentences": 3,
+   "title": "Leonard Roberts",
+   "url": "https://sv.wikipedia.org/wiki/Leonard_Roberts"
+  },
+  {
+   "sentences": 4,
+   "title": "Marietje Jan de Gortersdochter",
+   "url": "https://sv.wikipedia.org/wiki/Marietje_Jan_de_Gortersdochter"
+  },
+  {
+   "sentences": 2,
+   "title": "Diplacrum mitracarpoides",
+   "url": "https://sv.wikipedia.org/wiki/Diplacrum_mitracarpoides"
+  },
+  {
+   "sentences": 3,
+   "title": "Noguchiphaea yoshikoae",
+   "url": "https://sv.wikipedia.org/wiki/Noguchiphaea_yoshikoae"
+  },
+  {
+   "sentences": 5,
+   "title": "Länsväg 331",
+   "url": "https://sv.wikipedia.org/wiki/L%C3%A4nsv%C3%A4g_331"
+  },
+  {
+   "sentences": 8,
+   "title": "Mobilgardet",
+   "url": "https://sv.wikipedia.org/wiki/Mobilgardet"
+  },
+  {
+   "sentences": 3,
+   "title": "Butten",
+   "url": "https://sv.wikipedia.org/wiki/Butten"
+  },
+  {
+   "sentences": 3,
+   "title": "Shido Tsumori",
+   "url": "https://sv.wikipedia.org/wiki/Shido_Tsumori"
+  },
+  {
+   "sentences": 2,
+   "title": "Cumulopuntia rossiana",
+   "url": "https://sv.wikipedia.org/wiki/Cumulopuntia_rossiana"
+  },
+  {
+   "sentences": 3,
+   "title": "Mahura sorenseni",
+   "url": "https://sv.wikipedia.org/wiki/Mahura_sorenseni"
+  },
+  {
+   "sentences": 2,
+   "title": "Maianthemum lichiangense",
+   "url": "https://sv.wikipedia.org/wiki/Maianthemum_lichiangense"
+  },
+  {
+   "sentences": 2,
+   "title": "Cornucopina rotundata",
+   "url": "https://sv.wikipedia.org/wiki/Cornucopina_rotundata"
+  },
+  {
+   "sentences": 5,
+   "title": "Maud Megens",
+   "url": "https://sv.wikipedia.org/wiki/Maud_Megens"
+  },
+  {
+   "sentences": 22,
+   "title": "Glykoler",
+   "url": "https://sv.wikipedia.org/wiki/Glykoler"
+  },
+  {
+   "sentences": 2,
+   "title": "Proceraea gigantea",
+   "url": "https://sv.wikipedia.org/wiki/Proceraea_gigantea"
+  },
+  {
+   "sentences": 2,
+   "title": "Rhigioglossa obutundata",
+   "url": "https://sv.wikipedia.org/wiki/Rhigioglossa_obutundata"
+  },
+  {
+   "sentences": 3,
+   "title": "Login (TV-program)",
+   "url": "https://sv.wikipedia.org/wiki/Login_%28TV-program%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Exciter",
+   "url": "https://sv.wikipedia.org/wiki/Exciter"
+  },
+  {
+   "sentences": 5,
+   "title": "Rembercourt-sur-Mad",
+   "url": "https://sv.wikipedia.org/wiki/Rembercourt-sur-Mad"
+  },
+  {
+   "sentences": 2,
+   "title": "Maculinea emutata",
+   "url": "https://sv.wikipedia.org/wiki/Maculinea_emutata"
+  },
+  {
+   "sentences": 2,
+   "title": "Fidena morio",
+   "url": "https://sv.wikipedia.org/wiki/Fidena_morio"
+  },
+  {
+   "sentences": 3,
+   "title": "Beyeria constellata",
+   "url": "https://sv.wikipedia.org/wiki/Beyeria_constellata"
+  },
+  {
+   "sentences": 3,
+   "title": "Livingston County, New York",
+   "url": "https://sv.wikipedia.org/wiki/Livingston_County%2C_New_York"
+  },
+  {
+   "sentences": 2,
+   "title": "Messas",
+   "url": "https://sv.wikipedia.org/wiki/Messas"
+  },
+  {
+   "sentences": 2,
+   "title": "Ducetia ruspolii",
+   "url": "https://sv.wikipedia.org/wiki/Ducetia_ruspolii"
+  },
+  {
+   "sentences": 2,
+   "title": "Melitaea dschungarica",
+   "url": "https://sv.wikipedia.org/wiki/Melitaea_dschungarica"
+  },
+  {
+   "sentences": 1,
+   "title": "Guaygata",
+   "url": "https://sv.wikipedia.org/wiki/Guaygata"
+  },
+  {
+   "sentences": 2,
+   "title": "Castulo terpnodes",
+   "url": "https://sv.wikipedia.org/wiki/Castulo_terpnodes"
+  },
+  {
+   "sentences": 2,
+   "title": "Achrysocharoides tetrapunctatus",
+   "url": "https://sv.wikipedia.org/wiki/Achrysocharoides_tetrapunctatus"
+  },
+  {
+   "sentences": 2,
+   "title": "Naraoia",
+   "url": "https://sv.wikipedia.org/wiki/Naraoia"
+  },
+  {
+   "sentences": 2,
+   "title": "Hilarempis idonea",
+   "url": "https://sv.wikipedia.org/wiki/Hilarempis_idonea"
+  },
+  {
+   "sentences": 3,
+   "title": "Brookesia lambertoni",
+   "url": "https://sv.wikipedia.org/wiki/Brookesia_lambertoni"
+  },
+  {
+   "sentences": 15,
+   "title": "Tamara Vučić",
+   "url": "https://sv.wikipedia.org/wiki/Tamara_Vu%C4%8Di%C4%87"
+  },
+  {
+   "sentences": 2,
+   "title": "Andrena bernardina",
+   "url": "https://sv.wikipedia.org/wiki/Andrena_bernardina"
+  },
+  {
+   "sentences": 2,
+   "title": "Lambertella pruni",
+   "url": "https://sv.wikipedia.org/wiki/Lambertella_pruni"
+  },
+  {
+   "sentences": 3,
+   "title": "Montagna Pantani",
+   "url": "https://sv.wikipedia.org/wiki/Montagna_Pantani"
+  },
+  {
+   "sentences": 2,
+   "title": "Perdita repens",
+   "url": "https://sv.wikipedia.org/wiki/Perdita_repens"
+  },
+  {
+   "sentences": 14,
+   "title": "Lotte Feder",
+   "url": "https://sv.wikipedia.org/wiki/Lotte_Feder"
+  },
+  {
+   "sentences": 2,
+   "title": "Aleodorus intricatus",
+   "url": "https://sv.wikipedia.org/wiki/Aleodorus_intricatus"
+  },
+  {
+   "sentences": 3,
+   "title": "Ononis speciosa",
+   "url": "https://sv.wikipedia.org/wiki/Ononis_speciosa"
+  },
+  {
+   "sentences": 7,
+   "title": "Oppidum",
+   "url": "https://sv.wikipedia.org/wiki/Oppidum"
+  },
+  {
+   "sentences": 2,
+   "title": "Chacombe",
+   "url": "https://sv.wikipedia.org/wiki/Chacombe"
+  },
+  {
+   "sentences": 2,
+   "title": "Joel Broberg",
+   "url": "https://sv.wikipedia.org/wiki/Joel_Broberg"
+  },
+  {
+   "sentences": 3,
+   "title": "Campanula polyclada",
+   "url": "https://sv.wikipedia.org/wiki/Campanula_polyclada"
+  },
+  {
+   "sentences": 6,
+   "title": "Frau Hitt",
+   "url": "https://sv.wikipedia.org/wiki/Frau_Hitt"
+  },
+  {
+   "sentences": 6,
+   "title": "Lindöätten",
+   "url": "https://sv.wikipedia.org/wiki/Lind%C3%B6%C3%A4tten"
+  },
+  {
+   "sentences": 2,
+   "title": "Lopadorrhynchus panikkari",
+   "url": "https://sv.wikipedia.org/wiki/Lopadorrhynchus_panikkari"
+  },
+  {
+   "sentences": 22,
+   "title": "Växjö Tipshall",
+   "url": "https://sv.wikipedia.org/wiki/V%C3%A4xj%C3%B6_Tipshall"
+  },
+  {
+   "sentences": 2,
+   "title": "Pandiaka glabra",
+   "url": "https://sv.wikipedia.org/wiki/Pandiaka_glabra"
+  },
+  {
+   "sentences": 2,
+   "title": "Alpinia aquatica",
+   "url": "https://sv.wikipedia.org/wiki/Alpinia_aquatica"
+  },
+  {
+   "sentences": 9,
+   "title": "ATC-kod V10: Terapeutiska radiofarmaka",
+   "url": "https://sv.wikipedia.org/wiki/ATC-kod_V10%3A_Terapeutiska_radiofarmaka"
+  },
+  {
+   "sentences": 7,
+   "title": "Karen Jønsson",
+   "url": "https://sv.wikipedia.org/wiki/Karen_J%C3%B8nsson"
+  },
+  {
+   "sentences": 2,
+   "title": "Hoplotarache inquinata",
+   "url": "https://sv.wikipedia.org/wiki/Hoplotarache_inquinata"
+  },
+  {
+   "sentences": 3,
+   "title": "Tapellaria moelleri",
+   "url": "https://sv.wikipedia.org/wiki/Tapellaria_moelleri"
+  },
+  {
+   "sentences": 2,
+   "title": "Aloe lutescens",
+   "url": "https://sv.wikipedia.org/wiki/Aloe_lutescens"
+  },
+  {
+   "sentences": 2,
+   "title": "Coniochaeta xylariispora",
+   "url": "https://sv.wikipedia.org/wiki/Coniochaeta_xylariispora"
+  },
+  {
+   "sentences": 2,
+   "title": "Grewia serrata",
+   "url": "https://sv.wikipedia.org/wiki/Grewia_serrata"
+  },
+  {
+   "sentences": 11,
+   "title": "Melodic metalcore",
+   "url": "https://sv.wikipedia.org/wiki/Melodic_metalcore"
+  },
+  {
+   "sentences": 2,
+   "title": "Coenosia toshua",
+   "url": "https://sv.wikipedia.org/wiki/Coenosia_toshua"
+  },
+  {
+   "sentences": 2,
+   "title": "Bradysia elobata",
+   "url": "https://sv.wikipedia.org/wiki/Bradysia_elobata"
+  },
+  {
+   "sentences": 1,
+   "title": "Dawsonville",
+   "url": "https://sv.wikipedia.org/wiki/Dawsonville"
+  },
+  {
+   "sentences": 13,
+   "title": "Paul Jönska gården",
+   "url": "https://sv.wikipedia.org/wiki/Paul_J%C3%B6nska_g%C3%A5rden"
+  },
+  {
+   "sentences": 3,
+   "title": "Oudemansiella melanotricha",
+   "url": "https://sv.wikipedia.org/wiki/Oudemansiella_melanotricha"
+  },
+  {
+   "sentences": 4,
+   "title": "Shizi",
+   "url": "https://sv.wikipedia.org/wiki/Shizi"
+  },
+  {
+   "sentences": 2,
+   "title": "Greggmar Swift",
+   "url": "https://sv.wikipedia.org/wiki/Greggmar_Swift"
+  },
+  {
+   "sentences": 25,
+   "title": "Englands administrativa indelning",
+   "url": "https://sv.wikipedia.org/wiki/Englands_administrativa_indelning"
+  },
+  {
+   "sentences": 2,
+   "title": "Ophiostoma roraimense",
+   "url": "https://sv.wikipedia.org/wiki/Ophiostoma_roraimense"
+  },
+  {
+   "sentences": 2,
+   "title": "Frolesworth",
+   "url": "https://sv.wikipedia.org/wiki/Frolesworth"
+  },
+  {
+   "sentences": 2,
+   "title": "Calocarides rudolfi",
+   "url": "https://sv.wikipedia.org/wiki/Calocarides_rudolfi"
+  },
+  {
+   "sentences": 2,
+   "title": "Lepista subconnexa",
+   "url": "https://sv.wikipedia.org/wiki/Lepista_subconnexa"
+  },
+  {
+   "sentences": 6,
+   "title": "Minus One",
+   "url": "https://sv.wikipedia.org/wiki/Minus_One"
+  },
+  {
+   "sentences": 7,
+   "title": "Aktis",
+   "url": "https://sv.wikipedia.org/wiki/Aktis"
+  },
+  {
+   "sentences": 2,
+   "title": "Bulbophyllum bidenticulatum",
+   "url": "https://sv.wikipedia.org/wiki/Bulbophyllum_bidenticulatum"
+  },
+  {
+   "sentences": 10,
+   "title": "Fjällig dvärgspett",
+   "url": "https://sv.wikipedia.org/wiki/Fj%C3%A4llig_dv%C3%A4rgspett"
+  },
+  {
+   "sentences": 1,
+   "title": "Sanggrahan",
+   "url": "https://sv.wikipedia.org/wiki/Sanggrahan"
+  },
+  {
+   "sentences": 4,
+   "title": "Thielle, Neuchâtel",
+   "url": "https://sv.wikipedia.org/wiki/Thielle%2C_Neuch%C3%A2tel"
+  },
+  {
+   "sentences": 2,
+   "title": "Trigonopedia ferruginea",
+   "url": "https://sv.wikipedia.org/wiki/Trigonopedia_ferruginea"
+  },
+  {
+   "sentences": 3,
+   "title": "Siegfried (Nibelungenlied)",
+   "url": "https://sv.wikipedia.org/wiki/Siegfried_%28Nibelungenlied%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Ozodiceromya livdahli",
+   "url": "https://sv.wikipedia.org/wiki/Ozodiceromya_livdahli"
+  },
+  {
+   "sentences": 4,
+   "title": "Jaylen Wells",
+   "url": "https://sv.wikipedia.org/wiki/Jaylen_Wells"
+  },
+  {
+   "sentences": 25,
+   "title": "Christer Majbäck",
+   "url": "https://sv.wikipedia.org/wiki/Christer_Majb%C3%A4ck"
+  },
+  {
+   "sentences": 13,
+   "title": "Pétionville",
+   "url": "https://sv.wikipedia.org/wiki/P%C3%A9tionville"
+  },
+  {
+   "sentences": 6,
+   "title": "Cercanías",
+   "url": "https://sv.wikipedia.org/wiki/Cercan%C3%ADas"
+  },
+  {
+   "sentences": 7,
+   "title": "Tanūr-e Boland",
+   "url": "https://sv.wikipedia.org/wiki/Tan%C5%ABr-e_Boland"
+  },
+  {
+   "sentences": 10,
+   "title": "BT",
+   "url": "https://sv.wikipedia.org/wiki/BT"
+  },
+  {
+   "sentences": 5,
+   "title": "Pozi Cuo",
+   "url": "https://sv.wikipedia.org/wiki/Pozi_Cuo"
+  },
+  {
+   "sentences": 4,
+   "title": "Marigny-Marmande",
+   "url": "https://sv.wikipedia.org/wiki/Marigny-Marmande"
+  },
+  {
+   "sentences": 6,
+   "title": "Cornelis Saftleven",
+   "url": "https://sv.wikipedia.org/wiki/Cornelis_Saftleven"
+  },
+  {
+   "sentences": 3,
+   "title": "Xanthoparmelia conjuncta",
+   "url": "https://sv.wikipedia.org/wiki/Xanthoparmelia_conjuncta"
+  },
+  {
+   "sentences": 2,
+   "title": "Paragorgia wahine",
+   "url": "https://sv.wikipedia.org/wiki/Paragorgia_wahine"
+  },
+  {
+   "sentences": 3,
+   "title": "Acacia pulchella",
+   "url": "https://sv.wikipedia.org/wiki/Acacia_pulchella"
+  },
+  {
+   "sentences": 2,
+   "title": "Narraga alternaria",
+   "url": "https://sv.wikipedia.org/wiki/Narraga_alternaria"
+  },
+  {
+   "sentences": 4,
+   "title": "Mount Grimminger",
+   "url": "https://sv.wikipedia.org/wiki/Mount_Grimminger"
+  },
+  {
+   "sentences": 2,
+   "title": "South Dakota-klass (1939)",
+   "url": "https://sv.wikipedia.org/wiki/South_Dakota-klass_%281939%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Bebådelsens kyrka, Cergău Mare",
+   "url": "https://sv.wikipedia.org/wiki/Beb%C3%A5delsens_kyrka%2C_Cerg%C4%83u_Mare"
+  },
+  {
+   "sentences": 13,
+   "title": "Kastanjestrupig taggstjärt",
+   "url": "https://sv.wikipedia.org/wiki/Kastanjestrupig_taggstj%C3%A4rt"
+  },
+  {
+   "sentences": 1,
+   "title": "Yeonhui-dong, Seoul",
+   "url": "https://sv.wikipedia.org/wiki/Yeonhui-dong%2C_Seoul"
+  },
+  {
+   "sentences": 2,
+   "title": "Bulbophyllum nasica",
+   "url": "https://sv.wikipedia.org/wiki/Bulbophyllum_nasica"
+  },
+  {
+   "sentences": 2,
+   "title": "Ormosia nigripila",
+   "url": "https://sv.wikipedia.org/wiki/Ormosia_nigripila"
+  },
+  {
+   "sentences": 5,
+   "title": "Java Development Kit",
+   "url": "https://sv.wikipedia.org/wiki/Java_Development_Kit"
+  },
+  {
+   "sentences": 2,
+   "title": "Nannophya occidentalis",
+   "url": "https://sv.wikipedia.org/wiki/Nannophya_occidentalis"
+  },
+  {
+   "sentences": 1,
+   "title": "Caf Champions League 2002",
+   "url": "https://sv.wikipedia.org/wiki/Caf_Champions_League_2002"
+  },
+  {
+   "sentences": 9,
+   "title": "Austin A90 Atlantic",
+   "url": "https://sv.wikipedia.org/wiki/Austin_A90_Atlantic"
+  },
+  {
+   "sentences": 3,
+   "title": "Distaplia livida",
+   "url": "https://sv.wikipedia.org/wiki/Distaplia_livida"
+  },
+  {
+   "sentences": 3,
+   "title": "Plecia recaviterga",
+   "url": "https://sv.wikipedia.org/wiki/Plecia_recaviterga"
+  },
+  {
+   "sentences": 2,
+   "title": "Jinseo-myeon",
+   "url": "https://sv.wikipedia.org/wiki/Jinseo-myeon"
+  },
+  {
+   "sentences": 1,
+   "title": "Lilltjärnen (Haverö socken, Medelpad, 691834-148257)",
+   "url": "https://sv.wikipedia.org/wiki/Lilltj%C3%A4rnen_%28Haver%C3%B6_socken%2C_Medelpad%2C_691834-148257%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Bergtjärnen (Kristinehamns socken, Värmland)",
+   "url": "https://sv.wikipedia.org/wiki/Bergtj%C3%A4rnen_%28Kristinehamns_socken%2C_V%C3%A4rmland%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Bipinnula montana",
+   "url": "https://sv.wikipedia.org/wiki/Bipinnula_montana"
+  },
+  {
+   "sentences": 20,
+   "title": "Bångska palatset",
+   "url": "https://sv.wikipedia.org/wiki/B%C3%A5ngska_palatset"
+  },
+  {
+   "sentences": 3,
+   "title": "Potthastia",
+   "url": "https://sv.wikipedia.org/wiki/Potthastia"
+  },
+  {
+   "sentences": 2,
+   "title": "Commelina oligotricha",
+   "url": "https://sv.wikipedia.org/wiki/Commelina_oligotricha"
+  },
+  {
+   "sentences": 2,
+   "title": "Occidryas irelandi",
+   "url": "https://sv.wikipedia.org/wiki/Occidryas_irelandi"
+  },
+  {
+   "sentences": 1,
+   "title": "Oberländer",
+   "url": "https://sv.wikipedia.org/wiki/Oberl%C3%A4nder"
+  },
+  {
+   "sentences": 2,
+   "title": "Angraecum angustum",
+   "url": "https://sv.wikipedia.org/wiki/Angraecum_angustum"
+  },
+  {
+   "sentences": 2,
+   "title": "Anisolabis oahuensis",
+   "url": "https://sv.wikipedia.org/wiki/Anisolabis_oahuensis"
+  },
+  {
+   "sentences": 2,
+   "title": "Lycorea fasciata",
+   "url": "https://sv.wikipedia.org/wiki/Lycorea_fasciata"
+  },
+  {
+   "sentences": 8,
+   "title": "Eric Rosén",
+   "url": "https://sv.wikipedia.org/wiki/Eric_Ros%C3%A9n"
+  },
+  {
+   "sentences": 2,
+   "title": "Tarachodes modesta",
+   "url": "https://sv.wikipedia.org/wiki/Tarachodes_modesta"
+  },
+  {
+   "sentences": 2,
+   "title": "Selenocosmia compta",
+   "url": "https://sv.wikipedia.org/wiki/Selenocosmia_compta"
+  },
+  {
+   "sentences": 2,
+   "title": "Foetorepus agassizii",
+   "url": "https://sv.wikipedia.org/wiki/Foetorepus_agassizii"
+  },
+  {
+   "sentences": 7,
+   "title": "Crimson Stone",
+   "url": "https://sv.wikipedia.org/wiki/Crimson_Stone"
+  },
+  {
+   "sentences": 2,
+   "title": "Lytocarpia lepida",
+   "url": "https://sv.wikipedia.org/wiki/Lytocarpia_lepida"
+  },
+  {
+   "sentences": 2,
+   "title": "Agyriales",
+   "url": "https://sv.wikipedia.org/wiki/Agyriales"
+  },
+  {
+   "sentences": 2,
+   "title": "Argonectes",
+   "url": "https://sv.wikipedia.org/wiki/Argonectes"
+  },
+  {
+   "sentences": 3,
+   "title": "Euselasia aurantiaca",
+   "url": "https://sv.wikipedia.org/wiki/Euselasia_aurantiaca"
+  },
+  {
+   "sentences": 3,
+   "title": "Litoria humboldtorum",
+   "url": "https://sv.wikipedia.org/wiki/Litoria_humboldtorum"
+  },
+  {
+   "sentences": 2,
+   "title": "Fuchsia magdalenae",
+   "url": "https://sv.wikipedia.org/wiki/Fuchsia_magdalenae"
+  },
+  {
+   "sentences": 2,
+   "title": "Anacamptodes expressaria",
+   "url": "https://sv.wikipedia.org/wiki/Anacamptodes_expressaria"
+  },
+  {
+   "sentences": 1,
+   "title": "Scholar Green",
+   "url": "https://sv.wikipedia.org/wiki/Scholar_Green"
+  },
+  {
+   "sentences": 11,
+   "title": "Per Abraham Bursie",
+   "url": "https://sv.wikipedia.org/wiki/Per_Abraham_Bursie"
+  },
+  {
+   "sentences": 2,
+   "title": "Pedaria minetti",
+   "url": "https://sv.wikipedia.org/wiki/Pedaria_minetti"
+  },
+  {
+   "sentences": 3,
+   "title": "Amitabha Sen",
+   "url": "https://sv.wikipedia.org/wiki/Amitabha_Sen"
+  },
+  {
+   "sentences": 1,
+   "title": "Lista över fornlämningar i Linköpings kommun (Kärna)",
+   "url": "https://sv.wikipedia.org/wiki/Lista_%C3%B6ver_fornl%C3%A4mningar_i_Link%C3%B6pings_kommun_%28K%C3%A4rna%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Wallen",
+   "url": "https://sv.wikipedia.org/wiki/Wallen"
+  },
+  {
+   "sentences": 5,
+   "title": "Pýli (kommunhuvudort i Grekland)",
+   "url": "https://sv.wikipedia.org/wiki/P%C3%BDli_%28kommunhuvudort_i_Grekland%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Grylloderes sudanus",
+   "url": "https://sv.wikipedia.org/wiki/Grylloderes_sudanus"
+  },
+  {
+   "sentences": 2,
+   "title": "Combretum vernicosum",
+   "url": "https://sv.wikipedia.org/wiki/Combretum_vernicosum"
+  },
+  {
+   "sentences": 2,
+   "title": "Calamothespis adusta",
+   "url": "https://sv.wikipedia.org/wiki/Calamothespis_adusta"
+  },
+  {
+   "sentences": 25,
+   "title": "Fürstin Ninetta",
+   "url": "https://sv.wikipedia.org/wiki/F%C3%BCrstin_Ninetta"
+  },
+  {
+   "sentences": 9,
+   "title": "Åhus (olika betydelser)",
+   "url": "https://sv.wikipedia.org/wiki/%C3%85hus_%28olika_betydelser%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Mindre taggmätare",
+   "url": "https://sv.wikipedia.org/wiki/Mindre_taggm%C3%A4tare"
+  },
+  {
+   "sentences": 5,
+   "title": "Hebe",
+   "url": "https://sv.wikipedia.org/wiki/Hebe"
+  },
+  {
+   "sentences": 2,
+   "title": "Ramularia pastinacae",
+   "url": "https://sv.wikipedia.org/wiki/Ramularia_pastinacae"
+  },
+  {
+   "sentences": 2,
+   "title": "Spilosoma nigrifrons",
+   "url": "https://sv.wikipedia.org/wiki/Spilosoma_nigrifrons"
+  },
+  {
+   "sentences": 2,
+   "title": "Nannastacus longirostris",
+   "url": "https://sv.wikipedia.org/wiki/Nannastacus_longirostris"
+  },
+  {
+   "sentences": 2,
+   "title": "Mirollia luteipennis",
+   "url": "https://sv.wikipedia.org/wiki/Mirollia_luteipennis"
+  },
+  {
+   "sentences": 15,
+   "title": "Martin Elmiger",
+   "url": "https://sv.wikipedia.org/wiki/Martin_Elmiger"
+  },
+  {
+   "sentences": 25,
+   "title": "Skalstugan",
+   "url": "https://sv.wikipedia.org/wiki/Skalstugan"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "sv",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 1963,
+ "wikipedia": "https://sv.wikipedia.org/"
+}

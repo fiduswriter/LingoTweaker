@@ -1,0 +1,2010 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://tr.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 23,
+   "title": "James Watt",
+   "url": "https://tr.wikipedia.org/wiki/James_Watt"
+  },
+  {
+   "sentences": 3,
+   "title": "1. Altın Dzyga Ödülleri",
+   "url": "https://tr.wikipedia.org/wiki/1._Alt%C4%B1n_Dzyga_%C3%96d%C3%BClleri"
+  },
+  {
+   "sentences": 23,
+   "title": "Celal Yılmaz",
+   "url": "https://tr.wikipedia.org/wiki/Celal_Y%C4%B1lmaz"
+  },
+  {
+   "sentences": 2,
+   "title": "İyodoform",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0yodoform"
+  },
+  {
+   "sentences": 5,
+   "title": "Kosova'daki siyasi partilerin listesi",
+   "url": "https://tr.wikipedia.org/wiki/Kosova%27daki_siyasi_partilerin_listesi"
+  },
+  {
+   "sentences": 1,
+   "title": "Antonio Machado",
+   "url": "https://tr.wikipedia.org/wiki/Antonio_Machado"
+  },
+  {
+   "sentences": 12,
+   "title": "Warren Treadgold",
+   "url": "https://tr.wikipedia.org/wiki/Warren_Treadgold"
+  },
+  {
+   "sentences": 6,
+   "title": "2021 U19 Kızlar Balkan Voleybol Şampiyonası",
+   "url": "https://tr.wikipedia.org/wiki/2021_U19_K%C4%B1zlar_Balkan_Voleybol_%C5%9Eampiyonas%C4%B1"
+  },
+  {
+   "sentences": 5,
+   "title": "Rusuhi Bolayırlı",
+   "url": "https://tr.wikipedia.org/wiki/Rusuhi_Bolay%C4%B1rl%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Taşınmazlar uzlaştırma şirketleri",
+   "url": "https://tr.wikipedia.org/wiki/Ta%C5%9F%C4%B1nmazlar_uzla%C5%9Ft%C4%B1rma_%C5%9Firketleri"
+  },
+  {
+   "sentences": 10,
+   "title": "Fergana (il)",
+   "url": "https://tr.wikipedia.org/wiki/Fergana_%28il%29"
+  },
+  {
+   "sentences": 22,
+   "title": "Sütun başlığı",
+   "url": "https://tr.wikipedia.org/wiki/S%C3%BCtun_ba%C5%9Fl%C4%B1%C4%9F%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Dendrobium truncicola",
+   "url": "https://tr.wikipedia.org/wiki/Dendrobium_truncicola"
+  },
+  {
+   "sentences": 1,
+   "title": "Lordosa",
+   "url": "https://tr.wikipedia.org/wiki/Lordosa"
+  },
+  {
+   "sentences": 10,
+   "title": "Detroit Pistons",
+   "url": "https://tr.wikipedia.org/wiki/Detroit_Pistons"
+  },
+  {
+   "sentences": 3,
+   "title": "Euphorbia karibensis",
+   "url": "https://tr.wikipedia.org/wiki/Euphorbia_karibensis"
+  },
+  {
+   "sentences": 5,
+   "title": "Halloween",
+   "url": "https://tr.wikipedia.org/wiki/Halloween"
+  },
+  {
+   "sentences": 10,
+   "title": "Rabbinik literatür",
+   "url": "https://tr.wikipedia.org/wiki/Rabbinik_literat%C3%BCr"
+  },
+  {
+   "sentences": 3,
+   "title": "Amphicordus",
+   "url": "https://tr.wikipedia.org/wiki/Amphicordus"
+  },
+  {
+   "sentences": 25,
+   "title": "Uluslararası Eskrim Federasyonu",
+   "url": "https://tr.wikipedia.org/wiki/Uluslararas%C4%B1_Eskrim_Federasyonu"
+  },
+  {
+   "sentences": 25,
+   "title": "Alien Predator'e Karşı",
+   "url": "https://tr.wikipedia.org/wiki/Alien_Predator%27e_Kar%C5%9F%C4%B1"
+  },
+  {
+   "sentences": 20,
+   "title": "Altınbek Sarsenbayulı",
+   "url": "https://tr.wikipedia.org/wiki/Alt%C4%B1nbek_Sarsenbayul%C4%B1"
+  },
+  {
+   "sentences": 5,
+   "title": "Ankara Ekspresi",
+   "url": "https://tr.wikipedia.org/wiki/Ankara_Ekspresi"
+  },
+  {
+   "sentences": 15,
+   "title": "IV. Guaimar",
+   "url": "https://tr.wikipedia.org/wiki/IV._Guaimar"
+  },
+  {
+   "sentences": 2,
+   "title": "Ana Sözü",
+   "url": "https://tr.wikipedia.org/wiki/Ana_S%C3%B6z%C3%BC"
+  },
+  {
+   "sentences": 4,
+   "title": "Jaklin Çarkçı",
+   "url": "https://tr.wikipedia.org/wiki/Jaklin_%C3%87ark%C3%A7%C4%B1"
+  },
+  {
+   "sentences": 9,
+   "title": "Ana Luisa Peluffo",
+   "url": "https://tr.wikipedia.org/wiki/Ana_Luisa_Peluffo"
+  },
+  {
+   "sentences": 2,
+   "title": "Rudersdorf",
+   "url": "https://tr.wikipedia.org/wiki/Rudersdorf"
+  },
+  {
+   "sentences": 4,
+   "title": "Duman, Çan",
+   "url": "https://tr.wikipedia.org/wiki/Duman%2C_%C3%87an"
+  },
+  {
+   "sentences": 4,
+   "title": "Lyssacinosida",
+   "url": "https://tr.wikipedia.org/wiki/Lyssacinosida"
+  },
+  {
+   "sentences": 3,
+   "title": "Hypercompe lemairei",
+   "url": "https://tr.wikipedia.org/wiki/Hypercompe_lemairei"
+  },
+  {
+   "sentences": 14,
+   "title": "Marcelo",
+   "url": "https://tr.wikipedia.org/wiki/Marcelo"
+  },
+  {
+   "sentences": 3,
+   "title": "Anaitz Arbilla",
+   "url": "https://tr.wikipedia.org/wiki/Anaitz_Arbilla"
+  },
+  {
+   "sentences": 20,
+   "title": "Turist (anlam ayrımı)",
+   "url": "https://tr.wikipedia.org/wiki/Turist_%28anlam_ayr%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Andrena porterae",
+   "url": "https://tr.wikipedia.org/wiki/Andrena_porterae"
+  },
+  {
+   "sentences": 25,
+   "title": "Marmara Cezaevi",
+   "url": "https://tr.wikipedia.org/wiki/Marmara_Cezaevi"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 6261",
+   "url": "https://tr.wikipedia.org/wiki/NGC_6261"
+  },
+  {
+   "sentences": 6,
+   "title": "Kabir Helminski",
+   "url": "https://tr.wikipedia.org/wiki/Kabir_Helminski"
+  },
+  {
+   "sentences": 6,
+   "title": "Acoma",
+   "url": "https://tr.wikipedia.org/wiki/Acoma"
+  },
+  {
+   "sentences": 5,
+   "title": "Borbecksch",
+   "url": "https://tr.wikipedia.org/wiki/Borbecksch"
+  },
+  {
+   "sentences": 25,
+   "title": "Esomeprazol",
+   "url": "https://tr.wikipedia.org/wiki/Esomeprazol"
+  },
+  {
+   "sentences": 8,
+   "title": "1991 Portekiz Grand Prix",
+   "url": "https://tr.wikipedia.org/wiki/1991_Portekiz_Grand_Prix"
+  },
+  {
+   "sentences": 1,
+   "title": "1921 yılında tanımlanan türler",
+   "url": "https://tr.wikipedia.org/wiki/1921_y%C4%B1l%C4%B1nda_tan%C4%B1mlanan_t%C3%BCrler"
+  },
+  {
+   "sentences": 1,
+   "title": "Hiroyuki Sakashita",
+   "url": "https://tr.wikipedia.org/wiki/Hiroyuki_Sakashita"
+  },
+  {
+   "sentences": 1,
+   "title": "Castelnuovo, Trentino",
+   "url": "https://tr.wikipedia.org/wiki/Castelnuovo%2C_Trentino"
+  },
+  {
+   "sentences": 1,
+   "title": "Loray",
+   "url": "https://tr.wikipedia.org/wiki/Loray"
+  },
+  {
+   "sentences": 1,
+   "title": "Orlando Sá",
+   "url": "https://tr.wikipedia.org/wiki/Orlando_S%C3%A1"
+  },
+  {
+   "sentences": 11,
+   "title": "Kārlis Irbītis",
+   "url": "https://tr.wikipedia.org/wiki/K%C4%81rlis_Irb%C4%ABtis"
+  },
+  {
+   "sentences": 22,
+   "title": "Kishane Thompson",
+   "url": "https://tr.wikipedia.org/wiki/Kishane_Thompson"
+  },
+  {
+   "sentences": 1,
+   "title": "I Feel Loved",
+   "url": "https://tr.wikipedia.org/wiki/I_Feel_Loved"
+  },
+  {
+   "sentences": 5,
+   "title": "Linus (Misya)",
+   "url": "https://tr.wikipedia.org/wiki/Linus_%28Misya%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Adnan Menderes, Horasan",
+   "url": "https://tr.wikipedia.org/wiki/Adnan_Menderes%2C_Horasan"
+  },
+  {
+   "sentences": 3,
+   "title": "Smeringopus hypocrita",
+   "url": "https://tr.wikipedia.org/wiki/Smeringopus_hypocrita"
+  },
+  {
+   "sentences": 2,
+   "title": "Cothelstone",
+   "url": "https://tr.wikipedia.org/wiki/Cothelstone"
+  },
+  {
+   "sentences": 3,
+   "title": "Cribrochalina",
+   "url": "https://tr.wikipedia.org/wiki/Cribrochalina"
+  },
+  {
+   "sentences": 3,
+   "title": "Varanus olivaceus",
+   "url": "https://tr.wikipedia.org/wiki/Varanus_olivaceus"
+  },
+  {
+   "sentences": 4,
+   "title": "Kadının Adı Yok (film)",
+   "url": "https://tr.wikipedia.org/wiki/Kad%C4%B1n%C4%B1n_Ad%C4%B1_Yok_%28film%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Aeterni",
+   "url": "https://tr.wikipedia.org/wiki/Aeterni"
+  },
+  {
+   "sentences": 7,
+   "title": "Anii dili",
+   "url": "https://tr.wikipedia.org/wiki/Anii_dili"
+  },
+  {
+   "sentences": 3,
+   "title": "Sınırlı Sorumlu Şirket",
+   "url": "https://tr.wikipedia.org/wiki/S%C4%B1n%C4%B1rl%C4%B1_Sorumlu_%C5%9Eirket"
+  },
+  {
+   "sentences": 3,
+   "title": "Petrorhagia",
+   "url": "https://tr.wikipedia.org/wiki/Petrorhagia"
+  },
+  {
+   "sentences": 2,
+   "title": "Vato Arveladze",
+   "url": "https://tr.wikipedia.org/wiki/Vato_Arveladze"
+  },
+  {
+   "sentences": 9,
+   "title": "Şehzade Cemaleddin Efendi Çeşmesi",
+   "url": "https://tr.wikipedia.org/wiki/%C5%9Eehzade_Cemaleddin_Efendi_%C3%87e%C5%9Fmesi"
+  },
+  {
+   "sentences": 16,
+   "title": "José Asunción Silva",
+   "url": "https://tr.wikipedia.org/wiki/Jos%C3%A9_Asunci%C3%B3n_Silva"
+  },
+  {
+   "sentences": 3,
+   "title": "Ankleineella",
+   "url": "https://tr.wikipedia.org/wiki/Ankleineella"
+  },
+  {
+   "sentences": 3,
+   "title": "Dendrobium subintegrum",
+   "url": "https://tr.wikipedia.org/wiki/Dendrobium_subintegrum"
+  },
+  {
+   "sentences": 6,
+   "title": "Mezgit",
+   "url": "https://tr.wikipedia.org/wiki/Mezgit"
+  },
+  {
+   "sentences": 2,
+   "title": "Wroxeter and Uppington",
+   "url": "https://tr.wikipedia.org/wiki/Wroxeter_and_Uppington"
+  },
+  {
+   "sentences": 19,
+   "title": "Punta Arenas",
+   "url": "https://tr.wikipedia.org/wiki/Punta_Arenas"
+  },
+  {
+   "sentences": 3,
+   "title": "Salvia vargas-llosae",
+   "url": "https://tr.wikipedia.org/wiki/Salvia_vargas-llosae"
+  },
+  {
+   "sentences": 12,
+   "title": "Omsk Saati",
+   "url": "https://tr.wikipedia.org/wiki/Omsk_Saati"
+  },
+  {
+   "sentences": 25,
+   "title": "Sovyetler Birliği'ndeki Japon savaş esirleri",
+   "url": "https://tr.wikipedia.org/wiki/Sovyetler_Birli%C4%9Fi%27ndeki_Japon_sava%C5%9F_esirleri"
+  },
+  {
+   "sentences": 4,
+   "title": "Héctor Castro",
+   "url": "https://tr.wikipedia.org/wiki/H%C3%A9ctor_Castro"
+  },
+  {
+   "sentences": 22,
+   "title": "Christine Jorgensen",
+   "url": "https://tr.wikipedia.org/wiki/Christine_Jorgensen"
+  },
+  {
+   "sentences": 3,
+   "title": "Physalis greenmanii",
+   "url": "https://tr.wikipedia.org/wiki/Physalis_greenmanii"
+  },
+  {
+   "sentences": 4,
+   "title": "Marius Lăcătuș",
+   "url": "https://tr.wikipedia.org/wiki/Marius_L%C4%83c%C4%83tu%C8%99"
+  },
+  {
+   "sentences": 2,
+   "title": "Girl on Fire",
+   "url": "https://tr.wikipedia.org/wiki/Girl_on_Fire"
+  },
+  {
+   "sentences": 3,
+   "title": "Cyclops lacustris",
+   "url": "https://tr.wikipedia.org/wiki/Cyclops_lacustris"
+  },
+  {
+   "sentences": 2,
+   "title": "Ryota Oiwa",
+   "url": "https://tr.wikipedia.org/wiki/Ryota_Oiwa"
+  },
+  {
+   "sentences": 16,
+   "title": "Natovenator",
+   "url": "https://tr.wikipedia.org/wiki/Natovenator"
+  },
+  {
+   "sentences": 25,
+   "title": "On Üç Koloni",
+   "url": "https://tr.wikipedia.org/wiki/On_%C3%9C%C3%A7_Koloni"
+  },
+  {
+   "sentences": 3,
+   "title": "Niquitaia",
+   "url": "https://tr.wikipedia.org/wiki/Niquitaia"
+  },
+  {
+   "sentences": 14,
+   "title": "Saho dili",
+   "url": "https://tr.wikipedia.org/wiki/Saho_dili"
+  },
+  {
+   "sentences": 25,
+   "title": "One Piece",
+   "url": "https://tr.wikipedia.org/wiki/One_Piece"
+  },
+  {
+   "sentences": 1,
+   "title": "Douglas County, Nebraska",
+   "url": "https://tr.wikipedia.org/wiki/Douglas_County%2C_Nebraska"
+  },
+  {
+   "sentences": 3,
+   "title": "Andrzej Sekuła",
+   "url": "https://tr.wikipedia.org/wiki/Andrzej_Seku%C5%82a"
+  },
+  {
+   "sentences": 10,
+   "title": "İrfan Neziroğlu",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0rfan_Neziro%C4%9Flu"
+  },
+  {
+   "sentences": 3,
+   "title": "Trissopathes",
+   "url": "https://tr.wikipedia.org/wiki/Trissopathes"
+  },
+  {
+   "sentences": 10,
+   "title": "Lucy Deakins",
+   "url": "https://tr.wikipedia.org/wiki/Lucy_Deakins"
+  },
+  {
+   "sentences": 5,
+   "title": "Takuma Asano",
+   "url": "https://tr.wikipedia.org/wiki/Takuma_Asano"
+  },
+  {
+   "sentences": 3,
+   "title": "Zelotes kuntzi",
+   "url": "https://tr.wikipedia.org/wiki/Zelotes_kuntzi"
+  },
+  {
+   "sentences": 3,
+   "title": "961",
+   "url": "https://tr.wikipedia.org/wiki/961"
+  },
+  {
+   "sentences": 7,
+   "title": "Yiğitlik Madalyası",
+   "url": "https://tr.wikipedia.org/wiki/Yi%C4%9Fitlik_Madalyas%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Euphorbia biharamulensis",
+   "url": "https://tr.wikipedia.org/wiki/Euphorbia_biharamulensis"
+  },
+  {
+   "sentences": 5,
+   "title": "Sapça, Zonguldak",
+   "url": "https://tr.wikipedia.org/wiki/Sap%C3%A7a%2C_Zonguldak"
+  },
+  {
+   "sentences": 11,
+   "title": "Sajanwal, Shahkot",
+   "url": "https://tr.wikipedia.org/wiki/Sajanwal%2C_Shahkot"
+  },
+  {
+   "sentences": 3,
+   "title": "Parandania",
+   "url": "https://tr.wikipedia.org/wiki/Parandania"
+  },
+  {
+   "sentences": 2,
+   "title": ".dj",
+   "url": "https://tr.wikipedia.org/wiki/.dj"
+  },
+  {
+   "sentences": 6,
+   "title": "Dodurga, Boyabat",
+   "url": "https://tr.wikipedia.org/wiki/Dodurga%2C_Boyabat"
+  },
+  {
+   "sentences": 3,
+   "title": "Peperomia caraboboensis",
+   "url": "https://tr.wikipedia.org/wiki/Peperomia_caraboboensis"
+  },
+  {
+   "sentences": 5,
+   "title": "İlyaslı, Şuhut",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0lyasl%C4%B1%2C_%C5%9Euhut"
+  },
+  {
+   "sentences": 2,
+   "title": "Vavaçinya",
+   "url": "https://tr.wikipedia.org/wiki/Vava%C3%A7inya"
+  },
+  {
+   "sentences": 15,
+   "title": "2009 Marmara sel dizisi",
+   "url": "https://tr.wikipedia.org/wiki/2009_Marmara_sel_dizisi"
+  },
+  {
+   "sentences": 3,
+   "title": "Sedum barbeyi",
+   "url": "https://tr.wikipedia.org/wiki/Sedum_barbeyi"
+  },
+  {
+   "sentences": 2,
+   "title": "Party Animals (video oyunu)",
+   "url": "https://tr.wikipedia.org/wiki/Party_Animals_%28video_oyunu%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Piper medinillifolium",
+   "url": "https://tr.wikipedia.org/wiki/Piper_medinillifolium"
+  },
+  {
+   "sentences": 4,
+   "title": "Helicininae",
+   "url": "https://tr.wikipedia.org/wiki/Helicininae"
+  },
+  {
+   "sentences": 4,
+   "title": "Neti (tanrı)",
+   "url": "https://tr.wikipedia.org/wiki/Neti_%28tanr%C4%B1%29"
+  },
+  {
+   "sentences": 12,
+   "title": "1760",
+   "url": "https://tr.wikipedia.org/wiki/1760"
+  },
+  {
+   "sentences": 12,
+   "title": "Ters Gama fonksiyonu",
+   "url": "https://tr.wikipedia.org/wiki/Ters_Gama_fonksiyonu"
+  },
+  {
+   "sentences": 2,
+   "title": "Şehit Jandarma Binbaşı Kıvanç Cesur, Çaldıran",
+   "url": "https://tr.wikipedia.org/wiki/%C5%9Eehit_Jandarma_Binba%C5%9F%C4%B1_K%C4%B1van%C3%A7_Cesur%2C_%C3%87ald%C4%B1ran"
+  },
+  {
+   "sentences": 4,
+   "title": "Laloğlu, Çorum",
+   "url": "https://tr.wikipedia.org/wiki/Lalo%C4%9Flu%2C_%C3%87orum"
+  },
+  {
+   "sentences": 5,
+   "title": "NGC 4966",
+   "url": "https://tr.wikipedia.org/wiki/NGC_4966"
+  },
+  {
+   "sentences": 3,
+   "title": "Euphorbia pubentissima",
+   "url": "https://tr.wikipedia.org/wiki/Euphorbia_pubentissima"
+  },
+  {
+   "sentences": 25,
+   "title": "Bilal Kısa",
+   "url": "https://tr.wikipedia.org/wiki/Bilal_K%C4%B1sa"
+  },
+  {
+   "sentences": 5,
+   "title": "Stemmen i mit liv",
+   "url": "https://tr.wikipedia.org/wiki/Stemmen_i_mit_liv"
+  },
+  {
+   "sentences": 1,
+   "title": "Açık arka düz ünlü",
+   "url": "https://tr.wikipedia.org/wiki/A%C3%A7%C4%B1k_arka_d%C3%BCz_%C3%BCnl%C3%BC"
+  },
+  {
+   "sentences": 3,
+   "title": "Sarmaşa, Çorum",
+   "url": "https://tr.wikipedia.org/wiki/Sarma%C5%9Fa%2C_%C3%87orum"
+  },
+  {
+   "sentences": 3,
+   "title": "Pardosa coloradensis",
+   "url": "https://tr.wikipedia.org/wiki/Pardosa_coloradensis"
+  },
+  {
+   "sentences": 4,
+   "title": "Horsea",
+   "url": "https://tr.wikipedia.org/wiki/Horsea"
+  },
+  {
+   "sentences": 4,
+   "title": "Mamadou Samassa (1990 doğumlu futbolcu)",
+   "url": "https://tr.wikipedia.org/wiki/Mamadou_Samassa_%281990_do%C4%9Fumlu_futbolcu%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Paranoid kişilik bozukluğu",
+   "url": "https://tr.wikipedia.org/wiki/Paranoid_ki%C5%9Filik_bozuklu%C4%9Fu"
+  },
+  {
+   "sentences": 3,
+   "title": "2012 Yaz Olimpiyatları'nda eskrim",
+   "url": "https://tr.wikipedia.org/wiki/2012_Yaz_Olimpiyatlar%C4%B1%27nda_eskrim"
+  },
+  {
+   "sentences": 4,
+   "title": "Geçmeli tarama",
+   "url": "https://tr.wikipedia.org/wiki/Ge%C3%A7meli_tarama"
+  },
+  {
+   "sentences": 2,
+   "title": "Vital Loraux",
+   "url": "https://tr.wikipedia.org/wiki/Vital_Loraux"
+  },
+  {
+   "sentences": 7,
+   "title": "Elenchidae",
+   "url": "https://tr.wikipedia.org/wiki/Elenchidae"
+  },
+  {
+   "sentences": 10,
+   "title": "Hacettepe Üniversitesi SK",
+   "url": "https://tr.wikipedia.org/wiki/Hacettepe_%C3%9Cniversitesi_SK"
+  },
+  {
+   "sentences": 4,
+   "title": "Charlbi Dean",
+   "url": "https://tr.wikipedia.org/wiki/Charlbi_Dean"
+  },
+  {
+   "sentences": 3,
+   "title": "Phoenicopterus",
+   "url": "https://tr.wikipedia.org/wiki/Phoenicopterus"
+  },
+  {
+   "sentences": 5,
+   "title": "Overexposed",
+   "url": "https://tr.wikipedia.org/wiki/Overexposed"
+  },
+  {
+   "sentences": 3,
+   "title": "Arida, Suudi Arabistan",
+   "url": "https://tr.wikipedia.org/wiki/Arida%2C_Suudi_Arabistan"
+  },
+  {
+   "sentences": 1,
+   "title": "Česká televize",
+   "url": "https://tr.wikipedia.org/wiki/%C4%8Cesk%C3%A1_televize"
+  },
+  {
+   "sentences": 1,
+   "title": "Neuilly-en-Thelle",
+   "url": "https://tr.wikipedia.org/wiki/Neuilly-en-Thelle"
+  },
+  {
+   "sentences": 5,
+   "title": "Kayranlı",
+   "url": "https://tr.wikipedia.org/wiki/Kayranl%C4%B1"
+  },
+  {
+   "sentences": 4,
+   "title": "Suttungr (uydu)",
+   "url": "https://tr.wikipedia.org/wiki/Suttungr_%28uydu%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Teresa Jiménez-Becerril",
+   "url": "https://tr.wikipedia.org/wiki/Teresa_Jim%C3%A9nez-Becerril"
+  },
+  {
+   "sentences": 19,
+   "title": "Heinrich Dusemer",
+   "url": "https://tr.wikipedia.org/wiki/Heinrich_Dusemer"
+  },
+  {
+   "sentences": 3,
+   "title": "Paranebris",
+   "url": "https://tr.wikipedia.org/wiki/Paranebris"
+  },
+  {
+   "sentences": 10,
+   "title": "Saatköy",
+   "url": "https://tr.wikipedia.org/wiki/Saatk%C3%B6y"
+  },
+  {
+   "sentences": 7,
+   "title": "Küçelere Su Serpmişem",
+   "url": "https://tr.wikipedia.org/wiki/K%C3%BC%C3%A7elere_Su_Serpmi%C5%9Fem"
+  },
+  {
+   "sentences": 3,
+   "title": "Begonia caobangensis",
+   "url": "https://tr.wikipedia.org/wiki/Begonia_caobangensis"
+  },
+  {
+   "sentences": 15,
+   "title": "Avlonya",
+   "url": "https://tr.wikipedia.org/wiki/Avlonya"
+  },
+  {
+   "sentences": 4,
+   "title": "Türkmenistan manatı",
+   "url": "https://tr.wikipedia.org/wiki/T%C3%BCrkmenistan_manat%C4%B1"
+  },
+  {
+   "sentences": 1,
+   "title": "Moudeyres",
+   "url": "https://tr.wikipedia.org/wiki/Moudeyres"
+  },
+  {
+   "sentences": 4,
+   "title": "2017-18 Kadınlar Basketbol Süper Ligi",
+   "url": "https://tr.wikipedia.org/wiki/2017-18_Kad%C4%B1nlar_Basketbol_S%C3%BCper_Ligi"
+  },
+  {
+   "sentences": 15,
+   "title": "May Britt",
+   "url": "https://tr.wikipedia.org/wiki/May_Britt"
+  },
+  {
+   "sentences": 25,
+   "title": "Lugos Muharebesi",
+   "url": "https://tr.wikipedia.org/wiki/Lugos_Muharebesi"
+  },
+  {
+   "sentences": 10,
+   "title": "Guido Zurli",
+   "url": "https://tr.wikipedia.org/wiki/Guido_Zurli"
+  },
+  {
+   "sentences": 18,
+   "title": "CJ Badalona",
+   "url": "https://tr.wikipedia.org/wiki/CJ_Badalona"
+  },
+  {
+   "sentences": 3,
+   "title": "Hocatman, Yığılca",
+   "url": "https://tr.wikipedia.org/wiki/Hocatman%2C_Y%C4%B1%C4%9F%C4%B1lca"
+  },
+  {
+   "sentences": 5,
+   "title": "Nuri Kamburoğlu",
+   "url": "https://tr.wikipedia.org/wiki/Nuri_Kamburo%C4%9Flu"
+  },
+  {
+   "sentences": 8,
+   "title": "Seydi Gülsoy",
+   "url": "https://tr.wikipedia.org/wiki/Seydi_G%C3%BClsoy"
+  },
+  {
+   "sentences": 5,
+   "title": "Orta Doğu Medya Araştırma Enstitüsü",
+   "url": "https://tr.wikipedia.org/wiki/Orta_Do%C4%9Fu_Medya_Ara%C5%9Ft%C4%B1rma_Enstit%C3%BCs%C3%BC"
+  },
+  {
+   "sentences": 3,
+   "title": "Aconitum karakolium",
+   "url": "https://tr.wikipedia.org/wiki/Aconitum_karakolium"
+  },
+  {
+   "sentences": 14,
+   "title": "Beynam Ormanları",
+   "url": "https://tr.wikipedia.org/wiki/Beynam_Ormanlar%C4%B1"
+  },
+  {
+   "sentences": 4,
+   "title": "Trechaleidae",
+   "url": "https://tr.wikipedia.org/wiki/Trechaleidae"
+  },
+  {
+   "sentences": 2,
+   "title": "Fiume Veneto",
+   "url": "https://tr.wikipedia.org/wiki/Fiume_Veneto"
+  },
+  {
+   "sentences": 3,
+   "title": "Spermophorides fuertecavensis",
+   "url": "https://tr.wikipedia.org/wiki/Spermophorides_fuertecavensis"
+  },
+  {
+   "sentences": 3,
+   "title": "Tridontomidae",
+   "url": "https://tr.wikipedia.org/wiki/Tridontomidae"
+  },
+  {
+   "sentences": 2,
+   "title": "Paracedicus feti",
+   "url": "https://tr.wikipedia.org/wiki/Paracedicus_feti"
+  },
+  {
+   "sentences": 3,
+   "title": "Akçahisar (anlam ayrımı)",
+   "url": "https://tr.wikipedia.org/wiki/Ak%C3%A7ahisar_%28anlam_ayr%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Lied",
+   "url": "https://tr.wikipedia.org/wiki/Lied"
+  },
+  {
+   "sentences": 1,
+   "title": "Atsuo Watanabe",
+   "url": "https://tr.wikipedia.org/wiki/Atsuo_Watanabe"
+  },
+  {
+   "sentences": 4,
+   "title": "Bigadiç Belediyespor (erkek voleybol takımı)",
+   "url": "https://tr.wikipedia.org/wiki/Bigadi%C3%A7_Belediyespor_%28erkek_voleybol_tak%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Osmaniye, Karamürsel",
+   "url": "https://tr.wikipedia.org/wiki/Osmaniye%2C_Karam%C3%BCrsel"
+  },
+  {
+   "sentences": 3,
+   "title": "Geranium lazicum",
+   "url": "https://tr.wikipedia.org/wiki/Geranium_lazicum"
+  },
+  {
+   "sentences": 5,
+   "title": "16:9",
+   "url": "https://tr.wikipedia.org/wiki/16%3A9"
+  },
+  {
+   "sentences": 11,
+   "title": "Swish Swish",
+   "url": "https://tr.wikipedia.org/wiki/Swish_Swish"
+  },
+  {
+   "sentences": 3,
+   "title": "Jumpei Takaki",
+   "url": "https://tr.wikipedia.org/wiki/Jumpei_Takaki"
+  },
+  {
+   "sentences": 3,
+   "title": "Erpetogomphus",
+   "url": "https://tr.wikipedia.org/wiki/Erpetogomphus"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 2576",
+   "url": "https://tr.wikipedia.org/wiki/NGC_2576"
+  },
+  {
+   "sentences": 5,
+   "title": "Buenos Aires Metropoliten Katedrali",
+   "url": "https://tr.wikipedia.org/wiki/Buenos_Aires_Metropoliten_Katedrali"
+  },
+  {
+   "sentences": 1,
+   "title": "Boiry-Notre-Dame",
+   "url": "https://tr.wikipedia.org/wiki/Boiry-Notre-Dame"
+  },
+  {
+   "sentences": 2,
+   "title": "Jerry Nelson",
+   "url": "https://tr.wikipedia.org/wiki/Jerry_Nelson"
+  },
+  {
+   "sentences": 1,
+   "title": "Yisrael Kristal",
+   "url": "https://tr.wikipedia.org/wiki/Yisrael_Kristal"
+  },
+  {
+   "sentences": 5,
+   "title": "Do Sang-woo",
+   "url": "https://tr.wikipedia.org/wiki/Do_Sang-woo"
+  },
+  {
+   "sentences": 25,
+   "title": "Defense of the Ancients",
+   "url": "https://tr.wikipedia.org/wiki/Defense_of_the_Ancients"
+  },
+  {
+   "sentences": 1,
+   "title": "Janne Sankelo",
+   "url": "https://tr.wikipedia.org/wiki/Janne_Sankelo"
+  },
+  {
+   "sentences": 4,
+   "title": "Halina Rozpondek",
+   "url": "https://tr.wikipedia.org/wiki/Halina_Rozpondek"
+  },
+  {
+   "sentences": 1,
+   "title": "Haysin Rayonu",
+   "url": "https://tr.wikipedia.org/wiki/Haysin_Rayonu"
+  },
+  {
+   "sentences": 3,
+   "title": "Dendrobium parietiforme",
+   "url": "https://tr.wikipedia.org/wiki/Dendrobium_parietiforme"
+  },
+  {
+   "sentences": 11,
+   "title": "Allegheniyen Orojenezi",
+   "url": "https://tr.wikipedia.org/wiki/Allegheniyen_Orojenezi"
+  },
+  {
+   "sentences": 25,
+   "title": "Blood Ties",
+   "url": "https://tr.wikipedia.org/wiki/Blood_Ties"
+  },
+  {
+   "sentences": 1,
+   "title": "Saint-Michel, Charente",
+   "url": "https://tr.wikipedia.org/wiki/Saint-Michel%2C_Charente"
+  },
+  {
+   "sentences": 20,
+   "title": "Katharina Wackernagel",
+   "url": "https://tr.wikipedia.org/wiki/Katharina_Wackernagel"
+  },
+  {
+   "sentences": 5,
+   "title": "Marián Varga",
+   "url": "https://tr.wikipedia.org/wiki/Mari%C3%A1n_Varga"
+  },
+  {
+   "sentences": 14,
+   "title": "Havariler Çağı",
+   "url": "https://tr.wikipedia.org/wiki/Havariler_%C3%87a%C4%9F%C4%B1"
+  },
+  {
+   "sentences": 2,
+   "title": "How I Met Your Mother bölümleri listesi",
+   "url": "https://tr.wikipedia.org/wiki/How_I_Met_Your_Mother_b%C3%B6l%C3%BCmleri_listesi"
+  },
+  {
+   "sentences": 3,
+   "title": "Wisch (Holstein)",
+   "url": "https://tr.wikipedia.org/wiki/Wisch_%28Holstein%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Nakayacestus",
+   "url": "https://tr.wikipedia.org/wiki/Nakayacestus"
+  },
+  {
+   "sentences": 2,
+   "title": "Ayoze Pérez",
+   "url": "https://tr.wikipedia.org/wiki/Ayoze_P%C3%A9rez"
+  },
+  {
+   "sentences": 10,
+   "title": "Akiliya",
+   "url": "https://tr.wikipedia.org/wiki/Akiliya"
+  },
+  {
+   "sentences": 1,
+   "title": "Ajax",
+   "url": "https://tr.wikipedia.org/wiki/Ajax"
+  },
+  {
+   "sentences": 3,
+   "title": "Camponotus gibrer",
+   "url": "https://tr.wikipedia.org/wiki/Camponotus_gibrer"
+  },
+  {
+   "sentences": 3,
+   "title": "Poritella",
+   "url": "https://tr.wikipedia.org/wiki/Poritella"
+  },
+  {
+   "sentences": 3,
+   "title": "Astragalus pardalinus",
+   "url": "https://tr.wikipedia.org/wiki/Astragalus_pardalinus"
+  },
+  {
+   "sentences": 14,
+   "title": "Frederick Wallace Edwards",
+   "url": "https://tr.wikipedia.org/wiki/Frederick_Wallace_Edwards"
+  },
+  {
+   "sentences": 19,
+   "title": "Huzurkent",
+   "url": "https://tr.wikipedia.org/wiki/Huzurkent"
+  },
+  {
+   "sentences": 12,
+   "title": "Korkmaz Yiğit",
+   "url": "https://tr.wikipedia.org/wiki/Korkmaz_Yi%C4%9Fit"
+  },
+  {
+   "sentences": 1,
+   "title": "Nemoli",
+   "url": "https://tr.wikipedia.org/wiki/Nemoli"
+  },
+  {
+   "sentences": 7,
+   "title": "2024 Avrupa Av Tüfeği Şampiyonası",
+   "url": "https://tr.wikipedia.org/wiki/2024_Avrupa_Av_T%C3%BCfe%C4%9Fi_%C5%9Eampiyonas%C4%B1"
+  },
+  {
+   "sentences": 4,
+   "title": "Kocaman, Alaplı",
+   "url": "https://tr.wikipedia.org/wiki/Kocaman%2C_Alapl%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Dirk Lehmann",
+   "url": "https://tr.wikipedia.org/wiki/Dirk_Lehmann"
+  },
+  {
+   "sentences": 4,
+   "title": "Siyah Bir Veda Öpücüğü",
+   "url": "https://tr.wikipedia.org/wiki/Siyah_Bir_Veda_%C3%96p%C3%BCc%C3%BC%C4%9F%C3%BC"
+  },
+  {
+   "sentences": 5,
+   "title": "Menteşe Bey",
+   "url": "https://tr.wikipedia.org/wiki/Mente%C5%9Fe_Bey"
+  },
+  {
+   "sentences": 3,
+   "title": "Pardosa palustris",
+   "url": "https://tr.wikipedia.org/wiki/Pardosa_palustris"
+  },
+  {
+   "sentences": 5,
+   "title": "Doğan Ergül",
+   "url": "https://tr.wikipedia.org/wiki/Do%C4%9Fan_Erg%C3%BCl"
+  },
+  {
+   "sentences": 22,
+   "title": "Robin Li",
+   "url": "https://tr.wikipedia.org/wiki/Robin_Li"
+  },
+  {
+   "sentences": 6,
+   "title": "Jo Sullivan Loesser",
+   "url": "https://tr.wikipedia.org/wiki/Jo_Sullivan_Loesser"
+  },
+  {
+   "sentences": 5,
+   "title": "Turan Çolakkadı",
+   "url": "https://tr.wikipedia.org/wiki/Turan_%C3%87olakkad%C4%B1"
+  },
+  {
+   "sentences": 2,
+   "title": "Takahiro Kanemitsu",
+   "url": "https://tr.wikipedia.org/wiki/Takahiro_Kanemitsu"
+  },
+  {
+   "sentences": 3,
+   "title": "Habia",
+   "url": "https://tr.wikipedia.org/wiki/Habia"
+  },
+  {
+   "sentences": 2,
+   "title": "Dünya Yıldızlar Halter Şampiyonası",
+   "url": "https://tr.wikipedia.org/wiki/D%C3%BCnya_Y%C4%B1ld%C4%B1zlar_Halter_%C5%9Eampiyonas%C4%B1"
+  },
+  {
+   "sentences": 8,
+   "title": "Situla",
+   "url": "https://tr.wikipedia.org/wiki/Situla"
+  },
+  {
+   "sentences": 2,
+   "title": "Drone (ses)",
+   "url": "https://tr.wikipedia.org/wiki/Drone_%28ses%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Güneş SK",
+   "url": "https://tr.wikipedia.org/wiki/G%C3%BCne%C5%9F_SK"
+  },
+  {
+   "sentences": 10,
+   "title": "Crossroads (şarkı)",
+   "url": "https://tr.wikipedia.org/wiki/Crossroads_%28%C5%9Fark%C4%B1%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Yolcu treni",
+   "url": "https://tr.wikipedia.org/wiki/Yolcu_treni"
+  },
+  {
+   "sentences": 3,
+   "title": "Euophrys crux",
+   "url": "https://tr.wikipedia.org/wiki/Euophrys_crux"
+  },
+  {
+   "sentences": 6,
+   "title": "1972 Avrupa Futbol Şampiyonası elemeleri - 8. Grup",
+   "url": "https://tr.wikipedia.org/wiki/1972_Avrupa_Futbol_%C5%9Eampiyonas%C4%B1_elemeleri_-_8._Grup"
+  },
+  {
+   "sentences": 1,
+   "title": "Viola (anlam ayrımı)",
+   "url": "https://tr.wikipedia.org/wiki/Viola_%28anlam_ayr%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Großenehrich",
+   "url": "https://tr.wikipedia.org/wiki/Gro%C3%9Fenehrich"
+  },
+  {
+   "sentences": 3,
+   "title": "Emertonella",
+   "url": "https://tr.wikipedia.org/wiki/Emertonella"
+  },
+  {
+   "sentences": 13,
+   "title": "Džoni Novak",
+   "url": "https://tr.wikipedia.org/wiki/D%C5%BEoni_Novak"
+  },
+  {
+   "sentences": 25,
+   "title": "Güneş arabası",
+   "url": "https://tr.wikipedia.org/wiki/G%C3%BCne%C5%9F_arabas%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Bulbophyllum xanthoacron",
+   "url": "https://tr.wikipedia.org/wiki/Bulbophyllum_xanthoacron"
+  },
+  {
+   "sentences": 1,
+   "title": "Amplepuis",
+   "url": "https://tr.wikipedia.org/wiki/Amplepuis"
+  },
+  {
+   "sentences": 16,
+   "title": "Aggregata",
+   "url": "https://tr.wikipedia.org/wiki/Aggregata"
+  },
+  {
+   "sentences": 25,
+   "title": "Sérgio Oliveira",
+   "url": "https://tr.wikipedia.org/wiki/S%C3%A9rgio_Oliveira"
+  },
+  {
+   "sentences": 22,
+   "title": "Kuantum kimyası ve katı hal fiziği yazılımları listesi",
+   "url": "https://tr.wikipedia.org/wiki/Kuantum_kimyas%C4%B1_ve_kat%C4%B1_hal_fizi%C4%9Fi_yaz%C4%B1l%C4%B1mlar%C4%B1_listesi"
+  },
+  {
+   "sentences": 4,
+   "title": "Silva Gunbardhi",
+   "url": "https://tr.wikipedia.org/wiki/Silva_Gunbardhi"
+  },
+  {
+   "sentences": 4,
+   "title": "Pendik (anlam ayrımı)",
+   "url": "https://tr.wikipedia.org/wiki/Pendik_%28anlam_ayr%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Kenar Süsü",
+   "url": "https://tr.wikipedia.org/wiki/Kenar_S%C3%BCs%C3%BC"
+  },
+  {
+   "sentences": 13,
+   "title": "Azerbaycan Kickboks Federasyonu",
+   "url": "https://tr.wikipedia.org/wiki/Azerbaycan_Kickboks_Federasyonu"
+  },
+  {
+   "sentences": 3,
+   "title": "Compsoleon",
+   "url": "https://tr.wikipedia.org/wiki/Compsoleon"
+  },
+  {
+   "sentences": 25,
+   "title": "Dubai",
+   "url": "https://tr.wikipedia.org/wiki/Dubai"
+  },
+  {
+   "sentences": 1,
+   "title": "Rueglio",
+   "url": "https://tr.wikipedia.org/wiki/Rueglio"
+  },
+  {
+   "sentences": 1,
+   "title": "Rosiers-de-Juillac",
+   "url": "https://tr.wikipedia.org/wiki/Rosiers-de-Juillac"
+  },
+  {
+   "sentences": 8,
+   "title": "2010 Kış Olimpiyatları'nda Avusturya",
+   "url": "https://tr.wikipedia.org/wiki/2010_K%C4%B1%C5%9F_Olimpiyatlar%C4%B1%27nda_Avusturya"
+  },
+  {
+   "sentences": 1,
+   "title": "Chançay",
+   "url": "https://tr.wikipedia.org/wiki/Chan%C3%A7ay"
+  },
+  {
+   "sentences": 7,
+   "title": "Joan Röell",
+   "url": "https://tr.wikipedia.org/wiki/Joan_R%C3%B6ell"
+  },
+  {
+   "sentences": 3,
+   "title": "Malosemeyka",
+   "url": "https://tr.wikipedia.org/wiki/Malosemeyka"
+  },
+  {
+   "sentences": 19,
+   "title": "Karton kutu",
+   "url": "https://tr.wikipedia.org/wiki/Karton_kutu"
+  },
+  {
+   "sentences": 1,
+   "title": "Ertuğrulgazi, Tepebaşı",
+   "url": "https://tr.wikipedia.org/wiki/Ertu%C4%9Frulgazi%2C_Tepeba%C5%9F%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Cyrtandra villosissima",
+   "url": "https://tr.wikipedia.org/wiki/Cyrtandra_villosissima"
+  },
+  {
+   "sentences": 3,
+   "title": "Cabassus",
+   "url": "https://tr.wikipedia.org/wiki/Cabassus"
+  },
+  {
+   "sentences": 4,
+   "title": "Gretel Bergman",
+   "url": "https://tr.wikipedia.org/wiki/Gretel_Bergman"
+  },
+  {
+   "sentences": 1,
+   "title": "Féron",
+   "url": "https://tr.wikipedia.org/wiki/F%C3%A9ron"
+  },
+  {
+   "sentences": 3,
+   "title": "Phyllonorycter lyoniae",
+   "url": "https://tr.wikipedia.org/wiki/Phyllonorycter_lyoniae"
+  },
+  {
+   "sentences": 3,
+   "title": "Berfu Cengiz",
+   "url": "https://tr.wikipedia.org/wiki/Berfu_Cengiz"
+  },
+  {
+   "sentences": 3,
+   "title": "Acamptogorgia",
+   "url": "https://tr.wikipedia.org/wiki/Acamptogorgia"
+  },
+  {
+   "sentences": 6,
+   "title": "Vincent J. McMahon",
+   "url": "https://tr.wikipedia.org/wiki/Vincent_J._McMahon"
+  },
+  {
+   "sentences": 3,
+   "title": "Platynomorpha",
+   "url": "https://tr.wikipedia.org/wiki/Platynomorpha"
+  },
+  {
+   "sentences": 4,
+   "title": "Alacaşar, Nevşehir",
+   "url": "https://tr.wikipedia.org/wiki/Alaca%C5%9Far%2C_Nev%C5%9Fehir"
+  },
+  {
+   "sentences": 1,
+   "title": "Tales of Halloween",
+   "url": "https://tr.wikipedia.org/wiki/Tales_of_Halloween"
+  },
+  {
+   "sentences": 2,
+   "title": "Kevelaer",
+   "url": "https://tr.wikipedia.org/wiki/Kevelaer"
+  },
+  {
+   "sentences": 16,
+   "title": "II. Artaserhas'ın Kadusi Seferi",
+   "url": "https://tr.wikipedia.org/wiki/II._Artaserhas%27%C4%B1n_Kadusi_Seferi"
+  },
+  {
+   "sentences": 2,
+   "title": "Montigny-Montfort",
+   "url": "https://tr.wikipedia.org/wiki/Montigny-Montfort"
+  },
+  {
+   "sentences": 3,
+   "title": "Euphorbia leucantha",
+   "url": "https://tr.wikipedia.org/wiki/Euphorbia_leucantha"
+  },
+  {
+   "sentences": 3,
+   "title": "Macrothele cretica",
+   "url": "https://tr.wikipedia.org/wiki/Macrothele_cretica"
+  },
+  {
+   "sentences": 5,
+   "title": "Aemilius Scaurus",
+   "url": "https://tr.wikipedia.org/wiki/Aemilius_Scaurus"
+  },
+  {
+   "sentences": 3,
+   "title": "Télé Liban",
+   "url": "https://tr.wikipedia.org/wiki/T%C3%A9l%C3%A9_Liban"
+  },
+  {
+   "sentences": 9,
+   "title": "Anthropoid (film)",
+   "url": "https://tr.wikipedia.org/wiki/Anthropoid_%28film%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Ascochyta culmicola",
+   "url": "https://tr.wikipedia.org/wiki/Ascochyta_culmicola"
+  },
+  {
+   "sentences": 3,
+   "title": "Psychotria retusa",
+   "url": "https://tr.wikipedia.org/wiki/Psychotria_retusa"
+  },
+  {
+   "sentences": 3,
+   "title": "Opisthacidius",
+   "url": "https://tr.wikipedia.org/wiki/Opisthacidius"
+  },
+  {
+   "sentences": 1,
+   "title": "Doğuş, Karatay",
+   "url": "https://tr.wikipedia.org/wiki/Do%C4%9Fu%C5%9F%2C_Karatay"
+  },
+  {
+   "sentences": 8,
+   "title": "Kan Bağı (film)",
+   "url": "https://tr.wikipedia.org/wiki/Kan_Ba%C4%9F%C4%B1_%28film%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Atılhan Turna Konağı",
+   "url": "https://tr.wikipedia.org/wiki/At%C4%B1lhan_Turna_Kona%C4%9F%C4%B1"
+  },
+  {
+   "sentences": 4,
+   "title": "Chthoniini",
+   "url": "https://tr.wikipedia.org/wiki/Chthoniini"
+  },
+  {
+   "sentences": 3,
+   "title": "Halil Azmi",
+   "url": "https://tr.wikipedia.org/wiki/Halil_Azmi"
+  },
+  {
+   "sentences": 4,
+   "title": "Bağımsız pop",
+   "url": "https://tr.wikipedia.org/wiki/Ba%C4%9F%C4%B1ms%C4%B1z_pop"
+  },
+  {
+   "sentences": 4,
+   "title": "Sudbury, Massachusetts",
+   "url": "https://tr.wikipedia.org/wiki/Sudbury%2C_Massachusetts"
+  },
+  {
+   "sentences": 8,
+   "title": "Bağcılar, Menemen",
+   "url": "https://tr.wikipedia.org/wiki/Ba%C4%9Fc%C4%B1lar%2C_Menemen"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 59",
+   "url": "https://tr.wikipedia.org/wiki/NGC_59"
+  },
+  {
+   "sentences": 12,
+   "title": "Seyirci",
+   "url": "https://tr.wikipedia.org/wiki/Seyirci"
+  },
+  {
+   "sentences": 1,
+   "title": "İçel'de 1923 Türkiye genel seçimleri",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0%C3%A7el%27de_1923_T%C3%BCrkiye_genel_se%C3%A7imleri"
+  },
+  {
+   "sentences": 2,
+   "title": "Cihanşah, Haymana",
+   "url": "https://tr.wikipedia.org/wiki/Cihan%C5%9Fah%2C_Haymana"
+  },
+  {
+   "sentences": 3,
+   "title": "Hemidactylus bayonii",
+   "url": "https://tr.wikipedia.org/wiki/Hemidactylus_bayonii"
+  },
+  {
+   "sentences": 3,
+   "title": "Gerry Peyton",
+   "url": "https://tr.wikipedia.org/wiki/Gerry_Peyton"
+  },
+  {
+   "sentences": 14,
+   "title": "Gerardo Seoane",
+   "url": "https://tr.wikipedia.org/wiki/Gerardo_Seoane"
+  },
+  {
+   "sentences": 25,
+   "title": "JPEGMafia",
+   "url": "https://tr.wikipedia.org/wiki/JPEGMafia"
+  },
+  {
+   "sentences": 3,
+   "title": "Poblana",
+   "url": "https://tr.wikipedia.org/wiki/Poblana"
+  },
+  {
+   "sentences": 25,
+   "title": "Muhammed'in Aştinamesi",
+   "url": "https://tr.wikipedia.org/wiki/Muhammed%27in_A%C5%9Ftinamesi"
+  },
+  {
+   "sentences": 3,
+   "title": "Deleornis",
+   "url": "https://tr.wikipedia.org/wiki/Deleornis"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 305",
+   "url": "https://tr.wikipedia.org/wiki/NGC_305"
+  },
+  {
+   "sentences": 3,
+   "title": "Begonia weltoniensis",
+   "url": "https://tr.wikipedia.org/wiki/Begonia_weltoniensis"
+  },
+  {
+   "sentences": 22,
+   "title": "Muhammed Bahâeddin et-Tavilî",
+   "url": "https://tr.wikipedia.org/wiki/Muhammed_Bah%C3%A2eddin_et-Tavil%C3%AE"
+  },
+  {
+   "sentences": 13,
+   "title": "Sultan Şeyhmus",
+   "url": "https://tr.wikipedia.org/wiki/Sultan_%C5%9Eeyhmus"
+  },
+  {
+   "sentences": 12,
+   "title": "Pinokyo (1972, çizgi dizi)",
+   "url": "https://tr.wikipedia.org/wiki/Pinokyo_%281972%2C_%C3%A7izgi_dizi%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Tecvid",
+   "url": "https://tr.wikipedia.org/wiki/Tecvid"
+  },
+  {
+   "sentences": 8,
+   "title": "Erdoğan Toprak",
+   "url": "https://tr.wikipedia.org/wiki/Erdo%C4%9Fan_Toprak"
+  },
+  {
+   "sentences": 16,
+   "title": "ISS Pro Evolution 2",
+   "url": "https://tr.wikipedia.org/wiki/ISS_Pro_Evolution_2"
+  },
+  {
+   "sentences": 2,
+   "title": "Heywood, Norfolk",
+   "url": "https://tr.wikipedia.org/wiki/Heywood%2C_Norfolk"
+  },
+  {
+   "sentences": 2,
+   "title": "Kavaklıdere, Alaşehir",
+   "url": "https://tr.wikipedia.org/wiki/Kavakl%C4%B1dere%2C_Ala%C5%9Fehir"
+  },
+  {
+   "sentences": 2,
+   "title": "Karapınar, Sarız",
+   "url": "https://tr.wikipedia.org/wiki/Karap%C4%B1nar%2C_Sar%C4%B1z"
+  },
+  {
+   "sentences": 4,
+   "title": "Tekneçukur, Ulukışla",
+   "url": "https://tr.wikipedia.org/wiki/Tekne%C3%A7ukur%2C_Uluk%C4%B1%C5%9Fla"
+  },
+  {
+   "sentences": 3,
+   "title": "Columbella",
+   "url": "https://tr.wikipedia.org/wiki/Columbella"
+  },
+  {
+   "sentences": 7,
+   "title": "Taşlıyurt, Pasinler",
+   "url": "https://tr.wikipedia.org/wiki/Ta%C5%9Fl%C4%B1yurt%2C_Pasinler"
+  },
+  {
+   "sentences": 1,
+   "title": "Aubrives",
+   "url": "https://tr.wikipedia.org/wiki/Aubrives"
+  },
+  {
+   "sentences": 9,
+   "title": "Gayzerler Vadisi",
+   "url": "https://tr.wikipedia.org/wiki/Gayzerler_Vadisi"
+  },
+  {
+   "sentences": 20,
+   "title": "Dinkalar",
+   "url": "https://tr.wikipedia.org/wiki/Dinkalar"
+  },
+  {
+   "sentences": 3,
+   "title": "Ertuğrul Hasipoğlu",
+   "url": "https://tr.wikipedia.org/wiki/Ertu%C4%9Frul_Hasipo%C4%9Flu"
+  },
+  {
+   "sentences": 3,
+   "title": "Honiarrea",
+   "url": "https://tr.wikipedia.org/wiki/Honiarrea"
+  },
+  {
+   "sentences": 4,
+   "title": "Kızıl kırlangıç",
+   "url": "https://tr.wikipedia.org/wiki/K%C4%B1z%C4%B1l_k%C4%B1rlang%C4%B1%C3%A7"
+  },
+  {
+   "sentences": 5,
+   "title": "Küçükburunağıl, Mucur",
+   "url": "https://tr.wikipedia.org/wiki/K%C3%BC%C3%A7%C3%BCkburuna%C4%9F%C4%B1l%2C_Mucur"
+  },
+  {
+   "sentences": 2,
+   "title": "Tanushree Dutta",
+   "url": "https://tr.wikipedia.org/wiki/Tanushree_Dutta"
+  },
+  {
+   "sentences": 7,
+   "title": "Matkot",
+   "url": "https://tr.wikipedia.org/wiki/Matkot"
+  },
+  {
+   "sentences": 25,
+   "title": "Ateşten set paradoksu",
+   "url": "https://tr.wikipedia.org/wiki/Ate%C5%9Ften_set_paradoksu"
+  },
+  {
+   "sentences": 2,
+   "title": "Rıhani, Kızıltepe",
+   "url": "https://tr.wikipedia.org/wiki/R%C4%B1hani%2C_K%C4%B1z%C4%B1ltepe"
+  },
+  {
+   "sentences": 3,
+   "title": "Heminothrus",
+   "url": "https://tr.wikipedia.org/wiki/Heminothrus"
+  },
+  {
+   "sentences": 3,
+   "title": "Carex deweyana",
+   "url": "https://tr.wikipedia.org/wiki/Carex_deweyana"
+  },
+  {
+   "sentences": 5,
+   "title": "Endonezya arması",
+   "url": "https://tr.wikipedia.org/wiki/Endonezya_armas%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Peter Lorimer",
+   "url": "https://tr.wikipedia.org/wiki/Peter_Lorimer"
+  },
+  {
+   "sentences": 9,
+   "title": "Bayinnaung",
+   "url": "https://tr.wikipedia.org/wiki/Bayinnaung"
+  },
+  {
+   "sentences": 4,
+   "title": "Cichorium",
+   "url": "https://tr.wikipedia.org/wiki/Cichorium"
+  },
+  {
+   "sentences": 5,
+   "title": "Undead",
+   "url": "https://tr.wikipedia.org/wiki/Undead"
+  },
+  {
+   "sentences": 4,
+   "title": "Matt Charman",
+   "url": "https://tr.wikipedia.org/wiki/Matt_Charman"
+  },
+  {
+   "sentences": 3,
+   "title": "Andrena sobrina",
+   "url": "https://tr.wikipedia.org/wiki/Andrena_sobrina"
+  },
+  {
+   "sentences": 2,
+   "title": "Tupolev Tu-128",
+   "url": "https://tr.wikipedia.org/wiki/Tupolev_Tu-128"
+  },
+  {
+   "sentences": 3,
+   "title": "Camponotus siemsseni",
+   "url": "https://tr.wikipedia.org/wiki/Camponotus_siemsseni"
+  },
+  {
+   "sentences": 5,
+   "title": "Selma Tarcan",
+   "url": "https://tr.wikipedia.org/wiki/Selma_Tarcan"
+  },
+  {
+   "sentences": 1,
+   "title": "2016 Yaz Olimpiyatları'nda Meksika",
+   "url": "https://tr.wikipedia.org/wiki/2016_Yaz_Olimpiyatlar%C4%B1%27nda_Meksika"
+  },
+  {
+   "sentences": 2,
+   "title": "Geauga County",
+   "url": "https://tr.wikipedia.org/wiki/Geauga_County"
+  },
+  {
+   "sentences": 9,
+   "title": "Cato Institute",
+   "url": "https://tr.wikipedia.org/wiki/Cato_Institute"
+  },
+  {
+   "sentences": 3,
+   "title": "Eupteleaceae",
+   "url": "https://tr.wikipedia.org/wiki/Eupteleaceae"
+  },
+  {
+   "sentences": 3,
+   "title": "Gladioglanis",
+   "url": "https://tr.wikipedia.org/wiki/Gladioglanis"
+  },
+  {
+   "sentences": 1,
+   "title": "Undisputed Attitude",
+   "url": "https://tr.wikipedia.org/wiki/Undisputed_Attitude"
+  },
+  {
+   "sentences": 25,
+   "title": "Eray İşcan",
+   "url": "https://tr.wikipedia.org/wiki/Eray_%C4%B0%C5%9Fcan"
+  },
+  {
+   "sentences": 25,
+   "title": "İnce Memed",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0nce_Memed"
+  },
+  {
+   "sentences": 2,
+   "title": "Sabrosa",
+   "url": "https://tr.wikipedia.org/wiki/Sabrosa"
+  },
+  {
+   "sentences": 3,
+   "title": "Onychiuridae",
+   "url": "https://tr.wikipedia.org/wiki/Onychiuridae"
+  },
+  {
+   "sentences": 25,
+   "title": "Dağılma dönemi Osmanlı donanması",
+   "url": "https://tr.wikipedia.org/wiki/Da%C4%9F%C4%B1lma_d%C3%B6nemi_Osmanl%C4%B1_donanmas%C4%B1"
+  },
+  {
+   "sentences": 21,
+   "title": "Niklas Landin Jacobsen",
+   "url": "https://tr.wikipedia.org/wiki/Niklas_Landin_Jacobsen"
+  },
+  {
+   "sentences": 2,
+   "title": "Hunsonby",
+   "url": "https://tr.wikipedia.org/wiki/Hunsonby"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 1244",
+   "url": "https://tr.wikipedia.org/wiki/NGC_1244"
+  },
+  {
+   "sentences": 13,
+   "title": "Olga Hrjanovskaya",
+   "url": "https://tr.wikipedia.org/wiki/Olga_Hrjanovskaya"
+  },
+  {
+   "sentences": 8,
+   "title": "Görece Cumhuriyet, Menderes",
+   "url": "https://tr.wikipedia.org/wiki/G%C3%B6rece_Cumhuriyet%2C_Menderes"
+  },
+  {
+   "sentences": 4,
+   "title": "Manú Millî Parkı",
+   "url": "https://tr.wikipedia.org/wiki/Man%C3%BA_Mill%C3%AE_Park%C4%B1"
+  },
+  {
+   "sentences": 10,
+   "title": "Mingrelskaya",
+   "url": "https://tr.wikipedia.org/wiki/Mingrelskaya"
+  },
+  {
+   "sentences": 14,
+   "title": "James Naismith",
+   "url": "https://tr.wikipedia.org/wiki/James_Naismith"
+  },
+  {
+   "sentences": 1,
+   "title": "Villar Dora",
+   "url": "https://tr.wikipedia.org/wiki/Villar_Dora"
+  },
+  {
+   "sentences": 4,
+   "title": "IC 575",
+   "url": "https://tr.wikipedia.org/wiki/IC_575"
+  },
+  {
+   "sentences": 4,
+   "title": "Altındağ (anlam ayrımı)",
+   "url": "https://tr.wikipedia.org/wiki/Alt%C4%B1nda%C4%9F_%28anlam_ayr%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Kharasch reaksiyonu",
+   "url": "https://tr.wikipedia.org/wiki/Kharasch_reaksiyonu"
+  },
+  {
+   "sentences": 8,
+   "title": "Elvanlı, Erdemli",
+   "url": "https://tr.wikipedia.org/wiki/Elvanl%C4%B1%2C_Erdemli"
+  },
+  {
+   "sentences": 2,
+   "title": "Fatih Turan",
+   "url": "https://tr.wikipedia.org/wiki/Fatih_Turan"
+  },
+  {
+   "sentences": 6,
+   "title": "Zorro Efsanesi",
+   "url": "https://tr.wikipedia.org/wiki/Zorro_Efsanesi"
+  },
+  {
+   "sentences": 21,
+   "title": "Denizlispor 1983-84 sezonu",
+   "url": "https://tr.wikipedia.org/wiki/Denizlispor_1983-84_sezonu"
+  },
+  {
+   "sentences": 17,
+   "title": "Handley Page Manx",
+   "url": "https://tr.wikipedia.org/wiki/Handley_Page_Manx"
+  },
+  {
+   "sentences": 3,
+   "title": "Eucalyptus carolaniae",
+   "url": "https://tr.wikipedia.org/wiki/Eucalyptus_carolaniae"
+  },
+  {
+   "sentences": 1,
+   "title": "Hala (anlam ayrımı)",
+   "url": "https://tr.wikipedia.org/wiki/Hala_%28anlam_ayr%C4%B1m%C4%B1%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Yasuhiro Toyoda",
+   "url": "https://tr.wikipedia.org/wiki/Yasuhiro_Toyoda"
+  },
+  {
+   "sentences": 2,
+   "title": "Kalujsko-Rijskaya Hattı",
+   "url": "https://tr.wikipedia.org/wiki/Kalujsko-Rijskaya_Hatt%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Bortala Alashankou Havalimanı",
+   "url": "https://tr.wikipedia.org/wiki/Bortala_Alashankou_Havaliman%C4%B1"
+  },
+  {
+   "sentences": 5,
+   "title": "Eğitim kurumu",
+   "url": "https://tr.wikipedia.org/wiki/E%C4%9Fitim_kurumu"
+  },
+  {
+   "sentences": 4,
+   "title": "Bash in Berlin",
+   "url": "https://tr.wikipedia.org/wiki/Bash_in_Berlin"
+  },
+  {
+   "sentences": 10,
+   "title": "Macky Sall",
+   "url": "https://tr.wikipedia.org/wiki/Macky_Sall"
+  },
+  {
+   "sentences": 3,
+   "title": "Crematogaster",
+   "url": "https://tr.wikipedia.org/wiki/Crematogaster"
+  },
+  {
+   "sentences": 3,
+   "title": "Diaphorocellus",
+   "url": "https://tr.wikipedia.org/wiki/Diaphorocellus"
+  },
+  {
+   "sentences": 3,
+   "title": "Microlinyphia",
+   "url": "https://tr.wikipedia.org/wiki/Microlinyphia"
+  },
+  {
+   "sentences": 3,
+   "title": "Cyrtandra elizabethae",
+   "url": "https://tr.wikipedia.org/wiki/Cyrtandra_elizabethae"
+  },
+  {
+   "sentences": 6,
+   "title": "Harold Reitsema",
+   "url": "https://tr.wikipedia.org/wiki/Harold_Reitsema"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 5665A",
+   "url": "https://tr.wikipedia.org/wiki/NGC_5665A"
+  },
+  {
+   "sentences": 3,
+   "title": "Aconitum chayuense",
+   "url": "https://tr.wikipedia.org/wiki/Aconitum_chayuense"
+  },
+  {
+   "sentences": 6,
+   "title": "Stranger than Fiction (albüm)",
+   "url": "https://tr.wikipedia.org/wiki/Stranger_than_Fiction_%28alb%C3%BCm%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Ilay Feingold",
+   "url": "https://tr.wikipedia.org/wiki/Ilay_Feingold"
+  },
+  {
+   "sentences": 3,
+   "title": "Hacımahmutlu, Durağan",
+   "url": "https://tr.wikipedia.org/wiki/Hac%C4%B1mahmutlu%2C_Dura%C4%9Fan"
+  },
+  {
+   "sentences": 2,
+   "title": "Sina Ayaklanması",
+   "url": "https://tr.wikipedia.org/wiki/Sina_Ayaklanmas%C4%B1"
+  },
+  {
+   "sentences": 3,
+   "title": "Kim Eun-sook",
+   "url": "https://tr.wikipedia.org/wiki/Kim_Eun-sook"
+  },
+  {
+   "sentences": 10,
+   "title": "Marmara Üniversitesi Hukuk Fakültesi",
+   "url": "https://tr.wikipedia.org/wiki/Marmara_%C3%9Cniversitesi_Hukuk_Fak%C3%BCltesi"
+  },
+  {
+   "sentences": 25,
+   "title": "Ryan Kent",
+   "url": "https://tr.wikipedia.org/wiki/Ryan_Kent"
+  },
+  {
+   "sentences": 14,
+   "title": "İbrahim Halil Soğukoğlu",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0brahim_Halil_So%C4%9Fuko%C4%9Flu"
+  },
+  {
+   "sentences": 4,
+   "title": "Konyaspor 2011-12 sezonu",
+   "url": "https://tr.wikipedia.org/wiki/Konyaspor_2011-12_sezonu"
+  },
+  {
+   "sentences": 3,
+   "title": "Taphrolesbia",
+   "url": "https://tr.wikipedia.org/wiki/Taphrolesbia"
+  },
+  {
+   "sentences": 6,
+   "title": "Çılgın Dostlar: Korkak Kahraman",
+   "url": "https://tr.wikipedia.org/wiki/%C3%87%C4%B1lg%C4%B1n_Dostlar%3A_Korkak_Kahraman"
+  },
+  {
+   "sentences": 14,
+   "title": "Stefano Marrone",
+   "url": "https://tr.wikipedia.org/wiki/Stefano_Marrone"
+  },
+  {
+   "sentences": 25,
+   "title": "5 Eylül",
+   "url": "https://tr.wikipedia.org/wiki/5_Eyl%C3%BCl"
+  },
+  {
+   "sentences": 3,
+   "title": "Empusa spinosa",
+   "url": "https://tr.wikipedia.org/wiki/Empusa_spinosa"
+  },
+  {
+   "sentences": 2,
+   "title": "We Found Love (video klip)",
+   "url": "https://tr.wikipedia.org/wiki/We_Found_Love_%28video_klip%29"
+  },
+  {
+   "sentences": 25,
+   "title": "II. Konstans",
+   "url": "https://tr.wikipedia.org/wiki/II._Konstans"
+  },
+  {
+   "sentences": 7,
+   "title": "2005 Brezilya Grand Prix",
+   "url": "https://tr.wikipedia.org/wiki/2005_Brezilya_Grand_Prix"
+  },
+  {
+   "sentences": 14,
+   "title": "Berka Buse Özden",
+   "url": "https://tr.wikipedia.org/wiki/Berka_Buse_%C3%96zden"
+  },
+  {
+   "sentences": 25,
+   "title": "Fatih Terim",
+   "url": "https://tr.wikipedia.org/wiki/Fatih_Terim"
+  },
+  {
+   "sentences": 12,
+   "title": "Kurban Nasuh Baba Camii",
+   "url": "https://tr.wikipedia.org/wiki/Kurban_Nasuh_Baba_Camii"
+  },
+  {
+   "sentences": 1,
+   "title": "Magny-en-Bessin",
+   "url": "https://tr.wikipedia.org/wiki/Magny-en-Bessin"
+  },
+  {
+   "sentences": 17,
+   "title": "Ain't I",
+   "url": "https://tr.wikipedia.org/wiki/Ain%27t_I"
+  },
+  {
+   "sentences": 2,
+   "title": "Atlılar",
+   "url": "https://tr.wikipedia.org/wiki/Atl%C4%B1lar"
+  },
+  {
+   "sentences": 19,
+   "title": "Per Petterson",
+   "url": "https://tr.wikipedia.org/wiki/Per_Petterson"
+  },
+  {
+   "sentences": 10,
+   "title": "Teneke kutu",
+   "url": "https://tr.wikipedia.org/wiki/Teneke_kutu"
+  },
+  {
+   "sentences": 25,
+   "title": "İstanbul Matematiksel Bilimler Merkezi",
+   "url": "https://tr.wikipedia.org/wiki/%C4%B0stanbul_Matematiksel_Bilimler_Merkezi"
+  },
+  {
+   "sentences": 4,
+   "title": "Nassau Adası",
+   "url": "https://tr.wikipedia.org/wiki/Nassau_Adas%C4%B1"
+  },
+  {
+   "sentences": 1,
+   "title": "La Algaba",
+   "url": "https://tr.wikipedia.org/wiki/La_Algaba"
+  },
+  {
+   "sentences": 9,
+   "title": "Madagaskar bayrağı",
+   "url": "https://tr.wikipedia.org/wiki/Madagaskar_bayra%C4%9F%C4%B1"
+  },
+  {
+   "sentences": 7,
+   "title": "169 Zelia",
+   "url": "https://tr.wikipedia.org/wiki/169_Zelia"
+  },
+  {
+   "sentences": 6,
+   "title": "Yazar tıkanıklığı",
+   "url": "https://tr.wikipedia.org/wiki/Yazar_t%C4%B1kan%C4%B1kl%C4%B1%C4%9F%C4%B1"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "tr",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 2798,
+ "wikipedia": "https://tr.wikipedia.org/"
+}

@@ -55,6 +55,11 @@ pub const MODEL_SOURCE: &str = "fasttext";
 /// `source` for an exclusive-word decision on `/v3/detect`.
 pub const LEXICON_SOURCE: &str = "lexicon";
 
+/// `source` for a decision the confusable-set discriminator made on `/v3/detect`.
+/// Named apart from `fasttext` because it is a different model over a different
+/// label set, and a caller debugging a misdetection needs to know which one ran.
+pub const DISCRIMINATOR_SOURCE: &str = "discriminator";
+
 /// The marker lexicon, built once per process.
 fn lexicon() -> &'static Lexicon {
     static LEXICON: OnceLock<Lexicon> = OnceLock::new();
@@ -102,7 +107,8 @@ impl Outcome {
 pub fn language_of(text: &str, restrict: Option<&[Lang]>, gates: &Gates) -> Outcome {
     let lexicon = lexicon();
     let model = lt::detect_model::bundled();
-    let candidates = detect::candidates(text, lexicon, model);
+    let refiner = lt::detect_refiner::bundled();
+    let candidates = detect::candidates(text, lexicon, model, refiner, gates);
     let candidates: Vec<Candidate> = candidates
         .into_iter()
         .filter(|candidate| restrict.is_none_or(|restrict| restrict.contains(&candidate.lang)))
@@ -115,10 +121,15 @@ pub fn language_of(text: &str, restrict: Option<&[Lang]>, gates: &Gates) -> Outc
 }
 
 /// `source` string for the v2 response.
+///
+/// Both statistical layers report `"ngram"`: that is the vocabulary
+/// LanguageTool's own API uses for this (`TextChecker.java:993-1033`), and both
+/// of ours are n-gram models. The v2 surface is a drop-in, so it does not grow a
+/// value its clients have never seen.
 pub fn v2_source(source: Source) -> &'static str {
     match source {
         Source::Lexicon => V2_LEXICON_SOURCE,
-        Source::Model => V2_MODEL_SOURCE,
+        Source::Model | Source::Discriminator => V2_MODEL_SOURCE,
     }
 }
 
@@ -127,6 +138,7 @@ pub fn v3_source(source: Source) -> &'static str {
     match source {
         Source::Lexicon => LEXICON_SOURCE,
         Source::Model => MODEL_SOURCE,
+        Source::Discriminator => DISCRIMINATOR_SOURCE,
     }
 }
 

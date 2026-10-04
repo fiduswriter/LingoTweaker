@@ -1,39 +1,39 @@
 Nordum dictionary build
-core words (wordlist + alternatives + additions): 1937 (+319 additions)
+core words (wordlist + alternatives + additions): 1940 (+319 additions)
 generated inflected forms (spec §4, dictionary.json paradigms):
   verb entries: 105
   noun entries: 149
-  adjective entries: 63
-  generated form variants added: 1960
+  adjective entries: 65
+  generated form variants added: 1982
 strict converted-source inventory (spec §4 morphology only, owner decision 2026-09-23):
-  classified_dropped: 47689
-  classified_kept: 212925
+  classified_dropped: 50082
+  classified_kept: 240118
   da_classified_forms: 815574
-  source_base_kept: 617552
+  source_base_kept: 585256
   source_non_simple_kept: 62705
-  source_redundant_kept: 19351
+  source_redundant_kept: 17944
   source_words_read: 1016567
-  sv_classified_forms: 263689
+  sv_classified_forms: 760141
   dropped spec-violating forms by category:
-    dropped_genitive_s: 20744
-    dropped_noun_definite_en: 819
-    dropped_noun_definite_et: 709
-    dropped_noun_grade_or_plural_a: 9026
+    dropped_genitive_s: 20314
+    dropped_noun_definite_en: 909
+    dropped_noun_definite_et: 797
+    dropped_noun_grade_or_plural_a: 10078
     dropped_noun_plural_ar_mismatch: 4
-    dropped_noun_plural_definite: 13980
-    dropped_noun_plural_er: 5747
-    dropped_noun_plural_or: 41
-    dropped_verb_infinitive_a: 9
-    dropped_verb_participle_ande: 465
-    dropped_verb_participle_ende_mismatch: 37
-    dropped_verb_passive_s: 4595
-    dropped_verb_past_ade: 1
+    dropped_noun_plural_definite: 16682
+    dropped_noun_plural_er: 6752
+    dropped_noun_plural_or: 38
+    dropped_verb_infinitive_a: 6
+    dropped_verb_participle_ande: 20
+    dropped_verb_participle_ende_mismatch: 26
+    dropped_verb_passive_s: 4675
+    dropped_verb_past_ade: 4
     dropped_verb_past_ede_mismatch: 6
-    dropped_verb_present_ar: 113
-    dropped_verb_present_er_mismatch: 25
+    dropped_verb_present_ar: 102
+    dropped_verb_present_er_mismatch: 26
     dropped_verb_supine_at: 11
-    dropped_verb_supine_et_mismatch: 13
+    dropped_verb_supine_et_mismatch: 12
 source words read: 1016567
-core variants written: 1963
-dictionary entries written: 1580024
+core variants written: 1966
+dictionary entries written: 1869240
 sources: nb_NO.dic, da_DK.dic, sv_SE.dic

@@ -1,0 +1,2005 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://ca.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 4,
+   "title": "Pere Sust",
+   "url": "https://ca.wikipedia.org/wiki/Pere_Sust"
+  },
+  {
+   "sentences": 25,
+   "title": "Revolta iemenita del Valiat de l'Àndalus",
+   "url": "https://ca.wikipedia.org/wiki/Revolta_iemenita_del_Valiat_de_l%27%C3%80ndalus"
+  },
+  {
+   "sentences": 10,
+   "title": "Vocal tancada posterior arrodonida",
+   "url": "https://ca.wikipedia.org/wiki/Vocal_tancada_posterior_arrodonida"
+  },
+  {
+   "sentences": 3,
+   "title": "Teerasil Dangda",
+   "url": "https://ca.wikipedia.org/wiki/Teerasil_Dangda"
+  },
+  {
+   "sentences": 2,
+   "title": "Cantó de Sant Salvaur",
+   "url": "https://ca.wikipedia.org/wiki/Cant%C3%B3_de_Sant_Salvaur"
+  },
+  {
+   "sentences": 13,
+   "title": "Pietro Abbati Marescotti",
+   "url": "https://ca.wikipedia.org/wiki/Pietro_Abbati_Marescotti"
+  },
+  {
+   "sentences": 3,
+   "title": "Clostera",
+   "url": "https://ca.wikipedia.org/wiki/Clostera"
+  },
+  {
+   "sentences": 6,
+   "title": "(1966) Tristany",
+   "url": "https://ca.wikipedia.org/wiki/%281966%29_Tristany"
+  },
+  {
+   "sentences": 14,
+   "title": "Font dels Llaminers",
+   "url": "https://ca.wikipedia.org/wiki/Font_dels_Llaminers"
+  },
+  {
+   "sentences": 11,
+   "title": "Cafè de Mar",
+   "url": "https://ca.wikipedia.org/wiki/Caf%C3%A8_de_Mar"
+  },
+  {
+   "sentences": 4,
+   "title": "Alfonso de Baena",
+   "url": "https://ca.wikipedia.org/wiki/Alfonso_de_Baena"
+  },
+  {
+   "sentences": 15,
+   "title": "William Daniel Conybeare",
+   "url": "https://ca.wikipedia.org/wiki/William_Daniel_Conybeare"
+  },
+  {
+   "sentences": 5,
+   "title": "Abilio Barbero de Aguilera",
+   "url": "https://ca.wikipedia.org/wiki/Abilio_Barbero_de_Aguilera"
+  },
+  {
+   "sentences": 25,
+   "title": "Astèrix i el griu",
+   "url": "https://ca.wikipedia.org/wiki/Ast%C3%A8rix_i_el_griu"
+  },
+  {
+   "sentences": 2,
+   "title": "Ocell del paradís de Rothschild",
+   "url": "https://ca.wikipedia.org/wiki/Ocell_del_parad%C3%ADs_de_Rothschild"
+  },
+  {
+   "sentences": 12,
+   "title": "East Moriches",
+   "url": "https://ca.wikipedia.org/wiki/East_Moriches"
+  },
+  {
+   "sentences": 15,
+   "title": "Květa Pacovská",
+   "url": "https://ca.wikipedia.org/wiki/Kv%C4%9Bta_Pacovsk%C3%A1"
+  },
+  {
+   "sentences": 4,
+   "title": "Merchtem",
+   "url": "https://ca.wikipedia.org/wiki/Merchtem"
+  },
+  {
+   "sentences": 5,
+   "title": "Oscil·lació de Kuznets",
+   "url": "https://ca.wikipedia.org/wiki/Oscil%C2%B7laci%C3%B3_de_Kuznets"
+  },
+  {
+   "sentences": 3,
+   "title": "Edward Wilson",
+   "url": "https://ca.wikipedia.org/wiki/Edward_Wilson"
+  },
+  {
+   "sentences": 4,
+   "title": "Winterthur Group",
+   "url": "https://ca.wikipedia.org/wiki/Winterthur_Group"
+  },
+  {
+   "sentences": 10,
+   "title": "Margalida Solivellas i Lladó",
+   "url": "https://ca.wikipedia.org/wiki/Margalida_Solivellas_i_Llad%C3%B3"
+  },
+  {
+   "sentences": 8,
+   "title": "Federació Catalana Pro Persones amb Disminució Psíquica",
+   "url": "https://ca.wikipedia.org/wiki/Federaci%C3%B3_Catalana_Pro_Persones_amb_Disminuci%C3%B3_Ps%C3%ADquica"
+  },
+  {
+   "sentences": 13,
+   "title": "Mugilogobius",
+   "url": "https://ca.wikipedia.org/wiki/Mugilogobius"
+  },
+  {
+   "sentences": 8,
+   "title": "Lluc Mesquida i Rosselló",
+   "url": "https://ca.wikipedia.org/wiki/Lluc_Mesquida_i_Rossell%C3%B3"
+  },
+  {
+   "sentences": 3,
+   "title": "Carles Roca i Portolés",
+   "url": "https://ca.wikipedia.org/wiki/Carles_Roca_i_Portol%C3%A9s"
+  },
+  {
+   "sentences": 1,
+   "title": "Selon (Provença)",
+   "url": "https://ca.wikipedia.org/wiki/Selon_%28Proven%C3%A7a%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Celtis africana",
+   "url": "https://ca.wikipedia.org/wiki/Celtis_africana"
+  },
+  {
+   "sentences": 17,
+   "title": "La Malmaison",
+   "url": "https://ca.wikipedia.org/wiki/La_Malmaison"
+  },
+  {
+   "sentences": 17,
+   "title": "Andròmaca (desambiguació)",
+   "url": "https://ca.wikipedia.org/wiki/Andr%C3%B2maca_%28desambiguaci%C3%B3%29"
+  },
+  {
+   "sentences": 10,
+   "title": "SI-35",
+   "url": "https://ca.wikipedia.org/wiki/SI-35"
+  },
+  {
+   "sentences": 9,
+   "title": "Bandera d'Ontario",
+   "url": "https://ca.wikipedia.org/wiki/Bandera_d%27Ontario"
+  },
+  {
+   "sentences": 3,
+   "title": "Escriptura lineal",
+   "url": "https://ca.wikipedia.org/wiki/Escriptura_lineal"
+  },
+  {
+   "sentences": 4,
+   "title": "Autoexperimentació",
+   "url": "https://ca.wikipedia.org/wiki/Autoexperimentaci%C3%B3"
+  },
+  {
+   "sentences": 12,
+   "title": "Millersburg (Oregon)",
+   "url": "https://ca.wikipedia.org/wiki/Millersburg_%28Oregon%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Agenda 21 de la cultura",
+   "url": "https://ca.wikipedia.org/wiki/Agenda_21_de_la_cultura"
+  },
+  {
+   "sentences": 3,
+   "title": "Codex Basilensis",
+   "url": "https://ca.wikipedia.org/wiki/Codex_Basilensis"
+  },
+  {
+   "sentences": 15,
+   "title": "Banc de Reserva de l'Índia",
+   "url": "https://ca.wikipedia.org/wiki/Banc_de_Reserva_de_l%27%C3%8Dndia"
+  },
+  {
+   "sentences": 9,
+   "title": "Convent de Sant Agustí",
+   "url": "https://ca.wikipedia.org/wiki/Convent_de_Sant_Agust%C3%AD"
+  },
+  {
+   "sentences": 1,
+   "title": "Cantó d'Auxerre-Est",
+   "url": "https://ca.wikipedia.org/wiki/Cant%C3%B3_d%27Auxerre-Est"
+  },
+  {
+   "sentences": 1,
+   "title": "Nogay",
+   "url": "https://ca.wikipedia.org/wiki/Nogay"
+  },
+  {
+   "sentences": 8,
+   "title": "Torre de l'Oriola",
+   "url": "https://ca.wikipedia.org/wiki/Torre_de_l%27Oriola"
+  },
+  {
+   "sentences": 11,
+   "title": "Don't Change Your Husband",
+   "url": "https://ca.wikipedia.org/wiki/Don%27t_Change_Your_Husband"
+  },
+  {
+   "sentences": 6,
+   "title": "Apofènia",
+   "url": "https://ca.wikipedia.org/wiki/Apof%C3%A8nia"
+  },
+  {
+   "sentences": 15,
+   "title": "Lanio",
+   "url": "https://ca.wikipedia.org/wiki/Lanio"
+  },
+  {
+   "sentences": 15,
+   "title": "Felice Casorati",
+   "url": "https://ca.wikipedia.org/wiki/Felice_Casorati"
+  },
+  {
+   "sentences": 25,
+   "title": "Silly Symphonies",
+   "url": "https://ca.wikipedia.org/wiki/Silly_Symphonies"
+  },
+  {
+   "sentences": 2,
+   "title": "Memorial Andrzej Trochanowski",
+   "url": "https://ca.wikipedia.org/wiki/Memorial_Andrzej_Trochanowski"
+  },
+  {
+   "sentences": 5,
+   "title": "Speer",
+   "url": "https://ca.wikipedia.org/wiki/Speer"
+  },
+  {
+   "sentences": 6,
+   "title": "Laia Manresa Casals",
+   "url": "https://ca.wikipedia.org/wiki/Laia_Manresa_Casals"
+  },
+  {
+   "sentences": 1,
+   "title": "Can Fortuny (Arenys de Munt)",
+   "url": "https://ca.wikipedia.org/wiki/Can_Fortuny_%28Arenys_de_Munt%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Cogulló de Sant Quiri",
+   "url": "https://ca.wikipedia.org/wiki/Cogull%C3%B3_de_Sant_Quiri"
+  },
+  {
+   "sentences": 5,
+   "title": "Mission: Impossible temporada 1",
+   "url": "https://ca.wikipedia.org/wiki/Mission%3A_Impossible_temporada_1"
+  },
+  {
+   "sentences": 11,
+   "title": "Gary Webb",
+   "url": "https://ca.wikipedia.org/wiki/Gary_Webb"
+  },
+  {
+   "sentences": 4,
+   "title": "Cerdanya (desambiguació)",
+   "url": "https://ca.wikipedia.org/wiki/Cerdanya_%28desambiguaci%C3%B3%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Operació Währung",
+   "url": "https://ca.wikipedia.org/wiki/Operaci%C3%B3_W%C3%A4hrung"
+  },
+  {
+   "sentences": 1,
+   "title": "Colom blau de les Seychelles",
+   "url": "https://ca.wikipedia.org/wiki/Colom_blau_de_les_Seychelles"
+  },
+  {
+   "sentences": 25,
+   "title": "Control biològic de plagues",
+   "url": "https://ca.wikipedia.org/wiki/Control_biol%C3%B2gic_de_plagues"
+  },
+  {
+   "sentences": 2,
+   "title": "William Dally",
+   "url": "https://ca.wikipedia.org/wiki/William_Dally"
+  },
+  {
+   "sentences": 25,
+   "title": "Campionat del món d'escacs de 2016",
+   "url": "https://ca.wikipedia.org/wiki/Campionat_del_m%C3%B3n_d%27escacs_de_2016"
+  },
+  {
+   "sentences": 4,
+   "title": "William McDonnell",
+   "url": "https://ca.wikipedia.org/wiki/William_McDonnell"
+  },
+  {
+   "sentences": 1,
+   "title": "Mario Lega",
+   "url": "https://ca.wikipedia.org/wiki/Mario_Lega"
+  },
+  {
+   "sentences": 12,
+   "title": "Leon Brittan",
+   "url": "https://ca.wikipedia.org/wiki/Leon_Brittan"
+  },
+  {
+   "sentences": 15,
+   "title": "Tumbes (ciutat)",
+   "url": "https://ca.wikipedia.org/wiki/Tumbes_%28ciutat%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Barranc de Comaltes",
+   "url": "https://ca.wikipedia.org/wiki/Barranc_de_Comaltes"
+  },
+  {
+   "sentences": 25,
+   "title": "Anastasi I Dicor",
+   "url": "https://ca.wikipedia.org/wiki/Anastasi_I_Dicor"
+  },
+  {
+   "sentences": 7,
+   "title": "Hieri (prefecte del pretori)",
+   "url": "https://ca.wikipedia.org/wiki/Hieri_%28prefecte_del_pretori%29"
+  },
+  {
+   "sentences": 16,
+   "title": "Lily Wu",
+   "url": "https://ca.wikipedia.org/wiki/Lily_Wu"
+  },
+  {
+   "sentences": 22,
+   "title": "Eşkıya",
+   "url": "https://ca.wikipedia.org/wiki/E%C5%9Fk%C4%B1ya"
+  },
+  {
+   "sentences": 15,
+   "title": "Alan MacDiarmid",
+   "url": "https://ca.wikipedia.org/wiki/Alan_MacDiarmid"
+  },
+  {
+   "sentences": 11,
+   "title": "Reconeixement d'entitats nomenades",
+   "url": "https://ca.wikipedia.org/wiki/Reconeixement_d%27entitats_nomenades"
+  },
+  {
+   "sentences": 7,
+   "title": "Blanca Paloma",
+   "url": "https://ca.wikipedia.org/wiki/Blanca_Paloma"
+  },
+  {
+   "sentences": 10,
+   "title": "Pittsburg (Oklahoma)",
+   "url": "https://ca.wikipedia.org/wiki/Pittsburg_%28Oklahoma%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Luyten 726-8",
+   "url": "https://ca.wikipedia.org/wiki/Luyten_726-8"
+  },
+  {
+   "sentences": 10,
+   "title": "Charles Arendt",
+   "url": "https://ca.wikipedia.org/wiki/Charles_Arendt"
+  },
+  {
+   "sentences": 25,
+   "title": "Jacques Léonard",
+   "url": "https://ca.wikipedia.org/wiki/Jacques_L%C3%A9onard"
+  },
+  {
+   "sentences": 8,
+   "title": "Ferroflex",
+   "url": "https://ca.wikipedia.org/wiki/Ferroflex"
+  },
+  {
+   "sentences": 6,
+   "title": "Acetat d'isoamil",
+   "url": "https://ca.wikipedia.org/wiki/Acetat_d%27isoamil"
+  },
+  {
+   "sentences": 23,
+   "title": "Festival de Viña del Mar",
+   "url": "https://ca.wikipedia.org/wiki/Festival_de_Vi%C3%B1a_del_Mar"
+  },
+  {
+   "sentences": 13,
+   "title": "Biblioteca Montbau-Albert Pérez Baró",
+   "url": "https://ca.wikipedia.org/wiki/Biblioteca_Montbau-Albert_P%C3%A9rez_Bar%C3%B3"
+  },
+  {
+   "sentences": 1,
+   "title": "Iakovlevo (Tula)",
+   "url": "https://ca.wikipedia.org/wiki/Iakovlevo_%28Tula%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Riscle (instrument musical)",
+   "url": "https://ca.wikipedia.org/wiki/Riscle_%28instrument_musical%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Almena (Wisconsin)",
+   "url": "https://ca.wikipedia.org/wiki/Almena_%28Wisconsin%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Eusebi de Puig i de Conill",
+   "url": "https://ca.wikipedia.org/wiki/Eusebi_de_Puig_i_de_Conill"
+  },
+  {
+   "sentences": 2,
+   "title": "Massiena",
+   "url": "https://ca.wikipedia.org/wiki/Massiena"
+  },
+  {
+   "sentences": 15,
+   "title": "Somebody Up There Likes Me",
+   "url": "https://ca.wikipedia.org/wiki/Somebody_Up_There_Likes_Me"
+  },
+  {
+   "sentences": 11,
+   "title": "El nostre últim estiu a Escòcia",
+   "url": "https://ca.wikipedia.org/wiki/El_nostre_%C3%BAltim_estiu_a_Esc%C3%B2cia"
+  },
+  {
+   "sentences": 25,
+   "title": "K.d. lang",
+   "url": "https://ca.wikipedia.org/wiki/K.d._lang"
+  },
+  {
+   "sentences": 2,
+   "title": "Illots de Menorca",
+   "url": "https://ca.wikipedia.org/wiki/Illots_de_Menorca"
+  },
+  {
+   "sentences": 4,
+   "title": "Miniopterus approximatus",
+   "url": "https://ca.wikipedia.org/wiki/Miniopterus_approximatus"
+  },
+  {
+   "sentences": 4,
+   "title": "Antoni M. Ballester i Puchalt",
+   "url": "https://ca.wikipedia.org/wiki/Antoni_M._Ballester_i_Puchalt"
+  },
+  {
+   "sentences": 1,
+   "title": "Plouédern",
+   "url": "https://ca.wikipedia.org/wiki/Plou%C3%A9dern"
+  },
+  {
+   "sentences": 12,
+   "title": "Riera del Pare Fita",
+   "url": "https://ca.wikipedia.org/wiki/Riera_del_Pare_Fita"
+  },
+  {
+   "sentences": 12,
+   "title": "Torre de Ferragut",
+   "url": "https://ca.wikipedia.org/wiki/Torre_de_Ferragut"
+  },
+  {
+   "sentences": 2,
+   "title": "Ernesto Mora Ramírez",
+   "url": "https://ca.wikipedia.org/wiki/Ernesto_Mora_Ram%C3%ADrez"
+  },
+  {
+   "sentences": 2,
+   "title": "Gynacantha chaplini",
+   "url": "https://ca.wikipedia.org/wiki/Gynacantha_chaplini"
+  },
+  {
+   "sentences": 16,
+   "title": "Lipit-Ixtar",
+   "url": "https://ca.wikipedia.org/wiki/Lipit-Ixtar"
+  },
+  {
+   "sentences": 11,
+   "title": "Filomètor",
+   "url": "https://ca.wikipedia.org/wiki/Filom%C3%A8tor"
+  },
+  {
+   "sentences": 9,
+   "title": "Basitonia",
+   "url": "https://ca.wikipedia.org/wiki/Basitonia"
+  },
+  {
+   "sentences": 25,
+   "title": "Ebenista",
+   "url": "https://ca.wikipedia.org/wiki/Ebenista"
+  },
+  {
+   "sentences": 13,
+   "title": "BAII",
+   "url": "https://ca.wikipedia.org/wiki/BAII"
+  },
+  {
+   "sentences": 5,
+   "title": "Coccolitovirus",
+   "url": "https://ca.wikipedia.org/wiki/Coccolitovirus"
+  },
+  {
+   "sentences": 17,
+   "title": "The Big Cartoon DataBase",
+   "url": "https://ca.wikipedia.org/wiki/The_Big_Cartoon_DataBase"
+  },
+  {
+   "sentences": 25,
+   "title": "Regne de Sèrbia (medieval)",
+   "url": "https://ca.wikipedia.org/wiki/Regne_de_S%C3%A8rbia_%28medieval%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Josep Soler i Espalter",
+   "url": "https://ca.wikipedia.org/wiki/Josep_Soler_i_Espalter"
+  },
+  {
+   "sentences": 3,
+   "title": "Creu d'en Boquet",
+   "url": "https://ca.wikipedia.org/wiki/Creu_d%27en_Boquet"
+  },
+  {
+   "sentences": 15,
+   "title": "Meteorit Allende",
+   "url": "https://ca.wikipedia.org/wiki/Meteorit_Allende"
+  },
+  {
+   "sentences": 5,
+   "title": "Fabens",
+   "url": "https://ca.wikipedia.org/wiki/Fabens"
+  },
+  {
+   "sentences": 11,
+   "title": "Boost (biblioteca C++)",
+   "url": "https://ca.wikipedia.org/wiki/Boost_%28biblioteca_C%2B%2B%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Carlos Camps Burón",
+   "url": "https://ca.wikipedia.org/wiki/Carlos_Camps_Bur%C3%B3n"
+  },
+  {
+   "sentences": 10,
+   "title": "Le Fréty",
+   "url": "https://ca.wikipedia.org/wiki/Le_Fr%C3%A9ty"
+  },
+  {
+   "sentences": 10,
+   "title": "Rendibilitat a preu corrent",
+   "url": "https://ca.wikipedia.org/wiki/Rendibilitat_a_preu_corrent"
+  },
+  {
+   "sentences": 5,
+   "title": "Publi Clodi Pulcre (pretor 31 aC)",
+   "url": "https://ca.wikipedia.org/wiki/Publi_Clodi_Pulcre_%28pretor_31_aC%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Neumann (cràter)",
+   "url": "https://ca.wikipedia.org/wiki/Neumann_%28cr%C3%A0ter%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Guingamp",
+   "url": "https://ca.wikipedia.org/wiki/Guingamp"
+  },
+  {
+   "sentences": 16,
+   "title": "Tremsbüttel",
+   "url": "https://ca.wikipedia.org/wiki/Tremsb%C3%BCttel"
+  },
+  {
+   "sentences": 6,
+   "title": "Hyde & Jekill",
+   "url": "https://ca.wikipedia.org/wiki/Hyde_%26_Jekill"
+  },
+  {
+   "sentences": 6,
+   "title": "Luisa Valenzuela",
+   "url": "https://ca.wikipedia.org/wiki/Luisa_Valenzuela"
+  },
+  {
+   "sentences": 10,
+   "title": "Montferrand e la Fara",
+   "url": "https://ca.wikipedia.org/wiki/Montferrand_e_la_Fara"
+  },
+  {
+   "sentences": 1,
+   "title": "Puig Pedrós (Pals)",
+   "url": "https://ca.wikipedia.org/wiki/Puig_Pedr%C3%B3s_%28Pals%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Jammu and Kashmir Ikhwan",
+   "url": "https://ca.wikipedia.org/wiki/Jammu_and_Kashmir_Ikhwan"
+  },
+  {
+   "sentences": 24,
+   "title": "Lluís Cuspinera i Font",
+   "url": "https://ca.wikipedia.org/wiki/Llu%C3%ADs_Cuspinera_i_Font"
+  },
+  {
+   "sentences": 5,
+   "title": "Margarida de Ribelles",
+   "url": "https://ca.wikipedia.org/wiki/Margarida_de_Ribelles"
+  },
+  {
+   "sentences": 11,
+   "title": "KV44",
+   "url": "https://ca.wikipedia.org/wiki/KV44"
+  },
+  {
+   "sentences": 6,
+   "title": "(1889) Pakhmutova",
+   "url": "https://ca.wikipedia.org/wiki/%281889%29_Pakhmutova"
+  },
+  {
+   "sentences": 25,
+   "title": "TTN-AS1",
+   "url": "https://ca.wikipedia.org/wiki/TTN-AS1"
+  },
+  {
+   "sentences": 11,
+   "title": "Nielles-lès-Bléquin",
+   "url": "https://ca.wikipedia.org/wiki/Nielles-l%C3%A8s-Bl%C3%A9quin"
+  },
+  {
+   "sentences": 23,
+   "title": "Our Boys",
+   "url": "https://ca.wikipedia.org/wiki/Our_Boys"
+  },
+  {
+   "sentences": 1,
+   "title": "La Muntanya (Masdenverge)",
+   "url": "https://ca.wikipedia.org/wiki/La_Muntanya_%28Masdenverge%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Pathé Ciss",
+   "url": "https://ca.wikipedia.org/wiki/Path%C3%A9_Ciss"
+  },
+  {
+   "sentences": 10,
+   "title": "Asafa Powell",
+   "url": "https://ca.wikipedia.org/wiki/Asafa_Powell"
+  },
+  {
+   "sentences": 2,
+   "title": "Cent trenta-cinc",
+   "url": "https://ca.wikipedia.org/wiki/Cent_trenta-cinc"
+  },
+  {
+   "sentences": 9,
+   "title": "Number Thirteen",
+   "url": "https://ca.wikipedia.org/wiki/Number_Thirteen"
+  },
+  {
+   "sentences": 1,
+   "title": "Grup socialista (Assemblea nacional francesa)",
+   "url": "https://ca.wikipedia.org/wiki/Grup_socialista_%28Assemblea_nacional_francesa%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Rei d'Astúries",
+   "url": "https://ca.wikipedia.org/wiki/Rei_d%27Ast%C3%BAries"
+  },
+  {
+   "sentences": 7,
+   "title": "Coelorinchus denticulatus",
+   "url": "https://ca.wikipedia.org/wiki/Coelorinchus_denticulatus"
+  },
+  {
+   "sentences": 4,
+   "title": "Consell General del Cher",
+   "url": "https://ca.wikipedia.org/wiki/Consell_General_del_Cher"
+  },
+  {
+   "sentences": 3,
+   "title": "WIG 20",
+   "url": "https://ca.wikipedia.org/wiki/WIG_20"
+  },
+  {
+   "sentences": 1,
+   "title": "Can Teixidor (la Vall de Bianya)",
+   "url": "https://ca.wikipedia.org/wiki/Can_Teixidor_%28la_Vall_de_Bianya%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Can Torrella (Castellar del Vallès)",
+   "url": "https://ca.wikipedia.org/wiki/Can_Torrella_%28Castellar_del_Vall%C3%A8s%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Pierre Guichot",
+   "url": "https://ca.wikipedia.org/wiki/Pierre_Guichot"
+  },
+  {
+   "sentences": 5,
+   "title": "Mikkel Hansen",
+   "url": "https://ca.wikipedia.org/wiki/Mikkel_Hansen"
+  },
+  {
+   "sentences": 11,
+   "title": "Acaci de Berea",
+   "url": "https://ca.wikipedia.org/wiki/Acaci_de_Berea"
+  },
+  {
+   "sentences": 4,
+   "title": "Freddie Mac",
+   "url": "https://ca.wikipedia.org/wiki/Freddie_Mac"
+  },
+  {
+   "sentences": 8,
+   "title": "ATP World Tour Finals 2016",
+   "url": "https://ca.wikipedia.org/wiki/ATP_World_Tour_Finals_2016"
+  },
+  {
+   "sentences": 17,
+   "title": "Ludwig Reichenbach",
+   "url": "https://ca.wikipedia.org/wiki/Ludwig_Reichenbach"
+  },
+  {
+   "sentences": 9,
+   "title": "Villars-Saint-Georges",
+   "url": "https://ca.wikipedia.org/wiki/Villars-Saint-Georges"
+  },
+  {
+   "sentences": 6,
+   "title": "Pristerognathus",
+   "url": "https://ca.wikipedia.org/wiki/Pristerognathus"
+  },
+  {
+   "sentences": 6,
+   "title": "El perdó (pel·lícula de 2020)",
+   "url": "https://ca.wikipedia.org/wiki/El_perd%C3%B3_%28pel%C2%B7l%C3%ADcula_de_2020%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Luis Sáenz Peña",
+   "url": "https://ca.wikipedia.org/wiki/Luis_S%C3%A1enz_Pe%C3%B1a"
+  },
+  {
+   "sentences": 10,
+   "title": "Carles Martell d'Anjou",
+   "url": "https://ca.wikipedia.org/wiki/Carles_Martell_d%27Anjou"
+  },
+  {
+   "sentences": 10,
+   "title": "Jarnioux",
+   "url": "https://ca.wikipedia.org/wiki/Jarnioux"
+  },
+  {
+   "sentences": 2,
+   "title": "Riaguas de San Bartolomé",
+   "url": "https://ca.wikipedia.org/wiki/Riaguas_de_San_Bartolom%C3%A9"
+  },
+  {
+   "sentences": 2,
+   "title": "Moualine el Ghaba",
+   "url": "https://ca.wikipedia.org/wiki/Moualine_el_Ghaba"
+  },
+  {
+   "sentences": 2,
+   "title": "Salens",
+   "url": "https://ca.wikipedia.org/wiki/Salens"
+  },
+  {
+   "sentences": 25,
+   "title": "Bombardeig de Durango",
+   "url": "https://ca.wikipedia.org/wiki/Bombardeig_de_Durango"
+  },
+  {
+   "sentences": 6,
+   "title": "Kim Adams",
+   "url": "https://ca.wikipedia.org/wiki/Kim_Adams"
+  },
+  {
+   "sentences": 18,
+   "title": "White Desert",
+   "url": "https://ca.wikipedia.org/wiki/White_Desert"
+  },
+  {
+   "sentences": 5,
+   "title": "Teatro Arniches (Madrid)",
+   "url": "https://ca.wikipedia.org/wiki/Teatro_Arniches_%28Madrid%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Formigueret de Dugand",
+   "url": "https://ca.wikipedia.org/wiki/Formigueret_de_Dugand"
+  },
+  {
+   "sentences": 9,
+   "title": "L'enigma del xic croqueta",
+   "url": "https://ca.wikipedia.org/wiki/L%27enigma_del_xic_croqueta"
+  },
+  {
+   "sentences": 3,
+   "title": "Sant Fermí",
+   "url": "https://ca.wikipedia.org/wiki/Sant_Ferm%C3%AD"
+  },
+  {
+   "sentences": 1,
+   "title": "Vaux-en-Pré",
+   "url": "https://ca.wikipedia.org/wiki/Vaux-en-Pr%C3%A9"
+  },
+  {
+   "sentences": 6,
+   "title": "Johann Martin Rubert",
+   "url": "https://ca.wikipedia.org/wiki/Johann_Martin_Rubert"
+  },
+  {
+   "sentences": 14,
+   "title": "Xocolata de les forces armades dels Estats Units",
+   "url": "https://ca.wikipedia.org/wiki/Xocolata_de_les_forces_armades_dels_Estats_Units"
+  },
+  {
+   "sentences": 2,
+   "title": "Charles Denny",
+   "url": "https://ca.wikipedia.org/wiki/Charles_Denny"
+  },
+  {
+   "sentences": 8,
+   "title": "Laertes Editorial",
+   "url": "https://ca.wikipedia.org/wiki/Laertes_Editorial"
+  },
+  {
+   "sentences": 6,
+   "title": "Tögrög",
+   "url": "https://ca.wikipedia.org/wiki/T%C3%B6gr%C3%B6g"
+  },
+  {
+   "sentences": 1,
+   "title": "Zelenga",
+   "url": "https://ca.wikipedia.org/wiki/Zelenga"
+  },
+  {
+   "sentences": 25,
+   "title": "Districte de Quetta",
+   "url": "https://ca.wikipedia.org/wiki/Districte_de_Quetta"
+  },
+  {
+   "sentences": 18,
+   "title": "Museu de Belles Arts d'Astúries",
+   "url": "https://ca.wikipedia.org/wiki/Museu_de_Belles_Arts_d%27Ast%C3%BAries"
+  },
+  {
+   "sentences": 3,
+   "title": "Swedish Open 2019",
+   "url": "https://ca.wikipedia.org/wiki/Swedish_Open_2019"
+  },
+  {
+   "sentences": 7,
+   "title": "Mocochinchi",
+   "url": "https://ca.wikipedia.org/wiki/Mocochinchi"
+  },
+  {
+   "sentences": 1,
+   "title": "Llista de peixos de Letònia",
+   "url": "https://ca.wikipedia.org/wiki/Llista_de_peixos_de_Let%C3%B2nia"
+  },
+  {
+   "sentences": 9,
+   "title": "Alberto II Pio de Savoia",
+   "url": "https://ca.wikipedia.org/wiki/Alberto_II_Pio_de_Savoia"
+  },
+  {
+   "sentences": 2,
+   "title": "AOH",
+   "url": "https://ca.wikipedia.org/wiki/AOH"
+  },
+  {
+   "sentences": 2,
+   "title": "Apollonia (albedo)",
+   "url": "https://ca.wikipedia.org/wiki/Apollonia_%28albedo%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Molí d'en Cabot",
+   "url": "https://ca.wikipedia.org/wiki/Mol%C3%AD_d%27en_Cabot"
+  },
+  {
+   "sentences": 8,
+   "title": "Una escuela en Cerro Hueso",
+   "url": "https://ca.wikipedia.org/wiki/Una_escuela_en_Cerro_Hueso"
+  },
+  {
+   "sentences": 8,
+   "title": "Institució Catalana de Genealogia i Heràldica",
+   "url": "https://ca.wikipedia.org/wiki/Instituci%C3%B3_Catalana_de_Genealogia_i_Her%C3%A0ldica"
+  },
+  {
+   "sentences": 22,
+   "title": "Viöl",
+   "url": "https://ca.wikipedia.org/wiki/Vi%C3%B6l"
+  },
+  {
+   "sentences": 1,
+   "title": "Botanítxne",
+   "url": "https://ca.wikipedia.org/wiki/Botan%C3%ADtxne"
+  },
+  {
+   "sentences": 18,
+   "title": "Simfonia núm. 34 (Mozart)",
+   "url": "https://ca.wikipedia.org/wiki/Simfonia_n%C3%BAm._34_%28Mozart%29"
+  },
+  {
+   "sentences": 11,
+   "title": "The Typerwriter",
+   "url": "https://ca.wikipedia.org/wiki/The_Typerwriter"
+  },
+  {
+   "sentences": 1,
+   "title": "Premi Tony a les millors orquestracions",
+   "url": "https://ca.wikipedia.org/wiki/Premi_Tony_a_les_millors_orquestracions"
+  },
+  {
+   "sentences": 4,
+   "title": "Temporada 1975-76 de l'NBA",
+   "url": "https://ca.wikipedia.org/wiki/Temporada_1975-76_de_l%27NBA"
+  },
+  {
+   "sentences": 1,
+   "title": "Roca Dreta",
+   "url": "https://ca.wikipedia.org/wiki/Roca_Dreta"
+  },
+  {
+   "sentences": 9,
+   "title": "Elisa Badia i Pons",
+   "url": "https://ca.wikipedia.org/wiki/Elisa_Badia_i_Pons"
+  },
+  {
+   "sentences": 5,
+   "title": "Tajpuri",
+   "url": "https://ca.wikipedia.org/wiki/Tajpuri"
+  },
+  {
+   "sentences": 9,
+   "title": "Epinephelus amblycephalus",
+   "url": "https://ca.wikipedia.org/wiki/Epinephelus_amblycephalus"
+  },
+  {
+   "sentences": 25,
+   "title": "Crisi portuguesa de 1383-1385",
+   "url": "https://ca.wikipedia.org/wiki/Crisi_portuguesa_de_1383-1385"
+  },
+  {
+   "sentences": 25,
+   "title": "Vinaròs",
+   "url": "https://ca.wikipedia.org/wiki/Vinar%C3%B2s"
+  },
+  {
+   "sentences": 13,
+   "title": "Centro (Rio de Janeiro)",
+   "url": "https://ca.wikipedia.org/wiki/Centro_%28Rio_de_Janeiro%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Miniopterus zapfei",
+   "url": "https://ca.wikipedia.org/wiki/Miniopterus_zapfei"
+  },
+  {
+   "sentences": 21,
+   "title": "Autocaracterització",
+   "url": "https://ca.wikipedia.org/wiki/Autocaracteritzaci%C3%B3"
+  },
+  {
+   "sentences": 6,
+   "title": "Walter Reinhardt",
+   "url": "https://ca.wikipedia.org/wiki/Walter_Reinhardt"
+  },
+  {
+   "sentences": 21,
+   "title": "Atletisme als Jocs Olímpics d'Estiu de 1896",
+   "url": "https://ca.wikipedia.org/wiki/Atletisme_als_Jocs_Ol%C3%ADmpics_d%27Estiu_de_1896"
+  },
+  {
+   "sentences": 7,
+   "title": "Leon Cooper",
+   "url": "https://ca.wikipedia.org/wiki/Leon_Cooper"
+  },
+  {
+   "sentences": 4,
+   "title": "Angola on the Lake",
+   "url": "https://ca.wikipedia.org/wiki/Angola_on_the_Lake"
+  },
+  {
+   "sentences": 6,
+   "title": "Grapevine",
+   "url": "https://ca.wikipedia.org/wiki/Grapevine"
+  },
+  {
+   "sentences": 25,
+   "title": "Juan Ibarrola Orueta",
+   "url": "https://ca.wikipedia.org/wiki/Juan_Ibarrola_Orueta"
+  },
+  {
+   "sentences": 15,
+   "title": "Santa Maria de Gàver (església vella)",
+   "url": "https://ca.wikipedia.org/wiki/Santa_Maria_de_G%C3%A0ver_%28esgl%C3%A9sia_vella%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Grantham (Nou Hampshire)",
+   "url": "https://ca.wikipedia.org/wiki/Grantham_%28Nou_Hampshire%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Nino (pel·lícula)",
+   "url": "https://ca.wikipedia.org/wiki/Nino_%28pel%C2%B7l%C3%ADcula%29"
+  },
+  {
+   "sentences": 25,
+   "title": "John Banks",
+   "url": "https://ca.wikipedia.org/wiki/John_Banks"
+  },
+  {
+   "sentences": 25,
+   "title": "Situació del català a la Catalunya del Nord",
+   "url": "https://ca.wikipedia.org/wiki/Situaci%C3%B3_del_catal%C3%A0_a_la_Catalunya_del_Nord"
+  },
+  {
+   "sentences": 2,
+   "title": "Rosariense Clube da Ribeira Grande",
+   "url": "https://ca.wikipedia.org/wiki/Rosariense_Clube_da_Ribeira_Grande"
+  },
+  {
+   "sentences": 25,
+   "title": "Peter Wells (director de cinema)",
+   "url": "https://ca.wikipedia.org/wiki/Peter_Wells_%28director_de_cinema%29"
+  },
+  {
+   "sentences": 10,
+   "title": "Policia (pel·lícula)",
+   "url": "https://ca.wikipedia.org/wiki/Policia_%28pel%C2%B7l%C3%ADcula%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Família jerònima",
+   "url": "https://ca.wikipedia.org/wiki/Fam%C3%ADlia_jer%C3%B2nima"
+  },
+  {
+   "sentences": 8,
+   "title": "Hipòlit Negre Olaria",
+   "url": "https://ca.wikipedia.org/wiki/Hip%C3%B2lit_Negre_Olaria"
+  },
+  {
+   "sentences": 6,
+   "title": "Trofeu Laigueglia 2019",
+   "url": "https://ca.wikipedia.org/wiki/Trofeu_Laigueglia_2019"
+  },
+  {
+   "sentences": 25,
+   "title": "Batalla de Sumi",
+   "url": "https://ca.wikipedia.org/wiki/Batalla_de_Sumi"
+  },
+  {
+   "sentences": 16,
+   "title": "Hongqi CA770",
+   "url": "https://ca.wikipedia.org/wiki/Hongqi_CA770"
+  },
+  {
+   "sentences": 6,
+   "title": "Trabucaires de Sant Antoni",
+   "url": "https://ca.wikipedia.org/wiki/Trabucaires_de_Sant_Antoni"
+  },
+  {
+   "sentences": 1,
+   "title": "Juan Esteban Pedernera",
+   "url": "https://ca.wikipedia.org/wiki/Juan_Esteban_Pedernera"
+  },
+  {
+   "sentences": 2,
+   "title": "Districte d'Edineț",
+   "url": "https://ca.wikipedia.org/wiki/Districte_d%27Edine%C8%9B"
+  },
+  {
+   "sentences": 6,
+   "title": "Jacques Yvon Ndolou",
+   "url": "https://ca.wikipedia.org/wiki/Jacques_Yvon_Ndolou"
+  },
+  {
+   "sentences": 1,
+   "title": "Tercer Pic Occidental de la Maladeta",
+   "url": "https://ca.wikipedia.org/wiki/Tercer_Pic_Occidental_de_la_Maladeta"
+  },
+  {
+   "sentences": 25,
+   "title": "Chinatown (pel·lícula)",
+   "url": "https://ca.wikipedia.org/wiki/Chinatown_%28pel%C2%B7l%C3%ADcula%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Espíntar d'Heraclea",
+   "url": "https://ca.wikipedia.org/wiki/Esp%C3%ADntar_d%27Heraclea"
+  },
+  {
+   "sentences": 25,
+   "title": "Envelliment de la població",
+   "url": "https://ca.wikipedia.org/wiki/Envelliment_de_la_poblaci%C3%B3"
+  },
+  {
+   "sentences": 2,
+   "title": "Cantó de Vièla d'Aura",
+   "url": "https://ca.wikipedia.org/wiki/Cant%C3%B3_de_Vi%C3%A8la_d%27Aura"
+  },
+  {
+   "sentences": 3,
+   "title": "El gronxador",
+   "url": "https://ca.wikipedia.org/wiki/El_gronxador"
+  },
+  {
+   "sentences": 25,
+   "title": "Joc de realitat alternativa",
+   "url": "https://ca.wikipedia.org/wiki/Joc_de_realitat_alternativa"
+  },
+  {
+   "sentences": 2,
+   "title": "Colebrook",
+   "url": "https://ca.wikipedia.org/wiki/Colebrook"
+  },
+  {
+   "sentences": 3,
+   "title": "Djamel Zidane",
+   "url": "https://ca.wikipedia.org/wiki/Djamel_Zidane"
+  },
+  {
+   "sentences": 14,
+   "title": "Josep Maria Cruzet i Sanfeliu",
+   "url": "https://ca.wikipedia.org/wiki/Josep_Maria_Cruzet_i_Sanfeliu"
+  },
+  {
+   "sentences": 3,
+   "title": "Intrum Stockholm Open 2019",
+   "url": "https://ca.wikipedia.org/wiki/Intrum_Stockholm_Open_2019"
+  },
+  {
+   "sentences": 25,
+   "title": "Negació lògica",
+   "url": "https://ca.wikipedia.org/wiki/Negaci%C3%B3_l%C3%B2gica"
+  },
+  {
+   "sentences": 1,
+   "title": "Cantó d'Attichy",
+   "url": "https://ca.wikipedia.org/wiki/Cant%C3%B3_d%27Attichy"
+  },
+  {
+   "sentences": 4,
+   "title": "Hammer Series",
+   "url": "https://ca.wikipedia.org/wiki/Hammer_Series"
+  },
+  {
+   "sentences": 6,
+   "title": "Hans Simonsson",
+   "url": "https://ca.wikipedia.org/wiki/Hans_Simonsson"
+  },
+  {
+   "sentences": 25,
+   "title": "Nacionalisme flamenc",
+   "url": "https://ca.wikipedia.org/wiki/Nacionalisme_flamenc"
+  },
+  {
+   "sentences": 18,
+   "title": "Hamdan bin Mohammed Al Maktoum",
+   "url": "https://ca.wikipedia.org/wiki/Hamdan_bin_Mohammed_Al_Maktoum"
+  },
+  {
+   "sentences": 5,
+   "title": "Beril·lita",
+   "url": "https://ca.wikipedia.org/wiki/Beril%C2%B7lita"
+  },
+  {
+   "sentences": 4,
+   "title": "Los Almogávares",
+   "url": "https://ca.wikipedia.org/wiki/Los_Almog%C3%A1vares"
+  },
+  {
+   "sentences": 14,
+   "title": "Kippumjo",
+   "url": "https://ca.wikipedia.org/wiki/Kippumjo"
+  },
+  {
+   "sentences": 25,
+   "title": "Modelatge 3D",
+   "url": "https://ca.wikipedia.org/wiki/Modelatge_3D"
+  },
+  {
+   "sentences": 4,
+   "title": "Elliston-Lafayette",
+   "url": "https://ca.wikipedia.org/wiki/Elliston-Lafayette"
+  },
+  {
+   "sentences": 3,
+   "title": "Torneig de Shenzhen 2016",
+   "url": "https://ca.wikipedia.org/wiki/Torneig_de_Shenzhen_2016"
+  },
+  {
+   "sentences": 8,
+   "title": "Aulet",
+   "url": "https://ca.wikipedia.org/wiki/Aulet"
+  },
+  {
+   "sentences": 23,
+   "title": "Ibero Gutiérrez",
+   "url": "https://ca.wikipedia.org/wiki/Ibero_Guti%C3%A9rrez"
+  },
+  {
+   "sentences": 25,
+   "title": "Acaill",
+   "url": "https://ca.wikipedia.org/wiki/Acaill"
+  },
+  {
+   "sentences": 8,
+   "title": "Julian Pölsler",
+   "url": "https://ca.wikipedia.org/wiki/Julian_P%C3%B6lsler"
+  },
+  {
+   "sentences": 11,
+   "title": "Vuillafans",
+   "url": "https://ca.wikipedia.org/wiki/Vuillafans"
+  },
+  {
+   "sentences": 11,
+   "title": "Vernadskiy (cràter)",
+   "url": "https://ca.wikipedia.org/wiki/Vernadskiy_%28cr%C3%A0ter%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Premis Butaca de 2024",
+   "url": "https://ca.wikipedia.org/wiki/Premis_Butaca_de_2024"
+  },
+  {
+   "sentences": 16,
+   "title": "Unió Duanera del Nord d'Alemanya",
+   "url": "https://ca.wikipedia.org/wiki/Uni%C3%B3_Duanera_del_Nord_d%27Alemanya"
+  },
+  {
+   "sentences": 25,
+   "title": "Periple de la Mar Eritrea",
+   "url": "https://ca.wikipedia.org/wiki/Periple_de_la_Mar_Eritrea"
+  },
+  {
+   "sentences": 4,
+   "title": "Gymnocypris eckloni",
+   "url": "https://ca.wikipedia.org/wiki/Gymnocypris_eckloni"
+  },
+  {
+   "sentences": 3,
+   "title": "Kempnyia oliverai",
+   "url": "https://ca.wikipedia.org/wiki/Kempnyia_oliverai"
+  },
+  {
+   "sentences": 10,
+   "title": "Scartella itajobi",
+   "url": "https://ca.wikipedia.org/wiki/Scartella_itajobi"
+  },
+  {
+   "sentences": 2,
+   "title": "Banská Belá",
+   "url": "https://ca.wikipedia.org/wiki/Bansk%C3%A1_Bel%C3%A1"
+  },
+  {
+   "sentences": 15,
+   "title": "Cristóbal Galán",
+   "url": "https://ca.wikipedia.org/wiki/Crist%C3%B3bal_Gal%C3%A1n"
+  },
+  {
+   "sentences": 2,
+   "title": "Bobsleigh als Jocs Olímpics d'Hivern de 1964",
+   "url": "https://ca.wikipedia.org/wiki/Bobsleigh_als_Jocs_Ol%C3%ADmpics_d%27Hivern_de_1964"
+  },
+  {
+   "sentences": 12,
+   "title": "Cantallops (Alt Penedès)",
+   "url": "https://ca.wikipedia.org/wiki/Cantallops_%28Alt_Pened%C3%A8s%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Vicenç Pina",
+   "url": "https://ca.wikipedia.org/wiki/Vicen%C3%A7_Pina"
+  },
+  {
+   "sentences": 15,
+   "title": "Museu del Mar de Santa Pola",
+   "url": "https://ca.wikipedia.org/wiki/Museu_del_Mar_de_Santa_Pola"
+  },
+  {
+   "sentences": 25,
+   "title": "Mòmies dels pantans",
+   "url": "https://ca.wikipedia.org/wiki/M%C3%B2mies_dels_pantans"
+  },
+  {
+   "sentences": 7,
+   "title": "Resolució 1026 del Consell de Seguretat de les Nacions Unides",
+   "url": "https://ca.wikipedia.org/wiki/Resoluci%C3%B3_1026_del_Consell_de_Seguretat_de_les_Nacions_Unides"
+  },
+  {
+   "sentences": 13,
+   "title": "Noël Martin Joseph de Necker",
+   "url": "https://ca.wikipedia.org/wiki/No%C3%ABl_Martin_Joseph_de_Necker"
+  },
+  {
+   "sentences": 10,
+   "title": "Usson-en-Forez",
+   "url": "https://ca.wikipedia.org/wiki/Usson-en-Forez"
+  },
+  {
+   "sentences": 10,
+   "title": "Sileas na Ceapaich",
+   "url": "https://ca.wikipedia.org/wiki/Sileas_na_Ceapaich"
+  },
+  {
+   "sentences": 10,
+   "title": "Creu d'Èvol",
+   "url": "https://ca.wikipedia.org/wiki/Creu_d%27%C3%88vol"
+  },
+  {
+   "sentences": 8,
+   "title": "Xadegan (Kohkiluye i Boyer Ahmad)",
+   "url": "https://ca.wikipedia.org/wiki/Xadegan_%28Kohkiluye_i_Boyer_Ahmad%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Isabela",
+   "url": "https://ca.wikipedia.org/wiki/Isabela"
+  },
+  {
+   "sentences": 3,
+   "title": "Endika Irigoien Bravo",
+   "url": "https://ca.wikipedia.org/wiki/Endika_Irigoien_Bravo"
+  },
+  {
+   "sentences": 19,
+   "title": "Villa Carlota (Tiana)",
+   "url": "https://ca.wikipedia.org/wiki/Villa_Carlota_%28Tiana%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Ferristrunzita",
+   "url": "https://ca.wikipedia.org/wiki/Ferristrunzita"
+  },
+  {
+   "sentences": 11,
+   "title": "Raven Row",
+   "url": "https://ca.wikipedia.org/wiki/Raven_Row"
+  },
+  {
+   "sentences": 3,
+   "title": "Promethei Rupes",
+   "url": "https://ca.wikipedia.org/wiki/Promethei_Rupes"
+  },
+  {
+   "sentences": 2,
+   "title": "Aldo Poy",
+   "url": "https://ca.wikipedia.org/wiki/Aldo_Poy"
+  },
+  {
+   "sentences": 17,
+   "title": "Joaquim Bassegoda i Amigó",
+   "url": "https://ca.wikipedia.org/wiki/Joaquim_Bassegoda_i_Amig%C3%B3"
+  },
+  {
+   "sentences": 10,
+   "title": "Ferran Olivella i Pons",
+   "url": "https://ca.wikipedia.org/wiki/Ferran_Olivella_i_Pons"
+  },
+  {
+   "sentences": 9,
+   "title": "Beurèira",
+   "url": "https://ca.wikipedia.org/wiki/Beur%C3%A8ira"
+  },
+  {
+   "sentences": 1,
+   "title": "Sent Alari d'Ausilhan",
+   "url": "https://ca.wikipedia.org/wiki/Sent_Alari_d%27Ausilhan"
+  },
+  {
+   "sentences": 5,
+   "title": "Joan Baptista I Malatesta de Sogliano",
+   "url": "https://ca.wikipedia.org/wiki/Joan_Baptista_I_Malatesta_de_Sogliano"
+  },
+  {
+   "sentences": 23,
+   "title": "Pica baptismal",
+   "url": "https://ca.wikipedia.org/wiki/Pica_baptismal"
+  },
+  {
+   "sentences": 4,
+   "title": "L'Exposition de 1900",
+   "url": "https://ca.wikipedia.org/wiki/L%27Exposition_de_1900"
+  },
+  {
+   "sentences": 15,
+   "title": "Asymbolus vincenti",
+   "url": "https://ca.wikipedia.org/wiki/Asymbolus_vincenti"
+  },
+  {
+   "sentences": 25,
+   "title": "Espeleologia",
+   "url": "https://ca.wikipedia.org/wiki/Espeleologia"
+  },
+  {
+   "sentences": 18,
+   "title": "Ca l'Artigas (la Pobla de Lillet)",
+   "url": "https://ca.wikipedia.org/wiki/Ca_l%27Artigas_%28la_Pobla_de_Lillet%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Ibrahim Ferrer",
+   "url": "https://ca.wikipedia.org/wiki/Ibrahim_Ferrer"
+  },
+  {
+   "sentences": 11,
+   "title": "Osteosarcoma",
+   "url": "https://ca.wikipedia.org/wiki/Osteosarcoma"
+  },
+  {
+   "sentences": 4,
+   "title": "Campionat del món de ciclisme en pista de 1963",
+   "url": "https://ca.wikipedia.org/wiki/Campionat_del_m%C3%B3n_de_ciclisme_en_pista_de_1963"
+  },
+  {
+   "sentences": 25,
+   "title": "Vicenç Llorca i Berrocal",
+   "url": "https://ca.wikipedia.org/wiki/Vicen%C3%A7_Llorca_i_Berrocal"
+  },
+  {
+   "sentences": 3,
+   "title": "Kálmán Hazai",
+   "url": "https://ca.wikipedia.org/wiki/K%C3%A1lm%C3%A1n_Hazai"
+  },
+  {
+   "sentences": 5,
+   "title": "NUbuntu",
+   "url": "https://ca.wikipedia.org/wiki/NUbuntu"
+  },
+  {
+   "sentences": 25,
+   "title": "Fest (historiador)",
+   "url": "https://ca.wikipedia.org/wiki/Fest_%28historiador%29"
+  },
+  {
+   "sentences": 13,
+   "title": "Chen Lijiao",
+   "url": "https://ca.wikipedia.org/wiki/Chen_Lijiao"
+  },
+  {
+   "sentences": 2,
+   "title": "Diamant maculat",
+   "url": "https://ca.wikipedia.org/wiki/Diamant_maculat"
+  },
+  {
+   "sentences": 25,
+   "title": "Ramon Bordas i Estragués",
+   "url": "https://ca.wikipedia.org/wiki/Ramon_Bordas_i_Estragu%C3%A9s"
+  },
+  {
+   "sentences": 25,
+   "title": "Lemni",
+   "url": "https://ca.wikipedia.org/wiki/Lemni"
+  },
+  {
+   "sentences": 2,
+   "title": "Arbali",
+   "url": "https://ca.wikipedia.org/wiki/Arbali"
+  },
+  {
+   "sentences": 3,
+   "title": "Nahal Tillah",
+   "url": "https://ca.wikipedia.org/wiki/Nahal_Tillah"
+  },
+  {
+   "sentences": 10,
+   "title": "Bruach na Frìthe",
+   "url": "https://ca.wikipedia.org/wiki/Bruach_na_Fr%C3%ACthe"
+  },
+  {
+   "sentences": 2,
+   "title": "Paramys",
+   "url": "https://ca.wikipedia.org/wiki/Paramys"
+  },
+  {
+   "sentences": 22,
+   "title": "Individu",
+   "url": "https://ca.wikipedia.org/wiki/Individu"
+  },
+  {
+   "sentences": 10,
+   "title": "Villamayor (Bulbuente)",
+   "url": "https://ca.wikipedia.org/wiki/Villamayor_%28Bulbuente%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Demoscene",
+   "url": "https://ca.wikipedia.org/wiki/Demoscene"
+  },
+  {
+   "sentences": 5,
+   "title": "Patrick McCue",
+   "url": "https://ca.wikipedia.org/wiki/Patrick_McCue"
+  },
+  {
+   "sentences": 7,
+   "title": "Escerdilaides",
+   "url": "https://ca.wikipedia.org/wiki/Escerdilaides"
+  },
+  {
+   "sentences": 2,
+   "title": "Sosnovka (Kursk)",
+   "url": "https://ca.wikipedia.org/wiki/Sosnovka_%28Kursk%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Gruny",
+   "url": "https://ca.wikipedia.org/wiki/Gruny"
+  },
+  {
+   "sentences": 3,
+   "title": "Valaliky",
+   "url": "https://ca.wikipedia.org/wiki/Valaliky"
+  },
+  {
+   "sentences": 11,
+   "title": "Erich Maechler",
+   "url": "https://ca.wikipedia.org/wiki/Erich_Maechler"
+  },
+  {
+   "sentences": 25,
+   "title": "Baptisme de Kíev",
+   "url": "https://ca.wikipedia.org/wiki/Baptisme_de_K%C3%ADev"
+  },
+  {
+   "sentences": 25,
+   "title": "Pacte de la Concòrdia",
+   "url": "https://ca.wikipedia.org/wiki/Pacte_de_la_Conc%C3%B2rdia"
+  },
+  {
+   "sentences": 16,
+   "title": "Herveu de Bretanya",
+   "url": "https://ca.wikipedia.org/wiki/Herveu_de_Bretanya"
+  },
+  {
+   "sentences": 9,
+   "title": "Boissy-le-Bois",
+   "url": "https://ca.wikipedia.org/wiki/Boissy-le-Bois"
+  },
+  {
+   "sentences": 3,
+   "title": "Eleccions legislatives malteses de 1996",
+   "url": "https://ca.wikipedia.org/wiki/Eleccions_legislatives_malteses_de_1996"
+  },
+  {
+   "sentences": 11,
+   "title": "Andrew Johnson",
+   "url": "https://ca.wikipedia.org/wiki/Andrew_Johnson"
+  },
+  {
+   "sentences": 1,
+   "title": "Camppendut",
+   "url": "https://ca.wikipedia.org/wiki/Camppendut"
+  },
+  {
+   "sentences": 4,
+   "title": "Ansonia mcgregori",
+   "url": "https://ca.wikipedia.org/wiki/Ansonia_mcgregori"
+  },
+  {
+   "sentences": 2,
+   "title": "Arthroleptella bicolor",
+   "url": "https://ca.wikipedia.org/wiki/Arthroleptella_bicolor"
+  },
+  {
+   "sentences": 9,
+   "title": "José Luis Geresta Mujika",
+   "url": "https://ca.wikipedia.org/wiki/Jos%C3%A9_Luis_Geresta_Mujika"
+  },
+  {
+   "sentences": 5,
+   "title": "Alex Howes",
+   "url": "https://ca.wikipedia.org/wiki/Alex_Howes"
+  },
+  {
+   "sentences": 7,
+   "title": "El rector",
+   "url": "https://ca.wikipedia.org/wiki/El_rector"
+  },
+  {
+   "sentences": 6,
+   "title": "Carpezici",
+   "url": "https://ca.wikipedia.org/wiki/Carpezici"
+  },
+  {
+   "sentences": 5,
+   "title": "Llinatge dels Bardaixí",
+   "url": "https://ca.wikipedia.org/wiki/Llinatge_dels_Bardaix%C3%AD"
+  },
+  {
+   "sentences": 6,
+   "title": "Badr Mohamed Mirza Bani Hammad",
+   "url": "https://ca.wikipedia.org/wiki/Badr_Mohamed_Mirza_Bani_Hammad"
+  },
+  {
+   "sentences": 3,
+   "title": "Expedició 32",
+   "url": "https://ca.wikipedia.org/wiki/Expedici%C3%B3_32"
+  },
+  {
+   "sentences": 25,
+   "title": "Irene Paredes Hernández",
+   "url": "https://ca.wikipedia.org/wiki/Irene_Paredes_Hern%C3%A1ndez"
+  },
+  {
+   "sentences": 25,
+   "title": "Guia GEMMA",
+   "url": "https://ca.wikipedia.org/wiki/Guia_GEMMA"
+  },
+  {
+   "sentences": 8,
+   "title": "Fentale",
+   "url": "https://ca.wikipedia.org/wiki/Fentale"
+  },
+  {
+   "sentences": 3,
+   "title": "Kaders",
+   "url": "https://ca.wikipedia.org/wiki/Kaders"
+  },
+  {
+   "sentences": 8,
+   "title": "Joaquina Bernuy y Valda",
+   "url": "https://ca.wikipedia.org/wiki/Joaquina_Bernuy_y_Valda"
+  },
+  {
+   "sentences": 6,
+   "title": "Eliseu Maria Coroli",
+   "url": "https://ca.wikipedia.org/wiki/Eliseu_Maria_Coroli"
+  },
+  {
+   "sentences": 21,
+   "title": "Can Tria de Mata",
+   "url": "https://ca.wikipedia.org/wiki/Can_Tria_de_Mata"
+  },
+  {
+   "sentences": 25,
+   "title": "Asun Casasola Pardo",
+   "url": "https://ca.wikipedia.org/wiki/Asun_Casasola_Pardo"
+  },
+  {
+   "sentences": 6,
+   "title": "Valeri Harpocració",
+   "url": "https://ca.wikipedia.org/wiki/Valeri_Harpocraci%C3%B3"
+  },
+  {
+   "sentences": 25,
+   "title": "Nannostomus beckfordi",
+   "url": "https://ca.wikipedia.org/wiki/Nannostomus_beckfordi"
+  },
+  {
+   "sentences": 4,
+   "title": "Selecció de futbol de Papua Nova Guinea",
+   "url": "https://ca.wikipedia.org/wiki/Selecci%C3%B3_de_futbol_de_Papua_Nova_Guinea"
+  },
+  {
+   "sentences": 5,
+   "title": "Helmuth Johannsen",
+   "url": "https://ca.wikipedia.org/wiki/Helmuth_Johannsen"
+  },
+  {
+   "sentences": 3,
+   "title": "Roure de Bancells",
+   "url": "https://ca.wikipedia.org/wiki/Roure_de_Bancells"
+  },
+  {
+   "sentences": 7,
+   "title": "Rábida",
+   "url": "https://ca.wikipedia.org/wiki/R%C3%A1bida"
+  },
+  {
+   "sentences": 8,
+   "title": "Edafosàurids",
+   "url": "https://ca.wikipedia.org/wiki/Edafos%C3%A0urids"
+  },
+  {
+   "sentences": 25,
+   "title": "Nobuharu Matsushita",
+   "url": "https://ca.wikipedia.org/wiki/Nobuharu_Matsushita"
+  },
+  {
+   "sentences": 11,
+   "title": "Circuit de la Sarthe 2015",
+   "url": "https://ca.wikipedia.org/wiki/Circuit_de_la_Sarthe_2015"
+  },
+  {
+   "sentences": 6,
+   "title": "Ana María Noé",
+   "url": "https://ca.wikipedia.org/wiki/Ana_Mar%C3%ADa_No%C3%A9"
+  },
+  {
+   "sentences": 4,
+   "title": "A tempo",
+   "url": "https://ca.wikipedia.org/wiki/A_tempo"
+  },
+  {
+   "sentences": 15,
+   "title": "Coventry-Eagle",
+   "url": "https://ca.wikipedia.org/wiki/Coventry-Eagle"
+  },
+  {
+   "sentences": 13,
+   "title": "HPC Challenge Benchmark",
+   "url": "https://ca.wikipedia.org/wiki/HPC_Challenge_Benchmark"
+  },
+  {
+   "sentences": 4,
+   "title": "Zosterop de Kenya",
+   "url": "https://ca.wikipedia.org/wiki/Zosterop_de_Kenya"
+  },
+  {
+   "sentences": 7,
+   "title": "Acanthophis",
+   "url": "https://ca.wikipedia.org/wiki/Acanthophis"
+  },
+  {
+   "sentences": 6,
+   "title": "Kallima",
+   "url": "https://ca.wikipedia.org/wiki/Kallima"
+  },
+  {
+   "sentences": 25,
+   "title": "Willem Marinus Dudok",
+   "url": "https://ca.wikipedia.org/wiki/Willem_Marinus_Dudok"
+  },
+  {
+   "sentences": 6,
+   "title": "Open Library",
+   "url": "https://ca.wikipedia.org/wiki/Open_Library"
+  },
+  {
+   "sentences": 15,
+   "title": "Direcció general de Relacions Internacionals i Estrangeria",
+   "url": "https://ca.wikipedia.org/wiki/Direcci%C3%B3_general_de_Relacions_Internacionals_i_Estrangeria"
+  },
+  {
+   "sentences": 8,
+   "title": "Àcid ximènic",
+   "url": "https://ca.wikipedia.org/wiki/%C3%80cid_xim%C3%A8nic"
+  },
+  {
+   "sentences": 25,
+   "title": "Delcam",
+   "url": "https://ca.wikipedia.org/wiki/Delcam"
+  },
+  {
+   "sentences": 1,
+   "title": "Sergej Milinković-Savić",
+   "url": "https://ca.wikipedia.org/wiki/Sergej_Milinkovi%C4%87-Savi%C4%87"
+  },
+  {
+   "sentences": 4,
+   "title": "Neoguillauminia",
+   "url": "https://ca.wikipedia.org/wiki/Neoguillauminia"
+  },
+  {
+   "sentences": 25,
+   "title": "Parlem",
+   "url": "https://ca.wikipedia.org/wiki/Parlem"
+  },
+  {
+   "sentences": 12,
+   "title": "Coptodon discolor",
+   "url": "https://ca.wikipedia.org/wiki/Coptodon_discolor"
+  },
+  {
+   "sentences": 6,
+   "title": "Paràbola del llevat",
+   "url": "https://ca.wikipedia.org/wiki/Par%C3%A0bola_del_llevat"
+  },
+  {
+   "sentences": 11,
+   "title": "Consell Econòmic Transatlàntic",
+   "url": "https://ca.wikipedia.org/wiki/Consell_Econ%C3%B2mic_Transatl%C3%A0ntic"
+  },
+  {
+   "sentences": 5,
+   "title": "(141) Lumen",
+   "url": "https://ca.wikipedia.org/wiki/%28141%29_Lumen"
+  },
+  {
+   "sentences": 11,
+   "title": "Violència viària",
+   "url": "https://ca.wikipedia.org/wiki/Viol%C3%A8ncia_vi%C3%A0ria"
+  },
+  {
+   "sentences": 4,
+   "title": "Cleli Sícul",
+   "url": "https://ca.wikipedia.org/wiki/Cleli_S%C3%ADcul"
+  },
+  {
+   "sentences": 3,
+   "title": "Microclina",
+   "url": "https://ca.wikipedia.org/wiki/Microclina"
+  },
+  {
+   "sentences": 20,
+   "title": "Mater dolorosa (pel·lícula de 1917)",
+   "url": "https://ca.wikipedia.org/wiki/Mater_dolorosa_%28pel%C2%B7l%C3%ADcula_de_1917%29"
+  },
+  {
+   "sentences": 20,
+   "title": "Arxiu del Regne de València",
+   "url": "https://ca.wikipedia.org/wiki/Arxiu_del_Regne_de_Val%C3%A8ncia"
+  },
+  {
+   "sentences": 25,
+   "title": "Sudan",
+   "url": "https://ca.wikipedia.org/wiki/Sudan"
+  },
+  {
+   "sentences": 19,
+   "title": "C8",
+   "url": "https://ca.wikipedia.org/wiki/C8"
+  },
+  {
+   "sentences": 25,
+   "title": "Bisbat d'Anagni-Alatri",
+   "url": "https://ca.wikipedia.org/wiki/Bisbat_d%27Anagni-Alatri"
+  },
+  {
+   "sentences": 25,
+   "title": "Werner Wolf Glaser",
+   "url": "https://ca.wikipedia.org/wiki/Werner_Wolf_Glaser"
+  },
+  {
+   "sentences": 25,
+   "title": "Lluís Tramoyeres i Blasco",
+   "url": "https://ca.wikipedia.org/wiki/Llu%C3%ADs_Tramoyeres_i_Blasco"
+  },
+  {
+   "sentences": 11,
+   "title": "Lleveu àncores!",
+   "url": "https://ca.wikipedia.org/wiki/Lleveu_%C3%A0ncores%21"
+  },
+  {
+   "sentences": 9,
+   "title": "Aleksei Vakhonin",
+   "url": "https://ca.wikipedia.org/wiki/Aleksei_Vakhonin"
+  },
+  {
+   "sentences": 5,
+   "title": "Premis Nacionals de Cultura 2013",
+   "url": "https://ca.wikipedia.org/wiki/Premis_Nacionals_de_Cultura_2013"
+  },
+  {
+   "sentences": 13,
+   "title": "Sant Quintí (desambiguació)",
+   "url": "https://ca.wikipedia.org/wiki/Sant_Quint%C3%AD_%28desambiguaci%C3%B3%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Anissa Kate",
+   "url": "https://ca.wikipedia.org/wiki/Anissa_Kate"
+  },
+  {
+   "sentences": 2,
+   "title": "Hybopsis amblops",
+   "url": "https://ca.wikipedia.org/wiki/Hybopsis_amblops"
+  },
+  {
+   "sentences": 5,
+   "title": "Favonigobius punctatus",
+   "url": "https://ca.wikipedia.org/wiki/Favonigobius_punctatus"
+  },
+  {
+   "sentences": 25,
+   "title": "Poblat talaiòtic de s'Illot",
+   "url": "https://ca.wikipedia.org/wiki/Poblat_talai%C3%B2tic_de_s%27Illot"
+  },
+  {
+   "sentences": 4,
+   "title": "Castroregio",
+   "url": "https://ca.wikipedia.org/wiki/Castroregio"
+  },
+  {
+   "sentences": 2,
+   "title": "Ólguino (Saràtov)",
+   "url": "https://ca.wikipedia.org/wiki/%C3%93lguino_%28Sar%C3%A0tov%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Foe",
+   "url": "https://ca.wikipedia.org/wiki/Foe"
+  },
+  {
+   "sentences": 10,
+   "title": "Diencèfal",
+   "url": "https://ca.wikipedia.org/wiki/Dienc%C3%A8fal"
+  },
+  {
+   "sentences": 15,
+   "title": "Ostmark (Àustria)",
+   "url": "https://ca.wikipedia.org/wiki/Ostmark_%28%C3%80ustria%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Radio Televisión Madrid",
+   "url": "https://ca.wikipedia.org/wiki/Radio_Televisi%C3%B3n_Madrid"
+  },
+  {
+   "sentences": 24,
+   "title": "Basilea I",
+   "url": "https://ca.wikipedia.org/wiki/Basilea_I"
+  },
+  {
+   "sentences": 4,
+   "title": "Freeville",
+   "url": "https://ca.wikipedia.org/wiki/Freeville"
+  },
+  {
+   "sentences": 7,
+   "title": "Georgina Carreras Caner",
+   "url": "https://ca.wikipedia.org/wiki/Georgina_Carreras_Caner"
+  },
+  {
+   "sentences": 1,
+   "title": "Gravina in Puglia",
+   "url": "https://ca.wikipedia.org/wiki/Gravina_in_Puglia"
+  },
+  {
+   "sentences": 10,
+   "title": "Dompos",
+   "url": "https://ca.wikipedia.org/wiki/Dompos"
+  },
+  {
+   "sentences": 3,
+   "title": "Vendetta",
+   "url": "https://ca.wikipedia.org/wiki/Vendetta"
+  },
+  {
+   "sentences": 25,
+   "title": "César Gracia Samper",
+   "url": "https://ca.wikipedia.org/wiki/C%C3%A9sar_Gracia_Samper"
+  },
+  {
+   "sentences": 25,
+   "title": "Microquimerisme",
+   "url": "https://ca.wikipedia.org/wiki/Microquimerisme"
+  },
+  {
+   "sentences": 4,
+   "title": "Resolució 353 del Consell de Seguretat de les Nacions Unides",
+   "url": "https://ca.wikipedia.org/wiki/Resoluci%C3%B3_353_del_Consell_de_Seguretat_de_les_Nacions_Unides"
+  },
+  {
+   "sentences": 5,
+   "title": "Colville",
+   "url": "https://ca.wikipedia.org/wiki/Colville"
+  },
+  {
+   "sentences": 1,
+   "title": "Igbirra",
+   "url": "https://ca.wikipedia.org/wiki/Igbirra"
+  },
+  {
+   "sentences": 7,
+   "title": "Xakhriar Mamediàrov",
+   "url": "https://ca.wikipedia.org/wiki/Xakhriar_Mamedi%C3%A0rov"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "ca",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 4000,
+ "wikipedia": "https://ca.wikipedia.org/"
+}

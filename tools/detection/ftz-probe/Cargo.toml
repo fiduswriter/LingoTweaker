@@ -1,0 +1,14 @@
+[package]
+name = "ftz-probe"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Its own workspace: this is a local verification probe, not part of the engine,
+# so it must not enter `cargo test --workspace` or the publish set.
+[workspace]
+
+[dependencies]
+# Same crate, same version, as `crates/lt` — that is the point: this is the exact
+# inference path a trained model has to survive before it can be wired in.
+fasttext-pure-rs = { version = "0.1", default-features = false }

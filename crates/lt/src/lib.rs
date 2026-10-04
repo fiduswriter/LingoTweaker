@@ -41,6 +41,7 @@ mod dash;
 mod dates;
 mod de;
 pub mod detect_model;
+pub mod detect_refiner;
 mod double_punctuation;
 mod el;
 mod en;

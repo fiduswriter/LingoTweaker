@@ -7,3 +7,12 @@ España
 barnhage
 arbeiddag
 tunnskiva
+# Ordinary Bokmål noun ("weapon"), not a proper noun or technical term: here
+# only because the 2026-10-04 dictionary rebuild classifies converted Bokmål
+# words more aggressively and the strictness filter drops this one, so
+# NDM_SPELLER flags "Jei har ett våpen." (`crates/lt/tests/nordum.rs`). Its
+# proper home is the Nordum word list in the Nordum repository, from where the
+# builder generates it — delete this line once that is done. 7,488 further
+# Bokmål base forms are dropped the same way (`nb_NO.dic` ∩ dropped, plain
+# lowercase, no hyphen).
+våpen

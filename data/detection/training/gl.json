@@ -1,0 +1,2025 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://gl.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 16,
+   "title": "Burgas",
+   "url": "https://gl.wikipedia.org/wiki/Burgas"
+  },
+  {
+   "sentences": 6,
+   "title": "Corte Suprema de Chile",
+   "url": "https://gl.wikipedia.org/wiki/Corte_Suprema_de_Chile"
+  },
+  {
+   "sentences": 25,
+   "title": "The Strokes",
+   "url": "https://gl.wikipedia.org/wiki/The_Strokes"
+  },
+  {
+   "sentences": 17,
+   "title": "Jasminum",
+   "url": "https://gl.wikipedia.org/wiki/Jasminum"
+  },
+  {
+   "sentences": 2,
+   "title": "Promina",
+   "url": "https://gl.wikipedia.org/wiki/Promina"
+  },
+  {
+   "sentences": 3,
+   "title": "A Estrada, Malvas, Tui",
+   "url": "https://gl.wikipedia.org/wiki/A_Estrada%2C_Malvas%2C_Tui"
+  },
+  {
+   "sentences": 25,
+   "title": "Grupo de diferenciación",
+   "url": "https://gl.wikipedia.org/wiki/Grupo_de_diferenciaci%C3%B3n"
+  },
+  {
+   "sentences": 25,
+   "title": "Clorofila a",
+   "url": "https://gl.wikipedia.org/wiki/Clorofila_a"
+  },
+  {
+   "sentences": 11,
+   "title": "Andaina",
+   "url": "https://gl.wikipedia.org/wiki/Andaina"
+  },
+  {
+   "sentences": 2,
+   "title": "Leiras, As Goás, Abadín",
+   "url": "https://gl.wikipedia.org/wiki/Leiras%2C_As_Go%C3%A1s%2C_Abad%C3%ADn"
+  },
+  {
+   "sentences": 2,
+   "title": "Senande, Lagostelle, Guitiriz",
+   "url": "https://gl.wikipedia.org/wiki/Senande%2C_Lagostelle%2C_Guitiriz"
+  },
+  {
+   "sentences": 6,
+   "title": "Robert Fripp",
+   "url": "https://gl.wikipedia.org/wiki/Robert_Fripp"
+  },
+  {
+   "sentences": 14,
+   "title": "Escola de Socioloxía de Chicago",
+   "url": "https://gl.wikipedia.org/wiki/Escola_de_Sociolox%C3%ADa_de_Chicago"
+  },
+  {
+   "sentences": 1,
+   "title": "A Fraga, Franza, Mugardos",
+   "url": "https://gl.wikipedia.org/wiki/A_Fraga%2C_Franza%2C_Mugardos"
+  },
+  {
+   "sentences": 1,
+   "title": "A Cruz, Taboada, Monfero",
+   "url": "https://gl.wikipedia.org/wiki/A_Cruz%2C_Taboada%2C_Monfero"
+  },
+  {
+   "sentences": 16,
+   "title": "Eslovaquia",
+   "url": "https://gl.wikipedia.org/wiki/Eslovaquia"
+  },
+  {
+   "sentences": 2,
+   "title": "Cagnano",
+   "url": "https://gl.wikipedia.org/wiki/Cagnano"
+  },
+  {
+   "sentences": 4,
+   "title": "Congreso Nacional Africano",
+   "url": "https://gl.wikipedia.org/wiki/Congreso_Nacional_Africano"
+  },
+  {
+   "sentences": 25,
+   "title": "Confucio",
+   "url": "https://gl.wikipedia.org/wiki/Confucio"
+  },
+  {
+   "sentences": 25,
+   "title": "Gustav von Schmoller",
+   "url": "https://gl.wikipedia.org/wiki/Gustav_von_Schmoller"
+  },
+  {
+   "sentences": 2,
+   "title": "O Aciveiro, San Martiño dos Condes, Friol",
+   "url": "https://gl.wikipedia.org/wiki/O_Aciveiro%2C_San_Marti%C3%B1o_dos_Condes%2C_Friol"
+  },
+  {
+   "sentences": 2,
+   "title": "A Poula, San Martiño de Ferreiros, Pol",
+   "url": "https://gl.wikipedia.org/wiki/A_Poula%2C_San_Marti%C3%B1o_de_Ferreiros%2C_Pol"
+  },
+  {
+   "sentences": 6,
+   "title": "Tripla Alianza (1882)",
+   "url": "https://gl.wikipedia.org/wiki/Tripla_Alianza_%281882%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Cima de Vila, San Fiz de Reimóndez, Sarria",
+   "url": "https://gl.wikipedia.org/wiki/Cima_de_Vila%2C_San_Fiz_de_Reim%C3%B3ndez%2C_Sarria"
+  },
+  {
+   "sentences": 25,
+   "title": "Tebe (lúa)",
+   "url": "https://gl.wikipedia.org/wiki/Tebe_%28l%C3%BAa%29"
+  },
+  {
+   "sentences": 12,
+   "title": "MreB",
+   "url": "https://gl.wikipedia.org/wiki/MreB"
+  },
+  {
+   "sentences": 19,
+   "title": "Aitor Gelardo",
+   "url": "https://gl.wikipedia.org/wiki/Aitor_Gelardo"
+  },
+  {
+   "sentences": 7,
+   "title": "Bouzón",
+   "url": "https://gl.wikipedia.org/wiki/Bouz%C3%B3n"
+  },
+  {
+   "sentences": 20,
+   "title": "Werner Heisenberg",
+   "url": "https://gl.wikipedia.org/wiki/Werner_Heisenberg"
+  },
+  {
+   "sentences": 1,
+   "title": "Rates, Lira, Carnota",
+   "url": "https://gl.wikipedia.org/wiki/Rates%2C_Lira%2C_Carnota"
+  },
+  {
+   "sentences": 2,
+   "title": "O Campo, Rus, Carballo",
+   "url": "https://gl.wikipedia.org/wiki/O_Campo%2C_Rus%2C_Carballo"
+  },
+  {
+   "sentences": 1,
+   "title": "Alicia Cawiya",
+   "url": "https://gl.wikipedia.org/wiki/Alicia_Cawiya"
+  },
+  {
+   "sentences": 25,
+   "title": "Sebe",
+   "url": "https://gl.wikipedia.org/wiki/Sebe"
+  },
+  {
+   "sentences": 4,
+   "title": "Aponeurose",
+   "url": "https://gl.wikipedia.org/wiki/Aponeurose"
+  },
+  {
+   "sentences": 5,
+   "title": "Trap (filme de 2024)",
+   "url": "https://gl.wikipedia.org/wiki/Trap_%28filme_de_2024%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Vuvuzela",
+   "url": "https://gl.wikipedia.org/wiki/Vuvuzela"
+  },
+  {
+   "sentences": 5,
+   "title": "Salitre",
+   "url": "https://gl.wikipedia.org/wiki/Salitre"
+  },
+  {
+   "sentences": 2,
+   "title": "Comité Olímpico Nacional de Camboxa",
+   "url": "https://gl.wikipedia.org/wiki/Comit%C3%A9_Ol%C3%ADmpico_Nacional_de_Camboxa"
+  },
+  {
+   "sentences": 2,
+   "title": "San Román, San Román, Val do Dubra",
+   "url": "https://gl.wikipedia.org/wiki/San_Rom%C3%A1n%2C_San_Rom%C3%A1n%2C_Val_do_Dubra"
+  },
+  {
+   "sentences": 13,
+   "title": "Refuxio de Fonte da Cova",
+   "url": "https://gl.wikipedia.org/wiki/Refuxio_de_Fonte_da_Cova"
+  },
+  {
+   "sentences": 2,
+   "title": "Eidobispo, Zapeaus, Rairiz de Veiga",
+   "url": "https://gl.wikipedia.org/wiki/Eidobispo%2C_Zapeaus%2C_Rairiz_de_Veiga"
+  },
+  {
+   "sentences": 4,
+   "title": "Ek Hazarachi Note",
+   "url": "https://gl.wikipedia.org/wiki/Ek_Hazarachi_Note"
+  },
+  {
+   "sentences": 2,
+   "title": "Sakura",
+   "url": "https://gl.wikipedia.org/wiki/Sakura"
+  },
+  {
+   "sentences": 25,
+   "title": "Canalización de substratos",
+   "url": "https://gl.wikipedia.org/wiki/Canalizaci%C3%B3n_de_substratos"
+  },
+  {
+   "sentences": 4,
+   "title": "Kyuss/Queens of the Stone Age",
+   "url": "https://gl.wikipedia.org/wiki/Kyuss/Queens_of_the_Stone_Age"
+  },
+  {
+   "sentences": 2,
+   "title": "Delfín Álvarez",
+   "url": "https://gl.wikipedia.org/wiki/Delf%C3%ADn_%C3%81lvarez"
+  },
+  {
+   "sentences": 2,
+   "title": "Tete Montoliu",
+   "url": "https://gl.wikipedia.org/wiki/Tete_Montoliu"
+  },
+  {
+   "sentences": 8,
+   "title": "Microsoft Tablet PC",
+   "url": "https://gl.wikipedia.org/wiki/Microsoft_Tablet_PC"
+  },
+  {
+   "sentences": 3,
+   "title": "Medicines and Healthcare products Regulatory Agency",
+   "url": "https://gl.wikipedia.org/wiki/Medicines_and_Healthcare_products_Regulatory_Agency"
+  },
+  {
+   "sentences": 11,
+   "title": "Aquiminzaque",
+   "url": "https://gl.wikipedia.org/wiki/Aquiminzaque"
+  },
+  {
+   "sentences": 2,
+   "title": "Taganrog",
+   "url": "https://gl.wikipedia.org/wiki/Taganrog"
+  },
+  {
+   "sentences": 2,
+   "title": "A Bouza Vella, Triabá, Castro de Rei",
+   "url": "https://gl.wikipedia.org/wiki/A_Bouza_Vella%2C_Triab%C3%A1%2C_Castro_de_Rei"
+  },
+  {
+   "sentences": 25,
+   "title": "Clara Barton",
+   "url": "https://gl.wikipedia.org/wiki/Clara_Barton"
+  },
+  {
+   "sentences": 25,
+   "title": "Minderico",
+   "url": "https://gl.wikipedia.org/wiki/Minderico"
+  },
+  {
+   "sentences": 2,
+   "title": "Bellalta, Liñaio, Negreira",
+   "url": "https://gl.wikipedia.org/wiki/Bellalta%2C_Li%C3%B1aio%2C_Negreira"
+  },
+  {
+   "sentences": 8,
+   "title": "Juan Carlos Sánchez",
+   "url": "https://gl.wikipedia.org/wiki/Juan_Carlos_S%C3%A1nchez"
+  },
+  {
+   "sentences": 2,
+   "title": "Pradorramisquedo, Pradorramisquedo, Viana do Bolo",
+   "url": "https://gl.wikipedia.org/wiki/Pradorramisquedo%2C_Pradorramisquedo%2C_Viana_do_Bolo"
+  },
+  {
+   "sentences": 25,
+   "title": "Carlos López Gómez",
+   "url": "https://gl.wikipedia.org/wiki/Carlos_L%C3%B3pez_G%C3%B3mez"
+  },
+  {
+   "sentences": 10,
+   "title": "Aiguille du Midi",
+   "url": "https://gl.wikipedia.org/wiki/Aiguille_du_Midi"
+  },
+  {
+   "sentences": 4,
+   "title": "O Pontido",
+   "url": "https://gl.wikipedia.org/wiki/O_Pontido"
+  },
+  {
+   "sentences": 2,
+   "title": "Lista de partidos políticos de Francia",
+   "url": "https://gl.wikipedia.org/wiki/Lista_de_partidos_pol%C3%ADticos_de_Francia"
+  },
+  {
+   "sentences": 2,
+   "title": "Bufarda (homónimos)",
+   "url": "https://gl.wikipedia.org/wiki/Bufarda_%28hom%C3%B3nimos%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Anne Bancroft",
+   "url": "https://gl.wikipedia.org/wiki/Anne_Bancroft"
+  },
+  {
+   "sentences": 6,
+   "title": "Jordan Mickey",
+   "url": "https://gl.wikipedia.org/wiki/Jordan_Mickey"
+  },
+  {
+   "sentences": 9,
+   "title": "Thom Yorke",
+   "url": "https://gl.wikipedia.org/wiki/Thom_Yorke"
+  },
+  {
+   "sentences": 2,
+   "title": "Insua, Cando, Outes",
+   "url": "https://gl.wikipedia.org/wiki/Insua%2C_Cando%2C_Outes"
+  },
+  {
+   "sentences": 13,
+   "title": "Decreto Orovio",
+   "url": "https://gl.wikipedia.org/wiki/Decreto_Orovio"
+  },
+  {
+   "sentences": 8,
+   "title": "Pedro Tertuliano Hervella Nieto",
+   "url": "https://gl.wikipedia.org/wiki/Pedro_Tertuliano_Hervella_Nieto"
+  },
+  {
+   "sentences": 2,
+   "title": "Vicenta Jerónimo",
+   "url": "https://gl.wikipedia.org/wiki/Vicenta_Jer%C3%B3nimo"
+  },
+  {
+   "sentences": 22,
+   "title": "Insuficiencia cardíaca",
+   "url": "https://gl.wikipedia.org/wiki/Insuficiencia_card%C3%ADaca"
+  },
+  {
+   "sentences": 12,
+   "title": "Rosa Bassave",
+   "url": "https://gl.wikipedia.org/wiki/Rosa_Bassave"
+  },
+  {
+   "sentences": 9,
+   "title": "Livro de Horas de D. Manuel",
+   "url": "https://gl.wikipedia.org/wiki/Livro_de_Horas_de_D._Manuel"
+  },
+  {
+   "sentences": 25,
+   "title": "Aceiro inoxidábel",
+   "url": "https://gl.wikipedia.org/wiki/Aceiro_inoxid%C3%A1bel"
+  },
+  {
+   "sentences": 17,
+   "title": "Bacan",
+   "url": "https://gl.wikipedia.org/wiki/Bacan"
+  },
+  {
+   "sentences": 10,
+   "title": "A Irexe, Pereira, O Pino",
+   "url": "https://gl.wikipedia.org/wiki/A_Irexe%2C_Pereira%2C_O_Pino"
+  },
+  {
+   "sentences": 3,
+   "title": "Casa da Encomenda",
+   "url": "https://gl.wikipedia.org/wiki/Casa_da_Encomenda"
+  },
+  {
+   "sentences": 23,
+   "title": "Fractura da cabeza do radio",
+   "url": "https://gl.wikipedia.org/wiki/Fractura_da_cabeza_do_radio"
+  },
+  {
+   "sentences": 5,
+   "title": "Alek Wek",
+   "url": "https://gl.wikipedia.org/wiki/Alek_Wek"
+  },
+  {
+   "sentences": 1,
+   "title": "Tribo (bioloxía)",
+   "url": "https://gl.wikipedia.org/wiki/Tribo_%28biolox%C3%ADa%29"
+  },
+  {
+   "sentences": 1,
+   "title": "O Pazo, Limiñón, Abegondo",
+   "url": "https://gl.wikipedia.org/wiki/O_Pazo%2C_Limi%C3%B1%C3%B3n%2C_Abegondo"
+  },
+  {
+   "sentences": 25,
+   "title": "Micronúcleo",
+   "url": "https://gl.wikipedia.org/wiki/Micron%C3%BAcleo"
+  },
+  {
+   "sentences": 13,
+   "title": "Cessna 182 Skylane",
+   "url": "https://gl.wikipedia.org/wiki/Cessna_182_Skylane"
+  },
+  {
+   "sentences": 16,
+   "title": "I Asemblea Nacionalista",
+   "url": "https://gl.wikipedia.org/wiki/I_Asemblea_Nacionalista"
+  },
+  {
+   "sentences": 2,
+   "title": "Costa, Leirado, Quintela de Leirado",
+   "url": "https://gl.wikipedia.org/wiki/Costa%2C_Leirado%2C_Quintela_de_Leirado"
+  },
+  {
+   "sentences": 1,
+   "title": "Seringes-et-Nesles",
+   "url": "https://gl.wikipedia.org/wiki/Seringes-et-Nesles"
+  },
+  {
+   "sentences": 8,
+   "title": "Acuariofilia",
+   "url": "https://gl.wikipedia.org/wiki/Acuariofilia"
+  },
+  {
+   "sentences": 3,
+   "title": "Polimerización",
+   "url": "https://gl.wikipedia.org/wiki/Polimerizaci%C3%B3n"
+  },
+  {
+   "sentences": 6,
+   "title": "Stonehearst Asylum",
+   "url": "https://gl.wikipedia.org/wiki/Stonehearst_Asylum"
+  },
+  {
+   "sentences": 2,
+   "title": "Pradomao",
+   "url": "https://gl.wikipedia.org/wiki/Pradomao"
+  },
+  {
+   "sentences": 25,
+   "title": "O Riós",
+   "url": "https://gl.wikipedia.org/wiki/O_Ri%C3%B3s"
+  },
+  {
+   "sentences": 8,
+   "title": "Xornal.com",
+   "url": "https://gl.wikipedia.org/wiki/Xornal.com"
+  },
+  {
+   "sentences": 2,
+   "title": "Titushki",
+   "url": "https://gl.wikipedia.org/wiki/Titushki"
+  },
+  {
+   "sentences": 10,
+   "title": "Emigración europea",
+   "url": "https://gl.wikipedia.org/wiki/Emigraci%C3%B3n_europea"
+  },
+  {
+   "sentences": 25,
+   "title": "Jokerit",
+   "url": "https://gl.wikipedia.org/wiki/Jokerit"
+  },
+  {
+   "sentences": 8,
+   "title": "Antonio Núñez",
+   "url": "https://gl.wikipedia.org/wiki/Antonio_N%C3%BA%C3%B1ez"
+  },
+  {
+   "sentences": 3,
+   "title": "Economía de Porto Rico",
+   "url": "https://gl.wikipedia.org/wiki/Econom%C3%ADa_de_Porto_Rico"
+  },
+  {
+   "sentences": 4,
+   "title": "Close to Me",
+   "url": "https://gl.wikipedia.org/wiki/Close_to_Me"
+  },
+  {
+   "sentences": 2,
+   "title": "Crocodyloidea",
+   "url": "https://gl.wikipedia.org/wiki/Crocodyloidea"
+  },
+  {
+   "sentences": 13,
+   "title": "Manuel Pesqueira",
+   "url": "https://gl.wikipedia.org/wiki/Manuel_Pesqueira"
+  },
+  {
+   "sentences": 1,
+   "title": "A Roda, Camariñas, Camariñas",
+   "url": "https://gl.wikipedia.org/wiki/A_Roda%2C_Camari%C3%B1as%2C_Camari%C3%B1as"
+  },
+  {
+   "sentences": 25,
+   "title": "José Luís Rodríguez Fernández",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Lu%C3%ADs_Rodr%C3%ADguez_Fern%C3%A1ndez"
+  },
+  {
+   "sentences": 1,
+   "title": "Septvaux",
+   "url": "https://gl.wikipedia.org/wiki/Septvaux"
+  },
+  {
+   "sentences": 9,
+   "title": "Jerry Sloan",
+   "url": "https://gl.wikipedia.org/wiki/Jerry_Sloan"
+  },
+  {
+   "sentences": 2,
+   "title": "Provincia de Pisa",
+   "url": "https://gl.wikipedia.org/wiki/Provincia_de_Pisa"
+  },
+  {
+   "sentences": 2,
+   "title": "Branquenza, Barrañán, Arteixo",
+   "url": "https://gl.wikipedia.org/wiki/Branquenza%2C_Barra%C3%B1%C3%A1n%2C_Arteixo"
+  },
+  {
+   "sentences": 6,
+   "title": "007: Moonraker",
+   "url": "https://gl.wikipedia.org/wiki/007%3A_Moonraker"
+  },
+  {
+   "sentences": 3,
+   "title": "Santa Margarida, Mourente, Pontevedra",
+   "url": "https://gl.wikipedia.org/wiki/Santa_Margarida%2C_Mourente%2C_Pontevedra"
+  },
+  {
+   "sentences": 5,
+   "title": "Fluid Editorial",
+   "url": "https://gl.wikipedia.org/wiki/Fluid_Editorial"
+  },
+  {
+   "sentences": 15,
+   "title": "Nevill Francis Mott",
+   "url": "https://gl.wikipedia.org/wiki/Nevill_Francis_Mott"
+  },
+  {
+   "sentences": 2,
+   "title": "O Outeiro, Saiáns, Vigo",
+   "url": "https://gl.wikipedia.org/wiki/O_Outeiro%2C_Sai%C3%A1ns%2C_Vigo"
+  },
+  {
+   "sentences": 6,
+   "title": "STS-122",
+   "url": "https://gl.wikipedia.org/wiki/STS-122"
+  },
+  {
+   "sentences": 25,
+   "title": "Invención (música)",
+   "url": "https://gl.wikipedia.org/wiki/Invenci%C3%B3n_%28m%C3%BAsica%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Araucóns",
+   "url": "https://gl.wikipedia.org/wiki/Arauc%C3%B3ns"
+  },
+  {
+   "sentences": 25,
+   "title": "Crocodylus mindorensis",
+   "url": "https://gl.wikipedia.org/wiki/Crocodylus_mindorensis"
+  },
+  {
+   "sentences": 25,
+   "title": "Pío VII, papa",
+   "url": "https://gl.wikipedia.org/wiki/P%C3%ADo_VII%2C_papa"
+  },
+  {
+   "sentences": 4,
+   "title": "Copa de Europa de Hóckey Herba Masculina",
+   "url": "https://gl.wikipedia.org/wiki/Copa_de_Europa_de_H%C3%B3ckey_Herba_Masculina"
+  },
+  {
+   "sentences": 5,
+   "title": "Condado de Adams",
+   "url": "https://gl.wikipedia.org/wiki/Condado_de_Adams"
+  },
+  {
+   "sentences": 3,
+   "title": "Vilachá, Becerreá",
+   "url": "https://gl.wikipedia.org/wiki/Vilach%C3%A1%2C_Becerre%C3%A1"
+  },
+  {
+   "sentences": 25,
+   "title": "José Millán-Astray",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Mill%C3%A1n-Astray"
+  },
+  {
+   "sentences": 17,
+   "title": "IES Lucus Augusti",
+   "url": "https://gl.wikipedia.org/wiki/IES_Lucus_Augusti"
+  },
+  {
+   "sentences": 1,
+   "title": "Cabanas, Os Ánxeles, Oroso",
+   "url": "https://gl.wikipedia.org/wiki/Cabanas%2C_Os_%C3%81nxeles%2C_Oroso"
+  },
+  {
+   "sentences": 2,
+   "title": "A Hedra, Ardemil, Ordes",
+   "url": "https://gl.wikipedia.org/wiki/A_Hedra%2C_Ardemil%2C_Ordes"
+  },
+  {
+   "sentences": 17,
+   "title": "Sophie Wilmès",
+   "url": "https://gl.wikipedia.org/wiki/Sophie_Wilm%C3%A8s"
+  },
+  {
+   "sentences": 2,
+   "title": "Agrosagro, Carboentes, Rodeiro",
+   "url": "https://gl.wikipedia.org/wiki/Agrosagro%2C_Carboentes%2C_Rodeiro"
+  },
+  {
+   "sentences": 8,
+   "title": "Prins Karls Forland",
+   "url": "https://gl.wikipedia.org/wiki/Prins_Karls_Forland"
+  },
+  {
+   "sentences": 25,
+   "title": "Poliovirus",
+   "url": "https://gl.wikipedia.org/wiki/Poliovirus"
+  },
+  {
+   "sentences": 12,
+   "title": "Ría de Corme e Laxe",
+   "url": "https://gl.wikipedia.org/wiki/R%C3%ADa_de_Corme_e_Laxe"
+  },
+  {
+   "sentences": 6,
+   "title": "PRCP",
+   "url": "https://gl.wikipedia.org/wiki/PRCP"
+  },
+  {
+   "sentences": 20,
+   "title": "Eleccións municipais en Catoira",
+   "url": "https://gl.wikipedia.org/wiki/Elecci%C3%B3ns_municipais_en_Catoira"
+  },
+  {
+   "sentences": 4,
+   "title": "Yobe",
+   "url": "https://gl.wikipedia.org/wiki/Yobe"
+  },
+  {
+   "sentences": 1,
+   "title": "Partido Popular Cristián Demócrata",
+   "url": "https://gl.wikipedia.org/wiki/Partido_Popular_Cristi%C3%A1n_Dem%C3%B3crata"
+  },
+  {
+   "sentences": 5,
+   "title": "Irina Korschunow",
+   "url": "https://gl.wikipedia.org/wiki/Irina_Korschunow"
+  },
+  {
+   "sentences": 2,
+   "title": "As Reboleiras, Castelo de Rei, Outeiro de Rei",
+   "url": "https://gl.wikipedia.org/wiki/As_Reboleiras%2C_Castelo_de_Rei%2C_Outeiro_de_Rei"
+  },
+  {
+   "sentences": 1,
+   "title": "Viñal do Rei, Laias, Cenlle",
+   "url": "https://gl.wikipedia.org/wiki/Vi%C3%B1al_do_Rei%2C_Laias%2C_Cenlle"
+  },
+  {
+   "sentences": 25,
+   "title": "Remscheid",
+   "url": "https://gl.wikipedia.org/wiki/Remscheid"
+  },
+  {
+   "sentences": 2,
+   "title": "Rubiás, Ramirás",
+   "url": "https://gl.wikipedia.org/wiki/Rubi%C3%A1s%2C_Ramir%C3%A1s"
+  },
+  {
+   "sentences": 4,
+   "title": "Partido Laborista de Saint Kitts e Nevis",
+   "url": "https://gl.wikipedia.org/wiki/Partido_Laborista_de_Saint_Kitts_e_Nevis"
+  },
+  {
+   "sentences": 5,
+   "title": "Earthquake Bird",
+   "url": "https://gl.wikipedia.org/wiki/Earthquake_Bird"
+  },
+  {
+   "sentences": 4,
+   "title": "Aerolíneas federales (álbum)",
+   "url": "https://gl.wikipedia.org/wiki/Aerol%C3%ADneas_federales_%28%C3%A1lbum%29"
+  },
+  {
+   "sentences": 9,
+   "title": "Rodrigo Romaní",
+   "url": "https://gl.wikipedia.org/wiki/Rodrigo_Roman%C3%AD"
+  },
+  {
+   "sentences": 6,
+   "title": "Swapped",
+   "url": "https://gl.wikipedia.org/wiki/Swapped"
+  },
+  {
+   "sentences": 20,
+   "title": "Ladytron",
+   "url": "https://gl.wikipedia.org/wiki/Ladytron"
+  },
+  {
+   "sentences": 6,
+   "title": "Denez Prigent",
+   "url": "https://gl.wikipedia.org/wiki/Denez_Prigent"
+  },
+  {
+   "sentences": 14,
+   "title": "Parque nacional Nahanni",
+   "url": "https://gl.wikipedia.org/wiki/Parque_nacional_Nahanni"
+  },
+  {
+   "sentences": 25,
+   "title": "Uharte",
+   "url": "https://gl.wikipedia.org/wiki/Uharte"
+  },
+  {
+   "sentences": 16,
+   "title": "Francesiña",
+   "url": "https://gl.wikipedia.org/wiki/Francesi%C3%B1a"
+  },
+  {
+   "sentences": 1,
+   "title": "Doutores honoris causa pola Universidade Nacional de Irlanda",
+   "url": "https://gl.wikipedia.org/wiki/Doutores_honoris_causa_pola_Universidade_Nacional_de_Irlanda"
+  },
+  {
+   "sentences": 18,
+   "title": "Heterocongrinos",
+   "url": "https://gl.wikipedia.org/wiki/Heterocongrinos"
+  },
+  {
+   "sentences": 1,
+   "title": "Covas, San Cristovo de Cea",
+   "url": "https://gl.wikipedia.org/wiki/Covas%2C_San_Cristovo_de_Cea"
+  },
+  {
+   "sentences": 2,
+   "title": "658",
+   "url": "https://gl.wikipedia.org/wiki/658"
+  },
+  {
+   "sentences": 14,
+   "title": "Bandeira dos Estados Unidos de América",
+   "url": "https://gl.wikipedia.org/wiki/Bandeira_dos_Estados_Unidos_de_Am%C3%A9rica"
+  },
+  {
+   "sentences": 22,
+   "title": "Henrique III de Castela",
+   "url": "https://gl.wikipedia.org/wiki/Henrique_III_de_Castela"
+  },
+  {
+   "sentences": 10,
+   "title": "El Bola",
+   "url": "https://gl.wikipedia.org/wiki/El_Bola"
+  },
+  {
+   "sentences": 16,
+   "title": "Sociedade Nazonalista Pondal",
+   "url": "https://gl.wikipedia.org/wiki/Sociedade_Nazonalista_Pondal"
+  },
+  {
+   "sentences": 3,
+   "title": "San Miguel do Camiño, Castroverde",
+   "url": "https://gl.wikipedia.org/wiki/San_Miguel_do_Cami%C3%B1o%2C_Castroverde"
+  },
+  {
+   "sentences": 4,
+   "title": "Premio Nacional de Socioloxía e Ciencia Política",
+   "url": "https://gl.wikipedia.org/wiki/Premio_Nacional_de_Sociolox%C3%ADa_e_Ciencia_Pol%C3%ADtica"
+  },
+  {
+   "sentences": 4,
+   "title": "Triana, Sevilla",
+   "url": "https://gl.wikipedia.org/wiki/Triana%2C_Sevilla"
+  },
+  {
+   "sentences": 1,
+   "title": "A Meá, O Sequeiro, Valdoviño",
+   "url": "https://gl.wikipedia.org/wiki/A_Me%C3%A1%2C_O_Sequeiro%2C_Valdovi%C3%B1o"
+  },
+  {
+   "sentences": 25,
+   "title": "Consello de Seguridade Nuclear",
+   "url": "https://gl.wikipedia.org/wiki/Consello_de_Seguridade_Nuclear"
+  },
+  {
+   "sentences": 5,
+   "title": "Lynn Anderson",
+   "url": "https://gl.wikipedia.org/wiki/Lynn_Anderson"
+  },
+  {
+   "sentences": 13,
+   "title": "The Pastels",
+   "url": "https://gl.wikipedia.org/wiki/The_Pastels"
+  },
+  {
+   "sentences": 20,
+   "title": "Bernardo Kastrup",
+   "url": "https://gl.wikipedia.org/wiki/Bernardo_Kastrup"
+  },
+  {
+   "sentences": 3,
+   "title": "Emilio Couto",
+   "url": "https://gl.wikipedia.org/wiki/Emilio_Couto"
+  },
+  {
+   "sentences": 2,
+   "title": "Zarzosa",
+   "url": "https://gl.wikipedia.org/wiki/Zarzosa"
+  },
+  {
+   "sentences": 12,
+   "title": "Susana Fortes",
+   "url": "https://gl.wikipedia.org/wiki/Susana_Fortes"
+  },
+  {
+   "sentences": 25,
+   "title": "Decadencia do Imperio Romano",
+   "url": "https://gl.wikipedia.org/wiki/Decadencia_do_Imperio_Romano"
+  },
+  {
+   "sentences": 2,
+   "title": "Cabreira, Maianca, Oleiros",
+   "url": "https://gl.wikipedia.org/wiki/Cabreira%2C_Maianca%2C_Oleiros"
+  },
+  {
+   "sentences": 4,
+   "title": "Día Mundial da Liberdade de Prensa",
+   "url": "https://gl.wikipedia.org/wiki/D%C3%ADa_Mundial_da_Liberdade_de_Prensa"
+  },
+  {
+   "sentences": 1,
+   "title": "Arión (homónimos)",
+   "url": "https://gl.wikipedia.org/wiki/Ari%C3%B3n_%28hom%C3%B3nimos%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Torneo masculino de baloncesto nos Xogos Olímpicos de 2024",
+   "url": "https://gl.wikipedia.org/wiki/Torneo_masculino_de_baloncesto_nos_Xogos_Ol%C3%ADmpicos_de_2024"
+  },
+  {
+   "sentences": 25,
+   "title": "Osmia",
+   "url": "https://gl.wikipedia.org/wiki/Osmia"
+  },
+  {
+   "sentences": 3,
+   "title": "A Lamela, Goá, Cospeito",
+   "url": "https://gl.wikipedia.org/wiki/A_Lamela%2C_Go%C3%A1%2C_Cospeito"
+  },
+  {
+   "sentences": 25,
+   "title": "Historia da literatura galega (1951)",
+   "url": "https://gl.wikipedia.org/wiki/Historia_da_literatura_galega_%281951%29"
+  },
+  {
+   "sentences": 6,
+   "title": "Disartria",
+   "url": "https://gl.wikipedia.org/wiki/Disartria"
+  },
+  {
+   "sentences": 2,
+   "title": "A Rectoral, Santiago da Rabeda, Taboadela",
+   "url": "https://gl.wikipedia.org/wiki/A_Rectoral%2C_Santiago_da_Rabeda%2C_Taboadela"
+  },
+  {
+   "sentences": 2,
+   "title": "As Fontelas, Muniferral, Aranga",
+   "url": "https://gl.wikipedia.org/wiki/As_Fontelas%2C_Muniferral%2C_Aranga"
+  },
+  {
+   "sentences": 12,
+   "title": "Celestino Luís Crespo",
+   "url": "https://gl.wikipedia.org/wiki/Celestino_Lu%C3%ADs_Crespo"
+  },
+  {
+   "sentences": 7,
+   "title": "401",
+   "url": "https://gl.wikipedia.org/wiki/401"
+  },
+  {
+   "sentences": 2,
+   "title": "A Fonte, As Cabanas, San Xoán de Río",
+   "url": "https://gl.wikipedia.org/wiki/A_Fonte%2C_As_Cabanas%2C_San_Xo%C3%A1n_de_R%C3%ADo"
+  },
+  {
+   "sentences": 3,
+   "title": "Listanco, Armeses, Maside",
+   "url": "https://gl.wikipedia.org/wiki/Listanco%2C_Armeses%2C_Maside"
+  },
+  {
+   "sentences": 2,
+   "title": "A Aldea de Arriba, Cecebre, Cambre",
+   "url": "https://gl.wikipedia.org/wiki/A_Aldea_de_Arriba%2C_Cecebre%2C_Cambre"
+  },
+  {
+   "sentences": 4,
+   "title": "Pazos, Carballedo, Cerdedo Cotobade",
+   "url": "https://gl.wikipedia.org/wiki/Pazos%2C_Carballedo%2C_Cerdedo_Cotobade"
+  },
+  {
+   "sentences": 8,
+   "title": "Carballedo, Cerdedo Cotobade",
+   "url": "https://gl.wikipedia.org/wiki/Carballedo%2C_Cerdedo_Cotobade"
+  },
+  {
+   "sentences": 8,
+   "title": "Elysium (filme)",
+   "url": "https://gl.wikipedia.org/wiki/Elysium_%28filme%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Cristina Ramos",
+   "url": "https://gl.wikipedia.org/wiki/Cristina_Ramos"
+  },
+  {
+   "sentences": 3,
+   "title": "Trambasaugas, Rubiá, Rubiá",
+   "url": "https://gl.wikipedia.org/wiki/Trambasaugas%2C_Rubi%C3%A1%2C_Rubi%C3%A1"
+  },
+  {
+   "sentences": 10,
+   "title": "Enema",
+   "url": "https://gl.wikipedia.org/wiki/Enema"
+  },
+  {
+   "sentences": 4,
+   "title": "Sad Songs for Dirty Lovers",
+   "url": "https://gl.wikipedia.org/wiki/Sad_Songs_for_Dirty_Lovers"
+  },
+  {
+   "sentences": 9,
+   "title": "Sólido (homónimos)",
+   "url": "https://gl.wikipedia.org/wiki/S%C3%B3lido_%28hom%C3%B3nimos%29"
+  },
+  {
+   "sentences": 3,
+   "title": "José Novo Rodríguez",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Novo_Rodr%C3%ADguez"
+  },
+  {
+   "sentences": 25,
+   "title": "Alerxia alimentaria",
+   "url": "https://gl.wikipedia.org/wiki/Alerxia_alimentaria"
+  },
+  {
+   "sentences": 25,
+   "title": "Francis Cabrel",
+   "url": "https://gl.wikipedia.org/wiki/Francis_Cabrel"
+  },
+  {
+   "sentences": 1,
+   "title": "Nerea Balda",
+   "url": "https://gl.wikipedia.org/wiki/Nerea_Balda"
+  },
+  {
+   "sentences": 7,
+   "title": "Calle",
+   "url": "https://gl.wikipedia.org/wiki/Calle"
+  },
+  {
+   "sentences": 4,
+   "title": "Ideal Toy Company",
+   "url": "https://gl.wikipedia.org/wiki/Ideal_Toy_Company"
+  },
+  {
+   "sentences": 13,
+   "title": "Notting Hill (filme)",
+   "url": "https://gl.wikipedia.org/wiki/Notting_Hill_%28filme%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Idomeneo de Lampsaco",
+   "url": "https://gl.wikipedia.org/wiki/Idomeneo_de_Lampsaco"
+  },
+  {
+   "sentences": 25,
+   "title": "Nasser Al-Attiyah",
+   "url": "https://gl.wikipedia.org/wiki/Nasser_Al-Attiyah"
+  },
+  {
+   "sentences": 18,
+   "title": "Magnus Carlsen",
+   "url": "https://gl.wikipedia.org/wiki/Magnus_Carlsen"
+  },
+  {
+   "sentences": 10,
+   "title": "Gumersindo Pereira Nouche",
+   "url": "https://gl.wikipedia.org/wiki/Gumersindo_Pereira_Nouche"
+  },
+  {
+   "sentences": 3,
+   "title": "-1166",
+   "url": "https://gl.wikipedia.org/wiki/-1166"
+  },
+  {
+   "sentences": 4,
+   "title": "A Allonca, A Fonsagrada",
+   "url": "https://gl.wikipedia.org/wiki/A_Allonca%2C_A_Fonsagrada"
+  },
+  {
+   "sentences": 3,
+   "title": "Wikipedia en samoano",
+   "url": "https://gl.wikipedia.org/wiki/Wikipedia_en_samoano"
+  },
+  {
+   "sentences": 1,
+   "title": "Epiniac",
+   "url": "https://gl.wikipedia.org/wiki/Epiniac"
+  },
+  {
+   "sentences": 2,
+   "title": "Hinojosa de Duero",
+   "url": "https://gl.wikipedia.org/wiki/Hinojosa_de_Duero"
+  },
+  {
+   "sentences": 2,
+   "title": "Los Ausines",
+   "url": "https://gl.wikipedia.org/wiki/Los_Ausines"
+  },
+  {
+   "sentences": 6,
+   "title": "Calique (lúa)",
+   "url": "https://gl.wikipedia.org/wiki/Calique_%28l%C3%BAa%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Refrixeración dos alimentos",
+   "url": "https://gl.wikipedia.org/wiki/Refrixeraci%C3%B3n_dos_alimentos"
+  },
+  {
+   "sentences": 13,
+   "title": "Alessandro Del Piero",
+   "url": "https://gl.wikipedia.org/wiki/Alessandro_Del_Piero"
+  },
+  {
+   "sentences": 2,
+   "title": "A Paxariña, Valcarría, Viveiro",
+   "url": "https://gl.wikipedia.org/wiki/A_Paxari%C3%B1a%2C_Valcarr%C3%ADa%2C_Viveiro"
+  },
+  {
+   "sentences": 7,
+   "title": "Jules Bordet",
+   "url": "https://gl.wikipedia.org/wiki/Jules_Bordet"
+  },
+  {
+   "sentences": 3,
+   "title": "Leixões Sport Club",
+   "url": "https://gl.wikipedia.org/wiki/Leix%C3%B5es_Sport_Club"
+  },
+  {
+   "sentences": 4,
+   "title": "John Flanagan",
+   "url": "https://gl.wikipedia.org/wiki/John_Flanagan"
+  },
+  {
+   "sentences": 5,
+   "title": "Alpes Dináricos",
+   "url": "https://gl.wikipedia.org/wiki/Alpes_Din%C3%A1ricos"
+  },
+  {
+   "sentences": 1,
+   "title": "Kinosternoidea",
+   "url": "https://gl.wikipedia.org/wiki/Kinosternoidea"
+  },
+  {
+   "sentences": 25,
+   "title": "José Melchor Gomis",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Melchor_Gomis"
+  },
+  {
+   "sentences": 4,
+   "title": "Premio Astrid Lindgren",
+   "url": "https://gl.wikipedia.org/wiki/Premio_Astrid_Lindgren"
+  },
+  {
+   "sentences": 19,
+   "title": "Ifixenia de Etiopía",
+   "url": "https://gl.wikipedia.org/wiki/Ifixenia_de_Etiop%C3%ADa"
+  },
+  {
+   "sentences": 25,
+   "title": "Giulietta Masina",
+   "url": "https://gl.wikipedia.org/wiki/Giulietta_Masina"
+  },
+  {
+   "sentences": 25,
+   "title": "Latrodectus",
+   "url": "https://gl.wikipedia.org/wiki/Latrodectus"
+  },
+  {
+   "sentences": 12,
+   "title": "José Manuel Fernández de Labastida",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Manuel_Fern%C3%A1ndez_de_Labastida"
+  },
+  {
+   "sentences": 23,
+   "title": "Fengyun",
+   "url": "https://gl.wikipedia.org/wiki/Fengyun"
+  },
+  {
+   "sentences": 9,
+   "title": "Río Amstel",
+   "url": "https://gl.wikipedia.org/wiki/R%C3%ADo_Amstel"
+  },
+  {
+   "sentences": 25,
+   "title": "Muhsin Hendricks",
+   "url": "https://gl.wikipedia.org/wiki/Muhsin_Hendricks"
+  },
+  {
+   "sentences": 1,
+   "title": "Marpiré",
+   "url": "https://gl.wikipedia.org/wiki/Marpir%C3%A9"
+  },
+  {
+   "sentences": 7,
+   "title": "José Ramón Rego Martínez",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Ram%C3%B3n_Rego_Mart%C3%ADnez"
+  },
+  {
+   "sentences": 3,
+   "title": "As palabras dos galegos",
+   "url": "https://gl.wikipedia.org/wiki/As_palabras_dos_galegos"
+  },
+  {
+   "sentences": 5,
+   "title": "Mommy Dead and Dearest",
+   "url": "https://gl.wikipedia.org/wiki/Mommy_Dead_and_Dearest"
+  },
+  {
+   "sentences": 5,
+   "title": "Aix (mitoloxía)",
+   "url": "https://gl.wikipedia.org/wiki/Aix_%28mitolox%C3%ADa%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Juan Carlos Onetti",
+   "url": "https://gl.wikipedia.org/wiki/Juan_Carlos_Onetti"
+  },
+  {
+   "sentences": 1,
+   "title": "Constenla, Santo André de Vea, A Estrada",
+   "url": "https://gl.wikipedia.org/wiki/Constenla%2C_Santo_Andr%C3%A9_de_Vea%2C_A_Estrada"
+  },
+  {
+   "sentences": 2,
+   "title": "A Gándara, Estás, Tomiño",
+   "url": "https://gl.wikipedia.org/wiki/A_G%C3%A1ndara%2C_Est%C3%A1s%2C_Tomi%C3%B1o"
+  },
+  {
+   "sentences": 1,
+   "title": "O Piñeiro, Vincios, Gondomar",
+   "url": "https://gl.wikipedia.org/wiki/O_Pi%C3%B1eiro%2C_Vincios%2C_Gondomar"
+  },
+  {
+   "sentences": 4,
+   "title": "Samsung Galaxy",
+   "url": "https://gl.wikipedia.org/wiki/Samsung_Galaxy"
+  },
+  {
+   "sentences": 11,
+   "title": "Lloret de Mar",
+   "url": "https://gl.wikipedia.org/wiki/Lloret_de_Mar"
+  },
+  {
+   "sentences": 5,
+   "title": "Doraemon e o tren do tempo",
+   "url": "https://gl.wikipedia.org/wiki/Doraemon_e_o_tren_do_tempo"
+  },
+  {
+   "sentences": 25,
+   "title": "Íñigo Errejón",
+   "url": "https://gl.wikipedia.org/wiki/%C3%8D%C3%B1igo_Errej%C3%B3n"
+  },
+  {
+   "sentences": 2,
+   "title": "José Fernández Feijóo",
+   "url": "https://gl.wikipedia.org/wiki/Jos%C3%A9_Fern%C3%A1ndez_Feij%C3%B3o"
+  },
+  {
+   "sentences": 25,
+   "title": "Troy Van Leeuwen",
+   "url": "https://gl.wikipedia.org/wiki/Troy_Van_Leeuwen"
+  },
+  {
+   "sentences": 14,
+   "title": "Condado de Engjiang",
+   "url": "https://gl.wikipedia.org/wiki/Condado_de_Engjiang"
+  },
+  {
+   "sentences": 7,
+   "title": "Faial de Montejo",
+   "url": "https://gl.wikipedia.org/wiki/Faial_de_Montejo"
+  },
+  {
+   "sentences": 4,
+   "title": "Rodesia do Norte",
+   "url": "https://gl.wikipedia.org/wiki/Rodesia_do_Norte"
+  },
+  {
+   "sentences": 1,
+   "title": "Salaia",
+   "url": "https://gl.wikipedia.org/wiki/Salaia"
+  },
+  {
+   "sentences": 11,
+   "title": "Andreia C. Faria",
+   "url": "https://gl.wikipedia.org/wiki/Andreia_C._Faria"
+  },
+  {
+   "sentences": 10,
+   "title": "León VI, papa",
+   "url": "https://gl.wikipedia.org/wiki/Le%C3%B3n_VI%2C_papa"
+  },
+  {
+   "sentences": 1,
+   "title": "Somersby",
+   "url": "https://gl.wikipedia.org/wiki/Somersby"
+  },
+  {
+   "sentences": 3,
+   "title": "Joaquim Antonio Peres Fontanes",
+   "url": "https://gl.wikipedia.org/wiki/Joaquim_Antonio_Peres_Fontanes"
+  },
+  {
+   "sentences": 1,
+   "title": "2053",
+   "url": "https://gl.wikipedia.org/wiki/2053"
+  },
+  {
+   "sentences": 11,
+   "title": "Eleccións municipais en Toén",
+   "url": "https://gl.wikipedia.org/wiki/Elecci%C3%B3ns_municipais_en_To%C3%A9n"
+  },
+  {
+   "sentences": 15,
+   "title": "Valentin Inzko",
+   "url": "https://gl.wikipedia.org/wiki/Valentin_Inzko"
+  },
+  {
+   "sentences": 6,
+   "title": "O príncipe das mareas",
+   "url": "https://gl.wikipedia.org/wiki/O_pr%C3%ADncipe_das_mareas"
+  },
+  {
+   "sentences": 23,
+   "title": "Resident Evil: The Darkside Chronicles",
+   "url": "https://gl.wikipedia.org/wiki/Resident_Evil%3A_The_Darkside_Chronicles"
+  },
+  {
+   "sentences": 25,
+   "title": "Ministerio de Traballo e Economía Social (España)",
+   "url": "https://gl.wikipedia.org/wiki/Ministerio_de_Traballo_e_Econom%C3%ADa_Social_%28Espa%C3%B1a%29"
+  },
+  {
+   "sentences": 2,
+   "title": "A Portaxe, Araúxo, Lobios",
+   "url": "https://gl.wikipedia.org/wiki/A_Portaxe%2C_Ara%C3%BAxo%2C_Lobios"
+  },
+  {
+   "sentences": 5,
+   "title": "1662",
+   "url": "https://gl.wikipedia.org/wiki/1662"
+  },
+  {
+   "sentences": 1,
+   "title": "O Portorrío, Romariz, Abadín",
+   "url": "https://gl.wikipedia.org/wiki/O_Portorr%C3%ADo%2C_Romariz%2C_Abad%C3%ADn"
+  },
+  {
+   "sentences": 2,
+   "title": "O Outeiro, Orega, Leiro",
+   "url": "https://gl.wikipedia.org/wiki/O_Outeiro%2C_Orega%2C_Leiro"
+  },
+  {
+   "sentences": 2,
+   "title": "Agroxoi, A Broza, O Saviñao",
+   "url": "https://gl.wikipedia.org/wiki/Agroxoi%2C_A_Broza%2C_O_Savi%C3%B1ao"
+  },
+  {
+   "sentences": 16,
+   "title": "Euxenita",
+   "url": "https://gl.wikipedia.org/wiki/Euxenita"
+  },
+  {
+   "sentences": 3,
+   "title": "Morás, Xove",
+   "url": "https://gl.wikipedia.org/wiki/Mor%C3%A1s%2C_Xove"
+  },
+  {
+   "sentences": 1,
+   "title": "O Fomento, O Vicedo, O Vicedo",
+   "url": "https://gl.wikipedia.org/wiki/O_Fomento%2C_O_Vicedo%2C_O_Vicedo"
+  },
+  {
+   "sentences": 7,
+   "title": "The Dandy Warhols",
+   "url": "https://gl.wikipedia.org/wiki/The_Dandy_Warhols"
+  },
+  {
+   "sentences": 7,
+   "title": "Handbollsligan",
+   "url": "https://gl.wikipedia.org/wiki/Handbollsligan"
+  },
+  {
+   "sentences": 2,
+   "title": "Fokker 70",
+   "url": "https://gl.wikipedia.org/wiki/Fokker_70"
+  },
+  {
+   "sentences": 22,
+   "title": "Merlo de colar",
+   "url": "https://gl.wikipedia.org/wiki/Merlo_de_colar"
+  },
+  {
+   "sentences": 2,
+   "title": "Ría de Lires",
+   "url": "https://gl.wikipedia.org/wiki/R%C3%ADa_de_Lires"
+  },
+  {
+   "sentences": 13,
+   "title": "Obra derivada",
+   "url": "https://gl.wikipedia.org/wiki/Obra_derivada"
+  },
+  {
+   "sentences": 25,
+   "title": "Cupresáceas",
+   "url": "https://gl.wikipedia.org/wiki/Cupres%C3%A1ceas"
+  },
+  {
+   "sentences": 3,
+   "title": "Gantz: O",
+   "url": "https://gl.wikipedia.org/wiki/Gantz%3A_O"
+  },
+  {
+   "sentences": 11,
+   "title": "Rochas cristalinas",
+   "url": "https://gl.wikipedia.org/wiki/Rochas_cristalinas"
+  },
+  {
+   "sentences": 21,
+   "title": "Gustavo Balza",
+   "url": "https://gl.wikipedia.org/wiki/Gustavo_Balza"
+  },
+  {
+   "sentences": 25,
+   "title": "Carlos II de Estiria",
+   "url": "https://gl.wikipedia.org/wiki/Carlos_II_de_Estiria"
+  },
+  {
+   "sentences": 5,
+   "title": "Ragusa",
+   "url": "https://gl.wikipedia.org/wiki/Ragusa"
+  },
+  {
+   "sentences": 7,
+   "title": "Şehzade Mustafá",
+   "url": "https://gl.wikipedia.org/wiki/%C5%9Eehzade_Mustaf%C3%A1"
+  },
+  {
+   "sentences": 6,
+   "title": "Premio Glenn Smedley Memorial",
+   "url": "https://gl.wikipedia.org/wiki/Premio_Glenn_Smedley_Memorial"
+  },
+  {
+   "sentences": 2,
+   "title": "Leboré, Cabreiros, Xermade",
+   "url": "https://gl.wikipedia.org/wiki/Lebor%C3%A9%2C_Cabreiros%2C_Xermade"
+  },
+  {
+   "sentences": 4,
+   "title": "Valiño, Lousada, Carballedo",
+   "url": "https://gl.wikipedia.org/wiki/Vali%C3%B1o%2C_Lousada%2C_Carballedo"
+  },
+  {
+   "sentences": 10,
+   "title": "Premio Agustín Fernández Paz de narrativa infantil e xuvenil pola Igualdade",
+   "url": "https://gl.wikipedia.org/wiki/Premio_Agust%C3%ADn_Fern%C3%A1ndez_Paz_de_narrativa_infantil_e_xuvenil_pola_Igualdade"
+  },
+  {
+   "sentences": 13,
+   "title": "Moeda de 10 francos Victor Hugo",
+   "url": "https://gl.wikipedia.org/wiki/Moeda_de_10_francos_Victor_Hugo"
+  },
+  {
+   "sentences": 5,
+   "title": "Wikipedia en hawaiano",
+   "url": "https://gl.wikipedia.org/wiki/Wikipedia_en_hawaiano"
+  },
+  {
+   "sentences": 6,
+   "title": "Casa de Campo",
+   "url": "https://gl.wikipedia.org/wiki/Casa_de_Campo"
+  },
+  {
+   "sentences": 1,
+   "title": "O Castiñeiro, Andoio, Tordoia",
+   "url": "https://gl.wikipedia.org/wiki/O_Casti%C3%B1eiro%2C_Andoio%2C_Tordoia"
+  },
+  {
+   "sentences": 25,
+   "title": "Telefónica Europe",
+   "url": "https://gl.wikipedia.org/wiki/Telef%C3%B3nica_Europe"
+  },
+  {
+   "sentences": 5,
+   "title": "Ramón López Amado",
+   "url": "https://gl.wikipedia.org/wiki/Ram%C3%B3n_L%C3%B3pez_Amado"
+  },
+  {
+   "sentences": 1,
+   "title": "As Telleiras, Nigrán, Nigrán",
+   "url": "https://gl.wikipedia.org/wiki/As_Telleiras%2C_Nigr%C3%A1n%2C_Nigr%C3%A1n"
+  },
+  {
+   "sentences": 1,
+   "title": "O Cal, Limodre, Fene",
+   "url": "https://gl.wikipedia.org/wiki/O_Cal%2C_Limodre%2C_Fene"
+  },
+  {
+   "sentences": 25,
+   "title": "Northampton Saints",
+   "url": "https://gl.wikipedia.org/wiki/Northampton_Saints"
+  },
+  {
+   "sentences": 1,
+   "title": "Paramios, Castrelo, San Cristovo de Cea",
+   "url": "https://gl.wikipedia.org/wiki/Paramios%2C_Castrelo%2C_San_Cristovo_de_Cea"
+  },
+  {
+   "sentences": 20,
+   "title": "Pródico de Ceos",
+   "url": "https://gl.wikipedia.org/wiki/Pr%C3%B3dico_de_Ceos"
+  },
+  {
+   "sentences": 15,
+   "title": "Hüseyin Aygün",
+   "url": "https://gl.wikipedia.org/wiki/H%C3%BCseyin_Ayg%C3%BCn"
+  },
+  {
+   "sentences": 2,
+   "title": "Universidade Estatal de Feira de Santana",
+   "url": "https://gl.wikipedia.org/wiki/Universidade_Estatal_de_Feira_de_Santana"
+  },
+  {
+   "sentences": 25,
+   "title": "Terrorismo",
+   "url": "https://gl.wikipedia.org/wiki/Terrorismo"
+  },
+  {
+   "sentences": 1,
+   "title": "O Outeiro, Maroxo, Arzúa",
+   "url": "https://gl.wikipedia.org/wiki/O_Outeiro%2C_Maroxo%2C_Arz%C3%BAa"
+  },
+  {
+   "sentences": 4,
+   "title": "Ligue 2 2011/12",
+   "url": "https://gl.wikipedia.org/wiki/Ligue_2_2011/12"
+  },
+  {
+   "sentences": 8,
+   "title": "Salvatore Schillaci",
+   "url": "https://gl.wikipedia.org/wiki/Salvatore_Schillaci"
+  },
+  {
+   "sentences": 6,
+   "title": "Kara Kyzyl Sary",
+   "url": "https://gl.wikipedia.org/wiki/Kara_Kyzyl_Sary"
+  },
+  {
+   "sentences": 25,
+   "title": "Orixe da auga na Terra",
+   "url": "https://gl.wikipedia.org/wiki/Orixe_da_auga_na_Terra"
+  },
+  {
+   "sentences": 10,
+   "title": "Púrpura (medicina)",
+   "url": "https://gl.wikipedia.org/wiki/P%C3%BArpura_%28medicina%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Sobrado, Sobrado, A Pobra de Trives",
+   "url": "https://gl.wikipedia.org/wiki/Sobrado%2C_Sobrado%2C_A_Pobra_de_Trives"
+  },
+  {
+   "sentences": 16,
+   "title": "Neroli Fairhall",
+   "url": "https://gl.wikipedia.org/wiki/Neroli_Fairhall"
+  },
+  {
+   "sentences": 3,
+   "title": "Brañela",
+   "url": "https://gl.wikipedia.org/wiki/Bra%C3%B1ela"
+  },
+  {
+   "sentences": 4,
+   "title": "Códec",
+   "url": "https://gl.wikipedia.org/wiki/C%C3%B3dec"
+  },
+  {
+   "sentences": 1,
+   "title": "A Gaiola, Cerdeda, Taboada",
+   "url": "https://gl.wikipedia.org/wiki/A_Gaiola%2C_Cerdeda%2C_Taboada"
+  },
+  {
+   "sentences": 13,
+   "title": "Gran Premio de Francia de 1974",
+   "url": "https://gl.wikipedia.org/wiki/Gran_Premio_de_Francia_de_1974"
+  },
+  {
+   "sentences": 25,
+   "title": "Clostridium perfringens",
+   "url": "https://gl.wikipedia.org/wiki/Clostridium_perfringens"
+  },
+  {
+   "sentences": 9,
+   "title": "Joseph Schildkraut",
+   "url": "https://gl.wikipedia.org/wiki/Joseph_Schildkraut"
+  },
+  {
+   "sentences": 25,
+   "title": "Euxénese",
+   "url": "https://gl.wikipedia.org/wiki/Eux%C3%A9nese"
+  },
+  {
+   "sentences": 25,
+   "title": "Pedro Sánchez",
+   "url": "https://gl.wikipedia.org/wiki/Pedro_S%C3%A1nchez"
+  },
+  {
+   "sentences": 2,
+   "title": "Beleña",
+   "url": "https://gl.wikipedia.org/wiki/Bele%C3%B1a"
+  },
+  {
+   "sentences": 9,
+   "title": "Ernst Busch (actor)",
+   "url": "https://gl.wikipedia.org/wiki/Ernst_Busch_%28actor%29"
+  },
+  {
+   "sentences": 7,
+   "title": "Javier Alonso Seoane",
+   "url": "https://gl.wikipedia.org/wiki/Javier_Alonso_Seoane"
+  },
+  {
+   "sentences": 25,
+   "title": "Notorictemorfos",
+   "url": "https://gl.wikipedia.org/wiki/Notorictemorfos"
+  },
+  {
+   "sentences": 2,
+   "title": "Donhierro",
+   "url": "https://gl.wikipedia.org/wiki/Donhierro"
+  },
+  {
+   "sentences": 2,
+   "title": "O Pumariño, Cea, Vilagarcía de Arousa",
+   "url": "https://gl.wikipedia.org/wiki/O_Pumari%C3%B1o%2C_Cea%2C_Vilagarc%C3%ADa_de_Arousa"
+  },
+  {
+   "sentences": 25,
+   "title": "Empresa de traballo temporal",
+   "url": "https://gl.wikipedia.org/wiki/Empresa_de_traballo_temporal"
+  },
+  {
+   "sentences": 4,
+   "title": "Algaida",
+   "url": "https://gl.wikipedia.org/wiki/Algaida"
+  },
+  {
+   "sentences": 7,
+   "title": "Mapa (homónimos)",
+   "url": "https://gl.wikipedia.org/wiki/Mapa_%28hom%C3%B3nimos%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Eternity",
+   "url": "https://gl.wikipedia.org/wiki/Eternity"
+  },
+  {
+   "sentences": 25,
+   "title": "Borja Iglesias",
+   "url": "https://gl.wikipedia.org/wiki/Borja_Iglesias"
+  },
+  {
+   "sentences": 8,
+   "title": "Imnos is tin Eleftherian",
+   "url": "https://gl.wikipedia.org/wiki/Imnos_is_tin_Eleftherian"
+  },
+  {
+   "sentences": 4,
+   "title": "Songs to Fan the Flames of Discontent",
+   "url": "https://gl.wikipedia.org/wiki/Songs_to_Fan_the_Flames_of_Discontent"
+  },
+  {
+   "sentences": 9,
+   "title": "Cen Mil Fillos de San Luís",
+   "url": "https://gl.wikipedia.org/wiki/Cen_Mil_Fillos_de_San_Lu%C3%ADs"
+  },
+  {
+   "sentences": 2,
+   "title": "Represión",
+   "url": "https://gl.wikipedia.org/wiki/Represi%C3%B3n"
+  },
+  {
+   "sentences": 7,
+   "title": "Warm Bodies (filme)",
+   "url": "https://gl.wikipedia.org/wiki/Warm_Bodies_%28filme%29"
+  },
+  {
+   "sentences": 22,
+   "title": "Goberno da Comunidade de Madrid",
+   "url": "https://gl.wikipedia.org/wiki/Goberno_da_Comunidade_de_Madrid"
+  },
+  {
+   "sentences": 15,
+   "title": "Oficina do Censo dos Estados Unidos de América",
+   "url": "https://gl.wikipedia.org/wiki/Oficina_do_Censo_dos_Estados_Unidos_de_Am%C3%A9rica"
+  },
+  {
+   "sentences": 2,
+   "title": "Barciela, Vilatuxe, Lalín",
+   "url": "https://gl.wikipedia.org/wiki/Barciela%2C_Vilatuxe%2C_Lal%C3%ADn"
+  },
+  {
+   "sentences": 1,
+   "title": "Villepot",
+   "url": "https://gl.wikipedia.org/wiki/Villepot"
+  },
+  {
+   "sentences": 2,
+   "title": "Lamas, San Pedro de Viveiro, Viveiro",
+   "url": "https://gl.wikipedia.org/wiki/Lamas%2C_San_Pedro_de_Viveiro%2C_Viveiro"
+  },
+  {
+   "sentences": 7,
+   "title": "Amnesiac",
+   "url": "https://gl.wikipedia.org/wiki/Amnesiac"
+  },
+  {
+   "sentences": 1,
+   "title": "A Fontenova, San Cristovo das Viñas, A Coruña",
+   "url": "https://gl.wikipedia.org/wiki/A_Fontenova%2C_San_Cristovo_das_Vi%C3%B1as%2C_A_Coru%C3%B1a"
+  },
+  {
+   "sentences": 6,
+   "title": "Condados de Washington",
+   "url": "https://gl.wikipedia.org/wiki/Condados_de_Washington"
+  },
+  {
+   "sentences": 2,
+   "title": "O Carballal, Traba, Coristanco",
+   "url": "https://gl.wikipedia.org/wiki/O_Carballal%2C_Traba%2C_Coristanco"
+  },
+  {
+   "sentences": 3,
+   "title": "Dunadd",
+   "url": "https://gl.wikipedia.org/wiki/Dunadd"
+  },
+  {
+   "sentences": 11,
+   "title": "Francisco Caamaño Deñó",
+   "url": "https://gl.wikipedia.org/wiki/Francisco_Caama%C3%B1o_De%C3%B1%C3%B3"
+  },
+  {
+   "sentences": 1,
+   "title": "A Fonte Grande, O Castro de Soengas, Portomarín",
+   "url": "https://gl.wikipedia.org/wiki/A_Fonte_Grande%2C_O_Castro_de_Soengas%2C_Portomar%C3%ADn"
+  },
+  {
+   "sentences": 2,
+   "title": "Nikolaus von Amsdorf",
+   "url": "https://gl.wikipedia.org/wiki/Nikolaus_von_Amsdorf"
+  },
+  {
+   "sentences": 25,
+   "title": "Fukuoka",
+   "url": "https://gl.wikipedia.org/wiki/Fukuoka"
+  },
+  {
+   "sentences": 11,
+   "title": "Hidroxilisina",
+   "url": "https://gl.wikipedia.org/wiki/Hidroxilisina"
+  },
+  {
+   "sentences": 25,
+   "title": "Isomería estrutural",
+   "url": "https://gl.wikipedia.org/wiki/Isomer%C3%ADa_estrutural"
+  },
+  {
+   "sentences": 4,
+   "title": "Madrugada",
+   "url": "https://gl.wikipedia.org/wiki/Madrugada"
+  },
+  {
+   "sentences": 2,
+   "title": "Os Currás, Galgao, Abadín",
+   "url": "https://gl.wikipedia.org/wiki/Os_Curr%C3%A1s%2C_Galgao%2C_Abad%C3%ADn"
+  },
+  {
+   "sentences": 10,
+   "title": "Enxame",
+   "url": "https://gl.wikipedia.org/wiki/Enxame"
+  },
+  {
+   "sentences": 25,
+   "title": "Santiago Solari",
+   "url": "https://gl.wikipedia.org/wiki/Santiago_Solari"
+  },
+  {
+   "sentences": 3,
+   "title": "Spiritualized",
+   "url": "https://gl.wikipedia.org/wiki/Spiritualized"
+  },
+  {
+   "sentences": 6,
+   "title": "De loteling",
+   "url": "https://gl.wikipedia.org/wiki/De_loteling"
+  },
+  {
+   "sentences": 11,
+   "title": "Georgios Chalavazis",
+   "url": "https://gl.wikipedia.org/wiki/Georgios_Chalavazis"
+  },
+  {
+   "sentences": 6,
+   "title": "Alicate",
+   "url": "https://gl.wikipedia.org/wiki/Alicate"
+  },
+  {
+   "sentences": 6,
+   "title": "Poly Styrene",
+   "url": "https://gl.wikipedia.org/wiki/Poly_Styrene"
+  },
+  {
+   "sentences": 21,
+   "title": "Xosé Lodeiro",
+   "url": "https://gl.wikipedia.org/wiki/Xos%C3%A9_Lodeiro"
+  },
+  {
+   "sentences": 20,
+   "title": "Serie telescópica",
+   "url": "https://gl.wikipedia.org/wiki/Serie_telesc%C3%B3pica"
+  },
+  {
+   "sentences": 25,
+   "title": "Xulia Clary",
+   "url": "https://gl.wikipedia.org/wiki/Xulia_Clary"
+  },
+  {
+   "sentences": 5,
+   "title": "Stadium de Toulouse",
+   "url": "https://gl.wikipedia.org/wiki/Stadium_de_Toulouse"
+  },
+  {
+   "sentences": 4,
+   "title": "Bún bò Huế",
+   "url": "https://gl.wikipedia.org/wiki/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF"
+  },
+  {
+   "sentences": 23,
+   "title": "Thierry Jonquet",
+   "url": "https://gl.wikipedia.org/wiki/Thierry_Jonquet"
+  },
+  {
+   "sentences": 13,
+   "title": "Pedrafita de Rebordiño",
+   "url": "https://gl.wikipedia.org/wiki/Pedrafita_de_Rebordi%C3%B1o"
+  },
+  {
+   "sentences": 25,
+   "title": "Vesícula seminal",
+   "url": "https://gl.wikipedia.org/wiki/Ves%C3%ADcula_seminal"
+  },
+  {
+   "sentences": 10,
+   "title": "PO-264",
+   "url": "https://gl.wikipedia.org/wiki/PO-264"
+  },
+  {
+   "sentences": 2,
+   "title": "Lagos, Láncara",
+   "url": "https://gl.wikipedia.org/wiki/Lagos%2C_L%C3%A1ncara"
+  },
+  {
+   "sentences": 2,
+   "title": "Maurice Cloche",
+   "url": "https://gl.wikipedia.org/wiki/Maurice_Cloche"
+  },
+  {
+   "sentences": 1,
+   "title": "A Granxa, San Lourenzo de Fustáns, Gomesende",
+   "url": "https://gl.wikipedia.org/wiki/A_Granxa%2C_San_Lourenzo_de_Fust%C3%A1ns%2C_Gomesende"
+  },
+  {
+   "sentences": 25,
+   "title": "Convento de Santa Clara de Pontevedra",
+   "url": "https://gl.wikipedia.org/wiki/Convento_de_Santa_Clara_de_Pontevedra"
+  },
+  {
+   "sentences": 25,
+   "title": "Celso Bugallo",
+   "url": "https://gl.wikipedia.org/wiki/Celso_Bugallo"
+  },
+  {
+   "sentences": 3,
+   "title": "Billy West",
+   "url": "https://gl.wikipedia.org/wiki/Billy_West"
+  },
+  {
+   "sentences": 7,
+   "title": "Nicolas Cage",
+   "url": "https://gl.wikipedia.org/wiki/Nicolas_Cage"
+  },
+  {
+   "sentences": 3,
+   "title": "Francos, Baralla",
+   "url": "https://gl.wikipedia.org/wiki/Francos%2C_Baralla"
+  },
+  {
+   "sentences": 9,
+   "title": "Stipe Pletikosa",
+   "url": "https://gl.wikipedia.org/wiki/Stipe_Pletikosa"
+  },
+  {
+   "sentences": 2,
+   "title": "As Pereiras, A Armenteira, Meis",
+   "url": "https://gl.wikipedia.org/wiki/As_Pereiras%2C_A_Armenteira%2C_Meis"
+  },
+  {
+   "sentences": 5,
+   "title": "Gabriel Plaza Molina",
+   "url": "https://gl.wikipedia.org/wiki/Gabriel_Plaza_Molina"
+  },
+  {
+   "sentences": 2,
+   "title": "A Casopa, Seixas, Cospeito",
+   "url": "https://gl.wikipedia.org/wiki/A_Casopa%2C_Seixas%2C_Cospeito"
+  },
+  {
+   "sentences": 7,
+   "title": "Sakamichi no Apollon",
+   "url": "https://gl.wikipedia.org/wiki/Sakamichi_no_Apollon"
+  },
+  {
+   "sentences": 5,
+   "title": "Sacrificio",
+   "url": "https://gl.wikipedia.org/wiki/Sacrificio"
+  },
+  {
+   "sentences": 4,
+   "title": "Gin and Juice",
+   "url": "https://gl.wikipedia.org/wiki/Gin_and_Juice"
+  },
+  {
+   "sentences": 1,
+   "title": "A Aldea de Riba, Prado da Canda, Covelo",
+   "url": "https://gl.wikipedia.org/wiki/A_Aldea_de_Riba%2C_Prado_da_Canda%2C_Covelo"
+  },
+  {
+   "sentences": 2,
+   "title": "Os Caravasares persas",
+   "url": "https://gl.wikipedia.org/wiki/Os_Caravasares_persas"
+  },
+  {
+   "sentences": 5,
+   "title": "Calvo Sotelo",
+   "url": "https://gl.wikipedia.org/wiki/Calvo_Sotelo"
+  },
+  {
+   "sentences": 4,
+   "title": "Condatis",
+   "url": "https://gl.wikipedia.org/wiki/Condatis"
+  },
+  {
+   "sentences": 24,
+   "title": "Daniel Giménez Hernández",
+   "url": "https://gl.wikipedia.org/wiki/Daniel_Gim%C3%A9nez_Hern%C3%A1ndez"
+  },
+  {
+   "sentences": 11,
+   "title": "Ara Solis (álbum)",
+   "url": "https://gl.wikipedia.org/wiki/Ara_Solis_%28%C3%A1lbum%29"
+  },
+  {
+   "sentences": 5,
+   "title": "Kosmos 76",
+   "url": "https://gl.wikipedia.org/wiki/Kosmos_76"
+  },
+  {
+   "sentences": 3,
+   "title": "Wikipedia en bajaw da costa occidental",
+   "url": "https://gl.wikipedia.org/wiki/Wikipedia_en_bajaw_da_costa_occidental"
+  },
+  {
+   "sentences": 18,
+   "title": "Ontario Women's Hockey League",
+   "url": "https://gl.wikipedia.org/wiki/Ontario_Women%27s_Hockey_League"
+  },
+  {
+   "sentences": 15,
+   "title": "Concello de Naucalpan de Juárez",
+   "url": "https://gl.wikipedia.org/wiki/Concello_de_Naucalpan_de_Ju%C3%A1rez"
+  },
+  {
+   "sentences": 1,
+   "title": "Raxoi, Valga, Valga",
+   "url": "https://gl.wikipedia.org/wiki/Raxoi%2C_Valga%2C_Valga"
+  },
+  {
+   "sentences": 25,
+   "title": "Asistencia sanitaria LGBT na Administración da Saúde dos Veteranos dos Estados Unidos",
+   "url": "https://gl.wikipedia.org/wiki/Asistencia_sanitaria_LGBT_na_Administraci%C3%B3n_da_Sa%C3%BAde_dos_Veteranos_dos_Estados_Unidos"
+  },
+  {
+   "sentences": 2,
+   "title": "As Rebuiras, Cesullas, Cabana de Bergantiños",
+   "url": "https://gl.wikipedia.org/wiki/As_Rebuiras%2C_Cesullas%2C_Cabana_de_Berganti%C3%B1os"
+  },
+  {
+   "sentences": 25,
+   "title": "Rafidiópteros",
+   "url": "https://gl.wikipedia.org/wiki/Rafidi%C3%B3pteros"
+  },
+  {
+   "sentences": 6,
+   "title": "1718",
+   "url": "https://gl.wikipedia.org/wiki/1718"
+  },
+  {
+   "sentences": 10,
+   "title": "Eduardo Moreno López",
+   "url": "https://gl.wikipedia.org/wiki/Eduardo_Moreno_L%C3%B3pez"
+  },
+  {
+   "sentences": 2,
+   "title": "Vilarpandín",
+   "url": "https://gl.wikipedia.org/wiki/Vilarpand%C3%ADn"
+  },
+  {
+   "sentences": 23,
+   "title": "Área metropolitana de Valencia",
+   "url": "https://gl.wikipedia.org/wiki/%C3%81rea_metropolitana_de_Valencia"
+  },
+  {
+   "sentences": 23,
+   "title": "Candidatura Independiente",
+   "url": "https://gl.wikipedia.org/wiki/Candidatura_Independiente"
+  },
+  {
+   "sentences": 19,
+   "title": "Paul Samuelson",
+   "url": "https://gl.wikipedia.org/wiki/Paul_Samuelson"
+  },
+  {
+   "sentences": 25,
+   "title": "Žatec",
+   "url": "https://gl.wikipedia.org/wiki/%C5%BDatec"
+  },
+  {
+   "sentences": 4,
+   "title": "22 vs. Earth",
+   "url": "https://gl.wikipedia.org/wiki/22_vs._Earth"
+  },
+  {
+   "sentences": 1,
+   "title": "Valdegodos, Vilamartín de Valdeorras, Vilamartín de Valdeorras",
+   "url": "https://gl.wikipedia.org/wiki/Valdegodos%2C_Vilamart%C3%ADn_de_Valdeorras%2C_Vilamart%C3%ADn_de_Valdeorras"
+  },
+  {
+   "sentences": 25,
+   "title": "Capón",
+   "url": "https://gl.wikipedia.org/wiki/Cap%C3%B3n"
+  },
+  {
+   "sentences": 1,
+   "title": "Ryan Phillippe",
+   "url": "https://gl.wikipedia.org/wiki/Ryan_Phillippe"
+  },
+  {
+   "sentences": 13,
+   "title": "Scribus",
+   "url": "https://gl.wikipedia.org/wiki/Scribus"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "gl",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 3780,
+ "wikipedia": "https://gl.wikipedia.org/"
+}

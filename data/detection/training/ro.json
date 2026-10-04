@@ -1,0 +1,2005 @@
+{
+ "api_params": {
+  "action": "query",
+  "exlimit": "1",
+  "explaintext": "1",
+  "format": "json",
+  "formatversion": "2",
+  "generator": "random",
+  "grnlimit": "1",
+  "grnnamespace": "0",
+  "prop": "extracts",
+  "redirects": "1"
+ },
+ "api_url": "https://ro.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts&explaintext=1&redirects=1&exlimit=1&generator=random&grnnamespace=0&grnlimit=1",
+ "articles": [
+  {
+   "sentences": 7,
+   "title": "Spanair",
+   "url": "https://ro.wikipedia.org/wiki/Spanair"
+  },
+  {
+   "sentences": 2,
+   "title": "Bobove, Teceu",
+   "url": "https://ro.wikipedia.org/wiki/Bobove%2C_Teceu"
+  },
+  {
+   "sentences": 4,
+   "title": "147693 Piccioni",
+   "url": "https://ro.wikipedia.org/wiki/147693_Piccioni"
+  },
+  {
+   "sentences": 25,
+   "title": "Teritoriile palestiniene",
+   "url": "https://ro.wikipedia.org/wiki/Teritoriile_palestiniene"
+  },
+  {
+   "sentences": 3,
+   "title": "Judith Engel",
+   "url": "https://ro.wikipedia.org/wiki/Judith_Engel"
+  },
+  {
+   "sentences": 1,
+   "title": "Prince Alfred",
+   "url": "https://ro.wikipedia.org/wiki/Prince_Alfred"
+  },
+  {
+   "sentences": 1,
+   "title": "Uniunea Asociațiilor Arabe de Fotbal",
+   "url": "https://ro.wikipedia.org/wiki/Uniunea_Asocia%C8%9Biilor_Arabe_de_Fotbal"
+  },
+  {
+   "sentences": 5,
+   "title": "Nordtorpet",
+   "url": "https://ro.wikipedia.org/wiki/Nordtorpet"
+  },
+  {
+   "sentences": 8,
+   "title": "Matti Vanhanen",
+   "url": "https://ro.wikipedia.org/wiki/Matti_Vanhanen"
+  },
+  {
+   "sentences": 13,
+   "title": "Colelia, Ialomița",
+   "url": "https://ro.wikipedia.org/wiki/Colelia%2C_Ialomi%C8%9Ba"
+  },
+  {
+   "sentences": 8,
+   "title": "Brăila Mall",
+   "url": "https://ro.wikipedia.org/wiki/Br%C4%83ila_Mall"
+  },
+  {
+   "sentences": 2,
+   "title": "100553 Dariofo",
+   "url": "https://ro.wikipedia.org/wiki/100553_Dariofo"
+  },
+  {
+   "sentences": 2,
+   "title": "Lauregno",
+   "url": "https://ro.wikipedia.org/wiki/Lauregno"
+  },
+  {
+   "sentences": 2,
+   "title": "Kurciîțea, Novohrad-Volînskîi",
+   "url": "https://ro.wikipedia.org/wiki/Kurci%C3%AE%C8%9Bea%2C_Novohrad-Vol%C3%AEnsk%C3%AEi"
+  },
+  {
+   "sentences": 2,
+   "title": "Aeroportul Franco Bianco",
+   "url": "https://ro.wikipedia.org/wiki/Aeroportul_Franco_Bianco"
+  },
+  {
+   "sentences": 3,
+   "title": "Deadlands",
+   "url": "https://ro.wikipedia.org/wiki/Deadlands"
+  },
+  {
+   "sentences": 14,
+   "title": "Ira Gershwin",
+   "url": "https://ro.wikipedia.org/wiki/Ira_Gershwin"
+  },
+  {
+   "sentences": 1,
+   "title": "Echternach (canton)",
+   "url": "https://ro.wikipedia.org/wiki/Echternach_%28canton%29"
+  },
+  {
+   "sentences": 8,
+   "title": "Walter Stain",
+   "url": "https://ro.wikipedia.org/wiki/Walter_Stain"
+  },
+  {
+   "sentences": 13,
+   "title": "Ape uzate",
+   "url": "https://ro.wikipedia.org/wiki/Ape_uzate"
+  },
+  {
+   "sentences": 7,
+   "title": "Cymbalaria",
+   "url": "https://ro.wikipedia.org/wiki/Cymbalaria"
+  },
+  {
+   "sentences": 25,
+   "title": "Büren an der Aare",
+   "url": "https://ro.wikipedia.org/wiki/B%C3%BCren_an_der_Aare"
+  },
+  {
+   "sentences": 2,
+   "title": "Puilacher",
+   "url": "https://ro.wikipedia.org/wiki/Puilacher"
+  },
+  {
+   "sentences": 2,
+   "title": "LayCool",
+   "url": "https://ro.wikipedia.org/wiki/LayCool"
+  },
+  {
+   "sentences": 3,
+   "title": "Districtul Flacq",
+   "url": "https://ro.wikipedia.org/wiki/Districtul_Flacq"
+  },
+  {
+   "sentences": 4,
+   "title": "M-fenilendiamină",
+   "url": "https://ro.wikipedia.org/wiki/M-fenilendiamin%C4%83"
+  },
+  {
+   "sentences": 5,
+   "title": "Mereni",
+   "url": "https://ro.wikipedia.org/wiki/Mereni"
+  },
+  {
+   "sentences": 13,
+   "title": "Milan Gajić (fotbalist născut în 1996)",
+   "url": "https://ro.wikipedia.org/wiki/Milan_Gaji%C4%87_%28fotbalist_n%C4%83scut_%C3%AEn_1996%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Cranves-Sales",
+   "url": "https://ro.wikipedia.org/wiki/Cranves-Sales"
+  },
+  {
+   "sentences": 1,
+   "title": "Modena Team",
+   "url": "https://ro.wikipedia.org/wiki/Modena_Team"
+  },
+  {
+   "sentences": 4,
+   "title": "Seliminovo, Sliven",
+   "url": "https://ro.wikipedia.org/wiki/Seliminovo%2C_Sliven"
+  },
+  {
+   "sentences": 7,
+   "title": "Matthías Jochumsson",
+   "url": "https://ro.wikipedia.org/wiki/Matth%C3%ADas_Jochumsson"
+  },
+  {
+   "sentences": 14,
+   "title": "Transylvanosaurus",
+   "url": "https://ro.wikipedia.org/wiki/Transylvanosaurus"
+  },
+  {
+   "sentences": 5,
+   "title": "Gostilele, Călărași",
+   "url": "https://ro.wikipedia.org/wiki/Gostilele%2C_C%C4%83l%C4%83ra%C8%99i"
+  },
+  {
+   "sentences": 24,
+   "title": "Granit",
+   "url": "https://ro.wikipedia.org/wiki/Granit"
+  },
+  {
+   "sentences": 7,
+   "title": "Valle Moio (Delianova)",
+   "url": "https://ro.wikipedia.org/wiki/Valle_Moio_%28Delianova%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Burlats",
+   "url": "https://ro.wikipedia.org/wiki/Burlats"
+  },
+  {
+   "sentences": 1,
+   "title": "Lahraj",
+   "url": "https://ro.wikipedia.org/wiki/Lahraj"
+  },
+  {
+   "sentences": 6,
+   "title": "Horizon: O saga americană - Capitolul 1",
+   "url": "https://ro.wikipedia.org/wiki/Horizon%3A_O_saga_american%C4%83_-_Capitolul_1"
+  },
+  {
+   "sentences": 8,
+   "title": "Municipalitate (Mexic)",
+   "url": "https://ro.wikipedia.org/wiki/Municipalitate_%28Mexic%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Stana, Sălaj",
+   "url": "https://ro.wikipedia.org/wiki/Stana%2C_S%C4%83laj"
+  },
+  {
+   "sentences": 3,
+   "title": "Rașovița, Montana",
+   "url": "https://ro.wikipedia.org/wiki/Ra%C8%99ovi%C8%9Ba%2C_Montana"
+  },
+  {
+   "sentences": 11,
+   "title": "Timotei Ursu",
+   "url": "https://ro.wikipedia.org/wiki/Timotei_Ursu"
+  },
+  {
+   "sentences": 3,
+   "title": "Iulia Reabcinskaia",
+   "url": "https://ro.wikipedia.org/wiki/Iulia_Reabcinskaia"
+  },
+  {
+   "sentences": 2,
+   "title": "Tokarivka, Krîve Ozero",
+   "url": "https://ro.wikipedia.org/wiki/Tokarivka%2C_Kr%C3%AEve_Ozero"
+  },
+  {
+   "sentences": 9,
+   "title": "Iskra, Silistra",
+   "url": "https://ro.wikipedia.org/wiki/Iskra%2C_Silistra"
+  },
+  {
+   "sentences": 3,
+   "title": "Domiciliu convențional",
+   "url": "https://ro.wikipedia.org/wiki/Domiciliu_conven%C8%9Bional"
+  },
+  {
+   "sentences": 2,
+   "title": "Regiunea Kirov",
+   "url": "https://ro.wikipedia.org/wiki/Regiunea_Kirov"
+  },
+  {
+   "sentences": 3,
+   "title": "Ad infinitum",
+   "url": "https://ro.wikipedia.org/wiki/Ad_infinitum"
+  },
+  {
+   "sentences": 6,
+   "title": "Alpe di Storo e Bondone",
+   "url": "https://ro.wikipedia.org/wiki/Alpe_di_Storo_e_Bondone"
+  },
+  {
+   "sentences": 1,
+   "title": "Oryza latifolia",
+   "url": "https://ro.wikipedia.org/wiki/Oryza_latifolia"
+  },
+  {
+   "sentences": 3,
+   "title": "28636 Vasudevan",
+   "url": "https://ro.wikipedia.org/wiki/28636_Vasudevan"
+  },
+  {
+   "sentences": 11,
+   "title": "Autostrada A1 (Luxemburg)",
+   "url": "https://ro.wikipedia.org/wiki/Autostrada_A1_%28Luxemburg%29"
+  },
+  {
+   "sentences": 22,
+   "title": "Comuna Tătaru, Prahova",
+   "url": "https://ro.wikipedia.org/wiki/Comuna_T%C4%83taru%2C_Prahova"
+  },
+  {
+   "sentences": 25,
+   "title": "Rezervația naturală Flămînda",
+   "url": "https://ro.wikipedia.org/wiki/Rezerva%C8%9Bia_natural%C4%83_Fl%C4%83m%C3%AEnda"
+  },
+  {
+   "sentences": 25,
+   "title": "Ford Focus",
+   "url": "https://ro.wikipedia.org/wiki/Ford_Focus"
+  },
+  {
+   "sentences": 5,
+   "title": "Julien Rassam",
+   "url": "https://ro.wikipedia.org/wiki/Julien_Rassam"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 4387",
+   "url": "https://ro.wikipedia.org/wiki/NGC_4387"
+  },
+  {
+   "sentences": 25,
+   "title": "Biserica franciscană din Cluj",
+   "url": "https://ro.wikipedia.org/wiki/Biserica_franciscan%C4%83_din_Cluj"
+  },
+  {
+   "sentences": 13,
+   "title": "Medieval: Total War",
+   "url": "https://ro.wikipedia.org/wiki/Medieval%3A_Total_War"
+  },
+  {
+   "sentences": 1,
+   "title": "Mirna",
+   "url": "https://ro.wikipedia.org/wiki/Mirna"
+  },
+  {
+   "sentences": 5,
+   "title": "60669 Georgpick",
+   "url": "https://ro.wikipedia.org/wiki/60669_Georgpick"
+  },
+  {
+   "sentences": 5,
+   "title": "Catherine Sauvage",
+   "url": "https://ro.wikipedia.org/wiki/Catherine_Sauvage"
+  },
+  {
+   "sentences": 6,
+   "title": "Strings (Unix)",
+   "url": "https://ro.wikipedia.org/wiki/Strings_%28Unix%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Monchy-Breton",
+   "url": "https://ro.wikipedia.org/wiki/Monchy-Breton"
+  },
+  {
+   "sentences": 1,
+   "title": "Saint-Thibault, Côte-d'Or",
+   "url": "https://ro.wikipedia.org/wiki/Saint-Thibault%2C_C%C3%B4te-d%27Or"
+  },
+  {
+   "sentences": 14,
+   "title": "Biroul Permanent al Senatului României",
+   "url": "https://ro.wikipedia.org/wiki/Biroul_Permanent_al_Senatului_Rom%C3%A2niei"
+  },
+  {
+   "sentences": 1,
+   "title": "Lista comunelor din Alger",
+   "url": "https://ro.wikipedia.org/wiki/Lista_comunelor_din_Alger"
+  },
+  {
+   "sentences": 2,
+   "title": "Drosophila chicae",
+   "url": "https://ro.wikipedia.org/wiki/Drosophila_chicae"
+  },
+  {
+   "sentences": 4,
+   "title": "Economia Mozambicului",
+   "url": "https://ro.wikipedia.org/wiki/Economia_Mozambicului"
+  },
+  {
+   "sentences": 10,
+   "title": "Mâna lui Budda",
+   "url": "https://ro.wikipedia.org/wiki/M%C3%A2na_lui_Budda"
+  },
+  {
+   "sentences": 20,
+   "title": "Arena Sepsi",
+   "url": "https://ro.wikipedia.org/wiki/Arena_Sepsi"
+  },
+  {
+   "sentences": 4,
+   "title": "NGC 2902",
+   "url": "https://ro.wikipedia.org/wiki/NGC_2902"
+  },
+  {
+   "sentences": 3,
+   "title": "Josip Glasnović",
+   "url": "https://ro.wikipedia.org/wiki/Josip_Glasnovi%C4%87"
+  },
+  {
+   "sentences": 6,
+   "title": "Cristian Tello",
+   "url": "https://ro.wikipedia.org/wiki/Cristian_Tello"
+  },
+  {
+   "sentences": 4,
+   "title": "Salsalat",
+   "url": "https://ro.wikipedia.org/wiki/Salsalat"
+  },
+  {
+   "sentences": 18,
+   "title": "Sânpaul, Harghita",
+   "url": "https://ro.wikipedia.org/wiki/S%C3%A2npaul%2C_Harghita"
+  },
+  {
+   "sentences": 25,
+   "title": "San Marino",
+   "url": "https://ro.wikipedia.org/wiki/San_Marino"
+  },
+  {
+   "sentences": 25,
+   "title": "Dramaturgia feminină românească după 1989",
+   "url": "https://ro.wikipedia.org/wiki/Dramaturgia_feminin%C4%83_rom%C3%A2neasc%C4%83_dup%C4%83_1989"
+  },
+  {
+   "sentences": 4,
+   "title": "Cercle Brugge KSV",
+   "url": "https://ro.wikipedia.org/wiki/Cercle_Brugge_KSV"
+  },
+  {
+   "sentences": 21,
+   "title": "Ionel Dănciulescu",
+   "url": "https://ro.wikipedia.org/wiki/Ionel_D%C4%83nciulescu"
+  },
+  {
+   "sentences": 13,
+   "title": "Sanie (probă sportivă)",
+   "url": "https://ro.wikipedia.org/wiki/Sanie_%28prob%C4%83_sportiv%C4%83%29"
+  },
+  {
+   "sentences": 2,
+   "title": "La Chapelle, Charente",
+   "url": "https://ro.wikipedia.org/wiki/La_Chapelle%2C_Charente"
+  },
+  {
+   "sentences": 1,
+   "title": "Brezje pri Raki",
+   "url": "https://ro.wikipedia.org/wiki/Brezje_pri_Raki"
+  },
+  {
+   "sentences": 25,
+   "title": "Infecția Aku",
+   "url": "https://ro.wikipedia.org/wiki/Infec%C8%9Bia_Aku"
+  },
+  {
+   "sentences": 24,
+   "title": "La Doi Pași (Star Trek: Voyager)",
+   "url": "https://ro.wikipedia.org/wiki/La_Doi_Pa%C8%99i_%28Star_Trek%3A_Voyager%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Campionatul European de Handbal Feminin pentru Tineret din 2021",
+   "url": "https://ro.wikipedia.org/wiki/Campionatul_European_de_Handbal_Feminin_pentru_Tineret_din_2021"
+  },
+  {
+   "sentences": 1,
+   "title": "Wenddorf",
+   "url": "https://ro.wikipedia.org/wiki/Wenddorf"
+  },
+  {
+   "sentences": 5,
+   "title": "Vučji Do",
+   "url": "https://ro.wikipedia.org/wiki/Vu%C4%8Dji_Do"
+  },
+  {
+   "sentences": 25,
+   "title": "Opt milimetri (film)",
+   "url": "https://ro.wikipedia.org/wiki/Opt_milimetri_%28film%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Juliusz Gardan",
+   "url": "https://ro.wikipedia.org/wiki/Juliusz_Gardan"
+  },
+  {
+   "sentences": 3,
+   "title": "Deng Yaping",
+   "url": "https://ro.wikipedia.org/wiki/Deng_Yaping"
+  },
+  {
+   "sentences": 25,
+   "title": "Bătălia de la Slobozia",
+   "url": "https://ro.wikipedia.org/wiki/B%C4%83t%C4%83lia_de_la_Slobozia"
+  },
+  {
+   "sentences": 3,
+   "title": "Lista siturilor arheologice din județul Arad - L",
+   "url": "https://ro.wikipedia.org/wiki/Lista_siturilor_arheologice_din_jude%C8%9Bul_Arad_-_L"
+  },
+  {
+   "sentences": 3,
+   "title": "Râul Găuri",
+   "url": "https://ro.wikipedia.org/wiki/R%C3%A2ul_G%C4%83uri"
+  },
+  {
+   "sentences": 1,
+   "title": "Calomnierea calomniei",
+   "url": "https://ro.wikipedia.org/wiki/Calomnierea_calomniei"
+  },
+  {
+   "sentences": 4,
+   "title": "Daniele Costantini",
+   "url": "https://ro.wikipedia.org/wiki/Daniele_Costantini"
+  },
+  {
+   "sentences": 3,
+   "title": "Un ban",
+   "url": "https://ro.wikipedia.org/wiki/Un_ban"
+  },
+  {
+   "sentences": 1,
+   "title": "Peter Westbury",
+   "url": "https://ro.wikipedia.org/wiki/Peter_Westbury"
+  },
+  {
+   "sentences": 7,
+   "title": "Atacuri cibernetice asupra Ucrainei (2022)",
+   "url": "https://ro.wikipedia.org/wiki/Atacuri_cibernetice_asupra_Ucrainei_%282022%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Berezovca, Berșad",
+   "url": "https://ro.wikipedia.org/wiki/Berezovca%2C_Ber%C8%99ad"
+  },
+  {
+   "sentences": 13,
+   "title": "Torstein Raaby",
+   "url": "https://ro.wikipedia.org/wiki/Torstein_Raaby"
+  },
+  {
+   "sentences": 4,
+   "title": "Martina Merlino",
+   "url": "https://ro.wikipedia.org/wiki/Martina_Merlino"
+  },
+  {
+   "sentences": 1,
+   "title": "Svitle, Novopskov",
+   "url": "https://ro.wikipedia.org/wiki/Svitle%2C_Novopskov"
+  },
+  {
+   "sentences": 2,
+   "title": "Anopheles mascarensis",
+   "url": "https://ro.wikipedia.org/wiki/Anopheles_mascarensis"
+  },
+  {
+   "sentences": 25,
+   "title": "Ana Porgras",
+   "url": "https://ro.wikipedia.org/wiki/Ana_Porgras"
+  },
+  {
+   "sentences": 3,
+   "title": "27338 Malaraghavan",
+   "url": "https://ro.wikipedia.org/wiki/27338_Malaraghavan"
+  },
+  {
+   "sentences": 11,
+   "title": "Cumpăna apelor",
+   "url": "https://ro.wikipedia.org/wiki/Cump%C4%83na_apelor"
+  },
+  {
+   "sentences": 2,
+   "title": "Conducere imprudentă",
+   "url": "https://ro.wikipedia.org/wiki/Conducere_imprudent%C4%83"
+  },
+  {
+   "sentences": 1,
+   "title": "Lista planetelor minore/142801–142900",
+   "url": "https://ro.wikipedia.org/wiki/Lista_planetelor_minore/142801%E2%80%93142900"
+  },
+  {
+   "sentences": 1,
+   "title": "Lîsîciînți, Pidvolociîsk",
+   "url": "https://ro.wikipedia.org/wiki/L%C3%AEs%C3%AEci%C3%AEn%C8%9Bi%2C_Pidvoloci%C3%AEsk"
+  },
+  {
+   "sentences": 1,
+   "title": "Jaki Liebezeit",
+   "url": "https://ro.wikipedia.org/wiki/Jaki_Liebezeit"
+  },
+  {
+   "sentences": 1,
+   "title": "Radu Sârbu",
+   "url": "https://ro.wikipedia.org/wiki/Radu_S%C3%A2rbu"
+  },
+  {
+   "sentences": 2,
+   "title": "Vineți, Olt",
+   "url": "https://ro.wikipedia.org/wiki/Vine%C8%9Bi%2C_Olt"
+  },
+  {
+   "sentences": 10,
+   "title": "Hama (dezambiguizare)",
+   "url": "https://ro.wikipedia.org/wiki/Hama_%28dezambiguizare%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Abigail Breslin",
+   "url": "https://ro.wikipedia.org/wiki/Abigail_Breslin"
+  },
+  {
+   "sentences": 7,
+   "title": "Plastipak",
+   "url": "https://ro.wikipedia.org/wiki/Plastipak"
+  },
+  {
+   "sentences": 7,
+   "title": "Fenix Trophy",
+   "url": "https://ro.wikipedia.org/wiki/Fenix_Trophy"
+  },
+  {
+   "sentences": 1,
+   "title": "Sînîțivka, Uleanovka",
+   "url": "https://ro.wikipedia.org/wiki/S%C3%AEn%C3%AE%C8%9Bivka%2C_Uleanovka"
+  },
+  {
+   "sentences": 17,
+   "title": "Străzile din Dublin: un vânzător de cărți",
+   "url": "https://ro.wikipedia.org/wiki/Str%C4%83zile_din_Dublin%3A_un_v%C3%A2nz%C4%83tor_de_c%C4%83r%C8%9Bi"
+  },
+  {
+   "sentences": 25,
+   "title": "Sith (Războiul stelelor)",
+   "url": "https://ro.wikipedia.org/wiki/Sith_%28R%C4%83zboiul_stelelor%29"
+  },
+  {
+   "sentences": 15,
+   "title": "Simon de Taranto",
+   "url": "https://ro.wikipedia.org/wiki/Simon_de_Taranto"
+  },
+  {
+   "sentences": 25,
+   "title": "Marea hoinăreală (film din 2000)",
+   "url": "https://ro.wikipedia.org/wiki/Marea_hoin%C4%83real%C4%83_%28film_din_2000%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Towson, Maryland",
+   "url": "https://ro.wikipedia.org/wiki/Towson%2C_Maryland"
+  },
+  {
+   "sentences": 10,
+   "title": "Mariana Solomon",
+   "url": "https://ro.wikipedia.org/wiki/Mariana_Solomon"
+  },
+  {
+   "sentences": 2,
+   "title": "Lunca Borlesei, Bistrița-Năsăud",
+   "url": "https://ro.wikipedia.org/wiki/Lunca_Borlesei%2C_Bistri%C8%9Ba-N%C4%83s%C4%83ud"
+  },
+  {
+   "sentences": 1,
+   "title": "Kvina (Lurøy)",
+   "url": "https://ro.wikipedia.org/wiki/Kvina_%28Lur%C3%B8y%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Tony Yoka",
+   "url": "https://ro.wikipedia.org/wiki/Tony_Yoka"
+  },
+  {
+   "sentences": 1,
+   "title": "Pollestad",
+   "url": "https://ro.wikipedia.org/wiki/Pollestad"
+  },
+  {
+   "sentences": 25,
+   "title": "Anodonție",
+   "url": "https://ro.wikipedia.org/wiki/Anodon%C8%9Bie"
+  },
+  {
+   "sentences": 2,
+   "title": "Boală purtată de țânțari",
+   "url": "https://ro.wikipedia.org/wiki/Boal%C4%83_purtat%C4%83_de_%C8%9B%C3%A2n%C8%9Bari"
+  },
+  {
+   "sentences": 2,
+   "title": "Tourtrol",
+   "url": "https://ro.wikipedia.org/wiki/Tourtrol"
+  },
+  {
+   "sentences": 2,
+   "title": "Garlin",
+   "url": "https://ro.wikipedia.org/wiki/Garlin"
+  },
+  {
+   "sentences": 3,
+   "title": "Flanc",
+   "url": "https://ro.wikipedia.org/wiki/Flanc"
+  },
+  {
+   "sentences": 25,
+   "title": "Abisiniană",
+   "url": "https://ro.wikipedia.org/wiki/Abisinian%C4%83"
+  },
+  {
+   "sentences": 2,
+   "title": "Leijn Loevesijn",
+   "url": "https://ro.wikipedia.org/wiki/Leijn_Loevesijn"
+  },
+  {
+   "sentences": 4,
+   "title": "Refat Ciubarov",
+   "url": "https://ro.wikipedia.org/wiki/Refat_Ciubarov"
+  },
+  {
+   "sentences": 1,
+   "title": "Cantonul L'Aigle-Ouest",
+   "url": "https://ro.wikipedia.org/wiki/Cantonul_L%27Aigle-Ouest"
+  },
+  {
+   "sentences": 9,
+   "title": "Casa József Bócz",
+   "url": "https://ro.wikipedia.org/wiki/Casa_J%C3%B3zsef_B%C3%B3cz"
+  },
+  {
+   "sentences": 2,
+   "title": "Ruby O. Fee",
+   "url": "https://ro.wikipedia.org/wiki/Ruby_O._Fee"
+  },
+  {
+   "sentences": 15,
+   "title": "Turia, Covasna",
+   "url": "https://ro.wikipedia.org/wiki/Turia%2C_Covasna"
+  },
+  {
+   "sentences": 25,
+   "title": "Markus Wolf",
+   "url": "https://ro.wikipedia.org/wiki/Markus_Wolf"
+  },
+  {
+   "sentences": 11,
+   "title": "Grid Compass",
+   "url": "https://ro.wikipedia.org/wiki/Grid_Compass"
+  },
+  {
+   "sentences": 1,
+   "title": "TKO",
+   "url": "https://ro.wikipedia.org/wiki/TKO"
+  },
+  {
+   "sentences": 8,
+   "title": "Abolla",
+   "url": "https://ro.wikipedia.org/wiki/Abolla"
+  },
+  {
+   "sentences": 1,
+   "title": "Comuna Malînivka, Hoșcea",
+   "url": "https://ro.wikipedia.org/wiki/Comuna_Mal%C3%AEnivka%2C_Ho%C8%99cea"
+  },
+  {
+   "sentences": 2,
+   "title": "Drăgești, Bihor",
+   "url": "https://ro.wikipedia.org/wiki/Dr%C4%83ge%C8%99ti%2C_Bihor"
+  },
+  {
+   "sentences": 1,
+   "title": "Eichigt",
+   "url": "https://ro.wikipedia.org/wiki/Eichigt"
+  },
+  {
+   "sentences": 1,
+   "title": "Ukraiinka, Vilneansk",
+   "url": "https://ro.wikipedia.org/wiki/Ukraiinka%2C_Vilneansk"
+  },
+  {
+   "sentences": 25,
+   "title": "Argumentul designului defectuos",
+   "url": "https://ro.wikipedia.org/wiki/Argumentul_designului_defectuos"
+  },
+  {
+   "sentences": 6,
+   "title": "Drijenak, Kolašin",
+   "url": "https://ro.wikipedia.org/wiki/Drijenak%2C_Kola%C5%A1in"
+  },
+  {
+   "sentences": 2,
+   "title": "Martînkivți, Horodok",
+   "url": "https://ro.wikipedia.org/wiki/Mart%C3%AEnkiv%C8%9Bi%2C_Horodok"
+  },
+  {
+   "sentences": 3,
+   "title": "Rezervația naturală Mestecăniș",
+   "url": "https://ro.wikipedia.org/wiki/Rezerva%C8%9Bia_natural%C4%83_Mestec%C4%83ni%C8%99"
+  },
+  {
+   "sentences": 4,
+   "title": "Dorel Vulpoiu",
+   "url": "https://ro.wikipedia.org/wiki/Dorel_Vulpoiu"
+  },
+  {
+   "sentences": 1,
+   "title": "Costa di Rovigo",
+   "url": "https://ro.wikipedia.org/wiki/Costa_di_Rovigo"
+  },
+  {
+   "sentences": 25,
+   "title": "Edwin Muir",
+   "url": "https://ro.wikipedia.org/wiki/Edwin_Muir"
+  },
+  {
+   "sentences": 2,
+   "title": "Suelli",
+   "url": "https://ro.wikipedia.org/wiki/Suelli"
+  },
+  {
+   "sentences": 2,
+   "title": "Didier Hoyer",
+   "url": "https://ro.wikipedia.org/wiki/Didier_Hoyer"
+  },
+  {
+   "sentences": 8,
+   "title": "Western Digital",
+   "url": "https://ro.wikipedia.org/wiki/Western_Digital"
+  },
+  {
+   "sentences": 3,
+   "title": "Palatik",
+   "url": "https://ro.wikipedia.org/wiki/Palatik"
+  },
+  {
+   "sentences": 1,
+   "title": "Saint-Pardoux-Morterolles",
+   "url": "https://ro.wikipedia.org/wiki/Saint-Pardoux-Morterolles"
+  },
+  {
+   "sentences": 4,
+   "title": "Jessica Palud",
+   "url": "https://ro.wikipedia.org/wiki/Jessica_Palud"
+  },
+  {
+   "sentences": 2,
+   "title": "Aeroportul Darke County",
+   "url": "https://ro.wikipedia.org/wiki/Aeroportul_Darke_County"
+  },
+  {
+   "sentences": 1,
+   "title": "Comuna Radomka, Semenivka",
+   "url": "https://ro.wikipedia.org/wiki/Comuna_Radomka%2C_Semenivka"
+  },
+  {
+   "sentences": 25,
+   "title": "Biserica de lemn din Elciu",
+   "url": "https://ro.wikipedia.org/wiki/Biserica_de_lemn_din_Elciu"
+  },
+  {
+   "sentences": 25,
+   "title": "Benzen",
+   "url": "https://ro.wikipedia.org/wiki/Benzen"
+  },
+  {
+   "sentences": 9,
+   "title": "Snorri Sturluson",
+   "url": "https://ro.wikipedia.org/wiki/Snorri_Sturluson"
+  },
+  {
+   "sentences": 2,
+   "title": "Daijiro Takakuwa",
+   "url": "https://ro.wikipedia.org/wiki/Daijiro_Takakuwa"
+  },
+  {
+   "sentences": 5,
+   "title": "Ryan Gravenberch",
+   "url": "https://ro.wikipedia.org/wiki/Ryan_Gravenberch"
+  },
+  {
+   "sentences": 11,
+   "title": "Iacutia Airlines",
+   "url": "https://ro.wikipedia.org/wiki/Iacutia_Airlines"
+  },
+  {
+   "sentences": 10,
+   "title": "Saikhom Mirabai Chanu",
+   "url": "https://ro.wikipedia.org/wiki/Saikhom_Mirabai_Chanu"
+  },
+  {
+   "sentences": 1,
+   "title": "Râul Colceag",
+   "url": "https://ro.wikipedia.org/wiki/R%C3%A2ul_Colceag"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 2494",
+   "url": "https://ro.wikipedia.org/wiki/NGC_2494"
+  },
+  {
+   "sentences": 2,
+   "title": "Pardosa unguifera",
+   "url": "https://ro.wikipedia.org/wiki/Pardosa_unguifera"
+  },
+  {
+   "sentences": 1,
+   "title": "Ghlig Ehl Beye, Hodh El Gharbi",
+   "url": "https://ro.wikipedia.org/wiki/Ghlig_Ehl_Beye%2C_Hodh_El_Gharbi"
+  },
+  {
+   "sentences": 2,
+   "title": "Martînivka, Horol",
+   "url": "https://ro.wikipedia.org/wiki/Mart%C3%AEnivka%2C_Horol"
+  },
+  {
+   "sentences": 13,
+   "title": "Anjos (stație de metrou din Lisabona)",
+   "url": "https://ro.wikipedia.org/wiki/Anjos_%28sta%C8%9Bie_de_metrou_din_Lisabona%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Véronique Silver",
+   "url": "https://ro.wikipedia.org/wiki/V%C3%A9ronique_Silver"
+  },
+  {
+   "sentences": 4,
+   "title": "Catherine Serre",
+   "url": "https://ro.wikipedia.org/wiki/Catherine_Serre"
+  },
+  {
+   "sentences": 2,
+   "title": "Lucian Burdujan",
+   "url": "https://ro.wikipedia.org/wiki/Lucian_Burdujan"
+  },
+  {
+   "sentences": 1,
+   "title": "Burgsdorf",
+   "url": "https://ro.wikipedia.org/wiki/Burgsdorf"
+  },
+  {
+   "sentences": 4,
+   "title": "Iuri Fedkin",
+   "url": "https://ro.wikipedia.org/wiki/Iuri_Fedkin"
+  },
+  {
+   "sentences": 3,
+   "title": "Citral",
+   "url": "https://ro.wikipedia.org/wiki/Citral"
+  },
+  {
+   "sentences": 1,
+   "title": "Bellheim",
+   "url": "https://ro.wikipedia.org/wiki/Bellheim"
+  },
+  {
+   "sentences": 3,
+   "title": "La Roche-en-Ardenne",
+   "url": "https://ro.wikipedia.org/wiki/La_Roche-en-Ardenne"
+  },
+  {
+   "sentences": 1,
+   "title": "Comuna Domașiv, Sokal",
+   "url": "https://ro.wikipedia.org/wiki/Comuna_Doma%C8%99iv%2C_Sokal"
+  },
+  {
+   "sentences": 1,
+   "title": "Vogt (comună)",
+   "url": "https://ro.wikipedia.org/wiki/Vogt_%28comun%C4%83%29"
+  },
+  {
+   "sentences": 3,
+   "title": "San Damiano al Colle",
+   "url": "https://ro.wikipedia.org/wiki/San_Damiano_al_Colle"
+  },
+  {
+   "sentences": 7,
+   "title": "Ștefan Bărboianu",
+   "url": "https://ro.wikipedia.org/wiki/%C8%98tefan_B%C4%83rboianu"
+  },
+  {
+   "sentences": 2,
+   "title": "Mydaea urbana",
+   "url": "https://ro.wikipedia.org/wiki/Mydaea_urbana"
+  },
+  {
+   "sentences": 11,
+   "title": "Stadionul Olimpic din Kiev",
+   "url": "https://ro.wikipedia.org/wiki/Stadionul_Olimpic_din_Kiev"
+  },
+  {
+   "sentences": 1,
+   "title": "Varvarivka, Sovietskîi",
+   "url": "https://ro.wikipedia.org/wiki/Varvarivka%2C_Sovietsk%C3%AEi"
+  },
+  {
+   "sentences": 1,
+   "title": "Kisnîțea, Krîjopil",
+   "url": "https://ro.wikipedia.org/wiki/Kisn%C3%AE%C8%9Bea%2C_Kr%C3%AEjopil"
+  },
+  {
+   "sentences": 5,
+   "title": "Lepetani",
+   "url": "https://ro.wikipedia.org/wiki/Lepetani"
+  },
+  {
+   "sentences": 5,
+   "title": "Protecția muncii",
+   "url": "https://ro.wikipedia.org/wiki/Protec%C8%9Bia_muncii"
+  },
+  {
+   "sentences": 1,
+   "title": "Cantonul La Ferté-Frênel",
+   "url": "https://ro.wikipedia.org/wiki/Cantonul_La_Fert%C3%A9-Fr%C3%AAnel"
+  },
+  {
+   "sentences": 2,
+   "title": "Comitatul Midland, Texas",
+   "url": "https://ro.wikipedia.org/wiki/Comitatul_Midland%2C_Texas"
+  },
+  {
+   "sentences": 1,
+   "title": "Andselv",
+   "url": "https://ro.wikipedia.org/wiki/Andselv"
+  },
+  {
+   "sentences": 1,
+   "title": "Sichamps",
+   "url": "https://ro.wikipedia.org/wiki/Sichamps"
+  },
+  {
+   "sentences": 6,
+   "title": "Poligon Rembertów",
+   "url": "https://ro.wikipedia.org/wiki/Poligon_Rembert%C3%B3w"
+  },
+  {
+   "sentences": 18,
+   "title": "Renania Trade",
+   "url": "https://ro.wikipedia.org/wiki/Renania_Trade"
+  },
+  {
+   "sentences": 10,
+   "title": "Fabaceae",
+   "url": "https://ro.wikipedia.org/wiki/Fabaceae"
+  },
+  {
+   "sentences": 3,
+   "title": "130066 Timhaltigin",
+   "url": "https://ro.wikipedia.org/wiki/130066_Timhaltigin"
+  },
+  {
+   "sentences": 2,
+   "title": "Lancashire and Yorkshire Railway",
+   "url": "https://ro.wikipedia.org/wiki/Lancashire_and_Yorkshire_Railway"
+  },
+  {
+   "sentences": 17,
+   "title": "Mihai Iovănel",
+   "url": "https://ro.wikipedia.org/wiki/Mihai_Iov%C4%83nel"
+  },
+  {
+   "sentences": 25,
+   "title": "Sigle de trei litere de la YAA la ZZZ",
+   "url": "https://ro.wikipedia.org/wiki/Sigle_de_trei_litere_de_la_YAA_la_ZZZ"
+  },
+  {
+   "sentences": 11,
+   "title": "Gușă roșie siberiană",
+   "url": "https://ro.wikipedia.org/wiki/Gu%C8%99%C4%83_ro%C8%99ie_siberian%C4%83"
+  },
+  {
+   "sentences": 1,
+   "title": "Râul Brătășanul",
+   "url": "https://ro.wikipedia.org/wiki/R%C3%A2ul_Br%C4%83t%C4%83%C8%99anul"
+  },
+  {
+   "sentences": 1,
+   "title": "Lentiai",
+   "url": "https://ro.wikipedia.org/wiki/Lentiai"
+  },
+  {
+   "sentences": 7,
+   "title": "Dorsale dei Monti Lattari",
+   "url": "https://ro.wikipedia.org/wiki/Dorsale_dei_Monti_Lattari"
+  },
+  {
+   "sentences": 3,
+   "title": "Uschi Madeisky",
+   "url": "https://ro.wikipedia.org/wiki/Uschi_Madeisky"
+  },
+  {
+   "sentences": 15,
+   "title": "Accidentul aviatic din Dobrogea din 2 martie 2022",
+   "url": "https://ro.wikipedia.org/wiki/Accidentul_aviatic_din_Dobrogea_din_2_martie_2022"
+  },
+  {
+   "sentences": 7,
+   "title": "Burgberg, Heinsener Klippen, Rühler Schweiz",
+   "url": "https://ro.wikipedia.org/wiki/Burgberg%2C_Heinsener_Klippen%2C_R%C3%BChler_Schweiz"
+  },
+  {
+   "sentences": 1,
+   "title": "Coenosia ungulipardus",
+   "url": "https://ro.wikipedia.org/wiki/Coenosia_ungulipardus"
+  },
+  {
+   "sentences": 4,
+   "title": "Samuel E.K. Mqhayi",
+   "url": "https://ro.wikipedia.org/wiki/Samuel_E.K._Mqhayi"
+  },
+  {
+   "sentences": 2,
+   "title": "Ouled Aïssa (Boumerdès)",
+   "url": "https://ro.wikipedia.org/wiki/Ouled_A%C3%AFssa_%28Boumerd%C3%A8s%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Monte Catria, Monte Acuto e Monte della Strega",
+   "url": "https://ro.wikipedia.org/wiki/Monte_Catria%2C_Monte_Acuto_e_Monte_della_Strega"
+  },
+  {
+   "sentences": 1,
+   "title": "Marieke Sanders-Ten Holte",
+   "url": "https://ro.wikipedia.org/wiki/Marieke_Sanders-Ten_Holte"
+  },
+  {
+   "sentences": 2,
+   "title": "Lü Zhiwu",
+   "url": "https://ro.wikipedia.org/wiki/L%C3%BC_Zhiwu"
+  },
+  {
+   "sentences": 2,
+   "title": "Allmannshofen",
+   "url": "https://ro.wikipedia.org/wiki/Allmannshofen"
+  },
+  {
+   "sentences": 2,
+   "title": "Elovița, Pernik",
+   "url": "https://ro.wikipedia.org/wiki/Elovi%C8%9Ba%2C_Pernik"
+  },
+  {
+   "sentences": 25,
+   "title": "Ioan Dobre",
+   "url": "https://ro.wikipedia.org/wiki/Ioan_Dobre"
+  },
+  {
+   "sentences": 7,
+   "title": "Jabal Ram",
+   "url": "https://ro.wikipedia.org/wiki/Jabal_Ram"
+  },
+  {
+   "sentences": 1,
+   "title": "Venas",
+   "url": "https://ro.wikipedia.org/wiki/Venas"
+  },
+  {
+   "sentences": 1,
+   "title": "251 î.Hr.",
+   "url": "https://ro.wikipedia.org/wiki/251_%C3%AE.Hr."
+  },
+  {
+   "sentences": 9,
+   "title": "Dumitru C. Ollănescu-Ascanio",
+   "url": "https://ro.wikipedia.org/wiki/Dumitru_C._Oll%C4%83nescu-Ascanio"
+  },
+  {
+   "sentences": 25,
+   "title": "David di Donatello pentru cel mai bun film străin",
+   "url": "https://ro.wikipedia.org/wiki/David_di_Donatello_pentru_cel_mai_bun_film_str%C4%83in"
+  },
+  {
+   "sentences": 3,
+   "title": "Zone metropolitane în România",
+   "url": "https://ro.wikipedia.org/wiki/Zone_metropolitane_%C3%AEn_Rom%C3%A2nia"
+  },
+  {
+   "sentences": 3,
+   "title": "84118 Bracalicioci",
+   "url": "https://ro.wikipedia.org/wiki/84118_Bracalicioci"
+  },
+  {
+   "sentences": 7,
+   "title": "Fülöpszállás - Soltszentimre - csengődi lápok",
+   "url": "https://ro.wikipedia.org/wiki/F%C3%BCl%C3%B6psz%C3%A1ll%C3%A1s_-_Soltszentimre_-_cseng%C5%91di_l%C3%A1pok"
+  },
+  {
+   "sentences": 12,
+   "title": "Nadeș, Mureș",
+   "url": "https://ro.wikipedia.org/wiki/Nade%C8%99%2C_Mure%C8%99"
+  },
+  {
+   "sentences": 16,
+   "title": "Ion Vlasiu",
+   "url": "https://ro.wikipedia.org/wiki/Ion_Vlasiu"
+  },
+  {
+   "sentences": 3,
+   "title": "Ferruccio Biancini",
+   "url": "https://ro.wikipedia.org/wiki/Ferruccio_Biancini"
+  },
+  {
+   "sentences": 1,
+   "title": "Nadejda Mandelștam",
+   "url": "https://ro.wikipedia.org/wiki/Nadejda_Mandel%C8%99tam"
+  },
+  {
+   "sentences": 4,
+   "title": "Guido Gagliardi",
+   "url": "https://ro.wikipedia.org/wiki/Guido_Gagliardi"
+  },
+  {
+   "sentences": 7,
+   "title": "Crăciunul la Evergreen",
+   "url": "https://ro.wikipedia.org/wiki/Cr%C4%83ciunul_la_Evergreen"
+  },
+  {
+   "sentences": 12,
+   "title": "Sticlă colorată",
+   "url": "https://ro.wikipedia.org/wiki/Sticl%C4%83_colorat%C4%83"
+  },
+  {
+   "sentences": 9,
+   "title": "Lista președinților Cehoslovaciei",
+   "url": "https://ro.wikipedia.org/wiki/Lista_pre%C8%99edin%C8%9Bilor_Cehoslovaciei"
+  },
+  {
+   "sentences": 1,
+   "title": "Saint-Laurent-de-Céris",
+   "url": "https://ro.wikipedia.org/wiki/Saint-Laurent-de-C%C3%A9ris"
+  },
+  {
+   "sentences": 1,
+   "title": "Listă de aeroporturi după codul IATA: M",
+   "url": "https://ro.wikipedia.org/wiki/List%C4%83_de_aeroporturi_dup%C4%83_codul_IATA%3A_M"
+  },
+  {
+   "sentences": 1,
+   "title": "Comuna Șîlivka, Zinkiv",
+   "url": "https://ro.wikipedia.org/wiki/Comuna_%C8%98%C3%AElivka%2C_Zinkiv"
+  },
+  {
+   "sentences": 25,
+   "title": "Andrei Țugulea",
+   "url": "https://ro.wikipedia.org/wiki/Andrei_%C8%9Augulea"
+  },
+  {
+   "sentences": 1,
+   "title": "Pontifícia Universidade Católica de Minas Gerais",
+   "url": "https://ro.wikipedia.org/wiki/Pontif%C3%ADcia_Universidade_Cat%C3%B3lica_de_Minas_Gerais"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 13",
+   "url": "https://ro.wikipedia.org/wiki/NGC_13"
+  },
+  {
+   "sentences": 4,
+   "title": "Măgura Odobeștilor",
+   "url": "https://ro.wikipedia.org/wiki/M%C4%83gura_Odobe%C8%99tilor"
+  },
+  {
+   "sentences": 6,
+   "title": "Campionatul de Fotbal al României 1913",
+   "url": "https://ro.wikipedia.org/wiki/Campionatul_de_Fotbal_al_Rom%C3%A2niei_1913"
+  },
+  {
+   "sentences": 10,
+   "title": "Tarutino",
+   "url": "https://ro.wikipedia.org/wiki/Tarutino"
+  },
+  {
+   "sentences": 3,
+   "title": "Bamingui-Bangoran",
+   "url": "https://ro.wikipedia.org/wiki/Bamingui-Bangoran"
+  },
+  {
+   "sentences": 2,
+   "title": "Zvoreț, Turka",
+   "url": "https://ro.wikipedia.org/wiki/Zvore%C8%9B%2C_Turka"
+  },
+  {
+   "sentences": 13,
+   "title": "Brigada 2 Infanterie (1918-1920)",
+   "url": "https://ro.wikipedia.org/wiki/Brigada_2_Infanterie_%281918-1920%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Sainte-Marie-au-Bosc",
+   "url": "https://ro.wikipedia.org/wiki/Sainte-Marie-au-Bosc"
+  },
+  {
+   "sentences": 1,
+   "title": "Phytomyza jucunda",
+   "url": "https://ro.wikipedia.org/wiki/Phytomyza_jucunda"
+  },
+  {
+   "sentences": 12,
+   "title": "Teodora a II-a",
+   "url": "https://ro.wikipedia.org/wiki/Teodora_a_II-a"
+  },
+  {
+   "sentences": 3,
+   "title": "NGC 4234",
+   "url": "https://ro.wikipedia.org/wiki/NGC_4234"
+  },
+  {
+   "sentences": 1,
+   "title": "Harpactea deltshevi",
+   "url": "https://ro.wikipedia.org/wiki/Harpactea_deltshevi"
+  },
+  {
+   "sentences": 1,
+   "title": "Joshi (autor)",
+   "url": "https://ro.wikipedia.org/wiki/Joshi_%28autor%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Tattamåla",
+   "url": "https://ro.wikipedia.org/wiki/Tattam%C3%A5la"
+  },
+  {
+   "sentences": 1,
+   "title": "Besidka, Stavîșce",
+   "url": "https://ro.wikipedia.org/wiki/Besidka%2C_Stav%C3%AE%C8%99ce"
+  },
+  {
+   "sentences": 2,
+   "title": "Nume de scenă",
+   "url": "https://ro.wikipedia.org/wiki/Nume_de_scen%C4%83"
+  },
+  {
+   "sentences": 3,
+   "title": "Michele Massa",
+   "url": "https://ro.wikipedia.org/wiki/Michele_Massa"
+  },
+  {
+   "sentences": 1,
+   "title": "Ibitiúra de Minas",
+   "url": "https://ro.wikipedia.org/wiki/Ibiti%C3%BAra_de_Minas"
+  },
+  {
+   "sentences": 2,
+   "title": "Oligodon unicolor",
+   "url": "https://ro.wikipedia.org/wiki/Oligodon_unicolor"
+  },
+  {
+   "sentences": 4,
+   "title": "Daniel Florea (politician)",
+   "url": "https://ro.wikipedia.org/wiki/Daniel_Florea_%28politician%29"
+  },
+  {
+   "sentences": 4,
+   "title": "Dominic Raacke",
+   "url": "https://ro.wikipedia.org/wiki/Dominic_Raacke"
+  },
+  {
+   "sentences": 7,
+   "title": "Culesul viilor (film)",
+   "url": "https://ro.wikipedia.org/wiki/Culesul_viilor_%28film%29"
+  },
+  {
+   "sentences": 25,
+   "title": "Civilizația quimbaya",
+   "url": "https://ro.wikipedia.org/wiki/Civiliza%C8%9Bia_quimbaya"
+  },
+  {
+   "sentences": 1,
+   "title": "Morske, Mîkolaiiv",
+   "url": "https://ro.wikipedia.org/wiki/Morske%2C_M%C3%AEkolaiiv"
+  },
+  {
+   "sentences": 6,
+   "title": "Clasamentul pe medalii la Jocurile Olimpice de iarnă din 1998",
+   "url": "https://ro.wikipedia.org/wiki/Clasamentul_pe_medalii_la_Jocurile_Olimpice_de_iarn%C4%83_din_1998"
+  },
+  {
+   "sentences": 3,
+   "title": "Mănăstirea rupestră a pârcălabului Bosie",
+   "url": "https://ro.wikipedia.org/wiki/M%C4%83n%C4%83stirea_rupestr%C4%83_a_p%C3%A2rc%C4%83labului_Bosie"
+  },
+  {
+   "sentences": 5,
+   "title": "Cronologia cinematografiei",
+   "url": "https://ro.wikipedia.org/wiki/Cronologia_cinematografiei"
+  },
+  {
+   "sentences": 15,
+   "title": "Viață, primele semne",
+   "url": "https://ro.wikipedia.org/wiki/Via%C8%9B%C4%83%2C_primele_semne"
+  },
+  {
+   "sentences": 3,
+   "title": "Twitter Files",
+   "url": "https://ro.wikipedia.org/wiki/Twitter_Files"
+  },
+  {
+   "sentences": 1,
+   "title": "Holovkivske (Zvenîhorodka), Kirovohrad",
+   "url": "https://ro.wikipedia.org/wiki/Holovkivske_%28Zven%C3%AEhorodka%29%2C_Kirovohrad"
+  },
+  {
+   "sentences": 1,
+   "title": "Masunga",
+   "url": "https://ro.wikipedia.org/wiki/Masunga"
+  },
+  {
+   "sentences": 22,
+   "title": "Joan Brady",
+   "url": "https://ro.wikipedia.org/wiki/Joan_Brady"
+  },
+  {
+   "sentences": 6,
+   "title": "Listă de limbaje de programare după generație",
+   "url": "https://ro.wikipedia.org/wiki/List%C4%83_de_limbaje_de_programare_dup%C4%83_genera%C8%9Bie"
+  },
+  {
+   "sentences": 25,
+   "title": "Ianuarie 1996",
+   "url": "https://ro.wikipedia.org/wiki/Ianuarie_1996"
+  },
+  {
+   "sentences": 2,
+   "title": "29430 Mimiyen",
+   "url": "https://ro.wikipedia.org/wiki/29430_Mimiyen"
+  },
+  {
+   "sentences": 25,
+   "title": "Pin maritim",
+   "url": "https://ro.wikipedia.org/wiki/Pin_maritim"
+  },
+  {
+   "sentences": 25,
+   "title": "Pescăruș argintiu american",
+   "url": "https://ro.wikipedia.org/wiki/Pesc%C4%83ru%C8%99_argintiu_american"
+  },
+  {
+   "sentences": 1,
+   "title": "Ébaty",
+   "url": "https://ro.wikipedia.org/wiki/%C3%89baty"
+  },
+  {
+   "sentences": 4,
+   "title": "Kasanga",
+   "url": "https://ro.wikipedia.org/wiki/Kasanga"
+  },
+  {
+   "sentences": 1,
+   "title": "Hattingen",
+   "url": "https://ro.wikipedia.org/wiki/Hattingen"
+  },
+  {
+   "sentences": 8,
+   "title": "Lanús",
+   "url": "https://ro.wikipedia.org/wiki/Lan%C3%BAs"
+  },
+  {
+   "sentences": 3,
+   "title": "Falsehultsmyren",
+   "url": "https://ro.wikipedia.org/wiki/Falsehultsmyren"
+  },
+  {
+   "sentences": 1,
+   "title": "Hottenbach",
+   "url": "https://ro.wikipedia.org/wiki/Hottenbach"
+  },
+  {
+   "sentences": 1,
+   "title": "Schönheide",
+   "url": "https://ro.wikipedia.org/wiki/Sch%C3%B6nheide"
+  },
+  {
+   "sentences": 3,
+   "title": "Ballinturly Turlough SAC",
+   "url": "https://ro.wikipedia.org/wiki/Ballinturly_Turlough_SAC"
+  },
+  {
+   "sentences": 4,
+   "title": "Pirazină",
+   "url": "https://ro.wikipedia.org/wiki/Pirazin%C4%83"
+  },
+  {
+   "sentences": 25,
+   "title": "Close to the Edge",
+   "url": "https://ro.wikipedia.org/wiki/Close_to_the_Edge"
+  },
+  {
+   "sentences": 25,
+   "title": "Makalu",
+   "url": "https://ro.wikipedia.org/wiki/Makalu"
+  },
+  {
+   "sentences": 23,
+   "title": "Vasileuți, Secureni",
+   "url": "https://ro.wikipedia.org/wiki/Vasileu%C8%9Bi%2C_Secureni"
+  },
+  {
+   "sentences": 3,
+   "title": "Miosarcom",
+   "url": "https://ro.wikipedia.org/wiki/Miosarcom"
+  },
+  {
+   "sentences": 19,
+   "title": "Adrian Mircea Cotoranu",
+   "url": "https://ro.wikipedia.org/wiki/Adrian_Mircea_Cotoranu"
+  },
+  {
+   "sentences": 1,
+   "title": "Fang Yuting",
+   "url": "https://ro.wikipedia.org/wiki/Fang_Yuting"
+  },
+  {
+   "sentences": 25,
+   "title": "Georges Seurat",
+   "url": "https://ro.wikipedia.org/wiki/Georges_Seurat"
+  },
+  {
+   "sentences": 1,
+   "title": "Ipiaú",
+   "url": "https://ro.wikipedia.org/wiki/Ipia%C3%BA"
+  },
+  {
+   "sentences": 10,
+   "title": "Vrăjitoarea (film din 1956)",
+   "url": "https://ro.wikipedia.org/wiki/Vr%C4%83jitoarea_%28film_din_1956%29"
+  },
+  {
+   "sentences": 1,
+   "title": "Yves, Charente-Maritime",
+   "url": "https://ro.wikipedia.org/wiki/Yves%2C_Charente-Maritime"
+  },
+  {
+   "sentences": 8,
+   "title": "Herpestes brachyurus",
+   "url": "https://ro.wikipedia.org/wiki/Herpestes_brachyurus"
+  },
+  {
+   "sentences": 1,
+   "title": "Pettersson (autor)",
+   "url": "https://ro.wikipedia.org/wiki/Pettersson_%28autor%29"
+  },
+  {
+   "sentences": 11,
+   "title": "Lynn Howells",
+   "url": "https://ro.wikipedia.org/wiki/Lynn_Howells"
+  },
+  {
+   "sentences": 1,
+   "title": "Les Lèves-et-Thoumeyragues",
+   "url": "https://ro.wikipedia.org/wiki/Les_L%C3%A8ves-et-Thoumeyragues"
+  },
+  {
+   "sentences": 1,
+   "title": "Râul Dărășagu",
+   "url": "https://ro.wikipedia.org/wiki/R%C3%A2ul_D%C4%83r%C4%83%C8%99agu"
+  },
+  {
+   "sentences": 4,
+   "title": "Jinámar",
+   "url": "https://ro.wikipedia.org/wiki/Jin%C3%A1mar"
+  },
+  {
+   "sentences": 20,
+   "title": "Efren Ramirez",
+   "url": "https://ro.wikipedia.org/wiki/Efren_Ramirez"
+  },
+  {
+   "sentences": 5,
+   "title": "Arhiducesa Maria Ioana Gabriela a Austriei",
+   "url": "https://ro.wikipedia.org/wiki/Arhiducesa_Maria_Ioana_Gabriela_a_Austriei"
+  },
+  {
+   "sentences": 13,
+   "title": "Habarovsk",
+   "url": "https://ro.wikipedia.org/wiki/Habarovsk"
+  },
+  {
+   "sentences": 1,
+   "title": "Rezultatele echipei naționale de fotbal a Angliei (1872-1899)",
+   "url": "https://ro.wikipedia.org/wiki/Rezultatele_echipei_na%C8%9Bionale_de_fotbal_a_Angliei_%281872-1899%29"
+  },
+  {
+   "sentences": 2,
+   "title": "76309 Ronferdie",
+   "url": "https://ro.wikipedia.org/wiki/76309_Ronferdie"
+  },
+  {
+   "sentences": 1,
+   "title": "Blaignac",
+   "url": "https://ro.wikipedia.org/wiki/Blaignac"
+  },
+  {
+   "sentences": 1,
+   "title": "Plounévézel",
+   "url": "https://ro.wikipedia.org/wiki/Ploun%C3%A9v%C3%A9zel"
+  },
+  {
+   "sentences": 2,
+   "title": "429033 Gunterwendt",
+   "url": "https://ro.wikipedia.org/wiki/429033_Gunterwendt"
+  },
+  {
+   "sentences": 1,
+   "title": "Sisophon",
+   "url": "https://ro.wikipedia.org/wiki/Sisophon"
+  },
+  {
+   "sentences": 14,
+   "title": "Nokia 3250",
+   "url": "https://ro.wikipedia.org/wiki/Nokia_3250"
+  },
+  {
+   "sentences": 1,
+   "title": "Europa continentală",
+   "url": "https://ro.wikipedia.org/wiki/Europa_continental%C4%83"
+  },
+  {
+   "sentences": 12,
+   "title": "Mary Astor",
+   "url": "https://ro.wikipedia.org/wiki/Mary_Astor"
+  },
+  {
+   "sentences": 1,
+   "title": "Sistranda",
+   "url": "https://ro.wikipedia.org/wiki/Sistranda"
+  },
+  {
+   "sentences": 12,
+   "title": "DN67A",
+   "url": "https://ro.wikipedia.org/wiki/DN67A"
+  },
+  {
+   "sentences": 24,
+   "title": "Santa Clara",
+   "url": "https://ro.wikipedia.org/wiki/Santa_Clara"
+  },
+  {
+   "sentences": 9,
+   "title": "Drapelul Mexicului",
+   "url": "https://ro.wikipedia.org/wiki/Drapelul_Mexicului"
+  },
+  {
+   "sentences": 9,
+   "title": "Negostina, Suceava",
+   "url": "https://ro.wikipedia.org/wiki/Negostina%2C_Suceava"
+  },
+  {
+   "sentences": 1,
+   "title": "Kunova",
+   "url": "https://ro.wikipedia.org/wiki/Kunova"
+  },
+  {
+   "sentences": 2,
+   "title": "Offanengo",
+   "url": "https://ro.wikipedia.org/wiki/Offanengo"
+  },
+  {
+   "sentences": 5,
+   "title": "Kaiane Aldorino",
+   "url": "https://ro.wikipedia.org/wiki/Kaiane_Aldorino"
+  },
+  {
+   "sentences": 2,
+   "title": "Valnegra",
+   "url": "https://ro.wikipedia.org/wiki/Valnegra"
+  },
+  {
+   "sentences": 16,
+   "title": "Balanța (film)",
+   "url": "https://ro.wikipedia.org/wiki/Balan%C8%9Ba_%28film%29"
+  },
+  {
+   "sentences": 3,
+   "title": "Lancaster, California",
+   "url": "https://ro.wikipedia.org/wiki/Lancaster%2C_California"
+  },
+  {
+   "sentences": 10,
+   "title": "Jubaea chilensis",
+   "url": "https://ro.wikipedia.org/wiki/Jubaea_chilensis"
+  },
+  {
+   "sentences": 3,
+   "title": "József Benkő",
+   "url": "https://ro.wikipedia.org/wiki/J%C3%B3zsef_Benk%C5%91"
+  },
+  {
+   "sentences": 1,
+   "title": "Cabaceiras do Paraguaçu",
+   "url": "https://ro.wikipedia.org/wiki/Cabaceiras_do_Paragua%C3%A7u"
+  },
+  {
+   "sentences": 3,
+   "title": "705 Erminia",
+   "url": "https://ro.wikipedia.org/wiki/705_Erminia"
+  },
+  {
+   "sentences": 1,
+   "title": "Mühlenfließ",
+   "url": "https://ro.wikipedia.org/wiki/M%C3%BChlenflie%C3%9F"
+  },
+  {
+   "sentences": 4,
+   "title": "Ravena Crouri",
+   "url": "https://ro.wikipedia.org/wiki/Ravena_Crouri"
+  },
+  {
+   "sentences": 7,
+   "title": "David Walliams",
+   "url": "https://ro.wikipedia.org/wiki/David_Walliams"
+  },
+  {
+   "sentences": 4,
+   "title": "Ruben Maria Soriquez",
+   "url": "https://ro.wikipedia.org/wiki/Ruben_Maria_Soriquez"
+  },
+  {
+   "sentences": 2,
+   "title": "Zelotes erythrocephalus",
+   "url": "https://ro.wikipedia.org/wiki/Zelotes_erythrocephalus"
+  },
+  {
+   "sentences": 2,
+   "title": "Großes Moor bei Wistedt",
+   "url": "https://ro.wikipedia.org/wiki/Gro%C3%9Fes_Moor_bei_Wistedt"
+  },
+  {
+   "sentences": 4,
+   "title": "Lista șefilor de stat ai României după data nașterii",
+   "url": "https://ro.wikipedia.org/wiki/Lista_%C8%99efilor_de_stat_ai_Rom%C3%A2niei_dup%C4%83_data_na%C8%99terii"
+  },
+  {
+   "sentences": 2,
+   "title": "32590 Cynthiachen",
+   "url": "https://ro.wikipedia.org/wiki/32590_Cynthiachen"
+  },
+  {
+   "sentences": 1,
+   "title": "Drosophila repleta",
+   "url": "https://ro.wikipedia.org/wiki/Drosophila_repleta"
+  },
+  {
+   "sentences": 25,
+   "title": "Justin Gaethje",
+   "url": "https://ro.wikipedia.org/wiki/Justin_Gaethje"
+  },
+  {
+   "sentences": 7,
+   "title": "Cauză și efect (Star Trek: Generația următoare)",
+   "url": "https://ro.wikipedia.org/wiki/Cauz%C4%83_%C8%99i_efect_%28Star_Trek%3A_Genera%C8%9Bia_urm%C4%83toare%29"
+  },
+  {
+   "sentences": 10,
+   "title": "Bergama",
+   "url": "https://ro.wikipedia.org/wiki/Bergama"
+  },
+  {
+   "sentences": 5,
+   "title": "Septimiu Albini",
+   "url": "https://ro.wikipedia.org/wiki/Septimiu_Albini"
+  },
+  {
+   "sentences": 25,
+   "title": "Umberto Boccioni",
+   "url": "https://ro.wikipedia.org/wiki/Umberto_Boccioni"
+  },
+  {
+   "sentences": 13,
+   "title": "Kojak la Budapesta",
+   "url": "https://ro.wikipedia.org/wiki/Kojak_la_Budapesta"
+  },
+  {
+   "sentences": 1,
+   "title": "Veglie",
+   "url": "https://ro.wikipedia.org/wiki/Veglie"
+  },
+  {
+   "sentences": 25,
+   "title": "Polonia",
+   "url": "https://ro.wikipedia.org/wiki/Polonia"
+  },
+  {
+   "sentences": 1,
+   "title": "Rochy-Condé",
+   "url": "https://ro.wikipedia.org/wiki/Rochy-Cond%C3%A9"
+  },
+  {
+   "sentences": 7,
+   "title": "Jon Izagirre",
+   "url": "https://ro.wikipedia.org/wiki/Jon_Izagirre"
+  },
+  {
+   "sentences": 2,
+   "title": "300928 Uderzo",
+   "url": "https://ro.wikipedia.org/wiki/300928_Uderzo"
+  },
+  {
+   "sentences": 1,
+   "title": "Courcelles-lès-Lens",
+   "url": "https://ro.wikipedia.org/wiki/Courcelles-l%C3%A8s-Lens"
+  },
+  {
+   "sentences": 25,
+   "title": "Campania Midlothiană",
+   "url": "https://ro.wikipedia.org/wiki/Campania_Midlothian%C4%83"
+  },
+  {
+   "sentences": 3,
+   "title": "Bezdan pod Vučjakom",
+   "url": "https://ro.wikipedia.org/wiki/Bezdan_pod_Vu%C4%8Djakom"
+  },
+  {
+   "sentences": 1,
+   "title": "Kozîceanka, Makariv",
+   "url": "https://ro.wikipedia.org/wiki/Koz%C3%AEceanka%2C_Makariv"
+  },
+  {
+   "sentences": 1,
+   "title": "Zagajski Vrh",
+   "url": "https://ro.wikipedia.org/wiki/Zagajski_Vrh"
+  },
+  {
+   "sentences": 1,
+   "title": "Selo pri Ihanu",
+   "url": "https://ro.wikipedia.org/wiki/Selo_pri_Ihanu"
+  },
+  {
+   "sentences": 3,
+   "title": "Cluj Crusaders",
+   "url": "https://ro.wikipedia.org/wiki/Cluj_Crusaders"
+  },
+  {
+   "sentences": 1,
+   "title": "Arnhem",
+   "url": "https://ro.wikipedia.org/wiki/Arnhem"
+  },
+  {
+   "sentences": 1,
+   "title": "Drosophila pavani",
+   "url": "https://ro.wikipedia.org/wiki/Drosophila_pavani"
+  },
+  {
+   "sentences": 13,
+   "title": "Crow Dog",
+   "url": "https://ro.wikipedia.org/wiki/Crow_Dog"
+  },
+  {
+   "sentences": 1,
+   "title": "Râul Izvorul Doamnei",
+   "url": "https://ro.wikipedia.org/wiki/R%C3%A2ul_Izvorul_Doamnei"
+  },
+  {
+   "sentences": 3,
+   "title": "1271 Isergina",
+   "url": "https://ro.wikipedia.org/wiki/1271_Isergina"
+  },
+  {
+   "sentences": 2,
+   "title": "Naja siamensis",
+   "url": "https://ro.wikipedia.org/wiki/Naja_siamensis"
+  },
+  {
+   "sentences": 1,
+   "title": "Phyllodactylus davisi",
+   "url": "https://ro.wikipedia.org/wiki/Phyllodactylus_davisi"
+  },
+  {
+   "sentences": 1,
+   "title": "Brian Hansen",
+   "url": "https://ro.wikipedia.org/wiki/Brian_Hansen"
+  },
+  {
+   "sentences": 12,
+   "title": "97 (număr)",
+   "url": "https://ro.wikipedia.org/wiki/97_%28num%C4%83r%29"
+  },
+  {
+   "sentences": 12,
+   "title": "Slobozia-Varticăuți, Chelmenți",
+   "url": "https://ro.wikipedia.org/wiki/Slobozia-Vartic%C4%83u%C8%9Bi%2C_Chelmen%C8%9Bi"
+  },
+  {
+   "sentences": 2,
+   "title": "8998 Matthewizawa",
+   "url": "https://ro.wikipedia.org/wiki/8998_Matthewizawa"
+  },
+  {
+   "sentences": 1,
+   "title": "Magnolia gigantifolia",
+   "url": "https://ro.wikipedia.org/wiki/Magnolia_gigantifolia"
+  },
+  {
+   "sentences": 1,
+   "title": "Družinska vas",
+   "url": "https://ro.wikipedia.org/wiki/Dru%C5%BEinska_vas"
+  },
+  {
+   "sentences": 1,
+   "title": "Pegomya ceratostylata",
+   "url": "https://ro.wikipedia.org/wiki/Pegomya_ceratostylata"
+  },
+  {
+   "sentences": 25,
+   "title": "Johann Adolf I, Duce de Saxa-Weissenfels",
+   "url": "https://ro.wikipedia.org/wiki/Johann_Adolf_I%2C_Duce_de_Saxa-Weissenfels"
+  },
+  {
+   "sentences": 18,
+   "title": "Iuliu Scriban",
+   "url": "https://ro.wikipedia.org/wiki/Iuliu_Scriban"
+  },
+  {
+   "sentences": 1,
+   "title": "Montenoison",
+   "url": "https://ro.wikipedia.org/wiki/Montenoison"
+  },
+  {
+   "sentences": 12,
+   "title": "Gheorghe Banariuc",
+   "url": "https://ro.wikipedia.org/wiki/Gheorghe_Banariuc"
+  },
+  {
+   "sentences": 5,
+   "title": "Radu Panait",
+   "url": "https://ro.wikipedia.org/wiki/Radu_Panait"
+  },
+  {
+   "sentences": 25,
+   "title": "Biserica de lemn din Cerșani Vale",
+   "url": "https://ro.wikipedia.org/wiki/Biserica_de_lemn_din_Cer%C8%99ani_Vale"
+  },
+  {
+   "sentences": 4,
+   "title": "Regiunea Murmansk",
+   "url": "https://ro.wikipedia.org/wiki/Regiunea_Murmansk"
+  },
+  {
+   "sentences": 1,
+   "title": "Collandres",
+   "url": "https://ro.wikipedia.org/wiki/Collandres"
+  },
+  {
+   "sentences": 5,
+   "title": "Petru de Salerno",
+   "url": "https://ro.wikipedia.org/wiki/Petru_de_Salerno"
+  },
+  {
+   "sentences": 3,
+   "title": "Petr Jančárek",
+   "url": "https://ro.wikipedia.org/wiki/Petr_Jan%C4%8D%C3%A1rek"
+  },
+  {
+   "sentences": 1,
+   "title": "Dă-dămult... Mai dă-dămult",
+   "url": "https://ro.wikipedia.org/wiki/D%C4%83-d%C4%83mult..._Mai_d%C4%83-d%C4%83mult"
+  },
+  {
+   "sentences": 1,
+   "title": "Nachrodt-Wiblingwerde",
+   "url": "https://ro.wikipedia.org/wiki/Nachrodt-Wiblingwerde"
+  },
+  {
+   "sentences": 25,
+   "title": "Lagergeld (lagăre de concentrare)",
+   "url": "https://ro.wikipedia.org/wiki/Lagergeld_%28lag%C4%83re_de_concentrare%29"
+  },
+  {
+   "sentences": 22,
+   "title": "Jocul lui Ender (film)",
+   "url": "https://ro.wikipedia.org/wiki/Jocul_lui_Ender_%28film%29"
+  },
+  {
+   "sentences": 2,
+   "title": "Jättenekärret",
+   "url": "https://ro.wikipedia.org/wiki/J%C3%A4ttenek%C3%A4rret"
+  },
+  {
+   "sentences": 1,
+   "title": "Kronprinzenkoog",
+   "url": "https://ro.wikipedia.org/wiki/Kronprinzenkoog"
+  },
+  {
+   "sentences": 16,
+   "title": "Abd al-Latif",
+   "url": "https://ro.wikipedia.org/wiki/Abd_al-Latif"
+  },
+  {
+   "sentences": 2,
+   "title": "Negreni, Vâlcea",
+   "url": "https://ro.wikipedia.org/wiki/Negreni%2C_V%C3%A2lcea"
+  },
+  {
+   "sentences": 4,
+   "title": "1989 în artă",
+   "url": "https://ro.wikipedia.org/wiki/1989_%C3%AEn_art%C4%83"
+  },
+  {
+   "sentences": 1,
+   "title": "Grignasco",
+   "url": "https://ro.wikipedia.org/wiki/Grignasco"
+  },
+  {
+   "sentences": 6,
+   "title": "Das Modell",
+   "url": "https://ro.wikipedia.org/wiki/Das_Modell"
+  },
+  {
+   "sentences": 1,
+   "title": "Alexandru-Robert Zob",
+   "url": "https://ro.wikipedia.org/wiki/Alexandru-Robert_Zob"
+  }
+ ],
+ "filters": {
+  "max_chars": 300,
+  "max_sentences_per_article": 25,
+  "max_sentences_per_opening": 3,
+  "min_chars": 40
+ },
+ "generator": "tools/detection/fetch_wikipedia.py",
+ "language": "ro",
+ "paging": "generator=random paged forward with continue.grncontinue",
+ "purpose": "training",
+ "retrieved": "2026-10-04",
+ "sentence_count": 2736,
+ "wikipedia": "https://ro.wikipedia.org/"
+}

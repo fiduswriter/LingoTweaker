@@ -42,3 +42,8 @@ scripts/bench/results/
 
 # Generated Lindera-compiled dictionaries (see tools/lindera/)
 data/*/dictionary/
+
+# the fastText trainer built by tools/detection/build_fasttext.sh
+/target/detection-tools/
+# the fastText verification probe's own workspace (see tools/detection/ftz-probe)
+tools/detection/ftz-probe/target/
