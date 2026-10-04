@@ -40,3 +40,9 @@ fancy-regex = "0.14"
 aho-corasick = "1"
 rustc-hash = "2"
 unicode-normalization = "0.1"
+# Detection: `lt` loads both bundled fastText models (lid.176.ftz and
+# discriminator.ftz) through this crate. The facade compiles `lt`'s own source
+# via a symlink, so it must declare every dependency that source uses — the
+# version mirrors the workspace declaration in the root `Cargo.toml`, which this
+# crate cannot inherit because it is excluded from the workspace.
+fasttext-pure-rs = { version = "0.1", default-features = false }
