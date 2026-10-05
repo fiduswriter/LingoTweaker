@@ -68,7 +68,11 @@ console.log(
 const detected = JSON.parse(
   detect_json("Jag arbetar inte i dag, men jag kommer hem efter jobbet."),
 );
-if (detected.resolved !== "sv" || detected.detected.source !== "model") {
+// `source` is the v3 surface's name for a statistical-model decision
+// (`lt_core::detect::source_name`), shared with `/v3/detect` so the two cannot
+// drift — it was briefly pinned here as "model", which the 0.2.7 wasm job
+// caught after the strings were unified.
+if (detected.resolved !== "sv" || detected.detected.source !== "fasttext") {
   console.error(`FAIL: expected sv from the model, got ${JSON.stringify(detected)}`);
   process.exit(1);
 }
