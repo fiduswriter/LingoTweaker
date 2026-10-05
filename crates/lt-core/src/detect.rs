@@ -167,6 +167,34 @@ fn is_non_latin(ch: char) -> bool {
     )
 }
 
+/// The `source` string an exclusive-word decision reports on the project's own
+/// `/v3/detect` surface, and in `lt_wasm::detect_json`.
+///
+/// Defined here rather than in each surface because they are one field with one
+/// meaning: a client comparing an HTTP response with a wasm result must not find
+/// two spellings of the same layer. The v2 surface deliberately reports
+/// different strings (`ngram`, because it is a drop-in for LanguageTool's own
+/// vocabulary) and maps them in `lt-http`.
+pub const SOURCE_LEXICON: &str = "lexicon";
+
+/// The `source` string a statistical-model decision reports. Names the
+/// implementation outright, because the v3 surface has no compatibility duty.
+pub const SOURCE_MODEL: &str = "fasttext";
+
+/// The `source` string a discriminator decision reports. Distinct from
+/// [`SOURCE_MODEL`] because it is a different model over a different label set,
+/// and a client debugging a misdetection needs to know which one ran.
+pub const SOURCE_DISCRIMINATOR: &str = "discriminator";
+
+/// The `source` string for a [`Source`], as the v3 and wasm surfaces report it.
+pub fn source_name(source: Source) -> &'static str {
+    match source {
+        Source::Lexicon => SOURCE_LEXICON,
+        Source::Model => SOURCE_MODEL,
+        Source::Discriminator => SOURCE_DISCRIMINATOR,
+    }
+}
+
 /// Which layer produced a result.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Source {

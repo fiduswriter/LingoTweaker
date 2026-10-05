@@ -49,16 +49,12 @@ pub const V2_MODEL_SOURCE: &str = "ngram";
 pub const V2_LEXICON_SOURCE: &str = "lexicon";
 
 /// `source` for a statistical decision on `/v3/detect`. No LT client to keep
-/// happy here, so it says what actually ran.
-pub const MODEL_SOURCE: &str = "fasttext";
-
-/// `source` for an exclusive-word decision on `/v3/detect`.
-pub const LEXICON_SOURCE: &str = "lexicon";
-
-/// `source` for a decision the confusable-set discriminator made on `/v3/detect`.
-/// Named apart from `fasttext` because it is a different model over a different
-/// label set, and a caller debugging a misdetection needs to know which one ran.
-pub const DISCRIMINATOR_SOURCE: &str = "discriminator";
+/// happy here, so it says what actually ran. Shared with the wasm binding
+/// through `lt_core::detect`, so the two surfaces cannot drift apart.
+pub use lt_core::detect::{
+    SOURCE_DISCRIMINATOR as DISCRIMINATOR_SOURCE, SOURCE_LEXICON as LEXICON_SOURCE,
+    SOURCE_MODEL as MODEL_SOURCE,
+};
 
 /// The marker lexicon, built once per process.
 fn lexicon() -> &'static Lexicon {
@@ -104,16 +100,20 @@ impl Outcome {
 /// decision (and per sentence), so a second prediction per request would show
 /// up in the response time. The gate rules are `lt_core::detect`'s, applied by
 /// `lt_core::detect::cleared_candidates`, so the two surfaces cannot drift.
-pub fn language_of(text: &str, restrict: Option<&[Lang]>, gates: &Gates) -> Outcome {
+/// `gates` is `None` for the calibrated defaults. Detection is cheap enough that
+/// this is not worth an `Option` at every call site, but a caller that has tuned
+/// the gates passes them and gets exactly the behaviour it asked for.
+pub fn language_of(text: &str, restrict: Option<&[Lang]>, gates: Option<&Gates>) -> Outcome {
+    let gates = gates.copied().unwrap_or_default();
     let lexicon = lexicon();
     let model = lt::detect_model::bundled();
     let refiner = lt::detect_refiner::bundled();
-    let candidates = detect::candidates(text, lexicon, model, refiner, gates);
+    let candidates = detect::candidates(text, lexicon, model, refiner, &gates);
     let candidates: Vec<Candidate> = candidates
         .into_iter()
         .filter(|candidate| restrict.is_none_or(|restrict| restrict.contains(&candidate.lang)))
         .collect();
-    let detected = detect::cleared_candidates(&candidates, text, gates);
+    let detected = detect::cleared_candidates(&candidates, text, &gates);
     Outcome {
         detected,
         candidates,
@@ -135,11 +135,7 @@ pub fn v2_source(source: Source) -> &'static str {
 
 /// `source` string for the `/v3/detect` response.
 pub fn v3_source(source: Source) -> &'static str {
-    match source {
-        Source::Lexicon => LEXICON_SOURCE,
-        Source::Model => MODEL_SOURCE,
-        Source::Discriminator => DISCRIMINATOR_SOURCE,
-    }
+    detect::source_name(source)
 }
 
 /// `{"language":"sv","confidence":0.93,"source":"fasttext"}` — the wasm
@@ -218,7 +214,7 @@ mod tests {
     #[test]
     fn restrict_can_exclude_nordum() {
         let text = "Jei vet at det er viktig å lære språket i dag.";
-        let outcome = language_of(text, Some(&[Lang::Sv, Lang::En]), &Gates::default());
+        let outcome = language_of(text, Some(&[Lang::Sv, Lang::En]), None);
         assert_eq!(outcome.detected, None);
         assert!(outcome.candidates.iter().all(|c| c.lang != Lang::Nrd));
     }
@@ -230,7 +226,7 @@ mod tests {
         let outcome = language_of(
             "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
             Some(&[]),
-            &Gates::default(),
+            None,
         );
         assert_eq!(outcome.detected, None);
         assert!(outcome.candidates.is_empty());
@@ -239,13 +235,13 @@ mod tests {
     #[test]
     fn no_restriction_detects_normally() {
         let text = "Jag arbetar inte i dag, men jag kommer hem efter jobbet.";
-        let outcome = language_of(text, None, &Gates::default());
+        let outcome = language_of(text, None, None);
         assert_eq!(outcome.detected.map(|hit| hit.language), Some(Lang::Sv));
     }
 
     #[test]
     fn a_nordum_only_restrict_still_gets_the_lexicon_answer() {
-        let outcome = language_of("Jei.", Some(&[Lang::Nrd]), &Gates::default());
+        let outcome = language_of("Jei.", Some(&[Lang::Nrd]), None);
         assert_eq!(outcome.detected.map(|hit| hit.language), Some(Lang::Nrd));
         assert_eq!(
             outcome.detected.map(|hit| hit.source),
@@ -263,7 +259,7 @@ mod tests {
 
     #[test]
     fn abstention_reports_the_ranking_but_no_decision() {
-        let outcome = language_of("Hej.", None, &Gates::default());
+        let outcome = language_of("Hej.", None, None);
         assert_eq!(outcome.detected, None);
         assert!(
             outcome
@@ -275,7 +271,7 @@ mod tests {
 
     #[test]
     fn the_report_matches_the_wasm_binding_shape() {
-        let outcome = language_of("Jei.", None, &Gates::default());
+        let outcome = language_of("Jei.", None, None);
         let report = report_json(&outcome);
         assert_eq!(report["resolved"], "nrd");
         assert_eq!(report["detected"]["language"], "nrd");
@@ -287,7 +283,7 @@ mod tests {
 
     #[test]
     fn an_abstention_reports_a_null_decision() {
-        let outcome = language_of("Hej.", None, &Gates::default());
+        let outcome = language_of("Hej.", None, None);
         let report = report_json(&outcome);
         assert_eq!(report["resolved"], Value::Null);
         assert_eq!(report["detected"], Value::Null);

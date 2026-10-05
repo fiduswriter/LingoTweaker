@@ -33,7 +33,7 @@ fn a_swedish_sentence_resolves_to_sv_from_the_model() {
     let report = detect(SWEDISH);
     assert_eq!(report["resolved"], "sv");
     assert_eq!(report["detected"]["language"], "sv");
-    assert_eq!(report["detected"]["source"], "model");
+    assert_eq!(report["detected"]["source"], "fasttext");
     assert!(
         report["detected"]["confidence"]
             .as_f64()
@@ -53,10 +53,38 @@ fn a_swedish_sentence_resolves_to_sv_from_the_model() {
 fn a_norwegian_sentence_resolves_to_no() {
     let report = detect(NORWEGIAN);
     assert_eq!(report["resolved"], "no");
-    assert_eq!(report["detected"]["source"], "model");
+    assert_eq!(report["detected"]["source"], "fasttext");
     // Danish is the confusable neighbour and comes second, which is what the
     // margin gate is there to reject when the two run close.
     assert_eq!(report["candidates"][1]["language"], "da");
+}
+
+/// The `source` strings are wire values, and this binding is one of two surfaces
+/// that emit them. `/v3/detect` sends the same three for the same three layers,
+/// and both now come from `lt_core::detect::source_name`, so a client can compare
+/// an HTTP response with a wasm result field by field. `lexicon` and
+/// `discriminator` are covered by the sentences below; `fasttext` is what every
+/// statistical decision reports.
+#[test]
+fn the_source_strings_are_the_projects_own() {
+    use lt_core::detect::{
+        source_name, Source, SOURCE_DISCRIMINATOR, SOURCE_LEXICON, SOURCE_MODEL,
+    };
+    assert_eq!(SOURCE_LEXICON, "lexicon");
+    assert_eq!(SOURCE_MODEL, "fasttext");
+    assert_eq!(SOURCE_DISCRIMINATOR, "discriminator");
+    assert_eq!(source_name(Source::Lexicon), "lexicon");
+    assert_eq!(source_name(Source::Model), "fasttext");
+    assert_eq!(source_name(Source::Discriminator), "discriminator");
+
+    assert_eq!(
+        detect(SWEDISH)["detected"]["source"],
+        source_name(lt_core::detect::Source::Model)
+    );
+    assert_eq!(
+        detect(NORDUM)["detected"]["source"],
+        source_name(lt_core::detect::Source::Lexicon)
+    );
 }
 
 #[test]

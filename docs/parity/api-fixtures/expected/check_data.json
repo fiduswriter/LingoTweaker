@@ -1,0 +1,38 @@
+{
+  "extendedSentenceRanges": [
+    {
+      "detectedLanguages": [
+        {
+          "language": "en",
+          "rate": 1.0
+        }
+      ],
+      "from": 0,
+      "to": 2
+    }
+  ],
+  "language": {
+    "code": "en-US",
+    "detectedLanguage": {
+      "code": "nl",
+      "confidence": 0.3893674,
+      "name": "Dutch",
+      "source": "+fallback"
+    },
+    "name": "English (US)"
+  },
+  "matches": [],
+  "sentenceRanges": [
+    [
+      0,
+      2
+    ]
+  ],
+  "software": {
+    "apiVersion": 1,
+    "name": "LanguageTool"
+  },
+  "warnings": {
+    "incompleteResults": false
+  }
+}

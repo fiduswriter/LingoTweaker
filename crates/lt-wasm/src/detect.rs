@@ -88,11 +88,10 @@ impl Scored {
         Scored {
             language: lang.base_code(),
             confidence,
-            source: match source {
-                Source::Lexicon => "lexicon",
-                Source::Model => "model",
-                Source::Discriminator => "discriminator",
-            },
+            // The same strings `/v3/detect` reports, from the same definition, so
+            // an HTTP response and a wasm result cannot spell the same layer two
+            // ways.
+            source: detect::source_name(source),
         }
     }
 }
@@ -198,6 +197,10 @@ mod tests {
 
     #[test]
     fn sources_are_named_for_the_json() {
+        // The serialised `source` strings, pinned. `fasttext` rather than
+        // `model` because `/v3/detect` reports the implementation and both
+        // surfaces share `lt_core::detect::source_name`; a wasm client and an
+        // HTTP client must see the same word for the same layer.
         let json = serde_json::to_string(&Scored::new(Lang::Nrd, 0.95, Source::Lexicon)).unwrap();
         assert_eq!(
             json,
@@ -206,7 +209,13 @@ mod tests {
         let json = serde_json::to_string(&Scored::new(Lang::Sv, 0.93, Source::Model)).unwrap();
         assert_eq!(
             json,
-            r#"{"language":"sv","confidence":0.93,"source":"model"}"#
+            r#"{"language":"sv","confidence":0.93,"source":"fasttext"}"#
+        );
+        let json =
+            serde_json::to_string(&Scored::new(Lang::No, 0.99, Source::Discriminator)).unwrap();
+        assert_eq!(
+            json,
+            r#"{"language":"no","confidence":0.99,"source":"discriminator"}"#
         );
     }
 }

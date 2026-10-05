@@ -80,7 +80,40 @@ const MIN_CONFIDENCE: f32 = 0.98;
 /// enough for the refiner's own `min_margin` check and cheap at 855 KiB.
 const TOP_K: usize = 3;
 
-struct FastTextRefiner(fasttext_pure_rs::FastText);
+/// The primary model's leading confidence over its runner-up, above which a
+/// settled answer may **not** be overruled.
+///
+/// `1.0` — the shipped value — means "never", because a ratio is always at
+/// least 1. The gate exists because a settled answer *can* be overruled safely
+/// when the primary was visibly unsure, and the measurement is unambiguous
+/// (fixture, 14 559 sentences, whole pipeline, discriminator in place):
+///
+/// | gate | correct | wrong | `no` | `nn` | `gl` | `ast` | `sv` | `da` |
+/// |---|---|---|---|---|---|---|---|---|
+/// | **1.0 (shipped)** | 68.6 % | 3.2 % | 11.1 % | 17.4 % | 35.7 % | 22.0 % | **69.5 %** | 66.9 % |
+/// | 8.0 | **69.0 %** | **2.8 %** | 15.7 % | 23.2 % | 42.7 % | 26.0 % | **69.5 %** | 65.7 % |
+/// | 12.0 | 69.0 % | 2.7 % | 15.7 % | 23.2 % | 44.8 % | 26.8 % | **69.5 %** | 64.5 % |
+/// | 40.0 | 69.1 % | 2.6 % | 16.7 % | 24.6 % | 47.4 % | 35.0 % | **69.5 %** | 65.3 % |
+///
+/// Two things make this different from the blanket "second opinion wins" policy
+/// that was rejected earlier. Swedish is untouched at **every** setting, because
+/// the case that motivated rejecting overrides — Swedish prose called Danish at
+/// 0.999 — has a primary ratio of about 700, far outside any of these gates. And
+/// the overrides are overwhelmingly fixes: at 8.0 the refiner newly overrules 328
+/// settled answers and 299 of them are corrections, which is why the wrong-answer
+/// rate *falls* rather than rises.
+///
+/// The cost is Danish, which loses about three sentences of its 245 as the gate
+/// widens: Danish text the primary model rated only moderately is read as
+/// Norwegian. That is a named-language trade for a cluster-wide gain, and it is
+/// why the shipped value is the conservative one — raising this constant to 8.0
+/// is a one-line change, and the table above is what it buys.
+const MAX_UNSURE_RATIO: f32 = 1.0;
+
+struct FastTextRefiner {
+    model: fasttext_pure_rs::FastText,
+    max_unsure_ratio: f32,
+}
 
 fn refiner() -> Option<&'static FastTextRefiner> {
     static REFINER: OnceLock<Option<FastTextRefiner>> = OnceLock::new();
@@ -88,7 +121,10 @@ fn refiner() -> Option<&'static FastTextRefiner> {
         .get_or_init(|| {
             fasttext_pure_rs::FastText::load_from_reader(std::io::Cursor::new(DISCRIMINATOR))
                 .ok()
-                .map(FastTextRefiner)
+                .map(|model| FastTextRefiner {
+                    model,
+                    max_unsure_ratio: MAX_UNSURE_RATIO,
+                })
         })
         .as_ref()
 }
@@ -107,29 +143,31 @@ impl Refiner for FastTextRefiner {
         if !CONFUSABLE.contains(&lead.lang.base_code()) {
             return None;
         }
-        // Only where the primary model has no answer of its own. Not a
-        // confidence comparison: the two models are not calibrated against each
-        // other, and this one is confidently wrong on the register a grammar
-        // checker actually sees — asked about
+        // A settled answer is replaced only when the primary model was visibly
+        // unsure about it — see [`MAX_UNSURE_RATIO`] for the measurements and for
+        // why this is not the blanket "the more confident model wins" rule.
+        // Comparing the two models' confidences directly would not mean anything:
+        // they are not calibrated against each other, and this one is confidently
+        // wrong on the register a grammar checker actually sees — asked about
         // "Jag arbetar inte i dag, men jag kommer hem efter jobbet." it returns
-        // `da` at 0.999 while `lid.176` returns `sv` at 0.997. Its confidence
-        // measures agreement with Wikipedia prose, not with the truth, so any
-        // threshold on it is a threshold on that agreement instead.
+        // `da` at 0.999 where `lid.176` returns `sv` at 0.997. Its confidence
+        // measures agreement with Wikipedia prose, not with the truth.
         //
-        // Asking whether the primary *would have answered* is the one comparison
-        // that means what it says, and it makes the property exact: the refiner
-        // can supply an answer the pipeline lacked and can never replace one it
-        // had. Measured, that is most of the value anyway — the primary model's
-        // mistakes inside the confusable set are overwhelmingly sentences it
-        // abstains on, because a sentence it answers confidently as `es` for
-        // Asturian text looks like perfectly good Spanish to a 176-language
-        // model.
-        if lt_core::detect::cleared_candidates(primary, text, gates).is_some() {
-            return None;
+        // So the question is whether the primary *would have answered*, and if it
+        // did, whether it was sure. With the shipped gate of 1.0 the answer can
+        // never be replaced, which makes the property exact rather than
+        // statistical: the refiner supplies an answer the pipeline lacked and
+        // never trades one away.
+        if let Some(settled) = lt_core::detect::cleared_candidates(primary, text, gates) {
+            let runner_up = primary.get(1).map(|c| c.confidence).unwrap_or(0.0);
+            let ratio = settled.confidence / runner_up.max(1e-38);
+            if ratio > self.max_unsure_ratio {
+                return None;
+            }
         }
 
         let refined: Vec<Candidate> = self
-            .0
+            .model
             .predict(text, TOP_K, 0.0)
             .map(|predictions| {
                 predictions
@@ -175,6 +213,17 @@ mod tests {
             confidence,
             source: Source::Model,
         }]
+    }
+
+    /// A refiner with an explicit override gate, so both policies are testable
+    /// without changing what ships.
+    fn refiner_with_gate(max_unsure_ratio: f32) -> Option<FastTextRefiner> {
+        fasttext_pure_rs::FastText::load_from_reader(std::io::Cursor::new(DISCRIMINATOR))
+            .ok()
+            .map(|model| FastTextRefiner {
+                model,
+                max_unsure_ratio,
+            })
     }
 
     #[test]
@@ -260,6 +309,106 @@ mod tests {
             },
         ];
         assert!(refiner.refine(text, &ranking, &Gates::default()).is_none());
+    }
+
+    #[test]
+    fn a_confident_primary_answer_survives_any_gate() {
+        // lid.176 answers `sv` at 0.9968 against a runner-up of 0.0014 — a ratio
+        // of about 712 — while the discriminator answers `da` at 0.999. This is
+        // the case that made a blanket override unacceptable. Pinned at 40.0, the
+        // widest gate in MAX_UNSURE_RATIO's table, because that is the honest
+        // bound of the claim: Swedish survives every setting we measured, and the
+        // ratio it would take to break it is eighteen times the widest of them.
+        let text = "Jag arbetar inte i dag, men jag kommer hem efter jobbet.";
+        let ranking = vec![
+            Candidate {
+                lang: Lang::Sv,
+                confidence: 0.9968,
+                source: Source::Model,
+            },
+            Candidate {
+                lang: Lang::Ru,
+                confidence: 0.0014,
+                source: Source::Model,
+            },
+        ];
+        let refiner = refiner_with_gate(40.0).expect("refiner");
+        assert!(refiner.refine(text, &ranking, &Gates::default()).is_none());
+    }
+
+    #[test]
+    fn an_unsure_primary_answer_can_be_overruled() {
+        // lid.176 answers `da` at 0.850 against `no` at 0.129 — a ratio of 6.6 —
+        // for a sentence the discriminator calls `no` at 0.993. That is inside
+        // the 8.0 gate and outside the shipped 1.0 one, so the two policies
+        // disagree here and both are pinned.
+        let text = "Jeg arbeider i dag, men jeg kommer hjem etter jobbet.";
+        let ranking = vec![
+            Candidate {
+                lang: Lang::Da,
+                confidence: 0.850,
+                source: Source::Model,
+            },
+            Candidate {
+                lang: Lang::No,
+                confidence: 0.129,
+                source: Source::Model,
+            },
+        ];
+
+        let strict = refiner_with_gate(1.0).expect("refiner");
+        assert!(strict.refine(text, &ranking, &Gates::default()).is_none());
+
+        let relaxed = refiner_with_gate(8.0).expect("refiner");
+        let refined = relaxed
+            .refine(text, &ranking, &Gates::default())
+            .expect("overruled");
+        assert_eq!(refined.first().map(|c| c.lang), Some(Lang::No));
+        assert_eq!(
+            refined.first().map(|c| c.source),
+            Some(Source::Discriminator)
+        );
+    }
+
+    #[test]
+    fn the_shipped_gate_never_replaces_a_settled_answer() {
+        // The invariant the whole design rests on, asserted against the refiner
+        // that actually ships rather than against a stand-in. It covers the three
+        // ways a primary answer can be wrong inside the confusable set: certain
+        // (Swedish), moderate (Bokmål called Danish) and very certain (Bokmål
+        // called Norwegian). MAX_UNSURE_RATIO is 1.0, and a ratio is never below
+        // 1, so the gate is closed and the three cases below cannot vary.
+        let refiner = bundled().expect("refiner");
+        for (text, lang, confidence) in [
+            (
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+                Lang::Sv,
+                0.9968,
+            ),
+            (
+                "Jeg arbeider i dag, men jeg kommer hjem etter jobbet.",
+                Lang::Da,
+                0.850,
+            ),
+            ("Vi har store biler.", Lang::No, 0.991),
+        ] {
+            let ranking = vec![
+                Candidate {
+                    lang,
+                    confidence,
+                    source: Source::Model,
+                },
+                Candidate {
+                    lang: Lang::Ru,
+                    confidence: 0.001,
+                    source: Source::Model,
+                },
+            ];
+            assert!(
+                refiner.refine(text, &ranking, &Gates::default()).is_none(),
+                "the shipped gate overruled {text:?}"
+            );
+        }
     }
 
     #[test]

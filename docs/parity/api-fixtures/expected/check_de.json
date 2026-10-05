@@ -1,0 +1,38 @@
+{
+  "extendedSentenceRanges": [
+    {
+      "detectedLanguages": [
+        {
+          "language": "de",
+          "rate": 1.0
+        }
+      ],
+      "from": 0,
+      "to": 17
+    }
+  ],
+  "language": {
+    "code": "de-DE",
+    "detectedLanguage": {
+      "code": "de-DE",
+      "confidence": 0.9999939,
+      "name": "German (Germany)",
+      "source": "+fallback"
+    },
+    "name": "German (Germany)"
+  },
+  "matches": [],
+  "sentenceRanges": [
+    [
+      0,
+      17
+    ]
+  ],
+  "software": {
+    "apiVersion": 1,
+    "name": "LanguageTool"
+  },
+  "warnings": {
+    "incompleteResults": false
+  }
+}

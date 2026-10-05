@@ -1,0 +1,38 @@
+{
+  "extendedSentenceRanges": [
+    {
+      "detectedLanguages": [
+        {
+          "language": "es",
+          "rate": 1.0
+        }
+      ],
+      "from": 0,
+      "to": 19
+    }
+  ],
+  "language": {
+    "code": "es",
+    "detectedLanguage": {
+      "code": "es",
+      "confidence": 0.999972,
+      "name": "Spanish",
+      "source": "+fallback"
+    },
+    "name": "Spanish"
+  },
+  "matches": [],
+  "sentenceRanges": [
+    [
+      0,
+      19
+    ]
+  ],
+  "software": {
+    "apiVersion": 1,
+    "name": "LanguageTool"
+  },
+  "warnings": {
+    "incompleteResults": false
+  }
+}

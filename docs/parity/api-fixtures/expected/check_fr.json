@@ -1,0 +1,38 @@
+{
+  "extendedSentenceRanges": [
+    {
+      "detectedLanguages": [
+        {
+          "language": "fr",
+          "rate": 1.0
+        }
+      ],
+      "from": 0,
+      "to": 14
+    }
+  ],
+  "language": {
+    "code": "fr",
+    "detectedLanguage": {
+      "code": "fr",
+      "confidence": 0.9999882,
+      "name": "French",
+      "source": "+fallback"
+    },
+    "name": "French"
+  },
+  "matches": [],
+  "sentenceRanges": [
+    [
+      0,
+      14
+    ]
+  ],
+  "software": {
+    "apiVersion": 1,
+    "name": "LanguageTool"
+  },
+  "warnings": {
+    "incompleteResults": false
+  }
+}

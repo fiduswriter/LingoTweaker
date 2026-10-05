@@ -21,7 +21,8 @@
 //! handler mirrors `ApiV2.handlePreflight`.
 
 use std::collections::BTreeMap;
-use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::{Arc, RwLock};
 
 use axum::extract::{Query, Request, State};
 use axum::http::{header, HeaderValue, Method, StatusCode};
@@ -32,6 +33,7 @@ use axum::Router;
 use serde::Deserialize;
 use serde_json::{json, Value};
 
+use lt::DataDir;
 use lt::Engine;
 use lt_core::detect::Gates;
 use lt_core::{Lang, Match, TextRange};
@@ -39,7 +41,17 @@ use lt_core::{Lang, Match, TextRange};
 pub mod detect;
 
 pub const API_VERSION: i32 = 1;
-pub const MAX_TEXT_LENGTH: u32 = 60_000;
+
+/// Maximum `text=` length, in characters.
+///
+/// 100,000 rather than LanguageTool's advertised `Integer.MAX_VALUE`, which the
+/// Java server does not enforce either — past roughly this size a check stops
+/// being interactive (the per-rule work is linear, and `/v2/check` is a
+/// synchronous request). Enforcing an advertised limit beats advertising one
+/// that is not enforced: a caller reading `/v2/maxtextlength` gets the number
+/// that will actually be honoured, and overshooting is a clear 400 rather than
+/// a minutes-long hang.
+pub const MAX_TEXT_LENGTH: u32 = 100_000;
 /// LT `TextChecker.CONTEXT_SIZE`
 pub const CONTEXT_SIZE: i32 = 40;
 pub const SOFTWARE_NAME: &str = "LingoTweaker";
@@ -51,16 +63,6 @@ pub const SOFTWARE_NAME: &str = "LingoTweaker";
 /// which is `en-US` in this build — the first variant listed, as everywhere else.
 const AUTO_FALLBACK: &str = "en-US";
 
-/// Sentences reported in `extendedSentenceRanges`.
-///
-/// `sentenceRanges` is complete at any size, but every extended range costs one
-/// prediction and `MAX_TEXT_LENGTH` is 60,000 characters, which a caller can
-/// fill with 20,000 two-character sentences. 500 covers any real document
-/// (~10,000 words); past that the extended ranges stop rather than letting one
-/// request spend seconds in the detector.
-const MAX_EXTENDED_SENTENCE_RANGES: usize = 500;
-
-#[derive(Clone)]
 pub struct AppState {
     pub version: String,
     pub build_date: String,
@@ -69,66 +71,238 @@ pub struct AppState {
     /// reach a server on localhost; `None` sends no CORS header (the Java
     /// server's behaviour without `--allow-origin`).
     pub allow_origin: Option<String>,
-    /// One engine per resolved long code (variant selects the spelling
-    /// dictionary). Kept in declaration order: language resolution prefers
-    /// the earlier variant, so plain `pt` resolves to `pt-PT`, `de` to
-    /// `de-DE`, `en` to `en-US`.
-    engines: Vec<(String, Arc<Engine>)>,
+    /// Engines built on first use, kept least-recently-used up to
+    /// [`MAX_CACHED_ENGINES`].
+    ///
+    /// Building every vendored language eagerly costs ~5.6 GB RSS (43 engines ×
+    /// dictionaries + compiled rule regexes) — measured — and lazy building
+    /// alone only defers that: a server that answers one sentence in each
+    /// language ends in the same place, because nothing was ever freed. The
+    /// cache is therefore bounded. A language evicted is rebuilt on its next
+    /// use, at its build cost (well under a second for most, a couple for the
+    /// largest); an engine held by a request in flight stays alive through its
+    /// `Arc` until that request finishes. Keyed by lowercased long code; variant
+    /// resolution therefore goes through [`Lang::info`] rather than list order.
+    engines: RwLock<BTreeMap<String, CachedEngine>>,
+    /// Languages whose engine failed to build, with the error. A negative cache:
+    /// without it a broken language would re-attempt its build on every request
+    /// instead of answering 501 immediately.
+    failed: RwLock<BTreeMap<String, String>>,
+    /// Monotonic clock for the LRU order.
+    used: AtomicU64,
+}
+
+struct CachedEngine {
+    engine: Arc<Engine>,
+    used_at: u64,
+}
+
+/// How many language engines to keep in memory at once.
+///
+/// Eight covers a checking session that wanders across a few languages with
+/// room to spare, at a worst case near the reference Java server's idle
+/// footprint (~1.7 GB with every module loaded); beyond the cap the least
+/// recently used engine is dropped and rebuilt on demand. `LT_MAX_ENGINES`
+/// overrides it: `0` disables caching entirely (every check pays its build),
+/// and a large value approaches the unbounded 5.6 GB.
+pub const MAX_CACHED_ENGINES: usize = 8;
+
+/// Spelling variants served in addition to each language's default long code,
+/// in their canonical spelling. Only languages whose variant data is vendored
+/// are listed; Java also serves variants we have no data for (`fr-CA`,
+/// `nl-BE`, `ca-ES-valencia`), and an unbuildable variant would put a 501 in
+/// `/v2/languages`, which is worse than not listing it.
+const VARIANTS: &[(Lang, &str)] = &[
+    (Lang::En, "en-GB"),
+    (Lang::De, "de-AT"),
+    (Lang::De, "de-CH"),
+    (Lang::De, "de-DE-x-simple-language"),
+    (Lang::Pt, "pt-BR"),
+];
+
+/// Served default variants that differ from `Lang::info`'s long code.
+///
+/// Portuguese is the case: `info().long_code` is the bare `pt`, but the
+/// language's European variant is what a bare `pt` has always resolved to,
+/// LT-style (`getLanguageForLanguageCode` plus the server's default-variant
+/// fallback), and `pt-PT` is what the old engine list served first.
+const DEFAULT_VARIANTS: &[(Lang, &str)] = &[(Lang::Pt, "pt-PT")];
+
+/// The canonical long code for a request, resolving a bare base language to its
+/// default variant (`de` → `de-DE`, LT-style) and matching variants
+/// case-insensitively, so a caller's `DE-at` is answered as `de-AT` rather than
+/// echoed back lowercased. Unknown variant spellings pass through and fail at
+/// build time, which answers 501 with the reason.
+/// The codes `/v2/languages` serves, comma-separated, for the unknown-language
+/// error. Java names its own modules in the same place.
+fn supported_codes() -> String {
+    let mut codes: Vec<String> = Lang::ALL
+        .iter()
+        .map(|lang| lang.info().long_code.to_string())
+        .collect();
+    codes.extend(VARIANTS.iter().map(|(_, code)| code.to_string()));
+    // A bare variant language (`de`) is servable too, and Java lists it.
+    codes.extend(
+        VARIANTS
+            .iter()
+            .map(|(lang, _)| lang.info().code.to_string())
+            .collect::<Vec<_>>(),
+    );
+    codes.sort();
+    codes.dedup();
+    codes.join(", ")
+}
+
+fn canonical_long_code(code: &str) -> Option<String> {
+    let lang = Lang::from_long_code(code)?;
+    let default = DEFAULT_VARIANTS
+        .iter()
+        .find(|(l, _)| *l == lang)
+        .map(|(_, code)| (*code).to_string())
+        .unwrap_or_else(|| lang.info().long_code.to_string());
+    // A bare base code, the long code in any casing, or the default variant in
+    // any casing all mean the same engine; a listed variant matches itself.
+    if code.eq_ignore_ascii_case(lang.info().code)
+        || code.eq_ignore_ascii_case(lang.info().long_code)
+        || code.eq_ignore_ascii_case(&default)
+    {
+        return Some(default);
+    }
+    for (variant_lang, variant) in VARIANTS {
+        if *variant_lang == lang && variant.eq_ignore_ascii_case(code) {
+            return Some((*variant).to_string());
+        }
+    }
+    Some(code.to_string())
+}
+
+fn cache_cap() -> usize {
+    std::env::var("LT_MAX_ENGINES")
+        .ok()
+        .and_then(|value| value.parse().ok())
+        .unwrap_or(MAX_CACHED_ENGINES)
 }
 
 impl AppState {
-    /// Build engines for every available variant. English resolves like the
-    /// LT server: `en` and `en-US` share the American spelling rule;
-    /// `en-GB` uses the British one. German is served as `de-DE` (default),
-    /// `de-AT` and `de-CH`.
+    /// Discover the data directory and nothing else: engines are built on first
+    /// use, so server startup stays instant and idle RSS stays at the runtime's
+    /// own footprint. The one thing verified up front is that the data is there
+    /// at all — without it every check would 501 with a discovery error, which
+    /// [`lt_cli serve`] turns into its validation-only fallback.
+    ///
+    /// Every language this project vendors data for is servable, plus each
+    /// spelling variant that data covers. That includes languages the pinned
+    /// Java build has no module for — Nordum (ours, constructed) and Lithuanian
+    /// (whose upstream module throws on every check) — served under the same API
+    /// as everything else.
     pub fn new(
         version: impl Into<String>,
         build_date: impl Into<String>,
         allow_origin: Option<String>,
     ) -> Result<Self, String> {
-        let mut engines = Vec::new();
-        for (long_code, variant) in [
-            ("en-US", Some("en-US")),
-            ("en-GB", Some("en-GB")),
-            ("de-DE", Some("de-DE")),
-            ("de-AT", Some("de-AT")),
-            ("de-CH", Some("de-CH")),
-            ("de-DE-x-simple-language", Some("de-DE-x-simple-language")),
-            ("pt-PT", Some("pt-PT")),
-            ("pt-BR", Some("pt-BR")),
-            ("no", None),
-            ("nrd", None),
-            ("nn", None),
-            ("gn", None),
-            ("ja-JP", None),
-            ("zh-CN", None),
-        ] {
-            let Some(lang) = Lang::from_long_code(long_code) else {
-                continue;
-            };
-            let Ok(builder) = Engine::builder(lang) else {
-                continue;
-            };
-            let builder = match variant {
-                Some(v) => builder.variant(v),
-                None => builder,
-            };
-            if let Ok(engine) = builder.build() {
-                engines.push((long_code.to_string(), Arc::new(engine)));
-            }
-        }
-        if engines.is_empty() {
-            return Err("no language pipelines could be built (data directory missing?)".into());
-        }
+        DataDir::discover().map_err(|error| {
+            format!("no data directory found; set LT_DATA_DIR or run from the repository root ({error})")
+        })?;
         Ok(Self {
             version: version.into(),
             build_date: build_date.into(),
             allow_origin,
-            engines,
+            engines: RwLock::new(BTreeMap::new()),
+            failed: RwLock::new(BTreeMap::new()),
+            used: AtomicU64::new(0),
         })
     }
 
-    /// State without engines (validation-only endpoints still work).
+    /// Whether `code` names a language this server can check.
+    ///
+    /// Cheap on purpose and *not* a statement about engines already built: the
+    /// build is deferred to [`AppState::engine`], so existence checks (the
+    /// `language=auto` path asking whether a detection result can be honoured)
+    /// never trigger a dictionary compile as a side effect.
+    pub fn is_servable(&self, code: &str) -> bool {
+        Lang::from_long_code(code).is_some()
+    }
+
+    /// The engine for `code`, building it on first use.
+    ///
+    /// `code` may name a base language (`de`, which resolves to the default
+    /// variant `de-DE`, LT-style) or a specific one (`de-AT`). Builds happen
+    /// outside the lock so concurrent first requests for *different* languages
+    /// do not serialise behind each other's compile time; on a cache hit the
+    /// LRU clock advances, and when the cache is full the least recently used
+    /// engine is dropped before the new one is inserted.
+    pub fn engine(&self, code: &str) -> Result<(String, Arc<Engine>), String> {
+        let Some(lang) = Lang::from_long_code(code) else {
+            return Err(format!(
+                "{code} is not a language code known to LingoTweaker."
+            ));
+        };
+        let long_code = canonical_long_code(code)
+            .ok_or_else(|| format!("{code} is not a language code known to LingoTweaker."))?;
+
+        {
+            let engines = self.engines.read().expect("engines lock");
+            if let Some(cached) = engines.get(&long_code) {
+                let engine = Arc::clone(&cached.engine);
+                drop(engines);
+                let stamp = self.used.fetch_add(1, Ordering::Relaxed) + 1;
+                self.engines
+                    .write()
+                    .expect("engines lock")
+                    .get_mut(&long_code)
+                    .expect("just read it")
+                    .used_at = stamp;
+                return Ok((long_code, engine));
+            }
+        }
+        if let Some(error) = self.failed.read().expect("failed lock").get(&long_code) {
+            return Err(error.clone());
+        }
+
+        let mut builder = Engine::builder(lang).map_err(|error| error.to_string())?;
+        let default = DEFAULT_VARIANTS
+            .iter()
+            .find(|(l, _)| *l == lang)
+            .map(|(_, code)| (*code).to_string())
+            .unwrap_or_else(|| lang.info().long_code.to_string());
+        if long_code != default {
+            builder = builder.variant(&long_code);
+        }
+        let built = builder
+            .build()
+            .map_err(|error| format!("{long_code}: {error}"))?;
+        let engine = Arc::new(built);
+
+        let mut engines = self.engines.write().expect("engines lock");
+        if engines.len() >= cache_cap().max(1) {
+            // Evict the least recently used. With the cap at 0 the map never
+            // fills and every check builds its own engine.
+            if let Some(evicted) = engines
+                .iter()
+                .min_by_key(|(_, cached)| cached.used_at)
+                .map(|(key, _)| key.clone())
+            {
+                engines.remove(&evicted);
+            }
+        }
+        let stamp = self.used.fetch_add(1, Ordering::Relaxed) + 1;
+        engines.insert(
+            long_code.clone(),
+            CachedEngine {
+                engine: Arc::clone(&engine),
+                used_at: stamp,
+            },
+        );
+        Ok((long_code, engine))
+    }
+
+    /// The languages that can be checked.
+    pub fn servable_languages(&self) -> Vec<Lang> {
+        Lang::ALL.to_vec()
+    }
+
+    /// State that never builds engines: validation-only endpoints still work,
+    /// and every check answers 501 naming the missing data.
     pub fn without_engines(
         version: impl Into<String>,
         build_date: impl Into<String>,
@@ -138,24 +312,10 @@ impl AppState {
             version: version.into(),
             build_date: build_date.into(),
             allow_origin,
-            engines: Vec::new(),
+            engines: RwLock::new(BTreeMap::new()),
+            failed: RwLock::new(BTreeMap::new()),
+            used: AtomicU64::new(0),
         }
-    }
-
-    /// Resolve a requested language code to an engine entry, LT-style: codes
-    /// are case-insensitive (the browser extension sends `en-us`, `de-de`)
-    /// and a code without variant falls back to the first listed variant of
-    /// that language (`de` → `de-DE`, like `Languages.getLanguageForLanguageCode`
-    /// plus the server's default-variant fallback).
-    pub fn resolve_engine(&self, language: &str) -> Option<&(String, Arc<Engine>)> {
-        let lower = language.to_ascii_lowercase();
-        self.engines.iter().find(|(key, _)| {
-            let key_lower = key.to_ascii_lowercase();
-            key_lower == lower
-                || key_lower
-                    .strip_prefix(&lower)
-                    .is_some_and(|rest| rest.starts_with('-'))
-        })
     }
 }
 
@@ -363,15 +523,20 @@ async fn check_impl(
 ) -> Response {
     let params: CheckParams = serde_urlencoded::from_str(&body).unwrap_or_default();
 
-    if params.enabled.is_some()
-        || params.disabled.is_some()
-        || params.preferredvariants.is_some()
-        || params.autodetect.is_some()
-    {
-        return error_response(
-            StatusCode::BAD_REQUEST,
-            "The 'enabled', 'disabled', 'preferredvariants', 'autodetect' parameters are not supported anymore. Use 'enabledRules', 'disabledRules', 'preferredVariants' or set language to 'auto'.",
-        );
+    for legacy in ["enabled", "disabled", "preferredvariants", "autodetect"] {
+        // Named in Java's own order, one per response, with Java's wording.
+        let present = match legacy {
+            "enabled" => params.enabled.is_some(),
+            "disabled" => params.disabled.is_some(),
+            "preferredvariants" => params.preferredvariants.is_some(),
+            _ => params.autodetect.is_some(),
+        };
+        if present {
+            if utf8_offsets {
+                return error_response(StatusCode::BAD_REQUEST, &legacy_parameter_error(legacy));
+            }
+            return error_response_v2(StatusCode::BAD_REQUEST, &legacy_parameter_error(legacy));
+        }
     }
     if params.text.is_some() && params.data.is_some() {
         return error_response(
@@ -379,48 +544,83 @@ async fn check_impl(
             "You cannot use 'text' and 'data' at the same time.",
         );
     }
+    // v2 errors are Java's: `text/plain`, `Error: <message>`, his exact wording
+    // (captured from the pinned oracle). v3 is the native surface and keeps
+    // `error_response`'s JSON.
+    let fail = |status: StatusCode, message: String| {
+        if utf8_offsets {
+            error_response(status, &message)
+        } else {
+            error_response_v2(status, &message)
+        }
+    };
     let Some(language) = params.language.as_deref() else {
-        return error_response(
+        return fail(
             StatusCode::BAD_REQUEST,
-            "Missing required parameter: language",
+            "Missing 'language' parameter, e.g. 'language=en-US' for American English or 'language=fr' for French".into(),
         );
     };
     if params.preferred_variants.is_some() && language != "auto" {
-        return error_response(
+        return fail(
             StatusCode::BAD_REQUEST,
-            "The 'preferredVariants' parameter can only be used if 'language' is set to 'auto'.",
+            "The 'preferredVariants' parameter can only be used if 'language' is set to 'auto'."
+                .into(),
+        );
+    }
+    if params.text.is_some() && params.data.is_some() {
+        return fail(
+            StatusCode::BAD_REQUEST,
+            "Set only 'text' or 'data' parameter, not both".into(),
         );
     }
     if params.text.is_none() && params.data.is_none() {
-        return error_response(
+        return fail(
             StatusCode::BAD_REQUEST,
-            "Missing required parameter: text or data",
+            "Missing 'text' or 'data' parameter".into(),
         );
     }
     let text = match (&params.text, &params.data) {
         (Some(t), _) => t.clone(),
         (None, Some(d)) => match text_from_data(d) {
             Ok(t) => t,
-            Err(e) => return error_response(StatusCode::BAD_REQUEST, &e),
+            Err(e) => return fail(StatusCode::BAD_REQUEST, e),
         },
         (None, None) => unreachable!(),
     };
     if text.chars().count() > MAX_TEXT_LENGTH as usize {
-        return error_response(
+        return fail(
             StatusCode::BAD_REQUEST,
-            &format!("Text too long: limit is {MAX_TEXT_LENGTH} characters"),
+            format!("Text too long: limit is {MAX_TEXT_LENGTH} characters"),
         );
+    }
+    // Java rejects unknown `level` values outright
+    // (`TextChecker.getLevel`); ours accepted anything as "default", silently.
+    // The engine implements two of Java's ten levels, and the message names the
+    // two that exist here.
+    if let Some(level) = params.level.as_deref() {
+        if !level.eq_ignore_ascii_case("default") && !level.eq_ignore_ascii_case("picky") {
+            return fail(
+                StatusCode::BAD_REQUEST,
+                format!(
+                    "Unknown value '{level}' for parameter 'level'. Valid values: default, picky"
+                ),
+            );
+        }
     }
 
     let auto = language == "auto";
     let preferred_variants = split_csv(&params.preferred_variants);
-    // Detection runs only for `language=auto`. LT also detects for an explicit
-    // language — `V2TextChecker.getLanguage` always calls
-    // `detectLanguageOfString` and reports the answer under `detectedLanguage`
-    // while checking with the language that was asked for — but throws it away
-    // here: it costs a model parse and a prediction on every request, and the
-    // caller has already said which language it wants.
-    let outcome = auto.then(|| detect::language_of(&text, None, &Gates::default()));
+    // Detection runs only for `language=auto` (owner decision, 2026-10-05).
+    // LanguageTool always detects, even for an explicit language —
+    // `V2TextChecker.getLanguage` calls `detectLanguageOfString` and reports the
+    // answer under `detectedLanguage` while checking with the language that was
+    // asked for — but re-guessing a language the caller has already stated is
+    // work whose only output is a field that contradicts what they said. On an
+    // explicit request, `detectedLanguage` therefore reports the checked
+    // language at confidence 1.0 with no source, and the fixture gate carries
+    // the divergence (`check_data`, where Java answers `nl` for a request
+    // checked as `en-US`).
+    let outcome = auto.then(|| detect::language_of(&text, None, None));
     let detected = outcome.as_ref().and_then(|outcome| outcome.detected);
 
     // The language the check itself runs in. LT
@@ -429,6 +629,25 @@ async fn check_impl(
     // is not a candidate list — that is `preferredLanguages`), and an abstention
     // falls back to `en`.
     let long_code = if auto {
+        // v3 has no LanguageTool compatibility duty, so it answers the same way
+        // for a detected language as for a named one: if this build has no
+        // engine for what detection found, say 501 rather than check the text
+        // against different rules. Since the engine set became "every vendored
+        // language", detection cannot answer a language this server refuses —
+        // its labels are mapped through `Lang::from_long_code` — so this is
+        // defence in depth rather than a reachable answer.
+        if utf8_offsets {
+            if let Some(hit) = detected.filter(|hit| !state.is_servable(hit.language.base_code())) {
+                return error_response(
+                    StatusCode::NOT_IMPLEMENTED,
+                    &format!(
+                        "The text was detected as {} ({}) but this LingoTweaker build has no rules for it; pass an explicit 'language' to check it anyway.",
+                        hit.language.info().name,
+                        hit.language.base_code()
+                    ),
+                );
+            }
+        }
         for variant in &preferred_variants {
             if !variant.contains('-') {
                 return error_response(
@@ -443,11 +662,12 @@ async fn check_impl(
             &preferred_variants,
             detected.map_or(Lang::En, |hit| hit.language),
         );
-        if state.resolve_engine(&requested).is_some() {
+        if state.is_servable(&requested) {
             requested
         } else if let Some(fallback) = preferred_variants
             .iter()
-            .find_map(|variant| state.resolve_engine(variant).map(|(key, _)| key.clone()))
+            .find(|variant| state.is_servable(variant))
+            .cloned()
         {
             // This build builds engines for a subset of the languages the
             // identifier can return, so a detection it cannot check falls back
@@ -462,18 +682,18 @@ async fn check_impl(
         language.to_string()
     };
     let Some(lang) = Lang::from_long_code(&long_code) else {
-        return error_response(
+        return fail(
             StatusCode::BAD_REQUEST,
-            &format!("{long_code} is not a language code known to LingoTweaker."),
+            format!(
+                "'{long_code}' is not a language code known to LingoTweaker. Supported language codes are: {}. The list of languages is what GET /v2/languages reports.",
+                supported_codes()
+            ),
         );
     };
-    let Some((long_code, engine)) = state
-        .resolve_engine(&long_code)
-        .map(|(key, engine)| (key.clone(), Arc::clone(engine)))
-    else {
-        return error_response(
+    let Ok((long_code, engine)) = state.engine(&long_code) else {
+        return fail(
             StatusCode::NOT_IMPLEMENTED,
-            &format!("The language {long_code} is not supported by this LingoTweaker build yet."),
+            format!("The language {long_code} is not supported by this LingoTweaker build yet."),
         );
     };
 
@@ -526,7 +746,7 @@ async fn check_impl(
         },
         "matches": matches,
         "sentenceRanges": sentence_ranges(&text, &result, utf8_offsets),
-        "extendedSentenceRanges": extended_sentence_ranges(&text, &result, outcome.is_some(), utf8_offsets),
+        "extendedSentenceRanges": extended_sentence_ranges(&text, &result, lang, utf8_offsets),
     });
     (StatusCode::OK, Json(response)).into_response()
 }
@@ -579,8 +799,11 @@ fn detected_language_json(
             "source": Value::Null,
         });
     };
-    // The language detection settled on, or `en` when the gates abstained.
-    let base = outcome.detected.map_or(Lang::En, |hit| hit.language);
+    // The language detection settled on, or the checked language when the gates
+    // abstained — LT's own abstention is `DetectedLanguage(lang, lang, 0f,
+    // null)`, and reporting `en` for an abstained German check would be a
+    // third answer nobody asked for.
+    let base = outcome.detected.map_or(checked, |hit| hit.language);
     let (confidence, source) = match outcome.detected {
         Some(hit) => (hit.confidence, Some(detect::v2_source(hit.source))),
         // An abstention reports the fallback language at confidence `0.0` with a
@@ -632,37 +855,33 @@ fn sentence_ranges(text: &str, result: &lt_core::CheckResult, utf8_offsets: bool
 fn extended_sentence_ranges(
     text: &str,
     result: &lt_core::CheckResult,
-    detected: bool,
+    checked: Lang,
     utf8_offsets: bool,
 ) -> Vec<Value> {
-    if !detected {
-        return Vec::new();
-    }
+    // `JLanguageTool.checkAnalyzedSentenceStream:2195`: one range per sentence,
+    // carrying the checked language at rate 1.0. The rates change only when a
+    // rule match carries `getNewLanguageMatches()` — LanguageTool premium's
+    // per-sentence language switching — which no open-source rule populates, so
+    // the initial value is the value. Our first cut ran the detector per
+    // sentence instead; that produced five fractional rates per sentence where
+    // Java produces one 1.0, and it cost a prediction per sentence on texts
+    // where the answer is definitionally the language already checked.
     result
         .sentences
         .iter()
-        .take(MAX_EXTENDED_SENTENCE_RANGES)
         .map(|sentence| {
             let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
-            let languages: Vec<Value> =
-                detect::language_of(&sentence.text, None, &Gates::default())
-                    .candidates
-                    .iter()
-                    .map(|candidate| {
-                        json!({
-                            // LT uses the short code here
-                            // (`ExtendedSentenceRange`), not the long code.
-                            "language": candidate.lang.base_code(),
-                            // LT rounds the rate to two decimals
-                            // (`DefaultLanguageIdentifier:335`).
-                            "rate": (candidate.confidence * 100.0).round() / 100.0,
-                        })
-                    })
-                    .collect();
             json!({
                 "from": from,
                 "to": to,
-                "detectedLanguages": languages,
+                "detectedLanguages": [
+                    {
+                        // LT uses the short code here
+                        // (`ExtendedSentenceRange`), not the long code.
+                        "language": checked.base_code(),
+                        "rate": 1.0,
+                    }
+                ],
             })
         })
         .collect()
@@ -701,6 +920,7 @@ fn sentence_span(text: &str, range: TextRange, utf8_offsets: bool) -> (usize, us
 /// "resolved": …}`.
 async fn detect_language(body: String) -> Response {
     let params: DetectParams = serde_urlencoded::from_str(&body).unwrap_or_default();
+    let gates = params.gates();
     let Some(text) = params.text else {
         return error_response(StatusCode::BAD_REQUEST, "Missing required parameter: text");
     };
@@ -718,7 +938,7 @@ async fn detect_language(body: String) -> Response {
         .as_deref()
         .filter(|value| !value.trim().is_empty())
         .map(|value| detect::parse_restrict(Some(value)));
-    let outcome = detect::language_of(&text, restrict.as_deref(), &Gates::default());
+    let outcome = detect::language_of(&text, restrict.as_deref(), gates.as_ref());
     (StatusCode::OK, Json(detect::report_json(&outcome))).into_response()
 }
 
@@ -727,6 +947,35 @@ struct DetectParams {
     text: Option<String>,
     /// `sv,en,de`: only consider languages the caller has data for.
     restrict: Option<String>,
+    /// Gate overrides. Each is optional and defaults to the same field's
+    /// `Gates::default()` value, so naming none of them is the calibrated
+    /// behaviour and naming one leaves the rest alone. These are the same four
+    /// knobs `lt_wasm::detect_json` accepts, spelled the same way, because they
+    /// are the same settings: a caller that has tuned them for the browser has
+    /// no reason to learn a second vocabulary.
+    #[serde(rename = "minChars")]
+    min_chars: Option<usize>,
+    #[serde(rename = "minConfidence")]
+    min_confidence: Option<f32>,
+    #[serde(rename = "minMargin")]
+    min_margin: Option<f32>,
+    #[serde(rename = "nonLatinWeight")]
+    non_latin_weight: Option<usize>,
+}
+
+impl DetectParams {
+    /// The requested gates, or `None` if the caller named none of the four.
+    fn gates(&self) -> Option<Gates> {
+        let defaults = Gates::default();
+        let gates = Gates {
+            min_chars: self.min_chars.unwrap_or(defaults.min_chars),
+            min_confidence: self.min_confidence.unwrap_or(defaults.min_confidence),
+            min_margin: self.min_margin.unwrap_or(defaults.min_margin),
+            non_latin_weight: self.non_latin_weight.unwrap_or(defaults.non_latin_weight),
+        };
+        let untouched = gates == defaults;
+        (!untouched).then_some(gates)
+    }
 }
 
 /// LT `ContextTools.getContext`: a ±`CONTEXT_SIZE` character (UTF-16) window
@@ -866,13 +1115,16 @@ fn match_to_json(
 }
 
 async fn info(State(state): State<Arc<AppState>>) -> Json<Value> {
+    // Java's `/v2/info` answers `{"software":{...}}` — the same object its check
+    // response sends. Our first cut flattened those fields at the top level,
+    // which no LT client could read.
     Json(json!({
-        "name": SOFTWARE_NAME,
-        "version": state.version,
-        "buildDate": state.build_date,
-        "apiVersion": API_VERSION,
-        "premium": false,
-        "status": "",
+        "software": {
+            "name": SOFTWARE_NAME,
+            "version": state.version,
+            "buildDate": state.build_date,
+            "premium": false,
+        }
     }))
 }
 
@@ -914,6 +1166,38 @@ fn error_response(status: StatusCode, message: &str) -> Response {
         .into_response()
 }
 
+/// Java-shaped error for the v2 surface: a `text/plain` body of
+/// `Error: <message>`. That is what LanguageTool's server answers with, and a
+/// drop-in client written against it parses exactly that — JSON with our own
+/// wording would be two divergences where one is asked for. v3 keeps
+/// [`error_response`]'s JSON: it is the native surface.
+fn error_response_v2(status: StatusCode, message: &str) -> Response {
+    (
+        status,
+        [("content-type", "text/plain; charset=utf-8")],
+        format!("Error: {message}"),
+    )
+        .into_response()
+}
+
+/// The v2 wording for a retired v1 parameter, as
+/// `TextChecker.getParameter` rejects them: one parameter named per response,
+/// not all four at once. `autodetect` has its own sentence, because its v2
+/// replacement is a value of `language` rather than a renamed parameter.
+fn legacy_parameter_error(param: &str) -> String {
+    match param {
+        "autodetect" => String::from(
+            "You specified 'autodetect' but automatic language detection is now activated with 'language=auto' in v2 of the API",
+        ),
+        "preferredvariants" => String::from(
+            "You specified 'preferredvariants' but the parameter is now called 'preferredVariants' (uppercase 'V') in v2 of the API",
+        ),
+        other => format!(
+            "You specified '{other}' but the parameter is now called '{other}Rules' in v2 of the API"
+        ),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -939,7 +1223,7 @@ mod tests {
     }
 
     fn has_engines(s: &AppState) -> bool {
-        !s.engines.is_empty()
+        s.engine("en-US").is_ok()
     }
 
     async fn send(router: Router, method: &str, uri: &str, body: &str) -> (StatusCode, Value) {
@@ -1040,15 +1324,32 @@ mod tests {
     #[tokio::test]
     async fn check_rejects_legacy_params() {
         let router = router(state());
+        // v2 answers in Java's shape: text/plain `Error: …`, which `send`
+        // surfaces as a JSON parse failure (Value::Null) — the wording itself is
+        // pinned byte-for-byte by the oracle fixture gate.
         let (status, value) = send(
-            router,
+            router.clone(),
             "POST",
             "/v2/check",
             "text=hi&language=en-US&enabled=FOO",
         )
         .await;
         assert_eq!(status, StatusCode::BAD_REQUEST);
-        assert!(value["error"]["message"].is_string());
+        assert!(value.is_null(), "v2 errors are text/plain: {value}");
+
+        // v3 keeps the JSON envelope and the per-parameter wording.
+        let (status, value) = send(
+            router,
+            "POST",
+            "/v3/check",
+            "text=hi&language=en-US&enabled=FOO",
+        )
+        .await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert_eq!(
+            value["error"]["message"],
+            "You specified 'enabled' but the parameter is now called 'enabledRules' in v2 of the API"
+        );
     }
 
     #[tokio::test]
@@ -1255,7 +1556,7 @@ mod tests {
             "{}&language=en-US",
             serde_urlencoded::to_string([("data", data)]).unwrap()
         );
-        let (status, value) = send(router, "POST", "/v2/check", &body).await;
+        let (status, value) = send(router, "POST", "/v3/check", &body).await;
         assert_eq!(status, StatusCode::BAD_REQUEST);
         assert_eq!(
             value["error"]["message"],
@@ -1269,7 +1570,7 @@ mod tests {
         let (status, value) = send(
             router,
             "POST",
-            "/v2/check",
+            "/v3/check",
             "data=%7B%7D&language=en-US", // `{}`
         )
         .await;
@@ -1500,14 +1801,17 @@ mod tests {
     /// `detectedLanguage` keeps the "this is what was asked for" shape with a
     /// null `source`, exactly as before.
     #[tokio::test]
-    async fn explicit_language_bypasses_detection() {
+    async fn explicit_language_reports_the_checked_language() {
         let s = state();
         if !has_engines(&s) {
             return;
         }
         let router = router(s);
-        // Swedish text checked as German: detection would say `sv`, and saying
-        // so would be a behaviour change on the path that must not detect.
+        // Swedish text, checked as German: detection does not run, because the
+        // caller has already said which language it wants (owner decision,
+        // 2026-10-05). `detectedLanguage` therefore reports the checked language
+        // at 1.0 with no source — "certain, because you specified it" — rather
+        // than a guess that contradicts the caller.
         let body = serde_urlencoded::to_string([
             (
                 "text",
@@ -1518,14 +1822,13 @@ mod tests {
         .unwrap();
         let (status, value) = send(router, "POST", "/v2/check", &body).await;
         assert_eq!(status, StatusCode::OK, "response: {value}");
-        let detected = &value["language"]["detectedLanguage"];
         assert_eq!(value["language"]["code"], "de-DE");
+        let detected = &value["language"]["detectedLanguage"];
         assert_eq!(detected["code"], "de-DE");
         assert_eq!(detected["name"], "German (Germany)");
         assert_eq!(detected["confidence"], 1.0);
         assert_eq!(detected["source"], Value::Null);
     }
-
     /// `sentenceRanges` (`RuleMatchesAsJsonSerializer:230-241`) and
     /// `extendedSentenceRanges` (`:243-264`) were always empty arrays; both are
     /// filled now, in the offset convention of each surface.
@@ -1599,13 +1902,15 @@ mod tests {
         let languages = range["detectedLanguages"]
             .as_array()
             .expect("an array of {language, rate}");
-        let best = &languages[0];
-        // LT uses short codes here (`ExtendedSentenceRange`), not long codes
-        assert_eq!(best["language"], "sv");
-        let rate = best["rate"].as_f64().expect("a rate");
-        assert!(rate > 0.0 && rate <= 1.0, "rate: {rate}");
+        // One entry per sentence: the checked language at rate 1.0, exactly as
+        // `JLanguageTool:2195` initialises them — the per-sentence detector this
+        // test used to assert on was our own invention, not Java's.
+        assert_eq!(languages.len(), 1, "ranges: {languages:?}");
+        assert_eq!(languages[0]["language"], "sv");
+        assert_eq!(languages[0]["rate"], 1.0);
 
-        // an explicit language does not detect, so there is nothing to report
+        // An explicit language reports *itself* at 1.0 — the ranges carry the
+        // checked language, whether it came from detection or from the caller.
         let router_explicit = router(s);
         let body = serde_urlencoded::to_string([
             (
@@ -1617,7 +1922,10 @@ mod tests {
         .unwrap();
         let (status, value) = send(router_explicit, "POST", "/v2/check", &body).await;
         assert_eq!(status, StatusCode::OK);
-        assert_eq!(value["extendedSentenceRanges"].as_array().unwrap().len(), 0);
+        let extended = value["extendedSentenceRanges"].as_array().unwrap();
+        assert_eq!(extended.len(), 1);
+        assert_eq!(extended[0]["detectedLanguages"][0]["language"], "en");
+        assert_eq!(extended[0]["detectedLanguages"][0]["rate"], 1.0);
     }
 
     /// `/v3/check` reports UTF-8 byte offsets, so the sentence ranges differ
@@ -1678,6 +1986,92 @@ mod tests {
         assert_eq!(value["detected"], Value::Null);
         // the ranking survives an abstention, so a UI can still offer it
         assert!(!value["candidates"].as_array().unwrap().is_empty());
+    }
+
+    /// The gate overrides reach the engine, and naming none of them is the
+    /// calibrated behaviour. `minChars` is the clearest probe: `Hej.` is four
+    /// characters, so the default length gate abstains on it and a lowered one
+    /// does not.
+    #[tokio::test]
+    async fn v3_detect_accepts_gate_overrides() {
+        let router = router(state());
+        let short = serde_urlencoded::to_string([("text", "Hej.")]).unwrap();
+        let (status, value) = send(router.clone(), "POST", "/v3/detect", &short).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(value["resolved"], Value::Null, "default gates abstain");
+
+        let lenient = serde_urlencoded::to_string([
+            ("text", "Hej."),
+            ("minChars", "1"),
+            ("minConfidence", "0.1"),
+        ])
+        .unwrap();
+        let (status, value) = send(router, "POST", "/v3/detect", &lenient).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        assert!(
+            value["resolved"].is_string(),
+            "lowered gates should decide: {value}"
+        );
+    }
+
+    /// A gate named with the value it already has is not an override, and the
+    /// other three keep their defaults when one is named.
+    #[tokio::test]
+    async fn v3_detect_gate_overrides_default_per_field() {
+        let defaults = Gates::default();
+        let params = DetectParams {
+            text: None,
+            restrict: None,
+            min_chars: None,
+            min_confidence: Some(0.5),
+            min_margin: None,
+            non_latin_weight: None,
+        };
+        let gates = params.gates().expect("one field was named");
+        assert_eq!(gates.min_confidence, 0.5);
+        assert_eq!(gates.min_chars, defaults.min_chars);
+        assert_eq!(gates.min_margin, defaults.min_margin);
+        assert_eq!(gates.non_latin_weight, defaults.non_latin_weight);
+
+        let untouched = DetectParams {
+            text: None,
+            restrict: None,
+            min_chars: Some(defaults.min_chars),
+            min_confidence: None,
+            min_margin: None,
+            non_latin_weight: Some(defaults.non_latin_weight),
+        };
+        assert!(
+            untouched.gates().is_none(),
+            "naming defaults is not an override"
+        );
+    }
+
+    /// `language=auto` checks the language it detected — there is no substitute
+    /// step any more, because every language detection can answer is one this
+    /// server serves. This is the test that used to pin the 14-engine fallback,
+    /// where Swedish text was *reported* as Swedish and checked as English; that
+    /// divergence is gone by construction, and this pins its absence.
+    #[tokio::test]
+    async fn auto_checks_the_language_it_detected() {
+        let router = router(state());
+        let body = serde_urlencoded::to_string([
+            (
+                "text",
+                "Jag arbetar inte i dag, men jag kommer hem efter jobbet.",
+            ),
+            ("language", "auto"),
+        ])
+        .unwrap();
+        let (status, value) = send(router.clone(), "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        assert_eq!(value["language"]["code"], "sv", "checked as detected");
+        assert_eq!(value["language"]["detectedLanguage"]["code"], "sv");
+
+        // The same request on v3, which has no compatibility duty: same answer.
+        let (status, value) = send(router, "POST", "/v3/check", &body).await;
+        assert_eq!(status, StatusCode::OK, "response: {value}");
+        assert_eq!(value["language"]["code"], "sv");
     }
 
     /// `&restrict=` narrows detection to the languages the caller has data for.

@@ -1,0 +1,22 @@
+{
+  "extendedSentenceRanges": [],
+  "language": {
+    "code": "en-US",
+    "detectedLanguage": {
+      "code": "en-US",
+      "confidence": 0.0,
+      "name": "English (US)",
+      "source": null
+    },
+    "name": "English (US)"
+  },
+  "matches": [],
+  "sentenceRanges": [],
+  "software": {
+    "apiVersion": 1,
+    "name": "LanguageTool"
+  },
+  "warnings": {
+    "incompleteResults": false
+  }
+}

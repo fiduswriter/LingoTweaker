@@ -1,0 +1,37 @@
+{
+  "_comment": [
+    "The request set both the Java capture and the Rust contract test replay.",
+    "One list, so the two can never drift: capture-fixtures.sh reads this file,",
+    "and crates/lt-http/tests/api_fixtures.rs replays exactly these entries and",
+    "compares lt-http's answers against the normalised Java responses next to them.",
+    "",
+    "`body` is application/x-www-form-urlencoded, exactly as the endpoints are",
+    "documented to be called. `expect_status` is advisory and documented per case:",
+    "the Java responses are the reference, so where the two implementations differ",
+    "on the status line the fixture records Java's and the test says so.",
+    "",
+    "Captured from the pinned baseline commit in upstream.json (the oracle reports",
+    "its own commit in /v2/info, which is how a capture is tied to the pin)."
+  ],
+  "requests": [
+    { "name": "languages", "method": "GET", "path": "/v2/languages" },
+    { "name": "info", "method": "GET", "path": "/v2/info" },
+    { "name": "maxtextlength", "method": "GET", "path": "/v2/maxtextlength" },
+    { "name": "configinfo", "method": "GET", "path": "/v2/configinfo?language=en-US" },
+    { "name": "check_empty", "method": "POST", "path": "/v2/check", "body": "text=&language=en-US" },
+    { "name": "check_ascii", "method": "POST", "path": "/v2/check", "body": "text=This+is+a+test.&language=en-US" },
+    { "name": "check_emoji", "method": "POST", "path": "/v2/check", "body": "text=Hello+%F0%9F%98%80+world.&language=en-US" },
+    { "name": "check_de", "method": "POST", "path": "/v2/check", "body": "text=Das+ist+ein+Test.&language=de-DE" },
+    { "name": "check_es", "method": "POST", "path": "/v2/check", "body": "text=Esto+es+una+prueba.&language=es" },
+    { "name": "check_fr", "method": "POST", "path": "/v2/check", "body": "text=C%27est+un+test.&language=fr" },
+    { "name": "check_data", "method": "POST", "path": "/v2/check", "body": "data=%7B%22annotation%22%3A%5B%7B%22text%22%3A%22Hi%22%7D%5D%7D&language=en-US" },
+    { "name": "check_enabled_rules", "method": "POST", "path": "/v2/check", "body": "text=This+is+a+test.&language=en-US&enabledRules=UPPERCASE_SENTENCE_START" },
+    { "name": "check_disabled_rules", "method": "POST", "path": "/v2/check", "body": "text=This+is+a+test.&language=en-US&disabledRules=UPPERCASE_SENTENCE_START" },
+    { "name": "check_picky_level", "method": "POST", "path": "/v2/check", "body": "text=This+is+a+test.&language=en-US&level=picky" },
+    { "name": "check_legacy_param", "method": "POST", "path": "/v2/check", "body": "text=Hi&language=en-US&enabled=FOO" },
+    { "name": "check_legacy_preferredvariants", "method": "POST", "path": "/v2/check", "body": "text=Hi&language=en-US&preferredvariants=en-GB" },
+    { "name": "check_missing_language", "method": "POST", "path": "/v2/check", "body": "text=Hi" },
+    { "name": "check_unknown_language", "method": "POST", "path": "/v2/check", "body": "text=Hi&language=xx-YY" },
+    { "name": "words_not_implemented", "method": "POST", "path": "/v2/words", "body": "username=u&apikey=k" }
+  ]
+}
