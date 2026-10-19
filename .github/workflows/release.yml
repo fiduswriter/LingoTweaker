@@ -174,7 +174,11 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - uses: jetli/wasm-pack-action@v0.4.0
         with:
-          version: "latest"
+          # Pinned: "latest" resolution in this action intermittently
+          # falls back to wasm-pack 0.9.1, which cannot parse the
+          # `license.workspace = true` table in crates/lt-wasm/Cargo.toml
+          # ("invalid type: map, expected a string").
+          version: "0.15.0"
       - uses: Swatinem/rust-cache@v2
       - run: rustup toolchain install 1.98.1 --profile minimal
       - name: Build, smoke-test and publish lingotweaker-wasm
