@@ -36,7 +36,10 @@ jobs:
           # falls back to wasm-pack 0.9.1, which cannot parse the
           # `license.workspace = true` table in crates/lt-wasm/Cargo.toml
           # ("invalid type: map, expected a string").
-          version: "0.15.0"
+          # The version string is used verbatim as the release tag in the
+          # download URL, so it must carry the "v" prefix like `latest`
+          # (the tag_name) does; "0.15.0" 404s.
+          version: "v0.15.0"
 
       - uses: actions/setup-node@v4
         with:
