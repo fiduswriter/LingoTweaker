@@ -101,6 +101,21 @@ else
   done
 fi
 
+# PyPI name mapping. PyPI rejects `lingotweaker-data-lt` as confusably
+# similar to the existing `lingotweaker-data-it` (its l/i confusable rule),
+# so Lithuanian publishes under the 3-letter abbreviation `ltu` — the
+# package that has been on PyPI as `lingotweaker-data-ltu` from the start.
+# npm has no such rule and keeps `lingotweaker-data-lt`. Everything else
+# — the `data/lt` tree, the `pypi-versions.json` entry, the pack files —
+# keeps the ISO code `lt`; only the PyPI distribution/module name differs.
+# `lt_py` applies the same alias in its auto-discovery (crates/lt-py).
+pypi_lang() {
+  case "$1" in
+    lt) printf 'ltu' ;;
+    *)  printf '%s' "$1" ;;
+  esac
+}
+
 if [ ! -x "$VENV/bin/python" ]; then
   echo "== creating build venv at $VENV"
   "$PYTHON" -m venv "$VENV"
@@ -112,8 +127,9 @@ rm -rf "$out"
 mkdir -p "$out/dist"
 
 for lang in $langs; do
-  pkg="lingotweaker-data-$lang"
-  mod="lingotweaker_data_$lang"
+  pypolang="$(pypi_lang "$lang")"
+  pkg="lingotweaker-data-$pypolang"
+  mod="lingotweaker_data_$pypolang"
   src="$out/$pkg"
   lang_pyver="$(pep440_version "$lang")"
   echo "== source $pkg ($lang_pyver)"

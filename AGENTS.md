@@ -287,6 +287,14 @@ readmes must say that engine packages ship code only and how to get the data
 (`LT_DATA_DIR` accepts a directory or a pack file). The npm loader's smoke
 test is `scripts/ci/tests/npm-data-loader-test.sh`.
 
+PyPI's confusable-name rule rejects `lingotweaker-data-lt` as too similar to
+the existing `lingotweaker-data-it` (l/i), so Lithuanian data publishes on
+PyPI as `lingotweaker-data-ltu`: `pypi_lang()` in `publish-pypi-data.sh`
+maps the distribution name and `lt_py` auto-discovery applies the same alias
+(`crates/lt-py`). Everything else — the `data/lt` tree, the
+`data/pypi-versions.json` key, the pack artifacts, and npm, where no such
+rule applies — keeps the ISO code `lt`.
+
 Dutch ships two packs in every channel: the full `nl` pack (folded, still
 parity-exact vs Java) and the size-optimized `nl-light` pack — npm
 `lingotweaker-data-nl-light`, PyPI `lingotweaker-data-nl-light` (module

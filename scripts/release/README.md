@@ -34,7 +34,7 @@ one build (`scripts/release/build-data.sh`, which reuses
 | `packs/<lang>.pack.gz` | GitHub Release + npm `lingotweaker-data-<lang>` | wasm `LtEngine`, native Node `dataDir` |
 | `packs/nl-light.pack.gz` | GitHub Release + npm `lingotweaker-data-nl-light` | the size-optimized Dutch variant (opt-in; see `docs/differences.md`) |
 | `data/<lang>.tar.gz` | GitHub Release | native `LT_DATA_DIR` (extract) |
-| `lingotweaker-data-<lang>` | PyPI | `lt_py` (auto-discovered) |
+| `lingotweaker-data-<lang>` | PyPI | `lt_py` (auto-discovered). One exception: Lithuanian publishes as `lingotweaker-data-ltu`, because PyPI rejects `-lt` as confusably similar to the existing `-it`; the data tree, `data/pypi-versions.json` key and pack files keep the ISO code `lt`, and `lt_py` maps the alias at discovery (npm keeps `lingotweaker-data-lt`) |
 | `lingotweaker-data-nl-light` | PyPI | `lt_py` (opt-in: `data_dir()`/`LT_DATA_DIR`; the Dutch base code `nl` auto-discovers the full package) |
 | `manifest.json` | GitHub Release | sizes + sha256 per artifact |
 

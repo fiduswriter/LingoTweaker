@@ -28,10 +28,31 @@ fn parse_lang(lang: &str) -> PyResult<lt::Lang> {
 }
 
 /// The data directory of an installed `lingotweaker-data-<base>` package.
+///
+/// PyPI rejects `lingotweaker-data-lt` as confusably similar to the existing
+/// `lingotweaker-data-it` (its l/i confusable rule), so Lithuanian data
+/// publishes as `lingotweaker-data-ltu` (see `pypi_lang` in
+/// scripts/release/publish-pypi-data.sh); the alias is applied here at
+/// discovery time. npm has no such rule and keeps `lingotweaker-data-lt`,
+/// and the data trees, packs and version-registry keys everywhere keep the
+/// ISO code `lt`.
 fn installed_data_dir(py: Python<'_>, base: &str) -> Option<String> {
-    let module = format!("lingotweaker_data_{base}");
-    let module = py.import(&module).ok()?;
-    module.call_method0("data_dir").ok()?.extract().ok()
+    let mut modules = vec![format!("lingotweaker_data_{base}")];
+    if base == "lt" {
+        modules.push("lingotweaker_data_ltu".to_string());
+    }
+    for module in &modules {
+        if let Ok(module) = py.import(module.as_str()) {
+            if let Some(dir) = module
+                .call_method0("data_dir")
+                .ok()
+                .and_then(|value| value.extract::<String>().ok())
+            {
+                return Some(dir);
+            }
+        }
+    }
+    None
 }
 
 /// An immutable, thread-safe checking engine.
