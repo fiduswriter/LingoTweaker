@@ -315,7 +315,7 @@ languages and publish manually:
 scripts/release/update-pypi-data-versions.py   # patch-bump changed languages
 git commit -am "data: bump PyPI data versions"
 # then run the `publish-pypi-data` workflow (workflow_dispatch), or:
-scripts/release/publish-pypi-data.sh           # idempotent: skips files already on PyPI
+scripts/release/publish-pypi-data.sh           # idempotent: skips languages whose version is already on PyPI
 ```
 
 Full detail lives in `scripts/release/README.md`.

@@ -66,7 +66,8 @@ was bumped for), independent of the engine release:
 scripts/release/update-pypi-data-versions.py
 git commit -am "data: bump PyPI data versions"
 
-# build + upload; only files that are not already on PyPI are sent
+# build + upload; languages whose version is already on PyPI are skipped
+# entirely (not even rebuilt)
 scripts/release/publish-pypi-data.sh
 ```
 
@@ -74,8 +75,15 @@ scripts/release/publish-pypi-data.sh
 (`data/manifest.json`, `data/core/**`, `data/messages/**`, `data/<lang>/**`)
 and patch-bumps any language whose hash changed (a language seen for the first
 time starts at `data/pypi-version`). `--check` exits non-zero when anything
-changed, for CI. `publish-pypi-data.sh` builds every wheel at its own version
-and asks PyPI before uploading, so unchanged languages are never re-sent.
+changed, for CI. `publish-pypi-data.sh` asks PyPI whether each language's
+registry version is published; a published version is skipped before building
+(one index lookup per language, so an up-to-date run takes seconds and uploads
+nothing), and only pending versions are built and uploaded as a wheel+sdist
+pair. The check is version-level on purpose: most published versions predate
+the sdist upload and are wheel-only, so a per-filename check would re-attempt
+an sdist for every up-to-date language on every run. A run interrupted
+between a version's two files is not resumed for the missing one (the
+wheel-only version stays installable; bump the version to force a rebuild).
 
 `nl-light` is a virtual entry: not a `data/` directory, its hash covers the
 exact Dutch inputs of `scripts/data/nl_pack_transform.py` plus the Dutch

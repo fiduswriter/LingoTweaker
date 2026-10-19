@@ -22,14 +22,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DIST="${DIST_DIR:-$ROOT/target/data-dist}"
 
-# Generated CJK dictionaries are gitignored; generate any that are missing so
-# the data artifacts include their tokenizer data. Set LT_SKIP_DICT_BUILD=1 to
-# skip (offline / already generated).
-if [ -z "${LT_SKIP_DICT_BUILD:-}" ]; then
-  for _l in ja zh; do
-    [ -d "$ROOT/data/$_l/rules" ] && python3 "$ROOT/tools/lindera/build-dict.py" "$_l"
-  done
-fi
+# Generated CJK dictionaries (ja/zh) are gitignored and only feed their own
+# language packages, so they are generated inside the loop, only for a
+# language that actually needs (re)building. LT_SKIP_DICT_BUILD=1 skips
+# generation (offline / already generated).
 PYTHON="${PYTHON:-python3}"
 VENV="${DATA_RELEASE_VENV:-/tmp/lingotweaker-data-venv}"
 BUILD_ONLY=0
@@ -47,8 +43,17 @@ done
 # version and the content hash it was bumped for; refresh it with
 # scripts/release/update-pypi-data-versions.py after changing data/ (that bumps
 # only the languages whose contents changed). Because unchanged languages keep
-# their version, the upload below skips files already on PyPI and therefore
-# publishes only what actually changed.
+# their version, a language whose version is already on PyPI is skipped
+# ENTIRELY — not even rebuilt — so an up-to-date run does nothing but index
+# lookups, and a changed run builds and uploads only the changed languages.
+# The check is version-level on purpose: the per-filename variant used to
+# upload wheel+sdist pairs, but every published version predating that change
+# has wheel only, so a per-filename check re-uploaded an sdist for every one
+# of the ~39 languages on every run (an hour of pointless uploads and
+# rejections). The one accepted gap: a run interrupted between a version's
+# wheel and sdist upload is not resumed for the missing second file — the
+# wheel-only version stays installable, and a version bump re-triggers the
+# pair if a rebuild is ever wanted.
 registry="$ROOT/data/pypi-versions.json"
 if [ ! -f "$registry" ]; then
   echo "publish-pypi-data: missing $registry; run scripts/release/update-pypi-data-versions.py first" >&2
@@ -73,21 +78,19 @@ print(f"{core}a{pre.split('.')[1]}" if pre.startswith("alpha.") else version)
 PY
 }
 
-# Is <filename> already published under <pkg> on PyPI?
-on_pypi() {
+# Is <version> of <pkg> already published on PyPI? Version-level: one index
+# lookup answers for the whole wheel+sdist pair (see the registry comment
+# above for why this is not per filename).
+on_pypi_version() {
   python3 - "$1" "$2" <<'PY'
 import json, sys, urllib.request
-pkg, filename = sys.argv[1], sys.argv[2]
+pkg, version = sys.argv[1], sys.argv[2]
 try:
     with urllib.request.urlopen(f"https://pypi.org/pypi/{pkg}/json", timeout=20) as r:
         data = json.load(r)
 except Exception:
-    sys.exit(1)  # unknown -> attempt the upload
-for files in data.get("releases", {}).values():
-    for f in files:
-        if f.get("filename") == filename:
-            sys.exit(0)
-sys.exit(1)
+    sys.exit(1)  # unknown -> build and upload it after all
+sys.exit(0 if version in data.get("releases", {}) else 1)
 PY
 }
 
@@ -116,11 +119,15 @@ pypi_lang() {
   esac
 }
 
-if [ ! -x "$VENV/bin/python" ]; then
-  echo "== creating build venv at $VENV"
-  "$PYTHON" -m venv "$VENV"
-  "$VENV/bin/pip" install -q --upgrade pip build setuptools wheel twine
-fi
+# Created lazily: an up-to-date run (every version already on PyPI) needs no
+# build venv at all and finishes in seconds.
+ensure_venv() {
+  if [ ! -x "$VENV/bin/python" ]; then
+    echo "== creating build venv at $VENV"
+    "$PYTHON" -m venv "$VENV"
+    "$VENV/bin/pip" install -q --upgrade pip build setuptools wheel twine
+  fi
+}
 
 out="$DIST/pypi"
 rm -rf "$out"
@@ -132,6 +139,20 @@ for lang in $langs; do
   mod="lingotweaker_data_$pypolang"
   src="$out/$pkg"
   lang_pyver="$(pep440_version "$lang")"
+  if on_pypi_version "$pkg" "$lang_pyver"; then
+    echo "== up to date: $pkg $lang_pyver (not rebuilt, not uploaded)"
+    continue
+  fi
+  # Generated CJK dictionaries (gitignored) only feed these languages, so
+  # generate them here, now that we know a rebuild is actually needed.
+  case "$lang" in
+    ja|zh)
+      if [ -z "${LT_SKIP_DICT_BUILD:-}" ] && [ -d "$ROOT/data/$lang/rules" ]; then
+        python3 "$ROOT/tools/lindera/build-dict.py" "$lang"
+      fi
+      ;;
+  esac
+  ensure_venv
   echo "== source $pkg ($lang_pyver)"
   mkdir -p "$src/$mod/data"
   # manifest.json stays out of the wheels: it is repo-side metadata (lt-data
@@ -229,6 +250,10 @@ done
 # `lingotweaker_data_nl_light`. lt_py auto-discovery resolves the Dutch base
 # code `nl` to the FULL package (`lingotweaker_data_nl`), so the light variant
 # is opt-in via `data_dir()`/`LT_DATA_DIR`.
+# The transform recompiles the Dutch dictionaries (~15 min cold — CI has no
+# persistent target/ cache) and only ever feeds this one package, so the
+# whole section is gated as a unit by the version check at the end.
+build_nl_light() {
 nl_light_tree="$DIST/nl-light-tree"
 python3 "$ROOT/scripts/data/nl_pack_transform.py" light "$ROOT/data" "$nl_light_tree" \
   --cache "$ROOT/target/nl-variant-cache" --min-freq "${NL_LIGHT_MIN_FREQ:-B}"
@@ -319,8 +344,18 @@ include-package-data = true
 include = ["$mod*"]
 EOF
 
+ensure_venv
 "$VENV/bin/python" -m build --no-isolation --outdir "$out/dist" "$src" >/dev/null
 if [ "$KEEP_SOURCES" = 0 ]; then rm -rf "$src"; fi
+}
+
+nl_light_pkg="lingotweaker-data-nl-light"
+nl_light_ver="$(pep440_version nl-light)"
+if on_pypi_version "$nl_light_pkg" "$nl_light_ver"; then
+  echo "== up to date: $nl_light_pkg $nl_light_ver (transform skipped, not uploaded)"
+else
+  build_nl_light
+fi
 
 echo "== built $(ls "$out/dist" | wc -l) files"
 ls -lh "$out/dist" | tail -n +2
@@ -339,16 +374,18 @@ if [ -n "${PYPI_API_TOKEN:-}" ] && [ -z "${TWINE_PASSWORD:-}" ]; then
   export TWINE_PASSWORD="$PYPI_API_TOKEN"
 fi
 
-echo "== twine upload (only files not already on PyPI)"
-# Upload one file at a time, skip anything already on the index (so unchanged
-# languages are never re-uploaded), and back off-and-retry transient failures
-# (PyPI's new-project limit and burst uploads return HTTP 429) so the step is
-# resumable. A package that exhausts its retries does NOT abort the run: the
-# loop continues with the next package and failed ones are retried in later
-# passes, because the new-project limit is account-wide and a package that
-# already got through does not consume it again.
+echo "== twine upload (the build loop above already skipped up-to-date languages)"
+# Upload one file at a time, re-check per version that the index does not have
+# it yet (catches a version published by an interrupted earlier run), and back
+# off-and-retry transient failures (PyPI's new-project limit and burst uploads
+# return HTTP 429) so the step is resumable. A package that exhausts its
+# retries does NOT abort the run: the loop continues with the next package and
+# failed ones are retried in later passes, because the new-project limit is
+# account-wide and a package that already got through does not consume it
+# again.
 upload_one() {
   f="$1"
+  ensure_venv
   attempt=1
   while [ "$attempt" -le 8 ]; do
     if "$VENV/bin/twine" upload --skip-existing --disable-progress-bar "$f"; then
@@ -386,7 +423,7 @@ for f in "$out"/dist/*.whl "$out"/dist/*.tar.gz; do
   name="$(basename "$f")"
   pkg="$(file_pkg "$name")"
   ver="$(file_ver "$name")"
-  if on_pypi "$pkg" "$name"; then
+  if on_pypi_version "$pkg" "$ver"; then
     skipped=$((skipped + 1))
     echo "== up to date: $name"
     continue
@@ -411,7 +448,8 @@ while [ -n "$failed_files" ] && [ "$pass" -le 3 ]; do
   for f in $failed_files; do
     name="$(basename "$f")"
     pkg="$(file_pkg "$name")"
-    if on_pypi "$pkg" "$name"; then
+    ver="$(file_ver "$name")"
+    if on_pypi_version "$pkg" "$ver"; then
       skipped=$((skipped + 1))
       echo "== up to date: $name"
       continue
