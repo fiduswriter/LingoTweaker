@@ -836,7 +836,7 @@ fn decode_annotation(
     let mut stem_bytes = surface_bytes[trim_prefix..surface_bytes.len() - trim_suffix].to_vec();
     stem_bytes.extend_from_slice(&ann[header..tag_sep]);
     out.push((
-        charset.decode(&stem_bytes).into_owned(),
+        charset.decode_owned(stem_bytes),
         charset.decode(&ann[tag_sep + 1..]).into_owned(),
     ));
 }
@@ -917,7 +917,7 @@ impl SynthDictionary {
                 if stem_bytes.last() == Some(&separator) {
                     stem_bytes.pop();
                 }
-                out.push(charset.decode(&stem_bytes).into_owned());
+                out.push(charset.decode_owned(stem_bytes));
             });
         out
     }

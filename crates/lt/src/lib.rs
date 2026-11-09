@@ -232,10 +232,7 @@ pub fn catalan_tagger_ca_probe(data_dir: &DataDir) -> std::sync::Arc<lt_tagger::
 /// are clamped to the nearest char boundary (engine offsets are always
 /// valid; this keeps the output surfaces robust against legacy bugs).
 pub fn to_utf16_offset(text: &str, utf8_offset: usize) -> usize {
-    let mut offset = utf8_offset.min(text.len());
-    while !text.is_char_boundary(offset) {
-        offset -= 1;
-    }
+    let offset = text.floor_char_boundary(utf8_offset);
     text[..offset].encode_utf16().count()
 }
 
@@ -747,6 +744,24 @@ mod tests {
         // UTF-8: a(1) 😀(4) b(1); UTF-16: a(1) 😀(2) b(1)
         assert_eq!(to_utf16_offset(text, 5), 3);
         assert_eq!(to_utf16_offset(text, 6), 4);
+    }
+
+    #[test]
+    fn utf16_offsets_clamp_partial_scalars_and_out_of_bounds() {
+        for text in ["", "ASCII", "Grüße", "a😀b", "e\u{301} 🧑‍🔬 中文"] {
+            for offset in (0..=text.len() + 3).chain([usize::MAX]) {
+                let expected: usize = text
+                    .char_indices()
+                    .take_while(|(start, ch)| start + ch.len_utf8() <= offset)
+                    .map(|(_, ch)| ch.len_utf16())
+                    .sum();
+                assert_eq!(
+                    to_utf16_offset(text, offset),
+                    expected,
+                    "{text:?}: {offset}"
+                );
+            }
+        }
     }
 
     #[test]
