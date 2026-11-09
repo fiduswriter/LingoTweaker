@@ -1133,6 +1133,7 @@ dependencies = [
  "lt-core",
  "lt-data",
  "lt-tagger",
+ "rustc-hash",
  "unicode-normalization",
 ]
 

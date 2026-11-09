@@ -12,11 +12,12 @@
 //! the case-pattern adjustment of `MorfologikSpeller.getSuggestions`.
 
 use std::borrow::Cow;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 use std::path::Path;
 
 use lt_core::{CoreError, Result};
 use lt_tagger::{Automaton, Charset, DictionaryInfo};
+use rustc_hash::FxHashMap;
 use unicode_normalization::UnicodeNormalization;
 
 pub const LANGUAGETOOL: &str = "LanguageTool";
@@ -594,8 +595,9 @@ pub struct Speller {
     source: std::sync::Arc<DictSource>,
     meta: SpellerMetadata,
     edit_distance: i32,
-    replacements_any_to_one: HashMap<char, Vec<Pattern>>,
-    replacements_any_to_two: HashMap<String, Vec<Pattern>>,
+    // These immutable maps contain dictionary metadata, never request keys.
+    replacements_any_to_one: FxHashMap<char, Vec<Pattern>>,
+    replacements_any_to_two: FxHashMap<(char, char), Vec<Pattern>>,
     /// Keys keep their `^`/`$` anchors (`replacementsTheRest`).
     replacements_the_rest: Vec<(String, Vec<String>)>,
 }
@@ -634,8 +636,8 @@ impl Speller {
     }
 
     fn new(source: std::sync::Arc<DictSource>, meta: SpellerMetadata, edit_distance: i32) -> Self {
-        let mut any_to_one: HashMap<char, Vec<Pattern>> = HashMap::new();
-        let mut any_to_two: HashMap<String, Vec<Pattern>> = HashMap::new();
+        let mut any_to_one: FxHashMap<char, Vec<Pattern>> = FxHashMap::default();
+        let mut any_to_two: FxHashMap<(char, char), Vec<Pattern>> = FxHashMap::default();
         let mut the_rest: Vec<(String, Vec<String>)> = Vec::new();
         for (raw_key, values) in &meta.replacement_pairs {
             let start_anchor = raw_key.starts_with('^');
@@ -653,7 +655,9 @@ impl Speller {
                         });
                     }
                     2 => {
-                        any_to_two.entry(s.clone()).or_default().push(Pattern {
+                        let mut target = s.chars();
+                        let key = (target.next().unwrap(), target.next().unwrap());
+                        any_to_two.entry(key).or_default().push(Pattern {
                             chars: chars.clone(),
                             start_anchor,
                             end_anchor,
@@ -1166,13 +1170,9 @@ impl Search<'_, '_> {
         last_any_to_one_target: char,
     ) -> i32 {
         if cand_index > 0 && word_index > 0 {
-            let mut key_buf = [0u8; 8];
             let a = self.candidate[(cand_index - 1) as usize];
             let b = self.candidate[cand_index as usize];
-            let a_len = a.encode_utf8(&mut key_buf).len();
-            let b_len = b.encode_utf8(&mut key_buf[a_len..]).len();
-            let two_char = std::str::from_utf8(&key_buf[..a_len + b_len]).unwrap_or("");
-            if let Some(patterns) = self.speller.replacements_any_to_two.get(two_char) {
+            if let Some(patterns) = self.speller.replacements_any_to_two.get(&(a, b)) {
                 for p in patterns {
                     if p.start_anchor && word_index - 1 != 0 {
                         continue;
@@ -1197,10 +1197,10 @@ impl Search<'_, '_> {
                             continue;
                         }
                         if word_index - 1 < min_lookback_word_index
-                            && last_any_to_one_source.is_some()
                             && p.chars.len() == 1
                             && p.chars[0] == last_any_to_one_target
-                            && last_any_to_one_source == Some(two_char)
+                            && last_any_to_one_source
+                                .is_some_and(|source| source.chars().eq([a, b]))
                         {
                             continue;
                         }
@@ -1671,6 +1671,35 @@ mod tests {
     use lt_tagger::DictionaryInfo;
 
     use std::path::Path;
+
+    #[test]
+    fn two_character_replacements_preserve_unicode_and_overlap_guards() {
+        let meta = SpellerMetadata::from_info(
+            &DictionaryInfo::parse(
+                "fsa.dict.encoding=utf-8\nfsa.dict.speller.replacement-pairs=æ ae,x 😀ß\n",
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        let speller = Speller::from_lines(&[], meta, 1);
+        for (source, pair, previous) in [('æ', ['a', 'e'], "ae"), ('x', ['😀', 'ß'], "😀ß")]
+        {
+            let mut matrix = HMatrix::new(1, MAX_WORD_LENGTH);
+            let mut candidate = pair.to_vec();
+            let search = Search {
+                speller: &speller,
+                h: &mut matrix,
+                word: vec![source, 'a'],
+                word_len: 2,
+                effect_ed: 1,
+                candidate: &mut candidate,
+                out: Vec::new(),
+            };
+            assert_eq!(search.match_any_to_two(1, 1, 0, None, '\0'), 1);
+            assert_eq!(search.match_any_to_two(1, 1, 2, Some(previous), source), 0);
+            assert_eq!(search.match_any_to_two(1, 1, 2, Some("other"), source), 1);
+        }
+    }
 
     #[test]
     fn borrowed_dictionary_bytes_preserve_every_supported_encoding() {
