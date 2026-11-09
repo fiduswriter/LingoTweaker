@@ -68,7 +68,7 @@ js-sys = "0.3"
 console_error_panic_hook = "0.1"
 
 [profile.release]
-lto = "thin"
+lto = "fat"
 codegen-units = 1
 
 # Engine construction compiles thousands of rule regexes and the test suite

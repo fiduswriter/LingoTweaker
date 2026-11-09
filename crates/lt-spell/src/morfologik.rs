@@ -11,11 +11,13 @@
 //! by `distance * 26 + 25 - frequency` (stable). LT's wrapper then applies
 //! the case-pattern adjustment of `MorfologikSpeller.getSuggestions`.
 
-use std::collections::{HashMap, HashSet};
+use std::borrow::Cow;
+use std::collections::HashSet;
 use std::path::Path;
 
 use lt_core::{CoreError, Result};
 use lt_tagger::{Automaton, Charset, DictionaryInfo};
+use rustc_hash::FxHashMap;
 use unicode_normalization::UnicodeNormalization;
 
 pub const LANGUAGETOOL: &str = "LanguageTool";
@@ -239,6 +241,26 @@ pub fn apply_replacements(word: &str, replacements: &[(String, String)]) -> Stri
         }
     }
     s
+}
+
+// The common spelling path has no input conversions. Retain the borrowed
+// token there instead of copying it before every dictionary membership test.
+fn input_word<'a>(word: &'a str, replacements: &[(String, String)]) -> Cow<'a, str> {
+    if replacements.is_empty() {
+        Cow::Borrowed(word)
+    } else {
+        Cow::Owned(apply_replacements(word, replacements))
+    }
+}
+
+fn dictionary_bytes(charset: Charset, word: &str) -> Option<Cow<'_, [u8]>> {
+    // All supported legacy encodings preserve ASCII. UTF-8 tokens already
+    // carry the dictionary encoding, including their non-ASCII characters.
+    if charset == Charset::Utf8 || word.is_ascii() {
+        Some(Cow::Borrowed(word.as_bytes()))
+    } else {
+        charset.encode(word).map(Cow::Owned)
+    }
 }
 
 /// morfologik `Speller.CandidateData`: word plus the original edit distance
@@ -573,8 +595,9 @@ pub struct Speller {
     source: std::sync::Arc<DictSource>,
     meta: SpellerMetadata,
     edit_distance: i32,
-    replacements_any_to_one: HashMap<char, Vec<Pattern>>,
-    replacements_any_to_two: HashMap<String, Vec<Pattern>>,
+    // These immutable maps contain dictionary metadata, never request keys.
+    replacements_any_to_one: FxHashMap<char, Vec<Pattern>>,
+    replacements_any_to_two: FxHashMap<(char, char), Vec<Pattern>>,
     /// Keys keep their `^`/`$` anchors (`replacementsTheRest`).
     replacements_the_rest: Vec<(String, Vec<String>)>,
 }
@@ -613,8 +636,8 @@ impl Speller {
     }
 
     fn new(source: std::sync::Arc<DictSource>, meta: SpellerMetadata, edit_distance: i32) -> Self {
-        let mut any_to_one: HashMap<char, Vec<Pattern>> = HashMap::new();
-        let mut any_to_two: HashMap<String, Vec<Pattern>> = HashMap::new();
+        let mut any_to_one: FxHashMap<char, Vec<Pattern>> = FxHashMap::default();
+        let mut any_to_two: FxHashMap<(char, char), Vec<Pattern>> = FxHashMap::default();
         let mut the_rest: Vec<(String, Vec<String>)> = Vec::new();
         for (raw_key, values) in &meta.replacement_pairs {
             let start_anchor = raw_key.starts_with('^');
@@ -632,7 +655,9 @@ impl Speller {
                         });
                     }
                     2 => {
-                        any_to_two.entry(s.clone()).or_default().push(Pattern {
+                        let mut target = s.chars();
+                        let key = (target.next().unwrap(), target.next().unwrap());
+                        any_to_two.entry(key).or_default().push(Pattern {
                             chars: chars.clone(),
                             start_anchor,
                             end_anchor,
@@ -664,7 +689,7 @@ impl Speller {
     /// store `word` + separator + annotation sequences, so a word part is
     /// accepted when a non-empty separator arc follows it).
     pub fn is_in_dictionary(&self, word: &str) -> bool {
-        let Some(word_bytes) = self.meta.charset.encode(word) else {
+        let Some(word_bytes) = dictionary_bytes(self.meta.charset, word) else {
             return false;
         };
         let (kind, node) = self.source.match_sequence(&word_bytes);
@@ -690,7 +715,7 @@ impl Speller {
         if !self.meta.frequency_included {
             return 0;
         }
-        let Some(word_bytes) = self.meta.charset.encode(word) else {
+        let Some(word_bytes) = dictionary_bytes(self.meta.charset, word) else {
             return 0;
         };
         let (kind, node) = self.source.match_sequence(&word_bytes);
@@ -718,7 +743,7 @@ impl Speller {
     /// morfologik `Speller.isMisspelled`.
     #[allow(clippy::nonminimal_bool)]
     pub fn is_misspelled_speller(&self, word: &str) -> bool {
-        let word_to_check = apply_replacements(word, &self.meta.input_conversion);
+        let word_to_check = input_word(word, &self.meta.input_conversion);
         let is_alphabetic = word_to_check.chars().count() != 1
             || word_to_check
                 .chars()
@@ -779,7 +804,7 @@ impl Speller {
         word: &str,
         even_if_word_in_dictionary: bool,
     ) -> Vec<CandidateData> {
-        let word = apply_replacements(word, &self.meta.input_conversion);
+        let word = input_word(word, &self.meta.input_conversion);
         let mut candidates: Vec<CandidateData> = Vec::new();
         if !word.is_empty()
             && word.chars().count() < MAX_WORD_LENGTH
@@ -809,7 +834,7 @@ impl Speller {
                     words_to_check.push(word_checked);
                 }
             } else {
-                words_to_check.push(word.clone());
+                words_to_check.push(word.to_string());
             }
 
             let mut i = 1;
@@ -855,7 +880,7 @@ impl Speller {
         let mut result = Vec::with_capacity(candidates.len());
         for cd in candidates {
             let replaced = apply_replacements(&cd.word, &self.meta.output_conversion);
-            if seen.insert(replaced.clone()) && replaced != word {
+            if seen.insert(replaced.clone()) && replaced != word.as_ref() {
                 result.push(CandidateData {
                     word: replaced,
                     orig_distance: cd.orig_distance,
@@ -880,7 +905,7 @@ impl Speller {
     /// morfologik `Speller.replaceRunOnWordCandidates`.
     pub fn replace_run_on_word_candidates(&self, original: &str) -> Vec<CandidateData> {
         let mut candidates = Vec::new();
-        let word_to_check = apply_replacements(original, &self.meta.input_conversion);
+        let word_to_check = input_word(original, &self.meta.input_conversion);
         if !self.is_in_dictionary(&word_to_check) && self.meta.support_run_on_words {
             let chars: Vec<char> = word_to_check.chars().collect();
             for i in 1..chars.len() {
@@ -1145,13 +1170,9 @@ impl Search<'_, '_> {
         last_any_to_one_target: char,
     ) -> i32 {
         if cand_index > 0 && word_index > 0 {
-            let mut key_buf = [0u8; 8];
             let a = self.candidate[(cand_index - 1) as usize];
             let b = self.candidate[cand_index as usize];
-            let a_len = a.encode_utf8(&mut key_buf).len();
-            let b_len = b.encode_utf8(&mut key_buf[a_len..]).len();
-            let two_char = std::str::from_utf8(&key_buf[..a_len + b_len]).unwrap_or("");
-            if let Some(patterns) = self.speller.replacements_any_to_two.get(two_char) {
+            if let Some(patterns) = self.speller.replacements_any_to_two.get(&(a, b)) {
                 for p in patterns {
                     if p.start_anchor && word_index - 1 != 0 {
                         continue;
@@ -1176,10 +1197,10 @@ impl Search<'_, '_> {
                             continue;
                         }
                         if word_index - 1 < min_lookback_word_index
-                            && last_any_to_one_source.is_some()
                             && p.chars.len() == 1
                             && p.chars[0] == last_any_to_one_target
-                            && last_any_to_one_source == Some(two_char)
+                            && last_any_to_one_source
+                                .is_some_and(|source| source.chars().eq([a, b]))
                         {
                             continue;
                         }
@@ -1650,6 +1671,93 @@ mod tests {
     use lt_tagger::DictionaryInfo;
 
     use std::path::Path;
+
+    #[test]
+    fn two_character_replacements_preserve_unicode_and_overlap_guards() {
+        let meta = SpellerMetadata::from_info(
+            &DictionaryInfo::parse(
+                "fsa.dict.encoding=utf-8\nfsa.dict.speller.replacement-pairs=æ ae,x 😀ß\n",
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        let speller = Speller::from_lines(&[], meta, 1);
+        for (source, pair, previous) in [('æ', ['a', 'e'], "ae"), ('x', ['😀', 'ß'], "😀ß")]
+        {
+            let mut matrix = HMatrix::new(1, MAX_WORD_LENGTH);
+            let mut candidate = pair.to_vec();
+            let search = Search {
+                speller: &speller,
+                h: &mut matrix,
+                word: vec![source, 'a'],
+                word_len: 2,
+                effect_ed: 1,
+                candidate: &mut candidate,
+                out: Vec::new(),
+            };
+            assert_eq!(search.match_any_to_two(1, 1, 0, None, '\0'), 1);
+            assert_eq!(search.match_any_to_two(1, 1, 2, Some(previous), source), 0);
+            assert_eq!(search.match_any_to_two(1, 1, 2, Some("other"), source), 1);
+        }
+    }
+
+    #[test]
+    fn borrowed_dictionary_bytes_preserve_every_supported_encoding() {
+        for charset in [
+            Charset::Utf8,
+            Charset::Iso88591,
+            Charset::Iso885915,
+            Charset::Iso88592,
+            Charset::Iso88597,
+            Charset::Koi8R,
+        ] {
+            // Cover every byte of each legacy dictionary encoding, plus
+            // unmappable scalars and words mixing ASCII and other scripts.
+            for byte in 0..=u8::MAX {
+                let bytes = [byte];
+                let word = charset.decode(&bytes);
+                assert_eq!(
+                    dictionary_bytes(charset, &word).as_deref(),
+                    charset.encode(&word).as_deref(),
+                    "{charset:?}: {byte:02x}"
+                );
+            }
+            for word in ["", "ASCII", "école", "Straße", "łódź", "αβ", "тест", "😀"] {
+                assert_eq!(
+                    dictionary_bytes(charset, word).as_deref(),
+                    charset.encode(word).as_deref(),
+                    "{charset:?}: {word}"
+                );
+            }
+            assert!(matches!(
+                dictionary_bytes(charset, "ASCII"),
+                Some(Cow::Borrowed(_))
+            ));
+        }
+        assert!(matches!(
+            dictionary_bytes(Charset::Utf8, "😀école"),
+            Some(Cow::Borrowed(_))
+        ));
+    }
+
+    #[test]
+    fn borrowed_input_preserves_ordered_conversions() {
+        assert!(matches!(input_word("Straße", &[]), Cow::Borrowed(_)));
+        let conversions = vec![
+            ("ß".into(), "ss".into()),
+            ("ss".into(), "s".into()),
+            ("".into(), "ignored".into()),
+            ("ab".into(), "abab".into()),
+        ];
+        assert_eq!(input_word("Straße", &conversions), "Strase");
+        assert_eq!(input_word("ab", &conversions), "abab");
+        for word in ["", "Straße", "ssss", "ab", "unconverted", "😀"] {
+            assert_eq!(
+                input_word(word, &conversions),
+                apply_replacements(word, &conversions)
+            );
+        }
+    }
 
     /// Java's `Speller.getFrequency` subtracts the range base from a signed
     /// `byte`, so the tl_PH entries with high-bit annotations

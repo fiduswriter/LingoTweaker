@@ -21,8 +21,7 @@
 //! handler mirrors `ApiV2.handlePreflight`.
 
 use std::collections::BTreeMap;
-use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::{Arc, RwLock};
+use std::sync::Arc;
 
 use axum::extract::{Query, Request, State};
 use axum::http::{header, HeaderValue, Method, StatusCode};
@@ -39,6 +38,11 @@ use lt_core::detect::Gates;
 use lt_core::{Lang, Match, TextRange};
 
 pub mod detect;
+mod engine_cache;
+mod response_text;
+
+use engine_cache::EngineCache;
+use response_text::ResponseText;
 
 pub const API_VERSION: i32 = 1;
 
@@ -53,7 +57,7 @@ pub const API_VERSION: i32 = 1;
 /// a minutes-long hang.
 pub const MAX_TEXT_LENGTH: u32 = 100_000;
 /// LT `TextChecker.CONTEXT_SIZE`
-pub const CONTEXT_SIZE: i32 = 40;
+pub const CONTEXT_SIZE: i32 = response_text::CONTEXT_SIZE;
 pub const SOFTWARE_NAME: &str = "LingoTweaker";
 
 /// Language `language=auto` falls back to when detection abstains.
@@ -81,20 +85,9 @@ pub struct AppState {
     /// cache is therefore bounded. A language evicted is rebuilt on its next
     /// use, at its build cost (well under a second for most, a couple for the
     /// largest); an engine held by a request in flight stays alive through its
-    /// `Arc` until that request finishes. Keyed by lowercased long code; variant
+    /// `Arc` until that request finishes. Keyed by canonical long code; variant
     /// resolution therefore goes through [`Lang::info`] rather than list order.
-    engines: RwLock<BTreeMap<String, CachedEngine>>,
-    /// Languages whose engine failed to build, with the error. A negative cache:
-    /// without it a broken language would re-attempt its build on every request
-    /// instead of answering 501 immediately.
-    failed: RwLock<BTreeMap<String, String>>,
-    /// Monotonic clock for the LRU order.
-    used: AtomicU64,
-}
-
-struct CachedEngine {
-    engine: Arc<Engine>,
-    used_at: u64,
+    engines: EngineCache<Engine>,
 }
 
 /// How many language engines to keep in memory at once.
@@ -207,9 +200,7 @@ impl AppState {
             version: version.into(),
             build_date: build_date.into(),
             allow_origin,
-            engines: RwLock::new(BTreeMap::new()),
-            failed: RwLock::new(BTreeMap::new()),
-            used: AtomicU64::new(0),
+            engines: EngineCache::new(),
         })
     }
 
@@ -227,8 +218,8 @@ impl AppState {
     ///
     /// `code` may name a base language (`de`, which resolves to the default
     /// variant `de-DE`, LT-style) or a specific one (`de-AT`). Builds happen
-    /// outside the lock so concurrent first requests for *different* languages
-    /// do not serialise behind each other's compile time; on a cache hit the
+    /// outside the cache lock. Concurrent first requests for the same language
+    /// share one build; different languages build independently. On a cache hit the
     /// LRU clock advances, and when the cache is full the least recently used
     /// engine is dropped before the new one is inserted.
     pub fn engine(&self, code: &str) -> Result<(String, Arc<Engine>), String> {
@@ -240,59 +231,20 @@ impl AppState {
         let long_code = canonical_long_code(code)
             .ok_or_else(|| format!("{code} is not a language code known to LingoTweaker."))?;
 
-        {
-            let engines = self.engines.read().expect("engines lock");
-            if let Some(cached) = engines.get(&long_code) {
-                let engine = Arc::clone(&cached.engine);
-                drop(engines);
-                let stamp = self.used.fetch_add(1, Ordering::Relaxed) + 1;
-                self.engines
-                    .write()
-                    .expect("engines lock")
-                    .get_mut(&long_code)
-                    .expect("just read it")
-                    .used_at = stamp;
-                return Ok((long_code, engine));
-            }
-        }
-        if let Some(error) = self.failed.read().expect("failed lock").get(&long_code) {
-            return Err(error.clone());
-        }
-
-        let mut builder = Engine::builder(lang).map_err(|error| error.to_string())?;
-        let default = DEFAULT_VARIANTS
-            .iter()
-            .find(|(l, _)| *l == lang)
-            .map(|(_, code)| (*code).to_string())
-            .unwrap_or_else(|| lang.info().long_code.to_string());
-        if long_code != default {
-            builder = builder.variant(&long_code);
-        }
-        let built = builder
-            .build()
-            .map_err(|error| format!("{long_code}: {error}"))?;
-        let engine = Arc::new(built);
-
-        let mut engines = self.engines.write().expect("engines lock");
-        if engines.len() >= cache_cap().max(1) {
-            // Evict the least recently used. With the cap at 0 the map never
-            // fills and every check builds its own engine.
-            if let Some(evicted) = engines
+        let engine = self.engines.get_or_try_init(&long_code, cache_cap, || {
+            let mut builder = Engine::builder(lang).map_err(|error| error.to_string())?;
+            let default = DEFAULT_VARIANTS
                 .iter()
-                .min_by_key(|(_, cached)| cached.used_at)
-                .map(|(key, _)| key.clone())
-            {
-                engines.remove(&evicted);
+                .find(|(l, _)| *l == lang)
+                .map(|(_, code)| (*code).to_string())
+                .unwrap_or_else(|| lang.info().long_code.to_string());
+            if long_code != default {
+                builder = builder.variant(&long_code);
             }
-        }
-        let stamp = self.used.fetch_add(1, Ordering::Relaxed) + 1;
-        engines.insert(
-            long_code.clone(),
-            CachedEngine {
-                engine: Arc::clone(&engine),
-                used_at: stamp,
-            },
-        );
+            builder
+                .build()
+                .map_err(|error| format!("{long_code}: {error}"))
+        })?;
         Ok((long_code, engine))
     }
 
@@ -312,9 +264,7 @@ impl AppState {
             version: version.into(),
             build_date: build_date.into(),
             allow_origin,
-            engines: RwLock::new(BTreeMap::new()),
-            failed: RwLock::new(BTreeMap::new()),
-            used: AtomicU64::new(0),
+            engines: EngineCache::new(),
         }
     }
 }
@@ -718,10 +668,11 @@ async fn check_impl(
         Err(e) => return error_response(StatusCode::INTERNAL_SERVER_ERROR, &e.to_string()),
     };
 
+    let response_text = ResponseText::new(&text, utf8_offsets);
     let matches: Vec<Value> = result
         .matches
         .iter()
-        .map(|m| match_to_json(&text, &result, m, utf8_offsets))
+        .map(|m| match_to_json(&response_text, &result, m))
         .collect();
 
     let name = lang.info().name;
@@ -745,8 +696,8 @@ async fn check_impl(
             "detectedLanguage": detected_json,
         },
         "matches": matches,
-        "sentenceRanges": sentence_ranges(&text, &result, utf8_offsets),
-        "extendedSentenceRanges": extended_sentence_ranges(&text, &result, lang, utf8_offsets),
+        "sentenceRanges": sentence_ranges(&response_text, &result),
+        "extendedSentenceRanges": extended_sentence_ranges(&response_text, &result, lang),
     });
     (StatusCode::OK, Json(response)).into_response()
 }
@@ -833,12 +784,12 @@ fn detected_language_json(
 /// LT `RuleMatchesAsJsonSerializer.writeSentenceRanges` (`:230-241`): the
 /// sentence positions as `[from, to]` pairs, in this surface's offset
 /// convention — UTF-16 code units on v2, UTF-8 bytes on v3.
-fn sentence_ranges(text: &str, result: &lt_core::CheckResult, utf8_offsets: bool) -> Vec<Value> {
+fn sentence_ranges(text: &ResponseText<'_>, result: &lt_core::CheckResult) -> Vec<Value> {
     result
         .sentences
         .iter()
         .map(|sentence| {
-            let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
+            let (from, to) = sentence_span(text, sentence.range);
             json!([from, to])
         })
         .collect()
@@ -853,10 +804,9 @@ fn sentence_ranges(text: &str, result: &lt_core::CheckResult, utf8_offsets: bool
 /// it — and left empty otherwise, which is what LT emits for a single-language
 /// check. Each entry costs one prediction, so the list is capped.
 fn extended_sentence_ranges(
-    text: &str,
+    text: &ResponseText<'_>,
     result: &lt_core::CheckResult,
     checked: Lang,
-    utf8_offsets: bool,
 ) -> Vec<Value> {
     // `JLanguageTool.checkAnalyzedSentenceStream:2195`: one range per sentence,
     // carrying the checked language at rate 1.0. The rates change only when a
@@ -870,7 +820,7 @@ fn extended_sentence_ranges(
         .sentences
         .iter()
         .map(|sentence| {
-            let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
+            let (from, to) = sentence_span(text, sentence.range);
             json!({
                 "from": from,
                 "to": to,
@@ -894,18 +844,11 @@ fn extended_sentence_ranges(
 /// (`SentenceRange.getRangesFromSentences:58-62`): the engine's sentence spans
 /// include the whitespace that follows a sentence, and a range a client
 /// highlights should not end in it.
-fn sentence_span(text: &str, range: TextRange, utf8_offsets: bool) -> (usize, usize) {
-    let slice = &text[range.start..range.end];
+fn sentence_span(text: &ResponseText<'_>, range: TextRange) -> (usize, usize) {
+    let slice = &text.as_str()[range.start..range.end];
     let start = range.start + slice.len() - slice.trim_start().len();
     let end = start + slice.trim().len();
-    if utf8_offsets {
-        (start, end)
-    } else {
-        (
-            lt::to_utf16_offset(text, start),
-            lt::to_utf16_offset(text, end),
-        )
-    }
+    text.range(start, end)
 }
 
 /// `POST /v3/detect` — the native detection surface.
@@ -978,90 +921,9 @@ impl DetectParams {
     }
 }
 
-/// LT `ContextTools.getContext`: a ±`CONTEXT_SIZE` character (UTF-16) window
-/// around the match, `...` markers at clipped edges, newlines replaced by
-/// spaces, and the match position marked (here: reported as `offset`).
-fn context_window(text: &str, utf16_from: usize, utf16_to: usize) -> (String, usize, usize) {
-    let units: Vec<u16> = text.encode_utf16().collect();
-    let len = units.len() as i32;
-    let mut start = utf16_from as i32 - CONTEXT_SIZE;
-    let mut prefix = "...";
-    if start < 0 {
-        prefix = "";
-        start = 0;
-    }
-    let mut end = utf16_to as i32 + CONTEXT_SIZE;
-    let mut postfix = "...";
-    if end > len {
-        postfix = "";
-        end = len;
-    }
-    let context_units: Vec<u16> = units[start as usize..end as usize]
-        .iter()
-        .map(|&u| if u == b'\n' as u16 { b' ' as u16 } else { u })
-        .collect();
-    let context: String = String::from_utf16_lossy(&context_units);
-    let offset = prefix.len() + (utf16_from - start as usize);
-    let _ = (postfix, &mut end, &mut start);
-    (context, offset, utf16_to - utf16_from)
-}
-
-/// Byte-offset variant of `context_window` (UTF-8 mode): ±`CONTEXT_SIZE`
-/// characters (code points) around the match.
-fn context_window_utf8(text: &str, from: usize, to: usize) -> (String, usize, usize) {
-    let char_boundary = |mut pos: usize, backwards: bool| -> usize {
-        let mut remaining = CONTEXT_SIZE;
-        while remaining > 0 {
-            if backwards {
-                if pos == 0 {
-                    break;
-                }
-                pos -= 1;
-                while !text.is_char_boundary(pos) {
-                    pos -= 1;
-                }
-            } else {
-                if pos >= text.len() {
-                    break;
-                }
-                pos += 1;
-                while pos < text.len() && !text.is_char_boundary(pos) {
-                    pos += 1;
-                }
-            }
-            remaining -= 1;
-        }
-        pos
-    };
-    let start = char_boundary(from, true);
-    let end = char_boundary(to, false);
-    let prefix = if start > 0 { "..." } else { "" };
-    let postfix = if end < text.len() { "..." } else { "" };
-    let mut context = String::with_capacity(prefix.len() + postfix.len() + end - start);
-    context.push_str(prefix);
-    context.push_str(&text[start..end].replace('\n', " "));
-    context.push_str(postfix);
-    (context, prefix.len() + from - start, to - from)
-}
-
-fn match_to_json(
-    text: &str,
-    result: &lt_core::CheckResult,
-    m: &Match,
-    utf8_offsets: bool,
-) -> Value {
-    let ((from, to), (context, context_offset, context_length)) = if utf8_offsets {
-        (
-            (m.range.start, m.range.end),
-            context_window_utf8(text, m.range.start, m.range.end),
-        )
-    } else {
-        let (utf16_from, utf16_to) = lt::to_utf16_range(text, m.range);
-        (
-            (utf16_from, utf16_to),
-            context_window(text, utf16_from, utf16_to),
-        )
-    };
+fn match_to_json(text: &ResponseText<'_>, result: &lt_core::CheckResult, m: &Match) -> Value {
+    let (from, to) = text.range(m.range.start, m.range.end);
+    let (context, context_offset, context_length) = text.context(m.range.start, m.range.end);
     let sentence = result
         .sentences
         .iter()
@@ -1470,6 +1332,37 @@ mod tests {
             .find(|m| m["rule"]["id"] == "ORDINAL_NUMBER_SUFFIX")
             .expect("rule fires");
         assert_eq!(ordinal["offset"], 16);
+    }
+
+    #[tokio::test]
+    async fn check_clipped_context_includes_markers_and_highlights_the_match() {
+        let text = format!(
+            "{}This was my 1nd try.{}",
+            "😀 A calm day. ".repeat(6),
+            " Another calm day.".repeat(6)
+        );
+        let body = serde_urlencoded::to_string([
+            ("text", text.as_str()),
+            ("language", "en-US"),
+            ("level", "picky"),
+        ])
+        .unwrap();
+        let (status, value) = send(router(state()), "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        let ordinal = value["matches"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|m| m["rule"]["id"] == "ORDINAL_NUMBER_SUFFIX")
+            .expect("rule fires");
+        let context = ordinal["context"]["text"].as_str().unwrap();
+        assert!(context.starts_with("..."));
+        assert!(context.ends_with("..."));
+        // ContextTools counts both the 40 UTF-16 units and the leading marker.
+        assert_eq!(ordinal["context"]["offset"], 43);
+        assert_eq!(ordinal["context"]["length"], 3);
+        let units: Vec<_> = context.encode_utf16().collect();
+        assert_eq!(String::from_utf16_lossy(&units[43..46]), "1nd");
     }
 
     #[tokio::test]

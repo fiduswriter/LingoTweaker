@@ -12,3 +12,4 @@ lt-core = { workspace = true }
 lt-data = { workspace = true }
 lt-tagger = { workspace = true }
 unicode-normalization = { workspace = true }
+rustc-hash = { workspace = true }
