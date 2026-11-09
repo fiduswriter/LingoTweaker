@@ -1,0 +1,39 @@
+version: 2
+
+updates:
+  - package-ecosystem: "cargo"
+    directories:
+      - "/"
+      - "/crates/lingotweaker"
+      - "/tools/detection/ftz-probe"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Update alongside vendor/lindera-dictionary using tools/vendor/patch_lindera.py.
+      - dependency-name: "lindera"
+
+  - package-ecosystem: "npm"
+    directories:
+      - "/demo"
+      - "/crates/lt-node"
+      - "/crates/lt-wasm/npm"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Kept in sync with the engine by scripts/release/set-version.sh.
+      - dependency-name: "lingotweaker-data"
+
+  - package-ecosystem: "pip"
+    directory: "/crates/lt-py"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "rust-toolchain"
+    directory: "/"
+    schedule:
+      interval: "weekly"
