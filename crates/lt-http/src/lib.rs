@@ -21,8 +21,7 @@
 //! handler mirrors `ApiV2.handlePreflight`.
 
 use std::collections::BTreeMap;
-use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::{Arc, RwLock};
+use std::sync::Arc;
 
 use axum::extract::{Query, Request, State};
 use axum::http::{header, HeaderValue, Method, StatusCode};
@@ -39,6 +38,9 @@ use lt_core::detect::Gates;
 use lt_core::{Lang, Match, TextRange};
 
 pub mod detect;
+mod engine_cache;
+
+use engine_cache::EngineCache;
 
 pub const API_VERSION: i32 = 1;
 
@@ -81,20 +83,9 @@ pub struct AppState {
     /// cache is therefore bounded. A language evicted is rebuilt on its next
     /// use, at its build cost (well under a second for most, a couple for the
     /// largest); an engine held by a request in flight stays alive through its
-    /// `Arc` until that request finishes. Keyed by lowercased long code; variant
+    /// `Arc` until that request finishes. Keyed by canonical long code; variant
     /// resolution therefore goes through [`Lang::info`] rather than list order.
-    engines: RwLock<BTreeMap<String, CachedEngine>>,
-    /// Languages whose engine failed to build, with the error. A negative cache:
-    /// without it a broken language would re-attempt its build on every request
-    /// instead of answering 501 immediately.
-    failed: RwLock<BTreeMap<String, String>>,
-    /// Monotonic clock for the LRU order.
-    used: AtomicU64,
-}
-
-struct CachedEngine {
-    engine: Arc<Engine>,
-    used_at: u64,
+    engines: EngineCache<Engine>,
 }
 
 /// How many language engines to keep in memory at once.
@@ -207,9 +198,7 @@ impl AppState {
             version: version.into(),
             build_date: build_date.into(),
             allow_origin,
-            engines: RwLock::new(BTreeMap::new()),
-            failed: RwLock::new(BTreeMap::new()),
-            used: AtomicU64::new(0),
+            engines: EngineCache::new(),
         })
     }
 
@@ -227,8 +216,8 @@ impl AppState {
     ///
     /// `code` may name a base language (`de`, which resolves to the default
     /// variant `de-DE`, LT-style) or a specific one (`de-AT`). Builds happen
-    /// outside the lock so concurrent first requests for *different* languages
-    /// do not serialise behind each other's compile time; on a cache hit the
+    /// outside the cache lock. Concurrent first requests for the same language
+    /// share one build; different languages build independently. On a cache hit the
     /// LRU clock advances, and when the cache is full the least recently used
     /// engine is dropped before the new one is inserted.
     pub fn engine(&self, code: &str) -> Result<(String, Arc<Engine>), String> {
@@ -240,59 +229,20 @@ impl AppState {
         let long_code = canonical_long_code(code)
             .ok_or_else(|| format!("{code} is not a language code known to LingoTweaker."))?;
 
-        {
-            let engines = self.engines.read().expect("engines lock");
-            if let Some(cached) = engines.get(&long_code) {
-                let engine = Arc::clone(&cached.engine);
-                drop(engines);
-                let stamp = self.used.fetch_add(1, Ordering::Relaxed) + 1;
-                self.engines
-                    .write()
-                    .expect("engines lock")
-                    .get_mut(&long_code)
-                    .expect("just read it")
-                    .used_at = stamp;
-                return Ok((long_code, engine));
-            }
-        }
-        if let Some(error) = self.failed.read().expect("failed lock").get(&long_code) {
-            return Err(error.clone());
-        }
-
-        let mut builder = Engine::builder(lang).map_err(|error| error.to_string())?;
-        let default = DEFAULT_VARIANTS
-            .iter()
-            .find(|(l, _)| *l == lang)
-            .map(|(_, code)| (*code).to_string())
-            .unwrap_or_else(|| lang.info().long_code.to_string());
-        if long_code != default {
-            builder = builder.variant(&long_code);
-        }
-        let built = builder
-            .build()
-            .map_err(|error| format!("{long_code}: {error}"))?;
-        let engine = Arc::new(built);
-
-        let mut engines = self.engines.write().expect("engines lock");
-        if engines.len() >= cache_cap().max(1) {
-            // Evict the least recently used. With the cap at 0 the map never
-            // fills and every check builds its own engine.
-            if let Some(evicted) = engines
+        let engine = self.engines.get_or_try_init(&long_code, cache_cap, || {
+            let mut builder = Engine::builder(lang).map_err(|error| error.to_string())?;
+            let default = DEFAULT_VARIANTS
                 .iter()
-                .min_by_key(|(_, cached)| cached.used_at)
-                .map(|(key, _)| key.clone())
-            {
-                engines.remove(&evicted);
+                .find(|(l, _)| *l == lang)
+                .map(|(_, code)| (*code).to_string())
+                .unwrap_or_else(|| lang.info().long_code.to_string());
+            if long_code != default {
+                builder = builder.variant(&long_code);
             }
-        }
-        let stamp = self.used.fetch_add(1, Ordering::Relaxed) + 1;
-        engines.insert(
-            long_code.clone(),
-            CachedEngine {
-                engine: Arc::clone(&engine),
-                used_at: stamp,
-            },
-        );
+            builder
+                .build()
+                .map_err(|error| format!("{long_code}: {error}"))
+        })?;
         Ok((long_code, engine))
     }
 
@@ -312,9 +262,7 @@ impl AppState {
             version: version.into(),
             build_date: build_date.into(),
             allow_origin,
-            engines: RwLock::new(BTreeMap::new()),
-            failed: RwLock::new(BTreeMap::new()),
-            used: AtomicU64::new(0),
+            engines: EngineCache::new(),
         }
     }
 }
