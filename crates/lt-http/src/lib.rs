@@ -39,8 +39,10 @@ use lt_core::{Lang, Match, TextRange};
 
 pub mod detect;
 mod engine_cache;
+mod response_text;
 
 use engine_cache::EngineCache;
+use response_text::ResponseText;
 
 pub const API_VERSION: i32 = 1;
 
@@ -55,7 +57,7 @@ pub const API_VERSION: i32 = 1;
 /// a minutes-long hang.
 pub const MAX_TEXT_LENGTH: u32 = 100_000;
 /// LT `TextChecker.CONTEXT_SIZE`
-pub const CONTEXT_SIZE: i32 = 40;
+pub const CONTEXT_SIZE: i32 = response_text::CONTEXT_SIZE;
 pub const SOFTWARE_NAME: &str = "LingoTweaker";
 
 /// Language `language=auto` falls back to when detection abstains.
@@ -666,10 +668,11 @@ async fn check_impl(
         Err(e) => return error_response(StatusCode::INTERNAL_SERVER_ERROR, &e.to_string()),
     };
 
+    let response_text = ResponseText::new(&text, utf8_offsets);
     let matches: Vec<Value> = result
         .matches
         .iter()
-        .map(|m| match_to_json(&text, &result, m, utf8_offsets))
+        .map(|m| match_to_json(&response_text, &result, m))
         .collect();
 
     let name = lang.info().name;
@@ -693,8 +696,8 @@ async fn check_impl(
             "detectedLanguage": detected_json,
         },
         "matches": matches,
-        "sentenceRanges": sentence_ranges(&text, &result, utf8_offsets),
-        "extendedSentenceRanges": extended_sentence_ranges(&text, &result, lang, utf8_offsets),
+        "sentenceRanges": sentence_ranges(&response_text, &result),
+        "extendedSentenceRanges": extended_sentence_ranges(&response_text, &result, lang),
     });
     (StatusCode::OK, Json(response)).into_response()
 }
@@ -781,12 +784,12 @@ fn detected_language_json(
 /// LT `RuleMatchesAsJsonSerializer.writeSentenceRanges` (`:230-241`): the
 /// sentence positions as `[from, to]` pairs, in this surface's offset
 /// convention — UTF-16 code units on v2, UTF-8 bytes on v3.
-fn sentence_ranges(text: &str, result: &lt_core::CheckResult, utf8_offsets: bool) -> Vec<Value> {
+fn sentence_ranges(text: &ResponseText<'_>, result: &lt_core::CheckResult) -> Vec<Value> {
     result
         .sentences
         .iter()
         .map(|sentence| {
-            let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
+            let (from, to) = sentence_span(text, sentence.range);
             json!([from, to])
         })
         .collect()
@@ -801,10 +804,9 @@ fn sentence_ranges(text: &str, result: &lt_core::CheckResult, utf8_offsets: bool
 /// it — and left empty otherwise, which is what LT emits for a single-language
 /// check. Each entry costs one prediction, so the list is capped.
 fn extended_sentence_ranges(
-    text: &str,
+    text: &ResponseText<'_>,
     result: &lt_core::CheckResult,
     checked: Lang,
-    utf8_offsets: bool,
 ) -> Vec<Value> {
     // `JLanguageTool.checkAnalyzedSentenceStream:2195`: one range per sentence,
     // carrying the checked language at rate 1.0. The rates change only when a
@@ -818,7 +820,7 @@ fn extended_sentence_ranges(
         .sentences
         .iter()
         .map(|sentence| {
-            let (from, to) = sentence_span(text, sentence.range, utf8_offsets);
+            let (from, to) = sentence_span(text, sentence.range);
             json!({
                 "from": from,
                 "to": to,
@@ -842,18 +844,11 @@ fn extended_sentence_ranges(
 /// (`SentenceRange.getRangesFromSentences:58-62`): the engine's sentence spans
 /// include the whitespace that follows a sentence, and a range a client
 /// highlights should not end in it.
-fn sentence_span(text: &str, range: TextRange, utf8_offsets: bool) -> (usize, usize) {
-    let slice = &text[range.start..range.end];
+fn sentence_span(text: &ResponseText<'_>, range: TextRange) -> (usize, usize) {
+    let slice = &text.as_str()[range.start..range.end];
     let start = range.start + slice.len() - slice.trim_start().len();
     let end = start + slice.trim().len();
-    if utf8_offsets {
-        (start, end)
-    } else {
-        (
-            lt::to_utf16_offset(text, start),
-            lt::to_utf16_offset(text, end),
-        )
-    }
+    text.range(start, end)
 }
 
 /// `POST /v3/detect` — the native detection surface.
@@ -926,90 +921,9 @@ impl DetectParams {
     }
 }
 
-/// LT `ContextTools.getContext`: a ±`CONTEXT_SIZE` character (UTF-16) window
-/// around the match, `...` markers at clipped edges, newlines replaced by
-/// spaces, and the match position marked (here: reported as `offset`).
-fn context_window(text: &str, utf16_from: usize, utf16_to: usize) -> (String, usize, usize) {
-    let units: Vec<u16> = text.encode_utf16().collect();
-    let len = units.len() as i32;
-    let mut start = utf16_from as i32 - CONTEXT_SIZE;
-    let mut prefix = "...";
-    if start < 0 {
-        prefix = "";
-        start = 0;
-    }
-    let mut end = utf16_to as i32 + CONTEXT_SIZE;
-    let mut postfix = "...";
-    if end > len {
-        postfix = "";
-        end = len;
-    }
-    let context_units: Vec<u16> = units[start as usize..end as usize]
-        .iter()
-        .map(|&u| if u == b'\n' as u16 { b' ' as u16 } else { u })
-        .collect();
-    let context: String = String::from_utf16_lossy(&context_units);
-    let offset = prefix.len() + (utf16_from - start as usize);
-    let _ = (postfix, &mut end, &mut start);
-    (context, offset, utf16_to - utf16_from)
-}
-
-/// Byte-offset variant of `context_window` (UTF-8 mode): ±`CONTEXT_SIZE`
-/// characters (code points) around the match.
-fn context_window_utf8(text: &str, from: usize, to: usize) -> (String, usize, usize) {
-    let char_boundary = |mut pos: usize, backwards: bool| -> usize {
-        let mut remaining = CONTEXT_SIZE;
-        while remaining > 0 {
-            if backwards {
-                if pos == 0 {
-                    break;
-                }
-                pos -= 1;
-                while !text.is_char_boundary(pos) {
-                    pos -= 1;
-                }
-            } else {
-                if pos >= text.len() {
-                    break;
-                }
-                pos += 1;
-                while pos < text.len() && !text.is_char_boundary(pos) {
-                    pos += 1;
-                }
-            }
-            remaining -= 1;
-        }
-        pos
-    };
-    let start = char_boundary(from, true);
-    let end = char_boundary(to, false);
-    let prefix = if start > 0 { "..." } else { "" };
-    let postfix = if end < text.len() { "..." } else { "" };
-    let mut context = String::with_capacity(prefix.len() + postfix.len() + end - start);
-    context.push_str(prefix);
-    context.push_str(&text[start..end].replace('\n', " "));
-    context.push_str(postfix);
-    (context, prefix.len() + from - start, to - from)
-}
-
-fn match_to_json(
-    text: &str,
-    result: &lt_core::CheckResult,
-    m: &Match,
-    utf8_offsets: bool,
-) -> Value {
-    let ((from, to), (context, context_offset, context_length)) = if utf8_offsets {
-        (
-            (m.range.start, m.range.end),
-            context_window_utf8(text, m.range.start, m.range.end),
-        )
-    } else {
-        let (utf16_from, utf16_to) = lt::to_utf16_range(text, m.range);
-        (
-            (utf16_from, utf16_to),
-            context_window(text, utf16_from, utf16_to),
-        )
-    };
+fn match_to_json(text: &ResponseText<'_>, result: &lt_core::CheckResult, m: &Match) -> Value {
+    let (from, to) = text.range(m.range.start, m.range.end);
+    let (context, context_offset, context_length) = text.context(m.range.start, m.range.end);
     let sentence = result
         .sentences
         .iter()
@@ -1418,6 +1332,37 @@ mod tests {
             .find(|m| m["rule"]["id"] == "ORDINAL_NUMBER_SUFFIX")
             .expect("rule fires");
         assert_eq!(ordinal["offset"], 16);
+    }
+
+    #[tokio::test]
+    async fn check_clipped_context_includes_markers_and_highlights_the_match() {
+        let text = format!(
+            "{}This was my 1nd try.{}",
+            "😀 A calm day. ".repeat(6),
+            " Another calm day.".repeat(6)
+        );
+        let body = serde_urlencoded::to_string([
+            ("text", text.as_str()),
+            ("language", "en-US"),
+            ("level", "picky"),
+        ])
+        .unwrap();
+        let (status, value) = send(router(state()), "POST", "/v2/check", &body).await;
+        assert_eq!(status, StatusCode::OK);
+        let ordinal = value["matches"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|m| m["rule"]["id"] == "ORDINAL_NUMBER_SUFFIX")
+            .expect("rule fires");
+        let context = ordinal["context"]["text"].as_str().unwrap();
+        assert!(context.starts_with("..."));
+        assert!(context.ends_with("..."));
+        // ContextTools counts both the 40 UTF-16 units and the leading marker.
+        assert_eq!(ordinal["context"]["offset"], 43);
+        assert_eq!(ordinal["context"]["length"], 3);
+        let units: Vec<_> = context.encode_utf16().collect();
+        assert_eq!(String::from_utf16_lossy(&units[43..46]), "1nd");
     }
 
     #[tokio::test]
