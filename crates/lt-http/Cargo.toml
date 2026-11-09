@@ -3,6 +3,7 @@ name = "lt-http"
 description = "LanguageTool v2-compatible HTTP API for LingoTweaker"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 # Not publishable: depends on the internal `lt` facade crate (name taken).

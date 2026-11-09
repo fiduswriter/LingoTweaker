@@ -20,7 +20,7 @@ use crate::ca::helpers::{reading_with_tag_regex, transform, PronounPosition, Ver
 use crate::ca::verb_filters::tokens_without_whitespace;
 
 macro_rules! anchored_re {
-    ($name:ident, $pat:expr) => {
+    ($name:ident, $pat:expr_2021) => {
         #[allow(dead_code)]
         static $name: LazyLock<regex::Regex> =
             LazyLock::new(|| regex::Regex::new(concat!("^(?:", $pat, ")$")).unwrap());

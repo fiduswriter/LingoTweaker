@@ -128,7 +128,7 @@ fn matches_pos_regexp(tr: &AnalyzedTokenReadings, re: &regex::Regex) -> bool {
 }
 
 macro_rules! anchored_re {
-    ($name:ident, $pat:expr) => {
+    ($name:ident, $pat:expr_2021) => {
         static $name: LazyLock<regex::Regex> =
             LazyLock::new(|| regex::Regex::new(concat!("^(?:", $pat, ")$")).unwrap());
     };

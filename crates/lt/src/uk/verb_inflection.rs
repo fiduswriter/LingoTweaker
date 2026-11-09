@@ -90,12 +90,12 @@ pub fn get_verb_inflections(readings: &[AnalyzedToken]) -> Vec<VerbInflection> {
             continue;
         }
         if let Ok(Some(caps)) = VERB_INFLECTION_PATTERN.captures(pos_tag) {
-            let gen = caps
+            let gender = caps
                 .get(1)
                 .map(|m| m.as_str().to_string())
                 .unwrap_or_default();
             let person = caps.get(2).map(|m| m.as_str().to_string());
-            out.push(VerbInflection::new(&gen, person.as_deref()));
+            out.push(VerbInflection::new(&gender, person.as_deref()));
         }
     }
     out
@@ -108,11 +108,11 @@ pub fn get_noun_inflections_v(readings: &[AnalyzedToken]) -> Vec<VerbInflection>
         let Some(pos_tag) = token.pos_tag.as_deref() else {
             continue;
         };
-        let Some(gen) = find_group(&NOUN_INFLECTION_PATTERN, pos_tag, 2) else {
+        let Some(gender) = find_group(&NOUN_INFLECTION_PATTERN, pos_tag, 2) else {
             continue;
         };
         let person = find_group_opt(&NOUN_PERSON_PATTERN, pos_tag, 1);
-        out.push(VerbInflection::new(&gen, person.as_deref()));
+        out.push(VerbInflection::new(&gender, person.as_deref()));
     }
     out
 }
@@ -124,11 +124,11 @@ pub fn get_adj_inflections_v(readings: &[AnalyzedToken]) -> Vec<VerbInflection> 
         let Some(pos_tag) = token.pos_tag.as_deref() else {
             continue;
         };
-        let Some(gen) = find_group(&ADJ_INFLECTION_PATTERN, pos_tag, 1) else {
+        let Some(gender) = find_group(&ADJ_INFLECTION_PATTERN, pos_tag, 1) else {
             continue;
         };
         let person = find_group_opt(&NOUN_PERSON_PATTERN, pos_tag, 1);
-        out.push(VerbInflection::new(&gen, person.as_deref()));
+        out.push(VerbInflection::new(&gender, person.as_deref()));
     }
     out
 }

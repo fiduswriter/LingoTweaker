@@ -3,6 +3,7 @@ name = "lt-cli"
 description = "Batch/JSON CLI and parity-harness workhorse for LingoTweaker"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 # Not publishable: depends on the internal `lt` facade crate (name taken).

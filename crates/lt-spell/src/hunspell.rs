@@ -65,7 +65,7 @@ const CONTSIZE: usize = 65536;
 /// `std::string` without Rust's unconditional heap allocation, which made the
 /// suffix scan ~100x slower than the reference.
 macro_rules! joined_slice {
-    ($buf:ident, $heap:ident, $a:expr, $b:expr) => {{
+    ($buf:ident, $heap:ident, $a:expr_2021, $b:expr_2021) => {{
         let a: &[u8] = $a;
         let b: &[u8] = $b;
         let total = a.len() + b.len();

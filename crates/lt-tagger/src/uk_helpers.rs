@@ -182,8 +182,8 @@ pub fn generate_tokens_for_nv(
     extra_tags: Option<&str>,
 ) -> Vec<AnalyzedToken> {
     let mut out = Vec::new();
-    for gen in genders.chars() {
-        let pos_tag_base = format!("noun:inanim:{gen}:");
+    for gender in genders.chars() {
+        let pos_tag_base = format!("noun:inanim:{gender}:");
         for vidm in VIDMINKY {
             if *vidm == "v_kly" {
                 continue;

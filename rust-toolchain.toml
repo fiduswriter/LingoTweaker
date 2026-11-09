@@ -2,6 +2,6 @@
 # Forgejo runners install this toolchain via `rustup show` after bootstrapping
 # rustup, so local lints match CI exactly.
 [toolchain]
-channel = "1.98.1"
+channel = "1.99.1"
 profile = "minimal"
 components = ["rustfmt", "clippy"]
