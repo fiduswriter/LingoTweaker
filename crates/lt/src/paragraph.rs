@@ -688,29 +688,28 @@ pub fn punctuation_at_paragraph_end2_with(
         }
         let last_non_space = tokens.iter().rev().find(|t| !t.is_whitespace);
         let para_end = is_paragraph_end(sentences, sent_pos);
-        if let Some(last) = last_non_space {
-            if para_end
-                && token_count > TOKEN_THRESHOLD
-                && !single_punct_or_ellipsis(last.surface())
-                && !is_non_word(last)
-            {
-                rule_matches.push(
-                    Match::new(
-                        PUNCTUATION_PARAGRAPH_END2_ID,
-                        Option::<String>::None,
-                        strings.punct_msg,
-                        Option::<String>::None,
-                        TextRange::new(pos + last.start_pos, pos + last.end_pos()),
-                        vec![Suggestion {
-                            value: format!("{}.", last.surface()),
-                            short_description: None,
-                        }],
-                        strings.punctuation_category.0,
-                        strings.punctuation_category.1,
-                    )
-                    .with_metadata(strings.punct_desc, "grammar", -1),
-                );
-            }
+        if let Some(last) = last_non_space
+            && para_end
+            && token_count > TOKEN_THRESHOLD
+            && !single_punct_or_ellipsis(last.surface())
+            && !is_non_word(last)
+        {
+            rule_matches.push(
+                Match::new(
+                    PUNCTUATION_PARAGRAPH_END2_ID,
+                    Option::<String>::None,
+                    strings.punct_msg,
+                    Option::<String>::None,
+                    TextRange::new(pos + last.start_pos, pos + last.end_pos()),
+                    vec![Suggestion {
+                        value: format!("{}.", last.surface()),
+                        short_description: None,
+                    }],
+                    strings.punctuation_category.0,
+                    strings.punctuation_category.1,
+                )
+                .with_metadata(strings.punct_desc, "grammar", -1),
+            );
         }
         if para_end {
             token_count = 0;

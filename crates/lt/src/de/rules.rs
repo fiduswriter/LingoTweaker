@@ -450,20 +450,21 @@ pub fn missing_verb(
         }
         last_token = Some(readings);
     }
-    if !verb_found && tokens.len() >= MIN_TOKENS_FOR_ERROR {
-        if let Some(last) = last_token {
-            return vec![Match::new(
-                "MISSING_VERB",
-                Option::<String>::None,
-                "Dieser Satz scheint kein Verb zu enthalten",
-                None,
-                TextRange::new(sentence.offset, sentence.offset + last.end_pos()),
-                Vec::<Suggestion>::new(),
-                "GRAMMAR",
-                "Grammatik",
-            )
-            .with_metadata("Satz ohne Verb", "grammar", 0)];
-        }
+    if !verb_found
+        && tokens.len() >= MIN_TOKENS_FOR_ERROR
+        && let Some(last) = last_token
+    {
+        return vec![Match::new(
+            "MISSING_VERB",
+            Option::<String>::None,
+            "Dieser Satz scheint kein Verb zu enthalten",
+            None,
+            TextRange::new(sentence.offset, sentence.offset + last.end_pos()),
+            Vec::<Suggestion>::new(),
+            "GRAMMAR",
+            "Grammatik",
+        )
+        .with_metadata("Satz ohne Verb", "grammar", 0)];
     }
     Vec::new()
 }

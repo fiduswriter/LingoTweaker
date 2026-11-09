@@ -55,20 +55,20 @@ impl SpanishSynthesizer {
     fn lookup(&self, lemma: &str, pos_tag: &str) -> Vec<String> {
         let key = format!("{lemma}|{pos_tag}");
         let mut results = self.dict.lookup(&key);
-        if let Some(manual) = &self.manual {
-            if let Some(forms) = manual.lookup(lemma, pos_tag) {
-                results.extend(forms);
-            }
+        if let Some(manual) = &self.manual
+            && let Some(forms) = manual.lookup(lemma, pos_tag)
+        {
+            results.extend(forms);
         }
-        if let Some(removed) = &self.removed {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.removed
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
-        if let Some(removed) = &self.do_not_synthesize {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.do_not_synthesize
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
         results
     }
@@ -87,11 +87,11 @@ impl SpanishSynthesizer {
         let mut lemma = token.stem.clone().unwrap_or_else(|| token.token.clone());
         let mut to_add_after = String::new();
         // verbs with noun: "dar a luz" style lemmas, the noun follows the verb
-        if pos_tag.starts_with('V') {
-            if let Some(idx) = lemma.find(' ') {
-                to_add_after = lemma[idx + 1..].to_string();
-                lemma.truncate(idx);
-            }
+        if pos_tag.starts_with('V')
+            && let Some(idx) = lemma.find(' ')
+        {
+            to_add_after = lemma[idx + 1..].to_string();
+            lemma.truncate(idx);
         }
         if pos_tag_regexp {
             let Ok(re) = fancy_regex::Regex::new(&format!("^(?:{pos_tag})$")) else {

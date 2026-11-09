@@ -3112,10 +3112,10 @@ impl Pipeline {
             } else {
                 None
             };
-            if let Some(on) = on {
-                if let Some(rule) = Arc::get_mut(rule) {
-                    rule.category_default_on = on;
-                }
+            if let Some(on) = on
+                && let Some(rule) = Arc::get_mut(rule)
+            {
+                rule.category_default_on = on;
             }
         }
         mark("filters+rules");
@@ -7544,8 +7544,8 @@ impl Pipeline {
                 }
             }
             // `EN_REPEATEDWORDS` (33), `tags="picky"`
-            if let Some(repeated_words) = &self.repeated_words {
-                if builtin_active(
+            if let Some(repeated_words) = &self.repeated_words
+                && builtin_active(
                     "EN_REPEATEDWORDS",
                     "REPETITIONS_STYLE",
                     true,
@@ -7555,9 +7555,9 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(repeated_words.check(&analyzed_sentences, synth));
-                }
+                )
+            {
+                text_level_matches.extend(repeated_words.check(&analyzed_sentences, synth));
             }
             // `StyleTooOftenUsed*` (34-36; default off; enable by rule id)
             for kind in [
@@ -7746,10 +7746,9 @@ impl Pipeline {
                 &disabled_rules,
                 &disabled_categories,
                 &enabled_categories,
-            ) {
-                if let Some(german) = &self.german {
-                    text_level_matches.extend(german.verb_agreement.check(&analyzed_sentences));
-                }
+            ) && let Some(german) = &self.german
+            {
+                text_level_matches.extend(german.verb_agreement.check(&analyzed_sentences));
             }
             // `DE_WORD_COHERENCY` (25), text level
             if builtin_active(
@@ -7762,10 +7761,9 @@ impl Pipeline {
                 &disabled_rules,
                 &disabled_categories,
                 &enabled_categories,
-            ) {
-                if let Some(german) = &self.german {
-                    text_level_matches.extend(german.word_coherency.check(&analyzed_sentences));
-                }
+            ) && let Some(german) = &self.german
+            {
+                text_level_matches.extend(german.word_coherency.check(&analyzed_sentences));
             }
             if builtin_active(
                 "DE_SIMILAR_NAMES",
@@ -7968,8 +7966,8 @@ impl Pipeline {
                 }
             }
             // `DE_REPEATEDWORDS` (47), default on (no `Tag.picky`)
-            if let Some(german) = &self.german {
-                if builtin_active(
+            if let Some(german) = &self.german
+                && builtin_active(
                     "DE_REPEATEDWORDS",
                     "REPETITIONS_STYLE",
                     true,
@@ -7979,12 +7977,12 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(german.repeated_words.check(
-                        &analyzed_sentences,
-                        Some(german.synth_adapter.as_ref() as &dyn pm::Synthesizer),
-                    ));
-                }
+                )
+            {
+                text_level_matches.extend(german.repeated_words.check(
+                    &analyzed_sentences,
+                    Some(german.synth_adapter.as_ref() as &dyn pm::Synthesizer),
+                ));
             }
         }
         // Simple German (`de-DE-x-simple-language`): `SimpleGerman
@@ -8072,8 +8070,8 @@ impl Pipeline {
                 text_level_matches.extend(crate::long_sentence::check_es(&analyzed_sentences));
             }
             // `ES_REPEATEDWORDS` (17), `tags="picky"`
-            if let Some(spanish) = &self.spanish {
-                if builtin_active(
+            if let Some(spanish) = &self.spanish
+                && builtin_active(
                     "ES_REPEATEDWORDS",
                     "REPETITIONS_STYLE",
                     true,
@@ -8083,12 +8081,12 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(spanish.repeated_words.check(
-                        &analyzed_sentences,
-                        Some(spanish.synth_adapter.as_ref() as &dyn pm::Synthesizer),
-                    ));
-                }
+                )
+            {
+                text_level_matches.extend(spanish.repeated_words.check(
+                    &analyzed_sentences,
+                    Some(spanish.synth_adapter.as_ref() as &dyn pm::Synthesizer),
+                ));
             }
             // `SPANISH_WORD_REPEAT_BEGINNING_RULE` (15), `tags="picky"`
             if options.picky
@@ -8200,8 +8198,8 @@ impl Pipeline {
                 ));
             }
             // `FR_REPEATEDWORDS` (14), default on
-            if let Some(french) = &self.french {
-                if builtin_active(
+            if let Some(french) = &self.french
+                && builtin_active(
                     "FR_REPEATEDWORDS",
                     "REPETITIONS_STYLE",
                     true,
@@ -8211,12 +8209,12 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(french.repeated_words.check(
-                        &analyzed_sentences,
-                        Some(french.synth_adapter.as_ref() as &dyn pm::Synthesizer),
-                    ));
-                }
+                )
+            {
+                text_level_matches.extend(french.repeated_words.check(
+                    &analyzed_sentences,
+                    Some(french.synth_adapter.as_ref() as &dyn pm::Synthesizer),
+                ));
             }
         }
         if self.lang == crate::Lang::It {
@@ -8568,8 +8566,8 @@ impl Pipeline {
                 text_level_matches.extend(crate::whitespace::check_nl(&analyzed_sentences));
             }
             // `WordCoherencyRule` (9), default on (text level)
-            if let Some(dutch) = &self.dutch {
-                if builtin_active(
+            if let Some(dutch) = &self.dutch
+                && builtin_active(
                     "NL_WORD_COHERENCY",
                     "MISC",
                     true,
@@ -8579,9 +8577,9 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(dutch.word_coherency.check(&analyzed_sentences));
-                }
+                )
+            {
+                text_level_matches.extend(dutch.word_coherency.check(&analyzed_sentences));
             }
             // `LongSentenceRule` (11), `tags="picky"`, 40 words
             if builtin_active(
@@ -8720,8 +8718,8 @@ impl Pipeline {
                 ) {
                     text_level_matches.extend(catalan.word_coherency.check(&analyzed_sentences));
                 }
-                if let Some(valencia) = &catalan.word_coherency_valencia {
-                    if builtin_active(
+                if let Some(valencia) = &catalan.word_coherency_valencia
+                    && builtin_active(
                         valencia.rule_id(),
                         "STYLE",
                         true,
@@ -8731,9 +8729,9 @@ impl Pipeline {
                         &disabled_rules,
                         &disabled_categories,
                         &enabled_categories,
-                    ) {
-                        text_level_matches.extend(valencia.check(&analyzed_sentences));
-                    }
+                    )
+                {
+                    text_level_matches.extend(valencia.check(&analyzed_sentences));
                 }
             }
             // `PunctuationMarkAtParagraphEnd` (30), `tags="picky"`, default on
@@ -9120,8 +9118,8 @@ impl Pipeline {
             ) {
                 text_level_matches.extend(crate::unpaired_brackets::check_pl(&analyzed_sentences));
             }
-            if let Some(polish) = &self.polish {
-                if builtin_active(
+            if let Some(polish) = &self.polish
+                && builtin_active(
                     polish.word_coherency.rule_id(),
                     "MISC",
                     true,
@@ -9131,9 +9129,9 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(polish.word_coherency.check(&analyzed_sentences));
-                }
+                )
+            {
+                text_level_matches.extend(polish.word_coherency.check(&analyzed_sentences));
             }
         }
         // Slovak text-level rules (`Slovak.getRelevantRules`):
@@ -9329,8 +9327,8 @@ impl Pipeline {
             ) {
                 text_level_matches.extend(crate::long_sentence::check_sv(&analyzed_sentences));
             }
-            if let Some(swedish) = &self.sv {
-                if builtin_active(
+            if let Some(swedish) = &self.sv
+                && builtin_active(
                     swedish.word_coherency.rule_id(),
                     "MISC",
                     true,
@@ -9340,9 +9338,9 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(swedish.word_coherency.check(&analyzed_sentences));
-                }
+                )
+            {
+                text_level_matches.extend(swedish.word_coherency.check(&analyzed_sentences));
             }
             if builtin_active(
                 crate::whitespace::RULE_ID,
@@ -9461,8 +9459,8 @@ impl Pipeline {
                 text_level_matches.extend(crate::fa::word_repeat_beginning(&analyzed_sentences));
             }
             // `WordCoherencyRule` (`FA_WORD_COHERENCY`, text level).
-            if let Some(persian) = &self.persian {
-                if builtin_active(
+            if let Some(persian) = &self.persian
+                && builtin_active(
                     "FA_WORD_COHERENCY",
                     "MISC",
                     true,
@@ -9472,9 +9470,9 @@ impl Pipeline {
                     &disabled_rules,
                     &disabled_categories,
                     &enabled_categories,
-                ) {
-                    text_level_matches.extend(persian.word_coherency.check(&analyzed_sentences));
-                }
+                )
+            {
+                text_level_matches.extend(persian.word_coherency.check(&analyzed_sentences));
             }
         }
         // Khmer text-level rules (`Khmer.getRelevantRules`):
@@ -11067,13 +11065,14 @@ impl Pipeline {
                 }
             }
         }
-        if options.picky && !disabled_rules.contains("EN_DASH_RULE") {
-            if let Some(dash) = &self.dash {
-                for m in dash.check_sentence(analyzed) {
-                    let key = (m.rule_id.clone(), m.range.start, m.range.end);
-                    if seen.insert(key) {
-                        matches.push(m);
-                    }
+        if options.picky
+            && !disabled_rules.contains("EN_DASH_RULE")
+            && let Some(dash) = &self.dash
+        {
+            for m in dash.check_sentence(analyzed) {
+                let key = (m.rule_id.clone(), m.range.start, m.range.end);
+                if seen.insert(key) {
+                    matches.push(m);
                 }
             }
         }
@@ -12874,25 +12873,25 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence_da(&analyzed.tokens, start),
                 &mut seen,
             );
-            if let Some(danish) = &self.da {
-                if let Some(spelling) = &danish.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::da::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(danish) = &self.da
+                && let Some(spelling) = &danish.spelling
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::da::spelling::RULE_ID,
+                        "TYPOS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    spelling.check_sentence(&analyzed.tokens, sentence_text, start),
+                    &mut seen,
+                );
             }
         }
         // Swedish sentence-level Java rules in `Swedish.getRelevantRules`
@@ -13218,33 +13217,16 @@ impl Pipeline {
         // HunspellRule (1), SimpleReplace (2, generic `self.simple_replace`),
         // WordRepeat (3) and SpaceBefore (5). `KM_UNPAIRED_BRACKETS` (4) is
         // text-level above.
-        if self.lang == crate::Lang::Km {
-            if let Some(khmer) = &self.khmer {
-                // `KhmerHunspellRule` (`HUNSPELL_RULE`, default on).
-                if let Some(spelling) = &khmer.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::km::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, sentence_text, start),
-                        &mut seen,
-                    );
-                }
-                // `KhmerWordRepeatRule` (`KM_WORD_REPEAT_RULE`).
+        if self.lang == crate::Lang::Km
+            && let Some(khmer) = &self.khmer
+        {
+            // `KhmerHunspellRule` (`HUNSPELL_RULE`, default on).
+            if let Some(spelling) = &khmer.spelling {
                 append_active(
                     &mut matches,
                     builtin_active(
-                        "KM_WORD_REPEAT_RULE",
-                        "MISC",
+                        crate::km::spelling::RULE_ID,
+                        "TYPOS",
                         true,
                         false,
                         options,
@@ -13253,28 +13235,45 @@ impl Pipeline {
                         disabled_categories,
                         enabled_categories,
                     ),
-                    crate::km::check_word_repeat_km(&analyzed.tokens, start),
-                    &mut seen,
-                );
-                // `KhmerSpaceBeforeRule` (`KM_SPACE_BEFORE_CONJUNCTION`,
-                // default on).
-                append_active(
-                    &mut matches,
-                    builtin_active(
-                        khmer.space_before.rule_id(),
-                        "MISC",
-                        true,
-                        false,
-                        options,
-                        enabled_rules,
-                        disabled_rules,
-                        disabled_categories,
-                        enabled_categories,
-                    ),
-                    khmer.space_before.check_sentence(&analyzed.tokens, start),
+                    spelling.check_sentence(&analyzed.tokens, sentence_text, start),
                     &mut seen,
                 );
             }
+            // `KhmerWordRepeatRule` (`KM_WORD_REPEAT_RULE`).
+            append_active(
+                &mut matches,
+                builtin_active(
+                    "KM_WORD_REPEAT_RULE",
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                crate::km::check_word_repeat_km(&analyzed.tokens, start),
+                &mut seen,
+            );
+            // `KhmerSpaceBeforeRule` (`KM_SPACE_BEFORE_CONJUNCTION`,
+            // default on).
+            append_active(
+                &mut matches,
+                builtin_active(
+                    khmer.space_before.rule_id(),
+                    "MISC",
+                    true,
+                    false,
+                    options,
+                    enabled_rules,
+                    disabled_rules,
+                    disabled_categories,
+                    enabled_categories,
+                ),
+                khmer.space_before.check_sentence(&analyzed.tokens, start),
+                &mut seen,
+            );
         }
         // Malayalam sentence-level rules in `Malayalam.getRelevantRules`
         // order: CommaWhitespace (1), DoublePunctuation (2), the Morfologik
@@ -13504,25 +13503,25 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence_ast(&analyzed.tokens, start),
                 &mut seen,
             );
-            if let Some(asturian) = &self.asturian {
-                if let Some(spelling) = &asturian.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::ast::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(asturian) = &self.asturian
+                && let Some(spelling) = &asturian.spelling
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::ast::spelling::RULE_ID,
+                        "TYPOS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    spelling.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
             }
         }
         // Breton sentence-level Java rules in `Breton.getRelevantRules` order:
@@ -13638,25 +13637,25 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence_tl(&analyzed.tokens, start),
                 &mut seen,
             );
-            if let Some(tagalog) = &self.tagalog {
-                if let Some(spelling) = &tagalog.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::tl::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(tagalog) = &self.tagalog
+                && let Some(spelling) = &tagalog.spelling
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::tl::spelling::RULE_ID,
+                        "TYPOS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    spelling.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
             }
         }
         // Lithuanian sentence-level Java rules in `Lithuanian.getRelevantRules`
@@ -13698,25 +13697,25 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence_lt(&analyzed.tokens, start),
                 &mut seen,
             );
-            if let Some(lithuanian) = &self.lithuanian {
-                if let Some(spelling) = &lithuanian.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::lt::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(lithuanian) = &self.lithuanian
+                && let Some(spelling) = &lithuanian.spelling
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::lt::spelling::RULE_ID,
+                        "TYPOS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    spelling.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
             }
         }
         // Belarusian sentence-level Java rules in `Belarusian.getRelevantRules`
@@ -13759,25 +13758,25 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence_be(&analyzed.tokens, start),
                 &mut seen,
             );
-            if let Some(belarusian) = &self.belarusian {
-                if let Some(spelling) = &belarusian.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::be::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(belarusian) = &self.belarusian
+                && let Some(spelling) = &belarusian.spelling
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::be::spelling::RULE_ID,
+                        "TYPOS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    spelling.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
             }
         }
         // Serbian sentence-level built-ins in `Serbian.getRelevantRules` order:
@@ -14532,25 +14531,25 @@ impl Pipeline {
                 crate::double_punctuation::check_sentence(&analyzed.tokens, start),
                 &mut seen,
             );
-            if let Some(crh) = &self.crimean_tatar {
-                if let Some(spelling) = &crh.spelling {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            crate::crh::spelling::RULE_ID,
-                            "TYPOS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        spelling.check_sentence(&analyzed.tokens, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(crh) = &self.crimean_tatar
+                && let Some(spelling) = &crh.spelling
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        crate::crh::spelling::RULE_ID,
+                        "TYPOS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    spelling.check_sentence(&analyzed.tokens, start),
+                    &mut seen,
+                );
             }
             // `WhiteSpaceAtBeginOfParagraph` (7), default off
             append_active(
@@ -15166,25 +15165,25 @@ impl Pipeline {
                 );
             }
             // `PortugueseWrongWordInContextRule` (32), default on
-            if let Some(pt) = &self.portuguese {
-                if let Some(wwic) = &pt.wrong_word_in_context {
-                    append_active(
-                        &mut matches,
-                        builtin_active(
-                            "PORTUGUESE_WRONG_WORD_IN_CONTEXT",
-                            "SEMANTICS",
-                            true,
-                            false,
-                            options,
-                            enabled_rules,
-                            disabled_rules,
-                            disabled_categories,
-                            enabled_categories,
-                        ),
-                        wwic.check_sentence(analyzed, start),
-                        &mut seen,
-                    );
-                }
+            if let Some(pt) = &self.portuguese
+                && let Some(wwic) = &pt.wrong_word_in_context
+            {
+                append_active(
+                    &mut matches,
+                    builtin_active(
+                        "PORTUGUESE_WRONG_WORD_IN_CONTEXT",
+                        "SEMANTICS",
+                        true,
+                        false,
+                        options,
+                        enabled_rules,
+                        disabled_rules,
+                        disabled_categories,
+                        enabled_categories,
+                    ),
+                    wwic.check_sentence(analyzed, start),
+                    &mut seen,
+                );
             }
             // `PortugueseUnitConversionRule` (34), default on
             append_active(
@@ -15724,10 +15723,8 @@ impl Pipeline {
                         // Java's `CatalanRemoteRewriteFilter` rebuilds the
                         // match with the plain `RuleMatch(rule, sentence, …)`
                         // constructor, which resets the type to `Other`.
-                        if rebuilt_match {
-                            if let Some(t) = filter.rebuilds_match_type() {
-                                filter_match_type = Some(t);
-                            }
+                        if rebuilt_match && let Some(t) = filter.rebuilds_match_type() {
+                            filter_match_type = Some(t);
                         }
                     }
                     let abs_start = start + range.start;
@@ -15780,8 +15777,8 @@ impl Pipeline {
         }
 
         // German speller (`GERMAN_SPELLER_RULE`, runs after the XML rules)
-        if let Some(german) = &self.german {
-            if builtin_active(
+        if let Some(german) = &self.german
+            && builtin_active(
                 german.spelling.rule_id(),
                 "TYPOS",
                 true,
@@ -15791,19 +15788,19 @@ impl Pipeline {
                 disabled_rules,
                 disabled_categories,
                 enabled_categories,
-            ) {
-                for m in german.spelling.check_sentence(&analyzed.tokens, start) {
-                    let key = (m.rule_id.clone(), m.range.start, m.range.end);
-                    if !seen.insert(key) {
-                        continue;
-                    }
-                    matches.push(m);
+            )
+        {
+            for m in german.spelling.check_sentence(&analyzed.tokens, start) {
+                let key = (m.rule_id.clone(), m.range.start, m.range.end);
+                if !seen.insert(key) {
+                    continue;
                 }
+                matches.push(m);
             }
         }
         // spelling rule (D5, runs like a LT rule over each sentence)
-        if let Some(spelling) = &self.spelling {
-            if builtin_active(
+        if let Some(spelling) = &self.spelling
+            && builtin_active(
                 spelling.rule_id(),
                 "TYPOS",
                 true,
@@ -15813,14 +15810,14 @@ impl Pipeline {
                 disabled_rules,
                 disabled_categories,
                 enabled_categories,
-            ) {
-                for m in spelling.check_sentence(&analyzed.tokens, start) {
-                    let key = (m.rule_id.clone(), m.range.start, m.range.end);
-                    if !seen.insert(key) {
-                        continue;
-                    }
-                    matches.push(m);
+            )
+        {
+            for m in spelling.check_sentence(&analyzed.tokens, start) {
+                let key = (m.rule_id.clone(), m.range.start, m.range.end);
+                if !seen.insert(key) {
+                    continue;
                 }
+                matches.push(m);
             }
         }
         (matches, repeating)
@@ -16236,31 +16233,29 @@ fn match_preserves_case(rule: &CompiledRule) -> bool {
     };
     let in_message_count = rule.message.matches("<suggestion>").count();
     // in-message suggestions: `matchPreservesCase(suggestionMatches, message)`
-    if let Some(pos) = rule.message.find("<suggestion>") {
-        if rule.message[pos + "<suggestion>".len()..].starts_with('\\')
-            && rule
-                .suggestions
-                .iter()
-                .take(in_message_count)
-                .any(has_converting)
-        {
-            return false;
-        }
+    if let Some(pos) = rule.message.find("<suggestion>")
+        && rule.message[pos + "<suggestion>".len()..].starts_with('\\')
+        && rule
+            .suggestions
+            .iter()
+            .take(in_message_count)
+            .any(has_converting)
+    {
+        return false;
     }
     // out-of-message suggestions: `matchPreservesCase(suggestionMatchesOutMsg,
     // suggestionsOutMsg)`. Java passes the flat list of all out-of-message
     // `<match>` elements, so a case-converting match in a *later* suggestion
     // also disables the automatic case adjustment.
-    if let Some(parts) = rule.suggestions.get(in_message_count) {
-        if starts_with_backref(parts)
-            && rule
-                .suggestions
-                .iter()
-                .skip(in_message_count)
-                .any(has_converting)
-        {
-            return false;
-        }
+    if let Some(parts) = rule.suggestions.get(in_message_count)
+        && starts_with_backref(parts)
+        && rule
+            .suggestions
+            .iter()
+            .skip(in_message_count)
+            .any(has_converting)
+    {
+        return false;
     }
     true
 }

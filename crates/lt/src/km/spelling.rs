@@ -169,10 +169,10 @@ impl KhmerSpellingRule {
         from: usize,
         to: usize,
     ) {
-        if let Some(prev) = matches.last() {
-            if prev.range.start == from {
-                matches.pop();
-            }
+        if let Some(prev) = matches.last()
+            && prev.range.start == from
+        {
+            matches.pop();
         }
         let value = format!("{suggestion1} {suggestion2}").trim().to_string();
         matches.push(self.0.wrong_split_match(from, to, value));

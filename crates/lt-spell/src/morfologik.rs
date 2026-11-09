@@ -549,10 +549,10 @@ impl DictSource {
             if self.is_arc_final(arc) {
                 return Some(self.arc_label(arc));
             }
-            if !self.is_arc_terminal(arc) {
-                if let Some(found) = self.first_final_last_label(self.end_node(arc)) {
-                    return Some(found);
-                }
+            if !self.is_arc_terminal(arc)
+                && let Some(found) = self.first_final_last_label(self.end_node(arc))
+            {
+                return Some(found);
             }
             arc = self.next_arc(arc);
         }
@@ -743,10 +743,10 @@ impl Speller {
         if x == y {
             return true;
         }
-        if let Some((_, chars)) = self.meta.equivalent_chars.iter().find(|(c, _)| *c == x) {
-            if chars.contains(&y) {
-                return true;
-            }
+        if let Some((_, chars)) = self.meta.equivalent_chars.iter().find(|(c, _)| *c == x)
+            && chars.contains(&y)
+        {
+            return true;
         }
         if self.meta.ignore_diacritics {
             let xn = strip_diacritics(x);

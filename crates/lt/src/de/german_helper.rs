@@ -166,10 +166,10 @@ impl AnalyzedGermanToken {
 /// `GermanHelper.hasReadingOfType`.
 pub(crate) fn has_reading_of_type(token: &AnalyzedTokenReadings, pos_type: PosType) -> bool {
     for reading in &token.readings {
-        if let Some(tag) = reading.pos_tag.as_deref() {
-            if tag == "SENT_END" || tag == "PARA_END" {
-                return false;
-            }
+        if let Some(tag) = reading.pos_tag.as_deref()
+            && (tag == "SENT_END" || tag == "PARA_END")
+        {
+            return false;
         }
         if AnalyzedGermanToken::parse(reading).pos_type == Some(pos_type) {
             return true;
@@ -297,20 +297,20 @@ fn make_string(
     omit: &[GrammarCategory],
 ) -> String {
     let mut parts: Vec<&str> = Vec::new();
-    if let Some(casus) = casus {
-        if !omit.contains(&GrammarCategory::Kasus) {
-            parts.push(casus.as_str());
-        }
+    if let Some(casus) = casus
+        && !omit.contains(&GrammarCategory::Kasus)
+    {
+        parts.push(casus.as_str());
     }
-    if let Some(numerus) = numerus {
-        if !omit.contains(&GrammarCategory::Numerus) {
-            parts.push(numerus.as_str());
-        }
+    if let Some(numerus) = numerus
+        && !omit.contains(&GrammarCategory::Numerus)
+    {
+        parts.push(numerus.as_str());
     }
-    if let Some(genus) = genus {
-        if !omit.contains(&GrammarCategory::Genus) {
-            parts.push(genus.as_str());
-        }
+    if let Some(genus) = genus
+        && !omit.contains(&GrammarCategory::Genus)
+    {
+        parts.push(genus.as_str());
     }
     if let Some(determination) = determination {
         parts.push(determination.as_str());

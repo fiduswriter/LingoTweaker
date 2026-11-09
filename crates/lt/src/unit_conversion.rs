@@ -181,12 +181,12 @@ fn compose(a: &[Step], b: &[Step]) -> Vec<Step> {
         let mut changed = 0usize;
         let mut i = 1;
         while i < list.len() {
-            if let (Some(left), Some(right)) = (list[i - 1], list[i]) {
-                if let Some(result) = pair_simplify(left, right) {
-                    list[i - 1] = Some(result);
-                    list[i] = None;
-                    changed += 1;
-                }
+            if let (Some(left), Some(right)) = (list[i - 1], list[i])
+                && let Some(result) = pair_simplify(left, right)
+            {
+                list[i - 1] = Some(result);
+                list[i] = None;
+                changed += 1;
             }
             i += 1;
         }
@@ -1482,10 +1482,10 @@ fn try_conversion(
 
     // search for an existing conversion, e.g. "5 miles (8km)"
     let mut converted_matcher: Option<regex::Captures> = None;
-    if let Some(caps) = table.converted.captures(&text[converted_base..]) {
-        if caps.get(0).is_some_and(|m| m.start() == 0) {
-            converted_matcher = Some(caps);
-        }
+    if let Some(caps) = table.converted.captures(&text[converted_base..])
+        && caps.get(0).is_some_and(|m| m.start() == 0)
+    {
+        converted_matcher = Some(caps);
     }
 
     let value = match custom_value {
@@ -1534,10 +1534,10 @@ fn try_conversion(
                 .strip_prefix('(')
                 .and_then(|s| s.strip_suffix(')'))
                 .unwrap_or(final_converted_in_text);
-            if let Some(converted) = &converted {
-                if converted.iter().any(|s| s == converted_trimmed) {
-                    return;
-                }
+            if let Some(converted) = &converted
+                && converted.iter().any(|s| s == converted_trimmed)
+            {
+                return;
             }
             let converted_unit_pattern = table
                 .patterns

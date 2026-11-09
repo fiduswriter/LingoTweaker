@@ -238,16 +238,16 @@ impl WordCoherencyRule {
         let Some(synth) = &self.synth else {
             return create_replacement(marked, token, other_spelling);
         };
-        if let Some(atr) = reading_with_tag_regex(token_readings, "[VAND].*") {
-            if let Some(tag) = atr.pos_tag.clone() {
-                let probe =
-                    AnalyzedToken::new("", Some(String::new()), Some(other_spelling.to_string()));
-                let forms = synth.synthesize(&probe, &tag, false);
-                if let Some(first) = forms.first() {
-                    if !first.is_empty() {
-                        return first.clone();
-                    }
-                }
+        if let Some(atr) = reading_with_tag_regex(token_readings, "[VAND].*")
+            && let Some(tag) = atr.pos_tag.clone()
+        {
+            let probe =
+                AnalyzedToken::new("", Some(String::new()), Some(other_spelling.to_string()));
+            let forms = synth.synthesize(&probe, &tag, false);
+            if let Some(first) = forms.first()
+                && !first.is_empty()
+            {
+                return first.clone();
             }
         }
         create_replacement(marked, token, other_spelling)

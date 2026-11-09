@@ -409,10 +409,10 @@ impl Automaton {
             std::sync::Mutex<HashMap<std::path::PathBuf, std::sync::Weak<Automaton>>>,
         > = std::sync::OnceLock::new();
         let key = path.to_path_buf();
-        if let Ok(cache) = CACHE.get_or_init(Default::default).lock() {
-            if let Some(found) = cache.get(&key).and_then(|weak| weak.upgrade()) {
-                return Ok(found);
-            }
+        if let Ok(cache) = CACHE.get_or_init(Default::default).lock()
+            && let Some(found) = cache.get(&key).and_then(|weak| weak.upgrade())
+        {
+            return Ok(found);
         }
         let bytes = lt_data::fs::read(path).map_err(|e| {
             lt_core::CoreError::Data(format!("cannot read {}: {e}", path.display()))

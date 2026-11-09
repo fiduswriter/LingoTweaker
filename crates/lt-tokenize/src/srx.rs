@@ -70,12 +70,10 @@ impl SrxDocument {
                 }
             }
         }
-        if !specific_match {
-            if let Some(generic) = self.language_rules.get("Generic") {
-                let mut with_generic = generic.clone();
-                with_generic.extend(rules);
-                return with_generic;
-            }
+        if !specific_match && let Some(generic) = self.language_rules.get("Generic") {
+            let mut with_generic = generic.clone();
+            with_generic.extend(rules);
+            return with_generic;
         }
         rules
     }
@@ -548,11 +546,11 @@ impl SrxTokenizer {
             let mut min_pos = usize::MAX;
             let mut min_idx: Option<usize> = None;
             for (i, cursor) in cursors.iter().enumerate() {
-                if let Some(pos) = cursor.break_pos {
-                    if pos < min_pos {
-                        min_pos = pos;
-                        min_idx = Some(i);
-                    }
+                if let Some(pos) = cursor.break_pos
+                    && pos < min_pos
+                {
+                    min_pos = pos;
+                    min_idx = Some(i);
                 }
             }
             let end = match min_idx {

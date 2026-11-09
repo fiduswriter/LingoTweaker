@@ -212,50 +212,50 @@ impl DutchTagger {
                     }
                 }
                 // Tag unknown compound words
-                if l.is_empty() && word.chars().count() > 5 {
-                    if let Some(acceptor) = self.acceptor() {
-                        let parts = acceptor.get_parts(&word);
-                        if parts.len() == 2 {
-                            let part1 = &parts[0];
-                            let part2 = &parts[1];
-                            let part2_readings = self.tag(std::slice::from_ref(part2));
-                            let part1lc = part1.to_lowercase();
-                            if let Some(part2_atr) = part2_readings.first() {
-                                for reading in &part2_atr.readings {
-                                    let Some(tag) = &reading.pos_tag else {
-                                        continue;
+                if l.is_empty()
+                    && word.chars().count() > 5
+                    && let Some(acceptor) = self.acceptor()
+                {
+                    let parts = acceptor.get_parts(&word);
+                    if parts.len() == 2 {
+                        let part1 = &parts[0];
+                        let part2 = &parts[1];
+                        let part2_readings = self.tag(std::slice::from_ref(part2));
+                        let part1lc = part1.to_lowercase();
+                        if let Some(part2_atr) = part2_readings.first() {
+                            for reading in &part2_atr.readings {
+                                let Some(tag) = &reading.pos_tag else {
+                                    continue;
+                                };
+                                if part1.ends_with('-') && tag.starts_with("ENM:LOC") {
+                                    l.push(AnalyzedToken::new(
+                                        &word,
+                                        Some(part2.clone()),
+                                        Some(tag.clone()),
+                                    ));
+                                    break;
+                                }
+                                if tag.starts_with("ZNW") {
+                                    let special = if always_needs_het().contains(part2.as_str()) {
+                                        Some("ZNW:EKV:HET")
+                                    } else if always_needs_de().contains(part2.as_str()) {
+                                        Some("ZNW:EKV:DE_")
+                                    } else if always_needs_mrv().contains(part2.as_str()) {
+                                        Some("ZNW:MRV:DE_")
+                                    } else {
+                                        None
                                     };
-                                    if part1.ends_with('-') && tag.starts_with("ENM:LOC") {
-                                        l.push(AnalyzedToken::new(
-                                            &word,
-                                            Some(part2.clone()),
-                                            Some(tag.clone()),
-                                        ));
+                                    let lemma = format!(
+                                        "{part1lc}{}",
+                                        reading.stem.clone().unwrap_or_default()
+                                    );
+                                    l.push(AnalyzedToken::new(
+                                        &word,
+                                        Some(lemma),
+                                        Some(special.unwrap_or(tag).to_string()),
+                                    ));
+                                    if special.is_some() {
                                         break;
-                                    }
-                                    if tag.starts_with("ZNW") {
-                                        let special = if always_needs_het().contains(part2.as_str())
-                                        {
-                                            Some("ZNW:EKV:HET")
-                                        } else if always_needs_de().contains(part2.as_str()) {
-                                            Some("ZNW:EKV:DE_")
-                                        } else if always_needs_mrv().contains(part2.as_str()) {
-                                            Some("ZNW:MRV:DE_")
-                                        } else {
-                                            None
-                                        };
-                                        let lemma = format!(
-                                            "{part1lc}{}",
-                                            reading.stem.clone().unwrap_or_default()
-                                        );
-                                        l.push(AnalyzedToken::new(
-                                            &word,
-                                            Some(lemma),
-                                            Some(special.unwrap_or(tag).to_string()),
-                                        ));
-                                        if special.is_some() {
-                                            break;
-                                        }
                                     }
                                 }
                             }

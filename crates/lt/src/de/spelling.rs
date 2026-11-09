@@ -1277,10 +1277,10 @@ impl GermanSpellingRule {
         let mut lemma = String::new();
         let readings = self.tag_one(&lt_tagger::uppercase_first_char(word));
         for reading in &readings {
-            if reading.has_pos_tag_starting_with("SUB") {
-                if let Some(first) = reading.readings.first() {
-                    lemma = first.stem.clone().unwrap_or_else(|| first.token.clone());
-                }
+            if reading.has_pos_tag_starting_with("SUB")
+                && let Some(first) = reading.readings.first()
+            {
+                lemma = first.stem.clone().unwrap_or_else(|| first.token.clone());
             }
         }
         lemma
@@ -1991,115 +1991,115 @@ impl GermanSpellingRule {
                 None
             }
         };
-        if ENDS_WITH_IBELKEIT_IBLICHKEIT.is_match(word) {
-            if let Some(s) = checked(replaced("el[hk]eit$", "ilität")) {
-                return Some(s);
-            }
+        if ENDS_WITH_IBELKEIT_IBLICHKEIT.is_match(word)
+            && let Some(s) = checked(replaced("el[hk]eit$", "ilität"))
+        {
+            return Some(s);
         }
-        if word.ends_with("aquise") {
-            if let Some(s) = checked(replaced("aquise$", "akquise")) {
-                return Some(s);
-            }
+        if word.ends_with("aquise")
+            && let Some(s) = checked(replaced("aquise$", "akquise"))
+        {
+            return Some(s);
         }
-        if word.ends_with("standart") {
-            if let Some(s) = checked(replaced("standart$", "standard")) {
-                return Some(s);
-            }
+        if word.ends_with("standart")
+            && let Some(s) = checked(replaced("standart$", "standard"))
+        {
+            return Some(s);
         }
-        if word.ends_with("standarts") {
-            if let Some(s) = checked(replaced("standarts$", "standards")) {
-                return Some(s);
-            }
+        if word.ends_with("standarts")
+            && let Some(s) = checked(replaced("standarts$", "standards"))
+        {
+            return Some(s);
         }
-        if word.ends_with("tips") {
-            if let Some(s) = checked(replaced("tips$", "tipps")) {
-                return Some(s);
-            }
+        if word.ends_with("tips")
+            && let Some(s) = checked(replaced("tips$", "tipps"))
+        {
+            return Some(s);
         }
-        if word.ends_with("tip") {
-            if let Some(s) = checked(format!("{word}p")) {
-                return Some(s);
-            }
+        if word.ends_with("tip")
+            && let Some(s) = checked(format!("{word}p"))
+        {
+            return Some(s);
         }
-        if word.ends_with("entfehlung") {
-            if let Some(s) = checked(word.replacen("ent", "emp", 1)) {
-                return Some(s);
-            }
+        if word.ends_with("entfehlung")
+            && let Some(s) = checked(word.replacen("ent", "emp", 1))
+        {
+            return Some(s);
         }
-        if word.ends_with("oullie") {
-            if let Some(s) = checked(replaced("oullie$", "ouille")) {
-                return Some(s);
-            }
+        if word.ends_with("oullie")
+            && let Some(s) = checked(replaced("oullie$", "ouille"))
+        {
+            return Some(s);
         }
-        if word.starts_with("Bundstift") {
-            if let Some(s) = checked(replaced("^Bundstift", "Buntstift")) {
-                return Some(s);
-            }
+        if word.starts_with("Bundstift")
+            && let Some(s) = checked(replaced("^Bundstift", "Buntstift"))
+        {
+            return Some(s);
         }
-        if ALLMAHLLIG.is_match(word) {
-            if let Some(s) = checked(replaced("llmähll?i(g|ch)", "llmählich")) {
-                return Some(s);
-            }
+        if ALLMAHLLIG.is_match(word)
+            && let Some(s) = checked(replaced("llmähll?i(g|ch)", "llmählich"))
+        {
+            return Some(s);
         }
-        if CONTAINS_MAYONNAISE.is_match(word) {
-            if let Some(s) = checked(replaced("a[jy]onn?[äe]se", "ayonnaise")) {
-                return Some(s);
-            }
+        if CONTAINS_MAYONNAISE.is_match(word)
+            && let Some(s) = checked(replaced("a[jy]onn?[äe]se", "ayonnaise"))
+        {
+            return Some(s);
         }
-        if CONTAINS_RESERVIERUNG.is_match(word) {
-            if let Some(s) = checked(replaced("es(a|er)[vw]i[he]?rung", "eservierung")) {
-                return Some(s);
-            }
+        if CONTAINS_RESERVIERUNG.is_match(word)
+            && let Some(s) = checked(replaced("es(a|er)[vw]i[he]?rung", "eservierung"))
+        {
+            return Some(s);
         }
-        if STARTS_WITH_RESCHASCHIER.is_match(word) {
-            if let Some(s) = checked(word.replacen("schaschier", "cherchier", 1)) {
-                return Some(s);
-            }
+        if STARTS_WITH_RESCHASCHIER.is_match(word)
+            && let Some(s) = checked(word.replacen("schaschier", "cherchier", 1))
+        {
+            return Some(s);
         }
-        if ENDS_WITH_LABORANTS.is_match(word) {
-            if let Some(s) = checked(replaced("ts$", "ten")) {
-                return Some(s);
-            }
+        if ENDS_WITH_LABORANTS.is_match(word)
+            && let Some(s) = checked(replaced("ts$", "ten"))
+        {
+            return Some(s);
         }
-        if PROFESSIONELL.is_match(word) {
-            if let Some(s) = checked(replaced("roff?ess?ion([äe])h?l{1,2}", "rofessionell")) {
-                return Some(s);
-            }
+        if PROFESSIONELL.is_match(word)
+            && let Some(s) = checked(replaced("roff?ess?ion([äe])h?l{1,2}", "rofessionell"))
+        {
+            return Some(s);
         }
-        if VERSTANDNIS.is_match(word) {
-            if let Some(s) = checked(replaced("[vV]erstehendnis", "Verständnis")) {
-                return Some(s);
-            }
+        if VERSTANDNIS.is_match(word)
+            && let Some(s) = checked(replaced("[vV]erstehendnis", "Verständnis"))
+        {
+            return Some(s);
         }
-        if word.starts_with("koregier") {
-            if let Some(s) = checked(word.replace("reg", "rrig")) {
-                return Some(s);
-            }
+        if word.starts_with("koregier")
+            && let Some(s) = checked(word.replace("reg", "rrig"))
+        {
+            return Some(s);
         }
-        if STARTS_WITH_DIAGNOSZIER.is_match(word) {
-            if let Some(s) = checked(replaced("gno[sz]ier", "gnostizier")) {
-                return Some(s);
-            }
+        if STARTS_WITH_DIAGNOSZIER.is_match(word)
+            && let Some(s) = checked(replaced("gno[sz]ier", "gnostizier"))
+        {
+            return Some(s);
         }
-        if word.contains("eiss") {
-            if let Some(s) = checked(word.replace("eiss", "eiß")) {
-                return Some(s);
-            }
+        if word.contains("eiss")
+            && let Some(s) = checked(word.replace("eiss", "eiß"))
+        {
+            return Some(s);
         }
-        if word.contains("Akkupressur") {
-            if let Some(s) = checked(word.replace("Akkupressur", "Akupressur")) {
-                return Some(s);
-            }
+        if word.contains("Akkupressur")
+            && let Some(s) = checked(word.replace("Akkupressur", "Akupressur"))
+        {
+            return Some(s);
         }
-        if word.contains("farbend") {
-            if let Some(s) = checked(word.replace("farbend", "farben")) {
-                return Some(s);
-            }
+        if word.contains("farbend")
+            && let Some(s) = checked(word.replace("farbend", "farben"))
+        {
+            return Some(s);
         }
-        if word.contains("uess") {
-            if let Some(s) = checked(word.replace("uess", "üß")) {
-                return Some(s);
-            }
+        if word.contains("uess")
+            && let Some(s) = checked(word.replace("uess", "üß"))
+        {
+            return Some(s);
         }
         if ZB.is_match(word) || STARTS_WITH_ZB.is_match(word) {
             return one("z.\u{202f}B.");
@@ -2113,10 +2113,10 @@ impl GermanSpellingRule {
                 if let Some(s) = checked(replaced("stories$", "storys")) {
                     return Some(s);
                 }
-            } else if word.ends_with("parties") {
-                if let Some(s) = checked(replaced("parties$", "partys")) {
-                    return Some(s);
-                }
+            } else if word.ends_with("parties")
+                && let Some(s) = checked(replaced("parties$", "partys"))
+            {
+                return Some(s);
             }
         }
         for (pattern, exprs) in COMPILED_ADDITIONAL_SUGGESTIONS.iter() {
@@ -2284,26 +2284,24 @@ impl GermanSpellingRule {
 
     /// German `getMessage` for the `ss`/`ß` case; falls back to `spelling`.
     fn message_for(&self, word: &str, first_suggestion: Option<&str>) -> String {
-        if let Some(first) = first_suggestion {
-            if let Some(byte_pos) = word.find("ss") {
-                // Java `indexOf`/`charAt` are UTF-16 units; for German BMP
-                // text that is the char index.
-                let pos = word[..byte_pos].chars().count();
-                let replaced = word.replacen("ss", "ß", 1);
-                if replaced == first && pos >= 2 {
-                    let chars: Vec<char> = word.chars().collect();
-                    if let (Some(&prev), Some(&prev_prev)) =
-                        (chars.get(pos - 1), chars.get(pos - 2))
-                    {
-                        if is_vowel(prev_prev) && is_vowel(prev) {
-                            return format!(
+        if let Some(first) = first_suggestion
+            && let Some(byte_pos) = word.find("ss")
+        {
+            // Java `indexOf`/`charAt` are UTF-16 units; for German BMP
+            // text that is the char index.
+            let pos = word[..byte_pos].chars().count();
+            let replaced = word.replacen("ss", "ß", 1);
+            if replaced == first && pos >= 2 {
+                let chars: Vec<char> = word.chars().collect();
+                if let (Some(&prev), Some(&prev_prev)) = (chars.get(pos - 1), chars.get(pos - 2)) {
+                    if is_vowel(prev_prev) && is_vowel(prev) {
+                        return format!(
                                 "Nach einer Silbe aus zwei Vokalen (hier: {prev_prev}{prev}) schreibt man 'ß' statt 'ss'."
                             );
-                        }
-                        return format!(
+                    }
+                    return format!(
                             "Nach einer lang gesprochenen Silbe (hier: {prev}) schreibt man 'ß' statt 'ss'."
                         );
-                    }
                 }
             }
         }
@@ -2313,10 +2311,10 @@ impl GermanSpellingRule {
     /// `HunspellRule.calcSuggestions` for the German rule.
     fn calc_suggestions(&self, word: &str, clean_word: &str) -> Arc<Vec<Suggestion>> {
         let cache_key = format!("{word}\u{0}{clean_word}");
-        if let Ok(cache) = self.suggestion_cache.lock() {
-            if let Some(hit) = cache.get(&cache_key) {
-                return Arc::clone(hit);
-            }
+        if let Ok(cache) = self.suggestion_cache.lock()
+            && let Some(hit) = cache.get(&cache_key)
+        {
+            return Arc::clone(hit);
         }
         let only = self.get_only_suggestions(clean_word);
         let suggestions: Vec<String> = if !only.is_empty() {
@@ -2445,10 +2443,10 @@ impl GermanSpellingRule {
         from: usize,
         to: usize,
     ) {
-        if let Some(prev) = matches.last() {
-            if prev.range.start == from {
-                matches.pop();
-            }
+        if let Some(prev) = matches.last()
+            && prev.range.start == from
+        {
+            matches.pop();
         }
         let mut m = self.new_rule_match(
             from,
@@ -2517,47 +2515,46 @@ impl GermanSpellingRule {
                     }
                 }
                 // "thanky ou" -> "thank you" / "than kyou" -> "thank you"
-                if idx > 0 {
-                    if let Some(prev_pos) = prev_start_pos {
-                        let prev_word = &words[idx - 1];
-                        if !prev_word.is_empty() {
-                            let prev_chars: Vec<char> = prev_word.chars().collect();
-                            let sugg1a: String =
-                                prev_chars[..prev_chars.len() - 1].iter().collect();
-                            let mut sugg1b: String =
-                                prev_chars[prev_chars.len() - 1..].iter().collect();
-                            sugg1b.push_str(&clean_word);
-                            let sugg1b = cut_off_dot(&sugg1b);
-                            if !self.is_misspelled(&sugg1a)
-                                && !self.is_misspelled(&sugg1b)
-                                && self.accept_suggestion(&format!("{sugg1a} {sugg1b}"))
+                if idx > 0
+                    && let Some(prev_pos) = prev_start_pos
+                {
+                    let prev_word = &words[idx - 1];
+                    if !prev_word.is_empty() {
+                        let prev_chars: Vec<char> = prev_word.chars().collect();
+                        let sugg1a: String = prev_chars[..prev_chars.len() - 1].iter().collect();
+                        let mut sugg1b: String =
+                            prev_chars[prev_chars.len() - 1..].iter().collect();
+                        sugg1b.push_str(&clean_word);
+                        let sugg1b = cut_off_dot(&sugg1b);
+                        if !self.is_misspelled(&sugg1a)
+                            && !self.is_misspelled(&sugg1b)
+                            && self.accept_suggestion(&format!("{sugg1a} {sugg1b}"))
+                        {
+                            self.push_wrong_split_match(
+                                &mut matches,
+                                &sugg1a,
+                                &sugg1b,
+                                byte(prev_pos),
+                                byte(len + clean_word.encode_utf16().count()),
+                            );
+                        }
+                        // Java has no length guard; a single-char word can
+                        // never reach here (single letters are not checked).
+                        let mut chars = clean_word.chars();
+                        if let Some(first) = chars.next() {
+                            let sugg2a = format!("{prev_word}{first}");
+                            let sugg2b = cut_off_dot(chars.as_str());
+                            if !self.is_misspelled(&sugg2a)
+                                && !self.is_misspelled(&sugg2b)
+                                && self.accept_suggestion(&format!("{sugg2a} {sugg2b}"))
                             {
                                 self.push_wrong_split_match(
                                     &mut matches,
-                                    &sugg1a,
-                                    &sugg1b,
+                                    &sugg2a,
+                                    &sugg2b,
                                     byte(prev_pos),
                                     byte(len + clean_word.encode_utf16().count()),
                                 );
-                            }
-                            // Java has no length guard; a single-char word can
-                            // never reach here (single letters are not checked).
-                            let mut chars = clean_word.chars();
-                            if let Some(first) = chars.next() {
-                                let sugg2a = format!("{prev_word}{first}");
-                                let sugg2b = cut_off_dot(chars.as_str());
-                                if !self.is_misspelled(&sugg2a)
-                                    && !self.is_misspelled(&sugg2b)
-                                    && self.accept_suggestion(&format!("{sugg2a} {sugg2b}"))
-                                {
-                                    self.push_wrong_split_match(
-                                        &mut matches,
-                                        &sugg2a,
-                                        &sugg2b,
-                                        byte(prev_pos),
-                                        byte(len + clean_word.encode_utf16().count()),
-                                    );
-                                }
                             }
                         }
                     }

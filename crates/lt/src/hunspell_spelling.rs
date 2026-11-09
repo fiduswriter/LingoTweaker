@@ -186,10 +186,10 @@ impl HunspellSpellingRule {
         if self.config.latin_script && HAS_NO_LETTER.is_match(word) {
             return true;
         }
-        if let Some(stripped) = word.strip_suffix('.') {
-            if !self.ignore.contains(word) {
-                return self.is_ignored_no_case(stripped);
-            }
+        if let Some(stripped) = word.strip_suffix('.')
+            && !self.ignore.contains(word)
+        {
+            return self.is_ignored_no_case(stripped);
         }
         self.is_ignored_no_case(word)
     }

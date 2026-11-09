@@ -165,12 +165,12 @@ impl CompoundTagger {
 
         if !starts_with_digit && dash_idx != first_dash_idx {
             let dash_count = word.matches('-').count();
-            if dash_count >= 2 && dash_idx > first_dash_idx + 1 {
-                if let Some(tokens) =
+            if dash_count >= 2
+                && dash_idx > first_dash_idx + 1
+                && let Some(tokens) =
                     self.do_guess_multi_hyphens(tagger, word, first_dash_idx, dash_idx)
-                {
-                    return Some(tokens);
-                }
+            {
+                return Some(tokens);
             }
             if dash_count == 2 && dash_idx > first_dash_idx + 1 {
                 return self.do_guess_two_hyphens(tagger, word, first_dash_idx, dash_idx);
@@ -238,39 +238,39 @@ impl CompoundTagger {
 
         // стривай-бо, чекай-но, прийшов-таки, такий-от, такий-то, ішов-єм
         let right_lower = right_word.to_lowercase();
-        if let Some(left_tag_regex) = right_parts_with_left_tag(&right_lower) {
-            if !uk_helpers::has_pos_tag_part2(&left_wd, "abbr") {
-                if left_wd.is_empty() {
-                    return None;
-                }
-                let left_at = tagger.tagged_to_at(left_word, &left_wd);
-                if right_lower == "то" && uk_helpers::has_lemma(&left_at, &["хто", "що", "чи"])
-                {
-                    return None;
-                }
-                let mut new_tokens = Vec::new();
-                for at in &left_at {
-                    let pos_tag = at.pos_tag.as_deref().unwrap_or("");
-                    if left_word.eq_ignore_ascii_case("як") && pos_tag.contains("noun") {
-                        continue;
-                    }
-                    if !pos_tag.is_empty()
-                        && ((left_lower == "дуже" && pos_tag.contains("adv"))
-                            || left_tag_regex.is_match(pos_tag).unwrap_or(false))
-                    {
-                        let mut pos_tag = pos_tag.to_string();
-                        if right_word == "єм" {
-                            pos_tag = uk_helpers::add_if_not_contains(&pos_tag, ":arch");
-                        }
-                        new_tokens.push(AnalyzedToken::new(word, at.stem.clone(), Some(pos_tag)));
-                    }
-                }
-                return if new_tokens.is_empty() {
-                    None
-                } else {
-                    Some(new_tokens)
-                };
+        if let Some(left_tag_regex) = right_parts_with_left_tag(&right_lower)
+            && !uk_helpers::has_pos_tag_part2(&left_wd, "abbr")
+        {
+            if left_wd.is_empty() {
+                return None;
             }
+            let left_at = tagger.tagged_to_at(left_word, &left_wd);
+            if right_lower == "то" && uk_helpers::has_lemma(&left_at, &["хто", "що", "чи"])
+            {
+                return None;
+            }
+            let mut new_tokens = Vec::new();
+            for at in &left_at {
+                let pos_tag = at.pos_tag.as_deref().unwrap_or("");
+                if left_word.eq_ignore_ascii_case("як") && pos_tag.contains("noun") {
+                    continue;
+                }
+                if !pos_tag.is_empty()
+                    && ((left_lower == "дуже" && pos_tag.contains("adv"))
+                        || left_tag_regex.is_match(pos_tag).unwrap_or(false))
+                {
+                    let mut pos_tag = pos_tag.to_string();
+                    if right_word == "єм" {
+                        pos_tag = uk_helpers::add_if_not_contains(&pos_tag, ":arch");
+                    }
+                    new_tokens.push(AnalyzedToken::new(word, at.stem.clone(), Some(pos_tag)));
+                }
+            }
+            return if new_tokens.is_empty() {
+                None
+            } else {
+                Some(new_tokens)
+            };
         }
 
         // по-болгарськи, по-болгарському
@@ -318,32 +318,32 @@ impl CompoundTagger {
         let right_wd = tagger.tag_either_case(right_word);
 
         // напівпольської-напіванглійської
-        if word.to_lowercase().starts_with("напів") {
-            if let Ok(Some(caps)) = NAPIV.captures(word) {
-                let g1 = caps.get(1).map(|m| m.as_str()).unwrap_or("");
-                let g2 = caps.get(2).map(|m| m.as_str()).unwrap_or("");
-                let left_napiv = adjust(
-                    &tagger.tag_as_is_and_with_lowercase(g1),
+        if word.to_lowercase().starts_with("напів")
+            && let Ok(Some(caps)) = NAPIV.captures(word)
+        {
+            let g1 = caps.get(1).map(|m| m.as_str()).unwrap_or("");
+            let g2 = caps.get(2).map(|m| m.as_str()).unwrap_or("");
+            let left_napiv = adjust(
+                &tagger.tag_as_is_and_with_lowercase(g1),
+                Some("напів"),
+                None,
+                "",
+            );
+            let right_napiv = if !right_wd.is_empty() {
+                right_wd.clone()
+            } else {
+                adjust(
+                    &tagger.tag_as_is_and_with_lowercase(g2),
                     Some("напів"),
                     None,
                     "",
-                );
-                let right_napiv = if !right_wd.is_empty() {
-                    right_wd.clone()
-                } else {
-                    adjust(
-                        &tagger.tag_as_is_and_with_lowercase(g2),
-                        Some("напів"),
-                        None,
-                        "",
-                    )
-                };
-                if !left_napiv.is_empty() && !right_napiv.is_empty() {
-                    let left_at = tagger.tagged_to_at(g1, &left_napiv);
-                    let right_at = tagger.tagged_to_at(g2, &right_napiv);
-                    if let Some(tag_match) = self.tag_match(word, &left_at, &right_at) {
-                        return Some(tag_match);
-                    }
+                )
+            };
+            if !left_napiv.is_empty() && !right_napiv.is_empty() {
+                let left_at = tagger.tagged_to_at(g1, &left_napiv);
+                let right_at = tagger.tagged_to_at(g2, &right_napiv);
+                if let Some(tag_match) = self.tag_match(word, &left_at, &right_at) {
+                    return Some(tag_match);
                 }
             }
         }
@@ -521,15 +521,14 @@ impl CompoundTagger {
         if left_word.eq_ignore_ascii_case(right_word)
             && !left_at.is_empty()
             && uk_helpers::has_lemma_regex(&left_at, &ALL_VES)
+            && let Some(tag_match) = self.tag_match(word, &left_at, &right_at)
         {
-            if let Some(tag_match) = self.tag_match(word, &left_at, &right_at) {
-                return Some(
-                    tag_match
-                        .into_iter()
-                        .filter(|m| m.stem.as_deref().is_some_and(equal_parts))
-                        .collect(),
-                );
-            }
+            return Some(
+                tag_match
+                    .into_iter()
+                    .filter(|m| m.stem.as_deref().is_some_and(equal_parts))
+                    .collect(),
+            );
         }
 
         if uk_helpers::has_reading_pos_tag_part(&left_at, "pron")
@@ -650,10 +649,9 @@ impl CompoundTagger {
         if no_dash_at.is_empty()
             && !left_wd.is_empty()
             && (left_word.chars().count() > 2 || has_intj)
+            && let Some(tag_match) = self.tag_match(word, &left_at, &right_at)
         {
-            if let Some(tag_match) = self.tag_match(word, &left_at, &right_at) {
-                return Some(tag_match);
-            }
+            return Some(tag_match);
         }
 
         if let Some(m) = self.try_o_with_adj(tagger, word, left_word, &right_at) {
@@ -1182,22 +1180,22 @@ impl CompoundTagger {
         if !is_same_anim_status(left, right) {
             return None;
         }
-        if let Ok(Some(l)) = STD_NOUN_TAG_REGEX.captures(left) {
-            if let Ok(Some(r)) = STD_NOUN_TAG_REGEX.captures(right) {
-                let g1 = l.get(2).map(|m| m.as_str()).unwrap_or("");
-                let g2 = r.get(2).map(|m| m.as_str()).unwrap_or("");
-                if g1 == g2 {
-                    if l.get(1).map(|m| m.as_str()) != r.get(1).map(|m| m.as_str())
-                        && word.chars().count() < 10
-                    {
-                        return None;
-                    }
-                    return Some(if left_nv {
-                        right.to_string()
-                    } else {
-                        left.to_string()
-                    });
+        if let Ok(Some(l)) = STD_NOUN_TAG_REGEX.captures(left)
+            && let Ok(Some(r)) = STD_NOUN_TAG_REGEX.captures(right)
+        {
+            let g1 = l.get(2).map(|m| m.as_str()).unwrap_or("");
+            let g2 = r.get(2).map(|m| m.as_str()).unwrap_or("");
+            if g1 == g2 {
+                if l.get(1).map(|m| m.as_str()) != r.get(1).map(|m| m.as_str())
+                    && word.chars().count() < 10
+                {
+                    return None;
                 }
+                return Some(if left_nv {
+                    right.to_string()
+                } else {
+                    left.to_string()
+                });
             }
         }
         None

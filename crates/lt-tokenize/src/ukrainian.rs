@@ -358,19 +358,19 @@ fn adjust_text_for_tokenizing(text: &str) -> (String, Vec<(String, String)>) {
     let mut text = cleanup(text);
     let mut urls: Vec<(String, String)> = Vec::new();
 
-    if let Some(first) = text.chars().next() {
-        if "\u{2014}\u{2013}-".contains(first) {
-            if p.leading_dash.is_match(&text).unwrap_or(false) {
-                text = p
-                    .leading_dash
-                    .replace(&text, format!("$1{BREAKING_PLACEHOLDER}$2"))
-                    .into_owned();
-            } else if p.leading_dash2.is_match(&text).unwrap_or(false) {
-                text = p
-                    .leading_dash2
-                    .replace(&text, format!("$1{BREAKING_PLACEHOLDER}$2"))
-                    .into_owned();
-            }
+    if let Some(first) = text.chars().next()
+        && "\u{2014}\u{2013}-".contains(first)
+    {
+        if p.leading_dash.is_match(&text).unwrap_or(false) {
+            text = p
+                .leading_dash
+                .replace(&text, format!("$1{BREAKING_PLACEHOLDER}$2"))
+                .into_owned();
+        } else if p.leading_dash2.is_match(&text).unwrap_or(false) {
+            text = p
+                .leading_dash2
+                .replace(&text, format!("$1{BREAKING_PLACEHOLDER}$2"))
+                .into_owned();
         }
     }
 

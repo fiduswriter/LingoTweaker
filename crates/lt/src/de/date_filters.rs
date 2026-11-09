@@ -73,18 +73,19 @@ pub(crate) fn day_name(dow: u32) -> &'static str {
 /// `DateCheckFilter.adjustSuggestion`.
 fn adjust_suggestion(sugg: String) -> String {
     let dot_comma_pos = sugg.find(".,");
-    if let Some(pos) = dot_comma_pos {
-        if pos > 5 && pos < 12 {
-            return sugg.replace(".,", ",");
-        }
+    if let Some(pos) = dot_comma_pos
+        && pos > 5
+        && pos < 12
+    {
+        return sugg.replace(".,", ",");
     }
     let comma_pos = sugg.find(',');
-    if dot_comma_pos.is_none() {
-        if let Some(pos) = comma_pos {
-            if pos > 0 && pos < 5 {
-                return sugg.replacen(',', ".,", 1);
-            }
-        }
+    if dot_comma_pos.is_none()
+        && let Some(pos) = comma_pos
+        && pos > 0
+        && pos < 5
+    {
+        return sugg.replacen(',', ".,", 1);
     }
     sugg
 }

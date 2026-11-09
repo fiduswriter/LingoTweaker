@@ -151,10 +151,10 @@ impl FrenchTagger {
             self.add_from_word_tagger(original_word, &first_upper, out);
         }
         // additional tagging with prefixes removed
-        if out.is_empty() {
-            if let Some(additional) = self.additional_tags(word) {
-                out.extend(additional);
-            }
+        if out.is_empty()
+            && let Some(additional) = self.additional_tags(word)
+        {
+            out.extend(additional);
         }
     }
 

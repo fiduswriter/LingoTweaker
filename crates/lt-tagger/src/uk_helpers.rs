@@ -520,14 +520,12 @@ pub fn has_pos_tag_part_all(readings: &[AnalyzedToken], part: &str) -> bool {
 pub fn get_genders(readings: &[AnalyzedToken], regex: &fancy_regex::Regex) -> String {
     let mut out = String::new();
     for r in readings {
-        if let Some(tag) = r.pos_tag.as_deref() {
-            if full_match(regex, tag) {
-                if let Some(g) = get_gender(tag) {
-                    if !out.contains(&g) {
-                        out.push_str(&g);
-                    }
-                }
-            }
+        if let Some(tag) = r.pos_tag.as_deref()
+            && full_match(regex, tag)
+            && let Some(g) = get_gender(tag)
+            && !out.contains(&g)
+        {
+            out.push_str(&g);
         }
     }
     out
@@ -698,14 +696,12 @@ pub fn has_pos_tag_and_token(
 pub fn get_genders_token(token: &AnalyzedTokenReadings, postag: &fancy_regex::Regex) -> String {
     let mut out = String::new();
     for r in &token.readings {
-        if let Some(tag) = r.pos_tag.as_deref() {
-            if full_match(postag, tag) {
-                if let Some(g) = get_gender(tag) {
-                    if !out.contains(&g) {
-                        out.push_str(&g);
-                    }
-                }
-            }
+        if let Some(tag) = r.pos_tag.as_deref()
+            && full_match(postag, tag)
+            && let Some(g) = get_gender(tag)
+            && !out.contains(&g)
+        {
+            out.push_str(&g);
         }
     }
     out
@@ -1097,10 +1093,11 @@ pub fn token_search(
         if pos_ok && token_ok {
             return i;
         }
-        if let Some(ignore) = pos_tags_to_ignore {
-            if !has_pos_tag_re(curr, ignore) && !QUOTES.is_match(curr.surface()).unwrap_or(false) {
-                break;
-            }
+        if let Some(ignore) = pos_tags_to_ignore
+            && !has_pos_tag_re(curr, ignore)
+            && !QUOTES.is_match(curr.surface()).unwrap_or(false)
+        {
+            break;
         }
         i += step;
     }
@@ -1194,15 +1191,14 @@ pub fn has_masc_fem_lemma(
         return true;
     }
     for at in readings {
-        if let Some(pos_tag) = at.pos_tag.as_deref() {
-            if pos_tag.contains("noun:anim:m:v_naz") {
-                if let Some(lemma) = at.stem.as_deref() {
-                    let lemma = lemma.replace('\u{2018}', "-");
-                    let base = lemma.split('-').next().unwrap_or("");
-                    if masc_fem_set.contains(&lemma) || masc_fem_set.contains(base) {
-                        return true;
-                    }
-                }
+        if let Some(pos_tag) = at.pos_tag.as_deref()
+            && pos_tag.contains("noun:anim:m:v_naz")
+            && let Some(lemma) = at.stem.as_deref()
+        {
+            let lemma = lemma.replace('\u{2018}', "-");
+            let base = lemma.split('-').next().unwrap_or("");
+            if masc_fem_set.contains(&lemma) || masc_fem_set.contains(base) {
+                return true;
             }
         }
     }
@@ -1251,10 +1247,11 @@ pub fn token_search_re(
         if pos_ok && token_ok {
             return i;
         }
-        if let Some(ignore) = pos_tags_to_ignore {
-            if !has_pos_tag_re(curr, ignore) && !QUOTES.is_match(curr.surface()).unwrap_or(false) {
-                break;
-            }
+        if let Some(ignore) = pos_tags_to_ignore
+            && !has_pos_tag_re(curr, ignore)
+            && !QUOTES.is_match(curr.surface()).unwrap_or(false)
+        {
+            break;
         }
         i += step;
     }

@@ -581,10 +581,11 @@ impl SimpleReplaceRule {
         let from_pos = sentence_offset + tokens[start_index].start_pos;
         let to_pos = sentence_offset + tokens[end_index].end_pos();
         // keep only the longest match
-        if let Some(last) = rule_matches.last() {
-            if last.range.start <= from_pos && last.range.end >= to_pos {
-                return;
-            }
+        if let Some(last) = rule_matches.last()
+            && last.range.start <= from_pos
+            && last.range.end >= to_pos
+        {
+            return;
         }
         let first_word_in_sugg_is_camel = replacements
             .iter()
@@ -605,10 +606,10 @@ impl SimpleReplaceRule {
             if (sent_start == start_index && original_str == upper_replacement)
                 || original_str == replacement_check_case
             {
-                if let Some(last) = rule_matches.last() {
-                    if last.range.end > from_pos {
-                        rule_matches.pop();
-                    }
+                if let Some(last) = rule_matches.last()
+                    && last.range.end > from_pos
+                {
+                    rule_matches.pop();
                 }
                 *check_case_covered_upto = end_index;
                 return;
@@ -698,10 +699,11 @@ impl SimpleReplaceRule {
         .with_match_type("Other")
         .with_picky(self.config.picky);
         // remove the previous match if it is contained in this one
-        if let Some(last) = rule_matches.last() {
-            if last.range.start >= from_pos && last.range.end <= to_pos {
-                rule_matches.pop();
-            }
+        if let Some(last) = rule_matches.last()
+            && last.range.start >= from_pos
+            && last.range.end <= to_pos
+        {
+            rule_matches.pop();
         }
         rule_matches.push(m);
     }

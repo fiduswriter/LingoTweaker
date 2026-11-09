@@ -111,19 +111,19 @@ impl RuleFilter for DiacriticsCheckFilter {
         }
 
         let mut replacement: Option<&str> = None;
-        if let Some(readings) = self.words.get(&form) {
-            if readings.iter().any(|(_, tag)| {
+        if let Some(readings) = self.words.get(&form)
+            && readings.iter().any(|(_, tag)| {
                 regex::Regex::new(&format!("^(?:{postag})$"))
                     .map(|re| re.is_match(tag))
                     .unwrap_or(false)
-            }) {
-                if let Some(desired) = desired_gender_number {
-                    if desired.is_match(&readings[0].1) {
-                        replacement = Some(&readings[0].0);
-                    }
-                } else if gendernumber_from.is_none() {
+            })
+        {
+            if let Some(desired) = desired_gender_number {
+                if desired.is_match(&readings[0].1) {
                     replacement = Some(&readings[0].0);
                 }
+            } else if gendernumber_from.is_none() {
+                replacement = Some(&readings[0].0);
             }
         }
         let Some(replacement) = replacement else {

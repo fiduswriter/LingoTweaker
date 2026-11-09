@@ -103,20 +103,20 @@ impl GermanSynthesizer {
     fn base_lookup(&self, lemma: &str, pos_tag: &str) -> Vec<String> {
         let key = format!("{lemma}|{pos_tag}");
         let mut results = self.dict.lookup(&key);
-        if let Some(manual) = &self.manual {
-            if let Some(forms) = manual.lookup(lemma, pos_tag) {
-                results.extend(forms);
-            }
+        if let Some(manual) = &self.manual
+            && let Some(forms) = manual.lookup(lemma, pos_tag)
+        {
+            results.extend(forms);
         }
-        if let Some(removed) = &self.removed {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.removed
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
-        if let Some(removed) = &self.do_not_synthesize {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.do_not_synthesize
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
         results
     }
@@ -202,12 +202,12 @@ impl GermanSynthesizer {
             return Vec::new();
         }
         let mut maybe_hyphen = "";
-        if parts.len() == 1 {
-            if let Some(lemma) = &lemma {
-                parts = lemma.split('-').map(|s| s.to_string()).collect();
-                if parts.len() > 1 {
-                    maybe_hyphen = "-";
-                }
+        if parts.len() == 1
+            && let Some(lemma) = &lemma
+        {
+            parts = lemma.split('-').map(|s| s.to_string()).collect();
+            if parts.len() > 1 {
+                maybe_hyphen = "-";
             }
         }
         let first_part = parts[..parts.len() - 1].join(maybe_hyphen);

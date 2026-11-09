@@ -91,10 +91,11 @@ impl LegacyReplaceRule {
                 // the replacements are added as-is.
                 let mut lemmas: Vec<String> = Vec::new();
                 for reading in &tr.readings {
-                    if let Some(lemma) = &reading.stem {
-                        if self.wrong_words.contains_key(lemma) && !lemmas.contains(lemma) {
-                            lemmas.push(lemma.clone());
-                        }
+                    if let Some(lemma) = &reading.stem
+                        && self.wrong_words.contains_key(lemma)
+                        && !lemmas.contains(lemma)
+                    {
+                        lemmas.push(lemma.clone());
                     }
                 }
                 let mut direct: Vec<String> = Vec::new();

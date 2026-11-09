@@ -597,15 +597,14 @@ async fn check_impl(
     // (`TextChecker.getLevel`); ours accepted anything as "default", silently.
     // The engine implements two of Java's ten levels, and the message names the
     // two that exist here.
-    if let Some(level) = params.level.as_deref() {
-        if !level.eq_ignore_ascii_case("default") && !level.eq_ignore_ascii_case("picky") {
-            return fail(
-                StatusCode::BAD_REQUEST,
-                format!(
-                    "Unknown value '{level}' for parameter 'level'. Valid values: default, picky"
-                ),
-            );
-        }
+    if let Some(level) = params.level.as_deref()
+        && !level.eq_ignore_ascii_case("default")
+        && !level.eq_ignore_ascii_case("picky")
+    {
+        return fail(
+            StatusCode::BAD_REQUEST,
+            format!("Unknown value '{level}' for parameter 'level'. Valid values: default, picky"),
+        );
     }
 
     let auto = language == "auto";
@@ -636,9 +635,10 @@ async fn check_impl(
         // language", detection cannot answer a language this server refuses —
         // its labels are mapped through `Lang::from_long_code` — so this is
         // defence in depth rather than a reachable answer.
-        if utf8_offsets {
-            if let Some(hit) = detected.filter(|hit| !state.is_servable(hit.language.base_code())) {
-                return error_response(
+        if utf8_offsets
+            && let Some(hit) = detected.filter(|hit| !state.is_servable(hit.language.base_code()))
+        {
+            return error_response(
                     StatusCode::NOT_IMPLEMENTED,
                     &format!(
                         "The text was detected as {} ({}) but this LingoTweaker build has no rules for it; pass an explicit 'language' to check it anyway.",
@@ -646,7 +646,6 @@ async fn check_impl(
                         hit.language.base_code()
                     ),
                 );
-            }
         }
         for variant in &preferred_variants {
             if !variant.contains('-') {

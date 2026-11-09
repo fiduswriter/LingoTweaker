@@ -354,46 +354,46 @@ impl RuleFilter for ConvertToGenderAndNumberFilter {
                     .unwrap_or_default()
             };
             // if gender = C, look into the words before and after
-            if desired_gender_str == "C" && pos_word > 1 {
-                if let Some(split2) = split_gender_and_number(reading_with_tag_regex(
+            if desired_gender_str == "C"
+                && pos_word > 1
+                && let Some(split2) = split_gender_and_number(reading_with_tag_regex(
                     tokens[pos_word - 1],
                     &split_gender_number().to_string(),
-                )) {
-                    if split2.gender == "F" || split2.gender == "M" {
-                        desired_gender_str = split2.gender;
-                    }
-                }
+                ))
+                && (split2.gender == "F" || split2.gender == "M")
+            {
+                desired_gender_str = split2.gender;
             }
-            if desired_gender_str == "C" && pos_word + 1 < tokens.len() {
-                if let Some(split2) = split_gender_and_number(reading_with_tag_regex(
+            if desired_gender_str == "C"
+                && pos_word + 1 < tokens.len()
+                && let Some(split2) = split_gender_and_number(reading_with_tag_regex(
                     tokens[pos_word + 1],
                     &split_gender_number().to_string(),
-                )) {
-                    if split2.gender == "F" || split2.gender == "M" {
-                        desired_gender_str = split2.gender;
-                    }
-                }
+                ))
+                && (split2.gender == "F" || split2.gender == "M")
+            {
+                desired_gender_str = split2.gender;
             }
             // if number = N, look into the words before and after
-            if desired_number_str == "N" && pos_word > 1 {
-                if let Some(split2) = split_gender_and_number(reading_with_tag_regex(
+            if desired_number_str == "N"
+                && pos_word > 1
+                && let Some(split2) = split_gender_and_number(reading_with_tag_regex(
                     tokens[pos_word - 1],
                     &split_gender_number().to_string(),
-                )) {
-                    if split2.number == "S" || split2.number == "P" {
-                        desired_number_str = split2.number;
-                    }
-                }
+                ))
+                && (split2.number == "S" || split2.number == "P")
+            {
+                desired_number_str = split2.number;
             }
-            if desired_number_str == "N" && pos_word + 1 < tokens.len() {
-                if let Some(split2) = split_gender_and_number(reading_with_tag_regex(
+            if desired_number_str == "N"
+                && pos_word + 1 < tokens.len()
+                && let Some(split2) = split_gender_and_number(reading_with_tag_regex(
                     tokens[pos_word + 1],
                     &split_gender_number().to_string(),
-                )) {
-                    if split2.number == "S" || split2.number == "P" {
-                        desired_number_str = split2.number;
-                    }
-                }
+                ))
+                && (split2.number == "S" || split2.number == "P")
+            {
+                desired_number_str = split2.number;
             }
             // Prioritize gender and number in the original
             if let Some(split) = &split_postag {

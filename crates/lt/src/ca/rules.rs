@@ -975,25 +975,25 @@ pub fn unpaired_marks(
                     first_token = Some(tokens[i]);
                 }
             }
-            if let Some(first) = first_token {
-                if !has_inv_mark {
-                    matches.push(Match::new(
-                        rule_id,
-                        Option::<String>::None,
-                        format!("Símbol sense parella: Sembla que falta un '{start_symbol}'"),
-                        None::<String>,
-                        TextRange::new(
-                            sentence.offset + first.start_pos,
-                            sentence.offset + first.end_pos(),
-                        ),
-                        vec![lt_core::Suggestion {
-                            value: format!("{start_symbol}{}", first.surface()),
-                            short_description: None,
-                        }],
-                        "MISC",
-                        "Miscel·lània",
-                    ));
-                }
+            if let Some(first) = first_token
+                && !has_inv_mark
+            {
+                matches.push(Match::new(
+                    rule_id,
+                    Option::<String>::None,
+                    format!("Símbol sense parella: Sembla que falta un '{start_symbol}'"),
+                    None::<String>,
+                    TextRange::new(
+                        sentence.offset + first.start_pos,
+                        sentence.offset + first.end_pos(),
+                    ),
+                    vec![lt_core::Suggestion {
+                        value: format!("{start_symbol}{}", first.surface()),
+                        short_description: None,
+                    }],
+                    "MISC",
+                    "Miscel·lània",
+                ));
             }
         }
     }

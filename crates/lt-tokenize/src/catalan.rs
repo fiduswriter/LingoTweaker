@@ -245,13 +245,13 @@ impl<'a> CatalanWordTokenizer<'a> {
         let mut l: Vec<String> = Vec::new();
         for m in tokenizer_pattern().find_iter(&aux_text) {
             let mut s = m.as_str().to_string();
-            if let Some(last) = l.last_mut() {
-                if s.chars().count() == 1 {
-                    let c = s.chars().next().unwrap();
-                    if ('\u{FE00}'..='\u{FE0F}').contains(&c) {
-                        last.push_str(&s);
-                        continue;
-                    }
+            if let Some(last) = l.last_mut()
+                && s.chars().count() == 1
+            {
+                let c = s.chars().next().unwrap();
+                if ('\u{FE00}'..='\u{FE0F}').contains(&c) {
+                    last.push_str(&s);
+                    continue;
                 }
             }
             s = s.replace(APOS_RECTE_SUBST, "'");

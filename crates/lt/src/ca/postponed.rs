@@ -522,36 +522,37 @@ impl RuleFilter for PostponedAdjectiveConcordanceFilter {
         if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cs) {
             suggestions.extend(synth.synthesize(at, "A..CP.", true));
         }
-        if suggestions.is_empty() {
-            if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cp) {
-                suggestions.extend(synth.synthesize(at, "A..CS.", true));
-            }
+        if suggestions.is_empty()
+            && let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cp)
+        {
+            suggestions.extend(synth.synthesize(at, "A..CS.", true));
         }
-        if suggestions.is_empty() && is_plural {
-            if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_p) {
-                suggestions.extend(synth.synthesize(at, "A...P.|V.P..P..|PX..P.*", true));
-            }
+        if suggestions.is_empty()
+            && is_plural
+            && let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_p)
+        {
+            suggestions.extend(synth.synthesize(at, "A...P.|V.P..P..|PX..P.*", true));
         }
-        if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu) {
-            if suggestions.is_empty() {
-                if can_be_ms && !is_plural {
-                    suggestions.extend(synth.synthesize(at, "A..MS.|V.P..SM.|PX.MS.*", true));
-                }
-                if can_be_fs && !is_plural {
-                    suggestions.extend(synth.synthesize(at, "A..FS.|V.P..SF.|PX.FS.*", true));
-                }
-                if can_be_mp {
-                    suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM.|PX.MP.*", true));
-                }
-                if can_be_fp {
-                    suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF.|PX.FP.*", true));
-                }
-                if can_be_ms && (is_plural || can_be_p) {
-                    suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM.|PX.MP.*", true));
-                }
-                if can_be_fs && !can_be_ms && (is_plural || can_be_p) {
-                    suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF.|PX.FP.*", true));
-                }
+        if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu)
+            && suggestions.is_empty()
+        {
+            if can_be_ms && !is_plural {
+                suggestions.extend(synth.synthesize(at, "A..MS.|V.P..SM.|PX.MS.*", true));
+            }
+            if can_be_fs && !is_plural {
+                suggestions.extend(synth.synthesize(at, "A..FS.|V.P..SF.|PX.FS.*", true));
+            }
+            if can_be_mp {
+                suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM.|PX.MP.*", true));
+            }
+            if can_be_fp {
+                suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF.|PX.FP.*", true));
+            }
+            if can_be_ms && (is_plural || can_be_p) {
+                suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM.|PX.MP.*", true));
+            }
+            if can_be_fs && !can_be_ms && (is_plural || can_be_p) {
+                suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF.|PX.FP.*", true));
             }
         }
         // avoid the original token as suggestion

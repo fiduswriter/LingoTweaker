@@ -121,12 +121,12 @@ impl XmlDisambiguator {
     /// the end.
     pub fn load_with_extra(path: &Path, global: Option<&Path>) -> Result<Self> {
         let mut grammar = Grammar::load_file(path)?;
-        if let Some(global) = global {
-            if global.lt_exists() {
-                let g = Grammar::load_file(global)?;
-                grammar.rules.extend(g.rules);
-                grammar.equivalence_defs.extend(g.equivalence_defs);
-            }
+        if let Some(global) = global
+            && global.lt_exists()
+        {
+            let g = Grammar::load_file(global)?;
+            grammar.rules.extend(g.rules);
+            grammar.equivalence_defs.extend(g.equivalence_defs);
         }
         let unify_config = lt_pattern::EquivalenceConfig::from_defs(&grammar.equivalence_defs)
             .map_err(|e| CoreError::Parse(path.display().to_string(), e))?;
@@ -318,14 +318,13 @@ impl XmlDisambiguator {
             // Java `RuleSet.textHinted`: a rule is classified by the first
             // *non-inflected* token hint; inflected hints are ignored, and a
             // rule without any non-inflected hint is always considered.
-            if let Some(hint) = rule.hints.iter().find(|h| !h.inflected) {
-                if hint
+            if let Some(hint) = rule.hints.iter().find(|h| !h.inflected)
+                && hint
                     .values_lower
                     .iter()
                     .all(|v| !token_lower.contains_key(v))
-                {
-                    continue;
-                }
+            {
+                continue;
             }
             // Java `DisambiguationPatternRuleReplacer.replace`: `doMatch`
             // scans the candidate start positions once, in order, and applies
@@ -755,18 +754,18 @@ fn apply_action(
     if action.action == "unify" {
         // LT `executeAction` UNIFY: replace the marker readings with the
         // unified sequence (one reading list per targeted token)
-        if let Some(unified) = unified {
-            if unified.len() == t.count {
-                for (i, readings) in unified.iter().enumerate() {
-                    let Some(vi) = t.from_view.checked_add(i) else {
-                        break;
-                    };
-                    let Some(idx) = at(vi) else { break };
-                    let tr = &mut sentence.tokens[idx];
-                    tr.readings = readings.clone();
-                    restore_sent_end(tr);
-                    sentence.detach_pre_disambig(idx);
-                }
+        if let Some(unified) = unified
+            && unified.len() == t.count
+        {
+            for (i, readings) in unified.iter().enumerate() {
+                let Some(vi) = t.from_view.checked_add(i) else {
+                    break;
+                };
+                let Some(idx) = at(vi) else { break };
+                let tr = &mut sentence.tokens[idx];
+                tr.readings = readings.clone();
+                restore_sent_end(tr);
+                sentence.detach_pre_disambig(idx);
             }
         }
         return;
@@ -774,18 +773,19 @@ fn apply_action(
     // `<disambig><match .../></disambig>` (REPLACE with a match element):
     // keep only the readings selected by the match
     // (`DisambiguationPatternRuleReplacer` line 347).
-    if action.action == "replace" && readings.is_empty() {
-        if let Some(filter) = &action.filter_match {
-            if let Some(idx) = at(t.from_view) {
-                apply_match_filter(&mut sentence.tokens[idx], filter);
-                // the copy constructor keeps SENT_END/PARA_END (e.g.
-                // RP-ETRE_ADJ_AMBIG drops the `N`/SENT_END readings of the
-                // final `grands` but Java restores SENT_END)
-                restore_sent_end(&mut sentence.tokens[idx]);
-                sentence.detach_pre_disambig(idx);
-            }
-            return;
+    if action.action == "replace"
+        && readings.is_empty()
+        && let Some(filter) = &action.filter_match
+    {
+        if let Some(idx) = at(t.from_view) {
+            apply_match_filter(&mut sentence.tokens[idx], filter);
+            // the copy constructor keeps SENT_END/PARA_END (e.g.
+            // RP-ETRE_ADJ_AMBIG drops the `N`/SENT_END readings of the
+            // final `grands` but Java restores SENT_END)
+            restore_sent_end(&mut sentence.tokens[idx]);
+            sentence.detach_pre_disambig(idx);
         }
+        return;
     }
     match action.action.as_str() {
         "remove" => {
@@ -843,43 +843,42 @@ fn apply_action(
                         restore_sent_end(pre);
                     });
                 }
-            } else if let Some(pos) = &action.postag {
-                if let Some(re) = cached_postag_regex(pos) {
-                    if let Some(idx) = at(t.from_view) {
-                        let first = &mut sentence.tokens[idx];
-                        let surface = first
-                            .readings
-                            .first()
-                            .map(|r| r.token.clone())
-                            .unwrap_or_default();
-                        first.readings.retain(|r| {
-                            r.pos_tag
-                                .as_deref()
-                                .map(|tag| !re.is_match(tag).unwrap_or(false))
-                                .unwrap_or(true)
-                        });
-                        if first.readings.is_empty() {
-                            first
-                                .readings
-                                .push(AnalyzedToken::new(surface.clone(), None, None));
-                        }
-                        restore_sent_end(first);
-                        let re = re.clone();
-                        mirror_pre(sentence, idx, |pre| {
-                            pre.readings.retain(|r| {
-                                r.pos_tag
-                                    .as_deref()
-                                    .map(|tag| !re.is_match(tag).unwrap_or(false))
-                                    .unwrap_or(true)
-                            });
-                            if pre.readings.is_empty() {
-                                pre.readings
-                                    .push(AnalyzedToken::new(surface.clone(), None, None));
-                            }
-                            restore_sent_end(pre);
-                        });
-                    }
+            } else if let Some(pos) = &action.postag
+                && let Some(re) = cached_postag_regex(pos)
+                && let Some(idx) = at(t.from_view)
+            {
+                let first = &mut sentence.tokens[idx];
+                let surface = first
+                    .readings
+                    .first()
+                    .map(|r| r.token.clone())
+                    .unwrap_or_default();
+                first.readings.retain(|r| {
+                    r.pos_tag
+                        .as_deref()
+                        .map(|tag| !re.is_match(tag).unwrap_or(false))
+                        .unwrap_or(true)
+                });
+                if first.readings.is_empty() {
+                    first
+                        .readings
+                        .push(AnalyzedToken::new(surface.clone(), None, None));
                 }
+                restore_sent_end(first);
+                let re = re.clone();
+                mirror_pre(sentence, idx, |pre| {
+                    pre.readings.retain(|r| {
+                        r.pos_tag
+                            .as_deref()
+                            .map(|tag| !re.is_match(tag).unwrap_or(false))
+                            .unwrap_or(true)
+                    });
+                    if pre.readings.is_empty() {
+                        pre.readings
+                            .push(AnalyzedToken::new(surface.clone(), None, None));
+                    }
+                    restore_sent_end(pre);
+                });
             }
         }
         "add" if readings.len() == t.count => {
@@ -948,27 +947,26 @@ fn apply_action(
                 }
                 return;
             }
-            if let Some(pos) = &action.postag {
-                if let Some(re) = cached_postag_regex(pos) {
-                    if let Some(idx) = at(t.from_view) {
-                        let first = &mut sentence.tokens[idx];
-                        let any_match = first.readings.iter().any(|r| {
-                            r.pos_tag
-                                .as_deref()
-                                .map(|tag| re.is_match(tag).unwrap_or(false))
-                                .unwrap_or(false)
-                        });
-                        if any_match {
-                            first.readings.retain(|r| {
-                                r.pos_tag
-                                    .as_deref()
-                                    .map(|tag| re.is_match(tag).unwrap_or(false))
-                                    .unwrap_or(true)
-                            });
-                            restore_sent_end(first);
-                            sentence.detach_pre_disambig(idx);
-                        }
-                    }
+            if let Some(pos) = &action.postag
+                && let Some(re) = cached_postag_regex(pos)
+                && let Some(idx) = at(t.from_view)
+            {
+                let first = &mut sentence.tokens[idx];
+                let any_match = first.readings.iter().any(|r| {
+                    r.pos_tag
+                        .as_deref()
+                        .map(|tag| re.is_match(tag).unwrap_or(false))
+                        .unwrap_or(false)
+                });
+                if any_match {
+                    first.readings.retain(|r| {
+                        r.pos_tag
+                            .as_deref()
+                            .map(|tag| re.is_match(tag).unwrap_or(false))
+                            .unwrap_or(true)
+                    });
+                    restore_sent_end(first);
+                    sentence.detach_pre_disambig(idx);
                 }
             }
         }
@@ -1136,10 +1134,10 @@ fn apply_match_filter(tr: &mut AnalyzedTokenReadings, filter: &DisambigMatchFilt
         .map(|r| r.token.clone())
         .unwrap_or_default();
     let mut token = surface;
-    if let (Some(pattern), Some(replace)) = (&filter.regexp_match, &filter.regexp_replace) {
-        if let Some(re) = cached_plain_regex(pattern) {
-            token = re.replace_all(&token, replace.as_str()).into_owned();
-        }
+    if let (Some(pattern), Some(replace)) = (&filter.regexp_match, &filter.regexp_replace)
+        && let Some(re) = cached_plain_regex(pattern)
+    {
+        token = re.replace_all(&token, replace.as_str()).into_owned();
     }
     let postag_re = filter
         .postag

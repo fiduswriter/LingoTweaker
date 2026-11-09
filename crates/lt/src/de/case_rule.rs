@@ -1017,18 +1017,17 @@ impl CaseRule {
                     tokens[pos - 1],
                     &["SUB", "EIG", "VER:AUX:3:", "ADV:TMP", "ABK"],
                 ))
+            && let Some(lr) = lowercase_readings
         {
-            if let Some(lr) = lowercase_readings {
-                // find error in: "Der Brief wird morgen Übergeben." / "Die Ausgaben haben eine Mrd. Euro Überschritten."
-                is_potential_error |= lr.has_pos_tag("PA2:PRD:GRU:VER")
-                    && !tokens[pos - 1].has_pos_tag_starting_with("VER:AUX:3")
-                    && !lr.has_pos_tag("VER:3:PLU:PRT:NON");
-                // find error in: "Er lässt das Arktisbohrverbot Überprüfen." / "Sie bat ihn, es zu Überprüfen." / "Das Geld wird Überwiesen."
-                is_potential_error |= (pos >= tokens.len() - 2 || tokens[pos + 1].surface() == ",")
-                    && (tokens[pos - 1].surface() == "zu" || is_preceded_by_modal_or_auxiliary)
-                    && tokens[pos].surface().starts_with("Über")
-                    && partial_tag_any(lr, &["VER:INF:", "PA2:PRD:GRU:VER"]);
-            }
+            // find error in: "Der Brief wird morgen Übergeben." / "Die Ausgaben haben eine Mrd. Euro Überschritten."
+            is_potential_error |= lr.has_pos_tag("PA2:PRD:GRU:VER")
+                && !tokens[pos - 1].has_pos_tag_starting_with("VER:AUX:3")
+                && !lr.has_pos_tag("VER:3:PLU:PRT:NON");
+            // find error in: "Er lässt das Arktisbohrverbot Überprüfen." / "Sie bat ihn, es zu Überprüfen." / "Das Geld wird Überwiesen."
+            is_potential_error |= (pos >= tokens.len() - 2 || tokens[pos + 1].surface() == ",")
+                && (tokens[pos - 1].surface() == "zu" || is_preceded_by_modal_or_auxiliary)
+                && tokens[pos].surface().starts_with("Über")
+                && partial_tag_any(lr, &["VER:INF:", "PA2:PRD:GRU:VER"]);
         }
         is_potential_error
     }
@@ -1046,10 +1045,11 @@ impl CaseRule {
         let word = readings.surface().replace('\u{00AD}', "");
         if let Some(all) = self.lookup(&word) {
             for reading in &all.readings {
-                if let Some(tag) = reading.pos_tag.as_deref() {
-                    if tag.contains("SUB:") && !tag.contains(":ADJ") {
-                        return true;
-                    }
+                if let Some(tag) = reading.pos_tag.as_deref()
+                    && tag.contains("SUB:")
+                    && !tag.contains(":ADJ")
+                {
+                    return true;
                 }
             }
         }
@@ -1292,25 +1292,23 @@ impl CaseRule {
                     None
                 };
             // Another check to avoid false alarms for "eine Gruppe Aufständischer starb"
-            if !is_preceded_by_verb && lowercase_readings.is_some() {
-                if let Some(prev_token) = prev_token {
-                    if util::has_partial_pos_tag(prev_token, "SUB:")
-                        && lowercase_readings.is_some_and(|r| {
-                            r.has_pos_tag_matching(&util::anchored(
-                                "(ADJ|PA2):GEN:PLU:MAS:GRU:SOL.*",
-                            ))
-                        })
-                    {
-                        return next_readings
-                            .is_some_and(|t| !util::has_partial_pos_tag(t, "SUB:"));
-                    } else if next_readings.is_some_and(|t| {
-                        t.readings.len() == 1
-                            && prev_token.has_pos_tag_starting_with("PRO:PER:NOM:")
-                            && t.has_pos_tag("ADJ:PRD:GRU")
-                    }) {
-                        // avoid false alarm "Weil er Unmündige sexuell missbraucht haben soll,..."
-                        return true;
-                    }
+            if !is_preceded_by_verb
+                && lowercase_readings.is_some()
+                && let Some(prev_token) = prev_token
+            {
+                if util::has_partial_pos_tag(prev_token, "SUB:")
+                    && lowercase_readings.is_some_and(|r| {
+                        r.has_pos_tag_matching(&util::anchored("(ADJ|PA2):GEN:PLU:MAS:GRU:SOL.*"))
+                    })
+                {
+                    return next_readings.is_some_and(|t| !util::has_partial_pos_tag(t, "SUB:"));
+                } else if next_readings.is_some_and(|t| {
+                    t.readings.len() == 1
+                        && prev_token.has_pos_tag_starting_with("PRO:PER:NOM:")
+                        && t.has_pos_tag("ADJ:PRD:GRU")
+                }) {
+                    // avoid false alarm "Weil er Unmündige sexuell missbraucht haben soll,..."
+                    return true;
                 }
             }
             // Another check to avoid false alarms for "ein politischer Revolutionär"

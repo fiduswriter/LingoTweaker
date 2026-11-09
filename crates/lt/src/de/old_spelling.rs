@@ -178,13 +178,13 @@ impl OldSpellingRule {
         let suggestions: Vec<String> = value.split('|').map(|s| s.to_string()).collect();
         let covered = &text[begin..end];
         let mut message = MESSAGE.to_string();
-        if let Some(first) = suggestions.first() {
-            if first.replacen("ss", "ß", 1) == covered {
-                if self.austrian && covered.to_lowercase().contains("geschoß") {
-                    return false;
-                }
-                message.push_str(SUFFIX_MESSAGE);
+        if let Some(first) = suggestions.first()
+            && first.replacen("ss", "ß", 1) == covered
+        {
+            if self.austrian && covered.to_lowercase().contains("geschoß") {
+                return false;
             }
+            message.push_str(SUFFIX_MESSAGE);
         }
         matches.push(
             Match::new(
@@ -285,21 +285,21 @@ fn get_coherency_map(
                 format!("Old and new spelling are the same: {line}"),
             ));
         }
-        if let Some(lookup) = seen.get(new_spelling) {
-            if lookup == old_spelling {
-                return Err(lt_core::CoreError::Parse(
-                    path.display().to_string(),
-                    format!("Contradictory entry: {line}"),
-                ));
-            }
+        if let Some(lookup) = seen.get(new_spelling)
+            && lookup == old_spelling
+        {
+            return Err(lt_core::CoreError::Parse(
+                path.display().to_string(),
+                format!("Contradictory entry: {line}"),
+            ));
         }
-        if let Some(existing) = seen.get(old_spelling) {
-            if existing != new_spelling {
-                return Err(lt_core::CoreError::Parse(
-                    path.display().to_string(),
-                    format!("Duplicate key: {old_spelling}, {existing} vs. {new_spelling}"),
-                ));
-            }
+        if let Some(existing) = seen.get(old_spelling)
+            && existing != new_spelling
+        {
+            return Err(lt_core::CoreError::Parse(
+                path.display().to_string(),
+                format!("Duplicate key: {old_spelling}, {existing} vs. {new_spelling}"),
+            ));
         }
         let (key, value) = if sent_start_mode
             && starts_with_lowercase(old_spelling)

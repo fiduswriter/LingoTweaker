@@ -26,10 +26,10 @@ fn de_engine(enabled: &[&str]) -> Option<Arc<Engine>> {
     static CACHE: OnceLock<Cache> = OnceLock::new();
     let key = enabled.join(",");
     let mut guard = CACHE.get_or_init(|| Mutex::new(None)).lock().unwrap();
-    if let Some((cached_key, engine)) = guard.as_ref() {
-        if *cached_key == key {
-            return Some(Arc::clone(engine));
-        }
+    if let Some((cached_key, engine)) = guard.as_ref()
+        && *cached_key == key
+    {
+        return Some(Arc::clone(engine));
     }
     // release the previous engine before allocating the next one
     *guard = None;

@@ -193,63 +193,61 @@ impl VerbAgreementRule {
             if !tokens[pos_ver2_sin as usize].is_immunized {
                 rule_matches.push(self.rule_match_wrong_verb(tokens[pos_ver2_sin as usize], whole));
             }
-        } else if let Some(pos_du) = non_negative(pos_du) {
-            if !is_near(pos_possible_ver2_sin, pos_du)
-                && (!is_quotation_mark(tokens[pos_du - 1])
-                    || pos_du < 3
-                    || (pos_du > 1 && tokens[pos_du - 2].surface() == ":"))
+        } else if let Some(pos_du) = non_negative(pos_du)
+            && !is_near(pos_possible_ver2_sin, pos_du)
+            && (!is_quotation_mark(tokens[pos_du - 1])
+                || pos_du < 3
+                || (pos_du > 1 && tokens[pos_du - 2].surface() == ":"))
+        {
+            let plus1 = usize::from(pos_du + 1 != tokens.len());
+            let check = verb_does_match_person_and_number(
+                tokens[pos_du - 1],
+                tokens[pos_du + plus1],
+                "2",
+                "SIN",
+            );
+            if !check.0
+                && !tokens[pos_du + plus1].has_pos_tag_starting_with("VER:1:SIN:KJ2")
+                && (!tokens[pos_du + plus1].has_pos_tag_starting_with("ADJ:")
+                    || tokens[pos_du + plus1].has_pos_tag("ADJ:PRD:GRU"))
+                && !tokens[pos_du - 1].has_pos_tag_starting_with("VER:1:SIN:KJ2")
+                && !next_but_one_is_modal(&tokens, pos_du)
+                && !tokens[pos_du].is_immunized
             {
-                let plus1 = usize::from(pos_du + 1 != tokens.len());
-                let check = verb_does_match_person_and_number(
-                    tokens[pos_du - 1],
-                    tokens[pos_du + plus1],
-                    "2",
-                    "SIN",
-                );
-                if !check.0
-                    && !tokens[pos_du + plus1].has_pos_tag_starting_with("VER:1:SIN:KJ2")
-                    && (!tokens[pos_du + plus1].has_pos_tag_starting_with("ADJ:")
-                        || tokens[pos_du + plus1].has_pos_tag("ADJ:PRD:GRU"))
-                    && !tokens[pos_du - 1].has_pos_tag_starting_with("VER:1:SIN:KJ2")
-                    && !next_but_one_is_modal(&tokens, pos_du)
-                    && !tokens[pos_du].is_immunized
-                {
-                    rule_matches.push(self.rule_match_wrong_verb_subject(
-                        tokens[pos_du],
-                        check.1.expect("finite verb when no match"),
-                        "2:SIN",
-                        whole,
-                    ));
-                }
+                rule_matches.push(self.rule_match_wrong_verb_subject(
+                    tokens[pos_du],
+                    check.1.expect("finite verb when no match"),
+                    "2:SIN",
+                    whole,
+                ));
             }
         }
 
-        if let Some(pos_er) = non_negative(pos_er) {
-            if !is_near(pos_possible_ver3_sin, pos_er)
-                && (!is_quotation_mark(tokens[pos_er - 1])
-                    || pos_er < 3
-                    || (pos_er > 1 && tokens[pos_er - 2].surface() == ":"))
+        if let Some(pos_er) = non_negative(pos_er)
+            && !is_near(pos_possible_ver3_sin, pos_er)
+            && (!is_quotation_mark(tokens[pos_er - 1])
+                || pos_er < 3
+                || (pos_er > 1 && tokens[pos_er - 2].surface() == ":"))
+        {
+            let plus1 = usize::from(pos_er + 1 != tokens.len());
+            let check = verb_does_match_person_and_number(
+                tokens[pos_er - 1],
+                tokens[pos_er + plus1],
+                "3",
+                "SIN",
+            );
+            if !check.0
+                && !next_but_one_is_modal(&tokens, pos_er)
+                && check.1.map(|v| v.surface()) != Some("äußerst")
+                && check.1.map(|v| v.surface()) != Some("regen")
+                && !tokens[pos_er].is_immunized
             {
-                let plus1 = usize::from(pos_er + 1 != tokens.len());
-                let check = verb_does_match_person_and_number(
-                    tokens[pos_er - 1],
-                    tokens[pos_er + plus1],
-                    "3",
-                    "SIN",
-                );
-                if !check.0
-                    && !next_but_one_is_modal(&tokens, pos_er)
-                    && check.1.map(|v| v.surface()) != Some("äußerst")
-                    && check.1.map(|v| v.surface()) != Some("regen")
-                    && !tokens[pos_er].is_immunized
-                {
-                    rule_matches.push(self.rule_match_wrong_verb_subject(
-                        tokens[pos_er],
-                        check.1.expect("finite verb when no match"),
-                        "3:SIN",
-                        whole,
-                    ));
-                }
+                rule_matches.push(self.rule_match_wrong_verb_subject(
+                    tokens[pos_er],
+                    check.1.expect("finite verb when no match"),
+                    "3:SIN",
+                    whole,
+                ));
             }
         }
 
@@ -260,27 +258,28 @@ impl VerbAgreementRule {
             if !tokens[pos_ver1_plu as usize].is_immunized {
                 rule_matches.push(self.rule_match_wrong_verb(tokens[pos_ver1_plu as usize], whole));
             }
-        } else if let Some(pos_wir) = non_negative(pos_wir) {
-            if !is_near(pos_possible_ver1_plu, pos_wir) && !is_quotation_mark(tokens[pos_wir - 1]) {
-                let plus1 = usize::from(pos_wir + 1 != tokens.len());
-                let check = verb_does_match_person_and_number(
-                    tokens[pos_wir - 1],
-                    tokens[pos_wir + plus1],
-                    "1",
-                    "PLU",
-                );
-                if !check.0
-                    && !next_but_one_is_modal(&tokens, pos_wir)
-                    && !tokens[pos_wir].is_immunized
-                    && check.1.map(|v| v.surface()) != Some("äußerst")
-                {
-                    rule_matches.push(self.rule_match_wrong_verb_subject(
-                        tokens[pos_wir],
-                        check.1.expect("finite verb when no match"),
-                        "1:PLU",
-                        whole,
-                    ));
-                }
+        } else if let Some(pos_wir) = non_negative(pos_wir)
+            && !is_near(pos_possible_ver1_plu, pos_wir)
+            && !is_quotation_mark(tokens[pos_wir - 1])
+        {
+            let plus1 = usize::from(pos_wir + 1 != tokens.len());
+            let check = verb_does_match_person_and_number(
+                tokens[pos_wir - 1],
+                tokens[pos_wir + plus1],
+                "1",
+                "PLU",
+            );
+            if !check.0
+                && !next_but_one_is_modal(&tokens, pos_wir)
+                && !tokens[pos_wir].is_immunized
+                && check.1.map(|v| v.surface()) != Some("äußerst")
+            {
+                rule_matches.push(self.rule_match_wrong_verb_subject(
+                    tokens[pos_wir],
+                    check.1.expect("finite verb when no match"),
+                    "1:PLU",
+                    whole,
+                ));
             }
         }
 

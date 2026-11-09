@@ -529,14 +529,14 @@ fn pronoun_tags(
             }
             break;
         }
-        if let Some(pos_tag) = pronoun_token.pos_tag.as_deref() {
-            if pos_tag.starts_with("PP") {
-                tags.push(if convert_to_accusative {
-                    convert_pronoun_to_accusative(pos_tag)
-                } else {
-                    pos_tag.to_string()
-                });
-            }
+        if let Some(pos_tag) = pronoun_token.pos_tag.as_deref()
+            && pos_tag.starts_with("PP")
+        {
+            tags.push(if convert_to_accusative {
+                convert_pronoun_to_accusative(pos_tag)
+            } else {
+                pos_tag.to_string()
+            });
         }
     }
     tags
@@ -843,19 +843,16 @@ impl RuleFilter for PortugueseSuppressMisspelledSuggestionsFilter {
                 };
                 if let Some(re) =
                     suppress_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
+                    && atr.has_pos_tag_matching(&re)
                 {
-                    if atr.has_pos_tag_matching(&re) {
-                        add = false;
-                    }
+                    add = false;
                 }
-                if add {
-                    if let Some(re) =
+                if add
+                    && let Some(re) =
                         filter_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                    {
-                        if !atr.has_pos_tag_matching(&re) {
-                            add = false;
-                        }
-                    }
+                    && !atr.has_pos_tag_matching(&re)
+                {
+                    add = false;
                 }
             }
             if add {

@@ -258,10 +258,10 @@ impl SpanishSimpleReplaceVerbsRule {
                     if self.wrong_words.contains_key(&candidate) {
                         let word = format!("am{desinence}");
                         let tagged = self.tagger.tag(std::slice::from_ref(&word));
-                        if let Some(first) = tagged.into_iter().next() {
-                            if first.readings.first().is_some_and(|r| r.pos_tag.is_some()) {
-                                analyzed = Some(first.readings);
-                            }
+                        if let Some(first) = tagged.into_iter().next()
+                            && first.readings.first().is_some_and(|r| r.pos_tag.is_some())
+                        {
+                            analyzed = Some(first.readings);
                         }
                     }
                     infinitive = Some(candidate);

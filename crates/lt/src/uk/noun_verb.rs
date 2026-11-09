@@ -559,13 +559,13 @@ fn is_exception(
             .limit(8)
             .target(vec![Condition::postag("verb.*")])
             .m_after(tokens, verb_pos + 1);
-        if let Some(next) = next {
-            if !disjoint_inf(
+        if let Some(next) = next
+            && !disjoint_inf(
                 &verb_inflection::get_verb_inflections(&tokens[next].readings),
                 &verb_inflection::get_noun_inflections_v(&noun_at.readings),
-            ) {
-                return true;
-            }
+            )
+        {
+            return true;
         }
     }
     // — це були невільники

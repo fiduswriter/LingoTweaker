@@ -42,15 +42,15 @@ impl VerbInflection {
 
 impl PartialEq for VerbInflection {
     fn eq(&self, other: &Self) -> bool {
-        if let (Some(a), Some(b)) = (&self.person, &other.person) {
-            if a != b {
-                return false;
-            }
+        if let (Some(a), Some(b)) = (&self.person, &other.person)
+            && a != b
+        {
+            return false;
         }
-        if let (Some(a), Some(b)) = (&self.gender, &other.gender) {
-            if a != b {
-                return false;
-            }
+        if let (Some(a), Some(b)) = (&self.gender, &other.gender)
+            && a != b
+        {
+            return false;
         }
         self.plural == other.plural
     }

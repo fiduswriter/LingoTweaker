@@ -107,33 +107,33 @@ fn adjust_catalan_match(
     let error_str: &str = m.original_error_str.as_deref().unwrap_or("");
 
     // Avoid two white spaces after removing a word
-    if m.suggestions.len() == 1 && m.suggestions[0].value.is_empty() {
-        if let Some(sentence) = sentences
+    if m.suggestions.len() == 1
+        && m.suggestions[0].value.is_empty()
+        && let Some(sentence) = sentences
             .iter()
             .find(|s| m.range.start >= s.range.start && m.range.start < s.range.end)
+    {
+        let sentence_text = &sentence.text;
+        let from_sent = (m.range.start - sentence.range.start) as isize;
+        let to_sent = (m.range.end - sentence.range.start) as isize;
+        let bytes = sentence_text.as_bytes();
+        if from_sent >= 0
+            && to_sent >= 0
+            && (to_sent as usize) < bytes.len()
+            && (from_sent == 0 || bytes[(from_sent - 1) as usize] == b' ')
+            && bytes[to_sent as usize] == b' '
         {
-            let sentence_text = &sentence.text;
-            let from_sent = (m.range.start - sentence.range.start) as isize;
-            let to_sent = (m.range.end - sentence.range.start) as isize;
-            let bytes = sentence_text.as_bytes();
-            if from_sent >= 0
-                && to_sent >= 0
-                && (to_sent as usize) < bytes.len()
-                && (from_sent == 0 || bytes[(from_sent - 1) as usize] == b' ')
-                && bytes[to_sent as usize] == b' '
-            {
-                let mut new_match = m.clone();
-                new_match.range = lt_core::TextRange::new(m.range.start, m.range.end + 1);
-                new_match.suggestions = vec![Suggestion {
-                    value: String::new(),
-                    short_description: None,
-                }];
-                // Java builds this match with the plain `RuleMatch(rule,
-                // sentence, …)` constructor, which resets the match type to
-                // `Other` (the rule-level `Hint` is lost).
-                new_match.match_type = "Other".to_string();
-                return new_match;
-            }
+            let mut new_match = m.clone();
+            new_match.range = lt_core::TextRange::new(m.range.start, m.range.end + 1);
+            new_match.suggestions = vec![Suggestion {
+                value: String::new(),
+                short_description: None,
+            }];
+            // Java builds this match with the plain `RuleMatch(rule,
+            // sentence, …)` constructor, which resets the match type to
+            // `Other` (the rule-level `Hint` is lost).
+            new_match.match_type = "Other".to_string();
+            return new_match;
         }
     }
 
@@ -255,39 +255,39 @@ fn trim_match_ends(
     while changed {
         changed = false;
         // Try trimming from the end
-        if let Some(last_space_idx) = error_str.rfind(' ') {
-            if last_space_idx > 0 {
-                let last_token = &error_str[last_space_idx + 1..];
-                let end_suffix = format!(" {last_token}");
-                let all_end_with = replacements.iter().all(|r| r.ends_with(&end_suffix));
-                if all_end_with {
-                    let error_trim_len = error_str.len() - last_space_idx;
-                    replacements = replacements
-                        .iter()
-                        .map(|r| r[..r.len() - end_suffix.len()].to_string())
-                        .collect();
-                    to_pos -= error_trim_len;
-                    error_str = error_str[..last_space_idx].to_string();
-                    changed = true;
-                }
+        if let Some(last_space_idx) = error_str.rfind(' ')
+            && last_space_idx > 0
+        {
+            let last_token = &error_str[last_space_idx + 1..];
+            let end_suffix = format!(" {last_token}");
+            let all_end_with = replacements.iter().all(|r| r.ends_with(&end_suffix));
+            if all_end_with {
+                let error_trim_len = error_str.len() - last_space_idx;
+                replacements = replacements
+                    .iter()
+                    .map(|r| r[..r.len() - end_suffix.len()].to_string())
+                    .collect();
+                to_pos -= error_trim_len;
+                error_str = error_str[..last_space_idx].to_string();
+                changed = true;
             }
         }
         // Try trimming from the beginning
-        if let Some(first_space_idx) = error_str.find(' ') {
-            if first_space_idx > 0 {
-                let first_token = &error_str[..first_space_idx];
-                let start_prefix = format!("{first_token} ");
-                let all_start_with = replacements.iter().all(|r| r.starts_with(&start_prefix));
-                if all_start_with {
-                    let error_trim_len = first_space_idx + 1;
-                    replacements = replacements
-                        .iter()
-                        .map(|r| r[start_prefix.len()..].to_string())
-                        .collect();
-                    from_pos += error_trim_len;
-                    error_str = error_str[error_trim_len..].to_string();
-                    changed = true;
-                }
+        if let Some(first_space_idx) = error_str.find(' ')
+            && first_space_idx > 0
+        {
+            let first_token = &error_str[..first_space_idx];
+            let start_prefix = format!("{first_token} ");
+            let all_start_with = replacements.iter().all(|r| r.starts_with(&start_prefix));
+            if all_start_with {
+                let error_trim_len = first_space_idx + 1;
+                replacements = replacements
+                    .iter()
+                    .map(|r| r[start_prefix.len()..].to_string())
+                    .collect();
+                from_pos += error_trim_len;
+                error_str = error_str[error_trim_len..].to_string();
+                changed = true;
             }
         }
     }
@@ -320,12 +320,13 @@ pub fn catalan_filter_rule_matches(
         // remove rules IGNORE_PROPER_NOUNS and MORFOLOGIK_RULE_CA_ES if they
         // are in the same position
         if m.rule_id == "IGNORE_PROPER_NOUNS" {
-            if let Some(prev) = previous {
-                if prev.rule_id == "MORFOLOGIK_RULE_CA_ES" && m.range.start == prev.range.start {
-                    results.pop();
-                    ignore_match_in_pos = None;
-                    continue;
-                }
+            if let Some(prev) = previous
+                && prev.rule_id == "MORFOLOGIK_RULE_CA_ES"
+                && m.range.start == prev.range.start
+            {
+                results.pop();
+                ignore_match_in_pos = None;
+                continue;
             }
             ignore_match_in_pos = Some(m.range.start);
             continue;

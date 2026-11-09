@@ -862,12 +862,11 @@ impl ArabicTagger {
             let matches = (ArabicTagManager::is_verb(postag) && kind == "verb")
                 || (ArabicTagManager::is_adj(postag) && kind == "adj")
                 || (ArabicTagManager::is_masdar(postag) && kind == "masdar");
-            if matches {
-                if let Some(lemma) = &tok.stem {
-                    if !lemmas.contains(lemma) {
-                        lemmas.push(lemma.clone());
-                    }
-                }
+            if matches
+                && let Some(lemma) = &tok.stem
+                && !lemmas.contains(lemma)
+            {
+                lemmas.push(lemma.clone());
             }
         }
         lemmas

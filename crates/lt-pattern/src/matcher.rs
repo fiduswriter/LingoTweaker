@@ -224,10 +224,10 @@ fn compile_regex_fast(
     anchored: bool,
 ) -> Result<std::sync::Arc<TextRegex>, String> {
     let key = (pattern.to_string(), case_sensitive, anchored);
-    if let Ok(cache) = regex_cache().lock() {
-        if let Some(found) = cache.get(&key) {
-            return Ok(std::sync::Arc::clone(found));
-        }
+    if let Ok(cache) = regex_cache().lock()
+        && let Some(found) = cache.get(&key)
+    {
+        return Ok(std::sync::Arc::clone(found));
     }
     let compiled = std::sync::Arc::new(compile_regex_uncached(pattern, case_sensitive, anchored)?);
     if let Ok(mut cache) = regex_cache().lock() {
@@ -376,27 +376,25 @@ fn normalize_java_surrogate_escapes(pattern: &str) -> String {
                 i += 2;
                 continue;
             }
-            if bytes.get(i + 1) == Some(&b'u') && i + 6 <= pattern.len() {
-                if let Some(value) = hex4(&bytes[i + 2..i + 6]) {
-                    if (0xD800..=0xDBFF).contains(&value)
-                        && bytes.get(i + 6) == Some(&b'\\')
-                        && bytes.get(i + 7) == Some(&b'u')
-                        && i + 12 <= pattern.len()
-                    {
-                        if let Some(low) = hex4(&bytes[i + 8..i + 12]) {
-                            if (0xDC00..=0xDFFF).contains(&low) {
-                                let code_point =
-                                    0x10000 + ((value - 0xD800) << 10) + (low - 0xDC00);
-                                out.push_str(&format!("\\u{{{code_point:X}}}"));
-                                i += 12;
-                                continue;
-                            }
-                        }
-                    }
-                    out.push_str(&pattern[i..i + 6]);
-                    i += 6;
+            if bytes.get(i + 1) == Some(&b'u')
+                && i + 6 <= pattern.len()
+                && let Some(value) = hex4(&bytes[i + 2..i + 6])
+            {
+                if (0xD800..=0xDBFF).contains(&value)
+                    && bytes.get(i + 6) == Some(&b'\\')
+                    && bytes.get(i + 7) == Some(&b'u')
+                    && i + 12 <= pattern.len()
+                    && let Some(low) = hex4(&bytes[i + 8..i + 12])
+                    && (0xDC00..=0xDFFF).contains(&low)
+                {
+                    let code_point = 0x10000 + ((value - 0xD800) << 10) + (low - 0xDC00);
+                    out.push_str(&format!("\\u{{{code_point:X}}}"));
+                    i += 12;
                     continue;
                 }
+                out.push_str(&pattern[i..i + 6]);
+                i += 6;
+                continue;
             }
         }
         let ch = pattern[i..].chars().next().unwrap();
@@ -1494,26 +1492,26 @@ pub fn expand_message_matches<T: Deref<Target = AnalyzedTokenReadings>>(
         if !new_way {
             // Java `!newWay` fallback (no usable `<match>` element): replace
             // the remaining `\N` with the referenced token's surface.
-            if let Some(idx) = fallback_placeholder_token(n, positions) {
-                if let Some(t) = tokens.get(idx) {
-                    let surface = t.surface().to_string();
-                    let needle = format!("\\{n}");
-                    // Java's `lastIndexOf(...) + length` can land mid-character
-                    // in UTF-8; clamp to the previous char boundary.
-                    let new_processed = message
-                        .rfind(&needle)
-                        .map(|p| p + surface.len())
-                        .unwrap_or(processed)
-                        .min(message.len());
-                    let new_processed = (0..=new_processed)
-                        .rev()
-                        .find(|&k| message.is_char_boundary(k))
-                        .unwrap_or(processed);
-                    let head = message[..processed].to_string();
-                    let tail = message[processed..].replace(&needle, &surface);
-                    message = head + &tail;
-                    processed = new_processed.min(message.len());
-                }
+            if let Some(idx) = fallback_placeholder_token(n, positions)
+                && let Some(t) = tokens.get(idx)
+            {
+                let surface = t.surface().to_string();
+                let needle = format!("\\{n}");
+                // Java's `lastIndexOf(...) + length` can land mid-character
+                // in UTF-8; clamp to the previous char boundary.
+                let new_processed = message
+                    .rfind(&needle)
+                    .map(|p| p + surface.len())
+                    .unwrap_or(processed)
+                    .min(message.len());
+                let new_processed = (0..=new_processed)
+                    .rev()
+                    .find(|&k| message.is_char_boundary(k))
+                    .unwrap_or(processed);
+                let head = message[..processed].to_string();
+                let tail = message[processed..].replace(&needle, &surface);
+                message = head + &tail;
+                processed = new_processed.min(message.len());
             }
         }
     }
@@ -1789,16 +1787,16 @@ pub fn apply_match_transforms(
     let sample = value;
     // LT MatchState.toFinalString: regexp replacement first, then case
     let mut value = value.to_string();
-    if let Some(rm) = regexp_match {
-        if let Some(re) = java_regex(rm) {
-            // Java `Matcher.replaceAll` uses `$N`; the regex crate reads
-            // `$1re` as a group named "1re", so normalize to `${1}re`.
-            let group_count = re.captures_len().saturating_sub(1);
-            let replacement = regexp_replace.unwrap_or("").to_string();
-            let replacement = normalize_java_replacement(&replacement, group_count);
-            let new = re.replace_all(&value, replacement.as_str());
-            value = new.into_owned();
-        }
+    if let Some(rm) = regexp_match
+        && let Some(re) = java_regex(rm)
+    {
+        // Java `Matcher.replaceAll` uses `$N`; the regex crate reads
+        // `$1re` as a group named "1re", so normalize to `${1}re`.
+        let group_count = re.captures_len().saturating_sub(1);
+        let replacement = regexp_replace.unwrap_or("").to_string();
+        let replacement = normalize_java_replacement(&replacement, group_count);
+        let new = re.replace_all(&value, replacement.as_str());
+        value = new.into_owned();
     }
     if case_conversion.is_empty() {
         value
@@ -2461,22 +2459,16 @@ fn try_from<T: Deref<Target = AnalyzedTokenReadings>>(
     for cand in candidates {
         let Some(tr) = tokens.get(cand) else { break };
         if prev_skip != 0 {
-            if i > 0 {
-                if let Some(prev) = pattern.tokens.get(i - 1) {
-                    let untagged = tr
-                        .readings
-                        .iter()
-                        .all(|r| has_no_pos_tag(r.pos_tag.as_deref()));
-                    prev_matched |= tr.readings.iter().any(|r| {
-                        reading_scope_exception_matches(
-                            prev,
-                            "next",
-                            r,
-                            tr.whitespace_before,
-                            untagged,
-                        )
-                    });
-                }
+            if i > 0
+                && let Some(prev) = pattern.tokens.get(i - 1)
+            {
+                let untagged = tr
+                    .readings
+                    .iter()
+                    .all(|r| has_no_pos_tag(r.pos_tag.as_deref()));
+                prev_matched |= tr.readings.iter().any(|r| {
+                    reading_scope_exception_matches(prev, "next", r, tr.whitespace_before, untagged)
+                });
             }
         } else if let Some(next_tr) = tokens.get(cand + 1) {
             let untagged = next_tr
@@ -3054,10 +3046,10 @@ fn resolve_suggestions<T: Deref<Target = AnalyzedTokenReadings>>(
 /// punctuation character takes no preceding space, everything else takes one.
 fn add_space_for(word: &str) -> &'static str {
     let mut chars = word.chars();
-    if let (Some(c), None) = (chars.next(), chars.next()) {
-        if matches!(c, '.' | ',' | ';' | ':' | '?' | '!') {
-            return "";
-        }
+    if let (Some(c), None) = (chars.next(), chars.next())
+        && matches!(c, '.' | ',' | ';' | ':' | '?' | '!')
+    {
+        return "";
     }
     " "
 }
@@ -3106,19 +3098,20 @@ pub fn render_match_ref<T: Deref<Target = AnalyzedTokenReadings>>(
     // `MatchState.setToken(tokens, index, next)`: skipped tokens are the ones
     // consumed by the *following* pattern element when it spans >1 token.
     let mut skipped = String::new();
-    if spec.include_skipped != "none" && !spec.include_skipped.is_empty() {
-        if let Some(next_idx) = positions.get(no).and_then(|p| *p) {
-            let count = next_idx.saturating_sub(tok_idx);
-            if count > 1 {
-                for k in tok_idx + 1..tok_idx + count {
-                    if let Some(t) = tokens.get(k) {
-                        if t.whitespace_before
-                            && !(k == tok_idx + 1 && spec.include_skipped == "following")
-                        {
-                            skipped.push(' ');
-                        }
-                        skipped.push_str(t.surface());
+    if spec.include_skipped != "none"
+        && !spec.include_skipped.is_empty()
+        && let Some(next_idx) = positions.get(no).and_then(|p| *p)
+    {
+        let count = next_idx.saturating_sub(tok_idx);
+        if count > 1 {
+            for k in tok_idx + 1..tok_idx + count {
+                if let Some(t) = tokens.get(k) {
+                    if t.whitespace_before
+                        && !(k == tok_idx + 1 && spec.include_skipped == "following")
+                    {
+                        skipped.push(' ');
                     }
+                    skipped.push_str(t.surface());
                 }
             }
         }
@@ -3217,8 +3210,8 @@ fn render_match_ref_forms(
                     if tags.is_empty() {
                         tags.push(target.clone());
                     }
-                    let joined = tags
-                        .iter()
+
+                    tags.iter()
                         .map(|t| {
                             let mut t = regex_replace(t, pos_tag, replace);
                             if spec.setpos {
@@ -3227,8 +3220,7 @@ fn render_match_ref_forms(
                             t
                         })
                         .collect::<Vec<_>>()
-                        .join("|");
-                    joined
+                        .join("|")
                 }
                 None => target,
             }

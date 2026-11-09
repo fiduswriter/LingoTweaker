@@ -110,20 +110,20 @@ impl RuleFilter for AdjustVerbSuggestionsFilter {
             if let Some(first_space) = original_suggestion.find(' ') {
                 new_lemma = original_suggestion[..first_space].to_string();
                 after_lemma = original_suggestion[first_space + 1..].to_string();
-                if number_from_next_words {
-                    if let Some(sentence) = self.env.analyze_text(&after_lemma) {
-                        let toks: Vec<&AnalyzedTokenReadings> = sentence
-                            .tokens
-                            .iter()
-                            .filter(|t| !t.is_whitespace)
-                            .collect();
-                        if let Some(token) = toks.get(1) {
-                            desired_number = if has_partial_pos_tag(token, "S") {
-                                "S".to_string()
-                            } else {
-                                "P".to_string()
-                            };
-                        }
+                if number_from_next_words
+                    && let Some(sentence) = self.env.analyze_text(&after_lemma)
+                {
+                    let toks: Vec<&AnalyzedTokenReadings> = sentence
+                        .tokens
+                        .iter()
+                        .filter(|t| !t.is_whitespace)
+                        .collect();
+                    if let Some(token) = toks.get(1) {
+                        desired_number = if has_partial_pos_tag(token, "S") {
+                            "S".to_string()
+                        } else {
+                            "P".to_string()
+                        };
                     }
                 }
             }

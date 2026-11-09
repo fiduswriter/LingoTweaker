@@ -397,10 +397,11 @@ impl RuleFilter for FindSuggestionsFilter {
         // Check if the original token (before disambiguation) meets the
         // requirements
         for atr in self.env.tagger.tag_word(&atr_word_token) {
-            if let Some(tag) = &atr.pos_tag {
-                if desired_re.is_match(tag).unwrap_or(false) && diacritics_mode {
-                    return FilterOutcome::reject();
-                }
+            if let Some(tag) = &atr.pos_tag
+                && desired_re.is_match(tag).unwrap_or(false)
+                && diacritics_mode
+            {
+                return FilterOutcome::reject();
             }
         }
 
@@ -644,27 +645,22 @@ impl RuleFilter for FrenchSuppressMisspelledSuggestionsFilter {
                 };
                 if let Some(re) =
                     suppress_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                {
-                    if atr
+                    && atr
                         .readings
                         .iter()
                         .any(|r| r.pos_tag.as_deref().is_some_and(|t| re.is_match(t)))
-                    {
-                        add = false;
-                    }
+                {
+                    add = false;
                 }
-                if add {
-                    if let Some(re) =
+                if add
+                    && let Some(re) =
                         filter_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                    {
-                        if !atr
-                            .readings
-                            .iter()
-                            .any(|r| r.pos_tag.as_deref().is_some_and(|t| re.is_match(t)))
-                        {
-                            add = false;
-                        }
-                    }
+                    && !atr
+                        .readings
+                        .iter()
+                        .any(|r| r.pos_tag.as_deref().is_some_and(|t| re.is_match(t)))
+                {
+                    add = false;
                 }
             }
             if add {
@@ -1315,15 +1311,15 @@ impl RuleFilter for InterrogativeVerbFilter {
                         .synth
                         .inner()
                         .synthesize(reading, "V ppa [me] sp?", true);
-                if let Some(first) = participles.first() {
-                    if first.ends_with('é') {
-                        extra_suggestions.push(first.clone());
-                        // Java `substring(0, length-1)`: drop the final
-                        // (possibly multibyte) character.
-                        let without_last: String =
-                            first.chars().take(first.chars().count() - 1).collect();
-                        extra_suggestions.push(format!("{without_last}è"));
-                    }
+                if let Some(first) = participles.first()
+                    && first.ends_with('é')
+                {
+                    extra_suggestions.push(first.clone());
+                    // Java `substring(0, length-1)`: drop the final
+                    // (possibly multibyte) character.
+                    let without_last: String =
+                        first.chars().take(first.chars().count() - 1).collect();
+                    extra_suggestions.push(format!("{without_last}è"));
                 }
             }
         } else if matches_pos_tag_regex(atr_pronoun, ".* 2 s") {
@@ -2175,36 +2171,37 @@ impl RuleFilter for PostponedAdjectiveConcordanceFilter {
         if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cs) {
             suggestions.extend(synth.synthesize(at, "J e p", true));
         }
-        if suggestions.is_empty() {
-            if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cp) {
-                suggestions.extend(synth.synthesize(at, "J e s", true));
-            }
+        if suggestions.is_empty()
+            && let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cp)
+        {
+            suggestions.extend(synth.synthesize(at, "J e s", true));
         }
-        if suggestions.is_empty() && is_plural {
-            if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_p) {
-                suggestions.extend(synth.synthesize(at, "J . p|V ppa . p", true));
-            }
+        if suggestions.is_empty()
+            && is_plural
+            && let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_p)
+        {
+            suggestions.extend(synth.synthesize(at, "J . p|V ppa . p", true));
         }
-        if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu) {
-            if suggestions.is_empty() {
-                if can_be_ms && !is_plural {
-                    suggestions.extend(synth.synthesize(at, "J [me] sp?|V ppa m s", true));
-                }
-                if can_be_fs && !is_plural {
-                    suggestions.extend(synth.synthesize(at, "J [fe] sp?|V ppa f s", true));
-                }
-                if can_be_mp {
-                    suggestions.extend(synth.synthesize(at, "J [me] s?p|V ppa m p", true));
-                }
-                if can_be_fp {
-                    suggestions.extend(synth.synthesize(at, "J [fe] s?p|V ppa f p", true));
-                }
-                if can_be_ms && (is_plural || can_be_p) {
-                    suggestions.extend(synth.synthesize(at, "J [me] s?p|V ppa m p", true));
-                }
-                if can_be_fs && !can_be_ms && (is_plural || can_be_p) {
-                    suggestions.extend(synth.synthesize(at, "J [fe] s?p|V ppa f p", true));
-                }
+        if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu)
+            && suggestions.is_empty()
+        {
+            if can_be_ms && !is_plural {
+                suggestions.extend(synth.synthesize(at, "J [me] sp?|V ppa m s", true));
+            }
+            if can_be_fs && !is_plural {
+                suggestions.extend(synth.synthesize(at, "J [fe] sp?|V ppa f s", true));
+            }
+            if can_be_mp {
+                suggestions.extend(synth.synthesize(at, "J [me] s?p|V ppa m p", true));
+            }
+            if can_be_fp {
+                suggestions.extend(synth.synthesize(at, "J [fe] s?p|V ppa f p", true));
+            }
+            if can_be_ms && (is_plural || can_be_p) {
+                suggestions.extend(synth.synthesize(at, "J [me] s?p|V ppa m p", true));
+            }
+            if can_be_fs && !can_be_ms && (is_plural || can_be_p) {
+                suggestions.extend(synth.synthesize(at, "J [fe] s?p|V ppa f p", true));
             }
         }
         // set suggestion removing duplicates; avoid the original token
