@@ -270,10 +270,7 @@ impl HunspellSpellingRule {
             return false;
         }
         let normalized = word.replace(['\u{2019}', '\u{02BC}'], "'");
-        if normalized != word && self.checker.spell(&normalized) {
-            return false;
-        }
-        true
+        !(normalized != word && self.checker.spell(&normalized))
     }
 
     /// `SpellingCheckRule.match` over one sentence's token stream (absolute

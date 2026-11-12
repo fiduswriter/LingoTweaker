@@ -2,7 +2,7 @@
 name = "ftz-probe"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.99"
+rust-version = "1.100"
 publish = false
 
 # Its own workspace: this is a local verification probe, not part of the engine,

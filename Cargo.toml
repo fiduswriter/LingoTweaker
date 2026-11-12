@@ -22,7 +22,7 @@ license = "LGPL-2.1-or-later"
 repository = "https://github.com/fiduswriter/LingoTweaker"
 homepage = "https://fiduswriter.github.io/LingoTweaker/"
 readme = "README.md"
-rust-version = "1.99"
+rust-version = "1.100"
 
 [workspace.dependencies]
 # Path dependencies carry a version so the publishable crates can be pushed to

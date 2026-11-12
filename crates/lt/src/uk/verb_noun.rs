@@ -1691,17 +1691,12 @@ fn is_exception_inner(
     }
 
     // могли б займатися структури
-    if verb_pos > 2
+    verb_pos > 2
         && has_part(verb_at, ":inf")
         && has_start(tokens[verb_pos - 2], "verb")
         && (lemma(tokens[verb_pos - 1], &["б", "би"])
             || has(tokens[verb_pos - 1], "adv(?!p).*")
             || lemma_with(tokens[verb_pos - 2], &["мати"], "verb"))
-    {
-        return true;
-    }
-
-    false
 }
 
 fn has_start(tr: &AnalyzedTokenReadings, p: &str) -> bool {

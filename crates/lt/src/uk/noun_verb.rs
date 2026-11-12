@@ -1058,7 +1058,7 @@ fn is_exception(
             return true;
         }
     }
-    if has_re(noun_at, uk_helpers::noun_non_pron_v_naz_pattern())
+    has_re(noun_at, uk_helpers::noun_non_pron_v_naz_pattern())
         && uk_helpers::token_search_re(
             tokens,
             noun_pos as i64 - 1,
@@ -1067,8 +1067,4 @@ fn is_exception(
             None,
             Dir::Reverse,
         ) != -1
-    {
-        return true;
-    }
-    false
 }
