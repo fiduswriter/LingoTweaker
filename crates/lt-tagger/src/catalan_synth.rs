@@ -93,15 +93,15 @@ impl CatalanSynthesizer {
     fn lookup(&self, lemma: &str, pos_tag: &str) -> Vec<String> {
         let key = format!("{lemma}|{pos_tag}");
         let mut results = self.dict.lookup(&key);
-        if let Some(manual) = &self.manual {
-            if let Some(forms) = manual.lookup(lemma, pos_tag) {
-                results.extend(forms);
-            }
+        if let Some(manual) = &self.manual
+            && let Some(forms) = manual.lookup(lemma, pos_tag)
+        {
+            results.extend(forms);
         }
-        if let Some(removed) = &self.removed {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.removed
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
         results
     }
@@ -179,11 +179,11 @@ impl CatalanSynthesizer {
         let mut lemma = token.stem.clone().unwrap_or_else(|| token.token.clone());
         let mut to_add_after = String::new();
         // verbs with noun
-        if pos_tag.starts_with('V') {
-            if let Some((base, after)) = lemma.clone().split_once(' ') {
-                lemma = base.to_string();
-                to_add_after = after.to_string();
-            }
+        if pos_tag.starts_with('V')
+            && let Some((base, after)) = lemma.clone().split_once(' ')
+        {
+            lemma = base.to_string();
+            to_add_after = after.to_string();
         }
         let mut results = if pos_tag_regexp {
             let Ok(re) = fancy_regex::Regex::new(&format!("^(?:{pos_tag})$")) else {

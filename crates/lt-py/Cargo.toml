@@ -3,6 +3,7 @@ name = "lt-py"
 description = "Python bindings (PyO3) for LingoTweaker"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 # Not publishable to crates.io: distributed through PyPI (maturin). Depends on

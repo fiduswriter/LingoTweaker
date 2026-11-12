@@ -51,7 +51,7 @@ impl Model for FastTextModel {
                 predictions
                     .into_iter()
                     .map(|p| {
-                        let label = p.label.strip_prefix("__label__").unwrap_or(&p.label);
+                        let label = p.label.trim_prefix("__label__");
                         (label.to_string(), p.probability)
                     })
                     .collect()

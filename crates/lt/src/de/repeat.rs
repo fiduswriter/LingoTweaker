@@ -84,7 +84,7 @@ fn anti_patterns() -> &'static [Vec<Pat>] {
     static PATTERNS: LazyLock<Vec<Vec<Pat>>> = LazyLock::new(|| {
         use Pat::Token;
         macro_rules! p {
-            ($($pat:expr),* $(,)?) => { vec![$($pat),*] };
+            ($($pat:expr_2021),* $(,)?) => { vec![$($pat),*] };
         }
         vec![
             p!(

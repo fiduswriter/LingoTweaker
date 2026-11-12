@@ -182,13 +182,13 @@ impl<'a> AgreementSuggestor2<'a> {
         let noun_cases = self.get_noun_cases();
         let mut result: Vec<Suggestion> = Vec::new();
         for num in NUMBER {
-            for gen in GENDER {
+            for gender in GENDER {
                 for a_case in CASES {
                     if !noun_cases.contains(&a_case) {
                         continue;
                     }
                     for det_reading in &self.determiner_token.readings {
-                        if gen == "NOG" {
+                        if gender == "NOG" {
                             let det_synth =
                                 self.get_det_or_pronoun_synth(num, "MAS", a_case, det_reading);
                             let adj1_synth = self.get_adj_synth(
@@ -215,12 +215,22 @@ impl<'a> AgreementSuggestor2<'a> {
                             );
                         } else {
                             let det_synth =
-                                self.get_det_or_pronoun_synth(num, gen, a_case, det_reading);
-                            let adj1_synth =
-                                self.get_adj_synth(num, gen, a_case, self.adj_token1, det_reading);
-                            let adj2_synth =
-                                self.get_adj_synth(num, gen, a_case, self.adj_token2, det_reading);
-                            let noun_synth = self.get_noun_synth(num, gen, a_case);
+                                self.get_det_or_pronoun_synth(num, gender, a_case, det_reading);
+                            let adj1_synth = self.get_adj_synth(
+                                num,
+                                gender,
+                                a_case,
+                                self.adj_token1,
+                                det_reading,
+                            );
+                            let adj2_synth = self.get_adj_synth(
+                                num,
+                                gender,
+                                a_case,
+                                self.adj_token2,
+                                det_reading,
+                            );
+                            let noun_synth = self.get_noun_synth(num, gender, a_case);
                             self.combine_synth(
                                 &mut result,
                                 &det_synth,
@@ -251,7 +261,7 @@ impl<'a> AgreementSuggestor2<'a> {
     fn get_det_or_pronoun_synth(
         &self,
         num: &str,
-        gen: &str,
+        gender: &str,
         a_case: &str,
         det_reading: &AnalyzedToken,
     ) -> Vec<String> {
@@ -287,7 +297,7 @@ impl<'a> AgreementSuggestor2<'a> {
         let mut synthesized: Vec<String> = Vec::new();
         for template in templates {
             let template = replace_first(template, "IND/DEF", if is_def { "DEF" } else { "IND" });
-            let pos = replace_vars(&template, num, gen, a_case);
+            let pos = replace_vars(&template, num, gender, a_case);
             let tmp = self.synth.synthesize(&det_reading, &pos, false);
             let orig_first_char = det_reading.token.chars().next().unwrap_or(' ');
             let first_lower = orig_first_char.to_lowercase().next().unwrap_or(' ');
@@ -316,7 +326,7 @@ impl<'a> AgreementSuggestor2<'a> {
     fn get_adj_synth(
         &self,
         num: &str,
-        gen: &str,
+        gender: &str,
         a_case: &str,
         adj_token: Option<&AnalyzedTokenReadings>,
         det_reading: &AnalyzedToken,
@@ -360,7 +370,7 @@ impl<'a> AgreementSuggestor2<'a> {
             }
             let template =
                 replace_first(&template, "IND/DEF", if det_is_def { "DEF" } else { "IND" });
-            let adj_pos = replace_vars(&template, num, gen, a_case);
+            let adj_pos = replace_vars(&template, num, gender, a_case);
             for synth_noun in self.synth.synthesize(adj_reading, &adj_pos, false) {
                 if !adj_synthesized.contains(&synth_noun) {
                     adj_synthesized.push(synth_noun);
@@ -371,11 +381,11 @@ impl<'a> AgreementSuggestor2<'a> {
     }
 
     /// `getNounSynth`.
-    fn get_noun_synth(&self, num: &str, gen: &str, a_case: &str) -> Vec<String> {
+    fn get_noun_synth(&self, num: &str, gender: &str, a_case: &str) -> Vec<String> {
         let mut result: Vec<String> = Vec::new();
         for noun_reading in &self.noun_token.readings {
             for noun_template in NOUN_TEMPLATES {
-                let noun_pos = replace_vars(noun_template, num, gen, a_case);
+                let noun_pos = replace_vars(noun_template, num, gender, a_case);
                 let noun_synthesized = self.synth.synthesize(noun_reading, &noun_pos, false);
                 if noun_synthesized.is_empty() && noun_reading.token.contains('-') {
                     let first_part =
@@ -484,9 +494,9 @@ fn replace_first(text: &str, search: &str, replacement: &str) -> String {
 }
 
 /// `replaceVars`.
-fn replace_vars(template: &str, num: &str, gen: &str, a_case: &str) -> String {
+fn replace_vars(template: &str, num: &str, gender: &str, a_case: &str) -> String {
     let template = replace_first(template, "SIN/PLU", num);
-    let template = replace_first(&template, "MAS/FEM/NEU", gen);
+    let template = replace_first(&template, "MAS/FEM/NEU", gender);
     replace_first(&template, "NOM/AKK/DAT/GEN", a_case)
 }
 

@@ -174,15 +174,14 @@ impl PolishSpellingRule {
         if HAS_NO_LETTER.is_match(word) {
             return true;
         }
-        if let Some(stripped) = word.strip_suffix('.') {
-            if !self
+        if let Some(stripped) = word.strip_suffix('.')
+            && !self
                 .ignore
                 .lock()
                 .unwrap_or_else(|e| e.into_inner())
                 .contains(word)
-            {
-                return self.is_ignored_no_case(stripped);
-            }
+        {
+            return self.is_ignored_no_case(stripped);
         }
         self.is_ignored_no_case(word)
     }
@@ -493,10 +492,10 @@ impl PolishSpellingRule {
     }
 
     fn calc_speller_suggestions_cached(&self, word: &str) -> Arc<Vec<Suggestion>> {
-        if let Ok(cache) = self.suggestion_cache.lock() {
-            if let Some(hit) = cache.get(word) {
-                return Arc::clone(hit);
-            }
+        if let Ok(cache) = self.suggestion_cache.lock()
+            && let Some(hit) = cache.get(word)
+        {
+            return Arc::clone(hit);
         }
         let computed = Arc::new(self.calc_speller_suggestions(word));
         if let Ok(mut cache) = self.suggestion_cache.lock() {

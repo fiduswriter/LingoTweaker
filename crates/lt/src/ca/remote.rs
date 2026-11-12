@@ -426,26 +426,26 @@ fn join_contiguous_matches(mut matches: Vec<PseudoMatch>, original: &[char]) -> 
     let mut results: Vec<PseudoMatch> = Vec::new();
     let mut previous_end: Option<usize> = None;
     for m in matches.drain(..) {
-        if let Some(prev_end) = previous_end {
-            if m.from_pos.saturating_sub(prev_end) < MAX_CONTIGUOUS_DISTANCE {
-                let previous = results.last().unwrap().clone();
-                let between: String = if previous.to_pos < m.from_pos {
-                    original[previous.to_pos.min(original.len())..m.from_pos.min(original.len())]
-                        .iter()
-                        .collect()
-                } else {
-                    String::new()
-                };
-                let joined = PseudoMatch {
-                    replacement: format!("{}{}{}", previous.replacement, between, m.replacement),
-                    from_pos: previous.from_pos,
-                    to_pos: m.to_pos,
-                };
-                results.pop();
-                results.push(joined);
-                previous_end = Some(m.to_pos);
-                continue;
-            }
+        if let Some(prev_end) = previous_end
+            && m.from_pos.saturating_sub(prev_end) < MAX_CONTIGUOUS_DISTANCE
+        {
+            let previous = results.last().unwrap().clone();
+            let between: String = if previous.to_pos < m.from_pos {
+                original[previous.to_pos.min(original.len())..m.from_pos.min(original.len())]
+                    .iter()
+                    .collect()
+            } else {
+                String::new()
+            };
+            let joined = PseudoMatch {
+                replacement: format!("{}{}{}", previous.replacement, between, m.replacement),
+                from_pos: previous.from_pos,
+                to_pos: m.to_pos,
+            };
+            results.pop();
+            results.push(joined);
+            previous_end = Some(m.to_pos);
+            continue;
         }
         previous_end = Some(m.to_pos);
         results.push(m);

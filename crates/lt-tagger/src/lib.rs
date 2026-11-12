@@ -409,10 +409,10 @@ impl Automaton {
             std::sync::Mutex<HashMap<std::path::PathBuf, std::sync::Weak<Automaton>>>,
         > = std::sync::OnceLock::new();
         let key = path.to_path_buf();
-        if let Ok(cache) = CACHE.get_or_init(Default::default).lock() {
-            if let Some(found) = cache.get(&key).and_then(|weak| weak.upgrade()) {
-                return Ok(found);
-            }
+        if let Ok(cache) = CACHE.get_or_init(Default::default).lock()
+            && let Some(found) = cache.get(&key).and_then(|weak| weak.upgrade())
+        {
+            return Ok(found);
         }
         let bytes = lt_data::fs::read(path).map_err(|e| {
             lt_core::CoreError::Data(format!("cannot read {}: {e}", path.display()))
@@ -836,7 +836,7 @@ fn decode_annotation(
     let mut stem_bytes = surface_bytes[trim_prefix..surface_bytes.len() - trim_suffix].to_vec();
     stem_bytes.extend_from_slice(&ann[header..tag_sep]);
     out.push((
-        charset.decode(&stem_bytes).into_owned(),
+        charset.decode_owned(stem_bytes),
         charset.decode(&ann[tag_sep + 1..]).into_owned(),
     ));
 }
@@ -917,7 +917,7 @@ impl SynthDictionary {
                 if stem_bytes.last() == Some(&separator) {
                     stem_bytes.pop();
                 }
-                out.push(charset.decode(&stem_bytes).into_owned());
+                out.push(charset.decode_owned(stem_bytes));
             });
         out
     }

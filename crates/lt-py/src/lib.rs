@@ -42,14 +42,13 @@ fn installed_data_dir(py: Python<'_>, base: &str) -> Option<String> {
         modules.push("lingotweaker_data_ltu".to_string());
     }
     for module in &modules {
-        if let Ok(module) = py.import(module.as_str()) {
-            if let Some(dir) = module
+        if let Ok(module) = py.import(module.as_str())
+            && let Some(dir) = module
                 .call_method0("data_dir")
                 .ok()
                 .and_then(|value| value.extract::<String>().ok())
-            {
-                return Some(dir);
-            }
+        {
+            return Some(dir);
         }
     }
     None

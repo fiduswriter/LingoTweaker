@@ -568,27 +568,22 @@ impl RuleFilter for RussianSuppressMisspelledSuggestionsFilter {
                 };
                 if let Some(re) =
                     suppress_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                {
-                    if atr
+                    && atr
                         .readings
                         .iter()
                         .any(|t| t.pos_tag.as_deref().is_some_and(|p| re.is_match(p)))
-                    {
-                        add = false;
-                    }
+                {
+                    add = false;
                 }
-                if add {
-                    if let Some(re) =
+                if add
+                    && let Some(re) =
                         filter_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                    {
-                        if !atr
-                            .readings
-                            .iter()
-                            .any(|t| t.pos_tag.as_deref().is_some_and(|p| re.is_match(p)))
-                        {
-                            add = false;
-                        }
-                    }
+                    && !atr
+                        .readings
+                        .iter()
+                        .any(|t| t.pos_tag.as_deref().is_some_and(|p| re.is_match(p)))
+                {
+                    add = false;
                 }
             }
             if add {
@@ -710,10 +705,10 @@ impl RuleFilter for PartialPosTagFilter {
             .get(1)
             .map(|m| m.as_str().to_string())
             .unwrap_or_default();
-        if group_count == 2 {
-            if let Some(second) = caps.get(2) {
-                partial_token.push_str(second.as_str());
-            }
+        if group_count == 2
+            && let Some(second) = caps.get(2)
+        {
+            partial_token.push_str(second.as_str());
         }
         let tags = self.tag(&partial_token);
         if partial_tag_has_required_tag(&tags, required, negate_pos) {

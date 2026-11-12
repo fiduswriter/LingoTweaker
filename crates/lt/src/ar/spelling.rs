@@ -104,16 +104,16 @@ impl ArabicSpellingRule {
                 continue;
             }
             if self.0.is_misspelled_word(raw) {
-                if gap == 1 {
-                    if let Some((prev_word, prev_start)) = prev {
-                        self.wrong_split(
-                            &mut matches,
-                            prev_word,
-                            prev_start + sentence_offset,
-                            raw,
-                            sentence_offset + start,
-                        );
-                    }
+                if gap == 1
+                    && let Some((prev_word, prev_start)) = prev
+                {
+                    self.wrong_split(
+                        &mut matches,
+                        prev_word,
+                        prev_start + sentence_offset,
+                        raw,
+                        sentence_offset + start,
+                    );
                 }
                 let mut sub = AnalyzedTokenReadings::new(vec![AnalyzedToken::new(raw, None, None)]);
                 sub.start_pos = start;
@@ -141,7 +141,7 @@ impl ArabicSpellingRule {
         if prev_word.is_empty() {
             return;
         }
-        let clean_word = word.strip_suffix('.').unwrap_or(word);
+        let clean_word = word.trim_suffix('.');
         let from = prev_start;
         let to = word_start + clean_word.len();
         // "thanky ou" -> "thank you"
@@ -174,10 +174,10 @@ impl ArabicSpellingRule {
         from: usize,
         to: usize,
     ) {
-        if let Some(prev) = matches.last() {
-            if prev.range.start == from {
-                matches.pop();
-            }
+        if let Some(prev) = matches.last()
+            && prev.range.start == from
+        {
+            matches.pop();
         }
         let value = format!("{suggestion1} {suggestion2}").trim().to_string();
         matches.push(self.0.wrong_split_match(from, to, value));
@@ -186,5 +186,5 @@ impl ArabicSpellingRule {
 
 /// `StringTools.cutOffDot`.
 fn cut_off_dot(s: &str) -> String {
-    s.strip_suffix('.').unwrap_or(s).to_string()
+    s.trim_suffix('.').to_string()
 }

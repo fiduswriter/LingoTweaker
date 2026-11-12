@@ -128,7 +128,7 @@ fn matches_pos_regexp(tr: &AnalyzedTokenReadings, re: &regex::Regex) -> bool {
 }
 
 macro_rules! anchored_re {
-    ($name:ident, $pat:expr) => {
+    ($name:ident, $pat:expr_2021) => {
         static $name: LazyLock<regex::Regex> =
             LazyLock::new(|| regex::Regex::new(concat!("^(?:", $pat, ")$")).unwrap());
     };
@@ -377,10 +377,11 @@ impl LegacyReplaceRule {
             if possible.is_none() && self.config.check_lemmas {
                 let mut lemmas: Vec<String> = Vec::new();
                 for reading in &tr.readings {
-                    if let Some(lemma) = &reading.stem {
-                        if self.wrong_words.contains_key(lemma) && !lemmas.contains(lemma) {
-                            lemmas.push(lemma.clone());
-                        }
+                    if let Some(lemma) = &reading.stem
+                        && self.wrong_words.contains_key(lemma)
+                        && !lemmas.contains(lemma)
+                    {
+                        lemmas.push(lemma.clone());
                     }
                 }
                 let mut synthesized: Vec<String> = Vec::new();

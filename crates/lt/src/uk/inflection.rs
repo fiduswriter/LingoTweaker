@@ -106,10 +106,10 @@ pub fn get_noun_inflections(
         let Some(pos_tag) = token.pos_tag.as_deref() else {
             continue;
         };
-        if let Some(ignore) = ignore_tag {
-            if ignore.find(pos_tag).ok().flatten().is_some() {
-                continue;
-            }
+        if let Some(ignore) = ignore_tag
+            && ignore.find(pos_tag).ok().flatten().is_some()
+        {
+            continue;
         }
         let Ok(Some(caps)) = NOUN_INFLECTION_PATTERN.captures(pos_tag) else {
             continue;
@@ -146,14 +146,12 @@ pub fn format_inflections(inflections: &mut [Inflection], adj: bool) -> String {
     let mut groups: Vec<(String, Vec<String>)> = Vec::new();
     for inf in inflections.iter() {
         let mut case_str = lt_tagger::uk_helpers::case_name(&inf.case_);
-        if adj {
-            if let Some(anim) = inf.anim_tag.as_deref() {
-                case_str += if anim == "anim" {
-                    " (іст.)"
-                } else {
-                    " (неіст.)"
-                };
-            }
+        if adj && let Some(anim) = inf.anim_tag.as_deref() {
+            case_str += if anim == "anim" {
+                " (іст.)"
+            } else {
+                " (неіст.)"
+            };
         }
         if let Some(group) = groups.iter_mut().find(|(g, _)| g == &inf.gender) {
             group.1.push(case_str);

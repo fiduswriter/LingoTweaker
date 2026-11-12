@@ -1,5 +1,5 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = ["crates/*"]
 # `crates/lingotweaker` is the publish-only facade crate. It shares the
 # engine source with `crates/lt` through a symlink and is its own workspace,
@@ -17,13 +17,12 @@ lindera-dictionary = { path = "vendor/lindera-dictionary" }
 
 [workspace.package]
 version = "0.2.8"
-edition = "2021"
+edition = "2024"
 license = "LGPL-2.1-or-later"
 repository = "https://github.com/fiduswriter/LingoTweaker"
 homepage = "https://fiduswriter.github.io/LingoTweaker/"
 readme = "README.md"
-# 1.89 for fasttext-pure-rs, the bundled language-identification model.
-rust-version = "1.89"
+rust-version = "1.100"
 
 [workspace.dependencies]
 # Path dependencies carry a version so the publishable crates can be pushed to

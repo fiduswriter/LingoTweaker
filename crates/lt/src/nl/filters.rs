@@ -214,17 +214,16 @@ impl RuleFilter for DutchSuppressMisspelledSuggestionsFilter {
                             .unwrap_or(false)
                     })
                 };
-                if let Some(p) = suppress_postag {
-                    if matches(p) {
-                        add = false;
-                    }
+                if let Some(p) = suppress_postag
+                    && matches(p)
+                {
+                    add = false;
                 }
-                if add {
-                    if let Some(p) = filter_postag {
-                        if !matches(p) {
-                            add = false;
-                        }
-                    }
+                if add
+                    && let Some(p) = filter_postag
+                    && !matches(p)
+                {
+                    add = false;
                 }
             }
             if add {

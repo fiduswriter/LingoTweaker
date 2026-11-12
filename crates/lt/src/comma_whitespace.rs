@@ -210,58 +210,59 @@ pub fn check_sentence_with_comma(
                 }
             }
         }
-        if let Some(msg) = msg {
-            if !tokens[i].is_immunized && exception.is_none_or(|f| !f(tokens, i)) {
-                let mut from_pos = tokens[i - 1].start_pos;
-                if two_suggestions {
-                    from_pos = tokens[i - 2].start_pos;
-                }
-                let to_pos = tokens[i].end_pos();
-                let suggestion_text = suggestion_text.unwrap_or_default();
-                if to_pos < sentence_text.len() {
-                    let marked = &sentence_text[from_pos..to_pos];
-                    if marked == suggestion_text.as_str() && !two_suggestions {
-                        prev_prev_token = prev_token;
-                        prev_token = token;
-                        prev_white = is_whitespace;
-                        continue;
-                    }
-                }
-                let suggestions = if two_suggestions {
-                    vec![
-                        Suggestion {
-                            value: format!("{suggestion_text} "),
-                            short_description: None,
-                        },
-                        Suggestion {
-                            value: format!(" {suggestion_text}"),
-                            short_description: None,
-                        },
-                    ]
-                } else {
-                    vec![Suggestion {
-                        value: suggestion_text,
-                        short_description: None,
-                    }]
-                };
-                rule_matches.push(
-                    Match::new(
-                        rule_id,
-                        Option::<String>::None,
-                        msg,
-                        Option::<String>::None,
-                        TextRange::new(sentence_offset + from_pos, sentence_offset + to_pos),
-                        suggestions,
-                        "TYPOGRAPHY",
-                        "Typography",
-                    )
-                    .with_metadata(
-                        "Use of whitespace before comma and before/after parentheses",
-                        "whitespace",
-                        0,
-                    ),
-                );
+        if let Some(msg) = msg
+            && !tokens[i].is_immunized
+            && exception.is_none_or(|f| !f(tokens, i))
+        {
+            let mut from_pos = tokens[i - 1].start_pos;
+            if two_suggestions {
+                from_pos = tokens[i - 2].start_pos;
             }
+            let to_pos = tokens[i].end_pos();
+            let suggestion_text = suggestion_text.unwrap_or_default();
+            if to_pos < sentence_text.len() {
+                let marked = &sentence_text[from_pos..to_pos];
+                if marked == suggestion_text.as_str() && !two_suggestions {
+                    prev_prev_token = prev_token;
+                    prev_token = token;
+                    prev_white = is_whitespace;
+                    continue;
+                }
+            }
+            let suggestions = if two_suggestions {
+                vec![
+                    Suggestion {
+                        value: format!("{suggestion_text} "),
+                        short_description: None,
+                    },
+                    Suggestion {
+                        value: format!(" {suggestion_text}"),
+                        short_description: None,
+                    },
+                ]
+            } else {
+                vec![Suggestion {
+                    value: suggestion_text,
+                    short_description: None,
+                }]
+            };
+            rule_matches.push(
+                Match::new(
+                    rule_id,
+                    Option::<String>::None,
+                    msg,
+                    Option::<String>::None,
+                    TextRange::new(sentence_offset + from_pos, sentence_offset + to_pos),
+                    suggestions,
+                    "TYPOGRAPHY",
+                    "Typography",
+                )
+                .with_metadata(
+                    "Use of whitespace before comma and before/after parentheses",
+                    "whitespace",
+                    0,
+                ),
+            );
         }
         prev_prev_token = prev_token;
         prev_token = token;

@@ -390,14 +390,14 @@ fn create_match(
     sentence_index: usize,
     full_text: &str,
 ) -> Option<Match> {
-    if let Some(rloc) = rule_match_stack.last() {
-        if let Some(index) = sym.end.iter().position(|s| *s == symbol) {
-            if rloc.symbol == sym.start[index] && rule_matches.len() > rloc.rule_index {
-                rule_matches.remove(rloc.rule_index);
-                rule_match_stack.pop();
-                return None;
-            }
-        }
+    if let Some(rloc) = rule_match_stack.last()
+        && let Some(index) = sym.end.iter().position(|s| *s == symbol)
+        && rloc.symbol == sym.start[index]
+        && rule_matches.len() > rloc.rule_index
+    {
+        rule_matches.remove(rloc.rule_index);
+        rule_match_stack.pop();
+        return None;
     }
     rule_match_stack.push(SymbolLocator {
         symbol: symbol.to_string(),
@@ -1026,13 +1026,12 @@ pub fn check_with(sentences: &[AnalyzedSentence], sym: &UnpairedSymbols) -> Vec<
                 sentence_index,
                 &full_text,
             );
-            if let Some(m) = m {
-                if closing
+            if let Some(m) = m
+                && (closing
                     || ends_like_real_sentence(&sentences[sentence_index].text)
-                    || sentences.len() - 1 > sentence_index
-                {
-                    rule_matches.push(m);
-                }
+                    || sentences.len() - 1 > sentence_index)
+            {
+                rule_matches.push(m);
             }
         }
     }

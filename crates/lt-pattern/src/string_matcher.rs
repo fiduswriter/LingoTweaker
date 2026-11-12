@@ -184,14 +184,14 @@ impl<'a> RegexpParser<'a> {
                 if invalid {
                     options = None;
                 }
-                if let (Some(options), Some(last)) = (options.as_mut(), last) {
-                    if next >= last {
-                        for c in (last as u32 + 1)..=(next as u32) {
-                            if let Some(c) = char::from_u32(c) {
-                                options.push(c);
-                            } else {
-                                return Err(());
-                            }
+                if let (Some(options), Some(last)) = (options.as_mut(), last)
+                    && next >= last
+                {
+                    for c in (last as u32 + 1)..=(next as u32) {
+                        if let Some(c) = char::from_u32(c) {
+                            options.push(c);
+                        } else {
+                            return Err(());
                         }
                     }
                 }

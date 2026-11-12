@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Swatinem/rust-cache@v2
-      - run: rustup toolchain install 1.98.1 --profile minimal
+      - run: rustup toolchain install
       - name: Build and attach release data assets
         run: scripts/release/publish-data.sh "v${{ needs.version.outputs.cargo }}"
         env:
@@ -92,7 +92,7 @@ jobs:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - uses: Swatinem/rust-cache@v2
-      - run: rustup toolchain install 1.98.1 --profile minimal
+      - run: rustup toolchain install
       - name: Build and publish lingotweaker-data + lingotweaker-data-<lang>
         run: scripts/release/publish-npm-data.sh
 
@@ -103,7 +103,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Swatinem/rust-cache@v2
-      - run: rustup toolchain install 1.98.1 --profile minimal
+      - run: rustup toolchain install
       - name: Publish lt-* crates and the lingotweaker facade
         run: scripts/release/publish-crates.sh
         env:
@@ -156,7 +156,7 @@ jobs:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - uses: Swatinem/rust-cache@v2
-      - run: rustup toolchain install 1.98.1 --profile minimal
+      - run: rustup toolchain install
       - name: Build, smoke-test and publish the addon
         run: scripts/release/publish-npm.sh
 
@@ -183,6 +183,6 @@ jobs:
           # (the tag_name) does; "0.15.0" 404s.
           version: "v0.15.0"
       - uses: Swatinem/rust-cache@v2
-      - run: rustup toolchain install 1.98.1 --profile minimal
+      - run: rustup toolchain install
       - name: Build, smoke-test and publish lingotweaker-wasm
         run: scripts/release/publish-wasm.sh

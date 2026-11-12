@@ -197,25 +197,25 @@ impl RuleFilter for ConfusionCheckFilter {
         }
 
         let mut replacement: Option<String> = None;
-        if let Some(entry) = self.pairs.map.get(&form) {
-            if matches_pos_tag_regex(entry, postag) {
-                if let Some(pattern) = desired_gender_number_pattern {
-                    let first_tag = entry
-                        .readings
-                        .first()
-                        .and_then(|r| r.pos_tag.clone())
-                        .unwrap_or_default();
-                    let ok = regex::Regex::new(&format!("^(?:{pattern})$"))
-                        .map(|re| re.is_match(&first_tag))
-                        .unwrap_or(false);
-                    if !ok {
-                        return FilterOutcome::reject();
-                    }
-                    replacement = Some(entry.readings[0].token.clone());
-                } else if gendernumber_from.is_none() {
-                    // there is no desired gender number defined
-                    replacement = Some(entry.readings[0].token.clone());
+        if let Some(entry) = self.pairs.map.get(&form)
+            && matches_pos_tag_regex(entry, postag)
+        {
+            if let Some(pattern) = desired_gender_number_pattern {
+                let first_tag = entry
+                    .readings
+                    .first()
+                    .and_then(|r| r.pos_tag.clone())
+                    .unwrap_or_default();
+                let ok = regex::Regex::new(&format!("^(?:{pattern})$"))
+                    .map(|re| re.is_match(&first_tag))
+                    .unwrap_or(false);
+                if !ok {
+                    return FilterOutcome::reject();
                 }
+                replacement = Some(entry.readings[0].token.clone());
+            } else if gendernumber_from.is_none() {
+                // there is no desired gender number defined
+                replacement = Some(entry.readings[0].token.clone());
             }
         }
 
@@ -337,10 +337,11 @@ impl RuleFilter for FindSuggestionsFilter {
 
         // if the original token already meets the requirements, nothing to do
         for atr in self.env.tagger.tag_word(&atr_word_token) {
-            if let Some(tag) = &atr.pos_tag {
-                if desired_re.is_match(tag).unwrap_or(false) && diacritics_mode {
-                    return FilterOutcome::reject();
-                }
+            if let Some(tag) = &atr.pos_tag
+                && desired_re.is_match(tag).unwrap_or(false)
+                && diacritics_mode
+            {
+                return FilterOutcome::reject();
             }
         }
 
@@ -533,19 +534,16 @@ impl RuleFilter for SpanishSuppressMisspelledSuggestionsFilter {
                 };
                 if let Some(re) =
                     suppress_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
+                    && atr.has_pos_tag_matching(&re)
                 {
-                    if atr.has_pos_tag_matching(&re) {
-                        add = false;
-                    }
+                    add = false;
                 }
-                if add {
-                    if let Some(re) =
+                if add
+                    && let Some(re) =
                         filter_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                    {
-                        if !atr.has_pos_tag_matching(&re) {
-                            add = false;
-                        }
-                    }
+                    && !atr.has_pos_tag_matching(&re)
+                {
+                    add = false;
                 }
             }
             if add {
@@ -1624,36 +1622,37 @@ impl RuleFilter for PostponedAdjectiveConcordanceFilter {
         if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cs) {
             suggestions.extend(synth.synthesize(at, "A..CP.", true));
         }
-        if suggestions.is_empty() {
-            if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cp) {
-                suggestions.extend(synth.synthesize(at, "A..CS.", true));
-            }
+        if suggestions.is_empty()
+            && let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_cp)
+        {
+            suggestions.extend(synth.synthesize(at, "A..CS.", true));
         }
-        if suggestions.is_empty() && is_plural {
-            if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_p) {
-                suggestions.extend(synth.synthesize(at, "A...P.|V.P..P.|PX..P.*", true));
-            }
+        if suggestions.is_empty()
+            && is_plural
+            && let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu_p)
+        {
+            suggestions.extend(synth.synthesize(at, "A...P.|V.P..P.|PX..P.*", true));
         }
-        if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu) {
-            if suggestions.is_empty() {
-                if can_be_ms && !is_plural {
-                    suggestions.extend(synth.synthesize(at, "A..MS.|V.P..SM|PX.MS.*", true));
-                }
-                if can_be_fs && !is_plural {
-                    suggestions.extend(synth.synthesize(at, "A..FS.|V.P..SF|PX.FS.*", true));
-                }
-                if can_be_mp {
-                    suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM|PX.MP.*", true));
-                }
-                if can_be_fp {
-                    suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF|PX.FP.*", true));
-                }
-                if can_be_ms && (is_plural || can_be_p) {
-                    suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM|PX.MP.*", true));
-                }
-                if can_be_fs && !can_be_ms && (is_plural || can_be_p) {
-                    suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF|PX.FP.*", true));
-                }
+        if let Some(at) = get_analyzed_token(tokens[i], &p.adjectiu)
+            && suggestions.is_empty()
+        {
+            if can_be_ms && !is_plural {
+                suggestions.extend(synth.synthesize(at, "A..MS.|V.P..SM|PX.MS.*", true));
+            }
+            if can_be_fs && !is_plural {
+                suggestions.extend(synth.synthesize(at, "A..FS.|V.P..SF|PX.FS.*", true));
+            }
+            if can_be_mp {
+                suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM|PX.MP.*", true));
+            }
+            if can_be_fp {
+                suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF|PX.FP.*", true));
+            }
+            if can_be_ms && (is_plural || can_be_p) {
+                suggestions.extend(synth.synthesize(at, "A..MP.|V.P..PM|PX.MP.*", true));
+            }
+            if can_be_fs && !can_be_ms && (is_plural || can_be_p) {
+                suggestions.extend(synth.synthesize(at, "A..FP.|V.P..PF|PX.FP.*", true));
             }
         }
         // avoid the original token as suggestion

@@ -109,8 +109,8 @@ fn retag_fem_names(sentence: &mut AnalyzedSentence) {
     let n = idxs.len();
     let mut i = 1;
     while i + 2 < n {
-        for gen in ["f", "m"] {
-            let prefix: &[&str] = if gen == "f" {
+        for gender in ["f", "m"] {
+            let prefix: &[&str] = if gender == "f" {
                 &[
                     "пані",
                     "місіс",
@@ -123,15 +123,15 @@ fn retag_fem_names(sentence: &mut AnalyzedSentence) {
             } else {
                 &["пан", "містер", "м-р", "сер", "князь", "німець", "поляк"]
             };
-            let anim_prop_tag_prefix = format!("noun:anim:{gen}:v_naz:prop");
-            let verb_past = format!(r"^verb.*:past:{gen}$");
+            let anim_prop_tag_prefix = format!("noun:anim:{gender}:v_naz:prop");
+            let verb_past = format!(r"^verb.*:past:{gender}$");
             let cur = &sentence.tokens[idxs[i]];
             let has_prefix = prefix.iter().any(|p| {
                 cur.readings.iter().any(|r| {
                     r.stem.as_deref() == Some(p)
                         && r.pos_tag
                             .as_deref()
-                            .is_some_and(|t| t.starts_with(&format!("noun:anim:{gen}:v_naz")))
+                            .is_some_and(|t| t.starts_with(&format!("noun:anim:{gender}:v_naz")))
                 })
             }) || cur.readings.iter().any(|r| {
                 r.pos_tag
@@ -164,7 +164,7 @@ fn retag_fem_names(sentence: &mut AnalyzedSentence) {
                         .cloned()
                         .collect();
                     set_readings(&mut sentence.tokens[name_i], kept);
-                } else if gen == "f"
+                } else if gender == "f"
                     && name_readings.iter().any(|r| {
                         r.pos_tag
                             .as_deref()

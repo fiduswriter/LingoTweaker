@@ -294,10 +294,10 @@ impl CatalanTagger {
         }
         if self.is_valencian {
             for token in tokens.iter_mut() {
-                if let Some(pos_tag) = &token.pos_tag {
-                    if let Some(stripped) = pos_tag.strip_prefix('0') {
-                        token.pos_tag = Some(stripped.to_string());
-                    }
+                if let Some(pos_tag) = &token.pos_tag
+                    && let Some(stripped) = pos_tag.strip_prefix('0')
+                {
+                    token.pos_tag = Some(stripped.to_string());
                 }
             }
         } else {

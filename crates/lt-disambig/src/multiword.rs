@@ -247,8 +247,8 @@ impl MultiWordChunker {
                                 }
                             }
                             if self.add_ignore_spelling {
-                                for m in i..=final_len {
-                                    sentence.tokens[m].is_ignore_spelling = true;
+                                for token in &mut sentence.tokens[i..=final_len] {
+                                    token.is_ignore_spelling = true;
                                 }
                             }
                         }
@@ -295,8 +295,8 @@ impl MultiWordChunker {
                             }
                         }
                         if self.add_ignore_spelling {
-                            for m in i..=j {
-                                sentence.tokens[m].is_ignore_spelling = true;
+                            for token in &mut sentence.tokens[i..=j] {
+                                token.is_ignore_spelling = true;
                             }
                         }
                     }

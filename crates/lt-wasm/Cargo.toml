@@ -3,6 +3,7 @@ name = "lt-wasm"
 description = "wasm-bindgen bindings for the LingoTweaker engine"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 # Not published on crates.io: the wasm bindings ship through npm as

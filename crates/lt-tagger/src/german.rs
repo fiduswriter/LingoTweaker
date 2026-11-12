@@ -1099,13 +1099,14 @@ impl GermanTagger {
             } else if pos == 0 && ignore_case {
                 // "Haben", "Sollen", "Können", "Gerade" etc. at start of sentence
                 tagger_tokens.extend(self.word_tagger_tag(&word.to_lowercase()));
-            } else if pos > 1 && tagger_tokens.is_empty() && ignore_case {
-                if let Some(idx) = sentence_tokens.iter().position(|t| t == word) {
-                    // add lowercase token readings to words at start of direct speech
-                    if idx > 2 && sentence_tokens[idx - 1] == "„" && sentence_tokens[idx - 3] == ":"
-                    {
-                        tagger_tokens.extend(self.word_tagger_tag(&word.to_lowercase()));
-                    }
+            } else if pos > 1
+                && tagger_tokens.is_empty()
+                && ignore_case
+                && let Some(idx) = sentence_tokens.iter().position(|t| t == word)
+            {
+                // add lowercase token readings to words at start of direct speech
+                if idx > 2 && sentence_tokens[idx - 1] == "„" && sentence_tokens[idx - 3] == ":" {
+                    tagger_tokens.extend(self.word_tagger_tag(&word.to_lowercase()));
                 }
             }
 
@@ -1853,15 +1854,13 @@ impl SwissGermanTagger {
         let mut readings = self.inner.tag(sentence_tokens, ignore_case);
         for reading in &mut readings {
             let surface = reading.surface().to_string();
-            if !surface.is_empty() && surface.contains("ss") && !reading.is_tagged {
-                if let Some(replacement) = self.inner.lookup(&surface.replace("ss", "ß")) {
-                    for at in replacement.readings {
-                        reading.add_reading(AnalyzedToken::new(
-                            surface.clone(),
-                            at.stem,
-                            at.pos_tag,
-                        ));
-                    }
+            if !surface.is_empty()
+                && surface.contains("ss")
+                && !reading.is_tagged
+                && let Some(replacement) = self.inner.lookup(&surface.replace("ss", "ß"))
+            {
+                for at in replacement.readings {
+                    reading.add_reading(AnalyzedToken::new(surface.clone(), at.stem, at.pos_tag));
                 }
             }
         }

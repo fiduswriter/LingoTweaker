@@ -229,10 +229,9 @@ pub fn check_with(sentences: &[AnalyzedSentence], kind: StyleKind, lang: StyleLa
                 && !is_non_word(token.surface())
                 && kind.is_to_counted_word(token, lang)
                 && !kind.is_exception(&tokens, token_index, lang)
+                && let Some(lemma) = kind.to_added_lemma(token, lang)
             {
-                if let Some(lemma) = kind.to_added_lemma(token, lang) {
-                    *word_map.entry(lemma).or_insert(0) += 1;
-                }
+                *word_map.entry(lemma).or_insert(0) += 1;
             }
         }
     }
@@ -262,36 +261,30 @@ pub fn check_with(sentences: &[AnalyzedSentence], kind: StyleKind, lang: StyleLa
                 && !is_non_word(token.surface())
                 && kind.is_to_counted_word(token, lang)
                 && !kind.is_exception(&tokens, token_index, lang)
+                && let Some(lemma) = kind.to_added_lemma(token, lang)
+                && too_often.contains(&lemma)
             {
-                if let Some(lemma) = kind.to_added_lemma(token, lang) {
-                    if too_often.contains(&lemma) {
-                        rule_matches.push(
-                            Match::new(
-                                kind.rule_id(lang),
-                                Option::<String>::None,
-                                kind.limit_message(DEFAULT_MIN_PERCENT, lang),
-                                Option::<String>::None,
-                                TextRange::new(
-                                    sentence.offset + token.start_pos,
-                                    sentence.offset + token.end_pos(),
-                                ),
-                                Vec::<Suggestion>::new(),
-                                CATEGORY_ID,
-                                if lang == StyleLang::De {
-                                    "Stiltipps für kreatives Schreiben"
-                                } else {
-                                    CATEGORY_NAME
-                                },
-                            )
-                            .with_metadata(
-                                kind.description(lang),
-                                "style",
-                                0,
-                            ),
-                        );
-                        break;
-                    }
-                }
+                rule_matches.push(
+                    Match::new(
+                        kind.rule_id(lang),
+                        Option::<String>::None,
+                        kind.limit_message(DEFAULT_MIN_PERCENT, lang),
+                        Option::<String>::None,
+                        TextRange::new(
+                            sentence.offset + token.start_pos,
+                            sentence.offset + token.end_pos(),
+                        ),
+                        Vec::<Suggestion>::new(),
+                        CATEGORY_ID,
+                        if lang == StyleLang::De {
+                            "Stiltipps für kreatives Schreiben"
+                        } else {
+                            CATEGORY_NAME
+                        },
+                    )
+                    .with_metadata(kind.description(lang), "style", 0),
+                );
+                break;
             }
         }
     }

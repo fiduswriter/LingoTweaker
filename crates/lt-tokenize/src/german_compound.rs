@@ -346,8 +346,7 @@ impl InterfixDisambiguator {
             if ["samt", "samts", "samtes"].contains(&last_part.as_str()) {
                 // Verkehr+s+amt = Verkehrs+amt
                 new_parts[last_part_idx - 1] = format!("{}s", parts[last_part_idx - 1]);
-                new_parts[last_part_idx] =
-                    last_part.strip_prefix('s').unwrap_or(last_part).to_string();
+                new_parts[last_part_idx] = last_part.trim_prefix('s').to_string();
                 return new_parts;
             }
         }
@@ -548,19 +547,19 @@ impl GermanCompoundTokenizer {
         let mut parts = self.split_from_right(word, collect_subwords);
         if parts.is_none() && self.is_simple_word(word) {
             parts = Some(vec![word.to_string()]);
-        } else if let Some(ref mut current) = parts {
-            if self.is_simple_word(word) && !current.contains(&word.to_string()) {
-                current.push(word.to_string());
-            }
+        } else if let Some(ref mut current) = parts
+            && self.is_simple_word(word)
+            && !current.contains(&word.to_string())
+        {
+            current.push(word.to_string());
         }
         if parts.is_none() && self.ends_with_interfix(&lc_word) {
             parts = self.split_from_right(&word_without_interfix, collect_subwords);
-            if let Some(ref mut current) = parts {
-                if !self.hide_interfix_characters {
-                    if let Some(interfix) = removable_interfix {
-                        current.push(interfix);
-                    }
-                }
+            if let Some(ref mut current) = parts
+                && !self.hide_interfix_characters
+                && let Some(interfix) = removable_interfix
+            {
+                current.push(interfix);
             }
         }
         parts
@@ -576,10 +575,10 @@ impl GermanCompoundTokenizer {
         while i >= self.minimum_word_length as isize {
             let left_part: String = chars[..i as usize].iter().collect();
             let right_part: String = chars[i as usize..].iter().collect();
-            if !self.strict_mode {
-                if let Some(exception) = self.exception_split_for(&right_part, &left_part) {
-                    return Some(exception);
-                }
+            if !self.strict_mode
+                && let Some(exception) = self.exception_split_for(&right_part, &left_part)
+            {
+                return Some(exception);
             }
             if self.is_simple_word(&right_part) {
                 let left_part_parts = self.split(&left_part, true, collect_subwords);

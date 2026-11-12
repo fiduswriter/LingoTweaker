@@ -65,13 +65,13 @@ impl SpellChecker {
             .map_err(|e| CoreError::Data(format!("cannot read {}: {e}", info_path.display())))?;
         let info = DictionaryInfo::parse(&info_text)?;
 
-        if let Some(encoding) = info.encoding() {
-            if !encoding.eq_ignore_ascii_case("utf-8") {
-                return Err(CoreError::Parse(
-                    "dict".into(),
-                    format!("unsupported speller dictionary encoding: {encoding}"),
-                ));
-            }
+        if let Some(encoding) = info.encoding()
+            && !encoding.eq_ignore_ascii_case("utf-8")
+        {
+            return Err(CoreError::Parse(
+                "dict".into(),
+                format!("unsupported speller dictionary encoding: {encoding}"),
+            ));
         }
 
         let separator = info

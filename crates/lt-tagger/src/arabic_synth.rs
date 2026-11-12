@@ -66,20 +66,20 @@ impl ArabicSynthesizer {
     fn lookup(&self, lemma: &str, pos_tag: &str) -> Vec<String> {
         let key = format!("{lemma}|{pos_tag}");
         let mut results = self.dict.lookup(&key);
-        if let Some(manual) = &self.manual {
-            if let Some(forms) = manual.lookup(lemma, pos_tag) {
-                results.extend(forms);
-            }
+        if let Some(manual) = &self.manual
+            && let Some(forms) = manual.lookup(lemma, pos_tag)
+        {
+            results.extend(forms);
         }
-        if let Some(removed) = &self.removed {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.removed
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
-        if let Some(removed) = &self.do_not_synthesize {
-            if let Some(forms) = removed.lookup(lemma, pos_tag) {
-                results.retain(|r| !forms.contains(r));
-            }
+        if let Some(removed) = &self.do_not_synthesize
+            && let Some(forms) = removed.lookup(lemma, pos_tag)
+        {
+            results.retain(|r| !forms.contains(r));
         }
         results
     }
@@ -111,10 +111,10 @@ impl ArabicSynthesizer {
         if postag.is_empty() {
             return stem;
         }
-        if ArabicTagManager::is_attached(postag) {
-            if let Some(stripped) = stem.strip_suffix('ه') {
-                stem = stripped.to_string();
-            }
+        if ArabicTagManager::is_attached(postag)
+            && let Some(stripped) = stem.strip_suffix('ه')
+        {
+            stem = stripped.to_string();
         }
         if ArabicTagManager::is_definite(postag) {
             let prefix = ArabicTagManager::get_definite_prefix(postag);
@@ -266,10 +266,10 @@ impl ArabicSynthesizer {
         let new_word_list = self.synthesize(&new_token, &newpos_tag);
         let stem = if !new_word_list.is_empty() {
             let mut stem = new_word_list[0].clone();
-            if ArabicTagManager::has_pronoun(&newpos_tag) {
-                if let Some(stripped) = stem.strip_suffix('ه') {
-                    stem = stripped.to_string();
-                }
+            if ArabicTagManager::has_pronoun(&newpos_tag)
+                && let Some(stripped) = stem.strip_suffix('ه')
+            {
+                stem = stripped.to_string();
             }
             stem
         } else {

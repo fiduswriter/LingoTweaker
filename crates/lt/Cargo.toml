@@ -3,6 +3,7 @@ name = "lt"
 description = "Public facade crate for LingoTweaker: Engine, EngineBuilder, re-exports"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 # Not publishable: the crates.io name `lt` belongs to a third party. The

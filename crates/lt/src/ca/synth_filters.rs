@@ -360,10 +360,11 @@ impl RuleFilter for FindSuggestionsFilter {
 
         // if the original token already meets the requirements, nothing to do
         for atr in self.env.tagger.tag_word(&atr_word_token) {
-            if let Some(tag) = &atr.pos_tag {
-                if desired_re.is_match(tag).unwrap_or(false) && diacritics_mode {
-                    return FilterOutcome::reject();
-                }
+            if let Some(tag) = &atr.pos_tag
+                && desired_re.is_match(tag).unwrap_or(false)
+                && diacritics_mode
+            {
+                return FilterOutcome::reject();
             }
         }
 

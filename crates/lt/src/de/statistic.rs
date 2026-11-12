@@ -610,10 +610,10 @@ fn check_words(sentences: &[AnalyzedSentence], config: &WordStyleConfig) -> Vec<
                 && !crate::style_too_often::is_non_word(token.surface())
             {
                 word_count += 1;
-                if let Some(n_end) = (config.condition)(&tokens, n) {
-                    if n_end >= n {
-                        hints.push((sentence_index, token.start_pos, tokens[n_end].end_pos()));
-                    }
+                if let Some(n_end) = (config.condition)(&tokens, n)
+                    && n_end >= n
+                {
+                    hints.push((sentence_index, token.start_pos, tokens[n_end].end_pos()));
                 }
             }
         }

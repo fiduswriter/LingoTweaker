@@ -234,10 +234,10 @@ impl ArabicTransVerbRule {
         for verb_tok in &token.readings {
             if verb_tok.pos_tag.is_some() {
                 // lookup in WrongWords
-                if let Some(lemma) = &verb_tok.stem {
-                    if self.wrong_words.contains_key(lemma) {
-                        return true;
-                    }
+                if let Some(lemma) = &verb_tok.stem
+                    && self.wrong_words.contains_key(lemma)
+                {
+                    return true;
                 }
             }
         }
@@ -247,12 +247,11 @@ impl ArabicTransVerbRule {
     /// `ArabicTransVerbRule.getProperPrepositionForTransitiveVerb`.
     fn proper_prepositions(&self, token: &AnalyzedTokenReadings) -> Vec<String> {
         for verb_tok in &token.readings {
-            if verb_tok.pos_tag.is_some() {
-                if let Some(lemma) = &verb_tok.stem {
-                    if let Some((suggestion, _)) = self.wrong_words.get(lemma) {
-                        return suggestion.split('|').map(str::to_string).collect();
-                    }
-                }
+            if verb_tok.pos_tag.is_some()
+                && let Some(lemma) = &verb_tok.stem
+                && let Some((suggestion, _)) = self.wrong_words.get(lemma)
+            {
+                return suggestion.split('|').map(str::to_string).collect();
             }
         }
         Vec::new()
@@ -350,41 +349,42 @@ impl ArabicTransVerbRule {
                 let is_right_preposition = Self::is_right_preposition(token, &prepositions);
                 // the verb is attached and the next token is not the suitable
                 // preposition: we give the correct new form
-                if is_attached_verb_transitive && !is_right_preposition {
-                    if let Some(verb) = self.generate_unattached_new_form(synthesizer, prev) {
-                        // FIXME: test all suggestions (upstream comment)
-                        let new_preposition = prepositions[0].clone();
-                        if let Some(preposition) =
-                            self.generate_attached_new_form(synthesizer, &new_preposition, prev)
-                        {
-                            let replacement = format!("{verb} {preposition}");
-                            let msg = format!(
+                if is_attached_verb_transitive
+                    && !is_right_preposition
+                    && let Some(verb) = self.generate_unattached_new_form(synthesizer, prev)
+                {
+                    // FIXME: test all suggestions (upstream comment)
+                    let new_preposition = prepositions[0].clone();
+                    if let Some(preposition) =
+                        self.generate_attached_new_form(synthesizer, &new_preposition, prev)
+                    {
+                        let replacement = format!("{verb} {preposition}");
+                        let msg = format!(
                                 "قل <suggestion>{replacement}</suggestion> بدلا من '{prev_token_str}' لأنّ الفعل  متعد بحرف  ."
                             );
-                            let m = Match::new(
-                                self.rule_id(),
-                                Option::<String>::None,
-                                msg,
-                                Some("خطأ في الفعل المتعدي بحرف".to_string()),
-                                TextRange::new(
-                                    sentence_offset + prev.start_pos,
-                                    sentence_offset + prev.end_pos(),
-                                ),
-                                vec![Suggestion {
-                                    value: replacement,
-                                    short_description: None,
-                                }],
-                                "MISC",
-                                MISC_CATEGORY_NAME,
-                            )
-                            .with_metadata(
-                                "َTransitive verbs corrected to indirect transitive",
-                                "misspelling",
-                                0,
-                            )
-                            .with_match_type("Other");
-                            rule_matches.push(m);
-                        }
+                        let m = Match::new(
+                            self.rule_id(),
+                            Option::<String>::None,
+                            msg,
+                            Some("خطأ في الفعل المتعدي بحرف".to_string()),
+                            TextRange::new(
+                                sentence_offset + prev.start_pos,
+                                sentence_offset + prev.end_pos(),
+                            ),
+                            vec![Suggestion {
+                                value: replacement,
+                                short_description: None,
+                            }],
+                            "MISC",
+                            MISC_CATEGORY_NAME,
+                        )
+                        .with_metadata(
+                            "َTransitive verbs corrected to indirect transitive",
+                            "misspelling",
+                            0,
+                        )
+                        .with_match_type("Other");
+                        rule_matches.push(m);
                     }
                 }
             }

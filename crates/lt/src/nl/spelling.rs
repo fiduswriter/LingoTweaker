@@ -205,10 +205,10 @@ impl DutchSpellingRule {
         if HAS_NO_LETTER.is_match(word) {
             return true;
         }
-        if let Some(stripped) = word.strip_suffix('.') {
-            if !self.ignore.contains(word) {
-                return self.is_ignored_no_case(stripped);
-            }
+        if let Some(stripped) = word.strip_suffix('.')
+            && !self.ignore.contains(word)
+        {
+            return self.is_ignored_no_case(stripped);
         }
         self.is_ignored_no_case(word)
     }
@@ -566,32 +566,31 @@ impl DutchSpellingRule {
         }
 
         // word starting with numbers or bullets
-        if let Some(caps) = STARTS_WITH_NUMBERS_BULLETS.captures(word) {
-            if !STARTS_WITH_NUMBERS_BULLETS_EXCEPTIONS.is_match(word) {
-                let first_part = caps.get(1).map(|m| m.as_str()).unwrap_or("");
-                let second_part = caps.get(2).map(|m| m.as_str()).unwrap_or("");
-                let second_part_tokens = lt_tokenize::wordtokenizer::join_emails_and_urls(
-                    lt_tokenize::wordtokenizer::string_tokenize(
-                        second_part,
-                        &lt_tokenize::wordtokenizer::base_tokenizing_characters(),
-                    ),
-                );
-                let multitoken_is_misspelled =
-                    second_part_tokens.iter().any(|s| self.is_misspelled(s));
-                if (!multitoken_is_misspelled || self.is_ignored_no_case(second_part))
-                    && !self.is_prohibited(second_part)
-                {
-                    if let Some(rm) = &mut rule_match {
-                        rm.suggestions.push(Suggestion {
-                            value: format!("{first_part} {second_part}"),
-                            short_description: None,
-                        });
-                    }
-                    prevent_further_suggestions = true;
-                } else {
-                    before_suggestion_str = format!("{first_part} ");
-                    clean_word = second_part.to_string();
+        if let Some(caps) = STARTS_WITH_NUMBERS_BULLETS.captures(word)
+            && !STARTS_WITH_NUMBERS_BULLETS_EXCEPTIONS.is_match(word)
+        {
+            let first_part = caps.get(1).map(|m| m.as_str()).unwrap_or("");
+            let second_part = caps.get(2).map(|m| m.as_str()).unwrap_or("");
+            let second_part_tokens = lt_tokenize::wordtokenizer::join_emails_and_urls(
+                lt_tokenize::wordtokenizer::string_tokenize(
+                    second_part,
+                    &lt_tokenize::wordtokenizer::base_tokenizing_characters(),
+                ),
+            );
+            let multitoken_is_misspelled = second_part_tokens.iter().any(|s| self.is_misspelled(s));
+            if (!multitoken_is_misspelled || self.is_ignored_no_case(second_part))
+                && !self.is_prohibited(second_part)
+            {
+                if let Some(rm) = &mut rule_match {
+                    rm.suggestions.push(Suggestion {
+                        value: format!("{first_part} {second_part}"),
+                        short_description: None,
+                    });
                 }
+                prevent_further_suggestions = true;
+            } else {
+                before_suggestion_str = format!("{first_part} ");
+                clean_word = second_part.to_string();
             }
         }
 
@@ -635,10 +634,10 @@ impl DutchSpellingRule {
         suggestion2: &str,
         prev_pos: usize,
     ) -> Match {
-        if let Some(prev) = rule_matches_so_far.last() {
-            if prev.range.start == prev_pos {
-                rule_matches_so_far.pop();
-            }
+        if let Some(prev) = rule_matches_so_far.last()
+            && prev.range.start == prev_pos
+        {
+            rule_matches_so_far.pop();
         }
         let mut m = self.new_rule_match(prev_pos, end_pos, MESSAGE, SHORT_MESSAGE);
         m.suggestions.push(Suggestion {
@@ -664,10 +663,10 @@ impl DutchSpellingRule {
     }
 
     fn calc_speller_suggestions_cached(&self, word: &str) -> std::sync::Arc<Vec<Suggestion>> {
-        if let Ok(cache) = self.suggestion_cache.lock() {
-            if let Some(hit) = cache.get(word) {
-                return std::sync::Arc::clone(hit);
-            }
+        if let Ok(cache) = self.suggestion_cache.lock()
+            && let Some(hit) = cache.get(word)
+        {
+            return std::sync::Arc::clone(hit);
         }
         let computed = std::sync::Arc::new(self.calc_speller_suggestions(word));
         if let Ok(mut cache) = self.suggestion_cache.lock() {

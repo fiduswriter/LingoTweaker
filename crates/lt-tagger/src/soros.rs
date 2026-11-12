@@ -87,7 +87,7 @@ impl Soros {
                     if group1.starts_with('^') { "^" } else { "" },
                     prefix,
                     if group1.is_empty() { "" } else { " " },
-                    group1.strip_prefix('^').unwrap_or(group1),
+                    group1.trim_prefix('^'),
                     group2
                 );
                 let Some(rebuilt_caps) = p.captures(&rebuilt_owned) else {
@@ -145,8 +145,8 @@ impl Soros {
                 .into_owned();
             value = value.replace("\\n", "\n");
 
-            let stripped = pattern.strip_prefix('^').unwrap_or(&pattern);
-            let stripped = stripped.strip_suffix('$').unwrap_or(stripped);
+            let stripped = pattern.trim_prefix('^');
+            let stripped = stripped.trim_suffix('$');
             let re = Regex::new(&format!("^{stripped}$"))
                 .unwrap_or_else(|e| panic!("fr.sor pattern does not compile: {e}: {stripped}"));
             patterns.push(re);
@@ -212,8 +212,8 @@ fn translate(s: &str, chars: &str, chars2: &str, delim: &str) -> String {
 }
 
 fn strip_quotes(s: &str) -> &str {
-    let s = s.strip_prefix('"').unwrap_or(s);
-    s.strip_suffix('"').unwrap_or(s)
+    let s = s.trim_prefix('"');
+    s.trim_suffix('"')
 }
 
 /// Java `Matcher.replaceAll` replacement expansion: `\x` is `x`, `$N` is the

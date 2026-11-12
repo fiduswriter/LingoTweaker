@@ -20,7 +20,7 @@ use crate::ca::helpers::{reading_with_tag_regex, transform, PronounPosition, Ver
 use crate::ca::verb_filters::tokens_without_whitespace;
 
 macro_rules! anchored_re {
-    ($name:ident, $pat:expr) => {
+    ($name:ident, $pat:expr_2021) => {
         #[allow(dead_code)]
         static $name: LazyLock<regex::Regex> =
             LazyLock::new(|| regex::Regex::new(concat!("^(?:", $pat, ")$")).unwrap());
@@ -988,21 +988,20 @@ fn predicts_accent(
     let mut saturated_completive = false;
     let main_verb_finite =
         reading_with_tag_regex(tokens[main_verb_pos as usize], FINITE_VERB_RE_STR);
-    if let Some(main_verb_finite) = main_verb_finite {
-        if main_verb_pos + 1 < len
-            && tokens[(main_verb_pos + 1) as usize].surface() == "que"
-            && main_verb_finite.lemma() != "veure"
-        {
-            if COMPLETIVE_GAP_VERBS.contains(&main_verb_lemma.as_str()) {
-                // "[verb epistèmic/volitiu] que [subordinada]": decidim segons si hi ha buit.
-                match completive_has_gap(tokens, main_verb_pos, core_end, env) {
-                    Some(false) => saturated_completive = true,
-                    // buit detectat o no decidible: "què" lliga un argument de la subordinada.
-                    _ => is_que_object = true,
-                }
-            } else {
-                is_que_object = true;
+    if let Some(main_verb_finite) = main_verb_finite
+        && main_verb_pos + 1 < len
+        && tokens[(main_verb_pos + 1) as usize].surface() == "que"
+        && main_verb_finite.lemma() != "veure"
+    {
+        if COMPLETIVE_GAP_VERBS.contains(&main_verb_lemma.as_str()) {
+            // "[verb epistèmic/volitiu] que [subordinada]": decidim segons si hi ha buit.
+            match completive_has_gap(tokens, main_verb_pos, core_end, env) {
+                Some(false) => saturated_completive = true,
+                // buit detectat o no decidible: "què" lliga un argument de la subordinada.
+                _ => is_que_object = true,
             }
+        } else {
+            is_que_object = true;
         }
     }
     let is_fer = main_verb_lemma == "fer";

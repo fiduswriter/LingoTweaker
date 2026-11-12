@@ -982,19 +982,16 @@ impl RuleFilter for GermanSuppressMisspelledSuggestionsFilter {
                 };
                 if let Some(re) =
                     suppress_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
+                    && atr.has_pos_tag_matching(&re)
                 {
-                    if atr.has_pos_tag_matching(&re) {
-                        add = false;
-                    }
+                    add = false;
                 }
-                if add {
-                    if let Some(re) =
+                if add
+                    && let Some(re) =
                         filter_postag.and_then(|p| regex::Regex::new(&format!("^(?:{p})$")).ok())
-                    {
-                        if !atr.has_pos_tag_matching(&re) {
-                            add = false;
-                        }
-                    }
+                    && !atr.has_pos_tag_matching(&re)
+                {
+                    add = false;
                 }
             }
             if add {

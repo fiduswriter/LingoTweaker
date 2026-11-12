@@ -238,10 +238,10 @@ impl RussianVerbConjugationRule {
                 if present_or_future_wrong((&pronoun.0, &pronoun.1), (&verb.0, &verb.1)) {
                     rule_matches.push(verb_match(current, next, sentence_offset));
                 }
-            } else if let Some(verb_caps) = past_verb_re().captures(next_pos) {
-                if past_wrong(&pronoun_caps[1], &verb_caps[3]) {
-                    rule_matches.push(verb_match(current, next, sentence_offset));
-                }
+            } else if let Some(verb_caps) = past_verb_re().captures(next_pos)
+                && past_wrong(&pronoun_caps[1], &verb_caps[3])
+            {
+                rule_matches.push(verb_match(current, next, sentence_offset));
             }
         }
         rule_matches

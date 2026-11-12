@@ -661,15 +661,14 @@ impl RuleFilter for SynthesizeWithDAFilter {
             is_match_at_sentence_start(ctx.sentence_tokens, ctx.match_range.start);
         let mut potential_suggestions: Vec<AnalyzedToken> = vec![original_at.clone()];
         let mut second_gender_number = String::new();
-        if lemma_from > 0 {
-            if let Some(reading) = crate::ca::helpers::reading_with_tag_regex(
+        if lemma_from > 0
+            && let Some(reading) = crate::ca::helpers::reading_with_tag_regex(
                 ctx.pattern_tokens[lemma_from - 1],
                 "D.*",
-            ) {
-                if let Some(tag) = &reading.pos_tag {
-                    second_gender_number = tag.get(3..5).unwrap_or("").to_string();
-                }
-            }
+            )
+            && let Some(tag) = &reading.pos_tag
+        {
+            second_gender_number = tag.get(3..5).unwrap_or("").to_string();
         }
         let Ok(re) = regex::Regex::new(&format!("^(?:{lemma_select})$")) else {
             return FilterOutcome::reject();
@@ -752,18 +751,17 @@ impl RuleFilter for SynthesizeWithAnyDeterminerFilter {
         while pos_word > k && !done {
             done = true;
             let idx = pos_word - k;
-            if determiner_reading.is_none() {
-                if let Some(reading) =
+            if determiner_reading.is_none()
+                && let Some(reading) =
                     crate::ca::helpers::reading_with_tag_regex(tokens[idx], "D.*")
-                {
-                    determiner_reading = Some(reading.clone());
-                    if let Some(tag) = &reading.pos_tag {
-                        second_gender_number = tag.get(3..5).unwrap_or("").to_string();
-                        determiner_type = tag.get(0..2).unwrap_or("").to_string();
-                        done = determiner_type != "DA";
-                    }
-                    first_underlined_token = idx;
+            {
+                determiner_reading = Some(reading.clone());
+                if let Some(tag) = &reading.pos_tag {
+                    second_gender_number = tag.get(3..5).unwrap_or("").to_string();
+                    determiner_type = tag.get(0..2).unwrap_or("").to_string();
+                    done = determiner_type != "DA";
                 }
+                first_underlined_token = idx;
             }
             let token = tokens[idx];
             if token.has_pos_tag("_QM_OPEN") {

@@ -65,7 +65,7 @@ const CONTSIZE: usize = 65536;
 /// `std::string` without Rust's unconditional heap allocation, which made the
 /// suffix scan ~100x slower than the reference.
 macro_rules! joined_slice {
-    ($buf:ident, $heap:ident, $a:expr, $b:expr) => {{
+    ($buf:ident, $heap:ident, $a:expr_2021, $b:expr_2021) => {{
         let a: &[u8] = $a;
         let b: &[u8] = $b;
         let total = a.len() + b.len();
@@ -898,12 +898,11 @@ fn decode_flags_alias(mode: FlagMode, af_alias_raw: &[String], flags: &str) -> V
     if !af_alias_raw.is_empty()
         && !trimmed.is_empty()
         && trimmed.bytes().all(|b| b.is_ascii_digit())
+        && let Ok(n) = trimmed.parse::<usize>()
+        && n >= 1
+        && n <= af_alias_raw.len()
     {
-        if let Ok(n) = trimmed.parse::<usize>() {
-            if n >= 1 && n <= af_alias_raw.len() {
-                return decode_flags(mode, &af_alias_raw[n - 1]);
-            }
-        }
+        return decode_flags(mode, &af_alias_raw[n - 1]);
     }
     decode_flags(mode, flags)
 }
@@ -913,12 +912,11 @@ fn decode_entry_flags(aff: &Aff, flags: &str) -> Vec<Flag> {
     if !aff.af_aliases.is_empty()
         && !trimmed.is_empty()
         && trimmed.bytes().all(|b| b.is_ascii_digit())
+        && let Ok(n) = trimmed.parse::<usize>()
+        && n >= 1
+        && n <= aff.af_aliases.len()
     {
-        if let Ok(n) = trimmed.parse::<usize>() {
-            if n >= 1 && n <= aff.af_aliases.len() {
-                return aff.af_aliases[n - 1].clone();
-            }
-        }
+        return aff.af_aliases[n - 1].clone();
     }
     decode_flags(aff.flag_mode, flags)
 }
@@ -1190,10 +1188,10 @@ fn parse_directive<'a>(
         // `FLAG` directive may follow `AF`, as in the Hunspell-ar `.aff`).
         "AF" => {
             let rest: Vec<&str> = it.collect();
-            if let Some(first) = rest.first() {
-                if !(rest.len() == 1 && first.bytes().all(|b| b.is_ascii_digit())) {
-                    aff.af_alias_raw.push((*first).to_string());
-                }
+            if let Some(first) = rest.first()
+                && !(rest.len() == 1 && first.bytes().all(|b| b.is_ascii_digit()))
+            {
+                aff.af_alias_raw.push((*first).to_string());
             }
         }
         // `HashMgr::parse_aliasm` (`AM`): the morphological aliases are parsed
@@ -1325,15 +1323,15 @@ fn parse_map_row(rest: &str) -> Vec<Vec<u8>> {
     let mut row = Vec::new();
     let mut i = 0;
     while i < b.len() {
-        if b[i] == b'(' {
-            if let Some(rel) = rest[i..].find(')') {
-                let end = i + rel;
-                if end > i + 1 {
-                    row.push(b[i + 1..end].to_vec());
-                }
-                i = end + 1;
-                continue;
+        if b[i] == b'('
+            && let Some(rel) = rest[i..].find(')')
+        {
+            let end = i + rel;
+            if end > i + 1 {
+                row.push(b[i + 1..end].to_vec());
             }
+            i = end + 1;
+            continue;
         }
         let len = if b[i] & 0x80 == 0 {
             1
@@ -1361,13 +1359,13 @@ fn parse_compound_rule(mode: FlagMode, rest: &str) -> Vec<Flag> {
     let mut rule = Vec::new();
     let mut i = 0;
     while i < b.len() {
-        if b[i] == b'(' {
-            if let Some(rel) = rest[i..].find(')') {
-                let end = i + rel;
-                rule.extend(decode_flags(mode, &rest[i + 1..end]));
-                i = end + 1;
-                continue;
-            }
+        if b[i] == b'('
+            && let Some(rel) = rest[i..].find(')')
+        {
+            let end = i + rel;
+            rule.extend(decode_flags(mode, &rest[i + 1..end]));
+            i = end + 1;
+            continue;
         }
         if b[i] == b'*' || b[i] == b'?' {
             rule.push(b[i] as Flag);
@@ -1466,10 +1464,10 @@ fn strip_morphology(ts: &str) -> &str {
         }
         search = pos + 1;
     }
-    if let Some(tab) = ts.find('\t') {
-        if dp.is_none() || tab < dp.unwrap() {
-            dp = Some(tab + 1);
-        }
+    if let Some(tab) = ts.find('\t')
+        && (dp.is_none() || tab < dp.unwrap())
+    {
+        dp = Some(tab + 1);
     }
     match dp {
         Some(p) => &ts[..p - 1],
@@ -1848,12 +1846,12 @@ impl HunspellChecker {
         if info.forbidden {
             return false;
         }
-        if found {
-            if let Some(entry) = self.lookup_first(scw) {
-                if self.is_keepcase(entry) && captype == Captype::AllCap {
-                    found = false;
-                }
-            }
+        if found
+            && let Some(entry) = self.lookup_first(scw)
+            && self.is_keepcase(entry)
+            && captype == Captype::AllCap
+        {
+            found = false;
         }
         if found || idot {
             return found;
@@ -1868,23 +1866,21 @@ impl HunspellChecker {
                 let mut t = scw.clone();
                 t.push(b'.');
                 found = self.checkword(&t, info).is_some();
-                if found {
-                    if let Some(entry) = self.lookup_first(&t) {
-                        if self.is_keepcase(entry) && captype == Captype::AllCap {
-                            found = false;
-                        }
-                    }
-                }
-            }
-        }
-        if found {
-            if let Some(entry) = self.lookup_first(&check) {
-                let has_sharp = contains(&check, "ß".as_bytes());
-                if self.is_keepcase(entry)
-                    && (captype == Captype::AllCap || !(self.aff.checksharps && has_sharp))
+                if found
+                    && let Some(entry) = self.lookup_first(&t)
+                    && self.is_keepcase(entry)
+                    && captype == Captype::AllCap
                 {
                     found = false;
                 }
+            }
+        }
+        if found && let Some(entry) = self.lookup_first(&check) {
+            let has_sharp = contains(&check, "ß".as_bytes());
+            if self.is_keepcase(entry)
+                && (captype == Captype::AllCap || !(self.aff.checksharps && has_sharp))
+            {
+                found = false;
             }
         }
         found
@@ -2089,8 +2085,8 @@ impl HunspellChecker {
         state.pfx = None;
         state.sfxappnd = None;
         for (idx, e) in self.aff.empty_prefixes.iter().enumerate() {
-            if self.prefix_allowed_in_compound(e, in_compound) {
-                if let Some(entry) = self.pfx_entry_checkword(
+            if self.prefix_allowed_in_compound(e, in_compound)
+                && let Some(entry) = self.pfx_entry_checkword(
                     e,
                     idx,
                     true,
@@ -2100,10 +2096,10 @@ impl HunspellChecker {
                     in_compound,
                     needflag,
                     state,
-                ) {
-                    state.pfx = Some(PfxId::Empty(idx));
-                    return Some(entry);
-                }
+                )
+            {
+                state.pfx = Some(PfxId::Empty(idx));
+                return Some(entry);
             }
         }
         if start >= word.len() {
@@ -2524,20 +2520,20 @@ impl HunspellChecker {
                         continue;
                     }
                 }
-                if let Some(cc) = cclass {
-                    if !e.cont.contains(&cc) {
-                        continue;
-                    }
+                if let Some(cc) = cclass
+                    && !e.cont.contains(&cc)
+                {
+                    continue;
                 }
-                if let Some(bf) = badflag {
-                    if he.flags.contains(&bf) {
-                        continue;
-                    }
+                if let Some(bf) = badflag
+                    && he.flags.contains(&bf)
+                {
+                    continue;
                 }
-                if let Some(nf) = needflag {
-                    if !(he.flags.contains(&nf) || e.cont.contains(&nf)) {
-                        continue;
-                    }
+                if let Some(nf) = needflag
+                    && !(he.flags.contains(&nf) || e.cont.contains(&nf))
+                {
+                    continue;
                 }
                 return Some(he);
             }
@@ -2915,14 +2911,13 @@ impl HunspellChecker {
                         checked_prefix = true;
                     }
                 }
-            } else if let Some(entry) = rv {
-                if self.has_flag(entry, self.aff.forbidden_word)
+            } else if let Some(entry) = rv
+                && (self.has_flag(entry, self.aff.forbidden_word)
                     || self.has_flag(entry, self.aff.need_affix)
-                    || entry.only_upcase
-                {
-                    i += 1;
-                    continue;
-                }
+                    || entry.only_upcase)
+            {
+                i += 1;
+                continue;
             }
             // pfx/sfx continuation flags
             if let Some(entry) = rv {
@@ -3135,14 +3130,12 @@ impl HunspellChecker {
                             return None;
                         }
                         // first-part check with forbidden dictionary entries
-                        if let Some(forbidden) = self.aff.forbidden_word {
-                            if end <= st.len() {
-                                if let Some(rv2) = self.lookup_first(&st[..end]) {
-                                    if rv2.flags.contains(&forbidden) {
-                                        return None;
-                                    }
-                                }
-                            }
+                        if let Some(forbidden) = self.aff.forbidden_word
+                            && end <= st.len()
+                            && let Some(rv2) = self.lookup_first(&st[..end])
+                            && rv2.flags.contains(&forbidden)
+                        {
+                            return None;
                         }
                         return Some(rv_first);
                     }
@@ -3271,10 +3264,11 @@ impl HunspellChecker {
                 continue;
             };
             if found > 0 && found < scw.len().saturating_sub(plen) {
-                if let Some(found2) = find_sub(scw, j, found + 1) {
-                    if found2 > 0 && found2 < scw.len() - plen {
-                        found = found2;
-                    }
+                if let Some(found2) = find_sub(scw, j, found + 1)
+                    && found2 > 0
+                    && found2 < scw.len() - plen
+                {
+                    found = found2;
                 }
                 let rest = &scw[found + plen..];
                 if !self.spell_internal(rest) {
@@ -4427,12 +4421,11 @@ impl<'a> SuggestMgr<'a> {
     fn check_forbidden(&self, word: &[u8]) -> bool {
         let len = word.len();
         let mut rv = self.c.lookup_first(word);
-        if let Some(e) = rv {
-            if self.c.has_flag(e, self.c.aff.need_affix)
-                || self.c.has_flag(e, self.c.aff.only_in_compound)
-            {
-                rv = None;
-            }
+        if let Some(e) = rv
+            && (self.c.has_flag(e, self.c.aff.need_affix)
+                || self.c.has_flag(e, self.c.aff.only_in_compound))
+        {
+            rv = None;
         }
         let mut state = AffixState::default();
         if rv.is_none()
@@ -4492,13 +4485,12 @@ impl HunspellChecker {
         }
 
         let first = self.lookup_first(word);
-        if let Some(e) = first {
-            if self.has_flag(e, self.aff.forbidden_word)
+        if let Some(e) = first
+            && (self.has_flag(e, self.aff.forbidden_word)
                 || self.has_flag(e, self.aff.nosuggest)
-                || self.has_flag(e, self.aff.substandard)
-            {
-                return 0;
-            }
+                || self.has_flag(e, self.aff.substandard))
+        {
+            return 0;
         }
         let mut rv: Option<DicEntry<'_>> = None;
         if first.is_some() {
@@ -4931,13 +4923,13 @@ impl<'a> SuggestMgr<'a> {
                 if cont_special(e) {
                     continue;
                 }
-                if let Some(newword) = self.c.sfx_add(e, root_word) {
-                    if wlst.len() < MAX_WORDS {
-                        wlst.push(GuessWord {
-                            word: newword,
-                            allow: e.cross,
-                        });
-                    }
+                if let Some(newword) = self.c.sfx_add(e, root_word)
+                    && wlst.len() < MAX_WORDS
+                {
+                    wlst.push(GuessWord {
+                        word: newword,
+                        allow: e.cross,
+                    });
                 }
             }
         }
@@ -4959,13 +4951,13 @@ impl<'a> SuggestMgr<'a> {
                     {
                         continue;
                     }
-                    if let Some(newword) = self.c.pfx_add(e, &wlst[j].word) {
-                        if wlst.len() < MAX_WORDS {
-                            wlst.push(GuessWord {
-                                word: newword,
-                                allow: e.cross,
-                            });
-                        }
+                    if let Some(newword) = self.c.pfx_add(e, &wlst[j].word)
+                        && wlst.len() < MAX_WORDS
+                    {
+                        wlst.push(GuessWord {
+                            word: newword,
+                            allow: e.cross,
+                        });
                     }
                 }
             }
@@ -4985,13 +4977,13 @@ impl<'a> SuggestMgr<'a> {
                 if cont_special(e) {
                     continue;
                 }
-                if let Some(newword) = self.c.pfx_add(e, root_word) {
-                    if wlst.len() < MAX_WORDS {
-                        wlst.push(GuessWord {
-                            word: newword,
-                            allow: e.cross,
-                        });
-                    }
+                if let Some(newword) = self.c.pfx_add(e, root_word)
+                    && wlst.len() < MAX_WORDS
+                {
+                    wlst.push(GuessWord {
+                        word: newword,
+                        allow: e.cross,
+                    });
                 }
             }
         }
@@ -5010,7 +5002,7 @@ impl<'a> SuggestMgr<'a> {
 
         // exhaustively walk the dictionary, keeping the MAX_ROOTS best roots
         let mut roots: Vec<Option<u32>> = vec![None; MAX_ROOTS];
-        let mut scores: Vec<i32> = (0..MAX_ROOTS).map(|i| -100 * i as i32).collect();
+        let mut scores = Vec::from_fn(MAX_ROOTS, |i| -100 * i as i32);
         let mut lp = MAX_ROOTS - 1;
         for &idx in &self.c.index.ngram_order {
             let packed = self.c.index.entries[idx as usize];
@@ -5073,7 +5065,7 @@ impl<'a> SuggestMgr<'a> {
 
         // expand each root and keep the MAX_GUESS best candidates
         let mut guesses: Vec<Option<Vec<u8>>> = vec![None; MAX_GUESS];
-        let mut gscore: Vec<i32> = (0..MAX_GUESS).map(|i| -100 * i as i32).collect();
+        let mut gscore = Vec::from_fn(MAX_GUESS, |i| -100 * i as i32);
         let mut lp = MAX_GUESS - 1;
         for root in &roots {
             let Some(ridx) = *root else { continue };

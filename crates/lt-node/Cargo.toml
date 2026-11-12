@@ -3,6 +3,7 @@ name = "lt-node"
 description = "Node.js bindings (napi-rs) for LingoTweaker"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 # Not publishable to crates.io: distributed through npm (napi-rs). Depends on

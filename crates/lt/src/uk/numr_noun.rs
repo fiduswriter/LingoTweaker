@@ -209,12 +209,12 @@ impl TokenAgreementNumrNounRule {
                     continue;
                 }
                 for at in &tr.readings {
-                    if let Some(tag) = at.pos_tag.as_deref() {
-                        if tag.starts_with("numr") || NOUN_NUMR_ALL.is_match(tag).unwrap_or(false) {
-                            state.numr_pos = i;
-                            state.numr_readings.push(at.clone());
-                            state.numr_idx = Some(i);
-                        }
+                    if let Some(tag) = at.pos_tag.as_deref()
+                        && (tag.starts_with("numr") || NOUN_NUMR_ALL.is_match(tag).unwrap_or(false))
+                    {
+                        state.numr_pos = i;
+                        state.numr_readings.push(at.clone());
+                        state.numr_idx = Some(i);
                     }
                 }
                 i += 1;

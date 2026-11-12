@@ -135,10 +135,11 @@ impl LegacyReplaceRule {
             if possible.is_none() && self.config.check_lemmas {
                 let mut lemmas: Vec<String> = Vec::new();
                 for reading in &tr.readings {
-                    if let Some(lemma) = &reading.stem {
-                        if self.wrong_words.contains_key(lemma) && !lemmas.contains(lemma) {
-                            lemmas.push(self.cleanup(lemma));
-                        }
+                    if let Some(lemma) = &reading.stem
+                        && self.wrong_words.contains_key(lemma)
+                        && !lemmas.contains(lemma)
+                    {
+                        lemmas.push(self.cleanup(lemma));
                     }
                 }
                 let mut synthesized: Vec<String> = Vec::new();

@@ -229,19 +229,17 @@ impl RuleFilter for UnderlineSpacesFilter {
         };
         let sentence = ctx.sentence_text;
         let mut range = ctx.match_range;
-        if mode == "before" || mode == "both" {
-            if let Some(c) = sentence[..range.start].chars().last() {
-                if c.is_whitespace() {
-                    range.start -= c.len_utf8();
-                }
-            }
+        if (mode == "before" || mode == "both")
+            && let Some(c) = sentence[..range.start].chars().last()
+            && c.is_whitespace()
+        {
+            range.start -= c.len_utf8();
         }
-        if mode == "after" || mode == "both" {
-            if let Some(c) = sentence[range.end..].chars().next() {
-                if c.is_whitespace() {
-                    range.end += c.len_utf8();
-                }
-            }
+        if (mode == "after" || mode == "both")
+            && let Some(c) = sentence[range.end..].chars().next()
+            && c.is_whitespace()
+        {
+            range.end += c.len_utf8();
         }
         FilterOutcome {
             accepted: true,
@@ -1277,18 +1275,18 @@ impl RuleFilter for AdverbFilter {
         let (Some(adverb), Some(noun)) = (ctx.args.get("adverb"), ctx.args.get("noun")) else {
             return FilterOutcome::accept();
         };
-        if let Some(adjective) = self.adverb2adj.get(adverb.as_str()) {
-            if *adjective != adverb.as_str() {
-                return FilterOutcome {
-                    accepted: true,
-                    range: None,
-                    message: None,
-                    suggestions: Some(vec![Suggestion {
-                        value: format!("{adjective} {noun}"),
-                        short_description: None,
-                    }]),
-                };
-            }
+        if let Some(adjective) = self.adverb2adj.get(adverb.as_str())
+            && *adjective != adverb.as_str()
+        {
+            return FilterOutcome {
+                accepted: true,
+                range: None,
+                message: None,
+                suggestions: Some(vec![Suggestion {
+                    value: format!("{adjective} {noun}"),
+                    short_description: None,
+                }]),
+            };
         }
         FilterOutcome::accept()
     }
@@ -1336,17 +1334,16 @@ impl RuleFilter for SuppressMisspelledSuggestionsFilter {
                     has_typographic_apostrophe: false,
                     is_pos_tag_unknown: false,
                 };
-                if let Some(re) = suppress_postag.and_then(|p| pos_tag_regex(p)) {
-                    if has_pos_tag_full_match(&atr, &re) {
-                        add = false;
-                    }
+                if let Some(re) = suppress_postag.and_then(|p| pos_tag_regex(p))
+                    && has_pos_tag_full_match(&atr, &re)
+                {
+                    add = false;
                 }
-                if add {
-                    if let Some(re) = filter_postag.and_then(|p| pos_tag_regex(p)) {
-                        if !has_pos_tag_full_match(&atr, &re) {
-                            add = false;
-                        }
-                    }
+                if add
+                    && let Some(re) = filter_postag.and_then(|p| pos_tag_regex(p))
+                    && !has_pos_tag_full_match(&atr, &re)
+                {
+                    add = false;
                 }
             }
             if add {
@@ -1468,10 +1465,11 @@ impl RuleFilter for FindSuggestionsFilter {
 
         // if the original token already meets the requirements, nothing to do
         for atr in self.env.tagger.tag_word(&atr_word_token) {
-            if let Some(tag) = &atr.pos_tag {
-                if desired_re.is_match(tag).unwrap_or(false) && diacritics_mode {
-                    return FilterOutcome::reject();
-                }
+            if let Some(tag) = &atr.pos_tag
+                && desired_re.is_match(tag).unwrap_or(false)
+                && diacritics_mode
+            {
+                return FilterOutcome::reject();
             }
         }
 

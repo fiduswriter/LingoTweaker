@@ -305,15 +305,15 @@ impl UkrainianTagger {
                 return self.tagged_to_at(word, &tagged);
             }
         }
-        if word.chars().count() > 5 {
-            if let Some(caps) = full_captures(&MISSING_HYPHEN, word) {
-                let head = caps[1].to_lowercase();
-                let tagged = self.word_lookup(&head);
-                if !tagged.is_empty() && tagged.iter().any(|(_, tag)| tag.contains("pron")) {
-                    let suffix = format!("-{}", caps[2].to_lowercase());
-                    let tagged = adjust(&tagged, None, Some(&suffix), ":bad");
-                    return self.tagged_to_at(word, &tagged);
-                }
+        if word.chars().count() > 5
+            && let Some(caps) = full_captures(&MISSING_HYPHEN, word)
+        {
+            let head = caps[1].to_lowercase();
+            let tagged = self.word_lookup(&head);
+            if !tagged.is_empty() && tagged.iter().any(|(_, tag)| tag.contains("pron")) {
+                let suffix = format!("-{}", caps[2].to_lowercase());
+                let tagged = adjust(&tagged, None, Some(&suffix), ":bad");
+                return self.tagged_to_at(word, &tagged);
             }
         }
 
@@ -499,38 +499,38 @@ impl UkrainianTagger {
                 }
 
                 if tokens[0].pos_tag.is_none() && word.chars().count() >= 3 {
-                    if word.chars().count() >= 9 {
-                        if let Ok(Some(caps)) = LEFT_O_ADJ_INVALID_PATTERN.captures(&word) {
-                            let prefix = caps.get(1).map(|m| m.as_str()).unwrap_or("");
-                            let adjusted_word = caps.get(2).map(|m| m.as_str()).unwrap_or("");
-                            let new_tokens = self.get_adjusted_analyzed_tokens(
-                                &word,
-                                adjusted_word,
-                                Some(&ADJ_POS),
-                                None,
-                                &|lemma| format!("{prefix}{lemma}"),
-                            );
-                            if !new_tokens.is_empty() {
-                                tokens = new_tokens;
-                            }
+                    if word.chars().count() >= 9
+                        && let Ok(Some(caps)) = LEFT_O_ADJ_INVALID_PATTERN.captures(&word)
+                    {
+                        let prefix = caps.get(1).map(|m| m.as_str()).unwrap_or("");
+                        let adjusted_word = caps.get(2).map(|m| m.as_str()).unwrap_or("");
+                        let new_tokens = self.get_adjusted_analyzed_tokens(
+                            &word,
+                            adjusted_word,
+                            Some(&ADJ_POS),
+                            None,
+                            &|lemma| format!("{prefix}{lemma}"),
+                        );
+                        if !new_tokens.is_empty() {
+                            tokens = new_tokens;
                         }
                     }
                     // гааа
-                    if tokens[0].pos_tag.is_none() && !word.eq_ignore_ascii_case("ііі") {
-                        if let Ok(Some(caps)) = REPEATED_VOWEL.captures(&word) {
-                            let adjusted_word =
-                                REPEATED_VOWEL.replace_all(&word, "$1").into_owned();
-                            let _ = caps;
-                            let new_tokens = self.get_adjusted_analyzed_tokens(
-                                &word,
-                                &adjusted_word,
-                                Some(&REPEATED_OK_POS),
-                                Some(":alt"),
-                                &|lemma| lemma.to_string(),
-                            );
-                            if !new_tokens.is_empty() {
-                                tokens = new_tokens;
-                            }
+                    if tokens[0].pos_tag.is_none()
+                        && !word.eq_ignore_ascii_case("ііі")
+                        && let Ok(Some(caps)) = REPEATED_VOWEL.captures(&word)
+                    {
+                        let adjusted_word = REPEATED_VOWEL.replace_all(&word, "$1").into_owned();
+                        let _ = caps;
+                        let new_tokens = self.get_adjusted_analyzed_tokens(
+                            &word,
+                            &adjusted_word,
+                            Some(&REPEATED_OK_POS),
+                            Some(":alt"),
+                            &|lemma| lemma.to_string(),
+                        );
+                        if !new_tokens.is_empty() {
+                            tokens = new_tokens;
                         }
                     }
                     if tokens[0].pos_tag.is_none()

@@ -75,12 +75,12 @@ impl SimpleDisambiguator {
             if matcher.is_none() {
                 let lower = token.to_lowercase();
                 matcher = self.remove_map.get(&lower);
-                if matcher.is_none() {
-                    if let Some(idx) = token.rfind('-') {
-                        if idx > 0 && DASHED_PARTICLES.is_match(&token).unwrap_or(false) {
-                            matcher = self.remove_map.get(&token[..idx]);
-                        }
-                    }
+                if matcher.is_none()
+                    && let Some(idx) = token.rfind('-')
+                    && idx > 0
+                    && DASHED_PARTICLES.is_match(&token).unwrap_or(false)
+                {
+                    matcher = self.remove_map.get(&token[..idx]);
                 }
             }
 

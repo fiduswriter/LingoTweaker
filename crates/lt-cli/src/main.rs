@@ -345,7 +345,7 @@ fn cmd_check(
             // line terminator is stripped like scripts/oracle/CheckDumpText.java
             let text = input
                 .strip_suffix('\n')
-                .map(|t| t.strip_suffix('\r').unwrap_or(t))
+                .map(|t| t.trim_suffix('\r'))
                 .unwrap_or(&input);
             print!("{}", render(0, text)?);
             return Ok(());

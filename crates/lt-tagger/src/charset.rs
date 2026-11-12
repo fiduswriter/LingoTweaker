@@ -435,6 +435,14 @@ impl Charset {
         }
     }
 
+    /// Decode an owned FSA buffer, allowing UTF-8 to reuse its allocation.
+    pub(crate) fn decode_owned(self, bytes: Vec<u8>) -> String {
+        match self {
+            Charset::Utf8 => String::from_utf8_lossy_owned(bytes),
+            _ => self.decode(&bytes).into_owned(),
+        }
+    }
+
     /// Decode the first character of a (possibly partial) byte sequence.
     /// UTF-8 returns `None` for an incomplete sequence so the caller can keep
     /// accumulating continuation bytes; single-byte charsets always decode the
@@ -499,6 +507,34 @@ impl Charset {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn owned_decoding_preserves_charset_and_lossy_utf8_behavior() {
+        let mut inputs = vec![
+            Vec::new(),
+            "English Grüße 😀".as_bytes().to_vec(),
+            vec![b'a', 0xF0, 0x90, 0x80],
+            vec![0xED, 0xA0, 0x80, b'b', 0xFF],
+            (0..=255).collect(),
+        ];
+        inputs.extend((0..=255).map(|byte| vec![byte]));
+        for charset in [
+            Charset::Utf8,
+            Charset::Iso88591,
+            Charset::Iso885915,
+            Charset::Iso88592,
+            Charset::Iso88597,
+            Charset::Koi8R,
+        ] {
+            for bytes in &inputs {
+                assert_eq!(
+                    charset.decode_owned(bytes.clone()),
+                    charset.decode(bytes),
+                    "{charset:?}: {bytes:?}"
+                );
+            }
+        }
+    }
 
     #[test]
     fn latin2_round_trips_slovenian() {

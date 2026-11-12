@@ -335,10 +335,10 @@ fn get_inflected_case(
     // if the previous is Jar
     if previous_pos >= 0 && (previous_pos as usize) < pattern_tokens.len() {
         for tk in &pattern_tokens[previous_pos as usize].readings {
-            if let Some(postag) = &tk.pos_tag {
-                if postag.starts_with("PR") {
-                    return "jar".to_string();
-                }
+            if let Some(postag) = &tk.pos_tag
+                && postag.starts_with("PR")
+            {
+                return "jar".to_string();
             }
         }
     }

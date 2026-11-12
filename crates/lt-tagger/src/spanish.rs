@@ -121,10 +121,11 @@ impl SpanishTagger {
             let first_upper = uppercase_first_char(&lower_word);
             self.add_from_word_tagger(word, &first_upper, &mut l);
         }
-        if l.is_empty() && !is_mixed {
-            if let Some(additional) = self.additional_tags(word) {
-                l.extend(additional);
-            }
+        if l.is_empty()
+            && !is_mixed
+            && let Some(additional) = self.additional_tags(word)
+        {
+            l.extend(additional);
         }
         if l.is_empty() && is_emoji(word) {
             l.push(AnalyzedToken::new(
@@ -243,37 +244,32 @@ impl SpanishTagger {
         }
         // Any well-formed adjective with prefixes is tagged as an adjective
         // copying the original tags.
-        if let Some(possible_adj_prefix) = hyphen_prefix(word) {
-            if !full_match(
+        if let Some(possible_adj_prefix) = hyphen_prefix(word)
+            && !full_match(
                 r"(anti|pre|ex|pro|afro|ultra|super|súper)",
                 &possible_adj_prefix,
-            ) {
-                if let Some((_, possible_adj)) = hyphen_prefix_and_rest(word) {
-                    let mut prefix_matches = false;
-                    for (_, tag) in self.dict.lookup(&possible_adj_prefix) {
-                        if full_match(r"AQ.MS.|AQ.CS.|AQ.MN.", &tag) {
-                            prefix_matches = true;
-                            break;
-                        }
-                    }
-                    let mut adj_match: Option<(String, String)> = None;
-                    for (lemma, tag) in self.dict.lookup(&possible_adj) {
-                        if full_match("AQ.+", &tag) {
-                            adj_match = Some((tag, possible_adj_prefix.clone() + "-" + &lemma));
-                            break;
-                        }
-                    }
-                    if let Some((new_postag, new_lemma)) = adj_match {
-                        if prefix_matches {
-                            additional.push(AnalyzedToken::new(
-                                word,
-                                Some(new_lemma),
-                                Some(new_postag),
-                            ));
-                            return Some(additional);
-                        }
-                    }
+            )
+            && let Some((_, possible_adj)) = hyphen_prefix_and_rest(word)
+        {
+            let mut prefix_matches = false;
+            for (_, tag) in self.dict.lookup(&possible_adj_prefix) {
+                if full_match(r"AQ.MS.|AQ.CS.|AQ.MN.", &tag) {
+                    prefix_matches = true;
+                    break;
                 }
+            }
+            let mut adj_match: Option<(String, String)> = None;
+            for (lemma, tag) in self.dict.lookup(&possible_adj) {
+                if full_match("AQ.+", &tag) {
+                    adj_match = Some((tag, possible_adj_prefix.clone() + "-" + &lemma));
+                    break;
+                }
+            }
+            if let Some((new_postag, new_lemma)) = adj_match
+                && prefix_matches
+            {
+                additional.push(AnalyzedToken::new(word, Some(new_lemma), Some(new_postag)));
+                return Some(additional);
             }
         }
         None

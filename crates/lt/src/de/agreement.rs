@@ -357,8 +357,7 @@ impl AgreementRule {
                             PosType::Nomen,
                         )
                         && german_helper::has_reading_of_type(&tokens[token_pos], PosType::Adjektiv)
-                    {
-                        if let Some(m) = self.check_det_adj_adj_noun_agreement(
+                        && let Some(m) = self.check_det_adj_adj_noun_agreement(
                             maybe_preposition,
                             &tokens[i],
                             next_token,
@@ -370,14 +369,13 @@ impl AgreementRule {
                             &repl_map,
                             skipped_str.as_deref(),
                             with_compound_errors,
-                        ) {
-                            rule_matches.push(m);
-                        }
+                        )
+                    {
+                        rule_matches.push(m);
                     }
                 } else if german_helper::has_reading_of_type(next_token, PosType::Nomen)
                     && next_token.surface() != "Herr"
-                {
-                    if let Some(m) = self.check_det_noun_agreement(
+                    && let Some(m) = self.check_det_noun_agreement(
                         maybe_preposition,
                         &tokens[i],
                         next_token,
@@ -387,9 +385,9 @@ impl AgreementRule {
                         &repl_map,
                         skipped_str.as_deref(),
                         with_compound_errors,
-                    ) {
-                        rule_matches.push(m);
-                    }
+                    )
+                {
+                    rule_matches.push(m);
                 }
             }
         }
@@ -428,16 +426,16 @@ impl AgreementRule {
         let set2 = german_helper::get_agreement_categories(token2, &[], false);
         set1.retain(|c| set2.contains(c));
         if set1.is_empty() && !(token1.surface() == "allen" && token2.surface() == "Grund") {
-            if with_compound_errors {
-                if let Some(compound_match) = self.get_compound_error2(
+            if with_compound_errors
+                && let Some(compound_match) = self.get_compound_error2(
                     token1,
                     token2,
                     sentence_offset,
                     token_pos,
                     orig_tokens,
-                ) {
-                    return Some(compound_match);
-                }
+                )
+            {
+                return Some(compound_match);
             }
             let message = MSG;
             let mut suggestor = AgreementSuggestor2::new(
@@ -490,8 +488,9 @@ impl AgreementRule {
                 return None;
             }
         }
-        if with_compound_errors && token_pos + 4 < orig_tokens.len() {
-            if let Some(m) = self.get_compound_error4(
+        if with_compound_errors
+            && token_pos + 4 < orig_tokens.len()
+            && let Some(m) = self.get_compound_error4(
                 &orig_tokens[token_pos],
                 &orig_tokens[token_pos + 1],
                 &orig_tokens[token_pos + 2],
@@ -500,21 +499,21 @@ impl AgreementRule {
                 orig_tokens,
                 sentence_offset,
                 None,
-            ) {
-                return Some(m);
-            }
+            )
+        {
+            return Some(m);
         }
-        if with_compound_errors {
-            if let Some(m) = self.get_compound_error3(
+        if with_compound_errors
+            && let Some(m) = self.get_compound_error3(
                 token1,
                 token2,
                 token3,
                 token_pos,
                 orig_tokens,
                 sentence_offset,
-            ) {
-                return Some(m);
-            }
+            )
+        {
+            return Some(m);
         }
         if token3.has_pos_tag_starting_with("ABK") {
             return None;
@@ -559,8 +558,8 @@ impl AgreementRule {
         if !set.is_empty() {
             return None;
         }
-        if with_compound_errors {
-            if let Some(m) = self.get_compound_error4(
+        if with_compound_errors
+            && let Some(m) = self.get_compound_error4(
                 token1,
                 token2,
                 token3,
@@ -569,9 +568,9 @@ impl AgreementRule {
                 orig_tokens,
                 sentence_offset,
                 skipped_str,
-            ) {
-                return Some(m);
-            }
+            )
+        {
+            return Some(m);
         }
         if token4.has_pos_tag_starting_with("ABK") {
             return None;

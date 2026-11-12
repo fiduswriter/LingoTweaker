@@ -219,16 +219,16 @@ impl EnglishChunker {
                     new_chunk_tag = Some("NP-plural".to_string());
                 }
             }
-            if let Some(nct) = &new_chunk_tag {
-                if is_end_np(i) {
-                    chunk_tags.push(format!("E-{nct}"));
-                    new_chunk_tag = None;
-                }
+            if let Some(nct) = &new_chunk_tag
+                && is_end_np(i)
+            {
+                chunk_tags.push(format!("E-{nct}"));
+                new_chunk_tag = None;
             }
-            if let Some(nct) = &new_chunk_tag {
-                if is_in_np(t) {
-                    chunk_tags.push(format!("I-{nct}"));
-                }
+            if let Some(nct) = &new_chunk_tag
+                && is_in_np(t)
+            {
+                chunk_tags.push(format!("I-{nct}"));
             }
             if chunk_tags.is_empty() {
                 result.push(ChunkTaggedToken {

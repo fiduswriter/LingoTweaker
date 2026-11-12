@@ -25,45 +25,43 @@ pub fn dash(tokens: &[AnalyzedTokenReadings], sentence_offset: usize) -> Vec<Mat
     let mut prev_token: Option<&str> = None;
     for i in 0..view.len() {
         let token = view[i].surface();
-        if let Some(prev) = prev_token {
-            if prev.ends_with('-') && prev != "-" && !prev.contains("--") && !prev.contains("–-")
+        if let Some(prev) = prev_token
+            && prev.ends_with('-')
+            && prev != "-"
+            && !prev.contains("--")
+            && !prev.contains("–-")
+        {
+            let first_char = token.chars().next();
+            if first_char.is_some_and(char::is_uppercase)
+                && !matches!(token, "UND" | "ODER" | "BZW")
             {
-                let first_char = token.chars().next();
-                if first_char.is_some_and(char::is_uppercase)
-                    && !matches!(token, "UND" | "ODER" | "BZW")
-                {
-                    let from_pos = view[i - 1].start_pos;
-                    let mut suggestions = vec![Suggestion {
-                        value: format!("{prev}{token}"),
+                let from_pos = view[i - 1].start_pos;
+                let mut suggestions = vec![Suggestion {
+                    value: format!("{prev}{token}"),
+                    short_description: None,
+                }];
+                if count_matches(prev, '-') + count_matches(token, '-') <= 1 {
+                    suggestions.push(Suggestion {
+                        value: format!("{prev}, {token}"),
                         short_description: None,
-                    }];
-                    if count_matches(prev, '-') + count_matches(token, '-') <= 1 {
-                        suggestions.push(Suggestion {
-                            value: format!("{prev}, {token}"),
-                            short_description: None,
-                        });
-                    }
-                    rule_matches.push(
-                        Match::new(
-                            DASH_ID,
-                            Option::<String>::None,
-                            DASH_MESSAGE,
-                            Some(DASH_SHORT.to_string()),
-                            TextRange::new(
-                                sentence_offset + from_pos,
-                                sentence_offset + view[i].end_pos(),
-                            ),
-                            suggestions,
-                            "COMPOUNDING",
-                            "Getrennt- und Zusammenschreibung",
-                        )
-                        .with_metadata(
-                            DASH_DESCRIPTION,
-                            "uncategorized",
-                            0,
-                        ),
-                    );
+                    });
                 }
+                rule_matches.push(
+                    Match::new(
+                        DASH_ID,
+                        Option::<String>::None,
+                        DASH_MESSAGE,
+                        Some(DASH_SHORT.to_string()),
+                        TextRange::new(
+                            sentence_offset + from_pos,
+                            sentence_offset + view[i].end_pos(),
+                        ),
+                        suggestions,
+                        "COMPOUNDING",
+                        "Getrennt- und Zusammenschreibung",
+                    )
+                    .with_metadata(DASH_DESCRIPTION, "uncategorized", 0),
+                );
             }
         }
         prev_token = Some(token);

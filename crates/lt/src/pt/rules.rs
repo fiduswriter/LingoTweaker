@@ -592,10 +592,7 @@ fn filler_word_set() -> &'static std::collections::HashSet<&'static str> {
 
 /// `PortugueseFillerWordsRule.isException`.
 fn filler_is_exception(tokens: &[&AnalyzedTokenReadings], num: usize) -> bool {
-    if num >= 1 && tokens[num - 1].surface() == "," && tokens[num].surface() == "mas" {
-        return true;
-    }
-    false
+    num >= 1 && tokens[num - 1].surface() == "," && tokens[num].surface() == "mas"
 }
 
 fn is_opening_quote(token: &str) -> bool {

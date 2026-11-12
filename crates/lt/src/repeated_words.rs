@@ -235,84 +235,83 @@ impl RepeatedWordsRule {
                         .as_deref()
                         .and_then(|l| words_last_seen.get(l))
                         .copied();
-                    if let (Some(seen), Some(lemma)) = (seen_in_word_position, lemma.as_deref()) {
-                        if !lemmas_in_sentence.iter().any(|l| l == lemma)
-                            && (word_number - seen) <= MAX_WORDS_DISTANCE
+                    if let (Some(seen), Some(lemma)) = (seen_in_word_position, lemma.as_deref())
+                        && !lemmas_in_sentence.iter().any(|l| l == lemma)
+                        && (word_number - seen) <= MAX_WORDS_DISTANCE
+                    {
+                        let Some(data) = self.words.get(lemma) else {
+                            continue;
+                        };
+                        let mut create_match = true;
+                        if let Some(postag) = &data.postag {
+                            match atr.pos_tag.as_deref() {
+                                Some(tag) if pos_tag_matches(postag, tag) => {}
+                                _ => create_match = false,
+                            }
+                        }
+                        if let Some(chunk) = &data.chunk
+                            && !chunk_regex_matches(atrs, chunk)
                         {
-                            let Some(data) = self.words.get(lemma) else {
-                                continue;
-                            };
-                            let mut create_match = true;
-                            if let Some(postag) = &data.postag {
-                                match atr.pos_tag.as_deref() {
-                                    Some(tag) if pos_tag_matches(postag, tag) => {}
-                                    _ => create_match = false,
+                            create_match = false;
+                        }
+                        if create_match {
+                            let mut suggestions = Vec::new();
+                            for replacement_lemma in &data.synonyms {
+                                let analyzed = AnalyzedToken::new(
+                                    token,
+                                    Some(replacement_lemma.clone()),
+                                    atr.pos_tag.clone(),
+                                );
+                                let pos_tag = atr.pos_tag.as_deref().unwrap_or("");
+                                let pos_tag = if self.config.spanish {
+                                    adjust_postag_es(pos_tag)
+                                } else if self.config.french {
+                                    adjust_postag_fr(pos_tag)
+                                } else {
+                                    pos_tag.to_string()
+                                };
+                                let mut replacements = synth
+                                    .map(|s| s.synthesize(&analyzed, &pos_tag, true))
+                                    .unwrap_or_default();
+                                if replacements.is_empty() {
+                                    replacements = vec![replacement_lemma.clone()];
                                 }
-                            }
-                            if let Some(chunk) = &data.chunk {
-                                if !chunk_regex_matches(atrs, chunk) {
-                                    create_match = false;
-                                }
-                            }
-                            if create_match {
-                                let mut suggestions = Vec::new();
-                                for replacement_lemma in &data.synonyms {
-                                    let analyzed = AnalyzedToken::new(
-                                        token,
-                                        Some(replacement_lemma.clone()),
-                                        atr.pos_tag.clone(),
-                                    );
-                                    let pos_tag = atr.pos_tag.as_deref().unwrap_or("");
-                                    let pos_tag = if self.config.spanish {
-                                        adjust_postag_es(pos_tag)
-                                    } else if self.config.french {
-                                        adjust_postag_fr(pos_tag)
+                                for r in replacements {
+                                    let value = if is_all_uppercase {
+                                        r.to_uppercase()
+                                    } else if is_capitalized {
+                                        lt_tagger::uppercase_first_char(&r)
                                     } else {
-                                        pos_tag.to_string()
+                                        r
                                     };
-                                    let mut replacements = synth
-                                        .map(|s| s.synthesize(&analyzed, &pos_tag, true))
-                                        .unwrap_or_default();
-                                    if replacements.is_empty() {
-                                        replacements = vec![replacement_lemma.clone()];
-                                    }
-                                    for r in replacements {
-                                        let value = if is_all_uppercase {
-                                            r.to_uppercase()
-                                        } else if is_capitalized {
-                                            lt_tagger::uppercase_first_char(&r)
-                                        } else {
-                                            r
-                                        };
-                                        let suggestion = Suggestion {
-                                            value,
-                                            short_description: None,
-                                        };
-                                        if !suggestions.contains(&suggestion) {
-                                            suggestions.push(suggestion);
-                                        }
+                                    let suggestion = Suggestion {
+                                        value,
+                                        short_description: None,
+                                    };
+                                    if !suggestions.contains(&suggestion) {
+                                        suggestions.push(suggestion);
                                     }
                                 }
-                                let rule_match = Match::new(
-                                    self.config.rule_id,
-                                    Option::<String>::None,
-                                    self.config.message,
-                                    Some(self.config.short_message.to_string()),
-                                    TextRange::new(pos + atrs.start_pos, pos + atrs.end_pos()),
-                                    suggestions,
-                                    self.config.category_id,
-                                    self.config.category_name,
-                                )
-                                .with_specific_rule_id(format!(
-                                    "{}_{}",
-                                    self.config.rule_id,
-                                    to_id(lemma, self.config.german)
-                                ))
-                                .with_metadata(self.config.description, "style", -1)
-                                .with_picky(self.config.picky);
-                                matches.push(rule_match);
-                                break;
                             }
+                            let rule_match = Match::new(
+                                self.config.rule_id,
+                                Option::<String>::None,
+                                self.config.message,
+                                Some(self.config.short_message.to_string()),
+                                TextRange::new(pos + atrs.start_pos, pos + atrs.end_pos()),
+                                suggestions,
+                                self.config.category_id,
+                                self.config.category_name,
+                            )
+                            .with_specific_rule_id(format!(
+                                "{}_{}",
+                                self.config.rule_id,
+                                to_id(lemma, self.config.german)
+                            ))
+                            .with_metadata(self.config.description, "style", -1)
+                            .with_picky(self.config.picky);
+                            matches.push(rule_match);
+                            break;
                         }
                     }
                 }

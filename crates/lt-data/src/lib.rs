@@ -45,10 +45,11 @@ impl DataDir {
         let path = path.as_ref();
         // A pack file path is mounted in memory; a directory (or any error,
         // which surfaces on the first read) is used as-is.
-        if Self::is_pack_path(path) && path.is_file() {
-            if let Ok(dir) = Self::from_pack_path(path) {
-                return dir;
-            }
+        if Self::is_pack_path(path)
+            && path.is_file()
+            && let Ok(dir) = Self::from_pack_path(path)
+        {
+            return dir;
         }
         Self(path.to_path_buf())
     }

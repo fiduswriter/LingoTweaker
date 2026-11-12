@@ -173,10 +173,7 @@ impl Refiner for FastTextRefiner {
                 predictions
                     .into_iter()
                     .filter_map(|prediction| {
-                        let label = prediction
-                            .label
-                            .strip_prefix("__label__")
-                            .unwrap_or(&prediction.label);
+                        let label = prediction.label.trim_prefix("__label__");
                         Lang::from_long_code(label).map(|lang| Candidate {
                             lang,
                             confidence: prediction.probability,

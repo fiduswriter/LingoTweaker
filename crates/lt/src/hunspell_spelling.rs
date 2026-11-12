@@ -186,10 +186,10 @@ impl HunspellSpellingRule {
         if self.config.latin_script && HAS_NO_LETTER.is_match(word) {
             return true;
         }
-        if let Some(stripped) = word.strip_suffix('.') {
-            if !self.ignore.contains(word) {
-                return self.is_ignored_no_case(stripped);
-            }
+        if let Some(stripped) = word.strip_suffix('.')
+            && !self.ignore.contains(word)
+        {
+            return self.is_ignored_no_case(stripped);
         }
         self.is_ignored_no_case(word)
     }
@@ -270,10 +270,7 @@ impl HunspellSpellingRule {
             return false;
         }
         let normalized = word.replace(['\u{2019}', '\u{02BC}'], "'");
-        if normalized != word && self.checker.spell(&normalized) {
-            return false;
-        }
-        true
+        !(normalized != word && self.checker.spell(&normalized))
     }
 
     /// `SpellingCheckRule.match` over one sentence's token stream (absolute
@@ -312,7 +309,7 @@ impl HunspellSpellingRule {
                 let mut dash_corr = 0usize;
                 if word.starts_with('-') {
                     let clean = clean_word.unwrap_or(&word);
-                    let rest = clean.strip_prefix('-').unwrap_or(clean);
+                    let rest = clean.trim_prefix('-');
                     if !self.is_misspelled(rest) || minus_plus().is_match(clean) {
                         if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
                             is_first_word = false;

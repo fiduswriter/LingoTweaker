@@ -531,21 +531,21 @@ type ExampleCapture = (
 impl Loader {
     fn on_feature_element(&mut self, e: &quick_xml::events::BytesStart<'_>) {
         let id = self.attr_opt(e, b"id");
-        if let Some(p) = self.pending.as_mut() {
-            if p.in_unification {
-                p.current_feature = id;
-            }
+        if let Some(p) = self.pending.as_mut()
+            && p.in_unification
+        {
+            p.current_feature = id;
         }
     }
 
     fn on_type_element(&mut self, e: &quick_xml::events::BytesStart<'_>) {
         let id = self.attr_opt(e, b"id");
-        if let Some(p) = self.pending.as_mut() {
-            if p.in_unification && p.current_feature.is_some() {
-                if let Some(id) = id {
-                    p.current_types.push(id);
-                }
-            }
+        if let Some(p) = self.pending.as_mut()
+            && p.in_unification
+            && p.current_feature.is_some()
+            && let Some(id) = id
+        {
+            p.current_types.push(id);
         }
     }
 
@@ -735,13 +735,12 @@ fn expand_entities(
             if name
                 .chars()
                 .all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '.')
+                && let Some(value) = entities.get(name)
             {
-                if let Some(value) = entities.get(name) {
-                    out.push_str(value);
-                    changed = true;
-                    rest = &tail[end + 1..];
-                    continue;
-                }
+                out.push_str(value);
+                changed = true;
+                rest = &tail[end + 1..];
+                continue;
             }
         }
         // not a known reference: keep as-is
@@ -884,10 +883,10 @@ fn parameter_entity_systems(dtd: &str) -> Vec<String> {
         let after_name = after_pct.trim_start()[name_len..].trim_start();
         if let Some(sys) = after_name.strip_prefix("SYSTEM") {
             let sys = sys.trim_start();
-            if let Some(quote) = sys.chars().next().filter(|c| *c == '"' || *c == '\'') {
-                if let Some(end) = sys[1..].find(quote) {
-                    out.push(sys[1..1 + end].to_string());
-                }
+            if let Some(quote) = sys.chars().next().filter(|c| *c == '"' || *c == '\'')
+                && let Some(end) = sys[1..].find(quote)
+            {
+                out.push(sys[1..1 + end].to_string());
             }
         }
     }
@@ -1032,14 +1031,12 @@ fn push_or_attach(list: &mut Vec<PatternToken>, token: PatternToken, groups: &mu
     if let Some(group) = groups.last_mut() {
         let is_member = group.count > 0;
         group.count += 1;
-        if is_member {
-            if let Some(last) = list.last_mut() {
-                match group.kind {
-                    GroupKind::And => last.and_group.push(token),
-                    GroupKind::Or => last.or_group.push(token),
-                }
-                return;
+        if is_member && let Some(last) = list.last_mut() {
+            match group.kind {
+                GroupKind::And => last.and_group.push(token),
+                GroupKind::Or => last.or_group.push(token),
             }
+            return;
         }
     }
     list.push(token);
@@ -1270,29 +1267,29 @@ impl Loader {
                             if let Some(token) = loader.phrase_current_token.as_mut() {
                                 inherit_exception_case(&mut exc, token);
                                 token.exceptions.push(exc);
-                            } else if let Some(p) = loader.pending.as_mut() {
-                                if let Some(token) = p.current_token.as_mut() {
-                                    inherit_exception_case(&mut exc, token);
-                                    token.exceptions.push(exc);
-                                }
+                            } else if let Some(p) = loader.pending.as_mut()
+                                && let Some(token) = p.current_token.as_mut()
+                            {
+                                inherit_exception_case(&mut exc, token);
+                                token.exceptions.push(exc);
                             }
                         }
                         "feature" => {
                             // `<feature id="x"/>` is self-closing: commit it
                             loader.on_feature_element(&e);
-                            if let Some(p) = loader.pending.as_mut() {
-                                if let Some(feature) = p.current_feature.take() {
-                                    p.equivalence_features
-                                        .insert(feature, std::mem::take(&mut p.current_types));
-                                }
+                            if let Some(p) = loader.pending.as_mut()
+                                && let Some(feature) = p.current_feature.take()
+                            {
+                                p.equivalence_features
+                                    .insert(feature, std::mem::take(&mut p.current_types));
                             }
                         }
                         "type" => loader.on_type_element(&e),
                         "unify-ignore" => {
-                            if let Some(p) = loader.pending.as_mut() {
-                                if p.in_unification {
-                                    p.in_unification_neutral = true;
-                                }
+                            if let Some(p) = loader.pending.as_mut()
+                                && p.in_unification
+                            {
+                                p.in_unification_neutral = true;
                             }
                         }
                         "disambig" => {
@@ -1323,10 +1320,10 @@ impl Loader {
                                     _ => {}
                                 }
                             }
-                            if let Some(p) = loader.pending.as_mut() {
-                                if let Some(d) = p.current_disambig.as_mut() {
-                                    d.new_readings.push(wd);
-                                }
+                            if let Some(p) = loader.pending.as_mut()
+                                && let Some(d) = p.current_disambig.as_mut()
+                            {
+                                d.new_readings.push(wd);
                             }
                         }
 
@@ -1483,10 +1480,10 @@ impl Loader {
                 });
             }
             "rule" => {
-                if let Some(p) = self.pending.take() {
-                    if p.kind != PendingKind::Rulegroup {
-                        self.emit(p);
-                    }
+                if let Some(p) = self.pending.take()
+                    && p.kind != PendingKind::Rulegroup
+                {
+                    self.emit(p);
                 }
                 let id = self.attr_opt(e, b"id").unwrap_or_default();
                 let mut default_on = self.group.as_ref().map(|g| g.1).unwrap_or(true);
@@ -1743,28 +1740,28 @@ impl Loader {
                 }
             }
             "marker" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if p.in_pattern || self.antipattern_depth > 0 {
-                        p.marker_depth += 1;
-                        if p.marker_depth == 1 {
-                            // Java `tokenCounter`: an open group counts as the
-                            // element its first token will become
-                            let list_len = if self.antipattern_depth > 0 {
-                                p.current_antipattern
-                                    .as_ref()
-                                    .map(|a| a.tokens.len())
-                                    .unwrap_or(0)
-                            } else {
-                                p.pattern.tokens.len()
-                            };
-                            let idx = p.groups.last().map(|g| g.base).unwrap_or(list_len);
-                            if self.antipattern_depth > 0 {
-                                if let Some(anti) = p.current_antipattern.as_mut() {
-                                    anti.marker_start = Some(idx);
-                                }
-                            } else {
-                                p.pattern.marker_start = Some(idx);
+                if let Some(p) = self.pending.as_mut()
+                    && (p.in_pattern || self.antipattern_depth > 0)
+                {
+                    p.marker_depth += 1;
+                    if p.marker_depth == 1 {
+                        // Java `tokenCounter`: an open group counts as the
+                        // element its first token will become
+                        let list_len = if self.antipattern_depth > 0 {
+                            p.current_antipattern
+                                .as_ref()
+                                .map(|a| a.tokens.len())
+                                .unwrap_or(0)
+                        } else {
+                            p.pattern.tokens.len()
+                        };
+                        let idx = p.groups.last().map(|g| g.base).unwrap_or(list_len);
+                        if self.antipattern_depth > 0 {
+                            if let Some(anti) = p.current_antipattern.as_mut() {
+                                anti.marker_start = Some(idx);
                             }
+                        } else {
+                            p.pattern.marker_start = Some(idx);
                         }
                     }
                 }
@@ -1780,43 +1777,43 @@ impl Loader {
                         base: self.phrase_tokens.len(),
                         count: 0,
                     });
-                } else if let Some(p) = self.pending.as_mut() {
-                    if p.in_pattern || self.antipattern_depth > 0 {
-                        let base = if self.antipattern_depth > 0 {
-                            p.current_antipattern
-                                .as_ref()
-                                .map(|a| a.tokens.len())
-                                .unwrap_or(0)
+                } else if let Some(p) = self.pending.as_mut()
+                    && (p.in_pattern || self.antipattern_depth > 0)
+                {
+                    let base = if self.antipattern_depth > 0 {
+                        p.current_antipattern
+                            .as_ref()
+                            .map(|a| a.tokens.len())
+                            .unwrap_or(0)
+                    } else {
+                        p.pattern.tokens.len()
+                    };
+                    p.groups.push(OpenGroup {
+                        kind: if name == "and" {
+                            GroupKind::And
                         } else {
-                            p.pattern.tokens.len()
-                        };
-                        p.groups.push(OpenGroup {
-                            kind: if name == "and" {
-                                GroupKind::And
-                            } else {
-                                GroupKind::Or
-                            },
-                            base,
-                            count: 0,
-                        });
-                    }
+                            GroupKind::Or
+                        },
+                        base,
+                        count: 0,
+                    });
                 }
             }
             "unify" => {
                 let negate = self.attr_opt(e, b"negate").as_deref() == Some("yes");
-                if let Some(p) = self.pending.as_mut() {
-                    if p.in_pattern || self.antipattern_depth > 0 {
-                        p.in_unification = true;
-                        p.uni_negation = negate;
-                        p.equivalence_features.clear();
-                    }
+                if let Some(p) = self.pending.as_mut()
+                    && (p.in_pattern || self.antipattern_depth > 0)
+                {
+                    p.in_unification = true;
+                    p.uni_negation = negate;
+                    p.equivalence_features.clear();
                 }
             }
             "unify-ignore" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if p.in_unification {
-                        p.in_unification_neutral = true;
-                    }
+                if let Some(p) = self.pending.as_mut()
+                    && p.in_unification
+                {
+                    p.in_unification_neutral = true;
                 }
             }
             "feature" => self.on_feature_element(e),
@@ -2149,11 +2146,11 @@ impl Loader {
                 spec.static_lemma = Some(lemma.clone());
                 spec.postag_regexp = true;
             }
-            if self.captures.contains(&Capture::Message) {
-                if let Some(mref) = p.message_match_refs.last_mut() {
-                    mref.spec.static_lemma = Some(lemma);
-                    mref.spec.postag_regexp = true;
-                }
+            if self.captures.contains(&Capture::Message)
+                && let Some(mref) = p.message_match_refs.last_mut()
+            {
+                mref.spec.static_lemma = Some(lemma);
+                mref.spec.postag_regexp = true;
             }
         } else if let Some(mref) = p.message_match_refs.last_mut() {
             mref.spec.static_lemma = Some(lemma);
@@ -2178,10 +2175,10 @@ impl Loader {
         if self.antipattern_depth > 0 {
             // token texts inside `<antipattern>` matter (the patterns are
             // matched); examples inside antipatterns are ignored
-            if matches!(top, "token" | "wd" | "exception") {
-                if let Some(buf) = self.content_stack.last_mut() {
-                    buf.push_str(text);
-                }
+            if matches!(top, "token" | "wd" | "exception")
+                && let Some(buf) = self.content_stack.last_mut()
+            {
+                buf.push_str(text);
             }
             return Ok(());
         }
@@ -2233,12 +2230,11 @@ impl Loader {
                     self.in_disambig_match = false;
                     self.in_match = false;
                     let lemma = std::mem::take(&mut self.match_buf);
-                    if let Some(p) = self.pending.as_mut() {
-                        if let Some(d) = p.current_disambig.as_mut() {
-                            if let Some(filter) = d.filter_match.as_mut() {
-                                filter.lemma = Some(lemma.trim().to_string());
-                            }
-                        }
+                    if let Some(p) = self.pending.as_mut()
+                        && let Some(d) = p.current_disambig.as_mut()
+                        && let Some(filter) = d.filter_match.as_mut()
+                    {
+                        filter.lemma = Some(lemma.trim().to_string());
                     }
                     return Ok(());
                 }
@@ -2265,13 +2261,12 @@ impl Loader {
                 }
             }
             "feature" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if p.in_unification {
-                        if let Some(feature) = p.current_feature.take() {
-                            p.equivalence_features
-                                .insert(feature, std::mem::take(&mut p.current_types));
-                        }
-                    }
+                if let Some(p) = self.pending.as_mut()
+                    && p.in_unification
+                    && let Some(feature) = p.current_feature.take()
+                {
+                    p.equivalence_features
+                        .insert(feature, std::mem::take(&mut p.current_types));
                 }
             }
             "unify-ignore" => {
@@ -2280,28 +2275,28 @@ impl Loader {
                 }
             }
             "unify" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if p.in_unification {
-                        let last = if self.antipattern_depth > 0 {
-                            p.current_antipattern
-                                .as_mut()
-                                .and_then(|a| a.tokens.last_mut())
-                        } else {
-                            p.pattern.tokens.last_mut()
-                        };
-                        if let Some(token) = last {
-                            token.last_in_unification = true;
-                            if p.uni_negation {
-                                token.uni_negated = true;
-                            }
+                if let Some(p) = self.pending.as_mut()
+                    && p.in_unification
+                {
+                    let last = if self.antipattern_depth > 0 {
+                        p.current_antipattern
+                            .as_mut()
+                            .and_then(|a| a.tokens.last_mut())
+                    } else {
+                        p.pattern.tokens.last_mut()
+                    };
+                    if let Some(token) = last {
+                        token.last_in_unification = true;
+                        if p.uni_negation {
+                            token.uni_negated = true;
                         }
-                        p.in_unification = false;
-                        p.in_unification_neutral = false;
-                        p.uni_negation = false;
-                        p.equivalence_features.clear();
-                        p.current_feature = None;
-                        p.current_types.clear();
                     }
+                    p.in_unification = false;
+                    p.in_unification_neutral = false;
+                    p.uni_negation = false;
+                    p.equivalence_features.clear();
+                    p.current_feature = None;
+                    p.current_types.clear();
                 }
             }
             "unification" if self.in_unification_def => {
@@ -2325,10 +2320,8 @@ impl Loader {
             }
             "message" => {
                 let was_message = self.captures.pop() == Some(Capture::Message);
-                if was_message {
-                    if let Some(p) = self.pending.as_mut() {
-                        finalize_message_matches(p);
-                    }
+                if was_message && let Some(p) = self.pending.as_mut() {
+                    finalize_message_matches(p);
                 }
             }
 
@@ -2358,26 +2351,26 @@ impl Loader {
                 }
             }
             "marker" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if p.marker_depth > 0 {
-                        p.marker_depth -= 1;
-                        if p.marker_depth == 0 {
-                            let list_len = if self.antipattern_depth > 0 {
-                                p.current_antipattern
-                                    .as_ref()
-                                    .map(|a| a.tokens.len())
-                                    .unwrap_or(0)
-                            } else {
-                                p.pattern.tokens.len()
-                            };
-                            let idx = p.groups.last().map(|g| g.base + 1).unwrap_or(list_len);
-                            if self.antipattern_depth > 0 {
-                                if let Some(anti) = p.current_antipattern.as_mut() {
-                                    anti.marker_end = Some(idx);
-                                }
-                            } else {
-                                p.pattern.marker_end = Some(idx);
+                if let Some(p) = self.pending.as_mut()
+                    && p.marker_depth > 0
+                {
+                    p.marker_depth -= 1;
+                    if p.marker_depth == 0 {
+                        let list_len = if self.antipattern_depth > 0 {
+                            p.current_antipattern
+                                .as_ref()
+                                .map(|a| a.tokens.len())
+                                .unwrap_or(0)
+                        } else {
+                            p.pattern.tokens.len()
+                        };
+                        let idx = p.groups.last().map(|g| g.base + 1).unwrap_or(list_len);
+                        if self.antipattern_depth > 0 {
+                            if let Some(anti) = p.current_antipattern.as_mut() {
+                                anti.marker_end = Some(idx);
                             }
+                        } else {
+                            p.pattern.marker_end = Some(idx);
                         }
                     }
                 }
@@ -2391,19 +2384,18 @@ impl Loader {
             }
             "token" => {
                 if self.in_unification_def {
-                    if let Some(content) = self.content_stack.pop() {
-                        if let Some(mut token) = self.def_current_token.take() {
-                            let content = content.trim().to_string();
-                            if token.text.is_none() && !content.is_empty() {
-                                token.text = Some(normalize_text_pattern(&content));
-                            }
-                            if !token.case_sensitive_set
-                                && posix_case_sensitive(token.text.as_deref())
-                            {
-                                token.case_sensitive = true;
-                            }
-                            self.def_current_token = Some(token);
+                    if let Some(content) = self.content_stack.pop()
+                        && let Some(mut token) = self.def_current_token.take()
+                    {
+                        let content = content.trim().to_string();
+                        if token.text.is_none() && !content.is_empty() {
+                            token.text = Some(normalize_text_pattern(&content));
                         }
+                        if !token.case_sensitive_set && posix_case_sensitive(token.text.as_deref())
+                        {
+                            token.case_sensitive = true;
+                        }
+                        self.def_current_token = Some(token);
                     }
                     return Ok(());
                 }
@@ -2411,70 +2403,68 @@ impl Loader {
                     self.commit_phrase_token();
                     return Ok(());
                 }
-                if let Some(p) = self.pending.as_mut() {
-                    if let Some(content) = self.content_stack.pop() {
-                        let content = content.trim().to_string();
-                        if let Some(mut token) = p.current_token.take() {
-                            if token.text.is_none() && !content.is_empty() {
-                                token.text = Some(normalize_text_pattern(&content));
-                            }
-                            if !token.case_sensitive_set
-                                && posix_case_sensitive(token.text.as_deref())
-                            {
-                                token.case_sensitive = true;
-                            }
-                            if p.in_unification {
-                                token.unification = Some(p.equivalence_features.clone());
-                            }
-                            if p.in_unification_neutral {
-                                token.unification_neutral = true;
-                            }
-                            // Java `XMLRuleHandler`: `min` > 1 duplicates the
-                            // element (`setMinOccurrences` only accepts 0/1)
-                            let copies = token.min.unwrap_or(1).max(1) as usize;
-                            for _ in 0..copies {
-                                let token = token.clone();
-                                if self.antipattern_depth > 0 {
-                                    if let Some(anti) = p.current_antipattern.as_mut() {
-                                        push_or_attach(&mut anti.tokens, token, &mut p.groups);
-                                    }
-                                } else {
-                                    push_or_attach(&mut p.pattern.tokens, token, &mut p.groups);
+                if let Some(p) = self.pending.as_mut()
+                    && let Some(content) = self.content_stack.pop()
+                {
+                    let content = content.trim().to_string();
+                    if let Some(mut token) = p.current_token.take() {
+                        if token.text.is_none() && !content.is_empty() {
+                            token.text = Some(normalize_text_pattern(&content));
+                        }
+                        if !token.case_sensitive_set && posix_case_sensitive(token.text.as_deref())
+                        {
+                            token.case_sensitive = true;
+                        }
+                        if p.in_unification {
+                            token.unification = Some(p.equivalence_features.clone());
+                        }
+                        if p.in_unification_neutral {
+                            token.unification_neutral = true;
+                        }
+                        // Java `XMLRuleHandler`: `min` > 1 duplicates the
+                        // element (`setMinOccurrences` only accepts 0/1)
+                        let copies = token.min.unwrap_or(1).max(1) as usize;
+                        for _ in 0..copies {
+                            let token = token.clone();
+                            if self.antipattern_depth > 0 {
+                                if let Some(anti) = p.current_antipattern.as_mut() {
+                                    push_or_attach(&mut anti.tokens, token, &mut p.groups);
                                 }
+                            } else {
+                                push_or_attach(&mut p.pattern.tokens, token, &mut p.groups);
                             }
                         }
                     }
                 }
             }
             "wd" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if let Some(content) = self.content_stack.pop() {
-                        if let Some(mut wd) = p.current_wd.take() {
-                            wd.token = content.trim().to_string();
-                            if let Some(d) = p.current_disambig.as_mut() {
-                                d.new_readings.push(wd);
-                            }
-                        }
+                if let Some(p) = self.pending.as_mut()
+                    && let Some(content) = self.content_stack.pop()
+                    && let Some(mut wd) = p.current_wd.take()
+                {
+                    wd.token = content.trim().to_string();
+                    if let Some(d) = p.current_disambig.as_mut() {
+                        d.new_readings.push(wd);
                     }
                 }
             }
             "disambig" => {
-                if let Some(p) = self.pending.as_mut() {
-                    if let Some(d) = p.current_disambig.take() {
-                        p.disambigs.push(d);
-                    }
+                if let Some(p) = self.pending.as_mut()
+                    && let Some(d) = p.current_disambig.take()
+                {
+                    p.disambigs.push(d);
                 }
             }
             "antipattern" => {
                 self.antipattern_depth = self.antipattern_depth.saturating_sub(1);
                 let mut group_level = None;
                 if let Some(p) = self.pending.as_mut() {
-                    if let Some(anti) = p.current_antipattern.take() {
-                        if !anti.tokens.is_empty() {
-                            p.antipatterns.push(anti.clone());
-                            if p.kind == PendingKind::Rulegroup {
-                                group_level = Some(anti);
-                            }
+                    if let Some(anti) = p.current_antipattern.take()
+                        && !anti.tokens.is_empty()
+                    {
+                        p.antipatterns.push(anti.clone());
+                        if p.kind == PendingKind::Rulegroup {
+                            group_level = Some(anti);
                         }
                     }
                     p.pattern_case_sensitive = false;
@@ -2493,30 +2483,29 @@ impl Loader {
                         if posix_case_sensitive(exc.text.as_deref()) {
                             exc.case_sensitive = true;
                         }
-                        if let Some(token) = self.phrase_current_token.as_mut() {
-                            if let Some(last) = token.exceptions.last_mut() {
-                                *last = exc;
-                            }
+                        if let Some(token) = self.phrase_current_token.as_mut()
+                            && let Some(last) = token.exceptions.last_mut()
+                        {
+                            *last = exc;
                         }
                     }
                     return Ok(());
                 }
-                if let Some(p) = self.pending.as_mut() {
-                    if let Some(content) = self.content_stack.pop() {
-                        if let Some(mut exc) = p.current_exception.take() {
-                            let content = content.trim().to_string();
-                            if exc.text.is_none() && !content.is_empty() {
-                                exc.text = Some(normalize_text_pattern(&content));
-                            }
-                            if posix_case_sensitive(exc.text.as_deref()) {
-                                exc.case_sensitive = true;
-                            }
-                            if let Some(token) = p.current_token.as_mut() {
-                                if let Some(last) = token.exceptions.last_mut() {
-                                    *last = exc;
-                                }
-                            }
-                        }
+                if let Some(p) = self.pending.as_mut()
+                    && let Some(content) = self.content_stack.pop()
+                    && let Some(mut exc) = p.current_exception.take()
+                {
+                    let content = content.trim().to_string();
+                    if exc.text.is_none() && !content.is_empty() {
+                        exc.text = Some(normalize_text_pattern(&content));
+                    }
+                    if posix_case_sensitive(exc.text.as_deref()) {
+                        exc.case_sensitive = true;
+                    }
+                    if let Some(token) = p.current_token.as_mut()
+                        && let Some(last) = token.exceptions.last_mut()
+                    {
+                        *last = exc;
                     }
                 }
             }
@@ -2540,11 +2529,11 @@ impl Loader {
                 }
             }
             "rule" => {
-                if let Some(p) = self.pending.take() {
-                    if p.kind != PendingKind::Rulegroup {
-                        // `<rule>` and `<regexp>` rules both emit here
-                        self.emit_rule(p);
-                    }
+                if let Some(p) = self.pending.take()
+                    && p.kind != PendingKind::Rulegroup
+                {
+                    // `<rule>` and `<regexp>` rules both emit here
+                    self.emit_rule(p);
                 }
             }
             "rulegroup" => {
@@ -2557,10 +2546,10 @@ impl Loader {
                 self.group_goal_specific = None;
                 self.group_issue_type = None;
                 self.group_name = None;
-                if let Some(p) = self.pending.take() {
-                    if p.has_content() {
-                        self.emit(p);
-                    }
+                if let Some(p) = self.pending.take()
+                    && p.has_content()
+                {
+                    self.emit(p);
                 }
                 self.group = None;
             }
@@ -2656,10 +2645,10 @@ impl Loader {
     }
 
     fn finish_pending(&mut self) {
-        if let Some(p) = self.pending.take() {
-            if p.has_content() {
-                self.emit(p);
-            }
+        if let Some(p) = self.pending.take()
+            && p.has_content()
+        {
+            self.emit(p);
         }
     }
 
