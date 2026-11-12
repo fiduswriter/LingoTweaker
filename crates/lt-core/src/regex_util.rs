@@ -232,7 +232,7 @@ fn expand_branch_paths(
                 // non-capturing `?:` prefix is dropped (only lookbehind bodies
                 // are expanded, so capture numbering of the outer pattern is
                 // unaffected).
-                let inner = inner.strip_prefix("?:").unwrap_or(inner.as_str());
+                let inner = inner.trim_prefix("?:");
                 let mut base_paths = expand_body_paths(inner, unbounded_max, max_paths)?;
                 if base_paths.is_empty() {
                     base_paths.push(String::new());

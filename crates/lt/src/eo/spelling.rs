@@ -112,7 +112,7 @@ impl EsperantoSpellingRule {
         if prev_word.is_empty() {
             return;
         }
-        let clean_word = word.strip_suffix('.').unwrap_or(word);
+        let clean_word = word.trim_suffix('.');
         let to = sentence_offset + start + clean_word.len();
         let from = sentence_offset + prev_start;
         // "thanky ou" -> "thank you"
@@ -157,5 +157,5 @@ impl EsperantoSpellingRule {
 
 /// `StringTools.cutOffDot`.
 fn cut_off_dot(s: &str) -> String {
-    s.strip_suffix('.').unwrap_or(s).to_string()
+    s.trim_suffix('.').to_string()
 }

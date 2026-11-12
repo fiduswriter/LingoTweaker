@@ -5002,7 +5002,7 @@ impl<'a> SuggestMgr<'a> {
 
         // exhaustively walk the dictionary, keeping the MAX_ROOTS best roots
         let mut roots: Vec<Option<u32>> = vec![None; MAX_ROOTS];
-        let mut scores: Vec<i32> = (0..MAX_ROOTS).map(|i| -100 * i as i32).collect();
+        let mut scores = Vec::from_fn(MAX_ROOTS, |i| -100 * i as i32);
         let mut lp = MAX_ROOTS - 1;
         for &idx in &self.c.index.ngram_order {
             let packed = self.c.index.entries[idx as usize];
@@ -5065,7 +5065,7 @@ impl<'a> SuggestMgr<'a> {
 
         // expand each root and keep the MAX_GUESS best candidates
         let mut guesses: Vec<Option<Vec<u8>>> = vec![None; MAX_GUESS];
-        let mut gscore: Vec<i32> = (0..MAX_GUESS).map(|i| -100 * i as i32).collect();
+        let mut gscore = Vec::from_fn(MAX_GUESS, |i| -100 * i as i32);
         let mut lp = MAX_GUESS - 1;
         for root in &roots {
             let Some(ridx) = *root else { continue };

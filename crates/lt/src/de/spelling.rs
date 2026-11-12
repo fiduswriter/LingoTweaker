@@ -882,7 +882,7 @@ impl GermanSpellingRule {
     fn ignore_by_hanging_hyphen(&self, words: &[String], idx: usize) -> bool {
         let word = words[idx].as_str();
         let next = get_word_after_enumeration_or_null(words, idx + 1);
-        let next = next.map(|w| w.strip_suffix('.').unwrap_or(w));
+        let next = next.map(|w| w.trim_suffix('.'));
         let is_compound = next.is_some_and(|next| {
             self.compound.tokenize(next).len() > 1
                 || next.find('-').is_some_and(|i| i > 0)
@@ -891,7 +891,7 @@ impl GermanSpellingRule {
         if !is_compound {
             return false;
         }
-        let stem = word.strip_suffix('-').unwrap_or(word);
+        let stem = word.trim_suffix('-');
         let mut is_misspelled = !self.hunspell.spell(stem);
         if is_misspelled
             && (self.ignore_word_base(stem) || self.words_to_be_ignored_in_compounds.contains(stem))
@@ -911,7 +911,7 @@ impl GermanSpellingRule {
     /// dictionary check but before a match is created. Returns true when the
     /// word should be ignored.
     fn ignore_potentially_misspelled_word(&self, word: &str) -> bool {
-        let word_no_dot = word.strip_suffix('.').unwrap_or(word);
+        let word_no_dot = word.trim_suffix('.');
         if self.is_valid_word_length(word)
             || starts_with_lowercase(word)
             || self.is_prohibited(word)
@@ -1509,7 +1509,7 @@ impl GermanSpellingRule {
             if do_upper && part.ends_with('s') {
                 // maybe infix-s as in "Dampfschiffahrtskapitän"
                 // (`StringUtils.removeEnd`: strip one trailing "s", not all)
-                suggestions.extend(self.morfo_suggestions(part.strip_suffix('s').unwrap_or(part)));
+                suggestions.extend(self.morfo_suggestions(part.trim_suffix('s')));
                 append_s = true;
             }
             for mut suggestion in suggestions {
@@ -2325,10 +2325,7 @@ impl GermanSpellingRule {
                 let mut pos = 1usize;
                 for suggestion in self.suggestions(word) {
                     if !suggestions.contains(&suggestion) {
-                        let value = suggestion
-                            .strip_suffix('.')
-                            .unwrap_or(&suggestion)
-                            .to_string();
+                        let value = suggestion.trim_suffix('.').to_string();
                         let at = pos.min(suggestions.len());
                         suggestions.insert(at, value);
                         pos += 2;
@@ -2504,7 +2501,7 @@ impl GermanSpellingRule {
                     len += word_utf16 + 1;
                     continue;
                 }
-                let clean_word = word.strip_suffix('.').unwrap_or(word).to_string();
+                let clean_word = word.trim_suffix('.').to_string();
                 if word.starts_with('-') {
                     if !self.is_misspelled(&clean_word[1..]) || clean_word.chars().all(|c| c == '-')
                     {
@@ -2743,12 +2740,12 @@ fn common_prefix(a: &str, b: &str) -> String {
 
 /// `StringUtils.removeEnd(part, "s")`.
 fn remove_trailing_s(part: &str) -> String {
-    part.strip_suffix('s').unwrap_or(part).to_string()
+    part.trim_suffix('s').to_string()
 }
 
 /// `StringUtils.removeEnd(part, "-")`.
 fn remove_trailing_hyphen(part: &str) -> String {
-    part.strip_suffix('-').unwrap_or(part).to_string()
+    part.trim_suffix('-').to_string()
 }
 
 /// `removeTrailingS(removeTrailingHyphen(part))`.
@@ -2958,7 +2955,7 @@ fn hunspell_tokens(text: &str) -> Vec<String> {
 
 /// `HunspellRule.cutOffDot`: remove a single trailing dot.
 fn cut_off_dot(s: &str) -> String {
-    s.strip_suffix('.').unwrap_or(s).to_string()
+    s.trim_suffix('.').to_string()
 }
 
 /// UTF-16 code-unit offset → UTF-8 byte offset (clamped to the text end).

@@ -1445,7 +1445,7 @@ fn is_colon_question_word(word: &str) -> bool {
 
 /// `StringUtils.removeEnd`.
 fn remove_end(text: &str, suffix: &str) -> String {
-    text.strip_suffix(suffix).unwrap_or(text).to_string()
+    text.trim_suffix(suffix).to_string()
 }
 
 /// `StringUtils.isNumeric`.

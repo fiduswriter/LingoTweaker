@@ -141,7 +141,7 @@ impl ArabicSpellingRule {
         if prev_word.is_empty() {
             return;
         }
-        let clean_word = word.strip_suffix('.').unwrap_or(word);
+        let clean_word = word.trim_suffix('.');
         let from = prev_start;
         let to = word_start + clean_word.len();
         // "thanky ou" -> "thank you"
@@ -186,5 +186,5 @@ impl ArabicSpellingRule {
 
 /// `StringTools.cutOffDot`.
 fn cut_off_dot(s: &str) -> String {
-    s.strip_suffix('.').unwrap_or(s).to_string()
+    s.trim_suffix('.').to_string()
 }

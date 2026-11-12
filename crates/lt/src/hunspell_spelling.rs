@@ -309,7 +309,7 @@ impl HunspellSpellingRule {
                 let mut dash_corr = 0usize;
                 if word.starts_with('-') {
                     let clean = clean_word.unwrap_or(&word);
-                    let rest = clean.strip_prefix('-').unwrap_or(clean);
+                    let rest = clean.trim_prefix('-');
                     if !self.is_misspelled(rest) || minus_plus().is_match(clean) {
                         if idx > 0 && is_first_word && !is_punctuation_mark(token.surface()) {
                             is_first_word = false;

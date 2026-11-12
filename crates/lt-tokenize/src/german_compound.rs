@@ -346,8 +346,7 @@ impl InterfixDisambiguator {
             if ["samt", "samts", "samtes"].contains(&last_part.as_str()) {
                 // Verkehr+s+amt = Verkehrs+amt
                 new_parts[last_part_idx - 1] = format!("{}s", parts[last_part_idx - 1]);
-                new_parts[last_part_idx] =
-                    last_part.strip_prefix('s').unwrap_or(last_part).to_string();
+                new_parts[last_part_idx] = last_part.trim_prefix('s').to_string();
                 return new_parts;
             }
         }
